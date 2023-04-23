@@ -1,0 +1,13 @@
+.table.pmc-table {
+    font-size: .85rem;
+}
+
+.table.pmc-table th {
+    border: none;
+    font-weight: 600;
+    padding: .8rem .5rem;
+}
+
+.table.pmc-table tbody tr:hover {
+    background-color: rgba($primary, 0.05);
+}

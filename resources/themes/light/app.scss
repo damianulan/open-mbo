@@ -1,0 +1,19 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+// Vendors
+@import 'components/vendors/datatables.min.css';
+@import 'components/vendors/select2/core.scss';
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+@import '~bootstrap-icons/font/bootstrap-icons.scss';
+
+// Components
+@import 'components';
+
+// Rules
+

@@ -1,0 +1,89 @@
+// Theme variable
+$theme: "light";
+
+// Typography
+$font-family-base: 'Inter', 'Helvetica', sans-serif;
+$font-family-sans-serif: 'Inter', sans-serif;
+$font-size-base: 0.8rem;
+$line-height-base: 1.6;
+
+// Paths
+$imagesPath: "/themes/light/images";
+
+/**
+/* Colors START
+**/
+
+// Collection
+$aquamarine: #7fffd4;
+$coolgray: #9fa0c3;
+$columbia: #C5D5EA;
+$indigo: #1B4965;
+$cadet: #1C1F33;
+$violet: #564D80;
+
+$border-color: #daddee;
+
+// Primaries
+$primary: $violet;
+
+// Secondaries
+$secondary: #55AF3c;
+
+// Action colors
+$light: #fafafa;
+$dark: #332d2d;
+$danger: #e56b6f;
+$warning: #e36414;
+$success: #4f9d69;
+$info: #0892A5;
+$other: darken($border-color, 30%);
+
+$theme-colors: (
+    'primary': $primary,
+    'secondary': $secondary,
+    'success': $success,
+    'danger': $danger,
+    'warning': $warning,
+    'info': $info,
+    'dark': $dark,
+    'other': $other,
+);
+
+// Component colors
+$body-bg: #fff;
+$sidebar-bg: lighten($coolgray, 25%);
+$sidebar-link: $dark;
+$sidebar-link-active: $primary;
+$sidebar-brand-link: $primary;
+$sidebar-multi-title: lighten($dark, 10%);
+$sidebar-usermenu: $dark;
+$page-header-color: $primary;
+$paragraph-color: lighten($dark, 10%);
+
+/**
+/* Colors END
+**/
+
+// variables
+$menu-expanded-width: 18rem;
+$menu-collapsed-width: 5rem;
+$tooltip-inner-padding-y: .3rem;
+$tooltip-inner-padding-x: .2rem;
+$tooltip-inner-font-size: .8rem;
+
+$breadcrumb-font-size: .7rem;
+$dropdown-padding-y: 0;
+
+$card-bg: transparent;
+
+// Typography
+$link-color: $primary;
+$link-hover-color: $primary;
+$link-color-active: $primary;
+$nav-link-font-size: .85rem;
+$nav-link-font-weight: 400;
+
+// Navigation
+$nav-tab-bg: #fff;
+$nav-tab-color-hover: #000;

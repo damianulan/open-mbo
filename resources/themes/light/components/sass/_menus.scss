@@ -1,0 +1,275 @@
+nav::-webkit-scrollbar {
+    width: 10px;
+}
+
+nav::-webkit-scrollbar-track {
+background: rgb(179, 177, 177);
+border-radius: 10px;
+}
+
+nav::-webkit-scrollbar-thumb {
+background: rgb(136, 136, 136);
+border-radius: 10px;
+}
+
+nav::-webkit-scrollbar-thumb:hover {
+background: rgb(100, 100, 100);
+border-radius: 10px;
+}
+
+nav::-webkit-scrollbar-thumb:active {
+background: rgb(68, 68, 68);
+border-radius: 10px;
+}
+
+html .sidebar-menu {
+    height: 100%;
+}
+
+@media (min-width: 992px){
+    .sidebar-menu {
+        z-index: 1031;
+        display: table-cell;
+        background-color: $sidebar-bg;
+        box-shadow: 0 0 15px 0 rgb(0 0 0 / 7%);
+        transform: translate3d(0, 0, 0);
+        backface-visibility: hidden;
+        width: $menu-expanded-width;
+        padding: 2rem 0;
+        overflow-x: hidden;
+        transition: all .4s ease 0s;
+        right: auto;
+        left: 0;
+        //border-right: 1px solid $border-color;
+    }
+
+    .footer{
+        display: flex;
+        padding: 1rem 2rem;
+        background-color: $sidebar-bg;
+        position: relative;
+        bottom: 0;
+        right: 0;
+    }
+}
+
+.menu-fixed {
+    position: fixed !important;
+}
+
+.menu-absolute {
+    position: absolute !important;
+}
+
+.nav-pills {
+    margin: 0;
+}
+
+.sidebar-menu .nav-link .bi {
+    font-size: 1.25rem !important;
+    margin-right: 1rem;
+}
+
+.sidebar-menu .nav-pills {
+    border-radius: unset;
+}
+
+.sidebar-menu .navbar-brand {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: .03rem;
+    text-transform: uppercase;
+    color: $sidebar-brand-link;
+    transition: all .3s ease-in-out;
+    display: block;
+    padding: 1.5rem;
+}
+
+li.nav-item {
+    position: relative;
+}
+
+.sidebar-menu .nav-pills .nav-link {
+    display: flex;
+    align-items: center;
+    font-size: .85rem;
+    font-weight: 400;
+    text-transform: capitalize;
+    color: $sidebar-link;
+    padding: .3rem 1rem;
+    margin: 0 .75rem;
+    background-color: transparent;
+}
+
+.sidebar-menu .nav-heading {
+    font-weight: 600;
+    font-size: .8rem;
+    text-transform: uppercase;
+}
+
+.sidebar-menu .nav-pills .nav-link:hover {
+    color: lighten($sidebar-link, 10%);
+    transition: all .3s ease-in-out;
+}
+
+.sidebar-menu .nav-pills .nav-link.active {
+    font-weight: 600;
+    color: $sidebar-link-active !important;
+    background-color: lighten($coolgray, 15%);
+}
+
+.sidebar-menu .nav-pills .nav-link.active:hover {
+    color: lighten($sidebar-link-active, 5%);
+}
+
+.sidebar-menu .nav .nav-item a {
+    transition: padding 0.35s ease 0s !important;
+}
+
+.sidebar-menu .nav .nav-item:hover > a {
+    padding-left: 1.5rem;
+    color: $primary;
+    transition: padding 0.35s ease 0s !important;
+}
+
+.sidebar-menu .nav .nav-multi {
+    //border-bottom: 1px solid $border-color;
+    padding: 0 0 .3rem 0;
+    margin: 0 0 1rem 0;
+    font-size: .85rem;
+    color: lighten($dark, 20%);
+}
+
+.sidebar-menu .nav .nav-multi.first {
+    //border-top: 1px solid $border-color;
+    padding: .8rem 0;
+    margin-bottom: 1rem;
+}
+
+.sidebar-menu .nav-multi ul {
+    padding: 0;
+    list-style: none;
+}
+
+li.user-status {
+    position: relative;
+}
+
+ul.user-bar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.user-status .user-nav {
+    display: flex;
+    align-items: center;
+    padding: 1.2rem 2rem;
+    margin: 0;
+    background-color: transparent;
+    color: $sidebar-usermenu;
+}
+
+.user-nav .user-actions {
+    position: relative;
+    margin-left: auto;
+}
+
+.user-nav .user-details {
+    line-height: 1.2;
+}
+
+.user-nav .user-details .user-name {
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+.user-nav .user-details .user-email {
+    font-size: 0.7rem;
+    font-weight: 400;
+}
+
+.user-nav .dropdown-menu a.dropdown-item {
+    padding: 0.35rem 1.2rem;
+}
+
+.user-nav .dropdown-menu a.dropdown-item:hover {
+    background-color: rgba($primary, 0.1);
+}
+
+.user-avatar-left {
+    margin-right: .7rem;
+}
+
+.page-top {
+    display: flex;
+    padding: 1.8rem 2rem;
+    align-items: center;
+}
+
+.page-top .page-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: $page-header-color;
+}
+
+.page-top .page-quick-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.page-menu {
+    padding: 0 0 1.8rem 0;
+}
+
+.page-menu .nav-pills-horizontal .nav-link {
+    display: flex;
+    border: 1px solid transparent;
+    text-transform: capitalize;
+    padding: .3rem .8rem;
+    margin: .25rem .35rem;
+    font-size: .9rem;
+    font-weight: 400;
+    background: transparent;
+    align-items: center;
+    color: lighten($dark, 10%);
+    border-radius: 0.25rem;
+}
+
+.page-menu .nav-pills-horizontal .nav-link .badge {
+    font-size: .65rem;
+    margin-left: .6rem;
+    position: relative;
+}
+
+.page-menu .nav-pills-horizontal .nav-link:hover,
+.page-menu .nav-pills-horizontal .nav-link:focus {
+    color: $primary;
+    background-color: rgba($primary, 0.12);
+}
+
+.page-menu .nav-pills-horizontal .nav-link.active {
+    color: $primary;
+    font-weight: 600;
+    background-color: rgba($primary, 0.2);
+}
+
+ul.nav-pills-horizontal {
+    border: 1px solid lighten($border-color, 2%);
+    border-radius: .5rem;
+    padding: 0.3rem;
+}
+
+.breadcrumb {
+    margin: 0;
+}
+
+.breadcrumb .breadcrumb-item a {
+    color: $primary;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}

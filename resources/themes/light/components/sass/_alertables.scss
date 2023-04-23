@@ -1,0 +1,98 @@
+// badges
+.badge.badge-status, .badge.badge-tag {
+    padding: .3rem .5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.badge.badge-circle {
+    border-radius: 50% !important;
+}
+
+.badge.badge-primary {
+    background-color: rgba($primary, 0.25);
+    color: $primary;
+}
+
+.badge.badge-secondary {
+    background-color: rgba($secondary, 0.25);
+    color: $secondary;
+}
+
+.badge.badge-success {
+    background-color: rgba($success, 0.25);
+    color: $success;
+}
+
+.badge.badge-warning {
+    background-color: rgba($warning, 0.25);
+    color: $warning;
+}
+
+.badge.badge-danger {
+    background-color: rgba($danger, 0.25);
+    color: $danger;
+}
+
+.badge.badge-info {
+    background-color: rgba($info, 0.25);
+    color: $info;
+}
+
+.badge.badge-dark {
+    background-color: rgba($dark, 0.25);
+    color: $dark;
+}
+
+.badge.badge-other {
+    background-color: rgba($other, 0.25);
+    color: $other;
+}
+
+// alerts
+.alert-heading {
+    font-size: .9rem;
+    font-weight: 700;
+    padding-bottom: .5rem;
+}
+
+.alert {
+    box-shadow: 0 2px 15px -3px rgb(0 0 0 / 7%), 0 10px 20px -2px rgb(0 0 0 / 4%);
+    padding: 1rem 1.5rem;
+}
+
+.alert.alert-success {
+    background-color: rgba($success, .25);
+    border-color: rgba($success, .3);
+    color: darken($success, 10%);
+}
+
+.alert.alert-danger {
+    background-color: rgba($danger, .25);
+    border-color: rgba($danger, .3);
+    color: darken($danger, 10%);
+}
+
+.alert.alert-warning {
+    background-color: rgba($warning, .25);
+    border-color: rgba($warning, .3);
+    color: darken($warning, 10%);
+}
+
+.alert.alert-info {
+    background-color: rgba($info, .25);
+    border-color: rgba($info, .3);
+    color: darken($info, 10%);
+}
+
+.alert.alert-other {
+    background-color: rgba($other, .25);
+    border-color: rgba($other, .3);
+    color: darken($other, 10%);
+}
+
+.alert.alert-primary {
+    background-color: rgba($primary, .25);
+    border-color: rgba($primary, .3);
+    color: darken($primary, 10%);
+}
