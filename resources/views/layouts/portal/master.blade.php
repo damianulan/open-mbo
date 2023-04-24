@@ -20,9 +20,14 @@
                         <ul class="dropdown-menu">
                           <li><a href="#" class="dropdown-item">Edytuj profil</a></li>
                           <li><a href="#" class="dropdown-item">Preferencje</a></li>
-                          <li><a href="#" class="dropdown-item">Wyloguj</a></li>
+                          <li>
+                            <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Wyloguj
+                            </a>
+                          </li>
                         </ul>
                       </div>
+                      <form action="{{ route('logout') }}" method="POST" class="d-none" id="logout-form">@csrf</form>
                 </div>
 
             </div>

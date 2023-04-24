@@ -108,18 +108,18 @@ li.nav-item {
 }
 
 .sidebar-menu .nav-pills .nav-link:hover {
-    color: lighten($sidebar-link, 10%);
+    color: lighten($sidebar-link, 15%);
     transition: all .3s ease-in-out;
 }
 
 .sidebar-menu .nav-pills .nav-link.active {
     font-weight: 600;
     color: $sidebar-link-active !important;
-    background-color: lighten($coolgray, 15%);
+    background-color: $primary;
 }
 
 .sidebar-menu .nav-pills .nav-link.active:hover {
-    color: lighten($sidebar-link-active, 5%);
+    color: lighten($sidebar-link-active, 10%);
 }
 
 .sidebar-menu .nav .nav-item a {
