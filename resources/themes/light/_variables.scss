@@ -29,7 +29,7 @@ $border-color: #e2f1fc;
 $primary: #0A2472;
 
 // Secondaries
-$secondary: #55AF3c;
+$secondary: lighten($primary, 20%);
 
 // Action colors
 $light: #fafafa;

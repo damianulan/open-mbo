@@ -8,7 +8,7 @@ $(document).ready(function() {
     $('.select-multiple').select2({
         placeholder: "Wybierz...",
         language: "pl",
-        theme: "pmc",
+        theme: "default",
         multiple: true,
     });
 });

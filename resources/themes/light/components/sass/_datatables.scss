@@ -1,0 +1,18 @@
+.lms-table {
+    clear: both;
+    border-collapse: separate !important;
+    border-spacing: 0;
+}
+
+.lms-table tbody {
+    border-style: none;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover
+{
+    color: #fff !important;
+    background: $primary;
+    border: 1px solid $primary;
+    border-radius: 0.25rem;
+}

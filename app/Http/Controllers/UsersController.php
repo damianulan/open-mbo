@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use Yajra\DataTables\DataTables;
+use App\DataTables\UsersDataTable;
 
 class UsersController extends Controller
 {
@@ -13,11 +13,10 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(UsersDataTable $dataTable)
     {
-        return view('pages.users.index', [
+        return $dataTable->render('pages.users.index', [
             'title' => 'Zarządzanie użytkownikami',
-            'users' => User::all(),
         ]);
     }
 
