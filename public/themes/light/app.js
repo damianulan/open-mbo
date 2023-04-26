@@ -3379,6 +3379,24 @@ function sidebarToggleAll() {
 $('#menu-toggle').click(function () {
   sidebarToggleAll();
 });
+$(".pin").on("mouseenter", function () {
+  if ($(this).hasClass("bi-pin-angle")) {
+    $(this).removeClass("bi-pin-angle");
+    $(this).addClass("bi-pin-angle-fill");
+  } else if ($(this).hasClass("bi-pin-angle-fill")) {
+    $(this).removeClass("bi-pin-angle-fill");
+    $(this).addClass("bi-pin-angle");
+  }
+});
+$(".pin").on("mouseleave", function () {
+  if ($(this).hasClass("bi-pin-angle")) {
+    $(this).removeClass("bi-pin-angle");
+    $(this).addClass("bi-pin-angle-fill");
+  } else if ($(this).hasClass("bi-pin-angle-fill")) {
+    $(this).removeClass("bi-pin-angle-fill");
+    $(this).addClass("bi-pin-angle");
+  }
+});
 
 /***/ }),
 

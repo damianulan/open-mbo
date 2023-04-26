@@ -244,20 +244,24 @@ ul.user-bar {
     position: relative;
 }
 
+.page-menu .nav-pills-horizontal .nav-link:hover{
+    cursor: pointer;
+}
+
 .page-menu .nav-pills-horizontal .nav-link:hover,
 .page-menu .nav-pills-horizontal .nav-link:focus {
     color: $primary;
-    background-color: rgba($primary, 0.12);
+    background-color: rgba($primary, 0.15);
 }
 
 .page-menu .nav-pills-horizontal .nav-link.active {
     color: $primary;
     font-weight: 600;
-    background-color: rgba($primary, 0.2);
+    background-color: rgba($primary, 0.25);
 }
 
 ul.nav-pills-horizontal {
-    border: 1px solid lighten($border-color, 2%);
+    border: 1px solid rgba($primary, 0.1);
     border-radius: .5rem;
     padding: 0.3rem;
 }

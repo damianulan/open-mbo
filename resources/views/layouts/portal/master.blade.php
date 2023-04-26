@@ -18,11 +18,13 @@
                           <img class="rounded-circle user-avatar-left" src="{{ asset('images/portrait/avatar-male.png'); }}" width="30" height="30">
                         </div>
                         <ul class="dropdown-menu">
-                          <li><a href="#" class="dropdown-item">Edytuj profil</a></li>
-                          <li><a href="#" class="dropdown-item">Preferencje</a></li>
+                          <li><a href="#" class="dropdown-item"><i class="bi-person me-2"></i>Edytuj profil</a></li>
+                          <li><a href="#" class="dropdown-item"><i class="bi-activity me-2"></i>Aktywność</a></li>
+                          <li><a href="#" class="dropdown-item"><i class="bi-list-ol me-2"></i>Moje wyniki</a></li>
+                          <li><a href="#" class="dropdown-item"><i class="bi-sliders me-2"></i>Preferencje</a></li>
                           <li>
                             <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                Wyloguj
+                                <i class="bi-door-open me-2"></i>Wyloguj
                             </a>
                           </li>
                         </ul>

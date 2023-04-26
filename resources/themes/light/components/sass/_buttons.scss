@@ -1,6 +1,5 @@
 .btn {
     border-radius: .25rem;
-    text-transform: capitalize !important;
     font-weight: 600 !important;
 }
   
@@ -37,8 +36,8 @@
 .btn-outline-primary:focus,
 .btn-outline-primary:focus-visible {
     border: 1px solid $primary;
-    color: $primary;
-    background-color: lighten($coolgray, 20%);
+    color: #fff;
+    background-color: $primary;
 }
 
 .btn-secondary {

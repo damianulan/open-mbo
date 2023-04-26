@@ -57,23 +57,23 @@ border-radius: 10px;
 }
 
 a {
-    color: $secondary;
+    color: $primary;
     text-decoration: none;
 }
 
 a:hover {
-    color: lighten($secondary, 10%);
+    color: lighten($primary, 20%);
 }
 
 a.link-primary {
     color: $primary;
 }
 
-a.link-primary:hover {
-    color: lighten($primary, 15%);
+i.bi {
+    font-size: 1rem;
 }
 
-i.bi {
+.page-quick-actions i.bi {
     font-size: 1.1rem;
 }
 
@@ -86,10 +86,18 @@ i.bi {
 }
 
 h1, h2, h3, h4, h5 {
-    color: $dark;
+    color: $primary;
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+}
+
+h4, h5, h6 {
+    font-weight: 600;
 }
 
 hr {
-    background-color: $border-color;
-    opacity: 1;
+    background-color: $primary;
+    opacity: 0.1;
 }

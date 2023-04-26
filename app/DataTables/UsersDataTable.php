@@ -52,7 +52,6 @@ class UsersDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-
                     ->orderBy(1)
                     ->buttons([
                         Button::make('excel'),
@@ -81,7 +80,7 @@ class UsersDataTable extends DataTable
             Column::computed('action')
             ->exportable(false)
             ->printable(false)
-            ->width(60)
+            //->width(60)
             ->addClass('text-center')
             ->title(__('fields.action')),
         ];

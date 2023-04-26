@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Settings;
+namespace App\Http\Controllers\Management;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class GeneralController extends Controller
+class ManagementController extends Controller
 {
     /**
      * Show the application dashboard.
@@ -14,8 +14,8 @@ class GeneralController extends Controller
      */
     public function index()
     {
-        return view('pages.settings.index', [
-            'title' => 'Ustawienia'
+        return view('pages.management.index', [
+            'title' => 'Zarządzanie'
         ]);
     }
 }

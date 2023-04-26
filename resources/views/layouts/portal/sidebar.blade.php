@@ -11,7 +11,7 @@
       </li>
       <li class="nav-multi first">
         <a class="nav-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="recruitment" href="#recruitment">
-          <span class="nav-heading">Panel szkoleniowy</span><span class="ms-auto" onclick=""><i class="bi-pin-angle"></i></span>
+          <span class="nav-heading">Panel szkoleniowy</span><span class="ms-auto" onclick=""><i class="bi-pin-angle-fill pin"></i></span>
         </a>
         <ul class="collapse show" id="recruitment">
           <li class="nav-item">
@@ -35,7 +35,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <i class="bi bi-signpost-split-fill"></i>
-              <span class="nav-title">Ścieżki szkoleniowe</span>
+              <span class="nav-title">Ścieżki edukacyjne</span>
             </a>
           </li>
 
@@ -43,7 +43,7 @@
       </li>
       <li class="nav-multi">
         <a class="nav-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="administration" href="#administration">
-          <span class="nav-heading">Zarządzanie</span><span class="ms-auto" onclick=""><i class="bi-pin-angle"></i></span>
+          <span class="nav-heading">Zarządzanie</span><span class="ms-auto" onclick=""><i class="bi-pin-angle pin"></i></span>
         </a>
         <ul class="collapse show" id="administration">
           <li class="nav-item">
@@ -71,13 +71,13 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link{{ request()->routeIs('management.*') ? ' active':'' }}" href="{{ route('management.index') }}">
               <i class="bi bi-layers-half"></i>
               <span class="nav-title">Zarządzanie</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link{{ request()->routeIs('settings.*') ? ' active':'' }}" href="{{ route('settings.index') }}">
               <i class="bi bi-ui-radios-grid"></i>
               <span class="nav-title">Ustawienia</span>
             </a>

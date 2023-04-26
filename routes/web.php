@@ -28,3 +28,14 @@ Route::get('users/data', [App\Http\Controllers\UsersController::class, 'data'])-
 /**
  * Users END
  */
+
+/**
+ * Settings START
+ */
+
+Route::get('settings', [App\Http\Controllers\Settings\GeneralController::class, 'index'])->name('settings.index');
+
+/**
+ * Management START
+ */
+Route::get('management', [App\Http\Controllers\Management\ManagementController::class, 'index'])->name('management.index');

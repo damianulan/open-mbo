@@ -18,22 +18,24 @@ $imagesPath: "/themes/light/images";
 $aquamarine: #7fffd4;
 $coolgray: #bfdbf7; //#9fa0c3;
 $columbia: #C5D5EA;
+$cyan: #00F2F2;
 $indigo: #1B4965;
 $cadet: #1C1F33;
 $violet: #564D80;
 $lazuli: #22577A;
+$dimm-blue: #7392b7;
 
 $border-color: #e2f1fc;
 
 // Primaries
-$primary: #0A2472;
+$primary: #2b3a67;
 
 // Secondaries
-$secondary: lighten($primary, 20%);
+$secondary: $violet;
 
 // Action colors
 $light: #fafafa;
-$dark: #332d2d;
+$dark: #011638;
 $danger: #e56b6f;
 $warning: #e36414;
 $success: #4f9d69;
@@ -55,7 +57,7 @@ $theme-colors: (
 $body-bg: #fff;
 $sidebar-bg: lighten($columbia, 14%);
 $sidebar-link: $primary;
-$sidebar-link-active: lighten($primary, 60%);
+$sidebar-link-active: $sidebar-bg;
 $sidebar-brand-link: $primary;
 $sidebar-multi-title: lighten($dark, 10%);
 $sidebar-usermenu: $dark;
