@@ -25,4 +25,7 @@ return [
     'my_results' => 'Moje wyniki',
     'preferences' => 'Preferencje',
     'logout' => 'Wyloguj',
+    'login' => 'Zaloguj się',
+    'forgot_password' => 'Przypomnij hasło',
+    'remember_me' => 'Zapamiętaj mnie'
 ];
