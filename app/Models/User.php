@@ -9,11 +9,13 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Traits\HasRolesAndPermissions;
 use App\Traits\UUID;
+use App\Traits\Enrollable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, UUID, HasRolesAndPermissions, SoftDeletes;
+    use Enrollable;
 
     /**
      * The attributes that are mass assignable.
@@ -23,9 +25,13 @@ class User extends Authenticatable
     protected $fillable = [
         'firstname',
         'lastname',
-        
+        'gender',
         'email',
         'password',
+        'phone',
+        'avatar',
+        'active',
+        'force_password_change'
     ];
 
     /**
@@ -47,4 +53,26 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'created_at' => 'datetime'
     ];
+
+    public function block(): bool
+    {
+        if($this->active == 1){
+            $this->active = 0;
+            $this->save();
+            return true;
+        }
+
+        return false;
+    }
+
+    public function unblock(): bool
+    {
+        if($this->active == 0){
+            $this->active = 1;
+            $this->save();
+            return true;
+        }
+
+        return false;
+    }
 }

@@ -8,28 +8,23 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('users_config', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('verification_tokens', function (Blueprint $table) {
+            $table->id();
             $table->char('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('slug')->unique();
-            $table->string('value');
+            $table->string('token');
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('users_config');
+        Schema::dropIfExists('verification_tokens');
     }
 };

@@ -3,37 +3,37 @@
       <ul class="nav nav-pills-horizontal">
           <li class="nav-item">
               <a class="nav-link active">
-                  Główne
+                {{ __('menus.settings.general') }}
               </a>
           </li>
           <li class="nav-item">
               <a class="nav-link">
-                  Moduły
+                {{ __('menus.settings.modules') }}
               </a>
           </li>
           <li class="nav-item">
               <a class="nav-link">
-                  Zasoby
+                {{ __('menus.settings.resources') }}
               </a>
           </li>
           <li class="nav-item">
               <a class="nav-link">
-                  Integracje
+                {{ __('menus.settings.integrations') }}
               </a>
           </li>
           <li class="nav-item">
               <a class="nav-link">
-                  Serwer
+                {{ __('menus.settings.server') }}
               </a>
           </li>
           <li class="nav-item">
             <a class="nav-link">
-                Logi
+                {{ __('menus.settings.logs') }}
             </a>
         </li>
           <li class="nav-item">
               <a class="nav-link">
-                  Pomoc
+                {{ __('menus.settings.help') }}
               </a>
           </li>
       </ul>

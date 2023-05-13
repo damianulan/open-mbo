@@ -20,10 +20,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->char('gender','1');
+            $table->char('gender', 1);
+            $table->date('birthdate')->nullable();
             $table->string('phone')->nullable();
             $table->string('avatar')->nullable();
-            $table->boolean('status')->default(1); // 0 - blocked, 1 - active
+            $table->boolean('active')->default(1);
             $table->boolean('force_password_change')->default(1); // 0 - blocked, 1 - active
             $table->rememberToken();
             $table->softDeletes();

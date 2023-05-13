@@ -3,57 +3,57 @@
         <ul class="nav nav-pills-horizontal">
             <li class="nav-item">
                 <a class="nav-link active">
-                    Użytkownicy
+                    {{ __('menus.users') }}
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link">
-                    Organizacja
+                    {{ __('menus.management.structure') }}
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link">
-                    Powiadomienia
+                    {{ __('menus.notifications') }}
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link">
-                    Projekty
+                    {{ __('menus.projects') }}
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link">
-                    Raporty
+                    {{ __('menus.reports.index') }}
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link">
-                    Ścieżki edukacyjne
+                    {{ __('menus.learning_paths') }}
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link">
-                    Zadania
+                    {{ __('menus.tasks') }}
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link">
-                    Kalendarz
+                    {{ __('menus.calendar') }}
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link">
-                    Kursy
+                    {{ __('menus.courses') }}
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link">
-                    Zapisy
+                    {{ __('menus.management.enrollments') }}
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link">
-                    Zasoby
+                    {{ __('menus.management.resources') }}
                 </a>
             </li>
         </ul>

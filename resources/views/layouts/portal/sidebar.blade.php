@@ -6,36 +6,36 @@
       <li class="nav-item">
         <a href="{{ route('dashboard') }}" class="nav-link{{ request()->routeIs('dashboard') ? ' active':'' }}">
           <i class="bi bi-grid-fill"></i>
-          <span class="nav-title">Dashboard</span>
+          <span class="nav-title">{{ __('menus.dashboard') }}</span>
         </a>
       </li>
       <li class="nav-multi first">
         <a class="nav-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="recruitment" href="#recruitment">
-          <span class="nav-heading">Panel szkoleniowy</span><span class="ms-auto" onclick=""><i class="bi-pin-angle-fill pin"></i></span>
+          <span class="nav-heading">{{ __('menus.elearning_panel') }}</span><span class="ms-auto" onclick=""><i class="bi-pin-angle-fill pin"></i></span>
         </a>
         <ul class="collapse show" id="recruitment">
           <li class="nav-item">
             <a class="nav-link" href="#">
               <i class="bi bi-mortarboard-fill"></i>
-              <span class="nav-title">Kursy</span>
+              <span class="nav-title">{{ __('menus.courses') }}</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <i class="bi bi-calendar2-week-fill"></i>
-              <span class="nav-title">Kalendarz</span><span class="ms-auto badge badge-circle badge-primary">2</span>
+              <span class="nav-title">{{ __('menus.calendar') }}</span><span class="ms-auto badge badge-circle badge-primary">2</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <i class="bi bi-check-square-fill"></i>
-              <span class="nav-title">Zadania</span>
+              <span class="nav-title">{{ __('menus.tasks') }}</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <i class="bi bi-signpost-split-fill"></i>
-              <span class="nav-title">Ścieżki edukacyjne</span>
+              <span class="nav-title">{{ __('menus.learning_paths') }}</span>
             </a>
           </li>
 
@@ -43,43 +43,43 @@
       </li>
       <li class="nav-multi">
         <a class="nav-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="administration" href="#administration">
-          <span class="nav-heading">Zarządzanie</span><span class="ms-auto" onclick=""><i class="bi-pin-angle pin"></i></span>
+          <span class="nav-heading">{{ __('menus.admin_panel') }}</span><span class="ms-auto" onclick=""><i class="bi-pin-angle pin"></i></span>
         </a>
         <ul class="collapse show" id="administration">
           <li class="nav-item">
             <a class="nav-link" href="#">
               <i class="bi bi-bar-chart-steps"></i>
-              <span class="nav-title">Raporty</span>
+              <span class="nav-title">{{ __('menus.reports.index') }}</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <i class="bi bi-box-seam-fill"></i>
-              <span class="nav-title">Projekty</span>
+              <span class="nav-title">{{ __('menus.projects') }}</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <i class="bi bi-bell-fill"></i>
-              <span class="nav-title">Powiadomienia</span>
+              <span class="nav-title">{{ __('menus.notifications') }}</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link{{ request()->routeIs('users.*') ? ' active':'' }}" href="{{ route('users.index') }}">
               <i class="bi bi-people-fill"></i>
-              <span class="nav-title">Użytkownicy</span>
+              <span class="nav-title">{{ __('menus.users') }}</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link{{ request()->routeIs('management.*') ? ' active':'' }}" href="{{ route('management.index') }}">
               <i class="bi bi-layers-half"></i>
-              <span class="nav-title">Zarządzanie</span>
+              <span class="nav-title">{{ __('menus.management.index') }}</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link{{ request()->routeIs('settings.*') ? ' active':'' }}" href="{{ route('settings.index') }}">
               <i class="bi bi-ui-radios-grid"></i>
-              <span class="nav-title">Ustawienia</span>
+              <span class="nav-title">{{ __('menus.settings.index') }}</span>
             </a>
           </li>
         </ul>
