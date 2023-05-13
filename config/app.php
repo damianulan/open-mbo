@@ -115,6 +115,17 @@ return [
 
     'faker_locale' => 'pl_PL',
 
+    /**
+     * Application Versioning
+     * @key release - increments by one after successful implementation of a milestone.
+     * 
+     * @key build - YYYYMMDDV format.
+     * V stands for version build for the specific day (max 9).
+     */
+
+     'release' => '0.0.1 beta',
+     'build' => 202305130,
+
     /*
     |--------------------------------------------------------------------------
     | Encryption Key

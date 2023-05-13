@@ -34,7 +34,10 @@ Route::get('profile', [App\Http\Controllers\ProfileController::class, 'index'])-
  * Settings START
  */
 
-Route::get('settings', [App\Http\Controllers\Settings\GeneralController::class, 'index'])->name('settings.index');
+Route::get('settings', [App\Http\Controllers\Settings\GeneralController::class, 'index'])->middleware('auth')->name('settings.index');
+Route::get('settings/server', [App\Http\Controllers\Settings\ServerController::class, 'index'])->middleware('auth')->name('settings.server');
+Route::get('settings/server/clearcache', [App\Http\Controllers\Settings\ServerController::class, 'cache'])->middleware('auth')->name('settings.clearcache');
+
 
 /**
  * Management START

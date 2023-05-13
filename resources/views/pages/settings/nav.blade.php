@@ -2,7 +2,7 @@
   <div class="page-menu">
       <ul class="nav nav-pills-horizontal">
           <li class="nav-item">
-              <a class="nav-link active">
+              <a class="nav-link{{ request()->routeIs('settings.index') ? ' active':'' }}" href="{{ route('settings.index') }}">
                 {{ __('menus.settings.general') }}
               </a>
           </li>
@@ -22,7 +22,7 @@
               </a>
           </li>
           <li class="nav-item">
-              <a class="nav-link">
+              <a class="nav-link{{ request()->routeIs('settings.server') ? ' active':'' }}" href="{{ route('settings.server') }}">
                 {{ __('menus.settings.server') }}
               </a>
           </li>
