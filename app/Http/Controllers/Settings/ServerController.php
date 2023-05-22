@@ -36,7 +36,7 @@ class ServerController extends Controller
     {
         $command = Artisan::call('optimize:clear');
 
-        if($command ){
+        if($command === 0){
             return redirect()->back()->with('success', __('alerts.success.cache_clear'));
         }
 
