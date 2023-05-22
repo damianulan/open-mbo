@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
+use App\Models\app\Git;
 
 return [
 
@@ -125,6 +126,8 @@ return [
 
      'release' => '0.0.1 beta',
      'build' => 202305130,
+
+     'head' => Git::head(),
 
     /*
     |--------------------------------------------------------------------------

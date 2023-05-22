@@ -17,7 +17,7 @@
                         {{ __('pages.settings.environment') }}:
                     </th>
                     <td>
-                        {{ config('app.env') }}
+                        <span class="text-capitalize">{{ config('app.env') }}</span> 
                     </td>
                 </tr>
                 <tr>
