@@ -33,7 +33,7 @@
                         {{ __('pages.settings.git_status') }}:
                     </th>
                     <td>
-                        {!! $git_text !!}
+                        {!! $git_text !!} <a class="ms-1" href="{{ route('settings.pull') }}"><i class="bi bi-cloud-arrow-down-fill"></i></a>
                     </td>
                 </tr>
                 <tr>

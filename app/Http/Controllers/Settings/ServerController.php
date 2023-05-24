@@ -46,4 +46,15 @@ class ServerController extends Controller
         }
         return redirect()->back()->with('error', $msg);
     }
+
+    public function pull()
+    {
+        $command = Artisan::call('repo:pull');
+
+        if($command === 0){
+            return redirect()->back()->with('success', __('alerts.success.repo_pull'));
+        }
+
+        return redirect()->back()->with('error', __('alerts.error.repo_pull'));
+    }
 }
