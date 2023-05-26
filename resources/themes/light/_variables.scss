@@ -24,6 +24,7 @@ $cadet: #1C1F33;
 $violet: #564D80;
 $lazuli: #22577A;
 $dimm-blue: #7392b7;
+$celadon: #BAD4AA;
 
 $border-color: #e2f1fc;
 
@@ -37,7 +38,7 @@ $secondary: $violet;
 $light: #fafafa;
 $dark: #011638;
 $danger: #e56b6f;
-$warning: #e36414;
+$warning: #EDB458;
 $success: #4f9d69;
 $info: #0892A5;
 $other: darken($border-color, 30%);
@@ -51,6 +52,11 @@ $theme-colors: (
     'info': $info,
     'dark': $dark,
     'other': $other,
+
+    'cadet': $cadet,
+    'columbia': $columbia,
+    'dimm-blue': $dimm-blue,
+    'lightgrey': $coolgray,
 );
 
 // Component colors

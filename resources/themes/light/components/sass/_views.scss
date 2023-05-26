@@ -1,0 +1,10 @@
+.course .course-details .course-img {
+    display: block;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    background-position: center;
+    background-size: contain;
+    height: 30em;
+    pointer-events: none;
+}

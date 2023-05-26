@@ -3328,6 +3328,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_js_base__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_components_js_base__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_js_navbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/js/navbar */ "./resources/themes/light/components/js/navbar.js");
 /* harmony import */ var _components_js_navbar__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_components_js_navbar__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_js_course__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/js/course */ "./resources/themes/light/components/js/course.js");
+/* harmony import */ var _components_js_course__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_components_js_course__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 
@@ -3352,6 +3355,16 @@ $(document).ready(function () {
     multiple: true
   });
 });
+
+/***/ }),
+
+/***/ "./resources/themes/light/components/js/course.js":
+/*!********************************************************!*\
+  !*** ./resources/themes/light/components/js/course.js ***!
+  \********************************************************/
+/***/ (() => {
+
+
 
 /***/ }),
 

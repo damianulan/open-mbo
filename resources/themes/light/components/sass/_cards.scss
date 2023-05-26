@@ -16,3 +16,98 @@
     box-shadow: none;
     border: 1px solid $border-color;
 }
+
+.card.path-card {
+    color: $light;
+    border-radius: 1.3rem;
+    height: 22em;
+    display: flex;
+}
+
+.card.path-card .card-body{
+    padding: 1.5rem 2rem;
+    align-content: end;
+    display: grid;
+}
+
+.card.course-card {
+    margin-top: 1rem;
+}
+
+.card.course-card:hover {
+    cursor: pointer;
+    -webkit-box-shadow: inset -5px -15px 75px -28px rgba($border-color,0.8);
+    -moz-box-shadow: inset -5px -15px 75px -28px rgba($border-color,0.8);
+    box-shadow: inset -5px -15px 75px -28px rgba($border-color,0.8);
+}
+
+.course-card .course-img{
+    display: block;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    background-position: center;
+    background-size: cover;
+    height: 15em;
+    pointer-events: none;
+}
+
+.course-card .card-title,
+.path-card .card-title {
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.course-card .card-title {
+    font-size: 1rem;
+    white-space: nowrap;
+}
+
+.path-card .card-title {
+    font-size: .85rem;
+}
+
+.course-card .card-text,
+.path-card .card-text {
+    max-height: 3em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.5em;
+}
+
+.course-card .details .element,
+.path-card .details .element {
+    display: flex;
+    align-items: center;
+    padding: .3rem .5rem 0 .5rem;
+}
+
+.course-card .progress-bar {
+    display: flex;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.course-card .progress-bar .bar-container {
+    width: 100%;
+    height: .2em;
+    background-color: $columbia;
+}
+
+.course-card .progress-bar .bar-progress {
+    height: 100%;
+}
+
+.course-card .progress-bar .bar-container,
+.course-card .progress-bar .bar-progress {
+    border-bottom-right-radius: $card-border-radius;
+    border-bottom-left-radius: $card-border-radius;
+}
+
+
+// .course-card .card-title,
+// .course-card .card-text {
+//     text-overflow: ellipsis;
+// }

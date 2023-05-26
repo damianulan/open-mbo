@@ -213,6 +213,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        App\Providers\ComponentServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\PermissionServiceProvider::class,
         App\Providers\RolesServiceProvider::class,

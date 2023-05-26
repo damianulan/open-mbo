@@ -42,4 +42,12 @@ Route::get('settings/server/pull', [App\Http\Controllers\Settings\ServerControll
 /**
  * Management START
  */
-Route::get('management', [App\Http\Controllers\Management\ManagementController::class, 'index'])->name('management.index');
+Route::get('management', [App\Http\Controllers\Management\ManagementController::class, 'index'])->middleware('auth')->name('management.index');
+
+
+/**
+ * COURSES
+ */
+Route::get('course/view/{id?}', [App\Http\Controllers\CourseController::class, 'view'])->middleware('auth')->name('course.view');
+Route::get('course/edit/{id}', [App\Http\Controllers\CourseController::class, 'edit'])->middleware('auth')->name('course.edit');
+

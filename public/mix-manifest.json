@@ -1,6 +1,6 @@
 {
-    "/themes/light/app.js": "/themes/light/app.js?id=31e4744be4917aa7672b22ff9ef2b8ef",
-    "/themes/light/app.css": "/themes/light/app.css?id=be1ce5c98d29a0a70af147f715bf38df",
+    "/themes/light/app.js": "/themes/light/app.js?id=764ade742021d7d6b61d7f59a4a4d150",
+    "/themes/light/app.css": "/themes/light/app.css?id=bd24dde7e8aaaef2467e8a79e142b2c0",
     "/themes/vendors/datatables/datatables.min.js": "/themes/vendors/datatables/datatables.min.js?id=028790892e63b1a0b87f4037fee45ca1",
     "/themes/vendors/datatables/pl.json": "/themes/vendors/datatables/pl.json?id=1eb747a21cb68879bee8e110b14c246b",
     "/themes/vendors/jquery.min.js": "/themes/vendors/jquery.min.js?id=cf2fbbf84281d9ecbffb4993203d543b",
@@ -71,5 +71,12 @@
     "/themes/vendors/select2/select2.full.min.js": "/themes/vendors/select2/select2.full.min.js?id=6426dee270758cbf5787d67da63427ef",
     "/images/portrait/avatar-female.png": "/images/portrait/avatar-female.png?id=70aab25d86b1b481f2ff41df8b19f497",
     "/images/portrait/avatar-male.png": "/images/portrait/avatar-male.png?id=62fbb47559421f75e6e3208970b82381",
-    "/images/portrait/avatar-s-11.jpg": "/images/portrait/avatar-s-11.jpg?id=0798dc7b01555d223f42f3d0998324fb"
+    "/images/portrait/avatar-s-11.jpg": "/images/portrait/avatar-s-11.jpg?id=0798dc7b01555d223f42f3d0998324fb",
+    "/themes/light/images/courses/course-default-pic.jpg": "/themes/light/images/courses/course-default-pic.jpg?id=10806c5c2c2874381c2f54b44b6e3a9f",
+    "/themes/light/images/courses/course1.jpg": "/themes/light/images/courses/course1.jpg?id=88800e2abac8bc1d6144e412906dc10f",
+    "/themes/light/images/courses/course2.jpg": "/themes/light/images/courses/course2.jpg?id=ebf5a8546c6d88834cec18f7da9c01d2",
+    "/themes/light/images/courses/course3.jpg": "/themes/light/images/courses/course3.jpg?id=1652c8650f0f57ad4a1bf9655834a01e",
+    "/themes/light/images/courses/course4.jpg": "/themes/light/images/courses/course4.jpg?id=e1260fd370db11c05b39e1362c1db9da",
+    "/themes/light/images/courses/course5.jpg": "/themes/light/images/courses/course5.jpg?id=c11a4b59c2af160b4e0d6d6f208dac69",
+    "/themes/light/images/courses/course6.jpg": "/themes/light/images/courses/course6.jpg?id=02d6ea3db68075c280b85e402b2d8d3a"
 }

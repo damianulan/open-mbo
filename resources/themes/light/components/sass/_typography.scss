@@ -96,7 +96,15 @@ h4, h5, h6 {
     font-weight: 600;
 }
 
+.fs-7 {
+    font-size: 0.75rem !important;
+}
+
 hr {
     background-color: $primary;
     opacity: 0.1;
+}
+
+.text-secondary {
+    color: $secondary !important;
 }

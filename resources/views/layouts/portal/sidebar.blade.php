@@ -1,6 +1,6 @@
 <nav id="sidebar" class="sidebar-menu menu-fixed pt-0 <?php if(isset($_COOKIE['menu-collapsed'])&&$_COOKIE['menu-collapsed']==true){ echo 'menu-collapsed'; }?>">
     <a class="navbar-brand mb-0 px-6" href="{{ url('/') }}">
-        <i class="fs-3 bi-easel2-fill me-3"></i><span>LMS</span>
+        <i class="fs-2 bi-chevron-expand me-2"></i><span>LMS</span>
     </a>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
