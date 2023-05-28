@@ -5,6 +5,7 @@ let mix = require('laravel-mix');
 // misc
 mix.copyDirectory('resources/themes/vendors', 'public/themes/vendors');
 mix.copyDirectory('resources/images', 'public/images');
+mix.copyDirectory('resources/scripts', 'public/scripts');
 
 // // base-theme
 mix.js('resources/themes/light/app.js', 'public/themes/light')

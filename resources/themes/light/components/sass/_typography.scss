@@ -61,7 +61,8 @@ a {
 }
 
 a:hover {
-    color: lighten($primary, 20%);
+    color: $secondary;/*lighten($primary, 20%);*/
+    cursor: pointer !important;
 }
 
 a.link-primary {
@@ -107,4 +108,8 @@ hr {
 
 .text-secondary {
     color: $secondary !important;
+}
+
+.dashboard-widget-title {
+    margin: 0;
 }

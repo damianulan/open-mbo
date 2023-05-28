@@ -1,21 +1,37 @@
-function setCookie(name,value,days) {
-    var expires = "";
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
-        expires = "; expires=" + date.toUTCString();
+function sidebarToggleAll() {
+    if($('#sidebar').hasClass('menu-hamburgered')){
+        $('#sidebar').removeClass('menu-hamburgered')
     }
-    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
- }
-function sidebarToggleAll(){
-        $('#sidebar').toggleClass('menu-collapsed');
-        $('#topbar').toggleClass('menu-collapsed');
-        $('#main').toggleClass('menu-collapsed');
-        var menuCollapsed = $('#sidebar').hasClass('menu-collapsed');
-        setCookie('menu-collapsed', menuCollapsed, 30);
+
+    $('#sidebar').toggleClass('menu-collapsed');
+    $('#topbar').toggleClass('menu-collapsed');
+    $('#main-content').toggleClass('menu-collapsed');
+    var menuCollapsed = $('#sidebar').hasClass('menu-collapsed');
+    setCookie('menu-collapsed', menuCollapsed, 30);
 }
+
+function sidebarHamburger() {
+    if($('#sidebar').hasClass('menu-collapsed')){
+        $('#sidebar').removeClass('menu-collapsed');
+    }
+
+    if(!$('#sidebar').hasClass('menu-hamburgered')){
+        $('#sidebar').addClass('menu-hamburgered')
+    }
+}
+
     $('#menu-toggle').click(function(){
         sidebarToggleAll();
+    });
+
+    $('#hamburger-toggle').click(function (){
+        sidebarHamburger();
+    });
+
+    $('#hamburger-close').click(function (){
+        if($('#sidebar').hasClass('menu-hamburgered')){
+            $('#sidebar').removeClass('menu-hamburgered')
+        }
     });
 
 

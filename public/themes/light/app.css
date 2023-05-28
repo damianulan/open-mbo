@@ -21074,7 +21074,8 @@ a {
 }
 
 a:hover {
-  color: #4963af;
+  color: #564D80; /*lighten($primary, 20%);*/
+  cursor: pointer !important;
 }
 
 a.link-primary {
@@ -21122,6 +21123,10 @@ hr {
   color: #564D80 !important;
 }
 
+.dashboard-widget-title {
+  margin: 0;
+}
+
 html, body {
   direction: ltr;
   height: 100%;
@@ -21156,32 +21161,31 @@ html::-webkit-scrollbar-thumb:active {
   word-wrap: break-word;
 }
 
+.content {
+  padding: 0;
+  position: relative;
+  transition: 300ms ease all;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  min-height: calc(100% - 4rem);
+  transition: all 0.4s ease 0s;
+  padding-bottom: 1.5rem;
+}
+
 @media (min-width: 992px) {
   .content {
-    padding: 0;
-    position: relative;
-    transition: 300ms ease all;
-    -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-    min-height: calc(100% - 4rem);
     margin-left: 18rem;
-    transition: all 0.4s ease 0s;
-    padding-bottom: 1.5rem;
   }
 }
-@media (max-width: 991px) {
+@media (max-width: 992px) {
   .content {
-    padding: 0;
-    position: relative;
-    transition: 300ms ease all;
-    -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-    min-height: calc(100% - 4rem);
-    margin-left: 5rem;
-    transition: all 0.4s ease 0s;
-    padding-bottom: 1.5rem;
+    margin-left: 0 !important;
   }
 }
+.content.menu-collapsed {
+  margin-left: 5rem;
+}
+
 .blank-content {
   overflow: overlay;
   overflow-x: hidden;
@@ -21468,31 +21472,80 @@ html .sidebar-menu {
   height: 100%;
 }
 
+.sidebar-menu {
+  z-index: 1031;
+  display: table-cell;
+  background-color: #f9fbfd;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.07);
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  padding: 2rem 0;
+  overflow-x: hidden;
+  transition: all 0.4s ease 0s;
+  right: auto;
+  left: 0;
+}
+
 @media (min-width: 992px) {
   .sidebar-menu {
-    z-index: 1031;
-    display: table-cell;
-    background-color: #f9fbfd;
-    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.07);
-    transform: translate3d(0, 0, 0);
-    -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
     width: 18rem;
-    padding: 2rem 0;
-    overflow-x: hidden;
-    transition: all 0.4s ease 0s;
-    right: auto;
-    left: 0;
   }
-  .footer {
-    display: flex;
-    padding: 1rem 2rem;
-    background-color: #f9fbfd;
-    position: relative;
-    bottom: 0;
-    right: 0;
+  #hamburger-toggle {
+    display: none;
+  }
+  #hamburger-close {
+    display: none !important;
   }
 }
+@media (max-width: 992px) {
+  .sidebar-menu:not(.menu-hamburgered) {
+    width: 0 !important;
+  }
+  .sidebar-menu:not(.menu-hamburgered) * {
+    display: none !important;
+  }
+  #menu-toggle {
+    display: none;
+  }
+}
+.sidebar-menu.menu-collapsed {
+  width: 5rem;
+}
+
+.sidebar-menu.menu-hamburgered {
+  width: 18rem;
+}
+
+.sidebar-menu.menu-collapsed .nav-heading-link,
+.sidebar-menu.menu-collapsed .nav-title,
+.sidebar-menu.menu-collapsed .brand-title,
+.sidebar-menu.menu-collapsed .badge {
+  display: none !important;
+}
+
+.sidebar-menu.menu-collapsed .nav-link .bi,
+.sidebar-menu.menu-collapsed .navbar-brand i {
+  margin: 0 !important;
+}
+
+.sidebar-menu.menu-collapsed .nav-pills .nav-link,
+.sidebar-menu.menu-collapsed .navbar-brand {
+  display: block !important;
+  text-align: center !important;
+}
+
+.sidebar-menu #hamburger-close {
+  display: block;
+  margin-left: auto;
+  align-self: center;
+  cursor: pointer;
+}
+
+.sidebar-menu:not(.menu-hamburgered) #hamburger-close {
+  display: none;
+}
+
 .menu-fixed {
   position: fixed !important;
 }
@@ -21515,14 +21568,22 @@ html .sidebar-menu {
 }
 
 .sidebar-menu .navbar-brand {
+  transition: all 0.3s ease-in-out;
+  display: block;
+  padding: 1.5rem;
+}
+
+.sidebar-menu .navbar-brand .brand {
+  color: #2b3a67;
   font-size: 1.1rem;
   font-weight: 700;
   letter-spacing: 0.03rem;
   text-transform: uppercase;
-  color: #2b3a67;
-  transition: all 0.3s ease-in-out;
-  display: block;
-  padding: 1.5rem;
+  text-decoration: none;
+}
+
+.sidebar-menu .navbar-brand i {
+  margin-right: 0.5rem;
 }
 
 li.nav-item {
@@ -21547,6 +21608,16 @@ li.nav-item {
   text-transform: uppercase;
 }
 
+.sidebar-menu .nav-heading-link {
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem;
+  color: #2b3a67;
+  padding: 0.3rem 1rem;
+  margin: 0 0.75rem;
+  text-decoration: none;
+}
+
 .sidebar-menu .nav-pills .nav-link:hover {
   color: #42589d;
   transition: all 0.3s ease-in-out;
@@ -21566,7 +21637,7 @@ li.nav-item {
   transition: padding 0.35s ease 0s !important;
 }
 
-.sidebar-menu .nav .nav-item:hover > a {
+.sidebar-menu:not(.menu-collapsed) .nav .nav-item:hover > a {
   padding-left: 1.5rem;
   color: #2b3a67;
   transition: padding 0.35s ease 0s !important;
@@ -21938,7 +22009,7 @@ ul.nav-pills-horizontal {
 
 .course-card .progress-bar .bar-container {
   width: 100%;
-  height: 0.2em;
+  height: 0.3em;
   background-color: #C5D5EA;
 }
 

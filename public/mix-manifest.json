@@ -1,6 +1,6 @@
 {
-    "/themes/light/app.js": "/themes/light/app.js?id=764ade742021d7d6b61d7f59a4a4d150",
-    "/themes/light/app.css": "/themes/light/app.css?id=bd24dde7e8aaaef2467e8a79e142b2c0",
+    "/themes/light/app.js": "/themes/light/app.js?id=860d1976470a7a4f1006be39a2b573b0",
+    "/themes/light/app.css": "/themes/light/app.css?id=57fe68855552db077a2e71007309d913",
     "/themes/vendors/datatables/datatables.min.js": "/themes/vendors/datatables/datatables.min.js?id=028790892e63b1a0b87f4037fee45ca1",
     "/themes/vendors/datatables/pl.json": "/themes/vendors/datatables/pl.json?id=1eb747a21cb68879bee8e110b14c246b",
     "/themes/vendors/jquery.min.js": "/themes/vendors/jquery.min.js?id=cf2fbbf84281d9ecbffb4993203d543b",
@@ -72,6 +72,7 @@
     "/images/portrait/avatar-female.png": "/images/portrait/avatar-female.png?id=70aab25d86b1b481f2ff41df8b19f497",
     "/images/portrait/avatar-male.png": "/images/portrait/avatar-male.png?id=62fbb47559421f75e6e3208970b82381",
     "/images/portrait/avatar-s-11.jpg": "/images/portrait/avatar-s-11.jpg?id=0798dc7b01555d223f42f3d0998324fb",
+    "/scripts/globals.js": "/scripts/globals.js?id=b1af94d382c7cc5970af79a46bb90acc",
     "/themes/light/images/courses/course-default-pic.jpg": "/themes/light/images/courses/course-default-pic.jpg?id=10806c5c2c2874381c2f54b44b6e3a9f",
     "/themes/light/images/courses/course1.jpg": "/themes/light/images/courses/course1.jpg?id=88800e2abac8bc1d6144e412906dc10f",
     "/themes/light/images/courses/course2.jpg": "/themes/light/images/courses/course2.jpg?id=ebf5a8546c6d88834cec18f7da9c01d2",

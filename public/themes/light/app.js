@@ -3328,9 +3328,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_js_base__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_components_js_base__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_js_navbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/js/navbar */ "./resources/themes/light/components/js/navbar.js");
 /* harmony import */ var _components_js_navbar__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_components_js_navbar__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_js_course__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/js/course */ "./resources/themes/light/components/js/course.js");
-/* harmony import */ var _components_js_course__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_components_js_course__WEBPACK_IMPORTED_MODULE_2__);
-
 
 
 
@@ -3358,40 +3355,40 @@ $(document).ready(function () {
 
 /***/ }),
 
-/***/ "./resources/themes/light/components/js/course.js":
-/*!********************************************************!*\
-  !*** ./resources/themes/light/components/js/course.js ***!
-  \********************************************************/
-/***/ (() => {
-
-
-
-/***/ }),
-
 /***/ "./resources/themes/light/components/js/navbar.js":
 /*!********************************************************!*\
   !*** ./resources/themes/light/components/js/navbar.js ***!
   \********************************************************/
 /***/ (() => {
 
-function setCookie(name, value, days) {
-  var expires = "";
-  if (days) {
-    var date = new Date();
-    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-    expires = "; expires=" + date.toUTCString();
-  }
-  document.cookie = name + "=" + (value || "") + expires + "; path=/";
-}
 function sidebarToggleAll() {
+  if ($('#sidebar').hasClass('menu-hamburgered')) {
+    $('#sidebar').removeClass('menu-hamburgered');
+  }
   $('#sidebar').toggleClass('menu-collapsed');
   $('#topbar').toggleClass('menu-collapsed');
-  $('#main').toggleClass('menu-collapsed');
+  $('#main-content').toggleClass('menu-collapsed');
   var menuCollapsed = $('#sidebar').hasClass('menu-collapsed');
   setCookie('menu-collapsed', menuCollapsed, 30);
 }
+function sidebarHamburger() {
+  if ($('#sidebar').hasClass('menu-collapsed')) {
+    $('#sidebar').removeClass('menu-collapsed');
+  }
+  if (!$('#sidebar').hasClass('menu-hamburgered')) {
+    $('#sidebar').addClass('menu-hamburgered');
+  }
+}
 $('#menu-toggle').click(function () {
   sidebarToggleAll();
+});
+$('#hamburger-toggle').click(function () {
+  sidebarHamburger();
+});
+$('#hamburger-close').click(function () {
+  if ($('#sidebar').hasClass('menu-hamburgered')) {
+    $('#sidebar').removeClass('menu-hamburgered');
+  }
 });
 $(".pin").on("mouseenter", function () {
   if ($(this).hasClass("bi-pin-angle")) {

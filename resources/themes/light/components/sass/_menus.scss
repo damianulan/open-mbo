@@ -26,31 +26,86 @@ html .sidebar-menu {
     height: 100%;
 }
 
+.sidebar-menu {
+    z-index: 1031;
+    display: table-cell;
+    background-color: $sidebar-bg;
+    box-shadow: 0 0 15px 0 rgb(0 0 0 / 7%);
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    padding: 2rem 0;
+    overflow-x: hidden;
+    transition: all .4s ease 0s;
+    right: auto;
+    left: 0;
+}
+
 @media (min-width: 992px){
     .sidebar-menu {
-        z-index: 1031;
-        display: table-cell;
-        background-color: $sidebar-bg;
-        box-shadow: 0 0 15px 0 rgb(0 0 0 / 7%);
-        transform: translate3d(0, 0, 0);
-        backface-visibility: hidden;
         width: $menu-expanded-width;
-        padding: 2rem 0;
-        overflow-x: hidden;
-        transition: all .4s ease 0s;
-        right: auto;
-        left: 0;
-        //border-right: 1px solid $border-color;
     }
 
-    .footer{
-        display: flex;
-        padding: 1rem 2rem;
-        background-color: $sidebar-bg;
-        position: relative;
-        bottom: 0;
-        right: 0;
+    #hamburger-toggle {
+        display: none;
     }
+
+    #hamburger-close {
+        display: none !important;
+    }
+}
+
+@media (max-width: 992px){
+    .sidebar-menu:not(.menu-hamburgered) {
+        width: 0 !important;
+    }
+
+    .sidebar-menu:not(.menu-hamburgered) * {
+        display: none !important;
+    }
+
+    #menu-toggle {
+        display: none;
+    }
+}
+
+.sidebar-menu.menu-collapsed {
+    width: $menu-collapsed-width;
+}
+
+.sidebar-menu.menu-hamburgered {
+    width: $menu-expanded-width;
+}
+
+.sidebar-menu.menu-collapsed .nav-heading-link,
+.sidebar-menu.menu-collapsed .nav-title,
+.sidebar-menu.menu-collapsed .brand-title,
+.sidebar-menu.menu-collapsed .badge
+{
+    display: none !important;
+}
+
+.sidebar-menu.menu-collapsed .nav-link .bi,
+.sidebar-menu.menu-collapsed .navbar-brand i
+{
+    margin: 0 !important;
+}
+
+.sidebar-menu.menu-collapsed .nav-pills .nav-link,
+.sidebar-menu.menu-collapsed .navbar-brand
+{
+    display: block !important;
+    text-align: center !important;
+}
+
+.sidebar-menu #hamburger-close {
+    display: block;
+    margin-left: auto;
+    align-self: center;
+    cursor: pointer;
+}
+
+.sidebar-menu:not(.menu-hamburgered) #hamburger-close {
+    display: none;
 }
 
 .menu-fixed {
@@ -75,14 +130,22 @@ html .sidebar-menu {
 }
 
 .sidebar-menu .navbar-brand {
+    transition: all .3s ease-in-out;
+    display: block;
+    padding: 1.5rem;
+}
+
+.sidebar-menu .navbar-brand .brand {
+    color: $sidebar-brand-link;
     font-size: 1.1rem;
     font-weight: 700;
     letter-spacing: .03rem;
     text-transform: uppercase;
-    color: $sidebar-brand-link;
-    transition: all .3s ease-in-out;
-    display: block;
-    padding: 1.5rem;
+    text-decoration: none;
+}
+
+.sidebar-menu .navbar-brand i {
+    margin-right: .5rem;
 }
 
 li.nav-item {
@@ -107,6 +170,16 @@ li.nav-item {
     text-transform: uppercase;
 }
 
+.sidebar-menu .nav-heading-link {
+    display: flex;
+    align-items: center;
+    font-size: .85rem;
+    color: $sidebar-link;
+    padding: .3rem 1rem;
+    margin: 0 .75rem;
+    text-decoration: none;
+}
+
 .sidebar-menu .nav-pills .nav-link:hover {
     color: lighten($sidebar-link, 15%);
     transition: all .3s ease-in-out;
@@ -126,7 +199,7 @@ li.nav-item {
     transition: padding 0.35s ease 0s !important;
 }
 
-.sidebar-menu .nav .nav-item:hover > a {
+.sidebar-menu:not(.menu-collapsed) .nav .nav-item:hover > a {
     padding-left: 1.5rem;
     color: $primary;
     transition: padding 0.35s ease 0s !important;
@@ -150,6 +223,7 @@ li.nav-item {
     padding: 0;
     list-style: none;
 }
+
 
 li.user-status {
     position: relative;

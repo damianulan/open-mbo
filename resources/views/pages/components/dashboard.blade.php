@@ -1,15 +1,15 @@
 <div class="row course-cards">
     <h4 class="dashboard-widget-title">Moje kursy</h4>
-    <div class="col-md-3">
+    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12 mt-3">
         @include('components.course_card')
     </div>
-    <div class="col-md-3">
+    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12 mt-3">
         @include('components.course_card')
     </div>
-    <div class="col-md-3">
+    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12 mt-3">
         @include('components.course_card')
     </div>
-    <div class="col-md-3">
+    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12 mt-3">
         @include('components.course_card')
     </div>
 </div>

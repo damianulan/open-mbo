@@ -1,7 +1,13 @@
 <nav id="sidebar" class="sidebar-menu menu-fixed pt-0 <?php if(isset($_COOKIE['menu-collapsed'])&&$_COOKIE['menu-collapsed']==true){ echo 'menu-collapsed'; }?>">
-    <a class="navbar-brand mb-0 px-6" href="{{ url('/') }}">
-        <i class="fs-2 bi-chevron-expand me-2"></i><span>LMS</span>
-    </a>
+    <div class="navbar-brand mb-0 px-6">
+        <div class="d-flex">
+          <a class="brand"  href="{{ url('/') }}">
+            <i class="fs-2 bi-tornado"></i><span class="brand-title">{{ config('app.name') }}</span>
+          </a>
+          <div id="hamburger-close"><i class="bi-x-lg"></i></div>
+
+        </div>
+    </div>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
         <a href="{{ route('dashboard') }}" class="nav-link{{ request()->routeIs('dashboard') ? ' active':'' }}">
@@ -10,12 +16,12 @@
         </a>
       </li>
       <li class="nav-multi first">
-        <a class="nav-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="recruitment" href="#recruitment">
+        <a class="nav-heading-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="recruitment" href="#recruitment">
           <span class="nav-heading">{{ __('menus.elearning_panel') }}</span><span class="ms-auto" onclick=""><i class="bi-pin-angle-fill pin"></i></span>
         </a>
         <ul class="collapse show" id="recruitment">
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link{{ request()->routeIs('course.*') ? ' active':'' }}" href="#">
               <i class="bi bi-mortarboard-fill"></i>
               <span class="nav-title">{{ __('menus.courses') }}</span>
             </a>
@@ -42,7 +48,7 @@
         </ul>
       </li>
       <li class="nav-multi">
-        <a class="nav-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="administration" href="#administration">
+        <a class="nav-heading-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="administration" href="#administration">
           <span class="nav-heading">{{ __('menus.admin_panel') }}</span><span class="ms-auto" onclick=""><i class="bi-pin-angle pin"></i></span>
         </a>
         <ul class="collapse show" id="administration">
