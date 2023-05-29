@@ -351,3 +351,62 @@ ul.nav-pills-horizontal {
 .breadcrumb a:hover {
     text-decoration: underline;
 }
+
+.list-menu {
+    padding: 2rem 0;
+}
+
+.list-menu ul {
+    list-style: none;
+}
+
+.list-menu ul.sections {
+    padding: 0;
+}
+
+.list-menu li.section {
+    display: flex;
+    font-size: 1.2rem;
+    padding: .5rem 0;
+    cursor: pointer;
+}
+
+.list-menu li.section .section-title-settings {
+    margin-left: auto;
+}
+
+.list-menu li.section .section-title {
+    font-weight: 600;
+}
+
+.list-menu ul.subitems {
+    font-size: .95rem;
+}
+
+.list-menu ul.subitems .section-item {
+    display: flex;
+    padding: .3rem 2rem .3rem 0;
+    cursor: pointer;
+}
+
+.list-menu li.section .section-title:hover,
+.list-menu ul.subitems .section-item-title:hover
+{
+    color: $secondary;
+}
+
+.list-menu ul.subitems .section-item i {
+    margin-right: .5rem;
+}
+
+.list-menu ul.subitems .section-item .section-item-settings {
+    margin-left: auto;
+}
+
+.list-menu ul.subitems .section-item-title.success {
+    color: $success !important;
+}
+
+.list-menu ul.subitems .section-item-title.danger {
+    color: $danger !important;
+}

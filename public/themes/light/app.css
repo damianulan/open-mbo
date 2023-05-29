@@ -21787,6 +21787,64 @@ ul.nav-pills-horizontal {
   text-decoration: underline;
 }
 
+.list-menu {
+  padding: 2rem 0;
+}
+
+.list-menu ul {
+  list-style: none;
+}
+
+.list-menu ul.sections {
+  padding: 0;
+}
+
+.list-menu li.section {
+  display: flex;
+  font-size: 1.2rem;
+  padding: 0.5rem 0;
+  cursor: pointer;
+}
+
+.list-menu li.section .section-title-settings {
+  margin-left: auto;
+}
+
+.list-menu li.section .section-title {
+  font-weight: 600;
+}
+
+.list-menu ul.subitems {
+  font-size: 0.95rem;
+}
+
+.list-menu ul.subitems .section-item {
+  display: flex;
+  padding: 0.3rem 2rem 0.3rem 0;
+  cursor: pointer;
+}
+
+.list-menu li.section .section-title:hover,
+.list-menu ul.subitems .section-item-title:hover {
+  color: #564D80;
+}
+
+.list-menu ul.subitems .section-item i {
+  margin-right: 0.5rem;
+}
+
+.list-menu ul.subitems .section-item .section-item-settings {
+  margin-left: auto;
+}
+
+.list-menu ul.subitems .section-item-title.success {
+  color: #4f9d69 !important;
+}
+
+.list-menu ul.subitems .section-item-title.danger {
+  color: #e56b6f !important;
+}
+
 .badge.badge-status, .badge.badge-tag {
   padding: 0.3rem 0.5rem;
   font-size: 0.75rem;

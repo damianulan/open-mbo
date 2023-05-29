@@ -3408,6 +3408,12 @@ $(".pin").on("mouseleave", function () {
     $(this).addClass("bi-pin-angle");
   }
 });
+$(".list-menu .section-item .section-item-title").click(function () {
+  var link = $(this).attr('data-url');
+  if (link) {
+    document.location.href = link;
+  }
+});
 
 /***/ }),
 

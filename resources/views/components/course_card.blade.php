@@ -5,10 +5,10 @@
     <div class="course-img" style="background-image: url('{{ asset('themes/light/images/courses/course5.jpg') }}');"></div>
     <div class="card-body">
         <div class="card-title" title="Kurs zamartwiania się bardzo mocno mam dość">
-            Kurs przykładowy frontend
+            {{ lorem_title() }}
         </div>
         <div class="card-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            {{ lorem() }}
         </div>
         <div class="row details">
             <div class="col-md-6 col-sm-12">

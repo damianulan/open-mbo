@@ -17,9 +17,8 @@
     <div class="col-md-8">
         <div class="row path-cards">
             <h4 class="dashboard-widget-title">Moje ścieżki</h4>
-            <div class="col-md-3">
-                @include('components.path_card')
-            </div>
+            <!--<div class="col-md-3">
+            </div> -->
         </div>
     </div>
     <div class="col-md-4">
