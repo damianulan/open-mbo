@@ -54,6 +54,11 @@ class User extends Authenticatable
         'created_at' => 'datetime'
     ];
 
+    public function name()
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
+
     public function block(): bool
     {
         if($this->active == 1){

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\app;
+namespace App\Lib;
 
 class Git
 {

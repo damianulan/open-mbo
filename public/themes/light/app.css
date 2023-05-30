@@ -21706,6 +21706,15 @@ ul.user-bar {
   background-color: rgba(43, 58, 103, 0.1);
 }
 
+.user-nav span.profile-name {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.35rem 1rem;
+}
+
 .user-avatar-left {
   margin-right: 0.7rem;
 }
@@ -21745,6 +21754,7 @@ ul.user-bar {
   align-items: center;
   color: #022a6a;
   border-radius: 0.25rem;
+  white-space: nowrap;
 }
 
 .page-menu .nav-pills-horizontal .nav-link .badge {
@@ -21769,10 +21779,16 @@ ul.user-bar {
   background-color: rgba(43, 58, 103, 0.25);
 }
 
-ul.nav-pills-horizontal {
+.page-menu ul.nav-pills-horizontal {
   border: 1px solid rgba(43, 58, 103, 0.1);
   border-radius: 0.5rem;
   padding: 0.3rem;
+  flex-wrap: nowrap;
+  overflow-y: auto;
+}
+
+.page-menu ul.nav-pills-horizontal li.nav-item {
+  display: flex;
 }
 
 .breadcrumb {
@@ -21843,6 +21859,21 @@ ul.nav-pills-horizontal {
 
 .list-menu ul.subitems .section-item-title.danger {
   color: #e56b6f !important;
+}
+
+.list-menu .menu-options {
+  display: flex;
+}
+
+.menu-options .toggle-all {
+  font-size: 0.7rem;
+  margin-left: auto;
+}
+
+.menu-options .toggle-all:hover {
+  text-decoration: underline;
+  cursor: pointer;
+  color: #564D80;
 }
 
 .badge.badge-status, .badge.badge-tag {

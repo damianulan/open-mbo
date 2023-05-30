@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
-use App\Models\app\Git;
+use App\Lib\Git;
+use App\Lib\Theme;
 
 return [
 
@@ -129,6 +130,7 @@ return [
 
      'head' => Git::head(),
 
+     'themes_available' => Theme::getAvailable(),
     /*
     |--------------------------------------------------------------------------
     | Encryption Key
