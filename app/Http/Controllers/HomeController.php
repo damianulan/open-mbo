@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $theme = new \App\Lib\Theme();
         return view('pages.dashboard', [
             'title' => __('menus.dashboard')
         ]);

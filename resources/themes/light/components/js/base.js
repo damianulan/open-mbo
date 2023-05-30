@@ -12,3 +12,10 @@ $(document).ready(function() {
         multiple: true,
     });
 });
+
+$(".course-card").click(function (){
+    var url = $(this).attr('data-url');
+    if(url){
+        window.location.href = url;
+    }
+});

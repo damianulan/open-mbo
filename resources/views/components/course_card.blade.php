@@ -1,10 +1,10 @@
 @php
     $progress = 20;
 @endphp
-<div class="card course-card">
+<div class="card course-card" data-url="{{ route('course.view') }}">
     <div class="course-img" style="background-image: url('{{ asset('themes/light/images/courses/course5.jpg') }}');"></div>
     <div class="card-body">
-        <div class="card-title" title="Kurs zamartwiania się bardzo mocno mam dość">
+        <div class="card-title" title="{{ lorem_title() }}">
             {{ lorem_title() }}
         </div>
         <div class="card-text">
