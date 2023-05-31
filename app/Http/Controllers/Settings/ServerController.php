@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Settings;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Requests\Settings\MailServerRequest;
 
 class ServerController extends Controller
 {

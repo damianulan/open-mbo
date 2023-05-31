@@ -43,7 +43,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool) env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -126,11 +126,13 @@ return [
      */
 
      'release' => '0.0.1 beta',
-     'build' => 202305130,
+     'build' => 0,
 
      'head' => Git::head(),
 
-     'themes_available' => Theme::getAvailable(),
+     'theme' => 'light',
+     'logo' => null,
+
     /*
     |--------------------------------------------------------------------------
     | Encryption Key
@@ -219,6 +221,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\PermissionServiceProvider::class,
         App\Providers\RolesServiceProvider::class,
+        App\Providers\ConfigServiceProvider::class,
 
     ],
 
