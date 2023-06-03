@@ -27,7 +27,6 @@ class ServerController extends Controller
         }
 
         return view('pages.settings.server', [
-            'title' => __('menus.settings.index') . ' - ' . __('menus.settings.server'),
             'debugging_text' => $debugging_text,
             'git_text' => $git_text,
         ]);
@@ -46,16 +45,5 @@ class ServerController extends Controller
             $msg .= "<br/>" . str_replace("\n", "<br/>", Artisan::output());
         }
         return redirect()->back()->with('error', $msg);
-    }
-
-    public function pull()
-    {
-        $command = Artisan::call('repo:pull');
-
-        if($command === 0){
-            return redirect()->back()->with('success', __('alerts.success.repo_pull'));
-        }
-
-        return redirect()->back()->with('error', __('alerts.error.repo_pull'));
     }
 }

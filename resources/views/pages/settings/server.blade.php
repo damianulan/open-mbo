@@ -33,7 +33,7 @@
                         {{ __('pages.settings.git_status') }}:
                     </th>
                     <td>
-                        {!! $git_text !!} <a class="ms-1" href="{{ route('settings.pull') }}"><i class="bi bi-cloud-arrow-down-fill"></i></a>
+                        {!! $git_text !!}
                     </td>
                 </tr>
                 <tr>
@@ -72,7 +72,11 @@
             <hr/>
         </div>
         <div class="col-md-8">
-
+            <input type="text" class="form-control datetimepicker">
+            <select class="form-control">
+                <option>aaaa</option>
+                <option>bbbb</option>
+            </select>
         </div>
     </div>
 </div>

@@ -138,14 +138,18 @@ html .sidebar-menu {
 .sidebar-menu .navbar-brand .brand {
     color: $sidebar-brand-link;
     font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: .03rem;
-    text-transform: uppercase;
     text-decoration: none;
 }
 
+.sidebar-menu .navbar-brand .brand .brand-title {
+    font-weight: 800;
+    font-family: $font-family-serif;
+    letter-spacing: .05rem;
+    font-size: 1.4rem;
+}
+
 .sidebar-menu .navbar-brand i {
-    margin-right: .5rem;
+    margin-right: .8rem;
 }
 
 li.nav-item {
@@ -290,10 +294,15 @@ ul.user-bar {
     align-items: center;
 }
 
-.page-top .page-title {
+.page-top .page-heading {
     font-size: 1.6rem;
-    font-weight: 700;
     color: $page-header-color;
+}
+
+.page-top .page-heading .page-title {
+    font-weight: 700;
+    font-family: $font-family-serif;
+    font-size: 1.8rem;
 }
 
 .page-top .page-quick-actions {

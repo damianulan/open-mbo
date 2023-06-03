@@ -1,8 +1,8 @@
-<nav id="sidebar" class="sidebar-menu menu-fixed pt-0 <?php if(isset($_COOKIE['menu-collapsed'])&&$_COOKIE['menu-collapsed']==true){ echo 'menu-collapsed'; }?>">
+<nav id="sidebar" class="sidebar-menu menu-fixed pt-0 {{ $page->menu_collapsed }}">
     <div class="navbar-brand mb-0 px-6">
         <div class="d-flex">
           <a class="brand"  href="{{ url('/') }}">
-            <i class="fs-2 bi-tornado"></i><span class="brand-title">{{ config('app.name') }}</span>
+            <i class="fs-2 bi-tornado"></i><span class="brand-title">{{ $page->sitename }}</span>
           </a>
           <div id="hamburger-close"><i class="bi-x-lg"></i></div>
 

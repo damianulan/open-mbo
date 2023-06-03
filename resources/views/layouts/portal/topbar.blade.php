@@ -1,8 +1,8 @@
 <div id="topbar" class="page-top">
-    <div class="page-title">
+    <div class="page-heading">
       <a class="me-2" id="hamburger-toggle"><i class="bi-list"></i></a>
       <a class="me-2" id="menu-toggle" data-bs-toggle="tooltip" data-bs-title="Default tooltip"><i class="bi-three-dots-vertical"></i></a>
-        {{ $title }}
+      <span class="page-title">{{ $page->title }}</span>
     </div>
     <div class="page-quick-actions">
         

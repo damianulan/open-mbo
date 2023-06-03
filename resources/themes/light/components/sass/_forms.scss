@@ -3,7 +3,7 @@
 }
 
 .form-control {
-  font-size: .85rem;
+  font-size: $form-font-size;
   border: 1px solid darken($border-color, 10%);
   padding: .5rem .7rem;
   line-height: 1.25;
@@ -12,13 +12,24 @@
 }
 
 .form-control:focus {
-  color: #4e5154;
+  color: $dark;
   border: 1px solid darken($border-color, 30%);
   box-shadow: 0 3px 10px -1px rgb(0 0 0 / 10%);
 }
 
 .form-group {
   margin-bottom: 1.5rem;
+}
+
+
+// selects
+select.form-control option {
+  display: block;
+  padding: .5rem 0;
+}
+
+select.form-control option:hover {
+  background-color: $primary;
 }
 
 .divider {
@@ -79,20 +90,3 @@
 .valid-feedback, .invalid-feedback {
   font-size: 0.8rem;
 }
-
-// .text-danger {
-//   color: $danger !important;
-// }
-
-// .text-alert {
-//   color: $danger !important;
-//   margin-top: .25rem !important;
-// }
-
-// .text-info {
-//   color: $primary !important;
-// }
-
-// .text-asterisk {
-//   color: $asterisk !important;
-//}

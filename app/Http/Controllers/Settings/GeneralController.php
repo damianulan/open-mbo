@@ -15,7 +15,6 @@ class GeneralController extends Controller
     public function index()
     {
         return view('pages.settings.index', [
-            'title' => __('menus.settings.index')
         ]);
     }
 }

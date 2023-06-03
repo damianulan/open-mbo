@@ -15,7 +15,7 @@ class CourseController extends Controller
     public function view($id = 0)
     {
         return view('pages.courses.view', [
-            'title' => 'Kurs przykładowy'
+
         ]);
     }
 

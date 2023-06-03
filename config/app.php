@@ -104,6 +104,10 @@ return [
         'English' => 'en',
     ],
 
+    'date_format' => 'Y-m-d',
+    'time_format' => 'H:i',
+    'datetime_format' => 'Y-m-d H:i',
+
     /*
     |--------------------------------------------------------------------------
     | Faker Locale
@@ -129,9 +133,6 @@ return [
      'build' => 0,
 
      'head' => Git::head(),
-
-     'theme' => 'light',
-     'logo' => null,
 
     /*
     |--------------------------------------------------------------------------
@@ -238,6 +239,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'PageHeader' => App\Lib\PageHeader::class,
+        'Theme' => App\Lib\Theme::class,
     ])->toArray(),
 
 ];
