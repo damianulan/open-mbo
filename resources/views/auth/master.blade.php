@@ -1,6 +1,5 @@
 @php
-    $theme = 'light';
-    $title = 'Login';
+    $page = new PageHeader();
 @endphp
 @include('layouts.portal.header')
 <body>

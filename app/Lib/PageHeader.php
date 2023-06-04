@@ -16,9 +16,14 @@ class PageHeader
     public $logo;
     public $menu_collapsed;
 
-    public function __construct()
+    public function __construct(?string $pagetitle = null)
     {
-        $this->title = $this->assignPageTitle(Route::currentRouteName());
+        if(empty($pagetitle)){
+            $this->title = $this->assignPageTitle(Route::currentRouteName());
+        } else {
+            $this->title = $pagetitle;
+        }
+
         $this->sitename = app(GeneralSettings::class)->site_name;
         $this->theme = app(GeneralSettings::class)->theme;
         $this->locale = app(GeneralSettings::class)->locale;

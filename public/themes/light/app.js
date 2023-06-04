@@ -3339,11 +3339,13 @@ __webpack_require__.r(__webpack_exports__);
   \******************************************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-var chosen = __webpack_require__(/*! chosen-js */ "./node_modules/chosen-js/chosen.jquery.js");
+__webpack_require__(/*! chosen-js */ "./node_modules/chosen-js/chosen.jquery.js");
 var flatpickr = __webpack_require__(/*! flatpickr */ "./node_modules/flatpickr/dist/esm/index.js");
 var flatpickr_pl = (__webpack_require__(/*! flatpickr/dist/l10n/pl.js */ "./node_modules/flatpickr/dist/l10n/pl.js")["default"].pl);
 $(document).ready(function () {
-  $("select").chosen({});
+  $("select").chosen({
+    //disable_search_theshold: 5,
+  });
   $(".datetimepicker").flatpickr({
     "locale": flatpickr_pl,
     dateFormat: "d-m-Y H:i",

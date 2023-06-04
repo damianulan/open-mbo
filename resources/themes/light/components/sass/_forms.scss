@@ -1,35 +1,30 @@
+select, input {
+  display: block;
+  width: 100%;
+}
+
 .form-select {
-  background-color: #fff !important;
+  background-color: $input-background !important;
 }
 
 .form-control {
   font-size: $form-font-size;
-  border: 1px solid darken($border-color, 10%);
-  padding: .5rem .7rem;
-  line-height: 1.25;
-  background-color: #fff;
+  border: 1px solid $input-border-color;
+  padding: $input-padding;
+  line-height: $input-line-height;
+  background-color: $input-background;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  border-radius: $input-border-radius;
+  color: $input-color;
 }
 
 .form-control:focus {
-  color: $dark;
-  border: 1px solid darken($border-color, 30%);
-  box-shadow: 0 3px 10px -1px rgb(0 0 0 / 10%);
+  border: 1px solid $input-border-focus-color;
+  box-shadow: $input-box-shadow-focus;
 }
 
 .form-group {
   margin-bottom: 1.5rem;
-}
-
-
-// selects
-select.form-control option {
-  display: block;
-  padding: .5rem 0;
-}
-
-select.form-control option:hover {
-  background-color: $primary;
 }
 
 .divider {
@@ -89,4 +84,17 @@ select.form-control option:hover {
 
 .valid-feedback, .invalid-feedback {
   font-size: 0.8rem;
+}
+
+.settings .settings-contents {
+  padding: 0 2.5rem;
+}
+
+form.form-horizontal label {
+  font-size: .85rem;
+}
+
+form.form-horizontal .action-btns {
+  margin-left: auto;
+  padding-right: 15px;
 }

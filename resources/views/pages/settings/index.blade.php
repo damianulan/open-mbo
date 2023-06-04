@@ -8,7 +8,7 @@
     <div class="section">
         <div class="row">
             <div class="col-md-6 col-sm-12">
-                <h5>Ogólne</h5>
+                <h5 class="section-title">Ogólne</h5>
                 <hr/>
             </div>
         </div>
@@ -19,12 +19,12 @@
     <div class="section">
         <div class="row">
             <div class="col-md-6 col-sm-12">
-                <h5>Branding</h5>
+                <h5 class="section-title">Branding</h5>
                 <hr/>
             </div>
         </div>
         <div class="row">
-
+            
         </div>
     </div>
 </div>

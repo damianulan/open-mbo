@@ -1,10 +1,11 @@
-const chosen = require("chosen-js");
+require("chosen-js");
 
 const flatpickr = require("flatpickr");
 const flatpickr_pl = require("flatpickr/dist/l10n/pl.js").default.pl;
 
 $(document).ready(function() {
     $("select").chosen({
+        //disable_search_theshold: 5,
 
     });
 

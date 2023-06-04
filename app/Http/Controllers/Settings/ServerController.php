@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Settings;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use App\Settings\MailSettings;
 use App\Http\Requests\Settings\MailServerRequest;
+use App\Forms\Settings\SmtpForm;
 
 class ServerController extends Controller
 {
@@ -26,9 +28,12 @@ class ServerController extends Controller
             $git_text = 'On branch <strong>' . config('app.head') . '</strong>' ;
         }
 
+        $model = app(MailSettings::class);
         return view('pages.settings.server', [
             'debugging_text' => $debugging_text,
             'git_text' => $git_text,
+            'mail' => $model,
+            'form' => SmtpForm::boot($model),
         ]);
     }
 

@@ -36,9 +36,9 @@
 
 .card.course-card:hover {
     cursor: pointer;
-    -webkit-box-shadow: inset -5px -15px 75px -28px rgba($border-color,0.8);
-    -moz-box-shadow: inset -5px -15px 75px -28px rgba($border-color,0.8);
-    box-shadow: inset -5px -15px 75px -28px rgba($border-color,0.8);
+    -webkit-box-shadow: inset -5px -15px 75px -28px rgba($border-color,0.85);
+    -moz-box-shadow: inset -5px -15px 75px -28px rgba($border-color,0.85);
+    box-shadow: inset -5px -15px 75px -28px rgba($border-color,0.85);
 }
 
 .course-card .course-img{

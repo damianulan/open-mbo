@@ -1,5 +1,8 @@
 @php
-    $page = new PageHeader();
+    if(!isset($pagetitle)){
+        $pagetitle = null;
+    }
+    $page = new PageHeader($pagetitle);
 @endphp
 @include('layouts.portal.header')
 <body>

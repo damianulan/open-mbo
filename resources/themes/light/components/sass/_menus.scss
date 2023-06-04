@@ -294,9 +294,18 @@ ul.user-bar {
     align-items: center;
 }
 
-.page-top .page-heading {
+.page-top .togglers {
     font-size: 1.6rem;
+}
+
+.page-top .page-heading,
+.page-top .togglers {
     color: $page-header-color;
+}
+
+.page-top .page-heading {
+    white-space: nowrap;
+    overflow-x: auto;
 }
 
 .page-top .page-heading .page-title {
@@ -306,10 +315,16 @@ ul.user-bar {
 }
 
 .page-top .page-quick-actions {
+    padding-left: 1rem;
     margin-left: auto;
     display: flex;
     align-items: center;
     position: relative;
+}
+
+.page-top .page-quick-actions .notification-dropdown {
+    display: block;
+    white-space: nowrap;
 }
 
 .page-menu {
