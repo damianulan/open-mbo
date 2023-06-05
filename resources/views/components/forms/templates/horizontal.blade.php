@@ -6,7 +6,7 @@
     @method($method)
     @csrf
     @foreach ($elements as $element)
-        <div class="row">
+        <div class="row pb-3">
             <div class="col-md-4">
                 {{ $element->getLabel() }}
             </div>

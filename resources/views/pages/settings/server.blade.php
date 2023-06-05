@@ -42,7 +42,9 @@
                             {{ __('pages.settings.debugging') }}:
                         </th>
                         <td>
-                            {!! $debugging_text !!}
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="debuggingOptionSwitch"{{ config('app.debug') ? ' checked':'' }}>
+                            </div>
                         </td>
                     </tr>
                     <tr>

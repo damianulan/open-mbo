@@ -3328,6 +3328,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_js_base__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_components_js_base__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_js_navbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/js/navbar */ "./resources/themes/light/components/js/navbar.js");
 /* harmony import */ var _components_js_navbar__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_components_js_navbar__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_js_requests__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/js/requests */ "./resources/themes/light/components/js/requests.js");
+/* harmony import */ var _components_js_requests__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_components_js_requests__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 
@@ -3368,11 +3371,15 @@ $(document).ready(function () {
     mode: "range"
   });
 });
-$(".course-card").click(function () {
+$(".course-card").on("click", function () {
   var url = $(this).attr('data-url');
   if (url) {
     window.location.href = url;
   }
+});
+$("input[type=password]").on("focus", function () {
+  console.log(this);
+  $(this).val('');
 });
 
 /***/ }),
@@ -3462,6 +3469,16 @@ $(".list-menu .menu-options .toggle-all").click(function () {
     }
   });
 });
+
+/***/ }),
+
+/***/ "./resources/themes/light/components/js/requests.js":
+/*!**********************************************************!*\
+  !*** ./resources/themes/light/components/js/requests.js ***!
+  \**********************************************************/
+/***/ (() => {
+
+
 
 /***/ }),
 

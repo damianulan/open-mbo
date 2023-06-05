@@ -7,7 +7,7 @@
               </a>
           </li>
           <li class="nav-item">
-              <a class="nav-link">
+              <a class="nav-link{{ request()->routeIs('settings.modules') ? ' active':'' }}" href="{{ route('settings.modules') }}">
                 {{ __('menus.settings.modules') }}
               </a>
           </li>

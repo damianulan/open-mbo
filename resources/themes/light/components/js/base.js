@@ -35,9 +35,14 @@ $(document).ready(function() {
     });
 });
 
-$(".course-card").click(function (){
+$(".course-card").on("click", function (){
     var url = $(this).attr('data-url');
     if(url){
         window.location.href = url;
     }
 });
+
+$("input[type=password]").on("focus", function() {
+    console.log(this);
+    $(this).val('');
+})

@@ -10,6 +10,8 @@ return [
         'release' => 'Wersja',
         'cache_clear' => 'Wyczyść cache',
         'timezone' => 'Strefa czasowa',
-        
+        'general' => 'Ogólne',
+        'branding' => 'Branding',
+        'modules' => 'Zarządzanie modułami platformy',
     ],
 ];

@@ -10,7 +10,7 @@ class Button
     public string $class;
     public string $title;
 
-    public function __contruct(string $title, string $type = 'button', $class = 'btn-primary')
+    public function __construct(string $title, string $type = 'button', string $class = 'btn-primary')
     {
         $allowed_types = ['button', 'submit', 'reset'];
         if(in_array($type, $allowed_types)){

@@ -8,7 +8,7 @@
     <div class="section">
         <div class="row">
             <div class="col-md-6 col-sm-12">
-                <h5 class="section-title">{{ __('pages.settings.general') }}</h5>
+                <h5 class="section-title">{{ __('pages.settings.modules') }}</h5>
                 <hr/>
             </div>
         </div>

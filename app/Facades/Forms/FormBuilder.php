@@ -54,7 +54,7 @@ class FormBuilder
         return empty($this->classes) ? null:implode(' ', $this->classes);
     }
 
-    public function addSubmit($class = 'btn-primary')
+    public function addSubmit(string $class = 'btn-primary')
     {
         $this->submit = new Button(__('buttons.save'), 'submit', $class);
         return $this;

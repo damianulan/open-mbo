@@ -96,5 +96,16 @@ form.form-horizontal label {
 
 form.form-horizontal .action-btns {
   margin-left: auto;
-  padding-right: 15px;
+  position: relative;
+  display: flex;
+  padding-top: 1rem;
+}
+
+form.form-horizontal .action-btns .btn {
+  margin-left: auto;
+}
+
+.form-switch .form-check-input {
+  width: 3em;
+  height: 1.3em;
 }

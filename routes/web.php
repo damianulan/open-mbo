@@ -36,6 +36,8 @@ Route::get('profile', [App\Http\Controllers\ProfileController::class, 'index'])-
 
 Route::get('settings', [App\Http\Controllers\Settings\GeneralController::class, 'index'])->middleware('auth')->name('settings.index');
 Route::get('settings/server', [App\Http\Controllers\Settings\ServerController::class, 'index'])->middleware('auth')->name('settings.server');
+Route::get('settings/modules', [App\Http\Controllers\Settings\ModulesController::class, 'index'])->middleware('auth')->name('settings.modules');
+Route::post('settings/server/store/mail', [App\Http\Controllers\Settings\ServerController::class, 'storeMail'])->middleware('auth')->name('settings.server.mail.store');
 Route::get('settings/server/clearcache', [App\Http\Controllers\Settings\ServerController::class, 'cache'])->middleware('auth')->name('settings.clearcache');
 
 /**

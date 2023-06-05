@@ -28,4 +28,12 @@ class MailSettings extends Settings
             'mail_password' => CryptCast::class,
         ];
     }
+
+    public function safePassword()
+    {
+        if(!empty($this->mail_password)){
+            $this->mail_password = 'PassProtection123@';
+        }
+        return $this;
+    }
 }
