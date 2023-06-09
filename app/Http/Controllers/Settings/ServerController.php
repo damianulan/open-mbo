@@ -41,7 +41,6 @@ class ServerController extends Controller
             $settings->$key = $value;
         }
         if($settings->save()){
-            Artisan::call('optimize:clear');
             return redirect()->back()->with('success', __('alerts.settings.success.mail_update'));
         }
         return redirect()->back()->with('error', __('alerts.settings.error.mail_update'));;

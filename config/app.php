@@ -223,6 +223,7 @@ return [
         App\Providers\PermissionServiceProvider::class,
         App\Providers\RolesServiceProvider::class,
         App\Providers\ConfigServiceProvider::class,
+        App\Providers\ModuleServiceProvider::class,
 
     ],
 

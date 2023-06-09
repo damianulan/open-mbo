@@ -3478,7 +3478,35 @@ $(".list-menu .menu-options .toggle-all").click(function () {
   \**********************************************************/
 /***/ (() => {
 
-
+$('.module-card').on("click", function () {
+  var card = $(this);
+  var active = 1;
+  if (card.hasClass("active")) {
+    active = 0;
+  }
+  $.ajax({
+    headers: {
+      'X-CSRF-TOKEN': csrf
+    },
+    type: "POST",
+    url: SITEURL + '/settings/modules/updatestatus',
+    data: {
+      id: $(this).attr('data-uuid'),
+      active: active
+    },
+    dataType: 'json',
+    success: function success(data) {
+      if (active === 1) {
+        card.addClass("active");
+      } else {
+        card.removeClass("active");
+      }
+    },
+    error: function error(data) {
+      console.log(data);
+    }
+  });
+});
 
 /***/ }),
 

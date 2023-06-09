@@ -23,7 +23,8 @@ class FormElement
 
     public static function select(string $name, $model = null, $options = [])
     {
-
+        $value = $model->$name ?? null;
+        return new Select($name, $options, $value);
     }
     
 }
