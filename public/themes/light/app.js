@@ -3330,6 +3330,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_js_navbar__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_components_js_navbar__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_js_requests__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/js/requests */ "./resources/themes/light/components/js/requests.js");
 /* harmony import */ var _components_js_requests__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_components_js_requests__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_js_validation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/js/validation */ "./resources/themes/light/components/js/validation.js");
+/* harmony import */ var _components_js_validation__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_components_js_validation__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
@@ -3347,7 +3350,8 @@ var flatpickr = __webpack_require__(/*! flatpickr */ "./node_modules/flatpickr/d
 var flatpickr_pl = (__webpack_require__(/*! flatpickr/dist/l10n/pl.js */ "./node_modules/flatpickr/dist/l10n/pl.js")["default"].pl);
 $(document).ready(function () {
   $("select").chosen({
-    //disable_search_theshold: 5,
+    disable_search_theshold: 5,
+    placeholder_text: choose
   });
   $(".datetimepicker").flatpickr({
     "locale": flatpickr_pl,
@@ -3506,6 +3510,23 @@ $('.module-card').on("click", function () {
       console.log(data);
     }
   });
+});
+
+/***/ }),
+
+/***/ "./resources/themes/light/components/js/validation.js":
+/*!************************************************************!*\
+  !*** ./resources/themes/light/components/js/validation.js ***!
+  \************************************************************/
+/***/ (() => {
+
+$('input[data-validation="numeric"]').on('keypress', function (evt) {
+  var charCode = evt.which ? evt.which : evt.keyCode;
+  if (charCode == 46 || charCode > 31 && (charCode < 48 || charCode > 57)) {
+    evt.preventDefault();
+    return false;
+  }
+  return true;
 });
 
 /***/ }),

@@ -8,6 +8,11 @@ return [
     ],
 
     'settings' => [
+        'general' => [
+            'site_name' => 'Nazwa witryny',
+            'theme' => 'Szablon',
+            
+        ],
         'server' => [
             'mail_host' => 'Adres serwera',
             'mail_port' => 'Port',

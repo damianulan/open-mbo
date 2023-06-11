@@ -35,7 +35,7 @@ Route::get('profile', [App\Http\Controllers\ProfileController::class, 'index'])-
  */
 
 Route::get('settings', [App\Http\Controllers\Settings\GeneralController::class, 'index'])->middleware('auth')->name('settings.index');
-Route::post('settings/general/store', [App\Http\Controllers\Settings\GeneralController::class, 'index'])->middleware('auth')->name('settings.general.store');
+Route::post('settings/general/store', [App\Http\Controllers\Settings\GeneralController::class, 'storeGeneral'])->middleware('auth')->name('settings.general.store');
 Route::get('settings/modules', [App\Http\Controllers\Settings\ModulesController::class, 'index'])->middleware('auth')->name('settings.modules');
 Route::post('settings/modules/updatestatus', [App\Http\Controllers\Settings\ModulesController::class, 'updateStatus'])->middleware('auth')->name('settings.modules.updatestatus');
 Route::get('settings/server', [App\Http\Controllers\Settings\ServerController::class, 'index'])->middleware('auth')->name('settings.server');

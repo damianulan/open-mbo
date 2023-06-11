@@ -4,12 +4,20 @@ namespace App\Facades\Forms\Elements;
 
 class Option
 {
-    public $id;
     public $value;
+    public $content;
 
-    public function __construct($id, $value)
+    public bool $disabled = false;
+
+    public function __construct($value, $content)
     {
-        $this->id = $id;
         $this->value = $value;
+        $this->content = $content;
+    }
+
+    public function disable()
+    {
+        $this->disabled = true;
+        return $this;
     }
 }

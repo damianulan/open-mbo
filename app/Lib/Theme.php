@@ -2,6 +2,7 @@
 
 namespace App\Lib;
 
+use App\Settings\GeneralSettings;
 use Symfony\Component\Finder\Finder;
 
 class Theme
@@ -19,6 +20,9 @@ class Theme
                 $directories[] = $d;
             }
         }
+
+        $this->available = $directories;
+        $this->current = app(GeneralSettings::class)->theme;
     }
 
     public static function getAvailable()

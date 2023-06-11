@@ -100,8 +100,8 @@ return [
     'fallback_locale' => 'pl',
 
     'available_locales' => [
-        'Polish' => 'pl',
-        'English' => 'en',
+        'pl',
+        'en',
     ],
 
     'date_format' => 'Y-m-d',

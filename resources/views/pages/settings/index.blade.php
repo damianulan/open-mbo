@@ -11,6 +11,12 @@
                 <h5 class="section-title">{{ __('pages.settings.general') }}</h5>
                 <hr/>
             </div>
+            <div class="col-md-8 settings-contents">
+                <div class="row">
+                    {{ $form->render() }}
+                </div>
+    
+            </div>
         </div>
         <div class="row">
             

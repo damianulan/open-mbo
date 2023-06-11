@@ -13,4 +13,5 @@ return [
     'turned_off_male' => 'Wyłączony',
     'turned_off_female' => 'Wyłączona',
     'turned_off_other' => 'Wyłączone',
+    'select_choose' => 'Wybierz...',
 ];

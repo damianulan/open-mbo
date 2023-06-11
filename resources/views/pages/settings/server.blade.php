@@ -7,7 +7,7 @@
 <div class="container settings">
     <div class="section">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-6 col-sm-12">
                 <h5 class="section-title">{{ __('pages.settings.server_info') }}</h5>
                 <hr/>
             </div>
@@ -72,7 +72,7 @@
     </div>
     <div class="section">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-6 col-sm-12">
                 <h5 class="section-title">{{ __('Serwer poczty wychodzącej (SMTP)') }}</h5>
                 <hr/>
             </div>

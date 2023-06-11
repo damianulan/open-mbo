@@ -2,7 +2,7 @@
 <script type="text/javascript">
     var SITEURL = '{{ url('/') }}';
     var csrf = $('meta[name="csrf-token"]').attr('content');
-    var choose = '{{ __('Wybierz...') }}';
+    var choose = '{{ __('vocabulary.select_choose') }}';
 </script>
 <script src="{{ asset('scripts/globals.js') }}"></script>
 <script src="{{asset('themes/vendors/datatables/datatables.min.js')}}"></script>

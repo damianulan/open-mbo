@@ -33,7 +33,6 @@ class ServerController extends Controller
     public function storeMail(Request $request, MailSettings $settings)
     {
         $request->validate([
-            'mail_host' => 'max:5',
             'mail_port' => 'numeric',
             'mail_from_address' => 'email',
         ]);

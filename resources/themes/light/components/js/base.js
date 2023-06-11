@@ -5,8 +5,8 @@ const flatpickr_pl = require("flatpickr/dist/l10n/pl.js").default.pl;
 
 $(document).ready(function() {
     $("select").chosen({
-        //disable_search_theshold: 5,
-
+        disable_search_theshold: 5,
+        placeholder_text: choose,
     });
 
     $(".datetimepicker").flatpickr({

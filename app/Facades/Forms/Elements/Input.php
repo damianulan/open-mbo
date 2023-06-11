@@ -11,6 +11,8 @@ class Input extends Element
     public ?int $maxlength = null;
     public ?int $minlength = null;
 
+    public bool $numeric = false;
+
     public function __construct(string $name, string $type, ?string $value)
     {
         $this->name = empty($name) ? null:$name;
@@ -27,6 +29,12 @@ class Input extends Element
     public function minlength(int $value)
     {
         $this->minlength = $value;
+        return $this;
+    }
+
+    public function numeric()
+    {
+        $this->numeric = true;
         return $this;
     }
 
