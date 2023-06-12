@@ -3,7 +3,7 @@
         <ul class="nav nav-pills-horizontal">
             <li class="nav-item">
                 <a class="nav-link active">
-                    {{ __('menus.users') }}
+                    {{ __('menus.users.index') }}
                 </a>
             </li>
             <li class="nav-item">
@@ -43,7 +43,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link">
-                    {{ __('menus.courses') }}
+                    {{ __('menus.courses.index') }}
                 </a>
             </li>
             <li class="nav-item">

@@ -465,3 +465,15 @@ ul.user-bar {
     cursor: pointer;
     color: $secondary;
 }
+
+.nav-btn {
+    padding: .25rem 1.2rem;
+    margin-right: .8rem;
+}
+
+.nav-btn i {
+    position: relative;
+    vertical-align: middle;
+    font-size: 1.2rem;
+    margin-right: .5rem;
+}

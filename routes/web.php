@@ -52,6 +52,6 @@ Route::get('management', [App\Http\Controllers\Management\ManagementController::
 /**
  * COURSES
  */
-Route::get('course/view/{id?}', [App\Http\Controllers\CourseController::class, 'view'])->middleware('auth')->name('course.view');
-Route::get('course/edit/{id}', [App\Http\Controllers\CourseController::class, 'edit'])->middleware('auth')->name('course.edit');
+Route::resource('courses', App\Http\Controllers\CourseController::class)->middleware('auth');
+
 

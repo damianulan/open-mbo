@@ -33,6 +33,7 @@
 
 .btn-outline-primary:hover,
 .btn-outline-primary:active,
+.btn-outline-primary.active,
 .btn-outline-primary:focus,
 .btn-outline-primary:focus-visible {
     border: 1px solid $primary;
@@ -66,12 +67,13 @@
 
 .btn-outline-secondary:hover,
 .btn-outline-secondary:active,
+.btn-outline-secondary.active,
 .btn-outline-secondary:focus,
 .btn-outline-secondary:focus-visible {
     border: 1px solid $secondary;
     color: $secondary;
-    background-color: rgba($secondary, 0.2);
-    box-shadow: 0 4px 18px 0 rgba($secondary, 0.2);
+    background-color: rgba($secondary, 0.15);
+    box-shadow: 0 4px 12px 0 rgba($secondary, 0.1);
 }
 
 .btn-other,

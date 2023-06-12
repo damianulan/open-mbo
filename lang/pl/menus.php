@@ -6,7 +6,6 @@ return [
     'dashboard' => 'Pulpit',
     
     'elearning_panel' => 'Panel szkoleniowy',
-    'courses' => 'Kursy',
     'calendar' => 'Kalendarz',
     'blended' => 'Kształcenie hybrydowe',
     'tasks' => 'Zadania',
@@ -63,6 +62,10 @@ return [
 
     'users' => [
         'index' => 'Użytkownicy',
+    ],
+
+    'courses' => [
+        'index' => 'Kursy',
     ],
 
 ];

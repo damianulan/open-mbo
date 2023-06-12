@@ -21,9 +21,9 @@
         </a>
         <ul class="collapse show" id="recruitment">
           <li class="nav-item" id="nav_courses">
-            <a class="nav-link{{ request()->routeIs('course.*') ? ' active':'' }}" href="#">
+            <a class="nav-link{{ request()->routeIs('courses.*') ? ' active':'' }}" href="{{ route('courses.index') }}">
               <i class="bi bi-mortarboard-fill"></i>
-              <span class="nav-title">{{ __('menus.courses') }}</span>
+              <span class="nav-title">{{ __('menus.courses.index') }}</span>
             </a>
           </li>
           @module('calendar')

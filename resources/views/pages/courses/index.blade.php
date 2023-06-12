@@ -1,9 +1,9 @@
 @extends('layouts.portal.master')
 @section('content')
 
-@include('layouts.components.alerts')
-
+@include('pages.courses.nav')
 <div class="container-fluid">
+    @include('layouts.components.alerts')
 
     <div class="row">
 
