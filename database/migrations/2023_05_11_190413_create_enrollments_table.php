@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->char('course_id');
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
-            $table->bigInteger('type_id')->unsigned();
-            $table->foreign('type_id')->references('id')->on('enrollment_types')->onDelete('cascade');
+            // $table->bigInteger('type_id')->unsigned();
+            // $table->foreign('type_id')->references('id')->on('enrollment_types')->onDelete('cascade');
 
             $table->timestamp('timestart');
             $table->timestamp('timeend')->nullable();

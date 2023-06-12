@@ -1,9 +1,9 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;600;700;800&display=swap');
 
 // Vendors
-@import 'components/vendors/datatables.min.css';
-@import 'components/vendors/select2/core.scss';
+@import 'vendors/datatables.min.css';
 @import "~datatables.net-bs4/css/dataTables.bootstrap4.css";
 @import "~datatables.net-buttons-bs4/css/buttons.bootstrap4.css";
 @import '~datatables.net-select-bs4/css/select.bootstrap4.css';
@@ -18,6 +18,10 @@
 
 // Components
 @import 'components';
+
+// Vendors
+@import 'vendors/flatpickr';
+@import 'vendors/chosen/chosen';
 
 // Rules
 

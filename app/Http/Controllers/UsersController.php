@@ -16,7 +16,7 @@ class UsersController extends Controller
     public function index(UsersDataTable $dataTable)
     {
         return $dataTable->render('pages.users.index', [
-            'title' => 'Zarządzanie użytkownikami',
+
         ]);
     }
 

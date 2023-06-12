@@ -1,11 +1,14 @@
 @php
-    $theme = 'light';
+    if(!isset($pagetitle)){
+        $pagetitle = null;
+    }
+    $page = new PageHeader($pagetitle);
 @endphp
 @include('layouts.portal.header')
 <body>
     <div id="app">
         @include('layouts.portal.sidebar')
-        <main id="main-content" class="content <?php if(isset($_COOKIE['menu-collapsed'])&&$_COOKIE['menu-collapsed']==true){ echo 'menu-collapsed'; }?>">
+        <main id="main-content" class="content {{ $page->menu_collapsed }}">
             @include('layouts.portal.topbar')
             <div class="content-wrapper">
                 <div class="container-fluid">

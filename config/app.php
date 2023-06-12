@@ -43,7 +43,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool) env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -100,9 +100,13 @@ return [
     'fallback_locale' => 'pl',
 
     'available_locales' => [
-        'Polish' => 'pl',
-        'English' => 'en',
+        'pl',
+        'en',
     ],
+
+    'date_format' => 'Y-m-d',
+    'time_format' => 'H:i',
+    'datetime_format' => 'Y-m-d H:i',
 
     /*
     |--------------------------------------------------------------------------
@@ -126,11 +130,10 @@ return [
      */
 
      'release' => '0.0.1 beta',
-     'build' => 202305130,
+     'build' => 0,
 
      'head' => Git::head(),
 
-     'themes_available' => Theme::getAvailable(),
     /*
     |--------------------------------------------------------------------------
     | Encryption Key
@@ -219,6 +222,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\PermissionServiceProvider::class,
         App\Providers\RolesServiceProvider::class,
+        App\Providers\ConfigServiceProvider::class,
+        App\Providers\ModuleServiceProvider::class,
 
     ],
 
@@ -235,6 +240,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'PageHeader' => App\Lib\PageHeader::class,
+        'Theme' => App\Lib\Theme::class,
     ])->toArray(),
 
 ];

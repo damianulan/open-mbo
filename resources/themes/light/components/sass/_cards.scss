@@ -36,9 +36,9 @@
 
 .card.course-card:hover {
     cursor: pointer;
-    -webkit-box-shadow: inset -5px -15px 75px -28px rgba($border-color,0.8);
-    -moz-box-shadow: inset -5px -15px 75px -28px rgba($border-color,0.8);
-    box-shadow: inset -5px -15px 75px -28px rgba($border-color,0.8);
+    -webkit-box-shadow: inset -5px -15px 75px -28px rgba($border-color,0.85);
+    -moz-box-shadow: inset -5px -15px 75px -28px rgba($border-color,0.85);
+    box-shadow: inset -5px -15px 75px -28px rgba($border-color,0.85);
 }
 
 .course-card .course-img{
@@ -107,7 +107,44 @@
 }
 
 
-// .course-card .card-title,
-// .course-card .card-text {
-//     text-overflow: ellipsis;
-// }
+.card.module-card {
+    padding: 2rem 1rem;
+    color: $primary;
+}
+
+.card.module-card,
+.card.module-card.active:hover {
+    -webkit-box-shadow: inset -5px -15px 75px -28px rgba($dimm-blue,0.4);
+    -moz-box-shadow: inset -5px -15px 75px -28px rgba($dimm-blue,0.4);
+    box-shadow: inset -5px -15px 75px -28px rgba($dimm-blue,0.4);
+}
+
+.card.module-card.active,
+.card.module-card:not(.active):hover {
+    cursor: pointer;
+    color: $primary;
+    -webkit-box-shadow: inset -5px -15px 75px -28px rgba($secondary,0.5);
+    -moz-box-shadow: inset -5px -15px 75px -28px rgba($secondary,0.5);
+    box-shadow: inset -5px -15px 75px -28px rgba($secondary,0.5);
+}
+
+.module-card .module-icon {
+    font-size: 4.5rem;
+    text-align: center;
+}
+
+.module-card .module-title {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    height: 100%;
+    display: flex;
+    align-self: center;
+    align-items: end;
+    text-transform: capitalize;
+}
+
+.card.module-card:not(.active),
+.card.module-card.active:hover {
+    color: rgba($primary, 0.5);
+}

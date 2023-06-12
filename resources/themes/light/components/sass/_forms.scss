@@ -1,20 +1,22 @@
-.form-select {
-  background-color: #fff !important;
+select, input {
+  display: block;
+  width: 100%;
 }
 
-.form-control {
-  font-size: .85rem;
-  border: 1px solid darken($border-color, 10%);
-  padding: .5rem .7rem;
-  line-height: 1.25;
-  background-color: #fff;
+.form-control, select {
+  font-size: $form-font-size;
+  border: 1px solid $input-border-color;
+  padding: $input-padding;
+  line-height: $input-line-height;
+  background-color: $input-background;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  border-radius: $input-border-radius;
+  color: $input-color;
 }
 
-.form-control:focus {
-  color: #4e5154;
-  border: 1px solid darken($border-color, 30%);
-  box-shadow: 0 3px 10px -1px rgb(0 0 0 / 10%);
+.form-control:focus, select:focus {
+  border: 1px solid $input-border-focus-color;
+  box-shadow: $input-box-shadow-focus;
 }
 
 .form-group {
@@ -80,19 +82,26 @@
   font-size: 0.8rem;
 }
 
-// .text-danger {
-//   color: $danger !important;
-// }
+.settings .settings-contents {
+  padding: 0 2.5rem;
+}
 
-// .text-alert {
-//   color: $danger !important;
-//   margin-top: .25rem !important;
-// }
+form.form-horizontal label {
+  font-size: .85rem;
+}
 
-// .text-info {
-//   color: $primary !important;
-// }
+form.form-horizontal .action-btns {
+  margin-left: auto;
+  position: relative;
+  display: flex;
+  padding-top: 1rem;
+}
 
-// .text-asterisk {
-//   color: $asterisk !important;
-//}
+form.form-horizontal .action-btns .btn {
+  margin-left: auto;
+}
+
+.form-switch .form-check-input {
+  width: 3em;
+  height: 1.3em;
+}

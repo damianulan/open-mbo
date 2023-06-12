@@ -8,6 +8,7 @@ return [
     'elearning_panel' => 'Panel szkoleniowy',
     'courses' => 'Kursy',
     'calendar' => 'Kalendarz',
+    'blended' => 'Kształcenie hybrydowe',
     'tasks' => 'Zadania',
     'learning_paths' => 'Ścieżki edukacyjne',
 

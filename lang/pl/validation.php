@@ -174,6 +174,11 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'password' => 'hasło',
+        'email' => 'adres email',
+
+        'site_name' => 'nazwa witryny',
+    ],
 
 ];
