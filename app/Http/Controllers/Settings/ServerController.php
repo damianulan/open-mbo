@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use App\Settings\MailSettings;
 use App\Forms\Settings\SmtpForm;
+use App\Settings\GeneralSettings;
 
 class ServerController extends Controller
 {
@@ -58,5 +59,16 @@ class ServerController extends Controller
             $msg .= "<br/>" . str_replace("\n", "<br/>", Artisan::output());
         }
         return redirect()->back()->with('error', $msg);
+    }
+
+    public function debugging(Request $request, GeneralSettings $settings)
+    {
+        $response = false;
+        $check = filter_var($request->input('check'), FILTER_VALIDATE_BOOLEAN);
+        $settings->debug = $check;
+        if($settings->save()){
+            $response = true;
+        }
+        return response()->json($response);
     }
 }

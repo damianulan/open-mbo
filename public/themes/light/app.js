@@ -3351,7 +3351,8 @@ var flatpickr_pl = (__webpack_require__(/*! flatpickr/dist/l10n/pl.js */ "./node
 $(document).ready(function () {
   $("select").chosen({
     disable_search_threshold: 5,
-    placeholder_text: choose
+    placeholder_text: choose,
+    no_results_text: no_results
   });
   $(".datetimepicker").flatpickr({
     "locale": flatpickr_pl,
@@ -3508,6 +3509,19 @@ $('.module-card').on("click", function () {
     error: function error(data) {
       console.log(data);
     }
+  });
+});
+$('#debuggingOptionSwitch').on("change", function () {
+  $.ajax({
+    headers: {
+      'X-CSRF-TOKEN': csrf
+    },
+    type: "POST",
+    url: SITEURL + '/settings/server/debugging',
+    data: {
+      check: this.checked
+    },
+    dataType: 'json'
   });
 });
 

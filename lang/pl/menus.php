@@ -16,7 +16,6 @@ return [
     'reports' => 'Raporty',
     'projects' => 'Projekty',
     'notifications' => 'Powiadomienia',
-    'users' => 'Użytkownicy',
 
     // User menu
     'edit_profile' => 'Edytuj profil',
@@ -61,4 +60,9 @@ return [
     'reports' => [
         'index' => 'Raporty',
     ],
+
+    'users' => [
+        'index' => 'Użytkownicy',
+    ],
+
 ];

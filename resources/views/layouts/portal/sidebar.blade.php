@@ -90,7 +90,7 @@
           <li class="nav-item">
             <a class="nav-link{{ request()->routeIs('users.*') ? ' active':'' }}" href="{{ route('users.index') }}">
               <i class="bi bi-people-fill"></i>
-              <span class="nav-title">{{ __('menus.users') }}</span>
+              <span class="nav-title">{{ __('menus.users.index') }}</span>
             </a>
           </li>
           <li class="nav-item">

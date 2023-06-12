@@ -41,6 +41,7 @@ Route::post('settings/modules/updatestatus', [App\Http\Controllers\Settings\Modu
 Route::get('settings/server', [App\Http\Controllers\Settings\ServerController::class, 'index'])->middleware('auth')->name('settings.server');
 Route::post('settings/server/store/mail', [App\Http\Controllers\Settings\ServerController::class, 'storeMail'])->middleware('auth')->name('settings.server.mail.store');
 Route::get('settings/server/clearcache', [App\Http\Controllers\Settings\ServerController::class, 'cache'])->middleware('auth')->name('settings.clearcache');
+Route::post('settings/server/debugging', [App\Http\Controllers\Settings\ServerController::class, 'debugging'])->middleware('auth')->name('settings.debugging');
 
 /**
  * Management START
