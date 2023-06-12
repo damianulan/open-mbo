@@ -28,26 +28,25 @@ class ConfigServiceProvider extends ServiceProvider
             config([
 
                 // GENERAL
-                'app.name' => app(GeneralSettings::class)->site_name,
-                'app.debug' => app(GeneralSettings::class)->debug,
-                'app.timezone' => app(GeneralSettings::class)->timezone,
-                'app.locale' => app(GeneralSettings::class)->locale,
-                'app.build' => app(GeneralSettings::class)->build,
-                'app.release' => app(GeneralSettings::class)->release,
-                'app.date_format' => app(GeneralSettings::class)->date_format,
-                'app.time_format' => app(GeneralSettings::class)->time_format,
-                'app.datetime_format' => app(GeneralSettings::class)->date_format . ' ' .app(GeneralSettings::class)->time_format,
+                'app.name' => app(GeneralSettings::class)->site_name ?? env('APP_NAME', 'Blender'),
+                'app.debug' => app(GeneralSettings::class)->debug ?? env('APP_DEBUG', true),
+                'app.timezone' => app(GeneralSettings::class)->timezone ?? env('APP_TIMEZONE', 'UTC'),
+                'app.locale' => app(GeneralSettings::class)->locale ?? env('APP_LOCALE', 'en'),
+                'app.build' => app(GeneralSettings::class)->build ?? null,
+                'app.release' => app(GeneralSettings::class)->release ?? null,
+                'app.date_format' => app(GeneralSettings::class)->date_format ?? null,
+                'app.time_format' => app(GeneralSettings::class)->time_format ?? null,
+                'app.datetime_format' => app(GeneralSettings::class)->date_format&&app(GeneralSettings::class)->time_format ? app(GeneralSettings::class)->date_format . ' ' .app(GeneralSettings::class)->time_format:null,
 
                 // SERVER
-                'mail.default' => app(MailSettings::class)->mail_mailer,
-                'mail.mailers.smtp.host' => app(MailSettings::class)->mail_host,
-                'mail.mailers.smtp.port' => app(MailSettings::class)->mail_port,
-                'mail.mailers.smtp.encryption' => app(MailSettings::class)->mail_encryption,
-                'mail.mailers.smtp.username' => app(MailSettings::class)->mail_username,
-                'mail.mailers.smtp.password' => app(MailSettings::class)->mail_password,
-                'mail.from.address' => app(MailSettings::class)->mail_from_address,
-                'mail.from.name' => app(MailSettings::class)->mail_from_name,
-
+                'mail.default' => app(MailSettings::class)->mail_mailer ?? null,
+                'mail.mailers.smtp.host' => app(MailSettings::class)->mail_host ?? null,
+                'mail.mailers.smtp.port' => app(MailSettings::class)->mail_port ?? null,
+                'mail.mailers.smtp.encryption' => app(MailSettings::class)->mail_encryption ?? null,
+                'mail.mailers.smtp.username' => app(MailSettings::class)->mail_username ?? null,
+                'mail.mailers.smtp.password' => app(MailSettings::class)->mail_password ?? null,
+                'mail.from.address' => app(MailSettings::class)->mail_from_address ?? null,
+                'mail.from.name' => app(MailSettings::class)->mail_from_name ?? null,
             ]);
         }
     }
