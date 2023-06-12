@@ -5,8 +5,9 @@ const flatpickr_pl = require("flatpickr/dist/l10n/pl.js").default.pl;
 
 $(document).ready(function() {
     $("select").chosen({
-        disable_search_theshold: 5,
+        disable_search_threshold: 5,
         placeholder_text: choose,
+        no_results_text: no_results,
     });
 
     $(".datetimepicker").flatpickr({
@@ -43,6 +44,5 @@ $(".course-card").on("click", function (){
 });
 
 $("input[type=password]").on("focus", function() {
-    console.log(this);
     $(this).val('');
 })

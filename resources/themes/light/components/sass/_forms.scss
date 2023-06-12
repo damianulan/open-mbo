@@ -3,11 +3,7 @@ select, input {
   width: 100%;
 }
 
-.form-select {
-  background-color: $input-background !important;
-}
-
-.form-control {
+.form-control, select {
   font-size: $form-font-size;
   border: 1px solid $input-border-color;
   padding: $input-padding;
@@ -18,7 +14,7 @@ select, input {
   color: $input-color;
 }
 
-.form-control:focus {
+.form-control:focus, select:focus {
   border: 1px solid $input-border-focus-color;
   box-shadow: $input-box-shadow-focus;
 }
