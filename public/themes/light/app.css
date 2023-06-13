@@ -20669,6 +20669,7 @@ html::-webkit-scrollbar-thumb:active {
 .btn {
   border-radius: 0.25rem;
   font-weight: 600 !important;
+  white-space: nowrap;
 }
 
 .btn-pagination {
@@ -21351,11 +21352,19 @@ ul.user-bar {
 }
 
 .nav-btn {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 0.8rem;
+  overflow-x: auto;
+}
+
+.nav-btn .btn {
   padding: 0.25rem 1.2rem;
   margin-right: 0.8rem;
 }
 
-.nav-btn i {
+.nav-btn .btn i {
   position: relative;
   vertical-align: middle;
   font-size: 1.2rem;

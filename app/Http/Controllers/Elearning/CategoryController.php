@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Elearning;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class CourseController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('pages.courses.index', [
-
-        ]);
+        //
     }
 
     /**
@@ -37,9 +36,7 @@ class CourseController extends Controller
      */
     public function show(string $id)
     {
-        return view('pages.courses.view', [
-            'pagetitle' => 'Kurs przykładowy',
-        ]);
+        //
     }
 
     /**

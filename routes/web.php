@@ -33,15 +33,17 @@ Route::get('profile', [App\Http\Controllers\ProfileController::class, 'index'])-
 /**
  * Settings START
  */
+Route::prefix('settings')->middleware(['auth'])->name('settings.')->group(function (){
+    Route::get('/', [App\Http\Controllers\Settings\GeneralController::class, 'index'])->name('index');
+    Route::post('general/store', [App\Http\Controllers\Settings\GeneralController::class, 'storeGeneral'])->name('general.store');
+    Route::get('modules', [App\Http\Controllers\Settings\ModulesController::class, 'index'])->name('modules');
+    Route::post('modules/updatestatus', [App\Http\Controllers\Settings\ModulesController::class, 'updateStatus'])->name('modules.updatestatus');
+    Route::get('server', [App\Http\Controllers\Settings\ServerController::class, 'index'])->name('server');
+    Route::post('server/store/mail', [App\Http\Controllers\Settings\ServerController::class, 'storeMail'])->name('server.mail.store');
+    Route::get('server/clearcache', [App\Http\Controllers\Settings\ServerController::class, 'cache'])->name('clearcache');
+    Route::post('server/debugging', [App\Http\Controllers\Settings\ServerController::class, 'debugging'])->name('debugging');
+});
 
-Route::get('settings', [App\Http\Controllers\Settings\GeneralController::class, 'index'])->middleware('auth')->name('settings.index');
-Route::post('settings/general/store', [App\Http\Controllers\Settings\GeneralController::class, 'storeGeneral'])->middleware('auth')->name('settings.general.store');
-Route::get('settings/modules', [App\Http\Controllers\Settings\ModulesController::class, 'index'])->middleware('auth')->name('settings.modules');
-Route::post('settings/modules/updatestatus', [App\Http\Controllers\Settings\ModulesController::class, 'updateStatus'])->middleware('auth')->name('settings.modules.updatestatus');
-Route::get('settings/server', [App\Http\Controllers\Settings\ServerController::class, 'index'])->middleware('auth')->name('settings.server');
-Route::post('settings/server/store/mail', [App\Http\Controllers\Settings\ServerController::class, 'storeMail'])->middleware('auth')->name('settings.server.mail.store');
-Route::get('settings/server/clearcache', [App\Http\Controllers\Settings\ServerController::class, 'cache'])->middleware('auth')->name('settings.clearcache');
-Route::post('settings/server/debugging', [App\Http\Controllers\Settings\ServerController::class, 'debugging'])->middleware('auth')->name('settings.debugging');
 
 /**
  * Management START
@@ -52,6 +54,11 @@ Route::get('management', [App\Http\Controllers\Management\ManagementController::
 /**
  * COURSES
  */
-Route::resource('courses', App\Http\Controllers\CourseController::class)->middleware('auth');
+Route::middleware(['auth'])->group(function (){
+    Route::resource('courses', App\Http\Controllers\Elearning\CourseController::class);
+    Route::prefix('courses')->group(function() {
+        Route::resource('category', App\Http\Controllers\Elearning\CategoryController::class);
+    });
+});
 
 

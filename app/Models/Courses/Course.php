@@ -18,5 +18,20 @@ class Course extends Model
      */
     protected $fillable = [
         'name',
+        'description',
+        'available_from',
+        'available_to',
+        'active',
+        'visible',
+        'picture'
+    ];
+
+    protected $casts = [
+        'active' => 'boolean',
+        'visible' => 'boolean',
+    ];
+
+    protected $dates = [
+        'available_from', 'available_to'
     ];
 }

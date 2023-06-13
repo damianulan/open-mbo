@@ -66,6 +66,7 @@ return [
 
     'courses' => [
         'index' => 'Kursy',
+        'create' => 'Tworzenie szkolenia',
     ],
 
 ];
