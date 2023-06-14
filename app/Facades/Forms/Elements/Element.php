@@ -10,6 +10,7 @@ class Element
     public string $name;
     public string $type;
     public ?string $value = null;
+    public ?string $template = null;
 
     public ?string $label = null;
     public ?string $placeholder = null;
@@ -22,8 +23,8 @@ class Element
 
     public function render()
     {
-        $class = Str::lower((new \ReflectionClass($this))->getShortName());
-        return view('components.forms.elements.'.$class, [
+        $template = $this->template ?? Str::lower((new \ReflectionClass($this))->getShortName());
+        return view('components.forms.elements.'.$template, [
             'element' => $this,
             'classes' => $this->getClasses(),
         ]);

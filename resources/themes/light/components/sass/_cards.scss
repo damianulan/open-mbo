@@ -26,7 +26,7 @@
 
 .card.path-card .card-body{
     padding: 1.5rem 2rem;
-    align-content: end;
+    align-content: flex-end;
     display: grid;
 }
 
@@ -140,7 +140,7 @@
     height: 100%;
     display: flex;
     align-self: center;
-    align-items: end;
+    align-items: flex-end;
     text-transform: capitalize;
 }
 

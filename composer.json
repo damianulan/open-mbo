@@ -13,6 +13,7 @@
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.1",
         "maennchen/zipstream-php": "^2.1",
+        "mews/purifier": "^3.4",
         "phpoffice/phpspreadsheet": "^1.27",
         "psr/http-message": "^1.0",
         "spatie/laravel-activitylog": "^4.7",

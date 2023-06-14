@@ -1,0 +1,1 @@
+<x-forms.elements.trix-field id="id_{{ $element->name }}" name="{{ $element->name }}" toolbar="{{ $element->toolbar }}" />

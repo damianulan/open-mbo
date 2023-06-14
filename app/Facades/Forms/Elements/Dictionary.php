@@ -6,7 +6,9 @@ use Illuminate\Support\Collection;
 
 class Dictionary
 {
-
+    /**
+     * Declare array collections of options accessible to the public.
+     */
     public $mail_encryption_methods = [
         'tls' => 'TLS',
         'ssl' => 'SSL', 
