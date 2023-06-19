@@ -6,14 +6,15 @@
     id="{{ $id }}"
     value="{{ $value }}"
 />
-<trix-toolbar id="trix-toolbar-short">
+<trix-toolbar class="trix-toolbar" id="trix-toolbar-{{ $toolbar }}">
     <div class="trix-button-row">
         <button type="button" 
         class="btn btn-outline-secondary trix-btn trix-button--icon-bold"
         data-trix-attribute="bold" 
         data-trix-key="b"
         tabindex="-1" 
-        title="Pogrubienie"
+        data-bs-toggle="tooltip"
+        data-bs-title="Pogrubienie"
         ><i class="bi-type-bold"></i></button>
     
         <button type="button" 
@@ -21,7 +22,8 @@
         data-trix-attribute="italic" 
         data-trix-key="i"
         tabindex="-1" 
-        title="Pochyła"
+        data-bs-toggle="tooltip"
+        data-bs-title="Pochyła"
         ><i class="bi-type-italic"></i></button>
         
         <button type="button" 
@@ -30,28 +32,32 @@
         data-trix-action="link" 
         data-trix-key="k"
         tabindex="-1" 
-        title="Hiperłącze"
+        data-bs-toggle="tooltip"
+        data-bs-title="Hiperłącze"
         ><i class="bi-link-45deg"></i></button>
         
         <button type="button" 
         class="btn btn-outline-secondary trix-btn trix-button--icon-quote ms-2"
         data-trix-attribute="quote" 
         tabindex="-1" 
-        title="Cytat"
+        data-bs-toggle="tooltip"
+        data-bs-title="Cytat"
         ><i class="bi-quote"></i></button>
         
         <button type="button" 
         class="btn btn-outline-secondary trix-btn trix-button--icon-bullet-list"
         data-trix-attribute="bullet" 
         tabindex="-1" 
-        title="Lista punktowana"
+        data-bs-toggle="tooltip"
+        data-bs-title="Lista punktowana"
         ><i class="bi-list-ul"></i></button>
         
         <button type="button" 
         class="btn btn-outline-secondary trix-btn trix-button--icon-number-list"
         data-trix-attribute="number" 
         tabindex="-1" 
-        title="Lista numeryczna"
+        data-bs-toggle="tooltip"
+        data-bs-title="Lista numeryczna"
         ><i class="bi-list-ol"></i></button>
     </div>
     <div class="trix-dialogs" data-trix-dialogs="">

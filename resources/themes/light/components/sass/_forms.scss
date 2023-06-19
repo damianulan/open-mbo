@@ -97,11 +97,32 @@ form.form-horizontal .action-btns {
   padding-top: 1rem;
 }
 
+form.form-horizontal .form-info {
+  margin-left: auto;
+  align-self: center;
+}
+
+form.form-horizontal .form-info span.info-box {
+  font-size: 1rem;
+  cursor: help;
+  color: $info;
+}
+
 form.form-horizontal .action-btns .btn {
   margin-left: auto;
 }
 
-.form-switch .form-check-input {
+.form-check.form-switch .form-check-input {
   width: 3em;
   height: 1.3em;
+}
+
+.form-check:not(.form-switch) .form-check-input {
+  width: 1.2em;
+  height: 1.2em;
+}
+
+.form-check:not(.form-switch) input[type="radio"] {
+  width: 1.2em;
+  height: 1.2em;
 }

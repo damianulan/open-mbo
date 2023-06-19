@@ -22,4 +22,19 @@ return [
             'mail_from_name' => 'Wysyłaj jako (nazwa)',
         ],
     ],
+
+    'courses' => [
+        'name' => 'Nazwa kursu',
+        'description' => 'Opis kursu',
+        'available_from' => 'Dostępny od',
+        'available_to' => 'Dostępny do',
+        'public' => 'Widoczny publicznie',
+        'visible' => 'Ukryty',
+    ],
+
+    'placeholders' => [
+        'choose_date' => 'Wybierz datę',
+        'choose_time' => 'Wybierz godzinę',
+        'choose_datetime' => 'Wybierz datę oraz godzinę',
+    ],
 ];

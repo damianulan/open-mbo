@@ -18,6 +18,7 @@ return new class extends Migration
 
             $table->timestamp('available_from')->nullable();
             $table->timestamp('available_to')->nullable();
+            $table->boolean('public')->default(1);
             $table->boolean('active')->default(1);
             $table->boolean('visible')->default(1);
             $table->string('picture')->nullable();

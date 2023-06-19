@@ -1,9 +1,10 @@
 {
-    "/themes/light/app.js": "/themes/light/app.js?id=6ff1d3ffdde3ace5e977c7847e4d1e7c",
-    "/themes/light/app.css": "/themes/light/app.css?id=e92b3827bfe12a905e0e48f8e962994d",
+    "/themes/light/app.js": "/themes/light/app.js?id=fabd6bdb474776f2ea679cc2cc0d0e0b",
+    "/themes/light/app.css": "/themes/light/app.css?id=37a4825319ab966ac81a5ab463fc2506",
     "/themes/vendors/datatables/datatables.min.js": "/themes/vendors/datatables/datatables.min.js?id=028790892e63b1a0b87f4037fee45ca1",
     "/themes/vendors/datatables/pl.json": "/themes/vendors/datatables/pl.json?id=1eb747a21cb68879bee8e110b14c246b",
     "/themes/vendors/jquery.min.js": "/themes/vendors/jquery.min.js?id=cf2fbbf84281d9ecbffb4993203d543b",
+    "/themes/vendors/jquery.min.map": "/themes/vendors/jquery.min.map?id=9fa7f86a9465f3ce534aa52df7189589",
     "/images/chosen-sprite.png": "/images/chosen-sprite.png?id=0de22e42b614304ab21e03ab99e56149",
     "/images/chosen-sprite@2x.png": "/images/chosen-sprite@2x.png?id=da1e3f69fcdb59582919488a1f679276",
     "/images/portrait/avatar-female.png": "/images/portrait/avatar-female.png?id=70aab25d86b1b481f2ff41df8b19f497",

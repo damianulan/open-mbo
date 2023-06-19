@@ -4,7 +4,7 @@
 <div class="card course-card" data-url="{{ route('courses.show', 3) }}">
     <div class="course-img" style="background-image: url('{{ asset('themes/light/images/courses/course5.jpg') }}');"></div>
     <div class="card-body">
-        <div class="card-title" title="{{ lorem_title() }}">
+        <div class="card-title" data-bs-toggle="tooltip" data-bs-title="{{ lorem_title() }}">
             {{ lorem_title() }}
         </div>
         <div class="card-text">

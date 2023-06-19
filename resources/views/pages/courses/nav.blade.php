@@ -4,5 +4,6 @@
         <a class="btn btn-outline-secondary" href="#"><i class="bi-list-nested"></i>Kategorie</a>
         <a class="btn btn-outline-secondary" href="#"><i class="bi-person-workspace"></i>Prowadzący</a>
         <a class="btn btn-outline-secondary" href="#"><i class="bi-calendar2-range-fill"></i>Terminarz</a>
+        <a class="btn btn-outline-secondary" href="#"><i class="bi-person-fill-add"></i>Zapisy</a>
     </div>
 </div>

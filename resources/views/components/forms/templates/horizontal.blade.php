@@ -8,7 +8,14 @@
     @foreach ($elements as $element)
         <div class="row pb-3">
             <div class="col-md-4">
-                {{ $element->getLabel() }}
+                <div class="d-flex">
+                    <div class="form-label">
+                        {{ $element->getLabel() }}
+                    </div>
+                    <div class="form-info">
+                        {!! $element->getInfos() !!}
+                    </div>
+                </div>
             </div>
             <div class="col-md-8">
                 {{ $element->render() }}

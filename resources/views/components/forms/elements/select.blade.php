@@ -16,3 +16,8 @@ name="{{ $element->name }}"{{ $element->placeholder ? ' data-placeholder="'.$ele
     @endforeach
 @endif
 </select>
+@error($element->name)
+<div class="invalid-feedback">
+    {{ $message }}
+</div>
+@enderror

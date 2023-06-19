@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Elearning;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Forms\Elearning\Courses\CourseEditForm;
 
 class CourseController extends Controller
 {
@@ -23,7 +24,7 @@ class CourseController extends Controller
     public function create()
     {
         return view('pages.courses.create', [
-
+            'form' => CourseEditForm::boot(),
         ]);
     }
 

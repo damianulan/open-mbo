@@ -18,6 +18,7 @@ class Input extends Element
         $this->name = empty($name) ? null:$name;
         $this->type = empty($type) ? null:$type;
         $this->value = $value;
+        $this->classes[] = 'form-control';
     }
 
     public function maxlength(int $value)

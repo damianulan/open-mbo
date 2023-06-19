@@ -1,4 +1,27 @@
-/** These are specific for the tag that will be added to the rich text content */
+trix-editor::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  trix-editor::-webkit-scrollbar-track {
+    background: rgb(179, 177, 177);
+    border-radius: $input-border-radius;
+  }
+  
+  trix-editor::-webkit-scrollbar-thumb {
+    background: rgb(136, 136, 136);
+    border-radius: $input-border-radius;
+  }
+  
+  trix-editor::-webkit-scrollbar-thumb:hover {
+    background: rgb(100, 100, 100);
+    border-radius: $input-border-radius;
+  }
+  
+  trix-editor::-webkit-scrollbar-thumb:active {
+    background: $dark;
+    border-radius: $input-border-radius;
+}
+
 .trix-content .attachment-gallery > .attachment,
 .trix-content .attachment-gallery > rich-text-attachment {
     flex: 1 0 33%;
@@ -22,7 +45,9 @@
 .trix-content {
     width: 100%;
     min-height: 10rem;
+    max-height: 15rem;
     padding: 1rem 1.5rem;
+    overflow-y: auto;
 }
 
 .trix-content h1 {
@@ -54,27 +79,27 @@
     display: none;
 }
 
-#trix-toolbar {
+.trix-toolbar {
     padding-bottom: .5rem;
 }
 
-#trix-toolbar .trix-btn {
+.trix-toolbar .trix-btn {
     padding: 0 0.5rem;
 }
 
-#trix-toolbar .trix-btn i {
+.trix-toolbar .trix-btn i {
     font-size: 1.2rem;
 }
 
-#trix-toolbar .trix-dialog {
+.trix-toolbar .trix-dialog {
     margin-top: .5rem;
 }
 
-#trix-toolbar .trix-button-group {
+.trix-toolbar .trix-button-group {
     display: flex;
     width: 30%;
 }
 
-#trix-toolbar .trix-input {
+.trix-toolbar .trix-input {
     font-size: .7rem;
 }

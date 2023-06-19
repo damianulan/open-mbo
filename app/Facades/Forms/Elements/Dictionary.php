@@ -68,4 +68,14 @@ class Dictionary
 
         return null;
     }
+
+    public static function yesNo()
+    {
+        $options = new Collection();
+
+        $options->push(new Option(1, __('vocabulary.yes')));
+        $options->push(new Option(0, __('vocabulary.no')));
+
+        return $options;
+    }
 }

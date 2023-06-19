@@ -21,6 +21,9 @@ class Element
     public bool $disabled = false;
     public bool $readonly = false;
 
+    public array $infos = [];
+    public array $dangers = [];
+
     public function render()
     {
         $template = $this->template ?? Str::lower((new \ReflectionClass($this))->getShortName());
@@ -91,5 +94,23 @@ class Element
     private function getClasses()
     {
         return empty($this->classes) ? null:implode(' ', $this->classes);
+    }
+
+    public function info(string $text)
+    {
+        $this->infos[] = $text;
+        return $this;
+    }
+
+    public function getInfos()
+    {
+        if(!empty($this->infos)){
+            $output = '';
+            foreach($this->infos as $info){
+                $output .= '<span class="info-box" data-bs-toggle="tooltip" data-bs-title="'.$info.'"><i class="bi-info-circle-fill"></i></span>';
+            }
+            return $output;
+        }
+        return null;
     }
 }

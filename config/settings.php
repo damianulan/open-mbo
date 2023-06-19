@@ -2,6 +2,7 @@
 
 use App\Settings\GeneralSettings;
 use App\Settings\MailSettings;
+use App\Settings\Modules\CourseSettings;
 
 return [
 
@@ -12,6 +13,7 @@ return [
     'settings' => [
         GeneralSettings::class,
         MailSettings::class,
+        CourseSettings::class,
     ],
 
     /*
@@ -44,11 +46,17 @@ return [
             'table' => null,
             'connection' => null,
         ],
-        'redis' => [
-            'type' => Spatie\LaravelSettings\SettingsRepositories\RedisSettingsRepository::class,
+        'modules' => [
+            'type' => Spatie\LaravelSettings\SettingsRepositories\DatabaseSettingsRepository::class,
+            'model' => null,
+            'table' => 'settings_modules',
             'connection' => null,
-            'prefix' => null,
         ],
+        // 'redis' => [
+        //     'type' => Spatie\LaravelSettings\SettingsRepositories\RedisSettingsRepository::class,
+        //     'connection' => null,
+        //     'prefix' => null,
+        // ],
     ],
 
     /*
