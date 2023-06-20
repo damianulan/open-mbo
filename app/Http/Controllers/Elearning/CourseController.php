@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Elearning;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Forms\Elearning\Courses\CourseEditForm;
+use App\Models\Elearning\Course;
 
 class CourseController extends Controller
 {
@@ -14,7 +15,7 @@ class CourseController extends Controller
     public function index()
     {
         return view('pages.courses.index', [
-
+            'courses' => Course::getCatalog(),
         ]);
     }
 
@@ -31,9 +32,9 @@ class CourseController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, CourseEditForm $form)
     {
-        //
+        $request->validate($form::validation());
     }
 
     /**

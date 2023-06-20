@@ -21983,6 +21983,11 @@ form.form-horizontal .action-btns .btn {
   height: 1.3em;
 }
 
+.form-check.form-switch .form-check-input:not(:checked) {
+  background-color: #f9fbfd;
+  border-color: rgba(86, 77, 128, 0.6);
+}
+
 .form-check:not(.form-switch) .form-check-input {
   width: 1.2em;
   height: 1.2em;

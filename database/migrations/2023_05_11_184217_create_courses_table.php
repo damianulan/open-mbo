@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name', 128);
+            $table->string('title', 128);
             $table->longText('description')->nullable();
 
             $table->timestamp('available_from')->nullable();

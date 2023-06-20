@@ -1,14 +1,13 @@
-@php
-    $progress = 20;
-@endphp
-<div class="card course-card" data-url="{{ route('courses.show', 3) }}">
-    <div class="course-img" style="background-image: url('{{ asset('themes/light/images/courses/course5.jpg') }}');"></div>
+@props(['id', 'title', 'descr', 'picture', 'available_from' => '', 'tags' => '', 'progress' => 0])
+
+<div class="card course-card" data-url="{{ route('courses.show', $id) }}">
+    <div class="course-img" style="background-image: url('{{ asset($picture) }}');"></div>
     <div class="card-body">
-        <div class="card-title" data-bs-toggle="tooltip" data-bs-title="{{ lorem_title() }}">
-            {{ lorem_title() }}
+        <div class="card-title" data-bs-toggle="tooltip" data-bs-title="{{ $title }}">
+            {{ $title }}
         </div>
         <div class="card-text">
-            {{ lorem() }}
+            {!! $descr !!}
         </div>
         <div class="row details">
             <div class="col-md-6 col-sm-12">
@@ -18,7 +17,7 @@
                 </div>
                 <div class="element">
                     <i class="bi bi-calendar-x me-2"></i>
-                    10.12.2023
+                    {{ date('d.m.Y', strtotime($available_from)) }}
                 </div>
             </div>
             <div class="col-md-6">

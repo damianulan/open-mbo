@@ -242,6 +242,11 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'PageHeader' => App\Lib\PageHeader::class,
         'Theme' => App\Lib\Theme::class,
+        'EnrolmentType' => App\Enums\Elearning\EnrolmentType::class,
+
+        // MODELS
+        'User' => App\Models\User::class,
+        'Course' => App\Models\Elearning\Course::class,
     ])->toArray(),
 
 ];

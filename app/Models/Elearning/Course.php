@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Courses;
+namespace App\Models\Elearning;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,25 +18,32 @@ class Course extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'title',
         'description',
         'available_from',
         'available_to',
+        'public',
         'active',
         'visible',
         'picture'
     ];
 
     protected $casts = [
+        'public' => 'boolean',
         'active' => 'boolean',
         'visible' => 'boolean',
-    ];
 
-    protected $dates = [
-        'available_from', 'available_to'
+        // Dates
+        'available_from' => 'datetime',
+        'available_to' => 'datetime',
     ];
 
     protected $trixFields = [
         'description',
     ];
+
+    public static function getCatalog()
+    {
+        return self::where(['public' => 1, 'visible' => 1, 'active' => 1])->get();
+    }
 }

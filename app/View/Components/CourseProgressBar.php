@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 use Illuminate\View\View;
-use App\Models\Courses\Course;
+use App\Models\Elearning\Course;
 
 class CourseProgressBar extends Component
 {

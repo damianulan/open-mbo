@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Models\Courses;
+namespace App\Models\Elearning;
 
+use App\Enums\Elearning\EnrolmentType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\UUID;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Enrollment extends Model
+class Enrolment extends Model
 {
     use HasFactory, UUID, SoftDeletes;
 
@@ -18,5 +19,14 @@ class Enrollment extends Model
      */
     protected $fillable = [
         'name',
+    ];
+
+    protected $casts = [
+        'type' => EnrolmentType::class,
+        'timestart' => 'datetime',
+        'timeend' => 'datetime',
+
+        'self_unenrol' => 'boolean',
+        'active' => 'boolean',
     ];
 }

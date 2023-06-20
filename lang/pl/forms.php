@@ -24,7 +24,7 @@ return [
     ],
 
     'courses' => [
-        'name' => 'Nazwa kursu',
+        'title' => 'Nazwa kursu',
         'description' => 'Opis kursu',
         'available_from' => 'Dostępny od',
         'available_to' => 'Dostępny do',
