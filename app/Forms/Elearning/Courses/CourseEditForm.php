@@ -17,6 +17,7 @@ class CourseEditForm
                 ->add(FormElement::date('available_from', $model)->label(__('forms.courses.available_from'))
                 ->info('info'))
                 ->add(FormElement::date('available_to', $model)->label(__('forms.courses.available_to')))
+                ->add(FormElement::file('picture')->label(__('forms.courses.picture')))
                 ->add(FormElement::switch('public', $model)->label(__('forms.courses.public'))->default(true)
                 ->info('Widoczny w katalogu kursów dla każdego użytkownika.'))
                 ->add(FormElement::switch('visible', $model)->label(__('forms.courses.visible'))

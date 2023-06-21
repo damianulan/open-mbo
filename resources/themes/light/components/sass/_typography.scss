@@ -121,3 +121,12 @@ hr {
 .dashboard-widget-title {
     margin: 0;
 }
+
+.auth .card-header {
+    font-family: $font-family-serif;
+    color: $primary;
+    font-weight: 600;
+    font-size: 1.6rem;
+    text-align: center;
+    padding: 1.5rem 0;
+}

@@ -82,4 +82,9 @@ class FormElement
         $value = $model->$name ?? null;
         return new Checkbox($name, 'switch', $value);
     }
+
+    public static function file(string $name): File
+    {
+        return new File($name);
+    }
 }

@@ -31,4 +31,11 @@
     @if($progress > 0)
     <x-course-progressbar :progress="$progress"/>
     @endif
+    <!--
+    <div class="action-panel">
+        <div class="action-btns">
+            <a href="#"><i class="bi-person-fill-up"></i></a>
+            <a href="#"><i class="bi-gear-fill"></i></a>
+        </div>
+    </div>-->
 </div>

@@ -21623,6 +21623,15 @@ hr {
   margin: 0;
 }
 
+.auth .card-header {
+  font-family: "Bodoni Moda", serif;
+  color: #2b3a67;
+  font-weight: 600;
+  font-size: 1.6rem;
+  text-align: center;
+  padding: 1.5rem 0;
+}
+
 html, body {
   direction: ltr;
   height: 100%;
@@ -21998,6 +22007,11 @@ form.form-horizontal .action-btns .btn {
   height: 1.2em;
 }
 
+input[type=file]::-webkit-file-upload-button,
+input[type=file]::file-selector-button {
+  display: none;
+}
+
 nav::-webkit-scrollbar {
   width: 10px;
 }
@@ -22126,13 +22140,13 @@ html .sidebar-menu {
   padding: 1.5rem;
 }
 
-.sidebar-menu .navbar-brand .brand {
+.brand {
   color: #2b3a67;
   font-size: 1.1rem;
   text-decoration: none;
 }
 
-.sidebar-menu .navbar-brand .brand .brand-title {
+.brand .brand-title {
   font-weight: 800;
   font-family: "Bodoni Moda", serif;
   letter-spacing: 0.05rem;
@@ -22707,6 +22721,24 @@ ul.user-bar {
 .course-card .progress-bar .bar-progress {
   border-bottom-right-radius: var(--bs-border-radius);
   border-bottom-left-radius: var(--bs-border-radius);
+}
+
+.course-card .action-panel {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  padding: 1rem;
+}
+
+.course-card .action-panel .action-btns {
+  display: inline-block;
+  margin-left: auto;
+}
+
+.course-card .action-panel .action-btns a {
+  font-size: 1.15rem;
+  margin-left: 0.35rem;
+  color: #2b3a67;
 }
 
 .card.module-card {

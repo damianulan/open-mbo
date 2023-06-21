@@ -131,3 +131,8 @@ form.form-horizontal .action-btns .btn {
   width: 1.2em;
   height: 1.2em;
 }
+
+input[type=file]::-webkit-file-upload-button,
+input[type=file]::file-selector-button {
+  display: none;
+}

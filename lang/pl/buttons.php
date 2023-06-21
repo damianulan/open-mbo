@@ -19,4 +19,5 @@ return [
     'unblock' => 'Odblokuj',
     'ok' => 'Ok',
     'ok_understand' => 'Ok, rozumiem',
+    'choose_file' => 'Wybierz plik',
 ];

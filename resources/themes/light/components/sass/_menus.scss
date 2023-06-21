@@ -135,13 +135,13 @@ html .sidebar-menu {
     padding: 1.5rem;
 }
 
-.sidebar-menu .navbar-brand .brand {
+.brand {
     color: $sidebar-brand-link;
     font-size: 1.1rem;
     text-decoration: none;
 }
 
-.sidebar-menu .navbar-brand .brand .brand-title {
+.brand .brand-title {
     font-weight: 800;
     font-family: $font-family-serif;
     letter-spacing: .05rem;

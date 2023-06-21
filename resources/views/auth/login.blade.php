@@ -1,13 +1,12 @@
 @extends('auth.master')
 
 @section('content')
-<div class="container pt-5">
+<div class="container pt-5 auth">
     <div class="row justify-content-center">
         <div class="col-md-8 pt-5">
             <div class="card">
-                <div class="card-header">{{ __('menus.login') }}</div>
-
-                <div class="card-body">
+                <div class="card-header"><i class="fs-2 bi-tornado me-2"></i><span>Blender LMS</span></div>
+                <div class="card-body pt-0">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
