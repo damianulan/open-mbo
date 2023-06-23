@@ -4,6 +4,7 @@ namespace Database\Factories\Elearning;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Models\Elearning\CourseCategory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
@@ -17,7 +18,9 @@ class CourseFactory extends Factory
      */
     public function definition(): array
     {
+        $category = CourseCategory::inRandomOrder()->first();
         return [
+            'category_id' => $category->id,
             'title' => $this->fakeDictionary('course_titles'),
             'description' => fake()->text(),
             'available_from' => fake()->dateTimeThisYear(),

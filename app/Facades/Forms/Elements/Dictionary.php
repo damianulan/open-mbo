@@ -16,9 +16,9 @@ class Dictionary
         'null' => 'PLAIN'
     ];
 
-    public static function fromModel(string $model, string $column): Collection
+    public static function fromModel(string $model, string $column, string $method = 'all'): Collection
     {
-        $records = $model::all();
+        $records = $model::$method();
         $options = new Collection();
 
         if(!empty($records)){

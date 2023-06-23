@@ -22697,7 +22697,7 @@ ul.user-bar {
 .path-card .details .element {
   display: flex;
   align-items: center;
-  padding: 0.3rem 0.5rem 0 0.5rem;
+  margin: 0.3rem 0.5rem 0 0.5rem;
 }
 
 .course-card .progress-bar {

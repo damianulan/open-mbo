@@ -15,10 +15,16 @@ return [
     'turned_off_other' => 'Wyłączone',
     'select_choose' => 'Wybierz...',
     'search_no_results' => 'Brak wyników dla wyszukiwanej frazy.',
+    'enter_address' => 'Wprowadź adres',
 
     'typography' => [
         'bold' => 'Pogrubienie',
         'italic' => 'Pochyła',
-        
+        'hiperlink' => 'Hiperłącze',
+        'quote' => 'Cytat',
+        'li' => 'Lista punktowana',
+        'ol' => 'Lista numeryczna',
+        'link' => 'Linkuj',
+        'unlink' => 'Odlinkuj',
     ],
 ];

@@ -10,6 +10,7 @@ class Select extends Element
     public ?string $value = null;
     public Collection $options;
     public bool $multiple = false;
+    public bool $empty_field = true;
 
     public function __construct(string $name, $options, $selected_value = null)
     {
@@ -22,6 +23,12 @@ class Select extends Element
     {
         $this->multiple = true;
         $this->classes[] = 'select-multiple';
+        return $this;
+    }
+
+    public function noEmpty()
+    {
+        $this->empty_field = false;
         return $this;
     }
 

@@ -8,6 +8,8 @@ use App\Traits\UUID;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\Vendors\TrixFields;
 
+use App\Models\Elearning\CourseCategory;
+
 class Course extends Model
 {
     use HasFactory, UUID, SoftDeletes, TrixFields;
@@ -18,6 +20,7 @@ class Course extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'category_id',
         'title',
         'description',
         'available_from',
@@ -45,5 +48,10 @@ class Course extends Model
     public static function getCatalog()
     {
         return self::where(['public' => 1, 'visible' => 1, 'active' => 1])->get();
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(CourseCategory::class);
     }
 }
