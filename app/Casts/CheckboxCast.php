@@ -27,7 +27,7 @@ class CheckboxCast implements CastsAttributes
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        if($value === "on"){
+        if($value === "on" || $value === true || $value === 1){
             return 1;
         }
         return 0;

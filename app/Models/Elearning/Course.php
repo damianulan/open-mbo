@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\Vendors\TrixFields;
 use App\Traits\RequestForms;
 use App\Facades\TrixField\TrixFieldCast;
+use App\Lib\Theme;
 
 class Course extends Model
 {

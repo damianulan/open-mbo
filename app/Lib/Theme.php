@@ -24,7 +24,7 @@ class Theme
 
         $this->available = $directories;
         $this->current = app(GeneralSettings::class)->theme;
-        $this->images_path = 'themes/'.$this->current.'images/';
+        $this->images_path = 'themes/'.$this->current.'/images/';
     }
 
     public static function getAvailable()
