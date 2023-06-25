@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\UUID;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\Vendors\TrixFields;
+use Mews\Purifier\Casts\CleanHtmlOutput;
 
 class CourseCategory extends Model
 {
@@ -22,6 +23,8 @@ class CourseCategory extends Model
     protected $casts = [
         'public' => 'boolean',
         'visible' => 'boolean',
+
+        'description' => CleanHtmlOutput::class,
     ];
 
     protected $trixFields = [

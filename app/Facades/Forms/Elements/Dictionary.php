@@ -11,7 +11,7 @@ class Dictionary
      */
     public $mail_encryption_methods = [
         'tls' => 'TLS',
-        'ssl' => 'SSL', 
+        'ssl' => 'SSL',
         'starttls' => 'STARTTLS',
         'null' => 'PLAIN'
     ];
@@ -29,13 +29,17 @@ class Dictionary
         return $options;
     }
 
-    public static function fromUnassocArray(array $values): Collection
+    public static function fromUnassocArray(array $values, string $lang_component = ''): Collection
     {
         $options = new Collection();
 
         if(!empty($values)){
             foreach($values as $value){
-                $options->push(new Option($value, ucfirst($value)));
+                $content = ucfirst($value);
+                if(!empty($lang_component)){
+                    $content = __($lang_component.'.'.$value);
+                }
+                $options->push(new Option($value, $content));
             }
         }
 

@@ -18,7 +18,23 @@
                             {{ __('pages.settings.environment') }}:
                         </th>
                         <td>
-                            <span class="text-capitalize">{{ config('app.env') }}</span> 
+                            <span class="text-capitalize">{{ config('app.env') }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ __('pages.settings.phpversion') }}:
+                        </th>
+                        <td>
+                            {{ phpversion() }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ __('pages.settings.info') }}:
+                        </th>
+                        <td>
+                            <a href="{{ route('settings.server.phpinfo') }}" target="_blank">{{ __('pages.settings.phpinfo') }}<i class="bi-box-arrow-up-right ms-2"></i></a>
                         </td>
                     </tr>
                     <tr>
@@ -80,7 +96,7 @@
                 <div class="row">
                     {{ $form->render() }}
                 </div>
-    
+
             </div>
         </div>
     </div>

@@ -9,6 +9,7 @@ class Theme
 {
     public $current = 'light';
     public $available;
+    protected $images_path;
 
     public function __construct()
     {
@@ -23,10 +24,16 @@ class Theme
 
         $this->available = $directories;
         $this->current = app(GeneralSettings::class)->theme;
+        $this->images_path = 'themes/'.$this->current.'images/';
     }
 
     public static function getAvailable()
     {
         return (new self())->available;
+    }
+
+    public static function imagePath()
+    {
+        return (new self())->images_path;
     }
 }

@@ -11,7 +11,7 @@ return [
         'general' => [
             'site_name' => 'Nazwa witryny',
             'theme' => 'Szablon',
-            
+            'lang' => 'Język aplikacji',
         ],
         'server' => [
             'mail_host' => 'Adres serwera',

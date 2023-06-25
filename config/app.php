@@ -124,7 +124,7 @@ return [
     /**
      * Application Versioning
      * @key release - increments by one after successful implementation of a milestone.
-     * 
+     *
      * @key build - YYYYMMDDV format.
      * V stands for version build for the specific day (max 9).
      */
@@ -210,7 +210,8 @@ return [
          * Package Service Providers...
          */
         Yajra\DataTables\DataTablesServiceProvider::class,
-        
+        Mews\Purifier\PurifierServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -244,9 +245,15 @@ return [
         'Theme' => App\Lib\Theme::class,
         'EnrolmentType' => App\Enums\Elearning\EnrolmentType::class,
 
+        // CASTS
+        'CheckboxCast' => App\Casts\CheckboxCast::class,
+
         // MODELS
         'User' => App\Models\User::class,
         'Course' => App\Models\Elearning\Course::class,
+
+        // VENDORS
+        'Purifier' => Mews\Purifier\Facades\Purifier::class,
     ])->toArray(),
 
 ];

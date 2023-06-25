@@ -16,7 +16,10 @@ class GeneralForm
                 ->add(FormElement::text('site_name', $model)->label(__('forms.settings.general.site_name')))
                 ->add(FormElement::select('theme', $model, Dictionary::fromUnassocArray(Theme::getAvailable()), app(GeneralSettings::class)->theme)
                 ->label(__('forms.settings.general.theme'))->noEmpty())
+                ->add(FormElement::select('locale', $model, Dictionary::fromUnassocArray(config('app.available_locales'), 'vocabulary.langs'), app(GeneralSettings::class)->locale)
+                ->label(__('forms.settings.general.lang'))->noEmpty())
 
                 ->addSubmit();
     }
+
 }

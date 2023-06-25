@@ -35,6 +35,11 @@ class CourseController extends Controller
     public function store(Request $request, CourseEditForm $form)
     {
         $request->validate($form::validation());
+        $course = Course::fillFromRequest($request);
+        if($course->save()){ // todo redirect do utworzonego id
+            return redirect()->back()->with('success', __('alerts.courses.success.create', ['coursetitle' => $course->title]));
+        }
+        return redirect()->back()->with('error', __('alerts.courses.error.create', ['coursetitle' => $course->title]));
     }
 
     /**

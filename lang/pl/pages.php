@@ -13,6 +13,9 @@ return [
         'general' => 'Ogólne',
         'branding' => 'Branding',
         'modules' => 'Zarządzanie modułami platformy',
+        'phpversion' => 'Wersja PHP',
+        'info' => 'Konfiguracja PHP',
+        'phpinfo' => 'PHP Info',
     ],
 
     'courses' => [
@@ -21,6 +24,6 @@ return [
         'available_from' => 'Data rozpoczęcia',
         'available_to' => 'Data zakończenia',
         'teacher' => 'Prowadzący',
-        
+
     ],
 ];

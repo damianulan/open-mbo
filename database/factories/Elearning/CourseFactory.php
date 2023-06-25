@@ -27,7 +27,6 @@ class CourseFactory extends Factory
             'public' => fake()->boolean(),
             'active' => true,
             'visible' => true,
-            'picture' => 'themes/light/images/courses/course'.rand(1,6).'.jpg'
         ];
     }
 

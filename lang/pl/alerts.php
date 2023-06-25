@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 return [
 
@@ -17,12 +17,27 @@ return [
             'general'     => 'Ustawienia platformy nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd.',
         ],
         'warning' => [
-    
+
         ],
         'info' => [
-    
+
         ],
 
+    ],
+
+    'courses' => [
+        'success' => [
+            'create' => 'Pomyślnie udało się dodać nowy kurs o nazwie :coursetitle',
+        ],
+        'error' => [
+            'create' => 'Wystąpił błąd. Nie udało się dodać kursu :coursetitle',
+        ],
+        'warning' => [
+
+        ],
+        'info' => [
+
+        ],
     ],
 
 ];

@@ -27,4 +27,9 @@ return [
         'link' => 'Linkuj',
         'unlink' => 'Odlinkuj',
     ],
+
+    'langs' => [
+        'pl' => 'Polski',
+        'en' => 'Angielski',
+    ],
 ];

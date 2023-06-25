@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,6 +43,9 @@ Route::prefix('settings')->middleware(['auth'])->name('settings.')->group(functi
     Route::post('server/store/mail', [App\Http\Controllers\Settings\ServerController::class, 'storeMail'])->name('server.mail.store');
     Route::get('server/clearcache', [App\Http\Controllers\Settings\ServerController::class, 'cache'])->name('clearcache');
     Route::post('server/debugging', [App\Http\Controllers\Settings\ServerController::class, 'debugging'])->name('debugging');
+    Route::get('server/phpinfo', function (Request $request){
+        echo phpinfo();
+    })->name('server.phpinfo');
 });
 
 

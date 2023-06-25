@@ -1,13 +1,13 @@
 @props(['id', 'title', 'descr', 'picture', 'category', 'available_from' => '', 'progress' => 0])
 
 <div class="card course-card" data-url="{{ route('courses.show', $id) }}">
-    <div class="course-img" style="background-image: url('{{ asset($picture) }}');"></div>
+    <div class="course-img" style="background-image: url('{{ $picture }}');"></div>
     <div class="card-body">
         <div class="card-title" data-bs-toggle="tooltip" data-bs-title="{{ $title }}">
             {{ $title }}
         </div>
         <div class="card-text">
-            {!! $descr !!}
+            {{  $descr  }}
         </div>
         <div class="row details">
             <div class="col-md-6 col-sm-12">
@@ -23,7 +23,7 @@
             <div class="col-md-6">
                 <div class="element">
                     <i class="bi bi-person-fill me-2"></i>
-                    Damian Ułan 
+                    Damian Ułan
                 </div>
             </div>
         </div>

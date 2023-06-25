@@ -28,6 +28,7 @@ class GeneralController extends Controller
         $request->validate([
             'site_name' => 'min:3|max:16|required',
             'theme' => 'required',
+            'lang' => 'required',
         ]);
         foreach($request->all() as $key => $value){
             $settings->$key = $value;
