@@ -5,6 +5,7 @@ namespace App\Forms\Elearning\Courses;
 use App\Facades\Forms\FormBuilder;
 use App\Facades\Forms\FormElement;
 use App\Facades\Forms\Elements\Dictionary;
+use App\Models\Elearning\CourseCategory;
 
 class CourseEditForm
 {
@@ -13,6 +14,8 @@ class CourseEditForm
         return (new FormBuilder('post', route('courses.store'), 'course_create'))
                 ->class('course-create-form')
                 ->add(FormElement::text('title', $model)->label(__('forms.courses.title')))
+                ->add(FormElement::select('category_id', $model, Dictionary::fromModel(CourseCategory::class, 'title', 'getPublic'))
+                ->label(__('forms.courses.category'))->noEmpty())
                 ->add(FormElement::trix('description', $model)->label(__('forms.courses.description')))
                 ->add(FormElement::date('available_from', $model)->label(__('forms.courses.available_from'))
                 ->info('info'))

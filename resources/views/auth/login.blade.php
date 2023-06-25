@@ -6,7 +6,18 @@
         <div class="col-md-8 pt-5">
             <div class="card">
                 <div class="card-header"><i class="fs-2 bi-tornado me-2"></i><span>Blender LMS</span></div>
+
                 <div class="card-body pt-0">
+                    @if(config('app.env') !== 'production')
+                        <div class="alert alert-info mx-5 px-5 mb-4">
+                            <div class="text-center"><strong>UWAGA</strong> - serwis jest na etapie produkcji. Nie wszystkie funkcjonalności są sprawne.<br/>Zaloguj się z użyciem globalnych danych zawartych poniżej.</div>
+                            <div class="text-center pt-3">
+                                <div><strong>Login:</strong> admin@damianulan.me</div>
+                                <div><strong>Hasło:</strong> 123456</div>
+                            </div>
+                        </div>
+                    @endif
+
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 

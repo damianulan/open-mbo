@@ -34,13 +34,13 @@ class CreateAdminUserSeeder extends Seeder
         $admin1->gender = '1';
         $admin1->save();
 
-        $admin1 = new User();
-        $admin1->firstname = 'Rafał';
-        $admin1->lastname = 'Orłowski';
-        $admin1->email = 'rafal@damianulan.me';
-        $admin1->password = Hash::make('123456');
-        $admin1->gender = '1';
-        $admin1->save();
+        // $admin1 = new User();
+        // $admin1->firstname = 'Rafał';
+        // $admin1->lastname = 'Orłowski';
+        // $admin1->email = 'rafal@damianulan.me';
+        // $admin1->password = Hash::make('123456');
+        // $admin1->gender = '1';
+        // $admin1->save();
 
         $user1 = new User();
         $user1->firstname = 'Test';

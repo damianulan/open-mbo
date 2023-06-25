@@ -14,7 +14,7 @@
         data-trix-key="b"
         tabindex="-1" 
         data-bs-toggle="tooltip"
-        data-bs-title="Pogrubienie"
+        data-bs-title="{{ __('vocabulary.typography.bold') }}"
         ><i class="bi-type-bold"></i></button>
     
         <button type="button" 
@@ -23,7 +23,7 @@
         data-trix-key="i"
         tabindex="-1" 
         data-bs-toggle="tooltip"
-        data-bs-title="Pochyła"
+        data-bs-title="{{ __('vocabulary.typography.italic') }}"
         ><i class="bi-type-italic"></i></button>
         
         <button type="button" 
@@ -33,7 +33,7 @@
         data-trix-key="k"
         tabindex="-1" 
         data-bs-toggle="tooltip"
-        data-bs-title="Hiperłącze"
+        data-bs-title="{{ __('vocabulary.typography.hiperlink') }}"
         ><i class="bi-link-45deg"></i></button>
         
         <button type="button" 
@@ -41,7 +41,7 @@
         data-trix-attribute="quote" 
         tabindex="-1" 
         data-bs-toggle="tooltip"
-        data-bs-title="Cytat"
+        data-bs-title="{{ __('vocabulary.typography.quote') }}"
         ><i class="bi-quote"></i></button>
         
         <button type="button" 
@@ -49,7 +49,7 @@
         data-trix-attribute="bullet" 
         tabindex="-1" 
         data-bs-toggle="tooltip"
-        data-bs-title="Lista punktowana"
+        data-bs-title="{{ __('vocabulary.typography.li') }}"
         ><i class="bi-list-ul"></i></button>
         
         <button type="button" 
@@ -57,16 +57,16 @@
         data-trix-attribute="number" 
         tabindex="-1" 
         data-bs-toggle="tooltip"
-        data-bs-title="Lista numeryczna"
+        data-bs-title="{{ __('vocabulary.typography.ol') }}"
         ><i class="bi-list-ol"></i></button>
     </div>
     <div class="trix-dialogs" data-trix-dialogs="">
         <div class="trix-dialog trix-dialog--link" data-trix-dialog="href" data-trix-dialog-attribute="href">
           <div class="trix-dialog__link-fields">
-            <input type="url" name="href" class="form-control trix-input trix-input--dialog" placeholder="Wprowadź adres" aria-label="URL" required="" data-trix-input="" disabled="disabled">
+            <input type="url" name="href" class="form-control trix-input trix-input--dialog" placeholder="{{ __('vocabulary.enter_address') }}" aria-label="URL" required="" data-trix-input="" disabled="disabled">
             <div class="trix-button-group">
-              <input type="button" class="btn trix-button trix-button--dialog" value="Link" data-trix-method="setAttribute">
-              <input type="button" class="btn trix-button trix-button--dialog" value="Unlink" data-trix-method="removeAttribute">
+              <input type="button" class="btn trix-button trix-button--dialog" value="{{ __('vocabulary.typography.link') }}" data-trix-method="setAttribute">
+              <input type="button" class="btn trix-button trix-button--dialog" value="{{ __('vocabulary.typography.unlink') }}" data-trix-method="removeAttribute">
             </div>
           </div>
         </div>

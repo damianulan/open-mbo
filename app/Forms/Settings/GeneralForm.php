@@ -15,7 +15,7 @@ class GeneralForm
                 ->class('settings-form')
                 ->add(FormElement::text('site_name', $model)->label(__('forms.settings.general.site_name')))
                 ->add(FormElement::select('theme', $model, Dictionary::fromUnassocArray(Theme::getAvailable()), app(GeneralSettings::class)->theme)
-                ->label(__('forms.settings.general.theme')))
+                ->label(__('forms.settings.general.theme'))->noEmpty())
 
                 ->addSubmit();
     }

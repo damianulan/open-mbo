@@ -1,4 +1,4 @@
-@props(['id', 'title', 'descr', 'picture', 'available_from' => '', 'tags' => '', 'progress' => 0])
+@props(['id', 'title', 'descr', 'picture', 'category', 'available_from' => '', 'progress' => 0])
 
 <div class="card course-card" data-url="{{ route('courses.show', $id) }}">
     <div class="course-img" style="background-image: url('{{ asset($picture) }}');"></div>
@@ -11,9 +11,9 @@
         </div>
         <div class="row details">
             <div class="col-md-6 col-sm-12">
-                <div class="element">
-                    <i class="bi bi-tag-fill me-2 text-secondary"></i>
-                    Głupie kategorie
+                <div class="element" data-bs-toggle="tooltip" data-bs-title="{{ __('pages.courses.category') }}">
+                    <i class="bi bi-list-nested me-2 text-secondary"></i>
+                    {{ $category }}
                 </div>
                 <div class="element">
                     <i class="bi bi-calendar-x me-2"></i>

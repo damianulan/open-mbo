@@ -1,7 +1,7 @@
 <select id="id_{{ $element->name }}" class="{{ $classes ? $classes:'' }} @error($element->name) is-invalid @enderror" 
 name="{{ $element->name }}"{{ $element->placeholder ? ' data-placeholder="'.$element->placeholder.'"':'' }}
 {{ $element->required ? ' required':'' }}{{ $element->readonly ? ' readonly':'' }}{{ $element->disabled ? ' disabled':'' }}{{ $element->multiple ? ' multiple':'' }}>
-@if($element->multiple === false)
+@if($element->multiple === false && $element->empty_field)
 <option></option>
 @endif
 @if (!empty($element->options))

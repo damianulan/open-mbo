@@ -14,4 +14,13 @@ return [
         'branding' => 'Branding',
         'modules' => 'Zarządzanie modułami platformy',
     ],
+
+    'courses' => [
+        'category' => 'Kategoria',
+        'categories' => 'Kategorie',
+        'available_from' => 'Data rozpoczęcia',
+        'available_to' => 'Data zakończenia',
+        'teacher' => 'Prowadzący',
+        
+    ],
 ];

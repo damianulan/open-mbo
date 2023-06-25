@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->char('category_id');
+            $table->foreign('category_id')->references('id')->on('course_categories')->onDelete('cascade');
             $table->string('title', 128);
             $table->longText('description')->nullable();
 
