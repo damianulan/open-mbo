@@ -7,11 +7,13 @@ class File extends Element
     public string $name;
     private array $accept = [];
     public bool $multiple = false;
+    public bool $hasValue = false;
 
-    public function __construct(string $name)
+    public function __construct(string $name, bool $hasValue)
     {
         $this->name = empty($name) ? null:$name;
         $this->classes[] = 'form-control';
+        $this->hasValue = $hasValue;
     }
 
     public function setExt(array $accepts)

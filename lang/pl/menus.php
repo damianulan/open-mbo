@@ -1,10 +1,10 @@
 <?php
 
 return [
-    
+
     // Sidebar
     'dashboard' => 'Pulpit',
-    
+
     'elearning_panel' => 'Panel szkoleniowy',
     'calendar' => 'Kalendarz',
     'blended' => 'Kształcenie hybrydowe',
@@ -28,7 +28,7 @@ return [
 
     // Submenus / Page menus
 
-    // User's profile menu 
+    // User's profile menu
     'profile' => [
         'index' => 'Profil',
         'edit' => 'Edytuj',
@@ -67,6 +67,7 @@ return [
     'courses' => [
         'index' => 'Kursy',
         'create' => 'Tworzenie szkolenia',
+        'edit' => 'Edycja szkolenia',
     ],
 
 ];

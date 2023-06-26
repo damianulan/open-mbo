@@ -52,7 +52,7 @@ class FormElement
         $value = $model->$name ?? null;
         return new Datetime($name, 'datetime', $value);
     }
-    
+
     public static function time(string $name, $model = null): Datetime
     {
         $value = $model->$name ?? null;
@@ -83,8 +83,12 @@ class FormElement
         return new Checkbox($name, 'switch', $value);
     }
 
-    public static function file(string $name): File
+    public static function file(string $name, $model = null): File
     {
-        return new File($name);
+        $value = false;
+        if(isset($model->$name) && !empty($model->$name)){
+            $value = true;
+        }
+        return new File($name, $value);
     }
 }

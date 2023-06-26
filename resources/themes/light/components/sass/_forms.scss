@@ -71,7 +71,7 @@ select, input {
       border-style: dashed;
       border-width: 1px;
       border-top-width: 0;
-      border-color: black; 
+      border-color: black;
 }
 
 .users-view-image {
@@ -135,4 +135,11 @@ form.form-horizontal .action-btns .btn {
 input[type=file]::-webkit-file-upload-button,
 input[type=file]::file-selector-button {
   display: none;
+}
+
+.input-group .input-snippet {
+    width: 100%;
+    text-align: end;
+    font-size: .7rem;
+    margin-top: .3rem;
 }

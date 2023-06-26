@@ -9,7 +9,7 @@
     type="hidden"
     name="{{ $name }}"
     id="{{ $id }}"
-    value="{{ $value }}"
+    value="{!! $value !!}"
 />
 <trix-toolbar class="trix-toolbar" id="trix-toolbar-{{ $toolbar }}">
     <div class="trix-button-row">

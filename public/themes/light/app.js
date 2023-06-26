@@ -3136,9 +3136,8 @@ $(document).ready(function () {
   });
   $(".datetimepicker").flatpickr({
     "locale": flatpickr_pl,
-    altInput: true,
     allowInput: true,
-    dateFormat: "d-m-Y H:i",
+    dateFormat: datetime_format,
     enableTime: true,
     time_24hr: true
   });
@@ -3148,17 +3147,17 @@ $(document).ready(function () {
     allowInput: true,
     enableTime: true,
     noCalendar: true,
-    dateFormat: "H:i",
+    dateFormat: time_format,
     time_24hr: true
   });
   $(".datepicker").flatpickr({
     "locale": flatpickr_pl,
     allowInput: true,
-    dateFormat: "d-m-Y"
+    dateFormat: date_format
   });
   $(".datepicker-range").flatpickr({
     "locale": flatpickr_pl,
-    dateFormat: "d-m-Y",
+    dateFormat: date_format,
     mode: "range"
   });
 });

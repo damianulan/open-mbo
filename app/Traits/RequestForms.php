@@ -13,7 +13,7 @@ trait RequestForms
         foreach($request->all() as $property => $value){
             if(in_array($property, $instance->fillable)){
                 if($value instanceof UploadedFile){
-                    $file = $request->file('picture');
+                    $file = $request->file($property);
                     if($file && isset($instance->storagePath)){
                         $name = $file->hashName();
                         $stored = $file->storeAs("public/$instance->storagePath", $name);

@@ -1,22 +1,22 @@
 trix-editor::-webkit-scrollbar {
     width: 6px;
   }
-  
+
   trix-editor::-webkit-scrollbar-track {
     background: rgb(179, 177, 177);
     border-radius: $input-border-radius;
   }
-  
+
   trix-editor::-webkit-scrollbar-thumb {
     background: rgb(136, 136, 136);
     border-radius: $input-border-radius;
   }
-  
+
   trix-editor::-webkit-scrollbar-thumb:hover {
     background: rgb(100, 100, 100);
     border-radius: $input-border-radius;
   }
-  
+
   trix-editor::-webkit-scrollbar-thumb:active {
     background: $dark;
     border-radius: $input-border-radius;
@@ -46,7 +46,7 @@ trix-editor::-webkit-scrollbar {
     width: 100%;
     min-height: 10rem;
     max-height: 15rem;
-    padding: 1rem 1.5rem;
+    padding: 1rem;
     overflow-y: auto;
 }
 

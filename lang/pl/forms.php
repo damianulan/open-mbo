@@ -31,7 +31,7 @@ return [
         'available_to' => 'Dostępny do',
         'picture' => 'Obrazek wiodący kursu',
         'public' => 'Widoczny publicznie',
-        'visible' => 'Ukryty',
+        'visible' => 'Widoczny',
     ],
 
     'placeholders' => [

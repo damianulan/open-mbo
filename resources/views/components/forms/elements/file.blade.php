@@ -9,4 +9,9 @@
         {{ $message }}
     </div>
     @enderror
+    @if($element->hasValue)
+    <div class="input-snippet text-muted">
+        Wybierając nadpiszesz istniejący już plik.
+    </div>
+    @endif
 </div>

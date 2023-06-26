@@ -24,7 +24,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view('pages.courses.create', [
+        return view('pages.courses.edit', [
             'form' => CourseEditForm::boot(),
         ]);
     }
@@ -47,8 +47,10 @@ class CourseController extends Controller
      */
     public function show(string $id)
     {
+        $course = Course::find($id);
         return view('pages.courses.view', [
-            'pagetitle' => 'Kurs przykładowy',
+            'pagetitle' => $course->title,
+            'course' => $course
         ]);
     }
 
@@ -57,7 +59,10 @@ class CourseController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $course = Course::find($id);
+        return view('pages.courses.edit', [
+            'form' => CourseEditForm::boot($course),
+        ]);
     }
 
     /**

@@ -5,7 +5,7 @@
     var choose = '{{ __('vocabulary.select_choose') }}';
     var no_results = '{{ __('vocabulary.search_no_results') }}';
 
-    var date_format = 'dd-mm-YYYY';
-    var time_fomrat = 'H:i';
-    var datetime_format = date_format + ' ' + time_fomrat;
+    var date_format = '{{ config('app.date_format') }}';
+    var time_format = '{{ config('app.time_format') }}';
+    var datetime_format = '{{ config('app.datetime_format') }}';
 </script>

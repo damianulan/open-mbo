@@ -15,7 +15,7 @@ return new class extends SettingsMigration
         $this->migrator->add('general.build', 202306031936);
         $this->migrator->add('general.release', '0.0.1');
 
-        $this->migrator->add('general.date_format', 'd-m-Y');
+        $this->migrator->add('general.date_format', 'd.m.Y');
         $this->migrator->add('general.time_format', 'H:i');
     }
 };

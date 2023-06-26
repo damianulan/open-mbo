@@ -22012,6 +22012,13 @@ input[type=file]::file-selector-button {
   display: none;
 }
 
+.input-group .input-snippet {
+  width: 100%;
+  text-align: end;
+  font-size: 0.7rem;
+  margin-top: 0.3rem;
+}
+
 nav::-webkit-scrollbar {
   width: 10px;
 }
@@ -24104,7 +24111,7 @@ trix-editor::-webkit-scrollbar-thumb:active {
   width: 100%;
   min-height: 10rem;
   max-height: 15rem;
-  padding: 1rem 1.5rem;
+  padding: 1rem;
   overflow-y: auto;
 }
 

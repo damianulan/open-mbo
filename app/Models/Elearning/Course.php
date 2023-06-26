@@ -62,4 +62,6 @@ class Course extends Model
     {
         return $this->picture ? asset("storage/$this->picture"):asset(Theme::imagePath()."courses/course-default-pic.jpg");
     }
+
+
 }
