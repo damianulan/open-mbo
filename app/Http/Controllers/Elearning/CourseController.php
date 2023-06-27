@@ -48,10 +48,13 @@ class CourseController extends Controller
     public function show(string $id)
     {
         $course = Course::find($id);
-        return view('pages.courses.view', [
-            'pagetitle' => $course->title,
-            'course' => $course
-        ]);
+        if($course){
+            return view('pages.courses.view', [
+                'pagetitle' => $course->title,
+                'course' => $course
+            ]);
+        }
+        abort(404);
     }
 
     /**

@@ -1,4 +1,6 @@
-@extends('errors.master')
+@extends('errors.master', [
+    'pagetitle' => "$errorCode ".__('pages.errors.'.$errorCode.'.title')
+])
 @php
     // TODO - include error reporting to the database
 @endphp
