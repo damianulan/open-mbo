@@ -24,8 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        abort(403);
         return view('pages.dashboard', [
-            
+
         ]);
     }
 }

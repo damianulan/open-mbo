@@ -5,6 +5,7 @@ $theme: "light";
 $font-family-base: 'Inter', 'Helvetica', sans-serif;
 $font-family-sans-serif: 'Inter', sans-serif;
 $font-family-serif: 'Bodoni Moda', serif;
+$font-family-monospace: 'JetBrains Mono', monospace;
 $font-size-base: 0.8rem;
 $line-height-base: 1.6;
 
@@ -98,7 +99,7 @@ $nav-link-font-weight: 400;
 $nav-tab-bg: #fff;
 $nav-tab-color-hover: #000;
 
-// Forms 
+// Forms
 $form-font-size: .85rem;
 $input-background: #fff;
 $input-border-color: darken($border-color, 10%);

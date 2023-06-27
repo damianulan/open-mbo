@@ -6,22 +6,22 @@ html, body {
 html::-webkit-scrollbar {
     width: 10px;
   }
-  
+
   html::-webkit-scrollbar-track {
     background: rgb(179, 177, 177);
     border-radius: 10px;
   }
-  
+
   html::-webkit-scrollbar-thumb {
     background: rgb(136, 136, 136);
     border-radius: 10px;
   }
-  
+
   html::-webkit-scrollbar-thumb:hover {
     background: rgb(100, 100, 100);
     border-radius: 10px;
   }
-  
+
   html::-webkit-scrollbar-thumb:active {
     background: $primary;
     border-radius: 10px;
@@ -45,12 +45,12 @@ html::-webkit-scrollbar {
 @media (min-width: 992px){
     .content {
         margin-left: $menu-expanded-width;
-    }    
+    }
 }
 @media (max-width: 992px){
     .content {
         margin-left: 0 !important;
-    }  
+    }
 }
 
 .content.menu-collapsed {
@@ -117,4 +117,27 @@ html::-webkit-scrollbar {
 
 .settings .section {
     padding: 1.5rem 0;
+}
+
+.error-page {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.error-page .error-code {
+    font-size: 8rem;
+    font-weight: 700;
+    font-family: $font-family-monospace;
+}
+
+.error-page .error-icon {
+    font-size: 5rem;
+}
+
+.error-page .error-title {
+    font-size: 1.3rem;
+    font-family: $font-family-monospace;
+    font-weight: 700;
+    text-transform: uppercase;
 }
