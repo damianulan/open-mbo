@@ -13,10 +13,12 @@ class CourseEditForm
     public static function boot($model = null): FormBuilder
     {
         $route = route('courses.store');
+        $method = 'POST';
         if(!is_null($model)){
+            $method = 'PUT';
             $route = route('courses.update', $model->id);
         }
-        return (new FormBuilder('post', $route, 'course_edit'))
+        return (new FormBuilder($method, $route, 'course_edit'))
                 ->class('course-create-form')
                 ->add(FormElement::text('title', $model)->label(__('forms.courses.title')))
                 ->add(FormElement::select('category_id', $model, Dictionary::fromModel(CourseCategory::class, 'title', 'getPublic'))

@@ -54,7 +54,6 @@ class CourseController extends Controller
                 'course' => $course
             ]);
         }
-        abort(404);
     }
 
     /**
@@ -71,9 +70,14 @@ class CourseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id, CourseEditForm $form)
     {
-        //
+        $request->validate($form::validation());
+        $course = Course::fillFromRequest($request, $id);
+        if($course->update()){
+            return redirect()->back()->with('success', __('alerts.courses.success.update', ['coursetitle' => $course->title]));
+        }
+        return redirect()->back()->with('error', __('alerts.courses.error.update', ['coursetitle' => $course->title]));
     }
 
     /**

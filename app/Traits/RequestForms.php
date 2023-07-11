@@ -7,9 +7,14 @@ use Illuminate\Http\UploadedFile;
 
 trait RequestForms
 {
-    public static function fillFromRequest(Request $request): self
+    public static function fillFromRequest(Request $request, $id = null): self
     {
-        $instance = new self();
+        $instance = null;
+        if(is_null($id)){
+            $instance = new self();
+        } else {
+            $instance = self::find($id);
+        }
         foreach($request->all() as $property => $value){
             if(in_array($property, $instance->fillable)){
                 if($value instanceof UploadedFile){

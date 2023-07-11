@@ -28,9 +28,11 @@ return [
     'courses' => [
         'success' => [
             'create' => 'Pomyślnie udało się dodać nowy kurs o nazwie :coursetitle',
+            'update' => 'Kurs o nazwie :coursetitle został pomyślnie zaktualizowany',
         ],
         'error' => [
             'create' => 'Wystąpił błąd. Nie udało się dodać kursu :coursetitle',
+            'update' => 'Wystąpił błąd. Nie udało się zaktualizować kursu :coursetitle',
         ],
         'warning' => [
 

@@ -3,6 +3,7 @@
 @endphp
 
 <form {{ $id ? 'id="'.$id.'"':''  }} action="{{ $action }}" method="{{ $nominal }}" class="col-md-12 form-{{ $template }}{{ $classes ? ' '.$classes:''  }}" enctype="multipart/form-data">
+    @method($method)
     @csrf
     @foreach ($elements as $element)
         <div class="row pb-3">
