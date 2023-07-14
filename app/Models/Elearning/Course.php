@@ -63,5 +63,19 @@ class Course extends Model
         return $this->picture ? asset("storage/$this->picture"):asset(Theme::imagePath()."courses/course-default-pic.jpg");
     }
 
+    public function renderCard()
+    {
+        return view('components.course-card', [
+            'id' => $this->id,
+            'title' => $this->title,
+            'descr' => $this->description->stripFormat(),
+            'picture' => $this->loadPicture(),
+            'category' => $this->category->title,
+            'available_from' => $this->available_from,
+            'available_to' => $this->available_to,
+            'progress' => $this->progress ?? 0,
+        ]);
+    }
+
 
 }

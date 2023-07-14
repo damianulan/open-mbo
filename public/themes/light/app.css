@@ -22371,7 +22371,7 @@ ul.user-bar {
   padding: 0.3rem 0.8rem;
   margin: 0.25rem 0.35rem;
   font-size: 0.9rem;
-  font-weight: 400;
+  font-weight: 500;
   background: transparent;
   align-items: center;
   color: #022a6a;
@@ -22399,6 +22399,11 @@ ul.user-bar {
   color: #2b3a67;
   font-weight: 600;
   background-color: rgba(43, 58, 103, 0.25);
+}
+
+.page-menu .nav-pills-horizontal .nav-link i {
+  margin-right: 0.5rem;
+  font-size: 1rem;
 }
 
 .page-menu ul.nav-pills-horizontal {
@@ -22728,7 +22733,15 @@ ul.user-bar {
 .path-card .details .element {
   display: flex;
   align-items: center;
-  margin: 0.3rem 0.5rem 0 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.course-card .details .element .element-title {
+  width: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 
 .course-card .progress-bar {

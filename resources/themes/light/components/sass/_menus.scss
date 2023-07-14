@@ -338,7 +338,7 @@ ul.user-bar {
     padding: .3rem .8rem;
     margin: .25rem .35rem;
     font-size: .9rem;
-    font-weight: 400;
+    font-weight: 500;
     background: transparent;
     align-items: center;
     color: lighten($dark, 10%);
@@ -366,6 +366,11 @@ ul.user-bar {
     color: $primary;
     font-weight: 600;
     background-color: rgba($primary, 0.25);
+}
+
+.page-menu .nav-pills-horizontal .nav-link i{
+    margin-right: .5rem;
+    font-size: 1rem;
 }
 
 .page-menu ul.nav-pills-horizontal {

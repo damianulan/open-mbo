@@ -1,5 +1,3 @@
-@props(['id', 'title', 'descr', 'picture', 'category', 'available_from' => '', 'progress' => 0])
-
 <div class="card course-card" data-url="{{ route('courses.show', $id) }}">
     <div class="course-img" style="background-image: url('{{ $picture }}');"></div>
     <div class="card-body">
@@ -13,17 +11,25 @@
             <div class="col-md-6 col-sm-12">
                 <div class="element" data-bs-toggle="tooltip" data-bs-title="{{ __('pages.courses.category') }}">
                     <i class="bi bi-list-nested me-2 text-secondary"></i>
-                    {{ $category }}
+                    <span class="element-title">
+                        {{ $category }}
+                    </span>
                 </div>
-                <div class="element">
-                    <i class="bi bi-calendar-x me-2"></i>
-                    {{ date('d.m.Y', strtotime($available_from)) }}
-                </div>
+                @if($available_to)
+                    <div class="element" data-bs-toggle="tooltip" data-bs-title="{{ __('pages.courses.available_to') }}">
+                        <i class="bi bi-calendar-x me-2"></i>
+                        <span class="element-title">
+                            {{ date('d.m.Y', strtotime($available_to)) }}
+                        </span>
+                    </div>
+                @endif
             </div>
             <div class="col-md-6">
-                <div class="element">
+                <div class="element" data-bs-toggle="tooltip" data-bs-title="{{ __('pages.courses.teacher') }}">
                     <i class="bi bi-person-fill me-2"></i>
-                    Damian Ułan
+                    <span class="element-title">
+                        Damian Ułan
+                    </span>
                 </div>
             </div>
         </div>

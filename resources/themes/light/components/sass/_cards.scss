@@ -80,7 +80,15 @@
 .path-card .details .element {
     display: flex;
     align-items: center;
-    margin: .3rem .5rem 0 .5rem;
+    margin-top: .5rem;
+}
+
+.course-card .details .element .element-title {
+    width: 100%;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
 }
 
 .course-card .progress-bar {
@@ -116,7 +124,7 @@
 .course-card .action-panel .action-btns {
     display: inline-block;
     margin-left: auto;
-} 
+}
 
 .course-card .action-panel .action-btns a {
     font-size: 1.15rem;
