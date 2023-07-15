@@ -3,7 +3,6 @@
       <ul class="nav nav-pills-horizontal">
           <li class="nav-item">
               <a class="nav-link{{ request()->routeIs('settings.index') ? ' active':'' }}" href="{{ route('settings.index') }}">
-                <i class="bi-gear-fill me-2"></i>
                 {{ __('menus.settings.general') }}
               </a>
           </li>

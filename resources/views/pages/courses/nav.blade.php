@@ -2,7 +2,7 @@
     <div class="page-menu">
         <ul class="nav nav-pills-horizontal">
             <li class="nav-item">
-                <a class="nav-link{{ request()->routeIs('courses.index') ? ' active':'' }}" href="{{ route('courses.index') }}">
+                <a class="nav-link{{ request()->routeIs('courses.index.*') ? ' active':'' }}" href="{{ route('courses.index', 'tile') }}">
                     <i class="bi-mortarboard-fill"></i>
                     Wszystkie kursy
                 </a>

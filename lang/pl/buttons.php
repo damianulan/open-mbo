@@ -17,8 +17,13 @@ return [
     'revoke' => 'Odbierz',
     'block' => 'Zablokuj',
     'unblock' => 'Odblokuj',
+    'hide' => 'Ukryj',
+    'unhide' => 'Odkryj',
     'ok' => 'Ok',
     'ok_understand' => 'Ok, rozumiem',
     'choose_file' => 'Wybierz plik',
     'redirect_back' => 'Powrót',
+
+    'list_view' => 'Tryb listy',
+    'tile_view' => 'Tryb kafelkowy',
 ];

@@ -27,12 +27,16 @@ return [
 
     'courses' => [
         'success' => [
-            'create' => 'Pomyślnie udało się dodać nowy kurs o nazwie :coursetitle',
-            'update' => 'Kurs o nazwie :coursetitle został pomyślnie zaktualizowany',
+            'create' => 'Pomyślnie udało się dodać nowy kurs o nazwie :coursetitle.',
+            'update' => 'Kurs o nazwie :coursetitle został pomyślnie zaktualizowany.',
+            'hide' => 'Widoczność kursu :coursetitle została nadpisana.',
+            'delete' => 'Kurs :coursetitle został pomyślnie usunięty.',
         ],
         'error' => [
-            'create' => 'Wystąpił błąd. Nie udało się dodać kursu :coursetitle',
-            'update' => 'Wystąpił błąd. Nie udało się zaktualizować kursu :coursetitle',
+            'create' => 'Wystąpił błąd. Nie udało się dodać kursu :coursetitle.',
+            'update' => 'Wystąpił błąd. Nie udało się zaktualizować kursu :coursetitle.',
+            'hide' => 'Widoczność kursu :coursetitle nie mogła zostać nadpisana. Wystąpił błąd.',
+            'delete' => 'Kurs :coursetitle nie mógł zostać usunięty. Wystąpił błąd.',
         ],
         'warning' => [
 

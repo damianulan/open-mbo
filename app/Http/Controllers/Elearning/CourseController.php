@@ -6,16 +6,26 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Forms\Elearning\Courses\CourseEditForm;
 use App\Models\Elearning\Course;
+use App\DataTables\Elearning\CoursesDataTable;
 
 class CourseController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(string $type)
     {
+        $pagetype = $type==='list' ? 'list-view':'tile-view';
+        if($type === 'list'){
+            $dataTable = new CoursesDataTable();
+            return $dataTable->render('pages.courses.index', [
+                'type' => $pagetype,
+            ]);
+        }
+        $courses = Course::getCatalog();
         return view('pages.courses.index', [
-            'courses' => Course::getCatalog(),
+            'courses' => $courses,
+            'type' => $pagetype,
         ]);
     }
 
@@ -83,8 +93,34 @@ class CourseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    public function toggleVisibility(string $id)
+    {
+        $course = Course::find($id);
+        if($course){
+            if($course->visible == 1){
+                $course->visible = 0;
+            } else {
+                $course->visible = 1;
+            }
+            if($course->update()){
+                return redirect()->back()->with('success', __('alerts.courses.success.hide', ['coursetitle' => $course->title]));
+            }
+        }
+        return redirect()->back()->with('error', __('alerts.courses.error.hide', ['coursetitle' => $course->title]));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(string $id)
     {
-        //
+        $course = Course::find($id);
+        if($course){
+            if($course->delete())
+            {
+                return redirect()->back()->with('success', __('alerts.courses.success.delete', ['coursetitle' => $course->title]));
+            }
+        }
+        return redirect()->back()->with('error', __('alerts.courses.error.delete', ['coursetitle' => $course->title]));
     }
 }

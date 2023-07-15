@@ -1,8 +1,8 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Elearning;
 
-use App\Models\User;
+use App\Models\Elearning\Course;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -13,7 +13,7 @@ use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Support\Carbon;
 
-class UsersDataTable extends DataTable
+class CoursesDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -23,15 +23,36 @@ class UsersDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'pages.users.action')
+            ->addColumn('action', function($data){
+                return view('pages.components.course.list-action', [
+                    'data' => $data
+                ]);
+            })
+            ->editColumn('category_id', function($model) {
+                return $model->category->title;
+            })
+            ->editColumn('available_from', function($data){
+                if($data->available_from){
+                    $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->available_from)->format('d-m-Y H:i');
+                    return $formatedDate;
+                }
+                return __('vocabulary.no_data');
+            })
+            ->editColumn('available_to', function($data){
+                if($data->available_to){
+                    $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->available_to)->format('d-m-Y H:i');
+                    return $formatedDate;
+                }
+                return __('vocabulary.no_data');
+            })
             ->editColumn('created_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format('d-m-Y H:i'); return $formatedDate; })
-            ->editColumn('updated_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format('d-m-Y H:i'); return $formatedDate; });
+            ->editColumn('updated_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->updated_at)->format('d-m-Y H:i'); return $formatedDate; });
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(User $model): QueryBuilder
+    public function query(Course $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -47,20 +68,16 @@ class UsersDataTable extends DataTable
                             'url' => asset('themes/vendors/datatables/pl.json'),
                         ],
                         'responsive' => true,
+                        'buttons' => [
+                            'csv'
+                        ],
                     ])
-                    ->setTableId('users-table')
+                    ->setTableId('course-list')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
+                    ->processing(true)
                     //->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+                    ->orderBy(0);
     }
 
     /**
@@ -69,10 +86,14 @@ class UsersDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('firstname')
-            ->title(__('fields.firstname')),
-            Column::make('lastname')
-            ->title(__('fields.lastname')),
+            Column::make('title')
+            ->title(__('fields.name')),
+            Column::make('category_id')
+            ->title(__('fields.category')),
+            Column::make('available_from')
+            ->title(__('fields.courses.available_from')),
+            Column::make('available_to')
+            ->title(__('fields.courses.available_to')),
             Column::make('created_at')
             ->title(__('fields.created_at')),
             Column::make('updated_at')
@@ -80,9 +101,7 @@ class UsersDataTable extends DataTable
             Column::computed('action')
             ->exportable(false)
             ->printable(false)
-            //->width(60)
-            ->addClass('text-center')
-            ->addClass('nowrap')
+            ->addClass('action-btns')
             ->title(__('fields.action')),
         ];
     }
@@ -92,6 +111,6 @@ class UsersDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Users_' . date('YmdHis');
+        return 'Courses_' . date('YmdHis');
     }
 }

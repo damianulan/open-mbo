@@ -21776,6 +21776,10 @@ html::-webkit-scrollbar-thumb:active {
   text-transform: uppercase;
 }
 
+.nowrap {
+  white-space: nowrap !important;
+}
+
 .btn {
   border-radius: 0.25rem;
   font-weight: 600 !important;
@@ -22635,6 +22639,15 @@ ul.user-bar {
 
 .settings-table td {
   padding-left: 1rem;
+}
+
+.lms-table .action-btns {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.lms-table .action-btns a {
+  text-decoration: none;
 }
 
 .lms-table {

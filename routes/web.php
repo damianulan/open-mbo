@@ -59,8 +59,15 @@ Route::get('management', [App\Http\Controllers\Management\ManagementController::
  * COURSES
  */
 Route::middleware(['auth'])->group(function (){
-    Route::resource('courses', App\Http\Controllers\Elearning\CourseController::class);
     Route::prefix('courses')->group(function() {
+        Route::get('/{type}', [App\Http\Controllers\Elearning\CourseController::class, 'index'])->name('courses.index');
+        Route::get('/create', [App\Http\Controllers\Elearning\CourseController::class, 'create'])->name('courses.create');
+        Route::get('/{course}/view', [App\Http\Controllers\Elearning\CourseController::class, 'show'])->name('courses.show');
+        Route::get('/{course}/edit', [App\Http\Controllers\Elearning\CourseController::class, 'edit'])->name('courses.edit');
+        Route::get('/{course}/hide', [App\Http\Controllers\Elearning\CourseController::class, 'toggleVisibility'])->name('courses.hide');
+        Route::post('/', [App\Http\Controllers\Elearning\CourseController::class, 'store'])->name('courses.store');
+        Route::put('/', [App\Http\Controllers\Elearning\CourseController::class, 'update'])->name('courses.update');
+        Route::get('/{course}/delete', [App\Http\Controllers\Elearning\CourseController::class, 'destroy'])->name('courses.destroy');
         Route::resource('category', App\Http\Controllers\Elearning\CategoryController::class);
     });
 });

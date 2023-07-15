@@ -19,7 +19,8 @@
         "spatie/laravel-activitylog": "^4.7",
         "spatie/laravel-query-builder": "^5.2",
         "spatie/laravel-settings": "^3.1",
-        "yajra/laravel-datatables": "^10.1"
+        "yajra/laravel-datatables": "^10.1",
+        "yajra/laravel-datatables-export": "^10.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
