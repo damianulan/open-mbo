@@ -7,9 +7,7 @@
       <span class="page-title">{{ $page->title }}</span>
     </div>
     <div class="page-quick-actions">
-        <div class="notification-dropdown">
-          <a class="me-3" href="#"><i class="bi bi-bell-fill"></i><span class="badge badge-circle badge-primary">2</span></a>
-        </div>
+        <x-notification-dropdown/>
         <div class="user-nav dropup">
             <div class="user-actions" data-bs-toggle="dropdown" role="button" aria-expanded="false">
               <img class="rounded-circle user-avatar-left" src="{{ asset('images/portrait/avatar-male.png'); }}" width="30" height="30">

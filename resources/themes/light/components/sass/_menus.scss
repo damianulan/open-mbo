@@ -284,6 +284,10 @@ ul.user-bar {
     padding: .35rem 1rem;
 }
 
+a.dropdown-toggle{
+    text-decoration: none;
+}
+
 .user-avatar-left {
     margin-right: .7rem;
 }
@@ -489,4 +493,21 @@ ul.user-bar {
     vertical-align: middle;
     font-size: 1.2rem;
     margin-right: .5rem;
+}
+
+.notification-dropdown .dropdown-menu {
+    max-width: 20rem;
+}
+
+.notification-dropdown .dropdown-menu .dropdown-header {
+    padding: .3rem 1rem;
+    color: $gray-600;
+}
+
+.notification-dropdown .notification-item {
+    display: flex;
+}
+
+.notification-time {
+    color: $gray-600;
 }

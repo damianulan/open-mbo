@@ -4775,8 +4775,8 @@ textarea.form-control-lg {
   --bs-dropdown-border-radius: var(--bs-border-radius);
   --bs-dropdown-border-width: var(--bs-border-width);
   --bs-dropdown-inner-border-radius: calc(var(--bs-border-radius) - var(--bs-border-width));
-  --bs-dropdown-divider-bg: var(--bs-border-color-translucent);
-  --bs-dropdown-divider-margin-y: 0.5rem;
+  --bs-dropdown-divider-bg: #e2f1fc;
+  --bs-dropdown-divider-margin-y: 0.2rem;
   --bs-dropdown-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   --bs-dropdown-link-color: var(--bs-body-color);
   --bs-dropdown-link-hover-color: var(--bs-body-color);
@@ -5055,7 +5055,7 @@ textarea.form-control-lg {
   --bs-dropdown-box-shadow: ;
   --bs-dropdown-link-color: #dee2e6;
   --bs-dropdown-link-hover-color: #fff;
-  --bs-dropdown-divider-bg: var(--bs-border-color-translucent);
+  --bs-dropdown-divider-bg: #e2f1fc;
   --bs-dropdown-link-hover-bg: rgba(255, 255, 255, 0.15);
   --bs-dropdown-link-active-color: #fff;
   --bs-dropdown-link-active-bg: #2b3a67;
@@ -22321,6 +22321,10 @@ ul.user-bar {
   padding: 0.35rem 1rem;
 }
 
+a.dropdown-toggle {
+  text-decoration: none;
+}
+
 .user-avatar-left {
   margin-right: 0.7rem;
 }
@@ -22525,6 +22529,23 @@ ul.user-bar {
   vertical-align: middle;
   font-size: 1.2rem;
   margin-right: 0.5rem;
+}
+
+.notification-dropdown .dropdown-menu {
+  max-width: 20rem;
+}
+
+.notification-dropdown .dropdown-menu .dropdown-header {
+  padding: 0.3rem 1rem;
+  color: #6c757d;
+}
+
+.notification-dropdown .notification-item {
+  display: flex;
+}
+
+.notification-time {
+  color: #6c757d;
 }
 
 .badge.badge-status, .badge.badge-tag {
