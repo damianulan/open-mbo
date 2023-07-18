@@ -25,12 +25,6 @@ class ComponentServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Progressbar component
-        Blade::component('course-progressbar', CourseProgressBar::class);
 
-        // @radial_gradient css directive
-        Blade::directive('radial_gradient', function ($secondary) {
-            return 'style="background: rgb(86,77,128);background: radial-gradient(circle, rgba(86,77,128,1) 0%, rgba('.$secondary.',1) 100%);"';
-        });
     }
 }

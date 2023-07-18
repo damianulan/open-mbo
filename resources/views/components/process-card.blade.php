@@ -1,4 +1,4 @@
-<div class="card course-card" data-url="{{ route('courses.show', $id) }}">
+<div class="card process-card" data-url="{{ route('courses.show', $id) }}">
     <div class="course-img" style="background-image: url('{{ $picture }}');"></div>
     <div class="card-body">
         <div class="card-title" data-bs-toggle="tooltip" data-bs-title="{{ $title }}">
@@ -34,9 +34,6 @@
             </div>
         </div>
     </div>
-    @if($progress > 0)
-    <x-course-progressbar :progress="$progress"/>
-    @endif
     <!--
     <div class="action-panel">
         <div class="action-btns">

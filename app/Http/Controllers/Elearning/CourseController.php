@@ -4,10 +4,6 @@ namespace App\Http\Controllers\Elearning;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Forms\Elearning\Courses\CourseEditForm;
-use App\Models\Elearning\Course;
-use App\DataTables\Elearning\CoursesDataTable;
-
 class CourseController extends Controller
 {
     /**

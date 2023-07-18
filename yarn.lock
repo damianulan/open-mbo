@@ -985,35 +985,6 @@
   resolved "https://registry.npmjs.org/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz"
   integrity sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==
 
-"@fullcalendar/core@^6.1.8", "@fullcalendar/core@~6.1.8":
-  version "6.1.8"
-  resolved "https://registry.npmjs.org/@fullcalendar/core/-/core-6.1.8.tgz"
-  integrity sha512-i8JBIvZCWGO9dsMEDcx9bnsQZ9PtGSJdOXGgWbhLaGq2iq41OBdp9g9gM4b/Otv2oK8bL5Gl6CsMmb/HkDtA6Q==
-  dependencies:
-    preact "~10.12.1"
-
-"@fullcalendar/daygrid@^6.1.8", "@fullcalendar/daygrid@~6.1.8":
-  version "6.1.8"
-  resolved "https://registry.npmjs.org/@fullcalendar/daygrid/-/daygrid-6.1.8.tgz"
-  integrity sha512-kCZxQFKb9Vqa3CZRX0v7rMSJ2mlTt4gDpyLfiNJKxUAq7W51uKurPaFZWicaXy1ESHVBxKNlbx5uNjBpyu50JQ==
-
-"@fullcalendar/interaction@^6.1.8":
-  version "6.1.8"
-  resolved "https://registry.npmjs.org/@fullcalendar/interaction/-/interaction-6.1.8.tgz"
-  integrity sha512-r6W4E9ohaA87M2uPSlmpE2WT7Fzu7LN0u2pE6D/tThruCEaAPbN8Pw5+sqclsuyTIL09mg0eSJm/ggJekTabSA==
-
-"@fullcalendar/list@^6.1.8":
-  version "6.1.8"
-  resolved "https://registry.npmjs.org/@fullcalendar/list/-/list-6.1.8.tgz"
-  integrity sha512-10N0T/vCtId1cE3JGLpnbAivWVnaWCCkVO7wmbsyr5Y+I939kr/zq4BUNwBoP/xSFVVxx59FETh3iyA+MkV8Fw==
-
-"@fullcalendar/timegrid@^6.1.8":
-  version "6.1.8"
-  resolved "https://registry.npmjs.org/@fullcalendar/timegrid/-/timegrid-6.1.8.tgz"
-  integrity sha512-3+3KHHCoNcaLs/gQt004hAqICbY5+WAffrZ0ePv+80HFB1OVh8BQ5XXLHSOUbTvXdgtUTcfBHuw9fhO31kt5gA==
-  dependencies:
-    "@fullcalendar/daygrid" "~6.1.8"
-
 "@jridgewell/gen-mapping@^0.1.0":
   version "0.1.1"
   resolved "https://registry.npmjs.org/@jridgewell/gen-mapping/-/gen-mapping-0.1.1.tgz"
@@ -4336,11 +4307,6 @@ postcss-value-parser@^4.1.0, postcss-value-parser@^4.2.0:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-preact@~10.12.1:
-  version "10.12.1"
-  resolved "https://registry.npmjs.org/preact/-/preact-10.12.1.tgz"
-  integrity sha512-l8386ixSsBdbreOAkqtrwqHwdvR35ID8c3rKPa8lCWuO86dBi32QWHV4vfsZK1utLLFMvw+Z5Ad4XLkZzchscg==
-
 pretty-time@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/pretty-time/-/pretty-time-1.1.0.tgz"
@@ -4741,24 +4707,24 @@ selfsigned@^2.1.1:
     node-forge "^1"
 
 semver@^6.0.0:
-  version "6.3.0"
-  resolved "https://registry.npmjs.org/semver/-/semver-6.3.0.tgz"
-  integrity sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==
+  version "6.3.1"
+  resolved "https://registry.npmjs.org/semver/-/semver-6.3.1.tgz"
+  integrity sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==
 
 semver@^6.1.1:
-  version "6.3.0"
-  resolved "https://registry.npmjs.org/semver/-/semver-6.3.0.tgz"
-  integrity sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==
+  version "6.3.1"
+  resolved "https://registry.npmjs.org/semver/-/semver-6.3.1.tgz"
+  integrity sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==
 
 semver@^6.1.2:
-  version "6.3.0"
-  resolved "https://registry.npmjs.org/semver/-/semver-6.3.0.tgz"
-  integrity sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==
+  version "6.3.1"
+  resolved "https://registry.npmjs.org/semver/-/semver-6.3.1.tgz"
+  integrity sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==
 
 semver@^6.3.0:
-  version "6.3.0"
-  resolved "https://registry.npmjs.org/semver/-/semver-6.3.0.tgz"
-  integrity sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==
+  version "6.3.1"
+  resolved "https://registry.npmjs.org/semver/-/semver-6.3.1.tgz"
+  integrity sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==
 
 semver@^7.3.2, semver@^7.3.5:
   version "7.5.3"

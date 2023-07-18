@@ -5,11 +5,7 @@ return [
     // Sidebar
     'dashboard' => 'Pulpit',
 
-    'elearning_panel' => 'Panel szkoleniowy',
-    'calendar' => 'Kalendarz',
-    'blended' => 'Kształcenie hybrydowe',
-    'tasks' => 'Zadania',
-    'learning_paths' => 'Ścieżki edukacyjne',
+
 
     'admin_panel' => 'Panel administracyjny',
     'reports' => 'Raporty',
@@ -64,10 +60,5 @@ return [
         'index' => 'Użytkownicy',
     ],
 
-    'courses' => [
-        'index' => 'Kursy',
-        'create' => 'Tworzenie szkolenia',
-        'edit' => 'Edycja szkolenia',
-    ],
 
 ];

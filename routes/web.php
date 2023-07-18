@@ -37,8 +37,6 @@ Route::get('profile', [App\Http\Controllers\ProfileController::class, 'index'])-
 Route::prefix('settings')->middleware(['auth'])->name('settings.')->group(function (){
     Route::get('/', [App\Http\Controllers\Settings\GeneralController::class, 'index'])->name('index');
     Route::post('general/store', [App\Http\Controllers\Settings\GeneralController::class, 'storeGeneral'])->name('general.store');
-    Route::get('modules', [App\Http\Controllers\Settings\ModulesController::class, 'index'])->name('modules');
-    Route::post('modules/updatestatus', [App\Http\Controllers\Settings\ModulesController::class, 'updateStatus'])->name('modules.updatestatus');
     Route::get('server', [App\Http\Controllers\Settings\ServerController::class, 'index'])->name('server');
     Route::post('server/store/mail', [App\Http\Controllers\Settings\ServerController::class, 'storeMail'])->name('server.mail.store');
     Route::get('server/clearcache', [App\Http\Controllers\Settings\ServerController::class, 'cache'])->name('clearcache');
@@ -55,21 +53,5 @@ Route::prefix('settings')->middleware(['auth'])->name('settings.')->group(functi
 Route::get('management', [App\Http\Controllers\Management\ManagementController::class, 'index'])->middleware('auth')->name('management.index');
 
 
-/**
- * COURSES
- */
-Route::middleware(['auth'])->group(function (){
-    Route::prefix('courses')->group(function() {
-        Route::get('/{type}', [App\Http\Controllers\Elearning\CourseController::class, 'index'])->name('courses.index');
-        Route::get('/create', [App\Http\Controllers\Elearning\CourseController::class, 'create'])->name('courses.create');
-        Route::get('/{course}/view', [App\Http\Controllers\Elearning\CourseController::class, 'show'])->name('courses.show');
-        Route::get('/{course}/edit', [App\Http\Controllers\Elearning\CourseController::class, 'edit'])->name('courses.edit');
-        Route::get('/{course}/hide', [App\Http\Controllers\Elearning\CourseController::class, 'toggleVisibility'])->name('courses.hide');
-        Route::post('/', [App\Http\Controllers\Elearning\CourseController::class, 'store'])->name('courses.store');
-        Route::put('/', [App\Http\Controllers\Elearning\CourseController::class, 'update'])->name('courses.update');
-        Route::get('/{course}/delete', [App\Http\Controllers\Elearning\CourseController::class, 'destroy'])->name('courses.destroy');
-        Route::resource('category', App\Http\Controllers\Elearning\CategoryController::class);
-    });
-});
 
 

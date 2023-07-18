@@ -30,18 +30,18 @@
     display: grid;
 }
 
-.card.course-card {
+.card.process-card {
     margin-top: 1rem;
 }
 
-.card.course-card:hover {
+.card.process-card:hover {
     cursor: pointer;
     -webkit-box-shadow: inset -5px -15px 75px -28px rgba($border-color,0.85);
     -moz-box-shadow: inset -5px -15px 75px -28px rgba($border-color,0.85);
     box-shadow: inset -5px -15px 75px -28px rgba($border-color,0.85);
 }
 
-.course-card .course-img{
+.process-card .process-img{
     display: block;
     width: 100%;
     background-repeat: no-repeat;
@@ -52,14 +52,14 @@
     pointer-events: none;
 }
 
-.course-card .card-title,
+.process-card .card-title,
 .path-card .card-title {
     font-weight: 600;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.course-card .card-title {
+.process-card .card-title {
     font-size: 1rem;
     white-space: nowrap;
 }
@@ -68,7 +68,7 @@
     font-size: .85rem;
 }
 
-.course-card .card-text,
+.process-card .card-text,
 .path-card .card-text {
     max-height: 3em;
     overflow: hidden;
@@ -76,14 +76,14 @@
     line-height: 1.5em;
 }
 
-.course-card .details .element,
+.process-card .details .element,
 .path-card .details .element {
     display: flex;
     align-items: center;
     margin-top: .5rem;
 }
 
-.course-card .details .element .element-title {
+.process-card .details .element .element-title {
     width: 100%;
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -91,42 +91,42 @@
     overflow: hidden;
 }
 
-.course-card .progress-bar {
+.process-card .progress-bar {
     display: flex;
     width: 100%;
     position: absolute;
     bottom: 0;
 }
 
-.course-card .progress-bar .bar-container {
+.process-card .progress-bar .bar-container {
     width: 100%;
     height: .3em;
     background-color: $columbia;
 }
 
-.course-card .progress-bar .bar-progress {
+.process-card .progress-bar .bar-progress {
     height: 100%;
 }
 
-.course-card .progress-bar .bar-container,
-.course-card .progress-bar .bar-progress {
+.process-card .progress-bar .bar-container,
+.process-card .progress-bar .bar-progress {
     border-bottom-right-radius: $card-border-radius;
     border-bottom-left-radius: $card-border-radius;
 }
 
-.course-card .action-panel {
+.process-card .action-panel {
     position: absolute;
     display: flex;
     width: 100%;
     padding: 1rem;
 }
 
-.course-card .action-panel .action-btns {
+.process-card .action-panel .action-btns {
     display: inline-block;
     margin-left: auto;
 }
 
-.course-card .action-panel .action-btns a {
+.process-card .action-panel .action-btns a {
     font-size: 1.15rem;
     margin-left: .35rem;
     color: $primary;

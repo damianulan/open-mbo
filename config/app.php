@@ -227,8 +227,6 @@ return [
         App\Providers\PermissionServiceProvider::class,
         App\Providers\RolesServiceProvider::class,
         App\Providers\ConfigServiceProvider::class,
-        App\Providers\ModuleServiceProvider::class,
-
     ],
 
     /*
@@ -246,14 +244,12 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'PageHeader' => App\Lib\PageHeader::class,
         'Theme' => App\Lib\Theme::class,
-        'EnrolmentType' => App\Enums\Elearning\EnrolmentType::class,
 
         // CASTS
         'CheckboxCast' => App\Casts\CheckboxCast::class,
 
         // MODELS
         'User' => App\Models\User::class,
-        'Course' => App\Models\Elearning\Course::class,
 
         // VENDORS
         'Purifier' => Mews\Purifier\Facades\Purifier::class,

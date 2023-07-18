@@ -3092,10 +3092,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_js_navbar__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_components_js_navbar__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _components_js_requests__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/js/requests */ "./resources/themes/light/components/js/requests.js");
 /* harmony import */ var _components_js_requests__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_components_js_requests__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _components_js_calendar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/js/calendar */ "./resources/themes/light/components/js/calendar.js");
-/* harmony import */ var _components_js_validation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/js/validation */ "./resources/themes/light/components/js/validation.js");
-/* harmony import */ var _components_js_validation__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_components_js_validation__WEBPACK_IMPORTED_MODULE_5__);
-
+/* harmony import */ var _components_js_validation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/js/validation */ "./resources/themes/light/components/js/validation.js");
+/* harmony import */ var _components_js_validation__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_components_js_validation__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
@@ -3161,30 +3159,9 @@ $(document).ready(function () {
     mode: "range"
   });
 });
-$(".course-card").on("click", function () {
-  var url = $(this).attr('data-url');
-  if (url) {
-    window.location.href = url;
-  }
-});
 $("input[type=password]").on("focus", function () {
   $(this).val('');
 });
-
-/***/ }),
-
-/***/ "./resources/themes/light/components/js/calendar.js":
-/*!**********************************************************!*\
-  !*** ./resources/themes/light/components/js/calendar.js ***!
-  \**********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-
-
-
-
 
 /***/ }),
 
@@ -3282,35 +3259,6 @@ $(".list-menu .menu-options .toggle-all").click(function () {
   \**********************************************************/
 /***/ (() => {
 
-$('.module-card').on("click", function () {
-  var card = $(this);
-  var active = 1;
-  if (card.hasClass("active")) {
-    active = 0;
-  }
-  $.ajax({
-    headers: {
-      'X-CSRF-TOKEN': csrf
-    },
-    type: "POST",
-    url: SITEURL + '/settings/modules/updatestatus',
-    data: {
-      id: $(this).attr('data-uuid'),
-      active: active
-    },
-    dataType: 'json',
-    success: function success(data) {
-      if (active === 1) {
-        card.addClass("active");
-      } else {
-        card.removeClass("active");
-      }
-    },
-    error: function error(data) {
-      console.log(data);
-    }
-  });
-});
 $('#debuggingOptionSwitch').on("change", function () {
   $.ajax({
     headers: {

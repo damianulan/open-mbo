@@ -17,8 +17,5 @@ return [
     'created_at' => 'Utworzono',
     'updated_at' => 'Zaktualizowano',
 
-    'courses' => [
-        'available_from' => 'Dostępny od',
-        'available_to' => 'Dostępny do',
-    ],
+
 ];

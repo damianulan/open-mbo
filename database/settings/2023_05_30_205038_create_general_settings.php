@@ -6,7 +6,7 @@ return new class extends SettingsMigration
 {
     public function up(): void
     {
-        $this->migrator->add('general.site_name', 'Blender LMS');
+        $this->migrator->add('general.site_name', 'OpenMBO');
         $this->migrator->add('general.site_logo', null);
         $this->migrator->add('general.theme', 'light');
         $this->migrator->add('general.timezone', 'Europe/Warsaw');

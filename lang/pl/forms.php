@@ -23,17 +23,6 @@ return [
         ],
     ],
 
-    'courses' => [
-        'category' => 'Kategoria kursu',
-        'title' => 'Nazwa kursu',
-        'description' => 'Opis kursu',
-        'available_from' => 'Dostępny od',
-        'available_to' => 'Dostępny do',
-        'picture' => 'Obrazek wiodący kursu',
-        'public' => 'Widoczny publicznie',
-        'visible' => 'Widoczny',
-    ],
-
     'placeholders' => [
         'choose_date' => 'Wybierz datę',
         'choose_time' => 'Wybierz godzinę',

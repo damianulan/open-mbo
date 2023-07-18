@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Settings\GeneralSettings;
-use App\Models\Elearning\Course;
 
 class HomeController extends Controller
 {
@@ -25,9 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $courses = Course::orderByDesc('available_from')->take(4)->get() ?? null;
-        return view('pages.dashboard', [
-            'courses' => $courses,
-        ]);
+
     }
 }
