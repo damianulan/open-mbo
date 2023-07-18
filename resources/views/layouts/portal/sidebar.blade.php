@@ -2,7 +2,7 @@
     <div class="navbar-brand mb-0 px-6">
         <div class="d-flex">
           <a class="brand"  href="{{ url('/') }}">
-            <i class="fs-2 bi-tornado"></i><span class="brand-title">{{ $page->sitename }}</span>
+            </i><span class="brand-title">{{ $page->sitename }}</span>
           </a>
           <div id="hamburger-close"><i class="bi-x-lg"></i></div>
 
@@ -21,59 +21,47 @@
         </a>
         <ul class="collapse show" id="recruitment">
           <li class="nav-item" id="nav_courses">
-            <a class="nav-link{{ request()->routeIs('courses.*') ? ' active':'' }}" href="{{ route('courses.index', 'tile') }}">
+            <a class="nav-link" href="">
               <i class="bi bi-mortarboard-fill"></i>
               <span class="nav-title">{{ __('menus.courses.index') }}</span>
             </a>
           </li>
-          @module('calendar')
           <li class="nav-item" id="nav_calendar">
             <a class="nav-link" href="#">
               <i class="bi bi-calendar2-week-fill"></i>
               <span class="nav-title">{{ __('menus.calendar') }}</span><span class="ms-auto badge badge-circle badge-primary">2</span>
             </a>
           </li>
-          @endmodule
-          @module('tasks')
           <li class="nav-item" id="nav_tasks">
             <a class="nav-link" href="#">
               <i class="bi bi-check-square-fill"></i>
               <span class="nav-title">{{ __('menus.tasks') }}</span>
             </a>
           </li>
-          @endmodule
-          @module('blended')
           <li class="nav-item" id="nav_blended">
             <a class="nav-link" href="#">
               <i class="bi bi-layers-half"></i>
               <span class="nav-title">{{ __('menus.blended') }}</span>
             </a>
           </li>
-          @endmodule
-          @module('learning_paths')
           <li class="nav-item" id="nav_learning_paths">
             <a class="nav-link" href="#">
               <i class="bi bi-signpost-split-fill"></i>
               <span class="nav-title">{{ __('menus.learning_paths') }}</span>
             </a>
           </li>
-          @endmodule
-          @module('reports')
           <li class="nav-item" id="nav_reports">
             <a class="nav-link" href="#">
               <i class="bi bi-bar-chart-steps"></i>
               <span class="nav-title">{{ __('menus.reports.index') }}</span>
             </a>
           </li>
-          @endmodule
-          @module('projects')
           <li class="nav-item" id="nav_projects">
             <a class="nav-link" href="#">
               <i class="bi bi-box-seam-fill"></i>
               <span class="nav-title">{{ __('menus.projects') }}</span>
             </a>
           </li>
-          @endmodule
         </ul>
       </li>
       <li class="nav-multi">

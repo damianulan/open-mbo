@@ -2,9 +2,9 @@
 $theme: "light";
 
 // Typography
-$font-family-base: 'Inter', 'Helvetica', sans-serif;
-$font-family-sans-serif: 'Inter', sans-serif;
-$font-family-serif: 'Bodoni Moda', serif;
+$font-family-base: 'IBM Plex Sans', 'Helvetica', sans-serif;
+$font-family-sans-serif: 'IBM Plex Sans', sans-serif;
+$font-family-serif: 'IBM Plex Serif', serif;
 $font-family-monospace: 'JetBrains Mono', monospace;
 $font-size-base: 0.8rem;
 $line-height-base: 1.6;
@@ -26,19 +26,19 @@ $cadet: #1C1F33;
 $violet: #564D80;
 $lazuli: #22577A;
 $dimm-blue: #7392b7;
-$celadon: #BAD4AA;
+$celadon: #445C43;
 
 $border-color: #e2f1fc;
 
 // Primaries
-$primary: #2b3a67;
+$primary: $celadon;
 
 // Secondaries
 $secondary: $violet;
 
 // Action colors
 $light: #fafafa;
-$dark: #011638;
+$dark: #334532;
 $danger: #e56b6f;
 $warning: #EDB458;
 $success: #4f9d69;
