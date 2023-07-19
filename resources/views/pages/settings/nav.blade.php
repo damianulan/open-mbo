@@ -6,12 +6,6 @@
                 {{ __('menus.settings.general') }}
               </a>
           </li>
-
-          <li class="nav-item">
-              <a class="nav-link">
-                {{ __('menus.settings.resources') }}
-              </a>
-          </li>
           <li class="nav-item">
               <a class="nav-link">
                 {{ __('menus.settings.integrations') }}

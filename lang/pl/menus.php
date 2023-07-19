@@ -9,7 +9,6 @@ return [
 
     'admin_panel' => 'Panel administracyjny',
     'reports' => 'Raporty',
-    'projects' => 'Projekty',
     'notifications' => 'Powiadomienia',
 
     // User menu
@@ -37,8 +36,6 @@ return [
     'settings' => [
         'index' => 'Ustawienia',
         'general' => 'Główne',
-        'modules' => 'Moduły',
-        'resources' => 'Zasoby',
         'integrations' => 'Integracje',
         'server' => 'Serwer',
         'logs' => 'Logi',
@@ -48,8 +45,6 @@ return [
     'management' => [
         'index' => 'Zarządzanie',
         'structure' => 'Organizacja',
-        'enrollments' => 'Zapisy',
-        'resources' => 'Zasoby',
     ],
 
     'reports' => [

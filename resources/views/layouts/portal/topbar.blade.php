@@ -9,11 +9,11 @@
     <div class="page-quick-actions">
         <x-notification-dropdown/>
         <div class="user-nav dropup">
-            <div class="user-actions" data-bs-toggle="dropdown" role="button" aria-expanded="false">
-              <img class="rounded-circle user-avatar-left" src="{{ asset('images/portrait/avatar-male.png'); }}" width="30" height="30">
+            <div class="user-actions" data-bs-toggle="dropdown" type="button" aria-expanded="false">
+              <img class="rounded-circle" src="{{ asset('images/portrait/avatar-male.png'); }}" width="30" height="30">
+              <span class="profile-name">{{ auth()->user()->name() }}</span>
             </div>
             <ul class="dropdown-menu">
-              <li><span class="profile-name">{{ auth()->user()->name() }}</span></li>
               <li><a href="{{ route('profile.index') }}" class="dropdown-item"><i class="bi-person me-2"></i>{{ __('menus.edit_profile') }}</a></li>
               <li><a href="#" class="dropdown-item"><i class="bi-activity me-2"></i>{{ __('menus.activity') }}</a></li>
               <li><a href="#" class="dropdown-item"><i class="bi-list-ol me-2"></i>{{ __('menus.my_results') }}</a></li>

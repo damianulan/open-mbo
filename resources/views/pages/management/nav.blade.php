@@ -3,6 +3,16 @@
         <ul class="nav nav-pills-horizontal">
             <li class="nav-item">
                 <a class="nav-link active">
+                    Wyznaczaj cele
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">
+                    Formularze
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">
                     {{ __('menus.users.index') }}
                 </a>
             </li>
@@ -18,42 +28,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link">
-                    {{ __('menus.projects') }}
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link">
                     {{ __('menus.reports.index') }}
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link">
-                    {{ __('menus.learning_paths') }}
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link">
-                    {{ __('menus.tasks') }}
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link">
-                    {{ __('menus.calendar') }}
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link">
-                    {{ __('menus.courses.index') }}
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link">
-                    {{ __('menus.management.enrollments') }}
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link">
-                    {{ __('menus.management.resources') }}
                 </a>
             </li>
         </ul>

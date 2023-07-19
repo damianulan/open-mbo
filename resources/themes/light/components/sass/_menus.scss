@@ -185,7 +185,7 @@ li.nav-item {
 }
 
 .sidebar-menu .nav-pills .nav-link:hover {
-    color: lighten($sidebar-link, 15%);
+    color: lighten($sidebar-link, 10%) !important;
     transition: all .3s ease-in-out;
 }
 
@@ -196,7 +196,7 @@ li.nav-item {
 }
 
 .sidebar-menu .nav-pills .nav-link.active:hover {
-    color: lighten($sidebar-link-active, 10%);
+    color: darken($sidebar-link-active, 10%);
 }
 
 .sidebar-menu .nav .nav-item a {
@@ -249,8 +249,10 @@ ul.user-bar {
 }
 
 .user-nav .user-actions {
+    display: flex;
     position: relative;
     margin-left: auto;
+    align-items: center;
 }
 
 .user-nav .user-details {
@@ -271,25 +273,17 @@ ul.user-bar {
     padding: 0.35rem 1.2rem;
 }
 
-.user-nav .dropdown-menu a.dropdown-item:hover {
-    background-color: rgba($primary, 0.1);
-}
-
 .user-nav span.profile-name {
-    display: block;
     width: 100%;
     text-align: center;
     font-size: .75rem;
     font-weight: 600;
-    padding: .35rem 1rem;
+    padding: 0 .5rem;
+    color: $primary;
 }
 
 a.dropdown-toggle{
     text-decoration: none;
-}
-
-.user-avatar-left {
-    margin-right: .7rem;
 }
 
 .page-top {

@@ -3,19 +3,19 @@
     font-weight: 600 !important;
     white-space: nowrap;
 }
-  
+
   .btn-pagination {
     padding: .5rem 1rem;
     margin: 0 .2rem;
   }
-  
+
   .btn-round {
     border-radius: 2rem;
     padding: .3rem .5rem;
     width: 36px;
     height: 36px;
   }
-  
+
   .btn-round i.bi {
     font-size: 1rem !important;
   }
@@ -29,7 +29,7 @@
 
 .btn-primary {
     border: 1px solid $primary;
-    color: $white;
+    color: $coolgreen;
 }
 
 .btn-outline-primary:hover,
@@ -38,7 +38,7 @@
 .btn-outline-primary:focus,
 .btn-outline-primary:focus-visible {
     border: 1px solid $primary;
-    color: #fff;
+    color: $coolgreen;
     background-color: $primary;
 }
 
