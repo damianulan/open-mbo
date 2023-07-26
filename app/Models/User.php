@@ -10,10 +10,11 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Traits\HasRolesAndPermissions;
 use App\Traits\UUID;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\RequestForms;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, UUID, HasRolesAndPermissions, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, UUID, HasRolesAndPermissions, SoftDeletes, RequestForms;
 
     /**
      * The attributes that are mass assignable.
@@ -61,21 +62,14 @@ class User extends Authenticatable
     {
         if($this->active == 1){
             $this->active = 0;
-            $this->save();
-            return true;
-        }
-
-        return false;
-    }
-
-    public function unblock(): bool
-    {
-        if($this->active == 0){
+        } else {
             $this->active = 1;
-            $this->save();
+        }
+        if($this->update()){
             return true;
         }
 
         return false;
     }
+
 }

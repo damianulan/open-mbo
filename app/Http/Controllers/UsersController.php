@@ -49,7 +49,9 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('pages.users.show', [
+            'user' => User::findOrFail($id),
+        ]);
     }
 
     /**
@@ -60,7 +62,9 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('pages.users.edit', [
+            'user' => User::findOrFail($id),
+        ]);
     }
 
     /**
@@ -75,20 +79,18 @@ class UsersController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function delete($id)
     {
         //
     }
 
-    public function suspend($id)
+    public function block($id)
     {
-        //
+        $user = User::findOrFail($id);
+        if($user){
+            $user->block();
+        }
+        return redirect()->back();
     }
 
 }

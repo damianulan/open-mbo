@@ -4184,7 +4184,7 @@ textarea.form-control-lg {
   --bs-btn-font-size: 0.8rem;
   --bs-btn-font-weight: 400;
   --bs-btn-line-height: 1.6;
-  --bs-btn-color: var(--bs-body-color);
+  --bs-btn-color: white;
   --bs-btn-bg: transparent;
   --bs-btn-border-width: var(--bs-border-width);
   --bs-btn-border-color: transparent;
@@ -21811,7 +21811,7 @@ html::-webkit-scrollbar-thumb:active {
 
 .btn-primary {
   border: 1px solid #1C676C;
-  color: #D7FAF4;
+  color: white;
 }
 
 .btn-outline-primary:hover,
@@ -21820,7 +21820,7 @@ html::-webkit-scrollbar-thumb:active {
 .btn-outline-primary:focus,
 .btn-outline-primary:focus-visible {
   border: 1px solid #1C676C;
-  color: #D7FAF4;
+  color: white;
   background-color: #1C676C;
 }
 
@@ -21874,6 +21874,11 @@ html::-webkit-scrollbar-thumb:active {
   background-color: #b4dbf7;
   color: #86c4f2;
   box-shadow: none;
+}
+
+a.action-btn {
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 select, input {
@@ -22319,6 +22324,11 @@ ul.user-bar {
   color: #1C676C;
 }
 
+@media (max-width: 992px) {
+  .user-nav span.profile-name {
+    display: none;
+  }
+}
 a.dropdown-toggle {
   text-decoration: none;
 }
@@ -22540,6 +22550,20 @@ a.dropdown-toggle {
 
 .notification-time {
   color: #6c757d;
+}
+
+.icon-btn-nav {
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+
+.icon-btn-nav .panel-left {
+  margin-left: auto;
+}
+
+.panel-left a.icon-btn {
+  font-size: 1.5rem;
+  margin-left: 0.5rem;
 }
 
 .badge.badge-status, .badge.badge-tag {
@@ -22849,6 +22873,33 @@ a.dropdown-toggle {
 .card.module-card:not(.active),
 .card.module-card.active:hover {
   color: rgba(28, 103, 108, 0.5);
+}
+
+.card.profile-card {
+  border: 1px solid rgba(22, 71, 85, 0.5);
+  border-radius: 0.25rem;
+  box-shadow: inset 0px 0px 28px -20px rgba(22, 71, 85, 0.5);
+}
+
+.card.profile-card .card-header {
+  display: flex;
+  color: #1C676C;
+}
+
+.card.profile-card .card-header .card-name {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+.card.profile-card .card-header .card-actions {
+  margin-left: auto;
+  font-size: 1.3rem;
+  white-space: nowrap;
+}
+
+.card.profile-card .card-header .card-actions a {
+  margin-left: 0.5rem;
+  text-decoration: none;
 }
 
 .avatar-xl {

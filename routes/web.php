@@ -22,8 +22,17 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('da
 /**
  * Users START
  */
-Route::resource('users', App\Http\Controllers\UsersController::class)->middleware('auth');
-Route::get('users/data', [App\Http\Controllers\UsersController::class, 'data'])->middleware('auth')->name('users.data');
+Route::prefix('users')->middleware(['auth'])->name('users.')->group(function (){
+    Route::get('/', [App\Http\Controllers\UsersController::class, 'index'])->name('index');
+    Route::post('/', [App\Http\Controllers\UsersController::class, 'store'])->name('store');
+    Route::get('create', [App\Http\Controllers\UsersController::class, 'create'])->name('create');
+    Route::get('edit/{user}', [App\Http\Controllers\UsersController::class, 'edit'])->name('edit');
+    Route::get('{user}', [App\Http\Controllers\UsersController::class, 'show'])->name('show');
+    Route::get('{user}/block', [App\Http\Controllers\UsersController::class, 'block'])->name('block');
+    Route::get('{user}/delete', [App\Http\Controllers\UsersController::class, 'delete'])->name('delete');
+    Route::put('{user}', [App\Http\Controllers\UsersController::class, 'update'])->name('update');
+
+});
 
 Route::get('profile', [App\Http\Controllers\ProfileController::class, 'index'])->middleware('auth')->name('profile.index');
 

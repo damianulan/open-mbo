@@ -1,7 +1,7 @@
 import { Tooltip } from "bootstrap"
 require("chosen-js");
 const moment = require("moment");
-
+const Swal = require('sweetalert2');
 const flatpickr = require("flatpickr");
 const flatpickr_pl = require("flatpickr/dist/l10n/pl.js").default.pl;
 

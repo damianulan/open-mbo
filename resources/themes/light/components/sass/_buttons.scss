@@ -29,7 +29,7 @@
 
 .btn-primary {
     border: 1px solid $primary;
-    color: $coolgreen;
+    color: $btn-color;
 }
 
 .btn-outline-primary:hover,
@@ -38,7 +38,7 @@
 .btn-outline-primary:focus,
 .btn-outline-primary:focus-visible {
     border: 1px solid $primary;
-    color: $coolgreen;
+    color: $btn-color;
     background-color: $primary;
 }
 
@@ -92,4 +92,9 @@
     background-color: darken($border-color, 10%);
     color: darken($border-color, 20%);
     box-shadow: none;
+}
+
+a.action-btn {
+    text-decoration: none;
+    white-space: nowrap;
 }

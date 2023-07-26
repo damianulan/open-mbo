@@ -44,7 +44,8 @@ return [
 
     'management' => [
         'index' => 'Zarządzanie',
-        'structure' => 'Organizacja',
+        'users' => 'Użytkownicy',
+        'structure' => 'Struktura',
     ],
 
     'reports' => [
@@ -53,6 +54,8 @@ return [
 
     'users' => [
         'index' => 'Użytkownicy',
+        'edit' => 'Edycja użytkownika',
+        'show' => 'Profil użytkownika',
     ],
 
 

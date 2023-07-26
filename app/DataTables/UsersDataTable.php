@@ -23,7 +23,11 @@ class UsersDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'pages.users.action')
+            ->addColumn('action', function($data) {
+                return view('pages.users.action', [
+                    'data' => $data,
+                ]);
+            })
             ->editColumn('created_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format('d-m-Y H:i'); return $formatedDate; })
             ->editColumn('updated_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format('d-m-Y H:i'); return $formatedDate; });
     }
@@ -47,12 +51,19 @@ class UsersDataTable extends DataTable
                             'url' => asset('themes/vendors/datatables/pl.json'),
                         ],
                         'responsive' => true,
+                        'buttons' => [
+                            'csv'
+                        ],
+                        'lengthMenu' => [
+                            20, 50, 100, 200
+                        ]
                     ])
                     ->setTableId('users-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
+                    ->processing(true)
                     //->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(1) // lastname
                     ->buttons([
                         Button::make('excel'),
                         Button::make('csv'),
@@ -80,9 +91,7 @@ class UsersDataTable extends DataTable
             Column::computed('action')
             ->exportable(false)
             ->printable(false)
-            //->width(60)
-            ->addClass('text-center')
-            ->addClass('nowrap')
+            ->addClass('action-btns')
             ->title(__('fields.action')),
         ];
     }

@@ -282,6 +282,12 @@ ul.user-bar {
     color: $primary;
 }
 
+@media (max-width: 992px){
+    .user-nav span.profile-name {
+        display: none;
+    }
+}
+
 a.dropdown-toggle{
     text-decoration: none;
 }
@@ -504,4 +510,18 @@ a.dropdown-toggle{
 
 .notification-time {
     color: $gray-600;
+}
+
+.icon-btn-nav {
+    display: flex;
+    margin-bottom: .5rem;
+}
+
+.icon-btn-nav .panel-left {
+    margin-left: auto;
+}
+
+.panel-left a.icon-btn {
+    font-size: 1.5rem;
+    margin-left: .5rem;
 }
