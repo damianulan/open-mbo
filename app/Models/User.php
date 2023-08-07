@@ -25,6 +25,7 @@ class User extends Authenticatable
         'firstname',
         'lastname',
         'gender',
+        'birthday',
         'email',
         'password',
         'phone',
@@ -41,6 +42,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+    ];
+
+    protected $dates = [
+        'birthday',
     ];
 
     /**
@@ -70,6 +75,11 @@ class User extends Authenticatable
         }
 
         return false;
+    }
+
+    public function blocked(): bool
+    {
+        return $this->active ? true:false;
     }
 
 }

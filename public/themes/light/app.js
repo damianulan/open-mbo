@@ -3157,6 +3157,7 @@ $(document).ready(function () {
   $(".datepicker-range").flatpickr({
     "locale": flatpickr_pl,
     dateFormat: date_format,
+    allowInput: true,
     mode: "range"
   });
 });

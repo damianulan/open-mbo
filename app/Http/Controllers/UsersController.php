@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\DataTables\UsersDataTable;
+use App\Forms\Users\UserEditForm;
 
 class UsersController extends Controller
 {
@@ -27,7 +28,9 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.users.edit', [
+            'form' => UserEditForm::boot()
+        ]);
     }
 
     /**
@@ -36,9 +39,13 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, UserEditForm $form)
     {
-        //
+        $request->validate($form::validation());
+        $user = User::fillFromRequest($request);
+        if($user->save()){
+
+        }
     }
 
     /**
@@ -62,8 +69,10 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
+        $model = User::findOrFail($id);
         return view('pages.users.edit', [
-            'user' => User::findOrFail($id),
+            'user' => $model,
+            'form' => UserEditForm::boot($model)
         ]);
     }
 
@@ -74,9 +83,14 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, UserEditForm $form)
     {
-        //
+        $request->validate($form::validation());
+        $user = User::fillFromRequest($request, $id);
+        if($user->update()){
+            return redirect()->route('users.show', $id)->with('success', __('alerts.users.success.edit', ['name' => $user->name()]));
+        }
+        return redirect()->back()->with('error', __('alerts.users.error.edit', ['name' => $user->name()]));
     }
 
     public function delete($id)
@@ -89,6 +103,9 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
         if($user){
             $user->block();
+        }
+        if($user->blocked()){
+            return redirect()->back();
         }
         return redirect()->back();
     }

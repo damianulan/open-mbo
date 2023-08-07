@@ -23,13 +23,20 @@ class UsersDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addColumn('name', function($data) {
+                return $data->name();
+            })
+            ->orderColumn('name', function($query, $order) {
+                $query->orderBy('firstname', $order);
+                $query->orderBy('lastname', $order);
+            })
             ->addColumn('action', function($data) {
                 return view('pages.users.action', [
                     'data' => $data,
                 ]);
             })
-            ->editColumn('created_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format('d-m-Y H:i'); return $formatedDate; })
-            ->editColumn('updated_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format('d-m-Y H:i'); return $formatedDate; });
+            ->editColumn('created_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format(config('app.datetime_format')); return $formatedDate; })
+            ->editColumn('updated_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format(config('app.datetime_format')); return $formatedDate; });
     }
 
     /**
@@ -80,10 +87,9 @@ class UsersDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('firstname')
-            ->title(__('fields.firstname')),
-            Column::make('lastname')
-            ->title(__('fields.lastname')),
+            Column::computed('name')
+            ->title(__('fields.firstname_lastname'))
+            ->sortable(true),
             Column::make('created_at')
             ->title(__('fields.created_at')),
             Column::make('updated_at')

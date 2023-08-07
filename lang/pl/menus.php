@@ -52,6 +52,11 @@ return [
         'index' => 'Raporty',
     ],
 
+    'process' => [
+        'index' => 'Procesy Pomiarowe',
+        'create' => 'Tworzenie procesu',
+    ],
+
     'users' => [
         'index' => 'Użytkownicy',
         'edit' => 'Edycja użytkownika',

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->char('gender', 1);
-            $table->date('birthdate')->nullable();
+            $table->date('birthday')->nullable();
             $table->string('phone')->nullable();
             $table->string('avatar')->nullable();
             $table->boolean('active')->default(1);
@@ -30,7 +30,7 @@ return new class extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-        
+
     }
 
     /**

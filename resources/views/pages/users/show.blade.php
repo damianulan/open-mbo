@@ -15,7 +15,7 @@
                         </div>
                         <div class="col-md-10">
                             <div class="card-header">
-                                <div class="card-name">Damian Ułan</div>
+                                <div class="card-name">{{ $user->name() }}</div>
                                 <div class="card-actions">
                                     <a href="#" class="" data-bs-toggle="tooltip" data-bs-title="{{ __('buttons.favourities_add') }}">
                                         <i class="bi-star"></i>
@@ -23,7 +23,7 @@
                                     <a href="#" class="" data-bs-toggle="tooltip" data-bs-title="{{ __('buttons.edit') }}">
                                         <i class="bi-pencil-square"></i>
                                     </a>
-                                    <a href="#" class="" data-bs-toggle="tooltip" data-bs-title="{{ __('buttons.block') }}">
+                                    <a href="#" class="" data-bs-toggle="tooltip" data-bs-title="{{ __('buttons.reset_password') }}">
                                         <i class="bi-key-fill"></i>
                                     </a>
                                     <a href="#" class="" data-bs-toggle="tooltip" data-bs-title="{{ __('buttons.block') }}">

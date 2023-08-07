@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Role;
 use App\Models\Config;
 use App\Models\User;
+use App\Enums\Users\Gender;
 
 class CreateAdminUserSeeder extends Seeder
 {
@@ -23,7 +24,7 @@ class CreateAdminUserSeeder extends Seeder
         $admin1->lastname = 'Admin';
         $admin1->email = 'admin@damianulan.me';
         $admin1->password = Hash::make('123456');
-        $admin1->gender = '1';
+        $admin1->gender = Gender::MALE->value;
         $admin1->save();
 
         $admin1 = new User();
@@ -31,7 +32,7 @@ class CreateAdminUserSeeder extends Seeder
         $admin1->lastname = 'Ułan';
         $admin1->email = 'kontakt@damianulan.me';
         $admin1->password = Hash::make('123456');
-        $admin1->gender = '1';
+        $admin1->gender = Gender::MALE->value;
         $admin1->save();
 
         // $admin1 = new User();
@@ -47,7 +48,7 @@ class CreateAdminUserSeeder extends Seeder
         $user1->lastname = 'User';
         $user1->email = 'demo@damianulan.me';
         $user1->password = Hash::make('123456');
-        $user1->gender = '0';
+        $user1->gender = Gender::MALE->value;
         $user1->save();
     }
 

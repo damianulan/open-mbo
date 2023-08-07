@@ -15,16 +15,22 @@
           <span class="nav-title">{{ __('menus.dashboard') }}</span>
         </a>
       </li>
-      <li class="nav-item" id="nav_reports">
+      <li class="nav-item" id="nav_objectives">
         <a class="nav-link" href="#">
           <i class="bi bi-clipboard-check-fill"></i>
           <span class="nav-title">Moje cele</span>
         </a>
       </li>
-      <li class="nav-item" id="nav_reports">
+      <li class="nav-item" id="nav_forms">
         <a class="nav-link" href="#">
           <i class="bi bi-ui-radios"></i>
           <span class="nav-title">Moje formularze</span>
+        </a>
+      </li>
+      <li class="nav-item" id="nav_process">
+        <a href="{{ route('process.index') }}" class="nav-link{{ request()->routeIs('process.*') ? ' active':'' }}">
+          <i class="bi bi-cpu-fill"></i>
+          <span class="nav-title">{{ __('menus.process.index') }}</span>
         </a>
       </li>
       <li class="nav-item" id="nav_reports">

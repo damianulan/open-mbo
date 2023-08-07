@@ -6,6 +6,7 @@ use App\Facades\Forms\Elements\Input;
 use App\Facades\Forms\Elements\Checkbox;
 use App\Facades\Forms\Elements\Select;
 use App\Facades\Forms\Elements\Datetime;
+use App\Facades\Forms\Elements\Daterange;
 use App\Facades\Forms\Elements\File;
 use App\Facades\Forms\Elements\Trix;
 use Illuminate\Support\Collection;
@@ -63,6 +64,17 @@ class FormElement
     {
         $value = $model->$name ?? null;
         return new Datetime($name, 'date', $value);
+    }
+
+    public static function daterange(string $name, $model = null): Daterange
+    {
+        $from = $name . '_from';
+        $to = $name . '_to';
+        $values = [
+            'from' => $model->$from ?? null,
+            'to' => $model->$to ?? null,
+        ];
+        return new Daterange($name, 'date', $values);
     }
 
     public static function radio(string $name, $model = null): Checkbox

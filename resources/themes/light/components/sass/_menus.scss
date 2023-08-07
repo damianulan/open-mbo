@@ -1,25 +1,25 @@
 nav::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
 }
 
 nav::-webkit-scrollbar-track {
 background: rgb(179, 177, 177);
-border-radius: 10px;
+border-radius: 1px;
 }
 
 nav::-webkit-scrollbar-thumb {
 background: rgb(136, 136, 136);
-border-radius: 10px;
+border-radius: 1px;
 }
 
 nav::-webkit-scrollbar-thumb:hover {
 background: rgb(100, 100, 100);
-border-radius: 10px;
+border-radius: 1px;
 }
 
 nav::-webkit-scrollbar-thumb:active {
 background: rgb(68, 68, 68);
-border-radius: 10px;
+border-radius: 1px;
 }
 
 html .sidebar-menu {

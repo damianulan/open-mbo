@@ -4,9 +4,8 @@
 @include('layouts.components.alerts')
 
 <div class="container-fluid">
-    <div class="container pt-4">
-        {{ $form->render() }}
-    </div>
+    @include('pages.process.nav')
+
 </div>
 
 @endsection

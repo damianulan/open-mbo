@@ -22,6 +22,7 @@ return [
     'profile_show' => 'Przeglądaj profil',
     'favourities_add' => 'Dodaj do ulubionych',
     'favourities_remove' => 'Usuń z ulubionych',
+    'reset_password' => 'Resetuj hasło',
     'ok' => 'Ok',
     'ok_understand' => 'Ok, rozumiem',
     'choose_file' => 'Wybierz plik',

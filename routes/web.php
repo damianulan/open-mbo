@@ -50,7 +50,7 @@ Route::prefix('settings')->middleware(['auth'])->name('settings.')->group(functi
     Route::post('server/store/mail', [App\Http\Controllers\Settings\ServerController::class, 'storeMail'])->name('server.mail.store');
     Route::get('server/clearcache', [App\Http\Controllers\Settings\ServerController::class, 'cache'])->name('clearcache');
     Route::post('server/debugging', [App\Http\Controllers\Settings\ServerController::class, 'debugging'])->name('debugging');
-    Route::get('server/phpinfo', function (Request $request){
+    Route::get('server/phpinfo', function (){
         echo phpinfo();
     })->name('server.phpinfo');
 });
@@ -64,3 +64,12 @@ Route::get('management', [App\Http\Controllers\Management\ManagementController::
 
 
 
+Route::prefix('process')->middleware(['auth'])->name('process.')->group(function (){
+    Route::get('/', [App\Http\Controllers\ProcessController::class, 'index'])->name('index');
+    Route::post('/', [App\Http\Controllers\ProcessController::class, 'store'])->name('store');
+    Route::get('create', [App\Http\Controllers\ProcessController::class, 'create'])->name('create');
+    Route::get('edit/{user}', [App\Http\Controllers\ProcessController::class, 'edit'])->name('edit');
+    Route::get('{user}', [App\Http\Controllers\ProcessController::class, 'show'])->name('show');
+    Route::put('{user}', [App\Http\Controllers\v::class, 'update'])->name('update');
+
+});

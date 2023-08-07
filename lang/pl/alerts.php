@@ -25,6 +25,27 @@ return [
 
     ],
 
+    'process' => [
+        'success' => [
+            'create' => 'Proces został utworzony pomyślnie.',
+        ],
 
+        'error' => [
+            'create' => '',
+        ],
+
+    ],
+
+    'users' => [
+        'success' => [
+            'create' => 'Nowy użytkownik został pomyślnie dodany do systemu.',
+            'edit' => 'Użytkownik :name został pomyślnie zmodyfikowany.',
+        ],
+
+        'error' => [
+            'create' => 'Wystąpił błąd, użytkownik nie mógł być dodany.',
+            'edit' => 'Użytkownik nie mógł zostać zmodyfikowany. Podczas operacji wystąpił nieoczekiwany błąd.',
+        ],
+    ],
 
 ];

@@ -1,2 +1,2 @@
-## About LMS
+## About OpenMBO
 

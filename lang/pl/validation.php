@@ -158,8 +158,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'definition_to' => [
+            'after_or_equal' => 'Data końca etapu musi być późniejsza niż data początku.',
         ],
     ],
 
