@@ -53,8 +53,8 @@ return [
     ],
 
     'campaigns' => [
-        'index' => 'Kampanie',
-        'create' => 'Tworzenie kampanii',
+        'index' => 'Kampanie MBO',
+        'create' => 'Tworzenie kampanii pomiarowej',
     ],
 
     'users' => [

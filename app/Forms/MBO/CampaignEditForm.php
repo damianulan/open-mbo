@@ -13,11 +13,11 @@ class CampaignEditForm
 
     public static function boot($model = null): FormBuilder
     {
-        $route = route('campaign.store');
+        $route = route('campaigns.store');
         $method = 'POST';
         if(!is_null($model)){
             $method = 'PUT';
-            $route = route('campaign.update', $model->id);
+            $route = route('campaigns.update', $model->id);
         }
         return (new FormBuilder($method, $route, 'campaign_edit'))
                 ->class('campaign-create-form')

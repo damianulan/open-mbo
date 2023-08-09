@@ -27,10 +27,10 @@
           <span class="nav-title">Moje formularze</span>
         </a>
       </li>
-      <li class="nav-item" id="nav_process">
-        <a href="{{ route('process.index') }}" class="nav-link{{ request()->routeIs('process.*') ? ' active':'' }}">
-          <i class="bi bi-cpu-fill"></i>
-          <span class="nav-title">{{ __('menus.process.index') }}</span>
+      <li class="nav-item" id="nav_campaign">
+        <a href="{{ route('campaigns.index') }}" class="nav-link{{ request()->routeIs('campaigns.*') ? ' active':'' }}">
+          <i class="bi bi-bullseye"></i>
+          <span class="nav-title">{{ __('menus.campaigns.index') }}</span>
         </a>
       </li>
       <li class="nav-item" id="nav_reports">
