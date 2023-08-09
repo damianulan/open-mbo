@@ -12,7 +12,8 @@ use App\Facades\TrixField\TrixFieldCast;
 use App\Casts\CheckboxCast;
 use App\Enums\CampaignStage;
 
-class Objective extends Model
+class UserCampaign extends Model
 {
     use HasFactory, UUID, SoftDeletes, RequestForms, TrixFields;
+
 }

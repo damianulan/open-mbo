@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\MBO;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +12,7 @@ use App\Facades\TrixField\TrixFieldCast;
 use App\Casts\CheckboxCast;
 use App\Enums\CampaignStage;
 
-class Objective extends Model
+class ObjectiveTemplate extends Model
 {
     use HasFactory, UUID, SoftDeletes, RequestForms, TrixFields;
 }

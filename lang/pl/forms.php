@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\ProcessStage;
+use App\Enums\CampaignStage;
 
 return [
 
@@ -33,17 +33,17 @@ return [
         'choose_daterange_to' => 'Wybierz datę do...',
     ],
 
-    'process' => [
-        'name' => 'Nazwa procesu',
+    'campaigns' => [
+        'name' => 'Nazwa kampanii',
         'period' => 'Okres pomiaru',
         'description' => 'Opis',
-        ProcessStage::DEFINITION->value => 'Tworzenie strategii i określanie celów przez kierownictwo',
-        ProcessStage::DISPOSITION->value => 'Dysponowanie celów przez kierowników zespołów',
-        ProcessStage::REALIZATION->value => 'Realizacja celów',
-        ProcessStage::EVALUATION->value => 'Ewaluacja celów i ocena pracowników przez kierowników',
-        ProcessStage::SELF_EVALUATION->value => 'Samoocena pracowników',
-        ProcessStage::COMPLETION->value => 'Ocena zakończona',
-        ProcessStage::TERMINATION->value => 'Proces ',
+        CampaignStage::DEFINITION->value => 'Tworzenie strategii i określanie celów przez kierownictwo',
+        CampaignStage::DISPOSITION->value => 'Dysponowanie celów przez kierowników zespołów',
+        CampaignStage::REALIZATION->value => 'Realizacja celów',
+        CampaignStage::EVALUATION->value => 'Ewaluacja celów i ocena pracowników przez kierowników',
+        CampaignStage::SELF_EVALUATION->value => 'Samoocena pracowników',
+        CampaignStage::COMPLETION->value => 'Ocena zakończona',
+        CampaignStage::TERMINATION->value => 'Proces ',
         'draft' => 'Przechowuj jako wersję roboczą',
         'manual' => 'Tryb ręczny',
 

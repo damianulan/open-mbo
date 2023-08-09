@@ -25,13 +25,13 @@ return [
 
     ],
 
-    'process' => [
+    'campaigns' => [
         'success' => [
-            'create' => 'Proces został utworzony pomyślnie.',
+            'create' => 'Kampania została utworzona pomyślnie.',
         ],
 
         'error' => [
-            'create' => '',
+            'create' => 'Kampanie nie mogła zostać dodana. Wystąpił błąd.',
         ],
 
     ],

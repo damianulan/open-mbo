@@ -6,39 +6,39 @@ use App\Facades\Forms\FormBuilder;
 use App\Facades\Forms\FormElement;
 use App\Facades\Forms\Elements\Datetime;
 use App\Facades\Forms\Elements\Dictionary;
-use App\Enums\ProcessStage;
+use App\Enums\CampaignStage;
 
-class ProcessEditForm
+class CampaignEditForm
 {
 
     public static function boot($model = null): FormBuilder
     {
-        $route = route('process.store');
+        $route = route('campaign.store');
         $method = 'POST';
         if(!is_null($model)){
             $method = 'PUT';
-            $route = route('process.update', $model->id);
+            $route = route('campaign.update', $model->id);
         }
-        return (new FormBuilder($method, $route, 'process_edit'))
-                ->class('process-create-form')
-                ->add(FormElement::text('name', $model)->label(__('forms.process.name')))
-                ->add(FormElement::text('period', $model)->label(__('forms.process.period'))
+        return (new FormBuilder($method, $route, 'campaign_edit'))
+                ->class('campaign-create-form')
+                ->add(FormElement::text('name', $model)->label(__('forms.campaigns.name')))
+                ->add(FormElement::text('period', $model)->label(__('forms.campaigns.period'))
                 ->info('Wprowadź unikalny reprezentatywny okres pomiaru procesu, np. dla pomiaru co kwartał: 2023 Q3'))
-                ->add(FormElement::trix('description', $model)->label(__('forms.process.description')))
+                ->add(FormElement::trix('description', $model)->label(__('forms.campaigns.description')))
 
-                ->add(FormElement::daterange(ProcessStage::DEFINITION->value, $model)->label(__('forms.process.'.ProcessStage::DEFINITION->value))
+                ->add(FormElement::daterange(CampaignStage::DEFINITION->value, $model)->label(__('forms.campaigns.'.CampaignStage::DEFINITION->value))
                 ->info('info'))
-                ->add(FormElement::daterange(ProcessStage::DISPOSITION->value, $model)->label(__('forms.process.'.ProcessStage::DISPOSITION->value))
+                ->add(FormElement::daterange(CampaignStage::DISPOSITION->value, $model)->label(__('forms.campaigns.'.CampaignStage::DISPOSITION->value))
                 ->info('info'))
-                ->add(FormElement::daterange(ProcessStage::REALIZATION->value, $model)->label(__('forms.process.'.ProcessStage::REALIZATION->value))
+                ->add(FormElement::daterange(CampaignStage::REALIZATION->value, $model)->label(__('forms.campaigns.'.CampaignStage::REALIZATION->value))
                 ->info('info'))
-                ->add(FormElement::daterange(ProcessStage::EVALUATION->value, $model)->label(__('forms.process.'.ProcessStage::EVALUATION->value))
+                ->add(FormElement::daterange(CampaignStage::EVALUATION->value, $model)->label(__('forms.campaigns.'.CampaignStage::EVALUATION->value))
                 ->info('info'))
-                ->add(FormElement::daterange(ProcessStage::SELF_EVALUATION->value, $model)->label(__('forms.process.'.ProcessStage::SELF_EVALUATION->value))
+                ->add(FormElement::daterange(CampaignStage::SELF_EVALUATION->value, $model)->label(__('forms.campaigns.'.CampaignStage::SELF_EVALUATION->value))
                 ->info('info'))
-                ->add(FormElement::switch('draft', $model)->label(__('forms.process.draft'))->default(true)
+                ->add(FormElement::switch('draft', $model)->label(__('forms.campaigns.draft'))->default(true)
                 ->info('Proces będzie widoczny tylko dla administratorów i nie zostanie uruchomiony automatycznie.'))
-                ->add(FormElement::switch('manual', $model)->label(__('forms.process.manual'))->default(false)
+                ->add(FormElement::switch('manual', $model)->label(__('forms.campaigns.manual'))->default(false)
                 ->info('Przejście pomiędzy etapami nie będzie uzależnione od dat, a od podjęcia akcji przez administratora. Opcję tą można także włączyć w trakcie trwania procesu.'))
                 ->addSubmit();
     }
@@ -47,7 +47,7 @@ class ProcessEditForm
     {
         return [
             'name' => 'max:120|required',
-            'period' => 'max:60|required|unique:processes,period',
+            'period' => 'max:60|required|unique:campaigns,period',
             'description' => 'max:512|nullable',
 
             'definition_from' => 'date|required|after:today',

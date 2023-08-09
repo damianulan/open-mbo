@@ -64,12 +64,12 @@ Route::get('management', [App\Http\Controllers\Management\ManagementController::
 
 
 
-Route::prefix('process')->middleware(['auth'])->name('process.')->group(function (){
-    Route::get('/', [App\Http\Controllers\ProcessController::class, 'index'])->name('index');
-    Route::post('/', [App\Http\Controllers\ProcessController::class, 'store'])->name('store');
-    Route::get('create', [App\Http\Controllers\ProcessController::class, 'create'])->name('create');
-    Route::get('edit/{user}', [App\Http\Controllers\ProcessController::class, 'edit'])->name('edit');
-    Route::get('{user}', [App\Http\Controllers\ProcessController::class, 'show'])->name('show');
-    Route::put('{user}', [App\Http\Controllers\v::class, 'update'])->name('update');
+Route::prefix('campaigns')->middleware(['auth'])->name('campaigns.')->group(function (){
+    Route::get('/', [App\Http\Controllers\CampaignsController::class, 'index'])->name('index');
+    Route::post('/', [App\Http\Controllers\CampaignsController::class, 'store'])->name('store');
+    Route::get('create', [App\Http\Controllers\CampaignsController::class, 'create'])->name('create');
+    Route::get('edit/{user}', [App\Http\Controllers\CampaignsController::class, 'edit'])->name('edit');
+    Route::get('{user}', [App\Http\Controllers\CampaignsController::class, 'show'])->name('show');
+    Route::put('{user}', [App\Http\Controllers\CampaignsController::class, 'update'])->name('update');
 
 });

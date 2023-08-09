@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum ProcessStage: string
+enum CampaignStage: string
 {
     case DEFINITION = 'definition';
     case DISPOSITION = 'disposition';

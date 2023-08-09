@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\MBO\Process;
+use App\Models\MBO\Campaign;
 use App\Models\MBO\Objective;
-use App\Enums\ProcessStage;
-use App\Forms\MBO\ProcessEditForm;
+use App\Enums\CampaignStage;
+use App\Forms\MBO\CampaignEditForm;
 
-class ProcessController extends Controller
+class CampaignsController extends Controller
 {
     public function index()
     {
-        return view('pages.process.index', [
+        return view('pages.campaigns.index', [
 
         ]);
     }
@@ -24,8 +24,8 @@ class ProcessController extends Controller
      */
     public function create()
     {
-        return view('pages.process.edit', [
-            'form' => ProcessEditForm::boot(),
+        return view('pages.campaigns.edit', [
+            'form' => CampaignEditForm::boot(),
         ]);
     }
 
@@ -35,10 +35,10 @@ class ProcessController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, ProcessEditForm $form)
+    public function store(Request $request, CampaignEditForm $form)
     {
         $request->validate($form::validation());
-        $process = Process::fillFromRequest($request);
+        $process = Campaign::fillFromRequest($request);
         if($process->save()){
 
         }
@@ -52,8 +52,8 @@ class ProcessController extends Controller
      */
     public function show($id)
     {
-        return view('pages.process.show', [
-            'process' => Process::findOrFail($id),
+        return view('pages.campaigns.show', [
+            'campaign' => Campaign::findOrFail($id),
         ]);
     }
 
@@ -65,10 +65,10 @@ class ProcessController extends Controller
      */
     public function edit($id)
     {
-        $model = Process::findOrFail($id);
-        return view('pages.process.edit', [
-            'process' => $model,
-            'form' => ProcessEditForm::boot($model),
+        $model = Campaign::findOrFail($id);
+        return view('pages.campaigns.edit', [
+            'campaign' => $model,
+            'form' => CampaignEditForm::boot($model),
         ]);
     }
 

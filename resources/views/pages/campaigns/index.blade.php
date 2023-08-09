@@ -4,7 +4,7 @@
 @include('layouts.components.alerts')
 
 <div class="container-fluid">
-    @include('pages.process.nav')
+    @include('pages.campaigns.nav')
 
 </div>
 

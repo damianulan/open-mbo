@@ -10,9 +10,9 @@ use App\Traits\Vendors\TrixFields;
 use App\Traits\RequestForms;
 use App\Facades\TrixField\TrixFieldCast;
 use App\Casts\CheckboxCast;
-use App\Enums\ProcessStage;
+use App\Enums\CampaignStage;
 
-class Process extends Model
+class Campaign extends Model
 {
     use HasFactory, UUID, SoftDeletes, RequestForms, TrixFields;
 
@@ -42,8 +42,8 @@ class Process extends Model
         'manual' => CheckboxCast::class,
 
         // Dates
-        'available_from' => 'datetime',
-        'available_to' => 'datetime',
+        'definition_from' => 'datetime',
+        'definition_to' => 'datetime',
         'disposition_from' => 'datetime',
         'disposition_to' => 'datetime',
         'realization_from' => 'datetime',

@@ -52,9 +52,9 @@ return [
         'index' => 'Raporty',
     ],
 
-    'process' => [
-        'index' => 'Procesy Pomiarowe',
-        'create' => 'Tworzenie procesu',
+    'campaigns' => [
+        'index' => 'Kampanie',
+        'create' => 'Tworzenie kampanii',
     ],
 
     'users' => [

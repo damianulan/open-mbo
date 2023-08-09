@@ -11,17 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('objectives', function (Blueprint $table) {
+        Schema::create('objective_templates', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->char('parent_id')->nullable();
             $table->string('name');
             $table->longText('description')->nullable();
 
             $table->string('min_goal')->nullable();
-            $table->string('expected_goal')->nullable();
+            $table->integer('min_goal_weight')->default(80);
+            $table->string('exp_goal')->nullable();
+            $table->integer('exp_goal_weight')->default(100);
             $table->string('max_goal')->nullable();
+            $table->integer('max_goal_weight')->default(120);
 
-            $table->string('type');
+            $table->string('type'); // App\Enums\ObjectiveType::enum
             $table->boolean('draft')->default(1);
             $table->softDeletes();
             $table->timestamps();
@@ -33,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('objectives');
+        Schema::dropIfExists('objective_templates');
     }
 };
