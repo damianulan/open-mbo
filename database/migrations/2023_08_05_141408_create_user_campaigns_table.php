@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('supervisor_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->boolean('manual')->default(0); // user assignment can be hold for extended period without
+            $table->boolean('manual')->default(0); // user assignment can be held for extended period without
             $table->boolean('active')->default(1);
             $table->softDeletes();
             $table->timestamps();

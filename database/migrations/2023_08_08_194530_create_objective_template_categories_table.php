@@ -11,18 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('objective_templates', function (Blueprint $table) {
+        Schema::create('objective_template_categories', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('category_id')->nullable();
             $table->string('name');
             $table->longText('description')->nullable();
+            $table->string('icon')->nullable();
 
-            $table->foreign('category_id')->references('id')->on('objective_template_categories')->onDelete('cascade');
-
-            $table->float('goal')->nullable();
-
-            $table->string('type'); // App\Enums\ObjectiveType::enum
-            $table->boolean('draft')->default(1);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -33,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('objective_templates');
+        Schema::dropIfExists('objective_template_categories');
     }
 };

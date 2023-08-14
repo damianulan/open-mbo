@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\MBO;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,35 +10,24 @@ use App\Traits\Vendors\TrixFields;
 use App\Traits\RequestForms;
 use App\Facades\TrixField\TrixFieldCast;
 use App\Casts\CheckboxCast;
-use App\Enums\CampaignStage;
-use App\Models\MBO\Objective;
-use App\Models\MBO\ObjectiveTemplateCategory;
+use App\Models\ObjectiveTemplate;
 
-class ObjectiveTemplate extends Model
+class ObjectiveTemplateCategory extends Model
 {
     use HasFactory, UUID, SoftDeletes, RequestForms, TrixFields;
 
     protected $fillable = [
-        'category_id',
         'name',
         'description',
-        'goal',
-        'type',
-        'draft',
+        'icon',
     ];
 
     protected $casts = [
-        'draft' => CheckboxCast::class,
         'description' => TrixFieldCast::class,
     ];
 
-    public function category()
+    public function objective_templates()
     {
-        return $this->belongsTo(ObjectiveTemplateCategory::class, 'category_id');
-    }
-
-    public function objectives()
-    {
-        return $this->hasMany(Objective::class, 'template_id');
+        return $this->hasMany(ObjectiveTemplate::class, 'category_id');
     }
 }

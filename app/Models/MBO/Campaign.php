@@ -11,6 +11,8 @@ use App\Traits\RequestForms;
 use App\Facades\TrixField\TrixFieldCast;
 use App\Casts\CheckboxCast;
 use App\Enums\CampaignStage;
+use App\Models\MBO\UserCampaign;
+use App\Models\ObjectiveTemplate;
 
 class Campaign extends Model
 {
@@ -55,4 +57,14 @@ class Campaign extends Model
 
         'description' => TrixFieldCast::class,
     ];
+
+    public function user_campaigns()
+    {
+        return $this->hasMany(UserCampaign::class);
+    }
+
+    public function objective_templates()
+    {
+        return $this->belongsToMany(ObjectiveTemplate::class, 'objective_templates_campaigns');
+    }
 }
