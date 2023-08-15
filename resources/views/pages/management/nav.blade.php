@@ -3,17 +3,12 @@
         <ul class="nav nav-pills-horizontal">
             <li class="nav-item">
                 <a class="nav-link active">
-                    Wyznaczaj cele
+                    Cele
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link">
-                    Szablony
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link">
-                    Grupy
+                    Kategorie
                 </a>
             </li>
             <li class="nav-item">

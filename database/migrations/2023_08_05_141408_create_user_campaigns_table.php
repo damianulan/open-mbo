@@ -15,12 +15,12 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->char('campaign_id');
             $table->char('user_id');
-            $table->char('supervisor_id'); // by default it is a current superior to a user
+            $table->char('leader_id'); // by default it is a current superior to a user or dedicated team leader
             $table->string('stage'); // user assignment can be reverted or fast-forwarded regardless of process stage
 
             $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('supervisor_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('leader_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->boolean('manual')->default(0); // user assignment can be held for extended period without
             $table->boolean('active')->default(1);

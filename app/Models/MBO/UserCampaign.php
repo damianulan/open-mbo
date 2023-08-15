@@ -20,7 +20,7 @@ class UserCampaign extends Model
     protected $fillable = [
         'campaign_id',
         'user_id',
-        'supervisor_id',
+        'leader_id',
         'stage',
         'manual',
         'active',
@@ -36,14 +36,27 @@ class UserCampaign extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function supervisor()
+    public function leader()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'leader_id');
     }
 
     public function campaign()
     {
         return $this->belongsTo(Campaign::class);
+    }
+
+    public function objectives()
+    {
+        return $this->campaign()->objectives()->where([
+            'user_id' => $this->user_id,
+            'draft' => 0,
+            ])->get();
+    }
+
+    public function global_objectives()
+    {
+        return $this->campaign()->global_objectives()->where('draft', 0)->get();
     }
 
 }

@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->longText('description')->nullable();
 
-            $table->char('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            // constains jsoned array of bonus percentage values gained based on evaluation percentage
+            $table->json('options');
 
             $table->softDeletes();
             $table->timestamps();

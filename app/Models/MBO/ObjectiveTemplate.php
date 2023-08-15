@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\MBO;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,6 +12,7 @@ use App\Facades\TrixField\TrixFieldCast;
 use App\Casts\CheckboxCast;
 use App\Enums\CampaignStage;
 use App\Models\MBO\Objective;
+use App\Models\MBO\CampaignObjective;
 use App\Models\MBO\ObjectiveTemplateCategory;
 
 class ObjectiveTemplate extends Model
@@ -40,5 +41,10 @@ class ObjectiveTemplate extends Model
     public function objectives()
     {
         return $this->hasMany(Objective::class, 'template_id');
+    }
+
+    public function global_objectives()
+    {
+        return $this->hasMany(CampaignObjective::class, 'template_id');
     }
 }

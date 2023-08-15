@@ -2,6 +2,7 @@
 
 return [
     'add' => 'Dodaj',
+    'create' => 'Utwórz',
     'remove' => 'Usuń',
     'delete' => 'Usuń',
     'suspend' => 'Zawieś',
@@ -27,6 +28,7 @@ return [
     'ok_understand' => 'Ok, rozumiem',
     'choose_file' => 'Wybierz plik',
     'redirect_back' => 'Powrót',
+    'create_template' => 'Utwórz szablon',
 
     'list_view' => 'Tryb listy',
     'tile_view' => 'Tryb kafelkowy',

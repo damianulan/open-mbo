@@ -10,7 +10,7 @@ use App\Traits\Vendors\TrixFields;
 use App\Traits\RequestForms;
 use App\Facades\TrixField\TrixFieldCast;
 use App\Casts\CheckboxCast;
-use App\Models\ObjectiveTemplate;
+use App\Models\MBO\ObjectiveTemplate;
 
 class ObjectiveTemplateCategory extends Model
 {

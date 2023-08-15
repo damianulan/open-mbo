@@ -59,9 +59,15 @@ Route::prefix('settings')->middleware(['auth'])->name('settings.')->group(functi
 /**
  * Management START
  */
-Route::get('management', [App\Http\Controllers\Management\ManagementController::class, 'index'])->middleware('auth')->name('management.index');
+Route::prefix('management')->middleware(['auth'])->name('management.')->group(function (){
+    Route::prefix('objectives')->group(function () {
+        Route::get('/', [App\Http\Controllers\Management\ObjectiveTemplateController::class, 'index'])->name('index');
+        Route::post('/', [App\Http\Controllers\ObjectiveTemplateController::class, 'store'])->name('objectives.store');
+        Route::get('create', [App\Http\Controllers\Management\ObjectiveTemplateController::class, 'create'])->name('objectives.create');
+    });
 
 
+});
 
 
 Route::prefix('campaigns')->middleware(['auth'])->name('campaigns.')->group(function (){

@@ -17,17 +17,23 @@ class BonusScheme extends Model
     use HasFactory, UUID, SoftDeletes, RequestForms, TrixFields;
 
     protected $fillable = [
-        'user_id',
         'name',
         'description',
+        'options',
     ];
 
     protected $casts = [
         'description' => TrixFieldCast::class,
+        'options' => 'array',
     ];
 
-    public function user()
+    public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class, 'user_bonus_schemes');
+    }
+
+    public function assignments()
+    {
+        return $this->hasMany(UserBonusAssignment::class);
     }
 }

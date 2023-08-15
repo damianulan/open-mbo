@@ -10,19 +10,19 @@ use App\Traits\Vendors\TrixFields;
 use App\Traits\RequestForms;
 use App\Facades\TrixField\TrixFieldCast;
 use App\Casts\CheckboxCast;
-use App\Models\MBO\ObjectiveTemplate;
 use App\Models\MBO\Campaign;
-use App\Models\User;
+use App\Models\MBO\ObjectiveTemplate;
 
-class Objective extends Model
+/**
+ * It's specifically model of template's type GLOBAL
+ */
+class CampaignObjective extends Model
 {
     use HasFactory, UUID, SoftDeletes, RequestForms, TrixFields;
 
     protected $fillable = [
-        'template_id',
-        'parent_id',
-        'user_id',
         'campaign_id',
+        'template_id',
         'name',
         'description',
         'deadline',
@@ -32,38 +32,17 @@ class Objective extends Model
 
     protected $casts = [
         'draft' => CheckboxCast::class,
-        'of_campaign' => 'boolean',
         'deadline' => 'datetime',
         'description' => TrixFieldCast::class,
     ];
-
-    public function parent()
-    {
-        return $this->belongsTo(self::class, 'parent_id');
-    }
-
-    public function children()
-    {
-        return $this->hasMany(self::class, 'parent_id');
-    }
 
     public function template()
     {
         return $this->belongsTo(ObjectiveTemplate::class, 'template_id');
     }
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public function campaign()
     {
         return $this->belongsTo(Campaign::class);
-    }
-
-    public function type()
-    {
-        return $this->template()->type;
     }
 }
