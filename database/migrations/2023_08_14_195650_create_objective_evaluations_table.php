@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('objective_evaluations', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->char('objective_id');
+            $table->char('objective_id')->nullable();
             $table->foreign('objective_id')->references('id')->on('objectives')->nullOnDelete();
 
             $table->float('evaluation');

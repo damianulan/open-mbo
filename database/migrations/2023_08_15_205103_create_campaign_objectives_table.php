@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->char('campaign_id');
             $table->char('template_id')->nullable();
-            $table->foreign('campaign_id')->references('id')->on('campaign')->onDelete('cascade');
+            $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');
             $table->foreign('template_id')->references('id')->on('objective_templates')->nullOnDelete();
 
             $table->string('name');

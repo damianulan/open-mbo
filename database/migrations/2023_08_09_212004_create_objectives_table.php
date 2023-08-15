@@ -21,7 +21,7 @@ return new class extends Migration
 
             $table->foreign('template_id')->references('id')->on('objective_templates')->nullOnDelete();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('campaign_id')->references('id')->on('campaign')->onDelete('cascade');
+            $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');
 
             $table->char('user_id');
             $table->string('name');
