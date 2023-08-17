@@ -16,7 +16,7 @@ return new class extends Migration
             $table->char('objective_id')->nullable();
             $table->foreign('objective_id')->references('id')->on('objectives')->nullOnDelete();
 
-            $table->float('evaluation');
+            $table->decimal('evaluation', 8,2);
             $table->string('comment', 300);
             $table->char('evaluated_by');
             $table->foreign('evaluated_by')->references('id')->on('users')->onDelete('cascade');

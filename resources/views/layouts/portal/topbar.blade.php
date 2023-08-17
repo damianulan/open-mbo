@@ -4,7 +4,7 @@
       <a class="me-2" id="menu-toggle" data-bs-toggle="tooltip" data-bs-title="Default tooltip"><i class="bi-three-dots-vertical"></i></a>
     </div>
     <div class="page-heading">
-      <span class="page-title">{{ $page->title }}</span>
+      <span class="page-title" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $page->title }}">{{ $page->title }}</span>
     </div>
     <div class="page-quick-actions">
         <!--<x-notification-dropdown/>-->

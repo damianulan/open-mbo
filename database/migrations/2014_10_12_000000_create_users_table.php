@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+use App\Enums\Users\Gender;
 return new class extends Migration
 {
     /**
@@ -20,7 +20,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->char('gender', 1);
+            $table->enum('gender', [
+                Gender::MALE->value,
+                Gender::FEMALE->value,
+                Gender::OTHER->value,
+            ]);
             $table->date('birthday')->nullable();
             $table->string('phone')->nullable();
             $table->string('avatar')->nullable();

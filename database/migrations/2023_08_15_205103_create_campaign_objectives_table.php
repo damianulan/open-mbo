@@ -22,7 +22,8 @@ return new class extends Migration
             $table->longText('description')->nullable();
 
             $table->dateTime('deadline')->nullable();
-            $table->float('goal')->nullable();
+            $table->decimal('goal', 8,2)->nullable();
+
             $table->boolean('draft')->default(1);
 
             $table->softDeletes();

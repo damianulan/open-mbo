@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreign('bonus_scheme_id')->references('id')->on('bonus_schemes')->onDelete('cascade');
             $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');
 
-            $table->integer('score');
+            $table->tinyInteger('score')->unsigned(); // in percent
 
             $table->char('approved_by');
             $table->foreign('approved_by')->references('id')->on('users')->onDelete('cascade');

@@ -16,7 +16,6 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('period')->unique();
-            $table->string('stage'); // process can be reverted or fast-forwarded regardless of dates
             $table->longText('description')->nullable();
 
             $table->dateTime(CampaignStage::DEFINITION->value.'_from');

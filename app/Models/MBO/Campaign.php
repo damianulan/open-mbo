@@ -10,6 +10,7 @@ use App\Traits\Vendors\TrixFields;
 use App\Traits\RequestForms;
 use App\Facades\TrixField\TrixFieldCast;
 use App\Casts\CheckboxCast;
+use Illuminate\Support\Collection;
 use App\Enums\CampaignStage;
 use App\Models\MBO\Objective;
 use App\Models\MBO\CampaignObjective;
@@ -20,10 +21,16 @@ class Campaign extends Model
 {
     use HasFactory, UUID, SoftDeletes, RequestForms, TrixFields;
 
+    public $stages;
+
+    public function __construct()
+    {
+        $this->stages = $this->stages();
+    }
+
     protected $fillable = [
         'name',
         'period',
-        'stage',
         'description',
 
         'definition_from',
@@ -78,5 +85,12 @@ class Campaign extends Model
     public function global_objectives()
     {
         return $this->hasMany(CampaignObjective::class);
+    }
+
+    public function stages(): Collection
+    {
+        $stages = new Collection;
+
+        return $stages;
     }
 }

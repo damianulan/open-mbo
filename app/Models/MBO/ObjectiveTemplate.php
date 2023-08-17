@@ -10,10 +10,10 @@ use App\Traits\Vendors\TrixFields;
 use App\Traits\RequestForms;
 use App\Facades\TrixField\TrixFieldCast;
 use App\Casts\CheckboxCast;
-use App\Enums\CampaignStage;
 use App\Models\MBO\Objective;
 use App\Models\MBO\CampaignObjective;
 use App\Models\MBO\ObjectiveTemplateCategory;
+use App\Enums\ObjectiveType;
 
 class ObjectiveTemplate extends Model
 {
@@ -31,6 +31,7 @@ class ObjectiveTemplate extends Model
     protected $casts = [
         'draft' => CheckboxCast::class,
         'description' => TrixFieldCast::class,
+        'type' => ObjectiveType::class,
     ];
 
     public function category()

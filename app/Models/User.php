@@ -11,6 +11,7 @@ use App\Traits\HasRolesAndPermissions;
 use App\Traits\UUID;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\RequestForms;
+use App\Enums\Users\Gender;
 
 class User extends Authenticatable
 {
@@ -55,7 +56,8 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'created_at' => 'datetime'
+        'created_at' => 'datetime',
+        'gender' => Gender::class,
     ];
 
     public function name()

@@ -7,6 +7,7 @@ use App\Facades\Forms\FormElement;
 use App\Facades\Forms\Elements\Dictionary;
 use Illuminate\Validation\Rules\File;
 use App\Enums\Users\Gender;
+use Illuminate\Validation\Rules\Enum;
 
 class UserEditForm
 {
@@ -24,7 +25,7 @@ class UserEditForm
                 ->add(FormElement::text('firstname', $model)->label(__('forms.users.firstname')))
                 ->add(FormElement::text('lastname', $model)->label(__('forms.users.lastname')))
                 ->add(FormElement::text('email', $model)->label(__('forms.users.email')))
-                ->add(FormElement::select('gender', $model, Dictionary::fromUnassocArray(Gender::values(), 'fields.gender'))
+                ->add(FormElement::select('gender', $model, Dictionary::fromEnum(Gender::class))
                 ->label(__('forms.users.gender')))
                 ->add(FormElement::date('birthday', $model)->label(__('forms.users.birthday')))
 
@@ -38,6 +39,7 @@ class UserEditForm
             'lastname' => 'max:255|required',
             'email' => 'max:255|email|required',
             'birthday' => 'date|nullable',
+            'gender' => [new Enum(Gender::class)],
             // 'avatar' => [
             //     File::image()->types(['jpg', 'jpeg', 'png'])
             //         ->min(10)->max(4096),

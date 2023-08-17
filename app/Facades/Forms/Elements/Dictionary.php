@@ -82,4 +82,18 @@ class Dictionary
 
         return $options;
     }
+
+    /**
+     * Enum equivalents should be translated in fields.php
+     */
+    public static function fromEnum($enum)
+    {
+        $options = new Collection();
+        if(class_exists($enum)){
+            foreach($enum::values() as $case){
+                $options->push(new Option($case, __('fields.enums.'.$case)));
+            }
+        }
+        return $options;
+    }
 }

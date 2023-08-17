@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\ObjectiveType;
 
 return new class extends Migration
 {
@@ -19,9 +20,14 @@ return new class extends Migration
 
             $table->foreign('category_id')->references('id')->on('objective_template_categories')->onDelete('cascade');
 
-            $table->float('goal')->nullable();
+            $table->decimal('goal', 8,2)->nullable();
 
-            $table->string('type'); // App\Enums\ObjectiveType::enum
+            $table->enum('type', [
+                ObjectiveType::INDIVIDUAL->value,
+                ObjectiveType::TEAM->value,
+                ObjectiveType::GLOBAL->value
+            ]);
+            
             $table->boolean('draft')->default(1);
             $table->softDeletes();
             $table->timestamps();
