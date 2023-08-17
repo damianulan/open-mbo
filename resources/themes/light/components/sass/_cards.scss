@@ -180,22 +180,27 @@
     box-shadow: inset 0px 0px 28px -20px rgba($dark-green, 0.5);
 }
 
-.card.profile-card .card-header {
+.profile-picture img {
+    border-radius: 50%;
+}
+
+.user-header {
     display: flex;
     color: $primary;
 }
 
-.card.profile-card .card-header .card-name {
-    font-size: 1.5rem;
-    font-weight: 300;
+.user-header .user-name {
+    font-size: 1.7rem;
+    font-weight: 700;
+    font-family: $font-family-serif;
 }
 
-.card.profile-card .card-header .card-actions {
+.user-header .user-actions {
     margin-left: auto;
     font-size: 1.3rem;
     white-space: nowrap;
 }
-.card.profile-card .card-header .card-actions a {
+.user-header .user-actions a {
     margin-left: .5rem;
     text-decoration: none;
 }

@@ -18,14 +18,17 @@ class Dictionary
 
     public static function fromModel(string $model, string $column, string $method = 'all'): Collection
     {
-        $records = $model::$method();
         $options = new Collection();
 
-        if(!empty($records)){
-            foreach ($records as $record){
-                $options->push(new Option($record->id, $record->$column));
+        if(class_exists($model)){
+            $records = $model::$method();
+            if(!empty($records)){
+                foreach ($records as $record){
+                    $options->push(new Option($record->id, $record->$column));
+                }
             }
         }
+
         return $options;
     }
 

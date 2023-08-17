@@ -13,7 +13,9 @@
 <div class="container pt-3">
     <div class="row">
         <div class="col-md-12">
-            {{ $dataTable->table() }}
+            <div class="table-container">
+                {{ $dataTable->table() }}
+            </div>
         </div>
     </div>
 </div>

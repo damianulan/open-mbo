@@ -145,3 +145,8 @@ html::-webkit-scrollbar {
 .nowrap {
     white-space: nowrap !important;
 }
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}

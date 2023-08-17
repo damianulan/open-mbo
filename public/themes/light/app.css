@@ -21780,6 +21780,11 @@ html::-webkit-scrollbar-thumb:active {
   white-space: nowrap !important;
 }
 
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
 .btn {
   border-radius: 0.25rem;
   font-weight: 600 !important;
@@ -22882,23 +22887,28 @@ a.dropdown-toggle {
   box-shadow: inset 0px 0px 28px -20px rgba(22, 71, 85, 0.5);
 }
 
-.card.profile-card .card-header {
+.profile-picture img {
+  border-radius: 50%;
+}
+
+.user-header {
   display: flex;
   color: #1C676C;
 }
 
-.card.profile-card .card-header .card-name {
-  font-size: 1.5rem;
-  font-weight: 300;
+.user-header .user-name {
+  font-size: 1.7rem;
+  font-weight: 700;
+  font-family: "IBM Plex Serif", serif;
 }
 
-.card.profile-card .card-header .card-actions {
+.user-header .user-actions {
   margin-left: auto;
   font-size: 1.3rem;
   white-space: nowrap;
 }
 
-.card.profile-card .card-header .card-actions a {
+.user-header .user-actions a {
   margin-left: 0.5rem;
   text-decoration: none;
 }

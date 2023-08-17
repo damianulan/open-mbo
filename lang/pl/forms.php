@@ -57,5 +57,13 @@ return [
         'gender' => 'Płeć',
         'birthday' => 'Data urodzenia',
 
-    ]
+    ],
+
+    'objectives' => [
+        'category' => 'Kategoria',
+        'name' => 'Nazwa celu',
+        'description' => 'Opis celu',
+        'goal' => 'Oczekiwany poziom realizacji',
+        'draft' => 'Wersja robocza',
+    ],
 ];

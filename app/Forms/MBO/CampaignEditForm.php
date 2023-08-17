@@ -23,7 +23,7 @@ class CampaignEditForm
                 ->class('campaign-create-form')
                 ->add(FormElement::text('name', $model)->label(__('forms.campaigns.name')))
                 ->add(FormElement::text('period', $model)->label(__('forms.campaigns.period'))
-                ->info('Wprowadź unikalny reprezentatywny okres pomiaru procesu, np. dla pomiaru co kwartał: 2023 Q3'))
+                ->info('Wprowadź unikalny reprezentatywny okres pomiaru, np. dla pomiaru co kwartał: 2023 Q3'))
                 ->add(FormElement::trix('description', $model)->label(__('forms.campaigns.description')))
 
                 ->add(FormElement::daterange(CampaignStage::DEFINITION->value, $model)->label(__('forms.campaigns.'.CampaignStage::DEFINITION->value))
@@ -37,9 +37,9 @@ class CampaignEditForm
                 ->add(FormElement::daterange(CampaignStage::SELF_EVALUATION->value, $model)->label(__('forms.campaigns.'.CampaignStage::SELF_EVALUATION->value))
                 ->info('info'))
                 ->add(FormElement::switch('draft', $model)->label(__('forms.campaigns.draft'))->default(true)
-                ->info('Proces będzie widoczny tylko dla administratorów i nie zostanie uruchomiony automatycznie.'))
+                ->info('Kampania będzie widoczna tylko dla administratorów i nie zostanie uruchomiona automatycznie.'))
                 ->add(FormElement::switch('manual', $model)->label(__('forms.campaigns.manual'))->default(false)
-                ->info('Przejście pomiędzy etapami nie będzie uzależnione od dat, a od podjęcia akcji przez administratora. Opcję tą można także włączyć w trakcie trwania procesu.'))
+                ->info('Przejście pomiędzy etapami nie będzie uzależnione od dat, a od podjęcia akcji przez administratora. Opcję tą można także włączyć w trakcie trwania kampanii.'))
                 ->addSubmit();
     }
 

@@ -46,6 +46,9 @@ return [
         'index' => 'Zarządzanie',
         'users' => 'Użytkownicy',
         'structure' => 'Struktura',
+        'objectives' => [
+            'create' => 'Tworzenie szablonu celu',
+        ],
     ],
 
     'reports' => [
@@ -60,6 +63,7 @@ return [
     'users' => [
         'index' => 'Użytkownicy',
         'edit' => 'Edycja użytkownika',
+        'create' => 'Tworzenie użytkownika',
         'show' => 'Profil użytkownika',
     ],
 
