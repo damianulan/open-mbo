@@ -27,7 +27,9 @@ return new class extends Migration
                 ObjectiveType::TEAM->value,
                 ObjectiveType::GLOBAL->value
             ]);
-            
+
+            $table->unsignedSmallInteger('score')->nullable();
+
             $table->boolean('draft')->default(1);
             $table->softDeletes();
             $table->timestamps();

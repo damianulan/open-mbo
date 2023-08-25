@@ -2,13 +2,15 @@
 
 namespace App\Forms\MBO;
 
+use App\Facades\Forms\Form;
+use App\Facades\Forms\FormIO;
 use App\Facades\Forms\FormBuilder;
 use App\Facades\Forms\FormElement;
 use App\Facades\Forms\Elements\Datetime;
 use App\Facades\Forms\Elements\Dictionary;
 use App\Enums\CampaignStage;
 
-class CampaignEditForm
+class CampaignEditForm extends Form implements FormIO
 {
 
     public static function boot($model = null): FormBuilder

@@ -2,6 +2,8 @@
 
 namespace App\Forms\Users;
 
+use App\Facades\Forms\Form;
+use App\Facades\Forms\FormIO;
 use App\Facades\Forms\FormBuilder;
 use App\Facades\Forms\FormElement;
 use App\Facades\Forms\Elements\Dictionary;
@@ -9,7 +11,7 @@ use Illuminate\Validation\Rules\File;
 use App\Enums\Users\Gender;
 use Illuminate\Validation\Rules\Enum;
 
-class UserEditForm
+class UserEditForm extends Form implements FormIO
 {
     public static function boot($model = null): FormBuilder
     {

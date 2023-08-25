@@ -37,8 +37,10 @@ class CampaignsController extends Controller
      */
     public function store(Request $request, CampaignEditForm $form)
     {
+        $request = $form::reformatRequest($request);
         $request->validate($form::validation());
         $process = Campaign::fillFromRequest($request);
+
         if($process->save()){
 
         }

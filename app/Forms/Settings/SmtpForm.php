@@ -2,12 +2,13 @@
 
 namespace App\Forms\Settings;
 
+use App\Facades\Forms\Form;
 use App\Facades\Forms\Elements\Dictionary;
 use App\Facades\Forms\FormBuilder;
 use App\Facades\Forms\FormElement;
 use App\Settings\MailSettings;
 
-class SmtpForm
+class SmtpForm extends Form
 {
     public static function boot($model = null): FormBuilder
     {

@@ -40,6 +40,10 @@ return [
             'title' => 'Dostęp nieautoryzowany',
             'paragraph' => '',
         ],
+        '419' => [
+            'title' => 'Sesja wygasła',
+            'paragraph' => 'Twój sekretny klucz jest nieprawidłowy, bądź wygasła twoja sesja. Zaloguj się jeszcze raz i spróbuj ponownie.',
+        ],
         'common' => 'To chyba nie strona, której szukasz...',
 
     ],
