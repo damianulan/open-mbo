@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->longText('description')->nullable();
             $table->string('icon')->nullable();
-            $table->boolean('global')->default(1); // choose if its cascadable down the organization's structure
+            $table->boolean('global')->default(0); // choose if its cascadable down the organization's structure
 
             $table->softDeletes();
             $table->timestamps();

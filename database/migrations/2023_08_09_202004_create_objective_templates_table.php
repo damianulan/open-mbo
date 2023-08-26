@@ -28,7 +28,7 @@ return new class extends Migration
                 ObjectiveType::GLOBAL->value
             ]);
 
-            $table->unsignedSmallInteger('score')->nullable();
+            $table->unsignedSmallInteger('award')->nullable();
 
             $table->boolean('draft')->default(1);
             $table->softDeletes();

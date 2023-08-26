@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_scores', function (Blueprint $table) {
+        Schema::create('user_awards', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->char('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->unsignedInteger('score')->nullable();
+            $table->unsignedInteger('award')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

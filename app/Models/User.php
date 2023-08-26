@@ -10,12 +10,16 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Traits\HasRolesAndPermissions;
 use App\Traits\UUID;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\RequestForms;
+use App\Facades\Forms\RequestForms;
+use App\Traits\Awards;
+use App\Traits\UserMBO;
+use App\Traits\UserBusiness;
 use App\Enums\Users\Gender;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, UUID, HasRolesAndPermissions, SoftDeletes, RequestForms;
+    use Awards, UserMBO, UserBusiness;
 
     /**
      * The attributes that are mass assignable.

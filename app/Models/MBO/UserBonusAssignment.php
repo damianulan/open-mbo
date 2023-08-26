@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\UUID;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\RequestForms;
+use App\Facades\Forms\RequestForms;
 use App\Casts\CheckboxCast;
 use App\Models\User;
 use App\Models\MBO\BonusScheme;

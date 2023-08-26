@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\UUID;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\Vendors\TrixFields;
-use App\Traits\RequestForms;
+use App\Facades\Forms\RequestForms;
 use App\Facades\TrixField\TrixFieldCast;
 use App\Casts\CheckboxCast;
 use App\Models\User;
@@ -20,4 +20,13 @@ class TypeOfContract extends Model
         'name',
         'description',
     ];
+
+    protected $casts = [
+        'description' => TrixFieldCast::class,
+    ];
+
+    public function employments()
+    {
+        return $this->hasMany(UserEmployment::class);
+    }
 }

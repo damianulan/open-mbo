@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\UUID;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\Vendors\TrixFields;
-use App\Traits\RequestForms;
+use App\Facades\Forms\RequestForms;
 use App\Facades\TrixField\TrixFieldCast;
 use App\Casts\CheckboxCast;
 use App\Enums\CampaignStage;
 use App\Models\User;
+use App\Models\MBO\Campaign;
+use App\Models\MBO\Objective;
 
 class UserCampaign extends Model
 {
@@ -57,6 +59,16 @@ class UserCampaign extends Model
     public function global_objectives()
     {
         return $this->campaign()->global_objectives()->where('draft', 0)->get();
+    }
+
+    public function assignObjectives()
+    {
+        $templates = $this->campaign()->objective_templates();
+        if($templates){
+            foreach($templates as $template){
+                // assign objectives from template assigned to a Campaign.
+            }
+        }
     }
 
 }

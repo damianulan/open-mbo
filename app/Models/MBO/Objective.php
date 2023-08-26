@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\UUID;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\Vendors\TrixFields;
-use App\Traits\RequestForms;
+use App\Facades\Forms\RequestForms;
 use App\Facades\TrixField\TrixFieldCast;
 use App\Casts\CheckboxCast;
 use App\Models\MBO\ObjectiveTemplate;
@@ -28,11 +28,11 @@ class Objective extends Model
         'deadline',
         'goal',
         'draft',
+        'award',
     ];
 
     protected $casts = [
         'draft' => CheckboxCast::class,
-        'of_campaign' => 'boolean',
         'deadline' => 'datetime',
         'description' => TrixFieldCast::class,
     ];
