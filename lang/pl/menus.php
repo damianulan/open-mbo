@@ -46,7 +46,11 @@ return [
         'index' => 'Zarządzanie',
         'users' => 'Użytkownicy',
         'structure' => 'Struktura',
+        'organization' => 'Organizacja',
+        'questionnaire' => 'Formularze',
+        'teams' => 'Zespoły',
         'objectives' => [
+            'index' => 'Cele',
             'create' => 'Tworzenie szablonu celu',
         ],
     ],

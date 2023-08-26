@@ -11,6 +11,7 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\Html\SearchPane;
 use Illuminate\Support\Carbon;
 
 class UsersDataTable extends DataTable
@@ -34,6 +35,10 @@ class UsersDataTable extends DataTable
                 return view('pages.users.action', [
                     'data' => $data,
                 ]);
+            })
+            ->filterColumn('name', function($query, $keyword){
+                $sql = "CONCAT(users.firstname,'-',users.lastname)  like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->editColumn('created_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format(config('app.datetime_format')); return $formatedDate; })
             ->editColumn('updated_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format(config('app.datetime_format')); return $formatedDate; });
@@ -63,22 +68,13 @@ class UsersDataTable extends DataTable
                         ],
                         'lengthMenu' => [
                             20, 50, 100, 200
-                        ]
+                        ],
                     ])
                     ->setTableId('users-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->processing(true)
-                    //->dom('Bfrtip')
-                    ->orderBy(1) // lastname
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+                    ->orderBy(1);
     }
 
     /**
@@ -89,7 +85,8 @@ class UsersDataTable extends DataTable
         return [
             Column::computed('name')
             ->title(__('fields.firstname_lastname'))
-            ->sortable(true),
+            ->sortable(true)
+            ->searchable(true),
             Column::make('created_at')
             ->title(__('fields.created_at')),
             Column::make('updated_at')

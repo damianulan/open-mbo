@@ -44,10 +44,6 @@
     color: $dark;
 }
 
-.badge.badge-other {
-    background-color: rgba($other, 0.25);
-    color: $other;
-}
 
 // alerts
 .alert-heading {
@@ -83,12 +79,6 @@
     background-color: rgba($info, .25);
     border-color: rgba($info, .3);
     color: darken($info, 10%);
-}
-
-.alert.alert-other {
-    background-color: rgba($other, .25);
-    border-color: rgba($other, .3);
-    color: darken($other, 10%);
 }
 
 .alert.alert-primary {

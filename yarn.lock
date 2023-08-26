@@ -2356,6 +2356,14 @@ datatables.net-bs4@^1.13.4, datatables.net-bs4@>=1.12.1:
     datatables.net ">=1.12.1"
     jquery ">=1.7"
 
+datatables.net-bs5@^1.13.6, datatables.net-bs5@>=1.13.4:
+  version "1.13.6"
+  resolved "https://registry.npmjs.org/datatables.net-bs5/-/datatables.net-bs5-1.13.6.tgz"
+  integrity sha512-lXroZoXhLhDulp8gvU7y7wBherg38SbLMGXcHwbnj+XXh4Hvy+d67zSPYbrVI3YiRwYq+aCx15G5qmMj7KjYQg==
+  dependencies:
+    datatables.net ">=1.13.4"
+    jquery ">=1.7"
+
 datatables.net-buttons-bs4@^2.3.6:
   version "2.3.6"
   resolved "https://registry.npmjs.org/datatables.net-buttons-bs4/-/datatables.net-buttons-bs4-2.3.6.tgz"
@@ -2365,7 +2373,16 @@ datatables.net-buttons-bs4@^2.3.6:
     datatables.net-buttons ">=2.2.3"
     jquery ">=1.7"
 
-datatables.net-buttons@>=2.2.3:
+datatables.net-buttons-bs5@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.npmjs.org/datatables.net-buttons-bs5/-/datatables.net-buttons-bs5-2.4.1.tgz"
+  integrity sha512-z3YwAtHkCioLveY7Tu81F6NFlYZu18xjFFeXZna4o6TFP5qWPt2F+JGgD2aEpcxcJqxKWihUGHcuHf7R1SLkig==
+  dependencies:
+    datatables.net-bs5 ">=1.13.4"
+    datatables.net-buttons ">=2.3.6"
+    jquery ">=1.7"
+
+datatables.net-buttons@>=2.2.3, datatables.net-buttons@>=2.3.6:
   version "2.3.6"
   resolved "https://registry.npmjs.org/datatables.net-buttons/-/datatables.net-buttons-2.3.6.tgz"
   integrity sha512-9eid5D2kbTNfGCOiEx5WBHlwfK38W1LMz0AiNZHoSqKAiO0aXGfzrH7L2eY6reHgVMaPvHPAnqeRAjvOul2V/Q==
@@ -2382,7 +2399,16 @@ datatables.net-searchpanes-bs4@^2.1.2:
     datatables.net-searchpanes ">=2.0.2"
     jquery ">=1.7"
 
-datatables.net-searchpanes@>=2.0.2:
+datatables.net-searchpanes-bs5@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.npmjs.org/datatables.net-searchpanes-bs5/-/datatables.net-searchpanes-bs5-2.2.0.tgz"
+  integrity sha512-Y2G8cB9lNWxn3xPFdwhvsE1afC014szp/m2gxINuYQHEqsGaqx4b0DBdM2IPeMtvbTcFpqdLFEMFR5Gqs/NoCg==
+  dependencies:
+    datatables.net-bs5 ">=1.13.4"
+    datatables.net-searchpanes ">=2.1.2"
+    jquery ">=1.7"
+
+datatables.net-searchpanes@>=2.0.2, datatables.net-searchpanes@>=2.1.2:
   version "2.1.2"
   resolved "https://registry.npmjs.org/datatables.net-searchpanes/-/datatables.net-searchpanes-2.1.2.tgz"
   integrity sha512-gt0rNw6hlJVMLz9j7qoI5o8bMlxEpSA6jAfQ36clhe8Y9Ajbu/no78rrW3AJ2v8K1FkDG1r6S3g/B9KiClEAsQ==
@@ -2399,7 +2425,16 @@ datatables.net-select-bs4@^1.6.2:
     datatables.net-select ">=1.4.0"
     jquery ">=1.7"
 
-datatables.net-select@>=1.4.0:
+datatables.net-select-bs5@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.npmjs.org/datatables.net-select-bs5/-/datatables.net-select-bs5-1.7.0.tgz"
+  integrity sha512-9lDH+V+9ewaVSpKUFMplmpxEBM6eeUl0C+feGD4BRKkrFhMAzVYfuLibm4/gJvG0burQciO9U9eoLI9ywdiWWw==
+  dependencies:
+    datatables.net-bs5 ">=1.13.4"
+    datatables.net-select ">=1.6.2"
+    jquery ">=1.7"
+
+datatables.net-select@>=1.4.0, datatables.net-select@>=1.6.2:
   version "1.6.2"
   resolved "https://registry.npmjs.org/datatables.net-select/-/datatables.net-select-1.6.2.tgz"
   integrity sha512-mGkWFGEN8vLJGp9POHA+CHDBIcWGOpos6mtuZ/S3hKF+niTZivqRuXybd79iDG8OHw3yRbafBIsHtcXcZxoG/g==
@@ -2407,7 +2442,7 @@ datatables.net-select@>=1.4.0:
     datatables.net ">=1.12.1"
     jquery ">=1.7"
 
-datatables.net@>=1.12.1:
+datatables.net@>=1.12.1, datatables.net@>=1.13.4:
   version "1.13.4"
   resolved "https://registry.npmjs.org/datatables.net/-/datatables.net-1.13.4.tgz"
   integrity sha512-yzhArTOB6tPO2QFKm1z3hA4vabtt2hRvgw8XLsT1xqEirinfGYqWDiWXlkTPTaJv2e7gG+Kf985sXkzBFlGrGQ==

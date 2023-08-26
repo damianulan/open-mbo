@@ -28,8 +28,7 @@ $lazuli: #22577A;
 $dimm-blue: #7392b7;
 $celadon: #1BDCB8;
 $dark-green: #164755;
-
-$border-color: #e2f1fc;
+$greenish: #A3AEA7;
 
 // Primaries
 $primary: #1C676C;
@@ -44,7 +43,6 @@ $danger: #e56b6f;
 $warning: #EDB458;
 $success: #4f9d69;
 $info: #0892A5;
-$other: darken($border-color, 30%);
 
 $theme-colors: (
     'primary': $primary,
@@ -54,7 +52,6 @@ $theme-colors: (
     'warning': $warning,
     'info': $info,
     'dark': $dark,
-    'other': $other,
 
     'cadet': $cadet,
     'coolgreen': $coolgreen,
@@ -87,7 +84,7 @@ $tooltip-inner-font-size: .8rem;
 
 $dropdown-divider-margin-y: .2rem;
 $dropdown-divider-margin-x: .2rem;
-$dropdown-divider-bg: $border-color;
+$dropdown-divider-bg: $greenish;
 $dropdown-link-hover-bg: rgba($primary, 0.1);
 $dropdown-link-color: $dark-green;
 $dropdown-link-color-hover: $dark-green;
@@ -95,7 +92,9 @@ $dropdown-link-color-hover: $dark-green;
 $breadcrumb-font-size: .7rem;
 $dropdown-padding-y: 0;
 
+// Cards
 $card-bg: transparent;
+
 
 // Typography
 $link-color: $primary;
@@ -118,3 +117,6 @@ $input-box-shadow-focus: 0 3px 10px -1px rgb(0 0 0 / 10%);
 $input-padding: .5rem .7rem;
 $input-color: $dark-green;
 $input-line-height: 1.25;
+
+// Tables
+$table-bg: transparent;

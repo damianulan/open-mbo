@@ -3,17 +3,17 @@
         <ul class="nav nav-pills-horizontal">
             <li class="nav-item">
                 <a class="nav-link active">
-                    Cele
+                    {{ __('menus.management.objectives.index') }}
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link">
-                    Kategorie
+                    Kategorie celów
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link">
-                    Formularze
+                    {{ __('menus.management.questionnaire') }}
                 </a>
             </li>
             <li class="nav-item">
@@ -23,12 +23,17 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link">
-                    {{ __('menus.management.structure') }}
+                    {{ __('menus.management.teams') }}
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link">
-                    Zespoły
+                    {{ __('menus.management.organization') }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">
+                    {{ __('menus.management.structure') }}
                 </a>
             </li>
             <li class="nav-item">

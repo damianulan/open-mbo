@@ -1,3 +1,9 @@
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin: .5rem 0;
+}
+
 .settings-table {
     clear: both;
     border-collapse: separate !important;
@@ -15,6 +21,19 @@
     padding-left: 1rem;
 }
 
+.lms-table tbody {
+    border-style: none;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover
+{
+    color: #fff !important;
+    background: $primary;
+    border: 1px solid $primary;
+    border-radius: 0.25rem;
+}
+
 .lms-table .action-btns {
     text-align: center;
     white-space: nowrap;
@@ -22,4 +41,24 @@
 
 .lms-table .action-btns a {
     text-decoration: none;
+}
+
+table.lms-table {
+    border-collapse: separate !important;
+    border-spacing: 0 .75rem;
+}
+
+table.lms-table td,
+table.lms-table th {
+    padding: .75rem;
+    vertical-align: middle;
+}
+
+table.lms-table tbody tr:hover {
+    background-color: rgba($primary,0.1);
+    transition: all 0.2s ease-in-out;
+}
+
+.lms-table > :not(caption) > * > * {
+    border-bottom-width: 0;
 }

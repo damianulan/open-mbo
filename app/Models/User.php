@@ -21,6 +21,11 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable, UUID, HasRolesAndPermissions, SoftDeletes, RequestForms;
     use Awards, UserMBO, UserBusiness;
 
+    public function __construct()
+    {
+        $this->name = $this->firstname . ' ' . $this->lastname;
+    }
+
     /**
      * The attributes that are mass assignable.
      *

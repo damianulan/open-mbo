@@ -14,34 +14,33 @@
 .card {
     height: 100%;
     box-shadow: none;
-    border: 1px solid $border-color;
+    border: 1px solid rgba($primary,0.4);
 }
 
-.card.path-card {
-    color: $light;
-    border-radius: 1.3rem;
-    height: 22em;
-    display: flex;
-}
-
-.card.path-card .card-body{
-    padding: 1.5rem 2rem;
-    align-content: flex-end;
-    display: grid;
-}
-
-.card.process-card {
+.card.campaign-card {
     margin-top: 1rem;
 }
 
-.card.process-card:hover {
+.card:hover {
     cursor: pointer;
-    -webkit-box-shadow: inset -5px -15px 75px -28px rgba($border-color,0.85);
-    -moz-box-shadow: inset -5px -15px 75px -28px rgba($border-color,0.85);
-    box-shadow: inset -5px -15px 75px -28px rgba($border-color,0.85);
+    -webkit-box-shadow: inset -5px -15px 75px -28px rgba($primary,0.1);
+    -moz-box-shadow: inset -5px -15px 75px -28px rgba($primary,0.1);
+    box-shadow: inset -5px -15px 75px -28px rgba($primary,0.1);
 }
 
-.process-card .process-img{
+.card.inactive {
+    border: 1px solid rgba($greenish,0.85);
+    background-color: rgba($greenish,0.05) !important;
+}
+
+.card.inactive:hover {
+    cursor: pointer;
+    -webkit-box-shadow: inset -5px -15px 75px -28px rgba($greenish,0.4);
+    -moz-box-shadow: inset -5px -15px 75px -28px rgba($greenish,0.4);
+    box-shadow: inset -5px -15px 75px -28px rgba($greenish,0.4);
+}
+
+.campaign-card .campaign-img{
     display: block;
     width: 100%;
     background-repeat: no-repeat;
@@ -52,38 +51,55 @@
     pointer-events: none;
 }
 
-.process-card .card-title,
-.path-card .card-title {
-    font-weight: 600;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.campaign-card .card-top {
+    display: flex;
+
 }
 
-.process-card .card-title {
+.campaign-card .action-btns {
+    display: flex;
+    margin-left: auto;
+}
+
+.campaign-card .action-btns a {
     font-size: 1rem;
+    color: $primary;
+}
+
+.campaign-card .action-btns a:hover {
+    color: $secondary;
+}
+
+.campaign-card .card-top .card-title {
+    font-weight: 700;
+    font-family: $font-family-serif;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: $secondary;
+    font-size: 1.3rem;
     white-space: nowrap;
 }
 
-.path-card .card-title {
-    font-size: .85rem;
+.campaign-card.inactive .card-top .card-title {
+    color: darken($greenish, 20%);
 }
 
-.process-card .card-text,
-.path-card .card-text {
+.campaign-card .card-text {
     max-height: 3em;
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 1.5em;
+    margin-bottom: .7rem;
 }
 
-.process-card .details .element,
+.campaign-card .details .element,
 .path-card .details .element {
     display: flex;
     align-items: center;
     margin-top: .5rem;
 }
 
-.process-card .details .element .element-title {
+.campaign-card .details .element .element-title {
     width: 100%;
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -91,87 +107,27 @@
     overflow: hidden;
 }
 
-.process-card .progress-bar {
+.campaign-card .progress-bar {
     display: flex;
     width: 100%;
     position: absolute;
     bottom: 0;
 }
 
-.process-card .progress-bar .bar-container {
+.campaign-card .progress-bar .bar-container {
     width: 100%;
     height: .3em;
     background-color: $columbia;
 }
 
-.process-card .progress-bar .bar-progress {
+.campaign-card .progress-bar .bar-progress {
     height: 100%;
 }
 
-.process-card .progress-bar .bar-container,
-.process-card .progress-bar .bar-progress {
+.campaign-card .progress-bar .bar-container,
+.campaign-card .progress-bar .bar-progress {
     border-bottom-right-radius: $card-border-radius;
     border-bottom-left-radius: $card-border-radius;
-}
-
-.process-card .action-panel {
-    position: absolute;
-    display: flex;
-    width: 100%;
-    padding: 1rem;
-}
-
-.process-card .action-panel .action-btns {
-    display: inline-block;
-    margin-left: auto;
-}
-
-.process-card .action-panel .action-btns a {
-    font-size: 1.15rem;
-    margin-left: .35rem;
-    color: $primary;
-}
-
-.card.module-card {
-    padding: 2rem 1rem;
-    color: $primary;
-}
-
-.card.module-card,
-.card.module-card.active:hover {
-    -webkit-box-shadow: inset -5px -15px 75px -28px rgba($dimm-blue,0.4);
-    -moz-box-shadow: inset -5px -15px 75px -28px rgba($dimm-blue,0.4);
-    box-shadow: inset -5px -15px 75px -28px rgba($dimm-blue,0.4);
-}
-
-.card.module-card.active,
-.card.module-card:not(.active):hover {
-    cursor: pointer;
-    color: $primary;
-    -webkit-box-shadow: inset -5px -15px 75px -28px rgba($secondary,0.5);
-    -moz-box-shadow: inset -5px -15px 75px -28px rgba($secondary,0.5);
-    box-shadow: inset -5px -15px 75px -28px rgba($secondary,0.5);
-}
-
-.module-card .module-icon {
-    font-size: 4.5rem;
-    text-align: center;
-}
-
-.module-card .module-title {
-    text-align: center;
-    font-size: 1.1rem;
-    font-weight: 600;
-    height: 100%;
-    display: flex;
-    align-self: center;
-    align-items: flex-end;
-    text-transform: capitalize;
-}
-
-.card.module-card:not(.active),
-.card.module-card.active:hover {
-    color: rgba($primary, 0.5);
 }
 
 .card.profile-card {

@@ -102,19 +102,6 @@ html::-webkit-scrollbar {
     vertical-align: middle;
 }
 
-.bb-1 {
-    border-bottom: 1px solid $border-color;
-}
-
-.bt-1 {
-    border-top: 1px solid $border-color;
-}
-
-.by-1 {
-    border-bottom: 1px solid $border-color;
-    border-top: 1px solid $border-color;
-}
-
 .settings .section {
     padding: 1.5rem 0;
 }
@@ -146,7 +133,3 @@ html::-webkit-scrollbar {
     white-space: nowrap !important;
 }
 
-.table-container {
-    width: 100%;
-    overflow-x: auto;
-}
