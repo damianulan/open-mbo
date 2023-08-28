@@ -14,6 +14,6 @@
     </a>
 @endif
 
-<a class="action-btn" href="{{ route('users.delete', $data->id) }}" title="{{ __('buttons.delete') }}">
+<a class="action-btn swal-confirm" href="{{ route('users.delete', $data->id) }}" title="{{ __('buttons.delete') }}" data-swal-text="Usunięcie użytkownika będzie nieodwracalne.">
     <i class="bi bi-trash-fill"></i>
 </a>

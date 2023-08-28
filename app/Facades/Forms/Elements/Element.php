@@ -20,6 +20,7 @@ class Element
     public bool $required = false;
     public bool $disabled = false;
     public bool $readonly = false;
+    public string $autocomplete = '';
 
     public array $infos = [];
     public array $dangers = [];
@@ -112,5 +113,11 @@ class Element
             return $output;
         }
         return null;
+    }
+
+    public function autocomplete(string $type)
+    {
+        $this->autocomplete = $type;
+        return $this;
     }
 }

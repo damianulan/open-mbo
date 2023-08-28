@@ -21,11 +21,6 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable, UUID, HasRolesAndPermissions, SoftDeletes, RequestForms;
     use Awards, UserMBO, UserBusiness;
 
-    public function __construct()
-    {
-        $this->name = $this->firstname . ' ' . $this->lastname;
-    }
-
     /**
      * The attributes that are mass assignable.
      *
@@ -91,6 +86,19 @@ class User extends Authenticatable
     public function blocked(): bool
     {
         return $this->active ? true:false;
+    }
+
+    public function getAvatar(): ?string
+    {
+        if($this->avatar){
+            return asset($this->avatar);
+        }
+        if($this->gender->name === 'MALE'){
+            return asset('images/portrait/avatar-male.png');
+        } elseif($this->gender->name === 'FEMALE'){
+            return asset('images/portrait/avatar-female.png');
+        }
+        return null;
     }
 
 }

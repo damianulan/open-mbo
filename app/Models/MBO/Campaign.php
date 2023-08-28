@@ -89,7 +89,7 @@ class Campaign extends Model
 
     public function stages(): Collection
     {
-        $stages = new Collection;
+        $stages = new Collection();
 
         return $stages;
     }

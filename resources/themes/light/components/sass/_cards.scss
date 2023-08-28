@@ -14,23 +14,27 @@
 .card {
     height: 100%;
     box-shadow: none;
-    border: 1px solid rgba($primary,0.4);
+    border: 1px solid transparent;
 }
 
-.card.campaign-card {
-    margin-top: 1rem;
+.card-col {
+    padding-bottom: 1rem;
 }
 
-.card:hover {
+.card.card-url{
+    background-color: rgba($primary,0.08);
+}
+
+.card.card-url:hover {
     cursor: pointer;
-    -webkit-box-shadow: inset -5px -15px 75px -28px rgba($primary,0.1);
-    -moz-box-shadow: inset -5px -15px 75px -28px rgba($primary,0.1);
-    box-shadow: inset -5px -15px 75px -28px rgba($primary,0.1);
+    -webkit-box-shadow: inset -5px -15px 75px -28px rgba($primary,0.12);
+    -moz-box-shadow: inset -5px -15px 75px -28px rgba($primary,0.12);
+    box-shadow: inset -5px -15px 75px -28px rgba($primary,0.12);
+    transition: all 0.2s ease-in-out;
 }
 
-.card.inactive {
-    border: 1px solid rgba($greenish,0.85);
-    background-color: rgba($greenish,0.05) !important;
+.card.card-url.inactive {
+    background-color: rgba($greenish,0.2) !important;
 }
 
 .card.inactive:hover {
@@ -56,17 +60,21 @@
 
 }
 
-.campaign-card .action-btns {
+.campaign-card .campaign-badges {
     display: flex;
     margin-left: auto;
+    margin-bottom: $card-title-spacer-y;
 }
 
-.campaign-card .action-btns a {
+.campaign-card .campaign-badges div {
+    display: flex;
+    align-items: center;
+    font-size: .75rem;
+    margin-left: .35rem;
+}
+
+.campaign-card .campaign-badges div i.bi{
     font-size: 1rem;
-    color: $primary;
-}
-
-.campaign-card .action-btns a:hover {
     color: $secondary;
 }
 
@@ -81,7 +89,7 @@
 }
 
 .campaign-card.inactive .card-top .card-title {
-    color: darken($greenish, 20%);
+    color: darken($greenish, 25%);
 }
 
 .campaign-card .card-text {
@@ -95,16 +103,21 @@
 .campaign-card .details .element,
 .path-card .details .element {
     display: flex;
-    align-items: center;
     margin-top: .5rem;
 }
 
 .campaign-card .details .element .element-title {
-    width: 100%;
+    display: flex;
+    align-items: center;
+    color: $secondary;
+}
+
+.campaign-card .details .element .element-title span {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+    font-weight: 600;
 }
 
 .campaign-card .progress-bar {
@@ -112,12 +125,13 @@
     width: 100%;
     position: absolute;
     bottom: 0;
+    padding-top: .5rem;
 }
 
 .campaign-card .progress-bar .bar-container {
     width: 100%;
     height: .3em;
-    background-color: $columbia;
+    background-color: rgba($secondary, 0.2);
 }
 
 .campaign-card .progress-bar .bar-progress {
@@ -131,9 +145,7 @@
 }
 
 .card.profile-card {
-    border: 1px solid rgba($dark-green, 0.5);
-    border-radius: .25rem;
-    box-shadow: inset 0px 0px 28px -20px rgba($dark-green, 0.5);
+    background-color: rgba($primary,0.08);
 }
 
 .profile-picture img {
@@ -142,16 +154,21 @@
 
 .user-header {
     display: flex;
-    color: $primary;
+    font-family: $font-family-serif;
 }
 
 .user-header .user-name {
     font-size: 1.7rem;
     font-weight: 700;
-    font-family: $font-family-serif;
+    color: $primary;
+}
+
+.user-header .user-position {
+    color: $secondary;
 }
 
 .user-header .user-actions {
+    color: $primary;
     margin-left: auto;
     font-size: 1.3rem;
     white-space: nowrap;

@@ -49,7 +49,7 @@ class CampaignEditForm extends Form implements FormIO
     {
         return [
             'name' => 'max:120|required',
-            'period' => 'max:60|required|unique:campaigns,period',
+            'period' => 'max:10|required|unique:campaigns,period',
             'description' => 'max:512|nullable',
 
             'definition_from' => 'date|required|after:today',

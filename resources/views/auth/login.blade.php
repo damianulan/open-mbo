@@ -4,7 +4,7 @@
 <div class="container pt-5 auth">
     <div class="row justify-content-center">
         <div class="col-md-8 pt-5">
-            <div class="card">
+            <div class="card logincard">
                 <div class="card-header"><span>{{ config('app.name') }}</span></div>
 
                 <div class="card-body pt-0">

@@ -25,7 +25,9 @@ class UsersDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('name', function($data) {
-                return $data->name();
+                return view('components.datatables.username', [
+                    'data' => $data,
+                ]);
             })
             ->orderColumn('name', function($query, $order) {
                 $query->orderBy('firstname', $order);
@@ -49,7 +51,7 @@ class UsersDataTable extends DataTable
      */
     public function query(User $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->whereNotIn('id', [auth()->user()->id]);
     }
 
     /**
@@ -86,7 +88,7 @@ class UsersDataTable extends DataTable
             Column::computed('name')
             ->title(__('fields.firstname_lastname'))
             ->sortable(true)
-            ->searchable(true),
+            ->addClass('firstcol'),
             Column::make('created_at')
             ->title(__('fields.created_at')),
             Column::make('updated_at')
@@ -94,7 +96,7 @@ class UsersDataTable extends DataTable
             Column::computed('action')
             ->exportable(false)
             ->printable(false)
-            ->addClass('action-btns')
+            ->addClass('lastcol action-btns')
             ->title(__('fields.action')),
         ];
     }

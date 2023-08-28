@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\View\Components\CourseProgressBar;
+use App\View\Components\CardProgressBar;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 
@@ -25,6 +25,7 @@ class ComponentServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
+        // Progressbar component
+        Blade::component('card-progressbar', CardProgressBar::class);
     }
 }

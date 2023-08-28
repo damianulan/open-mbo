@@ -11,7 +11,7 @@ return [
      * Default table attributes when generating the table.
      */
     'table' => [
-        'class' => 'table lms-table',
+        'class' => 'table ombo-table',
         'id'    => 'dataTableBuilder',
     ],
 

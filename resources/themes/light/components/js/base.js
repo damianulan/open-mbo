@@ -2,6 +2,15 @@ import { Tooltip } from "bootstrap"
 require("chosen-js");
 const moment = require("moment");
 const Swal = require('sweetalert2');
+const CustomSwal = Swal.mixin({
+    customClass: {
+        cancelButton: 'btn btn-outline-primary',
+        confirmButton: 'btn btn-primary me-2',
+    },
+    buttonsStyling: false,
+    backdrop: `rgba(22,71,85, 0.20)`,
+});
+
 const flatpickr = require("flatpickr");
 const flatpickr_pl = require("flatpickr/dist/l10n/pl.js").default.pl;
 
@@ -47,12 +56,36 @@ $(document).ready(function() {
     });
 });
 
-$(".card").on("click", function (){
+$(".body").on("click", ".card-url", function (){
     var url = $(this).attr('data-url');
     if(url){
         window.location.href = url;
     }
 });
+
+$("body").on('click', '.swal-confirm', function(e){
+    e.preventDefault();
+    var url = $(this).attr('href');
+    var title = 'Czy na pewno?';
+    var title_input = $(this).attr('data-swal-title');
+    if(title_input){
+        title = title_input;
+    }
+    var text = $(this).attr('data-swal-text');
+
+    CustomSwal.fire({
+        title: title,
+        text: text,
+        showCancelButton: true,
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Anuluj',
+    }).then((result) => {
+        if(result.isConfirmed){
+            window.location.href = url;
+        }
+    });
+})
+
 
 $("input[type=password]").on("focus", function() {
     $(this).val('');

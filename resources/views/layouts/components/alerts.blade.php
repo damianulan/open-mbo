@@ -1,5 +1,5 @@
 <div class="container-fluid" id="alert-container">
-    @if (session('success'))
+@if (session('success'))
 <div class="row justify-content-center my-2">
     <div class="col-md-12">
         <div class="alert alert-success alert-dismissible fade show" role="alert">

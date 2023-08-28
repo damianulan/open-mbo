@@ -3117,6 +3117,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 __webpack_require__(/*! chosen-js */ "./node_modules/chosen-js/chosen.jquery.js");
 var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 var Swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+var CustomSwal = Swal.mixin({
+  customClass: {
+    cancelButton: 'btn btn-outline-primary',
+    confirmButton: 'btn btn-primary me-2'
+  },
+  buttonsStyling: false,
+  backdrop: "rgba(22,71,85, 0.20)"
+});
 var flatpickr = __webpack_require__(/*! flatpickr */ "./node_modules/flatpickr/dist/esm/index.js");
 var flatpickr_pl = (__webpack_require__(/*! flatpickr/dist/l10n/pl.js */ "./node_modules/flatpickr/dist/l10n/pl.js")["default"].pl);
 var tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
@@ -3157,11 +3165,32 @@ $(document).ready(function () {
     mode: "range"
   });
 });
-$(".card").on("click", function () {
+$(".body").on("click", ".card-url", function () {
   var url = $(this).attr('data-url');
   if (url) {
     window.location.href = url;
   }
+});
+$("body").on('click', '.swal-confirm', function (e) {
+  e.preventDefault();
+  var url = $(this).attr('href');
+  var title = 'Czy na pewno?';
+  var title_input = $(this).attr('data-swal-title');
+  if (title_input) {
+    title = title_input;
+  }
+  var text = $(this).attr('data-swal-text');
+  CustomSwal.fire({
+    title: title,
+    text: text,
+    showCancelButton: true,
+    confirmButtonText: 'OK',
+    cancelButtonText: 'Anuluj'
+  }).then(function (result) {
+    if (result.isConfirmed) {
+      window.location.href = url;
+    }
+  });
 });
 $("input[type=password]").on("focus", function () {
   $(this).val('');

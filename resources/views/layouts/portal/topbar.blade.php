@@ -1,7 +1,7 @@
 <div id="topbar" class="page-top">
     <div class="togglers">
       <a class="me-2" id="hamburger-toggle"><i class="bi-list"></i></a>
-      <a class="me-2" id="menu-toggle" data-bs-toggle="tooltip" data-bs-title="Default tooltip"><i class="bi-three-dots-vertical"></i></a>
+      <a class="me-2" id="menu-toggle"><i class="bi-three-dots-vertical"></i></a>
     </div>
     <div class="page-heading">
       <span class="page-title" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $page->title }}">{{ $page->title }}</span>
@@ -10,7 +10,7 @@
         <!--<x-notification-dropdown/>-->
         <div class="user-nav dropup">
             <div class="user-actions" data-bs-toggle="dropdown" type="button" aria-expanded="false">
-              <img class="rounded-circle" src="{{ asset('images/portrait/avatar-male.png'); }}" width="30" height="30">
+              <img class="rounded-circle" src="{{ auth()->user()->getAvatar() }}" width="30" height="30">
               <span class="profile-name">{{ auth()->user()->name() }}</span>
             </div>
             <ul class="dropdown-menu">
