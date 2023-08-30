@@ -15,7 +15,7 @@ class Datetime extends Element
     {
         $this->name = empty($name) ? null:$name;
         $this->type = empty($type) ? null:$type;
-        $this->value = $value;//$this->assignValue($value);
+        $this->value = date(config('app.'.$type.'_format'), $value);
         $this->classes[] = 'form-control';
 
         if($this->type){

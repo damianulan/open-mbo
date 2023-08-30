@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Casts;
+namespace App\Casts\Carbon;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
@@ -25,6 +25,6 @@ class CarbonDatetime implements CastsAttributes
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        return $value;
+        return date('Y-m-d', strtotime($value));
     }
 }

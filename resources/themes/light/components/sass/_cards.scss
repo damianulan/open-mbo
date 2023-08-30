@@ -6,8 +6,7 @@
 }
 
 .card-hello {
-    //background: linear-gradient(118deg, $primary-dark, $primary-light);
-    //color: $light;
+
     margin: 1.2rem 0;
 }
 
@@ -44,7 +43,7 @@
     box-shadow: inset -5px -15px 75px -28px rgba($greenish,0.4);
 }
 
-.campaign-card .campaign-img{
+.card-bg .campaign-img{
     display: block;
     width: 100%;
     background-repeat: no-repeat;
@@ -55,30 +54,30 @@
     pointer-events: none;
 }
 
-.campaign-card .card-top {
+.card-bg .card-top {
     display: flex;
 
 }
 
-.campaign-card .campaign-badges {
+.card-badges {
     display: flex;
     margin-left: auto;
     margin-bottom: $card-title-spacer-y;
 }
 
-.campaign-card .campaign-badges div {
+.card-badges div {
     display: flex;
     align-items: center;
     font-size: .75rem;
     margin-left: .35rem;
 }
 
-.campaign-card .campaign-badges div i.bi{
+.card-badges div i.bi{
     font-size: 1rem;
     color: $secondary;
 }
 
-.campaign-card .card-top .card-title {
+.card-bg .card-top .card-title {
     font-weight: 700;
     font-family: $font-family-serif;
     overflow: hidden;
@@ -88,11 +87,11 @@
     white-space: nowrap;
 }
 
-.campaign-card.inactive .card-top .card-title {
+.card-bg.inactive .card-top .card-title {
     color: darken($greenish, 25%);
 }
 
-.campaign-card .card-text {
+.card-bg .card-text {
     max-height: 3em;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -100,19 +99,19 @@
     margin-bottom: .7rem;
 }
 
-.campaign-card .details .element,
+.card-bg .details .element,
 .path-card .details .element {
     display: flex;
     margin-top: .5rem;
 }
 
-.campaign-card .details .element .element-title {
+.card-bg .details .element .element-title {
     display: flex;
     align-items: center;
     color: $secondary;
 }
 
-.campaign-card .details .element .element-title span {
+.card-bg .details .element .element-title span {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
@@ -120,7 +119,7 @@
     font-weight: 600;
 }
 
-.campaign-card .progress-bar {
+.card-bg .progress-bar {
     display: flex;
     width: 100%;
     position: absolute;
@@ -128,18 +127,18 @@
     padding-top: .5rem;
 }
 
-.campaign-card .progress-bar .bar-container {
+.card-bg .progress-bar .bar-container {
     width: 100%;
     height: .3em;
     background-color: rgba($secondary, 0.2);
 }
 
-.campaign-card .progress-bar .bar-progress {
+.card-bg .progress-bar .bar-progress {
     height: 100%;
 }
 
-.campaign-card .progress-bar .bar-container,
-.campaign-card .progress-bar .bar-progress {
+.card-bg .progress-bar .bar-container,
+.card-bg .progress-bar .bar-progress {
     border-bottom-right-radius: $card-border-radius;
     border-bottom-left-radius: $card-border-radius;
 }

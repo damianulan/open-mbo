@@ -52,7 +52,7 @@ class CampaignEditForm extends Form implements FormIO
             'period' => 'max:10|required|unique:campaigns,period',
             'description' => 'max:512|nullable',
 
-            'definition_from' => 'date|required|after:today',
+            'definition_from' => 'date|required',
             'definition_to' => 'date|required|after_or_equal:definition_from',
 
             'disposition_from' => 'date|required|after:definition_from',

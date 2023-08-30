@@ -13,7 +13,7 @@ class CampaignsController extends Controller
     public function index()
     {
         return view('pages.campaigns.index', [
-
+            'campaigns' => Campaign::all(),
         ]);
     }
 
@@ -39,9 +39,9 @@ class CampaignsController extends Controller
     {
         $request = $form::reformatRequest($request);
         $request->validate($form::validation());
-        $process = Campaign::fillFromRequest($request);
+        $campaign = Campaign::fillFromRequest($request);
 
-        if($process->save()){
+        if($campaign->save()){
 
         }
     }
@@ -54,8 +54,10 @@ class CampaignsController extends Controller
      */
     public function show($id)
     {
+        $campaign = Campaign::findOrFail($id);
         return view('pages.campaigns.show', [
-            'campaign' => Campaign::findOrFail($id),
+            'campaign' => $campaign,
+            'pagetitle' => $campaign->name,
         ]);
     }
 

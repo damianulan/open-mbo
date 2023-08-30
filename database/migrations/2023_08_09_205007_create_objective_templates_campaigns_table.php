@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('objective_templates_campaings', function (Blueprint $table) {
+        Schema::create('objective_templates_campaigns', function (Blueprint $table) {
             $table->char('objective_template_id');
             $table->char('campaign_id');
 

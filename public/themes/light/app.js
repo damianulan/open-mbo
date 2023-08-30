@@ -3165,7 +3165,7 @@ $(document).ready(function () {
     mode: "range"
   });
 });
-$(".body").on("click", ".card-url", function () {
+$("body").on("click", ".card-url", function () {
   var url = $(this).attr('data-url');
   if (url) {
     window.location.href = url;

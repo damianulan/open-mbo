@@ -15,7 +15,7 @@ class CarbonTime implements CastsAttributes
      */
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('app.time_format'));
+        return Carbon::createFromFormat('H:i:s', $value)->format(config('app.time_format'));
     }
 
     /**
@@ -25,6 +25,6 @@ class CarbonTime implements CastsAttributes
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        return $value;
+        return date('Y-m-d', strtotime($value));
     }
 }

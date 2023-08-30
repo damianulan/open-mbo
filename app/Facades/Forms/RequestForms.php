@@ -8,13 +8,13 @@ use Illuminate\Support\Carbon;
 
 trait RequestForms
 {
-    public static function fillFromRequest(Request $request, $id = null): self
+    public static function fillFromRequest(Request $request, $id = null): static
     {
         $instance = null;
         if(is_null($id)){
-            $instance = new self();
+            $instance = new static();
         } else {
-            $instance = self::find($id);
+            $instance = static::find($id);
         }
         foreach($request->all() as $property => $value){
             if(in_array($property, $instance->fillable)){

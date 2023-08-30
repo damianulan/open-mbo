@@ -16,17 +16,14 @@ use App\Models\MBO\Objective;
 use App\Models\MBO\CampaignObjective;
 use App\Models\MBO\UserCampaign;
 use App\Models\MBO\ObjectiveTemplate;
+use App\Casts\Carbon\CarbonDate;
+use Carbon\Carbon;
 
 class Campaign extends Model
 {
     use HasFactory, UUID, SoftDeletes, RequestForms, TrixFields;
 
     public $stages;
-
-    public function __construct()
-    {
-        $this->stages = $this->stages();
-    }
 
     protected $fillable = [
         'name',
@@ -46,6 +43,7 @@ class Campaign extends Model
 
         'draft',
         'manual',
+        'created_by',
     ];
 
     protected $casts = [
@@ -53,16 +51,16 @@ class Campaign extends Model
         'manual' => CheckboxCast::class,
 
         // Dates
-        'definition_from' => 'datetime',
-        'definition_to' => 'datetime',
-        'disposition_from' => 'datetime',
-        'disposition_to' => 'datetime',
-        'realization_from' => 'datetime',
-        'realization_to' => 'datetime',
-        'evaluation_from' => 'datetime',
-        'evaluation_to' => 'datetime',
-        'self_evaluation_from' => 'datetime',
-        'self_evaluation_to' => 'datetime',
+        'definition_from' => CarbonDate::class,
+        'definition_to' => CarbonDate::class,
+        'disposition_from' => CarbonDate::class,
+        'disposition_to' => CarbonDate::class,
+        'realization_from' => CarbonDate::class,
+        'realization_to' => CarbonDate::class,
+        'evaluation_from' => CarbonDate::class,
+        'evaluation_to' => CarbonDate::class,
+        'self_evaluation_from' => CarbonDate::class,
+        'self_evaluation_to' => CarbonDate::class,
 
         'description' => TrixFieldCast::class,
     ];
@@ -87,10 +85,43 @@ class Campaign extends Model
         return $this->hasMany(CampaignObjective::class);
     }
 
+    public function created_by()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function active(): bool
+    {
+        $now = Carbon::now();
+        $start = Carbon::createFromFormat(config('app.date_format'), $this->dateStart());
+        $end = Carbon::createFromFormat(config('app.date_format'), $this->dateEnd());
+        return $now->between($start, $end) && !$this->draft;
+    }
+
     public function stages(): Collection
     {
         $stages = new Collection();
 
         return $stages;
+    }
+
+    public function getProgress(): int
+    {
+        $now = Carbon::now();
+        $start = Carbon::createFromFormat(config('app.date_format'), $this->dateStart());
+        $end = Carbon::createFromFormat(config('app.date_format'), $this->dateEnd());
+        $fullDiff = $start->diffInDays($end, false);
+        $diff = $now->diffInDays($end);
+
+        return round(($diff / $fullDiff)*100);
+    }
+
+    public function dateStart(): string
+    {
+        return $this->definition_from;
+    }
+    public function dateEnd(): string
+    {
+        return $this->self_evaluation_to;
     }
 }

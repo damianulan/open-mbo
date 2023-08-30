@@ -11,6 +11,7 @@ class Form
         foreach($request->all() as $property => $value)
         {
             if(self::isDate($value)){
+                $value = self::formatDate($value);
                 if(str_contains($property, '_from') || str_contains($property, '_to')){
                     $value = self::formatDateSpan($property, $value);
                 }
@@ -48,5 +49,10 @@ class Form
             return true;
         }
         return false;
+    }
+
+    private static function formatDate(string $value)
+    {
+        return date('Y-m-d', strtotime($value));
     }
 }
