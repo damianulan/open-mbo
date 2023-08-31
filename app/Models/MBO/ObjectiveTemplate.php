@@ -2,7 +2,7 @@
 
 namespace App\Models\MBO;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\UUID;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -16,9 +16,9 @@ use App\Models\MBO\CampaignObjective;
 use App\Models\MBO\ObjectiveTemplateCategory;
 use App\Enums\ObjectiveType;
 
-class ObjectiveTemplate extends Model
+class ObjectiveTemplate extends BaseModel
 {
-    use HasFactory, UUID, SoftDeletes, RequestForms, TrixFields;
+    use TrixFields;
 
     protected $fillable = [
         'category_id',

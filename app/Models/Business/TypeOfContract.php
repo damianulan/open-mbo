@@ -2,19 +2,13 @@
 
 namespace App\Models\Business;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use App\Traits\UUID;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\BaseModel;
 use App\Traits\Vendors\TrixFields;
-use App\Facades\Forms\RequestForms;
 use App\Facades\TrixField\TrixFieldCast;
-use App\Casts\CheckboxCast;
-use App\Models\User;
 
-class TypeOfContract extends Model
+class TypeOfContract extends BaseModel
 {
-    use HasFactory, UUID, SoftDeletes, RequestForms, TrixFields;
+    use TrixFields;
 
     protected $fillable = [
         'name',

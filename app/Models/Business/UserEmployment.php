@@ -2,14 +2,8 @@
 
 namespace App\Models\Business;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use App\Traits\UUID;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\BaseModel;
 use App\Traits\Vendors\TrixFields;
-use App\Facades\Forms\RequestForms;
-use App\Facades\TrixField\TrixFieldCast;
-use App\Casts\CheckboxCast;
 use App\Models\User;
 use App\Models\Business\Company;
 use App\Models\Business\Department;
@@ -17,9 +11,9 @@ use App\Models\Business\Position;
 use App\Models\Business\Team;
 use App\Models\Business\TypeOfContract;
 
-class UserEmployment extends Model
+class UserEmployment extends BaseModel
 {
-    use HasFactory, UUID, SoftDeletes, RequestForms, TrixFields;
+    use TrixFields;
 
     protected $fillable = [
         'foreign_id',
@@ -50,6 +44,21 @@ class UserEmployment extends Model
 
     public function contract()
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(TypeOfContract::class, 'contract_id');
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+
+    public function position()
+    {
+        return $this->belongsTo(Position::class);
+    }
+
+    public function team()
+    {
+
     }
 }

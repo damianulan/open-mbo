@@ -2,19 +2,14 @@
 
 namespace App\Models\MBO;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use App\Traits\UUID;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\BaseModel;
 use App\Traits\Vendors\TrixFields;
-use App\Facades\Forms\RequestForms;
 use App\Facades\TrixField\TrixFieldCast;
-use App\Casts\CheckboxCast;
 use App\Models\User;
 
-class BonusScheme extends Model
+class BonusScheme extends BaseModel
 {
-    use HasFactory, UUID, SoftDeletes, RequestForms, TrixFields;
+    use TrixFields;
 
     protected $fillable = [
         'name',

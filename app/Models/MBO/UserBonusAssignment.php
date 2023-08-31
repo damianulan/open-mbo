@@ -2,19 +2,13 @@
 
 namespace App\Models\MBO;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use App\Traits\UUID;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Facades\Forms\RequestForms;
-use App\Casts\CheckboxCast;
+use App\Models\BaseModel;
 use App\Models\User;
 use App\Models\MBO\BonusScheme;
 use App\Models\MBO\Campaign;
 
-class UserBonusAssignment extends Model
+class UserBonusAssignment extends BaseModel
 {
-    use HasFactory, UUID, SoftDeletes, RequestForms;
 
     protected $fillable = [
         'user_id',

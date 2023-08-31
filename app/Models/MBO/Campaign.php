@@ -2,16 +2,11 @@
 
 namespace App\Models\MBO;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use App\Traits\UUID;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\BaseModel;
 use App\Traits\Vendors\TrixFields;
-use App\Facades\Forms\RequestForms;
 use App\Facades\TrixField\TrixFieldCast;
 use App\Casts\CheckboxCast;
 use Illuminate\Support\Collection;
-use App\Enums\CampaignStage;
 use App\Models\MBO\Objective;
 use App\Models\MBO\CampaignObjective;
 use App\Models\MBO\UserCampaign;
@@ -19,9 +14,9 @@ use App\Models\MBO\ObjectiveTemplate;
 use App\Casts\Carbon\CarbonDate;
 use Carbon\Carbon;
 
-class Campaign extends Model
+class Campaign extends BaseModel
 {
-    use HasFactory, UUID, SoftDeletes, RequestForms, TrixFields;
+    use TrixFields;
 
     public $stages;
 

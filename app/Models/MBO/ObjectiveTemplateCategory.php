@@ -2,7 +2,7 @@
 
 namespace App\Models\MBO;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\UUID;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,9 +12,9 @@ use App\Facades\TrixField\TrixFieldCast;
 use App\Casts\CheckboxCast;
 use App\Models\MBO\ObjectiveTemplate;
 
-class ObjectiveTemplateCategory extends Model
+class ObjectiveTemplateCategory extends BaseModel
 {
-    use HasFactory, UUID, SoftDeletes, RequestForms, TrixFields;
+    use TrixFields;
 
     protected $fillable = [
         'name',
