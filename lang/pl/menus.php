@@ -62,6 +62,7 @@ return [
     'campaigns' => [
         'index' => 'Kampanie MBO',
         'create' => 'Tworzenie kampanii pomiarowej',
+        'edit' => 'Edycja kampanii',
     ],
 
     'users' => [

@@ -15,7 +15,7 @@ class Datetime extends Element
     {
         $this->name = empty($name) ? null:$name;
         $this->type = empty($type) ? null:$type;
-        $this->value = date(config('app.'.$type.'_format'), $value);
+        $this->value = date('Y-m-d', strtotime($value));
         $this->classes[] = 'form-control';
 
         if($this->type){
@@ -24,8 +24,4 @@ class Datetime extends Element
         $this->placeholder(__('forms.placeholders.choose_'. $this->type));
     }
 
-    private function assignValue($value)
-    {
-
-    }
 }

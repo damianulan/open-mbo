@@ -93,6 +93,17 @@ class Campaign extends BaseModel
         return $now->between($start, $end) && !$this->draft;
     }
 
+    public function finished(): bool
+    {
+        if($this->manual){
+            return false;
+        }
+
+        $now = Carbon::now();
+        $end = Carbon::createFromFormat(config('app.date_format'), $this->dateEnd());
+        return $now->greaterThan($end) && !$this->manual;
+    }
+
     public function stages(): Collection
     {
         $stages = new Collection();

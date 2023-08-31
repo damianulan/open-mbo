@@ -22531,6 +22531,59 @@ table.ombo-table tbody tr:hover {
   border-bottom-right-radius: 0.35rem;
 }
 
+ul.ombo-list {
+  list-style: none;
+  padding: 0;
+}
+
+.ombo-list li {
+  border-radius: 0.35rem;
+  background-color: rgba(28, 103, 108, 0.1);
+  padding: 0.5rem 1rem;
+  margin: 0.35rem 0;
+}
+
+.ombo-list li.inactive {
+  background-color: rgba(163, 174, 167, 0.2);
+}
+
+.ombo-list li .list-grid {
+  display: flex;
+  align-items: center;
+}
+
+.ombo-list li .list-content {
+  font-size: 0.9rem;
+}
+
+.ombo-list li .list-actions {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.ombo-list li .list-actions .list-action {
+  text-decoration: none;
+  margin-right: 0.35rem;
+  font-size: 1rem;
+  color: #164755;
+}
+
+.ombo-list li .list-actions .list-action span {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.ombo-list li:hover {
+  box-shadow: inset -5px -15px 75px -28px rgba(28, 103, 108, 0.13);
+  transition: all 0.2s ease-in-out;
+}
+
+.ombo-list li.inactive:hover {
+  box-shadow: inset -5px -15px 75px -28px rgba(163, 174, 167, 0.4);
+  transition: all 0.2s ease-in-out;
+}
+
 .card-header {
   border: none;
   font-size: 1.1rem;
@@ -22553,12 +22606,12 @@ table.ombo-table tbody tr:hover {
 }
 
 .card.card-url {
-  background-color: rgba(28, 103, 108, 0.08);
+  background-color: rgba(28, 103, 108, 0.1);
 }
 
 .card.card-url:hover {
   cursor: pointer;
-  box-shadow: inset -5px -15px 75px -28px rgba(28, 103, 108, 0.12);
+  box-shadow: inset -5px -15px 75px -28px rgba(28, 103, 108, 0.13);
   transition: all 0.2s ease-in-out;
 }
 
@@ -22569,6 +22622,15 @@ table.ombo-table tbody tr:hover {
 .card.inactive:hover {
   cursor: pointer;
   box-shadow: inset -5px -15px 75px -28px rgba(163, 174, 167, 0.4);
+  transition: all 0.2s ease-in-out;
+}
+
+.card.failed {
+  box-shadow: inset -5px -15px 75px -28px rgba(163, 174, 167, 0.4);
+}
+
+.card.completed {
+  box-shadow: inset -5px -15px 75px -28px rgba(79, 157, 105, 0.25);
 }
 
 .card-bg .campaign-img {

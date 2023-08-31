@@ -17,12 +17,15 @@ class CardProgressBar extends Component
 
     public $color;
 
-    public function __construct(public int $progress, string $state = 'auto', array $options = [])
+    public function __construct(public int $progress, bool $failed = false)
     {
-        if($progress > 0 && $progress < 100){
+        if($progress > 0 && $progress < 100 && !$failed){
             $this->color = $this->colors['in_progress'];
-        } elseif ($progress === 100) {
+        } elseif ($progress === 100 && !$failed) {
             $this->color = $this->colors['completed'];
+        } else {
+            $this->color = $this->colors['ungraded'];
+            $progress = 100;
         }
     }
 

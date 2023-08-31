@@ -93,3 +93,60 @@ table.ombo-table tbody tr:hover {
     border-top-right-radius: .35rem;
     border-bottom-right-radius: .35rem;
 }
+
+ul.ombo-list {
+    list-style: none;
+    padding: 0;
+}
+
+.ombo-list li {
+    border-radius: .35rem;
+    background-color: $ombo-body;
+    padding: .5rem 1rem;
+    margin: 0.35rem 0;
+}
+
+.ombo-list li.inactive {
+    background-color: $ombo-body-inactive;
+}
+
+.ombo-list li .list-grid{
+    display: flex;
+    align-items: center;
+}
+
+.ombo-list li .list-content{
+    font-size: .9rem;
+}
+
+.ombo-list li .list-actions{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.ombo-list li .list-actions .list-action{
+    text-decoration: none;
+    margin-right: .35rem;
+    font-size: 1rem;
+    color: $secondary;
+}
+
+.ombo-list li .list-actions .list-action span{
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+.ombo-list li:hover {
+    -webkit-box-shadow: inset -5px -15px 75px -28px $ombo-body-hover;
+    -moz-box-shadow: inset -5px -15px 75px -28px $ombo-body-hover;
+    box-shadow: inset -5px -15px 75px -28px $ombo-body-hover;
+    transition: all 0.2s ease-in-out;
+}
+
+.ombo-list li.inactive:hover {
+    -webkit-box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
+    -moz-box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
+    box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
+    transition: all 0.2s ease-in-out;
+}

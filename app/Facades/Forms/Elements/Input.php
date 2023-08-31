@@ -12,6 +12,7 @@ class Input extends Element
     public ?int $minlength = null;
 
     public bool $numeric = false;
+    public string $numeric_type = 'integer';
 
     public function __construct(string $name, string $type, ?string $value)
     {
@@ -36,6 +37,15 @@ class Input extends Element
     public function numeric()
     {
         $this->numeric = true;
+        $this->placeholder('Wprowadź liczbę...');
+        return $this;
+    }
+
+    public function decimal()
+    {
+        $this->numeric = true;
+        $this->numeric_type = __FUNCTION__;
+        $this->placeholder('Wprowadź liczbę do dwóch miejsc dziesiętnych...');
         return $this;
     }
 

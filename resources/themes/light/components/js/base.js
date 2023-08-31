@@ -27,9 +27,11 @@ $(document).ready(function() {
     $(".datetimepicker").flatpickr({
         "locale": flatpickr_pl,
         allowInput: true,
-        dateFormat: datetime_format,
+        altFormat: datetime_format,
+        dateFormat: 'Y-m-d H:i:s',
         enableTime: true,
         time_24hr: true,
+        altInput: true,
     });
 
     $(".timepicker").flatpickr({
@@ -38,21 +40,17 @@ $(document).ready(function() {
         allowInput: true,
         enableTime: true,
         noCalendar: true,
-        dateFormat: time_format,
+        altFormat: time_format,
+        dateFormat: 'H:i:s',
         time_24hr: true,
     });
 
     $(".datepicker").flatpickr({
         "locale": flatpickr_pl,
         allowInput: true,
-        dateFormat: date_format,
-    });
-
-    $(".datepicker-range").flatpickr({
-        "locale": flatpickr_pl,
-        dateFormat: date_format,
-        allowInput: true,
-        mode: "range"
+        altInput: true,
+        altFormat: date_format,
+        dateFormat: 'Y-m-d',
     });
 });
 

@@ -26,6 +26,12 @@ class FormElement
         return (new Input($name, 'text', $value))->numeric();
     }
 
+    public static function decimal(string $name, $model = null): Input
+    {
+        $value = $model->$name ?? null;
+        return (new Input($name, 'text', $value))->decimal();
+    }
+
     public static function password(string $name, $model = null): Input
     {
         $value = $model->$name ?? null;

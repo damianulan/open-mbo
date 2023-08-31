@@ -9,6 +9,7 @@ use App\Casts\CheckboxCast;
 use App\Models\MBO\ObjectiveTemplate;
 use App\Models\MBO\Campaign;
 use App\Models\User;
+use App\Casts\Carbon\CarbonDatetime;
 
 class Objective extends BaseModel
 {
@@ -29,7 +30,7 @@ class Objective extends BaseModel
 
     protected $casts = [
         'draft' => CheckboxCast::class,
-        'deadline' => 'datetime',
+        'deadline' => CarbonDatetime::class,
         'description' => TrixFieldCast::class,
     ];
 

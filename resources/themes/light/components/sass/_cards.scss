@@ -21,26 +21,39 @@
 }
 
 .card.card-url{
-    background-color: rgba($primary,0.08);
+    background-color: $ombo-body;
 }
 
 .card.card-url:hover {
     cursor: pointer;
-    -webkit-box-shadow: inset -5px -15px 75px -28px rgba($primary,0.12);
-    -moz-box-shadow: inset -5px -15px 75px -28px rgba($primary,0.12);
-    box-shadow: inset -5px -15px 75px -28px rgba($primary,0.12);
+    -webkit-box-shadow: inset -5px -15px 75px -28px $ombo-body-hover;
+    -moz-box-shadow: inset -5px -15px 75px -28px $ombo-body-hover;
+    box-shadow: inset -5px -15px 75px -28px $ombo-body-hover;
     transition: all 0.2s ease-in-out;
 }
 
 .card.card-url.inactive {
-    background-color: rgba($greenish,0.2) !important;
+    background-color: $ombo-body-inactive !important;
 }
 
 .card.inactive:hover {
     cursor: pointer;
-    -webkit-box-shadow: inset -5px -15px 75px -28px rgba($greenish,0.4);
-    -moz-box-shadow: inset -5px -15px 75px -28px rgba($greenish,0.4);
-    box-shadow: inset -5px -15px 75px -28px rgba($greenish,0.4);
+    -webkit-box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
+    -moz-box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
+    box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
+    transition: all 0.2s ease-in-out;
+}
+
+.card.failed {
+    -webkit-box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
+    -moz-box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
+    box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
+}
+
+.card.completed {
+    -webkit-box-shadow: inset -5px -15px 75px -28px rgba($success, 0.25);
+    -moz-box-shadow: inset -5px -15px 75px -28px rgba($success, 0.25);
+    box-shadow: inset -5px -15px 75px -28px rgba($success, 0.25);
 }
 
 .card-bg .campaign-img{
