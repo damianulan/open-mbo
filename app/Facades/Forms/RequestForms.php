@@ -32,7 +32,9 @@ trait RequestForms
 
                 } else {
                     // ALL ELSE
-                    $value = trim($value);
+                    if(!is_array($value)){
+                        $value = trim($value);
+                    }
                     $instance->$property = $value;
                 }
             }

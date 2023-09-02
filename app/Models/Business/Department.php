@@ -14,6 +14,7 @@ class Department extends BaseModel
 
     protected $fillable = [
         'parent_id',
+        'manager_id',
         'name',
         'description',
     ];

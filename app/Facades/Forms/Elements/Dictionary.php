@@ -16,15 +16,22 @@ class Dictionary
         'null' => 'PLAIN'
     ];
 
-    public static function fromModel(string $model, string $column, string $method = 'all'): Collection
+    public static function fromModel(string $model, string $column, string $method = 'all', array $exclude = []): Collection
     {
         $options = new Collection();
 
         if(class_exists($model)){
             $records = $model::$method();
             if(!empty($records)){
+                if(count($exclude)){
+                    $records = $records->except($exclude);
+                }
                 foreach ($records as $record){
-                    $options->push(new Option($record->id, $record->$column));
+                    if(method_exists($model, $column)){
+                        $options->push(new Option($record->id, $record->$column()));
+                    } else {
+                        $options->push(new Option($record->id, $record->$column));
+                    }
                 }
             }
         }

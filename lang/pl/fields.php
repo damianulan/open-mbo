@@ -10,6 +10,7 @@ return [
     'firstname_lastname' => 'Imię i nazwisko',
     'email' => 'E-mail',
     'password' => 'Hasło',
+    'status' => 'Status',
 
     // Miscellaneous
     'action' => 'Akcje',

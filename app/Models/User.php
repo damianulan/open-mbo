@@ -13,12 +13,13 @@ use App\Facades\Forms\RequestForms;
 use App\Traits\Awards;
 use App\Traits\UserMBO;
 use App\Traits\UserBusiness;
+use App\Traits\ActiveFields;
 use App\Enums\Users\Gender;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, UUID, HasRolesAndPermissions, SoftDeletes, RequestForms;
-    use Awards, UserMBO, UserBusiness;
+    use Awards, UserMBO, UserBusiness, ActiveFields;
 
     /**
      * The attributes that are mass assignable.
@@ -35,7 +36,7 @@ class User extends Authenticatable
         'phone',
         'avatar',
         'active',
-        'force_password_change'
+        'force_password_change',
     ];
 
     /**
@@ -50,6 +51,10 @@ class User extends Authenticatable
 
     protected $dates = [
         'birthday',
+    ];
+
+    protected $activeRules = [
+        'active' => 1,
     ];
 
     /**

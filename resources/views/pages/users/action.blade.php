@@ -4,7 +4,7 @@
 <a class="action-btn" href="{{ route('users.edit', $data->id) }}" title="{{ __('buttons.edit') }}">
     <i class="bi bi-pencil-square me-1"></i>
 </a>
-@if($data->active == 1)
+@if($data->active !== 1)
     <a class="action-btn" href="{{ route('users.block', $data->id) }}" title="{{ __('buttons.unblock') }}">
         <i class="bi bi-person-fill-check me-1"></i>
     </a>

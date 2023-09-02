@@ -43,9 +43,15 @@ class UsersController extends Controller
     {
         $request->validate($form::validation());
         $user = User::fillFromRequest($request);
-        if($user->save()){
+        $supervisors_ids = $request->input('supervisors_ids') ?? array();
 
+        if($user->save()){
+            if(!$user->syncSupervisors($supervisors_ids)){
+
+            }
+            return redirect()->route('users.show', $id)->with('success', __('alerts.users.success.create'));
         }
+        return redirect()->back()->with('error', __('alerts.users.error.create'));
     }
 
     /**
@@ -87,7 +93,12 @@ class UsersController extends Controller
     {
         $request->validate($form::validation());
         $user = User::fillFromRequest($request, $id);
+        $supervisors_ids = $request->input('supervisors_ids') ?? array();
+
         if($user->update()){
+            if(!$user->syncSupervisors($supervisors_ids)){
+
+            }
             return redirect()->route('users.show', $id)->with('success', __('alerts.users.success.edit', ['name' => $user->name()]));
         }
         return redirect()->back()->with('error', __('alerts.users.error.edit', ['name' => $user->name()]));

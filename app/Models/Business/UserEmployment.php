@@ -10,6 +10,8 @@ use App\Models\Business\Department;
 use App\Models\Business\Position;
 use App\Models\Business\Team;
 use App\Models\Business\TypeOfContract;
+use App\Casts\Carbon\CarbonDate;
+use App\Casts\CheckboxCast;
 
 class UserEmployment extends BaseModel
 {
@@ -28,8 +30,8 @@ class UserEmployment extends BaseModel
     ];
 
     protected $casts = [
-        'employment' => 'date',
-        'release' => 'date',
+        'employment' => CarbonDate::class,
+        'release' => CarbonDate::class,
     ];
 
     public function user()

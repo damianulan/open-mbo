@@ -42,10 +42,26 @@ class FormElement
     {
         $value = $model->$name ?? null;
 
+        if(is_object($value)){
+            $value = $value->value;
+        }
         if(!is_null($selected_value)){
             $value = $selected_value;
         }
-        return new Select($name, $options, $value);
+        return new Select($name, $options, array($value));
+    }
+
+    public static function multiselect(string $name, $model = null, Collection $options, $relation = null, $selected_values = [])
+    {
+        $values = array();
+        if($relation){
+            $values = $model->$relation->modelKeys() ?? array();
+        }
+
+        if(count($selected_values)){
+            $values = $selected_values;
+        }
+        return (new Select($name, $options, $values))->multiple();
     }
 
     public static function trix(string $name, $model = null, string $toolbar = 'short')

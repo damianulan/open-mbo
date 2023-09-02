@@ -30,7 +30,31 @@ trait HasRolesAndPermissions
     public function hasRole(... $roles ) {
         foreach ($roles as $role) {
             if ($this->roles->contains('slug', $role)) {
+                if($role === 'supervisor'){
+                    if(!$this->isSupervisor()){
+                        $this->revokeRole('supervisor');
+                        return false;
+                    }
+                }
+                elseif($role === 'manager'){
+                    if(!$this->isManager()){
+                        $this->revokeRole('manager');
+                        return false;
+                    }
+                }
                 return true;
+            }
+            elseif($role === 'supervisor'){
+                if($this->isSupervisor()){
+                    $this->assignRole('supervisor');
+
+                }
+            }
+            elseif($role === 'manager'){
+                if($this->isManager()){
+                    $this->assignRole('manager');
+
+                }
             }
         }
         return false;
@@ -118,8 +142,23 @@ trait HasRolesAndPermissions
      */
     public function refreshRole(... $role )
     {
-        $this->roles()->detach();
-        return $this->roles()->attach($role);
+        return $this->roles()->sync($role);
+    }
+
+    public function assignRole(... $roles)
+    {
+        foreach($roles as $role){
+            $this->roles->attach($role);
+        }
+        return true;
+    }
+
+    public function revokeRole(... $roles)
+    {
+        foreach($roles as $role){
+            $this->roles->detach($role);
+        }
+        return true;
     }
 
     public function getRole(){

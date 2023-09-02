@@ -29,6 +29,23 @@ class UsersDataTable extends DataTable
                     'data' => $data,
                 ]);
             })
+            ->addColumn('status', function($data) {
+                $color = 'primary';
+                $text = 'Aktywny';
+                if(!$data->active){
+                    $color = 'dark';
+                    $text = 'Zablokowany';
+                }
+                return view('components.datatables.badge', [
+                    'color' => $color,
+                    'text' => $text,
+                ]);
+            })
+            ->orderColumn('status', function($query, $order) {
+                $o = $order==='asc' ? 'desc':'asc';
+                $query->orderBy('firstname', $o);
+                $query->orderBy('lastname', $o);
+            })
             ->orderColumn('name', function($query, $order) {
                 $query->orderBy('firstname', $order);
                 $query->orderBy('lastname', $order);
@@ -89,6 +106,11 @@ class UsersDataTable extends DataTable
             ->title(__('fields.firstname_lastname'))
             ->sortable(true)
             ->addClass('firstcol'),
+            Column::make('email')
+            ->title(__('fields.email')),
+            Column::computed('status')
+            ->title(__('fields.status'))
+            ->sortable(true),
             Column::make('created_at')
             ->title(__('fields.created_at')),
             Column::make('updated_at')

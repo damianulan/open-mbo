@@ -17,13 +17,13 @@
                             <div class="user-header">
                                 <div class="user-title">
                                     <div class="user-name">{{ $user->name() }}</div>
-                                    <div class="user-position">Administrator danych osobowych</div>
+                                    <div class="user-position">STANOWISKO</div>
                                 </div>
                                 <div class="user-actions">
                                     <a href="#" class="" data-bs-toggle="tooltip" data-bs-title="{{ __('buttons.favourities_add') }}">
                                         <i class="bi-star"></i>
                                     </a>
-                                    <a href="#" class="" data-bs-toggle="tooltip" data-bs-title="{{ __('buttons.edit') }}">
+                                    <a href="{{ route('users.edit', $user->id) }}" class="" data-bs-toggle="tooltip" data-bs-title="{{ __('buttons.edit') }}">
                                         <i class="bi-pencil-square"></i>
                                     </a>
                                     <a href="#" class="" data-bs-toggle="tooltip" data-bs-title="{{ __('buttons.reset_password') }}">
