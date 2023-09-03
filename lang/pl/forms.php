@@ -56,7 +56,8 @@ return [
         'email' => 'E-mail',
         'gender' => 'Płeć',
         'birthday' => 'Data urodzenia',
-        'supervisors' => 'Bezpośredni przełożeni'
+        'supervisors' => 'Bezpośredni przełożeni',
+        'roles' => 'Role systemowe',
     ],
 
     'objectives' => [

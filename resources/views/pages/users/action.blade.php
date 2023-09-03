@@ -9,7 +9,7 @@
         <i class="bi bi-person-fill-check me-1"></i>
     </a>
 @else
-    <a class="action-btn" href="{{ route('users.block', $data->id) }}" title="{{ __('buttons.block') }}">
+    <a class="action-btn swal-confirm" href="{{ route('users.block', $data->id) }}" title="{{ __('buttons.block') }}" data-swal-text="Wskutek tej akcji użytkownik utraci dostęp do systemu, a jego przełożeni mogą mieć odebrane niektóre prawa.">
         <i class="bi bi-person-fill-lock me-1"></i>
     </a>
 @endif

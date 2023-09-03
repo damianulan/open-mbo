@@ -7,7 +7,7 @@ name="{{ $element->name }}{{ $element->multiple ? '[]':'' }}"{{ $element->placeh
 @if (!empty($element->options))
     @foreach ($element->options as $option)
         <option value="{{ $option->value }}"
-            @if(request()->old($element->name) && ( $option->value == request()->old($element->name) || in_array($option->value, request()->old($element->name)) ))
+            @if(request()->old($element->name) && ( $option->value == request()->old($element->name) || (is_array(request()->old($element->name)) && in_array($option->value, request()->old($element->name))) ))
                 selected
             @elseif(in_array($option->value,$element->values))
                 selected

@@ -9,6 +9,7 @@ use App\Facades\Forms\FormElement;
 use App\Facades\Forms\Elements\Dictionary;
 use Illuminate\Validation\Rules\File;
 use App\Enums\Users\Gender;
+use App\Models\Role;
 use Illuminate\Validation\Rules\Enum;
 use App\Models\User;
 
@@ -26,13 +27,14 @@ class UserEditForm extends Form implements FormIO
         }
         return (new FormBuilder($method, $route, 'users_edit'))
                 ->class('users-create-form')
-                ->add(FormElement::file('avatar')->label(__('forms.users.avatar'))->setExt(['.jpg', '.jpeg', '.png']))
                 ->add(FormElement::text('firstname', $model)->label(__('forms.users.firstname')))
                 ->add(FormElement::text('lastname', $model)->label(__('forms.users.lastname')))
                 ->add(FormElement::text('email', $model)->label(__('forms.users.email')))
                 ->add(FormElement::select('gender', $model, Dictionary::fromEnum(Gender::class))
                 ->label(__('forms.users.gender')))
                 ->add(FormElement::date('birthday', $model)->label(__('forms.users.birthday')))
+                ->add(FormElement::multiselect('roles_ids', $model, Dictionary::fromAssocArray(Role::getSelectList()), 'roles')
+                ->label(__('forms.users.roles')))
                 ->add(FormElement::multiselect('supervisors_ids', $model, Dictionary::fromModel(User::class, 'name', 'allActive', $exclude), 'supervisors')
                 ->label(__('forms.users.supervisors')))
                 ->addSubmit();
@@ -46,10 +48,6 @@ class UserEditForm extends Form implements FormIO
             'email' => 'max:255|email|required',
             'birthday' => 'date|nullable',
             'gender' => [new Enum(Gender::class)],
-            // 'avatar' => [
-            //     File::image()->types(['jpg', 'jpeg', 'png'])
-            //         ->min(10)->max(4096),
-            // ],
         ];
     }
 }

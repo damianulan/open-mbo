@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use App\Traits\UUID;
 
-class Permission extends BaseModel
+class Permission extends Model
 {
+    use UUID, HasFactory;
+
     protected $table = 'permissions';
     protected $primaryKey = 'id';
 

@@ -27,6 +27,19 @@ trait UserBusiness
         return $this->hasMany(UserEmployment::class);
     }
 
+    public function employments_active()
+    {
+        return $this->hasMany(UserEmployment::class)
+                ->where('employment', '<', now())
+                ->where('release', '>', now())
+                ->orWhereNull('release');
+    }
+
+    public function hasEmployment(): bool
+    {
+        return $this->employments_active()->count() ? true:false;
+    }
+
     public function supervisors()
     {
         return $this->belongsToMany(static::class, 'users_supervisors', 'user_id', 'supervisor_id')->where('active', 1);
@@ -52,15 +65,21 @@ trait UserBusiness
         return $this->subordinates()->count() ? true:false;
     }
 
-    public function assignSupervisors(... $supervisor_id): bool
+    public function assignSupervisor(... $supervisor_ids): bool
     {
-        foreach($supervisor_id as $id){
-            if(!$this->isSupervisor($id)){
-                $supervisor = static::find($id);
-                if($supervisor){
-                    $this->supervisors()->attach($supervisor);
-                }
+        foreach($supervisor_ids as $id){
+            $supervisor = static::find($id);
+            if(!$supervisor->isEmpty() && !$this->hasSupervisor($id)){
+                $this->supervisors()->attach($supervisor);
             }
+        }
+        return true;
+    }
+
+    public function revokeSupervisor(... $supervisor_ids)
+    {
+        foreach($supervisor_ids as $id){
+            $this->supervisors()->detach($id);
         }
         return true;
     }

@@ -46,6 +46,10 @@ return [
             'create' => 'Wystąpił błąd, użytkownik nie mógł być dodany.',
             'edit' => 'Użytkownik nie mógł zostać zmodyfikowany. Podczas operacji wystąpił nieoczekiwany błąd.',
         ],
+
+        'warning' => [
+            'user_is_root' => 'Uwaga, ten użytkownik posiada uprawnienia Roota.',
+        ]
     ],
 
 ];

@@ -148,7 +148,10 @@ trait HasRolesAndPermissions
     public function assignRole(... $roles)
     {
         foreach($roles as $role){
-            $this->roles->attach($role);
+            $id = Role::getId($role);
+            if($id){
+                $this->roles()->attach($id);
+            }
         }
         return true;
     }
@@ -156,22 +159,11 @@ trait HasRolesAndPermissions
     public function revokeRole(... $roles)
     {
         foreach($roles as $role){
-            $this->roles->detach($role);
+            $id = Role::getId($role);
+            if($id){
+                $this->roles()->detach($id);
+            }
         }
         return true;
-    }
-
-    public function getRole(){
-        if (isset($this->role)){
-            return __('forms.'.$this->roles[0]->slug);
-        }
-        return __('forms.none');
-    }
-
-    public function getRoleSlug(){
-        if (isset($this->role)){
-            return $this->roles[0]->slug;
-        }
-        return __('forms.none');
     }
 }

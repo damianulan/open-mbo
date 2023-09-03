@@ -46,6 +46,11 @@ class ObjectiveTemplate extends BaseModel
         return $this->hasMany(Objective::class, 'template_id');
     }
 
+    public function users_count()
+    {
+        return $this->objectives()->count();
+    }
+
     public function global_objectives()
     {
         return $this->hasMany(CampaignObjective::class, 'template_id');

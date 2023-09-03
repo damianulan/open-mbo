@@ -37,9 +37,8 @@ class ObjectiveTemplateEditForm
         return [
             'category_id' => 'nullable',
             'name' => 'max:120|required',
-            'period' => 'max:60|required|unique:campaigns,period',
             'description' => 'max:512|nullable',
-            'goal' => 'decimal:8,2',
+            'goal' => 'decimal:2',
             'draft' => 'in:on,off',
         ];
     }

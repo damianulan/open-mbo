@@ -1,5 +1,5 @@
 
-<div class="card card-url card-bg" data-url="{{ route('campaigns.show', $objective->id) }}">
+<div class="card card-url card-bg" data-url="{{ route('management.objectives.show', $objective->id) }}">
     <div class="card-body">
         <div class="card-top">
             <div class="card-title" data-bs-toggle="tooltip" data-bs-title="Kampania xxx">
@@ -14,7 +14,7 @@
                 @endif
                 @if($objective->category())
                 <div data-bs-toggle="tooltip" data-bs-title="Kategoria">
-                    <span class="badge bg-secondary">{{ $objective->category()->anme }}</span>
+                    <span class="badge bg-secondary">{{ $objective->category->name }}</span>
                 </div>
                 @endif
             </div>
@@ -41,21 +41,7 @@
                 <div class="element">
                     <div class="element-title" data-bs-toggle="tooltip" data-bs-title="Ilość uczestników">
                         <i class="bi bi-people-fill me-2"></i>
-                        <span>{{ $objective->user_campaigns()->count() }}</span>
-                    </div>
-                </div>
-                <div class="element">
-                    <div class="element-title" data-bs-toggle="tooltip" data-bs-title="Cele podstawowe">
-                        <i class="bi bi-bullseye me-2"></i>
-                        <span>{{ $objective->objective_templates()->count() }}</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-md-6 col-sm-12">
-                <div class="element">
-                    <div class="element-title" data-bs-toggle="tooltip" data-bs-title="Autor kampanii">
-                        <i class="bi bi-person-fill me-2"></i>
-                        <span></span>
+                        <span>{{ $objective->users_count() }}</span>
                     </div>
                 </div>
 

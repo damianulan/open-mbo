@@ -16,8 +16,9 @@ class ObjectiveTemplateController extends Controller
      */
     public function index()
     {
-        return view('pages.management.index', [
 
+        return view('pages.management.index', [
+            'objectives' => ObjectiveTemplate::all(),
         ]);
     }
 
@@ -41,7 +42,13 @@ class ObjectiveTemplateController extends Controller
      */
     public function store(Request $request, ObjectiveTemplateEditForm $form)
     {
+        $request->validate($form::validation());
+        $objective = ObjectiveTemplate::fillFromRequest($request);
 
+        if($objective->save()){
+            return redirect()->route('management.index')->with('success', __('alerts.objective_template.success.create'));
+        }
+        return redirect()->back()->with('error', 'Wystąpił błąd.');
     }
 
     /**

@@ -33,4 +33,14 @@ return [
         Gender::FEMALE->value => 'Kobieta',
         Gender::OTHER->value => 'Inna',
     ],
+
+    // Roles
+    'roles' => [
+        'root' => 'Root',
+        'admin' => 'Administrator',
+        'admin_mbo' => 'Administrator MBO',
+        'manager' => 'Menadżer',
+        'supervisor' => 'Przełożony',
+        'employee' => 'Pracownik',
+    ],
 ];
