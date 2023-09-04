@@ -3,13 +3,13 @@
 
 @include('layouts.components.alerts')
 
-<div class="container-fluid">
-    <div class="icon-btn-nav">
-        <div class="panel-left">
-            <a class="icon-btn" href="{{ route('campaigns.edit', $campaign->id) }}" data-bs-toggle="tooltip" data-bs-title="{{ __('buttons.edit') }}"><i class="bi-pencil-fill"></i></a>
-            <a class="icon-btn" href="" data-bs-toggle="tooltip" data-bs-title="{{ __('Dodaj cele') }}"><i class="bi-heart-arrow"></i></a>
-        </div>
+<div class="icon-btn-nav">
+    <div class="panel-left">
+        <a class="icon-btn" href="{{ route('campaigns.edit', $campaign->id) }}" data-bs-toggle="tooltip" data-bs-title="{{ __('buttons.edit') }}"><i class="bi-pencil-fill"></i></a>
+        <a class="icon-btn" href="" data-bs-toggle="tooltip" data-bs-title="{{ __('Dodaj cele') }}"><i class="bi-heart-arrow"></i></a>
     </div>
+</div>
+<div class="content-card">
     <div class="row">
         <div class="col-md-12">
             {!! $campaign->description->get() !!}
@@ -17,7 +17,7 @@
     </div>
     <div class="row">
         <div class="col-md-4 pt-3">
-            <h3>Cele</h3>
+            <h4>Cele</h4>
             <ul class="ombo-list">
                 <li>
                     <div class="list-grid">
@@ -38,7 +38,7 @@
             </ul>
         </div>
         <div class="col-md-4 pt-3">
-            <h3>Zapisani użytkownicy</h3>
+            <h4>Zapisani użytkownicy</h4>
             <ul class="ombo-list">
                 <li>
                     <div class="list-grid">

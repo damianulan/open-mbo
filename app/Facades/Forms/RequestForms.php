@@ -40,6 +40,10 @@ trait RequestForms
             }
         }
 
+        if(in_array('created_by', $instance->fillable)){
+            $instance->created_by = auth()->user()->id;
+        }
+
         return $instance;
     }
 

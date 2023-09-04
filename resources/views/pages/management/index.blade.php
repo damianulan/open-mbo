@@ -1,17 +1,18 @@
 @extends('layouts.portal.master')
 @section('content')
 
-@include('layouts.components.alerts')
 @include('pages.management.nav')
+@include('layouts.components.alerts')
 
-<div class="container-fluid">
-    <div class="icon-btn-nav">
-        <div class="panel-left">
-            <a class="icon-btn" href="{{ route('management.objectives.create') }}" data-bs-toggle="tooltip" data-bs-title="{{ __('buttons.create_template') }}">
-                <i class="bi-plus-circle-fill"></i>
-            </a>
-        </div>
+<div class="icon-btn-nav">
+    <div class="panel-left">
+        <a class="icon-btn" href="{{ route('management.objectives.create') }}" data-bs-toggle="tooltip" data-bs-title="{{ __('buttons.create_template') }}">
+            <i class="bi-plus-circle-fill"></i>
+        </a>
     </div>
+</div>
+<div class="content-card">
+
     <div class="row">
         @foreach($objectives as $objective)
             <div class="col-md-4">

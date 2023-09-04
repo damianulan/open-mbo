@@ -3,7 +3,7 @@
 
 @include('layouts.components.alerts')
 
-<div class="container-fluid">
+<div class="content-card">
     <div class="row">
         <div class="col-md-12">
             @include('pages.components.dashboard')

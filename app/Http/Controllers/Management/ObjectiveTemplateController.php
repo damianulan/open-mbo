@@ -22,7 +22,7 @@ class ObjectiveTemplateController extends Controller
         ]);
     }
 
-        /**
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -60,7 +60,7 @@ class ObjectiveTemplateController extends Controller
     public function show($id)
     {
         return view('pages.management.objectives.show', [
-            'user' => ObjectiveTemplate::findOrFail($id),
+            'objective' => ObjectiveTemplate::findOrFail($id),
         ]);
     }
 
@@ -72,7 +72,11 @@ class ObjectiveTemplateController extends Controller
      */
     public function edit($id)
     {
-
+        $model = ObjectiveTemplate::findOrFail($id);
+        return view('pages.management.objectives.edit', [
+            'objective' => $model,
+            'form' => ObjectiveTemplateEditForm::boot($model),
+        ]);
     }
 
     /**

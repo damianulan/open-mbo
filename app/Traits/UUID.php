@@ -11,6 +11,9 @@ trait UUID
         // Boot other traits on the Model
         parent::boot();
 
+        static::retrieved(function ($model) {
+            $model->incrementing = false;  // this is used after instance is loaded from DB
+        });
         /**
          * Listen for the creating event on the user model.
          * Sets the 'id' to a UUID using Str::uuid() on the instance being created

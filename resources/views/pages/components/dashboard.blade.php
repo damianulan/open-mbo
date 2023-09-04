@@ -1,4 +1,4 @@
-<div class="row pt-5">
+<div class="row">
     <div class="col-md-4">
         <div class="row">
             <h4 class="dashboard-widget-title">Moje Cele</h4>

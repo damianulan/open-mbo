@@ -3,8 +3,8 @@
 
 @include('layouts.components.alerts')
 
-<div class="container-fluid">
-    <div class="container pt-4">
+<div class="content-card">
+    <div class="container">
         {{ $form->render() }}
     </div>
 </div>

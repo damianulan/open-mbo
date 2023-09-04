@@ -60,12 +60,13 @@ Route::prefix('settings')->middleware(['auth'])->name('settings.')->group(functi
  * Management START
  */
 Route::prefix('management')->middleware(['auth'])->name('management.')->group(function (){
-    Route::prefix('objectives')->group(function () {
+    Route::prefix('objectives')->name('objectives.')->group(function () {
         Route::get('/', [App\Http\Controllers\Management\ObjectiveTemplateController::class, 'index'])->name('index');
-        Route::post('/', [App\Http\Controllers\Management\ObjectiveTemplateController::class, 'store'])->name('objectives.store');
-        Route::get('edit/{objective}', [App\Http\Controllers\Management\ObjectiveTemplateController::class, 'edit'])->name('objectives.edit');
-        Route::get('{objective}', [App\Http\Controllers\Management\ObjectiveTemplateController::class, 'show'])->name('objectives.show');
-        Route::get('create', [App\Http\Controllers\Management\ObjectiveTemplateController::class, 'create'])->name('objectives.create');
+        Route::post('/', [App\Http\Controllers\Management\ObjectiveTemplateController::class, 'store'])->name('store');
+        Route::get('create', [App\Http\Controllers\Management\ObjectiveTemplateController::class, 'create'])->name('create');
+        Route::get('edit/{objective}', [App\Http\Controllers\Management\ObjectiveTemplateController::class, 'edit'])->name('edit');
+        Route::get('{objective}', [App\Http\Controllers\Management\ObjectiveTemplateController::class, 'show'])->name('show');
+        Route::put('{objective}', [App\Http\Controllers\Management\ObjectiveTemplateController::class, 'update'])->name('update');
     });
 
 

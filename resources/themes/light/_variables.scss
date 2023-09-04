@@ -61,7 +61,8 @@ $theme-colors: (
 
 // Component colors
 $body-bg: #fff;
-$sidebar-bg: lighten($coolgreen, 8%);
+$body-wrapper-bg: rgba($primary, 0.04);
+$sidebar-bg: #fff;
 $sidebar-link: $primary;
 $sidebar-link-active: $coolgreen;
 $sidebar-brand-link: $primary;

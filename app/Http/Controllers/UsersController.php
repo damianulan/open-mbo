@@ -43,6 +43,7 @@ class UsersController extends Controller
     {
         $request->validate($form::validation());
         $user = User::fillFromRequest($request);
+        // TODO add roles also
         $supervisors_ids = $request->input('supervisors_ids') ?? array();
 
         if($user->save()){

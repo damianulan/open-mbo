@@ -21475,6 +21475,10 @@ html::-webkit-scrollbar-thumb:active {
   word-wrap: break-word;
 }
 
+body {
+  background-color: rgba(28, 103, 108, 0.04);
+}
+
 .content {
   padding: 0;
   position: relative;
@@ -21497,6 +21501,14 @@ html::-webkit-scrollbar-thumb:active {
 }
 .content.menu-collapsed {
   margin-left: 5rem;
+}
+
+.content-card {
+  background-color: #fff;
+  padding: 2.5rem 2rem;
+  margin: 0.75rem 0 2rem 0;
+  border-radius: 0.35rem;
+  min-height: 100%;
 }
 
 .blank-content {
@@ -21804,7 +21816,7 @@ form.form-horizontal .action-btns .btn {
 }
 
 .form-check.form-switch .form-check-input:not(:checked) {
-  background-color: #fbfffe;
+  background-color: #fff;
   border-color: rgba(22, 71, 85, 0.6);
 }
 
@@ -21861,7 +21873,7 @@ html .sidebar-menu {
 .sidebar-menu {
   z-index: 1031;
   display: table-cell;
-  background-color: #fbfffe;
+  background-color: #fff;
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.07);
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
@@ -22151,7 +22163,7 @@ a.dropdown-toggle {
 }
 
 .page-menu {
-  padding: 0 0 1.8rem 0;
+  padding: 0 0 1.25rem 0;
 }
 
 .page-menu .nav-pills-horizontal .nav-link {
@@ -22197,11 +22209,12 @@ a.dropdown-toggle {
 }
 
 .page-menu ul.nav-pills-horizontal {
-  border: 1px solid rgba(28, 103, 108, 0.1);
-  border-radius: 0.5rem;
-  padding: 0.3rem;
+  border: 1px solid transparent;
+  border-radius: 0.35rem;
+  padding: 0.35rem;
   flex-wrap: nowrap;
   overflow-y: auto;
+  background-color: #fff;
 }
 
 .page-menu ul.nav-pills-horizontal li.nav-item {
@@ -22533,7 +22546,7 @@ table.ombo-table tbody tr:hover {
 
 ul.ombo-list {
   list-style: none;
-  padding: 0;
+  padding: 0.5rem 0;
 }
 
 .ombo-list li {

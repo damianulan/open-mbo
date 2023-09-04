@@ -46,7 +46,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link{{ request()->routeIs('management.*') ? ' active':'' }}" href="{{ route('management.index') }}">
+        <a class="nav-link{{ request()->routeIs('management.*') ? ' active':'' }}" href="{{ route('management.objectives.index') }}">
           <i class="bi bi-diagram-3-fill"></i>
           <span class="nav-title">{{ __('menus.management.index') }}</span>
         </a>

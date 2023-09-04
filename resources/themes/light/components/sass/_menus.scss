@@ -330,7 +330,7 @@ a.dropdown-toggle{
 }
 
 .page-menu {
-    padding: 0 0 1.8rem 0;
+    padding: 0 0 1.25rem 0;
 }
 
 .page-menu .nav-pills-horizontal .nav-link {
@@ -376,11 +376,12 @@ a.dropdown-toggle{
 }
 
 .page-menu ul.nav-pills-horizontal {
-    border: 1px solid rgba($primary, 0.1);
-    border-radius: .5rem;
-    padding: 0.3rem;
+    border: 1px solid transparent;
+    border-radius: .35rem;
+    padding: 0.35rem;
     flex-wrap: nowrap;
     overflow-y: auto;
+    background-color: $body-bg;
 }
 
 .page-menu ul.nav-pills-horizontal li.nav-item {

@@ -1,10 +1,10 @@
 @extends('layouts.portal.master')
 @section('content')
 
+@include('pages.campaigns.nav')
 @include('layouts.components.alerts')
 
-<div class="container-fluid">
-    @include('pages.campaigns.nav')
+<div class="content-card">
 
     <div class="row">
         @foreach ($campaigns as $campaign)

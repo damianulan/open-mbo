@@ -54,7 +54,7 @@ class FormElement
     public static function multiselect(string $name, $model = null, Collection $options, $relation = null, $selected_values = [])
     {
         $values = array();
-        if($relation){
+        if($relation && $model && $model->$relation){
             $values = $model->$relation->modelKeys() ?? array();
         }
 

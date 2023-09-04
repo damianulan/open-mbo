@@ -13,6 +13,8 @@ use App\Models\MBO\UserCampaign;
 use App\Models\MBO\ObjectiveTemplate;
 use App\Casts\Carbon\CarbonDate;
 use Carbon\Carbon;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 class Campaign extends BaseModel
 {
@@ -59,6 +61,12 @@ class Campaign extends BaseModel
 
         'description' => TrixFieldCast::class,
     ];
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+        ->useLogName('mbo');
+    }
 
     public function user_campaigns()
     {

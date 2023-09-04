@@ -2,15 +2,18 @@
 @section('content')
 
 @include('layouts.components.alerts')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <a class="btn btn-outline-primary me-2" href="{{ route('users.create') }}"><i class="bi-plus-lg me-2"></i>{{ __('buttons.add') }}</a>
-            <a class="btn btn-outline-primary me-2" href="#"><i class="bi-people-fill me-2"></i>Zespoły</a>
-        </div>
+
+<div class="icon-btn-nav">
+    <div class="panel-left">
+        <a class="icon-btn" href="{{ route('users.create') }}" data-bs-toggle="tooltip" data-bs-title="{{ __('buttons.add') }}">
+            <i class="bi-plus-circle-fill"></i>
+        </a>
+        <a class="icon-btn" href="#" data-bs-toggle="tooltip" data-bs-title="Zespoły">
+            <i class="bi-people-fill"></i>
+        </a>
     </div>
 </div>
-<div class="container-fluid pt-3">
+<div class="content-card">
     <div class="row">
         <div class="col-md-12">
             <div class="table-container">

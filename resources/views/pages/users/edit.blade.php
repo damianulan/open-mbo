@@ -1,14 +1,14 @@
 @extends('layouts.portal.master')
 @section('content')
 @php
-    if($user->hasRole('root')){
+    if(isset($user) && $user->hasRole('root')){
         session()->now('warning', __('alerts.users.warning.user_is_root'));
     }
 @endphp
 @include('layouts.components.alerts')
 
-<div class="container-fluid">
-    <div class="container pt-4">
+<div class="content-card">
+    <div class="container">
         {{ $form->render() }}
     </div>
 </div>
