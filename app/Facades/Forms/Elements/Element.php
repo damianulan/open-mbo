@@ -20,6 +20,7 @@ class Element
     public bool $required = false;
     public bool $disabled = false;
     public bool $readonly = false;
+    public bool $show = true;
     public string $autocomplete = '';
 
     public array $infos = [];

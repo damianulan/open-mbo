@@ -9,11 +9,11 @@
     <div id="app">
         @include('layouts.portal.sidebar')
         <main id="main-content" class="content {{ $page->menu_collapsed }}">
-            @include('layouts.portal.topbar')
-            <div class="content-wrapper">
-                <div class="container-fluid">
+            <section class="page-wrapper">
+                @include('layouts.portal.topbar')
+                <section class="content-wrapper">
                     @yield('content')
-                </div>
-            </div>
+                </section>
+            </section>
         </main>
 @include('layouts.portal.footer')

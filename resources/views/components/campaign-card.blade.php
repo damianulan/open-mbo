@@ -63,7 +63,7 @@
                 <div class="element">
                     <div class="element-title" data-bs-toggle="tooltip" data-bs-title="Autor kampanii">
                         <i class="bi bi-person-fill me-2"></i>
-                        <span></span>
+                        <span>{{ $campaign->creator->name() }}</span>
                     </div>
                 </div>
 

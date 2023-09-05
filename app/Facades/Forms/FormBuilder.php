@@ -4,6 +4,7 @@ namespace App\Facades\Forms;
 
 use App\Facades\Forms\Elements\Button;
 use Illuminate\Support\Str;
+use App\Facades\Forms\Elements\Element;
 
 class FormBuilder
 {
@@ -35,9 +36,9 @@ class FormBuilder
         return $this;
     }
 
-    public function add($element)
+    public function add(Element $element)
     {
-        if(!empty($element)){
+        if(!empty($element) && $element->show === true){
             $this->elements[] = $element;
         }
         return $this;

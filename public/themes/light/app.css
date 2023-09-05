@@ -21489,6 +21489,18 @@ body {
   padding-bottom: 1.5rem;
 }
 
+.page-wrapper {
+  padding: 0 1.5rem;
+}
+
+.content-card {
+  background-color: #fff;
+  padding: 2.5rem 2rem;
+  margin: 0.75rem 0 2rem 0;
+  border-radius: 0.35rem;
+  min-height: 100%;
+}
+
 @media (min-width: 992px) {
   .content {
     margin-left: 18rem;
@@ -21498,17 +21510,15 @@ body {
   .content {
     margin-left: 0 !important;
   }
+  .page-wrapper {
+    padding: 0 0.75rem;
+  }
+  .content-card {
+    padding: 2rem 1.5rem;
+  }
 }
 .content.menu-collapsed {
   margin-left: 5rem;
-}
-
-.content-card {
-  background-color: #fff;
-  padding: 2.5rem 2rem;
-  margin: 0.75rem 0 2rem 0;
-  border-radius: 0.35rem;
-  min-height: 100%;
 }
 
 .blank-content {
@@ -21523,8 +21533,7 @@ body {
   justify-content: center;
 }
 
-.content-wrapper {
-  padding: 0 1.3rem;
+section.content-wrapper {
   word-wrap: break-word;
 }
 
@@ -22125,7 +22134,7 @@ a.dropdown-toggle {
 
 .page-top {
   display: flex;
-  padding: 1.8rem 2rem;
+  padding: 1.8rem 0;
   align-items: center;
 }
 
@@ -22414,37 +22423,42 @@ a.icon-btn {
 
 .alert {
   box-shadow: 0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04);
-  padding: 1rem 1.5rem;
+  padding: 0.75rem 1.5rem;
+  margin-bottom: 0.35rem;
 }
 
 .alert.alert-success {
   background-color: rgba(79, 157, 105, 0.25);
   border-color: rgba(79, 157, 105, 0.3);
-  color: #3e7b52;
+  color: #356a47;
 }
 
 .alert.alert-danger {
   background-color: rgba(229, 107, 111, 0.25);
   border-color: rgba(229, 107, 111, 0.3);
-  color: #dd4045;
+  color: #c72328;
 }
 
 .alert.alert-warning {
   background-color: rgba(237, 180, 88, 0.25);
   border-color: rgba(237, 180, 88, 0.3);
-  color: #e89f2a;
+  color: #e09418;
 }
 
 .alert.alert-info {
   background-color: rgba(8, 146, 165, 0.25);
   border-color: rgba(8, 146, 165, 0.3);
-  color: #066774;
+  color: #04515c;
 }
 
 .alert.alert-primary {
   background-color: rgba(28, 103, 108, 0.25);
   border-color: rgba(28, 103, 108, 0.3);
-  color: #124044;
+  color: #0c2d2f;
+}
+
+.alert-dismissible .btn-close {
+  padding: 1rem;
 }
 
 .table-container {
@@ -22566,7 +22580,7 @@ ul.ombo-list {
 }
 
 .ombo-list li .list-content {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 .ombo-list li .list-actions {
@@ -22580,6 +22594,10 @@ ul.ombo-list {
   margin-right: 0.35rem;
   font-size: 1rem;
   color: #164755;
+}
+
+.ombo-list li .list-actions .list-action i {
+  margin-right: 0.2rem;
 }
 
 .ombo-list li .list-actions .list-action span {

@@ -19,6 +19,9 @@ class Input extends Element
         $this->name = empty($name) ? null:$name;
         $this->type = empty($type) ? null:$type;
         $this->value = $value;
+        if(request()->old($name)){
+            $this->value = request()->old($name);
+        }
         $this->classes[] = 'form-control';
     }
 

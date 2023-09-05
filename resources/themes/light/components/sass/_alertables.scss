@@ -54,35 +54,40 @@
 
 .alert {
     box-shadow: 0 2px 15px -3px rgb(0 0 0 / 7%), 0 10px 20px -2px rgb(0 0 0 / 4%);
-    padding: 1rem 1.5rem;
+    padding: .75rem 1.5rem;
+    margin-bottom: .35rem;
 }
 
 .alert.alert-success {
     background-color: rgba($success, .25);
     border-color: rgba($success, .3);
-    color: darken($success, 10%);
+    color: darken($success, 15%);
 }
 
 .alert.alert-danger {
     background-color: rgba($danger, .25);
     border-color: rgba($danger, .3);
-    color: darken($danger, 10%);
+    color: darken($danger, 20%);
 }
 
 .alert.alert-warning {
     background-color: rgba($warning, .25);
     border-color: rgba($warning, .3);
-    color: darken($warning, 10%);
+    color: darken($warning, 15%);
 }
 
 .alert.alert-info {
     background-color: rgba($info, .25);
     border-color: rgba($info, .3);
-    color: darken($info, 10%);
+    color: darken($info, 15%);
 }
 
 .alert.alert-primary {
     background-color: rgba($primary, .25);
     border-color: rgba($primary, .3);
-    color: darken($primary, 10%);
+    color: darken($primary, 15%);
+}
+
+.alert-dismissible .btn-close {
+    padding: 1rem;
 }

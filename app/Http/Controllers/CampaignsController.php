@@ -42,8 +42,9 @@ class CampaignsController extends Controller
         $campaign = Campaign::fillFromRequest($request);
 
         if($campaign->save()){
-
+            return redirect()->route('campaigns.show', $id)->with('success', __('alerts.campaigns.success.create', ['name' => $campaign->name]));
         }
+        return redirect()->back()->with('error', __('alerts.campaigns.error.create', ['name' => $campaign->name]));
     }
 
     /**
@@ -83,9 +84,16 @@ class CampaignsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, CampaignEditForm $form)
     {
-        //
+        $request = $form::reformatRequest($request);
+        $request->validate($form::validation($id));
+        $campaign = Campaign::fillFromRequest($request, $id);
+
+        if($campaign->update()){
+            return redirect()->route('campaigns.show', $id)->with('success', __('alerts.campaigns.success.edit', ['name' => $campaign->name]));
+        }
+        return redirect()->back()->with('error', __('alerts.campaigns.error.edit', ['name' => $campaign->name]));
     }
 
 }

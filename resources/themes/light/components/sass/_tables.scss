@@ -116,7 +116,7 @@ ul.ombo-list {
 }
 
 .ombo-list li .list-content{
-    font-size: .9rem;
+    font-size: .8rem;
 }
 
 .ombo-list li .list-actions{
@@ -130,6 +130,10 @@ ul.ombo-list {
     margin-right: .35rem;
     font-size: 1rem;
     color: $secondary;
+}
+
+.ombo-list li .list-actions .list-action i {
+    margin-right: .2rem;
 }
 
 .ombo-list li .list-actions .list-action span{

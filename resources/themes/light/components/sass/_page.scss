@@ -46,19 +46,8 @@ body {
     padding-bottom: 1.5rem;
 }
 
-@media (min-width: 992px){
-    .content {
-        margin-left: $menu-expanded-width;
-    }
-}
-@media (max-width: 992px){
-    .content {
-        margin-left: 0 !important;
-    }
-}
-
-.content.menu-collapsed {
-    margin-left: $menu-collapsed-width;
+.page-wrapper {
+    padding: 0 1.5rem;
 }
 
 .content-card {
@@ -68,6 +57,30 @@ body {
     border-radius: .35rem;
     min-height: 100%;
 }
+
+@media (min-width: 992px){
+    .content {
+        margin-left: $menu-expanded-width;
+    }
+}
+@media (max-width: 992px){
+    .content {
+        margin-left: 0 !important;
+    }
+
+    .page-wrapper {
+        padding: 0 .75rem;
+    }
+
+    .content-card {
+        padding: 2rem 1.5rem;
+    }
+}
+
+.content.menu-collapsed {
+    margin-left: $menu-collapsed-width;
+}
+
 
 .blank-content {
     overflow: overlay;
@@ -81,8 +94,7 @@ body {
     justify-content: center;
 }
 
-.content-wrapper {
-    padding: 0 1.3rem;
+section.content-wrapper {
     word-wrap: break-word;
 }
 

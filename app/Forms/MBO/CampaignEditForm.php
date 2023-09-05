@@ -45,11 +45,11 @@ class CampaignEditForm extends Form implements FormIO
                 ->addSubmit();
     }
 
-    public static function validation(): array
+    public static function validation($model_id = null): array
     {
         return [
             'name' => 'max:120|required',
-            'period' => 'max:10|required|unique:campaigns,period',
+            'period' => 'max:10|required|unique:campaigns,period,'.$model_id,
             'description' => 'max:512|nullable',
 
             'definition_from' => 'date|required',

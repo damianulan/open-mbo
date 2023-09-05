@@ -15,6 +15,7 @@ use App\Casts\Carbon\CarbonDate;
 use Carbon\Carbon;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
+use App\Models\User;
 
 class Campaign extends BaseModel
 {
@@ -88,7 +89,7 @@ class Campaign extends BaseModel
         return $this->hasMany(CampaignObjective::class);
     }
 
-    public function created_by()
+    public function creator()
     {
         return $this->belongsTo(User::class, 'created_by');
     }

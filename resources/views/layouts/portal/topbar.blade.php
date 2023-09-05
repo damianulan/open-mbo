@@ -1,4 +1,4 @@
-<div id="topbar" class="page-top">
+<nav id="topbar" class="page-top">
     <div class="togglers">
       <a class="me-2" id="hamburger-toggle"><i class="bi-list"></i></a>
       <a class="me-2" id="menu-toggle"><i class="bi-three-dots-vertical"></i></a>
@@ -28,4 +28,4 @@
           <form action="{{ route('logout') }}" method="POST" class="d-none" id="logout-form">@csrf</form>
     </div>
 
-</div>
+</nav>
