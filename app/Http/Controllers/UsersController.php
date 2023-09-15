@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\DataTables\UsersDataTable;
 use App\Forms\Users\UserEditForm;
+use App\Facades\Logger\Activity;
 
 class UsersController extends Controller
 {
@@ -16,6 +17,8 @@ class UsersController extends Controller
      */
     public function index(UsersDataTable $dataTable)
     {
+        $activity = new Activity();
+        $activity->log('view');
         return $dataTable->render('pages.users.index', [
 
         ]);
@@ -119,6 +122,20 @@ class UsersController extends Controller
         if($user->blocked()){
             return redirect()->back();
         }
+        return redirect()->back();
+    }
+
+    public function impersonate(User $user)
+    {
+        auth()->user()->impersonate($user);
+
+        return redirect()->back();
+    }
+
+    public function impersonateLeave()
+    {
+        auth()->user()->leaveImpersonation();
+
         return redirect()->back();
     }
 

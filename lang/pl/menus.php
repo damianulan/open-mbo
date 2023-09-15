@@ -20,6 +20,8 @@ return [
     'login' => 'Zaloguj się',
     'forgot_password' => 'Przypomnij hasło',
     'remember_me' => 'Zapamiętaj mnie',
+    'impersonation_leave' => 'Wyloguj się jako',
+    'impersonated_by' => ':name podszywa się',
 
     // Submenus / Page menus
 

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Lab404\Impersonate\Models\Impersonate;
+use App\Traits\Impersonable;
 use App\Traits\HasRolesAndPermissions;
 use App\Traits\UUID;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,7 +21,7 @@ use App\Enums\Users\Gender;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, UUID, HasRolesAndPermissions, SoftDeletes, RequestForms;
-    use Awards, UserMBO, UserBusiness, ActiveFields;
+    use Awards, UserMBO, UserBusiness, ActiveFields, Impersonate, Impersonable;
 
     /**
      * The attributes that are mass assignable.
@@ -103,6 +105,16 @@ class User extends Authenticatable
             return asset('images/portrait/avatar-female.png');
         }
         return null;
+    }
+
+    public function canBeImpersonated(): bool
+    {
+        return !$this->hasRole('root');
+    }
+
+    public function canImpersonate(): bool
+    {
+        return $this->hasRole('root');
     }
 
 }

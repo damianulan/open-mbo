@@ -227,6 +227,7 @@ return [
         App\Providers\PermissionServiceProvider::class,
         App\Providers\RolesServiceProvider::class,
         App\Providers\ConfigServiceProvider::class,
+        Lab404\Impersonate\ImpersonateServiceProvider::class,
     ],
 
     /*

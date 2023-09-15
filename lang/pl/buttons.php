@@ -29,6 +29,7 @@ return [
     'choose_file' => 'Wybierz plik',
     'redirect_back' => 'Powrót',
     'create_template' => 'Utwórz szablon',
+    'impersonate' => 'Zaloguj jako',
 
     'list_view' => 'Tryb listy',
     'tile_view' => 'Tryb kafelkowy',

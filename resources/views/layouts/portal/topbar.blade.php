@@ -8,10 +8,11 @@
     </div>
     <div class="page-quick-actions">
         <!--<x-notification-dropdown/>-->
-        <div class="user-nav dropup">
+        <div class="user-nav dropup" data-bs-toggle="tooltip" data-bs-placement="left"
+        data-bs-title="{{ auth()->user()->isImpersonating() ? __('menus.impersonated_by', ['name' => auth()->user()->impersonator()->name()]):'' }}">
             <div class="user-actions" data-bs-toggle="dropdown" type="button" aria-expanded="false">
               <img class="rounded-circle" src="{{ auth()->user()->getAvatar() }}" width="30" height="30">
-              <span class="profile-name">{{ auth()->user()->name() }}</span>
+              <span class="profile-name{{auth()->user()->isImpersonating() ? ' text-info':''}}">{{ auth()->user()->name() }}</span>
             </div>
             <ul class="dropdown-menu">
               <li><a href="{{ route('profile.index') }}" class="dropdown-item"><i class="bi-person me-2"></i>{{ __('menus.edit_profile') }}</a></li>
@@ -23,6 +24,11 @@
                     <i class="bi-door-open me-2"></i>{{ __('menus.logout') }}
                 </a>
               </li>
+              @if(auth()->user()->isImpersonating())
+              <li>
+                <a href="{{ route('users.impersonate.leave') }}" class="dropdown-item"><i class="bi-person-fill-down me-2"></i>{{ __('menus.impersonation_leave') }}</a>
+              </li>
+              @endif
             </ul>
           </div>
           <form action="{{ route('logout') }}" method="POST" class="d-none" id="logout-form">@csrf</form>

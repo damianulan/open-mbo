@@ -31,7 +31,8 @@ Route::prefix('users')->middleware(['auth'])->name('users.')->group(function (){
     Route::get('{user}/block', [App\Http\Controllers\UsersController::class, 'block'])->name('block');
     Route::get('{user}/delete', [App\Http\Controllers\UsersController::class, 'delete'])->name('delete');
     Route::put('{user}', [App\Http\Controllers\UsersController::class, 'update'])->name('update');
-
+    Route::get('/{user}/impersonate', [App\Http\Controllers\UsersController::class, 'impersonate'])->name('impersonate');
+    Route::get('/impersonate/leave', [App\Http\Controllers\UsersController::class, 'impersonateLeave'])->name('impersonate.leave');
 });
 
 Route::get('profile', [App\Http\Controllers\ProfileController::class, 'index'])->middleware('auth')->name('profile.index');
