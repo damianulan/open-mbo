@@ -4,15 +4,7 @@
 @include('layouts.components.alerts')
 @include('pages.profile.nav')
 
-<div class="container">
-
-    <div class="row">
-
-        <div class="col-md-10">
-
-        </div>
-    </div>
-</div>
+<x-unavailable-page/>
 
 @endsection
 @section('page-scripts')

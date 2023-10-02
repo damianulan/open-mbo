@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="row">
-
+                <x-unavailable-page/>
             </div>
         </div>
     </div>
