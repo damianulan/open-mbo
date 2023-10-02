@@ -3,9 +3,9 @@
       <a class="me-2" id="hamburger-toggle"><i class="bi-list"></i></a>
       <a class="me-2" id="menu-toggle"><i class="bi-three-dots-vertical"></i></a>
     </div>
-    <div class="page-heading">
+    <header class="page-heading">
       <span class="page-title" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $page->title }}">{{ $page->title }}</span>
-    </div>
+    </header>
     <div class="page-quick-actions">
         <!--<x-notification-dropdown/>-->
         <div class="user-nav dropup"

@@ -4,6 +4,7 @@
 @include('pages.campaigns.nav')
 @include('layouts.components.alerts')
 
+@if (count($campaigns))
 <div class="content-card">
 
     <div class="row">
@@ -15,6 +16,10 @@
 
     </div>
 </div>
+@else
+<x-nocontent-page/>
+@endif
+
 
 @endsection
 @section('page-scripts')

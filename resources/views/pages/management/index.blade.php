@@ -4,13 +4,14 @@
 @include('pages.management.nav')
 @include('layouts.components.alerts')
 
-<div class="icon-btn-nav">
+<nav class="icon-btn-nav">
     <div class="panel-left">
         <a class="icon-btn" href="{{ route('management.objectives.create') }}" data-bs-toggle="tooltip" data-bs-title="{{ __('buttons.create_template') }}">
             <i class="bi-plus-circle-fill"></i>
         </a>
     </div>
-</div>
+</nav>
+@if (count($objectives))
 <div class="content-card">
 
     <div class="row">
@@ -21,6 +22,10 @@
         @endforeach
     </div>
 </div>
+@else
+<x-nocontent-page/>
+@endif
+
 
 @endsection
 @section('page-scripts')
