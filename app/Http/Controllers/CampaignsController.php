@@ -42,7 +42,7 @@ class CampaignsController extends Controller
         $campaign = Campaign::fillFromRequest($request);
 
         if($campaign->save()){
-            return redirect()->route('campaigns.show', $id)->with('success', __('alerts.campaigns.success.create', ['name' => $campaign->name]));
+            return redirect()->route('campaigns.show', $campaign->id)->with('success', __('alerts.campaigns.success.create', ['name' => $campaign->name]));
         }
         return redirect()->back()->with('error', __('alerts.campaigns.error.create', ['name' => $campaign->name]));
     }

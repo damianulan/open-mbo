@@ -13,7 +13,7 @@ trait Loggable
         return $this->hasMany(Activity::class, 'causer_id');
     }
 
-    public function log()
+    public function logs()
     {
         if(static::class === User::class){
             return $this->hasMany(Log::class, 'causer_id');
@@ -21,14 +21,36 @@ trait Loggable
         return $this->hasMany(Log::class, 'model_id');
     }
 
-    protected static function boot()
+    protected static function bootLoggable()
     {
-        parent::boot();
-        $user = User::find(auth()->user()->id);
+        static::updated(function ($model) {
+            $original = $model->getOriginal();
+            $dirty = $model->getChanges();
 
-        static::creating(function ($model) {
+            $changes = array();
+            $unlistedFields = [
+                'created_at', 'updated_at', 'deleted_at'
+            ];
+
+            if(!empty($dirty)){
+                foreach($dirty as $field => $value){
+                    if(!in_array($field, $unlistedFields)){
+                        $changes[$field]['clean'] = $original[$field];
+                        $changes[$field]['dirty'] = $value;
+                    }
+                }
+            }
+
             $log = new Log();
-            // getOriginal getChanges
+            $log->causer_id = auth()->user()->id;
+            $log->model_id = $model->id;
+            $log->model = $model::class;
+            $log->action = 'update';
+            if(!empty($changes)){
+                $log->changes = $changes;
+            }
+            $log->ip_address = request()->ip();
+            $log->save();
         });
     }
 }

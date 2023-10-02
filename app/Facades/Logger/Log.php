@@ -15,15 +15,14 @@ class Log extends Model
         'model_id',
         'model',
         'action',
-        'dirty',
-        'clean',
+        'changes',
+        'ip_address',
         'description',
     ];
 
     protected $casts = [
-
+        'changes' => 'array',
     ];
-
 
     public function user()
     {

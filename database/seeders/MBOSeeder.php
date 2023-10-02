@@ -13,6 +13,9 @@ class MBOSeeder extends Seeder
      */
     public function run(): void
     {
+        if(ObjectiveTemplateCategory::count() > 0){
+            return;
+        }
         $category = new ObjectiveTemplateCategory();
         $category->name = 'Cele Globalne';
         $category->global = true;

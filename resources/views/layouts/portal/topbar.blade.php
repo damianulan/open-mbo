@@ -8,8 +8,12 @@
     </div>
     <div class="page-quick-actions">
         <!--<x-notification-dropdown/>-->
-        <div class="user-nav dropup" data-bs-toggle="tooltip" data-bs-placement="left"
-        data-bs-title="{{ auth()->user()->isImpersonating() ? __('menus.impersonated_by', ['name' => auth()->user()->impersonator()->name()]):'' }}">
+        <div class="user-nav dropup"
+        @if(auth()->user()->isImpersonating())
+        data-bs-toggle="tooltip" data-bs-placement="left"
+        data-bs-title="{{ __('menus.impersonated_by', ['name' => auth()->user()->impersonator()->name()]) }}"
+        @endif
+        >
             <div class="user-actions" data-bs-toggle="dropdown" type="button" aria-expanded="false">
               <img class="rounded-circle" src="{{ auth()->user()->getAvatar() }}" width="30" height="30">
               <span class="profile-name{{auth()->user()->isImpersonating() ? ' text-info':''}}">{{ auth()->user()->name() }}</span>

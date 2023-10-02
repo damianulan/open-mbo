@@ -14,6 +14,9 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
+        if(Role::count() > 0){
+            return;
+        }
         $root = new Role();
         $root->slug = 'root';
         $root->save();

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->char('model_id');
             $table->string('model');
             $table->string('action');
-            $table->json('dirty');
-            $table->json('clean');
+            $table->json('changes')->nullable();
+            $table->string('ip_address', 45);
             $table->text('description')->nullable();
             $table->timestamps();
         });

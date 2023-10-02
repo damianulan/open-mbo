@@ -7,7 +7,6 @@ use App\Models\User;
 use App\DataTables\UsersDataTable;
 use App\Forms\Users\UserEditForm;
 use App\Facades\Logger\Activity;
-
 class UsersController extends Controller
 {
     /**
@@ -17,8 +16,6 @@ class UsersController extends Controller
      */
     public function index(UsersDataTable $dataTable)
     {
-        $activity = new Activity();
-        $activity->log('view');
         return $dataTable->render('pages.users.index', [
 
         ]);

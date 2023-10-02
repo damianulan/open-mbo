@@ -19,6 +19,9 @@ class CreateAdminUserSeeder extends Seeder
      */
     public function run()
     {
+        if(User::count() > 0){
+            return;
+        }
         $admin1 = new User();
         $admin1->firstname = 'Site';
         $admin1->lastname = 'Admin';

@@ -17,11 +17,12 @@ use App\Traits\UserMBO;
 use App\Traits\UserBusiness;
 use App\Traits\ActiveFields;
 use App\Enums\Users\Gender;
+use App\Facades\Logger\Loggable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, UUID, HasRolesAndPermissions, SoftDeletes, RequestForms;
-    use Awards, UserMBO, UserBusiness, ActiveFields, Impersonate, Impersonable;
+    use UUID, HasApiTokens, HasFactory, Notifiable, HasRolesAndPermissions, SoftDeletes, RequestForms;
+    use Awards, UserMBO, UserBusiness, ActiveFields, Impersonate, Impersonable, Loggable;
 
     /**
      * The attributes that are mass assignable.

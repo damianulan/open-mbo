@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('action');
             $table->text('url');
             $table->text('description')->nullable();
+            $table->string('ip_address', 45);
             $table->timestamps();
         });
     }

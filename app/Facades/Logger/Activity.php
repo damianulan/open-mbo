@@ -19,6 +19,7 @@ class Activity extends Model
         'action',
         'url',
         'description',
+        'ip_address'
     ];
 
     protected $casts = [
@@ -30,7 +31,7 @@ class Activity extends Model
         $user = User::find(Auth::user()->id);
         $description = null;
         if($description_lang){
-            $lang = __('logging.activity.'.$description_lang, ['causer' => $user->name()]);
+            $lang = __('logging.activity.'.$description_lang);
             if($lang && !empty($lang)){
                 $description = $lang;
             }
