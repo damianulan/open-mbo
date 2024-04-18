@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('user_bonus_assignments', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
-            $table->char('user_id');
-            $table->char('bonus_scheme_id');
-            $table->char('campaign_id');
+            $table->foreignUuid('user_id');
+            $table->foreignUuid('bonus_scheme_id');
+            $table->foreignUuid('campaign_id');
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('bonus_scheme_id')->references('id')->on('bonus_schemes')->onDelete('cascade');
@@ -24,7 +24,7 @@ return new class extends Migration
 
             $table->tinyInteger('score')->unsigned(); // in percent
 
-            $table->char('approved_by');
+            $table->foreignUuid('approved_by');
             $table->foreign('approved_by')->references('id')->on('users')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();

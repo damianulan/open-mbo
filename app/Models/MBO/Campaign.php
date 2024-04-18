@@ -15,7 +15,7 @@ use App\Casts\Carbon\CarbonDate;
 use Carbon\Carbon;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
-use App\Models\User;
+use App\Models\Core\User;
 
 class Campaign extends BaseModel
 {

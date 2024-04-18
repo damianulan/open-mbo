@@ -14,11 +14,11 @@ return new class extends Migration
     {
         Schema::create('objective_templates', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('category_id')->nullable();
+            $table->foreignUuid('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('objective_template_categories')->onDelete('cascade');
+
             $table->string('name');
             $table->longText('description')->nullable();
-
-            $table->foreign('category_id')->references('id')->on('objective_template_categories')->onDelete('cascade');
 
             $table->decimal('goal', 8,2)->nullable();
 

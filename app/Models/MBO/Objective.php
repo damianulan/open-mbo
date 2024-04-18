@@ -8,7 +8,7 @@ use App\Facades\TrixField\TrixFieldCast;
 use App\Casts\CheckboxCast;
 use App\Models\MBO\ObjectiveTemplate;
 use App\Models\MBO\Campaign;
-use App\Models\User;
+use App\Models\Core\User;
 use App\Casts\Carbon\CarbonDatetime;
 
 class Objective extends BaseModel

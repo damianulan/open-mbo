@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('user_employments', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('foreign_id')->nullable();
-            $table->char('user_id');
-            $table->char('company_id');
-            $table->char('contract_id');
-            $table->char('department_id');
-            $table->char('position_id');
+            $table->foreignUuid('user_id');
+            $table->foreignUuid('company_id');
+            $table->foreignUuid('contract_id');
+            $table->foreignUuid('department_id');
+            $table->foreignUuid('position_id');
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('company_id')->references('id')->on('companies');

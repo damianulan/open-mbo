@@ -17,6 +17,7 @@
         "mews/purifier": "^3.4",
         "phpoffice/phpspreadsheet": "^1.27",
         "psr/http-message": "^1.0",
+        "spatie/laravel-activitylog": "^4.8",
         "spatie/laravel-query-builder": "^5.2",
         "spatie/laravel-settings": "^3.1",
         "watson/rememberable": "^6.1",

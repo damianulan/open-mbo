@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Core;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,17 +12,15 @@ use App\Traits\HasRolesAndPermissions;
 use App\Traits\UUID;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Facades\Forms\RequestForms;
-use App\Traits\Awards;
 use App\Traits\UserMBO;
 use App\Traits\UserBusiness;
 use App\Traits\ActiveFields;
-use App\Enums\Users\Gender;
-use App\Facades\Logger\Loggable;
+use App\Models\Core\UserProfile;
 
 class User extends Authenticatable
 {
     use UUID, HasApiTokens, HasFactory, Notifiable, HasRolesAndPermissions, SoftDeletes, RequestForms;
-    use Awards, UserMBO, UserBusiness, ActiveFields, Impersonate, Impersonable, Loggable;
+    use UserMBO, UserBusiness, ActiveFields, Impersonate, Impersonable;
 
     /**
      * The attributes that are mass assignable.
@@ -30,14 +28,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'firstname',
-        'lastname',
-        'gender',
-        'birthday',
         'email',
-        'password',
-        'phone',
-        'avatar',
         'active',
         'force_password_change',
     ];
@@ -52,10 +43,6 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    protected $dates = [
-        'birthday',
-    ];
-
     protected $activeRules = [
         'active' => 1,
     ];
@@ -68,7 +55,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'created_at' => 'datetime',
-        'gender' => Gender::class,
     ];
 
     public function name()
@@ -116,6 +102,11 @@ class User extends Authenticatable
     public function canImpersonate(): bool
     {
         return $this->hasRole('root');
+    }
+
+    public function profile()
+    {
+        return $this->hasOne(UserProfile::class);
     }
 
 }

@@ -10,7 +10,7 @@ use App\Traits\Vendors\TrixFields;
 use App\Facades\Forms\RequestForms;
 use App\Facades\TrixField\TrixFieldCast;
 use App\Models\MBO\Objective;
-use App\Models\User;
+use App\Models\Core\User;
 
 class ObjectiveEvaluation extends BaseModel
 {

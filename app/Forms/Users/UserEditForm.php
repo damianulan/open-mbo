@@ -9,9 +9,9 @@ use App\Facades\Forms\FormElement;
 use App\Facades\Forms\Elements\Dictionary;
 use Illuminate\Validation\Rules\File;
 use App\Enums\Users\Gender;
-use App\Models\Role;
+use App\Models\Core\Role;
 use Illuminate\Validation\Rules\Enum;
-use App\Models\User;
+use App\Models\Core\User;
 
 class UserEditForm extends Form implements FormIO
 {

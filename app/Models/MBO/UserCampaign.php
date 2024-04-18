@@ -4,7 +4,7 @@ namespace App\Models\MBO;
 
 use App\Models\BaseModel;
 use App\Casts\CheckboxCast;
-use App\Models\User;
+use App\Models\Core\User;
 use App\Models\MBO\Campaign;
 
 class UserCampaign extends BaseModel

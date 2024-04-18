@@ -250,7 +250,7 @@ return [
         'CheckboxCast' => App\Casts\CheckboxCast::class,
 
         // MODELS
-        'User' => App\Models\User::class,
+        'User' => App\Models\Core\User::class,
 
         // VENDORS
         'Purifier' => Mews\Purifier\Facades\Purifier::class,

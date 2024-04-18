@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Core;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,7 +18,6 @@ class Role extends Model
 
     protected $fillable = [
         'slug',
-        'lang_custom',
     ];
 
     public function permissions()
@@ -42,12 +41,7 @@ class Role extends Model
         $roles = self::whereIn('slug', ['admin', 'admin_mbo'])->get();
         if(!$roles->isEmpty()){
             foreach ($roles as $role){
-                $name = '';
-                if(isset($role->lang_custom)){
-                    $name = $role->lang_custom;
-                } else {
-                    $name = __('fields.roles.'.$role->slug);
-                }
+                $name = __('fields.roles.'.$role->slug);
                 $output[$role->id] = $name;
             }
         }

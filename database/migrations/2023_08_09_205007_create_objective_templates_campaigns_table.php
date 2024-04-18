@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('objective_templates_campaigns', function (Blueprint $table) {
-            $table->char('objective_template_id');
-            $table->char('campaign_id');
+            $table->foreignUuid('objective_template_id');
+            $table->foreignUuid('campaign_id');
 
             $table->foreign('objective_template_id')->references('id')->on('objective_templates')->onDelete('cascade');
             $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');

@@ -11,14 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_awards', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->char('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
-            $table->unsignedInteger('award')->nullable();
-
-            $table->softDeletes();
+        Schema::create('contexts', function (Blueprint $table) {
+            $table->id();
+            $table->uuidMorphs('subject', 'subject');
             $table->timestamps();
         });
     }
@@ -28,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_scores');
+        Schema::dropIfExists('contexts');
     }
 };

@@ -4,7 +4,7 @@ namespace App\Models\Business;
 
 use App\Models\BaseModel;
 use App\Traits\Vendors\TrixFields;
-use App\Models\User;
+use App\Models\Core\User;
 use App\Models\Business\Company;
 use App\Models\Business\Department;
 use App\Models\Business\Position;

@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('objective_evaluations', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->char('objective_id')->nullable();
+            $table->foreignUuid('objective_id')->nullable();
             $table->foreign('objective_id')->references('id')->on('objectives')->nullOnDelete();
 
             $table->decimal('evaluation', 8,2);
             $table->string('comment', 300);
-            $table->char('evaluated_by');
+            $table->foreignUuid('evaluated_by');
             $table->foreign('evaluated_by')->references('id')->on('users')->onDelete('cascade');
 
             $table->softDeletes();
