@@ -1,5 +1,5 @@
 
-<div class="card card-url card-bg" data-url="{{ route('management.objectives.show', $objective->id) }}">
+<div class="card card-url card-bg" data-url="{{ route('management.objectives.edit', $objective->id) }}">
     <div class="card-body">
         <div class="card-top">
             <div class="card-title" data-bs-toggle="tooltip" data-bs-title="Kampania xxx">

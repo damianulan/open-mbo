@@ -29,6 +29,10 @@ class RoleSeeder extends Seeder
         $admin->slug = 'admin_mbo';
         $admin->save();
 
+        $admin = new Role();
+        $admin->slug = 'admin_mbo_category';
+        $admin->save();
+
         $manager = new Role();
         $manager->slug = 'manager';
         $manager->save();

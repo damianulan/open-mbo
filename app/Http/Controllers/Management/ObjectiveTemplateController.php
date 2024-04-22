@@ -46,7 +46,7 @@ class ObjectiveTemplateController extends Controller
         $objective = ObjectiveTemplate::fillFromRequest($request);
 
         if($objective->save()){
-            return redirect()->route('management.index')->with('success', __('alerts.objective_template.success.create'));
+            return redirect()->route('management.objectives.index')->with('success', __('alerts.objective_template.success.create'));
         }
         return redirect()->back()->with('error', 'Wystąpił błąd.');
     }

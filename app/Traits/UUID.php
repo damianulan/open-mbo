@@ -8,9 +8,6 @@ trait UUID
 {
     protected static function bootUUID()
     {
-        // Boot other traits on the Model
-        //parent::boot();
-
         static::retrieved(function ($model) {
             $model->incrementing = false;  // this is used after instance is loaded from DB
         });

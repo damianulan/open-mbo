@@ -34,7 +34,7 @@ class UsersDataTable extends DataTable
                 $text = 'Aktywny';
                 if(!$data->active){
                     $color = 'dark';
-                    $text = 'Zablokowany';
+                    $text = 'Zawieszony';
                 }
                 return view('components.datatables.badge', [
                     'color' => $color,
@@ -68,7 +68,7 @@ class UsersDataTable extends DataTable
      */
     public function query(User $model): QueryBuilder
     {
-        return $model->whereNotIn('id', [auth()->user()->id]);
+        return $model->with('profile')->whereNotIn('id', [auth()->user()->id]);
     }
 
     /**

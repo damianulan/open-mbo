@@ -22,22 +22,12 @@ class User extends Authenticatable
     use UUID, HasApiTokens, HasFactory, Notifiable, HasRolesAndPermissions, SoftDeletes, RequestForms;
     use UserMBO, UserBusiness, ActiveFields, Impersonate, Impersonable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'email',
         'active',
         'force_password_change',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
@@ -47,11 +37,6 @@ class User extends Authenticatable
         'active' => 1,
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
         'created_at' => 'datetime',
@@ -59,7 +44,7 @@ class User extends Authenticatable
 
     public function name()
     {
-        return $this->firstname . ' ' . $this->lastname;
+        return $this->profile->firstname . ' ' . $this->profile->lastname;
     }
 
     public function block(): bool
@@ -83,12 +68,12 @@ class User extends Authenticatable
 
     public function getAvatar(): ?string
     {
-        if($this->avatar){
-            return asset($this->avatar);
+        if($this->profile->avatar){
+            return asset($this->profile->avatar);
         }
-        if($this->gender->name === 'MALE'){
+        if($this->profile->gender->name === 'MALE'){
             return asset('images/portrait/avatar-male.png');
-        } elseif($this->gender->name === 'FEMALE'){
+        } elseif($this->profile->gender->name === 'FEMALE'){
             return asset('images/portrait/avatar-female.png');
         }
         return null;
