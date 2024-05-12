@@ -2,6 +2,19 @@
 
 return [
 
+    'success' => [
+    ],
+    'error' => [
+        'invalid_role' => 'Nie posiadasz odpowiedniej roli systemowej do wykonania tej akcji.',
+        'no_permission' => 'Nie posiadasz odpowiednich uprawnień do wykonania tej akcji.',
+    ],
+    'warning' => [
+
+    ],
+    'info' => [
+
+    ],
+
     'settings' => [
 
         'success' => [
@@ -50,6 +63,14 @@ return [
         'warning' => [
             'user_is_root' => 'Uwaga, ten użytkownik posiada uprawnienia Roota.',
         ]
+    ],
+
+    'objective_template' => [
+        'success' => [
+            'create' => 'Nowy szablon celu został pomyślnie dodany.',
+            'edit' => 'Szablon celu został pomyślnie zmodyfikowany.',
+            'delete' => 'Szablon celu został pomyślnie usunięty.',
+        ],
     ],
 
 ];

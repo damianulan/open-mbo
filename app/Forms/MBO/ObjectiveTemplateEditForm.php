@@ -28,7 +28,7 @@ class ObjectiveTemplateEditForm
                 ->add(FormElement::trix('description', $model)->label(__('forms.objectives.description')))
                 ->add(FormElement::decimal('goal', $model)->label(__('forms.objectives.goal')))
                 ->add(FormElement::switch('draft', $model)->label(__('forms.objectives.draft'))->default(true)
-                ->info('Proces będzie widoczny tylko dla administratorów i nie zostanie uruchomiony automatycznie.'))
+                ->info('Cel będzie widoczny tylko dla administratorów i nie będzie możliwy do dodania do procesu w Kampanii MBO.'))
                 ->addSubmit();
     }
 
