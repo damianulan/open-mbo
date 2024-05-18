@@ -64,7 +64,7 @@ return [
 
     'campaigns' => [
         'index' => 'Kampanie Pomiarowe',
-        'create' => 'Tworzenie kampanii pomiarowej',
+        'create' => 'Tworzenie nowej kampanii pomiarowej',
         'edit' => 'Edycja kampanii',
     ],
 

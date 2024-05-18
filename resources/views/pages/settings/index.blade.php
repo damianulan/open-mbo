@@ -2,7 +2,6 @@
 @section('content')
 
 @include('pages.settings.nav')
-@include('layouts.components.alerts')
 
 <div class="content-card">
     <div class="container settings">

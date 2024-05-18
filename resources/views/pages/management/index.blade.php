@@ -2,7 +2,6 @@
 @section('content')
 
 @include('pages.management.nav')
-@include('layouts.components.alerts')
 
 <nav class="icon-btn-nav">
     <div class="panel-left">

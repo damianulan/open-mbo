@@ -77,6 +77,7 @@ class Element
             return view('components.forms.label', [
                 'label' => $this->label,
                 'name' => $this->name,
+                'required' => $this->required,
             ]);
         }
         return null;

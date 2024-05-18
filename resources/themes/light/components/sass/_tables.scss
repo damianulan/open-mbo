@@ -116,7 +116,13 @@ ul.ombo-list {
 }
 
 .ombo-list li .list-content{
+    display: flex;
+    align-items: center;
     font-size: .8rem;
+}
+
+.ombo-list li .list-content span{
+    color: $secondary;
 }
 
 .ombo-list li .list-actions{

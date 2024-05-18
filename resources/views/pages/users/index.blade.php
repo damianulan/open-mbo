@@ -1,8 +1,6 @@
 @extends('layouts.portal.master')
 @section('content')
 
-@include('layouts.components.alerts')
-
 <div class="icon-btn-nav">
     <div class="panel-left">
         <a class="icon-btn" href="{{ route('users.create') }}" data-bs-toggle="tooltip" data-bs-title="{{ __('buttons.add') }}">

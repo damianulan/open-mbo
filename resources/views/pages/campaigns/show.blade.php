@@ -1,12 +1,10 @@
 @extends('layouts.portal.master')
 @section('content')
 
-@include('layouts.components.alerts')
-
 <div class="icon-btn-nav">
     <div class="panel-left">
         <a class="icon-btn" href="{{ route('campaigns.edit', $campaign->id) }}" data-bs-toggle="tooltip" data-bs-title="{{ __('buttons.edit') }}"><i class="bi-pencil-fill"></i></a>
-        <a class="icon-btn" href="" data-bs-toggle="tooltip" data-bs-title="{{ __('Dodaj cele') }}"><i class="bi-heart-arrow"></i></a>
+        <a href="javascript:void(0);" class="icon-btn add-objective" data-bs-toggle="tooltip" data-bs-title="{{ __('Dodaj cele') }}"><i class="bi-heart-arrow"></i></a>
     </div>
 </div>
 <div class="content-card">
@@ -24,7 +22,7 @@
                         <div class="list-grid">
                             <div class="list-content">
                                 <i class="bi text-primary bi-bullseye me-1"></i>
-                                Cel 1
+                                <span>Cel 1</span>
                             </div>
                             <div class="list-actions">
                                 <div class="list-action me-3" data-bs-toggle="tooltip" data-bs-title="Waga celu">
@@ -35,6 +33,9 @@
                                     <i class="bi-heart-arrow"></i>
                                     <span>3600</span>
                                 </div>
+                                <a href="#" class="list-action" data-bs-toggle="tooltip" data-bs-title="Edytuj">
+                                    <i class="bi-pencil-fill"></i>
+                                </a>
                                 <a href="#" class="list-action" data-bs-toggle="tooltip" data-bs-title="Usuń">
                                     <i class="bi-x-lg"></i>
                                 </a>
@@ -50,7 +51,7 @@
                         <div class="list-grid">
                             <div class="list-content">
                                 <i class="bi text-primary bi-person me-1"></i>
-                                Damian Ułan
+                                <span>Damian Ułan</span>
                             </div>
                             <div class="list-actions">
                                 <a href="#" class="list-action">
@@ -68,5 +69,9 @@
 
 @endsection
 @section('page-scripts')
-
+<script type="text/javascript">
+    $('.add-objective').on('click', function() {
+        $.getModal('campaigns.add_objectives');
+    })
+</script>
 @endsection

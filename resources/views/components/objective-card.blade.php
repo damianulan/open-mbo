@@ -25,13 +25,13 @@
         <div class="row details">
             <div class="col-xl-4 col-md-6 col-sm-12">
                 <div class="element">
-                    <div class="element-title" data-bs-toggle="tooltip" data-bs-title="Termin realizacji">
-                        <i class="bi bi bi-calendar2-date me-2"></i>
-                        <span>{{ $objective->deadline }}</span>
+                    <div class="element-title" data-bs-toggle="tooltip" data-bs-title="Powiązano z kampaniami">
+                        <i class="bi bi-bullseye me-2"></i>
+                        <span>{{ $objective->campaignsCount() }}</span>
                     </div>
                 </div>
                 <div class="element">
-                    <div class="element-title" data-bs-toggle="tooltip" data-bs-title="Data końca pomiaru">
+                    <div class="element-title" data-bs-toggle="tooltip" data-bs-title="Oczekiwany poziom realizacji">
                         <i class="bi bi-heart-arrow me-2"></i>
                         <span>{{ $objective->goal }}</span>
                     </div>
@@ -41,7 +41,7 @@
                 <div class="element">
                     <div class="element-title" data-bs-toggle="tooltip" data-bs-title="Ilość uczestników">
                         <i class="bi bi-people-fill me-2"></i>
-                        <span>{{ $objective->users_count() }}</span>
+                        <span>{{ $objective->usersCount() }}</span>
                     </div>
                 </div>
 

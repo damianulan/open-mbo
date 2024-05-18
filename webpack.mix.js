@@ -2,6 +2,12 @@
 
 let mix = require('laravel-mix');
 
+mix.webpackConfig(webpack => {
+    return {
+        plugins: []
+    };
+});
+
 // misc
 mix.copyDirectory('resources/themes/vendors', 'public/themes/vendors');
 mix.copyDirectory('resources/images', 'public/images');

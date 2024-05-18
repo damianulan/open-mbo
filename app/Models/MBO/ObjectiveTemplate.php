@@ -36,6 +36,11 @@ class ObjectiveTemplate extends BaseModel
         'type' => ObjectiveType::class,
     ];
 
+    public static function allActive()
+    {
+        return self::where('draft', 0)->get();
+    }
+
     public function category()
     {
         return $this->belongsTo(ObjectiveTemplateCategory::class, 'category_id');
@@ -46,9 +51,14 @@ class ObjectiveTemplate extends BaseModel
         return $this->hasMany(Objective::class, 'template_id');
     }
 
-    public function users_count()
+    public function usersCount()
     {
         return $this->objectives()->count();
+    }
+
+    public function campaignsCount()
+    {
+        return $this->campaigns()->count();
     }
 
     public function global_objectives()

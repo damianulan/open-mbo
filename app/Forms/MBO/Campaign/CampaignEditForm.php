@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Forms\MBO;
+namespace App\Forms\MBO\Campaign;
 
 use App\Facades\Forms\Form;
 use App\Facades\Forms\FormIO;

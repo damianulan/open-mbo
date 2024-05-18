@@ -126,7 +126,7 @@ class Campaign extends BaseModel
         $start = Carbon::createFromFormat(config('app.date_format'), $this->dateStart());
         $end = Carbon::createFromFormat(config('app.date_format'), $this->dateEnd());
         $fullDiff = $start->diffInDays($end, false);
-        $diff = $now->diffInDays($end);
+        $diff = $now->diffInDays($start);
 
         return round(($diff / $fullDiff)*100);
     }

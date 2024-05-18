@@ -1,7 +1,6 @@
 @extends('layouts.portal.master')
 @section('content')
 
-@include('layouts.components.alerts')
 @include('pages.settings.nav')
 
 <div class="content-card">

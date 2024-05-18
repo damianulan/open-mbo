@@ -12,7 +12,7 @@ return new class extends SettingsMigration
         $this->migrator->add('general.timezone', 'Europe/Warsaw');
         $this->migrator->add('general.debug', true);
         $this->migrator->add('general.locale', 'pl');
-        $this->migrator->add('general.build', 202306031936);
+        $this->migrator->add('general.build', 202405018);
         $this->migrator->add('general.release', '0.0.1');
 
         $this->migrator->add('general.date_format', 'd.m.Y');

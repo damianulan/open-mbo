@@ -75,11 +75,15 @@ Route::prefix('management')->middleware(['auth'])->name('management.')->group(fu
 
 
 Route::prefix('campaigns')->middleware(['auth'])->name('campaigns.')->group(function (){
-    Route::get('/', [App\Http\Controllers\CampaignsController::class, 'index'])->name('index');
-    Route::post('/', [App\Http\Controllers\CampaignsController::class, 'store'])->name('store');
-    Route::get('create', [App\Http\Controllers\CampaignsController::class, 'create'])->name('create');
-    Route::get('edit/{user}', [App\Http\Controllers\CampaignsController::class, 'edit'])->name('edit');
-    Route::get('{user}', [App\Http\Controllers\CampaignsController::class, 'show'])->name('show');
-    Route::put('{user}', [App\Http\Controllers\CampaignsController::class, 'update'])->name('update');
+    Route::get('/', [App\Http\Controllers\Campaigns\CampaignsController::class, 'index'])->name('index');
+    Route::post('/', [App\Http\Controllers\Campaigns\CampaignsController::class, 'store'])->name('store');
+    Route::get('create', [App\Http\Controllers\Campaigns\CampaignsController::class, 'create'])->name('create');
+    Route::get('edit/{user}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'edit'])->name('edit');
+    Route::get('{user}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'show'])->name('show');
+    Route::put('{user}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'update'])->name('update');
 
+});
+
+Route::middleware(['auth'])->name('general.')->group(function () {
+    Route::get('/get_modal', [App\Http\Controllers\GeneralController::class, 'getModal'])->name('get_modal');
 });

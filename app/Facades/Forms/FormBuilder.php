@@ -9,20 +9,26 @@ use App\Facades\Forms\Elements\Element;
 class FormBuilder
 {
     private ?string $id;
+    private ?string $title;
     private string $method;
-    private string $action;
+    private ?string $action;
     private string $template = 'horizontal';
 
     private array $classes = [];
     private array $elements = [];
 
-    public Button $submit;
+    public ?Button $submit = null;
 
-    public function __construct(string $method, string $action, string $id = null)
+    public function __construct(string $method, ?string $action, ?string $id = null)
     {
         $this->method = Str::upper($method);
         $this->action = $action;
         $this->id = $id;
+    }
+
+    public static function boot(string $method, ?string $action, ?string $id = null): self
+    {
+        return new self($method, $action, $id);
     }
 
     public function class(... $classes)
@@ -59,6 +65,17 @@ class FormBuilder
     {
         $this->submit = new Button(__('buttons.save'), 'submit', $class);
         return $this;
+    }
+
+    public function addTitle(string $title)
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+    public function title(): ?string
+    {
+        return $this->title;
     }
 
     public function render()
