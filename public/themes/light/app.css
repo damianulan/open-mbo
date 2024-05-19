@@ -22307,6 +22307,15 @@ a.action-btn {
   white-space: nowrap;
 }
 
+.btn-row {
+  display: flex;
+}
+
+.btn-row button.btn:not(:last-child),
+.btn-row a.btn:not(:last-child) {
+  margin-right: 1rem;
+}
+
 select, input {
   display: block;
   width: 100%;
