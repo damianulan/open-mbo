@@ -45,7 +45,14 @@ class FormBuilder
     public function add(Element $element)
     {
         if(!empty($element) && $element->show === true){
-            $this->elements[] = $element;
+            $this->elements[$element->name] = $element;
+        }
+        return $this;
+    }
+
+    public function remove(string $name){
+        if(isset($this->elements[$name])){
+            unset($this->elements[$name]);
         }
         return $this;
     }

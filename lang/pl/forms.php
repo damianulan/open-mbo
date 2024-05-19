@@ -66,5 +66,13 @@ return [
         'description' => 'Opis celu',
         'goal' => 'Oczekiwany poziom realizacji',
         'draft' => 'Wersja robocza',
+        'deadline' => 'Termin realizacji',
+        'weight' => 'Waga celu',
+        'award' => 'Nagroda',
+        
+
+        'info' => [
+
+        ],
     ],
 ];

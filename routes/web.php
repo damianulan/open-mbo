@@ -87,3 +87,7 @@ Route::prefix('campaigns')->middleware(['auth'])->name('campaigns.')->group(func
 Route::middleware(['auth'])->name('general.')->group(function () {
     Route::get('/get_modal', [App\Http\Controllers\GeneralController::class, 'getModal'])->name('get_modal');
 });
+
+Route::prefix('ajax')->middleware(['auth'])->name('ajax.')->group(function () {
+    Route::get('/get_model_instance', [App\Http\Controllers\AjaxController::class, 'getModelInstance'])->name('get_model_instance');
+});

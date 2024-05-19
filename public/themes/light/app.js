@@ -3328,6 +3328,43 @@ $.getModal = function (type) {
     });
   }
 };
+$.jsonAjax = function (url, datas) {
+  var _success_callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (response) {};
+  var _error_callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function (response) {};
+  var overlay = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
+  var cache = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
+  if (overlay) {
+    $.showOverlay();
+  }
+  $.ajax({
+    cache: cache,
+    url: url,
+    dataType: 'json',
+    headers: {
+      'X-CSRF-Token': csrf
+    },
+    data: datas
+  }).done(function (response) {
+    if (response.status === 'ok') {
+      _success_callback(response);
+    } else {
+      _error_callback(response);
+    }
+    if (overlay) {
+      $.hideOverlay();
+    }
+  }).fail(function (jqXHR, textStatus) {
+    if (overlay) {
+      $.hideOverlay();
+    }
+    $.error('Wystąpił błąd podczas pobierania danych z bazy danych. Zweryfikuj swoje połączenie internetowe.');
+    console.error('json ajax request failed.');
+  });
+};
+
+// $.ajaxForm = function (url, datas, ) {
+
+// }
 
 /***/ }),
 

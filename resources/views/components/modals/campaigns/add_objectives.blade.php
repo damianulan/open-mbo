@@ -21,6 +21,29 @@
 
 $(document).ready(function() {
     $.rebuildVendors();
+});
 
+$('select[name="template_id"]').on('change', function() {
+    $.jsonAjax('{{ route('ajax.get_model_instance') }}', {
+        model: 'objective_template',
+        id: $(this).val()
+    }, function(response) {
+        var instance = response.instance;
+        if(instance){
+            $('input[name="name"]').val(instance.name);
+            var descr_trix = document.querySelector("trix-editor");
+            console.log(descr_trix.editor, instance.description);
+            $('input[name="goal"]').val(instance.goal);
+            $('input[name="award"]').val(instance.award);
+
+            // descr_trix.editor.setSelectedRange([0, 0]);
+            // descr_trix.editor.insertHTML(instance.description);
+
+        }
+    },
+    function(response) {
+        $.error('Wystąpił błąd podczas pobierania danych z bazy danych. Zweryfikuj swoje połączenie internetowe.');
+    }
+    );
 });
 </script>

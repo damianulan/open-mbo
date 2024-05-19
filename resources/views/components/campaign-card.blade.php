@@ -55,7 +55,7 @@
                 <div class="element">
                     <div class="element-title" data-bs-toggle="tooltip" data-bs-title="Cele podstawowe">
                         <i class="bi bi-bullseye me-2"></i>
-                        <span>{{ $campaign->objective_templates()->count() }}</span>
+                        <span>{{ $campaign->objectives()->count() }}</span>
                     </div>
                 </div>
             </div>

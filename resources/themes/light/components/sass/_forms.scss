@@ -113,7 +113,11 @@ form.form-horizontal .action-btns .btn {
 }
 
 form label.required::after {
-
+    font-family: 'bootstrap-icons';
+    content: "\f151";
+    color: $danger;
+    font-size: .5rem;
+    vertical-align: text-top;
 }
 
 .form-check.form-switch .form-check-input {

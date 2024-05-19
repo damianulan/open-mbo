@@ -58,7 +58,7 @@ class ObjectiveTemplate extends BaseModel
 
     public function campaignsCount()
     {
-        return $this->campaigns()->count();
+        return $this->objectives()->whereNotNull('campaign_id')->count();
     }
 
     public function global_objectives()

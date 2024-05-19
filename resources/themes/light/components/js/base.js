@@ -118,7 +118,6 @@ function swal_confirm(text, title_input = null, _callback = null)
 
 function swal_alert(text, title, _callback = null, icon = null)
 {
-
     CustomSwal.fire({
         title: title,
         text: text,
@@ -225,3 +224,37 @@ $.getModal = function (type) {
         });
     }
 }
+
+$.jsonAjax = function (url, datas, _success_callback = function(response){}, _error_callback = function(response){}, overlay = true, cache = false) {
+    if(overlay){
+        $.showOverlay();
+    }
+    $.ajax({
+        cache: cache,
+        url: url,
+        dataType: 'json',
+        headers: {
+            'X-CSRF-Token': csrf
+        },
+        data: datas
+    }).done(function (response) {
+        if(response.status === 'ok'){
+            _success_callback(response);
+        } else {
+            _error_callback(response);
+        }
+        if(overlay){
+            $.hideOverlay();
+        }
+    }).fail(function (jqXHR, textStatus) {
+        if(overlay){
+            $.hideOverlay();
+        }
+        $.error('Wystąpił błąd podczas pobierania danych z bazy danych. Zweryfikuj swoje połączenie internetowe.');
+        console.error('json ajax request failed.');
+    });
+}
+
+// $.ajaxForm = function (url, datas, ) {
+
+// }

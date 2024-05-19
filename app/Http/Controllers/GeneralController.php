@@ -10,18 +10,12 @@ use App\Models\MBO\Campaign;
 class GeneralController extends Controller
 {
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function getModal(Request $request)
     {
         $type = $request->input('type') ?? null;
         $id = $request->input('id') ?? null;
         $status = 'error';
         $view = null;
-        $form = null;
         $params = array();
 
         switch ($type) {
