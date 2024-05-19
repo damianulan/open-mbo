@@ -8,7 +8,6 @@
         <div class="modal-body">
             <div class="container-fluid">
                 {{ $form->render() }}
-
             </div>
         </div>
         <div class="modal-footer">

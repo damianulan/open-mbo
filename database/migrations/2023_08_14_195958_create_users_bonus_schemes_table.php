@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_bonus_schemes', function (Blueprint $table) {
+        Schema::create('users_bonus_schemes', function (Blueprint $table) {
             $table->foreignUuid('user_id');
             $table->foreignUuid('bonus_scheme_id');
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_bonus_schemes');
+        Schema::dropIfExists('users_bonus_schemes');
     }
 };

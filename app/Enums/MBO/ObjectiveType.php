@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enums;
+namespace App\Enums\MBO;
 
 enum ObjectiveType: string
 {
@@ -10,7 +10,4 @@ enum ObjectiveType: string
     // can be assigned only to a team leader / supervisor and cannot be cascaded down the organization structure.
     // assigned to a campaign will be distributed to all team leaders and supervisors.
     case TEAM       = 'team';
-
-    // can only be assigned to a campaign. It's like a team, but is inherited by all participants.
-    case GLOBAL     = 'global';
 }

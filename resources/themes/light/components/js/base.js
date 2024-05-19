@@ -82,6 +82,9 @@ function buildVendors() {
         dateFormat: 'Y-m-d',
     });
 }
+$('.table-container').on('xhr.dt', function (e, settings, json, xhr) {
+    $.rebuildVendors();
+});
 
 function overlay(state) {
     if(state === 'show') {
@@ -190,8 +193,6 @@ $.showOverlay = function () {
 $.hideOverlay = function () {
     overlay('hide');
 }
-
-
 
 jQuery.fn.extend({
 

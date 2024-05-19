@@ -8,7 +8,7 @@ use App\Facades\Forms\FormBuilder;
 use App\Facades\Forms\FormElement;
 use App\Facades\Forms\Elements\Datetime;
 use App\Facades\Forms\Elements\Dictionary;
-use App\Enums\CampaignStage;
+use App\Enums\MBO\CampaignStage;
 use App\Models\MBO\ObjectiveTemplate;
 
 class CampaignEditObjective extends Form implements FormIO

@@ -14,7 +14,7 @@ use App\Models\Core\User;
 use App\Models\MBO\Objective;
 use App\Models\MBO\CampaignObjective;
 use App\Models\MBO\ObjectiveTemplateCategory;
-use App\Enums\ObjectiveType;
+use App\Enums\MBO\ObjectiveType;
 
 class ObjectiveTemplate extends BaseModel
 {
@@ -64,11 +64,6 @@ class ObjectiveTemplate extends BaseModel
     public function global_objectives()
     {
         return $this->hasMany(CampaignObjective::class, 'template_id');
-    }
-
-    public function campaigns()
-    {
-        return $this->belongsToMany(Campaign::class, 'objective_templates_campaigns');
     }
 
     public function global(): bool

@@ -74,11 +74,6 @@ class Campaign extends BaseModel
         return $this->hasMany(UserCampaign::class);
     }
 
-    public function objective_templates()
-    {
-        return $this->belongsToMany(ObjectiveTemplate::class, 'objective_templates_campaigns');
-    }
-
     public function objectives()
     {
         return $this->hasMany(Objective::class);

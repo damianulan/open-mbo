@@ -24,7 +24,7 @@ class BonusScheme extends BaseModel
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_bonus_schemes');
+        return $this->belongsToMany(User::class, 'users_bonus_schemes');
     }
 
     public function assignments()

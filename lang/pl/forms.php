@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\CampaignStage;
+use App\Enums\MBO\CampaignStage;
 
 return [
 

@@ -3189,6 +3189,9 @@ function buildVendors() {
     dateFormat: 'Y-m-d'
   });
 }
+$('.table-container').on('xhr.dt', function (e, settings, json, xhr) {
+  $.rebuildVendors();
+});
 function overlay(state) {
   if (state === 'show') {
     $('body').append('<div class="loader-overlay"><div class="mbo-loader"></div></div>');

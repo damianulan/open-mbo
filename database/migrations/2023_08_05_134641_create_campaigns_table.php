@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\CampaignStage;
+use App\Enums\MBO\CampaignStage;
 
 return new class extends Migration
 {
@@ -39,8 +39,8 @@ return new class extends Migration
             $table->foreignUuid('created_by');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
 
-            $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
