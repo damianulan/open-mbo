@@ -3311,6 +3311,9 @@ $.getModal = function (type) {
       cache: false,
       url: getModalUrl,
       dataType: 'json',
+      headers: {
+        'X-CSRF-Token': csrf
+      },
       data: {
         type: type
       }
