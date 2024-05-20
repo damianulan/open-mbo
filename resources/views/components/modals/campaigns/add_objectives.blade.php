@@ -3,7 +3,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-3" id="containerModalLabel">{{ $form->title() }}</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ __('buttons.close') }}"></button>
         </div>
         <div class="modal-body">
             <div class="container-fluid">
@@ -11,8 +11,8 @@
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">{{ __('buttons.close') }}</button>
+          <button type="button" class="btn btn-primary">{{ __('buttons.save') }}</button>
         </div>
       </div>
     </div>
@@ -33,7 +33,6 @@ $('select[name="template_id"]').on('change', function() {
             $('input[name="name"]').val(instance.name);
             var descr_trix = document.querySelector("trix-editor");
             console.log(descr_trix.editor, instance.description);
-            $('input[name="goal"]').val(instance.goal);
             $('input[name="award"]').val(instance.award);
 
             // descr_trix.editor.setSelectedRange([0, 0]);

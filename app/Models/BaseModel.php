@@ -8,9 +8,19 @@ use App\Traits\UUID;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Facades\Forms\RequestForms;
 use Watson\Rememberable\Rememberable;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 class BaseModel extends Model
 {
-    use HasFactory, UUID, SoftDeletes, RequestForms;
+    use HasFactory, UUID, SoftDeletes, RequestForms, LogsActivity;
     //use Rememberable;
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+                ->useLogName('model')
+                ->logOnly($this->fillable)
+                ->logOnlyDirty();
+    }
 }

@@ -22,8 +22,9 @@ trait UserMBO
         return $this->hasMany(UserCampaign::class);
     }
 
-    public function leader_campaigns()
+    public function coordinator_campaigns()
     {
-        return $this->hasMany(UserCampaign::class, 'leader_id');
+        return $this->belongsToMany(static::class, 'campaigns_coordinators', 'coordinator_id', 'campaign_id')->where('active', 1);
     }
+
 }

@@ -29,7 +29,6 @@ class CampaignEditObjective extends Form implements FormIO
                 ->add(FormElement::text('name', $model)->label(__('forms.objectives.name'))->required())
                 ->add(FormElement::trix('description', $model)->label(__('forms.objectives.description')))
                 ->add(FormElement::datetime('deadline')->label(__('forms.objectives.deadline')))
-                ->add(FormElement::decimal('goal', $model)->label(__('forms.objectives.goal'))->required())
                 ->add(FormElement::decimal('weight', $model)->label(__('forms.objectives.weight'))->required())
                 ->add(FormElement::decimal('award', $model)->label(__('forms.objectives.award')))
                 ->add(FormElement::switch('draft', $model)->label(__('forms.objectives.draft'))->default(true))
@@ -43,7 +42,6 @@ class CampaignEditObjective extends Form implements FormIO
             'name' => 'max:120|required',
             'deadline' => 'datetime|nullable',
             'description' => 'max:512|nullable',
-            'goal' => 'decimal:2|required',
             'weight' => 'decimal:2|required',
             'award' => 'decimal:2|nullable',
             'draft' => 'in:on,off',

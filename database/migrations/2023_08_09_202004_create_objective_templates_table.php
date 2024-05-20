@@ -20,8 +20,6 @@ return new class extends Migration
             $table->string('name');
             $table->longText('description')->nullable();
 
-            $table->decimal('goal', 8,2)->nullable();
-
             $table->enum('type', [
                 ObjectiveType::INDIVIDUAL->value,
                 ObjectiveType::TEAM->value,

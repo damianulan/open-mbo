@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('role_contexts', function (Blueprint $table) {
-            $table->id();
-            $table->uuidMorphs('subject', 'subject');
+        Schema::create('objective_goals', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->uuidMorphs('objective', 'objective');
+            $table->string('text', 255);
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contexts');
+        Schema::dropIfExists('objective_goals');
     }
 };

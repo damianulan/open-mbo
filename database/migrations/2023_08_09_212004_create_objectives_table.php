@@ -22,11 +22,10 @@ return new class extends Migration
             $table->foreign('template_id')->references('id')->on('objective_templates')->nullOnDelete();
             $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');
 
-            $table->string('name');
+            $table->string('name', 255);
             $table->longText('description')->nullable();
 
             $table->dateTime('deadline')->nullable();
-            $table->decimal('goal', 8,2)->nullable();
             $table->decimal('weight', 8,2)->default(1);
             $table->decimal('award', 8,2)->nullable();
 

@@ -8,6 +8,7 @@ use App\Models\Business\Position;
 use App\Models\Business\Team;
 use App\Models\Business\TypeOfContract;
 use App\Models\Business\UserEmployment;
+use App\Models\Core\User;
 
 trait UserBusiness
 {
@@ -63,6 +64,11 @@ trait UserBusiness
     public function isSupervisor(): bool
     {
         return $this->subordinates()->count() ? true:false;
+    }
+
+    public function isSupervisorTo(User $user): bool
+    {
+        return $this->subordinates->contains($user);
     }
 
     public function assignSupervisor(... $supervisor_ids): bool

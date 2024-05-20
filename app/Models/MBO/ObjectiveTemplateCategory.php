@@ -11,11 +11,10 @@ use App\Facades\Forms\RequestForms;
 use App\Facades\TrixField\TrixFieldCast;
 use App\Casts\CheckboxCast;
 use App\Models\MBO\ObjectiveTemplate;
-use App\Traits\Contexts;
 
 class ObjectiveTemplateCategory extends BaseModel
 {
-    use TrixFields, Contexts;
+    use TrixFields;
 
     protected $fillable = [
         'name',

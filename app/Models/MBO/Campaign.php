@@ -79,14 +79,14 @@ class Campaign extends BaseModel
         return $this->hasMany(Objective::class);
     }
 
-    public function global_objectives()
-    {
-        return $this->hasMany(CampaignObjective::class);
-    }
-
     public function creator()
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function coordinators()
+    {
+        return $this->belongsToMany(User::class, 'campaigns_coordinators', 'campaign_id', 'coordinator_id')->where('active', 1);
     }
 
     public function active(): bool
@@ -121,7 +121,7 @@ class Campaign extends BaseModel
         $start = Carbon::createFromFormat(config('app.date_format'), $this->dateStart());
         $end = Carbon::createFromFormat(config('app.date_format'), $this->dateEnd());
         $fullDiff = $start->diffInDays($end, false);
-        $diff = $now->diffInDays($start);
+        $diff = abs($now->diffInDays($start));
 
         return round(($diff / $fullDiff)*100);
     }

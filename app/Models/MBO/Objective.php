@@ -23,7 +23,6 @@ class Objective extends BaseModel
         'name',
         'description',
         'deadline',
-        'goal',
         'weight',
         'draft',
         'award',
@@ -33,7 +32,6 @@ class Objective extends BaseModel
         'draft' => CheckboxCast::class,
         'deadline' => CarbonDatetime::class,
         'description' => TrixFieldCast::class,
-        'goal' => 'decimal:8,2',
         'weight' => 'decimal:2,2',
         'award' => 'decimal:8,2',
     ];

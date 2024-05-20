@@ -24,7 +24,6 @@ class ObjectiveTemplate extends BaseModel
         'category_id',
         'name',
         'description',
-        'goal',
         'type',
         'draft',
         'award',
@@ -61,11 +60,6 @@ class ObjectiveTemplate extends BaseModel
         return $this->objectives()->whereNotNull('campaign_id')->count();
     }
 
-    public function global_objectives()
-    {
-        return $this->hasMany(CampaignObjective::class, 'template_id');
-    }
-
     public function global(): bool
     {
         return $this->category()->global ? true:false;
@@ -78,7 +72,6 @@ class ObjectiveTemplate extends BaseModel
         $objective->user_id = $user->id;
         $objective->name = $this->name;
         $objective->description = $this->description;
-        $objective->goal = $this->goal;
         $objective->draft = 1;
         $objective->award = $this->award;
         return $objective->save();

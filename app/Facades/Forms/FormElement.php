@@ -57,7 +57,7 @@ class FormElement
         if($relation && $model && $model->$relation){
             $values = $model->$relation->modelKeys() ?? array();
         }
-        
+
         if(count($selected_values)){
             $values = $selected_values;
         }
@@ -124,5 +124,10 @@ class FormElement
             $value = true;
         }
         return new File($name, $value);
+    }
+
+    public static function dynamicChecklist(string $name, $model = null)
+    {
+
     }
 }

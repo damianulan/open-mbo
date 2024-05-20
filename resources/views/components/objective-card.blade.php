@@ -30,12 +30,6 @@
                         <span>{{ $objective->campaignsCount() }}</span>
                     </div>
                 </div>
-                <div class="element">
-                    <div class="element-title" data-bs-toggle="tooltip" data-bs-title="Oczekiwany poziom realizacji">
-                        <i class="bi bi-heart-arrow me-2"></i>
-                        <span>{{ $objective->goal }}</span>
-                    </div>
-                </div>
             </div>
             <div class="col-xl-4 col-md-6 col-sm-12">
                 <div class="element">

@@ -3,9 +3,7 @@
 namespace App\Models\MBO;
 
 use App\Models\BaseModel;
-use App\Casts\CheckboxCast;
 use App\Models\Core\User;
-use App\Models\MBO\Campaign;
 use App\Models\MBO\Objective;
 use App\Enums\MBO\UserObjectiveStatus;
 
