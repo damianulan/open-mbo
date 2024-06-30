@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Settings\GeneralSettings;
-use App\Forms\MBO\Campaign\CampaignEditObjective;
 use App\Models\MBO\ObjectiveTemplate;
 use App\Models\MBO\Campaign;
 

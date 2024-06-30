@@ -24,7 +24,7 @@ class UserEditForm extends Form implements FormIO
         if(!is_null($model)){
             $method = 'PUT';
             $route = route('users.update', $model->id);
-            $exclude = ['id' => $model->id];
+            $exclude[] = ['id' => $model->id];
             $profile = $model->profile;
         }
         return (new FormBuilder($method, $route, 'users_edit'))
@@ -42,7 +42,7 @@ class UserEditForm extends Form implements FormIO
                 ->addSubmit();
     }
 
-    public static function validation(): array
+    public static function validation($model = null): array
     {
         return [
             'firstname' => 'max:255|required',

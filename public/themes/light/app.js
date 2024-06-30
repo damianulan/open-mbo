@@ -3309,7 +3309,9 @@ jQuery.fn.extend({
   }
 });
 $.getModal = function (type) {
+  var datas = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   if (type && type != '') {
+    datas.type = type;
     $.ajax({
       cache: false,
       url: getModalUrl,
@@ -3317,16 +3319,18 @@ $.getModal = function (type) {
       headers: {
         'X-CSRF-Token': csrf
       },
-      data: {
-        type: type
-      }
+      data: datas
     }).done(function (data) {
-      $('body').find('#modal-container').empty().append(data.view);
-      $('body').find('#modal-input').click();
+      $('body').find('#modal-container').children().remove();
+      $('body').find('#modal-container').append(data.view);
+      $('body').find('#modal-input').trigger("click");
     }).fail(function (jqXHR, textStatus) {
       console.error('get_modal footer function failed.');
     });
   }
+};
+$.hideModal = function () {
+  $('body').find('#modal-input').trigger("click");
 };
 $.jsonAjax = function (url, datas) {
   var _success_callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (response) {};
@@ -3340,6 +3344,7 @@ $.jsonAjax = function (url, datas) {
     cache: cache,
     url: url,
     dataType: 'json',
+    type: 'GET',
     headers: {
       'X-CSRF-Token': csrf
     },
@@ -3358,13 +3363,69 @@ $.jsonAjax = function (url, datas) {
       $.hideOverlay();
     }
     $.error('Wystąpił błąd podczas pobierania danych z bazy danych. Zweryfikuj swoje połączenie internetowe.');
-    console.error('json ajax request failed.');
+    console.error('json ajax request failed.', textStatus);
   });
 };
-
-// $.ajaxForm = function (url, datas, ) {
-
-// }
+$.ajaxForm = function (url, form_id) {
+  var _success_callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (response) {};
+  var _error_callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function (response) {};
+  var overlay = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
+  var cache = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
+  if (overlay) {
+    $.showOverlay();
+  }
+  var datas = $(document).find('#' + form_id).find('input,select,textarea').serializeArray();
+  $.clearErrorsForm(form_id);
+  if (datas) {
+    $.ajax({
+      cache: cache,
+      url: url,
+      dataType: 'json',
+      type: 'POST',
+      headers: {
+        'X-CSRF-Token': csrf
+      },
+      data: datas
+    }).done(function (response) {
+      if (response.status === 'ok') {
+        _success_callback(response);
+      } else {
+        $.makeErrorsForm(form_id, response);
+        _error_callback(response);
+      }
+      if (overlay) {
+        $.hideOverlay();
+      }
+    }).fail(function (jqXHR, textStatus) {
+      if (overlay) {
+        $.hideOverlay();
+      }
+      $.error('Wystąpił błąd podczas pobierania danych z bazy danych. Zweryfikuj swoje połączenie internetowe.');
+      console.error('json ajax form request failed.', textStatus);
+    });
+  } else {
+    console.error('json ajax form request failed. inputs are empty.');
+  }
+};
+$.makeErrorsForm = function (form_id, response) {
+  Object.keys(response.messages).forEach(function (key) {
+    var input = $(document).find('#' + form_id).find('[name="' + key + '"]');
+    if (input) {
+      input.each(function () {
+        var element = $(this);
+        element.addClass('is-invalid');
+        response.messages[key].forEach(function (message) {
+          var feedback = '<div class="invalid-feedback">' + message + '</div>';
+          element.parent().closest('div').append(feedback);
+        });
+      });
+    }
+  });
+};
+$.clearErrorsForm = function (form_id) {
+  $(document).find('#' + form_id).find('.invalid-feedback').remove();
+  $(document).find('#' + form_id).find('.is-invalid').removeClass('is-invalid');
+};
 
 /***/ }),
 

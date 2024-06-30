@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Settings\GeneralSettings;
-use App\Forms\MBO\Campaign\CampaignEditObjective;
+use App\Forms\MBO\Campaign\CampaignEditObjectiveForm;
 use App\Models\MBO\Campaign;
+use App\Models\MBO\Objective;
 
 class GeneralController extends Controller
 {
@@ -21,9 +22,21 @@ class GeneralController extends Controller
         switch ($type) {
             case 'campaigns.add_objectives':
                     $params = [
-                        'form' => CampaignEditObjective::boot(),
+                        'form' => CampaignEditObjectiveForm::boot(null, $request),
                     ];
+                    $status = 'ok';
                 break;
+
+            case 'campaigns.edit_objective':
+                $objective = Objective::find($id);
+                if($objective){
+                    $params = [
+                        'form' => CampaignEditObjectiveForm::boot($objective, $request),
+                    ];
+                    $status = 'ok';
+                }
+
+            break;
 
             default:
                 # code...

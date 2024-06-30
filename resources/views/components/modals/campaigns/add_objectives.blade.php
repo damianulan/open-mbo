@@ -12,7 +12,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">{{ __('buttons.close') }}</button>
-          <button type="button" class="btn btn-primary">{{ __('buttons.save') }}</button>
+          <button type="button" class="btn btn-primary" id="modal_save">{{ __('buttons.save') }}</button>
         </div>
       </div>
     </div>
@@ -32,7 +32,7 @@ $('select[name="template_id"]').on('change', function() {
         if(instance){
             $('input[name="name"]').val(instance.name);
             var descr_trix = document.querySelector("trix-editor");
-            console.log(descr_trix.editor, instance.description);
+            //console.log(descr_trix.editor, instance.description);
             $('input[name="award"]').val(instance.award);
 
             // descr_trix.editor.setSelectedRange([0, 0]);
@@ -44,5 +44,16 @@ $('select[name="template_id"]').on('change', function() {
         $.error('Wystąpił błąd podczas pobierania danych z bazy danych. Zweryfikuj swoje połączenie internetowe.');
     }
     );
+});
+
+$('#modal_save').on('click', function() {
+    $.ajaxForm('{{ route('campaigns.objective.store') }}', 'campaign_edit_objective', function(response) {
+        $.success(response.message, null, function() {
+            window.location.reload();
+        })
+    },
+    function(response) {
+
+    });
 });
 </script>

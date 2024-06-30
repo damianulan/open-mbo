@@ -11,7 +11,7 @@ class Trix extends Element
     public ?string $value = null;
     public string $toolbar;
 
-    public function __construct(string $name, string $toolbar = 'short', ?TrixField $value)
+    public function __construct(string $name, string $toolbar = 'short', ?TrixField $value = null)
     {
         $this->name = empty($name) ? null:$name;
         $this->value = $value ? $value->get():null;

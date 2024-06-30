@@ -34,6 +34,9 @@ trait RequestForms
                     // ALL ELSE
                     if(!is_array($value)){
                         $value = trim($value);
+                        if(empty($value)){
+                            $value = NULL;
+                        }
                     }
                     $instance->$property = $value;
                 }

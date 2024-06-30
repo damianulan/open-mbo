@@ -82,6 +82,10 @@ Route::prefix('campaigns')->middleware(['auth'])->name('campaigns.')->group(func
     Route::get('{user}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'show'])->name('show');
     Route::put('{user}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'update'])->name('update');
 
+    Route::prefix('objective')->name('objective.')->group(function (){
+        Route::post('/', [App\Http\Controllers\Campaigns\CampaignObjectiveController::class, 'store'])->name('store');
+
+    });
 });
 
 Route::middleware(['auth'])->name('general.')->group(function () {

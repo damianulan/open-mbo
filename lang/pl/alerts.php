@@ -41,6 +41,7 @@ return [
     'campaigns' => [
         'success' => [
             'create' => 'Kampania została utworzona pomyślnie.',
+            'objective_added' => 'Wskazany cel został pomyślnie dodany do Kampanii.',
         ],
 
         'error' => [

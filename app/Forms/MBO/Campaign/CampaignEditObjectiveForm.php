@@ -10,22 +10,34 @@ use App\Facades\Forms\Elements\Datetime;
 use App\Facades\Forms\Elements\Dictionary;
 use App\Enums\MBO\CampaignStage;
 use App\Models\MBO\ObjectiveTemplate;
+use App\Models\MBO\Objective;
+use Illuminate\Http\Request;
 
-class CampaignEditObjective extends Form implements FormIO
+class CampaignEditObjectiveForm extends Form implements FormIO
 {
 
-    public static function boot($model = null): FormBuilder
+    public static function boot($model = null, ?Request $request = null): FormBuilder
     {
         $route = null;
         $method = 'POST';
         $title = 'Dodaj nowy cel do kampanii';
+        $campaign_id = $request->input('campaign_id') ?? null;
         if(!is_null($model)){
             $method = 'PUT';
             $title = 'Edytuj cel w ramach kampanii';
         }
+        $template_ids = Objective::where('campaign_id', $campaign_id)->get()->pluck('template_id');
+        $exclude = array();
+        if(!empty($template_ids)){
+            foreach($template_ids as $tid){
+                $exclude[] = ['id' => $tid];
+            }
+        }
+
         return FormBuilder::boot($method, $route, 'campaign_edit_objective')
                 ->class('campaign-edit-objective-form')
-                ->add(FormElement::select('template_id', $model, Dictionary::fromModel(ObjectiveTemplate::class, 'name', 'allActive'))->required()->label(__('forms.objectives.name')))
+                ->add(FormElement::select('template_id', $model, Dictionary::fromModel(ObjectiveTemplate::class, 'name', 'allActive', $exclude))->required()->label(__('forms.objectives.name')))
+                ->add(FormElement::hidden('campaign_id', $model, $campaign_id))
                 ->add(FormElement::text('name', $model)->label(__('forms.objectives.name'))->required())
                 ->add(FormElement::trix('description', $model)->label(__('forms.objectives.description')))
                 ->add(FormElement::datetime('deadline')->label(__('forms.objectives.deadline')))
@@ -37,12 +49,21 @@ class CampaignEditObjective extends Form implements FormIO
 
     public static function validation($model_id = null): array
     {
+        // TODO - dla weight - suma wszystkich nie może być większa niż 1
+        $campaign_id = request()->input('campaign_id') ?? null;
+        $weights = Objective::where('campaign_id', $campaign_id)->get()->pluck('weight');
+        $max_weight = 1;
+        foreach($weights as $weight){
+            $max_weight = $max_weight - (float) $weight;
+        }
+        dd($max_weight);
+
         return [
             'template_id' => 'required',
             'name' => 'max:120|required',
             'deadline' => 'datetime|nullable',
             'description' => 'max:512|nullable',
-            'weight' => 'decimal:2|required',
+            'weight' => 'decimal:2|max:1|required',
             'award' => 'decimal:2|nullable',
             'draft' => 'in:on,off',
         ];

@@ -6,15 +6,24 @@ use Illuminate\Http\Request;
 use App\Models\MBO\Campaign;
 use App\Models\MBO\Objective;
 use App\Enums\MBO\CampaignStage;
-use App\Forms\MBO\Campaign\CampaignEditForm;
 use App\Http\Controllers\Controller;
+use App\Forms\MBO\Campaign\CampaignEditObjectiveForm;
 
-class CampaignsController extends Controller
+class CampaignObjectiveController extends Controller
 {
 
-    public function create(Request $request)
+    public function store(Request $request, CampaignEditObjectiveForm $form)
     {
-
+        $request = $form::reformatRequest($request);
+        $response = $form::validate($request);
+        if($response['status'] === 'ok'){
+            $objective = Objective::fillFromRequest($request);
+            if($objective->save()){
+                $response['message'] = __('alerts.campaigns.success.objective_added');
+                return response()->json($response);
+            }
+        }
+        return response()->json($response);
     }
 
 }

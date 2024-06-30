@@ -13,7 +13,8 @@ use Spatie\Activitylog\LogOptions;
 
 class BaseModel extends Model
 {
-    use HasFactory, UUID, SoftDeletes, RequestForms, LogsActivity;
+    use HasFactory, UUID, SoftDeletes, RequestForms;
+    //use LogsActivity;
     //use Rememberable;
 
     public function getActivitylogOptions(): LogOptions

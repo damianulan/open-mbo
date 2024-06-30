@@ -32,8 +32,6 @@ class Objective extends BaseModel
         'draft' => CheckboxCast::class,
         'deadline' => CarbonDatetime::class,
         'description' => TrixFieldCast::class,
-        'weight' => 'decimal:2,2',
-        'award' => 'decimal:8,2',
     ];
 
     public function parent()

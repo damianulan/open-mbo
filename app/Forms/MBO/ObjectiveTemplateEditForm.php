@@ -22,6 +22,7 @@ class ObjectiveTemplateEditForm
             $method = 'PUT';
             $route = route('management.objectives.update', $model->id);
         }
+
         return (new FormBuilder($method, $route, 'campaign_edit'))
                 ->class('campaign-create-form')
                 ->add(FormElement::select('category_id', $model, Dictionary::fromModel(ObjectiveTemplateCategory::class, 'name'))->label(__('forms.objectives.category')))
@@ -33,10 +34,11 @@ class ObjectiveTemplateEditForm
                 ->addSubmit();
     }
 
-    public static function validation(): array
+    public static function validation($model = null): array
     {
         return [
             'category_id' => 'nullable',
+            'type' => 'required',
             'name' => 'max:120|required',
             'description' => 'max:512|nullable',
             'draft' => 'in:on,off',
