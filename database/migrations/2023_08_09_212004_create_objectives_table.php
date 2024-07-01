@@ -28,6 +28,7 @@ return new class extends Migration
             $table->dateTime('deadline')->nullable();
             $table->decimal('weight', 8,2)->default(1);
             $table->decimal('award', 8,2)->nullable();
+            $table->decimal('expected', 8,2)->nullable();
 
             $table->boolean('draft')->default(1); // it's a draft on the assignment and can be adjusted in another view.
             $table->softDeletes();

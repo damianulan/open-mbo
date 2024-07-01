@@ -83,7 +83,7 @@
     $('.edit-objective').on('click', function() {
         var model_id = $(this).attr('data-modelid');
 
-        $.getModal('campaigns.edit_objective', {id: model_id});
+        $.getModal('campaigns.add_objectives', {id: model_id});
     });
 </script>
 @endsection

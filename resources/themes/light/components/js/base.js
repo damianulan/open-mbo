@@ -86,6 +86,13 @@ $('.table-container').on('xhr.dt', function (e, settings, json, xhr) {
     $.rebuildVendors();
 });
 
+$('input[data-numeric="decimal"]').on('focusout', function() {
+    var val = $(this).val();
+    if(!val.includes('.') && !val.includes(',')){
+        $(this).val(val + '.00');
+    }
+});
+
 function overlay(state) {
     if(state === 'show') {
         $('body').append('<div class="loader-overlay"><div class="mbo-loader"></div></div>');
@@ -148,7 +155,7 @@ $.error = function(text, title_input = null, _callback = null) {
         title = title_input;
     }
 
-    swal_alert(text, title, _callback, 'success');
+    swal_alert(text, title, _callback, 'error');
 }
 $.warning = function(text, title_input = null, _callback = null) {
     var title = 'Uwaga!';
@@ -156,7 +163,7 @@ $.warning = function(text, title_input = null, _callback = null) {
         title = title_input;
     }
 
-    swal_alert(text, title, _callback, 'success');
+    swal_alert(text, title, _callback, 'warning');
 }
 $.notice = function(text, title_input = null, _callback = null) {
     var title = 'Operacja zakończona pomyślnie!';
@@ -164,7 +171,7 @@ $.notice = function(text, title_input = null, _callback = null) {
         title = title_input;
     }
 
-    swal_alert(text, title, _callback, 'success');
+    swal_alert(text, title, _callback);
 }
 
 function toast_alert(text, type = 'info', _callback = function(){} ) {

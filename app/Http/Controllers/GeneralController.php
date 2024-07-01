@@ -21,22 +21,24 @@ class GeneralController extends Controller
 
         switch ($type) {
             case 'campaigns.add_objectives':
-                    $params = [
-                        'form' => CampaignEditObjectiveForm::boot(null, $request),
-                    ];
-                    $status = 'ok';
+                    if($id){
+                        $objective = Objective::find($id);
+                        if($objective){
+                            $params = [
+                                'id' => $id,
+                                'form' => CampaignEditObjectiveForm::boot($objective, $request),
+                            ];
+                            $status = 'ok';
+                        }
+
+                    } else {
+                        $params = [
+                            'form' => CampaignEditObjectiveForm::boot(null, $request),
+                        ];
+                        $status = 'ok';
+                    }
+
                 break;
-
-            case 'campaigns.edit_objective':
-                $objective = Objective::find($id);
-                if($objective){
-                    $params = [
-                        'form' => CampaignEditObjectiveForm::boot($objective, $request),
-                    ];
-                    $status = 'ok';
-                }
-
-            break;
 
             default:
                 # code...

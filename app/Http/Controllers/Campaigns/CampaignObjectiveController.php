@@ -26,4 +26,18 @@ class CampaignObjectiveController extends Controller
         return response()->json($response);
     }
 
+    public function update(Request $request, $id, CampaignEditObjectiveForm $form)
+    {
+        $request = $form::reformatRequest($request);
+        $response = $form::validate($request, $id);
+        if($response['status'] === 'ok'){
+            $objective = Objective::fillFromRequest($request);
+            dd($objective);
+            if($objective->update()){
+                $response['message'] = __('alerts.campaigns.success.objective_added');
+                return response()->json($response);
+            }
+        }
+        return response()->json($response);
+    }
 }

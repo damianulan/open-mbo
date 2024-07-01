@@ -13,6 +13,7 @@ use App\Models\MBO\ObjectiveTemplate;
 use App\Models\MBO\Objective;
 use Illuminate\Http\Request;
 
+// Ajax form
 class CampaignEditObjectiveForm extends Form implements FormIO
 {
 
@@ -49,21 +50,24 @@ class CampaignEditObjectiveForm extends Form implements FormIO
 
     public static function validation($model_id = null): array
     {
-        // TODO - dla weight - suma wszystkich nie może być większa niż 1
         $campaign_id = request()->input('campaign_id') ?? null;
-        $weights = Objective::where('campaign_id', $campaign_id)->get()->pluck('weight');
+        $builder = Objective::where('campaign_id', $campaign_id);
+        if($model_id){
+            $builder->where('id', '!=', $model_id);
+        }
+
+        $weights = $builder->get()->pluck('weight');
         $max_weight = 1;
         foreach($weights as $weight){
             $max_weight = $max_weight - (float) $weight;
         }
-        dd($max_weight);
 
         return [
             'template_id' => 'required',
             'name' => 'max:120|required',
             'deadline' => 'datetime|nullable',
             'description' => 'max:512|nullable',
-            'weight' => 'decimal:2|max:1|required',
+            'weight' => 'decimal:2|max:'.$max_weight.'|required',
             'award' => 'decimal:2|nullable',
             'draft' => 'in:on,off',
         ];

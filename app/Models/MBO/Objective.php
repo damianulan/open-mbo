@@ -26,6 +26,7 @@ class Objective extends BaseModel
         'weight',
         'draft',
         'award',
+        'expected',
     ];
 
     protected $casts = [

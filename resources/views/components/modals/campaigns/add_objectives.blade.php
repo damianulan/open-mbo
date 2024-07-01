@@ -47,13 +47,32 @@ $('select[name="template_id"]').on('change', function() {
 });
 
 $('#modal_save').on('click', function() {
-    $.ajaxForm('{{ route('campaigns.objective.store') }}', 'campaign_edit_objective', function(response) {
-        $.success(response.message, null, function() {
-            window.location.reload();
-        })
-    },
-    function(response) {
+    @if ($id)
+        $.ajaxForm('{{ route('campaigns.objective.update', $id) }}', 'campaign_edit_objective', function(response) {
+            $.success(response.message, null, function() {
+                window.location.reload();
+            })
+        },
+        function(response) {
 
-    });
+        });
+    @else
+        $.ajaxForm('{{ route('campaigns.objective.store') }}', 'campaign_edit_objective', function(response) {
+            $.success(response.message, null, function() {
+                window.location.reload();
+            })
+        },
+        function(response) {
+
+        });
+    @endif
+
+});
+
+$('input[data-numeric="decimal"]').on('focusout', function() {
+    var val = $(this).val();
+    if(val != '' && !val.includes('.') && !val.includes(',')){
+        $(this).val(val + '.00');
+    }
 });
 </script>

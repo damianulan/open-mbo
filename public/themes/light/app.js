@@ -3192,6 +3192,12 @@ function buildVendors() {
 $('.table-container').on('xhr.dt', function (e, settings, json, xhr) {
   $.rebuildVendors();
 });
+$('input[data-numeric="decimal"]').on('focusout', function () {
+  var val = $(this).val();
+  if (!val.includes('.') && !val.includes(',')) {
+    $(this).val(val + '.00');
+  }
+});
 function overlay(state) {
   if (state === 'show') {
     $('body').append('<div class="loader-overlay"><div class="mbo-loader"></div></div>');
@@ -3253,7 +3259,7 @@ $.error = function (text) {
   if (title_input) {
     title = title_input;
   }
-  swal_alert(text, title, _callback, 'success');
+  swal_alert(text, title, _callback, 'error');
 };
 $.warning = function (text) {
   var title_input = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -3262,7 +3268,7 @@ $.warning = function (text) {
   if (title_input) {
     title = title_input;
   }
-  swal_alert(text, title, _callback, 'success');
+  swal_alert(text, title, _callback, 'warning');
 };
 $.notice = function (text) {
   var title_input = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -3271,7 +3277,7 @@ $.notice = function (text) {
   if (title_input) {
     title = title_input;
   }
-  swal_alert(text, title, _callback, 'success');
+  swal_alert(text, title, _callback);
 };
 function toast_alert(text) {
   var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'info';

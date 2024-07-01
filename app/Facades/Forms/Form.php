@@ -4,6 +4,8 @@ namespace App\Facades\Forms;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
+use Exception;
 
 class Form
 {
@@ -18,7 +20,6 @@ class Form
         foreach($request->all() as $property => $value)
         {
             if(self::isDate($value)){
-                $value = self::formatDate($value);
                 if(str_contains($property, '_from') || str_contains($property, '_to')){
                     $value = self::formatDateSpan($property, $value);
                 }
@@ -57,8 +58,12 @@ class Form
 
     private static function isDate(?string $value): bool
     {
+        $date = null;
+        try {
+            $date = Carbon::parse($value);
+        } catch(Exception $ex){}
         $timestamp = strtotime($value);
-        if(!empty($value) && $timestamp !== false && $timestamp > 0 && $timestamp !== $value ){
+        if(!empty($value) && $timestamp !== false && $timestamp > 0 && $timestamp !== $value && $date){
             return true;
         }
         return false;
@@ -88,9 +93,9 @@ class Form
         return false;
     }
 
-    public static function validate(Request $request, $model = null): array
+    public static function validate(Request $request, $model_id = null): array
     {
-        $validator = Validator::make($request->all(), static::validation($model));
+        $validator = Validator::make($request->all(), static::validation($model_id));
 
         if($validator->fails()){
             return [
