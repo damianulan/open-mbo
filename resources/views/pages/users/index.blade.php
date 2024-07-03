@@ -3,10 +3,10 @@
 
 <div class="icon-btn-nav">
     <div class="panel-left">
-        <a class="icon-btn" href="{{ route('users.create') }}" data-bs-toggle="tooltip" data-bs-title="{{ __('buttons.add') }}">
+        <a class="icon-btn" href="{{ route('users.create') }}" data-tippy-content="{{ __('buttons.add') }}">
             <i class="bi-plus-circle-fill"></i>
         </a>
-        <a class="icon-btn" href="#" data-bs-toggle="tooltip" data-bs-title="Zespoły">
+        <a class="icon-btn" href="#" data-tippy-content="Zespoły">
             <i class="bi-people-fill"></i>
         </a>
     </div>

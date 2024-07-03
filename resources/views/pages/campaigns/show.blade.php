@@ -3,9 +3,9 @@
 
 <div class="icon-btn-nav">
     <div class="panel-left">
-        <a class="icon-btn" href="{{ route('campaigns.edit', $campaign->id) }}" data-bs-toggle="tooltip" data-bs-title="{{ __('buttons.edit') }}"><i class="bi-pencil-fill"></i></a>
-        <a href="javascript:void(0);" class="icon-btn add-objective" data-bs-toggle="tooltip" data-bs-title="{{ __('Dodaj cele') }}"><i class="bi-heart-arrow"></i></a>
-        <a href="javascript:void(0);" class="icon-btn add-users" data-bs-toggle="tooltip" data-bs-title="{{ __('Zapisz użytkowników') }}"><i class="bi-person-fill-up"></i></a>
+        <a class="icon-btn" href="{{ route('campaigns.edit', $campaign->id) }}" data-tippy-content="{{ __('buttons.edit') }}"><i class="bi-pencil-fill"></i></a>
+        <a href="javascript:void(0);" class="icon-btn add-objective" data-tippy-content="{{ __('Dodaj cele') }}"><i class="bi-heart-arrow"></i></a>
+        <a href="javascript:void(0);" class="icon-btn add-users" data-tippy-content="{{ __('Zapisz użytkowników') }}"><i class="bi-person-fill-up"></i></a>
     </div>
 </div>
 <div class="content-card">
@@ -28,18 +28,18 @@
                                     <span>{{ $objective->name }}</span>
                                 </div>
                                 <div class="list-actions">
-                                    <div class="list-action me-3" data-bs-toggle="tooltip" data-bs-title="Waga celu">
+                                    <div class="list-action me-3" data-tippy-content="Waga celu">
                                         <i class="bi-minecart-loaded"></i>
                                         <span>{{ $objective->weight }}</span>
                                     </div>
-                                    <div class="list-action me-3" data-bs-toggle="tooltip" data-bs-title="Oczekiwany poziom realizacji">
+                                    <div class="list-action me-3" data-tippy-content="{{ __('forms.objectives.expected') }}>
                                         <i class="bi-heart-arrow"></i>
-                                        <span>3600</span>
+                                        <span>{{ $objective->expected }}</span>
                                     </div>
-                                    <a href="javascript:void(0);" class="list-action edit-objective" data-modelid="{{ $objective->id }}" data-bs-toggle="tooltip" data-bs-title="Edytuj">
+                                    <a href="javascript:void(0);" class="list-action edit-objective" data-modelid="{{ $objective->id }}" data-tippy-content="Edytuj">
                                         <i class="bi-pencil-fill"></i>
                                     </a>
-                                    <a href="#" class="list-action" data-bs-toggle="tooltip" data-bs-title="Usuń">
+                                    <a href="#" class="list-action" data-tippy-content="Usuń">
                                         <i class="bi-x-lg"></i>
                                     </a>
                                 </div>

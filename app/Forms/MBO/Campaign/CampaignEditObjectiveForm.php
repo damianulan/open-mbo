@@ -41,9 +41,10 @@ class CampaignEditObjectiveForm extends Form implements FormIO
                 ->add(FormElement::hidden('campaign_id', $model, $campaign_id))
                 ->add(FormElement::text('name', $model)->label(__('forms.objectives.name'))->required())
                 ->add(FormElement::trix('description', $model)->label(__('forms.objectives.description')))
-                ->add(FormElement::datetime('deadline')->label(__('forms.objectives.deadline')))
-                ->add(FormElement::decimal('weight', $model)->label(__('forms.objectives.weight'))->required())
-                ->add(FormElement::decimal('award', $model)->label(__('forms.objectives.award')))
+                ->add(FormElement::datetime('deadline')->label(__('forms.objectives.deadline'))->info(__('forms.objectives.info.deadline')))
+                ->add(FormElement::decimal('weight', $model)->label(__('forms.objectives.weight'))->info(__('forms.objectives.info.weight'))->required())
+                ->add(FormElement::decimal('expected', $model)->label(__('forms.objectives.expected'))->info(__('forms.objectives.info.expected')))
+                ->add(FormElement::decimal('award', $model)->label(__('forms.objectives.award'))->info(__('forms.objectives.info.award')))
                 ->add(FormElement::switch('draft', $model)->label(__('forms.objectives.draft'))->default(true))
                 ->addTitle($title);
     }
@@ -68,6 +69,7 @@ class CampaignEditObjectiveForm extends Form implements FormIO
             'deadline' => 'datetime|nullable',
             'description' => 'max:512|nullable',
             'weight' => 'decimal:2|max:'.$max_weight.'|required',
+            'expected' => 'decimal:2|nullable',
             'award' => 'decimal:2|nullable',
             'draft' => 'in:on,off',
         ];

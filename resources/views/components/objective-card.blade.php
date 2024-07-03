@@ -2,18 +2,18 @@
 <div class="card card-url card-bg" data-url="{{ route('management.objectives.edit', $objective->id) }}">
     <div class="card-body">
         <div class="card-top">
-            <div class="card-title" data-bs-toggle="tooltip" data-bs-title="Kampania xxx">
+            <div class="card-title" data-tippy-content="Kampania xxx">
                 {{ $objective->name }}
             </div>
             <div class="card-badges">
                 <div></div>
                 @if($objective->draft)
-                    <div data-bs-toggle="tooltip" data-bs-title="Kopia robocza">
+                    <div data-tippy-content="Kopia robocza">
                         <span class="badge bg-secondary">Draft</span>
                     </div>
                 @endif
                 @if($objective->category())
-                <div data-bs-toggle="tooltip" data-bs-title="Kategoria">
+                <div data-tippy-content="Kategoria">
                     <span class="badge bg-secondary">{{ $objective->category->name }}</span>
                 </div>
                 @endif
@@ -25,7 +25,7 @@
         <div class="row details">
             <div class="col-xl-4 col-md-6 col-sm-12">
                 <div class="element">
-                    <div class="element-title" data-bs-toggle="tooltip" data-bs-title="Powiązano z kampaniami">
+                    <div class="element-title" data-tippy-content="Powiązano z kampaniami">
                         <i class="bi bi-bullseye me-2"></i>
                         <span>{{ $objective->campaignsCount() }}</span>
                     </div>
@@ -33,7 +33,7 @@
             </div>
             <div class="col-xl-4 col-md-6 col-sm-12">
                 <div class="element">
-                    <div class="element-title" data-bs-toggle="tooltip" data-bs-title="Ilość uczestników">
+                    <div class="element-title" data-tippy-content="Ilość uczestników">
                         <i class="bi bi-people-fill me-2"></i>
                         <span>{{ $objective->usersCount() }}</span>
                     </div>

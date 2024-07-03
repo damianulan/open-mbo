@@ -1,5 +1,6 @@
-import { Tooltip } from "bootstrap"
-import Toastify from 'toastify-js'
+import { Tooltip } from "bootstrap";
+import Toastify from 'toastify-js';
+import tippy from 'tippy.js';
 
 require("chosen-js");
 const moment = require("moment");
@@ -80,6 +81,10 @@ function buildVendors() {
         altInput: true,
         altFormat: date_format,
         dateFormat: 'Y-m-d',
+    });
+
+    tippy('[data-tippy-content]', {
+        allowHTML: true
     });
 }
 $('.table-container').on('xhr.dt', function (e, settings, json, xhr) {

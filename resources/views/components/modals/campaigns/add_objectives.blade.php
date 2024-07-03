@@ -47,7 +47,7 @@ $('select[name="template_id"]').on('change', function() {
 });
 
 $('#modal_save').on('click', function() {
-    @if ($id)
+    @if (isset($id))
         $.ajaxForm('{{ route('campaigns.objective.update', $id) }}', 'campaign_edit_objective', function(response) {
             $.success(response.message, null, function() {
                 window.location.reload();

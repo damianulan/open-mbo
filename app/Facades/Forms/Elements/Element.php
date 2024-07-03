@@ -110,7 +110,7 @@ class Element
         if(!empty($this->infos)){
             $output = '';
             foreach($this->infos as $info){
-                $output .= '<span class="info-box" data-bs-toggle="tooltip" data-bs-title="'.$info.'"><i class="bi-info-circle-fill"></i></span>';
+                $output .= '<span class="info-box" data-tippy-content="'.$info.'"><i class="bi-info-circle-fill"></i></span>';
             }
             return $output;
         }
