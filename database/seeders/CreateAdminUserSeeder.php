@@ -41,6 +41,7 @@ class CreateAdminUserSeeder extends Seeder
         $user = new User([
             'email' => 'kontakt@damianulan.me',
             'password' => Hash::make('12345678'),
+            'core' => 1,
         ]);
         $user->save();
         $profile = new UserProfile([
@@ -51,6 +52,21 @@ class CreateAdminUserSeeder extends Seeder
         ]);
         $user->profile()->save($profile);
         $user->assignRole('root');
+
+        $user = new User([
+            'email' => 'helpdesk@damianulan.me',
+            'password' => Hash::make('123456'),
+            'core' => 1,
+        ]);
+        $user->save();
+        $profile = new UserProfile([
+            'firstname' => 'Admin',
+            'lastname' => 'Helpdesk',
+            'birthday' => fake()->dateTimeBetween('-40 years', '-20years'),
+            'gender' => Gender::MALE->value
+        ]);
+        $user->profile()->save($profile);
+        $user->assignRole('support');
 
         //
         $user = new User([

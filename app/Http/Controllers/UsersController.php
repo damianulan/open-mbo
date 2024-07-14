@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Core\User;
+use App\Models\Core\UserProfile;
 use App\DataTables\UsersDataTable;
 use App\Forms\Users\UserEditForm;
 class UsersController extends Controller
@@ -42,14 +43,17 @@ class UsersController extends Controller
     {
         $request->validate($form::validation());
         $user = User::fillFromRequest($request);
-        // TODO add roles also
+        $user->generatePassword();
         $supervisors_ids = $request->input('supervisors_ids') ?? array();
+        $roles_ids = $request->input('roles_ids') ?? array();
 
         if($user->save()){
-            if(!$user->syncSupervisors($supervisors_ids)){
+            $profile = UserProfile::fillFromRequest($request);
+            $profile->user_id = $user->id;
 
+            if($profile->save() && $user->syncSupervisors($supervisors_ids) && $user->refreshRole($roles_ids)){
+                return redirect()->route('users.show', $user->id)->with('success', __('alerts.users.success.create'));
             }
-            return redirect()->route('users.show', $id)->with('success', __('alerts.users.success.create'));
         }
         return redirect()->back()->with('error', __('alerts.users.error.create'));
     }
@@ -94,31 +98,40 @@ class UsersController extends Controller
         $request->validate($form::validation());
         $user = User::fillFromRequest($request, $id);
         $supervisors_ids = $request->input('supervisors_ids') ?? array();
+        $roles_ids = $request->input('roles_ids') ?? array();
 
         if($user->update()){
-            if(!$user->syncSupervisors($supervisors_ids)){
-
+            $profile_id = $user->profile->id;
+            $profile = UserProfile::fillFromRequest($request, $profile_id);
+            if($profile){
+                if($profile->update() && $user->syncSupervisors($supervisors_ids) && $user->refreshRole($roles_ids)){
+                    return redirect()->route('users.show', $id)->with('success', __('alerts.users.success.edit', ['name' => $user->name()]));
+                }
             }
-            return redirect()->route('users.show', $id)->with('success', __('alerts.users.success.edit', ['name' => $user->name()]));
         }
         return redirect()->back()->with('error', __('alerts.users.error.edit', ['name' => $user->name()]));
     }
 
     public function delete($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        if($user->delete()){
+            return redirect()->route('users.index')->with('success', __('alerts.users.success.delete', ['name' => $user->name()]));
+        }
+        return redirect()->back()->with('error', __('alerts.users.error.delete', ['name' => $user->name()]));
     }
 
     public function block($id)
     {
         $user = User::findOrFail($id);
         if($user){
-            $user->block();
+            $user->toggleLock();
         }
         if($user->blocked()){
-            return redirect()->back();
+            return redirect()->back()->with('info', __('alerts.users.success.blocked', ['name' => $user->name()]));
         }
-        return redirect()->back();
+        return redirect()->back()->with('info', __('alerts.users.success.unblocked', ['name' => $user->name()]));
     }
 
     public function impersonate(User $user)

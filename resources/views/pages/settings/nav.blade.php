@@ -7,6 +7,11 @@
         </li>
         <li class="nav-item">
             <a class="nav-link">
+              {{ __('menus.settings.modules') }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link">
               {{ __('menus.settings.integrations') }}
             </a>
         </li>

@@ -47,14 +47,24 @@ trait HasRolesAndPermissions
             elseif($role === 'supervisor'){
                 if($this->isSupervisor()){
                     $this->assignRole('supervisor');
-
+                    return true;
                 }
             }
             elseif($role === 'manager'){
                 if($this->isManager()){
                     $this->assignRole('manager');
-
+                    return true;
                 }
+            }
+        }
+        return false;
+    }
+
+    public function hasAnyRole(... $roles)
+    {
+        foreach($roles as $role){
+            if($this->hasRole($role)){
+                return true;
             }
         }
         return false;
@@ -136,13 +146,13 @@ trait HasRolesAndPermissions
         return $this->givePermissionsTo($permissions);
     }
 
-        /**
-     * @param mixed ...$roles
+    /**
+     * @param array $roles
      * @return HasRolesAndPermissions
      */
-    public function refreshRole(... $role )
+    public function refreshRole(array $roles )
     {
-        return $this->roles()->sync($role);
+        return $this->roles()->sync($roles);
     }
 
     public function assignRole(... $roles)

@@ -54,16 +54,25 @@ return [
         'success' => [
             'create' => 'Nowy użytkownik został pomyślnie dodany do systemu.',
             'edit' => 'Użytkownik :name został pomyślnie zmodyfikowany.',
+            'blocked' => 'Użytkownik :name został zablokowany. Nie posiada już dostępu do systemu.',
+            'unblocked' => 'Użytkownik :name został odblokowany. Może spowrotem logować się do systemu.',
+            'delete' => 'Użytkownik :name został usunięty z systemu.',
         ],
 
         'error' => [
             'create' => 'Wystąpił błąd, użytkownik nie mógł być dodany.',
             'edit' => 'Użytkownik nie mógł zostać zmodyfikowany. Podczas operacji wystąpił nieoczekiwany błąd.',
+            'delete' => 'Użytkownik :name nie mógł zostać usunięty z systemu. Podczas operacji wystąpił nieoczekiwany błąd.',
         ],
 
         'warning' => [
             'user_is_root' => 'Uwaga, ten użytkownik posiada uprawnienia Roota.',
-        ]
+        ],
+
+        'info' => [
+            'block' => 'Wskutek tej akcji użytkownik utraci dostęp do systemu, a jego przełożeni mogą mieć odebrane niektóre prawa.',
+            'delete' => 'Usunięcie użytkownika będzie nieodwracalne.',
+        ],
     ],
 
     'objective_template' => [

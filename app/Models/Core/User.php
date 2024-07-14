@@ -16,6 +16,8 @@ use App\Traits\UserMBO;
 use App\Traits\UserBusiness;
 use App\Traits\ActiveFields;
 use App\Models\Core\UserProfile;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -25,6 +27,7 @@ class User extends Authenticatable
     protected $fillable = [
         'email',
         'active',
+        'core',
         'force_password_change',
     ];
 
@@ -35,6 +38,7 @@ class User extends Authenticatable
 
     protected $activeRules = [
         'active' => 1,
+        'core' => 0,
     ];
 
     protected $casts = [
@@ -42,12 +46,24 @@ class User extends Authenticatable
         'created_at' => 'datetime',
     ];
 
+    protected static function booted() {
+        static::deleting(function(User $user) {
+            $user->profile->delete();
+       });
+    }
+
+    public function generatePassword()
+    {
+        $this->password = Hash::make(Str::random(10));
+        return $this;
+    }
+
     public function name()
     {
         return $this->profile->firstname . ' ' . $this->profile->lastname;
     }
 
-    public function block(): bool
+    public function toggleLock(): bool
     {
         if($this->active == 1){
             $this->active = 0;
@@ -63,7 +79,12 @@ class User extends Authenticatable
 
     public function blocked(): bool
     {
-        return $this->active ? true:false;
+        return $this->active ? false:true;
+    }
+
+    public function canBeDeleted(): bool
+    {
+        return $this->core==0||isRoot() ? true:false;
     }
 
     public function getAvatar(): ?string
@@ -81,12 +102,12 @@ class User extends Authenticatable
 
     public function canBeImpersonated(): bool
     {
-        return !$this->hasRole('root');
+        return !$this->hasAnyRole('root', 'support')||isRoot();
     }
 
     public function canImpersonate(): bool
     {
-        return $this->hasRole('root');
+        return $this->hasPermissionTo('impersonate');
     }
 
     public function profile()

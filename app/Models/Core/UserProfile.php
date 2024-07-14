@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use App\Enums\Users\Gender;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Core\User;
+use App\Facades\Forms\RequestForms;
 
 class UserProfile extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, RequestForms;
 
     protected $fillable = [
         'firstname',

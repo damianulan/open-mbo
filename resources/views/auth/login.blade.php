@@ -75,6 +75,16 @@
                             </div>
                         </div>
                     </form>
+                    @if(config('app.env') !== 'production')
+                    <div class="mx-5 mt-3">
+                        <div class="row">
+                            <div class="col-md-12 text-muted">
+                                Build: {{ config('app.build') }}
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+
                 </div>
             </div>
         </div>

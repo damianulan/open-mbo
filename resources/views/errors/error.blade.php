@@ -15,7 +15,9 @@
                 <p class="error_paragraph">
                     {{ __('pages.errors.'.$errorCode.'.paragraph') }}
                 </p>
+                @if($errorCode !== '503')
                 <a href="{{ url()->previous() }}" class="btn btn-primary">{{ __('buttons.redirect_back') }}</a>
+                @endif
           </div>
   </div>
 @endsection

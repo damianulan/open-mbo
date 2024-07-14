@@ -23446,7 +23446,8 @@ ul.ombo-list {
 }
 
 .card.profile-card {
-  background-color: rgba(28, 103, 108, 0.08);
+  background-color: #fff;
+  box-shadow: 0px 0px 15px 0px rgba(28, 103, 108, 0.15);
 }
 
 .profile-picture img {

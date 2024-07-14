@@ -12,8 +12,8 @@ return new class extends SettingsMigration
         $this->migrator->add('server.mail_username', null);
         $this->migrator->add('server.mail_password', null);
         $this->migrator->add('server.mail_encryption', null);
-        $this->migrator->add('server.mail_from_address', 'hello@blender.com');
-        $this->migrator->add('server.mail_from_name', 'Blender LMS');
+        $this->migrator->add('server.mail_from_address', 'hello@openmbo.com');
+        $this->migrator->add('server.mail_from_name', 'OpenMBO');
 
     }
 };
