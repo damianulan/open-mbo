@@ -46,7 +46,7 @@ class ObjectiveTemplateController extends Controller
         $objective = ObjectiveTemplate::fillFromRequest($request);
 
         if($objective->save()){
-            return redirect()->route('management.index')->with('success', __('alerts.objective_template.success.create'));
+            return redirect()->route('management.objectives.index')->with('success', __('alerts.objective_template.success.create'));
         }
         return redirect()->back()->with('error', 'Wystąpił błąd.');
     }
@@ -86,14 +86,23 @@ class ObjectiveTemplateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, ObjectiveTemplateEditForm $form)
     {
-
+        $request->validate($form::validation());
+        $objective = ObjectiveTemplate::fillFromRequest($request, $id);
+        if($objective->update()){
+            return redirect()->route('management.objectives.index')->with('success', __('alerts.objective_template.success.edit'));
+        }
+        return redirect()->back()->with('error', 'Wystąpił błąd.');
     }
 
     public function delete($id)
     {
-        //
+        $objective = ObjectiveTemplate::findOrFail($id);
+        if($objective->delete()){
+            return redirect()->route('management.objectives.index')->with('success', __('alerts.objective_template.success.delete'));
+        }
+        return redirect()->back()->with('error', 'Wystąpił błąd.');
     }
 
 }

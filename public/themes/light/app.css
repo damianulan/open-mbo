@@ -1275,6 +1275,92 @@ html[data-bs-theme=dark] div.dtsp-panesContainer div.dtsp-searchPane div.dataTab
   color: inherit;
 }
 
+/*!
+ * Toastify js 1.12.0
+ * https://github.com/apvarun/toastify-js
+ * @license MIT licensed
+ *
+ * Copyright (C) 2018 Varun A P
+ */
+
+.toastify {
+    padding: 12px 20px;
+    color: #ffffff;
+    display: inline-block;
+    box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px rgba(77, 96, 232, 0.3);
+    background: linear-gradient(135deg, #73a5ff, #5477f5);
+    position: fixed;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    max-width: calc(50% - 20px);
+    z-index: 2147483647;
+}
+
+.toastify.on {
+    opacity: 1;
+}
+
+.toast-close {
+    background: transparent;
+    border: 0;
+    color: white;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1em;
+    opacity: 0.4;
+    padding: 0 5px;
+}
+
+.toastify-right {
+    right: 15px;
+}
+
+.toastify-left {
+    left: 15px;
+}
+
+.toastify-top {
+    top: -150px;
+}
+
+.toastify-bottom {
+    bottom: -150px;
+}
+
+.toastify-rounded {
+    border-radius: 25px;
+}
+
+.toastify-avatar {
+    width: 1.5em;
+    height: 1.5em;
+    margin: -7px 5px;
+    border-radius: 2px;
+}
+
+.toastify-center {
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    max-width: fit-content;
+    max-width: -moz-fit-content;
+}
+
+@media only screen and (max-width: 360px) {
+    .toastify-right, .toastify-left {
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        max-width: -moz-fit-content;
+        max-width: fit-content;
+    }
+}
+
 @charset "UTF-8";
 /**
 /* Colors START
@@ -22059,6 +22145,84 @@ section.content-wrapper {
   white-space: nowrap !important;
 }
 
+.mbo-loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  border: 3px solid;
+  border-color: #1c676c #1c676c transparent transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  align-self: center;
+  opacity: 0.75;
+}
+
+.mbo-loader::after,
+.mbo-loader::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border: 4px solid;
+  border-color: transparent transparent rgba(28, 103, 108, 0.5) rgba(28, 103, 108, 0.5);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  animation: rotationBack 0.5s linear infinite;
+  transform-origin: center center;
+}
+
+.mbo-loader::before {
+  width: 32px;
+  height: 32px;
+  border-color: #1c676c #1c676c transparent transparent;
+  animation: rotation 1.5s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotationBack {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+.loader-overlay {
+  box-sizing: border-box;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 2147483648;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-around;
+  top: 0;
+  left: 0;
+  background: rgba(28, 103, 108, 0.25);
+  opacity: 1;
+}
+
+.loader-overlay .mbo-loader {
+  height: 65px;
+  width: 65px;
+}
+
 .btn {
   border-radius: 0.25rem;
   font-weight: 600 !important;
@@ -22141,6 +22305,15 @@ section.content-wrapper {
 a.action-btn {
   text-decoration: none;
   white-space: nowrap;
+}
+
+.btn-row {
+  display: flex;
+}
+
+.btn-row button.btn:not(:last-child),
+.btn-row a.btn:not(:last-child) {
+  margin-right: 1rem;
 }
 
 select, input {
@@ -22282,6 +22455,14 @@ form.form-horizontal .action-btns .btn {
   margin-left: auto;
 }
 
+form label.required::after {
+  font-family: "bootstrap-icons";
+  content: "\f151";
+  color: #e56b6f;
+  font-size: 0.5rem;
+  vertical-align: text-top;
+}
+
 .form-check.form-switch .form-check-input {
   width: 3em;
   height: 1.3em;
@@ -22312,6 +22493,11 @@ input[type=file]::file-selector-button {
   text-align: end;
   font-size: 0.7rem;
   margin-top: 0.3rem;
+}
+
+.modal-header,
+.modal-footer {
+  border: none;
 }
 
 nav::-webkit-scrollbar {
@@ -22914,14 +23100,41 @@ a.icon-btn {
   color: #04515c;
 }
 
-.alert.alert-primary {
-  background-color: rgba(28, 103, 108, 0.25);
-  border-color: rgba(28, 103, 108, 0.3);
-  color: #0c2d2f;
-}
-
 .alert-dismissible .btn-close {
   padding: 1rem;
+}
+
+.toastify.success,
+.toastify.success * {
+  box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px rgba(79, 157, 105, 0.15);
+  background: rgba(79, 157, 105, 0.25);
+  color: #2d593c;
+}
+
+.toastify.error,
+.toastify.error * {
+  box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px rgba(229, 107, 111, 0.15);
+  background: rgba(229, 107, 111, 0.25);
+  color: #c72328;
+}
+
+.toastify.info,
+.toastify.info * {
+  box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px rgba(28, 103, 108, 0.15);
+  background: rgba(28, 103, 108, 0.25);
+  color: #1C676C;
+}
+
+.toastify.warning,
+.toastify.warning * {
+  box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px rgba(237, 180, 88, 0.15);
+  background: rgba(237, 180, 88, 0.25);
+  color: #c98516;
+}
+
+.toastify .toast-close {
+  background: transparent;
+  box-shadow: none;
 }
 
 .table-container {
@@ -23043,7 +23256,13 @@ ul.ombo-list {
 }
 
 .ombo-list li .list-content {
+  display: flex;
+  align-items: center;
   font-size: 0.8rem;
+}
+
+.ombo-list li .list-content span {
+  color: #164755;
 }
 
 .ombo-list li .list-actions {
@@ -24146,13 +24365,11 @@ span.flatpickr-day.selected {
   background: #fff;
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
   clip: rect(0, 0, 0, 0);
-  -webkit-clip-path: inset(100% 100%);
-          clip-path: inset(100% 100%);
+  clip-path: inset(100% 100%);
 }
 .chosen-container.chosen-with-drop .chosen-drop {
   clip: auto;
-  -webkit-clip-path: none;
-          clip-path: none;
+  clip-path: none;
 }
 .chosen-container a {
   cursor: pointer;
@@ -24258,8 +24475,7 @@ span.flatpickr-day.selected {
 .chosen-container-single.chosen-container-single-nosearch .chosen-search {
   position: absolute;
   clip: rect(0, 0, 0, 0);
-  -webkit-clip-path: inset(100% 100%);
-          clip-path: inset(100% 100%);
+  clip-path: inset(100% 100%);
 }
 
 /* @end */
@@ -24631,4 +24847,93 @@ trix-editor::-webkit-scrollbar-thumb:active {
 
 .trix-toolbar .trix-input {
   font-size: 0.7rem;
+}
+
+.tippy-box[data-animation=fade][data-state=hidden] {
+  opacity: 0;
+}
+
+[data-tippy-root] {
+  max-width: calc(100vw - 10px);
+}
+
+.tippy-box {
+  position: relative;
+  background-color: #1C676C;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  white-space: normal;
+  outline: 0;
+  transition-property: transform, visibility, opacity;
+}
+
+.tippy-box[data-placement^=top] > .tippy-arrow {
+  bottom: 0;
+}
+
+.tippy-box[data-placement^=top] > .tippy-arrow:before {
+  bottom: -7px;
+  left: 0;
+  border-width: 8px 8px 0;
+  border-top-color: initial;
+  transform-origin: center top;
+}
+
+.tippy-box[data-placement^=bottom] > .tippy-arrow {
+  top: 0;
+}
+
+.tippy-box[data-placement^=bottom] > .tippy-arrow:before {
+  top: -7px;
+  left: 0;
+  border-width: 0 8px 8px;
+  border-bottom-color: initial;
+  transform-origin: center bottom;
+}
+
+.tippy-box[data-placement^=left] > .tippy-arrow {
+  right: 0;
+}
+
+.tippy-box[data-placement^=left] > .tippy-arrow:before {
+  border-width: 8px 0 8px 8px;
+  border-left-color: initial;
+  right: -7px;
+  transform-origin: center left;
+}
+
+.tippy-box[data-placement^=right] > .tippy-arrow {
+  left: 0;
+}
+
+.tippy-box[data-placement^=right] > .tippy-arrow:before {
+  left: -7px;
+  border-width: 8px 8px 8px 0;
+  border-right-color: initial;
+  transform-origin: center right;
+}
+
+.tippy-box[data-inertia][data-state=visible] {
+  transition-timing-function: cubic-bezier(0.54, 1.5, 0.38, 1.11);
+}
+
+.tippy-arrow {
+  width: 16px;
+  height: 16px;
+  color: #1C676C;
+}
+
+.tippy-arrow:before {
+  content: "";
+  position: absolute;
+  border-color: transparent;
+  border-style: solid;
+}
+
+.tippy-content {
+  position: relative;
+  padding: 5px 9px;
+  z-index: 1;
 }

@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\Core\User;
 use App\DataTables\UsersDataTable;
 use App\Forms\Users\UserEditForm;
-use App\Facades\Logger\Activity;
 class UsersController extends Controller
 {
     /**

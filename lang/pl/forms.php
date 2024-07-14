@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\CampaignStage;
+use App\Enums\MBO\CampaignStage;
 
 return [
 
@@ -64,7 +64,17 @@ return [
         'category' => 'Kategoria',
         'name' => 'Nazwa celu',
         'description' => 'Opis celu',
-        'goal' => 'Oczekiwany poziom realizacji',
         'draft' => 'Wersja robocza',
+        'deadline' => 'Termin realizacji',
+        'weight' => 'Waga celu',
+        'type' => 'Typ celu',
+        'expected' => 'Oczekiwany wynik',
+        'award' => 'Punkty nagrody',
+        'info' => [
+            'deadline' => 'Po upłynięciu tej daty, cel przypisany do użytkownika zostanie automatycznie oznaczony jako zaliczony lub niezaliczony.',
+            'weight' => 'Określ jaki udział ma ten cel w całej kampanii. Suma wag wszystkich celów nie może przekraczać wartości <strong>1</strong>.',
+            'expected' => 'Określ minimalny wynik potrzebny do zaliczenia celu. W razie nieosiągnięcia wyniku, Administratorzy nadal będą mogli wymusić zaliczenie celu.',
+            'award' => 'W razie zaliczenia celu, na konto użytkownika wpadną określone tutaj punkty.',
+        ],
     ],
 ];

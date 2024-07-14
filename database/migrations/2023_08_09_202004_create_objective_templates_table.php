@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\ObjectiveType;
+use App\Enums\MBO\ObjectiveType;
 
 return new class extends Migration
 {
@@ -14,21 +14,18 @@ return new class extends Migration
     {
         Schema::create('objective_templates', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('category_id')->nullable();
-            $table->string('name');
-            $table->longText('description')->nullable();
-
+            $table->foreignUuid('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('objective_template_categories')->onDelete('cascade');
 
-            $table->decimal('goal', 8,2)->nullable();
+            $table->string('name');
+            $table->longText('description')->nullable();
 
             $table->enum('type', [
                 ObjectiveType::INDIVIDUAL->value,
                 ObjectiveType::TEAM->value,
-                ObjectiveType::GLOBAL->value
             ]);
 
-            $table->unsignedSmallInteger('award')->nullable();
+            $table->decimal('award', 8,2)->nullable();
 
             $table->boolean('draft')->default(1);
             $table->softDeletes();

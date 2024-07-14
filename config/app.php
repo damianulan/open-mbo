@@ -224,6 +224,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\ComponentServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        //App\Providers\TelescopeServiceProvider::class,
         App\Providers\PermissionServiceProvider::class,
         App\Providers\RolesServiceProvider::class,
         App\Providers\ConfigServiceProvider::class,
@@ -250,7 +251,7 @@ return [
         'CheckboxCast' => App\Casts\CheckboxCast::class,
 
         // MODELS
-        'User' => App\Models\User::class,
+        'User' => App\Models\Core\User::class,
 
         // VENDORS
         'Purifier' => Mews\Purifier\Facades\Purifier::class,

@@ -8,8 +8,9 @@ use App\Facades\TrixField\TrixFieldCast;
 use App\Casts\CheckboxCast;
 use App\Models\MBO\ObjectiveTemplate;
 use App\Models\MBO\Campaign;
-use App\Models\User;
+use App\Models\Core\User;
 use App\Casts\Carbon\CarbonDatetime;
+use App\Models\MBO\UserObjective;
 
 class Objective extends BaseModel
 {
@@ -18,23 +19,20 @@ class Objective extends BaseModel
     protected $fillable = [
         'template_id',
         'parent_id',
-        'user_id',
         'campaign_id',
         'name',
         'description',
         'deadline',
-        'goal',
         'weight',
         'draft',
         'award',
+        'expected',
     ];
 
     protected $casts = [
         'draft' => CheckboxCast::class,
         'deadline' => CarbonDatetime::class,
         'description' => TrixFieldCast::class,
-        'goal' => 'decimal:8,2',
-        'weight' => 'decimal:2,2',
     ];
 
     public function parent()
@@ -52,11 +50,6 @@ class Objective extends BaseModel
         return $this->belongsTo(ObjectiveTemplate::class, 'template_id');
     }
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public function campaign()
     {
         return $this->belongsTo(Campaign::class);
@@ -65,5 +58,10 @@ class Objective extends BaseModel
     public function type()
     {
         return $this->template()->type;
+    }
+
+    public function user_assignments()
+    {
+        return $this->hasMany(UserObjective::class);
     }
 }

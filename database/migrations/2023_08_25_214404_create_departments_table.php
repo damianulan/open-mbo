@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('departments', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->char('parent_id')->nullable();
-            $table->char('manager_id');
+            $table->foreignUuid('parent_id')->nullable();
+            $table->foreignUuid('manager_id');
             $table->foreign('manager_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->string('name');

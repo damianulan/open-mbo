@@ -18,8 +18,7 @@
         data-trix-attribute="bold"
         data-trix-key="b"
         tabindex="-1"
-        data-bs-toggle="tooltip"
-        data-bs-title="{{ __('vocabulary.typography.bold') }}"
+        data-tippy-content="{{ __('vocabulary.typography.bold') }}"
         ><i class="bi-type-bold"></i></button>
 
         <button type="button"
@@ -27,8 +26,7 @@
         data-trix-attribute="italic"
         data-trix-key="i"
         tabindex="-1"
-        data-bs-toggle="tooltip"
-        data-bs-title="{{ __('vocabulary.typography.italic') }}"
+        data-tippy-content="{{ __('vocabulary.typography.italic') }}"
         ><i class="bi-type-italic"></i></button>
 
         <button type="button"
@@ -37,32 +35,28 @@
         data-trix-action="link"
         data-trix-key="k"
         tabindex="-1"
-        data-bs-toggle="tooltip"
-        data-bs-title="{{ __('vocabulary.typography.hiperlink') }}"
+        data-tippy-content="{{ __('vocabulary.typography.hiperlink') }}"
         ><i class="bi-link-45deg"></i></button>
 
         <button type="button"
         class="btn btn-outline-secondary trix-btn trix-button--icon-quote ms-2"
         data-trix-attribute="quote"
         tabindex="-1"
-        data-bs-toggle="tooltip"
-        data-bs-title="{{ __('vocabulary.typography.quote') }}"
+        data-tippy-content="{{ __('vocabulary.typography.quote') }}"
         ><i class="bi-quote"></i></button>
 
         <button type="button"
         class="btn btn-outline-secondary trix-btn trix-button--icon-bullet-list"
         data-trix-attribute="bullet"
         tabindex="-1"
-        data-bs-toggle="tooltip"
-        data-bs-title="{{ __('vocabulary.typography.li') }}"
+        data-tippy-content="{{ __('vocabulary.typography.li') }}"
         ><i class="bi-list-ul"></i></button>
 
         <button type="button"
         class="btn btn-outline-secondary trix-btn trix-button--icon-number-list"
         data-trix-attribute="number"
         tabindex="-1"
-        data-bs-toggle="tooltip"
-        data-bs-title="{{ __('vocabulary.typography.ol') }}"
+        data-tippy-content="{{ __('vocabulary.typography.ol') }}"
         ><i class="bi-list-ol"></i></button>
     </div>
     <div class="trix-dialogs" data-trix-dialogs="">

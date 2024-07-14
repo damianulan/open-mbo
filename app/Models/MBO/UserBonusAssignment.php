@@ -3,7 +3,7 @@
 namespace App\Models\MBO;
 
 use App\Models\BaseModel;
-use App\Models\User;
+use App\Models\Core\User;
 use App\Models\MBO\BonusScheme;
 use App\Models\MBO\Campaign;
 

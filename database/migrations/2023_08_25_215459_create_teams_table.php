@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->char('leader_id');
+            $table->foreignUuid('leader_id');
             $table->foreign('leader_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->string('name');

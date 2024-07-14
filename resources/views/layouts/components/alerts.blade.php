@@ -1,34 +1,25 @@
-<div class="row justify-content-center my-2">
-    <div class="col-md-12">
-        @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {!! session('success') !!}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+@php
+    $allowedAlertTypes = [
+        'success',
+        'error',
+        'warning',
+        'info',
+    ]
+@endphp
+<script type="text/javascript">
+    @foreach ($allowedAlertTypes as $type)
+        @if (session($type) )
+            @if (is_array(session($type)))
+                @foreach (session($type) as $a)
+                    $.notify('{!! $a !!}','{{ $type }}');
+                @endforeach
+
+            @else
+
+            $.notify('{!! session($type) !!}', '{{ $type }}');
+
+            @endif
         @endif
-        @if (session('error'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {!! session('error') !!}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        @endif
-        @if (session('warning'))
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            {!! session('warning') !!}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        @endif
-        @if (session('info'))
-        <div class="alert alert-primary alert-dismissible fade show" role="alert">
-            {!! session('info') !!}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        @endif
-        @if (session('alert-primary'))
-        <div class="alert alert-primary alert-dismissible fade show" role="alert">
-            {!! session('alert-primary') !!}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        @endif
-    </div>
-</div>
+    @endforeach
+
+</script>

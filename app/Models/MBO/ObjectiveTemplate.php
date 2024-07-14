@@ -10,11 +10,11 @@ use App\Traits\Vendors\TrixFields;
 use App\Facades\Forms\RequestForms;
 use App\Facades\TrixField\TrixFieldCast;
 use App\Casts\CheckboxCast;
-use App\Models\User;
+use App\Models\Core\User;
 use App\Models\MBO\Objective;
 use App\Models\MBO\CampaignObjective;
 use App\Models\MBO\ObjectiveTemplateCategory;
-use App\Enums\ObjectiveType;
+use App\Enums\MBO\ObjectiveType;
 
 class ObjectiveTemplate extends BaseModel
 {
@@ -24,7 +24,6 @@ class ObjectiveTemplate extends BaseModel
         'category_id',
         'name',
         'description',
-        'goal',
         'type',
         'draft',
         'award',
@@ -36,6 +35,11 @@ class ObjectiveTemplate extends BaseModel
         'type' => ObjectiveType::class,
     ];
 
+    public static function allActive()
+    {
+        return self::where('draft', 0)->get();
+    }
+
     public function category()
     {
         return $this->belongsTo(ObjectiveTemplateCategory::class, 'category_id');
@@ -46,19 +50,14 @@ class ObjectiveTemplate extends BaseModel
         return $this->hasMany(Objective::class, 'template_id');
     }
 
-    public function users_count()
+    public function usersCount()
     {
         return $this->objectives()->count();
     }
 
-    public function global_objectives()
+    public function campaignsCount()
     {
-        return $this->hasMany(CampaignObjective::class, 'template_id');
-    }
-
-    public function campaigns()
-    {
-        return $this->belongsToMany(Campaign::class, 'objective_templates_campaigns');
+        return $this->objectives()->whereNotNull('campaign_id')->count();
     }
 
     public function global(): bool
@@ -73,7 +72,6 @@ class ObjectiveTemplate extends BaseModel
         $objective->user_id = $user->id;
         $objective->name = $this->name;
         $objective->description = $this->description;
-        $objective->goal = $this->goal;
         $objective->draft = 1;
         $objective->award = $this->award;
         return $objective->save();

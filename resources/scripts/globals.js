@@ -1,4 +1,4 @@
-// GLOBAL FUNCTIONS 
+// GLOBAL FUNCTIONS
 function setCookie(name,value,days) {
     var expires = "";
     if (days) {
@@ -22,6 +22,6 @@ function getCookie(name){
 
 function eraseCookie( name, path, domain ) {
     if( getCookie( name ) ) {
-        document.cookie = name+'=; Max-Age=-99999999;';  
+        document.cookie = name+'=; Max-Age=-99999999;';
     }
 }

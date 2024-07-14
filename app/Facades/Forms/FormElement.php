@@ -38,7 +38,16 @@ class FormElement
         return new Input($name, 'password', $value);
     }
 
-    public static function select(string $name, $model = null, Collection $options, $selected_value = null)
+    public static function hidden(string $name, $model = null, $val = null): Input
+    {
+        $value = $model->$name ?? null;
+        if(!$value && $val){
+            $value = $val;
+        }
+        return new Input($name, 'hidden', $value);
+    }
+
+    public static function select(string $name, $model = null, ?Collection $options = null, $selected_value = null)
     {
         $value = $model->$name ?? null;
 
@@ -51,7 +60,7 @@ class FormElement
         return new Select($name, $options, array($value));
     }
 
-    public static function multiselect(string $name, $model = null, Collection $options, $relation = null, $selected_values = [])
+    public static function multiselect(string $name, $model = null, ?Collection $options = null, $relation = null, $selected_values = [])
     {
         $values = array();
         if($relation && $model && $model->$relation){
@@ -124,5 +133,10 @@ class FormElement
             $value = true;
         }
         return new File($name, $value);
+    }
+
+    public static function dynamicChecklist(string $name, $model = null)
+    {
+
     }
 }

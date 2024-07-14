@@ -112,6 +112,14 @@ form.form-horizontal .action-btns .btn {
   margin-left: auto;
 }
 
+form label.required::after {
+    font-family: 'bootstrap-icons';
+    content: "\f151";
+    color: $danger;
+    font-size: .5rem;
+    vertical-align: text-top;
+}
+
 .form-check.form-switch .form-check-input {
   width: 3em;
   height: 1.3em;
@@ -142,4 +150,9 @@ input[type=file]::file-selector-button {
     text-align: end;
     font-size: .7rem;
     margin-top: .3rem;
+}
+
+.modal-header,
+.modal-footer {
+    border: none;
 }

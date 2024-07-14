@@ -4,8 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Permission;
-use App\Models\Role;
+use App\Models\Core\Permission;
+use App\Models\Core\Role;
 
 class RoleSeeder extends Seeder
 {
@@ -27,6 +27,10 @@ class RoleSeeder extends Seeder
 
         $admin = new Role();
         $admin->slug = 'admin_mbo';
+        $admin->save();
+
+        $admin = new Role();
+        $admin->slug = 'admin_mbo_category';
         $admin->save();
 
         $manager = new Role();

@@ -5,7 +5,7 @@ namespace App\Models\MBO;
 use App\Models\BaseModel;
 use App\Traits\Vendors\TrixFields;
 use App\Facades\TrixField\TrixFieldCast;
-use App\Models\User;
+use App\Models\Core\User;
 
 class BonusScheme extends BaseModel
 {
@@ -24,7 +24,7 @@ class BonusScheme extends BaseModel
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_bonus_schemes');
+        return $this->belongsToMany(User::class, 'users_bonus_schemes');
     }
 
     public function assignments()

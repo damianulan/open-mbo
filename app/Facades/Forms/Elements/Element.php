@@ -77,6 +77,7 @@ class Element
             return view('components.forms.label', [
                 'label' => $this->label,
                 'name' => $this->name,
+                'required' => $this->required,
             ]);
         }
         return null;
@@ -109,7 +110,7 @@ class Element
         if(!empty($this->infos)){
             $output = '';
             foreach($this->infos as $info){
-                $output .= '<span class="info-box" data-bs-toggle="tooltip" data-bs-title="'.$info.'"><i class="bi-info-circle-fill"></i></span>';
+                $output .= '<span class="info-box" data-tippy-content="'.$info.'"><i class="bi-info-circle-fill"></i></span>';
             }
             return $output;
         }

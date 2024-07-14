@@ -13,14 +13,12 @@ return new class extends Migration
     {
         Schema::create('user_campaigns', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->char('campaign_id');
-            $table->char('user_id');
-            $table->char('leader_id'); // by default it is a current superior to a user or dedicated team leader
+            $table->foreignUuid('campaign_id');
+            $table->foreignUuid('user_id');
             $table->string('stage'); // user assignment can be reverted or fast-forwarded regardless of process stage
 
             $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('leader_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->boolean('manual')->default(0); // user assignment can be held for extended period without
             $table->boolean('active')->default(1);

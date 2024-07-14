@@ -1,7 +1,6 @@
 @extends('layouts.portal.master')
 @section('content')
 
-@include('layouts.components.alerts')
 @include('pages.settings.nav')
 
 <div class="content-card">
@@ -81,8 +80,11 @@
                             </td>
                         </tr>
                     </table>
-                    <div class="d-flex">
-                        <a href="{{ route('settings.clearcache') }}" class="btn btn-primary">{{ __('pages.settings.cache_clear') }}</a>
+                    <div class="btn-row">
+                        <a href="{{ route('settings.clearcache') }}" class="btn btn-outline-primary">{{ __('pages.settings.cache_clear') }}</a>
+                        @role('root')
+                            <a href="{{ route('telescope') }}" class="btn btn-outline-primary">{{ __('pages.settings.telescope') }}</a>
+                        @endrole
                     </div>
                 </div>
             </div>

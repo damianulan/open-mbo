@@ -4,14 +4,14 @@
       <a class="me-2" id="menu-toggle"><i class="bi-three-dots-vertical"></i></a>
     </div>
     <header class="page-heading">
-      <span class="page-title" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $page->title }}">{{ $page->title }}</span>
+      <span class="page-title" data-tippy-placement="bottom" data-tippy-content="{{ $page->title }}">{{ $page->title }}</span>
     </header>
     <div class="page-quick-actions">
         <!--<x-notification-dropdown/>-->
         <div class="user-nav dropup"
         @if(auth()->user()->isImpersonating())
-        data-bs-toggle="tooltip" data-bs-placement="left"
-        data-bs-title="{{ __('menus.impersonated_by', ['name' => auth()->user()->impersonator()->name()]) }}"
+        data-tippy-placement="left"
+        data-tippy-content="{{ __('menus.impersonated_by', ['name' => auth()->user()->impersonator()->name()]) }}"
         @endif
         >
             <div class="user-actions" data-bs-toggle="dropdown" type="button" aria-expanded="false">

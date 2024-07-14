@@ -4,7 +4,7 @@ namespace App\Models\MBO;
 
 use App\Models\BaseModel;
 use App\Casts\CheckboxCast;
-use App\Models\User;
+use App\Models\Core\User;
 use App\Models\MBO\Campaign;
 
 class UserCampaign extends BaseModel
@@ -12,7 +12,6 @@ class UserCampaign extends BaseModel
     protected $fillable = [
         'campaign_id',
         'user_id',
-        'leader_id',
         'stage',
         'manual',
         'active',
@@ -26,11 +25,6 @@ class UserCampaign extends BaseModel
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function leader()
-    {
-        return $this->belongsTo(User::class, 'leader_id');
     }
 
     public function campaign()

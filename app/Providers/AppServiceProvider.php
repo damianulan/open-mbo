@@ -5,6 +5,10 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Settings\GeneralSettings;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Gate;
+
+use App\Models\Core\User;
+use App\Models\Policies\UserPolicy;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,7 +19,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if ($this->app->environment('local')) {
+            $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
+            $this->app->register(TelescopeServiceProvider::class);
+        }
     }
 
     /**
@@ -25,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
+        Gate::policy(User::class, UserPolicy::class);
+
     }
 }

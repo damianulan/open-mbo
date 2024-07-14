@@ -54,6 +54,7 @@ return [
         'objectives' => [
             'index' => 'Cele',
             'create' => 'Tworzenie szablonu celu',
+            'edit' => 'Modyfikacja szablonu celu',
         ],
     ],
 
@@ -62,8 +63,8 @@ return [
     ],
 
     'campaigns' => [
-        'index' => 'Kampanie MBO',
-        'create' => 'Tworzenie kampanii pomiarowej',
+        'index' => 'Kampanie Pomiarowe',
+        'create' => 'Tworzenie nowej kampanii pomiarowej',
         'edit' => 'Edycja kampanii',
     ],
 

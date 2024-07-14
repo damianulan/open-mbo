@@ -16,6 +16,7 @@ return [
         'phpversion' => 'Wersja PHP',
         'info' => 'Konfiguracja PHP',
         'phpinfo' => 'PHP Info',
+        'telescope' => 'Teleskop',
     ],
 
 

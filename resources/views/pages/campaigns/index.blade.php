@@ -2,7 +2,6 @@
 @section('content')
 
 @include('pages.campaigns.nav')
-@include('layouts.components.alerts')
 
 @if (count($campaigns))
 <div class="content-card">

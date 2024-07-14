@@ -24,9 +24,9 @@ class DatabaseSeeder extends Seeder
         $this->call(CreateAdminUserSeeder::class);
         $this->call(MBOSeeder::class);
 
-        // \App\Models\User::factory(10)->create();
+        // \App\Models\Core\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
+        // \App\Models\Core\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);

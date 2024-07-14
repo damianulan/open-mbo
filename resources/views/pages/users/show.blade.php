@@ -1,7 +1,6 @@
 @extends('layouts.portal.master')
 @section('content')
 
-@include('layouts.components.alerts')
 <div class="container-fluid">
     <div class="row">
         <div class="col-xl-8 col-lg-10 col-sm-12">
@@ -20,19 +19,19 @@
                                     <div class="user-position">STANOWISKO</div>
                                 </div>
                                 <div class="user-actions">
-                                    <a href="#" class="" data-bs-toggle="tooltip" data-bs-title="{{ __('buttons.favourities_add') }}">
+                                    <a href="#" class="" data-tippy-content="{{ __('buttons.favourities_add') }}">
                                         <i class="bi-star"></i>
                                     </a>
-                                    <a href="{{ route('users.edit', $user->id) }}" class="" data-bs-toggle="tooltip" data-bs-title="{{ __('buttons.edit') }}">
+                                    <a href="{{ route('users.edit', $user->id) }}" class="" data-tippy-content="{{ __('buttons.edit') }}">
                                         <i class="bi-pencil-square"></i>
                                     </a>
-                                    <a href="#" class="" data-bs-toggle="tooltip" data-bs-title="{{ __('buttons.reset_password') }}">
+                                    <a href="#" class="" data-tippy-content="{{ __('buttons.reset_password') }}">
                                         <i class="bi-key-fill"></i>
                                     </a>
-                                    <a href="#" class="" data-bs-toggle="tooltip" data-bs-title="{{ __('buttons.block') }}">
+                                    <a href="#" class="" data-tippy-content="{{ __('buttons.block') }}">
                                         <i class="bi-person-fill-lock"></i>
                                     </a>
-                                    <a href="#" class="" data-bs-toggle="tooltip" data-bs-title="{{ __('buttons.delete') }}">
+                                    <a href="#" class="" data-tippy-content="{{ __('buttons.delete') }}">
                                         <i class="bi-trash-fill"></i>
                                     </a>
                                 </div>

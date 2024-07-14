@@ -82,12 +82,36 @@
     color: darken($info, 15%);
 }
 
-.alert.alert-primary {
-    background-color: rgba($primary, .25);
-    border-color: rgba($primary, .3);
-    color: darken($primary, 15%);
-}
-
 .alert-dismissible .btn-close {
     padding: 1rem;
+}
+
+.toastify.success,
+.toastify.success *{
+    box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px rgba($success, 0.15);
+    background: rgba($success, 0.25);
+    color: darken($success, 20%);
+  }
+  .toastify.error,
+  .toastify.error *{
+    box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px rgba($danger, 0.15);
+    background: rgba($danger, 0.25);
+    color: darken($danger, 20%);
+  }
+  .toastify.info,
+  .toastify.info *{
+    box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px rgba($primary, 0.15);
+    background: rgba($primary, 0.25);
+    color: $primary;
+  }
+  .toastify.warning,
+  .toastify.warning *{
+    box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px rgba($warning, 0.15);
+    background: rgba($warning, 0.25);
+    color: darken($warning, 20%);
+  }
+
+.toastify .toast-close {
+    background: transparent;
+    box-shadow: none;
 }

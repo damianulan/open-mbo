@@ -24,7 +24,16 @@ class Dictionary
             $records = $model::$method();
             if(!empty($records)){
                 if(count($exclude)){
-                    $records = $records->except($exclude);
+                    foreach($exclude as $condition){
+                        $records = $records->filter(function ($record, int $key) use($condition) {
+                            foreach ($condition as $prop => $value){
+                                if(isset($record->$prop) && $record->$prop === $value){
+                                    return false;
+                                }
+                            }
+                            return true;
+                        });
+                    }
                 }
                 foreach ($records as $record){
                     if(method_exists($model, $column)){

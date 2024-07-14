@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users_supervisors', function (Blueprint $table) {
-            $table->char('user_id');
-            $table->char('supervisor_id');
+            $table->foreignUuid('user_id');
+            $table->foreignUuid('supervisor_id');
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('supervisor_id')->references('id')->on('users')->onDelete('cascade');

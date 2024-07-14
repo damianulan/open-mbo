@@ -5,9 +5,10 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Role;
+use App\Models\Core\Role;
 use App\Models\Config;
-use App\Models\User;
+use App\Models\Core\User;
+use App\Models\Core\UserProfile;
 use App\Enums\Users\Gender;
 
 class CreateAdminUserSeeder extends Seeder
@@ -22,35 +23,49 @@ class CreateAdminUserSeeder extends Seeder
         if(User::count() > 0){
             return;
         }
-        $admin1 = new User();
-        $admin1->firstname = 'Site';
-        $admin1->lastname = 'Admin';
-        $admin1->email = 'admin@damianulan.me';
-        $admin1->birthday = fake()->dateTimeBetween('-40 years', '-20years');
-        $admin1->password = Hash::make('123456');
-        $admin1->gender = Gender::MALE->value;
-        $admin1->save();
-        $admin1->assignRole('admin');
+        $user = new User([
+            'email' => 'admin@damianulan.me',
+            'password' => Hash::make('123456'),
+        ]);
+        $user->save();
+        $profile = new UserProfile([
+            'firstname' => 'Site',
+            'lastname' => 'Admin',
+            'birthday' => fake()->dateTimeBetween('-40 years', '-20years'),
+            'gender' => Gender::MALE->value
+        ]);
+        $user->profile()->save($profile);
+        $user->assignRole('admin');
 
-        $admin1 = new User();
-        $admin1->firstname = 'Damian';
-        $admin1->lastname = 'Ułan';
-        $admin1->email = 'kontakt@damianulan.me';
-        $admin1->birthday = fake()->dateTimeBetween('-40 years', '-20years');
-        $admin1->password = Hash::make('123456');
-        $admin1->gender = Gender::MALE->value;
-        $admin1->save();
-        $admin1->assignRole('root');
+        //
+        $user = new User([
+            'email' => 'kontakt@damianulan.me',
+            'password' => Hash::make('12345678'),
+        ]);
+        $user->save();
+        $profile = new UserProfile([
+            'firstname' => 'Damian',
+            'lastname' => 'Ułan',
+            'birthday' => fake()->dateTimeBetween('-40 years', '-20years'),
+            'gender' => Gender::MALE->value
+        ]);
+        $user->profile()->save($profile);
+        $user->assignRole('root');
 
-        $user1 = new User();
-        $user1->firstname = 'Test';
-        $user1->lastname = 'User';
-        $user1->email = 'demo@damianulan.me';
-        $user1->birthday = fake()->dateTimeBetween('-40 years', '-20years');
-        $user1->password = Hash::make('123456');
-        $user1->gender = Gender::MALE->value;
-        $user1->save();
-        $user1->assignRole('employee');
+        //
+        $user = new User([
+            'email' => 'demo@damianulan.me',
+            'password' => Hash::make('12345678'),
+        ]);
+        $user->save();
+        $profile = new UserProfile([
+            'firstname' => 'Test',
+            'lastname' => 'User',
+            'birthday' => fake()->dateTimeBetween('-40 years', '-20years'),
+            'gender' => Gender::FEMALE->value
+        ]);
+        $user->profile()->save($profile);
+        $user->assignRole('employee');
 
     }
 

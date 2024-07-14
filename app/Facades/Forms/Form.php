@@ -3,20 +3,34 @@
 namespace App\Facades\Forms;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
+use Exception;
 
 class Form
 {
+
+    public static function validation($model_id = null): array
+    {
+        return [];
+    }
+
     public static function reformatRequest(Request $request): Request
     {
         foreach($request->all() as $property => $value)
         {
             if(self::isDate($value)){
-                $value = self::formatDate($value);
                 if(str_contains($property, '_from') || str_contains($property, '_to')){
                     $value = self::formatDateSpan($property, $value);
                 }
-                $request->merge([$property => $value]);
+            } elseif(self::isEUFloat($value)) {
+                $value = str_replace(',','.',$value);
+            } else {
+                if(empty($value)){
+                    $value = null;
+                }
             }
+            $request->merge([$property => $value]);
         }
 
         return $request;
@@ -44,8 +58,12 @@ class Form
 
     private static function isDate(?string $value): bool
     {
+        $date = null;
+        try {
+            $date = Carbon::parse($value);
+        } catch(Exception $ex){}
         $timestamp = strtotime($value);
-        if(!empty($value) && $timestamp !== false && $timestamp > 0 && $timestamp !== $value ){
+        if(!empty($value) && $timestamp !== false && $timestamp > 0 && $timestamp !== $value && $date){
             return true;
         }
         return false;
@@ -54,5 +72,40 @@ class Form
     private static function formatDate(string $value)
     {
         return date('Y-m-d', strtotime($value));
+    }
+
+    private static function isEUFloat(?string $value)
+    {
+        if($value){
+            if(strpos($value, ',') !== false){
+                $values = explode(',', $value);
+                $all_numeric = true;
+                foreach($values as $v){
+                    if((int) $v != $v) {
+                        $all_numeric = false;
+                    }
+                }
+
+                return $all_numeric;
+            }
+
+        }
+        return false;
+    }
+
+    public static function validate(Request $request, $model_id = null): array
+    {
+        $validator = Validator::make($request->all(), static::validation($model_id));
+
+        if($validator->fails()){
+            return [
+                'status' => 'error',
+                'messages' => $validator->messages(),
+            ];
+        }
+        return [
+            'status' => 'ok',
+            'messages' => $validator->messages(),
+        ];
     }
 }
