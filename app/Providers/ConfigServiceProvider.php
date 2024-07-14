@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
 use App\Settings\GeneralSettings;
 use App\Settings\MailSettings;
 use Illuminate\Support\Facades\Schema;
@@ -28,7 +27,7 @@ class ConfigServiceProvider extends ServiceProvider
             config([
 
                 // GENERAL
-                'app.name' => app(GeneralSettings::class)->site_name ?? env('APP_NAME', 'Blender'),
+                'app.name' => app(GeneralSettings::class)->site_name ?? env('APP_NAME', 'OpenMBO'),
                 'app.debug' => app(GeneralSettings::class)->debug ?? env('APP_DEBUG', true),
                 'app.timezone' => app(GeneralSettings::class)->timezone ?? env('APP_TIMEZONE', 'UTC'),
                 'app.locale' => app(GeneralSettings::class)->locale ?? env('APP_LOCALE', 'en'),

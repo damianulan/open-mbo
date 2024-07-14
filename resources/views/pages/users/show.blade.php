@@ -19,19 +19,22 @@
                                     <div class="user-position">STANOWISKO</div>
                                 </div>
                                 <div class="user-actions">
-                                    <a href="#" class="" data-tippy-content="{{ __('buttons.favourities_add') }}">
-                                        <i class="bi-star"></i>
-                                    </a>
                                     <a href="{{ route('users.edit', $user->id) }}" class="" data-tippy-content="{{ __('buttons.edit') }}">
                                         <i class="bi-pencil-square"></i>
                                     </a>
                                     <a href="#" class="" data-tippy-content="{{ __('buttons.reset_password') }}">
                                         <i class="bi-key-fill"></i>
                                     </a>
-                                    <a href="#" class="" data-tippy-content="{{ __('buttons.block') }}">
+                                    @if($user->active !== 1)
+                                    <a href="{{ route('users.block', $user->id) }}" class="" data-tippy-content="{{ __('buttons.unblock') }}">
+                                        <i class="bi-person-fill-check"></i>
+                                    </a>
+                                    @else
+                                    <a href="{{ route('users.block', $user->id) }}" class="swal-confirm" data-tippy-content="{{ __('buttons.block') }}" data-swal-text="{{ __('alerts.users.info.block') }}">
                                         <i class="bi-person-fill-lock"></i>
                                     </a>
-                                    <a href="#" class="" data-tippy-content="{{ __('buttons.delete') }}">
+                                    @endif
+                                    <a href="{{ route('users.delete', $user->id) }}" class="swal-confirm" data-tippy-content="{{ __('buttons.delete') }}" data-swal-text="{{ __('alerts.users.info.delete') }}">
                                         <i class="bi-trash-fill"></i>
                                     </a>
                                 </div>

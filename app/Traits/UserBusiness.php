@@ -43,12 +43,12 @@ trait UserBusiness
 
     public function supervisors()
     {
-        return $this->belongsToMany(static::class, 'users_supervisors', 'user_id', 'supervisor_id')->where('active', 1);
+        return $this->belongsToMany(static::class, 'users_supervisors', 'user_id', 'supervisor_id');
     }
 
     public function subordinates()
     {
-        return $this->belongsToMany(static::class, 'users_supervisors', 'supervisor_id', 'user_id')->where('active', 1);
+        return $this->belongsToMany(static::class, 'users_supervisors', 'supervisor_id', 'user_id');
     }
 
     public function hasSupervisor($supervisor_id): bool

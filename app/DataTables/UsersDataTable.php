@@ -34,7 +34,7 @@ class UsersDataTable extends DataTable
                 $text = 'Aktywny';
                 if(!$data->active){
                     $color = 'dark';
-                    $text = 'Zawieszony';
+                    $text = 'Zablokowany';
                 }
                 return view('components.datatables.badge', [
                     'color' => $color,

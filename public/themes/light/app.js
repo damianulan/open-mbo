@@ -3150,6 +3150,7 @@ $("body").on("click", ".card-url", function () {
 });
 $("body").on('click', '.swal-confirm', function (e) {
   e.preventDefault();
+  var url = $(this).attr('href');
   swal_confirm($(this).attr('data-swal-text'), $(this).attr('data-swal-title'), function () {
     window.location.href = url;
   });

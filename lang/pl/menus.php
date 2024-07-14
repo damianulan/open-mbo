@@ -38,6 +38,7 @@ return [
     'settings' => [
         'index' => 'Ustawienia',
         'general' => 'Główne',
+        'modules' => 'Moduły',
         'integrations' => 'Integracje',
         'server' => 'Serwer',
         'logs' => 'Logi',
