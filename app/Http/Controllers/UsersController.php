@@ -112,6 +112,12 @@ class UsersController extends Controller
         return redirect()->back()->with('error', __('alerts.users.error.edit', ['name' => $user->name()]));
     }
 
+    /**
+     * Delete User instance.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
     public function delete($id)
     {
         $user = User::findOrFail($id);
@@ -122,6 +128,12 @@ class UsersController extends Controller
         return redirect()->back()->with('error', __('alerts.users.error.delete', ['name' => $user->name()]));
     }
 
+    /**
+     * Toggles User blocking if was nat blocked and unlocking otherwise.
+     *
+     * @param  mixed $id
+     * @return \Illuminate\Http\Response
+     */
     public function block($id)
     {
         $user = User::findOrFail($id);

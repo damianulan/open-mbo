@@ -6,6 +6,11 @@ use App\Facades\Forms\Elements\Button;
 use Illuminate\Support\Str;
 use App\Facades\Forms\Elements\Element;
 
+/**
+ * Collects elements to render bootstrap form.
+ *
+ * @author Damian Ułan <damian.ulan@protonmail.com>
+ */
 class FormBuilder
 {
     private ?string $id;

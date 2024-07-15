@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 use Exception;
 
+/**
+ * Base class for full Form template.
+ *
+ * @author Damian Ułan <damian.ulan@protonmail.com>
+ */
 class Form
 {
 
