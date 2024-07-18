@@ -10,24 +10,34 @@ class Dictionary
      * Declare array collections of options accessible to the public.
      */
     public $mail_encryption_methods = [
-        'tls' => 'TLS',
-        'ssl' => 'SSL',
-        'starttls' => 'STARTTLS',
-        'null' => 'PLAIN'
+        "tls" => "TLS",
+        "ssl" => "SSL",
+        "starttls" => "STARTTLS",
+        "null" => "PLAIN",
     ];
 
-    public static function fromModel(string $model, string $column, string $method = 'all', array $exclude = []): Collection
-    {
+    public static function fromModel(
+        string $model,
+        string $column,
+        string $method = "all",
+        array $exclude = []
+    ): Collection {
         $options = new Collection();
 
-        if(class_exists($model)){
+        if (class_exists($model)) {
             $records = $model::$method();
-            if(!empty($records)){
-                if(count($exclude)){
-                    foreach($exclude as $condition){
-                        $records = $records->filter(function ($record, int $key) use($condition) {
-                            foreach ($condition as $prop => $value){
-                                if(isset($record->$prop) && $record->$prop === $value){
+            if (!empty($records)) {
+                if (count($exclude)) {
+                    foreach ($exclude as $condition) {
+                        $records = $records->filter(function (
+                            $record,
+                            int $key
+                        ) use ($condition) {
+                            foreach ($condition as $prop => $value) {
+                                if (
+                                    isset($record->$prop) &&
+                                    $record->$prop === $value
+                                ) {
                                     return false;
                                 }
                             }
@@ -35,11 +45,15 @@ class Dictionary
                         });
                     }
                 }
-                foreach ($records as $record){
-                    if(method_exists($model, $column)){
-                        $options->push(new Option($record->id, $record->$column()));
+                foreach ($records as $record) {
+                    if (method_exists($model, $column)) {
+                        $options->push(
+                            new Option($record->id, $record->$column())
+                        );
                     } else {
-                        $options->push(new Option($record->id, $record->$column));
+                        $options->push(
+                            new Option($record->id, $record->$column)
+                        );
                     }
                 }
             }
@@ -48,15 +62,17 @@ class Dictionary
         return $options;
     }
 
-    public static function fromUnassocArray(array $values, string $lang_component = ''): Collection
-    {
+    public static function fromUnassocArray(
+        array $values,
+        string $lang_component = ""
+    ): Collection {
         $options = new Collection();
 
-        if(!empty($values)){
-            foreach($values as $value){
+        if (!empty($values)) {
+            foreach ($values as $value) {
                 $content = ucfirst($value);
-                if(!empty($lang_component)){
-                    $content = __($lang_component.'.'.$value);
+                if (!empty($lang_component)) {
+                    $content = __($lang_component . "." . $value);
                 }
                 $options->push(new Option($value, $content));
             }
@@ -72,8 +88,8 @@ class Dictionary
     {
         $options = new Collection();
 
-        if(!empty($values)){
-            foreach($values as $value => $content){
+        if (!empty($values)) {
+            foreach ($values as $value => $content) {
                 $options->push(new Option($value, $content));
             }
         }
@@ -81,23 +97,23 @@ class Dictionary
         return $options;
     }
 
-    public static function fromCatalog(string $index)
+    public static function fromCatalog(string $index): ?self
     {
         $instance = new self();
 
-        if(isset($instance->$index)){
+        if (isset($instance->$index)) {
             return self::fromAssocArray($instance->$index);
         }
 
         return null;
     }
 
-    public static function yesNo()
+    public static function yesNo(): Collection
     {
         $options = new Collection();
 
-        $options->push(new Option(1, __('vocabulary.yes')));
-        $options->push(new Option(0, __('vocabulary.no')));
+        $options->push(new Option(1, __("vocabulary.yes")));
+        $options->push(new Option(0, __("vocabulary.no")));
 
         return $options;
     }
@@ -105,12 +121,12 @@ class Dictionary
     /**
      * Enum equivalents should be translated in fields.php
      */
-    public static function fromEnum($enum)
+    public static function fromEnum($enum): Collection
     {
         $options = new Collection();
-        if(class_exists($enum)){
-            foreach($enum::values() as $case){
-                $options->push(new Option($case, __('fields.enums.'.$case)));
+        if (class_exists($enum)) {
+            foreach ($enum::values() as $case) {
+                $options->push(new Option($case, __("fields.enums." . $case)));
             }
         }
         return $options;

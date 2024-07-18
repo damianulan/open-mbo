@@ -22,17 +22,12 @@
         </li>
         <li class="nav-item">
             <a class="nav-link">
-                {{ __('menus.management.teams') }}
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link">
                 {{ __('menus.management.organization') }}
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link">
-                {{ __('menus.management.structure') }}
+                {{ __('menus.management.teams') }}
             </a>
         </li>
         <li class="nav-item">

@@ -58,9 +58,19 @@ class User extends Authenticatable
         return $this;
     }
 
-    public function name()
+    public function name(): string
     {
         return $this->profile->firstname . ' ' . $this->profile->lastname;
+    }
+
+    public function firstname() : string
+    {
+        return $this->profile->firstname;
+    }
+
+    public function lastname(): string
+    {
+        return $this->profile->lastname;
     }
 
     public function toggleLock(): bool
@@ -83,6 +93,11 @@ class User extends Authenticatable
     }
 
     public function canBeDeleted(): bool
+    {
+        return $this->core==0||isRoot() ? true:false;
+    }
+
+    public function canBeSuspended(): bool
     {
         return $this->core==0||isRoot() ? true:false;
     }
