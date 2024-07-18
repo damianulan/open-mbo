@@ -69,7 +69,9 @@ Route::prefix('management')->middleware(['auth'])->name('management.')->group(fu
         Route::get('{objective}', [App\Http\Controllers\Management\ObjectiveTemplateController::class, 'show'])->name('show');
         Route::put('{objective}', [App\Http\Controllers\Management\ObjectiveTemplateController::class, 'update'])->name('update');
     });
-
+    Route::prefix('organization')->name('organization.')->group(function () {
+        Route::get('/', [App\Http\Controllers\Management\Organization\OrganizationController::class, 'index'])->name('index');
+    });
 
 });
 

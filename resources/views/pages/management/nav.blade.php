@@ -1,13 +1,13 @@
 <div class="page-menu">
     <ul class="nav nav-pills-horizontal">
         <li class="nav-item">
-            <a class="nav-link active">
+            <a class="nav-link{{ request()->routeIs('management.objectives.index') ? ' active':'' }}" href="{{ route('management.objectives.index') }}">
                 {{ __('menus.management.objectives.index') }}
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link">
-                Kategorie celów
+                {{ __('menus.management.categories') }}
             </a>
         </li>
         <li class="nav-item">
@@ -21,13 +21,8 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link">
-                {{ __('menus.management.organization') }}
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link">
-                {{ __('menus.management.teams') }}
+            <a class="nav-link{{ request()->routeIs('management.organization.index') ? ' active':'' }}" href="{{ route('management.organization.index') }}">
+                {{ __('menus.management.organization.index') }}
             </a>
         </li>
         <li class="nav-item">

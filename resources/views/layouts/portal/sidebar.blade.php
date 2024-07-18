@@ -41,13 +41,13 @@
       </li>
       <li class="nav-item">
         <a class="nav-link{{ request()->routeIs('users.*') ? ' active':'' }}" href="{{ route('users.index') }}">
-          <i class="bi bi-people-fill"></i>
+          <i class="bi bi-person-fill"></i>
           <span class="nav-title">{{ __('menus.users.index') }}</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link{{ request()->routeIs('management.*') ? ' active':'' }}" href="{{ route('management.objectives.index') }}">
-          <i class="bi bi-diagram-3-fill"></i>
+          <i class="bi bi-layers-half"></i>
           <span class="nav-title">{{ __('menus.management.index') }}</span>
         </a>
       </li>

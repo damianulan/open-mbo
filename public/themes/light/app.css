@@ -22320,6 +22320,49 @@ a.action-btn {
   margin-right: 1rem;
 }
 
+a.btn-tile {
+  display: flex;
+  color: #1C676C;
+  font-weight: 600;
+  font-size: 1.2rem;
+  background-color: rgba(28, 103, 108, 0.25);
+  text-decoration: none;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.2s ease-in-out;
+  border-radius: 0.25rem;
+}
+
+a.btn-tile span {
+  padding-left: 0.75rem;
+  transition: padding 0.35s ease 0s;
+}
+
+a.btn-tile i.on-hover {
+  margin-left: auto;
+  display: none;
+}
+
+a.btn-tile:hover {
+  background-color: #1C676C;
+}
+
+a.btn-tile:hover span {
+  padding-left: 1.25rem;
+}
+
+a.btn-tile:hover i.on-hover {
+  display: block;
+}
+
+a.btn-tile:hover * {
+  color: #D7FAF4 !important;
+}
+
+a.btn-tile .bi {
+  font-size: 1.5rem;
+}
+
 select, input {
   display: block;
   width: 100%;
