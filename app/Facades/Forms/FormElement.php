@@ -18,7 +18,6 @@ use Illuminate\Support\Collection;
  */
 class FormElement
 {
-
     /**
      * Returns input instruction for simple text type.
      *
@@ -29,7 +28,7 @@ class FormElement
     public static function text(string $name, $model = null): Input
     {
         $value = $model->$name ?? null;
-        return new Input($name, 'text', $value);
+        return new Input($name, "text", $value);
     }
 
     /**
@@ -42,7 +41,7 @@ class FormElement
     public static function numeric(string $name, $model = null): Input
     {
         $value = $model->$name ?? null;
-        return (new Input($name, 'text', $value))->numeric();
+        return (new Input($name, "text", $value))->numeric();
     }
 
     /**
@@ -55,7 +54,7 @@ class FormElement
     public static function decimal(string $name, $model = null): Input
     {
         $value = $model->$name ?? null;
-        return (new Input($name, 'text', $value))->decimal();
+        return (new Input($name, "text", $value))->decimal();
     }
 
     /**
@@ -68,7 +67,7 @@ class FormElement
     public static function password(string $name, $model = null): Input
     {
         $value = $model->$name ?? null;
-        return new Input($name, 'password', $value);
+        return new Input($name, "password", $value);
     }
 
     /**
@@ -79,13 +78,16 @@ class FormElement
      * @param  mixed  $val
      * @return Input
      */
-    public static function hidden(string $name, $model = null, $val = null): Input
-    {
+    public static function hidden(
+        string $name,
+        $model = null,
+        $val = null
+    ): Input {
         $value = $model->$name ?? null;
-        if(!$value && $val){
+        if (!$value && $val) {
             $value = $val;
         }
-        return new Input($name, 'hidden', $value);
+        return new Input($name, "hidden", $value);
     }
 
     /**
@@ -97,17 +99,21 @@ class FormElement
      * @param  mixed           $selected_value
      * @return void
      */
-    public static function select(string $name, $model = null, ?Collection $options = null, $selected_value = null)
-    {
+    public static function select(
+        string $name,
+        $model = null,
+        ?Collection $options = null,
+        $selected_value = null
+    ): Select {
         $value = $model->$name ?? null;
 
-        if(is_object($value)){
+        if (is_object($value)) {
             $value = $value->value;
         }
-        if(!is_null($selected_value)){
+        if (!is_null($selected_value)) {
             $value = $selected_value;
         }
-        return new Select($name, $options, array($value));
+        return new Select($name, $options, [$value]);
     }
 
     /**
@@ -120,19 +126,23 @@ class FormElement
      * @param  array           $selected_values
      * @return void
      */
-    public static function multiselect(string $name, $model = null, ?Collection $options = null, $relation = null, $selected_values = [])
-    {
-        $values = array();
-        if($relation && $model && $model->$relation){
-            $values = $model->$relation->modelKeys() ?? array();
+    public static function multiselect(
+        string $name,
+        $model = null,
+        ?Collection $options = null,
+        $relation = null,
+        $selected_values = []
+    ): Select {
+        $values = [];
+        if ($relation && $model && $model->$relation) {
+            $values = $model->$relation->modelKeys() ?? [];
         }
 
-        if(count($selected_values)){
+        if (count($selected_values)) {
             $values = $selected_values;
         }
         return (new Select($name, $options, $values))->multiple();
     }
-
 
     /**
      * Returns rich edited textarea type instruction pregenerated with trix.js.
@@ -142,8 +152,11 @@ class FormElement
      * @param  string $toolbar
      * @return Trix
      */
-    public static function trix(string $name, $model = null, string $toolbar = 'short'): Trix
-    {
+    public static function trix(
+        string $name,
+        $model = null,
+        string $toolbar = "short"
+    ): Trix {
         $value = $model->$name ?? null;
         return new Trix($name, $toolbar, $value);
     }
@@ -158,7 +171,7 @@ class FormElement
     public static function datetime(string $name, $model = null): Datetime
     {
         $value = $model->$name ?? null;
-        return new Datetime($name, 'datetime', $value);
+        return new Datetime($name, "datetime", $value);
     }
 
     /**
@@ -171,7 +184,7 @@ class FormElement
     public static function time(string $name, $model = null): Datetime
     {
         $value = $model->$name ?? null;
-        return new Datetime($name, 'time', $value);
+        return new Datetime($name, "time", $value);
     }
 
     /**
@@ -184,7 +197,7 @@ class FormElement
     public static function date(string $name, $model = null): Datetime
     {
         $value = $model->$name ?? null;
-        return new Datetime($name, 'date', $value);
+        return new Datetime($name, "date", $value);
     }
 
     /**
@@ -196,13 +209,13 @@ class FormElement
      */
     public static function daterange(string $name, $model = null): Daterange
     {
-        $from = $name . '_from';
-        $to = $name . '_to';
+        $from = $name . "_from";
+        $to = $name . "_to";
         $values = [
-            'from' => $model->$from ?? null,
-            'to' => $model->$to ?? null,
+            "from" => $model->$from ?? null,
+            "to" => $model->$to ?? null,
         ];
-        return new Daterange($name, 'date', $values);
+        return new Daterange($name, "date", $values);
     }
 
     /**
@@ -215,7 +228,7 @@ class FormElement
     public static function radio(string $name, $model = null): Checkbox
     {
         $value = $model->$name ?? null;
-        return new Checkbox($name, 'radio', $value);
+        return new Checkbox($name, "radio", $value);
     }
 
     /**
@@ -228,7 +241,7 @@ class FormElement
     public static function checkbox(string $name, $model = null): Checkbox
     {
         $value = $model->$name ?? null;
-        return new Checkbox($name, 'checkbox', $value);
+        return new Checkbox($name, "checkbox", $value);
     }
 
     /**
@@ -241,7 +254,7 @@ class FormElement
     public static function switch(string $name, $model = null): Checkbox
     {
         $value = $model->$name ?? null;
-        return new Checkbox($name, 'switch', $value);
+        return new Checkbox($name, "switch", $value);
     }
 
     /**
@@ -254,7 +267,7 @@ class FormElement
     public static function file(string $name, $model = null): File
     {
         $value = false;
-        if(isset($model->$name) && !empty($model->$name)){
+        if (isset($model->$name) && !empty($model->$name)) {
             $value = true;
         }
         return new File($name, $value);
@@ -262,6 +275,5 @@ class FormElement
 
     public static function dynamicChecklist(string $name, $model = null)
     {
-
     }
 }

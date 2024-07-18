@@ -16,6 +16,7 @@ return [
     'select_choose' => 'Wybierz...',
     'search_no_results' => 'Brak wyników dla wyszukiwanej frazy.',
     'enter_address' => 'Wprowadź adres',
+    'hello' => 'Cześć',
 
     'typography' => [
         'bold' => 'Pogrubienie',
