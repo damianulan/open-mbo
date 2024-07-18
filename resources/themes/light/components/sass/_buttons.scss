@@ -90,3 +90,46 @@ a.action-btn {
 .btn-row a.btn:not(:last-child) {
     margin-right: 1rem;
 }
+
+a.btn-tile {
+    display: flex;
+    color: $primary;
+    font-weight: 600;
+    font-size: 1.2rem;
+    background-color: rgba($primary, 0.25);
+    text-decoration: none;
+    align-items: center;
+    padding: .75rem 1.5rem;
+    transition: all .2s ease-in-out;
+    border-radius: .25rem;
+}
+
+a.btn-tile span {
+    padding-left: .75rem;
+    transition: padding 0.35s ease 0s;
+}
+
+a.btn-tile i.on-hover {
+    margin-left: auto;
+    display: none;
+}
+
+a.btn-tile:hover {
+    background-color: $primary;
+}
+
+a.btn-tile:hover span {
+    padding-left: 1.25rem;
+}
+
+a.btn-tile:hover i.on-hover {
+    display: block;
+}
+
+a.btn-tile:hover * {
+    color: $sidebar-link-active !important;
+}
+
+a.btn-tile .bi {
+    font-size: 1.5rem;
+}

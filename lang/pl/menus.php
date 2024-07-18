@@ -48,7 +48,10 @@ return [
     'management' => [
         'index' => 'Zarządzanie',
         'users' => 'Użytkownicy',
-        'organization' => 'Struktura organizacyjna',
+        'categories' => 'Kategorie celów',
+        'organization' => [
+            'index' => 'Struktura organizacyjna',
+        ],
         'questionnaire' => 'Formularze',
         'teams' => 'Zespoły',
         'objectives' => [
