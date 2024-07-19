@@ -4,11 +4,11 @@ namespace App\Lib;
 
 use App\Settings\GeneralSettings;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
 
 class PageHeader
 {
 
+    public $routename;
     public $sitename;
     public $title;
     public $theme;
@@ -18,8 +18,10 @@ class PageHeader
 
     public function __construct(?string $pagetitle = null)
     {
+        $this->routename = Route::currentRouteName();
+
         if(empty($pagetitle)){
-            $this->title = $this->assignPageTitle(Route::currentRouteName());
+            $this->title = $this->assignPageTitle();
         } else {
             $this->title = $pagetitle;
         }
@@ -34,9 +36,9 @@ class PageHeader
         }
     }
 
-    private function assignPageTitle($route)
+    private function assignPageTitle()
     {
-        return __('menus.'.$route);
+        return __('menus.'.$this->routename);
     }
 
 

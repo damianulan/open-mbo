@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.3.0",
         "akaunting/laravel-apexcharts": "^3.0",
+        "diglactic/laravel-breadcrumbs": "^9.0",
         "guzzlehttp/guzzle": "^7.2",
         "lab404/laravel-impersonate": "^1.7",
         "laravel/framework": "^11.0",

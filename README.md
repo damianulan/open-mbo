@@ -19,7 +19,7 @@ Once You have your secret key injected in Your configuration, proceed with migra
 ```
 **Warning:** Application is still in production, so make sure your `.env` file contains following instructions:
 ```
-APP_ENV=local   // or 'development'
+APP_ENV=local   // or development
 APP_DEBUG=true
 SESSION_ENCRYPTION=false
 SESSION_SECURE_COOKIE=false
