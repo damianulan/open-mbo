@@ -1,5 +1,8 @@
 ## About OpenMBO
 
+### Licensing
+The Software is free for commercial use and restricted for modifing and altering. For more information see the [License Agreement](LICENSE.md).
+
 ### Installation
 Firstly, after cloning the repo, install composer dependencies. For that You need to have composer v2 installed on Your machine.
 ```
