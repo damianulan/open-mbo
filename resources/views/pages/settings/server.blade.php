@@ -82,9 +82,7 @@
                     </table>
                     <div class="btn-row">
                         <a href="{{ route('settings.clearcache') }}" class="btn btn-outline-primary">{{ __('pages.settings.cache_clear') }}</a>
-                        @role('root')
-                            <a href="{{ route('telescope') }}" class="btn btn-outline-primary">{{ __('pages.settings.telescope') }}</a>
-                        @endrole
+                        <a href="{{ route('telescope') }}" class="btn btn-outline-primary">{{ __('pages.settings.telescope') }}</a>
                     </div>
                 </div>
             </div>

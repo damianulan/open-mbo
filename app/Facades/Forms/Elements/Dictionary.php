@@ -97,7 +97,7 @@ class Dictionary
         return $options;
     }
 
-    public static function fromCatalog(string $index): ?self
+    public static function fromCatalog(string $index): ?Collection
     {
         $instance = new self();
 
