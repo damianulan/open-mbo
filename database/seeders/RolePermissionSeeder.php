@@ -40,12 +40,8 @@ class RolePermissionSeeder extends Seeder
         $this->admin->save();
 
         $this->adminMBO = new Role();
-        $this->adminMBO->slug = 'admin_mbo';
+        $this->adminMBO->slug = 'admin_mbo'; // staje się po przypisaniu kategorii mbo
         $this->adminMBO->save();
-
-        $this->adminMBOCat = new Role();
-        $this->adminMBOCat->slug = 'admin_mbo_category';
-        $this->adminMBOCat->save();
 
         $this->manager = new Role();
         $this->manager->slug = 'manager';

@@ -36,6 +36,7 @@ return [
     // Roles
     'roles' => [
         'root' => 'Root',
+        'support' => 'Helpdesk',
         'admin' => 'Administrator',
         'admin_mbo' => 'Administrator MBO',
         'manager' => 'Menadżer',

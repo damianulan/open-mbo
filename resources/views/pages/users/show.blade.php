@@ -16,7 +16,6 @@
                             <div class="user-header">
                                 <div class="user-title">
                                     <div class="user-name">{{ $user->name() }}</div>
-                                    <div class="user-position">STANOWISKO</div>
                                 </div>
                                 <div class="user-actions">
                                     <a href="{{ route('users.edit', $user->id) }}" class="" data-tippy-content="{{ __('buttons.edit') }}">
@@ -39,6 +38,25 @@
                                     </a>
                                 </div>
                             </div>
+                            <div class="row user-summary">
+                                <div class="user-info col-xl-6 col-lg-12">
+                                    <i class="bi bi-envelope-at-fill" data-tippy-content="Adres e-mail"></i><a href="mailto:{{ $user->email }}">{{ $user->email }}</a>
+                                </div>
+                                <div class="user-info col-xl-6 col-lg-12">
+                                    <i class="bi bi-building-fill" data-tippy-content="Przedsiębiorstwo"></i><div>OpenMBO LLP</div>
+                                </div>
+                                <div class="user-info col-xl-6 col-lg-12">
+                                    <i class="bi bi-diagram-3-fill" data-tippy-content="Departament"></i><div>Departament menadżerski MBO</div>
+                                </div>
+                                <div class="user-info col-xl-6 col-lg-12">
+                                    <i class="bi bi-person-badge-fill" data-tippy-content="Stanowisko"></i><div>Administrator przebiegów gospodarczo-produkcyjnych</div>
+                                </div>
+                                <div class="user-info col-xl-6 col-lg-12">
+                                    <i class="bi bi-person-fill-gear" data-tippy-content="Role"></i><div>{{ $user->getRolesNames()->implode(', ') }}</div>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>

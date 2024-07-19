@@ -31,7 +31,7 @@
         </div>
         <div class="col-xl-4 col-md-6 col-sm-12 pt-4">
             <a href="#" class="btn-tile">
-                <i class="bi bi-files"></i><span>Typy kontraktów</span><i class="bi bi-arrow-right on-hover"></i>
+                <i class="bi bi-clipboard2-fill"></i><span>Typy kontraktów</span><i class="bi bi-arrow-right on-hover"></i>
             </a>
         </div>
         <div class="col-xl-4 col-md-6 col-sm-12 pt-4">

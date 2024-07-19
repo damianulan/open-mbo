@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use App\Models\Core\Role;
 use App\Models\Core\Permission;
+use Illuminate\Support\Collection;
 
 trait HasRolesAndPermissions
 {
@@ -21,6 +22,31 @@ trait HasRolesAndPermissions
     public function permissions()
     {
         return $this->belongsToMany(Permission::class,'users_permissions');
+    }
+
+    /**
+     * Returns a Colletion of slugs with user roles being assigned to him.
+     *
+     * @return Collection
+     */
+    public function getRoles(): Collection
+    {
+        return $this->roles->pluck('slug');
+    }
+
+    /**
+     * Returns a Colletion of user's roles names based on langs.
+     *
+     * @return Collection
+     */
+    public function getRolesNames(): Collection
+    {
+        $slugs = $this->roles->pluck('slug');
+        $roles = new Collection();
+        foreach($slugs as $slug){
+            $roles->push(__('fields.roles.'.$slug));
+        }
+        return $roles;
     }
 
     /**

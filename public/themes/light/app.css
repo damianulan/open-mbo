@@ -23466,6 +23466,7 @@ ul.ombo-list {
 .card-bg .details .element .element-title span {
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
   overflow: hidden;
   font-weight: 600;
@@ -23513,10 +23514,24 @@ ul.ombo-list {
   font-size: 1.7rem;
   font-weight: 700;
   color: #1C676C;
+  line-height: 1.1;
 }
 
-.user-header .user-position {
+.user-summary {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.user-summary .user-info {
+  display: flex;
+  align-items: center;
   color: #164755;
+  font-size: 0.85rem;
+}
+
+.user-summary .user-info i.bi {
+  margin-right: 0.35rem;
+  font-size: 1.1rem;
 }
 
 .user-header .user-actions {
