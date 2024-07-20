@@ -21,7 +21,7 @@
             </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link">
+          <a class="nav-link{{ request()->routeIs('settings.logs') ? ' active':'' }}" href="{{ route('settings.logs') }}">
               {{ __('menus.settings.logs') }}
           </a>
       </li>

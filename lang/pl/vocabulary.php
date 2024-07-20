@@ -17,6 +17,7 @@ return [
     'search_no_results' => 'Brak wyników dla wyszukiwanej frazy.',
     'enter_address' => 'Wprowadź adres',
     'hello' => 'Cześć',
+    'not_applicable' => 'Nie dotyczy',
 
     'typography' => [
         'bold' => 'Pogrubienie',

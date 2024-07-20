@@ -35,7 +35,10 @@ Route::prefix('users')->middleware(['auth'])->name('users.')->group(function (){
     Route::get('/impersonate/leave', [App\Http\Controllers\UsersController::class, 'impersonateLeave'])->name('impersonate.leave');
 });
 
-Route::get('profile', [App\Http\Controllers\ProfileController::class, 'index'])->middleware('auth')->name('profile.index');
+Route::prefix('profile')->middleware(['auth'])->name('profile.')->group(function () {
+    Route::get('/', [App\Http\Controllers\ProfileController::class, 'index'])->name('index');
+    Route::get('/activity', [App\Http\Controllers\Settings\LogController::class, 'myLogs'])->name('logs');
+});
 
 /**
  * Users END
@@ -54,6 +57,7 @@ Route::prefix('settings')->middleware(['auth'])->name('settings.')->group(functi
     Route::get('server/phpinfo', function (){
         echo phpinfo();
     })->name('server.phpinfo');
+    Route::get('/logs', [App\Http\Controllers\Settings\LogController::class, 'index'])->name('logs');
 });
 
 
@@ -71,6 +75,13 @@ Route::prefix('management')->middleware(['auth'])->name('management.')->group(fu
     });
     Route::prefix('organization')->name('organization.')->group(function () {
         Route::get('/', [App\Http\Controllers\Management\Organization\OrganizationController::class, 'index'])->name('index');
+        Route::prefix('company')->name('company.')->group(function () {
+            Route::get('/', [App\Http\Controllers\Management\Organization\CompanyController::class, 'index'])->name('index');
+            Route::post('/', [App\Http\Controllers\Management\Organization\CompanyController::class, 'store'])->name('store');
+            Route::get('create', [App\Http\Controllers\Management\Organization\CompanyController::class, 'create'])->name('create');
+            Route::get('edit/{company}', [App\Http\Controllers\Management\Organization\CompanyController::class, 'edit'])->name('edit');
+            Route::put('{company}', [App\Http\Controllers\Management\Organization\CompanyController::class, 'update'])->name('update');
+        });
     });
 
 });

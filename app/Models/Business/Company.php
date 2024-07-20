@@ -19,9 +19,15 @@ class Company extends BaseModel
         'founded',
     ];
 
+    protected $dates = [
+        'founded',
+        'created_at',
+    ];
+
     protected $casts = [
         'description' => TrixFieldCast::class,
         'founded' => 'date',
+        'created_at' => 'date',
     ];
 
     public function employments()

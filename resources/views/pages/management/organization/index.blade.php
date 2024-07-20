@@ -10,8 +10,8 @@
 
     <div class="row">
         <div class="col-xl-4 col-md-6 col-sm-12 pt-4">
-            <a href="#" class="btn-tile">
-                <i class="bi bi-building-fill-gear"></i><span>Przedsiębiorstwa</span><i class="bi bi-arrow-right on-hover"></i>
+            <a href="{{ route('management.organization.company.index') }}" class="btn-tile">
+                <i class="bi bi-building-fill-gear"></i><span>{{ __('menus.management.organization.company.index') }}</span><i class="bi bi-arrow-right on-hover"></i>
             </a>
         </div>
         <div class="col-xl-4 col-md-6 col-sm-12 pt-4">

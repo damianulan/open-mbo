@@ -43,8 +43,8 @@ If any provision of this Agreement is held to be invalid or unenforceable, the r
 ### 10. Contact Information
 If you have any questions about this Agreement, please contact Licensor at:
 
-Damian Aleksander Ułan
-Wrocław, Poland
+Damian Aleksander Ułan<br/>
+Wrocław, Poland<br/>
 **damian.ulan@protonmail.com**
 
 By using the Software, you acknowledge that you have read this Agreement, understand it, and agree to be bound by its terms and conditions.

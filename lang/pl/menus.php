@@ -51,6 +51,9 @@ return [
         'categories' => 'Kategorie celów',
         'organization' => [
             'index' => 'Struktura organizacyjna',
+            'company' => [
+                'index' => 'Przedsiębiorstwa',
+            ],
         ],
         'questionnaire' => 'Formularze',
         'teams' => 'Zespoły',
@@ -58,6 +61,9 @@ return [
             'index' => 'Cele',
             'create' => 'Tworzenie szablonu celu',
             'edit' => 'Modyfikacja szablonu celu',
+        ],
+        'restoring' => [
+            'index' => 'Przywracanie danych',
         ],
     ],
 

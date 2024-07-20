@@ -97,7 +97,7 @@ class FormElement
      * @param  mixed           $model
      * @param  Collection|null $options
      * @param  mixed           $selected_value
-     * @return void
+     * @return Select
      */
     public static function select(
         string $name,
@@ -124,7 +124,7 @@ class FormElement
      * @param  Collection|null $options
      * @param  mixed           $relation - method name for model relationships you want to use
      * @param  array           $selected_values
-     * @return void
+     * @return Select
      */
     public static function multiselect(
         string $name,

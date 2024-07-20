@@ -18,11 +18,12 @@ use App\Traits\ActiveFields;
 use App\Models\Core\UserProfile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Traits\Vendors\ModelActivity;
 
 class User extends Authenticatable
 {
     use UUID, HasApiTokens, HasFactory, Notifiable, HasRolesAndPermissions, SoftDeletes, RequestForms;
-    use UserMBO, UserBusiness, ActiveFields, Impersonate, Impersonable;
+    use UserMBO, UserBusiness, ActiveFields, Impersonate, Impersonable, ModelActivity;
 
     protected $fillable = [
         'email',

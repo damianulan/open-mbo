@@ -6270,8 +6270,8 @@ textarea.form-control-lg {
 
 .badge {
   --bs-badge-padding-x: 0.65em;
-  --bs-badge-padding-y: 0.35em;
-  --bs-badge-font-size: 0.75em;
+  --bs-badge-padding-y: 0.5em;
+  --bs-badge-font-size: 0.8em;
   --bs-badge-font-weight: 700;
   --bs-badge-color: #fff;
   --bs-badge-border-radius: var(--bs-border-radius);
@@ -22227,6 +22227,10 @@ section.content-wrapper {
   width: 65px;
 }
 
+.breadcrumb .breadcrumb-item {
+  color: #1C676C;
+}
+
 .btn {
   border-radius: 0.25rem;
   font-weight: 600 !important;
@@ -22794,6 +22798,8 @@ ul.user-bar {
 
 .user-nav .user-details {
   line-height: 1.2;
+  text-decoration: none;
+  color: #1C676C;
 }
 
 .user-nav .user-details .user-name {
@@ -23241,7 +23247,7 @@ a.icon-btn {
 
 table.ombo-table {
   border-collapse: separate !important;
-  border-spacing: 0 0.6rem;
+  border-spacing: 0 0.5rem;
 }
 
 table.ombo-table td,
@@ -23272,6 +23278,10 @@ table.ombo-table tbody tr:hover {
   border-radius: 50%;
   width: 2rem;
   margin-right: 0.5rem;
+}
+
+.ombo-table .user-details a {
+  text-decoration: none;
 }
 
 .ombo-table td.firstcol {

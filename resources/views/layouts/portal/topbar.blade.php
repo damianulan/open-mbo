@@ -24,7 +24,7 @@
                   </div>
                   <ul class="dropdown-menu">
                     <li><a href="{{ route('profile.index') }}" class="dropdown-item"><i class="bi-person me-2"></i>{{ __('menus.edit_profile') }}</a></li>
-                    <li><a href="#" class="dropdown-item"><i class="bi-activity me-2"></i>{{ __('menus.activity') }}</a></li>
+                    <li><a href="{{ route('profile.logs') }}" class="dropdown-item"><i class="bi-activity me-2"></i>{{ __('menus.activity') }}</a></li>
                     <li><a href="#" class="dropdown-item"><i class="bi-list-ol me-2"></i>{{ __('menus.my_results') }}</a></li>
                     <li><a href="#" class="dropdown-item"><i class="bi-sliders me-2"></i>{{ __('menus.preferences') }}</a></li>
                     <li>

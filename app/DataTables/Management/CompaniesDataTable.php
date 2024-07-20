@@ -1,8 +1,8 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Management;
 
-use App\Models\Core\User;
+use App\Models\Business\Company;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -14,7 +14,7 @@ use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\Html\SearchPane;
 use Illuminate\Support\Carbon;
 
-class UsersDataTable extends DataTable
+class CompaniesDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -24,11 +24,6 @@ class UsersDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('name', function($data) {
-                return view('components.datatables.username', [
-                    'data' => $data,
-                ]);
-            })
             ->addColumn('status', function($data) {
                 $color = 'primary';
                 $text = 'Aktywny';
@@ -43,20 +38,20 @@ class UsersDataTable extends DataTable
             })
             ->orderColumn('status', function($query, $order) {
                 $o = $order==='asc' ? 'desc':'asc';
-                $query->orderBy('active', $o);
-                $query->orderBy('active', $o);
+                $query->orderBy('firstname', $o);
+                $query->orderBy('lastname', $o);
             })
             ->orderColumn('name', function($query, $order) {
                 $query->orderBy('firstname', $order);
                 $query->orderBy('lastname', $order);
             })
             ->addColumn('action', function($data) {
-                return view('pages.users.action', [
+                return view('pages.management.organization.company.action', [
                     'data' => $data,
                 ]);
             })
             ->filterColumn('name', function($query, $keyword){
-                $sql = "CONCAT(firstname,' ',lastname)  like ?";
+                $sql = "CONCAT(users.firstname,'-',users.lastname)  like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->editColumn('created_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format(config('app.datetime_format')); return $formatedDate; })
@@ -66,12 +61,9 @@ class UsersDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(User $model): QueryBuilder
+    public function query(Company $model): QueryBuilder
     {
-        $query = $model->join('user_profiles', 'user_profiles.user_id', '=', 'users.id')
-                    ->select('users.*', 'user_profiles.firstname', 'user_profiles.lastname')
-                    ->whereNotIn('users.id', [auth()->user()->id]);
-        return $query;
+        return $model->with('profile')->whereNotIn('id', [auth()->user()->id]);
     }
 
     /**
@@ -92,7 +84,7 @@ class UsersDataTable extends DataTable
                             20, 50, 100, 200
                         ],
                     ])
-                    ->setTableId('users-table')
+                    ->setTableId('companies-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->processing(true)
@@ -107,14 +99,13 @@ class UsersDataTable extends DataTable
         return [
             Column::computed('name')
             ->title(__('fields.firstname_lastname'))
-            ->searchable(true)
-            ->orderable(true)
+            ->sortable(true)
             ->addClass('firstcol'),
             Column::make('email')
             ->title(__('fields.email')),
             Column::computed('status')
             ->title(__('fields.status'))
-            ->orderable(true),
+            ->sortable(true),
             Column::make('created_at')
             ->title(__('fields.created_at')),
             Column::make('updated_at')
@@ -134,5 +125,4 @@ class UsersDataTable extends DataTable
     {
         return 'Users_' . date('YmdHis');
     }
-
 }

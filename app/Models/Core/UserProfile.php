@@ -27,7 +27,6 @@ class UserProfile extends Model
     ];
 
     protected $casts = [
-        'created_at' => 'datetime',
         'gender' => Gender::class,
     ];
 

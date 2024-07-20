@@ -255,6 +255,8 @@ ul.user-bar {
 
 .user-nav .user-details {
     line-height: 1.2;
+    text-decoration: none;
+    color: $primary;
 }
 
 .user-nav .user-details .user-name {

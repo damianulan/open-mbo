@@ -7,11 +7,42 @@
  */
 return [
 
-    'log' => [
+    'columns' => [
+        'causer' => 'Inicjator',
+        'subject' => 'Odnosi się do',
+        'subject_type' => 'Odnosi się do typu',
+        'created_at' => 'Kiedy',
+        'event' => 'Zdarzenie',
+        'description' => 'Opis',
 
     ],
 
-    'activity' => [
+    'events' => [
+        'updated' => 'Aktualizacja danych',
+        'logged_out' => 'Wylogowanie',
+        'auth_attempt_success' => 'Pomyślnie logowanie',
+        'auth_attempt_fail' => 'Niepowodzenie logowania',
 
     ],
+
+    'log_name' => [
+        'system' => 'System',
+        'auth' => 'Identyfikacja użytkownika',
+        'model' => 'Zmiana danych',
+    ],
+
+    'description' => [
+        'created' => 'Użytkownik :username utworzył nową instancję obiektu: :model_map.',
+        'updated' => 'Użytkownik :username zmodyfikował instancję obiektu: :model_map.',
+        'deleted' => 'Użytkownik :username usunął instancję obiektu: :model_map.',
+    ],
+
+    'model_mapping' => [
+        'App\Models\MBO\ObjectiveTemplate' => 'Szablon celu',
+    ],
+
+    'route_mapping' => [
+        'App\Models\MBO\ObjectiveTemplate' => 'management.objectives.edit',
+    ],
+
 ];

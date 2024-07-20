@@ -53,7 +53,7 @@
 
 table.ombo-table {
     border-collapse: separate !important;
-    border-spacing: 0 .6rem;
+    border-spacing: 0 .5rem;
 }
 
 table.ombo-table td,
@@ -83,6 +83,10 @@ table.ombo-table tbody tr:hover {
     border-radius: 50%;
     width: 2rem;
     margin-right: .5rem;
+}
+
+.ombo-table .user-details a {
+    text-decoration: none;
 }
 
 .ombo-table td.firstcol{

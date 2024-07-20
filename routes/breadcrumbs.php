@@ -11,3 +11,8 @@ Breadcrumbs::for('management.organization.index', function (BreadcrumbTrail $tra
     $trail->parent('management.index');
     $trail->push(__('menus.management.organization.index'), route('management.organization.index'));
 });
+
+Breadcrumbs::for('management.organization.company.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('management.organization.index');
+    $trail->push(__('menus.management.organization.company.index'), route('management.organization.company.index'));
+});

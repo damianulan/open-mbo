@@ -15,11 +15,6 @@ use Exception;
 class Form
 {
 
-    public static function validation($model_id = null): array
-    {
-        return [];
-    }
-
     public static function reformatRequest(Request $request): Request
     {
         foreach($request->all() as $property => $value)
