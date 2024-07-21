@@ -12,7 +12,7 @@ class LogController extends Controller
     public function index(LogsDataTable $dataTable)
     {
         return $dataTable->render('pages.settings.logs', [
-
+            'table' => $dataTable,
         ]);
     }
 

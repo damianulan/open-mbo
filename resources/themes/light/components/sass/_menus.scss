@@ -154,6 +154,7 @@ html .sidebar-menu {
 
 li.nav-item {
     position: relative;
+    cursor: pointer;
 }
 
 .sidebar-menu .nav-pills .nav-link {
@@ -532,4 +533,13 @@ a.dropdown-toggle{
 a.icon-btn {
     font-size: 1.5rem;
     text-decoration: none;
+}
+
+.nav-item.disabled {
+    transition: none;
+}
+
+.nav-item.disabled *{
+    pointer-events: none;
+    color: $disabled-text !important;
 }

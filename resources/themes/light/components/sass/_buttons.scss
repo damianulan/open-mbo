@@ -4,21 +4,11 @@
     white-space: nowrap;
 }
 
-  .btn-pagination {
-    padding: .5rem 1rem;
-    margin: 0 .2rem;
-  }
+.btn-pagination {
+padding: .5rem 1rem;
+margin: 0 .2rem;
+}
 
-  .btn-round {
-    border-radius: 2rem;
-    padding: .3rem .5rem;
-    width: 36px;
-    height: 36px;
-  }
-
-  .btn-round i.bi {
-    font-size: 1rem !important;
-  }
 
 .btn-primary,
 .btn-secondary,
@@ -132,4 +122,15 @@ a.btn-tile:hover * {
 
 a.btn-tile .bi {
     font-size: 1.5rem;
+}
+
+.btn-round {
+    border-radius: 50%;
+    padding: .3rem .5rem;
+    width: 36px;
+    height: 36px;
+}
+
+.btn-round i.bi {
+    font-size: 1rem !important;
 }

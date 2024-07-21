@@ -3,7 +3,9 @@ select, input {
   width: 100%;
 }
 
-.form-control, select {
+.form-control,
+select,
+input[type="search"] {
   font-size: $form-font-size;
   border: 1px solid $input-border-color;
   padding: $input-padding;
@@ -14,7 +16,9 @@ select, input {
   color: $input-color;
 }
 
-.form-control:focus, select:focus {
+.form-control:focus,
+select:focus,
+input[type="search"]:focus {
   border: 1px solid $input-border-focus-color;
   box-shadow: $input-box-shadow-focus;
 }

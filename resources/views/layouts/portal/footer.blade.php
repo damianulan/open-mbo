@@ -6,6 +6,7 @@
 <script src="{{ asset('themes/'.$page->theme.'/app.js') }}"></script>
 @include('layouts.components.alerts');
 @yield('page-scripts')
+@stack('custom-scripts')
 <footer></footer>
 </body>
 </html>

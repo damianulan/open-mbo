@@ -11,12 +11,15 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\Html\SearchPane;
-use App\Facades\DataTable\CustomDataTable;
+use App\Facades\DataTables\CustomDataTable;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Activity;
 
 class LogsDataTable extends CustomDataTable
 {
+    protected $id = 'logs_table';
+    protected $orderBy = 'created_at';
+
     /**
      * Build the DataTable class.
      *
@@ -76,31 +79,6 @@ class LogsDataTable extends CustomDataTable
                     ->select('activity_log.*', 'user_profiles.firstname', 'user_profiles.lastname');
     }
 
-    /**
-     * Optional method if you want to use the html builder.
-     */
-    public function html(): HtmlBuilder
-    {
-        return $this->builder()
-                    ->parameters([
-                        'language' => [
-                            'url' => asset('themes/vendors/datatables/pl.json'),
-                        ],
-                        'responsive' => true,
-                        'buttons' => [
-                            'csv'
-                        ],
-                        'lengthMenu' => [
-                            20, 50, 100, 200
-                        ],
-                    ])
-                    ->setTableId('logs-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->processing(true)
-                    ->orderBy(3);
-    }
-
     protected function defaultColumns(): array
     {
         return [
@@ -142,6 +120,10 @@ class LogsDataTable extends CustomDataTable
     private function getEventColor(string $event): string
     {
         $color = 'primary';
+
+        if($event === 'auth_attempt_fail'){
+            $color = 'danger';
+        }
 
         return $color;
     }

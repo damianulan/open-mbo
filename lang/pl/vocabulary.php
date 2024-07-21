@@ -19,6 +19,9 @@ return [
     'hello' => 'Cześć',
     'not_applicable' => 'Nie dotyczy',
 
+    'column' => 'Kolumna',
+    'columns' => 'Kolumny',
+
     'typography' => [
         'bold' => 'Pogrubienie',
         'italic' => 'Pochyła',

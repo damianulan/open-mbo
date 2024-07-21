@@ -22242,17 +22242,6 @@ section.content-wrapper {
   margin: 0 0.2rem;
 }
 
-.btn-round {
-  border-radius: 2rem;
-  padding: 0.3rem 0.5rem;
-  width: 36px;
-  height: 36px;
-}
-
-.btn-round i.bi {
-  font-size: 1rem !important;
-}
-
 .btn-primary,
 .btn-secondary,
 .btn-outline-primary,
@@ -22367,12 +22356,25 @@ a.btn-tile .bi {
   font-size: 1.5rem;
 }
 
+.btn-round {
+  border-radius: 50%;
+  padding: 0.3rem 0.5rem;
+  width: 36px;
+  height: 36px;
+}
+
+.btn-round i.bi {
+  font-size: 1rem !important;
+}
+
 select, input {
   display: block;
   width: 100%;
 }
 
-.form-control, select {
+.form-control,
+select,
+input[type=search] {
   font-size: 0.85rem;
   border: 1px solid #278e95;
   padding: 0.5rem 0.7rem;
@@ -22383,7 +22385,9 @@ select, input {
   color: #164755;
 }
 
-.form-control:focus, select:focus {
+.form-control:focus,
+select:focus,
+input[type=search]:focus {
   border: 1px solid #50c9d2;
   box-shadow: 0 3px 10px -1px rgba(0, 0, 0, 0.1);
 }
@@ -22698,6 +22702,7 @@ html .sidebar-menu {
 
 li.nav-item {
   position: relative;
+  cursor: pointer;
 }
 
 .sidebar-menu .nav-pills .nav-link {
@@ -23073,6 +23078,15 @@ a.dropdown-toggle {
 a.icon-btn {
   font-size: 1.5rem;
   text-decoration: none;
+}
+
+.nav-item.disabled {
+  transition: none;
+}
+
+.nav-item.disabled * {
+  pointer-events: none;
+  color: #6c757d !important;
 }
 
 .badge.badge-status, .badge.badge-tag {
