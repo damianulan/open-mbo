@@ -193,7 +193,8 @@ li.nav-item {
 .sidebar-menu .nav-pills .nav-link.active {
     font-weight: 600;
     color: $sidebar-link-active !important;
-    background-color: $primary;
+    background: $primary;
+    background: linear-gradient(90deg, rgba($primary,0.80) 0%, rgba($primary,0.95) 40%, rgba($primary,1) 100%);
 }
 
 .sidebar-menu .nav-pills .nav-link.active:hover {
@@ -501,7 +502,7 @@ a.dropdown-toggle{
 }
 
 .notification-dropdown .dropdown-menu {
-    max-width: 20rem;
+    width: 25rem;
 }
 
 .notification-dropdown .dropdown-menu .dropdown-header {
@@ -509,12 +510,30 @@ a.dropdown-toggle{
     color: $gray-600;
 }
 
-.notification-dropdown .notification-item {
+.notification-dropdown .notification-item .notification-contents {
     display: flex;
 }
 
-.notification-time {
+.notification-dropdown .notification-item .notification-contents .notification-text{
+    text-wrap: wrap;
+}
+
+.notification-dropdown .notification-item .notification-contents .notification-time{
     color: $gray-600;
+    text-align: end;
+}
+
+.notification-dropdown .dropdown-menu li.notification-li {
+    border-top: 1px solid $dropdown-divider-bg;
+}
+
+.dropdown-toggle::after {
+    font-family: $font-family-icons;
+    content: "\f282";
+    color: $primary;
+    border: none;
+    vertical-align: middle;
+    font-size: .7rem;
 }
 
 .icon-btn-nav {

@@ -26,4 +26,9 @@ class SelectedColumns extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public static function findColumn(string $datatable_id)
+    {
+        return self::where('user_id', auth()->user()->id)->where('table_id', $datatable_id)->first();
+    }
 }

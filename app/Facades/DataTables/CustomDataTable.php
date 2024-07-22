@@ -3,6 +3,7 @@
 namespace App\Facades\DataTables;
 
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Http\Request;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -11,6 +12,8 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\Html\SearchPane;
+use App\Facades\DataTables\SelectedColumns;
+use Illuminate\Support\Facades\Validator;
 
 class CustomDataTable extends DataTable
 {
@@ -46,9 +49,20 @@ class CustomDataTable extends DataTable
 
     protected function selectedColumns(): array
     {
-        $default = $this->defaultColumns();
+        $columns = array();
+        $model = SelectedColumns::findColumn($this->id);
+        $columns_raw = $model->columns ?? array();
+        $available = $this->availableColumns();
 
-        return $default;
+        if(empty($columns_raw)){
+            $columns = $this->defaultColumns();
+        } else {
+            $columns = array_filter($columns_raw, function ($c) use($available) {
+                return array_key_exists($c, $available);
+            });
+        }
+
+        return $columns;
     }
 
     protected function defaultColumns(): array
@@ -108,4 +122,32 @@ class CustomDataTable extends DataTable
         }
         return $builder;
     }
+
+    public function saveColumns(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'datatable_id' => 'required|string',
+            'columns' => 'present|array',
+        ]);
+
+        if($validator->passes()){
+            $datatable_id = $request->input('datatable_id');
+            $columns = $request->input('columns');
+
+            $selected = SelectedColumns::findColumn($datatable_id) ?? new SelectedColumns();
+            $selected->user_id = auth()->user()->id;
+            $selected->table_id = $datatable_id;
+            $selected->columns = $columns;
+
+            if($selected->save()){
+                return redirect()->back();
+            } else {
+                return redirect()->back()->with('error', __('alerts.datatables.save_columns.error'));
+            }
+        }
+
+        return redirect()->back()->with('error', __('alerts.datatables.save_columns.error_data'));
+
+    }
+
 }

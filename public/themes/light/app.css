@@ -4863,7 +4863,7 @@ textarea.form-control-lg {
   --bs-dropdown-border-width: var(--bs-border-width);
   --bs-dropdown-inner-border-radius: calc(var(--bs-border-radius) - var(--bs-border-width));
   --bs-dropdown-divider-bg: #A3AEA7;
-  --bs-dropdown-divider-margin-y: 0.2rem;
+  --bs-dropdown-divider-margin-y: 0.5rem;
   --bs-dropdown-box-shadow: var(--bs-box-shadow);
   --bs-dropdown-link-color: #164755;
   --bs-dropdown-link-hover-color: #164755;
@@ -4871,10 +4871,10 @@ textarea.form-control-lg {
   --bs-dropdown-link-active-color: #fff;
   --bs-dropdown-link-active-bg: #1C676C;
   --bs-dropdown-link-disabled-color: var(--bs-tertiary-color);
-  --bs-dropdown-item-padding-x: 1rem;
+  --bs-dropdown-item-padding-x: 0.75rem;
   --bs-dropdown-item-padding-y: 0.25rem;
   --bs-dropdown-header-color: #6c757d;
-  --bs-dropdown-header-padding-x: 1rem;
+  --bs-dropdown-header-padding-x: 0.75rem;
   --bs-dropdown-header-padding-y: 0;
   position: absolute;
   z-index: var(--bs-dropdown-zindex);
@@ -22337,7 +22337,8 @@ a.btn-tile i.on-hover {
 }
 
 a.btn-tile:hover {
-  background-color: #1C676C;
+  background: #1C676C;
+  background: linear-gradient(90deg, rgba(28, 103, 108, 0.65) 0%, rgba(28, 103, 108, 0.75) 40%, #1c676c 100%);
 }
 
 a.btn-tile:hover span {
@@ -22741,7 +22742,8 @@ li.nav-item {
 .sidebar-menu .nav-pills .nav-link.active {
   font-weight: 600;
   color: #D7FAF4 !important;
-  background-color: #1C676C;
+  background: #1C676C;
+  background: linear-gradient(90deg, rgba(28, 103, 108, 0.8) 0%, rgba(28, 103, 108, 0.95) 40%, #1c676c 100%);
 }
 
 .sidebar-menu .nav-pills .nav-link.active:hover {
@@ -23046,7 +23048,7 @@ a.dropdown-toggle {
 }
 
 .notification-dropdown .dropdown-menu {
-  max-width: 20rem;
+  width: 25rem;
 }
 
 .notification-dropdown .dropdown-menu .dropdown-header {
@@ -23054,12 +23056,30 @@ a.dropdown-toggle {
   color: #6c757d;
 }
 
-.notification-dropdown .notification-item {
+.notification-dropdown .notification-item .notification-contents {
   display: flex;
 }
 
-.notification-time {
+.notification-dropdown .notification-item .notification-contents .notification-text {
+  text-wrap: wrap;
+}
+
+.notification-dropdown .notification-item .notification-contents .notification-time {
   color: #6c757d;
+  text-align: end;
+}
+
+.notification-dropdown .dropdown-menu li.notification-li {
+  border-top: 1px solid #A3AEA7;
+}
+
+.dropdown-toggle::after {
+  font-family: "bootstrap-icons";
+  content: "\f282";
+  color: #1C676C;
+  border: none;
+  vertical-align: middle;
+  font-size: 0.7rem;
 }
 
 .icon-btn-nav {

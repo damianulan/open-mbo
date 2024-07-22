@@ -83,4 +83,11 @@ return [
         ],
     ],
 
+    'datatables' => [
+        'save_columns' => [
+            'error_data' => 'Nie wykryto nowych danych dotyczących wyświetlania kolumn w tabeli. Zmiany nie zostały zapisane.',
+            'error' => 'Nie można było zapisać nowych danych dotyczących kolumn w tabeli. Wystąpił błąd.',
+        ]
+    ]
+
 ];

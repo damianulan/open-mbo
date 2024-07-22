@@ -11,7 +11,12 @@
             <span class="page-title" data-tippy-placement="bottom" data-tippy-content="{{ $page->title }}">{{ $page->title }}</span>
           </header>
           <div class="page-quick-actions">
-              <!--<x-notification-dropdown/>-->
+              <div class="me-3">
+                <a href="#" data-tippy-placement="bottom" data-tippy-content="Baza wiedzy">
+                    <i class="bi bi-book-fill"></i>
+                </a>
+              </div>
+              <x-notification-dropdown/>
               <div class="user-nav dropup"
               @if(auth()->user()->isImpersonating())
               data-tippy-placement="left"

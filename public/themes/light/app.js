@@ -3204,14 +3204,14 @@ $('input[data-numeric="decimal"]').on('focusout', function () {
     $(this).val(val + '.00');
   }
 });
-function overlay(state) {
+$.overlay = function (state) {
   if (state === 'show') {
     $('body').append('<div class="loader-overlay"><div class="mbo-loader"></div></div>');
   } else if (state === 'hide') {
     var overlays = $('body').find('.loader-overlay');
     overlays.remove();
   }
-}
+};
 function swal_confirm(text) {
   var title_input = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
   var _callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;

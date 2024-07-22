@@ -99,7 +99,7 @@ $('input[data-numeric="decimal"]').on('focusout', function() {
     }
 });
 
-function overlay(state) {
+$.overlay = function(state) {
     if(state === 'show') {
         $('body').append('<div class="loader-overlay"><div class="mbo-loader"></div></div>');
     } else if (state === 'hide') {

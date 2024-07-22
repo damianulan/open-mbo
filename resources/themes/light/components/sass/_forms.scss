@@ -117,7 +117,7 @@ form.form-horizontal .action-btns .btn {
 }
 
 form label.required::after {
-    font-family: 'bootstrap-icons';
+    font-family: $font-family-icons;
     content: "\f151";
     color: $danger;
     font-size: .5rem;
