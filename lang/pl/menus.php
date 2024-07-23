@@ -32,7 +32,7 @@ return [
         'reset' => 'Reset hasła',
         'personal_data' => 'Dane personalne',
         'settings' => 'Ustawienia konta',
-
+        'logs' => 'Twoja aktywność',
     ],
 
     'settings' => [
@@ -83,6 +83,15 @@ return [
         'create' => 'Tworzenie użytkownika',
         'show' => 'Profil użytkownika',
     ],
+
+
+
+    'info' => [
+        'profile' => [
+            'logs' => 'Strona przedstawia całą Twoją aktywność, jaka jest mierzona przez system.',
+        ],
+    ],
+
 
 
 ];

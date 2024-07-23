@@ -19,7 +19,7 @@ class LogController extends Controller
     public function myLogs(MyLogsDataTable $dataTable)
     {
         return $dataTable->render('pages.settings.my_logs', [
-
+            'table' => $dataTable,
         ]);
     }
 

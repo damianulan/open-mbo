@@ -183,7 +183,7 @@ $.notice = function(text, title_input = null, _callback = null) {
 function toast_alert(text, type = 'info', _callback = function(){} ) {
     Toastify({
         text: text,
-        duration: 6000,
+        duration: 8000,
         close: true,
         gravity: "bottom", // `top` or `bottom`
         position: "right", // `left`, `center` or `right`

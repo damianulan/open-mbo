@@ -1,7 +1,4 @@
 @extends('layouts.portal.master')
-@section('breadcrumbs')
-{{ Breadcrumbs::render(Route::currentRouteName()) }}
-@endsection
 @section('content')
 
 @include('pages.management.nav')

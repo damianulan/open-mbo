@@ -11,6 +11,9 @@ trait ModelActivity
 
     public function getActivitylogOptions(): LogOptions
     {
+        if(!auth()->user()){
+            return LogOptions::defaults();
+        }
         return LogOptions::defaults()
                 ->useLogName('model')
                 ->logOnly($this->fillable)

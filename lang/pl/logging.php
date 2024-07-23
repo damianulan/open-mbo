@@ -35,6 +35,9 @@ return [
         'created' => 'Użytkownik :username utworzył nową instancję obiektu: :model_map.',
         'updated' => 'Użytkownik :username zmodyfikował instancję obiektu: :model_map.',
         'deleted' => 'Użytkownik :username usunął instancję obiektu: :model_map.',
+        'auth_attempt_success' => 'Zarejestrowano pomyślną próbę logowania użytkownika.',
+        'auth_attempt_fail' => 'Zarejestrowano pomyślną próbę logowania użytkownika.',
+        'auth_logout' => 'Użytkownik wylogował się z systemu.',
     ],
 
     'model_mapping' => [

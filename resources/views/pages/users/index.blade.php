@@ -15,6 +15,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="table-container">
+                {{ $table->columnSelector() }}
                 {{ $dataTable->table() }}
             </div>
         </div>

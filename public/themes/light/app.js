@@ -3290,7 +3290,7 @@ function toast_alert(text) {
   var _callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
   toastify_js__WEBPACK_IMPORTED_MODULE_1___default()({
     text: text,
-    duration: 6000,
+    duration: 8000,
     close: true,
     gravity: "bottom",
     // `top` or `bottom`

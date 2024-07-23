@@ -3,6 +3,11 @@ select, input {
   width: 100%;
 }
 
+*:focus,
+*:focus-visible {
+    outline: none;
+}
+
 .form-control,
 select,
 input[type="search"] {

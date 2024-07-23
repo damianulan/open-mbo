@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('table_id', 255);
             $table->json('columns');
+            $table->json('selected');
             $table->timestamps();
         });
     }

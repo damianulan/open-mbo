@@ -32,7 +32,7 @@
                                         <i class="bi-minecart-loaded"></i>
                                         <span>{{ $objective->weight }}</span>
                                     </div>
-                                    <div class="list-action me-3" data-tippy-content="{{ __('forms.objectives.expected') }}>
+                                    <div class="list-action me-3" data-tippy-content="{{ __('forms.objectives.expected') }}">
                                         <i class="bi-heart-arrow"></i>
                                         <span>{{ $objective->expected }}</span>
                                     </div>

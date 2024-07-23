@@ -2,10 +2,10 @@
     <a class="dropdown-item notification-item" href="#">
         <div class="notification-contents">
             <div class="notification-icon px-1">
-                <i class="bi-mortarboard-fill"></i>
+                <i class="bi-pencil-fill"></i>
             </div>
             <div class="notification-text px-1">
-                <strong>Kurs stacjonarny</strong> został pomyślnie zedytowany przez twojego podwładnego: <strong>Adam Nowicki</strong>
+                Cel <strong>Kontrolny 1</strong> został pomyślnie zedytowany przez twojego podwładnego: <strong>Adam Nowicki</strong>
             </div>
 
         </div>

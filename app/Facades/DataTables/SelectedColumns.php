@@ -16,10 +16,12 @@ class SelectedColumns extends Model
         'user_id',
         'table_id',
         'columns',
+        'selected',
     ];
 
     protected $casts = [
         'columns' => 'array',
+        'selected' => 'array',
     ];
 
     public function user()

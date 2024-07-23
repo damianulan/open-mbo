@@ -21952,15 +21952,8 @@ i.bi-3 {
   color: #278e95;
 }
 
-h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   color: #1C676C;
-}
-
-h1, .h1, h2, .h2, h3, .h3 {
-  font-weight: 700;
-}
-
-h4, .h4, h5, .h5, h6, .h6 {
   font-weight: 600;
 }
 
@@ -21992,6 +21985,11 @@ hr {
 
 .text-serif {
   font-family: "IBM Plex Serif", serif !important;
+}
+
+.text-light {
+  font-weight: lighter;
+  text-indent: 50px;
 }
 
 html, body {
@@ -22338,7 +22336,7 @@ a.btn-tile i.on-hover {
 
 a.btn-tile:hover {
   background: #1C676C;
-  background: linear-gradient(90deg, rgba(28, 103, 108, 0.65) 0%, rgba(28, 103, 108, 0.75) 40%, #1c676c 100%);
+  background: linear-gradient(90deg, #1c676c 0%, rgba(28, 103, 108, 0.75) 60%, rgba(28, 103, 108, 0.65) 100%);
 }
 
 a.btn-tile:hover span {
@@ -22371,6 +22369,11 @@ a.btn-tile .bi {
 select, input {
   display: block;
   width: 100%;
+}
+
+*:focus,
+*:focus-visible {
+  outline: none;
 }
 
 .form-control,
@@ -22861,7 +22864,14 @@ a.dropdown-toggle {
 
 .page-top .page-heading {
   white-space: nowrap;
+  display: flex;
+  align-items: baseline;
   overflow-x: auto;
+}
+
+.page-top .page-heading i.bi {
+  font-size: 1.2rem;
+  margin-left: 0.75rem;
 }
 
 .page-top .page-heading .page-title {
@@ -23389,6 +23399,44 @@ ul.ombo-list {
 .ombo-list li.inactive:hover {
   box-shadow: inset -5px -15px 75px -28px rgba(163, 174, 167, 0.4);
   transition: all 0.2s ease-in-out;
+}
+
+.draggable-table .draggable-table__drag {
+  position: absolute;
+  width: 100%;
+  text-indent: 50px;
+  border: 1px solid #f1f1f1;
+  z-index: 10;
+  cursor: grabbing;
+  box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.05);
+  opacity: 1;
+}
+.draggable-table thead th {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.draggable-table tbody tr {
+  cursor: grabbing;
+}
+.draggable-table tbody tr td {
+  padding: 10px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  border-top: 1px solid whitesmoke;
+}
+.draggable-table tbody tr:nth-child(even) {
+  background-color: #f7f7f7;
+}
+.draggable-table tbody tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+.draggable-table tbody tr.is-dragging {
+  background: rgba(28, 103, 108, 0.15);
+}
+.draggable-table tbody tr.is-dragging td {
+  color: rgba(28, 103, 108, 0.05);
 }
 
 .card-header {
@@ -24835,6 +24883,14 @@ span.flatpickr-day.selected {
 }
 .chosen-rtl.chosen-container-single.chosen-with-drop .chosen-single div b {
   background-position: -12px 2px;
+}
+
+.dataTables_wrapper .chosen-container-single .chosen-single {
+  padding: 0.1rem 0.65rem;
+}
+
+.dataTables_wrapper input[type=search] {
+  padding: 0.2rem 0.65rem;
 }
 
 /* @end */

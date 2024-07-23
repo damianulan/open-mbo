@@ -33,14 +33,32 @@ class CustomDataTable extends DataTable
         $output = array_filter($available, function($key) use($columns) {
             return in_array($key, $columns);
         }, ARRAY_FILTER_USE_KEY);
+
+        usort($output, function($x, $y) use($columns) {
+            $pos_x = array_search($x->data, $columns);
+            $pos_y = array_search($y->data, $columns);
+            return $pos_x - $pos_y;
+        });
+
         return $output;
     }
 
     public function columnSelector()
     {
+        $model = SelectedColumns::findColumn($this->id);
+        $available = $this->availableColumns();
+        if($model){
+            $selected = $model->selected;
+            uasort($available, function($x, $y) use($selected) {
+                $pos_x = array_search($x->name, $selected);
+                $pos_y = array_search($y->name, $selected);
+                return $pos_x - $pos_y;
+            });
+        }
+
         $view = view('components.datatables.partials.columns', [
             'datatable_id' => $this->id,
-            'columns' => $this->availableColumns(),
+            'columns' => $available,
             'selected' => $this->selectedColumns(),
         ]);
 
@@ -51,7 +69,7 @@ class CustomDataTable extends DataTable
     {
         $columns = array();
         $model = SelectedColumns::findColumn($this->id);
-        $columns_raw = $model->columns ?? array();
+        $columns_raw = $model->selected ?? array();
         $available = $this->availableColumns();
 
         if(empty($columns_raw)){
@@ -79,10 +97,10 @@ class CustomDataTable extends DataTable
     {
         $orderBy = null;
         if($this->orderBy){
-            $columns = array_keys($this->getColumns());
+            $columns = $this->getColumns();
             if(!empty($columns)){
                 foreach($columns as $key => $column){
-                    if($column === $this->orderBy){
+                    if($column->name === $this->orderBy){
                         $orderBy = $key;
                         break;
                     }
@@ -127,19 +145,21 @@ class CustomDataTable extends DataTable
     {
         $validator = Validator::make($request->all(), [
             'datatable_id' => 'required|string',
-            'columns' => 'present|array',
+            'selected' => 'present|array',
         ]);
 
         if($validator->passes()){
             $datatable_id = $request->input('datatable_id');
             $columns = $request->input('columns');
+            $selected = $request->input('selected');
 
-            $selected = SelectedColumns::findColumn($datatable_id) ?? new SelectedColumns();
-            $selected->user_id = auth()->user()->id;
-            $selected->table_id = $datatable_id;
-            $selected->columns = $columns;
+            $sc = SelectedColumns::findColumn($datatable_id) ?? new SelectedColumns();
+            $sc->user_id = auth()->user()->id;
+            $sc->table_id = $datatable_id;
+            $sc->columns = $columns;
+            $sc->selected = $selected;
 
-            if($selected->save()){
+            if($sc->save()){
                 return redirect()->back();
             } else {
                 return redirect()->back()->with('error', __('alerts.datatables.save_columns.error'));

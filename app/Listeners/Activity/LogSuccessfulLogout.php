@@ -28,7 +28,7 @@ class LogSuccessfulLogout
                 activity('auth')
                 ->causedBy($user)
                 ->event('logged_out')
-                ->log('auth_attempt');
+                ->log(__('logging.description.auth_logout'));
             }
         }
     }

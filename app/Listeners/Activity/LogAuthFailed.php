@@ -29,7 +29,7 @@ class LogAuthFailed
                 ->causedBy($user)
                 ->withProperties(['authenticated' => false])
                 ->event('auth_attempt_fail')
-                ->log('auth_attempt');
+                ->log(__('logging.description.auth_attempt_fail'));
             }
         }
     }

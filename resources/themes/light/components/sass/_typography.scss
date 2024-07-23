@@ -93,15 +93,8 @@ i.bi-3 {
     color: lighten($primary, 10%);
 }
 
-h1, h2, h3, h4, h5 {
+h1, h2, h3, h4, h5, h6 {
     color: $primary;
-}
-
-h1, h2, h3 {
-    font-weight: 700;
-}
-
-h4, h5, h6 {
     font-weight: 600;
 }
 
@@ -133,4 +126,9 @@ hr {
 
 .text-serif {
     font-family: $font-family-serif !important;
+}
+
+.text-light {
+    font-weight: lighter;
+    text-indent: 50px;
 }

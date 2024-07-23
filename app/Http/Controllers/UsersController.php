@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Core\User;
 use App\Models\Core\UserProfile;
-use App\DataTables\UsersDataTable;
+use App\DataTables\Users\UsersDataTable;
 use App\Forms\Users\UserEditForm;
 class UsersController extends Controller
 {
@@ -17,7 +17,7 @@ class UsersController extends Controller
     public function index(UsersDataTable $dataTable)
     {
         return $dataTable->render('pages.users.index', [
-
+            'table' => $dataTable,
         ]);
     }
 

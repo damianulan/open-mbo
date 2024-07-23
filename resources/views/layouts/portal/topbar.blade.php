@@ -1,6 +1,6 @@
 <nav id="topbar" class="page-top">
     <div class="ms-2">
-        @yield('breadcrumbs')
+        {{ Breadcrumbs::render(Route::currentRouteName()) }}
     </div>
     <div class="page-top-elements">
         <div class="togglers">
@@ -9,6 +9,9 @@
           </div>
           <header class="page-heading">
             <span class="page-title" data-tippy-placement="bottom" data-tippy-content="{{ $page->title }}">{{ $page->title }}</span>
+            @if($page->info)
+                <i class="bi bi-question-circle" data-tippy-placement="bottom" data-tippy-content="{{ $page->info }}"></i>
+            @endif
           </header>
           <div class="page-quick-actions">
               <div class="me-3">

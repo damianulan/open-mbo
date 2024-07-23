@@ -10,12 +10,15 @@ use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
-use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\Html\SearchPane;
+use App\Facades\DataTables\CustomDataTable;
 use Illuminate\Support\Carbon;
+use Spatie\Activitylog\Models\Activity;
 
-class MyLogsDataTable extends DataTable
+class MyLogsDataTable extends CustomDataTable
 {
+    protected $id = 'my_logs_table';
+    protected $orderBy = 'created_at';
+
     /**
      * Build the DataTable class.
      *
@@ -23,98 +26,76 @@ class MyLogsDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
+
         return (new EloquentDataTable($query))
-            ->addColumn('status', function($data) {
-                $color = 'primary';
-                $text = 'Aktywny';
-                if(!$data->active){
-                    $color = 'dark';
-                    $text = 'Zablokowany';
-                }
+            ->addColumn('event', function($data) {
                 return view('components.datatables.badge', [
-                    'color' => $color,
-                    'text' => $text,
+                    'color' => $this->getEventColor($data->event),
+                    'text' => __('logging.events.'.$data->event),
                 ]);
             })
-            ->orderColumn('status', function($query, $order) {
-                $o = $order==='asc' ? 'desc':'asc';
-                $query->orderBy('firstname', $o);
-                $query->orderBy('lastname', $o);
+            ->addColumn('subject', function($data) {
+                if($data->subject){
+                    return view('components.datatables.link', [
+                        'route' => route(__('logging.route_mapping.'.$data->subject_type), $data->subject_id),
+                        'text' => $data->subject->name,
+                    ]);
+                } else {
+                    return __('vocabulary.not_applicable');
+                }
+
             })
-            ->orderColumn('name', function($query, $order) {
+            ->addColumn('subject_type', function($data) {
+                if($data->subject){
+                    return __('logging.model_mapping.'.$data->subject_type);
+                } else {
+                    return __('vocabulary.not_applicable');
+                }
+            })
+            ->orderColumn('causer', function($query, $order) {
                 $query->orderBy('firstname', $order);
                 $query->orderBy('lastname', $order);
             })
-            ->addColumn('action', function($data) {
-                return view('pages.management.organization.company.action', [
-                    'data' => $data,
-                ]);
-            })
-            ->filterColumn('name', function($query, $keyword){
-                $sql = "CONCAT(users.firstname,'-',users.lastname)  like ?";
+            ->filterColumn('causer', function($query, $keyword){
+                $sql = "CONCAT(firstname,'-',lastname)  like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
-            ->editColumn('created_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format(config('app.datetime_format')); return $formatedDate; })
-            ->editColumn('updated_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format(config('app.datetime_format')); return $formatedDate; });
+            ->editColumn('created_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format(config('app.datetime_format')); return $formatedDate; });
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(Company $model): QueryBuilder
+    public function query(Activity $model): QueryBuilder
     {
-        return $model->with('profile')->whereNotIn('id', [auth()->user()->id]);
+        return $model->join('users', 'users.id', '=', 'activity_log.causer_id')
+                    ->join('user_profiles', 'user_profiles.user_id', '=', 'users.id')
+                    ->select('activity_log.*', 'user_profiles.firstname', 'user_profiles.lastname')
+                    ->where('users.id', auth()->user()->id);
     }
 
-    /**
-     * Optional method if you want to use the html builder.
-     */
-    public function html(): HtmlBuilder
-    {
-        return $this->builder()
-                    ->parameters([
-                        'language' => [
-                            'url' => asset('themes/vendors/datatables/pl.json'),
-                        ],
-                        'responsive' => true,
-                        'buttons' => [
-                            'csv'
-                        ],
-                        'lengthMenu' => [
-                            20, 50, 100, 200
-                        ],
-                    ])
-                    ->setTableId('companies-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->processing(true)
-                    ->orderBy(1);
-    }
-
-    /**
-     * Get the dataTable columns definition.
-     */
-    public function getColumns(): array
+    protected function defaultColumns(): array
     {
         return [
-            Column::computed('name')
-            ->title(__('fields.firstname_lastname'))
-            ->sortable(true)
-            ->addClass('firstcol'),
-            Column::make('email')
-            ->title(__('fields.email')),
-            Column::computed('status')
-            ->title(__('fields.status'))
-            ->sortable(true),
-            Column::make('created_at')
-            ->title(__('fields.created_at')),
-            Column::make('updated_at')
-            ->title(__('fields.updated_at')),
-            Column::computed('action')
-            ->exportable(false)
-            ->printable(false)
-            ->addClass('lastcol action-btns')
-            ->title(__('fields.action')),
+            'event', 'subject', 'subject_type', 'created_at'
+        ];
+    }
+
+    protected function availableColumns(): array
+    {
+        return [
+            'event'         => Column::computed('event')
+                                ->title(__('logging.columns.event'))
+                                ->addClass('firstcol'),
+            'subject'       => Column::computed('subject')
+                                ->title(__('logging.columns.subject')),
+            'subject_type'  => Column::computed('subject_type')
+                                ->title(__('logging.columns.subject_type')),
+            'description'   => Column::make('description')
+                                ->title(__('logging.columns.description')),
+            'created_at'    => Column::make('created_at')
+                                ->title(__('logging.columns.created_at'))
+                                ->addClass('lastcol'),
         ];
     }
 
@@ -123,6 +104,18 @@ class MyLogsDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Users_' . date('YmdHis');
+        return 'MyLogs_' . date('YmdHis');
+    }
+
+
+    private function getEventColor(string $event): string
+    {
+        $color = 'primary';
+
+        if($event === 'auth_attempt_fail'){
+            $color = 'danger';
+        }
+
+        return $color;
     }
 }

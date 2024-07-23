@@ -1,21 +1,20 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Users;
 
 use App\Models\Core\User;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
-use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\Html\SearchPane;
 use Illuminate\Support\Carbon;
+use App\Facades\DataTables\CustomDataTable;
 
-class UsersDataTable extends DataTable
+class UsersDataTable extends CustomDataTable
 {
+    protected $id = 'users_table';
+    protected $orderBy = 'created_at';
+
     /**
      * Build the DataTable class.
      *
@@ -74,58 +73,38 @@ class UsersDataTable extends DataTable
         return $query;
     }
 
-    /**
-     * Optional method if you want to use the html builder.
-     */
-    public function html(): HtmlBuilder
-    {
-        return $this->builder()
-                    ->parameters([
-                        'language' => [
-                            'url' => asset('themes/vendors/datatables/pl.json'),
-                        ],
-                        'responsive' => true,
-                        'buttons' => [
-                            'csv'
-                        ],
-                        'lengthMenu' => [
-                            20, 50, 100, 200
-                        ],
-                    ])
-                    ->setTableId('users-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->processing(true)
-                    ->orderBy(1);
-    }
-
-    /**
-     * Get the dataTable columns definition.
-     */
-    public function getColumns(): array
+    protected function defaultColumns(): array
     {
         return [
-            Column::computed('name')
-            ->title(__('fields.firstname_lastname'))
-            ->searchable(true)
-            ->orderable(true)
-            ->addClass('firstcol'),
-            Column::make('email')
-            ->title(__('fields.email')),
-            Column::computed('status')
-            ->title(__('fields.status'))
-            ->orderable(true),
-            Column::make('created_at')
-            ->title(__('fields.created_at')),
-            Column::make('updated_at')
-            ->title(__('fields.updated_at')),
-            Column::computed('action')
-            ->exportable(false)
-            ->printable(false)
-            ->addClass('lastcol action-btns')
-            ->title(__('fields.action')),
+            'name', 'email', 'status', 'created_at', 'updated_at', 'action'
         ];
     }
+
+    protected function availableColumns(): array
+    {
+        return [
+            'name'          => Column::computed('name')
+                                ->title(__('fields.firstname_lastname'))
+                                ->searchable(true)
+                                ->orderable(true)
+                                ->addClass('firstcol'),
+            'email'         => Column::make('email')
+                                ->title(__('fields.email')),
+            'status'        => Column::computed('status')
+                                ->title(__('fields.status'))
+                                ->orderable(true),
+            'created_at'    => Column::make('created_at')
+                                ->title(__('fields.created_at')),
+            'updated_at'    => Column::make('updated_at')
+                                ->title(__('fields.updated_at')),
+            'action'    => Column::computed('action')
+                                ->exportable(false)
+                                ->printable(false)
+                                ->addClass('lastcol action-btns')
+                                ->title(__('fields.action')),
+        ];
+    }
+
 
     /**
      * Get the filename for export.

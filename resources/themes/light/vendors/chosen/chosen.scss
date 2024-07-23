@@ -401,6 +401,14 @@ $chosen-sprite-retina: url('chosen-sprite@2x.png') !default;
   }
 }
 
+.dataTables_wrapper .chosen-container-single .chosen-single {
+    padding: 0.1rem 0.65rem;
+}
+
+.dataTables_wrapper input[type=search] {
+    padding: 0.2rem 0.65rem;
+}
+
 /* @end */
 
 /* @group Retina compatibility */

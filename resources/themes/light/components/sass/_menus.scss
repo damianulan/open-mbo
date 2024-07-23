@@ -314,7 +314,14 @@ a.dropdown-toggle{
 
 .page-top .page-heading {
     white-space: nowrap;
+    display: flex;
+    align-items: baseline;
     overflow-x: auto;
+}
+
+.page-top .page-heading i.bi {
+    font-size: 1.2rem;
+    margin-left: 0.75rem;
 }
 
 .page-top .page-heading .page-title {
