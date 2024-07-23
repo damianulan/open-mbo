@@ -22336,7 +22336,7 @@ a.btn-tile i.on-hover {
 
 a.btn-tile:hover {
   background: #1C676C;
-  background: linear-gradient(90deg, #1c676c 0%, rgba(28, 103, 108, 0.75) 60%, rgba(28, 103, 108, 0.65) 100%);
+  background: linear-gradient(90deg, #1c676c 0%, rgba(28, 103, 108, 0.75) 70%, rgba(28, 103, 108, 0.65) 100%);
 }
 
 a.btn-tile:hover span {
