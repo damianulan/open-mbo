@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Lib;
+namespace App\Facades\Page;
 
 use App\Settings\GeneralSettings;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Lang;
 
-class PageHeader
+class PageBuilder
 {
     public $routename;
     public $sitename;
@@ -37,7 +37,7 @@ class PageHeader
         $this->logo = app(GeneralSettings::class)->site_logo;
 
         if(isset($_COOKIE['menu-collapsed']) && (bool) $_COOKIE['menu-collapsed']===true){
-            $this->menu_collapsed = 'menu-collapsed';
+            $this->sidebar_collapsed = 'menu-collapsed';
         }
     }
 

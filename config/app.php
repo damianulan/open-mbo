@@ -244,7 +244,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        'PageHeader' => App\Lib\PageHeader::class,
+        'PageBuilder' => App\Facades\Page\PageBuilder::class,
         'Theme' => App\Lib\Theme::class,
 
         // CASTS

@@ -58,7 +58,7 @@ return [
         'questionnaire' => 'Formularze',
         'teams' => 'Zespoły',
         'objectives' => [
-            'index' => 'Cele',
+            'index' => 'Szablony celów',
             'create' => 'Tworzenie szablonu celu',
             'edit' => 'Modyfikacja szablonu celu',
         ],

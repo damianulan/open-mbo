@@ -1,4 +1,4 @@
-<nav id="sidebar" class="sidebar-menu menu-fixed pt-0 {{ $page->menu_collapsed }}">
+<nav id="sidebar" class="sidebar-menu menu-fixed pt-0 {{ $page->sidebar_collapsed }}">
     <div class="navbar-brand mb-0 px-6">
         <div class="d-flex">
           <a class="brand"  href="{{ url('/') }}">

@@ -2,7 +2,7 @@
     if(!isset($pagetitle)){
         $pagetitle = null;
     }
-    $page = new PageHeader($pagetitle);
+    $page = new PageBuilder($pagetitle);
 @endphp
 @include('layouts.portal.header')
 <body>
