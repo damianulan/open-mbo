@@ -161,7 +161,7 @@ li.nav-item {
     display: flex;
     align-items: center;
     font-size: .85rem;
-    font-weight: 400;
+    font-weight: 600;
     text-transform: capitalize;
     color: $sidebar-link;
     padding: .3rem 1rem;
@@ -201,11 +201,11 @@ li.nav-item {
     color: darken($sidebar-link-active, 10%);
 }
 
-.sidebar-menu .nav .nav-item a {
+.sidebar-menu .nav .nav-item:not(.disabled) a {
     transition: padding 0.35s ease 0s !important;
 }
 
-.sidebar-menu:not(.menu-collapsed) .nav .nav-item:hover > a {
+.sidebar-menu:not(.menu-collapsed) .nav .nav-item:not(.disabled):hover > a {
     padding-left: 1.5rem;
     color: $primary;
     transition: padding 0.35s ease 0s !important;
@@ -562,11 +562,13 @@ a.icon-btn {
     text-decoration: none;
 }
 
-.nav-item.disabled {
+.nav .nav-item.disabled {
     transition: none;
+    filter: grayscale(0.8) !important;
 }
 
-.nav-item.disabled *{
+.nav .nav-item.disabled *,
+.nav .nav-item.disabled a{
     pointer-events: none;
-    color: $disabled-text !important;
+    transition: unset !important;
 }

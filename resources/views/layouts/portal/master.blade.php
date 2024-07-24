@@ -7,7 +7,9 @@
 @include('layouts.portal.header')
 <body>
     <div id="app">
-        @include('layouts.portal.sidebar')
+        @if($page->sidebar)
+            {!! $page->sidebar->render() !!}
+        @endif
         <main id="main-content" class="content {{ $page->sidebar_collapsed }}">
             <section class="page-wrapper">
                 @include('layouts.portal.topbar')

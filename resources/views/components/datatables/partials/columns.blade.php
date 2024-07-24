@@ -1,11 +1,7 @@
 <div class="row">
-    <div class="col-md-12">
-        <div class="d-flex">
-            <button class="btn btn-primary btn-round ms-auto" data-bs-toggle="modal" data-bs-target="#columnsModal_{{ $datatable_id }}" data-tippy-content="{{ __('facades.datatables.select_columns') }}">
-                <i class="bi bi-person-lines-fill"></i>
-            </button>
-        </div>
-    </div>
+    <button class="btn btn-primary btn-round ms-auto" data-bs-toggle="modal" data-bs-target="#columnsModal_{{ $datatable_id }}" data-tippy-content="{{ __('facades.datatables.select_columns') }}">
+        <i class="bi bi-person-lines-fill"></i>
+    </button>
 </div>
 <div class="modal fade" id="columnsModal_{{ $datatable_id }}" tabindex="-1" aria-labelledby="columnsModal_{{ $datatable_id }}Label" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
@@ -54,6 +50,7 @@
     </div>
 </div>
 
+@push('custom-scripts')
 <script type="text/javascript">
     (function() {
         "use strict";
@@ -205,3 +202,4 @@
 
     })();
 </script>
+@endpush

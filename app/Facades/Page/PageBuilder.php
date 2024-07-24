@@ -5,6 +5,8 @@ namespace App\Facades\Page;
 use App\Settings\GeneralSettings;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Lang;
+use App\Facades\Page\Bars\SidebarMenu;
+use App\Facades\Page\MenuBuilder;
 
 class PageBuilder
 {
@@ -15,7 +17,8 @@ class PageBuilder
     public $theme;
     public $locale;
     public $logo;
-    public $menu_collapsed;
+    public $sidebar_collapsed = null;
+    public SidebarMenu $sidebar;
 
     public function __construct(?string $pagetitle = null)
     {
@@ -39,6 +42,9 @@ class PageBuilder
         if(isset($_COOKIE['menu-collapsed']) && (bool) $_COOKIE['menu-collapsed']===true){
             $this->sidebar_collapsed = 'menu-collapsed';
         }
+
+        $this->sidebar = MenuBuilder::bootSidebar($this->sitename)
+                            ->addClass($this->sidebar_collapsed);
     }
 
     private function assignPageTitle()

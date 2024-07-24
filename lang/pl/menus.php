@@ -25,6 +25,14 @@ return [
 
     // Submenus / Page menus
 
+    'my_objectives' => [
+        'index' => 'Moje cele',
+    ],
+
+    'forms' => [
+        'index' => 'Moje Formularze',
+    ],
+
     // User's profile menu
     'profile' => [
         'index' => 'Profil',

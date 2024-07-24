@@ -22713,7 +22713,7 @@ li.nav-item {
   display: flex;
   align-items: center;
   font-size: 0.85rem;
-  font-weight: 400;
+  font-weight: 600;
   text-transform: capitalize;
   color: #1C676C;
   padding: 0.3rem 1rem;
@@ -22753,11 +22753,11 @@ li.nav-item {
   color: #aaf4e8;
 }
 
-.sidebar-menu .nav .nav-item a {
+.sidebar-menu .nav .nav-item:not(.disabled) a {
   transition: padding 0.35s ease 0s !important;
 }
 
-.sidebar-menu:not(.menu-collapsed) .nav .nav-item:hover > a {
+.sidebar-menu:not(.menu-collapsed) .nav .nav-item:not(.disabled):hover > a {
   padding-left: 1.5rem;
   color: #1C676C;
   transition: padding 0.35s ease 0s !important;
@@ -23111,13 +23111,15 @@ a.icon-btn {
   text-decoration: none;
 }
 
-.nav-item.disabled {
+.nav .nav-item.disabled {
   transition: none;
+  filter: grayscale(0.8) !important;
 }
 
-.nav-item.disabled * {
+.nav .nav-item.disabled *,
+.nav .nav-item.disabled a {
   pointer-events: none;
-  color: #6c757d !important;
+  transition: unset !important;
 }
 
 .badge.badge-status, .badge.badge-tag {
@@ -23239,27 +23241,27 @@ a.icon-btn {
 }
 
 .table-container::-webkit-scrollbar {
-  width: 8px;
+  width: 3px;
 }
 
 .table-container::-webkit-scrollbar-track {
   background: rgb(179, 177, 177);
-  border-radius: 1px;
+  border-radius: 2px;
 }
 
 .table-container::-webkit-scrollbar-thumb {
   background: rgb(136, 136, 136);
-  border-radius: 1px;
+  border-radius: 2px;
 }
 
 .table-container::-webkit-scrollbar-thumb:hover {
   background: rgb(100, 100, 100);
-  border-radius: 1px;
+  border-radius: 2px;
 }
 
 .table-container::-webkit-scrollbar-thumb:active {
   background: rgb(68, 68, 68);
-  border-radius: 1px;
+  border-radius: 2px;
 }
 
 .table-container {
