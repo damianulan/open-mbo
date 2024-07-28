@@ -17,6 +17,10 @@ Once You have your secret key injected in Your configuration, proceed with migra
 > php artisan migrate --seed
 > php artisan optimize:clear
 ```
+Lastly, enable your storage by:
+```
+> php artisan storage:link
+```
 **Warning:** Application is still in production, so make sure your `.env` file contains following instructions:
 ```
 APP_ENV=local   // or development

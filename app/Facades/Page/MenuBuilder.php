@@ -42,7 +42,7 @@ class MenuBuilder
                     ->setRoute('management.objectives.index'),
             MenuItem::make('settings')
                     ->setTitle(__('menus.settings.index'))
-                    ->setIcon('ui-radios-grid')
+                    ->setIcon('gear-fill')
                     ->setRoute('settings.general.index'),
         ]);
 

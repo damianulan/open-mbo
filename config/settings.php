@@ -2,6 +2,8 @@
 
 use App\Settings\GeneralSettings;
 use App\Settings\MailSettings;
+use App\Settings\MBOSettings;
+use App\Settings\FormsSettings;
 
 return [
 
@@ -42,6 +44,12 @@ return [
             'type' => Spatie\LaravelSettings\SettingsRepositories\DatabaseSettingsRepository::class,
             'model' => null,
             'table' => null,
+            'connection' => null,
+        ],
+        'modules' => [
+            'type' => Spatie\LaravelSettings\SettingsRepositories\DatabaseSettingsRepository::class,
+            'model' => null,
+            'table' => 'config_modules',
             'connection' => null,
         ],
         // 'redis' => [

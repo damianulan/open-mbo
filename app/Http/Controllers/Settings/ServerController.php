@@ -37,6 +37,7 @@ class ServerController extends SettingsController
         $request->validate([
             'mail_port' => 'numeric',
             'mail_from_address' => 'email',
+            'mail_catchall_receiver' => 'email',
         ]);
         foreach($request->all() as $key => $value){
             $settings->$key = $value;
