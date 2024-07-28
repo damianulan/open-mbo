@@ -28,7 +28,7 @@ class RolesServiceProvider extends ServiceProvider
             return auth()->user()->hasRole($role);
         });
 
-        Blade::if('superadmin', function ($role){
+        Blade::if('admin', function (){
             return auth()->user()->hasAnyRole('root', 'support', 'admin');
         });
     }
