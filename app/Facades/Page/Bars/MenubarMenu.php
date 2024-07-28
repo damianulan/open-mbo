@@ -5,23 +5,23 @@ namespace App\Facades\Page\Bars;
 use Illuminate\Support\Collection;
 use App\Facades\Page\Bars\MenuItem;
 
-class SidebarMenu
+class MenubarMenu
 {
-    public $id = 'sidebar';
-    public $sitename;
+    public $id;
     public Collection $items;
     public $classes = [];
 
-    public static function boot(string $sitename, array $items = []): self
+    public static function boot(string $id, array $items = []): self
     {
         $instance = new self();
-        $instance->sitename = $sitename;
+        $instance->id = $id;
         $instance->items = new Collection();
 
         if(!empty($items)){
             foreach($items as $item){
                 if($item instanceof MenuItem){
                     if($item->id){
+                        $item->useStrictRoutes();
                         $item->generateParentRoute();
                         $instance->items->push($item);
                     }
@@ -42,8 +42,8 @@ class SidebarMenu
 
     public function render()
     {
-        return view('components.menus.sidebar', [
-            'sidebar' => $this,
+        return view('components.menus.menubar', [
+            'menubar' => $this,
         ])->render();
     }
 

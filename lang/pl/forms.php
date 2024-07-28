@@ -22,6 +22,8 @@ return [
             'mail_encryption' => 'Metoda szyfrowania',
             'mail_from_address' => 'Wysyłaj z adresu',
             'mail_from_name' => 'Wysyłaj jako (nazwa)',
+            'mail_catchall_enabled' => 'Przekierowywanie wiadomości',
+            'mail_catchall_receiver' => 'Przekieruj na adres',
         ],
     ],
 

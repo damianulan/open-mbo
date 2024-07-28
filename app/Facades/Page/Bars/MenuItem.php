@@ -11,8 +11,10 @@ class MenuItem
     protected $route = null;
     protected $link;
     protected $parentRoute = null;
+    private $routeDirectiveStrict = false;
     protected $icon = null;
     protected $disabled = false;
+    protected $visible = true;
 
     public static function make(string $id): self
     {
@@ -25,17 +27,36 @@ class MenuItem
     {
         if(Route::has($route)){
             $this->route = $route;
-
-            if (strpos($route, '.') !== false) {
-                $this->parentRoute = substr($route, 0, strpos($route, '.')) . ".*";
-            } else {
-                $this->parentRoute = $route;
-            }
-
         } else {
             $this->disabled = true;
         }
 
+        return $this;
+    }
+
+    public function useStrictRoutes()
+    {
+        $this->routeDirectiveStrict = true;
+        return $this;
+    }
+
+    public function generateParentRoute(): self
+    {
+        if($this->route){
+            if($this->routeDirectiveStrict){
+                if (strrpos($this->route, '.') !== false) {
+                    $this->parentRoute = substr($this->route, 0, strrpos($this->route, '.')) . ".*";
+                } else {
+                    $this->parentRoute = $this->route;
+                }
+            } else {
+                if (strpos($this->route, '.') !== false) {
+                    $this->parentRoute = substr($this->route, 0, strpos($this->route, '.')) . ".*";
+                } else {
+                    $this->parentRoute = $this->route;
+                }
+            }
+        }
         return $this;
     }
 
@@ -102,6 +123,39 @@ class MenuItem
         return view('components.menus.item', [
             'item' => $this,
         ])->render();
+    }
+
+    public function isVisible(): bool
+    {
+        return $this->visible;
+    }
+
+    public function hide(): self
+    {
+        $this->visible = false;
+        return $this;
+    }
+
+    /**
+     * User is required to be assigned to the given permission, in order to view menu element.
+     */
+    public function requirePermission(string $slug): self
+    {
+        if(!auth()->user()->hasPermissionTo($slug)){
+            $this->visible = false;
+        }
+        return $this;
+    }
+
+    /**
+     * User is required to be assigned to at least one of the given roles, in order to view menu element.
+     */
+    public function requireRole(... $slug): self
+    {
+        if(!auth()->user()->hasAnyRole($slug)){
+            $this->visible = false;
+        }
+        return $this;
     }
 
 }

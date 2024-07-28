@@ -23113,13 +23113,13 @@ a.icon-btn {
 
 .nav .nav-item.disabled {
   transition: none;
-  filter: grayscale(0.8) !important;
 }
 
 .nav .nav-item.disabled *,
 .nav .nav-item.disabled a {
   pointer-events: none;
   transition: unset !important;
+  color: #6c757d !important;
 }
 
 .badge.badge-status, .badge.badge-tag {

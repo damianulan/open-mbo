@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Settings\GeneralSettings;
 use Illuminate\Http\Request;
 
-class GeneralController extends Controller
+class GeneralController extends SettingsController
 {
     /**
      * Show the application dashboard.
@@ -20,6 +20,7 @@ class GeneralController extends Controller
         return view('pages.settings.index', [
             'model' => $model,
             'form' => GeneralForm::boot($model),
+            'nav' => $this->nav,
         ]);
     }
 

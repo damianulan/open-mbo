@@ -1,7 +1,7 @@
 @extends('layouts.portal.master')
 @section('content')
 
-@include('pages.management.nav')
+{!! $nav->render() !!}
 
 <nav class="icon-btn-nav">
     <div class="panel-left">

@@ -7,12 +7,13 @@ use Illuminate\Http\Request;
 use App\DataTables\Settings\LogsDataTable;
 use App\DataTables\Settings\MyLogsDataTable;
 
-class LogController extends Controller
+class LogController extends SettingsController
 {
     public function index(LogsDataTable $dataTable)
     {
         return $dataTable->render('pages.settings.logs', [
             'table' => $dataTable,
+            'nav' => $this->nav,
         ]);
     }
 

@@ -14,6 +14,8 @@ return new class extends SettingsMigration
         $this->migrator->add('server.mail_encryption', null);
         $this->migrator->add('server.mail_from_address', 'hello@openmbo.com');
         $this->migrator->add('server.mail_from_name', 'OpenMBO');
+        $this->migrator->add('server.mail_catchall_enabled', false);
+        $this->migrator->add('server.mail_catchall_receiver', 'openmbo@damianulan.me');
 
     }
 };

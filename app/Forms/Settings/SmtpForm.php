@@ -22,6 +22,8 @@ class SmtpForm extends Form
                 ->label(__('forms.settings.server.mail_encryption')))
                 ->add(FormElement::text('mail_from_address', $model)->label(__('forms.settings.server.mail_from_address')))
                 ->add(FormElement::text('mail_from_name', $model)->label(__('forms.settings.server.mail_from_name')))
+                ->add(FormElement::switch('mail_catchall_enabled', $model)->label(__('forms.settings.server.mail_catchall_enabled')))
+                ->add(FormElement::text('mail_catchall_receiver', $model)->label(__('forms.settings.server.mail_catchall_receiver')))
 
                 ->addSubmit();
     }

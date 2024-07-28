@@ -46,6 +46,8 @@ class ConfigServiceProvider extends ServiceProvider
                 'mail.mailers.smtp.password' => app(MailSettings::class)->mail_password ?? null,
                 'mail.from.address' => app(MailSettings::class)->mail_from_address ?? null,
                 'mail.from.name' => app(MailSettings::class)->mail_from_name ?? null,
+                'mailcatchall.enabled' => app(MailSettings::class)->mail_catchall_enabled ?? null,
+                'mailcatchall.receiver' => app(MailSettings::class)->mail_catchall_receiver ?? null,
             ]);
         }
     }

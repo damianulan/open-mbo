@@ -16,6 +16,8 @@ class MailSettings extends Settings
     public ?string $mail_encryption;
     public string $mail_from_address;
     public string $mail_from_name;
+    public bool $mail_catchall_enabled;
+    public string $mail_catchall_receiver;
 
     public static function group(): string
     {

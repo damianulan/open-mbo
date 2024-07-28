@@ -3,6 +3,7 @@
 namespace App\Facades\Page;
 
 use App\Facades\Page\Bars\SidebarMenu;
+use App\Facades\Page\Bars\MenubarMenu;
 use App\Facades\Page\Bars\MenuItem;
 
 class MenuBuilder
@@ -23,6 +24,10 @@ class MenuBuilder
                     ->setTitle(__('menus.forms.index'))
                     ->setIcon('ui-radios')
                     ->setRoute('forms.index'),
+            MenuItem::make('campaign')
+                    ->setTitle(__('menus.campaigns.index'))
+                    ->setIcon('bullseye')
+                    ->setRoute('campaigns.index'),
             MenuItem::make('reports')
                     ->setTitle(__('menus.reports.index'))
                     ->setIcon('bar-chart-steps')
@@ -38,10 +43,15 @@ class MenuBuilder
             MenuItem::make('settings')
                     ->setTitle(__('menus.settings.index'))
                     ->setIcon('ui-radios-grid')
-                    ->setRoute('settings.index'),
+                    ->setRoute('settings.general.index'),
         ]);
 
         return $sidebar;
+    }
+
+    public static function bootMenubar(string $id, array $items): MenubarMenu
+    {
+        return MenubarMenu::boot($id, $items);
     }
 
 }

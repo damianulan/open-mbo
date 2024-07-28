@@ -1,7 +1,7 @@
 @extends('layouts.portal.master')
 @section('content')
 
-@include('pages.management.nav')
+{!! $nav->render() !!}
 
 <div class="content-card pt-3">
 

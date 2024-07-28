@@ -1,7 +1,7 @@
 @extends('layouts.portal.master')
 @section('content')
 
-@include('pages.settings.nav')
+{!! $nav->render() !!}
 
 <div class="content-card">
     <div class="container settings">

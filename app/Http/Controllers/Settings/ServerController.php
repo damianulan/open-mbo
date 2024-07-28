@@ -9,7 +9,7 @@ use App\Settings\MailSettings;
 use App\Forms\Settings\SmtpForm;
 use App\Settings\GeneralSettings;
 
-class ServerController extends Controller
+class ServerController extends SettingsController
 {
     /**
      * Show the application dashboard.
@@ -28,6 +28,7 @@ class ServerController extends Controller
             'git_text' => $git_text,
             'mail' => $model,
             'form' => SmtpForm::boot($model),
+            'nav' => $this->nav,
         ]);
     }
 

@@ -48,16 +48,16 @@ Route::prefix('profile')->middleware(['auth'])->name('profile.')->group(function
  * Settings START
  */
 Route::prefix('settings')->middleware(['auth'])->name('settings.')->group(function (){
-    Route::get('/', [App\Http\Controllers\Settings\GeneralController::class, 'index'])->name('index');
+    Route::get('/', [App\Http\Controllers\Settings\GeneralController::class, 'index'])->name('general.index');
     Route::post('general/store', [App\Http\Controllers\Settings\GeneralController::class, 'storeGeneral'])->name('general.store');
-    Route::get('server', [App\Http\Controllers\Settings\ServerController::class, 'index'])->name('server');
+    Route::get('server', [App\Http\Controllers\Settings\ServerController::class, 'index'])->name('server.index');
     Route::post('server/store/mail', [App\Http\Controllers\Settings\ServerController::class, 'storeMail'])->name('server.mail.store');
-    Route::get('server/clearcache', [App\Http\Controllers\Settings\ServerController::class, 'cache'])->name('clearcache');
-    Route::post('server/debugging', [App\Http\Controllers\Settings\ServerController::class, 'debugging'])->name('debugging');
+    Route::get('server/clearcache', [App\Http\Controllers\Settings\ServerController::class, 'cache'])->name('server.clearcache');
+    Route::post('server/debugging', [App\Http\Controllers\Settings\ServerController::class, 'debugging'])->name('server.debugging');
     Route::get('server/phpinfo', function (){
         echo phpinfo();
     })->name('server.phpinfo');
-    Route::get('/logs', [App\Http\Controllers\Settings\LogController::class, 'index'])->name('logs');
+    Route::get('/logs', [App\Http\Controllers\Settings\LogController::class, 'index'])->name('logs.index');
 });
 
 
@@ -72,6 +72,9 @@ Route::prefix('management')->middleware(['auth'])->name('management.')->group(fu
         Route::get('edit/{objective}', [App\Http\Controllers\Management\ObjectiveTemplateController::class, 'edit'])->name('edit');
         Route::get('{objective}', [App\Http\Controllers\Management\ObjectiveTemplateController::class, 'show'])->name('show');
         Route::put('{objective}', [App\Http\Controllers\Management\ObjectiveTemplateController::class, 'update'])->name('update');
+        Route::prefix('categories')->name('categories.')->group(function () {
+
+        });
     });
     Route::prefix('organization')->name('organization.')->group(function () {
         Route::get('/', [App\Http\Controllers\Management\Organization\OrganizationController::class, 'index'])->name('index');

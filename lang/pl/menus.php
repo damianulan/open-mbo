@@ -8,8 +8,12 @@ return [
 
 
     'admin_panel' => 'Panel administracyjny',
-    'reports' => 'Raporty',
-    'notifications' => 'Powiadomienia',
+    'reports' => [
+        'index' => 'Raporty'
+    ],
+    'notifications' => [
+        'index' => 'Powiadomienia',
+    ],
 
     // User menu
     'edit_profile' => 'Edytuj profil',
@@ -45,30 +49,51 @@ return [
 
     'settings' => [
         'index' => 'Ustawienia',
-        'general' => 'Główne',
-        'modules' => 'Moduły',
-        'integrations' => 'Integracje',
-        'server' => 'Serwer',
-        'logs' => 'Logi',
-        'help' => 'Pomoc',
+        'general' => [
+            'index' => 'Główne',
+        ],
+        'modules' => [
+            'index' => 'Moduły',
+        ],
+        'integrations' => [
+            'index' => 'Integracje',
+        ],
+        'server' => [
+            'index' => 'Serwer'
+        ],
+        'logs' => [
+            'index' => 'Logi',
+        ],
+        'help' => [
+            'index' => 'Pomoc',
+        ],
     ],
 
     'management' => [
         'index' => 'Zarządzanie',
-        'users' => 'Użytkownicy',
-        'categories' => 'Kategorie celów',
+        'users' => [
+            'index' => 'Użytkownicy'
+        ],
         'organization' => [
             'index' => 'Struktura organizacyjna',
             'company' => [
                 'index' => 'Przedsiębiorstwa',
             ],
         ],
-        'questionnaire' => 'Formularze',
-        'teams' => 'Zespoły',
+        'forms' => [
+            'index' => 'Formularze'
+        ],
+        'teams' => [
+            'index' => 'Zespoły'
+        ],
         'objectives' => [
             'index' => 'Szablony celów',
             'create' => 'Tworzenie szablonu celu',
             'edit' => 'Modyfikacja szablonu celu',
+            'categories' => [
+              'index' => 'Kategorie celów',
+            ],
+
         ],
         'restoring' => [
             'index' => 'Przywracanie danych',

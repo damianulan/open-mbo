@@ -7,14 +7,15 @@ use Illuminate\Http\Request;
 use App\Models\Business\Company;
 use App\DataTables\Management\CompaniesDataTable;
 use App\Forms\Management\CompanyEditForm;
+use App\Http\Controllers\Management\ManagementController;
 
-class CompanyController extends Controller
+class CompanyController extends ManagementController
 {
 
     public function index(CompaniesDataTable $dataTable)
     {
         return $dataTable->render('pages.management.organization.company.index', [
-
+            'nav' => $this->nav,
         ]);
     }
 

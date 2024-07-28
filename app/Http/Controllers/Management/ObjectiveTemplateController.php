@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Forms\MBO\ObjectiveTemplateEditForm;
 use App\Models\MBO\ObjectiveTemplate;
 
-class ObjectiveTemplateController extends Controller
+class ObjectiveTemplateController extends ManagementController
 {
     /**
      * Show the application dashboard.
@@ -19,6 +19,7 @@ class ObjectiveTemplateController extends Controller
 
         return view('pages.management.index', [
             'objectives' => ObjectiveTemplate::all(),
+            'nav' => $this->nav,
         ]);
     }
 

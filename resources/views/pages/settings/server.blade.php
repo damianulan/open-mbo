@@ -1,7 +1,7 @@
 @extends('layouts.portal.master')
 @section('content')
 
-@include('pages.settings.nav')
+{!! $nav->render() !!}
 
 <div class="content-card">
     <div class="container settings">
@@ -81,7 +81,7 @@
                         </tr>
                     </table>
                     <div class="btn-row">
-                        <a href="{{ route('settings.clearcache') }}" class="btn btn-outline-primary">{{ __('pages.settings.cache_clear') }}</a>
+                        <a href="{{ route('settings.server.clearcache') }}" class="btn btn-outline-primary">{{ __('pages.settings.cache_clear') }}</a>
                         <a href="{{ route('telescope') }}" class="btn btn-outline-primary">{{ __('pages.settings.telescope') }}</a>
                     </div>
                 </div>
