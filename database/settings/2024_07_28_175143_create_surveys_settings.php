@@ -6,7 +6,7 @@ return new class extends SettingsMigration
 {
     public function up(): void
     {
-        $this->migrator->add('forms.enabled', true);
+        $this->migrator->add('surveys.enabled', true);
 
     }
 };

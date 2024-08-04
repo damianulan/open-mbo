@@ -33,8 +33,8 @@ return [
         'index' => 'Moje cele',
     ],
 
-    'forms' => [
-        'index' => 'Moje Formularze',
+    'surveys' => [
+        'index' => 'Moje Kwestionariusze',
     ],
 
     // User's profile menu
@@ -80,8 +80,8 @@ return [
                 'index' => 'Przedsiębiorstwa',
             ],
         ],
-        'forms' => [
-            'index' => 'Formularze'
+        'surveys' => [
+            'index' => 'Kwestionariusze'
         ],
         'teams' => [
             'index' => 'Zespoły'

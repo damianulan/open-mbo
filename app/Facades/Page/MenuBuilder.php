@@ -20,10 +20,10 @@ class MenuBuilder
                     ->setTitle(__('menus.my_objectives.index'))
                     ->setIcon('clipboard-check-fill')
                     ->setRoute('my-objectives.index'),
-            MenuItem::make('forms')
-                    ->setTitle(__('menus.forms.index'))
+            MenuItem::make('surveys')
+                    ->setTitle(__('menus.surveys.index'))
                     ->setIcon('ui-radios')
-                    ->setRoute('forms.index'),
+                    ->setRoute('surveys.index'),
             MenuItem::make('campaign')
                     ->setTitle(__('menus.campaigns.index'))
                     ->setIcon('bullseye')

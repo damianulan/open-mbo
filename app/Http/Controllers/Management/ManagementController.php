@@ -21,9 +21,9 @@ class ManagementController extends Controller
             MenuItem::make('categories')
                     ->setTitle(__('menus.management.objectives.categories.index'))
                     ->setRoute('management.objectives.categories.index'),
-            MenuItem::make('forms')
-                    ->setTitle(__('menus.management.forms.index'))
-                    ->setRoute('management.forms.index'),
+            MenuItem::make('surveys')
+                    ->setTitle(__('menus.management.surveys.index'))
+                    ->setRoute('management.surveys.index'),
             MenuItem::make('users')
                     ->setTitle(__('menus.management.users.index'))
                     ->setRoute('management.users.index'),

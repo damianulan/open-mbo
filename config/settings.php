@@ -3,7 +3,7 @@
 use App\Settings\GeneralSettings;
 use App\Settings\MailSettings;
 use App\Settings\MBOSettings;
-use App\Settings\FormsSettings;
+use App\Settings\SurveysSettings;
 
 return [
 
@@ -14,6 +14,8 @@ return [
     'settings' => [
         GeneralSettings::class,
         MailSettings::class,
+        SurveysSettings::class,
+        MBOSettings::class,
     ],
 
     /*
@@ -43,13 +45,7 @@ return [
         'database' => [
             'type' => Spatie\LaravelSettings\SettingsRepositories\DatabaseSettingsRepository::class,
             'model' => null,
-            'table' => null,
-            'connection' => null,
-        ],
-        'modules' => [
-            'type' => Spatie\LaravelSettings\SettingsRepositories\DatabaseSettingsRepository::class,
-            'model' => null,
-            'table' => 'config_modules',
+            'table' => 'settings',
             'connection' => null,
         ],
         // 'redis' => [

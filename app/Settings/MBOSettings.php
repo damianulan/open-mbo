@@ -12,9 +12,4 @@ class MBOSettings extends Settings
     {
         return 'mbo';
     }
-
-    public static function repository(): ?string
-    {
-        return 'modules';
-    }
 }

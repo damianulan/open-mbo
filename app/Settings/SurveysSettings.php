@@ -4,17 +4,13 @@ namespace App\Settings;
 
 use Spatie\LaravelSettings\Settings;
 
-class FormsSettings extends Settings
+class SurveysSettings extends Settings
 {
     public bool $enabled;
 
     public static function group(): string
     {
-        return 'forms';
+        return 'surveys';
     }
 
-    public static function repository(): ?string
-    {
-        return 'modules';
-    }
 }
