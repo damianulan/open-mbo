@@ -11,13 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('locations', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
             $table->string('name', 255);
-            $table->string('shortname', 12);
+            $table->string('address_line_1', 255)->nullable();
+            $table->string('address_line_2', 255)->nullable();
+            $table->string('city', 255)->nullable();
+            $table->string('postal_code', 255)->nullable();
             $table->longText('description')->nullable();
-            $table->string('logo')->nullable();
+            $table->boolean('active')->default(1);
             $table->date('founded')->nullable();
 
             $table->softDeletes();
@@ -30,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('locations');
     }
 };

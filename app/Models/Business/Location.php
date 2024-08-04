@@ -6,39 +6,34 @@ use App\Models\BaseModel;
 use App\Traits\Vendors\TrixFields;
 use App\Facades\TrixField\TrixFieldCast;
 use App\Models\Core\User;
-use App\Models\Business\Location;
+use App\Models\Business\Company;
 
-class Company extends BaseModel
+class Location extends BaseModel
 {
     use TrixFields;
 
     protected $fillable = [
         'name',
-        'shortname',
+        'address_line_1',
+        'address_line_2',
+        'city',
+        'postal_code',
         'description',
-        'logo',
-        'founded',
+        'active',
     ];
 
     protected $dates = [
-        'founded',
         'created_at',
     ];
 
     protected $casts = [
         'description' => TrixFieldCast::class,
-        'founded' => 'date',
         'created_at' => 'datetime',
+        'active' => 'boolean',
     ];
 
-    public function employments()
+    public function companies()
     {
-        return $this->hasMany(UserEmployment::class);
+        return $this->belongsToMany(Company::class,'companies_locations');
     }
-
-    public function locations()
-    {
-        return $this->belongsToMany(Location::class,'companies_locations');
-    }
-
 }
