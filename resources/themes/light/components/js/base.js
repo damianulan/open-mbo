@@ -17,7 +17,6 @@ const CustomSwal = Swal.mixin({
 });
 
 const flatpickr = require("flatpickr");
-import monthSelectPlugin from 'flatpickr/dist/plugins/monthSelect';
 const flatpickr_locale = require("flatpickr/dist/l10n/"+globalLocale+".js").default.pl; // TODO
 
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
@@ -93,7 +92,6 @@ function buildVendors() {
         dateFormat: 'Y-m-d',
         defaultDate: (new Date()).setFullYear(new Date().getFullYear() - 18),
         monthSelectorType: "dropdown",
-
     });
 
     tippy('[data-tippy-content]', {
