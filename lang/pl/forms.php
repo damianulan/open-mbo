@@ -29,6 +29,7 @@ return [
 
     'placeholders' => [
         'choose_date' => 'Wybierz datę',
+        'choose_birthdate' => 'Wybierz datę',
         'choose_time' => 'Wybierz godzinę',
         'choose_datetime' => 'Wybierz datę oraz godzinę',
         'choose_daterange_from' => 'Wybierz datę od...',

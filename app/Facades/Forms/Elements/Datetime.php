@@ -34,7 +34,7 @@ class Datetime extends Element
     public function getFormat(): string
     {
         $format = 'Y-m-d H:i:s';
-        if($this->type === 'date'){
+        if($this->type === 'date' || $this->type === 'birthdate'){
             $format = 'Y-m-d';
         } elseif ($this->type === 'time'){
             $format = 'H:i:s';

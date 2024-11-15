@@ -17,12 +17,13 @@ const CustomSwal = Swal.mixin({
 });
 
 const flatpickr = require("flatpickr");
+import monthSelectPlugin from 'flatpickr/dist/plugins/monthSelect';
 const flatpickr_locale = require("flatpickr/dist/l10n/"+globalLocale+".js").default.pl; // TODO
 
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new Tooltip(tooltipTriggerEl));
 
-$(document).ready(function() {
+jQuery(function() {
     buildVendors();
 });
 
@@ -82,6 +83,17 @@ function buildVendors() {
         altInput: true,
         altFormat: date_format,
         dateFormat: 'Y-m-d',
+    });
+
+    $(".birthdatepicker").flatpickr({
+        "locale": flatpickr_locale,
+        allowInput: true,
+        altInput: true,
+        altFormat: date_format,
+        dateFormat: 'Y-m-d',
+        defaultDate: (new Date()).setFullYear(new Date().getFullYear() - 18),
+        monthSelectorType: "dropdown",
+
     });
 
     tippy('[data-tippy-content]', {

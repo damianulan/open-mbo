@@ -7,6 +7,39 @@ use App\Casts\CheckboxCast;
 use App\Models\Core\User;
 use App\Models\MBO\Campaign;
 
+/**
+ * 
+ *
+ * @property string $id
+ * @property string $campaign_id
+ * @property string $user_id
+ * @property string $stage
+ * @property mixed $manual
+ * @property mixed $active
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read Campaign $campaign
+ * @property-read User $user
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign whereCampaignId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign whereManual($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign whereStage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign withoutTrashed()
+ * @mixin \Eloquent
+ */
 class UserCampaign extends BaseModel
 {
     protected $fillable = [

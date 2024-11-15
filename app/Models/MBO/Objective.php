@@ -12,6 +12,54 @@ use App\Models\Core\User;
 use App\Casts\Carbon\CarbonDatetime;
 use App\Models\MBO\UserObjective;
 
+/**
+ * 
+ *
+ * @property string $id
+ * @property string|null $template_id
+ * @property string|null $parent_id
+ * @property string|null $campaign_id
+ * @property string $name
+ * @property mixed|null $description
+ * @property mixed|null $deadline
+ * @property string $weight
+ * @property string|null $award
+ * @property string|null $expected
+ * @property mixed $draft
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read Campaign|null $campaign
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Objective> $children
+ * @property-read int|null $children_count
+ * @property-read Objective|null $parent
+ * @property-read ObjectiveTemplate|null $template
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, UserObjective> $user_assignments
+ * @property-read int|null $user_assignments_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective whereAward($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective whereCampaignId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective whereDeadline($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective whereDraft($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective whereExpected($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective whereParentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective whereTemplateId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective whereWeight($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Objective extends BaseModel
 {
     use TrixFields;

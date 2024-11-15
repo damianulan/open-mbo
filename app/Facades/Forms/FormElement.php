@@ -184,7 +184,7 @@ class FormElement
     public static function time(string $name, $model = null): Datetime
     {
         $value = $model->$name ?? null;
-        return new Datetime($name, "time", $value);
+        return new Datetime($name, __FUNCTION__, $value);
     }
 
     /**
@@ -197,7 +197,20 @@ class FormElement
     public static function date(string $name, $model = null): Datetime
     {
         $value = $model->$name ?? null;
-        return new Datetime($name, "date", $value);
+        return new Datetime($name, __FUNCTION__, $value);
+    }
+
+    /**
+     * Returns a birthdate type input instruction pregenerated with flatpickr.js.
+     *
+     * @param  string   $name
+     * @param  mixed    $model
+     * @return Datetime
+     */
+    public static function birthdate(string $name, $model = null): Datetime
+    {
+        $value = $model->$name ?? null;
+        return new Datetime($name, __FUNCTION__, $value);
     }
 
     /**

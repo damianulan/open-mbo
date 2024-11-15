@@ -165,3 +165,11 @@ input[type=file]::file-selector-button {
 .modal-footer {
     border: none;
 }
+
+.flatpickr-current-month {
+    display: flex;
+}
+
+.flatpickr-current-month .numInputWrapper {
+    margin-left: auto;
+}
