@@ -210,10 +210,10 @@ $.rebuildVendors = function() {
 };
 
 $.showOverlay = function () {
-    overlay('show');
+    $.overlay('show');
 }
 $.hideOverlay = function () {
-    overlay('hide');
+    $.overlay('hide');
 }
 
 jQuery.fn.extend({
