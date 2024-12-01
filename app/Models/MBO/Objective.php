@@ -13,7 +13,7 @@ use App\Casts\Carbon\CarbonDatetime;
 use App\Models\MBO\UserObjective;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string|null $template_id

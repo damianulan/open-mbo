@@ -18,6 +18,7 @@ return [
     ],
 
     'events' => [
+        'created' => 'Utworzenie obiektu',
         'updated' => 'Aktualizacja danych',
         'logged_out' => 'Wylogowanie',
         'auth_attempt_success' => 'Pomyślnie logowanie',
@@ -42,10 +43,15 @@ return [
 
     'model_mapping' => [
         'App\Models\MBO\ObjectiveTemplate' => 'Szablon celu',
+        'App\Models\MBO\Objective' => 'Cel',
+        'App\Models\MBO\Campaign' => 'Kampania pomiarowa',
+
     ],
 
     'route_mapping' => [
         'App\Models\MBO\ObjectiveTemplate' => 'management.objectives.edit',
+        'App\Models\MBO\Objective' => 'campaigns.objective.update',
+        'App\Models\MBO\Campaign' => 'campaigns.edit',
     ],
 
 ];

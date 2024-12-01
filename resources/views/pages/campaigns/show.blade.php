@@ -28,14 +28,21 @@
                                     <span>{{ $objective->name }}</span>
                                 </div>
                                 <div class="list-actions">
+                                    @if($objective->draft)
+                                    <div class="list-action me-3" data-tippy-content="{{ __('forms.objectives.info.draft') }}">
+                                        <i class="bi-feather"></i>
+                                    </div>
+                                    @endif
                                     <div class="list-action me-3" data-tippy-content="Waga celu">
                                         <i class="bi-minecart-loaded"></i>
                                         <span>{{ $objective->weight }}</span>
                                     </div>
+                                    @if($objective->expected)
                                     <div class="list-action me-3" data-tippy-content="{{ __('forms.objectives.expected') }}">
                                         <i class="bi-heart-arrow"></i>
                                         <span>{{ $objective->expected }}</span>
                                     </div>
+                                    @endif
                                     <a href="javascript:void(0);" class="list-action edit-objective" data-modelid="{{ $objective->id }}" data-tippy-content="Edytuj">
                                         <i class="bi-pencil-fill"></i>
                                     </a>
