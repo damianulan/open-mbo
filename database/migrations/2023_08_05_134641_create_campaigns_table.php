@@ -33,7 +33,7 @@ return new class extends Migration
             $table->dateTime(CampaignStage::SELF_EVALUATION->value.'_from');
             $table->dateTime(CampaignStage::SELF_EVALUATION->value.'_to');
 
-            $table->enum('stage', CampaignStage::values());
+            $table->enum('stage', CampaignStage::hardValues());
 
             $table->boolean('draft')->default(1);
             $table->boolean('manual')->default(0); // if on - do not automatically end stage after date passes

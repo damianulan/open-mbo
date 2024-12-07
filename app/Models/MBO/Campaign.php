@@ -99,7 +99,7 @@ class Campaign extends BaseModel
         'evaluation_to',
         'self_evaluation_from',
         'self_evaluation_to',
-        'stage', // current CampaignStage
+        'stage', // current overall CampaignStage
 
         'draft',
         'manual',
@@ -121,10 +121,22 @@ class Campaign extends BaseModel
         'evaluation_to' => CarbonDate::class,
         'self_evaluation_from' => CarbonDate::class,
         'self_evaluation_to' => CarbonDate::class,
-        'stage' => CampaignStage::class,
-
         'description' => TrixFieldCast::class,
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            if(!$model->manual){
+                $model->setStageAuto();
+            } else {
+                $model->stage = CampaignStage::PENDING->value;
+            }
+
+            return $model;
+        });
+    }
 
     public function getActivitylogOptions(): LogOptions
     {
@@ -166,6 +178,52 @@ class Campaign extends BaseModel
         return true;
     }
 
+    public function setStageAuto()
+    {
+        $stage = CampaignStage::PENDING->value;
+
+        foreach(CampaignStage::softValues() as $tmp){
+            $prop_start = $tmp.'_from';
+            $prop_end = $tmp.'_to';
+            $start = Carbon::createFromFormat(config('app.date_format'), $this->$prop_start);
+            $end = Carbon::createFromFormat(config('app.date_format'), $this->$prop_end);
+
+            if($now->between($start, $end)){
+                $stage = $tmp;
+                break;
+            }
+
+        }
+
+        $this->stage = $stage;
+
+        return $this;
+    }
+
+    public function getCurrentStages(): Collection
+    {
+        $stages = new Collection();
+        $now = Carbon::now();
+
+        if($this->stage === CampaignStage::IN_PROGRESS->value){
+            foreach(CampaignStage::softValues() as $tmp){
+                $prop_start = $tmp.'_from';
+                $prop_end = $tmp.'_to';
+                $start = Carbon::createFromFormat(config('app.date_format'), $this->$prop_start);
+                $end = Carbon::createFromFormat(config('app.date_format'), $this->$prop_end);
+
+                if($now->between($start, $end)){
+                    $stages->push($tmp);
+                }
+
+            }
+        } else {
+            $stages->push($this->stage);
+        }
+
+        return $stages;
+    }
+
     public function active(): bool
     {
         $now = Carbon::now();
@@ -185,12 +243,6 @@ class Campaign extends BaseModel
         return $now->greaterThan($end) && !$this->manual;
     }
 
-    public function stages(): Collection
-    {
-        $stages = new Collection();
-
-        return $stages;
-    }
 
     public function getProgress(): int
     {
