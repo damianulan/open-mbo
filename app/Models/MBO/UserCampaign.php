@@ -6,9 +6,10 @@ use App\Models\BaseModel;
 use App\Casts\CheckboxCast;
 use App\Models\Core\User;
 use App\Models\MBO\Campaign;
+use App\Enums\MBO\CampaignStage;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $campaign_id
@@ -53,6 +54,7 @@ class UserCampaign extends BaseModel
     protected $casts = [
         'active' => CheckboxCast::class,
         'manual' => CheckboxCast::class,
+        'stage' => CampaignStage::class,
     ];
 
     public function user()

@@ -16,9 +16,10 @@ use Carbon\Carbon;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 use App\Models\Core\User;
+use App\Enums\MBO\CampaignStage;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $name
@@ -98,6 +99,7 @@ class Campaign extends BaseModel
         'evaluation_to',
         'self_evaluation_from',
         'self_evaluation_to',
+        'stage', // current CampaignStage
 
         'draft',
         'manual',
@@ -119,6 +121,7 @@ class Campaign extends BaseModel
         'evaluation_to' => CarbonDate::class,
         'self_evaluation_from' => CarbonDate::class,
         'self_evaluation_to' => CarbonDate::class,
+        'stage' => CampaignStage::class,
 
         'description' => TrixFieldCast::class,
     ];
@@ -147,6 +150,20 @@ class Campaign extends BaseModel
     public function coordinators()
     {
         return $this->belongsToMany(User::class, 'campaigns_coordinators', 'campaign_id', 'coordinator_id')->where('active', 1);
+    }
+
+    public function assignUser($user_id)
+    {
+        $exists = $this->user_campaigns()->where('user_id', $user_id)->exists();
+        if(!$exists){
+            $this->user_campaigns()->create([
+                'user_id' => $user_id,
+                'stage' => $this->setUserStage($user_id),
+                'manual' => $this->manual,
+                'active' => $this->draft ? 0:1,
+            ]);
+        }
+        return true;
     }
 
     public function active(): bool

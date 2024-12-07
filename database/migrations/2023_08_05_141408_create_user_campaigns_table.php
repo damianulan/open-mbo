@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\MBO\CampaignStage;
 
 return new class extends Migration
 {
@@ -15,7 +16,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('campaign_id');
             $table->foreignUuid('user_id');
-            $table->string('stage'); // user assignment can be reverted or fast-forwarded regardless of process stage
+            $table->enum('stage', CampaignStage::values());
 
             $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
