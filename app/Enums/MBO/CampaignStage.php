@@ -4,6 +4,7 @@ namespace App\Enums\MBO;
 
 enum CampaignStage: string
 {
+    case PENDING = 'pending';
     case DEFINITION = 'definition';
     case DISPOSITION = 'disposition';
     case REALIZATION = 'realization';

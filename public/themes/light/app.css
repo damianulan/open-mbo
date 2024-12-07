@@ -24085,6 +24085,10 @@ input[type=file]::file-selector-button {
   margin-left: auto;
 }
 
+.modal-form-content .modal-body {
+  min-height: 300px;
+}
+
 nav::-webkit-scrollbar {
   width: 8px;
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Settings\GeneralSettings;
 use App\Forms\MBO\Campaign\CampaignEditObjectiveForm;
+use App\Forms\MBO\Campaign\CampaignEditUserForm;
 use App\Models\MBO\Campaign;
 use App\Models\MBO\Objective;
 
@@ -36,6 +37,20 @@ class GeneralController extends Controller
                             'form' => CampaignEditObjectiveForm::boot(null, $request),
                         ];
                         $status = 'ok';
+                    }
+
+                break;
+
+            case 'campaigns.add_users':
+                    //$id - objective_id
+                    if($id){
+                        $campaign = Campaign::find($id);
+                        $params = [
+                            'id' => $id,
+                            'form' => CampaignEditUserForm::boot($campaign, $request),
+                        ];
+                        $status = 'ok';
+
                     }
 
                 break;

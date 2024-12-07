@@ -64,7 +64,7 @@ class FormBuilder
 
     public function template(string $template)
     {
-        $this->template = empty($template) ? null:$template;
+        $this->template = empty($template) ? $this->template:$template;
         return $this;
     }
 

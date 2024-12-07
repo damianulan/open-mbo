@@ -173,3 +173,7 @@ input[type=file]::file-selector-button {
 .flatpickr-current-month .numInputWrapper {
     margin-left: auto;
 }
+
+.modal-form-content .modal-body {
+    min-height: 300px;
+}

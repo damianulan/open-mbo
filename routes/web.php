@@ -103,6 +103,10 @@ Route::prefix('campaigns')->middleware(['auth'])->name('campaigns.')->group(func
         Route::put('/{objective}', [App\Http\Controllers\Campaigns\CampaignObjectiveController::class, 'update'])->name('update');
 
     });
+    Route::prefix('users')->name('users.')->group(function (){
+        Route::post('/{campaign}', [App\Http\Controllers\Campaigns\CampaignUserController::class, 'update'])->name('update');
+
+    });
 });
 
 Route::middleware(['auth'])->name('general.')->group(function () {
