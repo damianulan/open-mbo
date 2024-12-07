@@ -45,8 +45,11 @@ return [
         CampaignStage::REALIZATION->value => 'Realizacja celów',
         CampaignStage::EVALUATION->value => 'Ewaluacja celów i ocena pracowników przez kierowników',
         CampaignStage::SELF_EVALUATION->value => 'Samoocena pracowników',
-        CampaignStage::COMPLETION->value => 'Ocena zakończona',
-        CampaignStage::TERMINATION->value => 'Proces ',
+        CampaignStage::COMPLETED->value => 'Ocena zakończona',
+        CampaignStage::TERMINATED->value => 'Proces przerwany',
+        CampaignStage::CANCELED->value => 'Proces odwołany',
+        CampaignStage::IN_PROGRESS->value => 'Proces w toku',
+        CampaignStage::PENDING->value => 'Oczekuje na rozpoczęcie pomiaru',
         'draft' => 'Przechowuj jako wersję roboczą',
         'manual' => 'Tryb ręczny',
 

@@ -15,7 +15,7 @@ class CarbonDate implements CastsAttributes
      */
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('app.date_format'));
+        return Carbon::createFromFormat('Y-m-d', $value)->format(config('app.date_format'));
     }
 
     /**

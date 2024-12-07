@@ -124,7 +124,7 @@ class Campaign extends BaseModel
         'description' => TrixFieldCast::class,
     ];
 
-    public static function boot()
+    protected static function boot()
     {
         parent::boot();
         static::creating(function ($model) {
@@ -178,9 +178,16 @@ class Campaign extends BaseModel
         return true;
     }
 
+    // TODO - set user stage based on campaign current stage
+    public function setUserStage($user_id)
+    {
+
+    }
+
     public function setStageAuto()
     {
         $stage = CampaignStage::PENDING->value;
+        $now = Carbon::now();
 
         foreach(CampaignStage::softValues() as $tmp){
             $prop_start = $tmp.'_from';
@@ -189,7 +196,7 @@ class Campaign extends BaseModel
             $end = Carbon::createFromFormat(config('app.date_format'), $this->$prop_end);
 
             if($now->between($start, $end)){
-                $stage = $tmp;
+                $stage = CampaignStage::IN_PROGRESS->value;
                 break;
             }
 

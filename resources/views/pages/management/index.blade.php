@@ -15,7 +15,7 @@
 
     <div class="row">
         @foreach($objectives as $objective)
-            <div class="col-md-4">
+            <div class="col-md-4 pb-3">
                 @include('components.objective-card')
             </div>
         @endforeach

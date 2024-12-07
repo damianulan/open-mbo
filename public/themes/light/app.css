@@ -24958,6 +24958,10 @@ ul.ombo-list {
   transition: all 0.2s ease-in-out;
 }
 
+.dataTables_paginate a {
+  padding: 0 0.5rem;
+}
+
 .draggable-table .draggable-table__drag {
   position: absolute;
   width: 100%;

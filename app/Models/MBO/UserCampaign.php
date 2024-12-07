@@ -7,6 +7,7 @@ use App\Casts\CheckboxCast;
 use App\Models\Core\User;
 use App\Models\MBO\Campaign;
 use App\Enums\MBO\CampaignStage;
+use App\Models\MBO\UserObjective;
 
 /**
  *
@@ -56,6 +57,25 @@ class UserCampaign extends BaseModel
         'manual' => CheckboxCast::class,
         'stage' => CampaignStage::class,
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::created(function ($model) {
+            $objectives = $this->campaign()->objectives()->get();
+            foreach($objectives as $objective){
+                $existing = UserObjective::where('user_id', $model->user_id)->where('objective_id', $objective->id)->exists();
+                if(!$existing){
+                    $instance = new UserObjective();
+                    $instance->user_id = $model->user_id;
+                    $instance->objective_id = $objective->id;
+                    $instance->save();
+                }
+            }
+
+            return $model;
+        });
+    }
 
     public function user()
     {

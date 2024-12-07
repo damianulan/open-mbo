@@ -9,6 +9,7 @@ use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Column;
 use Illuminate\Support\Carbon;
 use App\Facades\DataTables\CustomDataTable;
+use Illuminate\Support\Collection;
 
 class UsersDataTable extends CustomDataTable
 {
@@ -49,6 +50,18 @@ class UsersDataTable extends CustomDataTable
                 $query->orderBy('firstname', $order);
                 $query->orderBy('lastname', $order);
             })
+            ->addColumn('roles', function($data) {
+                $roles = $data->roles->pluck('slug');
+                $output = null;
+                $roles_collection = new Collection();
+                if(!empty($roles)){
+                    foreach($roles as $role){
+                        $roles_collection->push(__('fields.roles.'.$role));
+                    }
+                    $output = $roles_collection->implode(', ');
+                }
+                return $output;
+            })
             ->addColumn('action', function($data) {
                 return view('pages.users.action', [
                     'data' => $data,
@@ -76,7 +89,7 @@ class UsersDataTable extends CustomDataTable
     protected function defaultColumns(): array
     {
         return [
-            'name', 'email', 'status', 'created_at', 'updated_at', 'action'
+            'name', 'email', 'status', 'created_at', 'updated_at', 'roles', 'action'
         ];
     }
 
@@ -97,6 +110,9 @@ class UsersDataTable extends CustomDataTable
                                 ->title(__('fields.created_at')),
             'updated_at'    => Column::make('updated_at')
                                 ->title(__('fields.updated_at')),
+            'roles'          => Column::computed('roles')
+                                ->title(__('fields.roles_plural'))
+                                ->searchable(true),
             'action'    => Column::computed('action')
                                 ->exportable(false)
                                 ->printable(false)

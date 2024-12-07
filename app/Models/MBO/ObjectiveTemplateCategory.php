@@ -13,7 +13,7 @@ use App\Casts\CheckboxCast;
 use App\Models\MBO\ObjectiveTemplate;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $name
@@ -49,6 +49,7 @@ class ObjectiveTemplateCategory extends BaseModel
 
     protected $fillable = [
         'name',
+        'shortname',
         'description',
         'icon',
         'global',
@@ -58,6 +59,20 @@ class ObjectiveTemplateCategory extends BaseModel
         'description' => TrixFieldCast::class,
         'global' => CheckboxCast::class,
     ];
+
+    public static function findByShortname(string $shortname): ?self
+    {
+        return self::where('shortname', $shortname)->first();
+    }
+
+    public static function baseCategories(): array
+    {
+        return [
+            'global',
+            'audit',
+            'individual',
+        ];
+    }
 
     public function objective_templates()
     {

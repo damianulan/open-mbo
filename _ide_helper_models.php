@@ -452,6 +452,7 @@ namespace App\Models\Core{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutTrashed()
  * @mixin \Eloquent
+ * @method static \Database\Factories\Core\UserFactory factory($count = null, $state = [])
  */
 	class User extends \Eloquent {}
 }
@@ -490,6 +491,7 @@ namespace App\Models\Core{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withoutTrashed()
  * @mixin \Eloquent
+ * @method static \Database\Factories\Core\UserProfileFactory factory($count = null, $state = [])
  */
 	class UserProfile extends \Eloquent {}
 }
@@ -744,6 +746,7 @@ namespace App\Models\MBO{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withoutTrashed()
  * @mixin \Eloquent
+ * @method static \Database\Factories\MBO\ObjectiveTemplateFactory factory($count = null, $state = [])
  */
 	class ObjectiveTemplate extends \Eloquent {}
 }
@@ -779,6 +782,7 @@ namespace App\Models\MBO{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory withoutTrashed()
  * @mixin \Eloquent
+ * @property string|null $shortname
  */
 	class ObjectiveTemplateCategory extends \Eloquent {}
 }

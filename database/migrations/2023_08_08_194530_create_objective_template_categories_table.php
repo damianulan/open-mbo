@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('objective_template_categories', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
+            $table->string('name', 255);
+            $table->string('shortname', 64)->nullable();
             $table->longText('description')->nullable();
             $table->string('icon')->nullable();
             $table->boolean('global')->default(0); // choose if its cascadable down the organization's structure
 
-            $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

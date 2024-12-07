@@ -8,7 +8,7 @@ use App\Models\MBO\Objective;
 use App\Enums\MBO\UserObjectiveStatus;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $user_id
@@ -52,6 +52,18 @@ class UserObjective extends BaseModel
         'evaluation' => 'decimal:8,2',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            if(!$model->status){
+                $model->status = UserObjectiveStatus::UNSTARTED->value;
+            }
+
+            return $model;
+        });
+    }
+
     public function objective()
     {
         return $this->belongsTo(Objective::class);
@@ -61,4 +73,6 @@ class UserObjective extends BaseModel
     {
         return $this->belongsTo(User::class);
     }
+
+
 }

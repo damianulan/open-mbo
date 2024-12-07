@@ -9,7 +9,7 @@
                 <div></div>
                 @if($objective->draft)
                     <div data-tippy-content="Kopia robocza">
-                        <span class="badge bg-secondary">Draft</span>
+                        <span class="badge bg-warning">Draft</span>
                     </div>
                 @endif
                 @if($objective->category())

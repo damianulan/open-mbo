@@ -17,13 +17,13 @@ class CampaignUserController extends Controller
         $campaign = Campaign::find($id);
 
         $request = $form::reformatRequest($request);
-        dd($request->input('user_id'));
-
         $response = $form::validate($request, $id);
         if($response['status'] === 'ok'){
-            $objective = Objective::fillFromRequest($request, $id);
+            foreach($request->input('user_ids') as $user_id){
+                $campaign->assignUser($user_id);
+            }
             if($objective->update()){
-                $response['message'] = __('alerts.campaigns.success.objective_added');
+                $response['message'] = __('alerts.campaigns.success.users_added');
                 return response()->json($response);
             }
         }
