@@ -55,22 +55,24 @@ class UserCampaign extends BaseModel
     protected $casts = [
         'active' => CheckboxCast::class,
         'manual' => CheckboxCast::class,
-        'stage' => CampaignStage::class,
     ];
 
     protected static function boot()
     {
         parent::boot();
         static::created(function ($model) {
-            $objectives = $this->campaign()->objectives()->get();
+            $objectives = $model->campaign->objectives()->get();
             foreach($objectives as $objective){
-                $existing = UserObjective::where('user_id', $model->user_id)->where('objective_id', $objective->id)->exists();
-                if(!$existing){
-                    $instance = new UserObjective();
-                    $instance->user_id = $model->user_id;
-                    $instance->objective_id = $objective->id;
-                    $instance->save();
-                }
+                UserObjective::assign($model->user_id, $objective->id);
+            }
+
+            return $model;
+        });
+
+        static::deleted(function ($model) {
+            $objectives = $model->campaign->objectives()->get();
+            foreach($objectives as $objective){
+                UserObjective::unassign($model->user_id, $objective->id);
             }
 
             return $model;
@@ -108,6 +110,38 @@ class UserCampaign extends BaseModel
                 // assign objectives from template assigned to a Campaign.
             }
         }
+    }
+
+    public function stageDescription()
+    {
+        return __('forms.campaigns.'.$this->stage);
+    }
+
+    public function stageIcon()
+    {
+        $status = null;
+        switch ($this->stage) {
+            case CampaignStage::PENDING->value:
+                $status = 'bi-hourglass';
+                break;
+
+            case CampaignStage::DEFINITION->value:
+            case CampaignStage::DISPOSITION->value:
+                $status = 'bi-hourglass-top';
+                break;
+
+            case CampaignStage::REALIZATION->value:
+            case CampaignStage::EVALUATION->value:
+            case CampaignStage::SELF_EVALUATION->value:
+                $status = 'bi-hourglass-split';
+                break;
+
+            default:
+                $status = 'bi-hourglass-bottom';
+                break;
+        }
+
+        return $status;
     }
 
 }

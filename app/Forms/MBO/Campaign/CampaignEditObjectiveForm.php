@@ -70,7 +70,7 @@ class CampaignEditObjectiveForm extends Form implements FormIO
             'name' => 'max:120|required',
             'deadline' => 'nullable',
             'description' => 'max:512|nullable',
-            'weight' => 'decimal:2|max:'.$max_weight.'|required',
+            'weight' => 'decimal:2|required',
             'expected' => 'decimal:2|nullable',
             'award' => 'decimal:2|nullable',
             'draft' => 'in:on,off',

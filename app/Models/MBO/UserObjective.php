@@ -64,6 +64,33 @@ class UserObjective extends BaseModel
         });
     }
 
+    public static function assign($user_id, $objective_id): bool
+    {
+        $output = false;
+        $existing = self::where('user_id', $user_id)->where('objective_id', $objective_id)->exists();
+        if(!$existing){
+            $instance = new self();
+            $instance->user_id = $user_id;
+            $instance->objective_id = $objective_id;
+            if($instance->save()){
+                return true;
+            }
+        }
+        return $output;
+    }
+
+    public static function unassign($user_id, $objective_id): bool
+    {
+        $output = false;
+        $existing = self::where('user_id', $user_id)->where('objective_id', $objective_id)->first();
+        if($existing){
+            if($existing->delete()){
+                $output = true;
+            }
+        }
+        return $output;
+    }
+
     public function objective()
     {
         return $this->belongsTo(Objective::class);

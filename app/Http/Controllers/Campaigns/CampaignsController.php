@@ -57,9 +57,10 @@ class CampaignsController extends Controller
     public function show($id)
     {
         $campaign = Campaign::findOrFail($id);
+        $header = $campaign->name . ' [' . $campaign->period . ']';
         return view('pages.campaigns.show', [
             'campaign' => $campaign,
-            'pagetitle' => $campaign->name,
+            'pagetitle' => $header,
         ]);
     }
 

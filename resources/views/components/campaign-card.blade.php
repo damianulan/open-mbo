@@ -35,13 +35,13 @@
                 <div class="element">
                     <div class="element-title" data-tippy-content="Data startu pomiaru">
                         <i class="bi bi bi-calendar-check me-2"></i>
-                        <span>{{ $campaign->dateStart() }}</span>
+                        <span>{{ $campaign->dateStartView() }}</span>
                     </div>
                 </div>
                 <div class="element">
                     <div class="element-title" data-tippy-content="Data końca pomiaru">
                         <i class="bi bi-calendar-x me-2"></i>
-                        <span>{{ $campaign->dateEnd() }}</span>
+                        <span>{{ $campaign->dateEndView() }}</span>
                     </div>
                 </div>
             </div>

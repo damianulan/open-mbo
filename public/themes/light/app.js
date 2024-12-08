@@ -3342,9 +3342,19 @@ $.getModal = function (type) {
       },
       data: datas
     }).done(function (data) {
-      $('body').find('#modal-container').children().remove();
-      $('body').find('#modal-container').append(data.view);
-      $('body').find('#modal-input').trigger("click");
+      if (data.status === 'ok') {
+        $('body').find('#modal-container').children().remove();
+        $('body').find('#modal-container').append(data.view);
+        $('body').find('#modal-input').trigger("click");
+      } else {
+        if (data.status === 'warning') {
+          $.warning(data.message);
+        } else if (data.status === 'notice') {
+          $.notice(data.message);
+        } else {
+          $.error(data.message);
+        }
+      }
     }).fail(function (jqXHR, textStatus) {
       console.error('get_modal footer function failed.');
     });
@@ -3431,14 +3441,22 @@ $.ajaxForm = function (url, form_id) {
 $.makeErrorsForm = function (form_id, response) {
   Object.keys(response.messages).forEach(function (key) {
     var input = $(document).find('#' + form_id).find('[name="' + key + '"]');
+    if (!input || input.length == 0) {
+      input = $(document).find('#' + form_id).find('[name="' + key + '[]"]');
+    }
     if (input) {
       input.each(function () {
         var element = $(this);
+        var element_id = element.attr('id');
+        var is_chosenjs = $(document).find('#' + element_id + '_chosen');
         element.addClass('is-invalid');
         response.messages[key].forEach(function (message) {
           var feedback = '<div class="invalid-feedback">' + message + '</div>';
           element.parent().closest('div').append(feedback);
         });
+        if (is_chosenjs) {
+          element.trigger("chosen:updated");
+        }
       });
     }
   });
@@ -72431,7 +72449,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   VERSION: () => (/* binding */ VERSION)
 /* harmony export */ });
-const VERSION = "1.7.8";
+const VERSION = "1.7.9";
 
 /***/ }),
 

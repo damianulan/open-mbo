@@ -8,6 +8,7 @@ use App\Models\MBO\Campaign;
 use App\Models\MBO\UserCampaign;
 use App\Models\MBO\ObjectiveEvaluation;
 use App\Models\MBO\UserBonusAssignment;
+use Illuminate\Database\Eloquent\Builder;
 
 trait UserMBO
 {
@@ -15,6 +16,13 @@ trait UserMBO
     public function objective_assignments()
     {
         return $this->hasMany(UserObjective::class);
+    }
+
+    public function objectives()
+    {
+        return $this->objective_assignments()->whereHas('objective', function(Builder $query) {
+            $query->where('draft', 0);
+        });
     }
 
     public function campaigns()

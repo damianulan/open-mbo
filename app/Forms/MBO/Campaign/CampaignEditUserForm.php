@@ -40,7 +40,7 @@ class CampaignEditUserForm extends Form implements FormIO
         return FormBuilder::boot($method, $route, 'campaign_add_users')
                 ->class('campaign-add-users-form')
                 ->add(FormElement::hidden('id', $model))
-                ->add(FormElement::multiselect('user_ids', $model, Dictionary::fromModel(User::class, 'name', 'allActive'), 'users', $exclude)->required()->label(__('forms.objectives.name')))
+                ->add(FormElement::multiselect('user_ids', $model, Dictionary::fromModel(User::class, 'name', 'allActive'), 'users', $exclude)->required()->label(__('forms.campaigns.users.add')))
                 ->addTitle($title);
     }
 
@@ -48,7 +48,7 @@ class CampaignEditUserForm extends Form implements FormIO
     {
 
         return [
-            'user_ids' => 'required|array',
+
         ];
     }
 }

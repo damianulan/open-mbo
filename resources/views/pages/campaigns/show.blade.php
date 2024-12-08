@@ -46,7 +46,7 @@
                                     <a href="javascript:void(0);" class="list-action edit-objective" data-modelid="{{ $objective->id }}" data-tippy-content="Edytuj">
                                         <i class="bi-pencil-fill"></i>
                                     </a>
-                                    <a href="#" class="list-action" data-tippy-content="Usuń">
+                                    <a href="javascript:void(0);" data-oid="{{ $objective->id }}" class="list-action delete-objective" data-tippy-content="Usuń">
                                         <i class="bi-x-lg"></i>
                                     </a>
                                 </div>
@@ -59,21 +59,46 @@
             </div>
             <div class="col-md-5 offset-md-2 pt-3">
                 <h4>Zapisani użytkownicy</h4>
+                @if(count($campaign->user_campaigns))
                 <ul class="ombo-list">
+                    @foreach ($campaign->user_campaigns as $uc)
+                    @php
+                      $user = $uc->user;
+                    @endphp
                     <li>
                         <div class="list-grid">
                             <div class="list-content">
                                 <i class="bi text-primary bi-person me-1"></i>
-                                <span>Damian Ułan</span>
+                                <span>{{ $user->name() }}</span>
                             </div>
                             <div class="list-actions">
-                                <a href="#" class="list-action">
+                                <div class="list-action me-2" data-tippy-content="{{ $uc->stageDescription() }}">
+                                    <i class="{{ $uc->stageIcon() }}"></i>
+                                </div>
+                                @if($uc->manual)
+                                <a href="javascript:void(0);" class="list-action me-2" data-ucid="{{ $uc->id }}" data-tippy-content="Przesuń do poprzedniego etapu">
+                                    <i class="bi-caret-down-fill"></i>
+                                </a>
+                                <a href="javascript:void(0);" class="list-action me-2" data-ucid="{{ $uc->id }}" data-tippy-content="Przesuń do następnego etapu">
+                                    <i class="bi-caret-up-fill"></i>
+                                </a>
+                                <a href="javascript:void(0);" class="list-action me-2" data-ucid="{{ $uc->id }}" data-tippy-content="Wyłącz tryb ręczny">
+                                    <i class="bi-hand-index-thumb-fill"></i>
+                                </a>
+                                @else
+                                <a href="javascript:void(0);" class="list-action me-2" data-ucid="{{ $uc->id }}" data-tippy-content="Włącz tryb ręczny">
+                                    <i class="bi-hand-index-thumb"></i>
+                                </a>
+                                @endif
+                                <a href="javascript:void(0);" class="list-action" data-ucid="{{ $uc->id }}">
                                     <i class="bi-x-lg"></i>
                                 </a>
                             </div>
                         </div>
                     </li>
+                    @endforeach
                 </ul>
+                @endif
             </div>
         </div>
     </div>

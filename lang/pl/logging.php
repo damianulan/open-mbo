@@ -51,7 +51,9 @@ return [
     'route_mapping' => [
         'App\Models\MBO\ObjectiveTemplate' => 'management.objectives.edit',
         'App\Models\MBO\Objective' => 'campaigns.objective.update',
-        'App\Models\MBO\Campaign' => 'campaigns.edit',
+        'App\Models\MBO\Campaign' => 'campaigns.show',
+        'App\Models\MBO\UserObjective' => 'campaigns.users.update',
+        'App\Models\MBO\UserCampaign' => 'campaigns.users.update',
     ],
 
 ];

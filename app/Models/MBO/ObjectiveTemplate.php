@@ -17,7 +17,7 @@ use App\Models\MBO\ObjectiveTemplateCategory;
 use App\Enums\MBO\ObjectiveType;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string|null $category_id
@@ -86,12 +86,19 @@ class ObjectiveTemplate extends BaseModel
         return $this->hasMany(Objective::class, 'template_id');
     }
 
-    public function usersCount()
+    public function usersCount(): int
     {
-        return $this->objectives()->count();
+        $result = 0;
+        if($this->objectives){
+            foreach($this->objectives as $objective){
+                $result += $objective->user_assignments()->count();
+            }
+        }
+
+        return $result;
     }
 
-    public function campaignsCount()
+    public function campaignsCount(): int
     {
         return $this->objectives()->whereNotNull('campaign_id')->count();
     }

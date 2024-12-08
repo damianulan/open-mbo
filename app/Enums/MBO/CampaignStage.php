@@ -55,4 +55,19 @@ enum CampaignStage: string
             self::SELF_EVALUATION->value,
         ];
     }
+
+    public static function sequences(): array
+    {
+        return [
+            self::PENDING->value => 0,
+            self::DEFINITION->value => 1,
+            self::DISPOSITION->value => 2,
+            self::REALIZATION->value => 3,
+            self::EVALUATION->value => 4,
+            self::SELF_EVALUATION->value => 5,
+            self::COMPLETED->value => 6,
+            self::TERMINATED->value => 6,
+            self::CANCELED->value => 6,
+        ];
+    }
 }

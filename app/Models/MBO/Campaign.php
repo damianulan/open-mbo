@@ -11,7 +11,7 @@ use App\Models\MBO\Objective;
 use App\Models\MBO\CampaignObjective;
 use App\Models\MBO\UserCampaign;
 use App\Models\MBO\ObjectiveTemplate;
-use App\Casts\Carbon\CarbonDate;
+use App\Casts\Carbon\CarbonDatetime;
 use Carbon\Carbon;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
@@ -111,16 +111,16 @@ class Campaign extends BaseModel
         'manual' => CheckboxCast::class,
 
         // Dates
-        'definition_from' => CarbonDate::class,
-        'definition_to' => CarbonDate::class,
-        'disposition_from' => CarbonDate::class,
-        'disposition_to' => CarbonDate::class,
-        'realization_from' => CarbonDate::class,
-        'realization_to' => CarbonDate::class,
-        'evaluation_from' => CarbonDate::class,
-        'evaluation_to' => CarbonDate::class,
-        'self_evaluation_from' => CarbonDate::class,
-        'self_evaluation_to' => CarbonDate::class,
+        // 'definition_from' => CarbonDatetime::class,
+        // 'definition_to' => CarbonDatetime::class,
+        // 'disposition_from' => CarbonDatetime::class,
+        // 'disposition_to' => CarbonDatetime::class,
+        // 'realization_from' => CarbonDatetime::class,
+        // 'realization_to' => CarbonDatetime::class,
+        // 'evaluation_from' => CarbonDatetime::class,
+        // 'evaluation_to' => CarbonDatetime::class,
+        // 'self_evaluation_from' => CarbonDatetime::class,
+        // 'self_evaluation_to' => CarbonDatetime::class,
         'description' => TrixFieldCast::class,
     ];
 
@@ -128,6 +128,16 @@ class Campaign extends BaseModel
     {
         parent::boot();
         static::creating(function ($model) {
+            if(!$model->manual){
+                $model->setStageAuto();
+            } else {
+                $model->stage = CampaignStage::PENDING->value;
+            }
+
+            return $model;
+        });
+
+        static::updating(function ($model) {
             if(!$model->manual){
                 $model->setStageAuto();
             } else {
@@ -178,10 +188,19 @@ class Campaign extends BaseModel
         return true;
     }
 
+    public function unassignUser($user_id)
+    {
+        $record = $this->user_campaigns()->where('user_id', $user_id)->first();
+        if($record){
+            $record->delete();
+        }
+        return true;
+    }
+
     // TODO - set user stage based on campaign current stage
     public function setUserStage($user_id)
     {
-
+        return $this->getCurrentStages()->first();
     }
 
     public function setStageAuto()
@@ -192,8 +211,8 @@ class Campaign extends BaseModel
         foreach(CampaignStage::softValues() as $tmp){
             $prop_start = $tmp.'_from';
             $prop_end = $tmp.'_to';
-            $start = Carbon::createFromFormat(config('app.date_format'), $this->$prop_start);
-            $end = Carbon::createFromFormat(config('app.date_format'), $this->$prop_end);
+            $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_start);
+            $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_end);
 
             if($now->between($start, $end)){
                 $stage = CampaignStage::IN_PROGRESS->value;
@@ -216,8 +235,8 @@ class Campaign extends BaseModel
             foreach(CampaignStage::softValues() as $tmp){
                 $prop_start = $tmp.'_from';
                 $prop_end = $tmp.'_to';
-                $start = Carbon::createFromFormat(config('app.date_format'), $this->$prop_start);
-                $end = Carbon::createFromFormat(config('app.date_format'), $this->$prop_end);
+                $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_start);
+                $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_end);
 
                 if($now->between($start, $end)){
                     $stages->push($tmp);
@@ -234,8 +253,8 @@ class Campaign extends BaseModel
     public function active(): bool
     {
         $now = Carbon::now();
-        $start = Carbon::createFromFormat(config('app.date_format'), $this->dateStart());
-        $end = Carbon::createFromFormat(config('app.date_format'), $this->dateEnd());
+        $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateStart());
+        $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateEnd());
         return $now->between($start, $end) && !$this->draft;
     }
 
@@ -246,7 +265,7 @@ class Campaign extends BaseModel
         }
 
         $now = Carbon::now();
-        $end = Carbon::createFromFormat(config('app.date_format'), $this->dateEnd());
+        $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateEnd());
         return $now->greaterThan($end) && !$this->manual;
     }
 
@@ -254,12 +273,17 @@ class Campaign extends BaseModel
     public function getProgress(): int
     {
         $now = Carbon::now();
-        $start = Carbon::createFromFormat(config('app.date_format'), $this->dateStart());
-        $end = Carbon::createFromFormat(config('app.date_format'), $this->dateEnd());
-        $fullDiff = $start->diffInDays($end, false);
-        $diff = abs($now->diffInDays($start));
+        $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateStart());
+        $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateEnd());
+        if($now >= $start) {
+            $fullDiff = $start->diffInDays($end, false);
+            $diff = abs($now->diffInDays($start));
+            $progress = round(($diff / $fullDiff)*100);
+        } else {
+            $progress = 0;
+        }
 
-        return round(($diff / $fullDiff)*100);
+        return $progress;
     }
 
     public function dateStart(): string
@@ -269,5 +293,16 @@ class Campaign extends BaseModel
     public function dateEnd(): string
     {
         return $this->self_evaluation_to;
+    }
+
+    public function dateStartView(): string
+    {
+        $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateStart());
+        return $start->format(config('app.date_format'));
+    }
+    public function dateEndView(): string
+    {
+        $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateEnd());
+        return $end->format(config('app.date_format'));
     }
 }

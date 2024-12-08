@@ -6364,7 +6364,7 @@ textarea.form-control-lg {
   --bs-badge-padding-x: 0.65em;
   --bs-badge-padding-y: 0.5em;
   --bs-badge-font-size: 0.8em;
-  --bs-badge-font-weight: 700;
+  --bs-badge-font-weight: 600;
   --bs-badge-color: #fff;
   --bs-badge-border-radius: var(--bs-border-radius);
   display: inline-block;
@@ -24924,6 +24924,7 @@ ul.ombo-list {
 
 .ombo-list li .list-content span {
   color: #164755;
+  white-space: nowrap;
 }
 
 .ombo-list li .list-actions {
@@ -24937,6 +24938,7 @@ ul.ombo-list {
   margin-right: 0.35rem;
   font-size: 1rem;
   color: #164755;
+  white-space: nowrap;
 }
 
 .ombo-list li .list-actions .list-action i {

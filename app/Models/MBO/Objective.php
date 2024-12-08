@@ -83,6 +83,21 @@ class Objective extends BaseModel
         'description' => TrixFieldCast::class,
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+        static::created(function ($model) {
+            if($model->campaign_id){
+                $ucs = $model->campaign->user_campaigns;
+                if($ucs) {
+                    foreach($ucs as $uc){
+                        UserObjective::assign($uc->user_id, $model->id);
+                    }
+                }
+            }
+        });
+    }
+
     public function parent()
     {
         return $this->belongsTo(self::class, 'parent_id');

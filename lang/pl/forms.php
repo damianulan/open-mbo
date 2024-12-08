@@ -53,6 +53,10 @@ return [
         'draft' => 'Przechowuj jako wersję roboczą',
         'manual' => 'Tryb ręczny',
 
+        'users' => [
+            'add' => 'Dodaj użytkowników',
+        ],
+
     ],
 
     'users' => [

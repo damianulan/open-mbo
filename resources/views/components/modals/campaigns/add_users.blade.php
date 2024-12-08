@@ -28,7 +28,7 @@ $('#modal_save').on('click', function() {
         $.ajaxForm('{{ route('campaigns.users.update', $id) }}', 'campaign_add_users', function(response) {
             $.success(response.message, null, function() {
                 window.location.reload();
-            })
+            });
         },
         function(response) {
 
