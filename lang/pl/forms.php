@@ -64,6 +64,7 @@ return [
             CampaignStage::PENDING->value => 'Oczekuje na rozpoczęcie pomiaru',
         ],
 
+        'coordinators' => 'Koordynatorzy kampanii',
         'draft' => 'Przechowuj jako wersję roboczą',
         'manual' => 'Tryb ręczny',
 

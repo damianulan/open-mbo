@@ -203,5 +203,14 @@ trait HasRolesAndPermissions
         return true;
     }
 
+    public function isAdmin()
+    {
+        return $this->hasAnyRole('root', 'support', 'admin');
+    }
+
+    public function isRoot()
+    {
+        return $this->hasAnyRole('root', 'support');
+    }
 
 }

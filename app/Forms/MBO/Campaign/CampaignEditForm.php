@@ -32,7 +32,7 @@ class CampaignEditForm extends Form implements FormIO
                 ->add(FormElement::text('name', $model)->label(__('forms.campaigns.name')))
                 ->add(FormElement::text('period', $model)->label(__('forms.campaigns.period'))
                 ->info('Wprowadź unikalny reprezentatywny okres pomiaru, np. dla pomiaru co kwartał: 2023 Q3'))
-                ->add(FormElement::multiselect('user_ids', $model, Dictionary::fromModel(User::class, 'name', 'allActive'), 'users', $selected)->required()->label(__('forms.campaigns.users.add')))
+                ->add(FormElement::multiselect('user_ids', $model, Dictionary::fromModel(User::class, 'name', 'allActive'), 'users', $selected)->required()->label(__('forms.campaigns.coordinators')))
                 ->add(FormElement::trix('description', $model)->label(__('forms.campaigns.description')))
 
                 ->add(FormElement::daterange(CampaignStage::DEFINITION->value, $model)->label(__('forms.campaigns.'.CampaignStage::DEFINITION->value))
