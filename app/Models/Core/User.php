@@ -21,7 +21,7 @@ use Illuminate\Support\Str;
 use App\Traits\Vendors\ModelActivity;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $email
@@ -112,6 +112,11 @@ class User extends Authenticatable
     ];
 
     protected static function booted() {
+        static::created(function(User $user) {
+            // if(!$user->hasRole('employee')){
+            //     $user->assignRole('employee');
+            // }
+        });
         static::deleting(function(User $user) {
             $user->profile->delete();
        });

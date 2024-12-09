@@ -41,6 +41,7 @@ return [
     'campaigns' => [
         'success' => [
             'create' => 'Kampania została utworzona pomyślnie.',
+            'edit' => 'Kampania została pomyślnie zmodyfikowana.',
             'objective_added' => 'Wskazany cel został pomyślnie dodany do Kampanii.',
             'users_added' => 'Uzupełniono stan osobowy Kampanii pomiarowej.',
         ],

@@ -12,6 +12,7 @@ use App\Enums\MBO\CampaignStage;
 use App\Models\MBO\ObjectiveTemplate;
 use App\Models\MBO\Objective;
 use App\Models\MBO\UserCampaign;
+use App\Models\MBO\Campaign;
 use App\Models\Core\User;
 use Illuminate\Http\Request;
 
@@ -30,17 +31,25 @@ class CampaignEditUserForm extends Form implements FormIO
         $method = 'POST';
         $title = 'Dodaj użytkowników do kampanii';
         $user_ids = UserCampaign::where('campaign_id', $model->id)->get()->pluck('user_id');
+        $campaign = Campaign::find($model->id);
+        $coordinators = $campaign->coordinators->pluck('id')->toArray();
+        $selected = array();
         $exclude = array();
         if(!empty($user_ids)){
             foreach($user_ids as $tid){
-                $exclude[] = $tid;
+                $selected[] = $tid;
+            }
+        }
+        if(!empty($coordinators)){
+            foreach($coordinators as $tid){
+                $exclude[] = ['id' => $tid];
             }
         }
 
         return FormBuilder::boot($method, $route, 'campaign_add_users')
                 ->class('campaign-add-users-form')
                 ->add(FormElement::hidden('id', $model))
-                ->add(FormElement::multiselect('user_ids', $model, Dictionary::fromModel(User::class, 'name', 'allActive'), 'users', $exclude)->required()->label(__('forms.campaigns.users.add')))
+                ->add(FormElement::multiselect('user_ids', $model, Dictionary::fromModel(User::class, 'name', 'allActive', $exclude), 'users', $selected)->required()->label(__('forms.campaigns.users.add')))
                 ->addTitle($title);
     }
 

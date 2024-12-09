@@ -94,7 +94,7 @@ class UserCampaign extends BaseModel
         return $this->campaign()->objectives()->where([
             'user_id' => $this->user_id,
             'draft' => 0,
-            ])->get();
+        ])->get();
     }
 
     public function global_objectives()
@@ -119,29 +119,47 @@ class UserCampaign extends BaseModel
 
     public function stageIcon()
     {
-        $status = null;
-        switch ($this->stage) {
-            case CampaignStage::PENDING->value:
-                $status = 'bi-hourglass';
-                break;
-
-            case CampaignStage::DEFINITION->value:
-            case CampaignStage::DISPOSITION->value:
-                $status = 'bi-hourglass-top';
-                break;
-
-            case CampaignStage::REALIZATION->value:
-            case CampaignStage::EVALUATION->value:
-            case CampaignStage::SELF_EVALUATION->value:
-                $status = 'bi-hourglass-split';
-                break;
-
-            default:
-                $status = 'bi-hourglass-bottom';
-                break;
-        }
+        $status = CampaignStage::stageIcon($this->stage);
 
         return $status;
     }
+
+    public function nextStage()
+    {
+        $stages = CampaignStage::sequences();
+        $current = $stages[$this->stage];
+        $next_count = $current + 1;
+        if($next_count >= count($stages)) {
+            $next_count = count($stages) - 1;
+        }
+
+        $next = CampaignStage::getBySequence($next_count);
+        $this->stage = $next;
+
+        return $this->update();
+    }
+
+    public function previousStage()
+    {
+        $stages = CampaignStage::sequences();
+        $current = $stages[$this->stage];
+        $prev_count = $current - 1;
+        if($prev_count <= 0) {
+            $prev_count = 0;
+        }
+
+        $prev = CampaignStage::getBySequence($prev_count);
+        $this->stage = $prev;
+
+        return $this->update();
+    }
+
+    public function toggleManual()
+    {
+        $this->manual = $this->manual ? 0:1;
+        $this->stage = $this->campaign->setUserStage();
+        return $this->update();
+    }
+
 
 }

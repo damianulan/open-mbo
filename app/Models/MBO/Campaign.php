@@ -128,7 +128,7 @@ class Campaign extends BaseModel
     {
         parent::boot();
         static::creating(function ($model) {
-            if(!$model->manual){
+            if($model->manual == 0){
                 $model->setStageAuto();
             } else {
                 $model->stage = CampaignStage::PENDING->value;
@@ -138,7 +138,7 @@ class Campaign extends BaseModel
         });
 
         static::updating(function ($model) {
-            if(!$model->manual){
+            if($model->manual == 0){
                 $model->setStageAuto();
             } else {
                 $model->stage = CampaignStage::PENDING->value;
@@ -171,7 +171,33 @@ class Campaign extends BaseModel
 
     public function coordinators()
     {
-        return $this->belongsToMany(User::class, 'campaigns_coordinators', 'campaign_id', 'coordinator_id')->where('active', 1);
+        return $this->belongsToMany(User::class, 'campaigns_coordinators', 'campaign_id', 'coordinator_id');
+    }
+
+    public function refreshCoordinators(array $user_ids)
+    {
+        $stack = array();
+        foreach($user_ids as $user_id){
+            $stack[] = [
+                'campaign_id' => $this->id,
+                'coordinator_id' => $user_id,
+            ];
+        }
+        $this->coordinators()->sync($stack);
+    }
+
+    public function assignCoordinator(... $user_ids)
+    {
+        foreach($user_ids as $user_id){
+            $this->coordinators()->attach($user_id);
+        }
+    }
+
+    public function unassignCoordinator(... $user_ids)
+    {
+        foreach($user_ids as $user_id){
+            $this->coordinators()->detach($user_id);
+        }
     }
 
     public function assignUser($user_id)
@@ -198,7 +224,7 @@ class Campaign extends BaseModel
     }
 
     // TODO - set user stage based on campaign current stage
-    public function setUserStage($user_id)
+    public function setUserStage()
     {
         return $this->getCurrentStages()->first();
     }
@@ -211,8 +237,8 @@ class Campaign extends BaseModel
         foreach(CampaignStage::softValues() as $tmp){
             $prop_start = $tmp.'_from';
             $prop_end = $tmp.'_to';
-            $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_start);
-            $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_end);
+            $start = Carbon::parse($this->$prop_start);
+            $end = Carbon::parse($this->$prop_end);
 
             if($now->between($start, $end)){
                 $stage = CampaignStage::IN_PROGRESS->value;
@@ -304,5 +330,25 @@ class Campaign extends BaseModel
     {
         $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateEnd());
         return $end->format(config('app.date_format'));
+    }
+
+    public function getSoftStages(): array
+    {
+        return CampaignStage::softValues();
+    }
+
+    public function getStageIcon(string $stage): ?string
+    {
+        return CampaignStage::stageIcon($stage);
+    }
+
+    public function getStageName(string $stage): ?string
+    {
+        return CampaignStage::getName($stage);
+    }
+
+    public function getStageInfo(string $stage): ?string
+    {
+        return CampaignStage::getInfo($stage);
     }
 }

@@ -9,14 +9,10 @@
     </div>
 </div>
 <div class="content-card">
-    <div class="row">
-        <div class="col-md-12">
-            {!! $campaign->description->get() !!}
-        </div>
-    </div>
+    @include('components.mbo.campaign-summary')
     <div class="container pt-4">
         <div class="row">
-            <div class="col-md-5 pt-3">
+            <div class="col-md-5">
                 <h4>Cele</h4>
                 <ul class="ombo-list">
                     @if(count($campaign->objectives))
@@ -76,17 +72,17 @@
                                     <i class="{{ $uc->stageIcon() }}"></i>
                                 </div>
                                 @if($uc->manual)
-                                <a href="javascript:void(0);" class="list-action me-2" data-ucid="{{ $uc->id }}" data-tippy-content="Przesuń do poprzedniego etapu">
-                                    <i class="bi-caret-down-fill"></i>
+                                <a href="{{ route('campaigns.users.prev_stage', $uc->id) }}" class="list-action me-2" data-ucid="{{ $uc->id }}" data-tippy-content="Przesuń do poprzedniego etapu">
+                                    <i class="bi-caret-left-fill"></i>
                                 </a>
-                                <a href="javascript:void(0);" class="list-action me-2" data-ucid="{{ $uc->id }}" data-tippy-content="Przesuń do następnego etapu">
-                                    <i class="bi-caret-up-fill"></i>
+                                <a href="{{ route('campaigns.users.next_stage', $uc->id) }}" class="list-action me-2" data-ucid="{{ $uc->id }}" data-tippy-content="Przesuń do następnego etapu">
+                                    <i class="bi-caret-right-fill"></i>
                                 </a>
-                                <a href="javascript:void(0);" class="list-action me-2" data-ucid="{{ $uc->id }}" data-tippy-content="Wyłącz tryb ręczny">
+                                <a href="{{ route('campaigns.users.toggle_manual', $uc->id) }}" class="list-action me-2" data-ucid="{{ $uc->id }}" data-tippy-content="Wyłącz tryb ręczny">
                                     <i class="bi-hand-index-thumb-fill"></i>
                                 </a>
                                 @else
-                                <a href="javascript:void(0);" class="list-action me-2" data-ucid="{{ $uc->id }}" data-tippy-content="Włącz tryb ręczny">
+                                <a href="{{ route('campaigns.users.toggle_manual', $uc->id) }}" class="list-action me-2" data-ucid="{{ $uc->id }}" data-tippy-content="Włącz tryb ręczny">
                                     <i class="bi-hand-index-thumb"></i>
                                 </a>
                                 @endif

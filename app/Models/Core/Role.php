@@ -8,7 +8,7 @@ use App\Traits\UUID;
 use App\Facades\Forms\RequestForms;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $slug
@@ -36,6 +36,11 @@ class Role extends Model
 
     protected $fillable = [
         'slug',
+        'assignable',
+    ];
+
+    protected $casts = [
+        'assignable' => 'boolean',
     ];
 
     public function permissions()

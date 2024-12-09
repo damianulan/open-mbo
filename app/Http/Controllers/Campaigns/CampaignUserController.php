@@ -45,4 +45,31 @@ class CampaignUserController extends Controller
         }
         return response()->json($response);
     }
+
+    public function toggleManual(Request $request, $id)
+    {
+        $uc = UserCampaign::findOrFail($id);
+        $uc->toggleManual();
+        $message = 'Przełączono tryb zapisu na automatyczny.';
+        if($uc->manual){
+            $message = 'Przełączono tryb zapisu na ręczny.';
+        }
+        return redirect()->back()->with('success', $message);
+    }
+
+    public function moveStageUp(Request $request, $id)
+    {
+        $uc = UserCampaign::findOrFail($id);
+        $uc->nextStage();
+        $message = 'Przesunięto etap zapisu na: '. $uc->stageDescription();
+        return redirect()->back()->with('success', $message);
+    }
+
+    public function moveStageDown(Request $request, $id)
+    {
+        $uc = UserCampaign::findOrFail($id);
+        $uc->previousStage();
+        $message = 'Przesunięto etap zapisu na: '. $uc->stageDescription();
+        return redirect()->back()->with('success', $message);
+    }
 }

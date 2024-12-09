@@ -105,6 +105,9 @@ Route::prefix('campaigns')->middleware(['auth'])->name('campaigns.')->group(func
     });
     Route::prefix('users')->name('users.')->group(function (){
         Route::post('/{campaign}', [App\Http\Controllers\Campaigns\CampaignUserController::class, 'update'])->name('update');
+        Route::get('/toggle-manual/{id}', [App\Http\Controllers\Campaigns\CampaignUserController::class, 'toggleManual'])->name('toggle_manual');
+        Route::get('/next-stage/{id}', [App\Http\Controllers\Campaigns\CampaignUserController::class, 'moveStageUp'])->name('next_stage');
+        Route::get('/prev-stage/{id}', [App\Http\Controllers\Campaigns\CampaignUserController::class, 'moveStageDown'])->name('prev_stage');
 
     });
 });

@@ -41,8 +41,10 @@ class CampaignsController extends Controller
         $request = $form::reformatRequest($request);
         $request->validate($form::validation());
         $campaign = Campaign::fillFromRequest($request);
+        $user_ids = $request->input('user_ids');
 
         if($campaign->save()){
+            $campaign->refreshCoordinators($user_ids);
             return redirect()->route('campaigns.show', $campaign->id)->with('success', __('alerts.campaigns.success.create', ['name' => $campaign->name]));
         }
         return redirect()->back()->with('error', __('alerts.campaigns.error.create', ['name' => $campaign->name]));
@@ -91,8 +93,10 @@ class CampaignsController extends Controller
         $request = $form::reformatRequest($request);
         $request->validate($form::validation($id));
         $campaign = Campaign::fillFromRequest($request, $id);
+        $user_ids = $request->input('user_ids');
 
         if($campaign->update()){
+            $campaign->refreshCoordinators($user_ids);
             return redirect()->route('campaigns.show', $id)->with('success', __('alerts.campaigns.success.edit', ['name' => $campaign->name]));
         }
         return redirect()->back()->with('error', __('alerts.campaigns.error.edit', ['name' => $campaign->name]));

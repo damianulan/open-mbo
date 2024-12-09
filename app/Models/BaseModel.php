@@ -9,8 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Facades\Forms\RequestForms;
 use Watson\Rememberable\Rememberable;
 use App\Traits\Vendors\ModelActivity;
+use Carbon\Carbon;
 /**
- * 
+ *
  *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
@@ -27,5 +28,15 @@ class BaseModel extends Model
     use HasFactory, UUID, SoftDeletes, RequestForms;
     use ModelActivity;
     //use Rememberable;
+
+    public function carbonDate(string $prop, string $format = 'Y-m-d')
+    {
+        $date = $this->$prop;
+        $date_carbon = null;
+        if($date){
+            $date_carbon = Carbon::parse($date)->format($format);
+        }
+        return $date_carbon;
+    }
 
 }

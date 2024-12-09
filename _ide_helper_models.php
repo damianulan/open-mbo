@@ -384,6 +384,7 @@ namespace App\Models\Core{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Role whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Role whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property bool $assignable
  */
 	class Role extends \Eloquent {}
 }

@@ -66,8 +66,52 @@ enum CampaignStage: string
             self::EVALUATION->value => 4,
             self::SELF_EVALUATION->value => 5,
             self::COMPLETED->value => 6,
-            self::TERMINATED->value => 6,
-            self::CANCELED->value => 6,
         ];
+    }
+
+    public static function getName(string $value): string
+    {
+        return __('forms.campaigns.'.$value);
+    }
+
+    public static function getInfo(string $value): string
+    {
+        return __('forms.campaigns.info.'.$value);
+    }
+
+    public static function getBySequence(int $sequence)
+    {
+        $stages = self::sequences();
+        foreach($stages as $key => $value){
+            if($value === $sequence){
+                return $key;
+            }
+        }
+    }
+
+    public static function stageIcon($stage)
+    {
+        $status = null;
+        switch ($stage) {
+            case CampaignStage::PENDING->value:
+                $status = 'bi-hourglass';
+                break;
+
+            case CampaignStage::DEFINITION->value:
+            case CampaignStage::DISPOSITION->value:
+                $status = 'bi-hourglass-top';
+                break;
+
+            case CampaignStage::REALIZATION->value:
+            case CampaignStage::EVALUATION->value:
+            case CampaignStage::SELF_EVALUATION->value:
+                $status = 'bi-hourglass-split';
+                break;
+
+            default:
+                $status = 'bi-hourglass-bottom';
+                break;
+        }
+        return $status;
     }
 }
