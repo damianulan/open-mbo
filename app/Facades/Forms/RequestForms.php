@@ -38,6 +38,7 @@ trait RequestForms
                             $value = NULL;
                         }
                     }
+
                     $instance->$property = $value;
                 }
             }

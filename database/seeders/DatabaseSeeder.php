@@ -8,6 +8,9 @@ use Database\Seeders\CreateAdminUserSeeder;
 use Database\Seeders\RolePermissionSeeder;
 use Database\Seeders\MBOSeeder;
 use App\Facades\Modules\ModuleSeeder;
+use App\Models\MBO\ObjectiveTemplate;
+use App\Models\Core\User;
+use App\Models\Core\UserProfile;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,11 +25,16 @@ class DatabaseSeeder extends Seeder
         $this->call(CreateAdminUserSeeder::class);
         $this->call(MBOSeeder::class);
 
-        // \App\Models\Core\User::factory(10)->create();
+        ObjectiveTemplate::factory(35)->create();
 
-        // \App\Models\Core\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        for($i = 1; $i < 40; $i++){
+            $user = User::factory()->has(UserProfile::factory()->count(1), 'profile')->create([
+                'email' => 'user'.$i.'@damianulan.me',
+            ]);
+            if($user){
+                $user->assignRole('employee');
+            }
+        }
+
     }
 }

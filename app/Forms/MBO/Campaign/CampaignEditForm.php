@@ -9,6 +9,8 @@ use App\Facades\Forms\FormElement;
 use App\Facades\Forms\Elements\Datetime;
 use App\Facades\Forms\Elements\Dictionary;
 use App\Enums\MBO\CampaignStage;
+use App\Models\Core\User;
+use App\Models\MBO\Campaign;
 
 class CampaignEditForm extends Form implements FormIO
 {
@@ -17,27 +19,32 @@ class CampaignEditForm extends Form implements FormIO
     {
         $route = route('campaigns.store');
         $method = 'POST';
+        $selected = array();
+        $campaign = null;
         if(!is_null($model)){
             $method = 'PUT';
             $route = route('campaigns.update', $model->id);
+            $campaign = Campaign::find($model->id);
+            $selected = $campaign->coordinators->pluck('id')->toArray();
         }
         return (new FormBuilder($method, $route, 'campaign_edit'))
                 ->class('campaign-create-form')
                 ->add(FormElement::text('name', $model)->label(__('forms.campaigns.name')))
                 ->add(FormElement::text('period', $model)->label(__('forms.campaigns.period'))
                 ->info('Wprowadź unikalny reprezentatywny okres pomiaru, np. dla pomiaru co kwartał: 2023 Q3'))
+                ->add(FormElement::multiselect('user_ids', $model, Dictionary::fromModel(User::class, 'name', 'allActive'), 'users', $selected)->required()->label(__('forms.campaigns.users.add')))
                 ->add(FormElement::trix('description', $model)->label(__('forms.campaigns.description')))
 
                 ->add(FormElement::daterange(CampaignStage::DEFINITION->value, $model)->label(__('forms.campaigns.'.CampaignStage::DEFINITION->value))
-                ->info('info'))
+                ->info(__('forms.campaigns.info.'.CampaignStage::DEFINITION->value)))
                 ->add(FormElement::daterange(CampaignStage::DISPOSITION->value, $model)->label(__('forms.campaigns.'.CampaignStage::DISPOSITION->value))
-                ->info('info'))
+                ->info(__('forms.campaigns.info.'.CampaignStage::DISPOSITION->value)))
                 ->add(FormElement::daterange(CampaignStage::REALIZATION->value, $model)->label(__('forms.campaigns.'.CampaignStage::REALIZATION->value))
-                ->info('info'))
+                ->info(__('forms.campaigns.info.'.CampaignStage::REALIZATION->value)))
                 ->add(FormElement::daterange(CampaignStage::EVALUATION->value, $model)->label(__('forms.campaigns.'.CampaignStage::EVALUATION->value))
-                ->info('info'))
+                ->info(__('forms.campaigns.info.'.CampaignStage::EVALUATION->value)))
                 ->add(FormElement::daterange(CampaignStage::SELF_EVALUATION->value, $model)->label(__('forms.campaigns.'.CampaignStage::SELF_EVALUATION->value))
-                ->info('info'))
+                ->info(__('forms.campaigns.info.'.CampaignStage::SELF_EVALUATION->value)))
                 ->add(FormElement::switch('draft', $model)->label(__('forms.campaigns.draft'))->default(true)
                 ->info('Kampania będzie widoczna tylko dla administratorów i nie zostanie uruchomiona automatycznie.'))
                 ->add(FormElement::switch('manual', $model)->label(__('forms.campaigns.manual'))->default(false)

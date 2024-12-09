@@ -15,7 +15,7 @@ class Daterange extends Element
         $this->name = empty($name) ? null:$name;
         $this->elements = [
             (new Datetime($name . '_from', $type, $values['from']))->placeholder(__('forms.placeholders.choose_daterange_from')),
-            (new Datetime($name . '_to', $type, $values['from']))->placeholder(__('forms.placeholders.choose_daterange_to')),
+            (new Datetime($name . '_to', $type, $values['to']))->placeholder(__('forms.placeholders.choose_daterange_to')),
         ];
 
     }

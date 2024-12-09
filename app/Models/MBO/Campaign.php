@@ -11,12 +11,73 @@ use App\Models\MBO\Objective;
 use App\Models\MBO\CampaignObjective;
 use App\Models\MBO\UserCampaign;
 use App\Models\MBO\ObjectiveTemplate;
-use App\Casts\Carbon\CarbonDate;
+use App\Casts\Carbon\CarbonDatetime;
 use Carbon\Carbon;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 use App\Models\Core\User;
+use App\Enums\MBO\CampaignStage;
 
+/**
+ *
+ *
+ * @property string $id
+ * @property string $name
+ * @property string $period
+ * @property mixed|null $description
+ * @property mixed $definition_from
+ * @property mixed $definition_to
+ * @property mixed $disposition_from
+ * @property mixed $disposition_to
+ * @property mixed $realization_from
+ * @property mixed $realization_to
+ * @property mixed $evaluation_from
+ * @property mixed $evaluation_to
+ * @property mixed $self_evaluation_from
+ * @property mixed $self_evaluation_to
+ * @property mixed $draft
+ * @property mixed $manual
+ * @property string $created_by
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $coordinators
+ * @property-read int|null $coordinators_count
+ * @property-read User $creator
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Objective> $objectives
+ * @property-read int|null $objectives_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, UserCampaign> $user_campaigns
+ * @property-read int|null $user_campaigns_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereDefinitionFrom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereDefinitionTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereDispositionFrom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereDispositionTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereDraft($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereEvaluationFrom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereEvaluationTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereManual($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign wherePeriod($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereRealizationFrom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereRealizationTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereSelfEvaluationFrom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereSelfEvaluationTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Campaign extends BaseModel
 {
     use TrixFields;
@@ -38,6 +99,7 @@ class Campaign extends BaseModel
         'evaluation_to',
         'self_evaluation_from',
         'self_evaluation_to',
+        'stage', // current overall CampaignStage
 
         'draft',
         'manual',
@@ -49,19 +111,42 @@ class Campaign extends BaseModel
         'manual' => CheckboxCast::class,
 
         // Dates
-        'definition_from' => CarbonDate::class,
-        'definition_to' => CarbonDate::class,
-        'disposition_from' => CarbonDate::class,
-        'disposition_to' => CarbonDate::class,
-        'realization_from' => CarbonDate::class,
-        'realization_to' => CarbonDate::class,
-        'evaluation_from' => CarbonDate::class,
-        'evaluation_to' => CarbonDate::class,
-        'self_evaluation_from' => CarbonDate::class,
-        'self_evaluation_to' => CarbonDate::class,
-
+        // 'definition_from' => CarbonDatetime::class,
+        // 'definition_to' => CarbonDatetime::class,
+        // 'disposition_from' => CarbonDatetime::class,
+        // 'disposition_to' => CarbonDatetime::class,
+        // 'realization_from' => CarbonDatetime::class,
+        // 'realization_to' => CarbonDatetime::class,
+        // 'evaluation_from' => CarbonDatetime::class,
+        // 'evaluation_to' => CarbonDatetime::class,
+        // 'self_evaluation_from' => CarbonDatetime::class,
+        // 'self_evaluation_to' => CarbonDatetime::class,
         'description' => TrixFieldCast::class,
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            if($model->manual == 0){
+                $model->setStageAuto();
+            } else {
+                $model->stage = CampaignStage::PENDING->value;
+            }
+
+            return $model;
+        });
+
+        static::updating(function ($model) {
+            if($model->manual == 0){
+                $model->setStageAuto();
+            } else {
+                $model->stage = CampaignStage::PENDING->value;
+            }
+
+            return $model;
+        });
+    }
 
     public function getActivitylogOptions(): LogOptions
     {
@@ -86,14 +171,116 @@ class Campaign extends BaseModel
 
     public function coordinators()
     {
-        return $this->belongsToMany(User::class, 'campaigns_coordinators', 'campaign_id', 'coordinator_id')->where('active', 1);
+        return $this->belongsToMany(User::class, 'campaigns_coordinators', 'campaign_id', 'coordinator_id');
+    }
+
+    public function refreshCoordinators(array $user_ids)
+    {
+        $stack = array();
+        foreach($user_ids as $user_id){
+            $stack[] = [
+                'campaign_id' => $this->id,
+                'coordinator_id' => $user_id,
+            ];
+        }
+        $this->coordinators()->sync($stack);
+    }
+
+    public function assignCoordinator(... $user_ids)
+    {
+        foreach($user_ids as $user_id){
+            $this->coordinators()->attach($user_id);
+        }
+    }
+
+    public function unassignCoordinator(... $user_ids)
+    {
+        foreach($user_ids as $user_id){
+            $this->coordinators()->detach($user_id);
+        }
+    }
+
+    public function assignUser($user_id)
+    {
+        $exists = $this->user_campaigns()->where('user_id', $user_id)->exists();
+        if(!$exists){
+            $this->user_campaigns()->create([
+                'user_id' => $user_id,
+                'stage' => $this->setUserStage($user_id),
+                'manual' => $this->manual,
+                'active' => $this->draft ? 0:1,
+            ]);
+        }
+        return true;
+    }
+
+    public function unassignUser($user_id)
+    {
+        $record = $this->user_campaigns()->where('user_id', $user_id)->first();
+        if($record){
+            $record->delete();
+        }
+        return true;
+    }
+
+    // TODO - set user stage based on campaign current stage
+    public function setUserStage()
+    {
+        return $this->getCurrentStages()->first();
+    }
+
+    public function setStageAuto()
+    {
+        $stage = CampaignStage::PENDING->value;
+        $now = Carbon::now();
+
+        foreach(CampaignStage::softValues() as $tmp){
+            $prop_start = $tmp.'_from';
+            $prop_end = $tmp.'_to';
+            $start = Carbon::parse($this->$prop_start);
+            $end = Carbon::parse($this->$prop_end);
+
+            if($now->between($start, $end)){
+                $stage = CampaignStage::IN_PROGRESS->value;
+                break;
+            }
+
+        }
+
+        $this->stage = $stage;
+
+        return $this;
+    }
+
+    public function getCurrentStages(): Collection
+    {
+        $stages = new Collection();
+        $now = Carbon::now();
+
+        if($this->stage === CampaignStage::IN_PROGRESS->value){
+            foreach(CampaignStage::softValues() as $tmp){
+                $prop_start = $tmp.'_from';
+                $prop_end = $tmp.'_to';
+                $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_start);
+                $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_end);
+
+                if($now->between($start, $end)){
+                    $stages->push($tmp);
+                }
+
+            }
+        } else {
+            $stages->push($this->stage);
+        }
+
+        return $stages;
     }
 
     public function active(): bool
     {
         $now = Carbon::now();
-        $start = Carbon::createFromFormat(config('app.date_format'), $this->dateStart());
-        $end = Carbon::createFromFormat(config('app.date_format'), $this->dateEnd());
+        $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateStart());
+        $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateEnd());
         return $now->between($start, $end) && !$this->draft;
     }
 
@@ -104,26 +291,25 @@ class Campaign extends BaseModel
         }
 
         $now = Carbon::now();
-        $end = Carbon::createFromFormat(config('app.date_format'), $this->dateEnd());
+        $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateEnd());
         return $now->greaterThan($end) && !$this->manual;
     }
 
-    public function stages(): Collection
-    {
-        $stages = new Collection();
-
-        return $stages;
-    }
 
     public function getProgress(): int
     {
         $now = Carbon::now();
-        $start = Carbon::createFromFormat(config('app.date_format'), $this->dateStart());
-        $end = Carbon::createFromFormat(config('app.date_format'), $this->dateEnd());
-        $fullDiff = $start->diffInDays($end, false);
-        $diff = abs($now->diffInDays($start));
+        $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateStart());
+        $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateEnd());
+        if($now >= $start) {
+            $fullDiff = $start->diffInDays($end, false);
+            $diff = abs($now->diffInDays($start));
+            $progress = round(($diff / $fullDiff)*100);
+        } else {
+            $progress = 0;
+        }
 
-        return round(($diff / $fullDiff)*100);
+        return $progress;
     }
 
     public function dateStart(): string
@@ -133,5 +319,36 @@ class Campaign extends BaseModel
     public function dateEnd(): string
     {
         return $this->self_evaluation_to;
+    }
+
+    public function dateStartView(): string
+    {
+        $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateStart());
+        return $start->format(config('app.date_format'));
+    }
+    public function dateEndView(): string
+    {
+        $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateEnd());
+        return $end->format(config('app.date_format'));
+    }
+
+    public function getSoftStages(): array
+    {
+        return CampaignStage::softValues();
+    }
+
+    public function getStageIcon(string $stage): ?string
+    {
+        return CampaignStage::stageIcon($stage);
+    }
+
+    public function getStageName(string $stage): ?string
+    {
+        return CampaignStage::getName($stage);
+    }
+
+    public function getStageInfo(string $stage): ?string
+    {
+        return CampaignStage::getInfo($stage);
     }
 }

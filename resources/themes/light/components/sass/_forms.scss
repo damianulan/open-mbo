@@ -165,3 +165,15 @@ input[type=file]::file-selector-button {
 .modal-footer {
     border: none;
 }
+
+.flatpickr-current-month {
+    display: flex;
+}
+
+.flatpickr-current-month .numInputWrapper {
+    margin-left: auto;
+}
+
+.modal-form-content .modal-body {
+    min-height: 300px;
+}

@@ -29,6 +29,7 @@ return [
 
     'placeholders' => [
         'choose_date' => 'Wybierz datę',
+        'choose_birthdate' => 'Wybierz datę',
         'choose_time' => 'Wybierz godzinę',
         'choose_datetime' => 'Wybierz datę oraz godzinę',
         'choose_daterange_from' => 'Wybierz datę od...',
@@ -44,10 +45,31 @@ return [
         CampaignStage::REALIZATION->value => 'Realizacja celów',
         CampaignStage::EVALUATION->value => 'Ewaluacja celów i ocena pracowników przez kierowników',
         CampaignStage::SELF_EVALUATION->value => 'Samoocena pracowników',
-        CampaignStage::COMPLETION->value => 'Ocena zakończona',
-        CampaignStage::TERMINATION->value => 'Proces ',
+        CampaignStage::COMPLETED->value => 'Ocena zakończona',
+        CampaignStage::TERMINATED->value => 'Proces przerwany',
+        CampaignStage::CANCELED->value => 'Proces odwołany',
+        CampaignStage::IN_PROGRESS->value => 'Proces w toku',
+        CampaignStage::PENDING->value => 'Oczekuje na rozpoczęcie pomiaru',
+
+        'info' => [
+            CampaignStage::DEFINITION->value => 'Tworzenie strategii i określanie celów przez kierownictwo',
+            CampaignStage::DISPOSITION->value => 'Dysponowanie celów przez kierowników zespołów',
+            CampaignStage::REALIZATION->value => 'Realizacja celów',
+            CampaignStage::EVALUATION->value => 'Ewaluacja celów i ocena pracowników przez kierowników',
+            CampaignStage::SELF_EVALUATION->value => 'Samoocena pracowników',
+            CampaignStage::COMPLETED->value => 'Ocena zakończona',
+            CampaignStage::TERMINATED->value => 'Proces przerwany',
+            CampaignStage::CANCELED->value => 'Proces odwołany',
+            CampaignStage::IN_PROGRESS->value => 'Proces w toku',
+            CampaignStage::PENDING->value => 'Oczekuje na rozpoczęcie pomiaru',
+        ],
+
         'draft' => 'Przechowuj jako wersję roboczą',
         'manual' => 'Tryb ręczny',
+
+        'users' => [
+            'add' => 'Dodaj użytkowników',
+        ],
 
     ],
 
@@ -77,6 +99,7 @@ return [
             'weight' => 'Określ jaki udział ma ten cel w całej kampanii. Suma wag wszystkich celów nie może przekraczać wartości <strong>1</strong>.',
             'expected' => 'Określ minimalny wynik potrzebny do zaliczenia celu. W razie nieosiągnięcia wyniku, Administratorzy nadal będą mogli wymusić zaliczenie celu.',
             'award' => 'W razie zaliczenia celu, na konto użytkownika wpadną określone tutaj punkty.',
+            'draft' => 'Cel w wersji roboczej nie zostanie udostępniony do realizacji, jest także wyłączony z raportowania.',
         ],
     ],
 ];

@@ -34,6 +34,7 @@ return [
     ],
 
     // Roles
+    'roles_plural' => 'Role',
     'roles' => [
         'root' => 'Root',
         'support' => 'Helpdesk',

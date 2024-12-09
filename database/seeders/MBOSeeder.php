@@ -18,15 +18,18 @@ class MBOSeeder extends Seeder
         }
         $category = new ObjectiveTemplateCategory();
         $category->name = 'Cele Globalne';
+        $category->shortname = 'global';
         $category->global = true;
         $category->save();
 
         $category = new ObjectiveTemplateCategory();
         $category->name = 'Cele Kontrolne';
+        $category->shortname = 'audit';
         $category->save();
 
         $category = new ObjectiveTemplateCategory();
         $category->name = 'Cele Indywidualne';
+        $category->shortname = 'individual';
         $category->save();
     }
 }

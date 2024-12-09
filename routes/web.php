@@ -94,13 +94,20 @@ Route::prefix('campaigns')->middleware(['auth'])->name('campaigns.')->group(func
     Route::get('/', [App\Http\Controllers\Campaigns\CampaignsController::class, 'index'])->name('index');
     Route::post('/', [App\Http\Controllers\Campaigns\CampaignsController::class, 'store'])->name('store');
     Route::get('create', [App\Http\Controllers\Campaigns\CampaignsController::class, 'create'])->name('create');
-    Route::get('edit/{user}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'edit'])->name('edit');
-    Route::get('{user}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'show'])->name('show');
-    Route::put('{user}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'update'])->name('update');
+    Route::get('edit/{campaign}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'edit'])->name('edit');
+    Route::get('{campaign}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'show'])->name('show');
+    Route::put('{campaign}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'update'])->name('update');
 
     Route::prefix('objective')->name('objective.')->group(function (){
         Route::post('/', [App\Http\Controllers\Campaigns\CampaignObjectiveController::class, 'store'])->name('store');
         Route::put('/{objective}', [App\Http\Controllers\Campaigns\CampaignObjectiveController::class, 'update'])->name('update');
+
+    });
+    Route::prefix('users')->name('users.')->group(function (){
+        Route::post('/{campaign}', [App\Http\Controllers\Campaigns\CampaignUserController::class, 'update'])->name('update');
+        Route::get('/toggle-manual/{id}', [App\Http\Controllers\Campaigns\CampaignUserController::class, 'toggleManual'])->name('toggle_manual');
+        Route::get('/next-stage/{id}', [App\Http\Controllers\Campaigns\CampaignUserController::class, 'moveStageUp'])->name('next_stage');
+        Route::get('/prev-stage/{id}', [App\Http\Controllers\Campaigns\CampaignUserController::class, 'moveStageDown'])->name('prev_stage');
 
     });
 });

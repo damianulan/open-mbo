@@ -151,6 +151,7 @@ ul.ombo-list {
 
 .ombo-list li .list-content span{
     color: $secondary;
+    white-space: nowrap;
 }
 
 .ombo-list li .list-actions{
@@ -164,6 +165,7 @@ ul.ombo-list {
     margin-right: .35rem;
     font-size: 1rem;
     color: $secondary;
+    white-space: nowrap;
 }
 
 .ombo-list li .list-actions .list-action i {
@@ -187,6 +189,10 @@ ul.ombo-list {
     -moz-box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
     box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
     transition: all 0.2s ease-in-out;
+}
+
+.dataTables_paginate a {
+    padding: 0 .5rem;
 }
 
 .draggable-table {

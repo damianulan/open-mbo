@@ -16,6 +16,42 @@ use App\Models\MBO\CampaignObjective;
 use App\Models\MBO\ObjectiveTemplateCategory;
 use App\Enums\MBO\ObjectiveType;
 
+/**
+ *
+ *
+ * @property string $id
+ * @property string|null $category_id
+ * @property string $name
+ * @property mixed|null $description
+ * @property ObjectiveType $type
+ * @property string|null $award
+ * @property mixed $draft
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read ObjectiveTemplateCategory|null $category
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Objective> $objectives
+ * @property-read int|null $objectives_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereAward($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereDraft($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withoutTrashed()
+ * @mixin \Eloquent
+ */
 class ObjectiveTemplate extends BaseModel
 {
     use TrixFields;
@@ -50,12 +86,19 @@ class ObjectiveTemplate extends BaseModel
         return $this->hasMany(Objective::class, 'template_id');
     }
 
-    public function usersCount()
+    public function usersCount(): int
     {
-        return $this->objectives()->count();
+        $result = 0;
+        if($this->objectives){
+            foreach($this->objectives as $objective){
+                $result += $objective->user_assignments()->count();
+            }
+        }
+
+        return $result;
     }
 
-    public function campaignsCount()
+    public function campaignsCount(): int
     {
         return $this->objectives()->whereNotNull('campaign_id')->count();
     }

@@ -19,11 +19,11 @@ class Form
     {
         foreach($request->all() as $property => $value)
         {
-            if(self::isDate($value)){
+            if(is_string($value) && self::isDate($value)){
                 if(str_contains($property, '_from') || str_contains($property, '_to')){
                     $value = self::formatDateSpan($property, $value);
                 }
-            } elseif(self::isEUFloat($value)) {
+            } elseif(is_string($value) && self::isEUFloat($value)) {
                 $value = str_replace(',','.',$value);
             } else {
                 if(empty($value)){

@@ -34,7 +34,7 @@ class UserEditForm extends Form implements FormIO
                 ->add(FormElement::text('email', $model)->label(__('forms.users.email')))
                 ->add(FormElement::select('gender', $profile, Dictionary::fromEnum(Gender::class))
                 ->label(__('forms.users.gender')))
-                ->add(FormElement::date('birthday', $profile)->label(__('forms.users.birthday')))
+                ->add(FormElement::birthdate('birthday', $profile)->label(__('forms.users.birthday')))
                 ->add(FormElement::multiselect('roles_ids', $model, Dictionary::fromAssocArray(Role::getSelectList()), 'roles')
                 ->label(__('forms.users.roles')))
                 ->add(FormElement::multiselect('supervisors_ids', $model, Dictionary::fromModel(User::class, 'name', 'allActive', $exclude), 'supervisors')

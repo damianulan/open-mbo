@@ -7,6 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\UUID;
 use App\Facades\Forms\RequestForms;
 
+/**
+ *
+ *
+ * @property string $id
+ * @property string $slug
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Core\Permission> $permissions
+ * @property-read int|null $permissions_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Role newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Role newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Role query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Role whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Role whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Role whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Role whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Role extends Model
 {
     use UUID, HasFactory, RequestForms;
@@ -18,6 +36,11 @@ class Role extends Model
 
     protected $fillable = [
         'slug',
+        'assignable',
+    ];
+
+    protected $casts = [
+        'assignable' => 'boolean',
     ];
 
     public function permissions()

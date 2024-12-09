@@ -22,7 +22,7 @@ const flatpickr_locale = require("flatpickr/dist/l10n/"+globalLocale+".js").defa
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new Tooltip(tooltipTriggerEl));
 
-$(document).ready(function() {
+jQuery(function() {
     buildVendors();
 });
 
@@ -82,6 +82,16 @@ function buildVendors() {
         altInput: true,
         altFormat: date_format,
         dateFormat: 'Y-m-d',
+    });
+
+    $(".birthdatepicker").flatpickr({
+        "locale": flatpickr_locale,
+        allowInput: true,
+        altInput: true,
+        altFormat: date_format,
+        dateFormat: 'Y-m-d',
+        defaultDate: (new Date()).setFullYear(new Date().getFullYear() - 18),
+        monthSelectorType: "dropdown",
     });
 
     tippy('[data-tippy-content]', {
@@ -200,10 +210,10 @@ $.rebuildVendors = function() {
 };
 
 $.showOverlay = function () {
-    overlay('show');
+    $.overlay('show');
 }
 $.hideOverlay = function () {
-    overlay('hide');
+    $.overlay('hide');
 }
 
 jQuery.fn.extend({
@@ -231,9 +241,20 @@ $.getModal = function (type, datas = {}) {
             },
             data: datas
         }).done(function (data) {
-            $('body').find('#modal-container').children().remove()
-            $('body').find('#modal-container').append(data.view);
-            $('body').find('#modal-input').trigger("click");
+            if(data.status === 'ok'){
+                $('body').find('#modal-container').children().remove()
+                $('body').find('#modal-container').append(data.view);
+                $('body').find('#modal-input').trigger("click");
+            } else {
+                if(data.status === 'warning'){
+                    $.warning(data.message);
+                } else if(data.status === 'notice') {
+                    $.notice(data.message);
+                } else {
+                    $.error(data.message);
+                }
+            }
+
         }).fail(function (jqXHR, textStatus) {
             console.error('get_modal footer function failed.');
         });
@@ -317,14 +338,22 @@ $.ajaxForm = function (url, form_id, _success_callback = function(response){}, _
 $.makeErrorsForm = function (form_id, response) {
     Object.keys(response.messages).forEach(key => {
         var input = $(document).find('#'+form_id).find('[name="'+key+'"]');
+        if(!input || input.length == 0){
+            input = $(document).find('#'+form_id).find('[name="'+key+'[]"]');
+        }
         if(input){
             input.each(function() {
                 var element = $(this);
+                var element_id = element.attr('id');
+                var is_chosenjs = $(document).find('#'+element_id+'_chosen');
                 element.addClass('is-invalid');
                 response.messages[key].forEach(message => {
                     var feedback = '<div class="invalid-feedback">'+message+'</div>';
                     element.parent().closest('div').append(feedback);
                 });
+                if(is_chosenjs){
+                    element.trigger("chosen:updated");
+                }
             });
         }
     });
