@@ -228,6 +228,7 @@ return [
         //App\Providers\TelescopeServiceProvider::class,
         App\Providers\PermissionServiceProvider::class,
         App\Providers\RolesServiceProvider::class,
+        App\Providers\GateServiceProvider::class,
         App\Providers\ConfigServiceProvider::class,
         Lab404\Impersonate\ImpersonateServiceProvider::class,
     ],

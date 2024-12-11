@@ -5,6 +5,8 @@ namespace App\Traits;
 use App\Models\Core\Role;
 use App\Models\Core\Permission;
 use Illuminate\Support\Collection;
+use App\Models\MBO\Campaign;
+use Illuminate\Database\Eloquent\Model;
 
 trait HasRolesAndPermissions
 {
@@ -109,16 +111,16 @@ trait HasRolesAndPermissions
      * @param $permission
      * @return bool
      */
-    public function hasPermissionTo($permission)
+    public function hasPermissionTo($permission, $context = null)
     {
-        return $this->hasPermissionThroughRole($permission) || $this->hasPermission($permission);
+        return $this->hasPermissionThroughRole($permission, $context) || $this->hasPermission($permission);
     }
 
     /**
      * @param $permission
      * @return bool
      */
-    public function hasPermissionThroughRole($permission)
+    public function hasPermissionThroughRole($permission, $context = null)
     {
         foreach ($permission->roles as $role){
             if($this->roles->contains($role)) {
@@ -176,31 +178,42 @@ trait HasRolesAndPermissions
      * @param array $roles
      * @return HasRolesAndPermissions
      */
-    public function refreshRole(array $roles )
-    {
-        return $this->roles()->sync($roles);
-    }
+    // public function refreshRole(array $roles )
+    // {
+    //     return $this->roles()->sync($roles);
+    // }
 
-    public function assignRole(... $roles)
+    public function assignRole($role, $context = null)
     {
-        foreach($roles as $role){
-            $id = Role::getId($role);
-            if($id){
-                $this->roles()->attach($id);
+        $id = Role::getId($role);
+        if($id){
+            $additional = array();
+            if($context && $context instanceof Model){
+                $additional['context_type'] = $context::class;
+                $additional['context_id'] = $context->id;
             }
+            $this->roles()->attach($id, $additional);
         }
         return true;
     }
 
-    public function revokeRole(... $roles)
+    public function revokeRole($role, $context = null)
     {
-        foreach($roles as $role){
-            $id = Role::getId($role);
-            if($id){
-                $this->roles()->detach($id);
+        $id = Role::getId($role);
+        if($id){
+            $additional = array();
+            if($context && $context instanceof Model){
+                $additional['context_type'] = $context::class;
+                $additional['context_id'] = $context->id;
             }
+            $this->roles()->detach($id, $additional); // TODO - check if this works and not revoking from all contexts
         }
         return true;
+    }
+
+    public function isMBOAdmin()
+    {
+        return $this->hasAnyRole('root', 'support', 'admin', 'admin_mbo');
     }
 
     public function isAdmin()
@@ -213,4 +226,8 @@ trait HasRolesAndPermissions
         return $this->hasAnyRole('root', 'support');
     }
 
+    public function isCampaignCoordinator(Campaign $campaign)
+    {
+        return $campaign->coordinators()->contains('coordinator_id', $this->id);
+    }
 }

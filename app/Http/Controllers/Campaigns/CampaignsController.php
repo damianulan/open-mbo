@@ -23,8 +23,11 @@ class CampaignsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        if ($request->user()->cannot('create', Campaign::class)) {
+            abort(403);
+        }
         return view('pages.campaigns.edit', [
             'form' => CampaignEditForm::boot(),
         ]);
@@ -56,9 +59,13 @@ class CampaignsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $campaign = Campaign::findOrFail($id);
+
+        if ($request->user()->cannot('view', $campaign)) {
+            abort(403);
+        }
         $header = $campaign->name . ' [' . $campaign->period . ']';
         return view('pages.campaigns.show', [
             'campaign' => $campaign,
