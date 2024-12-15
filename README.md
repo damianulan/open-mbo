@@ -34,6 +34,8 @@ SESSION_SECURE_COOKIE=false
 ```
 At this moment application is available only with `pl` language. 
 
+See demo here: https://openmbo.damianulan.me
+
 Any question You can submit to **damian.ulan@protonmail.com**.
 
 
