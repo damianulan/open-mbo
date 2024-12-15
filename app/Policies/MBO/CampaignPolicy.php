@@ -30,7 +30,7 @@ class CampaignPolicy
      */
     public function view(User $user, Campaign $campaign): bool
     {
-        if($user->isMBOAdmin()){
+        if($user->can('mbo-campaign-view', $campaign)){
             return true;
         }
         return false;

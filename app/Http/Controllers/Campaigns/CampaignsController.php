@@ -63,7 +63,7 @@ class CampaignsController extends Controller
     {
         $campaign = Campaign::findOrFail($id);
 
-        if ($request->user()->cannot('view', $campaign)) {
+        if ($request->user()->cannot('mbo-campaign-view', $campaign)) {
             abort(403);
         }
         $header = $campaign->name . ' [' . $campaign->period . ']';

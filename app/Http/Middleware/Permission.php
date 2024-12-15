@@ -14,9 +14,9 @@ class Permission
      * @param $permission
      * @return mixed
      */
-    public function handle($request, Closure $next, $permission)
+    public function handle($request, Closure $next, $permission, $context = null)
     {
-        if(!auth()->user()->can($permission)) {
+        if(!auth()->user()->can($permission, $context)) {
             return abort(403);
         }
         return $next($request);

@@ -19,7 +19,7 @@ return new class extends Migration
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
-            $table->nullableUuidMorphs('context', 'context'); // needs default morph? -- cannot be nullable [App\Contexts\System]
+            $table->uuidMorphs('context', 'context');
 
             $table->primary(['user_id','role_id','context_type','context_id']);
         });
