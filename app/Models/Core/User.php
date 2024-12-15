@@ -19,6 +19,7 @@ use App\Models\Core\UserProfile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Traits\Vendors\ModelActivity;
+use App\Casts\Enigma;
 
 /**
  *
@@ -109,6 +110,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'created_at' => 'datetime',
+        'email' => Enigma::class,
     ];
 
     protected static function booted() {
