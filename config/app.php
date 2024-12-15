@@ -122,6 +122,18 @@ return [
 
     'faker_locale' => 'pl_PL',
 
+    /*
+    |--------------------------------------------------------------------------
+    | Sensitive Data Model Encryption
+    |--------------------------------------------------------------------------
+    |
+    | It determines whether the sensitive data model encryption is enabled or not.
+    | It includes user properties such as firstname, lastname, email, phone, etc. using Enigma Cast Encryption.
+    |
+    */
+
+    'enigma_models' => env('APP_ENIGMA_MODELS', true),
+
     /**
      * Application Versioning
      * @key release - increments by one after successful implementation of a milestone.
@@ -228,6 +240,7 @@ return [
         //App\Providers\TelescopeServiceProvider::class,
         App\Providers\PermissionServiceProvider::class,
         App\Providers\RolesServiceProvider::class,
+        App\Providers\GateServiceProvider::class,
         App\Providers\ConfigServiceProvider::class,
         Lab404\Impersonate\ImpersonateServiceProvider::class,
     ],

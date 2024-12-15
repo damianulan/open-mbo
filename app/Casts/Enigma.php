@@ -8,7 +8,7 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Contracts\Encryption\EncryptException;
 use Illuminate\Support\Facades\Crypt;
 
-class DataGuard implements CastsAttributes
+class Enigma implements CastsAttributes
 {
     /**
      * Cast the given value.
@@ -17,14 +17,18 @@ class DataGuard implements CastsAttributes
      */
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        if(!is_null($value)){
-            try {
-                return Crypt::decryptString($value);
-            } catch (DecryptException $e){
-                report($e);
-                return false;
+        $encryption = (bool) config('app.enigma_models');
+        if($encryption) {
+            if(!is_null($value)){
+                try {
+                    return Crypt::decryptString($value);
+                } catch (DecryptException $e){
+                    report($e);
+                    return false;
+                }
             }
         }
+
         return $value;
     }
 
@@ -35,14 +39,18 @@ class DataGuard implements CastsAttributes
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        if(!is_null($value)){
-            try {
-                return Crypt::encryptString($value);
-            } catch (EncryptException $e){
-                report($e);
-                return false;
+        $encryption = (bool) config('app.enigma_models');
+        if($encryption){
+            if(!is_null($value)){
+                try {
+                    return Crypt::encryptString($value);
+                } catch (EncryptException $e){
+                    report($e);
+                    return false;
+                }
             }
         }
+
         return $value;
     }
 }

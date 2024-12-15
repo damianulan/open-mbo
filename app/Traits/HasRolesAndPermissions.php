@@ -5,15 +5,26 @@ namespace App\Traits;
 use App\Models\Core\Role;
 use App\Models\Core\Permission;
 use Illuminate\Support\Collection;
-
+use App\Models\MBO\Campaign;
+use Illuminate\Database\Eloquent\Model;
+use App\Lib\Contexts\System;
+use Illuminate\Database\Eloquent\Builder;
 trait HasRolesAndPermissions
 {
     /**
      * @return mixed
      */
-    public function roles()
+    public function roles($context = null)
     {
-        return $this->belongsToMany(Role::class,'users_roles');
+        $relation = $this->belongsToMany(Role::class,'users_roles');
+        if($context && $context instanceof Model){
+            $system_context = new System();
+            $relation = $this->belongsToMany(Role::class,'users_roles')->where(function(Builder $q) use ($context, $system_context){
+                $q->where(['context_type' => $context::class, 'context_id' => $context->id])
+                    ->orWhere(['context_type' => $system_context::class]);
+            });
+        }
+        return $relation;
     }
 
     /**
@@ -109,19 +120,19 @@ trait HasRolesAndPermissions
      * @param $permission
      * @return bool
      */
-    public function hasPermissionTo($permission)
+    public function hasPermissionTo($permission, $context = null)
     {
-        return $this->hasPermissionThroughRole($permission) || $this->hasPermission($permission);
+        return $this->hasPermissionThroughRole($permission, $context) || $this->hasPermission($permission);
     }
 
     /**
      * @param $permission
      * @return bool
      */
-    public function hasPermissionThroughRole($permission)
+    public function hasPermissionThroughRole($permission, $context = null)
     {
         foreach ($permission->roles as $role){
-            if($this->roles->contains($role)) {
+            if($this->roles($context)->get()->contains($role)) {
                 return true;
             }
         }
@@ -176,32 +187,59 @@ trait HasRolesAndPermissions
      * @param array $roles
      * @return HasRolesAndPermissions
      */
-    public function refreshRole(array $roles )
-    {
-        return $this->roles()->sync($roles);
-    }
+    // public function refreshRole(array $roles )
+    // {
+    //     return $this->roles()->sync($roles);
+    // }
 
-    public function assignRole(... $roles)
+    public function assignRole($role, $context = null)
     {
-        foreach($roles as $role){
-            $id = Role::getId($role);
-            if($id){
-                $this->roles()->attach($id);
+        $id = Role::getId($role);
+        if($id){
+            $additional = array();
+            if(!$context || !($context instanceof Model)){
+                $context = new System();
             }
+            $additional['context_type'] = $context::class;
+            $additional['context_id'] = $context->id;
+
+            $this->roles()->attach($id, $additional);
         }
         return true;
     }
 
-    public function revokeRole(... $roles)
+    public function revokeRole($role, $context = null)
     {
-        foreach($roles as $role){
-            $id = Role::getId($role);
-            if($id){
-                $this->roles()->detach($id);
+        $id = Role::getId($role);
+        if($id){
+            $additional = array();
+            if(!$context || !($context instanceof Model)){
+                $context = new System();
             }
+            $additional['context_type'] = $context::class;
+            $additional['context_id'] = $context->id;
+            $this->roles()->detach($id, $additional); // TODO - check if this works and not revoking from all contexts
         }
         return true;
     }
 
+    public function isMBOAdmin()
+    {
+        return $this->hasAnyRole('root', 'support', 'admin', 'admin_mbo');
+    }
 
+    public function isAdmin()
+    {
+        return $this->hasAnyRole('root', 'support', 'admin');
+    }
+
+    public function isRoot()
+    {
+        return $this->hasAnyRole('root', 'support');
+    }
+
+    public function isCampaignCoordinator(Campaign $campaign)
+    {
+        return $campaign->coordinators()->contains('coordinator_id', $this->id);
+    }
 }

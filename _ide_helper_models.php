@@ -492,6 +492,7 @@ namespace App\Models\Core{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withoutTrashed()
  * @mixin \Eloquent
+ * @property string $lang
  * @method static \Database\Factories\Core\UserProfileFactory factory($count = null, $state = [])
  */
 	class UserProfile extends \Eloquent {}

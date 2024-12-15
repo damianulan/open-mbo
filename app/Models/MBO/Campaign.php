@@ -171,32 +171,34 @@ class Campaign extends BaseModel
 
     public function coordinators()
     {
-        return $this->belongsToMany(User::class, 'campaigns_coordinators', 'campaign_id', 'coordinator_id');
+        return $this->morphToMany(User::class, 'context', 'users_roles');
     }
 
-    public function refreshCoordinators(array $user_ids)
+    public function refreshCoordinators(?array $user_ids)
     {
-        $stack = array();
-        foreach($user_ids as $user_id){
-            $stack[] = [
-                'campaign_id' => $this->id,
-                'coordinator_id' => $user_id,
-            ];
+        if(!$user_ids){
+            $user_ids = array();
         }
-        $this->coordinators()->sync($stack);
-    }
 
-    public function assignCoordinator(... $user_ids)
-    {
-        foreach($user_ids as $user_id){
-            $this->coordinators()->attach($user_id);
+        $current = $this->coordinators->pluck('id')->toArray();
+        $toDelete = array_filter($current, function ($value) use ($user_ids) {
+            return !in_array($value, $user_ids);
+        });
+        $toAdd = array_filter($user_ids, function ($value) use ($current) {
+            return !in_array($value, $current);
+        });
+
+        foreach($toDelete as $user_id){
+            $user = User::find($user_id);
+            if($user->exists()){
+                $user->revokeRole('campaign_coordinator', $this);
+            }
         }
-    }
-
-    public function unassignCoordinator(... $user_ids)
-    {
-        foreach($user_ids as $user_id){
-            $this->coordinators()->detach($user_id);
+        foreach($toAdd as $user_id){
+            $user = User::find($user_id);
+            if($user->exists()){
+                $user->assignRole('campaign_coordinator', $this);
+            }
         }
     }
 

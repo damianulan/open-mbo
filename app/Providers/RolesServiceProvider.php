@@ -29,7 +29,11 @@ class RolesServiceProvider extends ServiceProvider
         });
 
         Blade::if('admin', function (){
-            return auth()->user()->hasAnyRole('root', 'support', 'admin');
+            return auth()->user()->isAdmin();
+        });
+
+        Blade::if('root', function (){
+            return auth()->user()->isRoot();
         });
     }
 }

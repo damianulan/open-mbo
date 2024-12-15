@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\UUID;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $slug
@@ -30,6 +30,17 @@ class Permission extends Model
 
     protected $table = 'permissions';
     protected $primaryKey = 'id';
+    public static $roleSeeds = [
+        // users
+        'users-impersonate' => ['admins'],
+
+        // mbo
+        'mbo-campaign-create' => ['admins', 'admin_mbo'],
+        'mbo-campaign-view' => ['admins', 'admin_mbo', 'campaign_coordinator'],
+        'mbo-campaign-update' => ['admins', 'admin_mbo', 'campaign_coordinator'],
+        'mbo-campaign-delete' => ['admins', 'admin_mbo'],
+        'mbo-campaign-manage' => ['admins', 'admin_mbo', 'campaign_coordinator'], // dodawanie/usuwanie użytkowników i celów do kampanii.
+    ];
 
     public $timestamps = true;
 

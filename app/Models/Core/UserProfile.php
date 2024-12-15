@@ -8,9 +8,10 @@ use App\Enums\Users\Gender;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Core\User;
 use App\Facades\Forms\RequestForms;
+use App\Casts\Enigma;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $user_id
@@ -62,6 +63,9 @@ class UserProfile extends Model
 
     protected $casts = [
         'gender' => Gender::class,
+        'firstname' => Enigma::class,
+        'lastname' => Enigma::class,
+        'phone' => Enigma::class,
     ];
 
     public function user()

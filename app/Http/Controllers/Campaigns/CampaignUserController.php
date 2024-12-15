@@ -17,8 +17,6 @@ class CampaignUserController extends Controller
     public function update(Request $request, $id, CampaignEditUserForm $form)
     {
         $campaign = Campaign::find($id);
-        // $user = User::find('08b30747-f998-4db1-a4e9-277e6b5f2a8f');
-        // dd($user->objectives);die;
 
         $request = $form::reformatRequest($request);
         $response = $form::validate($request, $id);

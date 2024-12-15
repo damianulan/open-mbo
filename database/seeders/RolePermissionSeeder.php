@@ -12,8 +12,9 @@ class RolePermissionSeeder extends Seeder
     private Role $root;
     private Role $support;
     private Role $admin;
-    private Role $adminMBO;
-    private Role $adminMBOCat;
+    private Role $admin_mbo;
+    private Role $objective_coordinator;
+    private Role $campaign_coordinator;
     private Role $supervisor;
     private Role $employee;
 
@@ -40,13 +41,18 @@ class RolePermissionSeeder extends Seeder
         $this->admin->assignable = true;
         $this->admin->save();
 
-        $this->adminMBO = new Role();
-        $this->adminMBO->slug = 'admin_mbo'; // staje się po przypisaniu kategorii mbo
-        $this->adminMBO->save();
+        $this->admin_mbo = new Role();
+        $this->admin_mbo->slug = 'admin_mbo';
+        $this->admin_mbo->assignable = true;
+        $this->admin_mbo->save();
 
-        $this->adminCampaign = new Role();
-        $this->adminCampaign->slug = 'campaign_coordinator'; // staje się po przypisaniu kampanii
-        $this->adminCampaign->save();
+        $this->objective_coordinator = new Role();
+        $this->objective_coordinator->slug = 'objective_coordinator'; // staje się po przypisaniu kategorii celu -- ma dostęp do edycji szablonów celów w kategorii oraz do podsumowania o ich wykorzystywaniu i aktualnym przypisaniu
+        $this->objective_coordinator->save();
+
+        $this->campaign_coordinator = new Role();
+        $this->campaign_coordinator->slug = 'campaign_coordinator'; // staje się po przypisaniu kampanii
+        $this->campaign_coordinator->save();
 
         $this->manager = new Role();
         $this->manager->slug = 'manager';
@@ -58,29 +64,39 @@ class RolePermissionSeeder extends Seeder
 
         $this->employee = new Role();
         $this->employee->slug = 'employee';
-        $this->admin->assignable = true;
+        $this->employee->assignable = true;
         $this->employee->save();
 
 
         // PERMISSIONS
 
         // users
-        $this->impersonate();
+        $this->setPermissions();
 
     }
 
-    private function impersonate()
+    private function setPermissions()
     {
-        $impersonate = new Permission();
-        $impersonate->slug = 'users-impersonate';
-        $impersonate->save();
-        $this->attach($impersonate, 'root', 'support', 'admin');
+        foreach(Permission::$roleSeeds as $slug => $roles){
+            $perm = new Permission();
+            $perm->slug = $slug;
+            if($perm->save()){
+                $this->attach($perm, $roles);
+            }
+        }
+
     }
 
-    private function attach(Permission $permission, ... $to)
+    private function attach(Permission $permission, array $to)
     {
         foreach($to as $slug){
-            $this->$slug->permissions()->attach($permission);
+            if($slug === 'admins'){
+                foreach(['root', 'support', 'admin'] as $role){
+                    $this->$role->permissions()->attach($permission);
+                }
+            } else {
+                $this->$slug->permissions()->attach($permission);
+            }
         }
     }
 }
