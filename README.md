@@ -1,5 +1,9 @@
 ## About OpenMBO
 
+### Introduction
+The project involves the creation of a web application in PHP/Javascript technology using the Laravel 11 framework. 
+The application is designed to support employee appraisal processes and to this end it is optimized for the possibility of introducing a management model that is compatible with both Management By Objectives (MBO) and Objective Key Results (OKR) methodologies. The platform makes it possible to combine these methodologies, use them separately and freely develop your own model. The application is tailored to the needs of an extended organizational structure of a small/medium enterprise.
+
 ### Licensing
 The Software is free for commercial use and restricted for modifing and altering. For more information see the [License Agreement](LICENSE.md).
 
