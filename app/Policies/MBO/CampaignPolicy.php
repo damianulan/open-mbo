@@ -30,10 +30,8 @@ class CampaignPolicy
      */
     public function view(User $user, Campaign $campaign): bool
     {
-        if($user->can('mbo-campaign-view', $campaign)){
-            return true;
-        }
-        return false;
+        $is_creator = $campaign->creator && $user->id === $creator->id;
+        return $user->can('mbo-campaign-view', $campaign) || $is_creator;
     }
 
     /**
@@ -41,7 +39,7 @@ class CampaignPolicy
      */
     public function create(User $user): bool
     {
-        return true;
+        return $user->can('mbo-campaign-create', $campaign);
     }
 
     /**
@@ -49,13 +47,13 @@ class CampaignPolicy
      */
     public function update(User $user, Campaign $campaign): bool
     {
-        return false;
+        return $user->can('mbo-campaign-update', $campaign);
     }
 
 
     public function manage(User $user, Campaign $campaign): bool
     {
-        return false;
+        return $user->can('mbo-campaign-manage', $campaign);
     }
 
     /**
@@ -63,7 +61,7 @@ class CampaignPolicy
      */
     public function delete(User $user, Campaign $campaign): bool
     {
-        //
+        return $user->can('mbo-campaign-delete', $campaign);
     }
 
 }

@@ -104,13 +104,11 @@ class User extends Authenticatable
 
     protected $activeRules = [
         'active' => 1,
-        'core' => 0,
     ];
 
     protected $casts = [
         'email_verified_at' => 'datetime',
         'created_at' => 'datetime',
-        'email' => Enigma::class,
     ];
 
     protected static function booted() {

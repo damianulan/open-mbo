@@ -31,8 +31,7 @@ class CampaignEditUserForm extends Form implements FormIO
         $method = 'POST';
         $title = 'Dodaj użytkowników do kampanii';
         $user_ids = UserCampaign::where('campaign_id', $model->id)->get()->pluck('user_id');
-        $campaign = Campaign::find($model->id);
-        $coordinators = $campaign->coordinators->pluck('id')->toArray();
+        $coordinators = $model->coordinators->pluck('id')->toArray();
         $selected = array();
         $exclude = array();
         if(!empty($user_ids)){

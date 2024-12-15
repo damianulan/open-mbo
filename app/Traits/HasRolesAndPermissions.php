@@ -67,31 +67,7 @@ trait HasRolesAndPermissions
     public function hasRole(... $roles ) {
         foreach ($roles as $role) {
             if ($this->roles->contains('slug', $role)) {
-                if($role === 'supervisor'){
-                    if(!$this->isSupervisor()){
-                        $this->revokeRole('supervisor');
-                        return false;
-                    }
-                }
-                elseif($role === 'manager'){
-                    if(!$this->isManager()){
-                        $this->revokeRole('manager');
-                        return false;
-                    }
-                }
                 return true;
-            }
-            elseif($role === 'supervisor'){
-                if($this->isSupervisor()){
-                    $this->assignRole('supervisor');
-                    return true;
-                }
-            }
-            elseif($role === 'manager'){
-                if($this->isManager()){
-                    $this->assignRole('manager');
-                    return true;
-                }
             }
         }
         return false;
@@ -183,15 +159,6 @@ trait HasRolesAndPermissions
         return $this->givePermissionsTo($permissions);
     }
 
-    /**
-     * @param array $roles
-     * @return HasRolesAndPermissions
-     */
-    // public function refreshRole(array $roles )
-    // {
-    //     return $this->roles()->sync($roles);
-    // }
-
     public function assignRole($role, $context = null)
     {
         $id = Role::getId($role);
@@ -218,8 +185,15 @@ trait HasRolesAndPermissions
             }
             $additional['context_type'] = $context::class;
             $additional['context_id'] = $context->id;
-            $this->roles()->detach($id, $additional); // TODO - check if this works and not revoking from all contexts
+            $this->roles()->detach($id, $additional);
         }
+        return true;
+    }
+
+    public function refreshRole($roles_ids)
+    {
+        // TODO
+
         return true;
     }
 

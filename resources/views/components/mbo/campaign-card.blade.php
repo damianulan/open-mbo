@@ -63,7 +63,7 @@
                 <div class="element">
                     <div class="element-title" data-tippy-content="Autor kampanii">
                         <i class="bi bi-person-fill me-2"></i>
-                        <span>{{ $campaign->creator->name() }}</span>
+                        <span>{{ $campaign->creator ? $campaign->creator->name():'' }}</span>
                     </div>
                 </div>
 

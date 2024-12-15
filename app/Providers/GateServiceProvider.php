@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Gate;
 use App\Models\Core\User;
 use App\Models\MBO\Campaign;
 use App\Policies\MBO\CampaignPolicy;
+use App\Models\MBO\Objective;
+use App\Policies\MBO\ObjectivePolicy;
 
 class GateServiceProvider extends ServiceProvider
 {
@@ -25,5 +27,6 @@ class GateServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::policy(Campaign::class, CampaignPolicy::class);
+        Gate::policy(Objective::class, ObjectivePolicy::class);
     }
 }

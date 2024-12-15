@@ -38,8 +38,8 @@ return new class extends Migration
             $table->boolean('draft')->default(1);
             $table->boolean('manual')->default(0); // if on - do not automatically end stage after date passes
 
-            $table->foreignUuid('created_by');
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignUuid('created_by')->nullable();
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('set null');
 
             $table->timestamps();
             $table->softDeletes();

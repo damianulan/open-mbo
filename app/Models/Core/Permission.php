@@ -40,6 +40,13 @@ class Permission extends Model
         'mbo-campaign-update' => ['admins', 'admin_mbo', 'campaign_coordinator'],
         'mbo-campaign-delete' => ['admins', 'admin_mbo'],
         'mbo-campaign-manage' => ['admins', 'admin_mbo', 'campaign_coordinator'], // dodawanie/usuwanie użytkowników i celów do kampanii.
+
+        'mbo-objective-create' => ['admins', 'admin_mbo', 'objective_coordinator'],
+        'mbo-objective-view' => ['admins', 'admin_mbo', 'objective_coordinator'],
+        'mbo-objective-update' => ['admins', 'admin_mbo', 'objective_coordinator'],
+        'mbo-objective-delete' => ['admins', 'admin_mbo'],
+        'mbo-objective-milestones' => ['admins', 'admin_mbo', 'objective_coordinator', 'supervisor'],
+        'mbo-objective-realization' => ['admins', 'admin_mbo', 'objective_coordinator', 'supervisor'],
     ];
 
     public $timestamps = true;

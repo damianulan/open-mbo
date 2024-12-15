@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\MBO\ObjectiveTemplateCategory;
+use App\Models\MBO\Campaign;
 
 class MBOSeeder extends Seeder
 {
@@ -31,5 +32,23 @@ class MBOSeeder extends Seeder
         $category->name = 'Cele Indywidualne';
         $category->shortname = 'individual';
         $category->save();
+
+        $campaign = new Campaign();
+        $campaign->name = 'Testowa kampania';
+        $campaign->period = '2024 Q4';
+        $campaign->description = 'Automatycznie wygenerowana przykładowa kampania';
+        $campaign->definition_from = '2024-12-05 00:00:00';
+        $campaign->definition_to = '2024-12-05 23:59:59';
+        $campaign->disposition_from = '2024-12-06 00:00:00';
+        $campaign->disposition_to = '2024-12-10 23:59:59';
+        $campaign->realization_from = '2024-12-15 00:00:00';
+        $campaign->realization_to = '2024-12-24 23:59:59';
+        $campaign->evaluation_from = '2024-12-24 00:00:00';
+        $campaign->evaluation_to = '2024-12-28 23:59:59';
+        $campaign->self_evaluation_from = '2024-12-28 00:00:00';
+        $campaign->self_evaluation_to = '2024-12-31 23:59:59';
+        $campaign->draft = 0;
+        $campaign->manual = 0;
+        $campaign->save();
     }
 }

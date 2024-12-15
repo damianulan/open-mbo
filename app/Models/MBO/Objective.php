@@ -113,6 +113,16 @@ class Objective extends BaseModel
         return $this->belongsTo(ObjectiveTemplate::class, 'template_id');
     }
 
+    public function category()
+    {
+        return $this->template->category();
+    }
+
+    public function coordinators()
+    {
+        return $this->template->coordinators();
+    }
+
     public function campaign()
     {
         return $this->belongsTo(Campaign::class);

@@ -11,6 +11,7 @@ use App\Facades\Forms\RequestForms;
 use App\Facades\TrixField\TrixFieldCast;
 use App\Casts\CheckboxCast;
 use App\Models\MBO\ObjectiveTemplate;
+use App\Models\Core\User;
 
 /**
  *
@@ -72,6 +73,39 @@ class ObjectiveTemplateCategory extends BaseModel
             'audit',
             'individual',
         ];
+    }
+
+    public function coordinators()
+    {
+        return $this->morphToMany(User::class, 'context', 'users_roles');
+    }
+
+    public function refreshCoordinators(?array $user_ids)
+    {
+        if(!$user_ids){
+            $user_ids = array();
+        }
+
+        $current = $this->coordinators->pluck('id')->toArray();
+        $toDelete = array_filter($current, function ($value) use ($user_ids) {
+            return !in_array($value, $user_ids);
+        });
+        $toAdd = array_filter($user_ids, function ($value) use ($current) {
+            return !in_array($value, $current);
+        });
+
+        foreach($toDelete as $user_id){
+            $user = User::find($user_id);
+            if($user->exists()){
+                $user->revokeRole('objective_coordinator', $this);
+            }
+        }
+        foreach($toAdd as $user_id){
+            $user = User::find($user_id);
+            if($user->exists()){
+                $user->assignRole('objective_coordinator', $this);
+            }
+        }
     }
 
     public function objective_templates()

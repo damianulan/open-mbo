@@ -8,7 +8,7 @@ use App\Models\MBO\Objective;
 use App\Enums\MBO\CampaignStage;
 use App\Forms\MBO\Campaign\CampaignEditForm;
 use App\Http\Controllers\Controller;
-
+use App\Models\Core\User;
 class CampaignsController extends Controller
 {
     public function index()
@@ -41,6 +41,9 @@ class CampaignsController extends Controller
      */
     public function store(Request $request, CampaignEditForm $form)
     {
+        if ($request->user()->cannot('create', Campaign::class)) {
+            abort(403);
+        }
         $request = $form::reformatRequest($request);
         $request->validate($form::validation());
         $campaign = Campaign::fillFromRequest($request);
@@ -79,12 +82,15 @@ class CampaignsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        $model = Campaign::findOrFail($id);
+        $campaign = Campaign::findOrFail($id);
+        if ($request->user()->cannot('mbo-campaign-update', $campaign)) {
+            abort(403);
+        }
         return view('pages.campaigns.edit', [
-            'campaign' => $model,
-            'form' => CampaignEditForm::boot($model),
+            'campaign' => $campaign,
+            'form' => CampaignEditForm::boot($campaign),
         ]);
     }
 
@@ -100,6 +106,9 @@ class CampaignsController extends Controller
         $request = $form::reformatRequest($request);
         $request->validate($form::validation($id));
         $campaign = Campaign::fillFromRequest($request, $id);
+        if ($request->user()->cannot('mbo-campaign-update', $campaign)) {
+            abort(403);
+        }
         $user_ids = $request->input('user_ids');
 
         if($campaign->update()){

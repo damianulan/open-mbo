@@ -9,6 +9,7 @@ use App\Models\Business\Team;
 use App\Models\Business\TypeOfContract;
 use App\Models\Business\UserEmployment;
 use App\Models\Core\User;
+use App\Models\Core\Role;
 
 trait UserBusiness
 {
@@ -43,12 +44,12 @@ trait UserBusiness
 
     public function supervisors()
     {
-        return $this->belongsToMany(static::class, 'users_supervisors', 'user_id', 'supervisor_id');
+        return $this->morphToMany(User::class, 'context', 'users_roles')->where('role_id', Role::getId('supervisor'));
     }
 
     public function subordinates()
     {
-        return $this->belongsToMany(static::class, 'users_supervisors', 'supervisor_id', 'user_id');
+        return $this->morphToMany(User::class, 'context', 'users_roles', 'user_id', 'context_id')->where('role_id', Role::getId('supervisor'));
     }
 
     public function hasSupervisor($supervisor_id): bool
@@ -75,8 +76,8 @@ trait UserBusiness
     {
         foreach($supervisor_ids as $id){
             $supervisor = static::find($id);
-            if(!$supervisor->isEmpty() && !$this->hasSupervisor($id)){
-                $this->supervisors()->attach($supervisor);
+            if($supervisor->exists() && !$this->hasSupervisor($id)){
+                $this->supervisors()->attach($supervisor, ['role_id' => Role::getId('supervisor')]);
             }
         }
         return true;
@@ -90,9 +91,28 @@ trait UserBusiness
         return true;
     }
 
-    public function syncSupervisors(array $supervisors_id): bool
+
+    public function refreshSupervisors(?array $user_ids)
     {
-        $this->supervisors()->sync($supervisors_id);
+        if(!$user_ids){
+            $user_ids = array();
+        }
+
+        $current = $this->supervisors->pluck('id')->toArray();
+        $toDelete = array_filter($current, function ($value) use ($user_ids) {
+            return !in_array($value, $user_ids);
+        });
+        $toAdd = array_filter($user_ids, function ($value) use ($current) {
+            return !in_array($value, $current);
+        });
+
+        foreach($toDelete as $user_id){
+            $this->revokeSupervisor($user_id);
+        }
+        foreach($toAdd as $user_id){
+            $this->assignSupervisor($user_id);
+        }
+
         return true;
     }
 

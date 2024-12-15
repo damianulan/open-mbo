@@ -200,6 +200,8 @@ class Campaign extends BaseModel
                 $user->assignRole('campaign_coordinator', $this);
             }
         }
+
+        return true;
     }
 
     public function assignUser($user_id)

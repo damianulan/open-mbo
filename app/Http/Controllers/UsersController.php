@@ -51,7 +51,7 @@ class UsersController extends Controller
             $profile = UserProfile::fillFromRequest($request);
             $profile->user_id = $user->id;
 
-            if($profile->save() && $user->syncSupervisors($supervisors_ids) && $user->refreshRole($roles_ids)){
+            if($profile->save() && $user->refreshSupervisors($supervisors_ids) && $user->refreshRole($roles_ids)){
                 return redirect()->route('users.show', $user->id)->with('success', __('alerts.users.success.create'));
             }
         }
@@ -104,7 +104,7 @@ class UsersController extends Controller
             $profile_id = $user->profile->id;
             $profile = UserProfile::fillFromRequest($request, $profile_id);
             if($profile){
-                if($profile->update() && $user->syncSupervisors($supervisors_ids) && $user->refreshRole($roles_ids)){
+                if($profile->update() && $user->refreshSupervisors($supervisors_ids) && $user->refreshRole($roles_ids)){
                     return redirect()->route('users.show', $id)->with('success', __('alerts.users.success.edit', ['name' => $user->name()]));
                 }
             }

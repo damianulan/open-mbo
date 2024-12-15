@@ -86,6 +86,11 @@ class ObjectiveTemplate extends BaseModel
         return $this->hasMany(Objective::class, 'template_id');
     }
 
+    public function coordinators()
+    {
+        return $this->category->coordinators();
+    }
+
     public function usersCount(): int
     {
         $result = 0;

@@ -20,13 +20,17 @@ class UserEditForm extends Form implements FormIO
         $route = route('users.store');
         $method = 'POST';
         $exclude = array();
+        $selected = array();
         $profile = null;
         if(!is_null($model)){
             $method = 'PUT';
             $route = route('users.update', $model->id);
-            $exclude[] = ['id' => $model->id];
             $profile = $model->profile;
+
+            $selected = $model->supervisors->pluck('id')->toArray();
         }
+        //dd($selected)    ;
+
         return (new FormBuilder($method, $route, 'users_edit'))
                 ->class('users-create-form')
                 ->add(FormElement::text('firstname', $profile)->label(__('forms.users.firstname')))
@@ -37,7 +41,7 @@ class UserEditForm extends Form implements FormIO
                 ->add(FormElement::birthdate('birthday', $profile)->label(__('forms.users.birthday')))
                 ->add(FormElement::multiselect('roles_ids', $model, Dictionary::fromAssocArray(Role::getSelectList()), 'roles')
                 ->label(__('forms.users.roles')))
-                ->add(FormElement::multiselect('supervisors_ids', $model, Dictionary::fromModel(User::class, 'name', 'allActive', $exclude), 'supervisors')
+                ->add(FormElement::multiselect('supervisors_ids', $model, Dictionary::fromModel(User::class, 'name', 'allActive', $exclude), 'supervisors', $selected)
                 ->label(__('forms.users.supervisors')))
                 ->addSubmit();
     }

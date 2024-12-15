@@ -61,7 +61,7 @@ class Role extends Model
     public static function getSelectList(): array
     {
         $output = array();
-        $roles = self::whereIn('slug', ['admin', 'admin_mbo'])->get();
+        $roles = self::where('assignable', 1)->get();
         if(!$roles->isEmpty()){
             foreach ($roles as $role){
                 $name = __('fields.roles.'.$role->slug);
