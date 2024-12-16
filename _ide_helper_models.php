@@ -785,6 +785,8 @@ namespace App\Models\MBO{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory withoutTrashed()
  * @mixin \Eloquent
  * @property string|null $shortname
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Core\User> $coordinators
+ * @property-read int|null $coordinators_count
  */
 	class ObjectiveTemplateCategory extends \Eloquent {}
 }
