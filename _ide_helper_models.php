@@ -603,37 +603,6 @@ namespace App\Models\MBO{
  * 
  *
  * @property string $id
- * @property string $user_objective_id
- * @property string $objective_goal_id
- * @property \Illuminate\Support\Carbon|null $completed_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
- * @property-read int|null $activities_count
- * @method static \Illuminate\Database\Eloquent\Builder<static>|GoalRealization newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|GoalRealization newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|GoalRealization onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|GoalRealization query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|GoalRealization whereCompletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|GoalRealization whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|GoalRealization whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|GoalRealization whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|GoalRealization whereObjectiveGoalId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|GoalRealization whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|GoalRealization whereUserObjectiveId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|GoalRealization withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|GoalRealization withoutTrashed()
- * @mixin \Eloquent
- */
-	class GoalRealization extends \Eloquent {}
-}
-
-namespace App\Models\MBO{
-/**
- * 
- *
- * @property string $id
  * @property string|null $template_id
  * @property string|null $parent_id
  * @property string|null $campaign_id
@@ -679,37 +648,6 @@ namespace App\Models\MBO{
  * @mixin \Eloquent
  */
 	class Objective extends \Eloquent {}
-}
-
-namespace App\Models\MBO{
-/**
- * 
- *
- * @property string $id
- * @property string $objective_type
- * @property string $objective_id
- * @property string $text
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
- * @property-read int|null $activities_count
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveGoal newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveGoal newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveGoal onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveGoal query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveGoal whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveGoal whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveGoal whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveGoal whereObjectiveId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveGoal whereObjectiveType($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveGoal whereText($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveGoal whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveGoal withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveGoal withoutTrashed()
- * @mixin \Eloquent
- */
-	class ObjectiveGoal extends \Eloquent {}
 }
 
 namespace App\Models\MBO{

@@ -147,17 +147,23 @@ ul.ombo-list {
     display: flex;
     align-items: center;
     font-size: .8rem;
+    position: absolute;
 }
 
 .ombo-list li .list-content span{
     color: $secondary;
     white-space: nowrap;
+    position: relative;
 }
 
 .ombo-list li .list-actions{
     display: flex;
     align-items: center;
     margin-left: auto;
+    position: relative;
+    z-index: 10;
+    padding-left: 0.5rem;
+    background-color: $ombo-body;
 }
 
 .ombo-list li .list-actions .list-action{
