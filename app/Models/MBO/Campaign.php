@@ -83,6 +83,7 @@ class Campaign extends BaseModel
     use TrixFields;
 
     public $stages;
+    public $timestamps = true;
 
     protected $fillable = [
         'name',
@@ -227,10 +228,22 @@ class Campaign extends BaseModel
         return true;
     }
 
-    // TODO - set user stage based on campaign current stage
-    public function setUserStage()
+    public function setUserStage($enrol_id = null)
     {
-        return $this->getCurrentStages()->first();
+        $params = ['manual' => 0, 'active' => 1];
+        if($enrol_id){
+            $params['id'] = $enrol_id;
+        }
+        $enrols = $this->user_campaigns()->where($params)->get();
+        $stage =  $this->getCurrentStages()->first();
+        if(!empty($enrols)){
+            foreach($enrols as $enrol){
+                $enrol->timestamps = false;
+                $enrol->stage = $stage;
+                $enrol->update();
+            }
+        }
+        return $stage;
     }
 
     public function setStageAuto()

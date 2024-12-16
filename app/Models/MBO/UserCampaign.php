@@ -57,6 +57,8 @@ class UserCampaign extends BaseModel
         'manual' => CheckboxCast::class,
     ];
 
+    public $timestamps = true;
+
     protected static function boot()
     {
         parent::boot();
@@ -67,6 +69,12 @@ class UserCampaign extends BaseModel
             }
 
             return $model;
+        });
+
+        static::updated(function ($model) {
+            if($model->manual == 0 && $model->active == 1){
+                $model->campaign->setUserStage($model->id);
+            }
         });
 
         static::deleted(function ($model) {

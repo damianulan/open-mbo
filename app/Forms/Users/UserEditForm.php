@@ -29,7 +29,6 @@ class UserEditForm extends Form implements FormIO
 
             $selected = $model->supervisors->pluck('id')->toArray();
         }
-        //dd($selected)    ;
 
         return (new FormBuilder($method, $route, 'users_edit'))
                 ->class('users-create-form')

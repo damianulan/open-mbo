@@ -7,6 +7,7 @@ enum UserObjectiveStatus: string
     case UNSTARTED = 'unstarted';
     case PROGRESS = 'progress';
     case COMPLETED = 'completed';
+    case PASSED = 'passed';
     case FAILED = 'failed';
 
     public static function values()
