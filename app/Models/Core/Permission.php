@@ -30,6 +30,10 @@ class Permission extends Model
 
     protected $table = 'permissions';
     protected $primaryKey = 'id';
+    public static $coreRoleSeeds = [
+        'telescope-view' => ['root', 'support'],
+        'maintenance' => ['root', 'support'],
+    ];
     public static $roleSeeds = [
         // users
         'users-impersonate' => ['admins'],
@@ -51,8 +55,26 @@ class Permission extends Model
 
     public $timestamps = true;
 
+    protected $fillable = [
+        'slug',
+        'assignable',
+    ];
+
     public function roles()
     {
         return $this->belongsToMany(Role::class,'roles_permissions');
+    }
+
+    public static function getSelectList(): array
+    {
+        $output = array();
+        $permissions = self::where('assignable', 1)->get();
+        if(!$permissions->isEmpty()){
+            foreach ($permissions as $permission){
+                $name = __('gates.permissions.'.$permission->slug);
+                $output[$permission->id] = $name;
+            }
+        }
+        return $output;
     }
 }

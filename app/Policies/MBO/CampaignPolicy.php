@@ -39,7 +39,7 @@ class CampaignPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('mbo-campaign-create', $campaign);
+        return $user->can('mbo-campaign-create');
     }
 
     /**
@@ -50,7 +50,13 @@ class CampaignPolicy
         return $user->can('mbo-campaign-update', $campaign);
     }
 
-
+    /**
+     * dodawanie/usuwanie użytkowników i celów do/z kampanii.
+     *
+     * @param  User     $user
+     * @param  Campaign $campaign
+     * @return bool
+     */
     public function manage(User $user, Campaign $campaign): bool
     {
         return $user->can('mbo-campaign-manage', $campaign);

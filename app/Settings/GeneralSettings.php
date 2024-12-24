@@ -11,6 +11,7 @@ class GeneralSettings extends Settings
     public ?string $site_logo;
     public string $theme;
     public bool $debug;
+    public bool $maintenance;
     public string $locale;
     public string $timezone;
     public int $build;

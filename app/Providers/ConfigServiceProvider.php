@@ -31,6 +31,7 @@ class ConfigServiceProvider extends ServiceProvider
                 'app.debug' => app(GeneralSettings::class)->debug ?? env('APP_DEBUG', true),
                 'app.timezone' => app(GeneralSettings::class)->timezone ?? env('APP_TIMEZONE', 'UTC'),
                 'app.locale' => app(GeneralSettings::class)->locale ?? env('APP_LOCALE', 'en'),
+                'app.maintenance' => app(GeneralSettings::class)->maintenance ?? null,
                 'app.build' => app(GeneralSettings::class)->build ?? null,
                 'app.release' => app(GeneralSettings::class)->release ?? null,
                 'app.date_format' => app(GeneralSettings::class)->date_format ?? null,

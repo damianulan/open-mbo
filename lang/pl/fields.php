@@ -9,6 +9,7 @@ return [
     'lastname' => 'Nazwisko',
     'firstname_lastname' => 'Imię i nazwisko',
     'email' => 'E-mail',
+    'login' => 'Login',
     'password' => 'Hasło',
     'status' => 'Status',
 
@@ -33,15 +34,5 @@ return [
         Gender::OTHER->value => 'Inna',
     ],
 
-    // Roles
-    'roles_plural' => 'Role',
-    'roles' => [
-        'root' => 'Root',
-        'support' => 'Helpdesk',
-        'admin' => 'Administrator',
-        'admin_mbo' => 'Administrator MBO',
-        'manager' => 'Menadżer',
-        'supervisor' => 'Przełożony',
-        'employee' => 'Pracownik',
-    ],
+
 ];

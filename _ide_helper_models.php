@@ -362,6 +362,7 @@ namespace App\Models\Core{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Permission whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Permission whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $assignable
  */
 	class Permission extends \Eloquent {}
 }

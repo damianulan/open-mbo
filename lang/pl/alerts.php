@@ -3,13 +3,16 @@
 return [
 
     'success' => [
+        'operation' => 'Operacja zakończona pomyślnie.',
     ],
     'error' => [
         'invalid_role' => 'Nie posiadasz odpowiedniej roli systemowej do wykonania tej akcji.',
         'no_permission' => 'Nie posiadasz odpowiednich uprawnień do wykonania tej akcji.',
+        'ajax' => 'Wystąpił błąd podczas pobierania danych z serwera, żądanie nie zostało przetworzone. Zweryfikuj swoje połączenie internetowe.',
+        'operation' => 'Wystąpił błąd podczas wykonywania operacji.',
     ],
     'warning' => [
-
+        'operation' => 'Uwaga!',
     ],
     'info' => [
 
@@ -43,11 +46,22 @@ return [
             'create' => 'Kampania została utworzona pomyślnie.',
             'edit' => 'Kampania została pomyślnie zmodyfikowana.',
             'objective_added' => 'Wskazany cel został pomyślnie dodany do Kampanii.',
+            'objective_deleted' => 'Cel został pomyślnie usunięty z Kampanii.',
             'users_added' => 'Uzupełniono stan osobowy Kampanii pomiarowej.',
+            'users_deleted' => 'Użytkownik został wypisany z Kampanii.',
         ],
 
         'error' => [
             'create' => 'Kampanie nie mogła zostać dodana. Wystąpił błąd.',
+            'edit' => 'Kampania została pomyślnie zmodyfikowana.',
+            'objective_added' => 'Wskazany cel został pomyślnie dodany do Kampanii.',
+            'objective_deleted' => 'Cel został pomyślnie usunięty z Kampanii.',
+            'users_added' => 'Dane nie zostały zaktualizowane. Odśwież stronę i spróbuj ponownie.',
+            'users_deleted' => 'Wystąpił błąd podczas wypisywania użytkownika z Kampanii. Odśwież stronę i spróbuj ponownie.',
+        ],
+
+        'confirm' => [
+
         ],
 
     ],
@@ -82,6 +96,12 @@ return [
             'create' => 'Nowy szablon celu został pomyślnie dodany.',
             'edit' => 'Szablon celu został pomyślnie zmodyfikowany.',
             'delete' => 'Szablon celu został pomyślnie usunięty.',
+        ],
+
+        'error' => [
+            'create' => 'Nowy szablon celu nie mógł zostać dodany. Wystąpił błąd.',
+            'edit' => 'Szablon celu nie został zmodyfikowany. Wystąpił błąd.',
+            'delete' => 'Szablon celu niestety nie został usunięty. Wystąpił błąd.',
         ],
     ],
 

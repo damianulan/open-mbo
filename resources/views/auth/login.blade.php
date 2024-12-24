@@ -8,16 +8,20 @@
                 <div class="card-header"><span>{{ config('app.name') }}</span></div>
 
                 <div class="card-body pt-0">
-                    @if(config('app.env') !== 'production')
+                    @if(config('app.env') !== 'production' && config('app.maintenance') === false)
                         <div class="alert alert-info mx-5 px-5 mb-4">
-                            <div class="text-center"><strong>UWAGA</strong> - serwis jest na etapie produkcji. Nie wszystkie funkcjonalności są sprawne.<br/>Zaloguj się z użyciem globalnych danych zawartych poniżej.</div>
+                            <div class="text-center">{!! __('auth.login_info') !!}</div>
                             <div class="text-center pt-3">
-                                <div><strong>Login:</strong> admin@damianulan.me</div>
-                                <div><strong>Hasło:</strong> 123456</div>
+                                <div><strong>{{ __('fields.login') }}:</strong> admin@damianulan.me</div>
+                                <div><strong>{{ __('fields.password') }}:</strong> 123456</div>
                             </div>
                         </div>
-                    @endif
+                    @elseif(config('app.maintenance') === true)
+                        <div class="alert alert-danger mx-5 px-5 mb-4">
+                            <div class="text-center">{!! __('auth.maintenance_info') !!}</div>
+                        </div>
 
+                    @endif
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 

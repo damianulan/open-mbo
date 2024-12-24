@@ -56,7 +56,7 @@ class UsersDataTable extends CustomDataTable
                 $roles_collection = new Collection();
                 if(!empty($roles)){
                     foreach($roles as $role){
-                        $roles_collection->push(__('fields.roles.'.$role));
+                        $roles_collection->push(__('gates.roles.'.$role));
                     }
                     $output = $roles_collection->implode(', ');
                 }
@@ -111,7 +111,7 @@ class UsersDataTable extends CustomDataTable
             'updated_at'    => Column::make('updated_at')
                                 ->title(__('fields.updated_at')),
             'roles'          => Column::computed('roles')
-                                ->title(__('fields.roles_plural'))
+                                ->title(__('gates.roles_plural'))
                                 ->searchable(true),
             'action'    => Column::computed('action')
                                 ->exportable(false)

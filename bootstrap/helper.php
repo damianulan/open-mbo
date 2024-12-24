@@ -22,3 +22,8 @@ function isRoot(): bool
 {
     return auth()->user()->hasRole('root');
 }
+
+function ajax(): App\Facades\Http\ResponseAjax
+{
+    return new App\Facades\Http\ResponseAjax();
+}

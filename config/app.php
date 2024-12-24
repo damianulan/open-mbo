@@ -97,6 +97,8 @@ return [
     |
     */
 
+    'maintenance' => false,
+
     'fallback_locale' => 'pl',
 
     'available_locales' => [
@@ -260,6 +262,7 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'PageBuilder' => App\Facades\Page\PageBuilder::class,
         'Theme' => App\Lib\Theme::class,
+        'ResponseAjax' => App\Facades\Http\ResponseAjax::class,
 
         // CASTS
         'CheckboxCast' => App\Casts\CheckboxCast::class,

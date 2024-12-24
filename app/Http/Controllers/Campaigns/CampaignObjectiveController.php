@@ -40,4 +40,13 @@ class CampaignObjectiveController extends Controller
         }
         return response()->json($response);
     }
+
+    public function delete(Request $request, $id)
+    {
+        $objective = Objective::findOrFail($id);
+        if($objective->delete()){
+            return ajax()->ok('message', __('alerts.campaigns.success.objective_deleted'));
+        }
+        return ajax()->error('message', __('alerts.campaigns.error.objective_deleted'));
+    }
 }

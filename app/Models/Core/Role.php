@@ -64,7 +64,7 @@ class Role extends Model
         $roles = self::where('assignable', 1)->get();
         if(!$roles->isEmpty()){
             foreach ($roles as $role){
-                $name = __('fields.roles.'.$role->slug);
+                $name = __('gates.roles.'.$role->slug);
                 $output[$role->id] = $name;
             }
         }

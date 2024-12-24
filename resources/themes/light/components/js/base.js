@@ -158,7 +158,7 @@ function swal_alert(text, title, _callback = null, icon = null)
 $.confirm = swal_confirm;
 
 $.success = function(text, title_input = null, _callback = null) {
-    var title = 'Operacja zakończona pomyślnie!';
+    var title = alert_success;
     if(title_input){
         title = title_input;
     }
@@ -166,7 +166,7 @@ $.success = function(text, title_input = null, _callback = null) {
     swal_alert(text, title, _callback, 'success');
 }
 $.error = function(text, title_input = null, _callback = null) {
-    var title = 'Wystąpił błąd!';
+    var title = alert_error;
     if(title_input){
         title = title_input;
     }
@@ -174,7 +174,7 @@ $.error = function(text, title_input = null, _callback = null) {
     swal_alert(text, title, _callback, 'error');
 }
 $.warning = function(text, title_input = null, _callback = null) {
-    var title = 'Uwaga!';
+    var title = alert_warning;
     if(title_input){
         title = title_input;
     }
@@ -182,7 +182,7 @@ $.warning = function(text, title_input = null, _callback = null) {
     swal_alert(text, title, _callback, 'warning');
 }
 $.notice = function(text, title_input = null, _callback = null) {
-    var title = 'Operacja zakończona pomyślnie!';
+    var title = alert_success;
     if(title_input){
         title = title_input;
     }
@@ -256,7 +256,7 @@ $.getModal = function (type, datas = {}) {
             }
 
         }).fail(function (jqXHR, textStatus) {
-            console.error('get_modal footer function failed.');
+            console.error('get_modal footer function failed.', textStatus);
         });
     }
 }
@@ -265,7 +265,7 @@ $.hideModal = function () {
     $('body').find('#modal-input').trigger("click");
 }
 
-$.jsonAjax = function (url, datas, _success_callback = function(response){}, _error_callback = function(response){}, overlay = true, cache = false) {
+$.jsonAjax = function (url, datas, _success_callback = function(response){}, _error_callback = function(response){}, method = 'GET', overlay = true, cache = false) {
     if(overlay){
         $.showOverlay();
     }
@@ -273,7 +273,7 @@ $.jsonAjax = function (url, datas, _success_callback = function(response){}, _er
         cache: cache,
         url: url,
         dataType: 'json',
-        type: 'GET',
+        type: method,
         headers: {
             'X-CSRF-Token': csrf
         },
@@ -291,7 +291,7 @@ $.jsonAjax = function (url, datas, _success_callback = function(response){}, _er
         if(overlay){
             $.hideOverlay();
         }
-        $.error('Wystąpił błąd podczas pobierania danych z bazy danych. Zweryfikuj swoje połączenie internetowe.');
+        $.error(alert_ajax_error);
         console.error('json ajax request failed.', textStatus);
     });
 }
@@ -326,7 +326,7 @@ $.ajaxForm = function (url, form_id, _success_callback = function(response){}, _
             if(overlay){
                 $.hideOverlay();
             }
-            $.error('Wystąpił błąd podczas pobierania danych z bazy danych. Zweryfikuj swoje połączenie internetowe.');
+            $.error(alert_ajax_error);
             console.error('json ajax form request failed.', textStatus);
         });
     } else {

@@ -77,9 +77,19 @@ class RolePermissionSeeder extends Seeder
 
     private function setPermissions()
     {
+        foreach(Permission::$coreRoleSeeds as $slug => $roles){
+            $perm = new Permission();
+            $perm->slug = $slug;
+            $perm->assignable = false;
+            if($perm->save()){
+                $this->attach($perm, $roles);
+            }
+        }
+
         foreach(Permission::$roleSeeds as $slug => $roles){
             $perm = new Permission();
             $perm->slug = $slug;
+            $perm->assignable = true;
             if($perm->save()){
                 $this->attach($perm, $roles);
             }

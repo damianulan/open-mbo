@@ -18,6 +18,9 @@
                 @if($errorCode !== '503')
                 <a href="{{ url()->previous() }}" class="btn btn-primary">{{ __('buttons.redirect_back') }}</a>
                 @endif
+                @if($errorCode === '503')
+                <a href="{{ url('/') }}" class="btn btn-primary">{{ __('buttons.redirect_login') }}</a>
+                @endif
           </div>
   </div>
 @endsection

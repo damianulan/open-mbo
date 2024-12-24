@@ -27,7 +27,7 @@ return [
         ],
         '503' => [
             'title' => 'Usługa niedostępna',
-            'paragraph' => 'Przepraszamy, usługa chwilowo niedostępna.',
+            'paragraph' => 'Przepraszamy, usługa chwilowo niedostępna. Trwają prace konserwacyjne, spróbuj ponownie później. Zostaniesz automatycznie wylogowany.',
         ],
         '404' => [
             'title' => 'Nie znaleziono strony',

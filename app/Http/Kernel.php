@@ -37,6 +37,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\UserLocale::class,
+            //\App\Http\Middleware\MaintenanceMode::class,
         ],
 
         'api' => [
@@ -66,5 +67,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'role' => \App\Http\Middleware\Role::class,
         'permission' => \App\Http\Middleware\Permission::class,
+        'maintenance' => \App\Http\Middleware\MaintenanceMode::class,
     ];
 }

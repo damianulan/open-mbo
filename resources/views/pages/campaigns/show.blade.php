@@ -39,10 +39,10 @@
                                         <span>{{ $objective->expected }}</span>
                                     </div>
                                     @endif
-                                    <a href="javascript:void(0);" class="list-action edit-objective" data-modelid="{{ $objective->id }}" data-tippy-content="Edytuj">
+                                    <a href="javascript:void(0);" class="list-action edit-objective" data-modelid="{{ $objective->id }}" data-tippy-content="{{ __('buttons.edit') }}">
                                         <i class="bi-pencil-fill"></i>
                                     </a>
-                                    <a href="javascript:void(0);" data-oid="{{ $objective->id }}" class="list-action delete-objective" data-tippy-content="Usuń">
+                                    <a href="javascript:void(0);" data-url="{{ route('campaigns.objective.delete', $objective->id) }}" class="list-action delete-objective" data-tippy-content="{{ __('buttons.delete') }}">
                                         <i class="bi-x-lg"></i>
                                     </a>
                                 </div>
@@ -86,7 +86,7 @@
                                     <i class="bi-hand-index-thumb"></i>
                                 </a>
                                 @endif
-                                <a href="javascript:void(0);" class="list-action" data-ucid="{{ $uc->id }}">
+                                <a class="user-delete" href="javascript:void(0);" class="list-action" data-url="{{ route('campaigns.users.delete', $uc->id) }}">
                                     <i class="bi-x-lg"></i>
                                 </a>
                             </div>
@@ -115,6 +115,32 @@
         var model_id = $(this).attr('data-modelid');
 
         $.getModal('campaigns.add_objectives', {id: model_id});
+    });
+
+    $('.user-delete').on('click', function() {
+        var dataurl = $(this).attr('data-url');
+        var uc = $(this).parents('li').first();
+        $.confirm('Czy na pewno chcesz usunąć tego użytkownika?', null, function() {
+            $.jsonAjax(dataurl, {}, function(response) {
+                uc.remove();
+                $.success(response.message);
+            }, function(response){
+                $.error(response.message);
+            }, 'DELETE' );
+        });
+    });
+
+    $('.delete-objective').on('click', function() {
+        var dataurl = $(this).attr('data-url');
+        var uc = $(this).parents('li').first();
+        $.confirm('Czy na pewno chcesz usunąć ten cel?', null, function() {
+            $.jsonAjax(dataurl, {}, function(response) {
+                uc.remove();
+                $.success(response.message);
+            }, function(response){
+                $.error(response.message);
+            }, 'DELETE' );
+        });
     });
 </script>
 @endsection

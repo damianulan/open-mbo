@@ -30,8 +30,10 @@ return [
     'ok_understand' => 'Ok, rozumiem',
     'choose_file' => 'Wybierz plik',
     'redirect_back' => 'Powrót',
+    'redirect_login' => 'Do strony logowania',
     'create_template' => 'Utwórz szablon',
     'impersonate' => 'Zaloguj jako',
+    'impersonate_out' => 'Wyloguj się jako',
 
     'list_view' => 'Tryb listy',
     'tile_view' => 'Tryb kafelkowy',

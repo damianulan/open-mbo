@@ -70,4 +70,13 @@ class CampaignUserController extends Controller
         $message = 'Przesunięto etap zapisu na: '. $uc->stageDescription();
         return redirect()->back()->with('success', $message);
     }
+
+    public function delete(Request $request, $id)
+    {
+        $uc = UserCampaign::findOrFail($id);
+        if($uc->delete()){
+            return ajax()->ok(__('alerts.campaigns.success.users_deleted'));
+        }
+        return ajax()->error(__('alerts.campaigns.error.users_deleted'));
+    }
 }

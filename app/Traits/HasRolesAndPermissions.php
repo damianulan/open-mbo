@@ -55,7 +55,7 @@ trait HasRolesAndPermissions
         $slugs = $this->roles->pluck('slug');
         $roles = new Collection();
         foreach($slugs as $slug){
-            $roles->push(__('fields.roles.'.$slug));
+            $roles->push(__('gates.roles.'.$slug));
         }
         return $roles;
     }

@@ -3261,7 +3261,7 @@ $.confirm = swal_confirm;
 $.success = function (text) {
   var title_input = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
   var _callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-  var title = 'Operacja zakończona pomyślnie!';
+  var title = alert_success;
   if (title_input) {
     title = title_input;
   }
@@ -3270,7 +3270,7 @@ $.success = function (text) {
 $.error = function (text) {
   var title_input = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
   var _callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-  var title = 'Wystąpił błąd!';
+  var title = alert_error;
   if (title_input) {
     title = title_input;
   }
@@ -3279,7 +3279,7 @@ $.error = function (text) {
 $.warning = function (text) {
   var title_input = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
   var _callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-  var title = 'Uwaga!';
+  var title = alert_warning;
   if (title_input) {
     title = title_input;
   }
@@ -3288,7 +3288,7 @@ $.warning = function (text) {
 $.notice = function (text) {
   var title_input = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
   var _callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-  var title = 'Operacja zakończona pomyślnie!';
+  var title = alert_success;
   if (title_input) {
     title = title_input;
   }
@@ -3356,7 +3356,7 @@ $.getModal = function (type) {
         }
       }
     }).fail(function (jqXHR, textStatus) {
-      console.error('get_modal footer function failed.');
+      console.error('get_modal footer function failed.', textStatus);
     });
   }
 };
@@ -3366,8 +3366,9 @@ $.hideModal = function () {
 $.jsonAjax = function (url, datas) {
   var _success_callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (response) {};
   var _error_callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function (response) {};
-  var overlay = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
-  var cache = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
+  var method = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'GET';
+  var overlay = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
+  var cache = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : false;
   if (overlay) {
     $.showOverlay();
   }
@@ -3375,7 +3376,7 @@ $.jsonAjax = function (url, datas) {
     cache: cache,
     url: url,
     dataType: 'json',
-    type: 'GET',
+    type: method,
     headers: {
       'X-CSRF-Token': csrf
     },
@@ -3393,7 +3394,7 @@ $.jsonAjax = function (url, datas) {
     if (overlay) {
       $.hideOverlay();
     }
-    $.error('Wystąpił błąd podczas pobierania danych z bazy danych. Zweryfikuj swoje połączenie internetowe.');
+    $.error(alert_ajax_error);
     console.error('json ajax request failed.', textStatus);
   });
 };
@@ -3431,7 +3432,7 @@ $.ajaxForm = function (url, form_id) {
       if (overlay) {
         $.hideOverlay();
       }
-      $.error('Wystąpił błąd podczas pobierania danych z bazy danych. Zweryfikuj swoje połączenie internetowe.');
+      $.error(alert_ajax_error);
       console.error('json ajax form request failed.', textStatus);
     });
   } else {
