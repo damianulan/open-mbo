@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\UUID;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string $slug
@@ -22,6 +22,7 @@ use App\Traits\UUID;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Permission whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Permission whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Permission whereUpdatedAt($value)
+ * @property int $assignable
  * @mixin \Eloquent
  */
 class Permission extends Model

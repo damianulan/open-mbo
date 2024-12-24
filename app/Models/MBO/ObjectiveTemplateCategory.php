@@ -14,7 +14,7 @@ use App\Models\MBO\ObjectiveTemplate;
 use App\Models\Core\User;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string $name
@@ -42,6 +42,9 @@ use App\Models\Core\User;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory withoutTrashed()
+ * @property string|null $shortname
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $coordinators
+ * @property-read int|null $coordinators_count
  * @mixin \Eloquent
  */
 class ObjectiveTemplateCategory extends BaseModel

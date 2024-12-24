@@ -19,7 +19,7 @@ use App\Models\Core\User;
 use App\Enums\MBO\CampaignStage;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string $name
@@ -76,6 +76,7 @@ use App\Enums\MBO\CampaignStage;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign withoutTrashed()
+ * @property string $stage
  * @mixin \Eloquent
  */
 class Campaign extends BaseModel

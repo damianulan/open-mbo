@@ -8,7 +8,7 @@ use App\Traits\UUID;
 use App\Facades\Forms\RequestForms;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string $slug
@@ -23,6 +23,7 @@ use App\Facades\Forms\RequestForms;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Role whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Role whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Role whereUpdatedAt($value)
+ * @property bool $assignable
  * @mixin \Eloquent
  */
 class Role extends Model

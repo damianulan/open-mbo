@@ -16,7 +16,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(new CampaignStatusScript())->hourlyAt('00:01');
+        $schedule->call(new CampaignStatusScript())->daily()->at('00:01');
+
+        if(config('backup.backup.auto') === true){
+            $schedule->command('backup:run')->daily()->at('01:30');
+        }
+
     }
 
     /**

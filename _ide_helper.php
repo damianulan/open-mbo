@@ -14442,247 +14442,6 @@ namespace Illuminate\Support\Facades {
             /**
      * 
      *
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes withoutOverlapping(int $expiresAt = 1440)
-     * @method static void mergeAttributes(\Illuminate\Console\Scheduling\Event $event)
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes user(string $user)
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes environments(array|mixed $environments)
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes evenInMaintenanceMode()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes onOneServer()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes runInBackground()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes when(\Closure|bool $callback)
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes skip(\Closure|bool $callback)
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes name(string $description)
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes description(string $description)
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes cron(string $expression)
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes between(string $startTime, string $endTime)
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes unlessBetween(string $startTime, string $endTime)
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes everySecond()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes everyTwoSeconds()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes everyFiveSeconds()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes everyTenSeconds()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes everyFifteenSeconds()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes everyTwentySeconds()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes everyThirtySeconds()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes everyMinute()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes everyTwoMinutes()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes everyThreeMinutes()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes everyFourMinutes()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes everyFiveMinutes()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes everyTenMinutes()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes everyFifteenMinutes()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes everyThirtyMinutes()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes hourly()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes hourlyAt(array|string|int $offset)
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes everyOddHour(array|string|int $offset = 0)
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes everyTwoHours(array|string|int $offset = 0)
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes everyThreeHours(array|string|int $offset = 0)
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes everyFourHours(array|string|int $offset = 0)
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes everySixHours(array|string|int $offset = 0)
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes daily()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes at(string $time)
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes dailyAt(string $time)
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes twiceDaily(int $first = 1, int $second = 13)
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes twiceDailyAt(int $first = 1, int $second = 13, int $offset = 0)
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes weekdays()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes weekends()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes mondays()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes tuesdays()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes wednesdays()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes thursdays()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes fridays()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes saturdays()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes sundays()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes weekly()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes weeklyOn(array|mixed $dayOfWeek, string $time = '0:0')
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes monthly()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes monthlyOn(int $dayOfMonth = 1, string $time = '0:0')
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes twiceMonthly(int $first = 1, int $second = 16, string $time = '0:0')
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes lastDayOfMonth(string $time = '0:0')
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes quarterly()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes quarterlyOn(int $dayOfQuarter = 1, string $time = '0:0')
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes yearly()
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes yearlyOn(int $month = 1, int|string $dayOfMonth = 1, string $time = '0:0')
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes days(array|mixed $days)
-     * @method static \Illuminate\Console\Scheduling\PendingEventAttributes timezone(\DateTimeZone|string $timezone)
-     * @see \Illuminate\Console\Scheduling\Schedule
-     */        class Schedule {
-                    /**
-         * Add a new callback event to the schedule.
-         *
-         * @param string|callable $callback
-         * @param array $parameters
-         * @return \Illuminate\Console\Scheduling\CallbackEvent 
-         * @static 
-         */        public static function call($callback, $parameters = [])
-        {
-                        /** @var \Illuminate\Console\Scheduling\Schedule $instance */
-                        return $instance->call($callback, $parameters);
-        }
-                    /**
-         * Add a new Artisan command event to the schedule.
-         *
-         * @param string $command
-         * @param array $parameters
-         * @return \Illuminate\Console\Scheduling\Event 
-         * @static 
-         */        public static function command($command, $parameters = [])
-        {
-                        /** @var \Illuminate\Console\Scheduling\Schedule $instance */
-                        return $instance->command($command, $parameters);
-        }
-                    /**
-         * Add a new job callback event to the schedule.
-         *
-         * @param object|string $job
-         * @param string|null $queue
-         * @param string|null $connection
-         * @return \Illuminate\Console\Scheduling\CallbackEvent 
-         * @static 
-         */        public static function job($job, $queue = null, $connection = null)
-        {
-                        /** @var \Illuminate\Console\Scheduling\Schedule $instance */
-                        return $instance->job($job, $queue, $connection);
-        }
-                    /**
-         * Add a new command event to the schedule.
-         *
-         * @param string $command
-         * @param array $parameters
-         * @return \Illuminate\Console\Scheduling\Event 
-         * @static 
-         */        public static function exec($command, $parameters = [])
-        {
-                        /** @var \Illuminate\Console\Scheduling\Schedule $instance */
-                        return $instance->exec($command, $parameters);
-        }
-                    /**
-         * Create new schedule group.
-         *
-         * @param \Illuminate\Console\Scheduling\Event $event
-         * @return void 
-         * @throws \RuntimeException
-         * @static 
-         */        public static function group($events)
-        {
-                        /** @var \Illuminate\Console\Scheduling\Schedule $instance */
-                        $instance->group($events);
-        }
-                    /**
-         * Compile array input for a command.
-         *
-         * @param string|int $key
-         * @param array $value
-         * @return string 
-         * @static 
-         */        public static function compileArrayInput($key, $value)
-        {
-                        /** @var \Illuminate\Console\Scheduling\Schedule $instance */
-                        return $instance->compileArrayInput($key, $value);
-        }
-                    /**
-         * Determine if the server is allowed to run this event.
-         *
-         * @param \Illuminate\Console\Scheduling\Event $event
-         * @param \DateTimeInterface $time
-         * @return bool 
-         * @static 
-         */        public static function serverShouldRun($event, $time)
-        {
-                        /** @var \Illuminate\Console\Scheduling\Schedule $instance */
-                        return $instance->serverShouldRun($event, $time);
-        }
-                    /**
-         * Get all of the events on the schedule that are due.
-         *
-         * @param \Illuminate\Contracts\Foundation\Application $app
-         * @return \Illuminate\Support\Collection 
-         * @static 
-         */        public static function dueEvents($app)
-        {
-                        /** @var \Illuminate\Console\Scheduling\Schedule $instance */
-                        return $instance->dueEvents($app);
-        }
-                    /**
-         * Get all of the events on the schedule.
-         *
-         * @return \Illuminate\Console\Scheduling\Event[] 
-         * @static 
-         */        public static function events()
-        {
-                        /** @var \Illuminate\Console\Scheduling\Schedule $instance */
-                        return $instance->events();
-        }
-                    /**
-         * Specify the cache store that should be used to store mutexes.
-         *
-         * @param string $store
-         * @return \Illuminate\Console\Scheduling\Schedule 
-         * @static 
-         */        public static function useCache($store)
-        {
-                        /** @var \Illuminate\Console\Scheduling\Schedule $instance */
-                        return $instance->useCache($store);
-        }
-                    /**
-         * Register a custom macro.
-         *
-         * @param string $name
-         * @param object|callable $macro
-         * @param-closure-this static  $macro
-         * @return void 
-         * @static 
-         */        public static function macro($name, $macro)
-        {
-                        \Illuminate\Console\Scheduling\Schedule::macro($name, $macro);
-        }
-                    /**
-         * Mix another object into the class.
-         *
-         * @param object $mixin
-         * @param bool $replace
-         * @return void 
-         * @throws \ReflectionException
-         * @static 
-         */        public static function mixin($mixin, $replace = true)
-        {
-                        \Illuminate\Console\Scheduling\Schedule::mixin($mixin, $replace);
-        }
-                    /**
-         * Checks if macro is registered.
-         *
-         * @param string $name
-         * @return bool 
-         * @static 
-         */        public static function hasMacro($name)
-        {
-                        return \Illuminate\Console\Scheduling\Schedule::hasMacro($name);
-        }
-                    /**
-         * Flush the existing macros.
-         *
-         * @return void 
-         * @static 
-         */        public static function flushMacros()
-        {
-                        \Illuminate\Console\Scheduling\Schedule::flushMacros();
-        }
-                    /**
-         * Dynamically handle calls to the class.
-         *
-         * @param string $method
-         * @param array $parameters
-         * @return mixed 
-         * @throws \BadMethodCallException
-         * @static 
-         */        public static function macroCall($method, $parameters)
-        {
-                        /** @var \Illuminate\Console\Scheduling\Schedule $instance */
-                        return $instance->macroCall($method, $parameters);
-        }
-            }
-            /**
-     * 
-     *
      * @see \Illuminate\Database\Schema\Builder
      */        class Schema {
                     /**
@@ -23431,6 +23190,42 @@ namespace Spatie\LaravelIgnition\Facades {
             }
     }
 
+namespace Spatie\SignalAwareCommand\Facades {
+            /**
+     * 
+     *
+     * @see \Spatie\SignalAwareCommand\Signal
+     */        class Signal {
+                    /**
+         * 
+         *
+         * @static 
+         */        public static function handle($signal, $callable)
+        {
+                        /** @var \Spatie\SignalAwareCommand\Signal $instance */
+                        return $instance->handle($signal, $callable);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */        public static function executeSignalHandlers($signal, $command)
+        {
+                        /** @var \Spatie\SignalAwareCommand\Signal $instance */
+                        return $instance->executeSignalHandlers($signal, $command);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */        public static function clearHandlers($signal = null)
+        {
+                        /** @var \Spatie\SignalAwareCommand\Signal $instance */
+                        return $instance->clearHandlers($signal);
+        }
+            }
+    }
+
 namespace Yajra\DataTables\Facades {
             /**
      * 
@@ -27558,7 +27353,6 @@ namespace  {
             class Request extends \Illuminate\Support\Facades\Request {}
             class Response extends \Illuminate\Support\Facades\Response {}
             class Route extends \Illuminate\Support\Facades\Route {}
-            class Schedule extends \Illuminate\Support\Facades\Schedule {}
             class Schema extends \Illuminate\Support\Facades\Schema {}
             class Session extends \Illuminate\Support\Facades\Session {}
             class Storage extends \Illuminate\Support\Facades\Storage {}
@@ -27569,6 +27363,7 @@ namespace  {
             class Vite extends \Illuminate\Support\Facades\Vite {}
             class PageBuilder extends \App\Facades\Page\PageBuilder {}
             class Theme extends \App\Lib\Theme {}
+            class ResponseAjax extends \App\Facades\Http\ResponseAjax {}
             class CheckboxCast extends \App\Casts\CheckboxCast {}
             class User extends \App\Models\Core\User {}
             class Purifier extends \Mews\Purifier\Facades\Purifier {}
@@ -27576,6 +27371,7 @@ namespace  {
             class Breadcrumbs extends \Diglactic\Breadcrumbs\Breadcrumbs {}
             class Livewire extends \Livewire\Livewire {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
+            class Signal extends \Spatie\SignalAwareCommand\Facades\Signal {}
             class DataTables extends \Yajra\DataTables\Facades\DataTables {}
     }
 

@@ -8,7 +8,7 @@ use App\Models\MBO\Objective;
 use App\Enums\MBO\UserObjectiveStatus;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string $user_id

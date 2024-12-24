@@ -11,7 +11,7 @@ use App\Facades\Forms\RequestForms;
 use App\Casts\Enigma;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property string $user_id
@@ -42,6 +42,8 @@ use App\Casts\Enigma;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withoutTrashed()
+ * @property string $lang
+ * @method static \Database\Factories\Core\UserProfileFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
 class UserProfile extends Model

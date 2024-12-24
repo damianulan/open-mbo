@@ -11,7 +11,7 @@ use Watson\Rememberable\Rememberable;
 use App\Traits\Vendors\ModelActivity;
 use Carbon\Carbon;
 /**
- *
+ * 
  *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count

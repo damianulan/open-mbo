@@ -22,7 +22,7 @@ use App\Traits\Vendors\ModelActivity;
 use App\Casts\Enigma;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string $email
@@ -83,6 +83,7 @@ use App\Casts\Enigma;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutTrashed()
+ * @method static \Database\Factories\Core\UserFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
 class User extends Authenticatable

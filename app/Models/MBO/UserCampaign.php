@@ -10,7 +10,7 @@ use App\Enums\MBO\CampaignStage;
 use App\Models\MBO\UserObjective;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string $campaign_id
