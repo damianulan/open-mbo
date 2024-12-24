@@ -15,7 +15,7 @@ return [
         'operation' => 'Uwaga!',
     ],
     'info' => [
-
+        'maintenance' => 'Serwis jest zamknięty dla użytkowników.',
     ],
 
     'settings' => [

@@ -14,6 +14,13 @@
             @endif
           </header>
           <div class="page-quick-actions">
+            @if(config('app.maintenance') === true)
+              <div class="me-3">
+                <a href="javascript:void(0);" data-tippy-placement="bottom" data-tippy-content="{{ __('alerts.info.maintenance') }}">
+                    <i class="bi text-danger bi-exclamation-triangle-fill"></i>
+                </a>
+              </div>
+            @endif
               <div class="me-3">
                 <a href="#" data-tippy-placement="bottom" data-tippy-content="Baza wiedzy">
                     <i class="bi bi-book-fill"></i>

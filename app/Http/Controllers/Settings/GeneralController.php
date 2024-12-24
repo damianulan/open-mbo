@@ -35,8 +35,8 @@ class GeneralController extends SettingsController
             $settings->$key = $value;
         }
         if($settings->save()){
-            return redirect()->back()->with('success', __('alerts.settings.success.mail_update'));
+            return redirect()->back()->with('success', __('alerts.settings.success.general'));
         }
-        return redirect()->back()->with('error', __('alerts.settings.error.mail_update'));;
+        return redirect()->back()->with('error', __('alerts.settings.error.general'));;
     }
 }
