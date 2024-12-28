@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\Users\Gender;
 
 return new class extends Migration
 {
@@ -12,20 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_profiles', function (Blueprint $table) {
+        Schema::create('user_preferences', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->enum('gender', [
-                Gender::MALE->value,
-                Gender::FEMALE->value,
-                Gender::OTHER->value,
-            ])->default(Gender::OTHER->value);
-            $table->date('birthday')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('avatar')->nullable();
+            $table->string('lang', 4)->default('auto');
+            $table->string('theme', 128);
+            $table->string('mail_notifications', 1);
+            $table->string('app_notifications', 1);
+            $table->string('extended_notifications', 1);
+            $table->string('system_notifications', 1);
+
             $table->timestamps();
             $table->softDeletes();
         });
@@ -36,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_profiles');
+        Schema::dropIfExists('user_preferences');
     }
 };

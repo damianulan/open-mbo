@@ -8,6 +8,7 @@ use App\Models\Core\User;
 use App\Models\MBO\Campaign;
 use App\Enums\MBO\CampaignStage;
 use App\Models\MBO\UserObjective;
+use App\Notifications\MBO\Campaign\CampaignAssignment;
 
 /**
  * 
@@ -66,6 +67,13 @@ class UserCampaign extends BaseModel
             $objectives = $model->campaign->objectives()->get();
             foreach($objectives as $objective){
                 UserObjective::assign($model->user_id, $objective->id);
+            }
+
+            $coordinators = $model->campaign->coordinators;
+            if(!empty($coordinators)){
+                foreach($coordinators as $coordinator){
+                    $coordinator->notify(new CampaignAssignment($model->user, $model->campaign));
+                }
             }
 
             return $model;

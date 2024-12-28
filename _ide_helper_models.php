@@ -361,8 +361,8 @@ namespace App\Models\Core{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Permission whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Permission whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Permission whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property int $assignable
+ * @mixin \Eloquent
  */
 	class Permission extends \Eloquent {}
 }
@@ -384,8 +384,8 @@ namespace App\Models\Core{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Role whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Role whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Role whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property bool $assignable
+ * @mixin \Eloquent
  */
 	class Role extends \Eloquent {}
 }
@@ -453,10 +453,36 @@ namespace App\Models\Core{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutTrashed()
- * @mixin \Eloquent
  * @method static \Database\Factories\Core\UserFactory factory($count = null, $state = [])
+ * @mixin \Eloquent
+ * @property-read \App\Models\Core\UserPreference|null $preferences
  */
 	class User extends \Eloquent {}
+}
+
+namespace App\Models\Core{
+/**
+ * 
+ *
+ * @property int $id
+ * @property string $user_id
+ * @property string $lang
+ * @property string $theme
+ * @property bool $mail_notifications
+ * @property bool $app_notifications
+ * @property bool $extended_notifications
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\Core\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference withoutTrashed()
+ */
+	class UserPreference extends \Eloquent {}
 }
 
 namespace App\Models\Core{
@@ -492,9 +518,9 @@ namespace App\Models\Core{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withoutTrashed()
- * @mixin \Eloquent
  * @property string $lang
  * @method static \Database\Factories\Core\UserProfileFactory factory($count = null, $state = [])
+ * @mixin \Eloquent
  */
 	class UserProfile extends \Eloquent {}
 }
@@ -593,8 +619,8 @@ namespace App\Models\MBO{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign withoutTrashed()
- * @mixin \Eloquent
  * @property string $stage
+ * @mixin \Eloquent
  */
 	class Campaign extends \Eloquent {}
 }
@@ -686,8 +712,8 @@ namespace App\Models\MBO{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withoutTrashed()
- * @mixin \Eloquent
  * @method static \Database\Factories\MBO\ObjectiveTemplateFactory factory($count = null, $state = [])
+ * @mixin \Eloquent
  */
 	class ObjectiveTemplate extends \Eloquent {}
 }
@@ -722,10 +748,10 @@ namespace App\Models\MBO{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory withoutTrashed()
- * @mixin \Eloquent
  * @property string|null $shortname
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Core\User> $coordinators
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $coordinators
  * @property-read int|null $coordinators_count
+ * @mixin \Eloquent
  */
 	class ObjectiveTemplateCategory extends \Eloquent {}
 }

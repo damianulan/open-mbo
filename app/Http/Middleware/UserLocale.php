@@ -19,7 +19,7 @@ class UserLocale
             return $next($request);
         }
 
-        $language = $request->user()->profile->lang ?? null;
+        $language = $request->user()->preferences->lang ?? null;
 
         $availableLocales = config('app.available_locales');
         if (isset($language) && in_array($language, $availableLocales)) {
