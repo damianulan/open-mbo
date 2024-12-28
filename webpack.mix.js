@@ -29,3 +29,5 @@ mix.sass('resources/themes/light/orange.scss', 'public/themes/light-orange/app.c
 
 mix.sass('resources/themes/light/orchid.scss', 'public/themes/light-orchid/app.css')
     .version();
+
+mix.copy('resources/themes/js/trix.esm.min.js.map', 'public/themes/js');

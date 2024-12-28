@@ -13,5 +13,6 @@
     "/images/chosen-sprite@2x.png": "/images/chosen-sprite@2x.png?id=da1e3f69fcdb59582919488a1f679276",
     "/images/portrait/avatar-female.png": "/images/portrait/avatar-female.png?id=70aab25d86b1b481f2ff41df8b19f497",
     "/images/portrait/avatar-male.png": "/images/portrait/avatar-male.png?id=62fbb47559421f75e6e3208970b82381",
-    "/scripts/globals.js": "/scripts/globals.js?id=114b06b1f9238eafb5b03f2ab95c8f78"
+    "/scripts/globals.js": "/scripts/globals.js?id=114b06b1f9238eafb5b03f2ab95c8f78",
+    "/themes/js/trix.esm.min.js.map": "/themes/js/trix.esm.min.js.map?id=8d0c6bb693f0450b8b3ea2025ee3cc6d"
 }
