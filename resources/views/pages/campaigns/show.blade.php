@@ -12,7 +12,7 @@
     @include('components.mbo.campaign-summary')
     <div class="container pt-4">
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-5 pt-3">
                 <h4>Cele</h4>
                 <ul class="ombo-list">
                     @if(count($campaign->objectives))
@@ -20,8 +20,11 @@
                         <li>
                             <div class="list-grid">
                                 <div class="list-content">
-                                    <i class="bi text-primary bi-bullseye me-1"></i>
-                                    <span>{{ $objective->name }}</span>
+                                    <div class="nowrap" data-tippy-content="{{ $objective->name }}">
+                                        <i class="bi text-primary bi-bullseye me-1"></i>
+                                        <span>{{ $objective->name }}</span>
+                                    </div>
+
                                 </div>
                                 <div class="list-actions">
                                     @if($objective->draft)
@@ -64,8 +67,10 @@
                     <li>
                         <div class="list-grid">
                             <div class="list-content">
-                                <i class="bi text-primary bi-person me-1"></i>
-                                <span>{{ $user->name() }}</span>
+                                <div class="nowrap" data-tippy-content="{{ $user->name() }}">
+                                    <i class="bi text-primary bi-person me-1"></i>
+                                    <span>{{ $user->name() }}</span>
+                                </div>
                             </div>
                             <div class="list-actions">
                                 <div class="list-action me-2" data-tippy-content="{{ $uc->stageDescription() }}">

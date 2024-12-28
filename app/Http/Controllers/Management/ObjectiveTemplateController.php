@@ -18,7 +18,7 @@ class ObjectiveTemplateController extends ManagementController
     {
 
         return view('pages.management.index', [
-            'objectives' => ObjectiveTemplate::all(),
+            'objectives' => ObjectiveTemplate::paginate(18),
             'nav' => $this->nav,
         ]);
     }

@@ -20,6 +20,13 @@
             </div>
         @endforeach
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            {{ $objectives->links() }}
+
+
+        </div>
+    </div>
 </div>
 @else
 <x-nocontent-page/>

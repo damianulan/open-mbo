@@ -15,5 +15,9 @@ return [
 
     'previous' => '&laquo; Poprzednia strona',
     'next' => 'Następna strona &raquo;',
+    'showing' => 'Wyświetlono',
+    'to' => ' - ',
+    'of' => 'z',
+    'results' => 'wyników',
 
 ];

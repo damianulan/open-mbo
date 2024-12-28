@@ -1,10 +1,10 @@
 {
     "/themes/js/app.js": "/themes/js/app.js?id=d9906025192cd02e9ef3128b71df5521",
-    "/themes/light-orchid/app.css": "/themes/light-orchid/app.css?id=1bc3ddb327c664715dfa902a4cd936b8",
-    "/themes/light-orange/app.css": "/themes/light-orange/app.css?id=8be04572b2a5e8dbaaf9f64e2b974d43",
-    "/themes/light-red/app.css": "/themes/light-red/app.css?id=324c034c81de8335dab425250809a0df",
-    "/themes/light-blue/app.css": "/themes/light-blue/app.css?id=9f1ccb5feaa862621a9afc1b487345b1",
-    "/themes/light-green/app.css": "/themes/light-green/app.css?id=38caa79085c3b3ace33564676a0a8e9a",
+    "/themes/light-orchid/app.css": "/themes/light-orchid/app.css?id=78cdf34923cda66e0bda58f18cd8e01b",
+    "/themes/light-orange/app.css": "/themes/light-orange/app.css?id=056f192135810db8cca9d217a7cc2527",
+    "/themes/light-red/app.css": "/themes/light-red/app.css?id=4e1b6c6f2bd82e5af6e1c9ee242d46a5",
+    "/themes/light-blue/app.css": "/themes/light-blue/app.css?id=c01dbe7811628f0e0eb846db96e8b5f8",
+    "/themes/light-green/app.css": "/themes/light-green/app.css?id=c50686cf0891d881325457cb2ea48cc2",
     "/themes/vendors/datatables/datatables.min.js": "/themes/vendors/datatables/datatables.min.js?id=028790892e63b1a0b87f4037fee45ca1",
     "/themes/vendors/datatables/pl.json": "/themes/vendors/datatables/pl.json?id=1eb747a21cb68879bee8e110b14c246b",
     "/themes/vendors/jquery.min.js": "/themes/vendors/jquery.min.js?id=cf2fbbf84281d9ecbffb4993203d543b",
@@ -13,6 +13,7 @@
     "/images/chosen-sprite@2x.png": "/images/chosen-sprite@2x.png?id=da1e3f69fcdb59582919488a1f679276",
     "/images/portrait/avatar-female.png": "/images/portrait/avatar-female.png?id=70aab25d86b1b481f2ff41df8b19f497",
     "/images/portrait/avatar-male.png": "/images/portrait/avatar-male.png?id=62fbb47559421f75e6e3208970b82381",
+    "/images/resources/favicon.ico": "/images/resources/favicon.ico?id=29c9ffe751a68cf424f56ee0212ea1bd",
     "/scripts/globals.js": "/scripts/globals.js?id=114b06b1f9238eafb5b03f2ab95c8f78",
     "/themes/js/trix.esm.min.js.map": "/themes/js/trix.esm.min.js.map?id=8d0c6bb693f0450b8b3ea2025ee3cc6d"
 }

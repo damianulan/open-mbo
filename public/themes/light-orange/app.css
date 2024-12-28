@@ -26253,7 +26253,11 @@ ul.ombo-list {
   display: flex;
   align-items: center;
   font-size: 0.8rem;
-  position: absolute;
+  width: 100%;
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
 }
 
 .ombo-list li .list-content span {
