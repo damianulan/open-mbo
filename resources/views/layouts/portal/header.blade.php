@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ $page->sitename . ' - ' . $page->title }}</title>
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('themes/'.$page->theme.'/images/resources/favicon.ico') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('themes/images/resources/favicon.ico') }}">
 
     <!-- Theme -->
     <link rel="stylesheet" type="text/css" href="{{ asset('themes/'.$page->theme.'/app.css') }}">

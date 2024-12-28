@@ -45,6 +45,10 @@
 }
 
 .card.failed {
+    background-color: $ombo-body-inactive;
+}
+
+.card.failed:hover {
     -webkit-box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
     -moz-box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
     box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;

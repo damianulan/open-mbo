@@ -1,0 +1,8 @@
+// Primaries
+$primary: #1C676C;
+//$primary: #135737;
+
+// Secondaries
+$secondary: darken($primary, 10%);
+
+@import 'app'

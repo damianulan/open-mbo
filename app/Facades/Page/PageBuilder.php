@@ -35,7 +35,7 @@ class PageBuilder
         }
 
         $this->sitename = app(GeneralSettings::class)->site_name;
-        $this->theme = app(GeneralSettings::class)->theme;
+        $this->theme = current_theme();
         $this->locale = app(GeneralSettings::class)->locale;
         $this->logo = app(GeneralSettings::class)->site_logo;
 

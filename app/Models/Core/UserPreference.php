@@ -9,7 +9,7 @@ use App\Models\Core\User;
 use App\Facades\Forms\RequestForms;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $user_id
@@ -47,7 +47,7 @@ class UserPreference extends Model
 
     protected $attributes = [
         'lang' => 'auto',
-        'theme' => 'light',
+        'theme' => 'auto',
         'mail_notifications' => 1,
         'app_notifications' => 1,
         'extended_notifications' => 1,

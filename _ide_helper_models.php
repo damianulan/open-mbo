@@ -454,10 +454,10 @@ namespace App\Models\Core{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutTrashed()
  * @method static \Database\Factories\Core\UserFactory factory($count = null, $state = [])
+ * @property-read UserPreference|null $preferences
  * @mixin \Eloquent
- * @property-read \App\Models\Core\UserPreference|null $preferences
  */
-	class User extends \Eloquent {}
+	class User extends \Eloquent implements \Illuminate\Contracts\Translation\HasLocalePreference {}
 }
 
 namespace App\Models\Core{
@@ -474,13 +474,15 @@ namespace App\Models\Core{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \App\Models\Core\User $user
+ * @property-read User $user
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference withoutTrashed()
+ * @mixin \Eloquent
+ * @property bool $system_notifications
  */
 	class UserPreference extends \Eloquent {}
 }

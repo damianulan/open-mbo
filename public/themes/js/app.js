@@ -3011,25 +3011,25 @@ function withinMaxClamp(min, value, max) {
 
 /***/ }),
 
-/***/ "./resources/themes/light/app.js":
-/*!***************************************!*\
-  !*** ./resources/themes/light/app.js ***!
-  \***************************************/
+/***/ "./resources/themes/js/app.js":
+/*!************************************!*\
+  !*** ./resources/themes/js/app.js ***!
+  \************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/themes/light/bootstrap.js");
-/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components */ "./resources/themes/light/components.js");
+/* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/themes/js/bootstrap.js");
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components */ "./resources/themes/js/components.js");
 
 
 
 /***/ }),
 
-/***/ "./resources/themes/light/bootstrap.js":
-/*!*********************************************!*\
-  !*** ./resources/themes/light/bootstrap.js ***!
-  \*********************************************/
+/***/ "./resources/themes/js/bootstrap.js":
+/*!******************************************!*\
+  !*** ./resources/themes/js/bootstrap.js ***!
+  \******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -3074,22 +3074,22 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/themes/light/components.js":
-/*!**********************************************!*\
-  !*** ./resources/themes/light/components.js ***!
-  \**********************************************/
+/***/ "./resources/themes/js/components.js":
+/*!*******************************************!*\
+  !*** ./resources/themes/js/components.js ***!
+  \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_js_trix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/js/trix */ "./resources/themes/light/components/js/trix.js");
-/* harmony import */ var _components_js_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/js/base */ "./resources/themes/light/components/js/base.js");
-/* harmony import */ var _components_js_navbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/js/navbar */ "./resources/themes/light/components/js/navbar.js");
-/* harmony import */ var _components_js_navbar__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_components_js_navbar__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _components_js_requests__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/js/requests */ "./resources/themes/light/components/js/requests.js");
-/* harmony import */ var _components_js_requests__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_components_js_requests__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _components_js_validation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/js/validation */ "./resources/themes/light/components/js/validation.js");
-/* harmony import */ var _components_js_validation__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_components_js_validation__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_trix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/trix */ "./resources/themes/js/components/trix.js");
+/* harmony import */ var _components_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/base */ "./resources/themes/js/components/base.js");
+/* harmony import */ var _components_navbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/navbar */ "./resources/themes/js/components/navbar.js");
+/* harmony import */ var _components_navbar__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_components_navbar__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_requests__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/requests */ "./resources/themes/js/components/requests.js");
+/* harmony import */ var _components_requests__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_components_requests__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_validation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/validation */ "./resources/themes/js/components/validation.js");
+/* harmony import */ var _components_validation__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_components_validation__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
@@ -3098,10 +3098,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/themes/light/components/js/base.js":
-/*!******************************************************!*\
-  !*** ./resources/themes/light/components/js/base.js ***!
-  \******************************************************/
+/***/ "./resources/themes/js/components/base.js":
+/*!************************************************!*\
+  !*** ./resources/themes/js/components/base.js ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -3469,10 +3469,10 @@ $.clearErrorsForm = function (form_id) {
 
 /***/ }),
 
-/***/ "./resources/themes/light/components/js/navbar.js":
-/*!********************************************************!*\
-  !*** ./resources/themes/light/components/js/navbar.js ***!
-  \********************************************************/
+/***/ "./resources/themes/js/components/navbar.js":
+/*!**************************************************!*\
+  !*** ./resources/themes/js/components/navbar.js ***!
+  \**************************************************/
 /***/ (() => {
 
 function sidebarToggleAll() {
@@ -3557,10 +3557,10 @@ $(".list-menu .menu-options .toggle-all").click(function () {
 
 /***/ }),
 
-/***/ "./resources/themes/light/components/js/requests.js":
-/*!**********************************************************!*\
-  !*** ./resources/themes/light/components/js/requests.js ***!
-  \**********************************************************/
+/***/ "./resources/themes/js/components/requests.js":
+/*!****************************************************!*\
+  !*** ./resources/themes/js/components/requests.js ***!
+  \****************************************************/
 /***/ (() => {
 
 $('#debuggingOptionSwitch').on("change", function () {
@@ -3579,10 +3579,10 @@ $('#debuggingOptionSwitch').on("change", function () {
 
 /***/ }),
 
-/***/ "./resources/themes/light/components/js/trix.js":
-/*!******************************************************!*\
-  !*** ./resources/themes/light/components/js/trix.js ***!
-  \******************************************************/
+/***/ "./resources/themes/js/components/trix.js":
+/*!************************************************!*\
+  !*** ./resources/themes/js/components/trix.js ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -3597,10 +3597,10 @@ window.Trix = trix__WEBPACK_IMPORTED_MODULE_0__["default"];
 
 /***/ }),
 
-/***/ "./resources/themes/light/components/js/validation.js":
-/*!************************************************************!*\
-  !*** ./resources/themes/light/components/js/validation.js ***!
-  \************************************************************/
+/***/ "./resources/themes/js/components/validation.js":
+/*!******************************************************!*\
+  !*** ./resources/themes/js/components/validation.js ***!
+  \******************************************************/
 /***/ (() => {
 
 $('input[data-validation="numeric"]').on('keypress', function (evt) {
@@ -40614,10 +40614,62 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
-/***/ "./resources/themes/light/app.scss":
+/***/ "./resources/themes/light/green.scss":
+/*!*******************************************!*\
+  !*** ./resources/themes/light/green.scss ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/themes/light/blue.scss":
+/*!******************************************!*\
+  !*** ./resources/themes/light/blue.scss ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/themes/light/red.scss":
 /*!*****************************************!*\
-  !*** ./resources/themes/light/app.scss ***!
+  !*** ./resources/themes/light/red.scss ***!
   \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/themes/light/orange.scss":
+/*!********************************************!*\
+  !*** ./resources/themes/light/orange.scss ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/themes/light/orchid.scss":
+/*!********************************************!*\
+  !*** ./resources/themes/light/orchid.scss ***!
+  \********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -75084,8 +75136,12 @@ const asap = typeof queueMicrotask !== 'undefined' ?
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
-/******/ 			"/themes/light/app": 0,
-/******/ 			"themes/light/app": 0
+/******/ 			"/themes/js/app": 0,
+/******/ 			"themes/light-orchid/app": 0,
+/******/ 			"themes/light-orange/app": 0,
+/******/ 			"themes/light-red/app": 0,
+/******/ 			"themes/light-blue/app": 0,
+/******/ 			"themes/light-green/app": 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -75135,8 +75191,12 @@ const asap = typeof queueMicrotask !== 'undefined' ?
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["themes/light/app"], () => (__webpack_require__("./resources/themes/light/app.js")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["themes/light/app"], () => (__webpack_require__("./resources/themes/light/app.scss")))
+/******/ 	__webpack_require__.O(undefined, ["themes/light-orchid/app","themes/light-orange/app","themes/light-red/app","themes/light-blue/app","themes/light-green/app"], () => (__webpack_require__("./resources/themes/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["themes/light-orchid/app","themes/light-orange/app","themes/light-red/app","themes/light-blue/app","themes/light-green/app"], () => (__webpack_require__("./resources/themes/light/green.scss")))
+/******/ 	__webpack_require__.O(undefined, ["themes/light-orchid/app","themes/light-orange/app","themes/light-red/app","themes/light-blue/app","themes/light-green/app"], () => (__webpack_require__("./resources/themes/light/blue.scss")))
+/******/ 	__webpack_require__.O(undefined, ["themes/light-orchid/app","themes/light-orange/app","themes/light-red/app","themes/light-blue/app","themes/light-green/app"], () => (__webpack_require__("./resources/themes/light/red.scss")))
+/******/ 	__webpack_require__.O(undefined, ["themes/light-orchid/app","themes/light-orange/app","themes/light-red/app","themes/light-blue/app","themes/light-green/app"], () => (__webpack_require__("./resources/themes/light/orange.scss")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["themes/light-orchid/app","themes/light-orange/app","themes/light-red/app","themes/light-blue/app","themes/light-green/app"], () => (__webpack_require__("./resources/themes/light/orchid.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
