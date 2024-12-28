@@ -4,6 +4,8 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Console\Commands\AppRefresh;
+use App\Console\Commands\AppReload;
 
 use App\Console\Commands\MBO\CampaignStatusScript;
 class Kernel extends ConsoleKernel
@@ -22,6 +24,9 @@ class Kernel extends ConsoleKernel
             $schedule->command('backup:run')->daily()->at('01:30');
         }
 
+        if(config('app.env') === 'development'){
+            $schedule->call(new AppRefresh())->daily()->at('01:01');
+        }
     }
 
     /**
