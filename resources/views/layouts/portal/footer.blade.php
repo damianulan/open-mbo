@@ -3,7 +3,7 @@
 <div id="modal-container"></div>
 <script src="{{ asset('scripts/globals.js') }}"></script>
 <script src="{{ asset('themes/vendors/datatables/datatables.min.js') }}"></script>
-<script src="{{ asset('themes/'.$page->theme.'/app.js') }}"></script>
+<script src="{{ asset('themes/js/app.js') }}"></script>
 @include('layouts.components.alerts');
 @yield('page-scripts')
 @stack('custom-scripts')

@@ -21,6 +21,11 @@
                     {{ __('menus.profile.settings') }}
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link">
+                    {{ __('menus.preferences') }}
+                </a>
+            </li>
         </ul>
     </div>
 </div>

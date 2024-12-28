@@ -1,16 +1,17 @@
 <li class="notification-li">
-    <a class="dropdown-item notification-item" href="#">
+    <a class="dropdown-item notification-item{{ $notification->unread() ? ' unread':'' }}" href="{{$notification->data['link'] ?? 'javascript:void(0);'}}">
         <div class="notification-contents">
             <div class="notification-icon px-1">
-                <i class="bi-pencil-fill"></i>
+                <i class="{{ $notification->data['icon'] }}"></i>
             </div>
             <div class="notification-text px-1">
-                Cel <strong>Kontrolny 1</strong> został pomyślnie zedytowany przez twojego podwładnego: <strong>Adam Nowicki</strong>
+                {!! $notification->data['message'] !!}
             </div>
+
 
         </div>
         <div class="notification-time px-1 text-end">
-            3 godziny temu
+            {{ $notification->created_at->diffForHumans() }}
         </div>
     </a>
 </li>

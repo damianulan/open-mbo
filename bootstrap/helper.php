@@ -27,3 +27,22 @@ function ajax(): App\Facades\Http\ResponseAjax
 {
     return new App\Facades\Http\ResponseAjax();
 }
+
+function current_theme(): string
+{
+    $theme = app(App\Settings\GeneralSettings::class)->theme;
+    $user = auth()->user();
+    if($user){
+        $userTheme = $user->preferences->theme;
+        if($userTheme && $userTheme !== $theme && $userTheme !== 'auto'){
+            $theme = $userTheme;
+        }
+    }
+    $available = App\Lib\Theme::getAvailable();
+
+    if($available->contains($theme) === false){
+        $theme = $available->first();
+    }
+
+    return $theme;
+}

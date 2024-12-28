@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('firstname');
             $table->string('lastname');
-            $table->string('lang', 4)->default('auto');
             $table->enum('gender', [
                 Gender::MALE->value,
                 Gender::FEMALE->value,

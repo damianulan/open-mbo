@@ -16,10 +16,11 @@ use App\Traits\UserMBO;
 use App\Traits\UserBusiness;
 use App\Traits\ActiveFields;
 use App\Models\Core\UserProfile;
+use App\Models\Core\UserPreference;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Traits\Vendors\ModelActivity;
-use App\Casts\Enigma;
+use Illuminate\Contracts\Translation\HasLocalePreference;
 
 /**
  * 
@@ -84,9 +85,10 @@ use App\Casts\Enigma;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutTrashed()
  * @method static \Database\Factories\Core\UserFactory factory($count = null, $state = [])
+ * @property-read UserPreference|null $preferences
  * @mixin \Eloquent
  */
-class User extends Authenticatable
+class User extends Authenticatable implements HasLocalePreference
 {
     use UUID, HasApiTokens, HasFactory, Notifiable, HasRolesAndPermissions, SoftDeletes, RequestForms;
     use UserMBO, UserBusiness, ActiveFields, Impersonate, Impersonable, ModelActivity;
@@ -114,10 +116,13 @@ class User extends Authenticatable
 
     protected static function booted() {
         static::created(function(User $user) {
-
+            if(empty($user->preferences)){
+                $user->preferences()->create();
+            }
         });
         static::deleting(function(User $user) {
             $user->profile->delete();
+            $user->preferences->delete();
        });
     }
 
@@ -197,6 +202,21 @@ class User extends Authenticatable
     public function profile()
     {
         return $this->hasOne(UserProfile::class);
+    }
+
+    public function preferences()
+    {
+        return $this->hasOne(UserPreference::class);
+    }
+
+    public function preferredLocale()
+    {
+        $locale = $this->preferences->lang ?? 'auto';
+        if($locale === 'auto') {
+            $locale = app()->getLocale();
+        }
+
+        return $locale;
     }
 
 }
