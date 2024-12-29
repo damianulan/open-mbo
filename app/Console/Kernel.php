@@ -18,17 +18,17 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(new CampaignStatusScript())->daily()->at('00:01');
+        $schedule->command(CampaignStatusScript::class)->daily()->at('00:01');
 
         if(config('backup.backup.auto') === true){
             $schedule->command('backup:run')->daily()->at('01:30');
         }
 
         if(config('app.env') === 'development'){
-            $schedule->call(new AppRefresh())->daily()->at('01:01');
+            $schedule->command(AppRefresh::class)->daily()->at('01:01');
         }
 
-        $schedule->command('echo "Hello test"')->everyMinute();
+        $schedule->exec('echo "Hello test"')->everyMinute();
     }
 
     /**
