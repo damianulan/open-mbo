@@ -137,20 +137,24 @@ class MenuItem
     }
 
     /**
-     * User is required to be assigned to the given permission, in order to view menu element.
+     * User is required to be assigned to ANY of the given permissions, in order to view menu element.
      */
-    public function requirePermission(string $slug): self
+    public function permission(... $slug): self
     {
-        if(!auth()->user()->hasPermissionTo($slug)){
-            $this->visible = false;
+        $this->visible = false;
+        foreach($slug as $s){
+            if(!auth()->user()->hasPermissionTo($s)){
+                $this->visible = true;
+            }
         }
+
         return $this;
     }
 
     /**
      * User is required to be assigned to at least one of the given roles, in order to view menu element.
      */
-    public function requireRole(... $slug): self
+    public function role(... $slug): self
     {
         if(!auth()->user()->hasAnyRole($slug)){
             $this->visible = false;

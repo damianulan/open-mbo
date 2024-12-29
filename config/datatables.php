@@ -97,12 +97,12 @@ return [
          * List of columns that are allowed to display html content.
          * Note: Adding columns to list will make us available to XSS attacks.
          */
-        'raw'       => ['action'],
+        'raw'       => ['action', 'actions'],
 
         /*
          * List of columns are forbidden from being searched/sorted.
          */
-        'blacklist' => ['password', 'remember_token'],
+        'blacklist' => ['password', 'remember_token', 'action', 'actions'],
 
         /*
          * List of columns that are only allowed fo search/sort.

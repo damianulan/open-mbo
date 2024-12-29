@@ -12,7 +12,11 @@ use Illuminate\Database\Eloquent\Builder;
 trait HasRolesAndPermissions
 {
     /**
-     * @return mixed
+     * Context is not required, if not provided, checks for all contexts. System context is superior - if context is provided,
+     * but assigned to System context, then it will return true.
+     *
+     * @param  mixed $context
+     * @return void
      */
     public function roles($context = null)
     {

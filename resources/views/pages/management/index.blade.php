@@ -12,7 +12,11 @@
 </nav>
 @if (count($objectives))
 <div class="content-card">
-
+    <div class="row pagination-row">
+        <div class="col-md-12">
+            {{ $objectives->links() }}
+        </div>
+    </div>
     <div class="row">
         @foreach($objectives as $objective)
             <div class="col-md-4 pb-3">
@@ -20,11 +24,9 @@
             </div>
         @endforeach
     </div>
-    <div class="row">
+    <div class="row pagination-row">
         <div class="col-md-12">
             {{ $objectives->links() }}
-
-
         </div>
     </div>
 </div>

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\UUID;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $slug
@@ -38,6 +38,29 @@ class Permission extends Model
     public static $roleSeeds = [
         // users
         'users-impersonate' => ['admins'],
+        'users-list' => ['admins', 'admin_mbo', 'supervisor'], // and probably any other superior and team leader @TODO later
+        'users-view' => ['admins', 'admin_mbo', 'supervisor'], // and probably any other superior and team leader @TODO later
+        'users-create' => ['admins'],
+        'users-edit' => ['admins'],
+        'users-teams' => ['admins'],
+
+        // settings
+        'settings-general' => ['admins'],
+        'settings-modules' => ['admins'],
+        'settings-server' => ['admins'],
+        'settings-logs' => ['admins'],
+
+        // management
+        'management-mbo-templates' => ['admins', 'admin_mbo', 'objective_coordinator'],
+        'management-mbo-categories' => ['admins', 'admin_mbo'],
+        'management-users' => ['admins'],
+        'management-structure' => ['admins'],
+        'management-notifications' => ['admins'],
+        'management-reports' => ['admins'],
+        'management-recovery' => ['root', 'support'],
+
+        // reports
+        'reports-view' => ['admins', 'admin_mbo', 'supervisor'], // and probably any other superior and team leader @TODO later
 
         // mbo
         'mbo-campaign-create' => ['admins', 'admin_mbo'],
