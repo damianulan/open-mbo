@@ -3,5 +3,9 @@ $primary: #B43841;
 
 // Secondaries
 $secondary: darken($primary, 10%);
+$warning: #e56b6f;
+$danger: #e79a1d;
+$success: #4f9d69;
+$info: #0892A5;
 
 @import 'app'

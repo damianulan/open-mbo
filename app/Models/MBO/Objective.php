@@ -13,7 +13,7 @@ use App\Casts\Carbon\CarbonDatetime;
 use App\Models\MBO\UserObjective;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string|null $template_id
@@ -96,6 +96,17 @@ class Objective extends BaseModel
                 }
             }
         });
+    }
+
+    public function isOverdued(): bool
+    {
+        if($this->deadline){
+            $deadline = \Carbon\Carbon::parse($this->deadline);
+            if($deadline->isPast()){
+                return true;
+            }
+        }
+        return false;
     }
 
     public function parent()

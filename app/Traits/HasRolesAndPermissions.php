@@ -9,6 +9,7 @@ use App\Models\MBO\Campaign;
 use Illuminate\Database\Eloquent\Model;
 use App\Lib\Contexts\System;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 trait HasRolesAndPermissions
 {
     /**
@@ -16,9 +17,9 @@ trait HasRolesAndPermissions
      * but assigned to System context, then it will return true.
      *
      * @param  mixed $context
-     * @return void
+     * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function roles($context = null)
+    public function roles($context = null): BelongsToMany
     {
         $relation = $this->belongsToMany(Role::class,'users_roles');
         if($context && $context instanceof Model){
@@ -111,8 +112,9 @@ trait HasRolesAndPermissions
      */
     public function hasPermissionThroughRole($permission, $context = null)
     {
+        $roles = $this->roles($context)->get();
         foreach ($permission->roles as $role){
-            if($this->roles($context)->get()->contains($role)) {
+            if($roles->contains($role)) {
                 return true;
             }
         }

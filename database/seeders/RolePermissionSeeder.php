@@ -13,8 +13,12 @@ class RolePermissionSeeder extends Seeder
     private Role $support;
     private Role $admin;
     private Role $admin_mbo;
+    private Role $admin_hr;
     private Role $objective_coordinator;
     private Role $campaign_coordinator;
+    private Role $director;
+    private Role $manager;
+    private Role $team_leader;
     private Role $supervisor;
     private Role $employee;
 
@@ -46,6 +50,11 @@ class RolePermissionSeeder extends Seeder
         $this->admin_mbo->assignable = true;
         $this->admin_mbo->save();
 
+        $this->admin_hr = new Role();
+        $this->admin_hr->slug = 'admin_hr'; // has some user management privileges
+        $this->admin_hr->assignable = true;
+        $this->admin_hr->save();
+
         $this->objective_coordinator = new Role();
         $this->objective_coordinator->slug = 'objective_coordinator'; // staje się po przypisaniu kategorii celu -- ma dostęp do edycji szablonów celów w kategorii oraz do podsumowania o ich wykorzystywaniu i aktualnym przypisaniu
         $this->objective_coordinator->save();
@@ -54,9 +63,17 @@ class RolePermissionSeeder extends Seeder
         $this->campaign_coordinator->slug = 'campaign_coordinator'; // staje się po przypisaniu kampanii
         $this->campaign_coordinator->save();
 
+        $this->director = new Role();
+        $this->director->slug = 'director'; // in company context
+        $this->director->save();
+
         $this->manager = new Role();
-        $this->manager->slug = 'manager';
+        $this->manager->slug = 'manager'; // in department context
         $this->manager->save();
+
+        $this->team_leader = new Role();
+        $this->team_leader->slug = 'team_leader'; // in a team context
+        $this->team_leader->save();
 
         $this->supervisor = new Role();
         $this->supervisor->slug = 'supervisor';

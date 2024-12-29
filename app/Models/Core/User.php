@@ -23,7 +23,7 @@ use App\Traits\Vendors\ModelActivity;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $email
@@ -135,6 +135,24 @@ class User extends Authenticatable implements HasLocalePreference
     public function name(): string
     {
         return $this->profile->firstname . ' ' . $this->profile->lastname;
+    }
+
+    public function nameView(): string
+    {
+        $link = '<span>'.$this->name().'</span>';
+        if (auth()->user()->can('view', $this)) {
+            $link = '<a href="'.route('users.show', $this->id).'" class="text-primary">'.$this->name().'</a>';
+        }
+        return $link;
+    }
+
+    public function nameDetails()
+    {
+        $view = view('components.datatables.username', ['data' => $this]);
+        if (auth()->user()->can('view', $this)) {
+            $view = view('components.datatables.username_link', ['data' => $this]);
+        }
+        return $view;
     }
 
     public function firstname() : string

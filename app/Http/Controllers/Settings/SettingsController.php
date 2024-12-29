@@ -32,9 +32,6 @@ class SettingsController extends Controller
             MenuItem::make('logs')
                     ->setTitle(__('menus.settings.logs.index'))
                     ->setRoute('settings.logs.index'),
-            MenuItem::make('help')
-                    ->setTitle(__('menus.settings.help.index'))
-                    ->setRoute('settings.help.index'),
         ]);
     }
 }

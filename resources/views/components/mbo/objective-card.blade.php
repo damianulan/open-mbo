@@ -2,18 +2,18 @@
 <div class="card card-url card-bg" data-url="{{ route('management.objectives.edit', $objective->id) }}">
     <div class="card-body">
         <div class="card-top">
-            <div class="card-title" data-tippy-content="Kampania xxx">
+            <div class="card-title" data-tippy-content="{{ $objective->name }}">
                 {{ $objective->name }}
             </div>
             <div class="card-badges">
                 <div></div>
                 @if($objective->draft)
                     <div data-tippy-content="Kopia robocza">
-                        <span class="badge bg-warning">Draft</span>
+                        <span class="badge bg-warning">{{ __('Draft') }}</span>
                     </div>
                 @endif
-                @if($objective->category())
-                <div data-tippy-content="Kategoria">
+                @if($objective->category)
+                <div class="align-self-center" data-tippy-content="Kategoria">
                     <span class="badge bg-secondary">{{ $objective->category->name }}</span>
                 </div>
                 @endif

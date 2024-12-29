@@ -25,6 +25,6 @@ class CarbonDatetime implements CastsAttributes
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        return empty($value) ? NULL:date('Y-m-d', strtotime($value));
+        return empty($value) ? NULL:date('Y-m-d H:i:s', strtotime($value));
     }
 }

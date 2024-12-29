@@ -831,31 +831,19 @@
   integrity sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==
 
 "@fontsource/ibm-plex-sans@^5.1.0":
-  version "5.1.0"
-  resolved "https://registry.npmjs.org/@fontsource/ibm-plex-sans/-/ibm-plex-sans-5.1.0.tgz"
-  integrity sha512-v2aFHGh33ogG+At6dVNUCX6vWlNAhQ6STWj5WrBKPxVWX1SsAnHNq8sXQBa7WHEt29Irmozuk7GTp6GzFlpwdQ==
+  version "5.1.1"
+  resolved "https://registry.npmjs.org/@fontsource/ibm-plex-sans/-/ibm-plex-sans-5.1.1.tgz"
+  integrity sha512-s6xHuHCYxZbIZV0Qchw+EoucPYWCP3PgLs9+oF3u1kLQKwabWaUC3Fm30y6n3VIMCqR89dpkcS8LTqH/IGTDDQ==
 
 "@fontsource/ibm-plex-serif@^5.1.0":
-  version "5.1.0"
-  resolved "https://registry.npmjs.org/@fontsource/ibm-plex-serif/-/ibm-plex-serif-5.1.0.tgz"
-  integrity sha512-x8/rprq/hc94eYugICIUJCyUVMC1rPpgmL8km5FhhXIl6l2soaYadLcx4bmVP/rvLr/cRtj4GCaV6ZnGg3jaPA==
+  version "5.1.1"
+  resolved "https://registry.npmjs.org/@fontsource/ibm-plex-serif/-/ibm-plex-serif-5.1.1.tgz"
+  integrity sha512-5EVMKXP2kT5/sufDp2Hw96Zz5C7J6oBq13OWIGn2uhtGAsuE5E+e6hhUl0TJK0+EHYTfCS85ylcY5Vk2Q6ht/Q==
 
 "@fontsource/jetbrains-mono@^5.1.1":
-  version "5.1.1"
-  resolved "https://registry.npmjs.org/@fontsource/jetbrains-mono/-/jetbrains-mono-5.1.1.tgz"
-  integrity sha512-5rwvmdQQpXev4LlBX1P+7h2dguu6iwW/9Npjde4+DEq+HgpVJI/7QY8DI1NVVFdvLtXZNP+vO2L/5BQED6FUhA==
-
-"@ibm/plex-sans@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@ibm/plex-sans/-/plex-sans-1.1.0.tgz"
-  integrity sha512-WPgvO6Yfj2w5YbhyAr1tv95RUz4LRJlqN+CmYvBglabXteufP1D1E9BABMde+ZIKdRbFJDoKF5eQzfhpnbgZcQ==
-  dependencies:
-    "@ibm/telemetry-js" "^1.6.1"
-
-"@ibm/telemetry-js@^1.6.1":
-  version "1.8.0"
-  resolved "https://registry.npmjs.org/@ibm/telemetry-js/-/telemetry-js-1.8.0.tgz"
-  integrity sha512-1u/8f5TtDHXWNQe+YfIESesZGX2PmhEfyU0znlyFvATch+xc5fPYjXj2gWKMTmdKsDawqAm/BkJBQjx2CDlZww==
+  version "5.1.2"
+  resolved "https://registry.npmjs.org/@fontsource/jetbrains-mono/-/jetbrains-mono-5.1.2.tgz"
+  integrity sha512-muYZK6W3NTrKpKTjoF2dkrtMjXLlPZhniLiLjMmfegRibl2L6jUJh9gB6UcbcZs3zHdIYTmzMkXNbNoI2kXX3Q==
 
 "@isaacs/cliui@^8.0.2":
   version "8.0.2"

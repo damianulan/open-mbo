@@ -39,6 +39,7 @@ class AppRefresh extends Command
         $this->info(Artisan::output());
         Artisan::call('migrate --seed');
         $this->info(Artisan::output());
-
+        Artisan::call('optimize:clear');
+        $this->info(Artisan::output());
     }
 }

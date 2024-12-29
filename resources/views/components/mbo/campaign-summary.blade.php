@@ -37,7 +37,7 @@
             </div>
             <ul>
                 @foreach($campaign->coordinators as $coordinator)
-                    <li>{{ $coordinator->name() }}</li>
+                    <li>{!! $coordinator->nameView() !!}</li>
                 @endforeach
             </ul>
         </div>

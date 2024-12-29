@@ -9,8 +9,8 @@
     "zeroRecords": "Nie znaleziono pasujących pozycji",
     "paginate": {
         "first": "Pierwsza",
-        "previous": "<i class='bi-chevron-left'></i>",
-        "next": "<i class='bi-chevron-right'></i>",
+        "previous": "<i class='bi-chevron-compact-left'></i>",
+        "next": "<i class='bi-chevron-compact-right'></i>",
         "last": "Ostatnia"
     },
     "aria": {

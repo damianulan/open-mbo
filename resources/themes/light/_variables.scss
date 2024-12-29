@@ -30,10 +30,6 @@ $greenish: #A3AEA7;
 // Action colors
 $light: #fafafa;
 $dark: #111611;
-$danger: #e56b6f;
-$warning: #EDB458;
-$success: #4f9d69;
-$info: #0892A5;
 $disabled-text: #6c757d;
 
 $theme-colors: (
@@ -53,7 +49,7 @@ $theme-colors: (
 
 // Component colors
 $body-bg: #fff;
-$body-wrapper-bg: rgba($primary, 0.04);
+$body-wrapper-bg: rgba($primary, 0.06);
 $sidebar-bg: #fff;
 $sidebar-link: $primary;
 $sidebar-link-active: lighten($primary, 58%);
@@ -118,7 +114,7 @@ $input-line-height: 1.25;
 
 // Tables
 $table-bg: transparent;
-$ombo-body: rgba($primary, 0.04);//lighten($primary, 60%);
-$ombo-body-inactive: rgba($primary, 0.07);
-$ombo-body-hover: rgba($primary, 0.07);
-$ombo-body-inactive-hover: rgba($primary, 0.09);
+$ombo-body: rgba($primary, 0.06);//lighten($primary, 60%);
+$ombo-body-inactive: rgba($primary, 0.085);
+$ombo-body-hover: rgba($primary, 0.085);
+$ombo-body-inactive-hover: rgba($primary, 0.1);

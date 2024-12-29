@@ -20,6 +20,7 @@ return [
     'block' => 'Zablokuj',
     'unblock' => 'Odblokuj',
     'close' => 'Zamknij',
+    'summary' => 'Podsumowanie',
     'hide' => 'Ukryj',
     'unhide' => 'Odkryj',
     'profile_show' => 'Przeglądaj profil',

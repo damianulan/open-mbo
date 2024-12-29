@@ -1,12 +1,20 @@
 .card-header {
     border: none;
     font-size: 1.1rem;
+    font-family: $font-family-serif;
     font-weight: 600;
     background: transparent;
 }
 
-.card-hello {
+.card-icons {
+    margin-left: 0.5rem;
+}
 
+.card-icons i {
+    font-size: 1rem;
+}
+
+.card-hello {
     margin: 1.2rem 0;
 }
 
@@ -71,9 +79,8 @@
     pointer-events: none;
 }
 
-.card-bg .card-top {
+.card-top {
     display: flex;
-
 }
 
 .card-badges {
@@ -94,7 +101,7 @@
     color: $secondary;
 }
 
-.card-bg .card-top .card-title {
+.card-top .card-title {
     font-weight: 700;
     font-family: $font-family-serif;
     overflow: hidden;

@@ -115,6 +115,10 @@ Route::middleware(['auth', 'maintenance'])->group(function (){
         });
     });
 
+    Route::prefix('objectives')->name('objectives.')->group(function (){
+        Route::get('{user}', [App\Http\Controllers\Objectives\ObjectiveController::class, 'show'])->name('show');
+    });
+
     Route::name('general.')->group(function () {
         Route::get('/get_modal', [App\Http\Controllers\GeneralController::class, 'getModal'])->name('get_modal');
     });

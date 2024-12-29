@@ -5,7 +5,7 @@
   font-display: swap;
   font-weight: 300;
   src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-300-normal.woff2?b11ca82cde2d4030261763888b8dad95) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-300-normal.woff?f10752b3f3e14c024b9921b8cab3946e) format('woff');
-  unicode-range: U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
 /* ibm-plex-sans-cyrillic-300-normal */
@@ -45,7 +45,7 @@
   font-display: swap;
   font-weight: 300;
   src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-300-normal.woff2?df149b0e0a34063407b0a483c195fff4) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-300-normal.woff?4b5cd12c1892504cf2bc66390627c223) format('woff');
-  unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
 /* ibm-plex-sans-latin-300-normal */
@@ -55,7 +55,7 @@
   font-display: swap;
   font-weight: 300;
   src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-300-normal.woff2?e38b99d324dc1f4e123abdd554a0739c) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-300-normal.woff?c52a6f039c6abf6b26b426145a7eb868) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-sans-cyrillic-ext-400-normal */
 @font-face {
@@ -64,7 +64,7 @@
   font-display: swap;
   font-weight: 400;
   src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-400-normal.woff2?56b6c5df575156819cfa5a4f20e4e1f5) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-400-normal.woff?ddb7009e517f27508df294e78a78d0ce) format('woff');
-  unicode-range: U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
 /* ibm-plex-sans-cyrillic-400-normal */
@@ -104,7 +104,7 @@
   font-display: swap;
   font-weight: 400;
   src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-400-normal.woff2?f16460285d7ee089d39ebc6b59715a33) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-400-normal.woff?3d8d457e5b04886f03119bdfc1830223) format('woff');
-  unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
 /* ibm-plex-sans-latin-400-normal */
@@ -114,7 +114,7 @@
   font-display: swap;
   font-weight: 400;
   src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff2?198edc1f5e61a3940f351c7bb2785e20) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff?26f87999b316dfb9a41eff3e965b94e4) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-sans-cyrillic-ext-600-normal */
 @font-face {
@@ -123,7 +123,7 @@
   font-display: swap;
   font-weight: 600;
   src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-600-normal.woff2?7a5e759883b08ebf2bc5492413afd96c) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-600-normal.woff?90dc0c67b56f0a5089828c4c0d32c344) format('woff');
-  unicode-range: U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
 /* ibm-plex-sans-cyrillic-600-normal */
@@ -163,7 +163,7 @@
   font-display: swap;
   font-weight: 600;
   src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-600-normal.woff2?64c7f5ae963b791d88ccfd1c3f9646e1) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-600-normal.woff?b97f809ea9dd94b885298d3e9b06a31c) format('woff');
-  unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
 /* ibm-plex-sans-latin-600-normal */
@@ -173,7 +173,7 @@
   font-display: swap;
   font-weight: 600;
   src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-600-normal.woff2?242ee29f2c929f1c9b17500932d610ec) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-600-normal.woff?97e431d0d3b81d7a95cf5bba7f4645f5) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-sans-cyrillic-ext-700-normal */
 @font-face {
@@ -182,7 +182,7 @@
   font-display: swap;
   font-weight: 700;
   src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-700-normal.woff2?eb9f70f4c982e9432671b2470c2442f1) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-700-normal.woff?2f962059e38e1912e71c4ae1d0584374) format('woff');
-  unicode-range: U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
 /* ibm-plex-sans-cyrillic-700-normal */
@@ -222,7 +222,7 @@
   font-display: swap;
   font-weight: 700;
   src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-700-normal.woff2?3fb6e352753c4fd7ee96e6481a5266fe) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-700-normal.woff?aabce859944e9b0f8bf399971e7e7050) format('woff');
-  unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
 /* ibm-plex-sans-latin-700-normal */
@@ -232,7 +232,7 @@
   font-display: swap;
   font-weight: 700;
   src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-700-normal.woff2?098b4a9bd3e124ad783d869d526fb502) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-700-normal.woff?152469dd3b87a2618f5416db5223736e) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-sans-cyrillic-ext-300-italic */
 @font-face {
@@ -241,7 +241,7 @@
   font-display: swap;
   font-weight: 300;
   src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-300-italic.woff2?a50bbd7b39cf1892b3020e9b95b151de) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-300-italic.woff?df7136e6739570d7a1a6cd374433a733) format('woff');
-  unicode-range: U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
 /* ibm-plex-sans-cyrillic-300-italic */
@@ -281,7 +281,7 @@
   font-display: swap;
   font-weight: 300;
   src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-300-italic.woff2?a3db53d7fec7d810756041f6f64e0636) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-300-italic.woff?b5098d9ddcbc164330f5bf1b52192f69) format('woff');
-  unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
 /* ibm-plex-sans-latin-300-italic */
@@ -291,7 +291,7 @@
   font-display: swap;
   font-weight: 300;
   src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-300-italic.woff2?ee846a5974feaba7139625989bd9bb68) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-300-italic.woff?ae8c5c922bdfddbdc5a48cfce4cbec30) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-sans-cyrillic-ext-400-italic */
 @font-face {
@@ -300,7 +300,7 @@
   font-display: swap;
   font-weight: 400;
   src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-400-italic.woff2?486966a9e19bfe45f238be6d8065f885) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-400-italic.woff?9b31ca6256fb57479240a34cea0f766a) format('woff');
-  unicode-range: U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
 /* ibm-plex-sans-cyrillic-400-italic */
@@ -340,7 +340,7 @@
   font-display: swap;
   font-weight: 400;
   src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-400-italic.woff2?3ab33516c98dcd5a815622c9f92207c1) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-400-italic.woff?a7516b96d68c7eb86785caa3c89e63ac) format('woff');
-  unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
 /* ibm-plex-sans-latin-400-italic */
@@ -350,7 +350,7 @@
   font-display: swap;
   font-weight: 400;
   src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-italic.woff2?a1f96d05f09dbb06b70317c166050afb) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-italic.woff?d3afb76957c13ab7ea3825961f838eb7) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-sans-cyrillic-ext-600-italic */
 @font-face {
@@ -359,7 +359,7 @@
   font-display: swap;
   font-weight: 600;
   src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-600-italic.woff2?c6f85c57683691b332632258d191a60c) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-600-italic.woff?af0c9ddd3c6689fedd0f319f35ed58a2) format('woff');
-  unicode-range: U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
 /* ibm-plex-sans-cyrillic-600-italic */
@@ -399,7 +399,7 @@
   font-display: swap;
   font-weight: 600;
   src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-600-italic.woff2?5f91ee0d8ae3ad82563a588e75272340) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-600-italic.woff?cd26166a2ace7d1c8a0db7394c7393ac) format('woff');
-  unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
 /* ibm-plex-sans-latin-600-italic */
@@ -409,7 +409,7 @@
   font-display: swap;
   font-weight: 600;
   src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-600-italic.woff2?8e92f41154aba03dd91ee5ce20bdaef4) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-600-italic.woff?6efabcb8571965979c45e32c2291727d) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-sans-cyrillic-ext-700-italic */
 @font-face {
@@ -418,7 +418,7 @@
   font-display: swap;
   font-weight: 700;
   src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-700-italic.woff2?6ef8bba9c1b93a6dd0cbb752a0a9096d) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-700-italic.woff?2d8440c8c123bf5bd4f5032b9c436a34) format('woff');
-  unicode-range: U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
 /* ibm-plex-sans-cyrillic-700-italic */
@@ -458,7 +458,7 @@
   font-display: swap;
   font-weight: 700;
   src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-700-italic.woff2?acd5dac7f3829be5d8ee42edc72f9c75) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-700-italic.woff?74e8ab3f4147ae70b729f09992229477) format('woff');
-  unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
 /* ibm-plex-sans-latin-700-italic */
@@ -468,7 +468,7 @@
   font-display: swap;
   font-weight: 700;
   src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-700-italic.woff2?4176602f5679bb95f106c6546d88ae93) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-700-italic.woff?c639fabb458e44141121ff61d65aaa3c) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-serif-cyrillic-ext-300-normal */
 @font-face {
@@ -477,7 +477,7 @@
   font-display: swap;
   font-weight: 300;
   src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-300-normal.woff2?47d573178e1ea9626f5e23600450838b) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-300-normal.woff?bed2ca5b6383cf21ecf3b04a72a7dbcc) format('woff');
-  unicode-range: U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
 /* ibm-plex-serif-cyrillic-300-normal */
@@ -507,7 +507,7 @@
   font-display: swap;
   font-weight: 300;
   src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-300-normal.woff2?bb90469fc1fc459af7305e7a7638831f) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-300-normal.woff?ccc03ec0757c624ee647f3d3a29e0b21) format('woff');
-  unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
 /* ibm-plex-serif-latin-300-normal */
@@ -517,7 +517,7 @@
   font-display: swap;
   font-weight: 300;
   src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-300-normal.woff2?71cb2de9a920d3691685de7c48be2923) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-300-normal.woff?9dc9adf3c83f443110cdc8a70aed4bb6) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-serif-cyrillic-ext-400-normal */
 @font-face {
@@ -526,7 +526,7 @@
   font-display: swap;
   font-weight: 400;
   src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-400-normal.woff2?d51fb4e1b62b7a3fd759888a843f7c6c) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-400-normal.woff?2b82a9386e35adc728a2bc67330a557e) format('woff');
-  unicode-range: U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
 /* ibm-plex-serif-cyrillic-400-normal */
@@ -556,7 +556,7 @@
   font-display: swap;
   font-weight: 400;
   src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-400-normal.woff2?061ffefb0a8336f5c14c31f8096028ee) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-400-normal.woff?34eccc4a704034c029f7153a46fa2cc6) format('woff');
-  unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
 /* ibm-plex-serif-latin-400-normal */
@@ -566,7 +566,7 @@
   font-display: swap;
   font-weight: 400;
   src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-400-normal.woff2?130c2d62503949e4d4e6c7810d96adeb) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-400-normal.woff?82236381b6e1ffd399b625a7a72b09aa) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-serif-cyrillic-ext-600-normal */
 @font-face {
@@ -575,7 +575,7 @@
   font-display: swap;
   font-weight: 600;
   src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-600-normal.woff2?9906b742dec01458696667a48b79a18c) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-600-normal.woff?1004c7d2483f74291785fab58377404d) format('woff');
-  unicode-range: U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
 /* ibm-plex-serif-cyrillic-600-normal */
@@ -605,7 +605,7 @@
   font-display: swap;
   font-weight: 600;
   src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-600-normal.woff2?c6ff24c947e65a538403ca79a5be3a46) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-600-normal.woff?b62bbccef406aa0611023c8d649e8834) format('woff');
-  unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
 /* ibm-plex-serif-latin-600-normal */
@@ -615,7 +615,7 @@
   font-display: swap;
   font-weight: 600;
   src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-600-normal.woff2?d50d092eda8d2941ee9143c4a92590f9) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-600-normal.woff?879ddb5ae0346b73012d3bdbaef7b16a) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-serif-cyrillic-ext-700-normal */
 @font-face {
@@ -624,7 +624,7 @@
   font-display: swap;
   font-weight: 700;
   src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-700-normal.woff2?ba44f0c8735dd01d8481f783be7fe7f8) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-700-normal.woff?595c69cc1633112aab1682986f969f18) format('woff');
-  unicode-range: U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
 /* ibm-plex-serif-cyrillic-700-normal */
@@ -654,7 +654,7 @@
   font-display: swap;
   font-weight: 700;
   src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-700-normal.woff2?2b5c5f5ada809568adf6bde9317cd938) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-700-normal.woff?f14cc1b43e2fbd48bd452591dbc76fc9) format('woff');
-  unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
 /* ibm-plex-serif-latin-700-normal */
@@ -664,7 +664,7 @@
   font-display: swap;
   font-weight: 700;
   src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-700-normal.woff2?f8afafec4a53cb9ecb065ca9a7ed5537) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-700-normal.woff?9453c7c29d238f8aacdffd2c7ef8e719) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-serif-cyrillic-ext-300-italic */
 @font-face {
@@ -673,7 +673,7 @@
   font-display: swap;
   font-weight: 300;
   src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-300-italic.woff2?c7d9a7d3ad65965b344cf9973092f8b2) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-300-italic.woff?1d118f92eb6e21c1b45c3406db901b18) format('woff');
-  unicode-range: U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
 /* ibm-plex-serif-cyrillic-300-italic */
@@ -703,7 +703,7 @@
   font-display: swap;
   font-weight: 300;
   src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-300-italic.woff2?60dd0cfcbbb62419537c126f792d5729) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-300-italic.woff?5b082d7029f6f6eb0d8e60e4dd24f059) format('woff');
-  unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
 /* ibm-plex-serif-latin-300-italic */
@@ -713,7 +713,7 @@
   font-display: swap;
   font-weight: 300;
   src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-300-italic.woff2?4b210c2a1a495e8edb33ce11b963680e) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-300-italic.woff?aff85bfffec9f4f62ff6a1a5e119394e) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-serif-cyrillic-ext-400-italic */
 @font-face {
@@ -722,7 +722,7 @@
   font-display: swap;
   font-weight: 400;
   src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-400-italic.woff2?9a705eb84d993efa627c8891f2454cc0) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-400-italic.woff?86fa44d84542f971a22499cf2e18dcd4) format('woff');
-  unicode-range: U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
 /* ibm-plex-serif-cyrillic-400-italic */
@@ -752,7 +752,7 @@
   font-display: swap;
   font-weight: 400;
   src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-400-italic.woff2?08b395eb7eb552eef52f7b927dd41773) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-400-italic.woff?7bdbde1fa797983227e6e0cf7b4ca21a) format('woff');
-  unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
 /* ibm-plex-serif-latin-400-italic */
@@ -762,7 +762,7 @@
   font-display: swap;
   font-weight: 400;
   src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-400-italic.woff2?eb89a03c637c9caf093821803dd199fb) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-400-italic.woff?c5240b6e7fab8b435f676dfea4084f32) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-serif-cyrillic-ext-600-italic */
 @font-face {
@@ -771,7 +771,7 @@
   font-display: swap;
   font-weight: 600;
   src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-600-italic.woff2?7245622ab748fe1e6f3de929c636c95d) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-600-italic.woff?9a3dab045115aa1018b8f4b375868266) format('woff');
-  unicode-range: U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
 /* ibm-plex-serif-cyrillic-600-italic */
@@ -801,7 +801,7 @@
   font-display: swap;
   font-weight: 600;
   src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-600-italic.woff2?2b04521c44af8650b9e9afb7b5c104fc) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-600-italic.woff?221dcd7124a5caa32e193701c5f09983) format('woff');
-  unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
 /* ibm-plex-serif-latin-600-italic */
@@ -811,7 +811,7 @@
   font-display: swap;
   font-weight: 600;
   src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-600-italic.woff2?65cacedc4433bfabebc744697b83f2a5) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-600-italic.woff?0debe7e5e6285349210079cae1e029a0) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-serif-cyrillic-ext-700-italic */
 @font-face {
@@ -820,7 +820,7 @@
   font-display: swap;
   font-weight: 700;
   src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-700-italic.woff2?d9d1f9ffed0c33c986a0e46e4ec876bd) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-700-italic.woff?35570dd8c3a67656c9735cd88a7ce940) format('woff');
-  unicode-range: U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
 /* ibm-plex-serif-cyrillic-700-italic */
@@ -850,7 +850,7 @@
   font-display: swap;
   font-weight: 700;
   src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-700-italic.woff2?8959e352f1afd0e8de2c1f37f9bfdcc4) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-700-italic.woff?5abfbd042b4d5b5fe6b0c85080e1f67d) format('woff');
-  unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
 /* ibm-plex-serif-latin-700-italic */
@@ -860,7 +860,7 @@
   font-display: swap;
   font-weight: 700;
   src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-700-italic.woff2?119dc81c6a8dfe21891317ba4ff6538e) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-700-italic.woff?38a51dbbf8dca448ae0a812ecfdb4b1a) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* jetbrains-mono-cyrillic-ext-300-normal */
 @font-face {
@@ -869,7 +869,7 @@
   font-display: swap;
   font-weight: 300;
   src: url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-cyrillic-ext-300-normal.woff2?833027c99ad5c7d30a6beea6d795fcfc) format('woff2'), url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-cyrillic-ext-300-normal.woff?162dd68afd85fb9fde66fe000feb487c) format('woff');
-  unicode-range: U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
 /* jetbrains-mono-cyrillic-300-normal */
@@ -909,7 +909,7 @@
   font-display: swap;
   font-weight: 300;
   src: url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-ext-300-normal.woff2?092159ad770f5a231daebace541e71ae) format('woff2'), url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-ext-300-normal.woff?7953f08b5e5a3e97891a355ab8d6c3c8) format('woff');
-  unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
 /* jetbrains-mono-latin-300-normal */
@@ -919,7 +919,7 @@
   font-display: swap;
   font-weight: 300;
   src: url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-300-normal.woff2?fb0e3fd9222b5dc53da9a3de0345e49f) format('woff2'), url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-300-normal.woff?5f1d915e4459965c7ea747807106f7e3) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* jetbrains-mono-cyrillic-ext-400-normal */
 @font-face {
@@ -928,7 +928,7 @@
   font-display: swap;
   font-weight: 400;
   src: url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-cyrillic-ext-400-normal.woff2?7347c7bfed47f1ef0b25faa67cefdacb) format('woff2'), url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-cyrillic-ext-400-normal.woff?fe91ef32cce4c8826b6573e7afb60d6f) format('woff');
-  unicode-range: U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
 /* jetbrains-mono-cyrillic-400-normal */
@@ -968,7 +968,7 @@
   font-display: swap;
   font-weight: 400;
   src: url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-ext-400-normal.woff2?e83b764e84e73968db26cf76026a82c1) format('woff2'), url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-ext-400-normal.woff?8cef58685fa3e568038ceb242185b9c1) format('woff');
-  unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
 /* jetbrains-mono-latin-400-normal */
@@ -978,7 +978,7 @@
   font-display: swap;
   font-weight: 400;
   src: url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2?d04352f240062b100fba0eff7f328200) format('woff2'), url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff?0fc70aa4dfe4d16d70738dfedf102a23) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* jetbrains-mono-cyrillic-ext-600-normal */
 @font-face {
@@ -987,7 +987,7 @@
   font-display: swap;
   font-weight: 600;
   src: url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-cyrillic-ext-600-normal.woff2?228aae4e62f71f9bd6e0d07330e07a41) format('woff2'), url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-cyrillic-ext-600-normal.woff?15601a8444d14fdf1448de96a4626568) format('woff');
-  unicode-range: U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
 /* jetbrains-mono-cyrillic-600-normal */
@@ -1027,7 +1027,7 @@
   font-display: swap;
   font-weight: 600;
   src: url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-ext-600-normal.woff2?2ebc3362e29bd0a56b471b1b4c004a91) format('woff2'), url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-ext-600-normal.woff?7e8dee1ee0e954d1eff5b7a475e3b270) format('woff');
-  unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
 /* jetbrains-mono-latin-600-normal */
@@ -1037,7 +1037,7 @@
   font-display: swap;
   font-weight: 600;
   src: url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-600-normal.woff2?d68d56cf8ab33f8cc5d00bbb1ad7373b) format('woff2'), url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-600-normal.woff?be504743361cf41a7cf1d61ff874a482) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* jetbrains-mono-cyrillic-ext-700-normal */
 @font-face {
@@ -1046,7 +1046,7 @@
   font-display: swap;
   font-weight: 700;
   src: url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-cyrillic-ext-700-normal.woff2?5ec92f9402c68a8c448980d61d0f4aa7) format('woff2'), url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-cyrillic-ext-700-normal.woff?5702df27b141447e6cece4ea818aa975) format('woff');
-  unicode-range: U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
 /* jetbrains-mono-cyrillic-700-normal */
@@ -1086,7 +1086,7 @@
   font-display: swap;
   font-weight: 700;
   src: url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-ext-700-normal.woff2?8c880fe623fe1acfeb0857bf6ad5f3a1) format('woff2'), url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-ext-700-normal.woff?800e74bfa224fc6db4d45b9a921752fd) format('woff');
-  unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
 /* jetbrains-mono-latin-700-normal */
@@ -1096,7 +1096,7 @@
   font-display: swap;
   font-weight: 700;
   src: url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2?ce1e40901d7a0d88d4836298021927a1) format('woff2'), url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff?5be6ec379613f10aea3f3f5fb547e4ab) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* jetbrains-mono-cyrillic-ext-300-italic */
 @font-face {
@@ -1105,7 +1105,7 @@
   font-display: swap;
   font-weight: 300;
   src: url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-cyrillic-ext-300-italic.woff2?aa7afd494c39b5449447c234d074fc93) format('woff2'), url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-cyrillic-ext-300-italic.woff?a2a5df9ddcd3742246deffeadceb4809) format('woff');
-  unicode-range: U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
 /* jetbrains-mono-cyrillic-300-italic */
@@ -1145,7 +1145,7 @@
   font-display: swap;
   font-weight: 300;
   src: url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-ext-300-italic.woff2?abda55f20f7c4bb817c27a00c231aa9d) format('woff2'), url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-ext-300-italic.woff?e045cfdffae744b2bb76366baab93773) format('woff');
-  unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
 /* jetbrains-mono-latin-300-italic */
@@ -1155,7 +1155,7 @@
   font-display: swap;
   font-weight: 300;
   src: url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-300-italic.woff2?fc0634b183f786ae87aac64b99fa1952) format('woff2'), url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-300-italic.woff?e7d0aba2b23756ca6aaae4361bb83c13) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* jetbrains-mono-cyrillic-ext-400-italic */
 @font-face {
@@ -1164,7 +1164,7 @@
   font-display: swap;
   font-weight: 400;
   src: url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-cyrillic-ext-400-italic.woff2?7d6aa853ad1a9a6c50592c102dd2f8ef) format('woff2'), url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-cyrillic-ext-400-italic.woff?236443ea9ed46190aeed540d22cf4b39) format('woff');
-  unicode-range: U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
 /* jetbrains-mono-cyrillic-400-italic */
@@ -1204,7 +1204,7 @@
   font-display: swap;
   font-weight: 400;
   src: url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-ext-400-italic.woff2?8392f8501a5a372633300a2e01269dac) format('woff2'), url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-ext-400-italic.woff?7a873ed75b10263942d168bac6ca5190) format('woff');
-  unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
 /* jetbrains-mono-latin-400-italic */
@@ -1214,7 +1214,7 @@
   font-display: swap;
   font-weight: 400;
   src: url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-italic.woff2?76c1862325ea6f70eeff58d00c886776) format('woff2'), url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-italic.woff?fd994e8d90d9cab651b0893cebaa9566) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* jetbrains-mono-cyrillic-ext-600-italic */
 @font-face {
@@ -1223,7 +1223,7 @@
   font-display: swap;
   font-weight: 600;
   src: url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-cyrillic-ext-600-italic.woff2?6fcfeac7088d3cc615f553172230eeb7) format('woff2'), url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-cyrillic-ext-600-italic.woff?49c8902b40969c0ac099eca753e32bbc) format('woff');
-  unicode-range: U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
 /* jetbrains-mono-cyrillic-600-italic */
@@ -1263,7 +1263,7 @@
   font-display: swap;
   font-weight: 600;
   src: url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-ext-600-italic.woff2?917303148407386d347fea6890c7ef34) format('woff2'), url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-ext-600-italic.woff?e22e9941394ea9002c48afd86990eb4b) format('woff');
-  unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
 /* jetbrains-mono-latin-600-italic */
@@ -1273,7 +1273,7 @@
   font-display: swap;
   font-weight: 600;
   src: url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-600-italic.woff2?3d0e0ed266d8f55a08c8ce5d10bbf01b) format('woff2'), url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-600-italic.woff?e82f848d79e922a44ab0caf89174c75a) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* jetbrains-mono-cyrillic-ext-700-italic */
 @font-face {
@@ -1282,7 +1282,7 @@
   font-display: swap;
   font-weight: 700;
   src: url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-cyrillic-ext-700-italic.woff2?3989f4d58f97396a97c81fc601745c4b) format('woff2'), url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-cyrillic-ext-700-italic.woff?0eb294097bb75d18956fffb7f393063e) format('woff');
-  unicode-range: U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
 /* jetbrains-mono-cyrillic-700-italic */
@@ -1322,7 +1322,7 @@
   font-display: swap;
   font-weight: 700;
   src: url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-ext-700-italic.woff2?e8d2ec714d71bfca4345fe15c59afede) format('woff2'), url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-ext-700-italic.woff?1f346bd3488479bd3a8e805214b97391) format('woff');
-  unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
 /* jetbrains-mono-latin-700-italic */
@@ -1332,7 +1332,7 @@
   font-display: swap;
   font-weight: 700;
   src: url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-italic.woff2?b659956119f91f2342bc4edd77c2ad46) format('woff2'), url(/fonts/vendor/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-italic.woff?583e3f428bf2362b546dc11cfff6aae1) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 @charset "UTF-8";
 :root {
@@ -2826,7 +2826,7 @@ html[data-bs-theme=dark] div.dtsp-panesContainer div.dtsp-searchPane div.dataTab
   --bs-secondary: rgb(158.3684210526, 64.4342105263, 18.6315789474);
   --bs-success: #4f9d69;
   --bs-danger: #e56b6f;
-  --bs-warning: #EDB458;
+  --bs-warning: #e79a1d;
   --bs-info: #0892A5;
   --bs-dark: #111611;
   --bs-cadet: #1C1F33;
@@ -2837,7 +2837,7 @@ html[data-bs-theme=dark] div.dtsp-panesContainer div.dtsp-searchPane div.dataTab
   --bs-secondary-rgb: 158, 64, 19;
   --bs-success-rgb: 79, 157, 105;
   --bs-danger-rgb: 229, 107, 111;
-  --bs-warning-rgb: 237, 180, 88;
+  --bs-warning-rgb: 231, 154, 29;
   --bs-info-rgb: 8, 146, 165;
   --bs-dark-rgb: 17, 22, 17;
   --bs-cadet-rgb: 28, 31, 51;
@@ -2848,7 +2848,7 @@ html[data-bs-theme=dark] div.dtsp-panesContainer div.dtsp-searchPane div.dataTab
   --bs-secondary-text-emphasis: rgb(63.3473684211, 25.7736842105, 7.4526315789);
   --bs-success-text-emphasis: rgb(31.6, 62.8, 42);
   --bs-info-text-emphasis: rgb(3.2, 58.4, 66);
-  --bs-warning-text-emphasis: rgb(94.8, 72, 35.2);
+  --bs-warning-text-emphasis: rgb(92.4, 61.6, 11.6);
   --bs-danger-text-emphasis: rgb(91.6, 42.8, 44.4);
   --bs-light-text-emphasis: #495057;
   --bs-dark-text-emphasis: #495057;
@@ -2856,7 +2856,7 @@ html[data-bs-theme=dark] div.dtsp-panesContainer div.dtsp-searchPane div.dataTab
   --bs-secondary-bg-subtle: rgb(235.6736842105, 216.8868421053, 207.7263157895);
   --bs-success-bg-subtle: rgb(219.8, 235.4, 225);
   --bs-info-bg-subtle: rgb(205.6, 233.2, 237);
-  --bs-warning-bg-subtle: rgb(251.4, 240, 221.6);
+  --bs-warning-bg-subtle: rgb(250.2, 234.8, 209.8);
   --bs-danger-bg-subtle: rgb(249.8, 225.4, 226.2);
   --bs-light-bg-subtle: rgb(251.5, 252, 252.5);
   --bs-dark-bg-subtle: #ced4da;
@@ -2864,7 +2864,7 @@ html[data-bs-theme=dark] div.dtsp-panesContainer div.dtsp-searchPane div.dataTab
   --bs-secondary-border-subtle: rgb(216.3473684211, 178.7736842105, 160.4526315789);
   --bs-success-border-subtle: rgb(184.6, 215.8, 195);
   --bs-info-border-subtle: rgb(156.2, 211.4, 219);
-  --bs-warning-border-subtle: rgb(247.8, 225, 188.2);
+  --bs-warning-border-subtle: rgb(245.4, 214.6, 164.6);
   --bs-danger-border-subtle: rgb(244.6, 195.8, 197.4);
   --bs-light-border-subtle: #e9ecef;
   --bs-dark-border-subtle: #adb5bd;
@@ -2944,7 +2944,7 @@ html[data-bs-theme=dark] div.dtsp-panesContainer div.dtsp-searchPane div.dataTab
   --bs-secondary-text-emphasis: rgb(197.0210526316, 140.6605263158, 113.1789473684);
   --bs-success-text-emphasis: rgb(149.4, 196.2, 165);
   --bs-info-text-emphasis: rgb(106.8, 189.6, 201);
-  --bs-warning-text-emphasis: rgb(244.2, 210, 154.8);
+  --bs-warning-text-emphasis: rgb(240.6, 194.4, 119.4);
   --bs-danger-text-emphasis: rgb(239.4, 166.2, 168.6);
   --bs-light-text-emphasis: #f8f9fa;
   --bs-dark-text-emphasis: #dee2e6;
@@ -2952,7 +2952,7 @@ html[data-bs-theme=dark] div.dtsp-panesContainer div.dtsp-searchPane div.dataTab
   --bs-secondary-bg-subtle: rgb(31.6736842105, 12.8868421053, 3.7263157895);
   --bs-success-bg-subtle: rgb(15.8, 31.4, 21);
   --bs-info-bg-subtle: rgb(1.6, 29.2, 33);
-  --bs-warning-bg-subtle: rgb(47.4, 36, 17.6);
+  --bs-warning-bg-subtle: rgb(46.2, 30.8, 5.8);
   --bs-danger-bg-subtle: rgb(45.8, 21.4, 22.2);
   --bs-light-bg-subtle: #343a40;
   --bs-dark-bg-subtle: #1a1d20;
@@ -2960,7 +2960,7 @@ html[data-bs-theme=dark] div.dtsp-panesContainer div.dtsp-searchPane div.dataTab
   --bs-secondary-border-subtle: rgb(95.0210526316, 38.6605263158, 11.1789473684);
   --bs-success-border-subtle: rgb(47.4, 94.2, 63);
   --bs-info-border-subtle: rgb(4.8, 87.6, 99);
-  --bs-warning-border-subtle: rgb(142.2, 108, 52.8);
+  --bs-warning-border-subtle: rgb(138.6, 92.4, 17.4);
   --bs-danger-border-subtle: rgb(137.4, 64.2, 66.6);
   --bs-light-border-subtle: #495057;
   --bs-dark-border-subtle: #343a40;
@@ -4782,13 +4782,13 @@ progress {
 
 .table-warning {
   --bs-table-color: #000;
-  --bs-table-bg: rgb(251.4, 240, 221.6);
-  --bs-table-border-color: rgb(201.12, 192, 177.28);
-  --bs-table-striped-bg: rgb(238.83, 228, 210.52);
+  --bs-table-bg: rgb(250.2, 234.8, 209.8);
+  --bs-table-border-color: rgb(200.16, 187.84, 167.84);
+  --bs-table-striped-bg: rgb(237.69, 223.06, 199.31);
   --bs-table-striped-color: #000;
-  --bs-table-active-bg: rgb(226.26, 216, 199.44);
+  --bs-table-active-bg: rgb(225.18, 211.32, 188.82);
   --bs-table-active-color: #000;
-  --bs-table-hover-bg: rgb(232.545, 222, 204.98);
+  --bs-table-hover-bg: rgb(231.435, 217.19, 194.065);
   --bs-table-hover-color: #000;
   color: var(--bs-table-color);
   border-color: var(--bs-table-border-color);
@@ -5873,19 +5873,19 @@ textarea.form-control-lg {
 
 .btn-warning {
   --bs-btn-color: #000;
-  --bs-btn-bg: #EDB458;
-  --bs-btn-border-color: #EDB458;
+  --bs-btn-bg: #e79a1d;
+  --bs-btn-border-color: #e79a1d;
   --bs-btn-hover-color: #000;
-  --bs-btn-hover-bg: rgb(239.7, 191.25, 113.05);
-  --bs-btn-hover-border-color: rgb(238.8, 187.5, 104.7);
-  --bs-btn-focus-shadow-rgb: 201, 153, 75;
+  --bs-btn-hover-bg: rgb(234.6, 169.15, 62.9);
+  --bs-btn-hover-border-color: rgb(233.4, 164.1, 51.6);
+  --bs-btn-focus-shadow-rgb: 196, 131, 25;
   --bs-btn-active-color: #000;
-  --bs-btn-active-bg: rgb(240.6, 195, 121.4);
-  --bs-btn-active-border-color: rgb(238.8, 187.5, 104.7);
+  --bs-btn-active-bg: rgb(235.8, 174.2, 74.2);
+  --bs-btn-active-border-color: rgb(233.4, 164.1, 51.6);
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   --bs-btn-disabled-color: #000;
-  --bs-btn-disabled-bg: #EDB458;
-  --bs-btn-disabled-border-color: #EDB458;
+  --bs-btn-disabled-bg: #e79a1d;
+  --bs-btn-disabled-border-color: #e79a1d;
 }
 
 .btn-info {
@@ -6059,19 +6059,19 @@ textarea.form-control-lg {
 }
 
 .btn-outline-warning {
-  --bs-btn-color: #EDB458;
-  --bs-btn-border-color: #EDB458;
+  --bs-btn-color: #e79a1d;
+  --bs-btn-border-color: #e79a1d;
   --bs-btn-hover-color: #000;
-  --bs-btn-hover-bg: #EDB458;
-  --bs-btn-hover-border-color: #EDB458;
-  --bs-btn-focus-shadow-rgb: 237, 180, 88;
+  --bs-btn-hover-bg: #e79a1d;
+  --bs-btn-hover-border-color: #e79a1d;
+  --bs-btn-focus-shadow-rgb: 231, 154, 29;
   --bs-btn-active-color: #000;
-  --bs-btn-active-bg: #EDB458;
-  --bs-btn-active-border-color: #EDB458;
+  --bs-btn-active-bg: #e79a1d;
+  --bs-btn-active-border-color: #e79a1d;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #EDB458;
+  --bs-btn-disabled-color: #e79a1d;
   --bs-btn-disabled-bg: transparent;
-  --bs-btn-disabled-border-color: #EDB458;
+  --bs-btn-disabled-border-color: #e79a1d;
   --bs-gradient: none;
 }
 
@@ -9860,8 +9860,8 @@ textarea.form-control-lg {
   text-decoration-color: RGBA(var(--bs-warning-rgb), var(--bs-link-underline-opacity, 1)) !important;
 }
 .link-warning:hover, .link-warning:focus {
-  color: RGBA(241, 195, 121, var(--bs-link-opacity, 1)) !important;
-  text-decoration-color: RGBA(241, 195, 121, var(--bs-link-underline-opacity, 1)) !important;
+  color: RGBA(236, 174, 74, var(--bs-link-opacity, 1)) !important;
+  text-decoration-color: RGBA(236, 174, 74, var(--bs-link-underline-opacity, 1)) !important;
 }
 
 .link-info {
@@ -24843,6 +24843,10 @@ hr {
   text-indent: 50px;
 }
 
+.fs-8 {
+  font-size: 0.7rem !important;
+}
+
 html, body {
   direction: ltr;
   height: 100%;
@@ -24878,7 +24882,7 @@ html::-webkit-scrollbar-thumb:active {
 }
 
 body {
-  background-color: rgba(204, 83, 24, 0.04);
+  background-color: rgba(204, 83, 24, 0.06);
 }
 
 .content {
@@ -24897,10 +24901,37 @@ body {
 
 .content-card {
   background-color: #fff;
-  padding: 2.5rem 2rem;
+  padding: 2.25rem 2rem;
   margin: 0.75rem 0 2rem 0;
   border-radius: 0.35rem;
   min-height: 100%;
+}
+
+.content-card .content-card-top {
+  display: flex;
+  color: #cc5318;
+}
+
+.content-card .content-card-top .content-card-title {
+  border: none;
+  font-size: 1.1rem;
+  font-family: "IBM Plex Serif", serif;
+  font-weight: 700;
+  background: transparent;
+}
+
+.content-card-icons {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.content-card-icons i {
+  font-size: 1.1rem;
+}
+
+.content-card-icons > *:not(:first-child) {
+  margin-left: 0.5rem;
 }
 
 @media (min-width: 992px) {
@@ -26011,8 +26042,8 @@ a.icon-btn {
 }
 
 .badge.badge-warning {
-  background-color: rgba(237, 180, 88, 0.25);
-  color: #EDB458;
+  background-color: rgba(231, 154, 29, 0.25);
+  color: #e79a1d;
 }
 
 .badge.badge-danger {
@@ -26055,9 +26086,9 @@ a.icon-btn {
 }
 
 .alert.alert-warning {
-  background-color: rgba(237, 180, 88, 0.25);
-  border-color: rgba(237, 180, 88, 0.3);
-  color: rgb(224.3216216216, 147.7567567568, 24.1783783784);
+  background-color: rgba(231, 154, 29, 0.25);
+  border-color: rgba(231, 154, 29, 0.3);
+  color: rgb(165.884, 109.366, 17.616);
 }
 
 .alert.alert-info {
@@ -26093,9 +26124,9 @@ a.icon-btn {
 
 .toastify.warning,
 .toastify.warning * {
-  box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px rgba(237, 180, 88, 0.15);
-  background: rgba(237, 180, 88, 0.25);
-  color: rgb(201.3027027027, 132.5945945946, 21.6972972973);
+  box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px rgba(231, 154, 29, 0.15);
+  background: rgba(231, 154, 29, 0.25);
+  color: rgb(142.832, 94.168, 15.168);
 }
 
 .toastify .toast-close {
@@ -26160,14 +26191,28 @@ a.icon-btn {
   text-decoration: none !important;
 }
 
+.pagination .page-item > .page-link,
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  border: 1px solid transparent;
+  background: transparent;
+  padding: 0.5rem;
+  margin: 0 0.1rem;
+  border-radius: 0.25rem;
+}
+
+.pagination .page-item > .page-link:hover,
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  background: rgba(204, 83, 24, 0.2);
+  border: 1px solid rgba(204, 83, 24, 0.25);
+}
+
 .dataTables_wrapper .dataTables_paginate .paginate_button.current,
-.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover,
+.pagination .page-item.active > .page-link,
+.pagination .page-item.active > .page-link:hover {
   color: #fff !important;
   background: #cc5318;
   border: 1px solid #cc5318;
-  border-radius: 0.25rem;
-  padding: 0.5rem;
-  margin: 0 0.35rem;
 }
 
 .ombo-table .action-btns {
@@ -26203,18 +26248,21 @@ table.ombo-table tbody tr:hover {
   border-bottom-width: 0;
 }
 
-.ombo-table .user-details {
+.ombo-table .user-details,
+.user > .user-details {
   display: flex;
   align-items: center;
 }
 
-.ombo-table .user-details img {
+.ombo-table .user-details img,
+.user > .user-details img {
   border-radius: 50%;
-  width: 2rem;
+  width: 1.55rem;
   margin-right: 0.5rem;
 }
 
-.ombo-table .user-details a {
+.ombo-table .user-details a,
+.user > .user-details a {
   text-decoration: none;
 }
 
@@ -26235,13 +26283,13 @@ ul.ombo-list {
 
 .ombo-list li {
   border-radius: 0.35rem;
-  background-color: rgba(204, 83, 24, 0.04);
+  background-color: rgba(204, 83, 24, 0.06);
   padding: 0.5rem 1rem;
   margin: 0.35rem 0;
 }
 
 .ombo-list li.inactive {
-  background-color: rgba(204, 83, 24, 0.07);
+  background-color: rgba(204, 83, 24, 0.085);
 }
 
 .ombo-list li .list-grid {
@@ -26294,12 +26342,12 @@ ul.ombo-list {
 }
 
 .ombo-list li:hover {
-  box-shadow: inset -5px -15px 75px -28px rgba(204, 83, 24, 0.07);
+  box-shadow: inset -5px -15px 75px -28px rgba(204, 83, 24, 0.085);
   transition: all 0.2s ease-in-out;
 }
 
 .ombo-list li.inactive:hover {
-  box-shadow: inset -5px -15px 75px -28px rgba(204, 83, 24, 0.09);
+  box-shadow: inset -5px -15px 75px -28px rgba(204, 83, 24, 0.1);
   transition: all 0.2s ease-in-out;
 }
 
@@ -26348,8 +26396,17 @@ ul.ombo-list {
 .card-header {
   border: none;
   font-size: 1.1rem;
+  font-family: "IBM Plex Serif", serif;
   font-weight: 600;
   background: transparent;
+}
+
+.card-icons {
+  margin-left: 0.5rem;
+}
+
+.card-icons i {
+  font-size: 1rem;
 }
 
 .card-hello {
@@ -26367,31 +26424,31 @@ ul.ombo-list {
 }
 
 .card.card-url {
-  background-color: rgba(204, 83, 24, 0.04);
+  background-color: rgba(204, 83, 24, 0.06);
 }
 
 .card.card-url:hover {
   cursor: pointer;
-  box-shadow: inset -5px -15px 75px -28px rgba(204, 83, 24, 0.07);
+  box-shadow: inset -5px -15px 75px -28px rgba(204, 83, 24, 0.085);
   transition: all 0.2s ease-in-out;
 }
 
 .card.card-url.inactive {
-  background-color: rgba(204, 83, 24, 0.07) !important;
+  background-color: rgba(204, 83, 24, 0.085) !important;
 }
 
 .card.inactive:hover {
   cursor: pointer;
-  box-shadow: inset -5px -15px 75px -28px rgba(204, 83, 24, 0.09);
+  box-shadow: inset -5px -15px 75px -28px rgba(204, 83, 24, 0.1);
   transition: all 0.2s ease-in-out;
 }
 
 .card.failed {
-  background-color: rgba(204, 83, 24, 0.07);
+  background-color: rgba(204, 83, 24, 0.085);
 }
 
 .card.failed:hover {
-  box-shadow: inset -5px -15px 75px -28px rgba(204, 83, 24, 0.09);
+  box-shadow: inset -5px -15px 75px -28px rgba(204, 83, 24, 0.1);
 }
 
 .card.completed {
@@ -26409,7 +26466,7 @@ ul.ombo-list {
   pointer-events: none;
 }
 
-.card-bg .card-top {
+.card-top {
   display: flex;
 }
 
@@ -26431,7 +26488,7 @@ ul.ombo-list {
   color: rgb(158.3684210526, 64.4342105263, 18.6315789474);
 }
 
-.card-bg .card-top .card-title {
+.card-top .card-title {
   font-weight: 700;
   font-family: "IBM Plex Serif", serif;
   overflow: hidden;

@@ -43,11 +43,11 @@ class CampaignEditObjectiveForm extends Form implements FormIO
                 ->add(FormElement::hidden('campaign_id', $model, $campaign_id))
                 ->add(FormElement::text('name', $model)->label(__('forms.objectives.name'))->required())
                 ->add(FormElement::trix('description', $model)->label(__('forms.objectives.description')))
-                ->add(FormElement::datetime('deadline')->label(__('forms.objectives.deadline'))->info(__('forms.objectives.info.deadline')))
+                ->add(FormElement::datetime('deadline', $model)->label(__('forms.objectives.deadline'))->info(__('forms.objectives.info.deadline')))
                 ->add(FormElement::decimal('weight', $model)->label(__('forms.objectives.weight'))->info(__('forms.objectives.info.weight'))->required())
                 ->add(FormElement::decimal('expected', $model)->label(__('forms.objectives.expected'))->info(__('forms.objectives.info.expected')))
                 ->add(FormElement::decimal('award', $model)->label(__('forms.objectives.award'))->info(__('forms.objectives.info.award')))
-                ->add(FormElement::switch('draft', $model)->label(__('forms.objectives.draft'))->info(__('forms.objectives.info.draft'))->default(true))
+                ->add(FormElement::switch('draft', $model)->label(__('forms.objectives.draft'))->info(__('forms.objectives.info.draft'))->default(false))
                 ->addTitle($title);
     }
 

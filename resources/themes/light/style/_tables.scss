@@ -55,15 +55,29 @@
     text-decoration: none !important;
 }
 
+.pagination .page-item > .page-link,
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    border: 1px solid transparent;
+    background: transparent;
+    padding: .5rem;
+    margin: 0 .1rem;
+    border-radius: 0.25rem;
+}
+
+.pagination .page-item > .page-link:hover,
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: rgba($primary, 0.2);
+    border: 1px solid rgba($primary, 0.25);
+}
+
 .dataTables_wrapper .dataTables_paginate .paginate_button.current,
-.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover,
+.pagination .page-item.active > .page-link,
+.pagination .page-item.active > .page-link:hover
 {
     color: #fff !important;
     background: $primary;
     border: 1px solid $primary;
-    border-radius: 0.25rem;
-    padding: .5rem;
-    margin: 0 .35rem;
 }
 
 .ombo-table .action-btns {
@@ -99,17 +113,20 @@ table.ombo-table tbody tr:hover {
     border-bottom-width: 0;
 }
 
-.ombo-table .user-details {
+.ombo-table .user-details,
+.user > .user-details {
     display: flex;
     align-items: center;
 }
-.ombo-table .user-details img {
+.ombo-table .user-details img,
+.user > .user-details img {
     border-radius: 50%;
-    width: 2rem;
+    width: 1.55rem;
     margin-right: .5rem;
 }
 
-.ombo-table .user-details a {
+.ombo-table .user-details a,
+.user > .user-details a {
     text-decoration: none;
 }
 

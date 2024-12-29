@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
 use App\Models\Core\User;
+use App\Policies\UserPolicy;
 use App\Models\MBO\Campaign;
 use App\Policies\MBO\CampaignPolicy;
 use App\Models\MBO\Objective;
@@ -28,5 +29,6 @@ class GateServiceProvider extends ServiceProvider
     {
         Gate::policy(Campaign::class, CampaignPolicy::class);
         Gate::policy(Objective::class, ObjectivePolicy::class);
+        Gate::policy(User::class, UserPolicy::class);
     }
 }

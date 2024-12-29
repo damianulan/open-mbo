@@ -16,6 +16,9 @@ return [
     ],
     'info' => [
         'maintenance' => 'Serwis jest zamknięty dla użytkowników.',
+        'env_local' => 'Aplikacja działa w trybie lokalnym',
+        'env_development' => 'Aplikacja uruchomiona w trybie deweloperskim. Część funkcjonalności może nie działać zgodnie z oczekiwaniami',
+        'debugging' => 'Uwaga - Debugowanie jest włączone',
     ],
 
     'settings' => [
@@ -64,6 +67,12 @@ return [
 
         ],
 
+    ],
+
+    'objectives' => [
+        'error' => [
+            'overdued' => 'Cel nie jest już aktualny - termin jego realizacji minął. Wszystkie nieukończone podejścia zostały oznaczone jako niezaliczone.',
+        ],
     ],
 
     'users' => [

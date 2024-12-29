@@ -31,18 +31,22 @@ class Permission extends Model
 
     protected $table = 'permissions';
     protected $primaryKey = 'id';
+    // roles and their permissions for core functionality, cannot be manipulated in-app
     public static $coreRoleSeeds = [
         'telescope-view' => ['root', 'support'],
         'maintenance' => ['root', 'support'],
     ];
+    // roles and their permissions for common use, can be manipulated by admins in settings
     public static $roleSeeds = [
         // users
         'users-impersonate' => ['admins'],
-        'users-list' => ['admins', 'admin_mbo', 'supervisor'], // and probably any other superior and team leader @TODO later
-        'users-view' => ['admins', 'admin_mbo', 'supervisor'], // and probably any other superior and team leader @TODO later
+        'users-list' => ['admins', 'admin_mbo', 'admin_hr', 'supervisor'], // and probably any other superior roles and team leader @TODO later
+        'users-view' => ['admins', 'admin_mbo', 'admin_hr', 'supervisor'], // and probably any other superior roles and team leader @TODO later
         'users-create' => ['admins'],
-        'users-edit' => ['admins'],
-        'users-teams' => ['admins'],
+        'users-edit' => ['admins', 'admin_hr'], // includes assigning assignable roles (not based on role context)
+        'users-teams' => ['admins', 'admin_hr'],
+        'users-delete' => ['admins'],
+        'users-restore' => ['admins'],
 
         // settings
         'settings-general' => ['admins'],
@@ -53,21 +57,22 @@ class Permission extends Model
         // management
         'management-mbo-templates' => ['admins', 'admin_mbo', 'objective_coordinator'],
         'management-mbo-categories' => ['admins', 'admin_mbo'],
-        'management-users' => ['admins'],
+        'management-users' => ['admins', 'admin_hr'],
+        'management-roles' => ['admins'], // role/permission manipulations
         'management-structure' => ['admins'],
         'management-notifications' => ['admins'],
         'management-reports' => ['admins'],
-        'management-recovery' => ['root', 'support'],
+        'management-recovery' => ['admins'],
 
         // reports
-        'reports-view' => ['admins', 'admin_mbo', 'supervisor'], // and probably any other superior and team leader @TODO later
+        'reports-view' => ['admins', 'admin_mbo', 'supervisor'], // and probably any other superior roles and team leader @TODO later
 
         // mbo
         'mbo-campaign-create' => ['admins', 'admin_mbo'],
         'mbo-campaign-view' => ['admins', 'admin_mbo', 'campaign_coordinator'],
         'mbo-campaign-update' => ['admins', 'admin_mbo', 'campaign_coordinator'],
         'mbo-campaign-delete' => ['admins', 'admin_mbo'],
-        'mbo-campaign-manage' => ['admins', 'admin_mbo', 'campaign_coordinator'], // dodawanie/usuwanie użytkowników i celów do kampanii.
+        'mbo-campaign-manage' => ['admins', 'admin_mbo', 'campaign_coordinator'], // adding/removing users and objectives to/from campaign.
 
         'mbo-objective-create' => ['admins', 'admin_mbo', 'objective_coordinator'],
         'mbo-objective-view' => ['admins', 'admin_mbo', 'objective_coordinator'],
