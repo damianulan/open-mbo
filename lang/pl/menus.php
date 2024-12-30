@@ -86,15 +86,21 @@ return [
         'teams' => [
             'index' => 'Zespoły'
         ],
-        'objectives' => [
-            'index' => 'Szablony celów',
-            'create' => 'Tworzenie szablonu celu',
-            'edit' => 'Modyfikacja szablonu celu',
+        'mbo' => [
+            'objectives' => [
+                'index' => 'Szablony celów',
+                'create' => 'Tworzenie szablonu celu',
+                'edit' => 'Modyfikacja szablonu celu',
+
+
+            ],
             'categories' => [
               'index' => 'Kategorie celów',
+              'create' => 'Tworzenie kategorii MBO',
+              'edit' => 'Modyfikacja kategorii MBO',
             ],
-
         ],
+
         'restoring' => [
             'index' => 'Przywracanie danych',
         ],

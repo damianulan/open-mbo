@@ -102,5 +102,16 @@ return [
             'award' => 'W razie zaliczenia celu, na konto użytkownika wpadną określone tutaj punkty.',
             'draft' => 'Cel w wersji roboczej nie zostanie udostępniony do realizacji, jest także wyłączony z raportowania.',
         ],
+
+        'categories' => [
+            'name' => 'Nazwa kategorii',
+            'shortname' => 'Unikalny identyfikator kategorii',
+            'description' => 'Opis kategorii',
+            'global' => 'Kategoria celów globalnych',
+            'coordinators' => 'Koordynatorzy kategorii',
+            'info' => [
+                'global' => 'Cele skierowane są do całej organizacji, a nie konkretnych użytkowników.',
+            ],
+        ],
     ],
 ];

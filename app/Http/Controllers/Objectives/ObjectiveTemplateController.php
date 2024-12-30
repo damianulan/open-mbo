@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Management;
+namespace App\Http\Controllers\Objectives;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Forms\MBO\ObjectiveTemplateEditForm;
+use App\Forms\MBO\Objective\ObjectiveTemplateEditForm;
 use App\Models\MBO\ObjectiveTemplate;
+use App\Http\Controllers\Management\ManagementController;
 
 class ObjectiveTemplateController extends ManagementController
 {
@@ -30,7 +30,7 @@ class ObjectiveTemplateController extends ManagementController
      */
     public function create()
     {
-        return view('pages.management.objectives.edit', [
+        return view('components.forms.edit', [
             'form' => ObjectiveTemplateEditForm::boot()
         ]);
     }
@@ -74,7 +74,7 @@ class ObjectiveTemplateController extends ManagementController
     public function edit($id)
     {
         $model = ObjectiveTemplate::findOrFail($id);
-        return view('pages.management.objectives.edit', [
+        return view('components.forms.edit', [
             'objective' => $model,
             'form' => ObjectiveTemplateEditForm::boot($model),
         ]);

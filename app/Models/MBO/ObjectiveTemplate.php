@@ -17,7 +17,7 @@ use App\Models\MBO\ObjectiveTemplateCategory;
 use App\Enums\MBO\ObjectiveType;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string|null $category_id
@@ -75,6 +75,26 @@ class ObjectiveTemplate extends BaseModel
     public static function allActive()
     {
         return self::where('draft', 0)->get();
+    }
+
+    public static function allIndividual(bool $active = true)
+    {
+        $results = self::where('type', ObjectiveType::INDIVIDUAL);
+        if($active){
+            $results->where('draft', 0);
+        }
+
+        return $results->get();
+    }
+
+    public static function allTeam(bool $active = true)
+    {
+        $results = self::where('type', ObjectiveType::TEAM);
+        if($active){
+            $results->where('draft', 0);
+        }
+
+        return $results->get();
     }
 
     public function category()

@@ -8,7 +8,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-xl-9 col-md-12">
+    <div class="col-xl-9 col-md-12 pb-2">
         <div class="content-card">
             <div class="content-card-top">
                 <div class="content-card-title">
@@ -59,7 +59,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xl-3 col-md-12">
+    <div class="col-xl-3 col-md-12 pb-2">
         <div class="content-card">
             <div class="content-card-top">
                 <div class="content-card-title">

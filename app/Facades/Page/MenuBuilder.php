@@ -39,7 +39,7 @@ class MenuBuilder
             MenuItem::make('management')
                     ->setTitle(__('menus.management.index'))
                     ->setIcon('layers-half')
-                    ->setRoute('management.objectives.index'),
+                    ->setRoute('management.mbo.objectives.index'),
             MenuItem::make('settings')
                     ->setTitle(__('menus.settings.index'))
                     ->setIcon('gear-fill')

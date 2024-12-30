@@ -16,11 +16,11 @@ class ManagementController extends Controller
     {
         $this->nav = MenuBuilder::bootMenubar('management', [
             MenuItem::make('objectives')
-                    ->setTitle(__('menus.management.objectives.index'))
-                    ->setRoute('management.objectives.index'),
+                    ->setTitle(__('menus.management.mbo.objectives.index'))
+                    ->setRoute('management.mbo.objectives.index'),
             MenuItem::make('categories')
-                    ->setTitle(__('menus.management.objectives.categories.index'))
-                    ->setRoute('management.objectives.categories.index'),
+                    ->setTitle(__('menus.management.mbo.categories.index'))
+                    ->setRoute('management.mbo.categories.index'),
             MenuItem::make('surveys')
                     ->setTitle(__('menus.management.surveys.index'))
                     ->setRoute('management.surveys.index'),

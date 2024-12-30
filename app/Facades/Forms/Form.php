@@ -95,6 +95,14 @@ class Form
 
     public static function validate(Request $request, $model_id = null): array
     {
+        if(is_null($model_id)){
+            $id = $request->input('id') ?? null;
+            if($id){
+                $model_id = $id;
+            }
+        }
+
+        dd($model_id);
         $validator = Validator::make($request->all(), static::validation($model_id));
 
         if($validator->fails()){

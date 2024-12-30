@@ -11,6 +11,7 @@ use App\Facades\Modules\ModuleSeeder;
 use App\Models\MBO\ObjectiveTemplate;
 use App\Models\Core\User;
 use App\Models\Core\UserProfile;
+use Database\Seeders\BusinessSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(RolePermissionSeeder::class);
+        $this->call(BusinessSeeder::class);
         $this->call(CreateAdminUserSeeder::class);
         $this->call(MBOSeeder::class);
 

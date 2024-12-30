@@ -1,5 +1,5 @@
 
-<div class="card card-url card-bg" data-url="{{ route('management.objectives.edit', $objective->id) }}">
+<div class="card card-url card-bg" data-url="{{ route('management.mbo.objectives.edit', $objective->id) }}">
     <div class="card-body">
         <div class="card-top">
             <div class="card-title" data-tippy-content="{{ $objective->name }}">
@@ -13,7 +13,7 @@
                     </div>
                 @endif
                 @if($objective->category)
-                <div class="align-self-center" data-tippy-content="Kategoria">
+                <div class="align-self-center" data-tippy-content="{{ __('fields.category') }}">
                     <span class="badge bg-secondary">{{ $objective->category->name }}</span>
                 </div>
                 @endif

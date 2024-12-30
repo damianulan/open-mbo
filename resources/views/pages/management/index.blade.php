@@ -5,7 +5,7 @@
 
 <nav class="icon-btn-nav">
     <div class="panel-left">
-        <a class="icon-btn" href="{{ route('management.objectives.create') }}" data-tippy-content="{{ __('buttons.create_template') }}">
+        <a class="icon-btn" href="{{ route('management.mbo.objectives.create') }}" data-tippy-content="{{ __('buttons.create_template') }}">
             <i class="bi-plus-circle-fill"></i>
         </a>
     </div>

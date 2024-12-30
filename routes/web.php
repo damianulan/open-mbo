@@ -66,17 +66,28 @@ Route::middleware(['auth', 'maintenance'])->group(function (){
      * Management START
      */
     Route::prefix('management')->name('management.')->group(function (){
-        Route::prefix('objectives')->name('objectives.')->group(function () {
-            Route::get('/', [App\Http\Controllers\Management\ObjectiveTemplateController::class, 'index'])->name('index');
-            Route::post('/', [App\Http\Controllers\Management\ObjectiveTemplateController::class, 'store'])->name('store');
-            Route::get('create', [App\Http\Controllers\Management\ObjectiveTemplateController::class, 'create'])->name('create');
-            Route::get('edit/{objective}', [App\Http\Controllers\Management\ObjectiveTemplateController::class, 'edit'])->name('edit');
-            Route::get('{objective}', [App\Http\Controllers\Management\ObjectiveTemplateController::class, 'show'])->name('show');
-            Route::put('{objective}', [App\Http\Controllers\Management\ObjectiveTemplateController::class, 'update'])->name('update');
-            Route::prefix('categories')->name('categories.')->group(function () {
 
+        Route::prefix('mbo')->name('mbo.')->group(function () {
+            Route::prefix('objectives')->name('objectives.')->group(function () {
+                Route::get('/', [App\Http\Controllers\Objectives\ObjectiveTemplateController::class, 'index'])->name('index');
+                Route::post('/', [App\Http\Controllers\Objectives\ObjectiveTemplateController::class, 'store'])->name('store');
+                Route::get('create', [App\Http\Controllers\Objectives\ObjectiveTemplateController::class, 'create'])->name('create');
+                Route::get('edit/{objective}', [App\Http\Controllers\Objectives\ObjectiveTemplateController::class, 'edit'])->name('edit');
+                Route::get('{objective}', [App\Http\Controllers\Objectives\ObjectiveTemplateController::class, 'show'])->name('show');
+                Route::put('{objective}', [App\Http\Controllers\Objectives\ObjectiveTemplateController::class, 'update'])->name('update');
+                Route::delete('/delete/{objective}', [App\Http\Controllers\Objectives\ObjectiveTemplateController::class, 'delete'])->name('delete');
+            });
+            Route::prefix('categories')->name('categories.')->group(function () {
+                Route::get('/', [App\Http\Controllers\Objectives\ObjectiveCategoryController::class, 'index'])->name('index');
+                Route::post('/', [App\Http\Controllers\Objectives\ObjectiveCategoryController::class, 'store'])->name('store');
+                Route::get('create', [App\Http\Controllers\Objectives\ObjectiveCategoryController::class, 'create'])->name('create');
+                Route::get('edit/{objective}', [App\Http\Controllers\Objectives\ObjectiveCategoryController::class, 'edit'])->name('edit');
+                Route::get('{objective}', [App\Http\Controllers\Objectives\ObjectiveCategoryController::class, 'show'])->name('show');
+                Route::put('{objective}', [App\Http\Controllers\Objectives\ObjectiveCategoryController::class, 'update'])->name('update');
+                Route::delete('/delete/{objective}', [App\Http\Controllers\Objectives\ObjectiveCategoryController::class, 'delete'])->name('delete');
             });
         });
+
         Route::prefix('organization')->name('organization.')->group(function () {
             Route::get('/', [App\Http\Controllers\Management\Organization\OrganizationController::class, 'index'])->name('index');
             Route::prefix('company')->name('company.')->group(function () {

@@ -14,7 +14,7 @@ use App\Models\MBO\ObjectiveTemplate;
 use App\Models\Core\User;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $name
@@ -51,12 +51,14 @@ class ObjectiveTemplateCategory extends BaseModel
 {
     use TrixFields;
 
+    protected $table = 'objective_template_categories';
+
     protected $fillable = [
         'name',
         'shortname',
         'description',
         'icon',
-        'global',
+        'global', // can be assigned to other entities than users
     ];
 
     protected $casts = [
