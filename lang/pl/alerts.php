@@ -63,7 +63,7 @@ return [
             'users_deleted' => 'Wystąpił błąd podczas wypisywania użytkownika z Kampanii. Odśwież stronę i spróbuj ponownie.',
         ],
 
-        'confirm' => [
+        'info' => [
 
         ],
 
@@ -113,6 +113,25 @@ return [
             'delete' => 'Szablon celu niestety nie został usunięty. Wystąpił błąd.',
         ],
     ],
+
+    'objective_categories' => [
+        'success' => [
+            'create' => 'Nowa kategoria MBO została pomyślnie dodana.',
+            'edit' => 'Kategoria MBO została pomyślnie zmodyfikowana.',
+            'delete' => 'Kategoria MBO została pomyślnie usunięta.',
+        ],
+
+        'error' => [
+            'create' => 'Nowa kategoria MBO nie mógła zostać dodana. Wystąpił błąd.',
+            'edit' => 'Kategoria MBO nie została zmodyfikowana. Wystąpił błąd.',
+            'delete' => 'Kategoria MBO niestety nie została usunięta. Wystąpił błąd.',
+        ],
+
+        'info' => [
+            'delete' => 'Usunięcie kategorii będzie nieodwracalne. Razem z nią usunięte zostaną wszystkie powiązane cele.',
+        ],
+    ],
+
 
     'datatables' => [
         'save_columns' => [

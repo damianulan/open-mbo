@@ -6,7 +6,8 @@ return [
 
     'generic' => [
         'password' => 'Hasło',
-
+        'login' => 'Login',
+        'email' => 'E-mail',
     ],
 
     'settings' => [
@@ -85,24 +86,26 @@ return [
         'roles' => 'Role systemowe',
     ],
 
-    'objectives' => [
-        'category' => 'Kategoria',
-        'name' => 'Nazwa celu',
-        'description' => 'Opis celu',
-        'draft' => 'Wersja robocza',
-        'deadline' => 'Termin realizacji',
-        'weight' => 'Waga celu',
-        'type' => 'Typ celu',
-        'expected' => 'Oczekiwany wynik',
-        'award' => 'Punkty nagrody',
-        'info' => [
-            'deadline' => 'Po upłynięciu tej daty, cel przypisany do użytkownika zostanie automatycznie oznaczony jako zaliczony lub niezaliczony.',
-            'weight' => 'Określ jaki udział ma ten cel w całej kampanii. Suma wag wszystkich celów nie może przekraczać wartości <strong>1</strong>.',
-            'expected' => 'Określ minimalny wynik potrzebny do zaliczenia celu. W razie nieosiągnięcia wyniku, Administratorzy nadal będą mogli wymusić zaliczenie celu.',
-            'award' => 'W razie zaliczenia celu, na konto użytkownika wpadną określone tutaj punkty.',
-            'draft' => 'Cel w wersji roboczej nie zostanie udostępniony do realizacji, jest także wyłączony z raportowania.',
+    'mbo' => [
+        'objectives' => [
+            'category' => 'Kategoria',
+            'template' => 'Szablon celu',
+            'name' => 'Nazwa celu',
+            'description' => 'Opis celu',
+            'draft' => 'Wersja robocza',
+            'deadline' => 'Termin realizacji',
+            'weight' => 'Waga celu',
+            'type' => 'Typ celu',
+            'expected' => 'Oczekiwany wynik',
+            'award' => 'Punkty nagrody',
+            'info' => [
+                'deadline' => 'Po upłynięciu tej daty, cel przypisany do użytkownika zostanie automatycznie oznaczony jako zaliczony lub niezaliczony.',
+                'weight' => 'Określ jaki udział ma ten cel w całej kampanii. Suma wag wszystkich celów nie może przekraczać wartości <strong>1</strong>.',
+                'expected' => 'Określ minimalny wynik potrzebny do zaliczenia celu. W razie nieosiągnięcia wyniku, Administratorzy nadal będą mogli wymusić zaliczenie celu.',
+                'award' => 'W razie zaliczenia celu, na konto użytkownika wpadną określone tutaj punkty.',
+                'draft' => 'Cel w wersji roboczej nie zostanie udostępniony do realizacji, jest także wyłączony z raportowania.',
+            ],
         ],
-
         'categories' => [
             'name' => 'Nazwa kategorii',
             'shortname' => 'Unikalny identyfikator kategorii',

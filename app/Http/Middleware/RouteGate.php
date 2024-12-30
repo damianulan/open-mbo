@@ -4,9 +4,12 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Route;
 
-class Permission
+class RouteGate
 {
+
     /**
      * @param  mixed   $request
      * @param  Closure $next
@@ -17,6 +20,7 @@ class Permission
     public function handle($request, Closure $next, $permission, $context = null)
     {
         if(auth()->user()->cannot($permission, $context)) {
+            $routes = Route::getRoutes();
             return abort(403);
         }
         return $next($request);

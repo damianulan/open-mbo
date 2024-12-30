@@ -25,12 +25,12 @@ class ObjectiveTemplateEditForm
 
         return (new FormBuilder($method, $route, 'campaign_edit'))
                 ->class('campaign-create-form')
-                ->add(FormElement::select('category_id', $model, Dictionary::fromModel(ObjectiveTemplateCategory::class, 'name'))->label(__('forms.objectives.category')))
-                ->add(FormElement::select('type', $model, Dictionary::fromEnum(ObjectiveType::class))->label(__('forms.objectives.type'))->required())
-                ->add(FormElement::text('name', $model)->label(__('forms.objectives.name'))->required())
-                ->add(FormElement::trix('description', $model)->label(__('forms.objectives.description')))
-                ->add(FormElement::switch('draft', $model)->label(__('forms.objectives.draft'))->default(false)
-                ->info(__('forms.objectives.info.draft')))
+                ->add(FormElement::select('category_id', $model, Dictionary::fromModel(ObjectiveTemplateCategory::class, 'name'))->label(__('forms.mbo.objectives.category')))
+                ->add(FormElement::select('type', $model, Dictionary::fromEnum(ObjectiveType::class))->label(__('forms.mbo.objectives.type'))->required())
+                ->add(FormElement::text('name', $model)->label(__('forms.mbo.objectives.name'))->required())
+                ->add(FormElement::trix('description', $model)->label(__('forms.mbo.objectives.description')))
+                ->add(FormElement::switch('draft', $model)->label(__('forms.mbo.objectives.draft'))->default(false)
+                ->info(__('forms.mbo.objectives.info.draft')))
                 ->addSubmit();
     }
 

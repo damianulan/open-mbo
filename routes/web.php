@@ -75,7 +75,7 @@ Route::middleware(['auth', 'maintenance'])->group(function (){
                 Route::get('edit/{objective}', [App\Http\Controllers\Objectives\ObjectiveTemplateController::class, 'edit'])->name('edit');
                 Route::get('{objective}', [App\Http\Controllers\Objectives\ObjectiveTemplateController::class, 'show'])->name('show');
                 Route::put('{objective}', [App\Http\Controllers\Objectives\ObjectiveTemplateController::class, 'update'])->name('update');
-                Route::delete('/delete/{objective}', [App\Http\Controllers\Objectives\ObjectiveTemplateController::class, 'delete'])->name('delete');
+                Route::get('/delete/{objective}', [App\Http\Controllers\Objectives\ObjectiveTemplateController::class, 'delete'])->name('delete');
             });
             Route::prefix('categories')->name('categories.')->group(function () {
                 Route::get('/', [App\Http\Controllers\Objectives\ObjectiveCategoryController::class, 'index'])->name('index');
@@ -84,7 +84,7 @@ Route::middleware(['auth', 'maintenance'])->group(function (){
                 Route::get('edit/{objective}', [App\Http\Controllers\Objectives\ObjectiveCategoryController::class, 'edit'])->name('edit');
                 Route::get('{objective}', [App\Http\Controllers\Objectives\ObjectiveCategoryController::class, 'show'])->name('show');
                 Route::put('{objective}', [App\Http\Controllers\Objectives\ObjectiveCategoryController::class, 'update'])->name('update');
-                Route::delete('/delete/{objective}', [App\Http\Controllers\Objectives\ObjectiveCategoryController::class, 'delete'])->name('delete');
+                Route::get('/delete/{objective}', [App\Http\Controllers\Objectives\ObjectiveCategoryController::class, 'delete'])->name('delete');
             });
         });
 

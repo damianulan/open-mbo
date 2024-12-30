@@ -46,3 +46,13 @@ function current_theme(): string
 
     return $theme;
 }
+
+function development(): bool
+{
+    return config('app.env') === 'development';
+}
+
+function production(): bool
+{
+    return config('app.env') === 'production';
+}

@@ -39,15 +39,15 @@ class CampaignEditObjectiveForm extends Form implements FormIO
         return FormBuilder::boot($method, $route, 'campaign_edit_objective')
                 ->class('campaign-edit-objective-form')
                 ->add(FormElement::hidden('id', $model))
-                ->add(FormElement::select('template_id', $model, Dictionary::fromModel(ObjectiveTemplate::class, 'name', 'allIndividual', $exclude))->required()->label(__('forms.objectives.name')))
+                ->add(FormElement::select('template_id', $model, Dictionary::fromModel(ObjectiveTemplate::class, 'name', 'allIndividual', $exclude))->required()->label(__('forms.mbo.objectives.template')))
                 ->add(FormElement::hidden('campaign_id', $model, $campaign_id))
-                ->add(FormElement::text('name', $model)->label(__('forms.objectives.name'))->required())
-                ->add(FormElement::trix('description', $model)->label(__('forms.objectives.description')))
-                ->add(FormElement::datetime('deadline', $model)->label(__('forms.objectives.deadline'))->info(__('forms.objectives.info.deadline')))
-                ->add(FormElement::decimal('weight', $model)->label(__('forms.objectives.weight'))->info(__('forms.objectives.info.weight'))->required())
-                ->add(FormElement::decimal('expected', $model)->label(__('forms.objectives.expected'))->info(__('forms.objectives.info.expected')))
-                ->add(FormElement::decimal('award', $model)->label(__('forms.objectives.award'))->info(__('forms.objectives.info.award')))
-                ->add(FormElement::switch('draft', $model)->label(__('forms.objectives.draft'))->info(__('forms.objectives.info.draft'))->default(false))
+                ->add(FormElement::text('name', $model)->label(__('forms.mbo.objectives.name'))->required())
+                ->add(FormElement::trix('description', $model)->label(__('forms.mbo.objectives.description')))
+                ->add(FormElement::datetime('deadline', $model)->label(__('forms.mbo.objectives.deadline'))->info(__('forms.mbo.objectives.info.deadline')))
+                ->add(FormElement::decimal('weight', $model)->label(__('forms.mbo.objectives.weight'))->info(__('forms.mbo.objectives.info.weight'))->required())
+                ->add(FormElement::decimal('expected', $model)->label(__('forms.mbo.objectives.expected'))->info(__('forms.mbo.objectives.info.expected')))
+                ->add(FormElement::decimal('award', $model)->label(__('forms.mbo.objectives.award'))->info(__('forms.mbo.objectives.info.award')))
+                ->add(FormElement::switch('draft', $model)->label(__('forms.mbo.objectives.draft'))->info(__('forms.objectives.info.draft'))->default(false))
                 ->addTitle($title);
     }
 

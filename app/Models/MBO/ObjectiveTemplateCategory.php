@@ -14,7 +14,7 @@ use App\Models\MBO\ObjectiveTemplate;
 use App\Models\Core\User;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string $name
@@ -66,6 +66,15 @@ class ObjectiveTemplateCategory extends BaseModel
         'global' => CheckboxCast::class,
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleted(function ($model) {
+            $model->objective_templates()->delete();
+            $model->coordinators()->delete();
+        });
+    }
+
     public static function findByShortname(string $shortname): ?self
     {
         return self::where('shortname', $shortname)->first();
@@ -78,6 +87,11 @@ class ObjectiveTemplateCategory extends BaseModel
             'audit',
             'individual',
         ];
+    }
+
+    public function canBeDeleted(): bool
+    {
+        return !in_array($this->shortname, self::baseCategories());
     }
 
     public function coordinators()

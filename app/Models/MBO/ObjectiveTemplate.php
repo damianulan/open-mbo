@@ -17,7 +17,7 @@ use App\Models\MBO\ObjectiveTemplateCategory;
 use App\Enums\MBO\ObjectiveType;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string|null $category_id
@@ -71,6 +71,14 @@ class ObjectiveTemplate extends BaseModel
         'description' => TrixFieldCast::class,
         'type' => ObjectiveType::class,
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleted(function ($model) {
+            $model->objective_templates()->delete();
+        });
+    }
 
     public static function allActive()
     {

@@ -9,7 +9,7 @@ use App\Models\Core\User;
 use App\Facades\Forms\RequestForms;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property string $user_id
@@ -28,6 +28,7 @@ use App\Facades\Forms\RequestForms;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference withoutTrashed()
+ * @property bool $system_notifications
  * @mixin \Eloquent
  */
 class UserPreference extends Model

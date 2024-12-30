@@ -23,7 +23,7 @@ use App\Traits\Vendors\ModelActivity;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string $email

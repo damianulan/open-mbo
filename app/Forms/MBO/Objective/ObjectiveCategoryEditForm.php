@@ -35,12 +35,12 @@ class ObjectiveCategoryEditForm
 
         return (new FormBuilder($method, $route, 'objective_category_edit'))
                 ->class('objective-category-create-form')
-                ->add(FormElement::text('name', $model)->label(__('forms.objectives.categories.name'))->required())
-                ->add(FormElement::{$shortnameType}('shortname', $model)->label(__('forms.objectives.categories.shortname')))
-                ->add(FormElement::trix('description', $model)->label(__('forms.objectives.categories.description')))
-                ->add(FormElement::multiselect('user_ids', $model, Dictionary::fromModel(User::class, 'name', 'allActive'), 'users', $selected)->label(__('forms.objectives.categories.coordinators')))
-                ->add(FormElement::switch('global', $model)->label(__('forms.objectives.categories.global'))->default(false)
-                ->info(__('forms.objectives.categories.info.global')))
+                ->add(FormElement::text('name', $model)->label(__('forms.mbo.categories.name'))->required())
+                ->add(FormElement::{$shortnameType}('shortname', $model)->label(__('forms.mbo.categories.shortname')))
+                ->add(FormElement::trix('description', $model)->label(__('forms.mbo.categories.description')))
+                ->add(FormElement::multiselect('user_ids', $model, Dictionary::fromModel(User::class, 'name', 'allActive'), 'users', $selected)->label(__('forms.mbo.categories.coordinators')))
+                ->add(FormElement::switch('global', $model)->label(__('forms.mbo.categories.global'))->default(false)
+                ->info(__('forms.mbo.categories.info.global')))
                 ->addSubmit();
     }
 

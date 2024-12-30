@@ -43,9 +43,9 @@ class ObjectiveCategoryController extends ManagementController
 
         if($objective->save()){
             $objective->refreshCoordinators($user_ids);
-            return redirect()->route('management.mbo.categories.index')->with('success', __('alerts.objective_template.success.create'));
+            return redirect()->route('management.mbo.categories.index')->with('success', __('alerts.objective_categories.success.create'));
         }
-        return redirect()->back()->with('error', 'Wystąpił błąd.');
+        return redirect()->back()->with('error', __('alerts.error.operation'));
     }
 
     /**
@@ -78,16 +78,20 @@ class ObjectiveCategoryController extends ManagementController
         $user_ids = $request->input('user_ids');
         if($objective->update()){
             $objective->refreshCoordinators($user_ids);
-            return redirect()->route('management.mbo.categories.index')->with('success', __('alerts.objective_template.success.edit'));
+            return redirect()->route('management.mbo.categories.index')->with('success', __('alerts.objective_categories.success.edit'));
         }
-        return redirect()->back()->with('error', 'Wystąpił błąd.');
+        return redirect()->back()->with('error', __('alerts.error.operation'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function delete(string $id)
     {
-        //
+        $objective = ObjectiveTemplateCategory::findOrFail($id);
+        if($objective->delete()){
+            return redirect()->route('management.mbo.objectives.index')->with('success', __('alerts.objective_categories.success.delete'));
+        }
+        return redirect()->back()->with('error', __('alerts.error.operation'));
     }
 }
