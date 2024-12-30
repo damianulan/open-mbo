@@ -11,6 +11,9 @@ enum ObjectiveType: string
     // assigned to a campaign will be distributed to all team leaders and supervisors.
     case TEAM       = 'team';
 
+    // can be viewed by all users who have higher RBAC than "employee". They can be 
+    case GLOBAL       = 'global';
+
     public static function values()
     {
         $collection = array();
