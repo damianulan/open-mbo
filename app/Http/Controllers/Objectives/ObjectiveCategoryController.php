@@ -16,7 +16,7 @@ class ObjectiveCategoryController extends ManagementController
      */
     public function index(ObjectiveCategoriesDataTable $dataTable)
     {
-        return $dataTable->render('pages.objectives.categories.index', [
+        return $dataTable->render('pages.mbo.categories.index', [
             'table' => $dataTable,
             'nav' => $this->nav(),
         ]);
@@ -27,7 +27,7 @@ class ObjectiveCategoryController extends ManagementController
      */
     public function create()
     {
-        return view('pages.objectives.categories.edit', [
+        return view('pages.mbo.categories.edit', [
             'form' => ObjectiveCategoryEditForm::boot()
         ]);
     }
@@ -62,7 +62,7 @@ class ObjectiveCategoryController extends ManagementController
     public function edit(string $id)
     {
         $model = ObjectiveTemplateCategory::findOrFail($id);
-        return view('pages.objectives.categories.edit', [
+        return view('pages.mbo.categories.edit', [
             'objective' => $model,
             'form' => ObjectiveCategoryEditForm::boot($model),
         ]);

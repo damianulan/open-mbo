@@ -13,7 +13,7 @@ class CampaignsController extends Controller
 {
     public function index()
     {
-        return view('pages.campaigns.index', [
+        return view('pages.mbo.campaigns.index', [
             'campaigns' => Campaign::paginate(30),
         ]);
     }
@@ -28,7 +28,7 @@ class CampaignsController extends Controller
         if ($request->user()->cannot('create', Campaign::class)) {
             abort(403);
         }
-        return view('pages.campaigns.edit', [
+        return view('pages.mbo.campaigns.edit', [
             'form' => CampaignEditForm::boot(),
         ]);
     }
@@ -68,7 +68,7 @@ class CampaignsController extends Controller
             abort(403);
         }
         $header = $campaign->name . ' [' . $campaign->period . ']';
-        return view('pages.campaigns.show', [
+        return view('pages.mbo.campaigns.show', [
             'campaign' => $campaign,
             'pagetitle' => $header,
         ]);
@@ -85,7 +85,7 @@ class CampaignsController extends Controller
         if ($request->user()->cannot('mbo-campaign-update', $campaign)) {
             abort(403);
         }
-        return view('pages.campaigns.edit', [
+        return view('pages.mbo.campaigns.edit', [
             'campaign' => $campaign,
             'form' => CampaignEditForm::boot($campaign),
         ]);

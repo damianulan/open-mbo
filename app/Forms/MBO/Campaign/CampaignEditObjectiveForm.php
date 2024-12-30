@@ -47,7 +47,7 @@ class CampaignEditObjectiveForm extends Form implements FormIO
                 ->add(FormElement::decimal('weight', $model)->label(__('forms.mbo.objectives.weight'))->info(__('forms.mbo.objectives.info.weight'))->required())
                 ->add(FormElement::decimal('expected', $model)->label(__('forms.mbo.objectives.expected'))->info(__('forms.mbo.objectives.info.expected')))
                 ->add(FormElement::decimal('award', $model)->label(__('forms.mbo.objectives.award'))->info(__('forms.mbo.objectives.info.award')))
-                ->add(FormElement::switch('draft', $model)->label(__('forms.mbo.objectives.draft'))->info(__('forms.objectives.info.draft'))->default(false))
+                ->add(FormElement::switch('draft', $model)->label(__('forms.mbo.objectives.draft'))->info(__('forms.mbo.objectives.info.draft'))->default(false))
                 ->addTitle($title);
     }
 

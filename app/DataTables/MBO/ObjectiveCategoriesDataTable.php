@@ -28,7 +28,7 @@ class ObjectiveCategoriesDataTable extends CustomDataTable
         return (new EloquentDataTable($query))
 
             ->addColumn('action', function($data) {
-                return view('pages.objectives.categories.action', [
+                return view('pages.mbo.categories.action', [
                     'data' => $data,
                 ]);
             })
@@ -56,12 +56,12 @@ class ObjectiveCategoriesDataTable extends CustomDataTable
     {
         return [
             'name'          => Column::make('name')
-                                ->title(__('forms.objectives.categories.name'))
+                                ->title(__('forms.mbo.categories.name'))
                                 ->searchable(true)
                                 ->orderable(true)
                                 ->addClass('firstcol'),
             'shortname'          => Column::computed('shortname')
-                                ->title(__('forms.objectives.categories.shortname'))
+                                ->title(__('forms.mbo.categories.shortname'))
                                 ->searchable(true)
                                 ->orderable(true),
             'created_at'    => Column::make('created_at')

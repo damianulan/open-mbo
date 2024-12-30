@@ -42,7 +42,7 @@ class ObjectiveTemplateFactory extends Factory
             return [
                 'category_id' => $category->id,
                 'name' => trim(fake()->realTextBetween(10, 50),'.'),
-                'description' => fake()->realTextBetween(300, 1000),
+                'description' => fake()->realTextBetween(300, 900),
                 'type' => $objectiveType,
                 'draft' => 0,
                 'award' => fake()->randomFloat(2, 1, 30),

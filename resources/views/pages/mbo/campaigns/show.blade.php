@@ -28,7 +28,7 @@
                                 </div>
                                 <div class="list-actions">
                                     @if($objective->draft)
-                                    <div class="list-action me-3" data-tippy-content="{{ __('forms.objectives.info.draft') }}">
+                                    <div class="list-action me-3" data-tippy-content="{{ __('forms.mbo.objectives.info.draft') }}">
                                         <i class="bi-feather"></i>
                                     </div>
                                     @endif
@@ -37,7 +37,7 @@
                                         <span>{{ $objective->weight }}</span>
                                     </div>
                                     @if($objective->expected)
-                                    <div class="list-action me-3" data-tippy-content="{{ __('forms.objectives.expected') }}">
+                                    <div class="list-action me-3" data-tippy-content="{{ __('forms.mbo.objectives.expected') }}">
                                         <i class="bi-patch-check"></i>
                                         <span>{{ $objective->expected }}</span>
                                     </div>

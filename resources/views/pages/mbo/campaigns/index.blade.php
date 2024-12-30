@@ -1,7 +1,7 @@
 @extends('layouts.portal.master')
 @section('content')
 
-@include('pages.campaigns.nav')
+@include('pages.mbo.campaigns.nav')
 
 @if (count($campaigns))
 <div class="content-card">

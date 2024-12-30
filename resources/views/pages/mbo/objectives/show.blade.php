@@ -27,7 +27,7 @@
                         </div>
                     @endif
                     @if($objective->draft)
-                        <div data-tippy-content="{{ __('forms.objectives.info.draft') }}">
+                        <div data-tippy-content="{{ __('forms.mbo.objectives.info.draft') }}">
                             <i class="bi-feather"></i>
                         </div>
                     @endif
@@ -46,13 +46,13 @@
                         <span>{{ $objective->weight }}</span>
                     </div>
                 @if($objective->expected)
-                    <div data-tippy-content="{{ __('forms.objectives.expected') }}">
+                    <div data-tippy-content="{{ __('forms.mbo.objectives.expected') }}">
                         <i class="bi-patch-check"></i>
                         <span>{{ $objective->expected }}</span>
                     </div>
                 @endif
                 @if($objective->deadline)
-                    <div data-tippy-content="{{ __('forms.objectives.deadline') }}">
+                    <div data-tippy-content="{{ __('forms.mbo.objectives.deadline') }}">
                         <span class="badge {{ $objective->isOverdued() ? 'bg-danger':'bg-secondary' }}">{{ $objective->deadline }}</span>
                     </div>
             @endif

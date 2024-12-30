@@ -42,7 +42,7 @@ class ObjectiveController extends Controller
         $objective = Objective::findOrFail($id);
 
         $header = 'Podsumowanie Celu';
-        return view('pages.objectives.show', [
+        return view('pages.mbo.objectives.show', [
             'objective' => $objective,
             'pagetitle' => $header,
         ]);

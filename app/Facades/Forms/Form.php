@@ -102,7 +102,6 @@ class Form
             }
         }
 
-        dd($model_id);
         $validator = Validator::make($request->all(), static::validation($model_id));
 
         if($validator->fails()){
