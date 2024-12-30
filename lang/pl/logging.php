@@ -45,15 +45,18 @@ return [
         'App\Models\MBO\ObjectiveTemplate' => 'Szablon celu',
         'App\Models\MBO\Objective' => 'Cel',
         'App\Models\MBO\Campaign' => 'Kampania pomiarowa',
-
+        'App\Models\MBO\ObjectiveTemplateCategory' => 'Kategoria MBO',
+        'App\Models\MBO\UserCampaign' => 'Modyfikacja przypisania użytkownika do kampanii',
+        'App\Models\MBO\UserObjective' => 'Modyfikacja przypisania użytkownika do celu',
     ],
 
     'route_mapping' => [
-        'App\Models\MBO\ObjectiveTemplate' => 'management.objectives.edit',
+        'App\Models\MBO\ObjectiveTemplate' => 'management.mbo.objectives.edit',
         'App\Models\MBO\Objective' => 'objectives.show',
         'App\Models\MBO\Campaign' => 'campaigns.show',
         'App\Models\MBO\UserObjective' => 'campaigns.users.update',
         'App\Models\MBO\UserCampaign' => 'campaigns.users.update',
+        'App\Models\MBO\ObjectiveTemplateCategory' => 'management.mbo.categories.edit',
     ],
 
 ];

@@ -11,7 +11,7 @@ use App\Models\MBO\UserObjective;
 use App\Notifications\MBO\Campaign\CampaignAssignment;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $campaign_id
@@ -45,6 +45,8 @@ use App\Notifications\MBO\Campaign\CampaignAssignment;
  */
 class UserCampaign extends BaseModel
 {
+    public $logEntities = ['user_id' => User::class, 'campaign_id' => Campaign::class];
+
     protected $fillable = [
         'campaign_id',
         'user_id',

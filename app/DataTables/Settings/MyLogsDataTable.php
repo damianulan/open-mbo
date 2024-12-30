@@ -38,7 +38,7 @@ class MyLogsDataTable extends CustomDataTable
                 if($data->subject){
                     return view('components.datatables.link', [
                         'route' => route(__('logging.route_mapping.'.$data->subject_type), $data->subject_id),
-                        'text' => $data->subject->name,
+                        'text' => $data->subject->name ?? null,
                     ]);
                 } else {
                     return __('vocabulary.not_applicable');

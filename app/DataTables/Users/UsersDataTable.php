@@ -80,7 +80,7 @@ class UsersDataTable extends CustomDataTable
      */
     public function query(User $model): QueryBuilder
     {
-        $query = $model->join('user_profiles', 'user_profiles.user_id', '=', 'users.id')
+        $query = $model->leftJoin('user_profiles', 'user_profiles.user_id', '=', 'users.id')
                     ->select('users.*', 'user_profiles.firstname', 'user_profiles.lastname')
                     ->whereNotIn('users.id', [auth()->user()->id]);
         return $query;

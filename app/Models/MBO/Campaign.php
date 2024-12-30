@@ -19,7 +19,7 @@ use App\Models\Core\User;
 use App\Enums\MBO\CampaignStage;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $name
@@ -85,6 +85,7 @@ class Campaign extends BaseModel
 
     public $stages;
     public $timestamps = true;
+    protected $log_name = 'mbo';
 
     protected $fillable = [
         'name',
@@ -148,12 +149,6 @@ class Campaign extends BaseModel
 
             return $model;
         });
-    }
-
-    public function getActivitylogOptions(): LogOptions
-    {
-        return LogOptions::defaults()
-        ->useLogName('mbo');
     }
 
     public function user_campaigns()

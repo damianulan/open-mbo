@@ -14,8 +14,10 @@ trait ModelActivity
         if(!auth()->user()){
             return LogOptions::defaults();
         }
+        $log_name = $this->log_name ?? 'model';
+
         return LogOptions::defaults()
-                ->useLogName('model')
+                ->useLogName($log_name)
                 ->logOnly($this->fillable)
                 ->logOnlyDirty()
                 ->dontSubmitEmptyLogs()

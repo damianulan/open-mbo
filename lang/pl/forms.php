@@ -108,6 +108,7 @@ return [
         ],
         'categories' => [
             'name' => 'Nazwa kategorii',
+            'template_count' => 'Powiązane szablony',
             'shortname' => 'Unikalny identyfikator kategorii',
             'description' => 'Opis kategorii',
             'global' => 'Kategoria celów globalnych',

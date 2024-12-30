@@ -36,10 +36,34 @@ class LogsDataTable extends CustomDataTable
             })
             ->addColumn('subject', function($data) {
                 if($data->subject){
-                    return view('components.datatables.link', [
-                        'route' => route(__('logging.route_mapping.'.$data->subject_type), $data->subject_id),
-                        'text' => $data->subject->name,
-                    ]);
+                    $logEntities = $data->subject->logEntities ?? null;
+                    $properties = $data->properties ? $data->properties->first() : null;
+                    if($logEntities){
+                        $instances = [];
+                        foreach($logEntities as $key => $entity){
+                            if(isset($properties[$key])){
+                                if(class_exists($entity)){
+                                    $instance = $entity::find($properties[$key]);
+                                    if($instance){
+                                        $instances[] = $instance;
+                                    }
+                                }
+                            }
+                        }
+
+                        if(!empty($instances)){
+                            // return view('components.datatables.link_multiple', [
+                            //     'instances' => $instances,
+                            // ]);
+                        }
+
+                    } else {
+                        return view('components.datatables.link', [
+                            'route' => route(__('logging.route_mapping.'.$data->subject_type), $data->subject_id),
+                            'text' => $data->subject->name ?? null,
+                        ]);
+                    }
+
                 } else {
                     return __('vocabulary.not_applicable');
                 }

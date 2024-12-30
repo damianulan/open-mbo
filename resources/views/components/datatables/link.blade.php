@@ -1,1 +1,1 @@
-<a href="{{ $route }}">{{ $text }}</a>
+<a href="{{ $route }}" target="_blank">{{ $text }}</a>

@@ -12,11 +12,13 @@ use App\Facades\DataTables\CustomDataTable;
 use App\Models\MBO\Objective;
 use Illuminate\Support\Collection;
 use App\Models\MBO\ObjectiveTemplateCategory;
+use DB;
 
 class ObjectiveCategoriesDataTable extends CustomDataTable
 {
     protected $id = 'objective_template_categories_table';
-    protected $orderBy = 'created_at';
+    protected $orderBy = 'name';
+    protected $orderByDir = 'asc';
 
     /**
      * Build the DataTable class.
@@ -32,6 +34,9 @@ class ObjectiveCategoriesDataTable extends CustomDataTable
                     'data' => $data,
                 ]);
             })
+            ->addColumn('templates', function($data) {
+                return $data->objective_templates()->count();
+            })
             ->editColumn('created_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format(config('app.datetime_format')); return $formatedDate; })
             ->editColumn('updated_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format(config('app.datetime_format')); return $formatedDate; });
     }
@@ -41,14 +46,14 @@ class ObjectiveCategoriesDataTable extends CustomDataTable
      */
     public function query(ObjectiveTemplateCategory $model): QueryBuilder
     {
-        $query = $model->orderBy('name');
+        $query = $model->query();
         return $query;
     }
 
     protected function defaultColumns(): array
     {
         return [
-            'name', 'shortname', 'created_at', 'updated_at', 'action'
+            'name', 'shortname', 'templates', 'created_at', 'updated_at', 'action'
         ];
     }
 
@@ -64,6 +69,8 @@ class ObjectiveCategoriesDataTable extends CustomDataTable
                                 ->title(__('forms.mbo.categories.shortname'))
                                 ->searchable(true)
                                 ->orderable(true),
+            'templates'     => Column::computed('templates')
+                                ->title(__('forms.mbo.categories.template_count')),
             'created_at'    => Column::make('created_at')
                                 ->title(__('fields.created_at')),
             'updated_at'    => Column::make('updated_at')
