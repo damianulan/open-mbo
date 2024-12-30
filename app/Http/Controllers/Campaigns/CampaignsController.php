@@ -14,7 +14,7 @@ class CampaignsController extends Controller
     public function index()
     {
         return view('pages.campaigns.index', [
-            'campaigns' => Campaign::all(),
+            'campaigns' => Campaign::paginate(30),
         ]);
     }
 
@@ -62,10 +62,8 @@ class CampaignsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show(Request $request, Campaign $campaign)
     {
-        $campaign = Campaign::findOrFail($id);
-
         if ($request->user()->cannot('mbo-campaign-view', $campaign)) {
             abort(403);
         }
@@ -82,9 +80,8 @@ class CampaignsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+    public function edit(Request $request, Campaign $campaign)
     {
-        $campaign = Campaign::findOrFail($id);
         if ($request->user()->cannot('mbo-campaign-update', $campaign)) {
             abort(403);
         }

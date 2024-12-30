@@ -23,7 +23,7 @@ return [
         'logged_out' => 'Wylogowanie',
         'auth_attempt_success' => 'Pomyślnie logowanie',
         'auth_attempt_fail' => 'Niepowodzenie logowania',
-
+        'deleted' => 'Usunięcie obiektu',
     ],
 
     'log_name' => [

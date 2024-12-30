@@ -28,7 +28,7 @@ class ServerController extends SettingsController
             'git_text' => $git_text,
             'mail' => $model,
             'form' => SmtpForm::boot($model),
-            'nav' => $this->nav,
+            'nav' => $this->nav(),
         ]);
     }
 

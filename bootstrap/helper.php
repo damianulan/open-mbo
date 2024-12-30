@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Auth;
 
 function lorem()
 {
@@ -16,11 +17,32 @@ function lorem_paragraph()
 }
 
 /**
+ *  Returns currently logged user instance or empty instance of User model.
+ *  Do not call in class constructors.
+ *
+ * @param  string|null          $user_id
+ * @return App\Models\Core\User
+ */
+function user(?string $user_id = null): App\Models\Core\User
+{
+    $user = new User();
+    if(is_null($user_id)){
+        if(auth()->check()){
+            $user = auth()->user();
+        }
+    } else {
+        $user = App\Models\Core\User::find($user_id);
+    }
+
+    return $user;
+}
+
+/**
  * Checks if currently logged user is a Root user
  */
-function isRoot(): bool
+function isRoot(bool $strict = false): bool
 {
-    return auth()->user()->hasRole('root');
+    return auth()->user()->isRoot($strict);
 }
 
 function ajax(): App\Facades\Http\ResponseAjax

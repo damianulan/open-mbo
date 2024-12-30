@@ -12,9 +12,9 @@ class ManagementController extends Controller
 {
     protected MenubarMenu $nav;
 
-    public function __construct()
+    public function nav(): MenubarMenu
     {
-        $this->nav = MenuBuilder::bootMenubar('management', [
+        return MenuBuilder::bootMenubar('management', [
             MenuItem::make('objectives')
                     ->setTitle(__('menus.management.mbo.objectives.index'))
                     ->setRoute('management.mbo.objectives.index'),

@@ -12,7 +12,7 @@ class OrganizationController extends ManagementController
     public function index()
     {
         return view('pages.management.organization.index', [
-            'nav' => $this->nav,
+            'nav' => $this->nav(),
         ]);
     }
 }

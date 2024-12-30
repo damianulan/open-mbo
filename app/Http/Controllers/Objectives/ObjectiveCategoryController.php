@@ -18,7 +18,7 @@ class ObjectiveCategoryController extends ManagementController
     {
         return $dataTable->render('pages.objectives.categories.index', [
             'table' => $dataTable,
-            'nav' => $this->nav,
+            'nav' => $this->nav(),
         ]);
     }
 

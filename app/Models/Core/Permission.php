@@ -51,6 +51,7 @@ class Permission extends Model
         // settings
         'settings-general' => ['admins'],
         'settings-modules' => ['admins'],
+        'settings-integrations' => ['admins'],
         'settings-server' => ['admins'],
         'settings-logs' => ['admins'],
 
@@ -92,6 +93,11 @@ class Permission extends Model
     public function roles()
     {
         return $this->belongsToMany(Role::class,'roles_permissions');
+    }
+
+    public static function getBySlug(string $slug): ?self
+    {
+        return static::where('slug', $slug)->first();
     }
 
     public static function getSelectList(): array

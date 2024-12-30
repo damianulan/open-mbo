@@ -15,7 +15,7 @@ class CompanyController extends ManagementController
     public function index(CompaniesDataTable $dataTable)
     {
         return $dataTable->render('pages.management.organization.company.index', [
-            'nav' => $this->nav,
+            'nav' => $this->nav(),
         ]);
     }
 

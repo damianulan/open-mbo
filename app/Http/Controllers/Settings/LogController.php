@@ -13,7 +13,7 @@ class LogController extends SettingsController
     {
         return $dataTable->render('pages.settings.logs', [
             'table' => $dataTable,
-            'nav' => $this->nav,
+            'nav' => $this->nav(),
         ]);
     }
 

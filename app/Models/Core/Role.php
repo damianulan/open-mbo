@@ -59,6 +59,11 @@ class Role extends Model
         return null;
     }
 
+    public static function getBySlug(string $slug): ?self
+    {
+        return self::where('slug', $slug)->first();
+    }
+
     public static function getSelectList(): array
     {
         $output = array();

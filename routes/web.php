@@ -49,16 +49,24 @@ Route::middleware(['auth', 'maintenance'])->group(function (){
      * Settings START
      */
     Route::prefix('settings')->name('settings.')->group(function (){
-        Route::get('/', [App\Http\Controllers\Settings\GeneralController::class, 'index'])->name('general.index');
-        Route::post('general/store', [App\Http\Controllers\Settings\GeneralController::class, 'storeGeneral'])->name('general.store');
-        Route::get('server', [App\Http\Controllers\Settings\ServerController::class, 'index'])->name('server.index');
-        Route::post('server/store/mail', [App\Http\Controllers\Settings\ServerController::class, 'storeMail'])->name('server.mail.store');
-        Route::get('server/clearcache', [App\Http\Controllers\Settings\ServerController::class, 'cache'])->name('server.clearcache');
-        Route::post('server/debugging', [App\Http\Controllers\Settings\ServerController::class, 'debugging'])->name('server.debugging');
-        Route::get('server/phpinfo', function (){
-            echo phpinfo();
-        })->name('server.phpinfo');
-        Route::get('/logs', [App\Http\Controllers\Settings\LogController::class, 'index'])->name('logs.index');
+        Route::prefix('general')->name('general.')->middleware('route.gate:settings-general')->group(function (){
+            Route::get('/', [App\Http\Controllers\Settings\GeneralController::class, 'index'])->name('index');
+            Route::post('general/store', [App\Http\Controllers\Settings\GeneralController::class, 'storeGeneral'])->name('store');
+        });
+
+        Route::prefix('server')->name('server.')->middleware('route.gate:settings-server')->group(function (){
+            Route::get('/', [App\Http\Controllers\Settings\ServerController::class, 'index'])->name('index');
+            Route::post('store/mail', [App\Http\Controllers\Settings\ServerController::class, 'storeMail'])->name('mail.store');
+            Route::get('clearcache', [App\Http\Controllers\Settings\ServerController::class, 'cache'])->name('clearcache');
+            Route::post('debugging', [App\Http\Controllers\Settings\ServerController::class, 'debugging'])->name('debugging');
+            Route::get('phpinfo', function (){
+                echo phpinfo();
+            })->name('phpinfo');
+        });
+        Route::prefix('logs')->name('logs.')->middleware('route.gate:settings-logs')->group(function (){
+            Route::get('/', [App\Http\Controllers\Settings\LogController::class, 'index'])->name('index');
+        });
+
     });
 
 
@@ -141,5 +149,9 @@ Route::middleware(['auth', 'maintenance'])->group(function (){
     Route::prefix('ajax')->name('ajax.')->group(function () {
         Route::get('/get_model_instance', [App\Http\Controllers\AjaxController::class, 'getModelInstance'])->name('get_model_instance');
     });
+
+    Route::fallback(function () {
+        return redirect()->route('dashboard')->with('error', 'Nie znaleziono strony');
+    })->name('fallback');
 
 });

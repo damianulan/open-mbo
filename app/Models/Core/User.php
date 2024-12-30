@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Traits\Vendors\ModelActivity;
 use Illuminate\Contracts\Translation\HasLocalePreference;
+use App\Traits\VirginModel;
 
 /**
  * 
@@ -91,7 +92,7 @@ use Illuminate\Contracts\Translation\HasLocalePreference;
 class User extends Authenticatable implements HasLocalePreference
 {
     use UUID, HasApiTokens, HasFactory, Notifiable, HasRolesAndPermissions, SoftDeletes, RequestForms;
-    use UserMBO, UserBusiness, ActiveFields, Impersonate, Impersonable, ModelActivity;
+    use UserMBO, UserBusiness, ActiveFields, Impersonate, Impersonable, ModelActivity, VirginModel;
 
     protected $fillable = [
         'email',
@@ -209,7 +210,7 @@ class User extends Authenticatable implements HasLocalePreference
 
     public function canBeImpersonated(): bool
     {
-        return !$this->hasAnyRole('root', 'support')||isRoot();
+        return !$this->hasAnyRole('root', 'support')||isRoot(true);
     }
 
     public function canImpersonate(): bool

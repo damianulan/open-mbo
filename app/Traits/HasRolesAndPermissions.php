@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\Lib\Contexts\System;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Str;
+
 trait HasRolesAndPermissions
 {
     /**
@@ -89,28 +91,48 @@ trait HasRolesAndPermissions
     }
 
     /**
-     * @param $permission
+     * @param  Permission $permission
      * @return bool
      */
-    public function hasPermission($permission)
+    public function hasPermission(Permission $permission)
     {
         return (bool) $this->permissions->where('slug', $permission->slug)->count();
     }
 
     /**
-     * @param $permission
+     * Check if user has a certain permission (direct or through role). Give model context if needed.
+     * Use "permission-*" syntax to check for multiple permissions of given category.
+     *
+     * @param  Permission|string $permission
+     * @param  mixed             $context
      * @return bool
      */
-    public function hasPermissionTo($permission, $context = null)
+    public function hasPermissionTo(Permission|string $permission, $context = null)
     {
-        return $this->hasPermissionThroughRole($permission, $context) || $this->hasPermission($permission);
+        $perm = $permission;
+        if($permission instanceof Permission){
+            $perm = $permission->slug;
+        }
+
+        $permissions = $this->getMultiplePermissions($perm);
+        $result = false;
+
+        foreach($permissions as $p){
+            $result = $this->hasPermissionThroughRole($p, $context) || $this->hasPermission($p);
+            if($result){
+                break;
+            }
+        }
+        return $result;
     }
 
+
     /**
-     * @param $permission
+     * @param  Permission $permission
+     * @param  mixed      $context
      * @return bool
      */
-    public function hasPermissionThroughRole($permission, $context = null)
+    public function hasPermissionThroughRole(Permission $permission, $context = null)
     {
         $roles = $this->roles($context)->get();
         foreach ($permission->roles as $role){
@@ -203,6 +225,35 @@ trait HasRolesAndPermissions
         return true;
     }
 
+    /**
+     * @param  string $permission
+     * @return array
+     */
+    private function getMultiplePermissions(string $permission): array
+    {
+        $permissions = array();
+        $m = array();
+        $str = Str::of($permission);
+        if($str->contains('-*')){
+            $needle = $str->beforeLast('-*');
+            $all = array_keys(Permission::$roleSeeds);
+            $matches = array_filter($all, function ($value) use ($needle) {
+                return Str::of($value)->contains($needle);
+            });
+            if(!empty($matches)){
+                $m = Permission::whereIn('slug', $matches)->get();
+            }
+        } else {
+            $m = Permission::whereIn('slug', array($permission))->get();
+        }
+
+        if(!empty($m)){
+            $permissions = $m->all();
+        }
+
+        return $permissions;
+    }
+
     public function isMBOAdmin()
     {
         return $this->hasAnyRole('root', 'support', 'admin', 'admin_mbo');
@@ -213,8 +264,11 @@ trait HasRolesAndPermissions
         return $this->hasAnyRole('root', 'support', 'admin');
     }
 
-    public function isRoot()
+    public function isRoot(bool $strict = false)
     {
+        if($strict){
+            return $this->hasAnyRole('root');
+        }
         return $this->hasAnyRole('root', 'support');
     }
 

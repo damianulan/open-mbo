@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Facades\Forms\RequestForms;
 use Watson\Rememberable\Rememberable;
 use App\Traits\Vendors\ModelActivity;
+use App\Traits\VirginModel;
 use Carbon\Carbon;
 /**
  * 
@@ -26,7 +27,7 @@ use Carbon\Carbon;
 class BaseModel extends Model
 {
     use HasFactory, UUID, SoftDeletes, RequestForms;
-    use ModelActivity;
+    use ModelActivity, VirginModel;
     //use Rememberable;
 
     public function carbonDate(string $prop, string $format = 'Y-m-d')

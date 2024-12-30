@@ -22,6 +22,21 @@ class RolePermissionSeeder extends Seeder
     private Role $supervisor;
     private Role $employee;
 
+    private static $roles = [
+        'root',
+        'support',
+        'admin',
+        'admin_mbo',
+        'admin_hr',
+        'objective_coordinator',
+        'campaign_coordinator',
+        'director',
+        'manager',
+        'team_leader',
+        'supervisor',
+        'employee',
+    ];
+
     /**
      * Run the database seeds.
      */
@@ -119,6 +134,10 @@ class RolePermissionSeeder extends Seeder
         foreach($to as $slug){
             if($slug === 'admins'){
                 foreach(['root', 'support', 'admin'] as $role){
+                    $this->$role->permissions()->attach($permission);
+                }
+            } elseif ($slug === '*') {
+                foreach(self::$roles as $role){
                     $this->$role->permissions()->attach($permission);
                 }
             } else {

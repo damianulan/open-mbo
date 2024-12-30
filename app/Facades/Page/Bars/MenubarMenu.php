@@ -20,7 +20,7 @@ class MenubarMenu
         if(!empty($items)){
             foreach($items as $item){
                 if($item instanceof MenuItem){
-                    if($item->id){
+                    if($item->id && $item->isVisible()){
                         $item->useStrictRoutes();
                         $item->generateParentRoute();
                         $instance->items->push($item);
@@ -38,6 +38,16 @@ class MenubarMenu
             $this->classes[] = $class;
         }
         return $this;
+    }
+
+    public function isNotEmpty(): bool
+    {
+        return $this->items && $this->items->isNotEmpty();
+    }
+
+    public function isEmpty(): bool
+    {
+        return !$this->items || $this->items->isEmpty();
     }
 
     public function render()

@@ -20,7 +20,7 @@ class GeneralController extends SettingsController
         return view('pages.settings.index', [
             'model' => $model,
             'form' => GeneralForm::boot($model),
-            'nav' => $this->nav,
+            'nav' => $this->nav(),
         ]);
     }
 

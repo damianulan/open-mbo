@@ -481,8 +481,8 @@ namespace App\Models\Core{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference withoutTrashed()
- * @mixin \Eloquent
  * @property bool $system_notifications
+ * @mixin \Eloquent
  */
 	class UserPreference extends \Eloquent {}
 }

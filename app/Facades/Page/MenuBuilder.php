@@ -43,6 +43,7 @@ class MenuBuilder
             MenuItem::make('settings')
                     ->setTitle(__('menus.settings.index'))
                     ->setIcon('gear-fill')
+                    ->permission('settings-*')
                     ->setRoute('settings.general.index'),
         ]);
 

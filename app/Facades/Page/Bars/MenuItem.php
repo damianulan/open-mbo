@@ -3,6 +3,7 @@
 namespace App\Facades\Page\Bars;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 class MenuItem
 {
@@ -143,7 +144,7 @@ class MenuItem
     {
         $this->visible = false;
         foreach($slug as $s){
-            if(!auth()->user()->hasPermissionTo($s)){
+            if(user()->hasPermissionTo($s)){
                 $this->visible = true;
             }
         }
