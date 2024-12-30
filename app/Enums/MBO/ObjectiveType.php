@@ -11,8 +11,8 @@ enum ObjectiveType: string
     // assigned to a campaign will be distributed to all team leaders and supervisors.
     case TEAM       = 'team';
 
-    // can be viewed by all users who have higher RBAC than "employee". They can be 
-    case GLOBAL       = 'global';
+    // can be viewed by all users who have higher RBAC than "employee". They can be marked as completed only by admins and admin_mbo. --- TODO [coming soon]
+    case GLOBAL     = 'global';
 
     public static function values()
     {

@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CreateAdminUserSeeder::class);
         $this->call(MBOSeeder::class);
 
-        ObjectiveTemplate::factory(35)->create();
+        ObjectiveTemplate::factory(50)->create();
 
         for($i = 1; $i < 40; $i++){
             $user = User::factory()->has(UserProfile::factory()->count(1), 'profile')->create([

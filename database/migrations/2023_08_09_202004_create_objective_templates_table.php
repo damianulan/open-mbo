@@ -23,6 +23,7 @@ return new class extends Migration
             $table->enum('type', [
                 ObjectiveType::INDIVIDUAL->value,
                 ObjectiveType::TEAM->value,
+                ObjectiveType::GLOBAL->value
             ]);
 
             $table->decimal('award', 8,2)->nullable();
