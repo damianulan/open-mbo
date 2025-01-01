@@ -4,7 +4,7 @@ namespace App\Listeners\Activity;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Auth\Events\Failed;
+use Illuminate\Auth\Events\Failed as AuthFailed;
 use App\Models\Core\User;
 
 class LogAuthFailed
@@ -20,7 +20,7 @@ class LogAuthFailed
     /**
      * Handle the event.
      */
-    public function handle(Failed $event): void
+    public function handle(AuthFailed $event): void
     {
         if($event->user){
             $user = User::find($event->user->id);

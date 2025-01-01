@@ -39,6 +39,7 @@ return [
         'auth_attempt_success' => 'Zarejestrowano pomyślną próbę logowania użytkownika.',
         'auth_attempt_fail' => 'Zarejestrowano pomyślną próbę logowania użytkownika.',
         'auth_logout' => 'Użytkownik wylogował się z systemu.',
+        'notification_sent' => 'Użytkownik :username otrzymał powiadomienie: :type'
     ],
 
     'model_mapping' => [

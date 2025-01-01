@@ -26,6 +26,9 @@ class EventServiceProvider extends ServiceProvider
         'Illuminate\Auth\Events\Failed' => [
             'App\Listeners\Activity\LogAuthFailed',
         ],
+        'Illuminate\Notifications\Events\NotificationSent' => [
+            'App\Listeners\Activity\NotificationLog',
+        ],
     ];
 
     /**
