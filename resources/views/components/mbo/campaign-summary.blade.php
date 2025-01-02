@@ -33,13 +33,18 @@
         <div class="float-end fs-6">
             <div class="d-flex text-primary align-items-center">
                 <i class="bi-person-fill-gear fs-4 me-2"></i>
-                <div class="fw-bold">Koordynatorzy Kampanii:</div>
+                <div class="fw-bold">{{ __('mbo.campaign_coordinators') }}:</div>
             </div>
-            <ul>
-                @foreach($campaign->coordinators as $coordinator)
-                    <li>{!! $coordinator->nameView() !!}</li>
-                @endforeach
-            </ul>
+            @if($campaign->coordinators()->count())
+                <ul class="list-style-none">
+                    @foreach($campaign->coordinators as $coordinator)
+                        <li class="user">{!! $coordinator->nameDetails() !!}</li>
+                    @endforeach
+
+                </ul>
+            @else
+                <div class="text-primary">{{ __('mbo.info.no_c_coordinators_added') }}</div>
+            @endif
         </div>
     </div>
 </div>

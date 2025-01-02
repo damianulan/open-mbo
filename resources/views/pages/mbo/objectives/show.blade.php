@@ -8,7 +8,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-xl-9 col-md-12 pb-2">
+    <div class="col-xl-8 col-lg-9 col-md-12 pb-4">
         <div class="content-card">
             <div class="content-card-top">
                 <div class="content-card-title">
@@ -22,9 +22,9 @@
                         </div>
                     @endif
                     @if($objective->campaign)
-                        <div data-tippy-content="{{ $objective->campaign->name . ' [' . $objective->campaign->period . ']' }}">
+                        <a href={{ route('campaigns.show', $objective->campaign->id) }} data-tippy-content="{{'Cel powiązany z kampanią: ' . $objective->campaign->name . ' [' . $objective->campaign->period . ']' }}">
                             <i class="bi-bullseye"></i>
-                        </div>
+                        </a>
                     @endif
                     @if($objective->draft)
                         <div data-tippy-content="{{ __('forms.mbo.objectives.info.draft') }}">
@@ -59,42 +59,99 @@
             </div>
         </div>
     </div>
-    <div class="col-xl-3 col-md-12 pb-2">
+    <div class="col-xl-4 col-lg-3 col-md-12 pb-4">
         <div class="content-card">
             <div class="content-card-top">
                 <div class="content-card-title">
                     <i class="bi-person-fill-gear me-1"></i>
-                    <span>{{ __('Administatorzy celu') }}</span>
+                    <span>{{ __('mbo.objective_admins') }}</span>
+                    <i class="info-box bi-info-circle-fill ms-1" data-tippy-content="{{ __('mbo.info.objective_admins') }}"></i>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    @if($objective->user_assignments()->count())
-                    <ul class="ombo-list">
-                        @foreach ($objective->user_assignments as $ua)
-                        @php
-                          $user = $ua->user;
-                        @endphp
-                        @if($user)
-                            <li>
-                                <div class="list-grid">
-                                    <div class="list-content">
-                                        <div class="nowrap user" data-tippy-content="{{ $user->name() }}">
-                                            {!! $user->nameDetails() !!}
+                    @if($objective->coordinators()->count())
+                        <ul class="ombo-list">
+                            @foreach ($objective->coordinators()->get() as $ua)
+                            @php
+                            $user = $ua->user;
+                            @endphp
+                            @if($user)
+                                <li>
+                                    <div class="list-grid">
+                                        <div class="list-content">
+                                            <div class="nowrap user" data-tippy-content="{{ $user->name() }}">
+                                                {!! $user->nameDetails() !!}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                        @endif
-                        @endforeach
-                    </ul>
+                                </li>
+                            @endif
+                            @endforeach
+                        </ul>
+
+                    @else
+                        <div><p class="text-primary">{{ __('mbo.info.no_category_admins_added') }}</p></div>
                     @endif
                 </div>
             </div>
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-lg-6 col-md-12 pb-4">
+        <div class="content-card">
+            <div class="content-card-top">
+                <div class="content-card-title">
+                    <i class="bi-person-fill-up me-1"></i>
+                    <span>{{ __('W trakcie realizacji celu') }}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @if($objective->user_assignments()->count())
+                        <ul class="ombo-list">
+                            @foreach ($objective->user_assignments as $ua)
+                            @php
+                            $user = $ua->user;
+                            @endphp
+                            @if($user)
+                                <li>
+                                    <div class="list-grid">
+                                        <div class="list-content">
+                                            <div class="nowrap user" data-tippy-content="{{ $user->name() }}">
+                                                {!! $user->nameDetails() !!}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            @endif
+                            @endforeach
+                        </ul>
 
+                    @else
+                        <div><p class="text-primary">{{ __('mbo.info.no_users_added') }}</p></div>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-12 pb-4">
+        <div class="content-card">
+            <div class="content-card-top">
+                <div class="content-card-title">
+                    <i class="bi-person-fill-down me-1"></i>
+                    <span>{{ __('Podejścia zakończone') }}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection
 @section('page-scripts')

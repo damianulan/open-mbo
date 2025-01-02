@@ -25111,6 +25111,18 @@ section.content-wrapper {
   color: #781093;
 }
 
+ul.list-style-none {
+  list-style: none !important;
+  margin: 0;
+  padding-left: 1rem;
+}
+
+i.info-box {
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: rgb(82.4539877301, 10.9938650307, 101.0061349693);
+}
+
 .btn {
   border-radius: 0.25rem;
   font-weight: 600 !important;

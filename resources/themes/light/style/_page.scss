@@ -264,3 +264,15 @@ section.content-wrapper {
   .breadcrumb .breadcrumb-item {
     color: $primary;
   }
+
+  ul.list-style-none {
+    list-style: none !important;
+    margin: 0;
+    padding-left: 1rem;
+  }
+
+  i.info-box {
+    font-size: 0.9rem;
+    cursor: pointer;
+    color: $secondary;
+  }

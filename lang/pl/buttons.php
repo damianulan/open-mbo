@@ -24,8 +24,8 @@ return [
     'hide' => 'Ukryj',
     'unhide' => 'Odkryj',
     'profile_show' => 'Przeglądaj profil',
-    'favourities_add' => 'Dodaj do ulubionych',
-    'favourities_remove' => 'Usuń z ulubionych',
+    'favourites_add' => 'Dodaj do ulubionych',
+    'favourites_remove' => 'Usuń z ulubionych',
     'reset_password' => 'Resetuj hasło',
     'ok' => 'Ok',
     'ok_understand' => 'Ok, rozumiem',
@@ -35,6 +35,7 @@ return [
     'create_template' => 'Utwórz szablon',
     'impersonate' => 'Zaloguj jako',
     'impersonate_out' => 'Wyloguj się jako',
+    'enrol_users' => 'Zapisz użytkowników',
 
     'list_view' => 'Tryb listy',
     'tile_view' => 'Tryb kafelkowy',

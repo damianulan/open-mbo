@@ -21,8 +21,8 @@
                                     <a href="{{ route('users.edit', $user->id) }}" class="" data-tippy-content="{{ __('buttons.edit') }}">
                                         <i class="bi-pencil-square"></i>
                                     </a>
-                                    <a href="#" class="" data-tippy-content="{{ __('buttons.favourites.add') }}">
-                                        <i class="bi-key-fill"></i>
+                                    <a href="#" class="" data-tippy-content="{{ __('buttons.favourites_add') }}">
+                                        <i class="bi-star"></i>
                                     </a>
                                     <a href="#" class="" data-tippy-content="{{ __('buttons.reset_password') }}">
                                         <i class="bi-key-fill"></i>
