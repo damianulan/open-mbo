@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\UUID;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $slug
@@ -47,6 +47,7 @@ class Permission extends Model
         'users-teams' => ['admins', 'admin_hr'],
         'users-delete' => ['admins'],
         'users-restore' => ['admins'],
+        'users-view-all' => ['*'],
 
         // settings
         'settings-general' => ['admins'],
@@ -81,6 +82,7 @@ class Permission extends Model
         'mbo-objective-delete' => ['admins', 'admin_mbo'],
         'mbo-objective-milestones' => ['admins', 'admin_mbo', 'objective_coordinator', 'supervisor'],
         'mbo-objective-realization' => ['admins', 'admin_mbo', 'objective_coordinator', 'supervisor'],
+        'mbo-view-all-objectives' => ['*'],
     ];
 
     public $timestamps = true;

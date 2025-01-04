@@ -28,6 +28,7 @@ return [
     'enums' => [
         ObjectiveType::INDIVIDUAL->value => 'Indywidualny',
         ObjectiveType::TEAM->value => 'Zespołowy',
+        ObjectiveType::GLOBAL->value => 'Globalny',
 
         Gender::MALE->value => 'Mężczyzna',
         Gender::FEMALE->value => 'Kobieta',
