@@ -29,7 +29,7 @@ class ObjectiveChildEditForm extends Form implements FormIO
             $title = 'Edytuj cel podrzędny';
         }
         $exclude = array();
-        $template_ids = Objective::where('campaign_id', $parent->id)->get()->pluck('template_id');
+        $template_ids = Objective::where('campaign_id', $parent->campaign_id)->get()->pluck('template_id');
         if(!empty($template_ids)){
             foreach($template_ids as $tid){
                 $exclude[] = ['id' => $tid];
@@ -48,7 +48,9 @@ class ObjectiveChildEditForm extends Form implements FormIO
                 ->add(FormElement::decimal('expected', $model)->label(__('forms.mbo.objectives.expected'))->info(__('forms.mbo.objectives.info.expected'))->required(function() use ($parent){
                     return $parent->expected > 0;
                 }))
-                ->add(FormElement::decimal('award', $model)->label(__('forms.mbo.objectives.award'))->info(__('forms.mbo.objectives.info.award')))
+                ->add(FormElement::decimal('award', $model)->label(__('forms.mbo.objectives.award'))->info(__('forms.mbo.objectives.info.award'))->required(function() use ($parent) {
+                    return $parent->award > 0;
+                }))
                 ->add(FormElement::switch('draft', $model)->label(__('forms.mbo.objectives.draft'))->info(__('forms.mbo.objectives.info.draft'))->default(false))
                 ->addTitle($title);
     }
@@ -61,13 +63,8 @@ class ObjectiveChildEditForm extends Form implements FormIO
             $builder->where('id', '!=', $model_id);
         }
 
-        $weights = $builder->get()->pluck('weight');
-        $max_weight = 1;
-        foreach($weights as $weight){
-            $max_weight = $max_weight - (float) $weight;
-        }
-
         return [
+            'parent_id' => 'required',
             'template_id' => 'required',
             'name' => 'max:120|required',
             'deadline' => 'nullable',

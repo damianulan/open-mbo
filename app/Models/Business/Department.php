@@ -7,9 +7,10 @@ use App\Traits\Vendors\TrixFields;
 use App\Facades\TrixField\TrixFieldCast;
 use App\Models\Core\User;
 use App\Models\Business\UserEmployment;
+use App\Models\Core\Role;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string|null $parent_id
@@ -48,8 +49,6 @@ class Department extends BaseModel
     use TrixFields;
 
     protected $fillable = [
-        'parent_id',
-        'manager_id',
         'name',
         'description',
     ];
@@ -58,19 +57,14 @@ class Department extends BaseModel
         'description' => TrixFieldCast::class,
     ];
 
-    public function parent()
-    {
-        return $this->belongsTo(self::class, 'parent_id');
-    }
-
     public function children()
     {
         return $this->hasMany(self::class, 'parent_id');
     }
 
-    public function manager()
+    public function managers()
     {
-        return $this->belongsTo(User::class, 'manager_id');
+        return $this->morphToMany(User::class, 'context', 'users_roles')->where('role_id', Role::getId('supervisor'));
     }
 
     public function employments()

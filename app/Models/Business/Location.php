@@ -9,7 +9,7 @@ use App\Models\Core\User;
 use App\Models\Business\Company;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $name
@@ -56,6 +56,7 @@ class Location extends BaseModel
         'address_line_1',
         'address_line_2',
         'city',
+        'country',
         'postal_code',
         'description',
         'active',

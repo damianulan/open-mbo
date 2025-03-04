@@ -4,7 +4,7 @@
 <div class="icon-btn-nav">
     <div class="panel-left">
         <a class="icon-btn edit-objective" href="javascript:void(0);" data-modelid="{{ $objective->id }}" data-tippy-content="{{ __('buttons.edit') }}"><i class="bi-pencil-fill"></i></a>
-        <a href="javascript:void(0);" class="icon-btn add-child-objective" data-modelid="{{ $objective->id }}" data-tippy-content="{{ __('Dodaj cele podrzędne') }}"><i class="bi-heart-arrow"></i></a>
+        <a href="javascript:void(0);" class="icon-btn add-child-objective" data-modelid="{{ $objective->id }}" data-tippy-content="{{ __('Dodaj cele podrzędne') }}"><i class="bi-crosshair"></i></a>
     </div>
 </div>
 <div class="row">
@@ -12,7 +12,7 @@
         <div class="content-card">
             <div class="content-card-top">
                 <div class="content-card-title">
-                    <i class="bi-heart-arrow me-1"></i>
+                    <i class="bi-crosshair me-1"></i>
                     <span>{{ $objective->name }}</span>
                 </div>
                 @if($objective->category)

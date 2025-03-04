@@ -14,7 +14,7 @@ use App\Casts\Carbon\CarbonDate;
 use App\Casts\CheckboxCast;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string|null $foreign_id
@@ -60,7 +60,6 @@ class UserEmployment extends BaseModel
     use TrixFields;
 
     protected $fillable = [
-        'foreign_id',
         'user_id',
         'company_id',
         'contract_id',
@@ -72,8 +71,8 @@ class UserEmployment extends BaseModel
     ];
 
     protected $casts = [
-        'employment' => CarbonDate::class,
-        'release' => CarbonDate::class,
+        'employment' => 'date',
+        'release' => 'date',
     ];
 
     public function user()
