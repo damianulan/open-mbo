@@ -1,9 +1,23 @@
 {
     "name": "damianulan/open-mbo",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "",
     "keywords": ["openmbo", "mbo", "laravel", "management", "objectives"],
-    "license": "MIT",
+    "license": "Proprietary",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/damianulan/laravel-form-forge.git"
+        }
+    ],
+    "authors": [
+        {
+            "name": "Damian Ułan",
+            "email": "damian.ulan@protonmail.com",
+            "homepage": "https://damianulan.me",
+            "role": "Developer"
+        }
+    ],
     "require": {
         "php": "^8.3.0",
         "akaunting/laravel-apexcharts": "^3.0",
@@ -26,7 +40,8 @@
         "tjvb/laravel-mail-catchall": "^4.4",
         "watson/rememberable": "^6.1",
         "yajra/laravel-datatables": "*",
-        "yajra/laravel-datatables-export": "*"
+        "yajra/laravel-datatables-export": "*",
+        "damianulan/laravel-form-forge": "dev-main"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^3.1",
