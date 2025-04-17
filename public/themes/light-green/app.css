@@ -4,7 +4,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 300;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-300-normal.woff2?b11ca82cde2d4030261763888b8dad95) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-300-normal.woff?f10752b3f3e14c024b9921b8cab3946e) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-300-normal.woff2?04106d055aca0305ae597df934c67091) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-300-normal.woff?efcac4be5102f0d43c48da77f504756e) format('woff');
   unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
@@ -14,7 +14,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 300;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-300-normal.woff2?f77283ae01f1e37148c0db46530627c3) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-300-normal.woff?0520dadd579e75b90128031c75a22388) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-300-normal.woff2?8e77bd22471e44634a56273394674d6e) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-300-normal.woff?e26d941dc4b2ba8c63e3f1bc7a517914) format('woff');
   unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
 }
 
@@ -24,7 +24,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 300;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-300-normal.woff2?88d101262e0ada862dbbb291a9749868) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-300-normal.woff?7eed1dec69858c45b054cad26c354fef) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-300-normal.woff2?1a049a2fa0c897156f95b5fddfdbe963) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-300-normal.woff?2350fcdd7e255f64d82d322ba46551c3) format('woff');
   unicode-range: U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;
 }
 
@@ -34,7 +34,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 300;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-300-normal.woff2?bb4d2b5620cdb7f9149218ab3770190c) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-300-normal.woff?312efe08db712138624a933729d43af5) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-300-normal.woff2?3405145399022554a4d21f1bd86dfd54) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-300-normal.woff?29a9bab8982d851f9b2ec403ee717ba2) format('woff');
   unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
 }
 
@@ -44,7 +44,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 300;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-300-normal.woff2?df149b0e0a34063407b0a483c195fff4) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-300-normal.woff?4b5cd12c1892504cf2bc66390627c223) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-300-normal.woff2?9da013bce4c62ebd0b98a687559c39a5) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-300-normal.woff?5481bff5c9dc0a19ee8e7bb2afbe0cfc) format('woff');
   unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
@@ -54,7 +54,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 300;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-300-normal.woff2?e38b99d324dc1f4e123abdd554a0739c) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-300-normal.woff?c52a6f039c6abf6b26b426145a7eb868) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-300-normal.woff2?79408ccee970e413b405d4760ff02b9f) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-300-normal.woff?8da20d2d73266ede2478210be6627ed2) format('woff');
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-sans-cyrillic-ext-400-normal */
@@ -63,7 +63,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 400;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-400-normal.woff2?56b6c5df575156819cfa5a4f20e4e1f5) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-400-normal.woff?ddb7009e517f27508df294e78a78d0ce) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-400-normal.woff2?c7f19d6795be43c1647b4b5d3cc0953d) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-400-normal.woff?522990d1d95c26a64737469fa3debf64) format('woff');
   unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
@@ -73,7 +73,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 400;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-400-normal.woff2?496b1fd454d2cf535c9e473f407b0fcb) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-400-normal.woff?9ad4be8ee1fdeec077cf6fdca450afd9) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-400-normal.woff2?f55992bec61fac647a43812753fdf6db) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-400-normal.woff?218725f080bd377b9148200682c09522) format('woff');
   unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
 }
 
@@ -83,7 +83,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 400;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-400-normal.woff2?3a057227a4ac726b71f520554562c099) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-400-normal.woff?6aceaf9dadc6ba56d590da5d7fb5981a) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-400-normal.woff2?173a235dfc0f0cb815f048845c5de396) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-400-normal.woff?42554ea8cf7242c13a113d9a0704f578) format('woff');
   unicode-range: U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;
 }
 
@@ -93,7 +93,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 400;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-400-normal.woff2?9738af472640eb4267fe23a2f091c09f) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-400-normal.woff?3a46c7516cca93f3063dc7ed3c77eddd) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-400-normal.woff2?a9c0738f08c3b2b7c486352de1e65c59) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-400-normal.woff?754096d441f303edb8e02308ad9023e3) format('woff');
   unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
 }
 
@@ -103,7 +103,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 400;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-400-normal.woff2?f16460285d7ee089d39ebc6b59715a33) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-400-normal.woff?3d8d457e5b04886f03119bdfc1830223) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-400-normal.woff2?11781b13e59d30facc4078291d0b62d2) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-400-normal.woff?00d6e80aa667e9446ee4d32ebb83724f) format('woff');
   unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
@@ -113,7 +113,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 400;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff2?198edc1f5e61a3940f351c7bb2785e20) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff?26f87999b316dfb9a41eff3e965b94e4) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff2?3160b5c6767eb4c69c785b2b20ddf21a) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff?f9b9d7d41cba1f6d589b857ff50a22a4) format('woff');
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-sans-cyrillic-ext-600-normal */
@@ -122,7 +122,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 600;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-600-normal.woff2?7a5e759883b08ebf2bc5492413afd96c) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-600-normal.woff?90dc0c67b56f0a5089828c4c0d32c344) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-600-normal.woff2?0a51b2f38b29d40915563ced9994132b) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-600-normal.woff?15bf205afba5fcc297d6fa56b5552e5a) format('woff');
   unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
@@ -132,7 +132,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 600;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-600-normal.woff2?b1469c2bbc6a83b33afaf7f495140e5e) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-600-normal.woff?7ac5d65ea5f24195c26e02148c876e85) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-600-normal.woff2?e07c188c118d4142e480647cd249845b) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-600-normal.woff?ce6c69dd9b2439adf4ba3ec4d87cae7d) format('woff');
   unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
 }
 
@@ -142,7 +142,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 600;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-600-normal.woff2?636e10e782086ff4b02a93f9ca37e5b7) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-600-normal.woff?c2ae7bd0877a8711594abd9a7e25cb58) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-600-normal.woff2?1fb74172d11b0014a7fef0b5277caec9) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-600-normal.woff?af76484d47d9de995e67691abc461c31) format('woff');
   unicode-range: U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;
 }
 
@@ -152,7 +152,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 600;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-600-normal.woff2?ff62adb9dfb97a7b6c656feebc403895) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-600-normal.woff?70ca4d865da45c442d9da98cfa95fd12) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-600-normal.woff2?1e7f665a0c00db1aee4bec058c4fbcdb) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-600-normal.woff?9831fbecabee70ffb2a104bb13084f2c) format('woff');
   unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
 }
 
@@ -162,7 +162,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 600;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-600-normal.woff2?64c7f5ae963b791d88ccfd1c3f9646e1) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-600-normal.woff?b97f809ea9dd94b885298d3e9b06a31c) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-600-normal.woff2?57f2c00df3cb0b0cff43755b3f90080f) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-600-normal.woff?1d05a3b735d7d8f0f626dacd01e285cd) format('woff');
   unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
@@ -172,7 +172,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 600;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-600-normal.woff2?242ee29f2c929f1c9b17500932d610ec) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-600-normal.woff?97e431d0d3b81d7a95cf5bba7f4645f5) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-600-normal.woff2?24bc59b4b4ad02d1666df98e473338c5) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-600-normal.woff?0bc640ae12be930a55ee87ccf798cba6) format('woff');
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-sans-cyrillic-ext-700-normal */
@@ -181,7 +181,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 700;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-700-normal.woff2?eb9f70f4c982e9432671b2470c2442f1) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-700-normal.woff?2f962059e38e1912e71c4ae1d0584374) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-700-normal.woff2?8743554c96ec7bd0804f1589ddb2327c) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-700-normal.woff?3d13889f4a39770d6454cc17c3272c6a) format('woff');
   unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
@@ -191,7 +191,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 700;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-700-normal.woff2?a0fa21e3c319658b7734fcd19848cace) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-700-normal.woff?0b4a6c5e87f5210db38f69e139bdca3c) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-700-normal.woff2?4760ba1e0e76b927b015f2b4c582cd8a) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-700-normal.woff?9f46510b3f3471b86881be11c6645881) format('woff');
   unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
 }
 
@@ -201,7 +201,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 700;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-700-normal.woff2?2b0a928418c8f8878236cc50b43fc460) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-700-normal.woff?a0420c20c33b859ab69fa9350000de1d) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-700-normal.woff2?9db89ac07fc88fe4cd23a02c78d4605e) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-700-normal.woff?61b221bcacb3786663a8ff55f3c5a1ef) format('woff');
   unicode-range: U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;
 }
 
@@ -211,7 +211,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 700;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-700-normal.woff2?58fccc16c719d3abe36198ff13977c66) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-700-normal.woff?efa8d38ac5d54a0fe663c457ac691751) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-700-normal.woff2?6879ecb90d9d0922523c4c07d54a10c2) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-700-normal.woff?f93ce50d5e0fcde7be5374d4ac4cba06) format('woff');
   unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
 }
 
@@ -221,7 +221,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 700;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-700-normal.woff2?3fb6e352753c4fd7ee96e6481a5266fe) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-700-normal.woff?aabce859944e9b0f8bf399971e7e7050) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-700-normal.woff2?ee3a0d8f4dabfc10203099e93b71de9d) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-700-normal.woff?54576b190509293130046a6293c8ed06) format('woff');
   unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
@@ -231,7 +231,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 700;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-700-normal.woff2?098b4a9bd3e124ad783d869d526fb502) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-700-normal.woff?152469dd3b87a2618f5416db5223736e) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-700-normal.woff2?cc104bdc19efb9831e6571d2db9a631b) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-700-normal.woff?a0757f4d132238557a9d25efa26dfb1a) format('woff');
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-sans-cyrillic-ext-300-italic */
@@ -240,7 +240,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 300;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-300-italic.woff2?a50bbd7b39cf1892b3020e9b95b151de) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-300-italic.woff?df7136e6739570d7a1a6cd374433a733) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-300-italic.woff2?d3b2b68014f9b1ef5a2297a7a4630167) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-300-italic.woff?161155a12db6f3520a1fcb0b6a45dab4) format('woff');
   unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
@@ -250,7 +250,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 300;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-300-italic.woff2?158a200a8992799f751bd43722978455) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-300-italic.woff?668973046315f3c8d2c8be8fb741d51b) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-300-italic.woff2?949f7936fe10329085fdd3f83df495d9) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-300-italic.woff?52cf08d0754b97ef0eb355807b05e75e) format('woff');
   unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
 }
 
@@ -260,7 +260,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 300;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-300-italic.woff2?e12679504f0d39e1342cd8faef523b97) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-300-italic.woff?fdff94cee268dce07f23793ee584688a) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-300-italic.woff2?29583e57ed3db5938ddbaec4d3e3af65) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-300-italic.woff?942e930a3c63a87b36c65678b3a203e2) format('woff');
   unicode-range: U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;
 }
 
@@ -270,7 +270,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 300;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-300-italic.woff2?96778f753b657a4c0c62b75b236a1da7) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-300-italic.woff?3b05336aa8f2e652d64584e61aed8782) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-300-italic.woff2?db61463d45821c9774fbcd51f2e3d688) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-300-italic.woff?0ee19e02ac2054a74e81281424900400) format('woff');
   unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
 }
 
@@ -280,7 +280,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 300;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-300-italic.woff2?a3db53d7fec7d810756041f6f64e0636) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-300-italic.woff?b5098d9ddcbc164330f5bf1b52192f69) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-300-italic.woff2?bd1d72fe1215662974ec995d9709cd54) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-300-italic.woff?5bcf592cc0084be9835106c67716bb47) format('woff');
   unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
@@ -290,7 +290,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 300;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-300-italic.woff2?ee846a5974feaba7139625989bd9bb68) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-300-italic.woff?ae8c5c922bdfddbdc5a48cfce4cbec30) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-300-italic.woff2?a5e18b7e9085fa7f99d0e1c6ceb628a3) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-300-italic.woff?9df2599c3f64d1b158082161e6e8e106) format('woff');
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-sans-cyrillic-ext-400-italic */
@@ -299,7 +299,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 400;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-400-italic.woff2?486966a9e19bfe45f238be6d8065f885) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-400-italic.woff?9b31ca6256fb57479240a34cea0f766a) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-400-italic.woff2?fa43b6ec77e943b5c65513ecd1a171de) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-400-italic.woff?257fb416993244fe1443524b0463b022) format('woff');
   unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
@@ -309,7 +309,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 400;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-400-italic.woff2?ab91f431a7e6689ec3824ca1ca28ab4a) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-400-italic.woff?18e17aa2c502657cf7c5f9c5dcbc0e2a) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-400-italic.woff2?a53b5de49d7ceae5561d9ed29a7c5a81) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-400-italic.woff?547c8c11577a43617338151e78d69640) format('woff');
   unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
 }
 
@@ -319,7 +319,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 400;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-400-italic.woff2?cd6c4666530da93fc49d3a0cef5c4ab9) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-400-italic.woff?984f7ad4f5e46da6586b85ceea011551) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-400-italic.woff2?0c2c6e255f7a2021b4a768c1e19abd85) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-400-italic.woff?62af7e40fe4793af0c80fcccc5a56862) format('woff');
   unicode-range: U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;
 }
 
@@ -329,7 +329,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 400;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-400-italic.woff2?f7641ecc659f6f44bdd17a788a455228) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-400-italic.woff?a66e3b1ec426ad8239ec52780af232b5) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-400-italic.woff2?01e96b40ae2593b56e166aa6997f25b1) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-400-italic.woff?84f32d3d6e5b448f68c3bb33736eed56) format('woff');
   unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
 }
 
@@ -339,7 +339,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 400;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-400-italic.woff2?3ab33516c98dcd5a815622c9f92207c1) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-400-italic.woff?a7516b96d68c7eb86785caa3c89e63ac) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-400-italic.woff2?d245964b3abbfcf7982d3c09f9390871) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-400-italic.woff?01b939f8386b9b471119e95ea702c534) format('woff');
   unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
@@ -349,7 +349,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 400;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-italic.woff2?a1f96d05f09dbb06b70317c166050afb) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-italic.woff?d3afb76957c13ab7ea3825961f838eb7) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-italic.woff2?9df1bfb34aee2ca6eb317bf564454d2c) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-italic.woff?967b37df323ec458be5a4d832dfbe75b) format('woff');
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-sans-cyrillic-ext-600-italic */
@@ -358,7 +358,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 600;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-600-italic.woff2?c6f85c57683691b332632258d191a60c) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-600-italic.woff?af0c9ddd3c6689fedd0f319f35ed58a2) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-600-italic.woff2?8819b2fed2d2c01de0f4daee01dd621a) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-600-italic.woff?55ba15f3af3e887b964bd58bbfe8c58e) format('woff');
   unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
@@ -368,7 +368,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 600;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-600-italic.woff2?deebadbdd7fccdd3d7e298a19db06351) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-600-italic.woff?4ea6c0edc64901c433961bcf0c9d3956) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-600-italic.woff2?9230bc830a578caec6705df79cbaae07) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-600-italic.woff?8ab710e97029713ac066faa7500dc6c1) format('woff');
   unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
 }
 
@@ -378,7 +378,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 600;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-600-italic.woff2?73074e82aaf192668b95c23ee5bd67b0) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-600-italic.woff?d772167612f5fd939e3f70c6235f4dad) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-600-italic.woff2?40c605a468031b8f0a3fbc4ea4c84330) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-600-italic.woff?85b0394b9132989b14dc70f548df835b) format('woff');
   unicode-range: U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;
 }
 
@@ -388,7 +388,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 600;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-600-italic.woff2?753e3ed2961d30ba9b507551e442297f) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-600-italic.woff?aa6c6788f97e1e62fb63f5db69d489ba) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-600-italic.woff2?78706cae2b97e59d025520ac3d2b381c) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-600-italic.woff?bd5d2ebed228216d28a00238e4b431a0) format('woff');
   unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
 }
 
@@ -398,7 +398,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 600;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-600-italic.woff2?5f91ee0d8ae3ad82563a588e75272340) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-600-italic.woff?cd26166a2ace7d1c8a0db7394c7393ac) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-600-italic.woff2?205ab8ba15ae3ebec2cbb787d5d175c6) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-600-italic.woff?a07f250fbfff0a2e6458104991fed1a8) format('woff');
   unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
@@ -408,7 +408,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 600;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-600-italic.woff2?8e92f41154aba03dd91ee5ce20bdaef4) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-600-italic.woff?6efabcb8571965979c45e32c2291727d) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-600-italic.woff2?187003692d97ab67f678e0913da15f27) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-600-italic.woff?5babbf312fb0cb0ee090d70869d146df) format('woff');
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-sans-cyrillic-ext-700-italic */
@@ -417,7 +417,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 700;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-700-italic.woff2?6ef8bba9c1b93a6dd0cbb752a0a9096d) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-700-italic.woff?2d8440c8c123bf5bd4f5032b9c436a34) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-700-italic.woff2?c9c49656ce269807f0f4fa1b68078cea) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-ext-700-italic.woff?f4bb7fae803abf4da1b1de305fa45ede) format('woff');
   unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
@@ -427,7 +427,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 700;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-700-italic.woff2?15c2a20102915da2c6dcde67c0ca79e1) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-700-italic.woff?d05a78d75c0cfbaaeaa209e453de7855) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-700-italic.woff2?b5003e9c8550d5af51272b155727b205) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-cyrillic-700-italic.woff?179c7c942710f521bc013a9942e484d1) format('woff');
   unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
 }
 
@@ -437,7 +437,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 700;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-700-italic.woff2?6eb4f9a7729d0cbb63dbfa0305f3ec61) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-700-italic.woff?72028ffb63335c3b65d9c8a900e9b926) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-700-italic.woff2?5830e936b2fe317a1f7d7788865810c9) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-greek-700-italic.woff?03572d2019b2282453ae070f910c91f8) format('woff');
   unicode-range: U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;
 }
 
@@ -447,7 +447,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 700;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-700-italic.woff2?799595c674f98d5c3f28b1d5da308f23) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-700-italic.woff?2dfd7299aa077872cc682fa1fc5bafba) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-700-italic.woff2?729060fa3101045c393bf681fe64a221) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-vietnamese-700-italic.woff?f54d678d19aa95d28cb533b0a74cd24b) format('woff');
   unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
 }
 
@@ -457,7 +457,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 700;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-700-italic.woff2?acd5dac7f3829be5d8ee42edc72f9c75) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-700-italic.woff?74e8ab3f4147ae70b729f09992229477) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-700-italic.woff2?5d456be6130bfb2ee020ecf8aa865aed) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-ext-700-italic.woff?366bfce7b679866a87e87c069b35177a) format('woff');
   unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
@@ -467,7 +467,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 700;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-700-italic.woff2?4176602f5679bb95f106c6546d88ae93) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-700-italic.woff?c639fabb458e44141121ff61d65aaa3c) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-700-italic.woff2?cee78ba2cab52fb05dbfb5d0867335c7) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-700-italic.woff?4d7fd952f64e58de78ec48957e773ec8) format('woff');
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-serif-cyrillic-ext-300-normal */
@@ -2793,8 +2793,8 @@ html[data-bs-theme=dark] div.dtsp-panesContainer div.dtsp-searchPane div.dataTab
 /* Colors END
 **/
 /*!
- * Bootstrap  v5.3.3 (https://getbootstrap.com/)
- * Copyright 2011-2024 The Bootstrap Authors
+ * Bootstrap  v5.3.5 (https://getbootstrap.com/)
+ * Copyright 2011-2025 The Bootstrap Authors
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 :root,
@@ -3311,8 +3311,8 @@ legend {
   width: 100%;
   padding: 0;
   margin-bottom: 0.5rem;
-  font-size: calc(1.275rem + 0.3vw);
   line-height: inherit;
+  font-size: calc(1.275rem + 0.3vw);
 }
 @media (min-width: 1200px) {
   legend {
@@ -3390,9 +3390,9 @@ progress {
 }
 
 .display-1 {
-  font-size: calc(1.625rem + 4.5vw);
   font-weight: 300;
   line-height: 1.2;
+  font-size: calc(1.625rem + 4.5vw);
 }
 @media (min-width: 1200px) {
   .display-1 {
@@ -3401,9 +3401,9 @@ progress {
 }
 
 .display-2 {
-  font-size: calc(1.575rem + 3.9vw);
   font-weight: 300;
   line-height: 1.2;
+  font-size: calc(1.575rem + 3.9vw);
 }
 @media (min-width: 1200px) {
   .display-2 {
@@ -3412,9 +3412,9 @@ progress {
 }
 
 .display-3 {
-  font-size: calc(1.525rem + 3.3vw);
   font-weight: 300;
   line-height: 1.2;
+  font-size: calc(1.525rem + 3.3vw);
 }
 @media (min-width: 1200px) {
   .display-3 {
@@ -3423,9 +3423,9 @@ progress {
 }
 
 .display-4 {
-  font-size: calc(1.475rem + 2.7vw);
   font-weight: 300;
   line-height: 1.2;
+  font-size: calc(1.475rem + 2.7vw);
 }
 @media (min-width: 1200px) {
   .display-4 {
@@ -3434,9 +3434,9 @@ progress {
 }
 
 .display-5 {
-  font-size: calc(1.425rem + 2.1vw);
   font-weight: 300;
   line-height: 1.2;
+  font-size: calc(1.425rem + 2.1vw);
 }
 @media (min-width: 1200px) {
   .display-5 {
@@ -3445,9 +3445,9 @@ progress {
 }
 
 .display-6 {
-  font-size: calc(1.375rem + 1.5vw);
   font-weight: 300;
   line-height: 1.2;
+  font-size: calc(1.375rem + 1.5vw);
 }
 @media (min-width: 1200px) {
   .display-6 {
@@ -3592,7 +3592,7 @@ progress {
 }
 
 .col {
-  flex: 1 0 0%;
+  flex: 1 0 0;
 }
 
 .row-cols-auto > * {
@@ -3801,7 +3801,7 @@ progress {
 
 @media (min-width: 576px) {
   .col-sm {
-    flex: 1 0 0%;
+    flex: 1 0 0;
   }
   .row-cols-sm-auto > * {
     flex: 0 0 auto;
@@ -3970,7 +3970,7 @@ progress {
 }
 @media (min-width: 768px) {
   .col-md {
-    flex: 1 0 0%;
+    flex: 1 0 0;
   }
   .row-cols-md-auto > * {
     flex: 0 0 auto;
@@ -4139,7 +4139,7 @@ progress {
 }
 @media (min-width: 992px) {
   .col-lg {
-    flex: 1 0 0%;
+    flex: 1 0 0;
   }
   .row-cols-lg-auto > * {
     flex: 0 0 auto;
@@ -4308,7 +4308,7 @@ progress {
 }
 @media (min-width: 1200px) {
   .col-xl {
-    flex: 1 0 0%;
+    flex: 1 0 0;
   }
   .row-cols-xl-auto > * {
     flex: 0 0 auto;
@@ -4477,7 +4477,7 @@ progress {
 }
 @media (min-width: 1400px) {
   .col-xxl {
-    flex: 1 0 0%;
+    flex: 1 0 0;
   }
   .row-cols-xxl-auto > * {
     flex: 0 0 auto;
@@ -5357,9 +5357,11 @@ textarea.form-control-lg {
   top: 0;
   left: 0;
   z-index: 2;
+  max-width: 100%;
   height: 100%;
   padding: 1rem 0.75rem;
   overflow: hidden;
+  color: rgba(var(--bs-body-color-rgb), 0.65);
   text-align: start;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -5384,7 +5386,7 @@ textarea.form-control-lg {
 .form-floating > .form-control-plaintext::placeholder {
   color: transparent;
 }
-.form-floating > .form-control:not(:-moz-placeholder-shown), .form-floating > .form-control-plaintext:not(:-moz-placeholder-shown) {
+.form-floating > .form-control:not(:-moz-placeholder), .form-floating > .form-control-plaintext:not(:-moz-placeholder) {
   padding-top: 1.625rem;
   padding-bottom: 0.625rem;
 }
@@ -5402,42 +5404,41 @@ textarea.form-control-lg {
 .form-floating > .form-select {
   padding-top: 1.625rem;
   padding-bottom: 0.625rem;
+  padding-left: 0.75rem;
 }
-.form-floating > .form-control:not(:-moz-placeholder-shown) ~ label {
-  color: rgba(var(--bs-body-color-rgb), 0.65);
+.form-floating > .form-control:not(:-moz-placeholder) ~ label {
   transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
 }
 .form-floating > .form-control:focus ~ label,
 .form-floating > .form-control:not(:placeholder-shown) ~ label,
 .form-floating > .form-control-plaintext ~ label,
 .form-floating > .form-select ~ label {
-  color: rgba(var(--bs-body-color-rgb), 0.65);
   transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
-}
-.form-floating > .form-control:not(:-moz-placeholder-shown) ~ label::after {
-  position: absolute;
-  inset: 1rem 0.375rem;
-  z-index: -1;
-  height: 1.5em;
-  content: "";
-  background-color: var(--bs-body-bg);
-  border-radius: 0.375rem;
-}
-.form-floating > .form-control:focus ~ label::after,
-.form-floating > .form-control:not(:placeholder-shown) ~ label::after,
-.form-floating > .form-control-plaintext ~ label::after,
-.form-floating > .form-select ~ label::after {
-  position: absolute;
-  inset: 1rem 0.375rem;
-  z-index: -1;
-  height: 1.5em;
-  content: "";
-  background-color: var(--bs-body-bg);
-  border-radius: 0.375rem;
 }
 .form-floating > .form-control:-webkit-autofill ~ label {
-  color: rgba(var(--bs-body-color-rgb), 0.65);
   transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+}
+.form-floating > textarea:not(:-moz-placeholder) ~ label::after {
+  position: absolute;
+  inset: 1rem 0.375rem;
+  z-index: -1;
+  height: 1.5em;
+  content: "";
+  background-color: var(--bs-body-bg);
+  border-radius: 0.375rem;
+}
+.form-floating > textarea:focus ~ label::after,
+.form-floating > textarea:not(:placeholder-shown) ~ label::after {
+  position: absolute;
+  inset: 1rem 0.375rem;
+  z-index: -1;
+  height: 1.5em;
+  content: "";
+  background-color: var(--bs-body-bg);
+  border-radius: 0.375rem;
+}
+.form-floating > textarea:disabled ~ label::after {
+  background-color: var(--bs-secondary-bg);
 }
 .form-floating > .form-control-plaintext ~ label {
   border-width: var(--bs-border-width) 0;
@@ -5445,10 +5446,6 @@ textarea.form-control-lg {
 .form-floating > :disabled ~ label,
 .form-floating > .form-control:disabled ~ label {
   color: #6c757d;
-}
-.form-floating > :disabled ~ label::after,
-.form-floating > .form-control:disabled ~ label::after {
-  background-color: var(--bs-secondary-bg);
 }
 
 .input-group {
@@ -5532,7 +5529,7 @@ textarea.form-control-lg {
   border-bottom-right-radius: 0;
 }
 .input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
-  margin-left: calc(var(--bs-border-width) * -1);
+  margin-left: calc(-1 * var(--bs-border-width));
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
@@ -5574,7 +5571,7 @@ textarea.form-control-lg {
 .was-validated .form-control:valid, .form-control.is-valid {
   border-color: var(--bs-form-valid-border-color);
   padding-right: calc(1.25em + 0.75rem);
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%234f9d69' d='M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%234f9d69' d='M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right calc(0.3125em + 0.1875rem) center;
   background-size: calc(0.625em + 0.375rem) calc(0.625em + 0.375rem);
@@ -5593,7 +5590,7 @@ textarea.form-control-lg {
   border-color: var(--bs-form-valid-border-color);
 }
 .was-validated .form-select:valid:not([multiple]):not([size]), .was-validated .form-select:valid:not([multiple])[size="1"], .form-select.is-valid:not([multiple]):not([size]), .form-select.is-valid:not([multiple])[size="1"] {
-  --bs-form-select-bg-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%234f9d69' d='M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+  --bs-form-select-bg-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%234f9d69' d='M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1'/%3e%3c/svg%3e");
   padding-right: 4.125rem;
   background-position: right 0.75rem center, center right 2.25rem;
   background-size: 16px 12px, calc(0.625em + 0.375rem) calc(0.625em + 0.375rem);
@@ -6617,7 +6614,7 @@ textarea.form-control-lg {
 }
 .btn-group > :not(.btn-check:first-child) + .btn,
 .btn-group > .btn-group:not(:first-child) {
-  margin-left: calc(var(--bs-border-width) * -1);
+  margin-left: calc(-1 * var(--bs-border-width));
 }
 .btn-group > .btn:not(:last-child):not(.dropdown-toggle),
 .btn-group > .btn.dropdown-toggle-split:first-child,
@@ -6664,14 +6661,15 @@ textarea.form-control-lg {
 }
 .btn-group-vertical > .btn:not(:first-child),
 .btn-group-vertical > .btn-group:not(:first-child) {
-  margin-top: calc(var(--bs-border-width) * -1);
+  margin-top: calc(-1 * var(--bs-border-width));
 }
 .btn-group-vertical > .btn:not(:last-child):not(.dropdown-toggle),
 .btn-group-vertical > .btn-group:not(:last-child) > .btn {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
-.btn-group-vertical > .btn ~ .btn,
+.btn-group-vertical > .btn:nth-child(n+3),
+.btn-group-vertical > :not(.btn-check) + .btn,
 .btn-group-vertical > .btn-group:not(:first-child) > .btn {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
@@ -6796,8 +6794,8 @@ textarea.form-control-lg {
 
 .nav-justified > .nav-link,
 .nav-justified .nav-item {
-  flex-basis: 0;
   flex-grow: 1;
+  flex-basis: 0;
   text-align: center;
 }
 
@@ -6899,8 +6897,8 @@ textarea.form-control-lg {
 }
 
 .navbar-collapse {
-  flex-basis: 100%;
   flex-grow: 1;
+  flex-basis: 100%;
   align-items: center;
 }
 
@@ -7395,7 +7393,7 @@ textarea.form-control-lg {
     flex-flow: row wrap;
   }
   .card-group > .card {
-    flex: 1 0 0%;
+    flex: 1 0 0;
     margin-bottom: 0;
   }
   .card-group > .card + .card {
@@ -7440,11 +7438,11 @@ textarea.form-control-lg {
   --bs-accordion-btn-padding-y: 1rem;
   --bs-accordion-btn-color: var(--bs-body-color);
   --bs-accordion-btn-bg: var(--bs-accordion-bg);
-  --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23212529' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 5L8 11L14 5'/%3e%3c/svg%3e");
+  --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23212529' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
   --bs-accordion-btn-icon-width: 1.25rem;
   --bs-accordion-btn-icon-transform: rotate(-180deg);
   --bs-accordion-btn-icon-transition: transform 0.2s ease-in-out;
-  --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='rgb%2811.2, 41.2, 43.2%29' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 5L8 11L14 5'/%3e%3c/svg%3e");
+  --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='rgb%2811.2, 41.2, 43.2%29' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
   --bs-accordion-btn-focus-box-shadow: 0 0 0 0.25rem rgba(28, 103, 108, 0.25);
   --bs-accordion-body-padding-x: 1.25rem;
   --bs-accordion-body-padding-y: 1rem;
@@ -7554,16 +7552,15 @@ textarea.form-control-lg {
 .accordion-flush > .accordion-item:last-child {
   border-bottom: 0;
 }
-.accordion-flush > .accordion-item > .accordion-header .accordion-button, .accordion-flush > .accordion-item > .accordion-header .accordion-button.collapsed {
-  border-radius: 0;
-}
-.accordion-flush > .accordion-item > .accordion-collapse {
+.accordion-flush > .accordion-item > .accordion-collapse,
+.accordion-flush > .accordion-item > .accordion-header .accordion-button,
+.accordion-flush > .accordion-item > .accordion-header .accordion-button.collapsed {
   border-radius: 0;
 }
 
 [data-bs-theme=dark] .accordion-button::after {
-  --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='rgb%28118.8, 163.8, 166.8%29'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
-  --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='rgb%28118.8, 163.8, 166.8%29'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='rgb%28118.8, 163.8, 166.8%29'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708'/%3e%3c/svg%3e");
+  --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='rgb%28118.8, 163.8, 166.8%29'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708'/%3e%3c/svg%3e");
 }
 
 .breadcrumb {
@@ -7668,7 +7665,7 @@ textarea.form-control-lg {
 }
 
 .page-item:not(:first-child) .page-link {
-  margin-left: calc(var(--bs-border-width) * -1);
+  margin-left: calc(-1 * var(--bs-border-width));
 }
 .page-item:first-child .page-link {
   border-top-left-radius: var(--bs-pagination-border-radius);
@@ -7838,7 +7835,7 @@ textarea.form-control-lg {
 
 @keyframes progress-bar-stripes {
   0% {
-    background-position-x: 1rem;
+    background-position-x: var(--bs-progress-height);
   }
 }
 .progress,
@@ -7932,22 +7929,6 @@ textarea.form-control-lg {
   counter-increment: section;
 }
 
-.list-group-item-action {
-  width: 100%;
-  color: var(--bs-list-group-action-color);
-  text-align: inherit;
-}
-.list-group-item-action:hover, .list-group-item-action:focus {
-  z-index: 1;
-  color: var(--bs-list-group-action-hover-color);
-  text-decoration: none;
-  background-color: var(--bs-list-group-action-hover-bg);
-}
-.list-group-item-action:active {
-  color: var(--bs-list-group-action-active-color);
-  background-color: var(--bs-list-group-action-active-bg);
-}
-
 .list-group-item {
   position: relative;
   display: block;
@@ -7982,6 +7963,22 @@ textarea.form-control-lg {
 .list-group-item + .list-group-item.active {
   margin-top: calc(-1 * var(--bs-list-group-border-width));
   border-top-width: var(--bs-list-group-border-width);
+}
+
+.list-group-item-action {
+  width: 100%;
+  color: var(--bs-list-group-action-color);
+  text-align: inherit;
+}
+.list-group-item-action:not(.active):hover, .list-group-item-action:not(.active):focus {
+  z-index: 1;
+  color: var(--bs-list-group-action-hover-color);
+  text-decoration: none;
+  background-color: var(--bs-list-group-action-hover-bg);
+}
+.list-group-item-action:not(.active):active {
+  color: var(--bs-list-group-action-active-color);
+  background-color: var(--bs-list-group-action-active-bg);
 }
 
 .list-group-horizontal {
@@ -8282,19 +8279,19 @@ textarea.form-control-lg {
 
 .btn-close {
   --bs-btn-close-color: #000;
-  --bs-btn-close-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e");
+  --bs-btn-close-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414'/%3e%3c/svg%3e");
   --bs-btn-close-opacity: 0.5;
   --bs-btn-close-hover-opacity: 0.75;
   --bs-btn-close-focus-shadow: 0 0 0 0.25rem rgba(28, 103, 108, 0.25);
   --bs-btn-close-focus-opacity: 1;
   --bs-btn-close-disabled-opacity: 0.25;
-  --bs-btn-close-white-filter: invert(1) grayscale(100%) brightness(200%);
   box-sizing: content-box;
   width: 1em;
   height: 1em;
   padding: 0.25em 0.25em;
   color: var(--bs-btn-close-color);
   background: transparent var(--bs-btn-close-bg) center/1em auto no-repeat;
+  filter: var(--bs-btn-close-filter);
   border: 0;
   border-radius: 0.375rem;
   opacity: var(--bs-btn-close-opacity);
@@ -8318,11 +8315,16 @@ textarea.form-control-lg {
 }
 
 .btn-close-white {
-  filter: var(--bs-btn-close-white-filter);
+  --bs-btn-close-filter: invert(1) grayscale(100%) brightness(200%);
 }
 
-[data-bs-theme=dark] .btn-close {
-  filter: var(--bs-btn-close-white-filter);
+:root,
+[data-bs-theme=light] {
+  --bs-btn-close-filter: ;
+}
+
+[data-bs-theme=dark] {
+  --bs-btn-close-filter: invert(1) grayscale(100%) brightness(200%);
 }
 
 .toast {
@@ -8398,7 +8400,7 @@ textarea.form-control-lg {
   --bs-modal-width: 500px;
   --bs-modal-padding: 1rem;
   --bs-modal-margin: 0.5rem;
-  --bs-modal-color: ;
+  --bs-modal-color: var(--bs-body-color);
   --bs-modal-bg: var(--bs-body-bg);
   --bs-modal-border-color: var(--bs-border-color-translucent);
   --bs-modal-border-width: var(--bs-border-width);
@@ -8434,8 +8436,8 @@ textarea.form-control-lg {
   pointer-events: none;
 }
 .modal.fade .modal-dialog {
-  transition: transform 0.3s ease-out;
   transform: translate(0, -50px);
+  transition: transform 0.3s ease-out;
 }
 @media (prefers-reduced-motion: reduce) {
   .modal.fade .modal-dialog {
@@ -8510,7 +8512,10 @@ textarea.form-control-lg {
 }
 .modal-header .btn-close {
   padding: calc(var(--bs-modal-header-padding-y) * 0.5) calc(var(--bs-modal-header-padding-x) * 0.5);
-  margin: calc(-0.5 * var(--bs-modal-header-padding-y)) calc(-0.5 * var(--bs-modal-header-padding-x)) calc(-0.5 * var(--bs-modal-header-padding-y)) auto;
+  margin-top: calc(-0.5 * var(--bs-modal-header-padding-y));
+  margin-right: calc(-0.5 * var(--bs-modal-header-padding-x));
+  margin-bottom: calc(-0.5 * var(--bs-modal-header-padding-y));
+  margin-left: auto;
 }
 
 .modal-title {
@@ -9030,6 +9035,7 @@ textarea.form-control-lg {
   color: #fff;
   text-align: center;
   background: none;
+  filter: var(--bs-carousel-control-icon-filter);
   border: 0;
   opacity: 0.5;
   transition: opacity 0.15s ease;
@@ -9068,11 +9074,11 @@ textarea.form-control-lg {
 }
 
 .carousel-control-prev-icon {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e") /*rtl:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e")*/;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0'/%3e%3c/svg%3e") /*rtl:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708'/%3e%3c/svg%3e")*/;
 }
 
 .carousel-control-next-icon {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") /*rtl:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e")*/;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708'/%3e%3c/svg%3e") /*rtl:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0'/%3e%3c/svg%3e")*/;
 }
 
 .carousel-indicators {
@@ -9098,7 +9104,7 @@ textarea.form-control-lg {
   margin-left: 3px;
   text-indent: -999px;
   cursor: pointer;
-  background-color: #fff;
+  background-color: var(--bs-carousel-indicator-active-bg);
   background-clip: padding-box;
   border: 0;
   border-top: 10px solid transparent;
@@ -9122,31 +9128,27 @@ textarea.form-control-lg {
   left: 15%;
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
-  color: #fff;
+  color: var(--bs-carousel-caption-color);
   text-align: center;
 }
 
-.carousel-dark .carousel-control-prev-icon,
-.carousel-dark .carousel-control-next-icon {
-  filter: invert(1) grayscale(100);
-}
-.carousel-dark .carousel-indicators [data-bs-target] {
-  background-color: #000;
-}
-.carousel-dark .carousel-caption {
-  color: #000;
+.carousel-dark {
+  --bs-carousel-indicator-active-bg: #000;
+  --bs-carousel-caption-color: #000;
+  --bs-carousel-control-icon-filter: invert(1) grayscale(100);
 }
 
-[data-bs-theme=dark] .carousel .carousel-control-prev-icon,
-[data-bs-theme=dark] .carousel .carousel-control-next-icon, [data-bs-theme=dark].carousel .carousel-control-prev-icon,
-[data-bs-theme=dark].carousel .carousel-control-next-icon {
-  filter: invert(1) grayscale(100);
+:root,
+[data-bs-theme=light] {
+  --bs-carousel-indicator-active-bg: #fff;
+  --bs-carousel-caption-color: #fff;
+  --bs-carousel-control-icon-filter: ;
 }
-[data-bs-theme=dark] .carousel .carousel-indicators [data-bs-target], [data-bs-theme=dark].carousel .carousel-indicators [data-bs-target] {
-  background-color: #000;
-}
-[data-bs-theme=dark] .carousel .carousel-caption, [data-bs-theme=dark].carousel .carousel-caption {
-  color: #000;
+
+[data-bs-theme=dark] {
+  --bs-carousel-indicator-active-bg: #000;
+  --bs-carousel-caption-color: #000;
+  --bs-carousel-control-icon-filter: invert(1) grayscale(100);
 }
 
 .spinner-grow,
@@ -9696,7 +9698,10 @@ textarea.form-control-lg {
 }
 .offcanvas-header .btn-close {
   padding: calc(var(--bs-offcanvas-padding-y) * 0.5) calc(var(--bs-offcanvas-padding-x) * 0.5);
-  margin: calc(-0.5 * var(--bs-offcanvas-padding-y)) calc(-0.5 * var(--bs-offcanvas-padding-x)) calc(-0.5 * var(--bs-offcanvas-padding-y)) auto;
+  margin-top: calc(-0.5 * var(--bs-offcanvas-padding-y));
+  margin-right: calc(-0.5 * var(--bs-offcanvas-padding-x));
+  margin-bottom: calc(-0.5 * var(--bs-offcanvas-padding-y));
+  margin-left: auto;
 }
 
 .offcanvas-title {
