@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\UUID;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string $slug

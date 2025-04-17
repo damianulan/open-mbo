@@ -10,7 +10,7 @@ use App\Models\Business\UserEmployment;
 use App\Models\Core\Role;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string|null $parent_id
@@ -42,6 +42,8 @@ use App\Models\Core\Role;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department withoutTrashed()
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $managers
+ * @property-read int|null $managers_count
  * @mixin \Eloquent
  */
 class Department extends BaseModel

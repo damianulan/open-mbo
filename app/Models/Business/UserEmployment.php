@@ -14,7 +14,7 @@ use App\Casts\Carbon\CarbonDate;
 use App\Casts\CheckboxCast;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string|null $foreign_id

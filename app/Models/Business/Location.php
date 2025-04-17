@@ -9,7 +9,7 @@ use App\Models\Core\User;
 use App\Models\Business\Company;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string $name
@@ -45,6 +45,7 @@ use App\Models\Business\Company;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location withoutTrashed()
+ * @method static \Database\Factories\Business\LocationFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
 class Location extends BaseModel

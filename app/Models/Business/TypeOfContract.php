@@ -7,7 +7,7 @@ use App\Traits\Vendors\TrixFields;
 use App\Facades\TrixField\TrixFieldCast;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string $name
