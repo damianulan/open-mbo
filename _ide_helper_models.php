@@ -116,6 +116,7 @@ namespace App\Models\Business{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company withoutTrashed()
  * @mixin \Eloquent
+ * @method static \Database\Factories\Business\CompanyFactory factory($count = null, $state = [])
  */
 	class Company extends \Eloquent {}
 }
@@ -155,6 +156,8 @@ namespace App\Models\Business{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department withoutTrashed()
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Core\User> $managers
+ * @property-read int|null $managers_count
  */
 	class Department extends \Eloquent {}
 }
@@ -198,6 +201,8 @@ namespace App\Models\Business{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location withoutTrashed()
  * @mixin \Eloquent
+ * @property string|null $country
+ * @method static \Database\Factories\Business\LocationFactory factory($count = null, $state = [])
  */
 	class Location extends \Eloquent {}
 }
@@ -294,6 +299,7 @@ namespace App\Models\Business{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract withoutTrashed()
  * @mixin \Eloquent
+ * @property string $shortname
  */
 	class TypeOfContract extends \Eloquent {}
 }

@@ -4,7 +4,7 @@
 <div class="icon-btn-nav">
     <div class="panel-left">
         <a class="icon-btn" href="{{ route('campaigns.edit', $campaign->id) }}" data-tippy-content="{{ __('buttons.edit') }}"><i class="bi-pencil-fill"></i></a>
-        <a href="javascript:void(0);" class="icon-btn add-objective" data-tippy-content="{{ __('mbo.buttons.add_objective') }}"><i class="bi-heart-arrow"></i></a>
+        <a href="javascript:void(0);" class="icon-btn add-objective" data-tippy-content="{{ __('mbo.buttons.add_objective') }}"><i class="bi-crosshair"></i></a>
         <a href="javascript:void(0);" class="icon-btn add-users" data-tippy-content="{{ __('buttons.enrol_users') }}"><i class="bi-person-fill-up"></i></a>
     </div>
 </div>
@@ -21,7 +21,7 @@
                                 <div class="list-grid">
                                     <div class="list-content">
                                         <div class="nowrap" data-tippy-content="{{ $objective->name }}">
-                                            <i class="bi text-primary bi-heart-arrow me-1"></i>
+                                            <i class="bi text-primary bi-crosshair me-1"></i>
                                             <span>{{ $objective->name }}</span>
                                         </div>
 

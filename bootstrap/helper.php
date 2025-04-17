@@ -25,7 +25,7 @@ function lorem_paragraph()
  */
 function user(?string $user_id = null): App\Models\Core\User
 {
-    $user = new User();
+    $user = new App\Models\Core\User();
     if(is_null($user_id)){
         if(auth()->check()){
             $user = auth()->user();
@@ -77,4 +77,23 @@ function development(): bool
 function production(): bool
 {
     return config('app.env') === 'production';
+}
+
+/**
+ * Converts float values to their string representation based on current locale.
+ *
+ * @param  float  $value
+ * @param  int    $decimals
+ * @return string
+ */
+function float_view(float $value, int $decimals = 2): string
+{
+    $lang = app()->getLocale();
+    $comma_locale = ['pl'];
+
+    if(in_array($lang, $comma_locale)){
+        return number_format($value, $decimals, ',', ' ');
+    }
+
+    return number_format($value, $decimals, '.', ',');
 }

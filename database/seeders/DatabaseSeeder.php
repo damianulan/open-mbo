@@ -29,12 +29,21 @@ class DatabaseSeeder extends Seeder
 
         ObjectiveTemplate::factory(50)->create();
 
+        $admins_mbo = 2;
+        $superadmins = 1;
         for($i = 1; $i < 40; $i++){
             $user = User::factory()->has(UserProfile::factory()->count(1), 'profile')->create([
                 'email' => 'user'.$i.'@damianulan.me',
             ]);
             if($user){
                 $user->assignRole('employee');
+            }
+            if($admins_mbo > 0){
+                $user->assignRole('admin_mbo');
+            } else {
+                if($superadmins > 0){
+                    $user->assignRole('admin');
+                }
             }
         }
 

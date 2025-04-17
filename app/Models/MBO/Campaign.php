@@ -19,7 +19,7 @@ use App\Models\Core\User;
 use App\Enums\MBO\CampaignStage;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string $name

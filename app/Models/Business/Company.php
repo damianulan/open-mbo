@@ -41,6 +41,7 @@ use App\Models\Business\Location;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company withoutTrashed()
+ * @method static \Database\Factories\Business\CompanyFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
 class Company extends BaseModel

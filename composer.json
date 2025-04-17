@@ -7,7 +7,7 @@
     "require": {
         "php": "^8.3.0",
         "akaunting/laravel-apexcharts": "^3.0",
-        "diglactic/laravel-breadcrumbs": "^9.0",
+        "diglactic/laravel-breadcrumbs": "^10.0",
         "guzzlehttp/guzzle": "^7.2",
         "lab404/laravel-impersonate": "^1.7",
         "laravel/framework": "^11.0",
@@ -35,7 +35,8 @@
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^8.1",
-        "phpunit/phpunit": "^10.0",
+        "phpunit/phpunit": "^11.0",
+        "pestphp/pest": "^3.0",
         "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {

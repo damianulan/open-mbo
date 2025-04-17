@@ -10,6 +10,7 @@ use App\Models\Business\TypeOfContract;
 use App\Models\Business\UserEmployment;
 use App\Models\Core\User;
 use App\Models\Core\Role;
+use Illuminate\Database\Eloquent\Builder;
 
 trait UserBusiness
 {
@@ -33,8 +34,15 @@ trait UserBusiness
     {
         return $this->hasMany(UserEmployment::class)
                 ->where('employment', '<', now())
-                ->where('release', '>', now())
-                ->orWhereNull('release');
+                ->where(function(Builder $q){
+                    $q->whereNull('release')
+                        ->orWhere('release', '>', now());
+                });
+    }
+
+    public function current_employment()
+    {
+        return $this->employments_active()->first();
     }
 
     public function hasEmployment(): bool

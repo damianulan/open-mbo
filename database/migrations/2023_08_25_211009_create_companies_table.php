@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
 
             $table->string('name', 255);
-            $table->string('shortname', 12);
+            $table->string('shortname', 128);
             $table->longText('description')->nullable();
             $table->string('logo')->nullable();
             $table->date('founded')->nullable();

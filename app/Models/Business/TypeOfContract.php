@@ -37,14 +37,24 @@ class TypeOfContract extends BaseModel
 {
     use TrixFields;
 
+    public static $contracts = [
+        'uop', 'uz', 'b2b', 'uod'
+    ];
+
     protected $fillable = [
         'name',
+        'shortname',
         'description',
     ];
 
     protected $casts = [
         'description' => TrixFieldCast::class,
     ];
+
+    public static function findByShortname($name)
+    {
+        return self::where('shortname', $name)->first();
+    }
 
     public function employments()
     {

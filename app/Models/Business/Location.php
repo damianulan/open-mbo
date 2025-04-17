@@ -45,6 +45,7 @@ use App\Models\Business\Company;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location withoutTrashed()
+ * @method static \Database\Factories\Business\LocationFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
 class Location extends BaseModel
@@ -56,6 +57,7 @@ class Location extends BaseModel
         'address_line_1',
         'address_line_2',
         'city',
+        'country',
         'postal_code',
         'description',
         'active',

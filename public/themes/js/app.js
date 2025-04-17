@@ -3158,6 +3158,12 @@ $("body").on('click', '.swal-confirm', function (e) {
 $("input[type=password]").on("focus", function () {
   $(this).val('');
 });
+$('input[data-numeric="decimal"]').on('focusout', function () {
+  var val = $(this).val();
+  if (val != '' && !val.includes('.') && !val.includes(',')) {
+    $(this).val(val + '.00');
+  }
+});
 function buildVendors() {
   $("select").chosen({
     disable_search_threshold: 5,

@@ -11,7 +11,7 @@ use App\Models\MBO\UserObjective;
 use App\Notifications\MBO\Campaign\CampaignAssignment;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string $campaign_id

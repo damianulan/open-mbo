@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('address_line_1', 255)->nullable();
             $table->string('address_line_2', 255)->nullable();
             $table->string('city', 255)->nullable();
+            $table->string('country', 255)->nullable();
             $table->string('postal_code', 255)->nullable();
             $table->longText('description')->nullable();
             $table->boolean('active')->default(1);
