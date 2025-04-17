@@ -56,6 +56,7 @@ namespace PHPSTORM_META {
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.schema' => \Illuminate\Database\Schema\MySqlBuilder::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
+            'encrypter' => \Illuminate\Encryption\Encrypter::class,
             'events' => \Illuminate\Events\Dispatcher::class,
             'files' => \Illuminate\Filesystem\Filesystem::class,
             'filesystem' => \Illuminate\Filesystem\FilesystemManager::class,
@@ -72,6 +73,7 @@ namespace PHPSTORM_META {
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'migrator' => \Illuminate\Database\Migrations\Migrator::class,
             'pipeline' => \Illuminate\Pipeline\Pipeline::class,
+            'purifier' => \Mews\Purifier\Purifier::class,
             'queue' => \Illuminate\Queue\QueueManager::class,
             'queue.connection' => \Illuminate\Queue\SyncQueue::class,
             'queue.failer' => \Illuminate\Queue\Failed\DatabaseUuidFailedJobProvider::class,
@@ -135,6 +137,7 @@ namespace PHPSTORM_META {
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.schema' => \Illuminate\Database\Schema\MySqlBuilder::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
+            'encrypter' => \Illuminate\Encryption\Encrypter::class,
             'events' => \Illuminate\Events\Dispatcher::class,
             'files' => \Illuminate\Filesystem\Filesystem::class,
             'filesystem' => \Illuminate\Filesystem\FilesystemManager::class,
@@ -151,6 +154,7 @@ namespace PHPSTORM_META {
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'migrator' => \Illuminate\Database\Migrations\Migrator::class,
             'pipeline' => \Illuminate\Pipeline\Pipeline::class,
+            'purifier' => \Mews\Purifier\Purifier::class,
             'queue' => \Illuminate\Queue\QueueManager::class,
             'queue.connection' => \Illuminate\Queue\SyncQueue::class,
             'queue.failer' => \Illuminate\Queue\Failed\DatabaseUuidFailedJobProvider::class,
@@ -214,6 +218,7 @@ namespace PHPSTORM_META {
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.schema' => \Illuminate\Database\Schema\MySqlBuilder::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
+            'encrypter' => \Illuminate\Encryption\Encrypter::class,
             'events' => \Illuminate\Events\Dispatcher::class,
             'files' => \Illuminate\Filesystem\Filesystem::class,
             'filesystem' => \Illuminate\Filesystem\FilesystemManager::class,
@@ -230,6 +235,7 @@ namespace PHPSTORM_META {
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'migrator' => \Illuminate\Database\Migrations\Migrator::class,
             'pipeline' => \Illuminate\Pipeline\Pipeline::class,
+            'purifier' => \Mews\Purifier\Purifier::class,
             'queue' => \Illuminate\Queue\QueueManager::class,
             'queue.connection' => \Illuminate\Queue\SyncQueue::class,
             'queue.failer' => \Illuminate\Queue\Failed\DatabaseUuidFailedJobProvider::class,
@@ -293,6 +299,7 @@ namespace PHPSTORM_META {
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.schema' => \Illuminate\Database\Schema\MySqlBuilder::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
+            'encrypter' => \Illuminate\Encryption\Encrypter::class,
             'events' => \Illuminate\Events\Dispatcher::class,
             'files' => \Illuminate\Filesystem\Filesystem::class,
             'filesystem' => \Illuminate\Filesystem\FilesystemManager::class,
@@ -309,6 +316,7 @@ namespace PHPSTORM_META {
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'migrator' => \Illuminate\Database\Migrations\Migrator::class,
             'pipeline' => \Illuminate\Pipeline\Pipeline::class,
+            'purifier' => \Mews\Purifier\Purifier::class,
             'queue' => \Illuminate\Queue\QueueManager::class,
             'queue.connection' => \Illuminate\Queue\SyncQueue::class,
             'queue.failer' => \Illuminate\Queue\Failed\DatabaseUuidFailedJobProvider::class,
@@ -372,6 +380,7 @@ namespace PHPSTORM_META {
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.schema' => \Illuminate\Database\Schema\MySqlBuilder::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
+            'encrypter' => \Illuminate\Encryption\Encrypter::class,
             'events' => \Illuminate\Events\Dispatcher::class,
             'files' => \Illuminate\Filesystem\Filesystem::class,
             'filesystem' => \Illuminate\Filesystem\FilesystemManager::class,
@@ -388,6 +397,7 @@ namespace PHPSTORM_META {
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'migrator' => \Illuminate\Database\Migrations\Migrator::class,
             'pipeline' => \Illuminate\Pipeline\Pipeline::class,
+            'purifier' => \Mews\Purifier\Purifier::class,
             'queue' => \Illuminate\Queue\QueueManager::class,
             'queue.connection' => \Illuminate\Queue\SyncQueue::class,
             'queue.failer' => \Illuminate\Queue\Failed\DatabaseUuidFailedJobProvider::class,
@@ -451,6 +461,7 @@ namespace PHPSTORM_META {
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.schema' => \Illuminate\Database\Schema\MySqlBuilder::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
+            'encrypter' => \Illuminate\Encryption\Encrypter::class,
             'events' => \Illuminate\Events\Dispatcher::class,
             'files' => \Illuminate\Filesystem\Filesystem::class,
             'filesystem' => \Illuminate\Filesystem\FilesystemManager::class,
@@ -467,6 +478,7 @@ namespace PHPSTORM_META {
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'migrator' => \Illuminate\Database\Migrations\Migrator::class,
             'pipeline' => \Illuminate\Pipeline\Pipeline::class,
+            'purifier' => \Mews\Purifier\Purifier::class,
             'queue' => \Illuminate\Queue\QueueManager::class,
             'queue.connection' => \Illuminate\Queue\SyncQueue::class,
             'queue.failer' => \Illuminate\Queue\Failed\DatabaseUuidFailedJobProvider::class,
@@ -530,6 +542,7 @@ namespace PHPSTORM_META {
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.schema' => \Illuminate\Database\Schema\MySqlBuilder::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
+            'encrypter' => \Illuminate\Encryption\Encrypter::class,
             'events' => \Illuminate\Events\Dispatcher::class,
             'files' => \Illuminate\Filesystem\Filesystem::class,
             'filesystem' => \Illuminate\Filesystem\FilesystemManager::class,
@@ -546,6 +559,7 @@ namespace PHPSTORM_META {
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'migrator' => \Illuminate\Database\Migrations\Migrator::class,
             'pipeline' => \Illuminate\Pipeline\Pipeline::class,
+            'purifier' => \Mews\Purifier\Purifier::class,
             'queue' => \Illuminate\Queue\QueueManager::class,
             'queue.connection' => \Illuminate\Queue\SyncQueue::class,
             'queue.failer' => \Illuminate\Queue\Failed\DatabaseUuidFailedJobProvider::class,
@@ -609,6 +623,7 @@ namespace PHPSTORM_META {
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.schema' => \Illuminate\Database\Schema\MySqlBuilder::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
+            'encrypter' => \Illuminate\Encryption\Encrypter::class,
             'events' => \Illuminate\Events\Dispatcher::class,
             'files' => \Illuminate\Filesystem\Filesystem::class,
             'filesystem' => \Illuminate\Filesystem\FilesystemManager::class,
@@ -625,6 +640,7 @@ namespace PHPSTORM_META {
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'migrator' => \Illuminate\Database\Migrations\Migrator::class,
             'pipeline' => \Illuminate\Pipeline\Pipeline::class,
+            'purifier' => \Mews\Purifier\Purifier::class,
             'queue' => \Illuminate\Queue\QueueManager::class,
             'queue.connection' => \Illuminate\Queue\SyncQueue::class,
             'queue.failer' => \Illuminate\Queue\Failed\DatabaseUuidFailedJobProvider::class,
@@ -688,6 +704,7 @@ namespace PHPSTORM_META {
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.schema' => \Illuminate\Database\Schema\MySqlBuilder::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
+            'encrypter' => \Illuminate\Encryption\Encrypter::class,
             'events' => \Illuminate\Events\Dispatcher::class,
             'files' => \Illuminate\Filesystem\Filesystem::class,
             'filesystem' => \Illuminate\Filesystem\FilesystemManager::class,
@@ -704,6 +721,7 @@ namespace PHPSTORM_META {
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'migrator' => \Illuminate\Database\Migrations\Migrator::class,
             'pipeline' => \Illuminate\Pipeline\Pipeline::class,
+            'purifier' => \Mews\Purifier\Purifier::class,
             'queue' => \Illuminate\Queue\QueueManager::class,
             'queue.connection' => \Illuminate\Queue\SyncQueue::class,
             'queue.failer' => \Illuminate\Queue\Failed\DatabaseUuidFailedJobProvider::class,
@@ -767,6 +785,7 @@ namespace PHPSTORM_META {
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.schema' => \Illuminate\Database\Schema\MySqlBuilder::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
+            'encrypter' => \Illuminate\Encryption\Encrypter::class,
             'events' => \Illuminate\Events\Dispatcher::class,
             'files' => \Illuminate\Filesystem\Filesystem::class,
             'filesystem' => \Illuminate\Filesystem\FilesystemManager::class,
@@ -783,6 +802,7 @@ namespace PHPSTORM_META {
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'migrator' => \Illuminate\Database\Migrations\Migrator::class,
             'pipeline' => \Illuminate\Pipeline\Pipeline::class,
+            'purifier' => \Mews\Purifier\Purifier::class,
             'queue' => \Illuminate\Queue\QueueManager::class,
             'queue.connection' => \Illuminate\Queue\SyncQueue::class,
             'queue.failer' => \Illuminate\Queue\Failed\DatabaseUuidFailedJobProvider::class,
@@ -846,6 +866,7 @@ namespace PHPSTORM_META {
             'db.factory' => \Illuminate\Database\Connectors\ConnectionFactory::class,
             'db.schema' => \Illuminate\Database\Schema\MySqlBuilder::class,
             'db.transactions' => \Illuminate\Database\DatabaseTransactionsManager::class,
+            'encrypter' => \Illuminate\Encryption\Encrypter::class,
             'events' => \Illuminate\Events\Dispatcher::class,
             'files' => \Illuminate\Filesystem\Filesystem::class,
             'filesystem' => \Illuminate\Filesystem\FilesystemManager::class,
@@ -862,6 +883,7 @@ namespace PHPSTORM_META {
             'migration.repository' => \Illuminate\Database\Migrations\DatabaseMigrationRepository::class,
             'migrator' => \Illuminate\Database\Migrations\Migrator::class,
             'pipeline' => \Illuminate\Pipeline\Pipeline::class,
+            'purifier' => \Mews\Purifier\Purifier::class,
             'queue' => \Illuminate\Queue\QueueManager::class,
             'queue.connection' => \Illuminate\Queue\SyncQueue::class,
             'queue.failer' => \Illuminate\Queue\Failed\DatabaseUuidFailedJobProvider::class,
@@ -3103,7 +3125,7 @@ namespace PHPSTORM_META {
     override(\tap(0), type(0));
     override(\optional(0), type(0));
 
-            registerArgumentsSet('auth',
+            registerArgumentsSet('auth', 
 'viewTelescope','settings-modules','mbo-objective-realization','management-mbo-templates','mbo-objective-update',
 'reports-view','management-reports','maintenance','users-view','users-create',
 'mbo-campaign-view','settings-logs','users-teams','mbo-campaign-update','management-recovery',
@@ -3113,7 +3135,7 @@ namespace PHPSTORM_META {
 'management-users','mbo-campaign-delete','mbo-objective-view','mbo-objective-milestones','management-mbo-categories',
 'management-notifications','viewAny','preview','view','create',
 'update','manage','delete','restore','forceDelete',);
-        registerArgumentsSet('configs',
+        registerArgumentsSet('configs', 
 'activitylog.enabled','activitylog.delete_records_older_than_days','activitylog.default_log_name','activitylog.default_auth_driver','activitylog.subject_returns_soft_deleted_models',
 'activitylog.activity_model','activitylog.table_name','activitylog.database_connection','apexcharts.options.chart.type','apexcharts.options.chart.height',
 'apexcharts.options.chart.width','apexcharts.options.chart.toolbar.show','apexcharts.options.chart.stacked','apexcharts.options.chart.zoom.enabled','apexcharts.options.chart.fontFamily',
@@ -3258,12 +3280,12 @@ namespace PHPSTORM_META {
 'query-builder.parameters.filter','query-builder.parameters.sort','query-builder.parameters.fields','query-builder.parameters.append','query-builder.count_suffix',
 'query-builder.exists_suffix','query-builder.disable_invalid_filter_query_exception','query-builder.disable_invalid_sort_query_exception','query-builder.disable_invalid_includes_query_exception','query-builder.convert_relation_names_to_snake_case_plural',
 'datatables-fractal.includes','datatables-fractal.serializer','tinker.commands','tinker.alias','tinker.dont_alias',);
-        registerArgumentsSet('middleware',
+        registerArgumentsSet('middleware', 
 'web','api','auth','auth.basic','auth.session',
 'cache.headers','can','guest','password.confirm','signed',
 'throttle','verified','role','permission','maintenance',
 'route.gate',);
-        registerArgumentsSet('routes',
+        registerArgumentsSet('routes', 
 'sanctum.csrf-cookie','livewire.update','livewire.upload-file',
 'livewire.preview-file','ignition.healthCheck','ignition.executeSolution','ignition.updateConfig',
 'login','logout','register',
@@ -3280,7 +3302,7 @@ namespace PHPSTORM_META {
 'campaigns.objective.delete','campaigns.users.update','campaigns.users.toggle_manual','campaigns.users.next_stage','campaigns.users.prev_stage',
 'campaigns.users.delete','objectives.show','objectives.child.store','objectives.child.update','objectives.child.delete',
 'general.get_modal','datatables.save_columns','ajax.get_model_instance','fallback',);
-        registerArgumentsSet('views',
+        registerArgumentsSet('views', 
 'apexcharts::container','apexcharts::script','auth.login','auth.master','auth.passwords.confirm',
 'auth.passwords.email','auth.passwords.reset','auth.register','auth.verify','components.datatables.badge',
 'components.datatables.link','components.datatables.link_multiple','components.datatables.partials.columns','components.datatables.username','components.datatables.username_link',
@@ -3318,7 +3340,7 @@ namespace PHPSTORM_META {
 'livewire::simple-bootstrap','livewire::simple-tailwind','livewire::tailwind','mailcatchall::receivers.html','mailcatchall::receivers.text',
 'notifications::email','pagination::bootstrap-4','pagination::bootstrap-5','pagination::default','pagination::semantic-ui',
 'pagination::simple-bootstrap-4','pagination::simple-bootstrap-5','pagination::simple-default','pagination::simple-tailwind','pagination::tailwind',);
-        registerArgumentsSet('translations',
+        registerArgumentsSet('translations', 
 'auth.failed','auth.password','auth.throttle','pagination.previous','pagination.next',
 'passwords.reset','passwords.sent','passwords.throttled','passwords.token','passwords.user',
 'validation.accepted','validation.accepted_if','validation.active_url','validation.after','validation.after_or_equal',
@@ -3430,7 +3452,7 @@ namespace PHPSTORM_META {
 'backup::notifications.unhealthy_backup_found_unknown','backup::notifications.unhealthy_backup_found_full','backup::notifications.no_backups_info','backup::notifications.application_name','backup::notifications.backup_name',
 'backup::notifications.disk','backup::notifications.newest_backup_size','backup::notifications.number_of_backups','backup::notifications.total_storage_used','backup::notifications.newest_backup_date',
 'backup::notifications.oldest_backup_date',);
-        registerArgumentsSet('env',
+        registerArgumentsSet('env', 
 'APP_NAME','APP_ENV','APP_LOCALE','APP_KEY','APP_DEBUG',
 'APP_URL','APP_TIMEZONE','APP_ENIGMA_MODELS','LOG_CHANNEL','LOG_DEPRECATIONS_CHANNEL',
 'LOG_LEVEL','DB_CONNECTION','DB_HOST','DB_PORT','DB_DATABASE',
@@ -3440,7 +3462,7 @@ namespace PHPSTORM_META {
 'MEMCACHED_HOST','MAIL_MAILER','MAIL_HOST','MAIL_PORT','MAIL_USERNAME',
 'MAIL_PASSWORD','MAIL_ENCRYPTION','MAIL_FROM_ADDRESS','MAIL_HOST_ADDRESS','MAIL_FROM_NAME',
 'MAILCATCHALL_ENABLED','MAILCATCHALL_RECEIVER','SETTINGS_CACHE_ENABLED',);
-
+        
                 expectedArguments(\Illuminate\Support\Facades\Gate::has(), 0, argumentsSet('auth'));
     expectedArguments(\Illuminate\Support\Facades\Gate::allows(), 0, argumentsSet('auth'));
     expectedArguments(\Illuminate\Support\Facades\Gate::denies(), 0, argumentsSet('auth'));
@@ -3504,5 +3526,5 @@ namespace PHPSTORM_META {
                 expectedArguments(\Illuminate\Contracts\Translation\Translator::get(), 0, argumentsSet('translations'));
                 expectedArguments(\env(), 0, argumentsSet('env'));
                 expectedArguments(\Illuminate\Support\Env::get(), 0, argumentsSet('env'));
-
+            
 }

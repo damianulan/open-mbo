@@ -1,8 +1,8 @@
 {
-    "name": "laravel/laravel",
+    "name": "damianulan/open-mbo",
     "type": "project",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": ["openmbo", "mbo", "laravel", "management", "objectives"],
     "license": "MIT",
     "require": {
         "php": "^8.3.0",
