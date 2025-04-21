@@ -28,10 +28,10 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         return view('pages.users.edit', [
-            'form' => UserEditForm::definition()
+            'form' => UserEditForm::definition($request)
         ]);
     }
 
@@ -43,7 +43,7 @@ class UsersController extends Controller
      */
     public function store(Request $request, UserEditForm $form)
     {
-        $request->validate($form::validation());
+        $request->validate($form::validation($request));
         $user = User::fillFromRequest($request);
         $user->generatePassword();
         $supervisors_ids = $request->input('supervisors_ids') ?? array();
@@ -81,12 +81,12 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $model = User::findOrFail($id);
         return view('pages.users.edit', [
             'user' => $model,
-            'form' => UserEditForm::definition($model)
+            'form' => UserEditForm::definition($request, $model)
         ]);
     }
 
@@ -99,7 +99,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id, UserEditForm $form)
     {
-        $request->validate($form::validation());
+        $request->validate($form::validation($request));
         $user = User::fillFromRequest($request, $id);
         $supervisors_ids = $request->input('supervisors_ids') ?? array();
         $roles_ids = $request->input('roles_ids') ?? array();

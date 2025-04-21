@@ -25,10 +25,10 @@ class ObjectiveCategoryController extends ManagementController
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
         return view('pages.mbo.categories.edit', [
-            'form' => ObjectiveCategoryEditForm::definition()
+            'form' => ObjectiveCategoryEditForm::definition($request)
         ]);
     }
 
@@ -37,7 +37,7 @@ class ObjectiveCategoryController extends ManagementController
      */
     public function store(Request $request, ObjectiveCategoryEditForm $form)
     {
-        $request->validate($form::validation());
+        $request->validate($form::validation($request));
         $objective = ObjectiveTemplateCategory::fillFromRequest($request);
         $user_ids = $request->input('user_ids');
 
@@ -59,12 +59,12 @@ class ObjectiveCategoryController extends ManagementController
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request, string $id)
     {
         $model = ObjectiveTemplateCategory::findOrFail($id);
         return view('pages.mbo.categories.edit', [
             'objective' => $model,
-            'form' => ObjectiveCategoryEditForm::definition($model),
+            'form' => ObjectiveCategoryEditForm::definition($request, $model),
         ]);
     }
 
@@ -73,7 +73,7 @@ class ObjectiveCategoryController extends ManagementController
      */
     public function update(Request $request, $id, ObjectiveCategoryEditForm $form)
     {
-        $request->validate($form::validation($id));
+        $request->validate($form::validation($request, $id));
         $objective = ObjectiveTemplateCategory::fillFromRequest($request, $id);
         $user_ids = $request->input('user_ids');
         if ($objective->update()) {

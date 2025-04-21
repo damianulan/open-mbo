@@ -19,16 +19,16 @@ class CompanyController extends ManagementController
         ]);
     }
 
-    public function create()
+    public function create(Request $request)
     {
         return view('pages.management.organization.company.edit', [
-            'form' => CompanyEditForm::definition()
+            'form' => CompanyEditForm::definition($request)
         ]);
     }
 
     public function store(Request $request, CompanyEditForm $form)
     {
-        $request->validate($form::validation());
+        $request->validate($form::validation($request));
         $company = Company::fillFromRequest($request);
 
         if ($company->save()) {
@@ -38,18 +38,18 @@ class CompanyController extends ManagementController
         return redirect()->back()->with('error', __('alerts.users.error.create'));
     }
 
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $model = Company::findOrFail($id);
         return view('pages.users.edit', [
             'user' => $model,
-            'form' => CompanyEditForm::definition($model)
+            'form' => CompanyEditForm::definition($request, $model)
         ]);
     }
 
     public function update(Request $request, $id, CompanyEditForm $form)
     {
-        $request->validate($form::validation());
+        $request->validate($form::validation($request, $id));
         $company = Company::fillFromRequest($request, $id);
 
         if ($company->update()) {
@@ -63,8 +63,8 @@ class CompanyController extends ManagementController
         $company = Company::findOrFail($id);
 
         if ($company->delete()) {
-            return redirect()->route('users.index')->with('success', __('alerts.users.success.delete', ['name' => $user->name()]));
+            return redirect()->route('users.index')->with('success', __('alerts.users.success.delete', ['name' => $company->name()]));
         }
-        return redirect()->back()->with('error', __('alerts.users.error.delete', ['name' => $user->name()]));
+        return redirect()->back()->with('error', __('alerts.users.error.delete', ['name' => $company->name()]));
     }
 }

@@ -30,13 +30,13 @@ class GeneralController extends Controller
                     if ($objective) {
                         $params = [
                             'id' => $id,
-                            'form' => CampaignEditObjectiveForm::definition($objective, $request),
+                            'form' => CampaignEditObjectiveForm::definition($request, $objective),
                         ];
                         $status = 'ok';
                     }
                 } else {
                     $params = [
-                        'form' => CampaignEditObjectiveForm::definition(null, $request),
+                        'form' => CampaignEditObjectiveForm::definition($request),
                     ];
                     $status = 'ok';
                 }
@@ -50,7 +50,7 @@ class GeneralController extends Controller
                     $campaign = Campaign::find($id);
                     $params = [
                         'id' => $id,
-                        'form' => CampaignEditUserForm::definition($campaign, $request),
+                        'form' => CampaignEditUserForm::definition($request, $campaign),
                     ];
                     $status = 'ok';
                 }
@@ -72,7 +72,7 @@ class GeneralController extends Controller
                     }
                 } else {
                     $params = [
-                        'form' => ObjectiveChildEditForm::definition(null, $request),
+                        'form' => ObjectiveChildEditForm::definition($request),
                     ];
                     $status = 'ok';
                 }

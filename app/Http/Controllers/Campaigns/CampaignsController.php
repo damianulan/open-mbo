@@ -30,7 +30,7 @@ class CampaignsController extends Controller
             abort(403);
         }
         return view('pages.mbo.campaigns.edit', [
-            'form' => CampaignEditForm::definition(),
+            'form' => CampaignEditForm::definition($request),
         ]);
     }
 
@@ -46,7 +46,7 @@ class CampaignsController extends Controller
             abort(403);
         }
         $request = $form::reformatRequest($request);
-        $request->validate($form::validation());
+        $request->validate($form::validation($request));
         $campaign = Campaign::fillFromRequest($request);
         $user_ids = $request->input('user_ids');
 
@@ -88,7 +88,7 @@ class CampaignsController extends Controller
         }
         return view('pages.mbo.campaigns.edit', [
             'campaign' => $campaign,
-            'form' => CampaignEditForm::definition($campaign),
+            'form' => CampaignEditForm::definition($request, $campaign->id),
         ]);
     }
 
@@ -102,7 +102,7 @@ class CampaignsController extends Controller
     public function update(Request $request, $id, CampaignEditForm $form)
     {
         $request = $form::reformatRequest($request);
-        $request->validate($form::validation($id));
+        $request->validate($form::validation($request, $id));
         $campaign = Campaign::fillFromRequest($request, $id);
         if ($request->user()->cannot('mbo-campaign-update', $campaign)) {
             abort(403);

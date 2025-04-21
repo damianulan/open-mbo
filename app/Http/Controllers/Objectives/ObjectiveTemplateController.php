@@ -27,10 +27,10 @@ class ObjectiveTemplateController extends ManagementController
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         return view('components.forms.edit', [
-            'form' => ObjectiveTemplateEditForm::definition()
+            'form' => ObjectiveTemplateEditForm::definition($request)
         ]);
     }
 
@@ -70,12 +70,12 @@ class ObjectiveTemplateController extends ManagementController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $model = ObjectiveTemplate::findOrFail($id);
         return view('components.forms.edit', [
             'objective' => $model,
-            'form' => ObjectiveTemplateEditForm::definition($model),
+            'form' => ObjectiveTemplateEditForm::definition($request, $model),
         ]);
     }
 
@@ -88,7 +88,7 @@ class ObjectiveTemplateController extends ManagementController
      */
     public function update(Request $request, $id, ObjectiveTemplateEditForm $form)
     {
-        $request->validate($form::validation());
+        $request->validate($form::validation($request, $id));
         $objective = ObjectiveTemplate::fillFromRequest($request, $id);
         if ($objective->update()) {
             return redirect()->route('management.mbo.objectives.index')->with('success', __('alerts.objective_template.success.edit'));
