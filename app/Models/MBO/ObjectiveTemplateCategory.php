@@ -9,7 +9,7 @@ use App\Models\MBO\ObjectiveTemplate;
 use App\Models\Core\User;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $name
@@ -51,12 +51,10 @@ class ObjectiveTemplateCategory extends BaseModel
         'shortname',
         'description',
         'icon',
-        'global', // can be assigned to other entities than users
     ];
 
     protected $casts = [
         'description' => TrixFieldCast::class,
-        'global' => CheckboxCast::class,
     ];
 
     protected static function boot()

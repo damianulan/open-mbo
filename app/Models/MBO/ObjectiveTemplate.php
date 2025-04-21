@@ -8,10 +8,9 @@ use App\Casts\CheckboxCast;
 use App\Models\Core\User;
 use App\Models\MBO\Objective;
 use App\Models\MBO\ObjectiveTemplateCategory;
-use App\Enums\MBO\ObjectiveType;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string|null $category_id
@@ -53,7 +52,6 @@ class ObjectiveTemplate extends BaseModel
         'category_id',
         'name',
         'description',
-        'type',
         'draft',
         'award',
     ];
@@ -61,7 +59,6 @@ class ObjectiveTemplate extends BaseModel
     protected $casts = [
         'draft' => CheckboxCast::class,
         'description' => TrixFieldCast::class,
-        'type' => ObjectiveType::class,
     ];
 
     protected static function boot()

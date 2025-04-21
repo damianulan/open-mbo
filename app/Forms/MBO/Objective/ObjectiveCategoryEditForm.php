@@ -38,8 +38,6 @@ class ObjectiveCategoryEditForm extends Form implements FormIO
             ->add(FormComponent::{$shortnameType}('shortname', $model)->label(__('forms.mbo.categories.shortname')))
             ->add(FormComponent::trix('description', $model)->label(__('forms.mbo.categories.description')))
             ->add(FormComponent::multiselect('user_ids', $model, Dictionary::fromModel(User::class, 'name', 'allActive'), 'users', $selected)->label(__('forms.mbo.categories.coordinators')))
-            ->add(FormComponent::switch('global', $model)->label(__('forms.mbo.categories.global'))->default(false)
-                ->info(__('forms.mbo.categories.info.global')))
             ->addSubmit();
     }
 
@@ -49,7 +47,6 @@ class ObjectiveCategoryEditForm extends Form implements FormIO
             'name' => 'max:50|required',
             'shortname' => 'max:20|required|unique:objective_template_categories,shortname,' . $model_id,
             'description' => 'max:1000|nullable',
-            'global' => 'in:on,off',
         ];
     }
 }

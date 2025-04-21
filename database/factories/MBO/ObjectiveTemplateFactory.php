@@ -28,34 +28,30 @@ class ObjectiveTemplateFactory extends Factory
         $cat_num = fake()->numberBetween(0, count($categories) - 1);
         $category_shortname = null;
         $category = null;
-        if(isset($categories[$cat_num])){
+        if (isset($categories[$cat_num])) {
             $category_shortname = $categories[$cat_num];
         }
 
-        if($category_shortname){
+        if ($category_shortname) {
             $category = ObjectiveTemplateCategory::findByShortname($category_shortname);
         }
-        $objectiveTypes = ObjectiveType::values();
-        $objectiveType = $objectiveTypes[fake()->numberBetween(0, count($objectiveTypes) - 1)];
 
-        if($category){
+        if ($category) {
             return [
                 'category_id' => $category->id,
-                'name' => trim(fake()->realTextBetween(10, 50),'.'),
+                'name' => trim(fake()->realTextBetween(10, 50), '.'),
                 'description' => fake()->realTextBetween(300, 900),
-                'type' => $objectiveType,
                 'draft' => 0,
                 'award' => fake()->randomFloat(2, 1, 30),
             ];
         } else {
             throw new \Exception('No category found');
         }
-
     }
 
     public function draft()
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'draft' => 1,
         ]);
     }

@@ -14,13 +14,12 @@ class MBOSeeder extends Seeder
      */
     public function run(): void
     {
-        if(ObjectiveTemplateCategory::count() > 0){
+        if (ObjectiveTemplateCategory::count() > 0) {
             return;
         }
         $category = new ObjectiveTemplateCategory();
         $category->name = 'Cele Globalne';
         $category->shortname = 'global';
-        $category->global = true;
         $category->save();
 
         $category = new ObjectiveTemplateCategory();
