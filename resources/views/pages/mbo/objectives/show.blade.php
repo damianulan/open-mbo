@@ -157,7 +157,7 @@
 </div>
 
 @endsection
-@section('page-scripts')
+@push('scripts')
 <script type="text/javascript">
     $('.edit-objective').on('click', function() {
         var model_id = $(this).attr('data-modelid');
@@ -175,4 +175,4 @@
         }
     });
 </script>
-@endsection
+@endpush

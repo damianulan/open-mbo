@@ -1,1 +1,0 @@
-<button type="{{ !empty($component->type) ? $component->type:'' }}" class="btn{{ !empty($component->class) ? ' '.$component->class:'' }}">{{ !empty($component->title) ? $component->title:'' }}</button>

@@ -22,6 +22,6 @@
 
 
 @endsection
-@section('page-scripts')
+@push('scripts')
 {{ $dataTable->scripts() }}
-@endsection
+@endpush

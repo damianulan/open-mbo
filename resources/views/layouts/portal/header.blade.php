@@ -13,6 +13,7 @@
 
     <!-- Theme -->
     <link rel="stylesheet" type="text/css" href="{{ asset('themes/'.$page->theme.'/app.css') }}">
+    @stack('styles')
     <script src="{{asset('themes/vendors/jquery.min.js')}}"></script>
     @include('layouts.portal.scripts')
 

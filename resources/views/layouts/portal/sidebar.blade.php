@@ -21,12 +21,6 @@
           <span class="nav-title">Moje cele</span>
         </a>
       </li>
-      <li class="nav-item" id="nav_forms">
-        <a class="nav-link" href="#">
-          <i class="bi bi-ui-radios"></i>
-          <span class="nav-title">Moje formularze</span>
-        </a>
-      </li>
       <li class="nav-item" id="nav_campaign">
         <a href="{{ route('campaigns.index') }}" class="nav-link{{ request()->routeIs('campaigns.*') ? ' active':'' }}">
           <i class="bi bi-bullseye"></i>

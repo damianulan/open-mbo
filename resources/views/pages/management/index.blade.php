@@ -36,6 +36,6 @@
 
 
 @endsection
-@section('page-scripts')
+@push('scripts')
 
-@endsection
+@endpush
