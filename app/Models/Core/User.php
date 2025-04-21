@@ -11,7 +11,7 @@ use App\Traits\Impersonable;
 use App\Traits\HasRolesAndPermissions;
 use App\Traits\UUID;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Facades\Forms\RequestForms;
+use FormForge\Traits\RequestForms;
 use App\Traits\UserMBO;
 use App\Traits\UserBusiness;
 use App\Traits\ActiveFields;
@@ -115,16 +115,17 @@ class User extends Authenticatable implements HasLocalePreference
         'created_at' => 'datetime',
     ];
 
-    protected static function booted() {
-        static::created(function(User $user) {
-            if(empty($user->preferences)){
+    protected static function booted()
+    {
+        static::created(function (User $user) {
+            if (empty($user->preferences)) {
                 $user->preferences()->create();
             }
         });
-        static::deleting(function(User $user) {
+        static::deleting(function (User $user) {
             $user->profile->delete();
             $user->preferences->delete();
-       });
+        });
     }
 
     public function generatePassword()
@@ -140,9 +141,9 @@ class User extends Authenticatable implements HasLocalePreference
 
     public function nameView(): string
     {
-        $link = '<span>'.$this->name().'</span>';
+        $link = '<span>' . $this->name() . '</span>';
         if (auth()->user()->can('view', $this)) {
-            $link = '<a href="'.route('users.show', $this->id).'" class="text-primary">'.$this->name().'</a>';
+            $link = '<a href="' . route('users.show', $this->id) . '" class="text-primary">' . $this->name() . '</a>';
         }
         return $link;
     }
@@ -156,7 +157,7 @@ class User extends Authenticatable implements HasLocalePreference
         return $view;
     }
 
-    public function firstname() : string
+    public function firstname(): string
     {
         return $this->profile->firstname;
     }
@@ -168,12 +169,12 @@ class User extends Authenticatable implements HasLocalePreference
 
     public function toggleLock(): bool
     {
-        if($this->active == 1){
+        if ($this->active == 1) {
             $this->active = 0;
         } else {
             $this->active = 1;
         }
-        if($this->update()){
+        if ($this->update()) {
             return true;
         }
 
@@ -182,27 +183,27 @@ class User extends Authenticatable implements HasLocalePreference
 
     public function blocked(): bool
     {
-        return $this->active ? false:true;
+        return $this->active ? false : true;
     }
 
     public function canBeDeleted(): bool
     {
-        return $this->core==0||isRoot() ? true:false;
+        return $this->core == 0 || isRoot() ? true : false;
     }
 
     public function canBeSuspended(): bool
     {
-        return $this->core==0||isRoot() ? true:false;
+        return $this->core == 0 || isRoot() ? true : false;
     }
 
     public function getAvatar(): ?string
     {
-        if($this->profile->avatar){
+        if ($this->profile->avatar) {
             return asset($this->profile->avatar);
         }
-        if($this->profile->gender->name === 'MALE'){
+        if ($this->profile->gender->name === 'MALE') {
             return asset('images/portrait/avatar-male.png');
-        } elseif($this->profile->gender->name === 'FEMALE'){
+        } elseif ($this->profile->gender->name === 'FEMALE') {
             return asset('images/portrait/avatar-female.png');
         }
         return null;
@@ -210,7 +211,7 @@ class User extends Authenticatable implements HasLocalePreference
 
     public function canBeImpersonated(): bool
     {
-        return !$this->hasAnyRole('root', 'support')||isRoot(true);
+        return !$this->hasAnyRole('root', 'support') || isRoot(true);
     }
 
     public function canImpersonate(): bool
@@ -231,11 +232,10 @@ class User extends Authenticatable implements HasLocalePreference
     public function preferredLocale()
     {
         $locale = $this->preferences->lang ?? 'auto';
-        if($locale === 'auto') {
+        if ($locale === 'auto') {
             $locale = app()->getLocale();
         }
 
         return $locale;
     }
-
 }

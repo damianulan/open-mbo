@@ -5,7 +5,7 @@
 <script src="{{ asset('themes/vendors/datatables/datatables.min.js') }}"></script>
 <script src="{{ asset('themes/js/app.js') }}"></script>
 @include('layouts.components.alerts');
-@yield('page-scripts')
+@stack('scripts')
 @stack('custom-scripts')
 <footer></footer>
 </body>

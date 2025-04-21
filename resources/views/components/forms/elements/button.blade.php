@@ -1,1 +1,0 @@
-<button type="{{ !empty($element->type) ? $element->type:'' }}" class="btn{{ !empty($element->class) ? ' '.$element->class:'' }}">{{ !empty($element->title) ? $element->title:'' }}</button>

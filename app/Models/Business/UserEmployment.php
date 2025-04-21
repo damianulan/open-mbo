@@ -3,7 +3,6 @@
 namespace App\Models\Business;
 
 use App\Models\BaseModel;
-use App\Traits\Vendors\TrixFields;
 use App\Models\Core\User;
 use App\Models\Business\Company;
 use App\Models\Business\Department;
@@ -11,7 +10,6 @@ use App\Models\Business\Position;
 use App\Models\Business\Team;
 use App\Models\Business\TypeOfContract;
 use App\Casts\Carbon\CarbonDate;
-use App\Casts\CheckboxCast;
 
 /**
  * 
@@ -57,8 +55,6 @@ use App\Casts\CheckboxCast;
  */
 class UserEmployment extends BaseModel
 {
-    use TrixFields;
-
     protected $fillable = [
         'user_id',
         'company_id',
@@ -100,8 +96,5 @@ class UserEmployment extends BaseModel
         return $this->belongsTo(Position::class);
     }
 
-    public function team()
-    {
-
-    }
+    public function team() {}
 }

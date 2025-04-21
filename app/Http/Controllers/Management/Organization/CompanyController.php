@@ -22,7 +22,7 @@ class CompanyController extends ManagementController
     public function create()
     {
         return view('pages.management.organization.company.edit', [
-            'form' => CompanyEditForm::boot()
+            'form' => CompanyEditForm::definition()
         ]);
     }
 
@@ -31,7 +31,7 @@ class CompanyController extends ManagementController
         $request->validate($form::validation());
         $company = Company::fillFromRequest($request);
 
-        if($company->save()){
+        if ($company->save()) {
 
             return redirect()->route('users.show', $company->id)->with('success', __('alerts.users.success.create'));
         }
@@ -43,7 +43,7 @@ class CompanyController extends ManagementController
         $model = Company::findOrFail($id);
         return view('pages.users.edit', [
             'user' => $model,
-            'form' => CompanyEditForm::boot($model)
+            'form' => CompanyEditForm::definition($model)
         ]);
     }
 
@@ -52,7 +52,7 @@ class CompanyController extends ManagementController
         $request->validate($form::validation());
         $company = Company::fillFromRequest($request, $id);
 
-        if($company->update()){
+        if ($company->update()) {
             return redirect()->route('users.show', $id)->with('success', __('alerts.users.success.edit', ['name' => $company->name()]));
         }
         return redirect()->back()->with('error', __('alerts.users.error.edit', ['name' => $company->name()]));
@@ -62,7 +62,7 @@ class CompanyController extends ManagementController
     {
         $company = Company::findOrFail($id);
 
-        if($company->delete()){
+        if ($company->delete()) {
             return redirect()->route('users.index')->with('success', __('alerts.users.success.delete', ['name' => $user->name()]));
         }
         return redirect()->back()->with('error', __('alerts.users.error.delete', ['name' => $user->name()]));

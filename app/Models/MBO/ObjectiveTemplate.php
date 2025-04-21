@@ -3,16 +3,10 @@
 namespace App\Models\MBO;
 
 use App\Models\BaseModel;
-use Illuminate\Database\Eloquent\Model;
-use App\Traits\UUID;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\Vendors\TrixFields;
-use App\Facades\Forms\RequestForms;
-use App\Facades\TrixField\TrixFieldCast;
+use FormForge\Casts\TrixFieldCast;
 use App\Casts\CheckboxCast;
 use App\Models\Core\User;
 use App\Models\MBO\Objective;
-use App\Models\MBO\CampaignObjective;
 use App\Models\MBO\ObjectiveTemplateCategory;
 use App\Enums\MBO\ObjectiveType;
 
@@ -55,8 +49,6 @@ use App\Enums\MBO\ObjectiveType;
  */
 class ObjectiveTemplate extends BaseModel
 {
-    use TrixFields;
-
     protected $fillable = [
         'category_id',
         'name',
@@ -88,7 +80,7 @@ class ObjectiveTemplate extends BaseModel
     public static function allIndividual(bool $active = true)
     {
         $results = self::where('type', ObjectiveType::INDIVIDUAL);
-        if($active){
+        if ($active) {
             $results->where('draft', 0);
         }
 
@@ -98,7 +90,7 @@ class ObjectiveTemplate extends BaseModel
     public static function allGlobal(bool $active = true)
     {
         $results = self::where('type', ObjectiveType::GLOBAL);
-        if($active){
+        if ($active) {
             $results->where('draft', 0);
         }
 
@@ -108,7 +100,7 @@ class ObjectiveTemplate extends BaseModel
     public static function allTeam(bool $active = true)
     {
         $results = self::where('type', ObjectiveType::TEAM);
-        if($active){
+        if ($active) {
             $results->where('draft', 0);
         }
 
@@ -133,8 +125,8 @@ class ObjectiveTemplate extends BaseModel
     public function usersCount(): int
     {
         $result = 0;
-        if($this->objectives){
-            foreach($this->objectives as $objective){
+        if ($this->objectives) {
+            foreach ($this->objectives as $objective) {
                 $result += $objective->user_assignments()->count();
             }
         }
@@ -149,7 +141,7 @@ class ObjectiveTemplate extends BaseModel
 
     public function global(): bool
     {
-        return $this->category()->global ? true:false;
+        return $this->category()->global ? true : false;
     }
 
     public function assign(User $user): bool

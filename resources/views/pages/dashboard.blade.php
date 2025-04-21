@@ -8,5 +8,5 @@
 <x-nocontent-page/>
 
 @endsection
-@section('page-scripts')
-@endsection
+@push('scripts')
+@endpush

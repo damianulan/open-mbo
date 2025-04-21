@@ -7,6 +7,6 @@
     </div>
 </div>
 @endsection
-@section('page-scripts')
+@push('scripts')
 
-@endsection
+@endpush

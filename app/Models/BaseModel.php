@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\UUID;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Facades\Forms\RequestForms;
+use FormForge\Traits\RequestForms;
 use Watson\Rememberable\Rememberable;
 use App\Traits\Vendors\ModelActivity;
 use App\Traits\VirginModel;
 use Carbon\Carbon;
+
 /**
  * 
  *
@@ -34,10 +35,9 @@ class BaseModel extends Model
     {
         $date = $this->$prop;
         $date_carbon = null;
-        if($date){
+        if ($date) {
             $date_carbon = Carbon::parse($date)->format($format);
         }
         return $date_carbon;
     }
-
 }

@@ -123,7 +123,7 @@
 </div>
 
 @endsection
-@section('page-scripts')
+@push('scripts')
 <script type="text/javascript">
     var campaign_id = '{{ $campaign->id }}';
     $('.add-objective').on('click', function() {
@@ -166,4 +166,4 @@
         });
     });
 </script>
-@endsection
+@endpush

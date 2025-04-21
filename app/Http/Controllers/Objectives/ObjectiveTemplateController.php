@@ -30,7 +30,7 @@ class ObjectiveTemplateController extends ManagementController
     public function create()
     {
         return view('components.forms.edit', [
-            'form' => ObjectiveTemplateEditForm::boot()
+            'form' => ObjectiveTemplateEditForm::definition()
         ]);
     }
 
@@ -45,7 +45,7 @@ class ObjectiveTemplateController extends ManagementController
         $request->validate($form::validation());
         $objective = ObjectiveTemplate::fillFromRequest($request);
 
-        if($objective->save()){
+        if ($objective->save()) {
             return redirect()->route('management.mbo.objectives.index')->with('success', __('alerts.objective_template.success.create'));
         }
         return redirect()->back()->with('error', __('alerts.error.operation'));
@@ -75,7 +75,7 @@ class ObjectiveTemplateController extends ManagementController
         $model = ObjectiveTemplate::findOrFail($id);
         return view('components.forms.edit', [
             'objective' => $model,
-            'form' => ObjectiveTemplateEditForm::boot($model),
+            'form' => ObjectiveTemplateEditForm::definition($model),
         ]);
     }
 
@@ -90,7 +90,7 @@ class ObjectiveTemplateController extends ManagementController
     {
         $request->validate($form::validation());
         $objective = ObjectiveTemplate::fillFromRequest($request, $id);
-        if($objective->update()){
+        if ($objective->update()) {
             return redirect()->route('management.mbo.objectives.index')->with('success', __('alerts.objective_template.success.edit'));
         }
         return redirect()->back()->with('error', __('alerts.error.operation'));
@@ -99,10 +99,9 @@ class ObjectiveTemplateController extends ManagementController
     public function delete($id)
     {
         $objective = ObjectiveTemplate::findOrFail($id);
-        if($objective->delete()){
+        if ($objective->delete()) {
             return redirect()->route('management.mbo.objectives.index')->with('success', __('alerts.objective_template.success.delete'));
         }
         return redirect()->back()->with('error', __('alerts.error.operation'));
     }
-
 }

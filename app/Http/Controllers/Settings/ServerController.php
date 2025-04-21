@@ -19,15 +19,15 @@ class ServerController extends SettingsController
     public function index()
     {
         $git_text = __('vocabulary.no_data');
-        if( !empty(config('app.head')) ){
-            $git_text = 'On branch <strong>' . config('app.head') . '</strong>' ;
+        if (!empty(config('app.head'))) {
+            $git_text = 'On branch <strong>' . config('app.head') . '</strong>';
         }
 
         $model = app(MailSettings::class); //->safePassword();
         return view('pages.settings.server', [
             'git_text' => $git_text,
             'mail' => $model,
-            'form' => SmtpForm::boot($model),
+            'form' => SmtpForm::definition($model),
             'nav' => $this->nav(),
         ]);
     }
@@ -39,10 +39,10 @@ class ServerController extends SettingsController
             'mail_from_address' => 'email',
             'mail_catchall_receiver' => 'email',
         ]);
-        foreach($request->all() as $key => $value){
+        foreach ($request->all() as $key => $value) {
             $settings->$key = $value;
         }
-        if($settings->save()){
+        if ($settings->save()) {
             return redirect()->back()->with('success', __('alerts.settings.success.mail_update'));
         }
         return redirect()->back()->with('error', __('alerts.settings.error.mail_update'));;
@@ -52,12 +52,12 @@ class ServerController extends SettingsController
     {
         $command = Artisan::call('optimize:clear');
 
-        if($command === 0){
+        if ($command === 0) {
             return redirect()->back()->with('success', __('alerts.settings.success.cache_clear'));
         }
 
         $msg = __('alerts.settings.error.cache_clear');
-        if(config('app.debug')){
+        if (config('app.debug')) {
             $msg .= "<br/>" . str_replace("\n", "<br/>", Artisan::output());
         }
         return redirect()->back()->with('error', $msg);
@@ -68,7 +68,7 @@ class ServerController extends SettingsController
         $response = false;
         $check = filter_var($request->input('check'), FILTER_VALIDATE_BOOLEAN);
         $settings->debug = $check;
-        if($settings->save()){
+        if ($settings->save()) {
             $response = true;
         }
         return response()->json($response);

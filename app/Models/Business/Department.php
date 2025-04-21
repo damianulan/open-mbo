@@ -3,8 +3,7 @@
 namespace App\Models\Business;
 
 use App\Models\BaseModel;
-use App\Traits\Vendors\TrixFields;
-use App\Facades\TrixField\TrixFieldCast;
+use FormForge\Casts\TrixFieldCast;
 use App\Models\Core\User;
 use App\Models\Business\UserEmployment;
 use App\Models\Core\Role;
@@ -48,8 +47,6 @@ use App\Models\Core\Role;
  */
 class Department extends BaseModel
 {
-    use TrixFields;
-
     protected $fillable = [
         'name',
         'description',

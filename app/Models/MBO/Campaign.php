@@ -3,18 +3,12 @@
 namespace App\Models\MBO;
 
 use App\Models\BaseModel;
-use App\Traits\Vendors\TrixFields;
-use App\Facades\TrixField\TrixFieldCast;
+use FormForge\Casts\TrixFieldCast;
 use App\Casts\CheckboxCast;
 use Illuminate\Support\Collection;
 use App\Models\MBO\Objective;
-use App\Models\MBO\CampaignObjective;
 use App\Models\MBO\UserCampaign;
-use App\Models\MBO\ObjectiveTemplate;
-use App\Casts\Carbon\CarbonDatetime;
 use Carbon\Carbon;
-use Spatie\Activitylog\Traits\LogsActivity;
-use Spatie\Activitylog\LogOptions;
 use App\Models\Core\User;
 use App\Enums\MBO\CampaignStage;
 
@@ -81,8 +75,6 @@ use App\Enums\MBO\CampaignStage;
  */
 class Campaign extends BaseModel
 {
-    use TrixFields;
-
     public $stages;
     public $timestamps = true;
     protected $log_name = 'mbo';
@@ -131,7 +123,7 @@ class Campaign extends BaseModel
     {
         parent::boot();
         static::creating(function ($model) {
-            if($model->manual == 0){
+            if ($model->manual == 0) {
                 $model->setStageAuto();
             } else {
                 $model->stage = CampaignStage::PENDING->value;
@@ -141,7 +133,7 @@ class Campaign extends BaseModel
         });
 
         static::updating(function ($model) {
-            if($model->manual == 0){
+            if ($model->manual == 0) {
                 $model->setStageAuto();
             } else {
                 $model->stage = CampaignStage::PENDING->value;
@@ -173,7 +165,7 @@ class Campaign extends BaseModel
 
     public function refreshCoordinators(?array $user_ids)
     {
-        if(!$user_ids){
+        if (!$user_ids) {
             $user_ids = array();
         }
 
@@ -185,15 +177,15 @@ class Campaign extends BaseModel
             return !in_array($value, $current);
         });
 
-        foreach($toDelete as $user_id){
+        foreach ($toDelete as $user_id) {
             $user = User::find($user_id);
-            if($user->exists()){
+            if ($user->exists()) {
                 $user->revokeRole('campaign_coordinator', $this);
             }
         }
-        foreach($toAdd as $user_id){
+        foreach ($toAdd as $user_id) {
             $user = User::find($user_id);
-            if($user->exists()){
+            if ($user->exists()) {
                 $user->assignRole('campaign_coordinator', $this);
             }
         }
@@ -204,12 +196,12 @@ class Campaign extends BaseModel
     public function assignUser($user_id)
     {
         $exists = $this->user_campaigns()->where('user_id', $user_id)->exists();
-        if(!$exists){
+        if (!$exists) {
             $this->user_campaigns()->create([
                 'user_id' => $user_id,
                 'stage' => $this->setUserStage($user_id),
                 'manual' => $this->manual,
-                'active' => $this->draft ? 0:1,
+                'active' => $this->draft ? 0 : 1,
             ]);
         }
         return true;
@@ -218,7 +210,7 @@ class Campaign extends BaseModel
     public function unassignUser($user_id)
     {
         $record = $this->user_campaigns()->where('user_id', $user_id)->first();
-        if($record){
+        if ($record) {
             $record->delete();
         }
         return true;
@@ -227,13 +219,13 @@ class Campaign extends BaseModel
     public function setUserStage($enrol_id = null)
     {
         $params = ['manual' => 0, 'active' => 1];
-        if($enrol_id){
+        if ($enrol_id) {
             $params['id'] = $enrol_id;
         }
         $enrols = $this->user_campaigns()->where($params)->get();
         $stage =  $this->getCurrentStages()->first();
-        if(!empty($enrols)){
-            foreach($enrols as $enrol){
+        if (!empty($enrols)) {
+            foreach ($enrols as $enrol) {
                 $enrol->timestamps = false;
                 $enrol->stage = $stage;
                 $enrol->update();
@@ -247,17 +239,16 @@ class Campaign extends BaseModel
         $stage = CampaignStage::PENDING->value;
         $now = Carbon::now();
 
-        foreach(CampaignStage::softValues() as $tmp){
-            $prop_start = $tmp.'_from';
-            $prop_end = $tmp.'_to';
+        foreach (CampaignStage::softValues() as $tmp) {
+            $prop_start = $tmp . '_from';
+            $prop_end = $tmp . '_to';
             $start = Carbon::parse($this->$prop_start);
             $end = Carbon::parse($this->$prop_end);
 
-            if($now->between($start, $end)){
+            if ($now->between($start, $end)) {
                 $stage = CampaignStage::IN_PROGRESS->value;
                 break;
             }
-
         }
 
         $this->stage = $stage;
@@ -270,17 +261,16 @@ class Campaign extends BaseModel
         $stages = new Collection();
         $now = Carbon::now();
 
-        if($this->stage === CampaignStage::IN_PROGRESS->value){
-            foreach(CampaignStage::softValues() as $tmp){
-                $prop_start = $tmp.'_from';
-                $prop_end = $tmp.'_to';
+        if ($this->stage === CampaignStage::IN_PROGRESS->value) {
+            foreach (CampaignStage::softValues() as $tmp) {
+                $prop_start = $tmp . '_from';
+                $prop_end = $tmp . '_to';
                 $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_start);
                 $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_end);
 
-                if($now->between($start, $end)){
+                if ($now->between($start, $end)) {
                     $stages->push($tmp);
                 }
-
             }
         } else {
             $stages->push($this->stage);
@@ -299,7 +289,7 @@ class Campaign extends BaseModel
 
     public function finished(): bool
     {
-        if($this->manual){
+        if ($this->manual) {
             return false;
         }
 
@@ -314,10 +304,10 @@ class Campaign extends BaseModel
         $now = Carbon::now();
         $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateStart());
         $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateEnd());
-        if($now >= $start) {
+        if ($now >= $start) {
             $fullDiff = $start->diffInDays($end, false);
             $diff = abs($now->diffInDays($start));
-            $progress = round(($diff / $fullDiff)*100);
+            $progress = round(($diff / $fullDiff) * 100);
         } else {
             $progress = 0;
         }
