@@ -2,7 +2,8 @@
     <div class="navbar-brand mb-0 px-6">
         <div class="d-flex">
           <a class="brand" href="{{ url('/') }}">
-            </i><span class="brand-title">{{ $sidebar->sitename }}</span>
+            <div class="brand-icon"><i class="bi-layers-half"></i></div>
+            <div class="brand-title">Open<span class="brand-title-2">MBO</span></div>
           </a>
           <div id="hamburger-close"><i class="bi-x-lg"></i></div>
 

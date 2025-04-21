@@ -25599,20 +25599,30 @@ html .sidebar-menu {
 }
 
 .brand {
+  display: flex;
+  align-items: center;
   color: #781093;
-  font-size: 1.1rem;
+  font-size: 1rem;
   text-decoration: none;
 }
 
 .brand .brand-title {
-  font-weight: 800;
+  font-weight: 400;
   font-family: "IBM Plex Serif", serif;
   letter-spacing: 0.05rem;
-  font-size: 1.4rem;
+  font-size: 1.1rem;
 }
 
-.sidebar-menu .navbar-brand i {
-  margin-right: 0.8rem;
+.brand .brand-title .brand-title-2 {
+  font-weight: 800;
+}
+
+.brand .brand-icon {
+  font-size: 1.8rem;
+}
+
+.sidebar-menu .brand .brand-icon i {
+  margin-right: 0.65rem;
 }
 
 li.nav-item {

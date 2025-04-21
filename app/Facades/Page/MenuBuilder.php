@@ -34,7 +34,7 @@ class MenuBuilder
                 ->setRoute('users.index'),
             MenuItem::make('management')
                 ->setTitle(__('menus.management.index'))
-                ->setIcon('layers-half')
+                ->setIcon('diagram-3-fill')
                 ->setRoute('management.mbo.objectives.index'),
             MenuItem::make('settings')
                 ->setTitle(__('menus.settings.index'))

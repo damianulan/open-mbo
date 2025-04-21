@@ -3,23 +3,23 @@ nav::-webkit-scrollbar {
 }
 
 nav::-webkit-scrollbar-track {
-background: rgb(179, 177, 177);
-border-radius: 1px;
+    background: rgb(179, 177, 177);
+    border-radius: 1px;
 }
 
 nav::-webkit-scrollbar-thumb {
-background: rgb(136, 136, 136);
-border-radius: 1px;
+    background: rgb(136, 136, 136);
+    border-radius: 1px;
 }
 
 nav::-webkit-scrollbar-thumb:hover {
-background: rgb(100, 100, 100);
-border-radius: 1px;
+    background: rgb(100, 100, 100);
+    border-radius: 1px;
 }
 
 nav::-webkit-scrollbar-thumb:active {
-background: rgb(68, 68, 68);
-border-radius: 1px;
+    background: rgb(68, 68, 68);
+    border-radius: 1px;
 }
 
 html .sidebar-menu {
@@ -35,12 +35,12 @@ html .sidebar-menu {
     backface-visibility: hidden;
     padding: 2rem 0;
     overflow-x: hidden;
-    transition: all .4s ease 0s;
+    transition: all 0.4s ease 0s;
     right: auto;
     left: 0;
 }
 
-@media (min-width: 992px){
+@media (min-width: 992px) {
     .sidebar-menu {
         width: $menu-expanded-width;
     }
@@ -54,7 +54,7 @@ html .sidebar-menu {
     }
 }
 
-@media (max-width: 992px){
+@media (max-width: 992px) {
     .sidebar-menu:not(.menu-hamburgered) {
         width: 0 !important;
     }
@@ -79,20 +79,17 @@ html .sidebar-menu {
 .sidebar-menu.menu-collapsed .nav-heading-link,
 .sidebar-menu.menu-collapsed .nav-title,
 .sidebar-menu.menu-collapsed .brand-title,
-.sidebar-menu.menu-collapsed .badge
-{
+.sidebar-menu.menu-collapsed .badge {
     display: none !important;
 }
 
 .sidebar-menu.menu-collapsed .nav-link .bi,
-.sidebar-menu.menu-collapsed .navbar-brand i
-{
+.sidebar-menu.menu-collapsed .navbar-brand i {
     margin: 0 !important;
 }
 
 .sidebar-menu.menu-collapsed .nav-pills .nav-link,
-.sidebar-menu.menu-collapsed .navbar-brand
-{
+.sidebar-menu.menu-collapsed .navbar-brand {
     display: block !important;
     text-align: center !important;
 }
@@ -130,26 +127,36 @@ html .sidebar-menu {
 }
 
 .sidebar-menu .navbar-brand {
-    transition: all .3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     display: block;
     padding: 1.5rem;
 }
 
 .brand {
+    display: flex;
+    align-items: center;
     color: $sidebar-brand-link;
-    font-size: 1.1rem;
+    font-size: 1rem;
     text-decoration: none;
 }
 
 .brand .brand-title {
-    font-weight: 800;
+    font-weight: 400;
     font-family: $font-family-serif;
-    letter-spacing: .05rem;
-    font-size: 1.4rem;
+    letter-spacing: 0.05rem;
+    font-size: 1.1rem;
 }
 
-.sidebar-menu .navbar-brand i {
-    margin-right: .8rem;
+.brand .brand-title .brand-title-2 {
+    font-weight: 800;
+}
+
+.brand .brand-icon {
+    font-size: 1.8rem;
+}
+
+.sidebar-menu .brand .brand-icon i {
+    margin-right: 0.65rem;
 }
 
 li.nav-item {
@@ -160,41 +167,46 @@ li.nav-item {
 .sidebar-menu .nav-pills .nav-link {
     display: flex;
     align-items: center;
-    font-size: .85rem;
+    font-size: 0.85rem;
     font-weight: 600;
     text-transform: capitalize;
     color: $sidebar-link;
-    padding: .3rem 1rem;
-    margin: 0 .75rem;
+    padding: 0.3rem 1rem;
+    margin: 0 0.75rem;
     background-color: transparent;
 }
 
 .sidebar-menu .nav-heading {
     font-weight: 600;
-    font-size: .8rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
 }
 
 .sidebar-menu .nav-heading-link {
     display: flex;
     align-items: center;
-    font-size: .85rem;
+    font-size: 0.85rem;
     color: $sidebar-link;
-    padding: .3rem 1rem;
-    margin: 0 .75rem;
+    padding: 0.3rem 1rem;
+    margin: 0 0.75rem;
     text-decoration: none;
 }
 
 .sidebar-menu .nav-pills .nav-link:hover {
     color: lighten($sidebar-link, 10%) !important;
-    transition: all .3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 .sidebar-menu .nav-pills .nav-link.active {
     font-weight: 600;
     color: $sidebar-link-active !important;
     background: $primary;
-    background: linear-gradient(90deg, rgba($primary,0.80) 0%, rgba($primary,0.95) 40%, rgba($primary,1) 100%);
+    background: linear-gradient(
+        90deg,
+        rgba($primary, 0.8) 0%,
+        rgba($primary, 0.95) 40%,
+        rgba($primary, 1) 100%
+    );
 }
 
 .sidebar-menu .nav-pills .nav-link.active:hover {
@@ -212,14 +224,14 @@ li.nav-item {
 }
 
 .sidebar-menu .nav .nav-multi {
-    padding: 0 0 .3rem 0;
+    padding: 0 0 0.3rem 0;
     margin: 0 0 1rem 0;
-    font-size: .85rem;
+    font-size: 0.85rem;
     color: lighten($dark, 20%);
 }
 
 .sidebar-menu .nav .nav-multi.first {
-    padding: .8rem 0;
+    padding: 0.8rem 0;
     margin-bottom: 1rem;
 }
 
@@ -227,7 +239,6 @@ li.nav-item {
     padding: 0;
     list-style: none;
 }
-
 
 li.user-status {
     position: relative;
@@ -262,7 +273,7 @@ ul.user-bar {
 }
 
 .user-nav .user-details .user-name {
-    font-size: .85rem;
+    font-size: 0.85rem;
     font-weight: 600;
 }
 
@@ -278,19 +289,19 @@ ul.user-bar {
 .user-nav span.profile-name {
     width: 100%;
     text-align: center;
-    font-size: .75rem;
+    font-size: 0.75rem;
     font-weight: 600;
-    padding: 0 .5rem;
+    padding: 0 0.5rem;
     color: $primary;
 }
 
-@media (max-width: 992px){
+@media (max-width: 992px) {
     .user-nav span.profile-name {
         display: none;
     }
 }
 
-a.dropdown-toggle{
+a.dropdown-toggle {
     text-decoration: none;
 }
 
@@ -351,9 +362,9 @@ a.dropdown-toggle{
     display: flex;
     border: 1px solid transparent;
     text-transform: capitalize;
-    padding: .3rem .8rem;
-    margin: .25rem .35rem;
-    font-size: .9rem;
+    padding: 0.3rem 0.8rem;
+    margin: 0.25rem 0.35rem;
+    font-size: 0.9rem;
     font-weight: 500;
     background: transparent;
     align-items: center;
@@ -363,12 +374,12 @@ a.dropdown-toggle{
 }
 
 .page-menu .nav-pills-horizontal .nav-link .badge {
-    font-size: .65rem;
-    margin-left: .6rem;
+    font-size: 0.65rem;
+    margin-left: 0.6rem;
     position: relative;
 }
 
-.page-menu .nav-pills-horizontal .nav-link:hover{
+.page-menu .nav-pills-horizontal .nav-link:hover {
     cursor: pointer;
 }
 
@@ -384,14 +395,14 @@ a.dropdown-toggle{
     background-color: rgba($primary, 0.25);
 }
 
-.page-menu .nav-pills-horizontal .nav-link i{
-    margin-right: .5rem;
+.page-menu .nav-pills-horizontal .nav-link i {
+    margin-right: 0.5rem;
     font-size: 1rem;
 }
 
 .page-menu ul.nav-pills-horizontal {
     border: 1px solid transparent;
-    border-radius: .35rem;
+    border-radius: 0.35rem;
     padding: 0.35rem;
     flex-wrap: nowrap;
     overflow-y: auto;
@@ -429,7 +440,7 @@ a.dropdown-toggle{
 .list-menu li.section {
     display: flex;
     font-size: 1.2rem;
-    padding: .5rem 0;
+    padding: 0.5rem 0;
     cursor: pointer;
 }
 
@@ -442,23 +453,22 @@ a.dropdown-toggle{
 }
 
 .list-menu ul.subitems {
-    font-size: .95rem;
+    font-size: 0.95rem;
 }
 
 .list-menu ul.subitems .section-item {
     display: flex;
-    padding: .3rem 2rem .3rem 0;
+    padding: 0.3rem 2rem 0.3rem 0;
     cursor: pointer;
 }
 
 .list-menu li.section .section-title:hover,
-.list-menu ul.subitems .section-item-title:hover
-{
+.list-menu ul.subitems .section-item-title:hover {
     color: $secondary;
 }
 
 .list-menu ul.subitems .section-item i {
-    margin-right: .5rem;
+    margin-right: 0.5rem;
 }
 
 .list-menu ul.subitems .section-item .section-item-settings {
@@ -478,7 +488,7 @@ a.dropdown-toggle{
 }
 
 .menu-options .toggle-all {
-    font-size: .7rem;
+    font-size: 0.7rem;
     margin-left: auto;
 }
 
@@ -492,29 +502,29 @@ a.dropdown-toggle{
     display: flex;
     width: 100%;
     height: 100%;
-    padding-bottom: .8rem;
+    padding-bottom: 0.8rem;
     overflow-x: auto;
 }
 
 .nav-btn .btn {
-    padding: .25rem 1.2rem;
-    margin-right: .8rem;
+    padding: 0.25rem 1.2rem;
+    margin-right: 0.8rem;
 }
 
 .nav-btn .btn i {
     position: relative;
     vertical-align: middle;
     font-size: 1.2rem;
-    margin-right: .5rem;
+    margin-right: 0.5rem;
 }
 
 .notification-dropdown .dropdown-menu {
     width: 25rem;
-    opacity: .9rem;
+    opacity: 0.9rem;
 }
 
 .notification-dropdown .dropdown-menu .dropdown-header {
-    padding: .3rem 1rem;
+    padding: 0.3rem 1rem;
     color: $gray-600;
 }
 
@@ -522,11 +532,17 @@ a.dropdown-toggle{
     display: flex;
 }
 
-.notification-dropdown .notification-item .notification-contents .notification-text{
+.notification-dropdown
+    .notification-item
+    .notification-contents
+    .notification-text {
     text-wrap: wrap;
 }
 
-.notification-dropdown .notification-item .notification-contents .notification-time{
+.notification-dropdown
+    .notification-item
+    .notification-contents
+    .notification-time {
     color: $gray-600;
     text-align: end;
 }
@@ -541,7 +557,7 @@ a.dropdown-toggle{
     color: $primary;
     border: none;
     vertical-align: middle;
-    font-size: .7rem;
+    font-size: 0.7rem;
 }
 
 .icon-btn-nav {
@@ -553,7 +569,7 @@ a.dropdown-toggle{
 }
 
 .panel-left a.icon-btn {
-    margin-left: .5rem;
+    margin-left: 0.5rem;
 }
 
 a.icon-btn {
@@ -566,7 +582,7 @@ a.icon-btn {
 }
 
 .nav .nav-item.disabled *,
-.nav .nav-item.disabled a{
+.nav .nav-item.disabled a {
     pointer-events: none;
     transition: unset !important;
     color: $disabled-text !important;
