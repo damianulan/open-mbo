@@ -14,12 +14,12 @@ class GeneralController extends SettingsController
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         $model = app(GeneralSettings::class);
         return view('pages.settings.index', [
             'model' => $model,
-            'form' => GeneralForm::definition($model),
+            'form' => GeneralForm::definition($request, $model),
             'nav' => $this->nav(),
         ]);
     }

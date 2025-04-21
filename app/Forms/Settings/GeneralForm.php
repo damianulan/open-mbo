@@ -3,17 +3,16 @@
 namespace App\Forms\Settings;
 
 use FormForge\Base\Form;
-use FormForge\Contracts\FormIO;
+use Illuminate\Http\Request;
 use FormForge\FormBuilder;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
-
 use App\Lib\Theme;
 use App\Settings\GeneralSettings;
 
 class GeneralForm extends Form
 {
-    public static function definition($model = null): FormBuilder
+    public static function definition(Request $request, $model = null): FormBuilder
     {
         return FormBuilder::boot('post', route('settings.general.store'), 'general_settings')
             ->class('settings-form')
@@ -26,7 +25,7 @@ class GeneralForm extends Form
             ->addSubmit();
     }
 
-    public static function validation($model_id = null): array
+    public static function validation(Request $request, $model_id = null): array
     {
         return [];
     }

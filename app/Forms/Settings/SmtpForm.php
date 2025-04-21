@@ -6,12 +6,12 @@ use FormForge\Base\Form;
 use FormForge\FormBuilder;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
-use FormForge\Contracts\FormIO;
+use Illuminate\Http\Request;
 use App\Settings\MailSettings;
 
-class SmtpForm extends Form implements FormIO
+class SmtpForm extends Form
 {
-    public static function definition($model = null): FormBuilder
+    public static function definition(Request $request, $model = null): FormBuilder
     {
         return FormBuilder::boot('post', route('settings.server.mail.store'), 'mail_settings')
             ->class('settings-form')
@@ -29,7 +29,7 @@ class SmtpForm extends Form implements FormIO
             ->addSubmit();
     }
 
-    public static function validation($model_id = null): array
+    public static function validation(Request $request, $model_id = null): array
     {
         return [];
     }

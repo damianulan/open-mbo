@@ -82,7 +82,9 @@
                     </table>
                     <div class="btn-row">
                         <a href="{{ route('settings.server.clearcache') }}" class="btn btn-outline-primary">{{ __('pages.settings.cache_clear') }}</a>
-                        <a href="{{ route('telescope') }}" class="btn btn-outline-primary">{{ __('pages.settings.telescope') }}</a>
+                        @env(['production', 'development'])
+                            <a href="{{ route('telescope') }}" class="btn btn-outline-primary">{{ __('pages.settings.telescope') }}</a>
+                        @endenv
                     </div>
                 </div>
             </div>

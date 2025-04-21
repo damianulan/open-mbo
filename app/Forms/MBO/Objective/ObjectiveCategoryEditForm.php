@@ -3,18 +3,17 @@
 namespace App\Forms\MBO\Objective;
 
 use FormForge\Base\Form;
-use FormForge\Contracts\FormIO;
+use Illuminate\Http\Request;
 use FormForge\FormBuilder;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
 use App\Models\MBO\ObjectiveTemplateCategory;
 use App\Models\Core\User;
-use Request;
 
-class ObjectiveCategoryEditForm extends Form implements FormIO
+class ObjectiveCategoryEditForm extends Form
 {
 
-    public static function definition($model = null): FormBuilder
+    public static function definition(Request $request, $model = null): FormBuilder
     {
         $route = route('management.mbo.categories.store');
         $method = 'POST';
@@ -41,7 +40,7 @@ class ObjectiveCategoryEditForm extends Form implements FormIO
             ->addSubmit();
     }
 
-    public static function validation($model_id = null): array
+    public static function validation(Request $request, $model_id = null): array
     {
         return [
             'name' => 'max:50|required',

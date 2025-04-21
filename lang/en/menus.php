@@ -33,10 +33,6 @@ return [
         'index' => 'Moje cele',
     ],
 
-    'surveys' => [
-        'index' => 'Moje Kwestionariusze',
-    ],
-
     // User's profile menu
     'profile' => [
         'index' => 'Profil',
@@ -80,9 +76,6 @@ return [
                 'index' => 'Przedsiębiorstwa',
             ],
         ],
-        'surveys' => [
-            'index' => 'Kwestionariusze'
-        ],
         'teams' => [
             'index' => 'Zespoły'
         ],
@@ -91,7 +84,7 @@ return [
             'create' => 'Tworzenie szablonu celu',
             'edit' => 'Modyfikacja szablonu celu',
             'categories' => [
-              'index' => 'Kategorie celów',
+                'index' => 'Kategorie celów',
             ],
 
         ],

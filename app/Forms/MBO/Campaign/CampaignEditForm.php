@@ -3,7 +3,7 @@
 namespace App\Forms\MBO\Campaign;
 
 use FormForge\Base\Form;
-use FormForge\Contracts\FormIO;
+use Illuminate\Http\Request;
 use FormForge\FormBuilder;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
@@ -11,10 +11,10 @@ use App\Enums\MBO\CampaignStage;
 use App\Models\Core\User;
 use App\Models\MBO\Campaign;
 
-class CampaignEditForm extends Form implements FormIO
+class CampaignEditForm extends Form
 {
 
-    public static function definition($model = null): FormBuilder
+    public static function definition(Request $request, $model = null): FormBuilder
     {
         $route = route('campaigns.store');
         $method = 'POST';
@@ -51,7 +51,7 @@ class CampaignEditForm extends Form implements FormIO
             ->addSubmit();
     }
 
-    public static function validation($model_id = null): array
+    public static function validation(Request $request, $model_id = null): array
     {
         return [
             'name' => 'max:120|required',

@@ -16,7 +16,7 @@ class ServerController extends SettingsController
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         $git_text = __('vocabulary.no_data');
         if (!empty(config('app.head'))) {
@@ -27,7 +27,7 @@ class ServerController extends SettingsController
         return view('pages.settings.server', [
             'git_text' => $git_text,
             'mail' => $model,
-            'form' => SmtpForm::definition($model),
+            'form' => SmtpForm::definition($request, $model),
             'nav' => $this->nav(),
         ]);
     }

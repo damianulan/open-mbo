@@ -3,15 +3,15 @@
 namespace App\Forms\Management;
 
 use FormForge\Base\Form;
-use FormForge\Contracts\FormIO;
+use Illuminate\Http\Request;
 use FormForge\FormBuilder;
 use FormForge\Base\FormComponent;
 use Illuminate\Validation\Rules\File;
 use App\Models\Core\Role;
 
-class CompanyEditForm extends Form implements FormIO
+class CompanyEditForm extends Form
 {
-    public static function definition($model = null): FormBuilder
+    public static function definition(Request $request, $model = null): FormBuilder
     {
         $route = route('management.organization.company.store');
         $method = 'POST';
@@ -29,7 +29,7 @@ class CompanyEditForm extends Form implements FormIO
             ->addSubmit();
     }
 
-    public static function validation($model = null): array
+    public static function validation(Request $request, $model_id = null): array
     {
         return [
             'firstname' => 'max:255|required',

@@ -111,11 +111,8 @@ return [
             'template_count' => 'Powiązane szablony',
             'shortname' => 'Unikalny identyfikator kategorii',
             'description' => 'Opis kategorii',
-            'global' => 'Kategoria celów globalnych',
             'coordinators' => 'Koordynatorzy kategorii',
-            'info' => [
-                'global' => 'Cele skierowane są do całej organizacji, a nie konkretnych użytkowników.',
-            ],
+            'info' => [],
         ],
     ],
 ];

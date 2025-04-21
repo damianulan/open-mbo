@@ -33,9 +33,6 @@ return [
         'index' => 'Moje cele',
     ],
 
-    'surveys' => [
-        'index' => 'Moje Kwestionariusze',
-    ],
 
     // User's profile menu
     'profile' => [
@@ -80,9 +77,6 @@ return [
                 'index' => 'Przedsiębiorstwa',
             ],
         ],
-        'surveys' => [
-            'index' => 'Kwestionariusze'
-        ],
         'teams' => [
             'index' => 'Zespoły'
         ],
@@ -95,9 +89,9 @@ return [
 
             ],
             'categories' => [
-              'index' => 'Kategorie celów',
-              'create' => 'Tworzenie kategorii MBO',
-              'edit' => 'Modyfikacja kategorii MBO',
+                'index' => 'Kategorie celów',
+                'create' => 'Tworzenie kategorii MBO',
+                'edit' => 'Modyfikacja kategorii MBO',
             ],
         ],
 

@@ -16,29 +16,26 @@ class ManagementController extends Controller
     {
         return MenuBuilder::bootMenubar('management', [
             MenuItem::make('objectives')
-                    ->setTitle(__('menus.management.mbo.objectives.index'))
-                    ->setRoute('management.mbo.objectives.index'),
+                ->setTitle(__('menus.management.mbo.objectives.index'))
+                ->setRoute('management.mbo.objectives.index'),
             MenuItem::make('categories')
-                    ->setTitle(__('menus.management.mbo.categories.index'))
-                    ->setRoute('management.mbo.categories.index'),
-            MenuItem::make('surveys')
-                    ->setTitle(__('menus.management.surveys.index'))
-                    ->setRoute('management.surveys.index'),
+                ->setTitle(__('menus.management.mbo.categories.index'))
+                ->setRoute('management.mbo.categories.index'),
             MenuItem::make('users')
-                    ->setTitle(__('menus.management.users.index'))
-                    ->setRoute('management.users.index'),
+                ->setTitle(__('menus.management.users.index'))
+                ->setRoute('management.users.index'),
             MenuItem::make('organization')
-                    ->setTitle(__('menus.management.organization.index'))
-                    ->setRoute('management.organization.index'),
+                ->setTitle(__('menus.management.organization.index'))
+                ->setRoute('management.organization.index'),
             MenuItem::make('notifications')
-                    ->setTitle(__('menus.notifications.index'))
-                    ->setRoute('management.notifications.index'),
+                ->setTitle(__('menus.notifications.index'))
+                ->setRoute('management.notifications.index'),
             MenuItem::make('reports')
-                    ->setTitle(__('menus.reports.index'))
-                    ->setRoute('management.reports.index'),
+                ->setTitle(__('menus.reports.index'))
+                ->setRoute('management.reports.index'),
             MenuItem::make('restoring')
-                    ->setTitle(__('menus.management.restoring.index'))
-                    ->setRoute('management.restoring.index'),
+                ->setTitle(__('menus.management.restoring.index'))
+                ->setRoute('management.restoring.index'),
         ]);
     }
 }

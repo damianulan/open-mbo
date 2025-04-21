@@ -3,16 +3,16 @@
 namespace App\Forms\MBO\Objective;
 
 use FormForge\Base\Form;
-use FormForge\Contracts\FormIO;
+use Illuminate\Http\Request;
 use FormForge\FormBuilder;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
 use App\Models\MBO\ObjectiveTemplateCategory;
 
-class ObjectiveTemplateEditForm
+class ObjectiveTemplateEditForm extends Form
 {
 
-    public static function definition($model = null): FormBuilder
+    public static function definition(Request $request, $model = null): FormBuilder
     {
         $route = route('management.mbo.objectives.store');
         $method = 'POST';
@@ -31,7 +31,7 @@ class ObjectiveTemplateEditForm
             ->addSubmit();
     }
 
-    public static function validation($model_id = null): array
+    public static function validation(Request $request, $model_id = null): array
     {
         return [
             'category_id' => 'nullable',

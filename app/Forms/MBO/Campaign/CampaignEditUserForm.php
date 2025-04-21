@@ -3,7 +3,6 @@
 namespace App\Forms\MBO\Campaign;
 
 use FormForge\Base\Form;
-use FormForge\Contracts\FormIO;
 use FormForge\FormBuilder;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
@@ -13,15 +12,10 @@ use App\Models\Core\User;
 use Illuminate\Http\Request;
 
 // Ajax form
-class CampaignEditUserForm extends Form implements FormIO
+class CampaignEditUserForm extends Form
 {
 
-    /**
-     * @param  App\Models\MBO\Campaign  $model
-     * @param  Request|null             $request
-     * @return FormBuilder
-     */
-    public static function definition($model = null, ?Request $request = null): FormBuilder
+    public static function definition(Request $request, $model = null): FormBuilder
     {
         $route = null;
         $method = 'POST';
@@ -48,7 +42,7 @@ class CampaignEditUserForm extends Form implements FormIO
             ->addTitle($title);
     }
 
-    public static function validation($model_id = null): array
+    public static function validation(Request $request, $model_id = null): array
     {
 
         return [];

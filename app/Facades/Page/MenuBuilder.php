@@ -13,38 +13,34 @@ class MenuBuilder
     {
         $sidebar = SidebarMenu::boot($sitename, [
             MenuItem::make('dashboard')
-                    ->setTitle(__('menus.dashboard'))
-                    ->setIcon('grid-fill')
-                    ->setRoute('dashboard'),
+                ->setTitle(__('menus.dashboard'))
+                ->setIcon('grid-fill')
+                ->setRoute('dashboard'),
             MenuItem::make('objectives')
-                    ->setTitle(__('menus.my_objectives.index'))
-                    ->setIcon('clipboard-check-fill')
-                    ->setRoute('my-objectives.index'),
-            MenuItem::make('surveys')
-                    ->setTitle(__('menus.surveys.index'))
-                    ->setIcon('ui-radios')
-                    ->setRoute('surveys.index'),
+                ->setTitle(__('menus.my_objectives.index'))
+                ->setIcon('clipboard-check-fill')
+                ->setRoute('my-objectives.index'),
             MenuItem::make('campaign')
-                    ->setTitle(__('menus.campaigns.index'))
-                    ->setIcon('bullseye')
-                    ->setRoute('campaigns.index'),
+                ->setTitle(__('menus.campaigns.index'))
+                ->setIcon('bullseye')
+                ->setRoute('campaigns.index'),
             MenuItem::make('reports')
-                    ->setTitle(__('menus.reports.index'))
-                    ->setIcon('bar-chart-steps')
-                    ->setRoute('reports.index'),
+                ->setTitle(__('menus.reports.index'))
+                ->setIcon('bar-chart-steps')
+                ->setRoute('reports.index'),
             MenuItem::make('users')
-                    ->setTitle(__('menus.users.index'))
-                    ->setIcon('person-fill')
-                    ->setRoute('users.index'),
+                ->setTitle(__('menus.users.index'))
+                ->setIcon('person-fill')
+                ->setRoute('users.index'),
             MenuItem::make('management')
-                    ->setTitle(__('menus.management.index'))
-                    ->setIcon('layers-half')
-                    ->setRoute('management.mbo.objectives.index'),
+                ->setTitle(__('menus.management.index'))
+                ->setIcon('layers-half')
+                ->setRoute('management.mbo.objectives.index'),
             MenuItem::make('settings')
-                    ->setTitle(__('menus.settings.index'))
-                    ->setIcon('gear-fill')
-                    ->permission('settings-*')
-                    ->setRoute('settings.general.index'),
+                ->setTitle(__('menus.settings.index'))
+                ->setIcon('gear-fill')
+                ->permission('settings-*')
+                ->setRoute('settings.general.index'),
         ]);
 
         return $sidebar;
@@ -54,5 +50,4 @@ class MenuBuilder
     {
         return MenubarMenu::boot($id, $items);
     }
-
 }

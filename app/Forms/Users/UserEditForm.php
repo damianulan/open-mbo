@@ -3,7 +3,7 @@
 namespace App\Forms\Users;
 
 use FormForge\Base\Form;
-use FormForge\Contracts\FormIO;
+use Illuminate\Http\Request;
 use FormForge\FormBuilder;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
@@ -13,9 +13,9 @@ use App\Models\Core\Role;
 use Illuminate\Validation\Rules\Enum;
 use App\Models\Core\User;
 
-class UserEditForm extends Form implements FormIO
+class UserEditForm extends Form
 {
-    public static function definition($model = null): FormBuilder
+    public static function definition(Request $request, $model = null): FormBuilder
     {
         $route = route('users.store');
         $method = 'POST';
@@ -45,7 +45,7 @@ class UserEditForm extends Form implements FormIO
             ->addSubmit();
     }
 
-    public static function validation($model = null): array
+    public static function validation(Request $request, $model = null): array
     {
         return [
             'firstname' => 'max:255|required',

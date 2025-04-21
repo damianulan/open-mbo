@@ -3,7 +3,6 @@
 namespace App\Forms\MBO\Campaign;
 
 use FormForge\Base\Form;
-use FormForge\Contracts\FormIO;
 use FormForge\FormBuilder;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
@@ -12,11 +11,10 @@ use App\Models\MBO\Objective;
 use Illuminate\Http\Request;
 
 // Ajax form
-// TODO PRIORYTETY
-class CampaignEditObjectiveForm extends Form implements FormIO
+class CampaignEditObjectiveForm extends Form
 {
 
-    public static function definition($model = null, ?Request $request = null): FormBuilder
+    public static function definition(Request $request, $model = null): FormBuilder
     {
         $route = null;
         $method = 'POST';
@@ -49,7 +47,7 @@ class CampaignEditObjectiveForm extends Form implements FormIO
             ->addTitle($title);
     }
 
-    public static function validation($model_id = null): array
+    public static function validation(Request $request, $model_id = null): array
     {
         $campaign_id = request()->input('campaign_id') ?? null;
         $builder = Objective::where('campaign_id', $campaign_id);
