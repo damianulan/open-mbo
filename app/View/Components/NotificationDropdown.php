@@ -5,8 +5,10 @@ namespace App\View\Components;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\DatabaseNotification;
+
 class NotificationDropdown extends Component
 {
     /**
@@ -22,8 +24,8 @@ class NotificationDropdown extends Component
      */
     public function render(): View|Closure|string
     {
-        $notifications_count = auth()->user()->unreadNotifications()->count();
-        $notifications = auth()->user()->notifications()->take(10)->get();
+        $notifications_count = Auth::user()->unreadNotifications()->count();
+        $notifications = Auth::user()->notifications()->take(10)->get();
 
         return view('components.notification-dropdown', [
             'notifications' => $notifications,

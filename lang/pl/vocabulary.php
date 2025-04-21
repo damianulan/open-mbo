@@ -23,17 +23,6 @@ return [
     'column' => 'Kolumna',
     'columns' => 'Kolumny',
 
-    'typography' => [
-        'bold' => 'Pogrubienie',
-        'italic' => 'Pochyła',
-        'hiperlink' => 'Hiperłącze',
-        'quote' => 'Cytat',
-        'li' => 'Lista punktowana',
-        'ol' => 'Lista numeryczna',
-        'link' => 'Linkuj',
-        'unlink' => 'Odlinkuj',
-    ],
-
     'langs' => [
         'pl' => 'Polski',
         'en' => 'Angielski',

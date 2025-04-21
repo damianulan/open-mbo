@@ -2,7 +2,13 @@
     "name": "damianulan/open-mbo",
     "type": "project",
     "description": "",
-    "keywords": ["openmbo", "mbo", "laravel", "management", "objectives"],
+    "keywords": [
+        "openmbo",
+        "mbo",
+        "laravel",
+        "management",
+        "objectives"
+    ],
     "license": "Proprietary",
     "repositories": [
         {
@@ -82,7 +88,8 @@
             "@php artisan ide-helper:meta"
         ],
         "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php artisan key:generate --ansi"
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"

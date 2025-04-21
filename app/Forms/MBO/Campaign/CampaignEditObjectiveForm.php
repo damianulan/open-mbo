@@ -37,7 +37,7 @@ class CampaignEditObjectiveForm extends Form implements FormIO
         return FormBuilder::boot($method, $route, 'campaign_edit_objective')
             ->class('campaign-edit-objective-form')
             ->add(FormComponent::hidden('id', $model))
-            ->add(FormComponent::select('template_id', $model, Dictionary::fromModel(ObjectiveTemplate::class, 'name', 'allIndividual', $exclude))->required()->label(__('forms.mbo.objectives.template')))
+            ->add(FormComponent::select('template_id', $model, Dictionary::fromModel(ObjectiveTemplate::class, 'name', 'all', $exclude))->required()->label(__('forms.mbo.objectives.template')))
             ->add(FormComponent::hidden('campaign_id', $model, $campaign_id))
             ->add(FormComponent::text('name', $model)->label(__('forms.mbo.objectives.name'))->required())
             ->add(FormComponent::trix('description', $model)->label(__('forms.mbo.objectives.description')))

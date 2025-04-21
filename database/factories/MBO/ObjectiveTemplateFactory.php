@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\MBO\ObjectiveTemplate;
 use App\Models\MBO\ObjectiveTemplateCategory;
-use App\Enums\MBO\ObjectiveType;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\MBO\ObjectiveTemplate>

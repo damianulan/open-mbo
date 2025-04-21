@@ -37,7 +37,7 @@ class ObjectiveChildEditForm extends Form implements FormIO
         return FormBuilder::boot($method, $route, 'objective_edit_child')
             ->class('objective-edit-child-form')
             ->add(FormComponent::hidden('id', $model))
-            ->add(FormComponent::select('template_id', $model, Dictionary::fromModel(ObjectiveTemplate::class, 'name', 'allIndividual', $exclude))->required()->label(__('forms.mbo.objectives.template')))
+            ->add(FormComponent::select('template_id', $model, Dictionary::fromModel(ObjectiveTemplate::class, 'name', 'all', $exclude))->required()->label(__('forms.mbo.objectives.template')))
             ->add(FormComponent::hidden('parent_id', $model, $parent->id))
             ->add(FormComponent::text('name', $model)->label(__('forms.mbo.objectives.name'))->required())
             ->add(FormComponent::trix('description', $model)->label(__('forms.mbo.objectives.description')))

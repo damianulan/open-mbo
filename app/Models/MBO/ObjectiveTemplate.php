@@ -74,36 +74,6 @@ class ObjectiveTemplate extends BaseModel
         return self::where('draft', 0)->get();
     }
 
-    public static function allIndividual(bool $active = true)
-    {
-        $results = self::where('type', ObjectiveType::INDIVIDUAL);
-        if ($active) {
-            $results->where('draft', 0);
-        }
-
-        return $results->get();
-    }
-
-    public static function allGlobal(bool $active = true)
-    {
-        $results = self::where('type', ObjectiveType::GLOBAL);
-        if ($active) {
-            $results->where('draft', 0);
-        }
-
-        return $results->get();
-    }
-
-    public static function allTeam(bool $active = true)
-    {
-        $results = self::where('type', ObjectiveType::TEAM);
-        if ($active) {
-            $results->where('draft', 0);
-        }
-
-        return $results->get();
-    }
-
     public function category()
     {
         return $this->belongsTo(ObjectiveTemplateCategory::class, 'category_id');

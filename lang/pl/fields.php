@@ -1,7 +1,6 @@
 <?php
 
 use App\Enums\Users\Gender;
-use App\Enums\MBO\ObjectiveType;
 
 return [
     // User & common column Fields
@@ -26,14 +25,9 @@ return [
 
     // Enumerations
     'enums' => [
-        ObjectiveType::INDIVIDUAL->value => 'Indywidualny',
-        ObjectiveType::TEAM->value => 'Zespołowy',
-        ObjectiveType::GLOBAL->value => 'Globalny',
-
         Gender::MALE->value => 'Mężczyzna',
         Gender::FEMALE->value => 'Kobieta',
         Gender::OTHER->value => 'Inna',
     ],
-
 
 ];
