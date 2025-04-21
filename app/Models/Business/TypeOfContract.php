@@ -3,8 +3,7 @@
 namespace App\Models\Business;
 
 use App\Models\BaseModel;
-use App\Traits\Vendors\TrixFields;
-use App\Facades\TrixField\TrixFieldCast;
+use FormForge\Casts\TrixFieldCast;
 
 /**
  * 
@@ -35,10 +34,11 @@ use App\Facades\TrixField\TrixFieldCast;
  */
 class TypeOfContract extends BaseModel
 {
-    use TrixFields;
-
     public static $contracts = [
-        'uop', 'uz', 'b2b', 'uod'
+        'uop',
+        'uz',
+        'b2b',
+        'uod'
     ];
 
     protected $fillable = [

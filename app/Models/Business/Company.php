@@ -3,8 +3,7 @@
 namespace App\Models\Business;
 
 use App\Models\BaseModel;
-use App\Traits\Vendors\TrixFields;
-use App\Facades\TrixField\TrixFieldCast;
+use FormForge\Casts\TrixFieldCast;
 use App\Models\Core\User;
 use App\Models\Business\Location;
 
@@ -46,8 +45,6 @@ use App\Models\Business\Location;
  */
 class Company extends BaseModel
 {
-    use TrixFields;
-
     protected $fillable = [
         'name',
         'shortname',
@@ -74,7 +71,6 @@ class Company extends BaseModel
 
     public function locations()
     {
-        return $this->belongsToMany(Location::class,'companies_locations');
+        return $this->belongsToMany(Location::class, 'companies_locations');
     }
-
 }

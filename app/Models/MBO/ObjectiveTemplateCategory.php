@@ -3,12 +3,7 @@
 namespace App\Models\MBO;
 
 use App\Models\BaseModel;
-use Illuminate\Database\Eloquent\Model;
-use App\Traits\UUID;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\Vendors\TrixFields;
-use App\Facades\Forms\RequestForms;
-use App\Facades\TrixField\TrixFieldCast;
+use FormForge\Casts\TrixFieldCast;
 use App\Casts\CheckboxCast;
 use App\Models\MBO\ObjectiveTemplate;
 use App\Models\Core\User;
@@ -49,8 +44,6 @@ use App\Models\Core\User;
  */
 class ObjectiveTemplateCategory extends BaseModel
 {
-    use TrixFields;
-
     protected $table = 'objective_template_categories';
 
     protected $fillable = [
@@ -101,7 +94,7 @@ class ObjectiveTemplateCategory extends BaseModel
 
     public function refreshCoordinators(?array $user_ids)
     {
-        if(!$user_ids){
+        if (!$user_ids) {
             $user_ids = array();
         }
 
@@ -113,15 +106,15 @@ class ObjectiveTemplateCategory extends BaseModel
             return !in_array($value, $current);
         });
 
-        foreach($toDelete as $user_id){
+        foreach ($toDelete as $user_id) {
             $user = User::find($user_id);
-            if($user->exists()){
+            if ($user->exists()) {
                 $user->revokeRole('objective_coordinator', $this);
             }
         }
-        foreach($toAdd as $user_id){
+        foreach ($toAdd as $user_id) {
             $user = User::find($user_id);
-            if($user->exists()){
+            if ($user->exists()) {
                 $user->assignRole('objective_coordinator', $this);
             }
         }

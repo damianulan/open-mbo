@@ -19,7 +19,7 @@ class GeneralController extends SettingsController
         $model = app(GeneralSettings::class);
         return view('pages.settings.index', [
             'model' => $model,
-            'form' => GeneralForm::boot($model),
+            'form' => GeneralForm::definition($model),
             'nav' => $this->nav(),
         ]);
     }
@@ -31,10 +31,10 @@ class GeneralController extends SettingsController
             'theme' => 'required',
             'locale' => 'required',
         ]);
-        foreach($request->all() as $key => $value){
+        foreach ($request->all() as $key => $value) {
             $settings->$key = $value;
         }
-        if($settings->save()){
+        if ($settings->save()) {
             return redirect()->back()->with('success', __('alerts.settings.success.general'));
         }
         return redirect()->back()->with('error', __('alerts.settings.error.general'));;

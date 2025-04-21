@@ -8,14 +8,13 @@ use FormForge\FormBuilder;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
 use App\Models\MBO\ObjectiveTemplateCategory;
-use App\Enums\MBO\ObjectiveType;
 use App\Models\Core\User;
 use Request;
 
 class ObjectiveCategoryEditForm extends Form implements FormIO
 {
 
-    public static function boot($model = null): FormBuilder
+    public static function definition($model = null): FormBuilder
     {
         $route = route('management.mbo.categories.store');
         $method = 'POST';

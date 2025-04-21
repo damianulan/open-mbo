@@ -3,8 +3,7 @@
 namespace App\Models\MBO;
 
 use App\Models\BaseModel;
-use App\Traits\Vendors\TrixFields;
-use App\Facades\TrixField\TrixFieldCast;
+use FormForge\Casts\TrixFieldCast;
 use App\Casts\CheckboxCast;
 use App\Models\MBO\ObjectiveTemplate;
 use App\Models\MBO\Campaign;
@@ -62,8 +61,6 @@ use App\Models\MBO\UserObjective;
  */
 class Objective extends BaseModel
 {
-    use TrixFields;
-
     protected $fillable = [
         'template_id',
         'parent_id',
@@ -87,10 +84,10 @@ class Objective extends BaseModel
     {
         parent::boot();
         static::created(function ($model) {
-            if($model->campaign_id){
+            if ($model->campaign_id) {
                 $ucs = $model->campaign->user_campaigns;
-                if($ucs) {
-                    foreach($ucs as $uc){
+                if ($ucs) {
+                    foreach ($ucs as $uc) {
                         UserObjective::assign($uc->user_id, $model->id);
                     }
                 }
@@ -100,9 +97,9 @@ class Objective extends BaseModel
 
     public function isOverdued(): bool
     {
-        if($this->deadline){
+        if ($this->deadline) {
             $deadline = \Carbon\Carbon::parse($this->deadline);
-            if($deadline->isPast()){
+            if ($deadline->isPast()) {
                 return true;
             }
         }

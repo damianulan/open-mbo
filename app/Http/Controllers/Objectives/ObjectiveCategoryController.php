@@ -28,7 +28,7 @@ class ObjectiveCategoryController extends ManagementController
     public function create()
     {
         return view('pages.mbo.categories.edit', [
-            'form' => ObjectiveCategoryEditForm::boot()
+            'form' => ObjectiveCategoryEditForm::definition()
         ]);
     }
 
@@ -41,7 +41,7 @@ class ObjectiveCategoryController extends ManagementController
         $objective = ObjectiveTemplateCategory::fillFromRequest($request);
         $user_ids = $request->input('user_ids');
 
-        if($objective->save()){
+        if ($objective->save()) {
             $objective->refreshCoordinators($user_ids);
             return redirect()->route('management.mbo.categories.index')->with('success', __('alerts.objective_categories.success.create'));
         }
@@ -64,7 +64,7 @@ class ObjectiveCategoryController extends ManagementController
         $model = ObjectiveTemplateCategory::findOrFail($id);
         return view('pages.mbo.categories.edit', [
             'objective' => $model,
-            'form' => ObjectiveCategoryEditForm::boot($model),
+            'form' => ObjectiveCategoryEditForm::definition($model),
         ]);
     }
 
@@ -76,7 +76,7 @@ class ObjectiveCategoryController extends ManagementController
         $request->validate($form::validation($id));
         $objective = ObjectiveTemplateCategory::fillFromRequest($request, $id);
         $user_ids = $request->input('user_ids');
-        if($objective->update()){
+        if ($objective->update()) {
             $objective->refreshCoordinators($user_ids);
             return redirect()->route('management.mbo.categories.index')->with('success', __('alerts.objective_categories.success.edit'));
         }
@@ -89,7 +89,7 @@ class ObjectiveCategoryController extends ManagementController
     public function delete(string $id)
     {
         $objective = ObjectiveTemplateCategory::findOrFail($id);
-        if($objective->delete()){
+        if ($objective->delete()) {
             return redirect()->route('management.mbo.objectives.index')->with('success', __('alerts.objective_categories.success.delete'));
         }
         return redirect()->back()->with('error', __('alerts.error.operation'));

@@ -25,60 +25,57 @@ class GeneralController extends Controller
         switch ($type) {
             case 'campaigns.add_objectives':
 
-                    if($id){
-                        $objective = Objective::find($id);
-                        if($objective){
-                            $params = [
-                                'id' => $id,
-                                'form' => CampaignEditObjectiveForm::boot($objective, $request),
-                            ];
-                            $status = 'ok';
-                        }
-
-                    } else {
+                if ($id) {
+                    $objective = Objective::find($id);
+                    if ($objective) {
                         $params = [
-                            'form' => CampaignEditObjectiveForm::boot(null, $request),
+                            'id' => $id,
+                            'form' => CampaignEditObjectiveForm::definition($objective, $request),
                         ];
                         $status = 'ok';
                     }
+                } else {
+                    $params = [
+                        'form' => CampaignEditObjectiveForm::definition(null, $request),
+                    ];
+                    $status = 'ok';
+                }
 
 
                 break;
 
             case 'campaigns.add_users':
-                    //$id - objective_id
-                    if($id){
-                        $campaign = Campaign::find($id);
-                        $params = [
-                            'id' => $id,
-                            'form' => CampaignEditUserForm::boot($campaign, $request),
-                        ];
-                        $status = 'ok';
-
-                    }
+                //$id - objective_id
+                if ($id) {
+                    $campaign = Campaign::find($id);
+                    $params = [
+                        'id' => $id,
+                        'form' => CampaignEditUserForm::definition($campaign, $request),
+                    ];
+                    $status = 'ok';
+                }
 
                 break;
 
             case 'objectives.add_child':
 
-                    $parent_id = $request->input('parent_id') ?? null;
+                $parent_id = $request->input('parent_id') ?? null;
 
-                    if($id){
-                        $objective = Objective::find($id);
-                        if($objective){
-                            $params = [
-                                'id' => $id,
-                                'form' => ObjectiveChildEditForm::boot($objective, $request),
-                            ];
-                            $status = 'ok';
-                        }
-
-                    } else {
+                if ($id) {
+                    $objective = Objective::find($id);
+                    if ($objective) {
                         $params = [
-                            'form' => ObjectiveChildEditForm::boot(null, $request),
+                            'id' => $id,
+                            'form' => ObjectiveChildEditForm::definition($objective, $request),
                         ];
                         $status = 'ok';
                     }
+                } else {
+                    $params = [
+                        'form' => ObjectiveChildEditForm::definition(null, $request),
+                    ];
+                    $status = 'ok';
+                }
 
 
                 break;
@@ -88,8 +85,8 @@ class GeneralController extends Controller
                 break;
         }
 
-        if($status === 'ok'){
-            $view = view('components.modals.'.$type, $params)->render();
+        if ($status === 'ok') {
+            $view = view('components.modals.' . $type, $params)->render();
         }
 
         return response()->json([

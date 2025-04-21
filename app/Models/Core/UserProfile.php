@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Enums\Users\Gender;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Core\User;
-use App\Facades\Forms\RequestForms;
+use FormForge\Traits\RequestForms;
 use App\Casts\Enigma;
 
 /**

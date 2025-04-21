@@ -3,8 +3,7 @@
 namespace App\Models\MBO;
 
 use App\Models\BaseModel;
-use App\Traits\Vendors\TrixFields;
-use App\Facades\TrixField\TrixFieldCast;
+use FormForge\Casts\TrixFieldCast;
 use App\Models\Core\User;
 
 /**
@@ -40,8 +39,6 @@ use App\Models\Core\User;
  */
 class BonusScheme extends BaseModel
 {
-    use TrixFields;
-
     protected $fillable = [
         'name',
         'description',

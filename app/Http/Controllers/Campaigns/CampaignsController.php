@@ -9,6 +9,7 @@ use App\Enums\MBO\CampaignStage;
 use App\Forms\MBO\Campaign\CampaignEditForm;
 use App\Http\Controllers\Controller;
 use App\Models\Core\User;
+
 class CampaignsController extends Controller
 {
     public function index()
@@ -18,7 +19,7 @@ class CampaignsController extends Controller
         ]);
     }
 
-        /**
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -29,7 +30,7 @@ class CampaignsController extends Controller
             abort(403);
         }
         return view('pages.mbo.campaigns.edit', [
-            'form' => CampaignEditForm::boot(),
+            'form' => CampaignEditForm::definition(),
         ]);
     }
 
@@ -49,7 +50,7 @@ class CampaignsController extends Controller
         $campaign = Campaign::fillFromRequest($request);
         $user_ids = $request->input('user_ids');
 
-        if($campaign->save()){
+        if ($campaign->save()) {
             $campaign->refreshCoordinators($user_ids);
             return redirect()->route('campaigns.show', $campaign->id)->with('success', __('alerts.campaigns.success.create', ['name' => $campaign->name]));
         }
@@ -87,7 +88,7 @@ class CampaignsController extends Controller
         }
         return view('pages.mbo.campaigns.edit', [
             'campaign' => $campaign,
-            'form' => CampaignEditForm::boot($campaign),
+            'form' => CampaignEditForm::definition($campaign),
         ]);
     }
 
@@ -108,11 +109,10 @@ class CampaignsController extends Controller
         }
         $user_ids = $request->input('user_ids');
 
-        if($campaign->update()){
+        if ($campaign->update()) {
             $campaign->refreshCoordinators($user_ids);
             return redirect()->route('campaigns.show', $id)->with('success', __('alerts.campaigns.success.edit', ['name' => $campaign->name]));
         }
         return redirect()->back()->with('error', __('alerts.campaigns.error.edit', ['name' => $campaign->name]));
     }
-
 }

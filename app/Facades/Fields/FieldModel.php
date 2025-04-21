@@ -4,7 +4,7 @@ namespace App\Facades\Fields;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\UUID;
-use App\Facades\Forms\RequestForms;
+use FormForge\Traits\RequestForms;
 
 /**
  * 
@@ -40,5 +40,4 @@ class FieldModel extends Model
     protected $fillable = [
         'slug',
     ];
-
 }
