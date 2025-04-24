@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Core;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Process;
@@ -29,8 +29,8 @@ class AppReload extends Command
         $branch = $this->option('branch');
         $result = Process::run('git status');
         $this->info($result->output());
-        if(!empty($branch)){
-            $result = Process::run('git switch '.$branch);
+        if (!empty($branch)) {
+            $result = Process::run('git switch ' . $branch);
         }
         $result = Process::run('git pull origin');
         $this->info($result->output());

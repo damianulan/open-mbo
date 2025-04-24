@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Core;
 
 use Illuminate\Console\Command;
 use App\Settings\MailSettings;
@@ -27,18 +27,18 @@ class MailTest extends Command
      */
     public function handle()
     {
-        if(config('app.env') !== 'production'){
+        if (config('app.env') !== 'production') {
             $settings = new MailSettings();
-            $settings->mail_username = 'openmbo@damianulan.me';
-            $settings->mail_password = '2D#tE!U/UP!s';
-            $settings->mail_port = 465;
-            $settings->mail_host = 'smtp.hostinger.com';
-            $settings->mail_encryption = 'ssl';
-            $settings->mail_from_address = 'openmbo@damianulan.me';
+            $settings->mail_username = env('MAIL_USERNAME');
+            $settings->mail_password = env('MAIL_PASSWORD');
+            $settings->mail_port = (int)env('MAIL_PORT');
+            $settings->mail_host = env('MAIL_HOST');
+            $settings->mail_encryption = env('MAIL_ENCRYPTION');
+            $settings->mail_from_address = env('MAIL_FROM_ADDRESS');
             $settings->mail_from_name = config('app.name');
-            $settings->mail_catchall_enabled = true;
-            $settings->mail_catchall_receiver = 'damian.ulan@protonmail.com';
-            if($settings->save()){
+            $settings->mail_catchall_enabled = (bool)env('MAIL_CATCHALL_ENABLED', true);
+            $settings->mail_catchall_receiver = env('MAIL_CATCHALL_RECEIVER');
+            if ($settings->save()) {
                 $this->info('Mail settings saved.');
             } else {
                 $this->error('Error occured while saving mail settings.');

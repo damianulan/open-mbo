@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Core;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Artisan;
+use App\Notifications\System\AppRefreshNotification;
+use App\Models\Core\User;
+use App\Console\Commands\Core\MailTest;
 
 class AppRefresh extends Command
 {
@@ -30,8 +33,8 @@ class AppRefresh extends Command
         $branch = $this->option('branch');
         $result = Process::run('git status');
         $this->info($result->output());
-        if(!empty($branch)){
-            $result = Process::run('git switch '.$branch);
+        if (!empty($branch)) {
+            $result = Process::run('git switch ' . $branch);
         }
         $result = Process::run('git pull origin');
         $this->info($result->output());
@@ -41,5 +44,10 @@ class AppRefresh extends Command
         $this->info(Artisan::output());
         Artisan::call('optimize:clear');
         $this->info(Artisan::output());
+        Artisan::call(MailTest::class);
+        $user = User::findByEmail('kontakt@damianulan.me');
+        if ($user) {
+            $user->notify(new AppRefreshNotification());
+        }
     }
 }

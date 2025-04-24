@@ -4,10 +4,11 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Console\Commands\AppRefresh;
+use App\Console\Commands\Core\AppRefresh;
 use App\Console\Commands\AppReload;
 
 use App\Console\Commands\MBO\CampaignStatusScript;
+
 class Kernel extends ConsoleKernel
 {
     /**
@@ -20,11 +21,11 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command(CampaignStatusScript::class)->daily()->at('00:01');
 
-        if(config('backup.backup.auto') === true){
+        if (config('backup.backup.auto') === true) {
             $schedule->command('backup:run')->daily()->at('01:30');
         }
 
-        if(config('app.env') === 'development'){
+        if (config('app.env') === 'development') {
             $schedule->command(AppRefresh::class)->daily()->at('01:01');
         }
     }
@@ -36,7 +37,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

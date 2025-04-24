@@ -22,9 +22,10 @@ use Illuminate\Support\Str;
 use App\Traits\Vendors\ModelActivity;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use App\Traits\VirginModel;
+use Illuminate\Support\Facades\Auth;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $email
@@ -128,6 +129,11 @@ class User extends Authenticatable implements HasLocalePreference
         });
     }
 
+    public static function findByEmail(string $email): ?User
+    {
+        return self::where('email', $email)->first();
+    }
+
     public function generatePassword()
     {
         $this->password = Hash::make(Str::random(10));
@@ -142,7 +148,7 @@ class User extends Authenticatable implements HasLocalePreference
     public function nameView(): string
     {
         $link = '<span>' . $this->name() . '</span>';
-        if (auth()->user()->can('view', $this)) {
+        if (Auth::user()->can('view', $this)) {
             $link = '<a href="' . route('users.show', $this->id) . '" class="text-primary">' . $this->name() . '</a>';
         }
         return $link;
@@ -151,7 +157,7 @@ class User extends Authenticatable implements HasLocalePreference
     public function nameDetails()
     {
         $view = view('components.datatables.username', ['data' => $this]);
-        if (auth()->user()->can('view', $this)) {
+        if (Auth::user()->can('view', $this)) {
             $view = view('components.datatables.username_link', ['data' => $this]);
         }
         return $view;
