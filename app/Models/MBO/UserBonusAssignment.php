@@ -8,6 +8,7 @@ use App\Models\MBO\BonusScheme;
 use App\Models\MBO\Campaign;
 
 /**
+ * 
  *
  * @property string $id
  * @property string $user_id

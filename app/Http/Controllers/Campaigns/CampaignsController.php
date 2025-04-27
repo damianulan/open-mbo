@@ -88,7 +88,7 @@ class CampaignsController extends Controller
         }
         return view('pages.mbo.campaigns.edit', [
             'campaign' => $campaign,
-            'form' => CampaignEditForm::definition($request, $campaign->id),
+            'form' => CampaignEditForm::definition($request, $campaign),
         ]);
     }
 
