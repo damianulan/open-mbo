@@ -30,6 +30,7 @@ use FormForge\Casts\TrixFieldCast;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract withoutTrashed()
+ * @property string $shortname
  * @mixin \Eloquent
  */
 class TypeOfContract extends BaseModel

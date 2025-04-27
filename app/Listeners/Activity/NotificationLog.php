@@ -26,13 +26,13 @@ class NotificationLog
         $notification = $event->notification;
         // TODO - check and store wether it was database or mail notification.
 
-        if($user && $notification){
-            activity('notification')
-            ->causedBy($user)
-            ->performedOn($event->response)
-            ->withProperties(['notification_id' => $notification->id])
-            ->event('notification_sent')
-            ->log(__('logging.description.notification_sent', ['username' => $user->name(), 'type' => $event->response->type]));
-        }
+        // if($user && $notification){
+        //     activity('notification')
+        //     ->causedBy($user)
+        //     ->performedOn($event->response)
+        //     ->withProperties(['notification_id' => $notification->id])
+        //     ->event('notification_sent')
+        //     ->log(__('logging.description.notification_sent', ['username' => $user->name(), 'type' => $event->response->type]));
+        // }
     }
 }

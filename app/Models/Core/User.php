@@ -25,7 +25,7 @@ use App\Traits\VirginModel;
 use Illuminate\Support\Facades\Auth;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string $email

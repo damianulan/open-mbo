@@ -9,7 +9,7 @@ use App\Models\MBO\ObjectiveTemplate;
 use App\Models\Core\User;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string $name

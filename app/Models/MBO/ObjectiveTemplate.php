@@ -10,7 +10,7 @@ use App\Models\MBO\Objective;
 use App\Models\MBO\ObjectiveTemplateCategory;
 
 /**
- *
+ * 
  *
  * @property string $id
  * @property string|null $category_id

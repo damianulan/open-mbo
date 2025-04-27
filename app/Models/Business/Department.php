@@ -43,6 +43,7 @@ use App\Models\Core\Role;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department withoutTrashed()
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $managers
  * @property-read int|null $managers_count
+ * @property string $shortname
  * @mixin \Eloquent
  */
 class Department extends BaseModel

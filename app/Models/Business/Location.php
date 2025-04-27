@@ -45,6 +45,7 @@ use App\Models\Business\Company;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location withoutTrashed()
  * @method static \Database\Factories\Business\LocationFactory factory($count = null, $state = [])
+ * @property string|null $country
  * @mixin \Eloquent
  */
 class Location extends BaseModel
