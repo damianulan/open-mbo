@@ -27,7 +27,7 @@
     height: 100%;
     overflow-x: auto;
     overflow-y: hidden;
-    margin: .5rem 0;
+    margin: 0.5rem 0;
 }
 
 .settings-table {
@@ -40,7 +40,7 @@
 .settings-table th {
     width: 12rem;
     font-weight: 700;
-    font-size: .9rem;
+    font-size: 0.9rem;
 }
 
 .settings-table td {
@@ -59,8 +59,8 @@
 .dataTables_wrapper .dataTables_paginate .paginate_button {
     border: 1px solid transparent;
     background: transparent;
-    padding: .5rem;
-    margin: 0 .1rem;
+    padding: 0.5rem;
+    margin: 0 0.1rem;
     border-radius: 0.25rem;
 }
 
@@ -73,8 +73,7 @@
 .dataTables_wrapper .dataTables_paginate .paginate_button.current,
 .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover,
 .pagination .page-item.active > .page-link,
-.pagination .page-item.active > .page-link:hover
-{
+.pagination .page-item.active > .page-link:hover {
     color: #fff !important;
     background: $primary;
     border: 1px solid $primary;
@@ -91,21 +90,21 @@
 
 table.ombo-table {
     border-collapse: separate !important;
-    border-spacing: 0 .5rem;
+    border-spacing: 0 0.5rem;
 }
 
 table.ombo-table td,
 table.ombo-table th {
-    padding: .75rem;
+    padding: 0.75rem;
     vertical-align: middle;
 }
 
-table.ombo-table tbody tr{
-    background-color: rgba($primary,0.05);
+table.ombo-table tbody tr {
+    background-color: rgba($primary, 0.05);
 }
 
 table.ombo-table tbody tr:hover {
-    background-color: rgba($primary,0.1);
+    background-color: rgba($primary, 0.1);
     transition: all 0.2s ease-in-out;
 }
 
@@ -122,7 +121,7 @@ table.ombo-table tbody tr:hover {
 .user > .user-details img {
     border-radius: 50%;
     width: 1.55rem;
-    margin-right: .5rem;
+    margin-right: 0.5rem;
 }
 
 .ombo-table .user-details a,
@@ -130,40 +129,72 @@ table.ombo-table tbody tr:hover {
     text-decoration: none;
 }
 
-.ombo-table td.firstcol{
-    border-top-left-radius: .35rem;
-    border-bottom-left-radius: .35rem;
+.ombo-table td.firstcol {
+    border-top-left-radius: 0.35rem;
+    border-bottom-left-radius: 0.35rem;
 }
-.ombo-table td.lastcol{
-    border-top-right-radius: .35rem;
-    border-bottom-right-radius: .35rem;
+.ombo-table td.lastcol {
+    border-top-right-radius: 0.35rem;
+    border-bottom-right-radius: 0.35rem;
 }
 
-ul.ombo-list {
+.ombo-list {
     list-style: none;
-    padding: .5rem 0;
+    padding: 0.5rem 0;
 }
 
 .ombo-list li {
-    border-radius: .35rem;
+    border-radius: 0.35rem;
     background-color: $ombo-body;
-    padding: .5rem 1rem;
+    padding: 0.5rem 1rem;
     margin: 0.35rem 0;
+}
+
+.ombo-list li.passed {
+    background-color: $ombo-body-passed;
+}
+
+.ombo-list li.passed:hover {
+    background-color: $ombo-body-passed-hover;
+    transition: all 0.2s ease-in-out;
+}
+
+.ombo-list li.failed {
+    background-color: $ombo-body-failed;
+}
+
+.ombo-list li.failed:hover {
+    background-color: $ombo-body-failed-hover;
+    transition: all 0.2s ease-in-out;
+}
+
+.ombo-list li.completed {
+    background-color: $ombo-body-completed;
+}
+
+.ombo-list li.completed:hover {
+    background-color: $ombo-body-completed-hover;
+    transition: all 0.2s ease-in-out;
 }
 
 .ombo-list li.inactive {
     background-color: $ombo-body-inactive;
 }
 
-.ombo-list li .list-grid{
+.ombo-list li.inactive:hover {
+    background-color: $ombo-body-inactive-hover;
+    transition: all 0.2s ease-in-out;
+}
+
+.ombo-list li .list-grid {
     display: flex;
     align-items: center;
 }
 
-.ombo-list li .list-content{
+.ombo-list li .list-content {
     display: flex;
     align-items: center;
-    font-size: .8rem;
+    font-size: 0.8rem;
     width: 100%;
     flex: 1 1 auto;
     overflow: hidden;
@@ -171,13 +202,13 @@ ul.ombo-list {
     word-wrap: break-word;
 }
 
-.ombo-list li .list-content span{
+.ombo-list li .list-content span {
     color: $secondary;
     white-space: nowrap;
     position: relative;
 }
 
-.ombo-list li .list-actions{
+.ombo-list li .list-actions {
     display: flex;
     align-items: center;
     margin-left: auto;
@@ -187,20 +218,20 @@ ul.ombo-list {
     background-color: transparent;
 }
 
-.ombo-list li .list-actions .list-action{
+.ombo-list li .list-actions .list-action {
     text-decoration: none;
-    margin-right: .35rem;
+    margin-right: 0.35rem;
     font-size: 1rem;
     color: $secondary;
     white-space: nowrap;
 }
 
 .ombo-list li .list-actions .list-action i {
-    margin-right: .2rem;
+    margin-right: 0.2rem;
 }
 
-.ombo-list li .list-actions .list-action span{
-    font-size: .85rem;
+.ombo-list li .list-actions .list-action span {
+    font-size: 0.85rem;
     font-weight: 600;
 }
 
@@ -219,12 +250,10 @@ ul.ombo-list {
 }
 
 .dataTables_paginate a {
-    padding: 0 .5rem;
+    padding: 0 0.5rem;
 }
 
 .draggable-table {
-
-
     .draggable-table__drag {
         position: absolute;
         width: 100%;
@@ -233,44 +262,42 @@ ul.ombo-list {
         z-index: 10;
         cursor: grabbing;
         -webkit-box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.05);
-                box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.05);
+        box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.05);
 
         opacity: 1;
     }
 
-  thead {
-
-    th {
-      user-select: none;
-    }
-  }
-
-  tbody {
-
-    tr {
-      cursor: grabbing;
-
-      td {
-        padding: 10px;
-        user-select: none;
-        border-top: 1px solid whitesmoke;
-      }
-    }
-
-    tr:nth-child(even) {
-        background-color: #f7f7f7;
-    }
-
-    tr:nth-child(odd) {
-        background-color: #ffffff;
-    }
-
-    tr.is-dragging {
-        background: rgba($primary,0.15);
-
-        td {
-            color: rgba($primary,0.05);
+    thead {
+        th {
+            user-select: none;
         }
     }
-  }
+
+    tbody {
+        tr {
+            cursor: grabbing;
+
+            td {
+                padding: 10px;
+                user-select: none;
+                border-top: 1px solid whitesmoke;
+            }
+        }
+
+        tr:nth-child(even) {
+            background-color: #f7f7f7;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        tr.is-dragging {
+            background: rgba($primary, 0.15);
+
+            td {
+                color: rgba($primary, 0.05);
+            }
+        }
+    }
 }

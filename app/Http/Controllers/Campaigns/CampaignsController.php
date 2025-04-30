@@ -4,11 +4,8 @@ namespace App\Http\Controllers\Campaigns;
 
 use Illuminate\Http\Request;
 use App\Models\MBO\Campaign;
-use App\Models\MBO\Objective;
-use App\Enums\MBO\CampaignStage;
 use App\Forms\MBO\Campaign\CampaignEditForm;
 use App\Http\Controllers\Controller;
-use App\Models\Core\User;
 
 class CampaignsController extends Controller
 {

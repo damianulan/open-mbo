@@ -1,9 +1,9 @@
 // Typography
-$font-family-base: 'IBM Plex Sans', 'Helvetica', sans-serif;
-$font-family-sans-serif: 'IBM Plex Sans', sans-serif;
-$font-family-serif: 'IBM Plex Serif', serif;
-$font-family-monospace: 'JetBrains Mono', monospace;
-$font-family-icons: 'bootstrap-icons';
+$font-family-base: "IBM Plex Sans", "Helvetica", sans-serif;
+$font-family-sans-serif: "IBM Plex Sans", sans-serif;
+$font-family-serif: "IBM Plex Serif", serif;
+$font-family-monospace: "JetBrains Mono", monospace;
+$font-family-icons: "bootstrap-icons";
 $font-size-base: 0.8rem;
 $line-height-base: 1.6;
 
@@ -16,16 +16,16 @@ $imagesPath: "/themes/light/images";
 
 // Collection
 $aquamarine: #7fffd4;
-$coolgreen: #D7FAF4;
-$columbia: #C5D5EA;
-$cyan: #00F2F2;
-$indigo: #1B4965;
-$cadet: #1C1F33;
-$violet: #564D80;
-$lazuli: #22577A;
+$coolgreen: #d7faf4;
+$columbia: #c5d5ea;
+$cyan: #00f2f2;
+$indigo: #1b4965;
+$cadet: #1c1f33;
+$violet: #564d80;
+$lazuli: #22577a;
 $dimm-blue: #7392b7;
-$celadon: #1BDCB8;
-$greenish: #A3AEA7;
+$celadon: #1bdcb8;
+$greenish: #a3aea7;
 
 // Action colors
 $light: #fafafa;
@@ -33,18 +33,18 @@ $dark: #111611;
 $disabled-text: #6c757d;
 
 $theme-colors: (
-    'primary': $primary,
-    'secondary': $secondary,
-    'success': $success,
-    'danger': $danger,
-    'warning': $warning,
-    'info': $info,
-    'dark': $dark,
+    "primary": $primary,
+    "secondary": $secondary,
+    "success": $success,
+    "danger": $danger,
+    "warning": $warning,
+    "info": $info,
+    "dark": $dark,
 
-    'cadet': $cadet,
-    'coolgreen': $coolgreen,
-    'dimm-blue': $dimm-blue,
-    'lightgrey': $columbia,
+    "cadet": $cadet,
+    "coolgreen": $coolgreen,
+    "dimm-blue": $dimm-blue,
+    "lightgrey": $columbia,
 );
 
 // Component colors
@@ -60,6 +60,8 @@ $page-header-color: $primary;
 $paragraph-color: lighten($dark, 10%);
 $btn-color: lighten($coolgreen, 15%);
 
+$invertive-color: #fff;
+
 /**
 /* Colors END
 **/
@@ -67,9 +69,9 @@ $btn-color: lighten($coolgreen, 15%);
 // variables
 $menu-expanded-width: 18rem;
 $menu-collapsed-width: 5rem;
-$tooltip-inner-padding-y: .3rem;
-$tooltip-inner-padding-x: .2rem;
-$tooltip-inner-font-size: .8rem;
+$tooltip-inner-padding-y: 0.3rem;
+$tooltip-inner-padding-x: 0.2rem;
+$tooltip-inner-font-size: 0.8rem;
 
 $dropdown-divider-bg: $greenish;
 $dropdown-link-hover-bg: rgba($primary, 0.1);
@@ -78,23 +80,22 @@ $dropdown-link-color-hover: $secondary;
 $dropdown-item-padding-x: 0.75rem;
 $dropdown-item-padding-y: 0.25rem;
 
-$breadcrumb-font-size: .7rem;
+$breadcrumb-font-size: 0.7rem;
 $dropdown-padding-y: 0;
 
-$badge-padding-x: .65em;
-$badge-padding-y: .5em;
-$badge-font-size: .8em;
+$badge-padding-x: 0.65em;
+$badge-padding-y: 0.5em;
+$badge-font-size: 0.8em;
 $badge-font-weight: 600;
 
 // Cards
 $card-bg: transparent;
 
-
 // Typography
 $link-color: $primary;
 $link-hover-color: $primary;
 $link-color-active: $primary;
-$nav-link-font-size: .85rem;
+$nav-link-font-size: 0.85rem;
 $nav-link-font-weight: 400;
 
 // Navigation
@@ -102,19 +103,25 @@ $nav-tab-bg: #fff;
 $nav-tab-color-hover: #000;
 
 // Forms
-$form-font-size: .85rem;
+$form-font-size: 0.85rem;
 $input-background: #fff;
 $input-border-color: lighten($primary, 10%);
 $input-border-focus-color: lighten($primary, 30%);
 $input-border-radius: 0.375rem;
 $input-box-shadow-focus: 0 3px 10px -1px rgb(0 0 0 / 10%);
-$input-padding: .5rem .7rem;
+$input-padding: 0.5rem 0.7rem;
 $input-color: $secondary;
 $input-line-height: 1.25;
 
 // Tables
 $table-bg: transparent;
-$ombo-body: rgba($primary, 0.06);//lighten($primary, 60%);
-$ombo-body-inactive: rgba($primary, 0.085);
+$ombo-body: rgba($primary, 0.06); //lighten($primary, 60%);
+$ombo-body-passed: rgba($success, 0.1);
+$ombo-body-passed-hover: rgba($success, 0.15);
+$ombo-body-failed: rgba($danger, 0.1);
+$ombo-body-failed-hover: rgba($danger, 0.15);
+$ombo-body-completed: rgba($primary, 0.2);
+$ombo-body-completed-hover: rgba($primary, 0.25);
+$ombo-body-inactive: rgba($disabled-text, 0.2);
 $ombo-body-hover: rgba($primary, 0.085);
-$ombo-body-inactive-hover: rgba($primary, 0.1);
+$ombo-body-inactive-hover: rgba($primary, 0.25);

@@ -19,10 +19,10 @@ return new class extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->enum('gender', [
-                Gender::MALE->value,
-                Gender::FEMALE->value,
-                Gender::OTHER->value,
-            ])->default(Gender::OTHER->value);
+                Gender::MALE,
+                Gender::FEMALE,
+                Gender::OTHER,
+            ])->default(Gender::OTHER);
             $table->date('birthday')->nullable();
             $table->string('phone')->nullable();
             $table->string('avatar')->nullable();

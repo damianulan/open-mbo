@@ -1,33 +1,34 @@
-html, body {
+html,
+body {
     direction: ltr;
     height: 100%;
 }
 
 html::-webkit-scrollbar {
     width: 10px;
-  }
+}
 
-  html::-webkit-scrollbar-track {
+html::-webkit-scrollbar-track {
     background: rgb(179, 177, 177);
     border-radius: 10px;
-  }
+}
 
-  html::-webkit-scrollbar-thumb {
+html::-webkit-scrollbar-thumb {
     background: rgb(136, 136, 136);
     border-radius: 10px;
-  }
+}
 
-  html::-webkit-scrollbar-thumb:hover {
+html::-webkit-scrollbar-thumb:hover {
     background: rgb(100, 100, 100);
     border-radius: 10px;
-  }
+}
 
-  html::-webkit-scrollbar-thumb:active {
+html::-webkit-scrollbar-thumb:active {
     background: $primary;
     border-radius: 10px;
 }
 
-#app{
+#app {
     height: 100%;
     word-wrap: break-word;
 }
@@ -42,7 +43,7 @@ body {
     transition: 300ms ease all;
     backface-visibility: hidden;
     min-height: calc(100% - 4rem);
-    transition: all .4s ease 0s;
+    transition: all 0.4s ease 0s;
     padding-bottom: 1.5rem;
 }
 
@@ -53,8 +54,8 @@ body {
 .content-card {
     background-color: $body-bg;
     padding: 2.25rem 2rem;
-    margin: .75rem 0 2rem 0;
-    border-radius: .35rem;
+    margin: 0.75rem 0 2rem 0;
+    border-radius: 0.35rem;
     min-height: 100%;
 }
 
@@ -64,6 +65,7 @@ body {
 }
 
 .content-card .content-card-top .content-card-title {
+    display: flex;
     border: none;
     font-size: 1.1rem;
     font-family: $font-family-serif;
@@ -85,19 +87,18 @@ body {
     margin-left: 0.5rem;
 }
 
-
-@media (min-width: 992px){
+@media (min-width: 992px) {
     .content {
         margin-left: $menu-expanded-width;
     }
 }
-@media (max-width: 992px){
+@media (max-width: 992px) {
     .content {
         margin-left: 0 !important;
     }
 
     .page-wrapper {
-        padding: 0 .75rem;
+        padding: 0 0.75rem;
     }
 
     .content-card {
@@ -108,7 +109,6 @@ body {
 .content.menu-collapsed {
     margin-left: $menu-collapsed-width;
 }
-
 
 .blank-content {
     overflow: overlay;
@@ -138,7 +138,8 @@ section.content-wrapper {
     float: right !important;
 }
 
-.mr-auto, .me-auto {
+.mr-auto,
+.me-auto {
     margin-right: auto !important;
 }
 
@@ -196,11 +197,11 @@ section.content-wrapper {
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
     align-self: center;
-    opacity: .75;
-  }
-  .mbo-loader::after,
-  .mbo-loader::before {
-    content: '';
+    opacity: 0.75;
+}
+.mbo-loader::after,
+.mbo-loader::before {
+    content: "";
     box-sizing: border-box;
     position: absolute;
     left: 0;
@@ -209,39 +210,40 @@ section.content-wrapper {
     bottom: 0;
     margin: auto;
     border: 4px solid;
-    border-color: transparent transparent rgba($primary,0.5) rgba($primary,0.5);
+    border-color: transparent transparent rgba($primary, 0.5)
+        rgba($primary, 0.5);
     width: 40px;
     height: 40px;
     border-radius: 50%;
     box-sizing: border-box;
     animation: rotationBack 0.5s linear infinite;
     transform-origin: center center;
-  }
-  .mbo-loader::before {
+}
+.mbo-loader::before {
     width: 32px;
     height: 32px;
     border-color: rgba($primary, 1) rgba($primary, 1) transparent transparent;
     animation: rotation 1.5s linear infinite;
-  }
+}
 
-  @keyframes rotation {
+@keyframes rotation {
     0% {
-      transform: rotate(0deg);
+        transform: rotate(0deg);
     }
     100% {
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
-  @keyframes rotationBack {
+}
+@keyframes rotationBack {
     0% {
-      transform: rotate(0deg);
+        transform: rotate(0deg);
     }
     100% {
-      transform: rotate(-360deg);
+        transform: rotate(-360deg);
     }
-  }
+}
 
-  .loader-overlay {
+.loader-overlay {
     box-sizing: border-box;
     position: fixed;
     width: 100%;
@@ -251,28 +253,34 @@ section.content-wrapper {
     flex-flow: column;
     align-items: center;
     justify-content: space-around;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     background: rgba($primary, 0.25);
     opacity: 1;
-  }
-  .loader-overlay .mbo-loader {
+}
+.loader-overlay .mbo-loader {
     height: 65px;
     width: 65px;
-  }
+}
 
-  .breadcrumb .breadcrumb-item {
+.breadcrumb .breadcrumb-item {
     color: $primary;
-  }
+}
 
-  ul.list-style-none {
+ul.list-style-none {
     list-style: none !important;
     margin: 0;
     padding-left: 1rem;
-  }
+}
 
-  i.info-box {
+i.info-box {
     font-size: 0.9rem;
     cursor: pointer;
     color: $secondary;
-  }
+}
+
+.tippy-info {
+    display: block;
+    cursor: pointer;
+    color: $secondary;
+}

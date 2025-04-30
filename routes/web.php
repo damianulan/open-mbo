@@ -17,13 +17,13 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::middleware(['auth', 'maintenance'])->group(function (){
+Route::middleware(['auth', 'maintenance'])->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
     /**
      * Users START
      */
-    Route::prefix('users')->name('users.')->group(function (){
+    Route::prefix('users')->name('users.')->group(function () {
         Route::get('/', [App\Http\Controllers\UsersController::class, 'index'])->name('index');
         Route::post('/', [App\Http\Controllers\UsersController::class, 'store'])->name('store');
         Route::get('create', [App\Http\Controllers\UsersController::class, 'create'])->name('create');
@@ -48,32 +48,31 @@ Route::middleware(['auth', 'maintenance'])->group(function (){
     /**
      * Settings START
      */
-    Route::prefix('settings')->name('settings.')->group(function (){
-        Route::prefix('general')->name('general.')->middleware('route.gate:settings-general')->group(function (){
+    Route::prefix('settings')->name('settings.')->group(function () {
+        Route::prefix('general')->name('general.')->middleware('route.gate:settings-general')->group(function () {
             Route::get('/', [App\Http\Controllers\Settings\GeneralController::class, 'index'])->name('index');
             Route::post('general/store', [App\Http\Controllers\Settings\GeneralController::class, 'storeGeneral'])->name('store');
         });
 
-        Route::prefix('server')->name('server.')->middleware('route.gate:settings-server')->group(function (){
+        Route::prefix('server')->name('server.')->middleware('route.gate:settings-server')->group(function () {
             Route::get('/', [App\Http\Controllers\Settings\ServerController::class, 'index'])->name('index');
             Route::post('store/mail', [App\Http\Controllers\Settings\ServerController::class, 'storeMail'])->name('mail.store');
             Route::get('clearcache', [App\Http\Controllers\Settings\ServerController::class, 'cache'])->name('clearcache');
             Route::post('debugging', [App\Http\Controllers\Settings\ServerController::class, 'debugging'])->name('debugging');
-            Route::get('phpinfo', function (){
+            Route::get('phpinfo', function () {
                 echo phpinfo();
             })->name('phpinfo');
         });
-        Route::prefix('logs')->name('logs.')->middleware('route.gate:settings-logs')->group(function (){
+        Route::prefix('logs')->name('logs.')->middleware('route.gate:settings-logs')->group(function () {
             Route::get('/', [App\Http\Controllers\Settings\LogController::class, 'index'])->name('index');
         });
-
     });
 
 
     /**
      * Management START
      */
-    Route::prefix('management')->name('management.')->group(function (){
+    Route::prefix('management')->name('management.')->group(function () {
 
         Route::prefix('mbo')->name('mbo.')->group(function () {
             Route::prefix('objectives')->name('objectives.')->group(function () {
@@ -106,11 +105,10 @@ Route::middleware(['auth', 'maintenance'])->group(function (){
                 Route::put('{company}', [App\Http\Controllers\Management\Organization\CompanyController::class, 'update'])->name('update');
             });
         });
-
     });
 
 
-    Route::prefix('campaigns')->name('campaigns.')->group(function (){
+    Route::prefix('campaigns')->name('campaigns.')->group(function () {
         Route::get('/', [App\Http\Controllers\Campaigns\CampaignsController::class, 'index'])->name('index');
         Route::post('/', [App\Http\Controllers\Campaigns\CampaignsController::class, 'store'])->name('store');
         Route::get('create', [App\Http\Controllers\Campaigns\CampaignsController::class, 'create'])->name('create');
@@ -118,30 +116,27 @@ Route::middleware(['auth', 'maintenance'])->group(function (){
         Route::get('{campaign}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'show'])->name('show');
         Route::put('{campaign}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'update'])->name('update');
 
-        Route::prefix('objective')->name('objective.')->group(function (){
+        Route::prefix('objective')->name('objective.')->group(function () {
             Route::post('/', [App\Http\Controllers\Campaigns\CampaignObjectiveController::class, 'store'])->name('store');
             Route::put('/{objective}', [App\Http\Controllers\Campaigns\CampaignObjectiveController::class, 'update'])->name('update');
             Route::delete('/delete/{id}', [App\Http\Controllers\Campaigns\CampaignObjectiveController::class, 'delete'])->name('delete');
-
         });
-        Route::prefix('users')->name('users.')->group(function (){
+        Route::prefix('users')->name('users.')->group(function () {
             Route::post('/{campaign}', [App\Http\Controllers\Campaigns\CampaignUserController::class, 'update'])->name('update');
             Route::get('/toggle-manual/{id}', [App\Http\Controllers\Campaigns\CampaignUserController::class, 'toggleManual'])->name('toggle_manual');
             Route::get('/next-stage/{id}', [App\Http\Controllers\Campaigns\CampaignUserController::class, 'moveStageUp'])->name('next_stage');
             Route::get('/prev-stage/{id}', [App\Http\Controllers\Campaigns\CampaignUserController::class, 'moveStageDown'])->name('prev_stage');
             Route::delete('/delete/{id}', [App\Http\Controllers\Campaigns\CampaignUserController::class, 'delete'])->name('delete');
-
         });
     });
 
-    Route::prefix('objectives')->name('objectives.')->group(function (){
+    Route::prefix('objectives')->name('objectives.')->group(function () {
         Route::get('{user}', [App\Http\Controllers\Objectives\ObjectiveController::class, 'show'])->name('show');
 
-        Route::prefix('child')->name('child.')->group(function (){
+        Route::prefix('child')->name('child.')->group(function () {
             Route::post('/', [App\Http\Controllers\Objectives\ObjectiveChildController::class, 'store'])->name('store');
             Route::put('/{objective}', [App\Http\Controllers\Objectives\ObjectiveChildController::class, 'update'])->name('update');
             Route::delete('/delete/{id}', [App\Http\Controllers\Objectives\ObjectiveChildController::class, 'delete'])->name('delete');
-
         });
     });
 
@@ -160,5 +155,4 @@ Route::middleware(['auth', 'maintenance'])->group(function (){
     Route::fallback(function () {
         return redirect()->route('dashboard')->with('error', 'Nie znaleziono strony');
     })->name('fallback');
-
 });

@@ -22,11 +22,15 @@ class CampaignEditObjectiveForm extends Form
         $method = 'POST';
         $title = 'Dodaj nowy cel do kampanii';
         $campaign_id = $request->input('campaign_id') ?? null;
-        $campaign = Campaign::findOrFail($campaign_id);
         if (!is_null($model)) {
             $method = 'PUT';
             $title = 'Edytuj cel w ramach kampanii';
+            if (!$campaign_id) {
+                $campaign_id = $model->campaign_id;
+            }
         }
+        $campaign = Campaign::findOrFail($campaign_id);
+
         $template_ids = Objective::where('campaign_id', $campaign_id)->get()->pluck('template_id');
         $exclude = array();
         if (!empty($template_ids)) {

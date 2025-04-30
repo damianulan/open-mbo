@@ -2,8 +2,10 @@
 
 namespace App\Enums\Forms;
 
-enum StructureField: string
+use FormForge\Enums\Enum;
+
+class StructureField extends Enum
 {
-    case TEXT = 'text';
-    case SELECT = 'select';
+    const TEXT = 'text';
+    const SELECT = 'select';
 }

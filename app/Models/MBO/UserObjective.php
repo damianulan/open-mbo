@@ -48,7 +48,6 @@ class UserObjective extends BaseModel
     ];
 
     protected $casts = [
-        'status' => UserObjectiveStatus::class,
         'evaluation' => 'decimal:8,2',
     ];
 
@@ -56,8 +55,8 @@ class UserObjective extends BaseModel
     {
         parent::boot();
         static::creating(function ($model) {
-            if(!$model->status){
-                $model->status = UserObjectiveStatus::UNSTARTED->value;
+            if (!$model->status) {
+                $model->status = UserObjectiveStatus::UNSTARTED;
             }
 
             return $model;
@@ -68,11 +67,11 @@ class UserObjective extends BaseModel
     {
         $output = false;
         $existing = self::where('user_id', $user_id)->where('objective_id', $objective_id)->exists();
-        if(!$existing){
+        if (!$existing) {
             $instance = new self();
             $instance->user_id = $user_id;
             $instance->objective_id = $objective_id;
-            if($instance->save()){
+            if ($instance->save()) {
                 return true;
             }
         }
@@ -83,8 +82,8 @@ class UserObjective extends BaseModel
     {
         $output = false;
         $existing = self::where('user_id', $user_id)->where('objective_id', $objective_id)->first();
-        if($existing){
-            if($existing->delete()){
+        if ($existing) {
+            if ($existing->delete()) {
                 $output = true;
             }
         }
@@ -100,6 +99,4 @@ class UserObjective extends BaseModel
     {
         return $this->belongsTo(User::class);
     }
-
-
 }

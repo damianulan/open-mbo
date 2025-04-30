@@ -25,9 +25,9 @@ return [
 
     // Enumerations
     'enums' => [
-        Gender::MALE->value => 'Mężczyzna',
-        Gender::FEMALE->value => 'Kobieta',
-        Gender::OTHER->value => 'Inna',
+        Gender::MALE => 'Mężczyzna',
+        Gender::FEMALE => 'Kobieta',
+        Gender::OTHER => 'Inna',
     ],
 
 ];

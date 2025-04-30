@@ -36,8 +36,8 @@ class MailTest extends Command
             $settings->mail_encryption = env('MAIL_ENCRYPTION');
             $settings->mail_from_address = env('MAIL_FROM_ADDRESS');
             $settings->mail_from_name = config('app.name');
-            $settings->mail_catchall_enabled = (bool)env('MAIL_CATCHALL_ENABLED', true);
-            $settings->mail_catchall_receiver = env('MAIL_CATCHALL_RECEIVER');
+            $settings->mail_catchall_enabled = (bool)env('MAILCATCHALL_ENABLED', true);
+            $settings->mail_catchall_receiver = env('MAILCATCHALL_RECEIVER');
             if ($settings->save()) {
                 $this->info('Mail settings saved.');
             } else {
