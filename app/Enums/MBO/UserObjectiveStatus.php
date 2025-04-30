@@ -2,20 +2,13 @@
 
 namespace App\Enums\MBO;
 
-enum UserObjectiveStatus: string
-{
-    case UNSTARTED = 'unstarted';
-    case PROGRESS = 'progress';
-    case COMPLETED = 'completed';
-    case PASSED = 'passed';
-    case FAILED = 'failed';
+use FormForge\Enums\Enum;
 
-    public static function values()
-    {
-        $collection = array();
-        foreach(self::cases() as $case){
-            $collection[] = $case->value;
-        }
-        return $collection;
-    }
+class UserObjectiveStatus extends Enum
+{
+    const UNSTARTED = 'unstarted';
+    const PROGRESS = 'progress';
+    const COMPLETED = 'completed';
+    const PASSED = 'passed';
+    const FAILED = 'failed';
 }

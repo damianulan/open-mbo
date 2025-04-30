@@ -22,7 +22,7 @@
                 @endif
                 <div class="content-card-icons ms-auto fw-bold">
                     @if($objective->campaign)
-                        <a href={{ route('campaigns.show', $objective->campaign->id) }} data-tippy-content="{{'Cel powiązany z kampanią: ' . $objective->campaign->name . ' [' . $objective->campaign->period . ']' }}">
+                        <a href={{ route('campaigns.show', $objective->campaign->id) }} data-tippy-content="{{ __('mbo.info.campaign_related', ['campaign' => $objective->campaign->name, 'period' => $objective->campaign->period]) }}">
                             <i class="bi-bullseye"></i>
                         </a>
                     @endif
@@ -102,49 +102,27 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-6 col-md-12 pb-4">
+    <div class="col-lg-4 col-md-6 pb-4">
         <div class="content-card">
             <div class="content-card-top">
                 <div class="content-card-title">
-                    <i class="bi-person-fill-up me-1"></i>
-                    <span>{{ __('W trakcie realizacji celu') }}</span>
+                    <x-icon key="lightning-fill" mr="1" />
+                    <span>{{ __('mbo.objectives.users.inprogress') }}</span>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    @if($objective->user_assignments()->count())
-                        <ul class="ombo-list">
-                            @foreach ($objective->user_assignments as $ua)
-                            @php
-                            $user = $ua->user;
-                            @endphp
-                            @if($user)
-                                <li>
-                                    <div class="list-grid">
-                                        <div class="list-content">
-                                            <div class="nowrap user" data-tippy-content="{{ $user->name() }}">
-                                                {!! $user->nameDetails() !!}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            @endif
-                            @endforeach
-                        </ul>
-
-                    @else
-                        <div><p class="text-primary">{{ __('mbo.info.no_users_added') }}</p></div>
-                    @endif
+                    <x-objective-users-list :userAssignments="$objective->user_assignments" />
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-lg-6 col-md-12 pb-4">
+    <div class="col-lg-8 col-md-6 pb-4">
         <div class="content-card">
             <div class="content-card-top">
                 <div class="content-card-title">
-                    <i class="bi-person-fill-down me-1"></i>
-                    <span>{{ __('Podejścia zakończone') }}</span>
+                    <x-icon key="check2-square" mr="1" />
+                    <span>{{ __('mbo.objectives.users.completed') }}</span>
                 </div>
             </div>
             <div class="row">

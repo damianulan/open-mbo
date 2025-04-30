@@ -28,7 +28,7 @@
     padding-bottom: 1rem;
 }
 
-.card.card-url{
+.card.card-url {
     background-color: $ombo-body;
 }
 
@@ -53,22 +53,26 @@
 }
 
 .card.failed {
-    background-color: $ombo-body-inactive;
+    background-color: $ombo-body-failed;
 }
 
 .card.failed:hover {
-    -webkit-box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
-    -moz-box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
-    box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
+    -webkit-box-shadow: inset -5px -15px 75px -28px $ombo-body-failed-hover;
+    -moz-box-shadow: inset -5px -15px 75px -28px $ombo-body-failed-hover;
+    box-shadow: inset -5px -15px 75px -28px $ombo-body-failed-hover;
 }
 
 .card.completed {
-    -webkit-box-shadow: inset -5px -15px 75px -28px rgba($success, 0.25);
-    -moz-box-shadow: inset -5px -15px 75px -28px rgba($success, 0.25);
-    box-shadow: inset -5px -15px 75px -28px rgba($success, 0.25);
+    background-color: $ombo-body-passed;
 }
 
-.card-bg .campaign-img{
+.card.completed:hover {
+    -webkit-box-shadow: inset -5px -15px 75px -28px $ombo-body-passed-hover;
+    -moz-box-shadow: inset -5px -15px 75px -28px $ombo-body-passed-hover;
+    box-shadow: inset -5px -15px 75px -28px $ombo-body-passed-hover;
+}
+
+.card-bg .campaign-img {
     display: block;
     width: 100%;
     background-repeat: no-repeat;
@@ -92,11 +96,11 @@
 .card-badges div {
     display: flex;
     align-items: center;
-    font-size: .75rem;
-    margin-left: .35rem;
+    font-size: 0.75rem;
+    margin-left: 0.35rem;
 }
 
-.card-badges div i.bi{
+.card-badges div i.bi {
     font-size: 1rem;
     color: $secondary;
 }
@@ -120,13 +124,13 @@
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 1.5em;
-    margin-bottom: .7rem;
+    margin-bottom: 0.7rem;
 }
 
 .card-bg .details .element,
 .path-card .details .element {
     display: flex;
-    margin-top: .5rem;
+    margin-top: 0.5rem;
 }
 
 .card-bg .details .element .element-title {
@@ -149,12 +153,12 @@
     width: 100%;
     position: absolute;
     bottom: 0;
-    padding-top: .5rem;
+    padding-top: 0.5rem;
 }
 
 .card-bg .progress-bar .bar-container {
     width: 100%;
-    height: .3em;
+    height: 0.3em;
     background-color: rgba($secondary, 0.2);
 }
 
@@ -190,15 +194,15 @@
 }
 
 .user-summary {
-    padding-top: .5rem;
-    padding-bottom: .5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 
 .user-summary .user-info {
     display: flex;
     align-items: center;
     color: $secondary;
-    font-size: .85rem;
+    font-size: 0.85rem;
 }
 
 .user-summary .user-info i.bi {
@@ -213,6 +217,6 @@
     white-space: nowrap;
 }
 .user-header .user-actions a {
-    margin-left: .5rem;
+    margin-left: 0.5rem;
     text-decoration: none;
 }

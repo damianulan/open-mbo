@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Campaigns;
 
 use Illuminate\Http\Request;
-use App\Models\MBO\Campaign;
 use App\Models\MBO\Objective;
-use App\Enums\MBO\CampaignStage;
 use App\Http\Controllers\Controller;
 use App\Forms\MBO\Campaign\CampaignEditObjectiveForm;
 
@@ -16,9 +14,9 @@ class CampaignObjectiveController extends Controller
     {
         $request = $form::reformatRequest($request);
         $response = $form::validate($request);
-        if($response['status'] === 'ok'){
+        if ($response['status'] === 'ok') {
             $objective = Objective::fillFromRequest($request);
-            if($objective->save()){
+            if ($objective->save()) {
                 $response['message'] = __('alerts.campaigns.success.objective_added');
                 return response()->json($response);
             }
@@ -30,10 +28,10 @@ class CampaignObjectiveController extends Controller
     {
         $request = $form::reformatRequest($request);
         $response = $form::validate($request, $id);
-        if($response['status'] === 'ok'){
+        if ($response['status'] === 'ok') {
             $objective = Objective::fillFromRequest($request, $id);
 
-            if($objective->update()){
+            if ($objective->update()) {
                 $response['message'] = __('alerts.campaigns.success.objective_added');
                 return response()->json($response);
             }
@@ -44,7 +42,7 @@ class CampaignObjectiveController extends Controller
     public function delete(Request $request, $id)
     {
         $objective = Objective::findOrFail($id);
-        if($objective->delete()){
+        if ($objective->delete()) {
             return ajax()->ok('message', __('alerts.campaigns.success.objective_deleted'));
         }
         return ajax()->error('message', __('alerts.campaigns.error.objective_deleted'));

@@ -2800,7 +2800,7 @@ html[data-bs-theme=dark] div.dtsp-panesContainer div.dtsp-searchPane div.dataTab
 :root,
 [data-bs-theme=light] {
   --bs-blue: #0d6efd;
-  --bs-indigo: #1B4965;
+  --bs-indigo: #1b4965;
   --bs-purple: #6f42c1;
   --bs-pink: #d63384;
   --bs-red: #dc3545;
@@ -2808,7 +2808,7 @@ html[data-bs-theme=dark] div.dtsp-panesContainer div.dtsp-searchPane div.dataTab
   --bs-yellow: #ffc107;
   --bs-green: #198754;
   --bs-teal: #20c997;
-  --bs-cyan: #00F2F2;
+  --bs-cyan: #00f2f2;
   --bs-black: #000;
   --bs-white: #fff;
   --bs-gray: #6c757d;
@@ -2829,10 +2829,10 @@ html[data-bs-theme=dark] div.dtsp-panesContainer div.dtsp-searchPane div.dataTab
   --bs-warning: #e79a1d;
   --bs-info: #0892A5;
   --bs-dark: #111611;
-  --bs-cadet: #1C1F33;
-  --bs-coolgreen: #D7FAF4;
+  --bs-cadet: #1c1f33;
+  --bs-coolgreen: #d7faf4;
   --bs-dimm-blue: #7392b7;
-  --bs-lightgrey: #C5D5EA;
+  --bs-lightgrey: #c5d5ea;
   --bs-primary-rgb: 40, 92, 127;
   --bs-secondary-rgb: 28, 64, 88;
   --bs-success-rgb: 79, 157, 105;
@@ -5921,8 +5921,8 @@ textarea.form-control-lg {
 
 .btn-cadet {
   --bs-btn-color: #fff;
-  --bs-btn-bg: #1C1F33;
-  --bs-btn-border-color: #1C1F33;
+  --bs-btn-bg: #1c1f33;
+  --bs-btn-border-color: #1c1f33;
   --bs-btn-hover-color: #fff;
   --bs-btn-hover-bg: rgb(23.8, 26.35, 43.35);
   --bs-btn-hover-border-color: rgb(22.4, 24.8, 40.8);
@@ -5932,14 +5932,14 @@ textarea.form-control-lg {
   --bs-btn-active-border-color: rgb(21, 23.25, 38.25);
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   --bs-btn-disabled-color: #fff;
-  --bs-btn-disabled-bg: #1C1F33;
-  --bs-btn-disabled-border-color: #1C1F33;
+  --bs-btn-disabled-bg: #1c1f33;
+  --bs-btn-disabled-border-color: #1c1f33;
 }
 
 .btn-coolgreen {
   --bs-btn-color: #000;
-  --bs-btn-bg: #D7FAF4;
-  --bs-btn-border-color: #D7FAF4;
+  --bs-btn-bg: #d7faf4;
+  --bs-btn-border-color: #d7faf4;
   --bs-btn-hover-color: #000;
   --bs-btn-hover-bg: rgb(221, 250.75, 245.65);
   --bs-btn-hover-border-color: rgb(219, 250.5, 245.1);
@@ -5949,8 +5949,8 @@ textarea.form-control-lg {
   --bs-btn-active-border-color: rgb(219, 250.5, 245.1);
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   --bs-btn-disabled-color: #000;
-  --bs-btn-disabled-bg: #D7FAF4;
-  --bs-btn-disabled-border-color: #D7FAF4;
+  --bs-btn-disabled-bg: #d7faf4;
+  --bs-btn-disabled-border-color: #d7faf4;
 }
 
 .btn-dimm-blue {
@@ -5972,8 +5972,8 @@ textarea.form-control-lg {
 
 .btn-lightgrey {
   --bs-btn-color: #000;
-  --bs-btn-bg: #C5D5EA;
-  --bs-btn-border-color: #C5D5EA;
+  --bs-btn-bg: #c5d5ea;
+  --bs-btn-border-color: #c5d5ea;
   --bs-btn-hover-color: #000;
   --bs-btn-hover-bg: rgb(205.7, 219.3, 237.15);
   --bs-btn-hover-border-color: rgb(202.8, 217.2, 236.1);
@@ -5983,8 +5983,8 @@ textarea.form-control-lg {
   --bs-btn-active-border-color: rgb(202.8, 217.2, 236.1);
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   --bs-btn-disabled-color: #000;
-  --bs-btn-disabled-bg: #C5D5EA;
-  --bs-btn-disabled-border-color: #C5D5EA;
+  --bs-btn-disabled-bg: #c5d5ea;
+  --bs-btn-disabled-border-color: #c5d5ea;
 }
 
 .btn-outline-primary {
@@ -6107,36 +6107,36 @@ textarea.form-control-lg {
 }
 
 .btn-outline-cadet {
-  --bs-btn-color: #1C1F33;
-  --bs-btn-border-color: #1C1F33;
+  --bs-btn-color: #1c1f33;
+  --bs-btn-border-color: #1c1f33;
   --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #1C1F33;
-  --bs-btn-hover-border-color: #1C1F33;
+  --bs-btn-hover-bg: #1c1f33;
+  --bs-btn-hover-border-color: #1c1f33;
   --bs-btn-focus-shadow-rgb: 28, 31, 51;
   --bs-btn-active-color: #fff;
-  --bs-btn-active-bg: #1C1F33;
-  --bs-btn-active-border-color: #1C1F33;
+  --bs-btn-active-bg: #1c1f33;
+  --bs-btn-active-border-color: #1c1f33;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #1C1F33;
+  --bs-btn-disabled-color: #1c1f33;
   --bs-btn-disabled-bg: transparent;
-  --bs-btn-disabled-border-color: #1C1F33;
+  --bs-btn-disabled-border-color: #1c1f33;
   --bs-gradient: none;
 }
 
 .btn-outline-coolgreen {
-  --bs-btn-color: #D7FAF4;
-  --bs-btn-border-color: #D7FAF4;
+  --bs-btn-color: #d7faf4;
+  --bs-btn-border-color: #d7faf4;
   --bs-btn-hover-color: #000;
-  --bs-btn-hover-bg: #D7FAF4;
-  --bs-btn-hover-border-color: #D7FAF4;
+  --bs-btn-hover-bg: #d7faf4;
+  --bs-btn-hover-border-color: #d7faf4;
   --bs-btn-focus-shadow-rgb: 215, 250, 244;
   --bs-btn-active-color: #000;
-  --bs-btn-active-bg: #D7FAF4;
-  --bs-btn-active-border-color: #D7FAF4;
+  --bs-btn-active-bg: #d7faf4;
+  --bs-btn-active-border-color: #d7faf4;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #D7FAF4;
+  --bs-btn-disabled-color: #d7faf4;
   --bs-btn-disabled-bg: transparent;
-  --bs-btn-disabled-border-color: #D7FAF4;
+  --bs-btn-disabled-border-color: #d7faf4;
   --bs-gradient: none;
 }
 
@@ -6158,19 +6158,19 @@ textarea.form-control-lg {
 }
 
 .btn-outline-lightgrey {
-  --bs-btn-color: #C5D5EA;
-  --bs-btn-border-color: #C5D5EA;
+  --bs-btn-color: #c5d5ea;
+  --bs-btn-border-color: #c5d5ea;
   --bs-btn-hover-color: #000;
-  --bs-btn-hover-bg: #C5D5EA;
-  --bs-btn-hover-border-color: #C5D5EA;
+  --bs-btn-hover-bg: #c5d5ea;
+  --bs-btn-hover-border-color: #c5d5ea;
   --bs-btn-focus-shadow-rgb: 197, 213, 234;
   --bs-btn-active-color: #000;
-  --bs-btn-active-bg: #C5D5EA;
-  --bs-btn-active-border-color: #C5D5EA;
+  --bs-btn-active-bg: #c5d5ea;
+  --bs-btn-active-border-color: #c5d5ea;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #C5D5EA;
+  --bs-btn-disabled-color: #c5d5ea;
   --bs-btn-disabled-bg: transparent;
-  --bs-btn-disabled-border-color: #C5D5EA;
+  --bs-btn-disabled-border-color: #c5d5ea;
   --bs-gradient: none;
 }
 
@@ -6286,7 +6286,7 @@ textarea.form-control-lg {
   --bs-dropdown-border-radius: var(--bs-border-radius);
   --bs-dropdown-border-width: var(--bs-border-width);
   --bs-dropdown-inner-border-radius: calc(var(--bs-border-radius) - var(--bs-border-width));
-  --bs-dropdown-divider-bg: #A3AEA7;
+  --bs-dropdown-divider-bg: #a3aea7;
   --bs-dropdown-divider-margin-y: 0.5rem;
   --bs-dropdown-box-shadow: var(--bs-box-shadow);
   --bs-dropdown-link-color: rgb(27.7844311377, 63.9041916168, 88.2155688623);
@@ -6566,7 +6566,7 @@ textarea.form-control-lg {
   --bs-dropdown-box-shadow: ;
   --bs-dropdown-link-color: #dee2e6;
   --bs-dropdown-link-hover-color: #fff;
-  --bs-dropdown-divider-bg: #A3AEA7;
+  --bs-dropdown-divider-bg: #a3aea7;
   --bs-dropdown-link-hover-bg: rgba(255, 255, 255, 0.15);
   --bs-dropdown-link-active-color: #fff;
   --bs-dropdown-link-active-bg: #285C7F;
@@ -24634,7 +24634,7 @@ trix-editor::-webkit-scrollbar-thumb:active {
 
 .tippy-box {
   position: relative;
-  background-color: #285C7F;
+  background-color: rgb(27.7844311377, 63.9041916168, 88.2155688623);
   color: #fff;
   border-radius: 4px;
   font-size: 0.75rem;
@@ -24852,7 +24852,8 @@ hr {
   font-size: 0.7rem !important;
 }
 
-html, body {
+html,
+body {
   direction: ltr;
   height: 100%;
 }
@@ -24918,6 +24919,7 @@ body {
 }
 
 .content-card .content-card-top .content-card-title {
+  display: flex;
   border: none;
   font-size: 1.1rem;
   font-family: "IBM Plex Serif", serif;
@@ -24987,7 +24989,8 @@ section.content-wrapper {
   float: right !important;
 }
 
-.mr-auto, .me-auto {
+.mr-auto,
+.me-auto {
   margin-right: auto !important;
 }
 
@@ -25124,6 +25127,12 @@ ul.list-style-none {
 
 i.info-box {
   font-size: 0.9rem;
+  cursor: pointer;
+  color: rgb(27.7844311377, 63.9041916168, 88.2155688623);
+}
+
+.tippy-info {
+  display: block;
   cursor: pointer;
   color: rgb(27.7844311377, 63.9041916168, 88.2155688623);
 }
@@ -26002,7 +26011,7 @@ a.dropdown-toggle {
 }
 
 .notification-dropdown .dropdown-menu li.notification-li {
-  border-top: 1px solid #A3AEA7;
+  border-top: 1px solid #a3aea7;
 }
 
 .dropdown-toggle::after {
@@ -26302,7 +26311,7 @@ table.ombo-table tbody tr:hover {
   border-bottom-right-radius: 0.35rem;
 }
 
-ul.ombo-list {
+.ombo-list {
   list-style: none;
   padding: 0.5rem 0;
 }
@@ -26314,8 +26323,40 @@ ul.ombo-list {
   margin: 0.35rem 0;
 }
 
+.ombo-list li.passed {
+  background-color: rgba(79, 157, 105, 0.1);
+}
+
+.ombo-list li.passed:hover {
+  background-color: rgba(79, 157, 105, 0.15);
+  transition: all 0.2s ease-in-out;
+}
+
+.ombo-list li.failed {
+  background-color: rgba(229, 107, 111, 0.1);
+}
+
+.ombo-list li.failed:hover {
+  background-color: rgba(229, 107, 111, 0.15);
+  transition: all 0.2s ease-in-out;
+}
+
+.ombo-list li.completed {
+  background-color: rgba(40, 92, 127, 0.2);
+}
+
+.ombo-list li.completed:hover {
+  background-color: rgba(40, 92, 127, 0.25);
+  transition: all 0.2s ease-in-out;
+}
+
 .ombo-list li.inactive {
-  background-color: rgba(40, 92, 127, 0.085);
+  background-color: rgba(108, 117, 125, 0.2);
+}
+
+.ombo-list li.inactive:hover {
+  background-color: rgba(40, 92, 127, 0.25);
+  transition: all 0.2s ease-in-out;
 }
 
 .ombo-list li .list-grid {
@@ -26373,7 +26414,7 @@ ul.ombo-list {
 }
 
 .ombo-list li.inactive:hover {
-  box-shadow: inset -5px -15px 75px -28px rgba(40, 92, 127, 0.1);
+  box-shadow: inset -5px -15px 75px -28px rgba(40, 92, 127, 0.25);
   transition: all 0.2s ease-in-out;
 }
 
@@ -26460,25 +26501,29 @@ ul.ombo-list {
 }
 
 .card.card-url.inactive {
-  background-color: rgba(40, 92, 127, 0.085) !important;
+  background-color: rgba(108, 117, 125, 0.2) !important;
 }
 
 .card.inactive:hover {
   cursor: pointer;
-  box-shadow: inset -5px -15px 75px -28px rgba(40, 92, 127, 0.1);
+  box-shadow: inset -5px -15px 75px -28px rgba(40, 92, 127, 0.25);
   transition: all 0.2s ease-in-out;
 }
 
 .card.failed {
-  background-color: rgba(40, 92, 127, 0.085);
+  background-color: rgba(229, 107, 111, 0.1);
 }
 
 .card.failed:hover {
-  box-shadow: inset -5px -15px 75px -28px rgba(40, 92, 127, 0.1);
+  box-shadow: inset -5px -15px 75px -28px rgba(229, 107, 111, 0.15);
 }
 
 .card.completed {
-  box-shadow: inset -5px -15px 75px -28px rgba(79, 157, 105, 0.25);
+  background-color: rgba(79, 157, 105, 0.1);
+}
+
+.card.completed:hover {
+  box-shadow: inset -5px -15px 75px -28px rgba(79, 157, 105, 0.15);
 }
 
 .card-bg .campaign-img {

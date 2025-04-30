@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\MBO\Campaign;
 
 use Illuminate\View\Component;
 use Illuminate\View\View;
@@ -19,7 +19,7 @@ class CardProgressBar extends Component
 
     public function __construct(public int $progress, bool $failed = false)
     {
-        if($progress > 0 && $progress < 100 && !$failed){
+        if ($progress > 0 && $progress < 100 && !$failed) {
             $this->color = $this->colors['in_progress'];
         } elseif ($progress === 100 && !$failed) {
             $this->color = $this->colors['completed'];

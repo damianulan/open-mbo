@@ -2,18 +2,11 @@
 
 namespace App\Enums\Users;
 
-enum Gender: string
-{
-    case MALE = 'm';
-    case FEMALE = 'f';
-    case OTHER = 'o';
+use FormForge\Enums\Enum;
 
-    public static function values()
-    {
-        $collection = array();
-        foreach(self::cases() as $case){
-            $collection[] = $case->value;
-        }
-        return $collection;
-    }
+class Gender extends Enum
+{
+    const MALE = 'm';
+    const FEMALE = 'f';
+    const OTHER = 'o';
 }

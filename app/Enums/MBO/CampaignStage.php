@@ -2,88 +2,81 @@
 
 namespace App\Enums\MBO;
 
+use FormForge\Enums\Enum;
+
 /**
  * Campaign Stages can be assigned to campaigns and users in campaign.
  *
  * Campaigns while in progress can have multiple SOFT STAGES assigned.
  * User can only have one of any STAGES assigned at a time.
  */
-enum CampaignStage: string
+class CampaignStage extends Enum
 {
     // in progress/soft stages - campaign can have multiple of them assigned.
     // if any assigned its generally an IN_PROGESS stage
-    case DEFINITION = 'definition';
-    case DISPOSITION = 'disposition';
-    case REALIZATION = 'realization';
-    case EVALUATION = 'evaluation';
-    case SELF_EVALUATION = 'self_evaluation';
+    const DEFINITION = 'definition';
+    const DISPOSITION = 'disposition';
+    const REALIZATION = 'realization';
+    const EVALUATION = 'evaluation';
+    const SELF_EVALUATION = 'self_evaluation';
 
     // hard stages
-    case PENDING = 'pending'; // starting point stage
-    case IN_PROGRESS = 'in_progress'; // case when process is in progress
-    case COMPLETED = 'completed'; // case when process is finished in time
-    case TERMINATED = 'terminated'; // case when process has been terminated after it has started
-    case CANCELED = 'canceled'; // case when process has been canceled
-
-    public static function values(): array
-    {
-        $collection = array();
-        foreach(self::cases() as $case){
-            $collection[] = $case->value;
-        }
-        return $collection;
-    }
+    const PENDING = 'pending'; // starting point stage
+    const IN_PROGRESS = 'in_progress'; // const when process is in progress
+    const COMPLETED = 'completed'; // const when process is finished in time
+    const TERMINATED = 'terminated'; // const when process has been terminated after it has started
+    const CANCELED = 'canceled'; // const when process has been canceled
 
     public static function hardValues(): array
     {
         return [
-            self::PENDING->value,
-            self::IN_PROGRESS->value,
-            self::COMPLETED->value,
-            self::TERMINATED->value,
-            self::CANCELED->value,
+            self::PENDING,
+            self::IN_PROGRESS,
+            self::COMPLETED,
+            self::TERMINATED,
+            self::CANCELED,
         ];
     }
 
     public static function softValues(): array
     {
         return [
-            self::DEFINITION->value,
-            self::DISPOSITION->value,
-            self::REALIZATION->value,
-            self::EVALUATION->value,
-            self::SELF_EVALUATION->value,
+            self::DEFINITION,
+            self::DISPOSITION,
+            self::REALIZATION,
+            self::EVALUATION,
+            self::SELF_EVALUATION,
         ];
     }
 
     public static function sequences(): array
     {
         return [
-            self::PENDING->value => 0,
-            self::DEFINITION->value => 1,
-            self::DISPOSITION->value => 2,
-            self::REALIZATION->value => 3,
-            self::EVALUATION->value => 4,
-            self::SELF_EVALUATION->value => 5,
-            self::COMPLETED->value => 6,
+            self::PENDING => 0,
+            self::DEFINITION => 1,
+            self::DISPOSITION => 2,
+            self::REALIZATION => 3,
+            self::EVALUATION => 4,
+            self::SELF_EVALUATION => 5,
+            self::COMPLETED => 6,
         ];
     }
 
     public static function getName(string $value): string
     {
-        return __('forms.campaigns.'.$value);
+        return __('forms.campaigns.' . $value);
     }
 
     public static function getInfo(string $value): string
     {
-        return __('forms.campaigns.info.'.$value);
+        return __('forms.campaigns.info.' . $value);
     }
 
     public static function getBySequence(int $sequence)
     {
         $stages = self::sequences();
-        foreach($stages as $key => $value){
-            if($value === $sequence){
+        foreach ($stages as $key => $value) {
+            if ($value === $sequence) {
                 return $key;
             }
         }
@@ -93,18 +86,18 @@ enum CampaignStage: string
     {
         $status = null;
         switch ($stage) {
-            case CampaignStage::PENDING->value:
+            case CampaignStage::PENDING:
                 $status = 'bi-hourglass';
                 break;
 
-            case CampaignStage::DEFINITION->value:
-            case CampaignStage::DISPOSITION->value:
+            case CampaignStage::DEFINITION:
+            case CampaignStage::DISPOSITION:
                 $status = 'bi-hourglass-top';
                 break;
 
-            case CampaignStage::REALIZATION->value:
-            case CampaignStage::EVALUATION->value:
-            case CampaignStage::SELF_EVALUATION->value:
+            case CampaignStage::REALIZATION:
+            case CampaignStage::EVALUATION:
+            case CampaignStage::SELF_EVALUATION:
                 $status = 'bi-hourglass-split';
                 break;
 

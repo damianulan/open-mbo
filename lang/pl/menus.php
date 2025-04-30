@@ -73,9 +73,21 @@ return [
         ],
         'organization' => [
             'index' => 'Struktura organizacyjna',
-            'company' => [
+            'companies' => [
                 'index' => 'Przedsiębiorstwa',
             ],
+            'departments' => [
+                'index' => 'Departamenty',
+            ],
+            'positions' => [
+                'index' => 'Stanowiska',
+            ],
+            'contracts' => [
+                'index' => 'Typy kontraktów',
+            ],
+        ],
+        'creator' => [
+            'index' => 'Kreator struktury',
         ],
         'teams' => [
             'index' => 'Zespoły'

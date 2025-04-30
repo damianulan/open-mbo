@@ -157,8 +157,8 @@ namespace App\Models\Business{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department withoutTrashed()
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $managers
  * @property-read int|null $managers_count
- * @mixin \Eloquent
  * @property string $shortname
+ * @mixin \Eloquent
  */
 	class Department extends \Eloquent {}
 }
@@ -202,8 +202,8 @@ namespace App\Models\Business{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location withoutTrashed()
  * @method static \Database\Factories\Business\LocationFactory factory($count = null, $state = [])
- * @mixin \Eloquent
  * @property string|null $country
+ * @mixin \Eloquent
  */
 	class Location extends \Eloquent {}
 }
@@ -299,8 +299,8 @@ namespace App\Models\Business{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract withoutTrashed()
- * @mixin \Eloquent
  * @property string $shortname
+ * @mixin \Eloquent
  */
 	class TypeOfContract extends \Eloquent {}
 }

@@ -64,7 +64,6 @@ class UserProfile extends Model
     ];
 
     protected $casts = [
-        'gender' => Gender::class,
         'firstname' => Enigma::class,
         'lastname' => Enigma::class,
         'phone' => Enigma::class,

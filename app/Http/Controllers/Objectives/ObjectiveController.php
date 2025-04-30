@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\MBO\Objective;
 use App\Models\Core\User;
 use App\Models\MBO\Campaign;
+use App\Enums\MBO\UserObjectiveStatus;
 
 class ObjectiveController extends Controller
 {

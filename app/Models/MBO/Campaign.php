@@ -126,7 +126,7 @@ class Campaign extends BaseModel
             if ($model->manual == 0) {
                 $model->setStageAuto();
             } else {
-                $model->stage = CampaignStage::PENDING->value;
+                $model->stage = CampaignStage::PENDING;
             }
 
             return $model;
@@ -136,7 +136,7 @@ class Campaign extends BaseModel
             if ($model->manual == 0) {
                 $model->setStageAuto();
             } else {
-                $model->stage = CampaignStage::PENDING->value;
+                $model->stage = CampaignStage::PENDING;
             }
 
             return $model;
@@ -236,7 +236,7 @@ class Campaign extends BaseModel
 
     public function setStageAuto()
     {
-        $stage = CampaignStage::PENDING->value;
+        $stage = CampaignStage::PENDING;
         $now = Carbon::now();
 
         foreach (CampaignStage::softValues() as $tmp) {
@@ -246,7 +246,7 @@ class Campaign extends BaseModel
             $end = Carbon::parse($this->$prop_end);
 
             if ($now->between($start, $end)) {
-                $stage = CampaignStage::IN_PROGRESS->value;
+                $stage = CampaignStage::IN_PROGRESS;
                 break;
             }
         }
@@ -261,7 +261,7 @@ class Campaign extends BaseModel
         $stages = new Collection();
         $now = Carbon::now();
 
-        if ($this->stage === CampaignStage::IN_PROGRESS->value) {
+        if ($this->stage === CampaignStage::IN_PROGRESS) {
             foreach (CampaignStage::softValues() as $tmp) {
                 $prop_start = $tmp . '_from';
                 $prop_end = $tmp . '_to';

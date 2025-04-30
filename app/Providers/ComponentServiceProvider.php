@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\View\Components\CardProgressBar;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 
@@ -25,7 +24,14 @@ class ComponentServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Progressbar component
-        Blade::component('card-progressbar', CardProgressBar::class);
+        Blade::component('icon', \App\View\Components\Layout\IconComponent::class);
+        Blade::component('notification-dropdown', \App\View\Components\Layout\NotificationDropdown::class);
+        Blade::component('tile-button', \App\View\Components\Layout\TileButton::class);
+
+        // MBO components
+        Blade::component('card-progressbar', \App\View\Components\MBO\Campaign\CardProgressBar::class);
+        Blade::component('objectives-list', \App\View\Components\MBO\Objectives\ObjectivesList::class);
+        Blade::component('objective-users-list', \App\View\Components\MBO\Objectives\ObjectiveUsersList::class);
+        Blade::component('campaign-users-list', \App\View\Components\MBO\Campaign\CampaignUsersList::class);
     }
 }

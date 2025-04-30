@@ -23,9 +23,10 @@ use App\Traits\Vendors\ModelActivity;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use App\Traits\VirginModel;
 use Illuminate\Support\Facades\Auth;
+use App\Enums\Users\Gender;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $email
@@ -207,9 +208,9 @@ class User extends Authenticatable implements HasLocalePreference
         if ($this->profile->avatar) {
             return asset($this->profile->avatar);
         }
-        if ($this->profile->gender->name === 'MALE') {
+        if ($this->profile->gender === Gender::MALE) {
             return asset('images/portrait/avatar-male.png');
-        } elseif ($this->profile->gender->name === 'FEMALE') {
+        } elseif ($this->profile->gender === Gender::FEMALE) {
             return asset('images/portrait/avatar-female.png');
         }
         return null;

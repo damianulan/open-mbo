@@ -20,7 +20,7 @@ class CreateAdminUserSeeder extends Seeder
      */
     public function run()
     {
-        if(User::count() > 0){
+        if (User::count() > 0) {
             return;
         }
         $user = new User([
@@ -32,7 +32,7 @@ class CreateAdminUserSeeder extends Seeder
             'firstname' => 'Site',
             'lastname' => 'Admin',
             'birthday' => fake()->dateTimeBetween('-40 years', '-20years'),
-            'gender' => Gender::MALE->value
+            'gender' => Gender::MALE
         ]);
         $user->profile()->save($profile);
         $user->assignRole('admin');
@@ -48,7 +48,7 @@ class CreateAdminUserSeeder extends Seeder
             'firstname' => 'Damian',
             'lastname' => 'Ułan',
             'birthday' => fake()->dateTimeBetween('-40 years', '-20years'),
-            'gender' => Gender::MALE->value
+            'gender' => Gender::MALE
         ]);
         $user->profile()->save($profile);
         $user->assignRole('root');
@@ -63,7 +63,7 @@ class CreateAdminUserSeeder extends Seeder
             'firstname' => 'Admin',
             'lastname' => 'Helpdesk',
             'birthday' => fake()->dateTimeBetween('-40 years', '-20years'),
-            'gender' => Gender::MALE->value
+            'gender' => Gender::MALE
         ]);
         $user->profile()->save($profile);
         $user->assignRole('support');
@@ -78,11 +78,9 @@ class CreateAdminUserSeeder extends Seeder
             'firstname' => 'Test',
             'lastname' => 'User',
             'birthday' => fake()->dateTimeBetween('-40 years', '-20years'),
-            'gender' => Gender::FEMALE->value
+            'gender' => Gender::FEMALE
         ]);
         $user->profile()->save($profile);
         $user->assignRole('employee');
-
     }
-
 }

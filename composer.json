@@ -83,8 +83,9 @@
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "@php artisan optimize:clear",
             "@php artisan ide-helper:generate",
-            "@php artisan ide-helper:models",
+            "@php artisan ide-helper:models -N",
             "@php artisan ide-helper:meta"
         ],
         "post-root-package-install": [
@@ -92,6 +93,7 @@
             "@php artisan key:generate --ansi"
         ],
         "post-create-project-cmd": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "@php artisan key:generate --ansi"
         ]
     },

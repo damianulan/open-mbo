@@ -18,20 +18,20 @@ return new class extends Migration
             $table->string('period')->unique();
             $table->longText('description')->nullable();
 
-            $table->dateTime(CampaignStage::DEFINITION->value.'_from');
-            $table->dateTime(CampaignStage::DEFINITION->value.'_to');
+            $table->dateTime(CampaignStage::DEFINITION . '_from');
+            $table->dateTime(CampaignStage::DEFINITION . '_to');
 
-            $table->dateTime(CampaignStage::DISPOSITION->value.'_from');
-            $table->dateTime(CampaignStage::DISPOSITION->value.'_to');
+            $table->dateTime(CampaignStage::DISPOSITION . '_from');
+            $table->dateTime(CampaignStage::DISPOSITION . '_to');
 
-            $table->dateTime(CampaignStage::REALIZATION->value.'_from');
-            $table->dateTime(CampaignStage::REALIZATION->value.'_to');
+            $table->dateTime(CampaignStage::REALIZATION . '_from');
+            $table->dateTime(CampaignStage::REALIZATION . '_to');
 
-            $table->dateTime(CampaignStage::EVALUATION->value.'_from');
-            $table->dateTime(CampaignStage::EVALUATION->value.'_to');
+            $table->dateTime(CampaignStage::EVALUATION . '_from');
+            $table->dateTime(CampaignStage::EVALUATION . '_to');
 
-            $table->dateTime(CampaignStage::SELF_EVALUATION->value.'_from');
-            $table->dateTime(CampaignStage::SELF_EVALUATION->value.'_to');
+            $table->dateTime(CampaignStage::SELF_EVALUATION . '_from');
+            $table->dateTime(CampaignStage::SELF_EVALUATION . '_to');
 
             $table->enum('stage', CampaignStage::hardValues());
 

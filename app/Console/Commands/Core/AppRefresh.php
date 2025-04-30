@@ -47,7 +47,9 @@ class AppRefresh extends Command
         Artisan::call('optimize:clear');
         $user = User::findByEmail('kontakt@damianulan.me');
         if ($user) {
-            $user->notify(new AppRefreshNotification());
+            if ($user->notify(new AppRefreshNotification())) {
+                $this->info('Job Success notification sent.');
+            }
         }
     }
 }

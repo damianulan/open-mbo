@@ -6,14 +6,14 @@
         @endif
     </a>
     <ul class="dropdown-menu">
-        <li><div class="dropdown-header">{{ __('commons.notifications') }}</div></li>
+        <li><div class="dropdown-header">{{ __('globals.notifications') }}</div></li>
         @if($notifications->isNotEmpty())
             @foreach ($notifications as $notification)
                 <x-utilities.notification-item :notification="$notification"/>
             @endforeach
         @else
             <li>
-                <div class="dropdown-header" style="white-space: normal;"><strong>{{ __('notifications.commons.empty') }}</strong></div>
+                <div class="dropdown-header" style="white-space: normal;"><strong>{{ __('notifications.info.empty') }}</strong></div>
             </li>
         @endif
     </ul>
