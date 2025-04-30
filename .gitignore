@@ -27,3 +27,6 @@ package-lock.json
 yarn.lock
 /public/mix-manifest.json
 schedule.php
+_ide_helper_models.php
+_ide_helper.php
+.phpstorm.meta.php
