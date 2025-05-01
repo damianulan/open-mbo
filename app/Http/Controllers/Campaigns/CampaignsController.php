@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\MBO\Campaign;
 use App\Forms\MBO\Campaign\CampaignEditForm;
 use App\Http\Controllers\Controller;
+use App\Http\Repositories\Campaigns\CampaignRepository;
 
 class CampaignsController extends Controller
 {
@@ -44,14 +45,13 @@ class CampaignsController extends Controller
         }
         $request = $form::reformatRequest($request);
         $request->validate($form::validation($request));
-        $campaign = Campaign::fillFromRequest($request);
-        $user_ids = $request->input('user_ids');
+        $repository = CampaignRepository::boot($request)->upsert();
 
-        if ($campaign->save()) {
-            $campaign->refreshCoordinators($user_ids);
+        if ($repository->check()) {
+            $campaign = $repository->getModel();
             return redirect()->route('campaigns.show', $campaign->id)->with('success', __('alerts.campaigns.success.create', ['name' => $campaign->name]));
         }
-        return redirect()->back()->with('error', __('alerts.campaigns.error.create', ['name' => $campaign->name]));
+        return redirect()->back()->with('error', __('alerts.campaigns.error.create'));
     }
 
     /**
@@ -81,7 +81,7 @@ class CampaignsController extends Controller
     public function edit(Request $request, Campaign $campaign)
     {
         if ($request->user()->cannot('mbo-campaign-update', $campaign)) {
-            abort(403);
+            unauthorized();
         }
         return view('pages.mbo.campaigns.edit', [
             'campaign' => $campaign,
@@ -89,25 +89,20 @@ class CampaignsController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id, CampaignEditForm $form)
     {
+        $campaign = Campaign::findOrFail($id);
+        if ($request->user()->cannot('mbo-campaign-update', $campaign)) {
+            unauthorized();
+        }
+
         $request = $form::reformatRequest($request);
         $request->validate($form::validation($request, $id));
-        $campaign = Campaign::fillFromRequest($request, $id);
-        if ($request->user()->cannot('mbo-campaign-update', $campaign)) {
-            abort(403);
-        }
-        $user_ids = $request->input('user_ids');
+        $repository = CampaignRepository::boot($request, $id)->upsert();
 
-        if ($campaign->update()) {
-            $campaign->refreshCoordinators($user_ids);
+        if ($repository->check()) {
+            $campaign = $repository->getModel();
             return redirect()->route('campaigns.show', $id)->with('success', __('alerts.campaigns.success.edit', ['name' => $campaign->name]));
         }
         return redirect()->back()->with('error', __('alerts.campaigns.error.edit', ['name' => $campaign->name]));

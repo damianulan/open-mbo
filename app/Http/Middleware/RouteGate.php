@@ -68,7 +68,7 @@ class RouteGate
                 }
             }
 
-            return abort(403);
+            return unauthorized();
         }
         return $next($request);
     }
