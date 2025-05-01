@@ -42,7 +42,7 @@ class ObjectiveTemplateController extends ManagementController
      */
     public function store(Request $request, ObjectiveTemplateEditForm $form)
     {
-        $request->validate($form::validation());
+        $request->validate($form::validation($request));
         $objective = ObjectiveTemplate::fillFromRequest($request);
 
         if ($objective->save()) {

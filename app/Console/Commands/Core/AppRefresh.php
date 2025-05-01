@@ -30,14 +30,19 @@ class AppRefresh extends Command
      */
     public function handle()
     {
-        $branch = $this->option('branch');
-        $result = Process::run('git status');
-        $this->info($result->output());
-        if (!empty($branch)) {
-            $result = Process::run('git switch ' . $branch);
+        $notLocal = config('app.env') !== 'local';
+
+        if ($notLocal) {
+            $branch = $this->option('branch');
+            $result = Process::run('git status');
+            $this->info($result->output());
+            if (!empty($branch)) {
+                $result = Process::run('git switch ' . $branch);
+            }
+            $result = Process::run('git pull origin');
+            $this->info($result->output());
         }
-        $result = Process::run('git pull origin');
-        $this->info($result->output());
+
         Artisan::call('db:wipe');
         $this->info(Artisan::output());
         Artisan::call('migrate --seed');
@@ -46,7 +51,7 @@ class AppRefresh extends Command
         Artisan::call(MailTest::class);
         Artisan::call('optimize:clear');
         $user = User::findByEmail('kontakt@damianulan.me');
-        if ($user) {
+        if ($user && $notLocal) {
             if ($user->notify(new AppRefreshNotification())) {
                 $this->info('Job Success notification sent.');
             }

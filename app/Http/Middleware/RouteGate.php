@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Str;
 
@@ -36,27 +37,27 @@ class RouteGate
      */
     public function handle($request, Closure $next, $permission, $context = null): Response
     {
-        if(auth()->user()->cannot($permission, $context)) {
+        if (Auth::user()->cannot($permission, $context)) {
             $currentName = Route::currentRouteName();
             $current = Route::current();
             $all = Route::getRoutes();
             //dd($current->gatherMiddleware());
             $parent = Str::of($currentName)->beforeLast('.')->toString();
-            if(isset(self::$fallbacks[$parent])){
+            if (isset(self::$fallbacks[$parent])) {
                 $fallbacks = self::$fallbacks[$parent];
-                foreach($fallbacks as $fallback){
+                foreach ($fallbacks as $fallback) {
                     try {
                         $fallbackRoute = $all->getByName($fallback);
                         $middlewares = $fallbackRoute->gatherMiddleware();
                         $permission = null;
-                        foreach($middlewares as $middleware){
-                            if(strpos($middleware, 'route.gate') !== false){
+                        foreach ($middlewares as $middleware) {
+                            if (strpos($middleware, 'route.gate') !== false) {
                                 $permission = Str::of($middleware)->after('route.gate:')->toString();
                             }
                         }
 
-                        if($permission){
-                            if(auth()->user()->cannot($permission)){
+                        if ($permission) {
+                            if (Auth::user()->cannot($permission)) {
                                 continue;
                             }
                         }
@@ -65,13 +66,10 @@ class RouteGate
                         continue;
                     }
                 }
-
-
             }
 
             return abort(403);
         }
         return $next($request);
     }
-
 }

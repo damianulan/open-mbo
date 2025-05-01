@@ -1,38 +1,38 @@
 @extends('layouts.portal.master')
 @section('content')
 
-{!! $nav->render() !!}
+    {!! $nav->render() !!}
 
-<nav class="icon-btn-nav">
-    <div class="panel-left">
-        <a class="icon-btn" href="{{ route('management.mbo.objectives.create') }}" data-tippy-content="{{ __('buttons.create_template') }}">
-            <i class="bi-plus-circle-fill"></i>
-        </a>
-    </div>
-</nav>
-@if (count($objectives))
-<div class="content-card">
-    <div class="row pagination-row">
-        <div class="col-md-12">
-            {{ $objectives->links() }}
+    <nav class="icon-btn-nav">
+        <div class="panel-left">
+            <a class="icon-btn" href="{{ route('management.mbo.objectives.create') }}" data-tippy-content="{{ __('buttons.create_template') }}">
+                <i class="bi-plus-circle-fill"></i>
+            </a>
         </div>
-    </div>
-    <div class="row">
-        @foreach($objectives as $objective)
-            <div class="col-md-4 pb-3">
-                @include('components.mbo.objective-card')
+    </nav>
+    @if (count($objectives))
+        <div class="content-card">
+            <div class="row pagination-row">
+                <div class="col-md-12">
+                    {{ $objectives->links() }}
+                </div>
             </div>
-        @endforeach
-    </div>
-    <div class="row pagination-row">
-        <div class="col-md-12">
-            {{ $objectives->links() }}
+            <div class="row">
+                @foreach($objectives as $objective)
+                    <div class="col-md-4 pb-3">
+                        @include('components.mbo.objective-card')
+                    </div>
+                @endforeach
+            </div>
+            <div class="row pagination-row">
+                <div class="col-md-12">
+                    {{ $objectives->links() }}
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-@else
-<x-nocontent-page/>
-@endif
+    @else
+        <x-nocontent-page/>
+    @endif
 
 
 @endsection

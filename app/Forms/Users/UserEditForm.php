@@ -51,8 +51,8 @@ class UserEditForm extends Form
             'firstname' => 'max:255|required',
             'lastname' => 'max:255|required',
             'email' => 'max:255|email|required',
-            'birthday' => 'date|nullable',
-            'gender' => [new Enum(Gender::class)],
+            'birthday' => 'date|nullable'
+            //'gender' => [new Enum(Gender::class)],
         ];
     }
 }

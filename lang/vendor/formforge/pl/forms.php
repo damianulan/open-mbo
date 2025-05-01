@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\Users\Gender;
+
 return [
 
     'placeholders' => [
@@ -19,7 +21,9 @@ return [
     'no' => 'Nie',
 
     'enums' => [
-
+        Gender::MALE => 'Mężczyzna',
+        Gender::FEMALE => 'Kobieta',
+        Gender::OTHER => 'Inna',
         // here bring your own enums for Dictionary::fromEnum() usages
     ],
 ];

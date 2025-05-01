@@ -11,9 +11,12 @@ use App\Models\MBO\UserCampaign;
 use Carbon\Carbon;
 use App\Models\Core\User;
 use App\Enums\MBO\CampaignStage;
+use Illuminate\Database\Eloquent\Attributes\ScopedBy;
+use App\Models\Scopes\MBO\CampaignScope;
+use App\Enums\Core\SystemRolesLib;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $name
@@ -31,7 +34,6 @@ use App\Enums\MBO\CampaignStage;
  * @property mixed $self_evaluation_to
  * @property mixed $draft
  * @property mixed $manual
- * @property string $created_by
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -73,6 +75,7 @@ use App\Enums\MBO\CampaignStage;
  * @property string $stage
  * @mixin \Eloquent
  */
+#[ScopedBy([CampaignScope::class])]
 class Campaign extends BaseModel
 {
     public $stages;
@@ -98,26 +101,16 @@ class Campaign extends BaseModel
 
         'draft',
         'manual',
-        'created_by',
     ];
 
     protected $casts = [
         'draft' => CheckboxCast::class,
         'manual' => CheckboxCast::class,
 
-        // Dates
-        // 'definition_from' => CarbonDatetime::class,
-        // 'definition_to' => CarbonDatetime::class,
-        // 'disposition_from' => CarbonDatetime::class,
-        // 'disposition_to' => CarbonDatetime::class,
-        // 'realization_from' => CarbonDatetime::class,
-        // 'realization_to' => CarbonDatetime::class,
-        // 'evaluation_from' => CarbonDatetime::class,
-        // 'evaluation_to' => CarbonDatetime::class,
-        // 'self_evaluation_from' => CarbonDatetime::class,
-        // 'self_evaluation_to' => CarbonDatetime::class,
         'description' => TrixFieldCast::class,
     ];
+
+    public $contextualRole = SystemRolesLib::CAMPAIGN_COORDINATOR;
 
     protected static function boot()
     {
@@ -153,11 +146,6 @@ class Campaign extends BaseModel
         return $this->hasMany(Objective::class);
     }
 
-    public function creator()
-    {
-        return $this->belongsTo(User::class, 'created_by');
-    }
-
     public function coordinators()
     {
         return $this->morphToMany(User::class, 'context', 'users_roles');
@@ -180,13 +168,13 @@ class Campaign extends BaseModel
         foreach ($toDelete as $user_id) {
             $user = User::find($user_id);
             if ($user->exists()) {
-                $user->revokeRole('campaign_coordinator', $this);
+                $user->revokeRoleSlug('campaign_coordinator', $this);
             }
         }
         foreach ($toAdd as $user_id) {
             $user = User::find($user_id);
             if ($user->exists()) {
-                $user->assignRole('campaign_coordinator', $this);
+                $user->assignRoleSlug('campaign_coordinator', $this);
             }
         }
 

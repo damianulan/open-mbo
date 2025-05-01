@@ -24,7 +24,7 @@ class CampaignsController extends Controller
     public function create(Request $request)
     {
         if ($request->user()->cannot('create', Campaign::class)) {
-            abort(403);
+            unauthorized();
         }
         return view('pages.mbo.campaigns.edit', [
             'form' => CampaignEditForm::definition($request),
@@ -40,7 +40,7 @@ class CampaignsController extends Controller
     public function store(Request $request, CampaignEditForm $form)
     {
         if ($request->user()->cannot('create', Campaign::class)) {
-            abort(403);
+            unauthorized();
         }
         $request = $form::reformatRequest($request);
         $request->validate($form::validation($request));
@@ -62,8 +62,8 @@ class CampaignsController extends Controller
      */
     public function show(Request $request, Campaign $campaign)
     {
-        if ($request->user()->cannot('mbo-campaign-view', $campaign)) {
-            abort(403);
+        if ($request->user()->cannot('view', $campaign)) {
+            unauthorized();
         }
         $header = $campaign->name . ' [' . $campaign->period . ']';
         return view('pages.mbo.campaigns.show', [

@@ -31,7 +31,7 @@ class ObjectiveCategoryEditForm extends Form
             }
         }
 
-        return (new FormBuilder($request, $method, $route, 'objective_category_edit'))
+        return (FormBuilder::boot($request, $method, $route, 'objective_category_edit'))
             ->class('objective-category-create-form')
             ->add(FormComponent::text('name', $model)->label(__('forms.mbo.categories.name'))->required())
             ->add(FormComponent::{$shortnameType}('shortname', $model)->label(__('forms.mbo.categories.shortname')))

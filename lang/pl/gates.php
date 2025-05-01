@@ -12,9 +12,9 @@ return [
         'manager' => 'Menadżer',
         'supervisor' => 'Przełożony',
         'employee' => 'Pracownik',
+        'objective_coordinator' => 'Koordynator kategorii celów',
+        'campaign_coordinator' => 'Koordynator kampanii MBO',
     ],
 
-    'permissions' => [
-
-    ],
+    'permissions' => [],
 ];

@@ -3,7 +3,6 @@
 namespace App\Exceptions\Core;
 
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Mews\Purifier;
 
 class UnauthorizedAccess extends HttpException
 {
@@ -17,8 +16,6 @@ class UnauthorizedAccess extends HttpException
         if ($permission) {
             $this->message .= '<div>' . __('gates.permissions.' . $permission) . '</div>';
         }
-
-        $this->message = Purifier::clean($this->message);
 
         parent::__construct($this->code, $this->message, null, [], $this->code);
     }

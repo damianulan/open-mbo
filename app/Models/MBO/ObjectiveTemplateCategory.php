@@ -9,7 +9,7 @@ use App\Models\MBO\ObjectiveTemplate;
 use App\Models\Core\User;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $name
@@ -107,13 +107,13 @@ class ObjectiveTemplateCategory extends BaseModel
         foreach ($toDelete as $user_id) {
             $user = User::find($user_id);
             if ($user->exists()) {
-                $user->revokeRole('objective_coordinator', $this);
+                $user->revokeRoleSlug('objective_coordinator', $this);
             }
         }
         foreach ($toAdd as $user_id) {
             $user = User::find($user_id);
             if ($user->exists()) {
-                $user->assignRole('objective_coordinator', $this);
+                $user->assignRoleSlug('objective_coordinator', $this);
             }
         }
     }

@@ -24,14 +24,12 @@ class CampaignPolicy
         return $user->isAdmin();
     }
 
-
     /**
      * Determine whether the user can view the model.
      */
     public function view(User $user, Campaign $campaign): bool
     {
-        $is_creator = $campaign->creator && $user->id === $creator->id;
-        return $user->can('mbo-campaign-view', $campaign) || $is_creator;
+        return $user->can('mbo-campaign-view', $campaign);
     }
 
     /**
@@ -69,5 +67,4 @@ class CampaignPolicy
     {
         return $user->can('mbo-campaign-delete', $campaign);
     }
-
 }

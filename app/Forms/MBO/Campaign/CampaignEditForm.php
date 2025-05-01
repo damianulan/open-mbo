@@ -14,11 +14,6 @@ use App\Models\MBO\Campaign;
 class CampaignEditForm extends Form
 {
 
-    public static function authorize(Request $request): bool
-    {
-        return false;
-    }
-
     public static function definition(Request $request, $model = null): FormBuilder
     {
         $route = route('campaigns.store');
