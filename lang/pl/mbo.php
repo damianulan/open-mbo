@@ -14,6 +14,9 @@ return [
         'no_category_admins_added' => 'Ta kategoria nie ma swoich administratorów.',
         'objective_admins' => 'Administratorzy przypisani do kategorii celu, mogą zarządzać podległymi sobie celami',
         'campaign_related' => 'Cel powiązany z kampanią: :campaign [:period]',
+        'manual_off' => 'Przełączono tryb zapisu na automatyczny.',
+        'manual_on' => 'Przełączono tryb zapisu na ręczny.',
+        'campaign_stage_changed' => 'Przesunięto etap zapisu na: :stage',
     ],
 
     'objective_status' => [

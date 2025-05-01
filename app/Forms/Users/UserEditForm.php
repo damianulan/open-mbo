@@ -30,7 +30,7 @@ class UserEditForm extends Form
             $selected = $model->supervisors->pluck('id')->toArray();
         }
 
-        return FormBuilder::boot($method, $route, 'users_edit')
+        return FormBuilder::boot($request, $method, $route, 'users_edit')
             ->class('users-create-form')
             ->add(FormComponent::text('firstname', $profile)->label(__('forms.users.firstname')))
             ->add(FormComponent::text('lastname', $profile)->label(__('forms.users.lastname')))

@@ -54,7 +54,7 @@
                 @if($objective->award)
                     <div data-tippy-content="{{ __('forms.mbo.objectives.award') }}">
                         <i class="bi-award"></i>
-                        <span>{{ float_view($objective->award) . '' . __('vocabulary.pnts') }}</span>
+                        <span>{{ float_view($objective->award) . '' . __('globals.pnts') }}</span>
                     </div>
                 @endif
                 @if($objective->deadline)

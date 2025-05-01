@@ -34,7 +34,7 @@ return [
             'paragraph' => 'Nie udało się odnaleźć żądanej strony.',
         ],
         '403' => [
-            'title' => 'Brak uprawnień',
+            'title' => 'Odmowa dostępu',
             'paragraph' => 'Nie posiadasz wystarczających uprawnień niezbędnych do wyświetlania tej strony. Jeśli to błąd, skontaktuj się z administratorem systemu.',
         ],
         '401' => [

@@ -12,14 +12,20 @@
                 <p class="error-title">
                     {{ __('pages.errors.'.$errorCode.'.title') }}
                 </p>
-                <p class="error_paragraph">
-                    {{ __('pages.errors.'.$errorCode.'.paragraph') }}
-                </p>
-                @if($errorCode !== '503')
-                <a href="{{ url()->previous() }}" class="btn btn-primary">{{ __('buttons.redirect_back') }}</a>
+                @if(isset($message) && !empty($message))
+                    <p class="error-paragraph">
+                        {!! $message !!}
+                    </p>
+                @else
+                    <p class="error-paragraph">
+                        {{ __('pages.errors.'.$errorCode.'.paragraph') }}
+                    </p>
                 @endif
-                @if($errorCode === '503')
-                <a href="{{ url('/') }}" class="btn btn-primary">{{ __('buttons.redirect_login') }}</a>
+
+                @if($errorCode !== '503')
+                    <a href="{{ url()->previous() }}" class="btn btn-primary">{{ __('buttons.redirect_back') }}</a>
+                @else
+                    <a href="{{ url('/') }}" class="btn btn-primary">{{ __('buttons.redirect_login') }}</a>
                 @endif
           </div>
   </div>

@@ -45,9 +45,9 @@ class CampaignUserController extends Controller
     {
         $uc = UserCampaign::findOrFail($id);
         $uc->toggleManual();
-        $message = 'Przełączono tryb zapisu na automatyczny.';
+        $message = __('mbo.info.manual_off');
         if ($uc->manual) {
-            $message = 'Przełączono tryb zapisu na ręczny.';
+            $message = __('mbo.info.manual_on');
         }
         return redirect()->back()->with('success', $message);
     }
@@ -56,7 +56,7 @@ class CampaignUserController extends Controller
     {
         $uc = UserCampaign::findOrFail($id);
         $uc->nextStage();
-        $message = 'Przesunięto etap zapisu na: ' . $uc->stageDescription();
+        $message = __('mbo.info.campaign_stage_changed', ['stage' => $uc->stageDescription()]);
         return redirect()->back()->with('success', $message);
     }
 
@@ -64,7 +64,7 @@ class CampaignUserController extends Controller
     {
         $uc = UserCampaign::findOrFail($id);
         $uc->previousStage();
-        $message = 'Przesunięto etap zapisu na: ' . $uc->stageDescription();
+        $message = __('mbo.info.campaign_stage_changed', ['stage' => $uc->stageDescription()]);
         return redirect()->back()->with('success', $message);
     }
 

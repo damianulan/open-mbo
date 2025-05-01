@@ -2,8 +2,8 @@
     const SITEURL = '{{ url('/') }}';
     const csrf = $('meta[name="csrf-token"]').attr('content');
 
-    const choose = '{{ __('vocabulary.select_choose') }}';
-    const no_results = '{{ __('vocabulary.search_no_results') }}';
+    const choose = '{{ __('globals.select_choose') }}';
+    const no_results = '{{ __('globals.search_no_results') }}';
 
     const date_format = '{{ config('app.date_format') }}';
     const time_format = '{{ config('app.time_format') }}';

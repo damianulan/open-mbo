@@ -25,7 +25,7 @@ class CampaignEditObjectiveForm extends Form
             $title = 'Edytuj cel';
         }
 
-        return FormBuilder::boot($method, $route, 'objective_edit')
+        return FormBuilder::boot($request, $method, $route, 'objective_edit')
             ->class('objective-edit-form')
             ->add(FormComponent::hidden('id', $model))
             ->add(FormComponent::select('template_id', $model, Dictionary::fromModel(ObjectiveTemplate::class, 'name'))->required()->label(__('forms.mbo.objectives.template')))

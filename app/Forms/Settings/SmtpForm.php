@@ -13,7 +13,7 @@ class SmtpForm extends Form
 {
     public static function definition(Request $request, $model = null): FormBuilder
     {
-        return FormBuilder::boot('post', route('settings.server.mail.store'), 'mail_settings')
+        return FormBuilder::boot($request, 'post', route('settings.server.mail.store'), 'mail_settings')
             ->class('settings-form')
             ->add(FormComponent::text('mail_host', $model)->label(__('forms.settings.server.mail_host')))
             ->add(FormComponent::text('mail_port', $model)->numeric()->label(__('forms.settings.server.mail_port')))

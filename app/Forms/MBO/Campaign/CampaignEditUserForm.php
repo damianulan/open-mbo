@@ -35,7 +35,7 @@ class CampaignEditUserForm extends Form
             }
         }
 
-        return FormBuilder::boot($method, $route, 'campaign_add_users')
+        return FormBuilder::boot($request, $method, $route, 'campaign_add_users')
             ->class('campaign-add-users-form')
             ->add(FormComponent::hidden('id', $model))
             ->add(FormComponent::multiselect('user_ids', $model, Dictionary::fromModel(User::class, 'name', 'allActive', $exclude), 'users', $selected)->required()->label(__('forms.campaigns.users.add')))

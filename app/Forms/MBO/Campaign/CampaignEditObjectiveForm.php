@@ -42,7 +42,7 @@ class CampaignEditObjectiveForm extends Form
         $realization_from = Carbon::parse($campaign->realization_from)->format('Y-m-d');
         $realization_to = Carbon::parse($campaign->realization_to)->format('Y-m-d');
 
-        return FormBuilder::boot($method, $route, 'campaign_edit_objective')
+        return FormBuilder::boot($request, $method, $route, 'campaign_edit_objective')
             ->class('campaign-edit-objective-form')
             ->add(FormComponent::hidden('id', $model))
             ->add(FormComponent::select('template_id', $model, Dictionary::fromModel(ObjectiveTemplate::class, 'name', 'all', $exclude))->required()->label(__('forms.mbo.objectives.template')))

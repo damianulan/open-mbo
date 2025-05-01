@@ -14,6 +14,11 @@ use App\Models\MBO\Campaign;
 class CampaignEditForm extends Form
 {
 
+    public static function authorize(Request $request): bool
+    {
+        return false;
+    }
+
     public static function definition(Request $request, $model = null): FormBuilder
     {
         $route = route('campaigns.store');
@@ -26,7 +31,7 @@ class CampaignEditForm extends Form
             $campaign = Campaign::find($model->id);
             $selected = $campaign->coordinators->pluck('id')->toArray();
         }
-        return FormBuilder::boot($method, $route, 'campaign_edit')
+        return FormBuilder::boot($request, $method, $route, 'campaign_edit')
             ->class('campaign-create-form')
             ->add(FormComponent::text('name', $model)->label(__('forms.campaigns.name'))->required())
             ->add(FormComponent::text('period', $model)->label(__('forms.campaigns.period'))->required()
