@@ -2,11 +2,11 @@
 
 namespace App\Console\Commands\Core;
 
-use Illuminate\Console\Command;
+use App\Console\BaseCommand;
 use App\Settings\MailSettings;
 use Illuminate\Support\Facades\Mail;
 
-class SystemTest extends Command
+class SystemTest extends BaseCommand
 {
     /**
      * The name and signature of the console command.
@@ -27,7 +27,7 @@ class SystemTest extends Command
      */
     public function handle()
     {
-        activity()->log('cron system test');
         $this->info('Cron system test');
+        $this->log('completed', true);
     }
 }

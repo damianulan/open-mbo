@@ -27,7 +27,13 @@ class CampaignStatusScript extends Command
      */
     public function handle()
     {
-        $this->campaignsSetStatus();
+        try {
+            $this->campaignsSetStatus();
+            $this->log('completed', true);
+        } catch (\Throwable $th) {
+            $this->log($th->getMessage(), false);
+            $this->error($th->getMessage());
+        }
     }
 
     public function campaignsSetStatus(bool $echo = true)
