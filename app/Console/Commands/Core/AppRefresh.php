@@ -49,7 +49,9 @@ class AppRefresh extends BaseCommand
             $this->info(Artisan::output());
             Artisan::call('migrate --seed');
             $this->info(Artisan::output());
+            Artisan::call('optimize:clear');
             Artisan::call(MailTest::class);
+            $this->info(Artisan::output());
             Artisan::call('optimize:clear');
             $this->info(Artisan::output());
             $user = User::findByEmail('kontakt@damianulan.me');
