@@ -29,7 +29,6 @@ class Kernel extends ConsoleKernel
         if (config('app.env') === 'development') {
             $schedule->command(AppRefresh::class)->daily()->at('01:01');
         }
-        $schedule->command(SystemTest::class)->everyMinute();
     }
 
     /**

@@ -45,19 +45,21 @@ class AppRefresh extends Command
 
         Artisan::call('db:wipe');
         $this->info(Artisan::output());
-        // Artisan::call('key:generate');
-        // $this->info(Artisan::output());
-        // Artisan::call('optimize:clear');
         Artisan::call('migrate --seed');
         $this->info(Artisan::output());
         Artisan::call(MailTest::class);
         Artisan::call('optimize:clear');
         $this->info(Artisan::output());
-        $user = User::findByEmail('kontakt@damianulan.me');
-        if ($user && $notLocal) {
-            if ($user->notify(new AppRefreshNotification())) {
-                $this->info('Job Success notification sent.');
+        activity()->log('app refreshed');
+        try {
+            $user = User::findByEmail('kontakt@damianulan.me');
+            if ($user && $notLocal) {
+                if ($user->notify(new AppRefreshNotification())) {
+                    $this->info('Job Success notification sent.');
+                }
             }
+        } catch (\Throwable $th) {
+            $this->info($th->getMessage());
         }
     }
 }
