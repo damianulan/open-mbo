@@ -27,6 +27,7 @@ class SystemTest extends BaseCommand
      */
     public function handle()
     {
+        $this->logStart();
         $this->info('Cron system test');
         $this->log('completed', true);
     }

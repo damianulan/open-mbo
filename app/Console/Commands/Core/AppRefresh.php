@@ -30,6 +30,7 @@ class AppRefresh extends BaseCommand
      */
     public function handle()
     {
+        $this->logStart();
         try {
             $notLocal = config('app.env') !== 'local';
 

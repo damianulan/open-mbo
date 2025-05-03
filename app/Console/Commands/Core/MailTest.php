@@ -2,11 +2,11 @@
 
 namespace App\Console\Commands\Core;
 
-use Illuminate\Console\Command;
+use App\Console\BaseCommand;
 use App\Settings\MailSettings;
 use Illuminate\Support\Facades\Mail;
 
-class MailTest extends Command
+class MailTest extends BaseCommand
 {
     /**
      * The name and signature of the console command.
@@ -27,6 +27,7 @@ class MailTest extends Command
      */
     public function handle()
     {
+        $this->logStart();
         try {
             if (config('app.env') !== 'production') {
                 $settings = new MailSettings();

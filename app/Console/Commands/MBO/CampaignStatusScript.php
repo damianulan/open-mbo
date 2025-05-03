@@ -27,6 +27,7 @@ class CampaignStatusScript extends Command
      */
     public function handle()
     {
+        $this->logStart();
         try {
             $this->campaignsSetStatus();
             $this->log('completed', true);
