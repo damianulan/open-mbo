@@ -20,7 +20,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command(CampaignStatusScript::class)->daily()->at('00:01');
+        $schedule->command(CampaignStatusScript::class)->everyThirtyMinutes();
 
         if (config('backup.backup.auto') === true) {
             $schedule->command('backup:run')->daily()->at('01:30');
