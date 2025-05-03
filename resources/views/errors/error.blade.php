@@ -12,7 +12,7 @@
                 <p class="error-title">
                     {{ __('pages.errors.'.$errorCode.'.title') }}
                 </p>
-                @if(isset($message) && !empty($message))
+                @if(isset($message) && !empty($message) && config('app.debug'))
                     <p class="error-paragraph">
                         {!! $message !!}
                     </p>

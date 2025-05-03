@@ -11,4 +11,18 @@ class UserObjectiveStatus extends Enum
     const COMPLETED = 'completed';
     const PASSED = 'passed';
     const FAILED = 'failed';
+    const INTERRUPTED = 'interrupted';
+
+    /**
+     * Frozen values are not editable by most system processes that automatically change status..
+     *
+     * @return array
+     */
+    public static function frozen(): array
+    {
+        return [
+            self::PASSED,
+            self::FAILED,
+        ];
+    }
 }

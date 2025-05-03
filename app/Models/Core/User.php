@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use FormForge\Traits\RequestForms;
 use App\Traits\UserMBO;
 use App\Traits\UserBusiness;
-use App\Traits\ActiveFields;
 use App\Models\Core\UserProfile;
 use App\Models\Core\UserPreference;
 use Illuminate\Support\Facades\Hash;
@@ -94,7 +93,7 @@ use App\Enums\Users\Gender;
 class User extends Authenticatable implements HasLocalePreference
 {
     use UUID, HasApiTokens, HasFactory, Notifiable, HasRolesAndPermissions, SoftDeletes, RequestForms;
-    use UserMBO, UserBusiness, ActiveFields, Impersonate, Impersonable, ModelActivity, VirginModel;
+    use UserMBO, UserBusiness, Impersonate, Impersonable, ModelActivity, VirginModel;
 
     protected $fillable = [
         'email',
@@ -106,10 +105,6 @@ class User extends Authenticatable implements HasLocalePreference
     protected $hidden = [
         'password',
         'remember_token',
-    ];
-
-    protected $activeRules = [
-        'active' => 1,
     ];
 
     protected $casts = [

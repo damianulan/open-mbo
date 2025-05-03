@@ -53,6 +53,7 @@ return [
         CampaignStage::PENDING => 'Oczekuje na rozpoczęcie pomiaru',
 
         'info' => [
+            'period' => 'Wprowadź unikalny reprezentatywny okres pomiaru, np. dla pomiaru co kwartał: 2023 Q3.',
             CampaignStage::DEFINITION => 'Tworzenie strategii i określanie celów przez kierownictwo',
             CampaignStage::DISPOSITION => 'Dysponowanie celów przez kierowników zespołów',
             CampaignStage::REALIZATION => 'Realizacja celów',
@@ -63,6 +64,8 @@ return [
             CampaignStage::CANCELED => 'Proces odwołany',
             CampaignStage::IN_PROGRESS => 'Proces w toku',
             CampaignStage::PENDING => 'Oczekuje na rozpoczęcie pomiaru',
+            'draft' => 'Kampania będzie widoczna tylko dla administratorów i nie zostanie uruchomiona automatycznie.',
+            'manual' => 'Przejście pomiędzy etapami nie będzie uzależnione od dat, a od podjęcia akcji przez administratora. Opcję tą można także włączyć w trakcie trwania kampanii.',
         ],
 
         'coordinators' => 'Koordynatorzy kampanii',

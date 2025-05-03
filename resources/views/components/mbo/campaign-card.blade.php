@@ -22,6 +22,11 @@
                         <i class="bi bi-hand-index-thumb-fill"></i>
                     </div>
                 @endif
+                @if($campaign->manual)
+                    <div data-tippy-content="Tryb ręczny">
+                        <i class="bi bi-hand-index-thumb-fill"></i>
+                    </div>
+                @endif
                 <div data-tippy-content="Okres pomiaru">
                     <span class="badge bg-secondary">{{ $campaign->period }}</span>
                 </div>

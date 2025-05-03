@@ -41,7 +41,7 @@ class RouteGate
             $currentName = Route::currentRouteName();
             $current = Route::current();
             $all = Route::getRoutes();
-            //dd($current->gatherMiddleware());
+
             $parent = Str::of($currentName)->beforeLast('.')->toString();
             if (isset(self::$fallbacks[$parent])) {
                 $fallbacks = self::$fallbacks[$parent];

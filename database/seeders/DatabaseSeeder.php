@@ -31,21 +31,20 @@ class DatabaseSeeder extends Seeder
 
         $admins_mbo = 2;
         $superadmins = 1;
-        for($i = 1; $i < 40; $i++){
+        for ($i = 1; $i < 40; $i++) {
             $user = User::factory()->has(UserProfile::factory()->count(1), 'profile')->create([
-                'email' => 'user'.$i.'@damianulan.me',
+                'email' => 'user' . $i . '@damianulan.me',
             ]);
-            if($user){
-                $user->assignRole('employee');
+            if ($user) {
+                $user->assignRoleSlug('employee');
             }
-            if($admins_mbo > 0){
-                $user->assignRole('admin_mbo');
+            if ($admins_mbo > 0) {
+                $user->assignRoleSlug('admin_mbo');
             } else {
-                if($superadmins > 0){
-                    $user->assignRole('admin');
+                if ($superadmins > 0) {
+                    $user->assignRoleSlug('admin');
                 }
             }
         }
-
     }
 }

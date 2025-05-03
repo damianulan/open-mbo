@@ -9,9 +9,10 @@ use App\Models\MBO\Campaign;
 use App\Enums\MBO\CampaignStage;
 use App\Models\MBO\UserObjective;
 use App\Notifications\MBO\Campaign\CampaignAssignment;
+use App\Enums\MBO\UserObjectiveStatus;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $campaign_id
@@ -67,13 +68,13 @@ class UserCampaign extends BaseModel
         parent::boot();
         static::created(function ($model) {
             $objectives = $model->campaign->objectives()->get();
-            foreach($objectives as $objective){
+            foreach ($objectives as $objective) {
                 UserObjective::assign($model->user_id, $objective->id);
             }
 
             $coordinators = $model->campaign->coordinators;
-            if(!empty($coordinators)){
-                foreach($coordinators as $coordinator){
+            if (!empty($coordinators)) {
+                foreach ($coordinators as $coordinator) {
                     $coordinator->notify(new CampaignAssignment($model->user, $model->campaign));
                 }
             }
@@ -82,14 +83,15 @@ class UserCampaign extends BaseModel
         });
 
         static::updated(function ($model) {
-            if($model->manual == 0 && $model->active == 1){
+            if ($model->isManual() == 0 && $model->active == 1) {
                 $model->campaign->setUserStage($model->id);
             }
+            $model->setObjectiveStatus();
         });
 
         static::deleted(function ($model) {
             $objectives = $model->campaign->objectives()->get();
-            foreach($objectives as $objective){
+            foreach ($objectives as $objective) {
                 UserObjective::unassign($model->user_id, $objective->id);
             }
 
@@ -109,45 +111,37 @@ class UserCampaign extends BaseModel
 
     public function objectives()
     {
-        return $this->campaign()->objectives()->where([
-            'user_id' => $this->user_id,
-            'draft' => 0,
-        ])->get();
-    }
-
-    public function global_objectives()
-    {
-        return $this->campaign()->global_objectives()->where('draft', 0)->get();
+        return $this->campaign->objectives()->whereAssigned($this->user)->get();
     }
 
     public function assignObjectives()
     {
-        $templates = $this->campaign()->objective_templates();
-        if($templates){
-            foreach($templates as $template){
-                // assign objectives from template assigned to a Campaign.
+        $templates = $this->campaign->objective_templates();
+        if ($templates) {
+            foreach ($templates as $template) {
+                // TODO assign objectives from template assigned to a Campaign.
             }
         }
     }
 
-    public function stageDescription()
+    public function stageDescription(): string
     {
-        return __('forms.campaigns.'.$this->stage);
+        return __('forms.campaigns.' . $this->stage);
     }
 
-    public function stageIcon()
+    public function stageIcon(): string
     {
         $status = CampaignStage::stageIcon($this->stage);
 
         return $status;
     }
 
-    public function nextStage()
+    public function nextStage(): bool
     {
         $stages = CampaignStage::sequences();
         $current = $stages[$this->stage];
         $next_count = $current + 1;
-        if($next_count >= count($stages)) {
+        if ($next_count >= count($stages)) {
             $next_count = count($stages) - 1;
         }
 
@@ -157,12 +151,12 @@ class UserCampaign extends BaseModel
         return $this->update();
     }
 
-    public function previousStage()
+    public function previousStage(): bool
     {
         $stages = CampaignStage::sequences();
         $current = $stages[$this->stage];
         $prev_count = $current - 1;
-        if($prev_count <= 0) {
+        if ($prev_count <= 0) {
             $prev_count = 0;
         }
 
@@ -172,12 +166,55 @@ class UserCampaign extends BaseModel
         return $this->update();
     }
 
-    public function toggleManual()
+    public function toggleManual(): bool
     {
-        $this->manual = $this->manual ? 0:1;
+        $this->manual = $this->manual ? 0 : 1;
         $this->stage = $this->campaign->setUserStage();
         return $this->update();
     }
 
+    public function isManual(): bool
+    {
+        return $this->manual || $this->campaign?->manual;
+    }
 
+    /**
+     * Sets objective statuses based on campaign stage changes.
+     *
+     * @return void
+     */
+    public function setObjectiveStatus(): void
+    {
+        if ($this->active) {
+            $sequences = CampaignStage::sequences();
+            $setStage = null;
+            if (in_array($this->stage, CampaignStage::sequences())) {
+                if ($this->stage === CampaignStage::REALIZATION) {
+                    $setStage = UserObjectiveStatus::PROGRESS;
+                } elseif ($sequences[$this->stage] < $sequences[CampaignStage::REALIZATION]) {
+                    $setStage = UserObjectiveStatus::UNSTARTED;
+                } elseif ($sequences[$this->stage] > $sequences[CampaignStage::REALIZATION]) {
+                    $setStage = UserObjectiveStatus::COMPLETED;
+                }
+            } else {
+                $setStage = UserObjectiveStatus::INTERRUPTED;
+            }
+
+            if ($setStage) {
+                $objectives = $this->objectives();
+                if ($objectives->count()) {
+                    foreach ($objectives as $objective) {
+                        $assignments = $objective->user_assignments()->active()->whereUserId($this->user_id)->get();
+
+                        if ($assignments->count()) {
+                            foreach ($assignments as $assignment) {
+                                $assignment->status = $setStage;
+                                $assignment->save();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

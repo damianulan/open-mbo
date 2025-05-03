@@ -6,6 +6,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Console\Commands\Core\AppRefresh;
 use App\Console\Commands\AppReload;
+use App\Console\Commands\Core\SystemTest;
 
 use App\Console\Commands\MBO\CampaignStatusScript;
 
@@ -28,6 +29,7 @@ class Kernel extends ConsoleKernel
         if (config('app.env') === 'development') {
             $schedule->command(AppRefresh::class)->daily()->at('01:01');
         }
+        $schedule->command(SystemTest::class)->everyMinute();
     }
 
     /**

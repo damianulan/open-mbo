@@ -13,7 +13,7 @@ class CampaignPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->can('mbo-campaign-view');
     }
 
     /**
@@ -29,7 +29,7 @@ class CampaignPolicy
      */
     public function view(User $user, Campaign $campaign): bool
     {
-        return $user->can('mbo-campaign-view', $campaign);
+        return $user->can('mbo-campaign-view');
     }
 
     /**
@@ -55,9 +55,29 @@ class CampaignPolicy
      * @param  Campaign $campaign
      * @return bool
      */
-    public function manage(User $user, Campaign $campaign): bool
+    public function users(User $user, Campaign $campaign): bool
     {
-        return $user->can('mbo-campaign-manage', $campaign);
+        return $campaign->isActive() && $user->can('mbo-campaign-manage-users', $campaign);
+    }
+
+    public function objectives(User $user, Campaign $campaign): bool
+    {
+        return $campaign->isActive() && $user->can('mbo-campaign-manage-objectives', $campaign);
+    }
+
+    public function manual(User $user, Campaign $campaign): bool
+    {
+        return $campaign->isActive() && $user->can('mbo-campaign-manage-manual', $campaign);
+    }
+
+    public function terminate(User $user, Campaign $campaign): bool
+    {
+        return ($campaign->isActive() || $campaign->terminated()) && $user->can('mbo-campaign-terminate', $campaign);
+    }
+
+    public function cancel(User $user, Campaign $campaign): bool
+    {
+        return $campaign->isActive() && $user->can('mbo-campaign-cancel', $campaign);
     }
 
     /**

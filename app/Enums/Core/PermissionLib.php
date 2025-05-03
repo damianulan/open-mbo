@@ -10,6 +10,13 @@ class PermissionLib extends Enum
     public const TELESCOPE_VIEW = 'telescope-view';
     public const MAINTENANCE = 'maintenance';
 
+    // global
+
+    /**
+     * When retrieving models, ignore contextual assignments.
+     */
+    public const MBO_ADMINISTRATION = 'mbo-administration';
+
     // users
     public const USERS_IMPERSONATE = 'users-impersonate';
     public const USERS_LIST = 'users-list';
@@ -19,7 +26,6 @@ class PermissionLib extends Enum
     public const USERS_TEAMS = 'users-teams';
     public const USERS_DELETE = 'users-delete';
     public const USERS_RESTORE = 'users-restore';
-    public const USERS_VIEW_ALL = 'users-view-all';
 
     // settings
     public const SETTINGS_GENERAL = 'settings-general';
@@ -44,24 +50,38 @@ class PermissionLib extends Enum
     // mbo
 
     /**
-     * viewing all mbo-related data - no direct access distinction
+     * viewing always all objective templates
      */
-    public const MBO_ADMINISTRATION = 'mbo-administration';
+    public const MBO_TEMPLATES_VIEW = 'mbo-templates-view';
+    public const MBO_TEMPLATES_CREATE = 'mbo-templates-create';
+    public const MBO_TEMPLATES_UPDATE = 'mbo-templates-update';
+    public const MBO_TEMPLATES_DELETE = 'mbo-templates-delete';
 
+    public const MBO_CATEGORIES_VIEW = 'mbo-categories-view';
+    public const MBO_CATEGORIES_CREATE = 'mbo-categories-create';
+    public const MBO_CATEGORIES_UPDATE = 'mbo-categories-update';
+    public const MBO_CATEGORIES_DELETE = 'mbo-categories-delete';
+
+    /**
+     * Viewing always all campaigns
+     */
     public const MBO_CAMPAIGN_VIEW = 'mbo-campaign-view';
 
     public const MBO_CAMPAIGN_CREATE = 'mbo-campaign-create';
     public const MBO_CAMPAIGN_UPDATE = 'mbo-campaign-update';
     public const MBO_CAMPAIGN_DELETE = 'mbo-campaign-delete';
-    public const MBO_CAMPAIGN_MANAGE = 'mbo-campaign-manage';
+    public const MBO_CAMPAIGN_TERMINATE = 'mbo-campaign-terminate';
+    public const MBO_CAMPAIGN_CANCEL = 'mbo-campaign-cancel';
+    public const MBO_CAMPAIGN_MANAGE_OBJECTIVES = 'mbo-campaign-manage-objectives';
+    public const MBO_CAMPAIGN_MANAGE_USERS = 'mbo-campaign-manage-users';
+    public const MBO_CAMPAIGN_MANAGE_MANUAL = 'mbo-campaign-manage-manual';
 
-    public const MBO_OBJECTIVE_CREATE = 'mbo-objective-create';
     public const MBO_OBJECTIVE_VIEW = 'mbo-objective-view';
+    public const MBO_OBJECTIVE_CREATE = 'mbo-objective-create';
     public const MBO_OBJECTIVE_UPDATE = 'mbo-objective-update';
     public const MBO_OBJECTIVE_DELETE = 'mbo-objective-delete';
     public const MBO_OBJECTIVE_MILESTONES = 'mbo-objective-milestones';
     public const MBO_OBJECTIVE_REALIZATION = 'mbo-objective-realization';
-    public const MBO_VIEW_ALL_OBJECTIVES = 'mbo-view-all-objectives';
 
     /**
      * roles and their permissions for core functionality, cannot be manipulated in-app.
@@ -84,6 +104,10 @@ class PermissionLib extends Enum
     public static function normal(): array
     {
         return [
+            // global
+
+            self::MBO_ADMINISTRATION => ['admins', 'admin_mbo'],
+
             // users
             self::USERS_IMPERSONATE => ['admins'],
             self::USERS_LIST => ['admins', 'admin_mbo', 'admin_hr', 'supervisor'], // and probably any other superior roles and team leader @TODO later
@@ -93,7 +117,6 @@ class PermissionLib extends Enum
             self::USERS_TEAMS => ['admins', 'admin_hr'],
             self::USERS_DELETE => ['admins'],
             self::USERS_RESTORE => ['admins'],
-            self::USERS_VIEW_ALL => ['*'],
 
             // settings
             self::SETTINGS_GENERAL => ['admins'],
@@ -116,20 +139,32 @@ class PermissionLib extends Enum
             self::REPORTS_VIEW => ['admins', 'admin_mbo', 'supervisor'], // and probably any other superior roles and team leader @TODO later
 
             // mbo
-            self::MBO_ADMINISTRATION => ['admins', 'admin_mbo'],
+            self::MBO_TEMPLATES_VIEW => ['admins', 'admin_mbo', 'objective_coordinator'],
+            self::MBO_TEMPLATES_CREATE => ['admins', 'admin_mbo', 'objective_coordinator'],
+            self::MBO_TEMPLATES_UPDATE => ['admins', 'admin_mbo', 'objective_coordinator'],
+            self::MBO_TEMPLATES_DELETE => ['admins', 'admin_mbo', 'objective_coordinator'],
+
+            self::MBO_CATEGORIES_VIEW => ['admins', 'admin_mbo'],
+            self::MBO_CATEGORIES_CREATE => ['admins', 'admin_mbo'],
+            self::MBO_CATEGORIES_UPDATE => ['admins', 'admin_mbo'],
+            self::MBO_CATEGORIES_DELETE => ['admins', 'admin_mbo'],
+
             self::MBO_CAMPAIGN_CREATE => ['admins', 'admin_mbo'],
             self::MBO_CAMPAIGN_VIEW => ['admins', 'admin_mbo', 'campaign_coordinator'],
             self::MBO_CAMPAIGN_UPDATE => ['admins', 'admin_mbo', 'campaign_coordinator'],
             self::MBO_CAMPAIGN_DELETE => ['admins', 'admin_mbo'],
-            self::MBO_CAMPAIGN_MANAGE => ['admins', 'admin_mbo', 'campaign_coordinator'], // adding/removing users and objectives to/from campaign.
+            self::MBO_CAMPAIGN_TERMINATE => ['admins', 'admin_mbo', 'campaign_coordinator'],
+            self::MBO_CAMPAIGN_CANCEL => ['admins', 'admin_mbo'], // operation is not reversible -- keep it strict
+            self::MBO_CAMPAIGN_MANAGE_OBJECTIVES => ['admins', 'admin_mbo', 'campaign_coordinator'], // adding/removing users and objectives to/from campaign.
+            self::MBO_CAMPAIGN_MANAGE_USERS => ['admins', 'admin_mbo', 'campaign_coordinator'],
+            self::MBO_CAMPAIGN_MANAGE_MANUAL => ['admins', 'admin_mbo', 'campaign_coordinator'],
 
-            self::MBO_OBJECTIVE_CREATE => ['admins', 'admin_mbo', 'objective_coordinator'],
-            self::MBO_OBJECTIVE_VIEW => ['admins', 'admin_mbo', 'objective_coordinator'],
-            self::MBO_OBJECTIVE_UPDATE => ['admins', 'admin_mbo', 'objective_coordinator'],
-            self::MBO_OBJECTIVE_DELETE => ['admins', 'admin_mbo'],
-            self::MBO_OBJECTIVE_MILESTONES => ['admins', 'admin_mbo', 'objective_coordinator', 'supervisor'],
-            self::MBO_OBJECTIVE_REALIZATION => ['admins', 'admin_mbo', 'objective_coordinator', 'supervisor'],
-            self::MBO_VIEW_ALL_OBJECTIVES => ['*'],
+            self::MBO_OBJECTIVE_VIEW => ['admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator', 'supervisor'],
+            self::MBO_OBJECTIVE_CREATE => ['admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator'],
+            self::MBO_OBJECTIVE_UPDATE => ['admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator'],
+            self::MBO_OBJECTIVE_DELETE => ['admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator'],
+            self::MBO_OBJECTIVE_MILESTONES => ['admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator', 'supervisor'],
+            self::MBO_OBJECTIVE_REALIZATION => ['admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator', 'supervisor'],
         ];
     }
 }

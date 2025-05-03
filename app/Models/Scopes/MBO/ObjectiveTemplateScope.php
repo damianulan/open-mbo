@@ -9,6 +9,7 @@ use App\Models\MBO\ObjectiveTemplateCategory;
 use Illuminate\Support\Facades\Auth;
 use App\Enums\Core\PermissionLib;
 use App\Models\Core\Role;
+use App\Enums\Core\SystemRolesLib;
 
 class ObjectiveTemplateScope implements Scope
 {
@@ -18,12 +19,16 @@ class ObjectiveTemplateScope implements Scope
     public function apply(Builder $builder, Model $model): void
     {
         $user = Auth::user();
-        $coordinatorRoleId = Role::getId($model->contextualRole);
 
         if ($user->cannot(PermissionLib::MBO_ADMINISTRATION)) {
-            $category_ids = $user->roleAssignments()->where('role_id', $coordinatorRoleId)->where('context_type', ObjectiveTemplateCategory::class)->get()->pluck('context_id');
+            if ($user->can(PermissionLib::MBO_TEMPLATES_VIEW)) {
+                $objectiveRoleId = Role::getId(SystemRolesLib::OBJECTIVE_COORDINATOR);
+                $category_ids = $user->roleAssignments()->where('role_id', $objectiveRoleId)->where('context_type', ObjectiveTemplateCategory::class)->get()->pluck('context_id');
 
-            $builder->whereIn('category_id', $category_ids);
+                $builder->whereIn('category_id', $category_ids);
+            } else {
+                $builder->whereRaw('1=0');
+            }
         }
     }
 }

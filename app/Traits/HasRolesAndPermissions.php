@@ -231,7 +231,7 @@ trait HasRolesAndPermissions
     public function revokeRoleSlug($slug, $context = null)
     {
         if (!$slug instanceof Role) {
-            $role = Role::find($slug);
+            $role = Role::findBySlug($slug);
         } else {
             $role = $slug;
         }

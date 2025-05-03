@@ -37,6 +37,10 @@ return [
     'impersonate_out' => 'Wyloguj się jako',
     'enrol_users' => 'Zapisz użytkowników',
 
+    'terminate_campaign' => 'Zawieś kampanię',
+    'resume_campaign' => 'Wznów kampanię',
+    'cancel_campaign' => 'Anuluj kampanię',
+
     'list_view' => 'Tryb listy',
     'tile_view' => 'Tryb kafelkowy',
 ];

@@ -8,9 +8,9 @@ use App\Casts\CheckboxCast;
 use App\Models\Core\User;
 use App\Models\MBO\Objective;
 use App\Models\MBO\ObjectiveTemplateCategory;
-use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use App\Models\Scopes\MBO\ObjectiveTemplateScope;
 use App\Enums\Core\SystemRolesLib;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  *
@@ -49,14 +49,12 @@ use App\Enums\Core\SystemRolesLib;
  * @method static \Database\Factories\MBO\ObjectiveTemplateFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
-#[ScopedBy([ObjectiveTemplateScope::class])]
 class ObjectiveTemplate extends BaseModel
 {
     protected $fillable = [
         'category_id',
         'name',
         'description',
-        'draft',
         'award',
     ];
 
@@ -65,7 +63,7 @@ class ObjectiveTemplate extends BaseModel
         'description' => TrixFieldCast::class,
     ];
 
-    public $contextualRole = SystemRolesLib::OBJECTIVE_COORDINATOR;
+    protected $accessScope = ObjectiveTemplateScope::class;
 
     protected static function boot()
     {
@@ -73,11 +71,6 @@ class ObjectiveTemplate extends BaseModel
         static::deleted(function ($model) {
             $model->objective_templates()->delete();
         });
-    }
-
-    public static function allActive()
-    {
-        return self::where('draft', 0)->get();
     }
 
     public function category()

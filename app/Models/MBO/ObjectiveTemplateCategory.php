@@ -7,6 +7,8 @@ use FormForge\Casts\TrixFieldCast;
 use App\Casts\CheckboxCast;
 use App\Models\MBO\ObjectiveTemplate;
 use App\Models\Core\User;
+use App\Models\Scopes\MBO\ObjectiveTemplateCategoryScope;
+use App\Enums\Core\SystemRolesLib;
 
 /**
  *
@@ -56,6 +58,8 @@ class ObjectiveTemplateCategory extends BaseModel
     protected $casts = [
         'description' => TrixFieldCast::class,
     ];
+
+    protected $accessScope = ObjectiveTemplateCategoryScope::class;
 
     protected static function boot()
     {

@@ -30,7 +30,7 @@ class CampaignEditForm extends Form
             ->class('campaign-create-form')
             ->add(FormComponent::text('name', $model)->label(__('forms.campaigns.name'))->required())
             ->add(FormComponent::text('period', $model)->label(__('forms.campaigns.period'))->required()
-                ->info('Wprowadź unikalny reprezentatywny okres pomiaru, np. dla pomiaru co kwartał: 2023 Q3'))
+                ->info(__('forms.campaigns.info.period')))
             ->add(FormComponent::multiselect('user_ids', $model, Dictionary::fromModel(User::class, 'name', 'allActive'), 'users', $selected)->label(__('forms.campaigns.coordinators')))
             ->add(FormComponent::trix('description', $model)->label(__('forms.campaigns.description')))
 
@@ -45,9 +45,9 @@ class CampaignEditForm extends Form
             ->add(FormComponent::daterange(CampaignStage::SELF_EVALUATION, $model)->label(__('forms.campaigns.' . CampaignStage::SELF_EVALUATION))->required()
                 ->info(__('forms.campaigns.info.' . CampaignStage::SELF_EVALUATION)))
             ->add(FormComponent::switch('draft', $model)->label(__('forms.campaigns.draft'))->default(true)
-                ->info('Kampania będzie widoczna tylko dla administratorów i nie zostanie uruchomiona automatycznie.'))
+                ->info(__('forms.campaigns.info.draft')))
             ->add(FormComponent::switch('manual', $model)->label(__('forms.campaigns.manual'))->default(false)
-                ->info('Przejście pomiędzy etapami nie będzie uzależnione od dat, a od podjęcia akcji przez administratora. Opcję tą można także włączyć w trakcie trwania kampanii.'))
+                ->info(__('forms.campaigns.info.manual')))
             ->addSubmit();
     }
 

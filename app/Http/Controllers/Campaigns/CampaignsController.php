@@ -7,13 +7,17 @@ use App\Models\MBO\Campaign;
 use App\Forms\MBO\Campaign\CampaignEditForm;
 use App\Http\Controllers\Controller;
 use App\Service\Campaigns\CampaignService;
+use App\Models\Core\User;
 
 class CampaignsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->user()->cannot('viewAny', Campaign::class)) {
+            unauthorized();
+        }
         return view('pages.mbo.campaigns.index', [
-            'campaigns' => Campaign::paginate(30),
+            'campaigns' => Campaign::checkAccess()->paginate(30),
         ]);
     }
 

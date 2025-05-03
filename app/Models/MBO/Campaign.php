@@ -14,6 +14,7 @@ use App\Enums\MBO\CampaignStage;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use App\Models\Scopes\MBO\CampaignScope;
 use App\Enums\Core\SystemRolesLib;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  *
@@ -75,7 +76,6 @@ use App\Enums\Core\SystemRolesLib;
  * @property string $stage
  * @mixin \Eloquent
  */
-#[ScopedBy([CampaignScope::class])]
 class Campaign extends BaseModel
 {
     public $stages;
@@ -110,7 +110,7 @@ class Campaign extends BaseModel
         'description' => TrixFieldCast::class,
     ];
 
-    public $contextualRole = SystemRolesLib::CAMPAIGN_COORDINATOR;
+    protected $accessScope = CampaignScope::class;
 
     protected static function boot()
     {
@@ -267,7 +267,7 @@ class Campaign extends BaseModel
         return $stages;
     }
 
-    public function active(): bool
+    public function open(): bool
     {
         $now = Carbon::now();
         $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateStart());
@@ -278,6 +278,7 @@ class Campaign extends BaseModel
     public function finished(): bool
     {
         if ($this->manual) {
+            // TODO return true if all objectives are completed
             return false;
         }
 
@@ -341,5 +342,58 @@ class Campaign extends BaseModel
     public function getStageInfo(string $stage): ?string
     {
         return CampaignStage::getInfo($stage);
+    }
+
+    public function isDraft(): bool
+    {
+        return $this->draft;
+    }
+
+    public function terminated(): bool
+    {
+        return $this->stage === CampaignStage::TERMINATED;
+    }
+
+    public function canceled(): bool
+    {
+        return $this->stage === CampaignStage::CANCELED;
+    }
+
+    public function completed(): bool
+    {
+        return $this->stage === CampaignStage::COMPLETED;
+    }
+
+    public function pending(): bool
+    {
+        return $this->stage === CampaignStage::PENDING;
+    }
+
+    public function isActive(): bool
+    {
+        return !$this->isDraft() && !$this->terminated() && !$this->canceled() && !$this->completed();
+    }
+
+    /**
+     * LOCAL SCOPES
+     */
+
+    public function scopeOngoing(Builder $query): void
+    {
+        $query->where('draft', 0)
+            ->where(function (Builder $q) {
+                $q->where('stage', CampaignStage::IN_PROGRESS)
+                    ->orWhereDate('self_evaluation_to', '>', Carbon::now());
+            });
+    }
+
+    public function scopeCompleted(Builder $query): void
+    {
+        $query->where('draft', 0)
+            ->whereNotIn('stage', [CampaignStage::TERMINATED, CampaignStage::CANCELED])
+            ->where(function (Builder $q) {
+                $q->where('stage', CampaignStage::COMPLETED)
+                    ->orWhereDate('self_evaluation_to', '<', Carbon::now());
+            });
     }
 }

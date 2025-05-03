@@ -2,11 +2,8 @@
 
 namespace App\Service\Campaigns;
 
-use Illuminate\Http\Request;
 use App\Service\BaseService;
 use App\Models\MBO\Campaign;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
 
 class CampaignService extends BaseService
 {

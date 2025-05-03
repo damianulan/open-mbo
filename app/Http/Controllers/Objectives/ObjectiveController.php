@@ -40,7 +40,7 @@ class ObjectiveController extends Controller
      */
     public function show(string $id)
     {
-        $objective = Objective::findOrFail($id);
+        $objective = Objective::checkAccess()->findOrFail($id);
 
         $header = 'Podsumowanie Celu';
         return view('pages.mbo.objectives.show', [
