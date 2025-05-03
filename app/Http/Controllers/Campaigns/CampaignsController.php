@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\MBO\Campaign;
 use App\Forms\MBO\Campaign\CampaignEditForm;
 use App\Http\Controllers\Controller;
-use App\Http\Repositories\Campaigns\CampaignRepository;
+use App\Service\Campaigns\CampaignService;
 
 class CampaignsController extends Controller
 {
@@ -45,10 +45,10 @@ class CampaignsController extends Controller
         }
         $request = $form::reformatRequest($request);
         $request->validate($form::validation($request));
-        $repository = CampaignRepository::boot($request)->upsert();
+        $service = CampaignService::boot($request)->createOrUpdate();
 
-        if ($repository->check()) {
-            $campaign = $repository->getModel();
+        if ($service->check()) {
+            $campaign = $service->getModel();
             return redirect()->route('campaigns.show', $campaign->id)->with('success', __('alerts.campaigns.success.create', ['name' => $campaign->name]));
         }
         return redirect()->back()->with('error', __('alerts.campaigns.error.create'));
@@ -99,10 +99,10 @@ class CampaignsController extends Controller
 
         $request = $form::reformatRequest($request);
         $request->validate($form::validation($request, $id));
-        $repository = CampaignRepository::boot($request, $id)->upsert();
+        $service = CampaignService::boot($request, $id)->createOrUpdate();
 
-        if ($repository->check()) {
-            $campaign = $repository->getModel();
+        if ($service->check()) {
+            $campaign = $service->getModel();
             return redirect()->route('campaigns.show', $id)->with('success', __('alerts.campaigns.success.edit', ['name' => $campaign->name]));
         }
         return redirect()->back()->with('error', __('alerts.campaigns.error.edit', ['name' => $campaign->name]));

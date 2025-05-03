@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Repositories\Campaigns;
+namespace App\Service\Campaigns;
 
 use Illuminate\Http\Request;
-use App\Http\Repositories\Repository;
+use App\Service\BaseService;
 use App\Models\MBO\Campaign;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
-class CampaignRepository extends Repository
+class CampaignService extends BaseService
 {
-    public function upsert(): static
+    public function createOrUpdate(): static
     {
         $this->transaction(function () {
             $campaign = Campaign::fillFromRequest($this->request, $this->id);
@@ -22,6 +22,11 @@ class CampaignRepository extends Repository
 
             return $campaign;
         });
+        return $this;
+    }
+
+    public function destroy(): static
+    {
         return $this;
     }
 }
