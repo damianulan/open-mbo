@@ -10,9 +10,13 @@ use App\Models\MBO\Campaign;
 use App\Models\Core\User;
 use App\Casts\Carbon\CarbonDatetime;
 use App\Models\MBO\UserObjective;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Query\JoinClause;
+use App\Enums\Core\SystemRolesLib;
+use App\Models\Scopes\MBO\ObjectiveScope;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string|null $template_id
@@ -80,6 +84,9 @@ class Objective extends BaseModel
         'description' => TrixFieldCast::class,
     ];
 
+
+    protected $accessScope = ObjectiveScope::class;
+
     protected static function boot()
     {
         parent::boot();
@@ -123,12 +130,12 @@ class Objective extends BaseModel
 
     public function category()
     {
-        return $this->template->category();
+        return $this->template?->category();
     }
 
     public function coordinators()
     {
-        return $this->template->coordinators();
+        return $this->template?->coordinators();
     }
 
     public function campaign()
@@ -144,5 +151,15 @@ class Objective extends BaseModel
     public function user_assignments()
     {
         return $this->hasMany(UserObjective::class);
+    }
+
+    public function scopeWhereAssigned(Builder $query, User $user): void
+    {
+        $query->select('objectives.*')
+            ->join('user_objectives', function (JoinClause $join) use ($user) {
+                $join->on('objectives.id', '=', 'user_objectives.objective_id')
+                    ->where('user_objectives.user_id', $user->id);
+            })
+            ->published();
     }
 }

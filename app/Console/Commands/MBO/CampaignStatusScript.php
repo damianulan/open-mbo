@@ -27,13 +27,27 @@ class CampaignStatusScript extends Command
      */
     public function handle()
     {
-        $campaigns = Campaign::where(['manual' => 0, 'draft' => 0])
-                        ->whereIn('stage', [CampaignStage::PENDING->value, CampaignStage::IN_PROGRESS->value])
-                        ->get();
+        $this->logStart();
+        try {
+            $this->campaignsSetStatus();
+            $this->log('completed', true);
+        } catch (\Throwable $th) {
+            $this->log($th->getMessage(), false);
+            $this->error($th->getMessage());
+        }
+    }
 
-        if(!empty($campaigns)){
-            foreach($campaigns as $campaign){
-                $this->info('Updating campaign status for: ' . $campaign->name);
+    public function campaignsSetStatus(bool $echo = true)
+    {
+        $campaigns = Campaign::where(['manual' => 0, 'draft' => 0])
+            ->whereIn('stage', [CampaignStage::PENDING, CampaignStage::IN_PROGRESS])
+            ->get();
+
+        if (!empty($campaigns)) {
+            foreach ($campaigns as $campaign) {
+                if ($echo) {
+                    $this->info('Updating campaign status for: ' . $campaign->name);
+                }
                 $campaign->timestamps = false;
                 $campaign->setStageAuto();
                 $campaign->update();

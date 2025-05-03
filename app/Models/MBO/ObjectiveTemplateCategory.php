@@ -7,9 +7,11 @@ use FormForge\Casts\TrixFieldCast;
 use App\Casts\CheckboxCast;
 use App\Models\MBO\ObjectiveTemplate;
 use App\Models\Core\User;
+use App\Models\Scopes\MBO\ObjectiveTemplateCategoryScope;
+use App\Enums\Core\SystemRolesLib;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $name
@@ -56,6 +58,8 @@ class ObjectiveTemplateCategory extends BaseModel
     protected $casts = [
         'description' => TrixFieldCast::class,
     ];
+
+    protected $accessScope = ObjectiveTemplateCategoryScope::class;
 
     protected static function boot()
     {
@@ -107,13 +111,13 @@ class ObjectiveTemplateCategory extends BaseModel
         foreach ($toDelete as $user_id) {
             $user = User::find($user_id);
             if ($user->exists()) {
-                $user->revokeRole('objective_coordinator', $this);
+                $user->revokeRoleSlug('objective_coordinator', $this);
             }
         }
         foreach ($toAdd as $user_id) {
             $user = User::find($user_id);
             if ($user->exists()) {
-                $user->assignRole('objective_coordinator', $this);
+                $user->assignRoleSlug('objective_coordinator', $this);
             }
         }
     }

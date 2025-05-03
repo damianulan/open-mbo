@@ -18,7 +18,7 @@ class ServerController extends SettingsController
      */
     public function index(Request $request)
     {
-        $git_text = __('vocabulary.no_data');
+        $git_text = __('globals.no_data');
         if (!empty(config('app.head'))) {
             $git_text = 'On branch <strong>' . config('app.head') . '</strong>';
         }

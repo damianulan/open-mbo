@@ -25033,6 +25033,10 @@ section.content-wrapper {
   text-transform: uppercase;
 }
 
+.error-page p.error-paragraph {
+  font-size: 0.85rem;
+}
+
 .nowrap {
   white-space: nowrap !important;
 }

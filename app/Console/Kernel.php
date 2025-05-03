@@ -6,6 +6,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Console\Commands\Core\AppRefresh;
 use App\Console\Commands\AppReload;
+use App\Console\Commands\Core\SystemTest;
 
 use App\Console\Commands\MBO\CampaignStatusScript;
 
@@ -19,14 +20,20 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command(CampaignStatusScript::class)->daily()->at('00:01');
+        $schedule->command(CampaignStatusScript::class)->everyThirtyMinutes();
 
         if (config('backup.backup.auto') === true) {
             $schedule->command('backup:run')->daily()->at('01:30');
         }
 
-        if (config('app.env') === 'development') {
+
+        if (config('app.env') === 'development' && env('CRON_APP_REFRESH', false)) {
             $schedule->command(AppRefresh::class)->daily()->at('01:01');
+        }
+
+        $runTest = env('CRON_RUN_TEST', false);
+        if ($runTest) {
+            $schedule->command(SystemTest::class)->everyMinute();
         }
     }
 

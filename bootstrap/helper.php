@@ -1,5 +1,7 @@
 <?php
+
 use Illuminate\Support\Facades\Auth;
+use App\Exceptions\Core\UnauthorizedAccess;
 
 function lorem()
 {
@@ -26,9 +28,9 @@ function lorem_paragraph()
 function user(?string $user_id = null): App\Models\Core\User
 {
     $user = new App\Models\Core\User();
-    if(is_null($user_id)){
-        if(auth()->check()){
-            $user = auth()->user();
+    if (is_null($user_id)) {
+        if (Auth::check()) {
+            $user = Auth::user();
         }
     } else {
         $user = App\Models\Core\User::find($user_id);
@@ -42,7 +44,7 @@ function user(?string $user_id = null): App\Models\Core\User
  */
 function isRoot(bool $strict = false): bool
 {
-    return auth()->user()->isRoot($strict);
+    return Auth::user()->isRoot($strict);
 }
 
 function ajax(): App\Facades\Http\ResponseAjax
@@ -53,16 +55,16 @@ function ajax(): App\Facades\Http\ResponseAjax
 function current_theme(): string
 {
     $theme = app(App\Settings\GeneralSettings::class)->theme;
-    $user = auth()->user();
-    if($user){
+    $user = Auth::user();
+    if ($user) {
         $userTheme = $user->preferences->theme;
-        if($userTheme && $userTheme !== $theme && $userTheme !== 'auto'){
+        if ($userTheme && $userTheme !== $theme && $userTheme !== 'auto') {
             $theme = $userTheme;
         }
     }
     $available = App\Lib\Theme::getAvailable();
 
-    if($available->contains($theme) === false){
+    if ($available->contains($theme) === false) {
         $theme = $available->first();
     }
 
@@ -91,9 +93,14 @@ function float_view(float $value, int $decimals = 2): string
     $lang = app()->getLocale();
     $comma_locale = ['pl'];
 
-    if(in_array($lang, $comma_locale)){
+    if (in_array($lang, $comma_locale)) {
         return number_format($value, $decimals, ',', ' ');
     }
 
     return number_format($value, $decimals, '.', ',');
+}
+
+function unauthorized($message = '', $permission = null)
+{
+    throw new UnauthorizedAccess($message, $permission);
 }

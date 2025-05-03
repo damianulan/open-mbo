@@ -21,7 +21,7 @@ class UserProfileFactory extends Factory
      */
     public function definition(): array
     {
-        $genders = Gender::values();
+        $genders = array_values(Gender::values());
         $g = $genders[fake()->numberBetween(0, count($genders) - 2)];
         $gender = null;
 

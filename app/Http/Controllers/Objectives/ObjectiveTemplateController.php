@@ -17,7 +17,7 @@ class ObjectiveTemplateController extends ManagementController
     public function index()
     {
         return view('pages.management.index', [
-            'objectives' => ObjectiveTemplate::paginate(30),
+            'objectives' => ObjectiveTemplate::checkAccess()->paginate(30),
             'nav' => $this->nav(),
         ]);
     }
@@ -42,7 +42,7 @@ class ObjectiveTemplateController extends ManagementController
      */
     public function store(Request $request, ObjectiveTemplateEditForm $form)
     {
-        $request->validate($form::validation());
+        $request->validate($form::validation($request));
         $objective = ObjectiveTemplate::fillFromRequest($request);
 
         if ($objective->save()) {
@@ -53,15 +53,15 @@ class ObjectiveTemplateController extends ManagementController
 
     /**
      * Display the specified resource.
-     *
+     * @TODO add view
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return view('pages.management.objectives.show', [
-            'objective' => ObjectiveTemplate::findOrFail($id),
-        ]);
+        // return view('pages.management.objectives.show', [
+        //     'objective' => ObjectiveTemplate::findOrFail($id),
+        // ]);
     }
 
     /**
@@ -72,7 +72,7 @@ class ObjectiveTemplateController extends ManagementController
      */
     public function edit(Request $request, $id)
     {
-        $model = ObjectiveTemplate::findOrFail($id);
+        $model = ObjectiveTemplate::checkAccess()->findOrFail($id);
         return view('components.forms.edit', [
             'objective' => $model,
             'form' => ObjectiveTemplateEditForm::definition($request, $model),
@@ -98,7 +98,7 @@ class ObjectiveTemplateController extends ManagementController
 
     public function delete($id)
     {
-        $objective = ObjectiveTemplate::findOrFail($id);
+        $objective = ObjectiveTemplate::checkAccess()->findOrFail($id);
         if ($objective->delete()) {
             return redirect()->route('management.mbo.objectives.index')->with('success', __('alerts.objective_template.success.delete'));
         }

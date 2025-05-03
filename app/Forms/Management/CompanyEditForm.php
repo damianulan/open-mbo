@@ -20,7 +20,7 @@ class CompanyEditForm extends Form
             $method = 'PUT';
             $route = route('management.organization.company.update', $model->id);
         }
-        return FormBuilder::boot($method, $route, 'companies_edit')
+        return FormBuilder::boot($request, $method, $route, 'companies_edit')
             ->class('companies-create-form')
             ->add(FormComponent::text('firstname', $model)->label(__('forms.users.firstname')))
             ->add(FormComponent::text('lastname', $model)->label(__('forms.users.lastname')))

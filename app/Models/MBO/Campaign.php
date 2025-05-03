@@ -11,9 +11,13 @@ use App\Models\MBO\UserCampaign;
 use Carbon\Carbon;
 use App\Models\Core\User;
 use App\Enums\MBO\CampaignStage;
+use Illuminate\Database\Eloquent\Attributes\ScopedBy;
+use App\Models\Scopes\MBO\CampaignScope;
+use App\Enums\Core\SystemRolesLib;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $name
@@ -31,7 +35,6 @@ use App\Enums\MBO\CampaignStage;
  * @property mixed $self_evaluation_to
  * @property mixed $draft
  * @property mixed $manual
- * @property string $created_by
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -98,26 +101,16 @@ class Campaign extends BaseModel
 
         'draft',
         'manual',
-        'created_by',
     ];
 
     protected $casts = [
         'draft' => CheckboxCast::class,
         'manual' => CheckboxCast::class,
 
-        // Dates
-        // 'definition_from' => CarbonDatetime::class,
-        // 'definition_to' => CarbonDatetime::class,
-        // 'disposition_from' => CarbonDatetime::class,
-        // 'disposition_to' => CarbonDatetime::class,
-        // 'realization_from' => CarbonDatetime::class,
-        // 'realization_to' => CarbonDatetime::class,
-        // 'evaluation_from' => CarbonDatetime::class,
-        // 'evaluation_to' => CarbonDatetime::class,
-        // 'self_evaluation_from' => CarbonDatetime::class,
-        // 'self_evaluation_to' => CarbonDatetime::class,
         'description' => TrixFieldCast::class,
     ];
+
+    protected $accessScope = CampaignScope::class;
 
     protected static function boot()
     {
@@ -153,11 +146,6 @@ class Campaign extends BaseModel
         return $this->hasMany(Objective::class);
     }
 
-    public function creator()
-    {
-        return $this->belongsTo(User::class, 'created_by');
-    }
-
     public function coordinators()
     {
         return $this->morphToMany(User::class, 'context', 'users_roles');
@@ -180,13 +168,13 @@ class Campaign extends BaseModel
         foreach ($toDelete as $user_id) {
             $user = User::find($user_id);
             if ($user->exists()) {
-                $user->revokeRole('campaign_coordinator', $this);
+                $user->revokeRoleSlug('campaign_coordinator', $this);
             }
         }
         foreach ($toAdd as $user_id) {
             $user = User::find($user_id);
             if ($user->exists()) {
-                $user->assignRole('campaign_coordinator', $this);
+                $user->assignRoleSlug('campaign_coordinator', $this);
             }
         }
 
@@ -279,7 +267,7 @@ class Campaign extends BaseModel
         return $stages;
     }
 
-    public function active(): bool
+    public function open(): bool
     {
         $now = Carbon::now();
         $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateStart());
@@ -290,6 +278,7 @@ class Campaign extends BaseModel
     public function finished(): bool
     {
         if ($this->manual) {
+            // TODO return true if all objectives are completed
             return false;
         }
 
@@ -353,5 +342,58 @@ class Campaign extends BaseModel
     public function getStageInfo(string $stage): ?string
     {
         return CampaignStage::getInfo($stage);
+    }
+
+    public function isDraft(): bool
+    {
+        return $this->draft;
+    }
+
+    public function terminated(): bool
+    {
+        return $this->stage === CampaignStage::TERMINATED;
+    }
+
+    public function canceled(): bool
+    {
+        return $this->stage === CampaignStage::CANCELED;
+    }
+
+    public function completed(): bool
+    {
+        return $this->stage === CampaignStage::COMPLETED;
+    }
+
+    public function pending(): bool
+    {
+        return $this->stage === CampaignStage::PENDING;
+    }
+
+    public function isActive(): bool
+    {
+        return !$this->isDraft() && !$this->terminated() && !$this->canceled() && !$this->completed();
+    }
+
+    /**
+     * LOCAL SCOPES
+     */
+
+    public function scopeOngoing(Builder $query): void
+    {
+        $query->where('draft', 0)
+            ->where(function (Builder $q) {
+                $q->where('stage', CampaignStage::IN_PROGRESS)
+                    ->orWhereDate('self_evaluation_to', '>', Carbon::now());
+            });
+    }
+
+    public function scopeCompleted(Builder $query): void
+    {
+        $query->where('draft', 0)
+            ->whereNotIn('stage', [CampaignStage::TERMINATED, CampaignStage::CANCELED])
+            ->where(function (Builder $q) {
+                $q->where('stage', CampaignStage::COMPLETED)
+                    ->orWhereDate('self_evaluation_to', '<', Carbon::now());
+            });
     }
 }

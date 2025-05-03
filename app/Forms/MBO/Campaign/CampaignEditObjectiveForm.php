@@ -22,11 +22,16 @@ class CampaignEditObjectiveForm extends Form
         $method = 'POST';
         $title = 'Dodaj nowy cel do kampanii';
         $campaign_id = $request->input('campaign_id') ?? null;
+        $selectedTemplate = array();
+
         if (!is_null($model)) {
             $method = 'PUT';
             $title = 'Edytuj cel w ramach kampanii';
             if (!$campaign_id) {
                 $campaign_id = $model->campaign_id;
+            }
+            if ($model->template_id) {
+                $selectedTemplate = [$model->template_id];
             }
         }
         $campaign = Campaign::findOrFail($campaign_id);
@@ -35,17 +40,19 @@ class CampaignEditObjectiveForm extends Form
         $exclude = array();
         if (!empty($template_ids)) {
             foreach ($template_ids as $tid) {
-                $exclude[] = ['id' => $tid];
+                if (!in_array($tid, $selectedTemplate)) {
+                    $exclude[] = ['id' => $tid];
+                }
             }
         }
 
         $realization_from = Carbon::parse($campaign->realization_from)->format('Y-m-d');
         $realization_to = Carbon::parse($campaign->realization_to)->format('Y-m-d');
 
-        return FormBuilder::boot($method, $route, 'campaign_edit_objective')
+        return FormBuilder::boot($request, $method, $route, 'campaign_edit_objective')
             ->class('campaign-edit-objective-form')
             ->add(FormComponent::hidden('id', $model))
-            ->add(FormComponent::select('template_id', $model, Dictionary::fromModel(ObjectiveTemplate::class, 'name', 'all', $exclude))->required()->label(__('forms.mbo.objectives.template')))
+            ->add(FormComponent::select('template_id', $model, Dictionary::fromModel(ObjectiveTemplate::class, 'name', 'getAll', $exclude), $selectedTemplate)->required()->label(__('forms.mbo.objectives.template')))
             ->add(FormComponent::hidden('campaign_id', $model, $campaign_id))
             ->add(FormComponent::text('name', $model)->label(__('forms.mbo.objectives.name'))->required())
             ->add(FormComponent::trix('description', $model)->label(__('forms.mbo.objectives.description')))

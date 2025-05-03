@@ -144,10 +144,10 @@ return [
      * V stands for version build for the specific day (max 9).
      */
 
-     'release' => '0.0.1 beta',
-     'build' => 0,
+    'release' => '0.0.1 beta',
+    'build' => 0,
 
-     'head' => Git::head(),
+    'head' => Git::head(),
 
     /*
     |--------------------------------------------------------------------------
@@ -263,6 +263,8 @@ return [
         'PageBuilder' => App\Facades\Page\PageBuilder::class,
         'Theme' => App\Lib\Theme::class,
         'ResponseAjax' => App\Facades\Http\ResponseAjax::class,
+        'PermissionsLib' => App\Enums\Core\PermissionLib::class,
+        'SystemRolesLib' => App\Enums\Core\SystemRolesLib::class,
 
         // CASTS
         'CheckboxCast' => App\Casts\CheckboxCast::class,

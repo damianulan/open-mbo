@@ -1,5 +1,7 @@
 <?php
 
+use FormForge\Enums\Template;
+
 return [
 
     /*
@@ -11,5 +13,11 @@ return [
     |
     */
 
+    'date_format' => env('FORMFORGE_DATE_FORMAT', 'Y-m-d'),
 
+    'handling_files' => env('FORMFORGE_HANDLING_FILES', true),
+
+    'defaults' => [
+        'template' => env('FORMFORGE_TEMPLATE', Template::HORIZONTAL),
+    ],
 ];

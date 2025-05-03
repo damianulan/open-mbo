@@ -8,9 +8,12 @@ use App\Casts\CheckboxCast;
 use App\Models\Core\User;
 use App\Models\MBO\Objective;
 use App\Models\MBO\ObjectiveTemplateCategory;
+use App\Models\Scopes\MBO\ObjectiveTemplateScope;
+use App\Enums\Core\SystemRolesLib;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string|null $category_id
@@ -52,7 +55,6 @@ class ObjectiveTemplate extends BaseModel
         'category_id',
         'name',
         'description',
-        'draft',
         'award',
     ];
 
@@ -61,17 +63,14 @@ class ObjectiveTemplate extends BaseModel
         'description' => TrixFieldCast::class,
     ];
 
+    protected $accessScope = ObjectiveTemplateScope::class;
+
     protected static function boot()
     {
         parent::boot();
         static::deleted(function ($model) {
             $model->objective_templates()->delete();
         });
-    }
-
-    public static function allActive()
-    {
-        return self::where('draft', 0)->get();
     }
 
     public function category()

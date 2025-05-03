@@ -11,9 +11,10 @@ use Watson\Rememberable\Rememberable;
 use App\Traits\Vendors\ModelActivity;
 use App\Traits\VirginModel;
 use Carbon\Carbon;
+use App\Traits\Accessible;
 
 /**
- * 
+ *
  *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
@@ -28,7 +29,7 @@ use Carbon\Carbon;
 class BaseModel extends Model
 {
     use HasFactory, UUID, SoftDeletes, RequestForms;
-    use ModelActivity, VirginModel;
+    use ModelActivity, VirginModel, Accessible;
     //use Rememberable;
 
     public function carbonDate(string $prop, string $format = 'Y-m-d')

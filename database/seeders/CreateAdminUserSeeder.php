@@ -35,7 +35,7 @@ class CreateAdminUserSeeder extends Seeder
             'gender' => Gender::MALE
         ]);
         $user->profile()->save($profile);
-        $user->assignRole('admin');
+        $user->assignRoleSlug('admin');
 
         //
         $user = new User([
@@ -51,7 +51,7 @@ class CreateAdminUserSeeder extends Seeder
             'gender' => Gender::MALE
         ]);
         $user->profile()->save($profile);
-        $user->assignRole('root');
+        $user->assignRoleSlug('root');
 
         $user = new User([
             'email' => 'helpdesk@damianulan.me',
@@ -66,7 +66,7 @@ class CreateAdminUserSeeder extends Seeder
             'gender' => Gender::MALE
         ]);
         $user->profile()->save($profile);
-        $user->assignRole('support');
+        $user->assignRoleSlug('support');
 
         //
         $user = new User([
@@ -81,6 +81,6 @@ class CreateAdminUserSeeder extends Seeder
             'gender' => Gender::FEMALE
         ]);
         $user->profile()->save($profile);
-        $user->assignRole('employee');
+        $user->assignRoleSlug('employee');
     }
 }

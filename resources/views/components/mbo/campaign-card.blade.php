@@ -1,5 +1,5 @@
 
-<div class="card failed card-url card-bg" data-url="{{ route('campaigns.show', $campaign->id) }}">
+<div class="card card-url card-bg" data-url="{{ route('campaigns.show', $campaign->id) }}">
     <div class="card-body">
         <div class="card-top">
             <div class="card-title" data-tippy-content="Kampania xxx">
@@ -15,6 +15,11 @@
                 @if($campaign->active())
                     <div data-tippy-content="Kampania w toku">
                         <i class="bi bi-lightning-charge-fill"></i>
+                    </div>
+                @endif
+                @if($campaign->manual)
+                    <div data-tippy-content="Tryb ręczny">
+                        <i class="bi bi-hand-index-thumb-fill"></i>
                     </div>
                 @endif
                 @if($campaign->manual)
@@ -60,12 +65,6 @@
                 </div>
             </div>
             <div class="col-xl-4 col-md-6 col-sm-12">
-                <div class="element">
-                    <div class="element-title" data-tippy-content="Autor kampanii">
-                        <i class="bi bi-person-fill me-2"></i>
-                        <span>{{ $campaign->creator ? $campaign->creator->name():'' }}</span>
-                    </div>
-                </div>
 
             </div>
         </div>

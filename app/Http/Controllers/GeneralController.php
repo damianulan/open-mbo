@@ -26,7 +26,7 @@ class GeneralController extends Controller
             case 'campaigns.add_objectives':
 
                 if ($id) {
-                    $objective = Objective::find($id);
+                    $objective = Objective::checkAccess()->find($id);
                     if ($objective) {
                         $params = [
                             'id' => $id,
@@ -47,7 +47,7 @@ class GeneralController extends Controller
             case 'campaigns.add_users':
                 //$id - objective_id
                 if ($id) {
-                    $campaign = Campaign::find($id);
+                    $campaign = Campaign::checkAccess()->find($id);
                     $params = [
                         'id' => $id,
                         'form' => CampaignEditUserForm::definition($request, $campaign),
@@ -62,11 +62,11 @@ class GeneralController extends Controller
                 $parent_id = $request->input('parent_id') ?? null;
 
                 if ($id) {
-                    $objective = Objective::find($id);
+                    $objective = Objective::checkAccess()->find($id);
                     if ($objective) {
                         $params = [
                             'id' => $id,
-                            'form' => ObjectiveChildEditForm::definition($objective, $request),
+                            'form' => ObjectiveChildEditForm::definition($request, $objective),
                         ];
                         $status = 'ok';
                     }

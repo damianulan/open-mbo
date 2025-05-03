@@ -6,13 +6,18 @@ use Illuminate\Http\Request;
 use App\Models\MBO\Campaign;
 use App\Forms\MBO\Campaign\CampaignEditForm;
 use App\Http\Controllers\Controller;
+use App\Service\Campaigns\CampaignService;
+use App\Models\Core\User;
 
 class CampaignsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->user()->cannot('viewAny', Campaign::class)) {
+            unauthorized();
+        }
         return view('pages.mbo.campaigns.index', [
-            'campaigns' => Campaign::paginate(30),
+            'campaigns' => Campaign::checkAccess()->paginate(30),
         ]);
     }
 
@@ -24,7 +29,7 @@ class CampaignsController extends Controller
     public function create(Request $request)
     {
         if ($request->user()->cannot('create', Campaign::class)) {
-            abort(403);
+            unauthorized();
         }
         return view('pages.mbo.campaigns.edit', [
             'form' => CampaignEditForm::definition($request),
@@ -40,18 +45,17 @@ class CampaignsController extends Controller
     public function store(Request $request, CampaignEditForm $form)
     {
         if ($request->user()->cannot('create', Campaign::class)) {
-            abort(403);
+            unauthorized();
         }
         $request = $form::reformatRequest($request);
         $request->validate($form::validation($request));
-        $campaign = Campaign::fillFromRequest($request);
-        $user_ids = $request->input('user_ids');
+        $service = CampaignService::boot($request)->createOrUpdate();
 
-        if ($campaign->save()) {
-            $campaign->refreshCoordinators($user_ids);
+        if ($service->check()) {
+            $campaign = $service->getModel();
             return redirect()->route('campaigns.show', $campaign->id)->with('success', __('alerts.campaigns.success.create', ['name' => $campaign->name]));
         }
-        return redirect()->back()->with('error', __('alerts.campaigns.error.create', ['name' => $campaign->name]));
+        return redirect()->back()->with('error', __('alerts.campaigns.error.create'));
     }
 
     /**
@@ -62,8 +66,8 @@ class CampaignsController extends Controller
      */
     public function show(Request $request, Campaign $campaign)
     {
-        if ($request->user()->cannot('mbo-campaign-view', $campaign)) {
-            abort(403);
+        if ($request->user()->cannot('view', $campaign)) {
+            unauthorized();
         }
         $header = $campaign->name . ' [' . $campaign->period . ']';
         return view('pages.mbo.campaigns.show', [
@@ -81,7 +85,7 @@ class CampaignsController extends Controller
     public function edit(Request $request, Campaign $campaign)
     {
         if ($request->user()->cannot('mbo-campaign-update', $campaign)) {
-            abort(403);
+            unauthorized();
         }
         return view('pages.mbo.campaigns.edit', [
             'campaign' => $campaign,
@@ -89,25 +93,20 @@ class CampaignsController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id, CampaignEditForm $form)
     {
+        $campaign = Campaign::findOrFail($id);
+        if ($request->user()->cannot('mbo-campaign-update', $campaign)) {
+            unauthorized();
+        }
+
         $request = $form::reformatRequest($request);
         $request->validate($form::validation($request, $id));
-        $campaign = Campaign::fillFromRequest($request, $id);
-        if ($request->user()->cannot('mbo-campaign-update', $campaign)) {
-            abort(403);
-        }
-        $user_ids = $request->input('user_ids');
+        $service = CampaignService::boot($request, $id)->createOrUpdate();
 
-        if ($campaign->update()) {
-            $campaign->refreshCoordinators($user_ids);
+        if ($service->check()) {
+            $campaign = $service->getModel();
             return redirect()->route('campaigns.show', $id)->with('success', __('alerts.campaigns.success.edit', ['name' => $campaign->name]));
         }
         return redirect()->back()->with('error', __('alerts.campaigns.error.edit', ['name' => $campaign->name]));

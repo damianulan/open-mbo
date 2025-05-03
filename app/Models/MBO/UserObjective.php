@@ -6,9 +6,11 @@ use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Models\MBO\Objective;
 use App\Enums\MBO\UserObjectiveStatus;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $user_id
@@ -98,5 +100,33 @@ class UserObjective extends BaseModel
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function isPassed(): bool
+    {
+        return $this->status === UserObjectiveStatus::PASSED;
+    }
+
+    public function isFailed(): bool
+    {
+        return $this->status === UserObjectiveStatus::FAILED;
+    }
+
+    public function isCompleted(): bool
+    {
+        return in_array($this->status, [UserObjectiveStatus::COMPLETED, UserObjectiveStatus::PASSED, UserObjectiveStatus::FAILED]);
+    }
+
+    public function scopeActive(Builder $query): void
+    {
+        $query->whereNotIn('status', UserObjectiveStatus::frozen());
+    }
+
+    public function scopeMy(Builder $query, ?User $user = null): void
+    {
+        if (!$user) {
+            $user = Auth::user();
+        }
+        $query->where('user_id', $user->id);
     }
 }

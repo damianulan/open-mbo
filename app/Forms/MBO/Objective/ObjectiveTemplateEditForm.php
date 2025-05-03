@@ -21,7 +21,7 @@ class ObjectiveTemplateEditForm extends Form
             $route = route('management.mbo.objectives.update', $model->id);
         }
 
-        return FormBuilder::boot($method, $route, 'campaign_edit')
+        return FormBuilder::boot($request, $method, $route, 'campaign_edit')
             ->class('campaign-create-form')
             ->add(FormComponent::select('category_id', $model, Dictionary::fromModel(ObjectiveTemplateCategory::class, 'name'))->label(__('forms.mbo.objectives.category')))
             ->add(FormComponent::text('name', $model)->label(__('forms.mbo.objectives.name'))->required())

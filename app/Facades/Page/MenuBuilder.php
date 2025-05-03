@@ -5,6 +5,7 @@ namespace App\Facades\Page;
 use App\Facades\Page\Bars\SidebarMenu;
 use App\Facades\Page\Bars\MenubarMenu;
 use App\Facades\Page\Bars\MenuItem;
+use App\Enums\Core\PermissionLib;
 
 class MenuBuilder
 {
@@ -23,7 +24,8 @@ class MenuBuilder
             MenuItem::make('campaign')
                 ->setTitle(__('menus.campaigns.index'))
                 ->setIcon('bullseye')
-                ->setRoute('campaigns.index'),
+                ->setRoute('campaigns.index')
+                ->permission('mbo-campaign-*'),
             MenuItem::make('reports')
                 ->setTitle(__('menus.reports.index'))
                 ->setIcon('bar-chart-steps')
@@ -35,7 +37,8 @@ class MenuBuilder
             MenuItem::make('management')
                 ->setTitle(__('menus.management.index'))
                 ->setIcon('diagram-3-fill')
-                ->setRoute('management.mbo.objectives.index'),
+                ->setRoute('management.mbo.objectives.index')
+                ->permission('management-*'),
             MenuItem::make('settings')
                 ->setTitle(__('menus.settings.index'))
                 ->setIcon('gear-fill')

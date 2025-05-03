@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\UUID;
 use FormForge\Traits\RequestForms;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $slug
@@ -49,9 +50,14 @@ class Role extends Model
         return $this->belongsToMany(Permission::class, 'roles_permissions');
     }
 
+    public static function findBySlug(string $slug): ?self
+    {
+        return self::whereSlug($slug)->first();
+    }
+
     public static function getId(string $slug): ?string
     {
-        $role = self::where('slug', $slug)->first();
+        $role = self::whereSlug($slug)->first();
         if (isset($role->id)) {
             return $role->id;
         }
@@ -75,5 +81,15 @@ class Role extends Model
             }
         }
         return $output;
+    }
+
+    public function scopeWhereSlug(Builder $query, string $slug): void
+    {
+        $query->where('slug', $slug);
+    }
+
+    public function scopeWhereAssignable(Builder $query): void
+    {
+        $query->where('assignable', 1);
     }
 }
