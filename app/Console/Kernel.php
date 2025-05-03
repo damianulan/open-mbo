@@ -26,11 +26,12 @@ class Kernel extends ConsoleKernel
             $schedule->command('backup:run')->daily()->at('01:30');
         }
 
-        if (config('app.env') === 'development') {
+
+        if (config('app.env') === 'development' && env('CRON_APP_REFRESH', false)) {
             $schedule->command(AppRefresh::class)->daily()->at('01:01');
         }
 
-        $runTest = (bool) env('CRON_RUN_TEST', false);
+        $runTest = env('CRON_RUN_TEST', false);
         if ($runTest) {
             $schedule->command(SystemTest::class)->everyMinute();
         }
