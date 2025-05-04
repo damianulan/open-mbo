@@ -14,7 +14,7 @@
                 @endif
                 @if($campaign->active())
                     <div data-tippy-content="Kampania w toku">
-                        <i class="bi bi-lightning-charge-fill"></i>
+                        <i class="bi bi-lightning-fill"></i>
                     </div>
                 @endif
                 @if($campaign->manual)
@@ -22,9 +22,14 @@
                         <i class="bi bi-hand-index-thumb-fill"></i>
                     </div>
                 @endif
-                @if($campaign->manual)
-                    <div data-tippy-content="Tryb ręczny">
-                        <i class="bi bi-hand-index-thumb-fill"></i>
+                @if($campaign->terminated())
+                    <div data-tippy-content="Kampania zawieszona">
+                        <i class="bi bi-pause-fill"></i>
+                    </div>
+                @endif
+                @if($campaign->canceled())
+                    <div data-tippy-content="Kampania anulowana">
+                        <i class="bi bi-x-circle"></i>
                     </div>
                 @endif
                 <div data-tippy-content="Okres pomiaru">
