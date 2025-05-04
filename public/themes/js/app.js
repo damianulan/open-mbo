@@ -75067,17 +75067,30 @@ $(".list-menu .menu-options .toggle-all").click(function () {
   \****************************************************/
 /***/ (() => {
 
-$('#debuggingOptionSwitch').on("change", function () {
+$("#debuggingOptionSwitch").on("change", function () {
   $.ajax({
     headers: {
-      'X-CSRF-TOKEN': csrf
+      "X-CSRF-TOKEN": csrf
     },
     type: "POST",
-    url: SITEURL + '/settings/server/debugging',
+    url: SITEURL + "/settings/server/debugging",
     data: {
       check: this.checked
     },
-    dataType: 'json'
+    dataType: "json"
+  });
+});
+$("#debugbarOptionSwitch").on("change", function () {
+  $.ajax({
+    headers: {
+      "X-CSRF-TOKEN": csrf
+    },
+    type: "POST",
+    url: SITEURL + "/settings/server/debugbar-enable",
+    data: {
+      check: this.checked
+    },
+    dataType: "json"
   });
 });
 

@@ -21,6 +21,7 @@ class CustomDataTable extends DataTable
     protected $id = null;
     protected $orderBy = null;
     protected $orderByDir = 'desc';
+    protected array $actions = ['csv', 'excel', 'column_selector'];
 
     /**
      * Get the dataTable columns definition.
@@ -30,11 +31,11 @@ class CustomDataTable extends DataTable
         $columns = $this->selectedColumns();
         $available = $this->availableColumns();
 
-        $output = array_filter($available, function($key) use($columns) {
+        $output = array_filter($available, function ($key) use ($columns) {
             return in_array($key, $columns);
         }, ARRAY_FILTER_USE_KEY);
 
-        usort($output, function($x, $y) use($columns) {
+        usort($output, function ($x, $y) use ($columns) {
             $pos_x = array_search($x->data, $columns);
             $pos_y = array_search($y->data, $columns);
             return $pos_x - $pos_y;
@@ -43,13 +44,13 @@ class CustomDataTable extends DataTable
         return $output;
     }
 
-    public function columnSelector()
+    public function actions()
     {
         $model = SelectedColumns::findColumn($this->id);
         $available = $this->availableColumns();
-        if($model){
+        if ($model) {
             $selected = $model->selected;
-            uasort($available, function($x, $y) use($selected) {
+            uasort($available, function ($x, $y) use ($selected) {
                 $pos_x = array_search($x->name, $selected);
                 $pos_y = array_search($y->name, $selected);
                 return $pos_x - $pos_y;
@@ -60,6 +61,10 @@ class CustomDataTable extends DataTable
             'datatable_id' => $this->id,
             'columns' => $available,
             'selected' => $this->selectedColumns(),
+            'hasColumns' => in_array('column_selector', $this->actions),
+            'hasCsv' => in_array('csv', $this->actions),
+            'hasExcel' => in_array('excel', $this->actions),
+            'class' => static::class
         ]);
 
         return $view;
@@ -72,10 +77,10 @@ class CustomDataTable extends DataTable
         $columns_raw = $model->selected ?? array();
         $available = $this->availableColumns();
 
-        if(empty($columns_raw)){
+        if (empty($columns_raw)) {
             $columns = $this->defaultColumns();
         } else {
-            $columns = array_filter($columns_raw, function ($c) use($available) {
+            $columns = array_filter($columns_raw, function ($c) use ($available) {
                 return array_key_exists($c, $available);
             });
         }
@@ -96,11 +101,11 @@ class CustomDataTable extends DataTable
     protected function getOrderBy(): ?int
     {
         $orderBy = null;
-        if($this->orderBy){
+        if ($this->orderBy) {
             $columns = $this->getColumns();
-            if(!empty($columns)){
-                foreach($columns as $key => $column){
-                    if($column->name === $this->orderBy){
+            if (!empty($columns)) {
+                foreach ($columns as $key => $column) {
+                    if ($column->name === $this->orderBy) {
                         $orderBy = $key;
                         break;
                     }
@@ -117,25 +122,28 @@ class CustomDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         $builder = $this->builder()
-                    ->parameters([
-                        'language' => [
-                            'url' => asset('themes/vendors/datatables/pl.json'),
-                        ],
-                        'responsive' => true,
-                        'buttons' => [
-                            'csv'
-                        ],
-                        'lengthMenu' => [
-                            20, 50, 100, 200
-                        ],
-                    ])
-                    ->setTableId($this->id)
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->processing(true);
+            ->parameters([
+                'language' => [
+                    'url' => asset('themes/vendors/datatables/pl.json'),
+                ],
+                'responsive' => true,
+                'buttons' => [
+                    'csv'
+                ],
+                'lengthMenu' => [
+                    20,
+                    50,
+                    100,
+                    200
+                ],
+            ])
+            ->setTableId($this->id)
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->processing(true);
 
         $orderBy = $this->getOrderBy();
-        if(!is_null($orderBy)){
+        if (!is_null($orderBy)) {
             $builder->orderBy($orderBy, $this->orderByDir);
         }
         return $builder;
@@ -148,7 +156,7 @@ class CustomDataTable extends DataTable
             'selected' => 'present|array',
         ]);
 
-        if($validator->passes()){
+        if ($validator->passes()) {
             $datatable_id = $request->input('datatable_id');
             $columns = $request->input('columns');
             $selected = $request->input('selected');
@@ -159,7 +167,7 @@ class CustomDataTable extends DataTable
             $sc->columns = $columns;
             $sc->selected = $selected;
 
-            if($sc->save()){
+            if ($sc->save()) {
                 return redirect()->back();
             } else {
                 return redirect()->back()->with('error', __('alerts.datatables.save_columns.error'));
@@ -167,7 +175,5 @@ class CustomDataTable extends DataTable
         }
 
         return redirect()->back()->with('error', __('alerts.datatables.save_columns.error_data'));
-
     }
-
 }

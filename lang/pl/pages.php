@@ -5,6 +5,7 @@ return [
         'server_info' => 'Informacje o serwerze',
         'git_status' => 'Git status',
         'debugging' => 'Tryb debugowania',
+        'debugbar' => 'Pasek debugowania',
         'environment' => 'Środowisko',
         'build' => 'Build',
         'release' => 'Wersja',

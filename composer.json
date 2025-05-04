@@ -27,6 +27,8 @@
     "require": {
         "php": "^8.3.0",
         "akaunting/laravel-apexcharts": "^3.0",
+        "barryvdh/laravel-snappy": "^1.0",
+        "damianulan/laravel-form-forge": "dev-main",
         "diglactic/laravel-breadcrumbs": "^10.0",
         "guzzlehttp/guzzle": "^7.2",
         "lab404/laravel-impersonate": "^1.7",
@@ -35,6 +37,7 @@
         "laravel/telescope": "^5.0",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.1",
+        "maatwebsite/excel": "^3.1",
         "maennchen/zipstream-php": "^2.1",
         "mews/purifier": "^3.4",
         "phpoffice/phpspreadsheet": "^1.27",
@@ -46,8 +49,7 @@
         "tjvb/laravel-mail-catchall": "^4.4",
         "watson/rememberable": "^6.1",
         "yajra/laravel-datatables": "*",
-        "yajra/laravel-datatables-export": "*",
-        "damianulan/laravel-form-forge": "dev-main"
+        "yajra/laravel-datatables-export": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.15",

@@ -1,14 +1,13 @@
 .btn {
-    border-radius: .25rem;
+    border-radius: 0.25rem;
     font-weight: 600 !important;
     white-space: nowrap;
 }
 
 .btn-pagination {
-    padding: .5rem 1rem;
-    margin: 0 .2rem;
+    padding: 0.5rem 1rem;
+    margin: 0 0.2rem;
 }
-
 
 .btn-primary,
 .btn-secondary,
@@ -89,13 +88,13 @@ a.btn-tile {
     background-color: rgba($primary, 0.25);
     text-decoration: none;
     align-items: center;
-    padding: .75rem 1.5rem;
-    transition: all .2s ease-in-out;
-    border-radius: .25rem;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.2s ease-in-out;
+    border-radius: 0.25rem;
 }
 
 a.btn-tile span {
-    padding-left: .75rem;
+    padding-left: 0.75rem;
     transition: padding 0.35s ease 0s;
 }
 
@@ -106,7 +105,12 @@ a.btn-tile i.on-hover {
 
 a.btn-tile:hover {
     background: $primary;
-    background: linear-gradient(90deg, rgba($primary,1) 0%, rgba($primary,0.75) 70%, rgba($primary,0.65) 100%);
+    background: linear-gradient(
+        90deg,
+        rgba($primary, 1) 0%,
+        rgba($primary, 0.75) 70%,
+        rgba($primary, 0.65) 100%
+    );
 }
 
 a.btn-tile:hover span {
@@ -127,11 +131,18 @@ a.btn-tile .bi {
 
 .btn-round {
     border-radius: 50%;
-    padding: .3rem .5rem;
+    padding: 0.3rem 0.5rem;
     width: 36px;
     height: 36px;
 }
 
 .btn-round i.bi {
     font-size: 1rem !important;
+}
+
+a.btn-round.btn-primary i.bi,
+button.btn-round.btn-primary i.bi,
+a.btn-round.btn-secondary i.bi,
+button.btn-round.btn-secondary i.bi {
+    color: $body-bg;
 }

@@ -65,6 +65,16 @@
                         </tr>
                         <tr>
                             <th>
+                                {{ __('pages.settings.debugbar') }}:
+                            </th>
+                            <td>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="debugbarOptionSwitch"{{ config('debugbar.enabled') ? ' checked':'' }}>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
                                 {{ __('pages.settings.build') }}:
                             </th>
                             <td>

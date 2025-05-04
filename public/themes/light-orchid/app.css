@@ -25278,6 +25278,13 @@ a.btn-tile .bi {
   font-size: 1rem !important;
 }
 
+a.btn-round.btn-primary i.bi,
+button.btn-round.btn-primary i.bi,
+a.btn-round.btn-secondary i.bi,
+button.btn-round.btn-secondary i.bi {
+  color: #fff;
+}
+
 select, input {
   display: block;
   width: 100%;
