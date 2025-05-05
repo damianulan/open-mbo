@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 use App\Models\MBO\Objective;
 use App\Models\Core\User;
 use App\Models\MBO\Campaign;
+use App\Models\MBO\UserObjective;
 use App\Enums\MBO\UserObjectiveStatus;
+use Illuminate\Support\Facades\Auth;
 
-class ObjectiveController extends Controller
+class UserObjectiveController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -40,12 +42,14 @@ class ObjectiveController extends Controller
      */
     public function show(Request $request, string $id)
     {
-        $objective = Objective::checkAccess()->findOrFail($id);
+        $userObjective = UserObjective::checkAccess()->findOrFail($id);
 
         $header = 'Podsumowanie Celu';
-        return view('pages.mbo.objectives.show', [
-            'objective' => $objective,
+        return view('pages.mbo.objectives.users.show', [
+            'userObjective' => $userObjective,
+            'objective' => $userObjective->objective,
             'pagetitle' => $header,
+            'isOwner' => $userObjective->user->id === Auth::user()->id,
         ]);
     }
 

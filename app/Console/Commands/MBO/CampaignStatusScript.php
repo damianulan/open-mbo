@@ -2,25 +2,25 @@
 
 namespace App\Console\Commands\MBO;
 
-use Illuminate\Console\Command;
+use App\Console\BaseCommand;
 use App\Models\MBO\Campaign;
 use App\Enums\MBO\CampaignStage;
 
-class CampaignStatusScript extends Command
+class CampaignStatusScript extends BaseCommand
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:campaign-status';
+    protected $signature = 'mbo:campaign-status';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'User enrolled to Campaigns status update';
 
     /**
      * Execute the console command.
@@ -39,9 +39,7 @@ class CampaignStatusScript extends Command
 
     public function campaignsSetStatus(bool $echo = true)
     {
-        $campaigns = Campaign::where(['manual' => 0, 'draft' => 0])
-            ->whereIn('stage', [CampaignStage::PENDING, CampaignStage::IN_PROGRESS])
-            ->get();
+        $campaigns = Campaign::whereActive()->whereManual(0)->get();
 
         if (!empty($campaigns)) {
             foreach ($campaigns as $campaign) {
@@ -53,6 +51,8 @@ class CampaignStatusScript extends Command
                 $campaign->update();
                 $campaign->setUserStage();
             }
+
+            $this->info('Campaign statuses updated successfully');
         }
     }
 }

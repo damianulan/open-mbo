@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::middleware(['auth', 'maintenance'])->group(function () {
+Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
     /**
@@ -66,6 +66,9 @@ Route::middleware(['auth', 'maintenance'])->group(function () {
         });
         Route::prefix('logs')->name('logs.')->middleware('route.gate:settings-logs')->group(function () {
             Route::get('/', [App\Http\Controllers\Settings\LogController::class, 'index'])->name('index');
+        });
+        Route::prefix('modules')->name('modules.')->middleware('route.gate:settings-modules')->group(function () {
+            Route::get('/', [App\Http\Controllers\Settings\ModuleController::class, 'index'])->name('index');
         });
     });
 
@@ -138,6 +141,10 @@ Route::middleware(['auth', 'maintenance'])->group(function () {
             Route::post('/', [App\Http\Controllers\Objectives\ObjectiveChildController::class, 'store'])->name('store');
             Route::put('/{objective}', [App\Http\Controllers\Objectives\ObjectiveChildController::class, 'update'])->name('update');
             Route::delete('/delete/{id}', [App\Http\Controllers\Objectives\ObjectiveChildController::class, 'delete'])->name('delete');
+        });
+
+        Route::prefix('assignment')->name('assignment.')->group(function () {
+            Route::get('/{id}', [App\Http\Controllers\Objectives\UserObjectiveController::class, 'show'])->name('show');
         });
     });
 

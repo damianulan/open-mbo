@@ -24918,7 +24918,7 @@ body {
   color: #781093;
 }
 
-.content-card .content-card-top .content-card-title {
+.content-card .content-card-top .content-card-header {
   display: flex;
   border: none;
   font-size: 1.1rem;
@@ -25246,21 +25246,29 @@ a.btn-tile i.on-hover {
   display: none;
 }
 
+a.btn-tile.selected,
 a.btn-tile:hover {
   background: #781093;
   background: linear-gradient(90deg, #781093 0%, rgba(120, 16, 147, 0.75) 70%, rgba(120, 16, 147, 0.65) 100%);
 }
 
+a.btn-tile.selected span,
 a.btn-tile:hover span {
   padding-left: 1.25rem;
 }
 
+a.btn-tile.selected i.on-hover,
 a.btn-tile:hover i.on-hover {
   display: block;
 }
 
+a.btn-tile.selected *,
 a.btn-tile:hover * {
   color: rgb(241.4932515337, 208.8257668712, 249.9742331288) !important;
+}
+
+a.btn-tile.selected i.enter--icon {
+  display: none;
 }
 
 a.btn-tile .bi {
@@ -26420,7 +26428,7 @@ table.ombo-table tbody tr:hover {
 }
 
 .ombo-list li:hover {
-  box-shadow: inset -5px -15px 75px -28px rgba(120, 16, 147, 0.085);
+  box-shadow: inset -5px -15px 75px -28px rgba(120, 16, 147, 0.1);
   transition: all 0.2s ease-in-out;
 }
 
@@ -26502,12 +26510,12 @@ table.ombo-table tbody tr:hover {
 }
 
 .card.card-url {
-  background-color: rgba(120, 16, 147, 0.06);
+  background: linear-gradient(120deg, rgba(120, 16, 147, 0.06) 0%, rgba(120, 16, 147, 0.1) 70%, rgba(120, 16, 147, 0.12) 100%);
 }
 
 .card.card-url:hover {
   cursor: pointer;
-  box-shadow: inset -5px -15px 75px -28px rgba(120, 16, 147, 0.085);
+  box-shadow: inset -5px -15px 75px -28px rgba(120, 16, 147, 0.1);
   transition: all 0.2s ease-in-out;
 }
 

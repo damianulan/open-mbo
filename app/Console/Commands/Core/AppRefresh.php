@@ -23,7 +23,7 @@ class AppRefresh extends BaseCommand
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Rerolling whole application and updating repository data';
 
     /**
      * Execute the console command.

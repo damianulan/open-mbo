@@ -103,6 +103,7 @@ a.btn-tile i.on-hover {
     display: none;
 }
 
+a.btn-tile.selected,
 a.btn-tile:hover {
     background: $primary;
     background: linear-gradient(
@@ -113,16 +114,23 @@ a.btn-tile:hover {
     );
 }
 
+a.btn-tile.selected span,
 a.btn-tile:hover span {
     padding-left: 1.25rem;
 }
 
+a.btn-tile.selected i.on-hover,
 a.btn-tile:hover i.on-hover {
     display: block;
 }
 
+a.btn-tile.selected *,
 a.btn-tile:hover * {
     color: $sidebar-link-active !important;
+}
+
+a.btn-tile.selected i.enter--icon {
+    display: none;
 }
 
 a.btn-tile .bi {

@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Settings\GeneralSettings;
 use App\Settings\MailSettings;
+use App\Settings\MBOSettings;
 use Illuminate\Support\Facades\Schema;
 
 class ConfigServiceProvider extends ServiceProvider
@@ -14,7 +15,15 @@ class ConfigServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton('settings.general', function () {
+            return app(GeneralSettings::class);
+        });
+        $this->app->singleton('settings.mail', function () {
+            return app(MailSettings::class);
+        });
+        $this->app->singleton('settings.mbo', function (MBOSettings $settings) {
+            return $settings;
+        });
     }
 
     /**

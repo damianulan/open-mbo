@@ -3,12 +3,11 @@
 
 <div class="icon-btn-nav">
     <div class="panel-left">
-        <a class="icon-btn edit-objective" href="javascript:void(0);" data-modelid="{{ $objective->id }}" data-tippy-content="{{ __('buttons.edit') }}"><i class="bi-pencil-fill"></i></a>
-        <a href="javascript:void(0);" class="icon-btn add-child-objective" data-modelid="{{ $objective->id }}" data-tippy-content="{{ __('Dodaj cele podrzędne') }}"><i class="bi-crosshair"></i></a>
+        <a class="icon-btn edit-objective" href="javascript:void(0);" data-modelid="" data-tippy-content="{{ __('buttons.edit') }}"><i class="bi-pencil-fill"></i></a>
     </div>
 </div>
 <div class="row">
-    <div class="@if($objective->coordinators())col-xl-8 col-lg-9 col-md-12 @else col-xl-12 col-lg-12 col-md-12 @endif pb-4">
+    <div class="col-xl-6 col-md-12 pb-4">
         <div class="content-card">
             <div class="content-card-top">
                 <div class="content-card-header">
@@ -36,7 +35,6 @@
                             <i class="bi-exclamation-diamond-fill"></i>
                         </div>
                     @endif
-
                 </div>
             </div>
             <div class="my-3">{!! $objective->description->get() !!}</div>
@@ -66,13 +64,12 @@
         </div>
     </div>
     @if($objective->coordinators())
-        <div class="col-xl-4 col-lg-3 col-md-12 pb-4">
+        <div class="col-xl-6 pb-4">
             <div class="content-card">
                 <div class="content-card-top">
                     <div class="content-card-header">
                         <i class="bi-person-fill-gear me-1"></i>
-                        <span>{{ __('mbo.objective_admins') }}</span>
-                        <i class="info-box bi-info-circle-fill ms-1" data-tippy-content="{{ __('mbo.info.objective_admins') }}"></i>
+                        <span>{{ __('Realizacja celu') }}</span>
                     </div>
                 </div>
                 <div class="row">
@@ -95,7 +92,7 @@
                             </ul>
 
                         @else
-                            <div><p class="text-primary">{{ __('mbo.info.no_category_admins_added') }}</p></div>
+                            <div><p class="text-primary"></p></div>
                         @endif
                     </div>
                 </div>
