@@ -92,9 +92,9 @@
                     </table>
                     <div class="btn-row">
                         <a href="{{ route('settings.server.clearcache') }}" class="btn btn-outline-primary">{{ __('pages.settings.cache_clear') }}</a>
-                        @env(['production', 'development'])
+                        @if(config('telescope.enabled'))
                             <a href="{{ route('telescope') }}" class="btn btn-outline-primary">{{ __('pages.settings.telescope') }}</a>
-                        @endenv
+                        @endif
                     </div>
                 </div>
             </div>

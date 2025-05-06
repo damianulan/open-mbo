@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use App\Models\Scopes\MBO\CampaignScope;
 use App\Enums\Core\SystemRolesLib;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use App\Observers\MBO\Campaigns\CampaignObserver;
 
 /**
  *
@@ -76,6 +78,7 @@ use Illuminate\Database\Eloquent\Builder;
  * @property string $stage
  * @mixin \Eloquent
  */
+#[ObservedBy([CampaignObserver::class])]
 class Campaign extends BaseModel
 {
     public $stages;

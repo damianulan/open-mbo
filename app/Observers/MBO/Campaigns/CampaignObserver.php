@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Observers\MBO;
+namespace App\Observers\MBO\Campaigns;
 
 use App\Models\MBO\Campaign;
 
