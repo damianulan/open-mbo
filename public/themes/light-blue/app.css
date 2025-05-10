@@ -25409,7 +25409,8 @@ button.btn-round.btn-secondary i.bi {
   color: #fff;
 }
 
-select, input {
+select,
+input {
   display: block;
   width: 100%;
 }
@@ -25463,7 +25464,8 @@ input[type=search]:focus {
   font-size: 1rem;
 }
 
-.divider .divider-text:before, .divider .divider-text:after {
+.divider .divider-text:before,
+.divider .divider-text:after {
   content: "";
   position: absolute;
   top: 50%;
@@ -25505,14 +25507,16 @@ input[type=search]:focus {
   right: -25%;
 }
 
-.divider.divider-dotted .divider-text:before, .divider.divider-dotted .divider-text:after {
+.divider.divider-dotted .divider-text:before,
+.divider.divider-dotted .divider-text:after {
   border-style: dotted;
   border-width: 1px;
   border-top-width: 0;
   border-color: black;
 }
 
-.divider.divider-dashed .divider-text:before, .divider.divider-dashed .divider-text:after {
+.divider.divider-dashed .divider-text:before,
+.divider.divider-dashed .divider-text:after {
   border-style: dashed;
   border-width: 1px;
   border-top-width: 0;
@@ -25523,7 +25527,8 @@ input[type=search]:focus {
   width: 150px;
 }
 
-.valid-feedback, .invalid-feedback {
+.valid-feedback,
+.invalid-feedback {
   font-size: 0.8rem;
 }
 
@@ -25612,6 +25617,10 @@ input[type=file]::file-selector-button {
 
 .modal-form-content .modal-body {
   min-height: 300px;
+}
+
+.form-label {
+  margin: 0;
 }
 
 nav::-webkit-scrollbar {

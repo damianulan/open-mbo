@@ -35,7 +35,6 @@ class ObjectiveTemplateEditForm extends Form
     {
         return [
             'category_id' => 'nullable',
-            'type' => 'required',
             'name' => 'max:50|required',
             'description' => 'max:1000|nullable',
             'draft' => 'in:on,off',

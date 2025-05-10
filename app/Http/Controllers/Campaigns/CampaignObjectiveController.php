@@ -13,7 +13,7 @@ class CampaignObjectiveController extends Controller
     public function store(Request $request, CampaignEditObjectiveForm $form)
     {
         $request = $form::reformatRequest($request);
-        $response = $form::validate($request);
+        $response = $form::validateJson($request);
         if ($response['status'] === 'ok') {
             $objective = Objective::fillFromRequest($request);
             if ($objective->save()) {
@@ -27,7 +27,7 @@ class CampaignObjectiveController extends Controller
     public function update(Request $request, $id, CampaignEditObjectiveForm $form)
     {
         $request = $form::reformatRequest($request);
-        $response = $form::validate($request, $id);
+        $response = $form::validateJson($request, $id);
         if ($response['status'] === 'ok') {
             $objective = Objective::fillFromRequest($request, $id);
 

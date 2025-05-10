@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Artisan;
 use App\Settings\MailSettings;
 use App\Forms\Settings\SmtpForm;
 use App\Settings\MBOSettings;
+use App\Forms\Settings\MboForm;
 
 class ModuleController extends SettingsController
 {
@@ -47,12 +48,32 @@ class ModuleController extends SettingsController
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(Request $request)
+    public function index(Request $request, ?string $module = null)
     {
+        $modules = $this->getModules();
+        if (is_null($module) || !array_key_exists($module, $modules)) {
+            $module = 'users';
+        }
 
+        $mboModel = app(MBOSettings::class);
         return view('pages.settings.modules.index', [
-            'modules' => $this->getModules(),
+            'modules' => $modules,
+            'mod' => $modules[$module]['id'],
+            'mboForm' => MboForm::definition($request, $mboModel),
             'nav' => $this->nav(),
         ]);
+    }
+
+    public function storeMbo(Request $request, MboForm $form, MBOSettings $settings)
+    {
+        $request = $form::reformatRequest($request);
+        $form::validate($request);
+        foreach ($request->all() as $key => $value) {
+            $settings->$key = $value;
+        }
+        if ($settings->save()) {
+            return redirect()->to(route('settings.modules.index', ['module' => 'mbo']))->with('success', __('alerts.settings.success.mail_update'));
+        }
+        return redirect()->to(route('settings.modules.index', ['module' => 'mbo']))->with('error', __('alerts.settings.error.mail_update'));;
     }
 }

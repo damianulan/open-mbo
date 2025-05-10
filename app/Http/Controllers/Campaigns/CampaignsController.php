@@ -87,6 +87,7 @@ class CampaignsController extends Controller
         if ($request->user()->cannot('mbo-campaign-update', $campaign)) {
             unauthorized();
         }
+
         return view('pages.mbo.campaigns.edit', [
             'campaign' => $campaign,
             'form' => CampaignEditForm::definition($request, $campaign),

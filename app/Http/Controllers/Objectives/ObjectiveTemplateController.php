@@ -42,7 +42,9 @@ class ObjectiveTemplateController extends ManagementController
      */
     public function store(Request $request, ObjectiveTemplateEditForm $form)
     {
-        $request->validate($form::validation($request));
+        $request = $form::reformatRequest($request);
+        $request->validate();
+
         $objective = ObjectiveTemplate::fillFromRequest($request);
 
         if ($objective->save()) {
@@ -88,7 +90,8 @@ class ObjectiveTemplateController extends ManagementController
      */
     public function update(Request $request, $id, ObjectiveTemplateEditForm $form)
     {
-        $request->validate($form::validation($request, $id));
+        $request = $form::reformatRequest($request);
+        $form::validate($request, $id);
         $objective = ObjectiveTemplate::fillFromRequest($request, $id);
         if ($objective->update()) {
             return redirect()->route('management.mbo.objectives.index')->with('success', __('alerts.objective_template.success.edit'));
