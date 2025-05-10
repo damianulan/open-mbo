@@ -108,15 +108,22 @@ function unauthorized($message = '', $permission = null)
 /**
  * Returns settings value from Spatie Laravel Settings. Requires custom singletons in config service provider.
  *
- * @param string $group
- * @param string $key
+ * @param string $key - use as group.setting
  * @param mixed  $default
  * @return void
  */
-function settings(string $group, string $key, $default = null)
+function setting(string $key, $default = null)
 {
-    $class = app('settings.' . strtolower($group)) ?? null;
-    $setting = $class ? $class->$key : null;
+    $keys = explode('.', $key);
+    $group = $keys[0];
+    $key = $keys[1];
+    $setting = null;
+
+    if ($group && $key) {
+        $appkey = 'settings.' . strtolower($group);
+        $class = app($appkey) ?? null;
+        $setting = $class ? $class->$key : null;
+    }
 
     if (is_null($setting)) {
         $setting = $default;

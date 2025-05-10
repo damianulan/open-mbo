@@ -9,39 +9,10 @@ use App\Settings\MailSettings;
 use App\Forms\Settings\SmtpForm;
 use App\Settings\MBOSettings;
 use App\Forms\Settings\MboForm;
+use App\Facades\Modules\ModuleManager;
 
 class ModuleController extends SettingsController
 {
-
-    public function getModules()
-    {
-        return [
-            'users' => [
-                'id' => 'module-users-btn',
-                'icon' => 'person-fill',
-                'title' => 'Użytkownicy',
-                'route' => null,
-            ],
-            'mbo' => [
-                'id' => 'module-mbo-btn',
-                'icon' => 'bullseye',
-                'title' => 'Moduł MBO',
-                'route' => null,
-            ],
-            'reports' => [
-                'id' => 'module-reports-btn',
-                'icon' => 'bar-chart-steps',
-                'title' => 'Raporty',
-                'route' => null,
-            ],
-            'notifications' => [
-                'id' => 'module-notifications-btn',
-                'icon' => 'bell-fill',
-                'title' => 'Powiadomienia',
-                'route' => null,
-            ],
-        ];
-    }
 
     /**
      * Show the application dashboard.
@@ -50,7 +21,7 @@ class ModuleController extends SettingsController
      */
     public function index(Request $request, ?string $module = null)
     {
-        $modules = $this->getModules();
+        $modules = ModuleManager::getModules();
         if (is_null($module) || !array_key_exists($module, $modules)) {
             $module = 'users';
         }

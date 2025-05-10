@@ -80,7 +80,7 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
     Route::prefix('management')->name('management.')->group(function () {
 
         Route::prefix('mbo')->name('mbo.')->group(function () {
-            Route::prefix('objectives')->name('objectives.')->group(function () {
+            Route::prefix('objectives')->name('objectives.')->middleware('module:mbo')->group(function () {
                 Route::get('/', [App\Http\Controllers\Objectives\ObjectiveTemplateController::class, 'index'])->name('index');
                 Route::post('/', [App\Http\Controllers\Objectives\ObjectiveTemplateController::class, 'store'])->name('store');
                 Route::get('create', [App\Http\Controllers\Objectives\ObjectiveTemplateController::class, 'create'])->name('create');
@@ -89,7 +89,7 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
                 Route::put('{objective}', [App\Http\Controllers\Objectives\ObjectiveTemplateController::class, 'update'])->name('update');
                 Route::get('/delete/{objective}', [App\Http\Controllers\Objectives\ObjectiveTemplateController::class, 'delete'])->name('delete');
             });
-            Route::prefix('categories')->name('categories.')->group(function () {
+            Route::prefix('categories')->name('categories.')->middleware('module:mbo')->group(function () {
                 Route::get('/', [App\Http\Controllers\Objectives\ObjectiveCategoryController::class, 'index'])->name('index');
                 Route::post('/', [App\Http\Controllers\Objectives\ObjectiveCategoryController::class, 'store'])->name('store');
                 Route::get('create', [App\Http\Controllers\Objectives\ObjectiveCategoryController::class, 'create'])->name('create');
@@ -112,7 +112,7 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
         });
     });
 
-    Route::prefix('campaigns')->name('campaigns.')->group(function () {
+    Route::prefix('campaigns')->name('campaigns.')->middleware('module:mbo')->group(function () {
         Route::get('/', [App\Http\Controllers\Campaigns\CampaignsController::class, 'index'])->name('index');
         Route::post('/', [App\Http\Controllers\Campaigns\CampaignsController::class, 'store'])->name('store');
         Route::get('create', [App\Http\Controllers\Campaigns\CampaignsController::class, 'create'])->name('create');
@@ -137,7 +137,7 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
         });
     });
 
-    Route::prefix('objectives')->name('objectives.')->group(function () {
+    Route::prefix('objectives')->name('objectives.')->middleware('module:mbo')->group(function () {
         Route::get('{user}', [App\Http\Controllers\Objectives\ObjectiveController::class, 'show'])->name('show');
 
         Route::prefix('child')->name('child.')->group(function () {
