@@ -73,4 +73,15 @@ class ServerController extends SettingsController
         }
         return response()->json($response);
     }
+
+    public function debugbar(Request $request, GeneralSettings $settings)
+    {
+        $response = false;
+        $check = filter_var($request->input('check'), FILTER_VALIDATE_BOOLEAN);
+        $settings->debugbar = $check;
+        if ($settings->save()) {
+            $response = true;
+        }
+        return response()->json($response);
+    }
 }

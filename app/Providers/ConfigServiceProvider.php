@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Settings\GeneralSettings;
 use App\Settings\MailSettings;
+use App\Settings\MBOSettings;
 use Illuminate\Support\Facades\Schema;
 
 class ConfigServiceProvider extends ServiceProvider
@@ -14,7 +15,15 @@ class ConfigServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton('settings.general', function () {
+            return app(GeneralSettings::class);
+        });
+        $this->app->singleton('settings.mail', function () {
+            return app(MailSettings::class);
+        });
+        $this->app->singleton('settings.mbo', function (MBOSettings $settings) {
+            return $settings;
+        });
     }
 
     /**
@@ -22,13 +31,14 @@ class ConfigServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if(Schema::hasTable('settings')){
+        if (Schema::hasTable('settings')) {
             // load settings from database and overwrite existing
             config([
 
                 // GENERAL
                 'app.name' => app(GeneralSettings::class)->site_name ?? env('APP_NAME', 'OpenMBO'),
                 'app.debug' => app(GeneralSettings::class)->debug ?? env('APP_DEBUG', true),
+                'debugbar.enabled' => app(GeneralSettings::class)->debugbar ?? env('DEBUGBAR_ENABLED', true),
                 'app.timezone' => app(GeneralSettings::class)->timezone ?? env('APP_TIMEZONE', 'UTC'),
                 'app.locale' => app(GeneralSettings::class)->locale ?? env('APP_LOCALE', 'en'),
                 'app.maintenance' => app(GeneralSettings::class)->maintenance ?? null,
@@ -36,7 +46,7 @@ class ConfigServiceProvider extends ServiceProvider
                 'app.release' => app(GeneralSettings::class)->release ?? null,
                 'app.date_format' => app(GeneralSettings::class)->date_format ?? null,
                 'app.time_format' => app(GeneralSettings::class)->time_format ?? null,
-                'app.datetime_format' => app(GeneralSettings::class)->date_format&&app(GeneralSettings::class)->time_format ? app(GeneralSettings::class)->date_format . ' ' .app(GeneralSettings::class)->time_format:null,
+                'app.datetime_format' => app(GeneralSettings::class)->date_format && app(GeneralSettings::class)->time_format ? app(GeneralSettings::class)->date_format . ' ' . app(GeneralSettings::class)->time_format : null,
 
                 // SERVER
                 'mail.default' => app(MailSettings::class)->mail_mailer ?? null,

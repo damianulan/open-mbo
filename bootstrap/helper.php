@@ -104,3 +104,23 @@ function unauthorized($message = '', $permission = null)
 {
     throw new UnauthorizedAccess($message, $permission);
 }
+
+/**
+ * Returns settings value from Spatie Laravel Settings. Requires custom singletons in config service provider.
+ *
+ * @param string $group
+ * @param string $key
+ * @param mixed  $default
+ * @return void
+ */
+function settings(string $group, string $key, $default = null)
+{
+    $class = app('settings.' . strtolower($group)) ?? null;
+    $setting = $class ? $class->$key : null;
+
+    if (is_null($setting)) {
+        $setting = $default;
+    }
+
+    return $setting;
+}

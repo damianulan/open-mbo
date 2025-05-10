@@ -7,9 +7,9 @@ use App\Casts\CheckboxCast;
 use App\Models\Core\User;
 use App\Models\MBO\Campaign;
 use App\Enums\MBO\CampaignStage;
-use App\Models\MBO\UserObjective;
-use App\Notifications\MBO\Campaign\CampaignAssignment;
+use App\Observers\MBO\Campaigns\UserCampaignObserver;
 use App\Enums\MBO\UserObjectiveStatus;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 
 /**
  *
@@ -44,6 +44,7 @@ use App\Enums\MBO\UserObjectiveStatus;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign withoutTrashed()
  * @mixin \Eloquent
  */
+#[ObservedBy([UserCampaignObserver::class])]
 class UserCampaign extends BaseModel
 {
     public $logEntities = ['user_id' => User::class, 'campaign_id' => Campaign::class];
@@ -66,37 +67,6 @@ class UserCampaign extends BaseModel
     protected static function boot()
     {
         parent::boot();
-        static::created(function ($model) {
-            $objectives = $model->campaign->objectives()->get();
-            foreach ($objectives as $objective) {
-                UserObjective::assign($model->user_id, $objective->id);
-            }
-
-            $coordinators = $model->campaign->coordinators;
-            if (!empty($coordinators)) {
-                foreach ($coordinators as $coordinator) {
-                    $coordinator->notify(new CampaignAssignment($model->user, $model->campaign));
-                }
-            }
-
-            return $model;
-        });
-
-        static::updated(function ($model) {
-            if ($model->isManual() == 0 && $model->active == 1) {
-                $model->campaign->setUserStage($model->id);
-            }
-            $model->setObjectiveStatus();
-        });
-
-        static::deleted(function ($model) {
-            $objectives = $model->campaign->objectives()->get();
-            foreach ($objectives as $objective) {
-                UserObjective::unassign($model->user_id, $objective->id);
-            }
-
-            return $model;
-        });
     }
 
     public function user()
@@ -179,7 +149,7 @@ class UserCampaign extends BaseModel
     }
 
     /**
-     * Sets objective statuses based on campaign stage changes.
+     * Sets users' objectives statuses based on campaign stage changes.
      *
      * @return void
      */

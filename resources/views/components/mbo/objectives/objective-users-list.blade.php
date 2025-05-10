@@ -15,7 +15,7 @@
                         </div>
                         <div class="list-actions">
                             <div class="list-action tippy-info" data-tippy-content="{{ __('mbo.objective_status.' . $ua->status) }}"><x-icon key="info-circle-fill" /></div>
-                            <a href="#" class="list-action" data-tippy-content="{{ __('buttons.summary') }}">
+                            <a href="{{ route('objectives.assignment.show', $ua->id) }}" class="list-action" data-tippy-content="{{ __('buttons.summary') }}">
                                 <x-icon key="eye-fill" />
                             </a>
                         </div>

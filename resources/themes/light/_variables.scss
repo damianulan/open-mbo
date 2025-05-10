@@ -123,5 +123,11 @@ $ombo-body-failed-hover: rgba($danger, 0.15);
 $ombo-body-completed: rgba($primary, 0.2);
 $ombo-body-completed-hover: rgba($primary, 0.25);
 $ombo-body-inactive: rgba($disabled-text, 0.2);
-$ombo-body-hover: rgba($primary, 0.085);
+$ombo-body-hover: rgba($primary, 0.1);
 $ombo-body-inactive-hover: rgba($primary, 0.25);
+$ombo-body-gradient: linear-gradient(
+    120deg,
+    rgba($primary, 0.06) 0%,
+    rgba($primary, 0.1) 70%,
+    rgba($primary, 0.12) 100%
+);

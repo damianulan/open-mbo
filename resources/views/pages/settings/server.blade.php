@@ -65,6 +65,16 @@
                         </tr>
                         <tr>
                             <th>
+                                {{ __('pages.settings.debugbar') }}:
+                            </th>
+                            <td>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="debugbarOptionSwitch"{{ config('debugbar.enabled') ? ' checked':'' }}>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
                                 {{ __('pages.settings.build') }}:
                             </th>
                             <td>
@@ -82,9 +92,9 @@
                     </table>
                     <div class="btn-row">
                         <a href="{{ route('settings.server.clearcache') }}" class="btn btn-outline-primary">{{ __('pages.settings.cache_clear') }}</a>
-                        @env(['production', 'development'])
+                        @if(config('telescope.enabled'))
                             <a href="{{ route('telescope') }}" class="btn btn-outline-primary">{{ __('pages.settings.telescope') }}</a>
-                        @endenv
+                        @endif
                     </div>
                 </div>
             </div>

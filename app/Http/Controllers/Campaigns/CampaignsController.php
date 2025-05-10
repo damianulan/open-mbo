@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\MBO\Campaign;
 use App\Forms\MBO\Campaign\CampaignEditForm;
 use App\Http\Controllers\Controller;
-use App\Service\Campaigns\CampaignService;
+use App\Services\Campaigns\CampaignService;
 use App\Models\Core\User;
 
 class CampaignsController extends Controller
@@ -103,7 +103,7 @@ class CampaignsController extends Controller
 
         $request = $form::reformatRequest($request);
         $request->validate($form::validation($request, $id));
-        $service = CampaignService::boot($request, $id)->createOrUpdate();
+        $service = CampaignService::boot($request, $campaign)->createOrUpdate();
 
         if ($service->check()) {
             $campaign = $service->getModel();

@@ -24918,7 +24918,7 @@ body {
   color: #285C7F;
 }
 
-.content-card .content-card-top .content-card-title {
+.content-card .content-card-top .content-card-header {
   display: flex;
   border: none;
   font-size: 1.1rem;
@@ -25246,21 +25246,29 @@ a.btn-tile i.on-hover {
   display: none;
 }
 
+a.btn-tile.selected,
 a.btn-tile:hover {
   background: #285C7F;
   background: linear-gradient(90deg, #285c7f 0%, rgba(40, 92, 127, 0.75) 70%, rgba(40, 92, 127, 0.65) 100%);
 }
 
+a.btn-tile.selected span,
 a.btn-tile:hover span {
   padding-left: 1.25rem;
 }
 
+a.btn-tile.selected i.on-hover,
 a.btn-tile:hover i.on-hover {
   display: block;
 }
 
+a.btn-tile.selected *,
 a.btn-tile:hover * {
   color: rgb(219.1053892216, 233.8023952096, 243.6946107784) !important;
+}
+
+a.btn-tile.selected i.enter--icon {
+  display: none;
 }
 
 a.btn-tile .bi {
@@ -25276,6 +25284,13 @@ a.btn-tile .bi {
 
 .btn-round i.bi {
   font-size: 1rem !important;
+}
+
+a.btn-round.btn-primary i.bi,
+button.btn-round.btn-primary i.bi,
+a.btn-round.btn-secondary i.bi,
+button.btn-round.btn-secondary i.bi {
+  color: #fff;
 }
 
 select, input {
@@ -26413,7 +26428,7 @@ table.ombo-table tbody tr:hover {
 }
 
 .ombo-list li:hover {
-  box-shadow: inset -5px -15px 75px -28px rgba(40, 92, 127, 0.085);
+  box-shadow: inset -5px -15px 75px -28px rgba(40, 92, 127, 0.1);
   transition: all 0.2s ease-in-out;
 }
 
@@ -26495,12 +26510,12 @@ table.ombo-table tbody tr:hover {
 }
 
 .card.card-url {
-  background-color: rgba(40, 92, 127, 0.06);
+  background: linear-gradient(120deg, rgba(40, 92, 127, 0.06) 0%, rgba(40, 92, 127, 0.1) 70%, rgba(40, 92, 127, 0.12) 100%);
 }
 
 .card.card-url:hover {
   cursor: pointer;
-  box-shadow: inset -5px -15px 75px -28px rgba(40, 92, 127, 0.085);
+  box-shadow: inset -5px -15px 75px -28px rgba(40, 92, 127, 0.1);
   transition: all 0.2s ease-in-out;
 }
 

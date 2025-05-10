@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use App\Models\Scopes\MBO\CampaignScope;
 use App\Enums\Core\SystemRolesLib;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use App\Observers\MBO\Campaigns\CampaignObserver;
 
 /**
  *
@@ -76,6 +78,7 @@ use Illuminate\Database\Eloquent\Builder;
  * @property string $stage
  * @mixin \Eloquent
  */
+#[ObservedBy([CampaignObserver::class])]
 class Campaign extends BaseModel
 {
     public $stages;
@@ -378,7 +381,20 @@ class Campaign extends BaseModel
      * LOCAL SCOPES
      */
 
-    public function scopeOngoing(Builder $query): void
+    public function scopeWhereManual(Builder $query, int $manual): void
+    {
+        $query->where('manual', $manual);
+    }
+
+    public function scopeWhereActive(Builder $query): void
+    {
+        $query->where('draft', 0)
+            ->where(function (Builder $q) {
+                $q->whereIn('stage', [CampaignStage::PENDING, CampaignStage::IN_PROGRESS]);
+            });
+    }
+
+    public function scopeWhereOngoing(Builder $query): void
     {
         $query->where('draft', 0)
             ->where(function (Builder $q) {
@@ -387,7 +403,7 @@ class Campaign extends BaseModel
             });
     }
 
-    public function scopeCompleted(Builder $query): void
+    public function scopeWhereCompleted(Builder $query): void
     {
         $query->where('draft', 0)
             ->whereNotIn('stage', [CampaignStage::TERMINATED, CampaignStage::CANCELED])

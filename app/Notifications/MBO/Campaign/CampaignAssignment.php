@@ -11,17 +11,15 @@ use App\Models\MBO\Campaign;
 class CampaignAssignment extends BaseNotification
 {
     use Queueable;
-    public User $assigned;
-    public Campaign $campaign;
+
 
     /**
      * Create a new notification instance.
      */
-    public function __construct(User $assigned, Campaign $campaign)
-    {
-        $this->assigned = $assigned;
-        $this->campaign = $campaign;
-    }
+    public function __construct(
+        public User $assigned,
+        public Campaign $campaign
+    ) {}
 
     /**
      * Get the array representation of the notification.
@@ -30,7 +28,7 @@ class CampaignAssignment extends BaseNotification
      */
     public function toArray(object $notifiable): array
     {
-        return NotificationAdhoc::make(__('notifications.app.campaign_assignment', [
+        return NotificationAdhoc::make(__('notifications.app.campaign.coordinator_assignment', [
             'username' => $this->assigned->name(),
             'campaignname' => $this->campaign->name,
         ]), 'bi-person-fill-up')->toArray();

@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::middleware(['auth', 'maintenance'])->group(function () {
+Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
     /**
@@ -59,12 +59,16 @@ Route::middleware(['auth', 'maintenance'])->group(function () {
             Route::post('store/mail', [App\Http\Controllers\Settings\ServerController::class, 'storeMail'])->name('mail.store');
             Route::get('clearcache', [App\Http\Controllers\Settings\ServerController::class, 'cache'])->name('clearcache');
             Route::post('debugging', [App\Http\Controllers\Settings\ServerController::class, 'debugging'])->name('debugging');
+            Route::post('debugbar-enable', [App\Http\Controllers\Settings\ServerController::class, 'debugbar'])->name('debugbar');
             Route::get('phpinfo', function () {
                 echo phpinfo();
             })->name('phpinfo');
         });
         Route::prefix('logs')->name('logs.')->middleware('route.gate:settings-logs')->group(function () {
             Route::get('/', [App\Http\Controllers\Settings\LogController::class, 'index'])->name('index');
+        });
+        Route::prefix('modules')->name('modules.')->middleware('route.gate:settings-modules')->group(function () {
+            Route::get('/', [App\Http\Controllers\Settings\ModuleController::class, 'index'])->name('index');
         });
     });
 
@@ -138,6 +142,10 @@ Route::middleware(['auth', 'maintenance'])->group(function () {
             Route::put('/{objective}', [App\Http\Controllers\Objectives\ObjectiveChildController::class, 'update'])->name('update');
             Route::delete('/delete/{id}', [App\Http\Controllers\Objectives\ObjectiveChildController::class, 'delete'])->name('delete');
         });
+
+        Route::prefix('assignment')->name('assignment.')->group(function () {
+            Route::get('/{id}', [App\Http\Controllers\Objectives\UserObjectiveController::class, 'show'])->name('show');
+        });
     });
 
     Route::name('general.')->group(function () {
@@ -146,6 +154,8 @@ Route::middleware(['auth', 'maintenance'])->group(function () {
 
     Route::prefix('datatables')->name('datatables.')->group(function () {
         Route::post('/save_columns', [App\Facades\DataTables\CustomDataTable::class, 'saveColumns'])->name('save_columns');
+        Route::get('/excel/{class}', [App\Facades\DataTables\DataTableController::class, 'toExcel'])->name('excel');
+        Route::get('/csv/{class}', [App\Facades\DataTables\DataTableController::class, 'toCsv'])->name('csv');
     });
 
     Route::prefix('ajax')->name('ajax.')->group(function () {

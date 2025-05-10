@@ -11,17 +11,17 @@
     <div class="@if($objective->coordinators())col-xl-8 col-lg-9 col-md-12 @else col-xl-12 col-lg-12 col-md-12 @endif pb-4">
         <div class="content-card">
             <div class="content-card-top">
-                <div class="content-card-title">
+                <div class="content-card-header">
                     <i class="bi-crosshair me-1"></i>
                     <span>{{ $objective->name }}</span>
                 </div>
-                @if($objective->category())
+                @if($objective->category()->exists())
                     <div data-tippy-content="{{ __('fields.category') }}" class="align-self-center ms-2">
                         <span class="badge bg-secondary">{{ $objective->category->name }}</span>
                     </div>
                 @endif
                 <div class="content-card-icons ms-auto fw-bold">
-                    @if($objective->campaign())
+                    @if($objective->campaign()->exists())
                         <a href={{ route('campaigns.show', $objective->campaign->id) }} data-tippy-content="{{ __('mbo.info.campaign_related', ['campaign' => $objective->campaign->name, 'period' => $objective->campaign->period]) }}">
                             <i class="bi-bullseye"></i>
                         </a>
@@ -69,7 +69,7 @@
         <div class="col-xl-4 col-lg-3 col-md-12 pb-4">
             <div class="content-card">
                 <div class="content-card-top">
-                    <div class="content-card-title">
+                    <div class="content-card-header">
                         <i class="bi-person-fill-gear me-1"></i>
                         <span>{{ __('mbo.objective_admins') }}</span>
                         <i class="info-box bi-info-circle-fill ms-1" data-tippy-content="{{ __('mbo.info.objective_admins') }}"></i>
@@ -102,12 +102,10 @@
             </div>
         </div>
     @endif
-</div>
-<div class="row">
     <div class="col-lg-4 col-md-6 pb-4">
         <div class="content-card">
             <div class="content-card-top">
-                <div class="content-card-title">
+                <div class="content-card-header">
                     <x-icon key="lightning-fill" mr="1" />
                     <span>{{ __('mbo.objectives.users.inprogress') }}</span>
                 </div>
@@ -122,7 +120,7 @@
     <div class="col-lg-8 col-md-6 pb-4">
         <div class="content-card">
             <div class="content-card-top">
-                <div class="content-card-title">
+                <div class="content-card-header">
                     <x-icon key="check2-square" mr="1" />
                     <span>{{ __('mbo.objectives.users.completed') }}</span>
                 </div>

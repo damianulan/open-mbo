@@ -38,7 +38,7 @@ class ObjectiveController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
         $objective = Objective::checkAccess()->findOrFail($id);
 

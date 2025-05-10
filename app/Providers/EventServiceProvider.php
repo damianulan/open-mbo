@@ -29,6 +29,14 @@ class EventServiceProvider extends ServiceProvider
         'Illuminate\Notifications\Events\NotificationSent' => [
             'App\Listeners\Activity\NotificationLog',
         ],
+
+        // MBO LISTENERS
+        'App\Events\MBO\Campaigns\UserCampaignAssigned' => [
+            'App\Listeners\MBO\Campaigns\UserAssignedNotify',
+        ],
+        'App\Events\MBO\Campaigns\UserCampaignUnassigned' => [
+            'App\Listeners\MBO\Campaigns\UserUnassignedNotify',
+        ],
     ];
 
     /**

@@ -16,7 +16,7 @@ class IconComponent extends Component
         public int $ml = 0,
         public int $mr = 0,
         public array $classes = [],
-        public bool $autosize = false
+        public bool $bi = false
     ) {}
 
     /**
@@ -24,7 +24,7 @@ class IconComponent extends Component
      */
     public function render(): View|Closure|string
     {
-        if ($this->autosize) {
+        if ($this->bi) {
             $this->classes[] = 'bi';
         }
         if ($this->ml > 0) {
