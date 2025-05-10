@@ -363,6 +363,16 @@ class Campaign extends BaseModel
 
         return false;
     }
+
+    public function resume(): bool
+    {
+        if ($this->stage === CampaignStage::TERMINATED) {
+            $this->stage = CampaignStage::IN_PROGRESS;
+            return $this->update();
+        }
+
+        return false;
+    }
     public function terminated(): bool
     {
         return $this->stage === CampaignStage::TERMINATED;

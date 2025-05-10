@@ -120,6 +120,16 @@ class CampaignsController extends Controller
         if ($campaign->terminate()) {
             return ajax()->ok(__('alerts.campaigns.success.terminate'));
         }
-        return ajax()->error(('alerts.campaigns.error.terminate'));
+        return ajax()->error(__('alerts.campaigns.error.terminate'));
+    }
+
+    public function resume(Request $request, $id)
+    {
+        $campaign = Campaign::findOrFail($id);
+        // dd(vars: $campaign->resume());
+        if ($campaign->resume()) {
+            return ajax()->ok(__('alerts.campaigns.success.resume'));
+        }
+        return ajax()->error(__('alerts.campaigns.error.resume'));
     }
 }

@@ -120,6 +120,7 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
         Route::get('{campaign}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'show'])->name('show');
         Route::put('{campaign}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'update'])->name('update');
         Route::post('/terminate/{id}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'terminate'])->name('terminate');
+        Route::post('/resume/{id}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'resume'])->name('resume');
 
         Route::prefix('objective')->name('objective.')->group(function () {
             Route::post('/', [App\Http\Controllers\Campaigns\CampaignObjectiveController::class, 'store'])->name('store');
