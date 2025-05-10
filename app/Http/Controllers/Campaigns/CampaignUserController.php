@@ -17,7 +17,7 @@ class CampaignUserController extends Controller
         $campaign = Campaign::findOrFail($id);
 
         $request = $form::reformatRequest($request);
-        $response = $form::validate($request, $id);
+        $response = $form::validateJson($request, $id);
         if ($response['status'] === 'ok') {
 
             $service = CampaignService::boot($request, $campaign)->bulkAssignUsers();

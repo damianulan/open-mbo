@@ -26,6 +26,20 @@ return [
             'mail_catchall_enabled' => 'Przekierowywanie wiadomości',
             'mail_catchall_receiver' => 'Przekieruj na adres',
         ],
+
+        'mbo' => [
+            'enabled' => 'Moduł MBO włączony',
+            'campaigns_enabled' => 'Kampanie pomiarowe',
+            'campaigns_manual' => 'Tryb ręczny w kampaniach',
+            'rewards' => 'Punkty nagrody',
+
+            'info' => [
+                'enabled' => 'Włącza moduł MBO',
+                'campaigns_enabled' => 'Włącza kampanie pomiarowe',
+                'campaigns_manual' => 'Włącza tryb ręczny w kampaniach',
+                'rewards' => 'Włącza punkty nagrody',
+            ],
+        ]
     ],
 
     'placeholders' => [

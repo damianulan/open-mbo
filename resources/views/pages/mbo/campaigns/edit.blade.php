@@ -9,5 +9,4 @@
 
 @endsection
 @push('scripts')
-
 @endpush

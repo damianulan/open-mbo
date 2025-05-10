@@ -21,7 +21,10 @@ class CampaignService extends BaseService
 
             return $campaign;
         });
-        $this->model = $tmp;
+
+        if ($tmp) {
+            $this->model = $tmp;
+        }
 
         return $this;
     }

@@ -68,7 +68,8 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
             Route::get('/', [App\Http\Controllers\Settings\LogController::class, 'index'])->name('index');
         });
         Route::prefix('modules')->name('modules.')->middleware('route.gate:settings-modules')->group(function () {
-            Route::get('/', [App\Http\Controllers\Settings\ModuleController::class, 'index'])->name('index');
+            Route::get('/{module?}', [App\Http\Controllers\Settings\ModuleController::class, 'index'])->name('index');
+            Route::post('/mbo/store', [App\Http\Controllers\Settings\ModuleController::class, 'storeMbo'])->name('mbo.store');
         });
     });
 
@@ -110,7 +111,6 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
             });
         });
     });
-
 
     Route::prefix('campaigns')->name('campaigns.')->group(function () {
         Route::get('/', [App\Http\Controllers\Campaigns\CampaignsController::class, 'index'])->name('index');

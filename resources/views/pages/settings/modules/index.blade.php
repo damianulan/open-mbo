@@ -23,13 +23,21 @@
         Ustawienia Użytkownicy
     </div>
     <div class="container pt-4" id="module-mbo" style="display: none;">
-        Ustawienia MBO
+        {{ $mboForm->render() }}
     </div>
 </div>
 
 @endsection
 @push('scripts')
 <script type="text/javascript">
+    var default_mod = '{{ $mod }}';
+
+    $(document).ready(function() {
+        if(default_mod !== ''){
+            $('#'+default_mod).trigger('click');
+        }
+    });
+
     $('.module-tile').on('click', function() {
         var module_id = $(this).attr('id');
         $('.module-tile').each(function() {
