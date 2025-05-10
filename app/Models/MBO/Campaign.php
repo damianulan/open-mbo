@@ -230,19 +230,21 @@ class Campaign extends BaseModel
         $stage = CampaignStage::PENDING;
         $now = Carbon::now();
 
-        foreach (CampaignStage::softValues() as $tmp) {
-            $prop_start = $tmp . '_from';
-            $prop_end = $tmp . '_to';
-            $start = Carbon::parse($this->$prop_start);
-            $end = Carbon::parse($this->$prop_end);
+        if(!in_array($this->stage, [CampaignStage::TERMINATED, CampaignStage::CANCELED])){
+            foreach (CampaignStage::softValues() as $tmp) {
+                $prop_start = $tmp . '_from';
+                $prop_end = $tmp . '_to';
+                $start = Carbon::parse($this->$prop_start);
+                $end = Carbon::parse($this->$prop_end);
 
-            if ($now->between($start, $end)) {
-                $stage = CampaignStage::IN_PROGRESS;
-                break;
+                if ($now->between($start, $end)) {
+                    $stage = CampaignStage::IN_PROGRESS;
+                    break;
+                }
             }
-        }
+            $this->stage = $stage;
 
-        $this->stage = $stage;
+        }
 
         return $this;
     }
@@ -352,6 +354,15 @@ class Campaign extends BaseModel
         return $this->draft;
     }
 
+    public function terminate(): bool
+    {
+        if ($this->stage !== CampaignStage::TERMINATED) {
+            $this->stage = CampaignStage::TERMINATED;
+            return $this->update();
+        }
+
+        return false;
+    }
     public function terminated(): bool
     {
         return $this->stage === CampaignStage::TERMINATED;

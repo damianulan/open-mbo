@@ -111,4 +111,14 @@ class CampaignsController extends Controller
         }
         return redirect()->back()->with('error', __('alerts.campaigns.error.edit', ['name' => $campaign->name]));
     }
+
+    public function terminate(Request $request, $id)
+    {
+        $campaign = Campaign::findOrFail($id);
+        // dd(vars: $campaign->terminate());
+        if ($campaign->terminate()) {
+            return ajax()->ok(__('alerts.campaigns.success.terminate'));
+        }
+        return ajax()->error(('alerts.campaigns.error.terminate'));
+    }
 }

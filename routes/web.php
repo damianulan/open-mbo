@@ -119,11 +119,13 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
         Route::get('edit/{campaign}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'edit'])->name('edit');
         Route::get('{campaign}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'show'])->name('show');
         Route::put('{campaign}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'update'])->name('update');
+        Route::post('/terminate/{id}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'terminate'])->name('terminate');
 
         Route::prefix('objective')->name('objective.')->group(function () {
             Route::post('/', [App\Http\Controllers\Campaigns\CampaignObjectiveController::class, 'store'])->name('store');
             Route::put('/{objective}', [App\Http\Controllers\Campaigns\CampaignObjectiveController::class, 'update'])->name('update');
             Route::delete('/delete/{id}', [App\Http\Controllers\Campaigns\CampaignObjectiveController::class, 'delete'])->name('delete');
+
         });
         Route::prefix('users')->name('users.')->group(function () {
             Route::post('/{campaign}', [App\Http\Controllers\Campaigns\CampaignUserController::class, 'update'])->name('update');
