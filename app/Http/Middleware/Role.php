@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Role
 {
@@ -16,8 +17,8 @@ class Role
      */
     public function handle($request, Closure $next, $role)
     {
-        if(!auth()->user()->hasRole($role)) {
-            return redirect()->route('notAuthorized');
+        if (!Auth::check() || !Auth::user()->hasRole($role)) {
+            return unauthorized();
         }
         return $next($request);
     }

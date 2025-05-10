@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
         'role' => \App\Http\Middleware\Role::class,
         'permission' => \App\Http\Middleware\Permission::class,
         'maintenance' => \App\Http\Middleware\MaintenanceMode::class,
+        'module' => \App\Http\Middleware\ModulesEnabled::class,
         'route.gate' => \App\Http\Middleware\RouteGate::class,
     ];
 }

@@ -21,8 +21,8 @@ class ConfigServiceProvider extends ServiceProvider
         $this->app->singleton('settings.mail', function () {
             return app(MailSettings::class);
         });
-        $this->app->singleton('settings.mbo', function (MBOSettings $settings) {
-            return $settings;
+        $this->app->singleton('settings.mbo', function () {
+            return app(MBOSettings::class);
         });
     }
 
