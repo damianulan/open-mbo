@@ -8,6 +8,8 @@ use App\Models\MBO\Objective;
 use App\Enums\MBO\UserObjectiveStatus;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use App\Observers\MBO\Objectives\UserObjectiveObserver;
 
 /**
  *
@@ -40,6 +42,7 @@ use Illuminate\Support\Facades\Auth;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserObjective withoutTrashed()
  * @mixin \Eloquent
  */
+#[ObservedBy([UserObjectiveObserver::class])]
 class UserObjective extends BaseModel
 {
     protected $fillable = [

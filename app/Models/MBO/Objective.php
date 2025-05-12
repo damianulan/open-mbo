@@ -79,7 +79,7 @@ class Objective extends BaseModel
     ];
 
     protected $casts = [
-        'draft' => CheckboxCast::class,
+        'draft' => 'boolean',
         'deadline' => CarbonDatetime::class,
         'description' => TrixFieldCast::class,
     ];

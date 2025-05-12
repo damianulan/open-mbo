@@ -48,7 +48,7 @@ class CampaignsController extends Controller
             unauthorized();
         }
         $request = $form::reformatRequest($request);
-        $request->validate($form::validation($request));
+        $form::validate($request);
         $service = CampaignService::boot($request)->createOrUpdate();
 
         if ($service->check()) {
@@ -103,7 +103,7 @@ class CampaignsController extends Controller
         }
 
         $request = $form::reformatRequest($request);
-        $request->validate($form::validation($request, $id));
+        $form::validate($request, $id);
         $service = CampaignService::boot($request, $campaign)->createOrUpdate();
 
         if ($service->check()) {

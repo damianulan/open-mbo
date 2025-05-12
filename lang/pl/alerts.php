@@ -57,7 +57,7 @@ return [
 
         'error' => [
             'create' => 'Kampanie nie mogła zostać dodana. Wystąpił błąd.',
-            'edit' => 'Kampania została pomyślnie zmodyfikowana.',
+            'edit' => 'Kampania nie została zmodyfikowana. W formularzu wystąpiły błędy.',
             'objective_added' => 'Wskazany cel został pomyślnie dodany do Kampanii.',
             'objective_deleted' => 'Cel został pomyślnie usunięty z Kampanii.',
             'users_added' => 'Dane nie zostały zaktualizowane. Odśwież stronę i spróbuj ponownie.',

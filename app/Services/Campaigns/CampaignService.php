@@ -31,7 +31,7 @@ class CampaignService extends BaseService
 
     public function bulkAssignUsers(): self
     {
-        $tmp = $this->transaction(function () {
+        $this->transaction(function () {
             $current = UserCampaign::where('campaign_id', $this->model->id)->get();
             $current_ids = $current->pluck('user_id')->flip();
 
@@ -48,9 +48,7 @@ class CampaignService extends BaseService
                     $this->unassignUser($user_id);
                 }
             }
-            return $this->model;
         });
-        $this->model = $tmp;
 
         return $this;
     }

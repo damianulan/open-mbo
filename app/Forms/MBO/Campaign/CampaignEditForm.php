@@ -47,7 +47,9 @@ class CampaignEditForm extends Form
             ->add(FormComponent::switch('draft', $model)->label(__('forms.campaigns.draft'))->default(true)
                 ->info(__('forms.campaigns.info.draft')))
             ->add(FormComponent::switch('manual', $model)->label(__('forms.campaigns.manual'))->default(false)
-                ->info(__('forms.campaigns.info.manual')))
+                ->condition(function () {
+                    return setting('mbo.campaigns_manual');
+                })->info(__('forms.campaigns.info.manual')))
             ->addSubmit();
     }
 

@@ -58,8 +58,8 @@ class UserCampaign extends BaseModel
     ];
 
     protected $casts = [
-        'active' => CheckboxCast::class,
-        'manual' => CheckboxCast::class,
+        'active' => 'boolean',
+        'manual' => 'boolean',
     ];
 
     public $timestamps = true;

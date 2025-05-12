@@ -107,8 +107,8 @@ class Campaign extends BaseModel
     ];
 
     protected $casts = [
-        'draft' => CheckboxCast::class,
-        'manual' => CheckboxCast::class,
+        'draft' => 'boolean',
+        'manual' => 'boolean',
 
         'description' => TrixFieldCast::class,
     ];
@@ -129,6 +129,10 @@ class Campaign extends BaseModel
         });
 
         static::updating(function ($model) {
+            if (!setting('mbo.campaigns_manual')) {
+                $model->manual = 0;
+            }
+
             if ($model->manual == 0) {
                 $model->setStageAuto();
             } else {
@@ -207,11 +211,11 @@ class Campaign extends BaseModel
         return true;
     }
 
-    public function setUserStage($enrol_id = null)
+    public function setUserStage($user_id = null)
     {
         $params = ['manual' => 0, 'active' => 1];
-        if ($enrol_id) {
-            $params['id'] = $enrol_id;
+        if ($user_id) {
+            $params['user_id'] = $user_id;
         }
         $enrols = $this->user_campaigns()->where($params)->get();
         $stage =  $this->getCurrentStages()->first();
@@ -253,6 +257,7 @@ class Campaign extends BaseModel
         $now = Carbon::now();
 
         if ($this->stage === CampaignStage::IN_PROGRESS) {
+            $softStage = null;
             foreach (CampaignStage::softValues() as $tmp) {
                 $prop_start = $tmp . '_from';
                 $prop_end = $tmp . '_to';
@@ -260,8 +265,13 @@ class Campaign extends BaseModel
                 $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_end);
 
                 if ($now->between($start, $end)) {
+                    $softStage = $tmp;
                     $stages->push($tmp);
                 }
+            }
+
+            if (is_null($softStage)) {
+                $stages->push($this->stage);
             }
         } else {
             $stages->push($this->stage);
