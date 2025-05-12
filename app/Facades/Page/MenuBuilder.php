@@ -25,6 +25,7 @@ class MenuBuilder
                 ->setTitle(__('menus.campaigns.index'))
                 ->setIcon('bullseye')
                 ->setRoute('campaigns.index')
+                ->settings('mbo.campaigns_enabled', 'mbo.enabled')
                 ->permission('mbo-campaign-*'),
             MenuItem::make('reports')
                 ->setTitle(__('menus.reports.index'))

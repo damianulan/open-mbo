@@ -60,7 +60,7 @@ class CampaignEditObjectiveForm extends Form
             'weight' => 'decimal:2|required',
             'expected' => 'decimal:2|nullable',
             'award' => 'decimal:2|nullable',
-            'draft' => 'in:on,off',
+            'draft' => 'boolean',
         ];
     }
 }

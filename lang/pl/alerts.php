@@ -2,6 +2,9 @@
 
 return [
 
+    'system' => [
+        'unauthorized_module' => 'Moduł, który próbujesz otworzyć został zablokowany przez administratora systemu.',
+    ],
     'success' => [
         'operation' => 'Operacja zakończona pomyślnie.',
     ],
@@ -27,20 +30,18 @@ return [
             // SETTINGS
             'cache_clear' => 'Pamięć podręczna aplikacji została pomyślnie wyczyszczona!',
             'mail_update' => 'Dane serwera SMTP zostały zaktualizowane. Cache został automatycznie wyczyszczony.',
+            'mbo_update'  => 'Ustawienia modułu MBO zostały zaktualizowane.',
             'general'     => 'Ustawienia platformy zostały zaktualizowane.',
         ],
         'error' => [
             //SETTINGS
             'cache_clear' => 'Podczas czyszczenia pamięci podręcznej aplikacji serwer napotkał problemy. Sprawdź uprawnienia serwera.',
             'mail_update' => 'Dane serwera SMTP nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd.',
+            'mbo_update'  => 'Ustawienia modułu MBO nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd.',
             'general'     => 'Ustawienia platformy nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd.',
         ],
-        'warning' => [
-
-        ],
-        'info' => [
-
-        ],
+        'warning' => [],
+        'info' => [],
 
     ],
 
@@ -63,9 +64,7 @@ return [
             'users_deleted' => 'Wystąpił błąd podczas wypisywania użytkownika z Kampanii. Odśwież stronę i spróbuj ponownie.',
         ],
 
-        'info' => [
-
-        ],
+        'info' => [],
 
     ],
 

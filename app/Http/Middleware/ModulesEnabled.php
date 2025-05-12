@@ -18,7 +18,7 @@ class ModulesEnabled
     {
         $verified = ModuleManager::check($module);
         if (!$verified) {
-            unauthorized('Moduł, który próbujesz otworzyć został zablokowany przez administratora systemu.');
+            unauthorized(__('alerts.system.unauthorized_module'));
         }
 
         return $next($request);

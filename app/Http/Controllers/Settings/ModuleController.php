@@ -43,8 +43,8 @@ class ModuleController extends SettingsController
             $settings->$key = $value;
         }
         if ($settings->save()) {
-            return redirect()->to(route('settings.modules.index', ['module' => 'mbo']))->with('success', __('alerts.settings.success.mail_update'));
+            return redirect()->to(route('settings.modules.index', ['module' => 'mbo']))->with('success', __('alerts.settings.success.mbo_update'));
         }
-        return redirect()->to(route('settings.modules.index', ['module' => 'mbo']))->with('error', __('alerts.settings.error.mail_update'));;
+        return redirect()->to(route('settings.modules.index', ['module' => 'mbo']))->with('error', __('alerts.settings.error.mbo_update'));;
     }
 }

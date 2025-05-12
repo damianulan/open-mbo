@@ -73,8 +73,8 @@ class CampaignEditForm extends Form
             'self_evaluation_from' => 'date|required|after:evaluation_from',
             'self_evaluation_to' => 'date|required|after_or_equal:self_evaluation_from',
 
-            'draft' => 'in:on,off',
-            'manual' => 'in:on,off',
+            'draft' => 'boolean',
+            'manual' => 'boolean',
         ];
     }
 }
