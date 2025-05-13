@@ -74883,15 +74883,12 @@ $.clearErrorsForm = function (form_id) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
 /* harmony import */ var trix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! trix */ "./node_modules/trix/dist/trix.esm.min.js");
+/* harmony import */ var flatpickr__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flatpickr */ "./node_modules/flatpickr/dist/esm/index.js");
 __webpack_require__(/*! chosen-js */ "./node_modules/chosen-js/chosen.jquery.js");
 
+
 window.Trix = trix__WEBPACK_IMPORTED_MODULE_0__["default"];
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (trix__WEBPACK_IMPORTED_MODULE_0__["default"]);
-var flatpickr = __webpack_require__(/*! flatpickr */ "./node_modules/flatpickr/dist/esm/index.js");
 var flatpickr_locale = __webpack_require__("./node_modules/flatpickr/dist/l10n sync recursive ^\\.\\/.*\\.js$")("./" + globalLocale + ".js")["default"].pl;
 $.buildFlatpickr = function () {
   var dateTimePickerOptions = {
@@ -74938,7 +74935,7 @@ $.buildFlatpickr = function () {
     if (maxDate) {
       dateTimePickerOptions.maxDate = maxDate;
     }
-    $(this).flatpickr(dateTimePickerOptions);
+    (0,flatpickr__WEBPACK_IMPORTED_MODULE_1__["default"])(this, dateTimePickerOptions);
   });
   $(document).find(".timepicker").each(function () {
     var minDate = $(this).attr("data-min-date");
@@ -74949,7 +74946,7 @@ $.buildFlatpickr = function () {
     if (maxDate) {
       timePickerOptions.maxDate = maxDate;
     }
-    $(this).flatpickr(timePickerOptions);
+    (0,flatpickr__WEBPACK_IMPORTED_MODULE_1__["default"])(this, timePickerOptions);
   });
   $(document).find(".datepicker").each(function () {
     var minDate = $(this).attr("data-min-date");
@@ -74960,7 +74957,7 @@ $.buildFlatpickr = function () {
     if (maxDate) {
       datePickerOptions.maxDate = maxDate;
     }
-    $(this).flatpickr(datePickerOptions);
+    (0,flatpickr__WEBPACK_IMPORTED_MODULE_1__["default"])(this, datePickerOptions);
   });
   $(document).find(".birthdatepicker").each(function () {
     var minDate = $(this).attr("data-min-date");
@@ -74971,7 +74968,7 @@ $.buildFlatpickr = function () {
     if (maxDate) {
       birthdatePickerOptions.maxDate = maxDate;
     }
-    $(this).flatpickr(birthdatePickerOptions);
+    (0,flatpickr__WEBPACK_IMPORTED_MODULE_1__["default"])(this, birthdatePickerOptions);
   });
 };
 $.buildChosen = function () {

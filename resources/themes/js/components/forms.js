@@ -1,15 +1,14 @@
 require("chosen-js");
-
 import Trix from "trix";
-window.Trix = Trix;
-export default Trix;
+import flatpickr from "flatpickr";
 
-const flatpickr = require("flatpickr");
+window.Trix = Trix;
+
 const flatpickr_locale = require("flatpickr/dist/l10n/" + globalLocale + ".js")
     .default.pl;
 
 $.buildFlatpickr = function () {
-    var dateTimePickerOptions = {
+    const dateTimePickerOptions = {
         locale: flatpickr_locale,
         allowInput: true,
         altFormat: datetime_format,
@@ -19,7 +18,7 @@ $.buildFlatpickr = function () {
         altInput: true,
     };
 
-    var timePickerOptions = {
+    const timePickerOptions = {
         locale: flatpickr_locale,
         altInput: true,
         allowInput: true,
@@ -30,7 +29,7 @@ $.buildFlatpickr = function () {
         time_24hr: true,
     };
 
-    var datePickerOptions = {
+    const datePickerOptions = {
         locale: flatpickr_locale,
         allowInput: true,
         altInput: true,
@@ -38,7 +37,7 @@ $.buildFlatpickr = function () {
         dateFormat: "Y-m-d",
     };
 
-    var birthdatePickerOptions = {
+    const birthdatePickerOptions = {
         locale: flatpickr_locale,
         allowInput: true,
         altInput: true,
@@ -60,7 +59,7 @@ $.buildFlatpickr = function () {
             if (maxDate) {
                 dateTimePickerOptions.maxDate = maxDate;
             }
-            $(this).flatpickr(dateTimePickerOptions);
+            flatpickr(this, dateTimePickerOptions);
         });
 
     $(document)
@@ -75,7 +74,7 @@ $.buildFlatpickr = function () {
             if (maxDate) {
                 timePickerOptions.maxDate = maxDate;
             }
-            $(this).flatpickr(timePickerOptions);
+            flatpickr(this, timePickerOptions);
         });
 
     $(document)
@@ -90,7 +89,7 @@ $.buildFlatpickr = function () {
             if (maxDate) {
                 datePickerOptions.maxDate = maxDate;
             }
-            $(this).flatpickr(datePickerOptions);
+            flatpickr(this, datePickerOptions);
         });
 
     $(document)
@@ -105,7 +104,7 @@ $.buildFlatpickr = function () {
             if (maxDate) {
                 birthdatePickerOptions.maxDate = maxDate;
             }
-            $(this).flatpickr(birthdatePickerOptions);
+            flatpickr(this, birthdatePickerOptions);
         });
 };
 
