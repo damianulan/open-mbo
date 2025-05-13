@@ -10,12 +10,6 @@
         "objectives"
     ],
     "license": "Proprietary",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/damianulan/laravel-form-forge.git"
-        }
-    ],
     "authors": [
         {
             "name": "Damian Ułan",
