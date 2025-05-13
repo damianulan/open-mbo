@@ -1,15 +1,13 @@
 require("chosen-js");
 import Trix from "trix";
 import flatpickr from "flatpickr";
+import { Polish } from "flatpickr/dist/l10n/pl.js";
 
 window.Trix = Trix;
 
-const flatpickr_locale = require("flatpickr/dist/l10n/" + globalLocale + ".js")
-    .default.pl;
-
 $.buildFlatpickr = function () {
+    flatpickr.localize(Polish);
     const dateTimePickerOptions = {
-        locale: flatpickr_locale,
         allowInput: true,
         altFormat: datetime_format,
         dateFormat: "Y-m-d H:i:s",
@@ -19,7 +17,6 @@ $.buildFlatpickr = function () {
     };
 
     const timePickerOptions = {
-        locale: flatpickr_locale,
         altInput: true,
         allowInput: true,
         enableTime: true,
@@ -30,7 +27,6 @@ $.buildFlatpickr = function () {
     };
 
     const datePickerOptions = {
-        locale: flatpickr_locale,
         allowInput: true,
         altInput: true,
         altFormat: date_format,
@@ -38,7 +34,6 @@ $.buildFlatpickr = function () {
     };
 
     const birthdatePickerOptions = {
-        locale: flatpickr_locale,
         allowInput: true,
         altInput: true,
         altFormat: date_format,

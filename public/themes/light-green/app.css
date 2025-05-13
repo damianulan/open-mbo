@@ -25245,16 +25245,91 @@ ul.list-style-none {
   padding-left: 1rem;
 }
 
-i.info-box {
-  font-size: 0.9rem;
-  cursor: pointer;
-  color: rgb(17.5, 64.375, 67.5);
+.settings .settings-contents {
+  padding: 0 2.5rem;
 }
 
-.tippy-info {
+.users-view-image {
+  width: 150px;
+}
+
+.divider {
   display: block;
-  cursor: pointer;
-  color: rgb(17.5, 64.375, 67.5);
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 1rem 0;
+}
+
+.divider .divider-text {
+  position: relative;
+  display: inline-block;
+  font-size: 0.8rem;
+  padding: 0 1rem;
+  background-color: #fff;
+}
+
+.divider .divider-text i {
+  font-size: 1rem;
+}
+
+.divider .divider-text:before,
+.divider .divider-text:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 9999px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.divider .divider-text:before {
+  right: 100%;
+}
+
+.divider .divider-text:after {
+  left: 100%;
+}
+
+.divider.divider-left .divider-text {
+  float: left;
+  padding-left: 0;
+}
+
+.divider.divider-left .divider-text:before {
+  display: none;
+}
+
+.divider.divider-left-center .divider-text {
+  left: -25%;
+}
+
+.divider.divider-right .divider-text {
+  float: right;
+  padding-right: 0;
+}
+
+.divider.divider-right .divider-text:after {
+  display: none;
+}
+
+.divider.divider-right-center .divider-text {
+  right: -25%;
+}
+
+.divider.divider-dotted .divider-text:before,
+.divider.divider-dotted .divider-text:after {
+  border-style: dotted;
+  border-width: 1px;
+  border-top-width: 0;
+  border-color: black;
+}
+
+.divider.divider-dashed .divider-text:before,
+.divider.divider-dashed .divider-text:after {
+  border-style: dashed;
+  border-width: 1px;
+  border-top-width: 0;
+  border-color: black;
 }
 
 .btn {
@@ -25444,96 +25519,21 @@ input[type=search]:focus {
   margin-bottom: 1.5rem;
 }
 
-.divider {
-  display: block;
-  text-align: center;
-  overflow: hidden;
-  white-space: nowrap;
-  margin: 1rem 0;
-}
-
-.divider .divider-text {
-  position: relative;
-  display: inline-block;
-  font-size: 0.8rem;
-  padding: 0 1rem;
-  background-color: #fff;
-}
-
-.divider .divider-text i {
-  font-size: 1rem;
-}
-
-.divider .divider-text:before,
-.divider .divider-text:after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: 9999px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.divider .divider-text:before {
-  right: 100%;
-}
-
-.divider .divider-text:after {
-  left: 100%;
-}
-
-.divider.divider-left .divider-text {
-  float: left;
-  padding-left: 0;
-}
-
-.divider.divider-left .divider-text:before {
-  display: none;
-}
-
-.divider.divider-left-center .divider-text {
-  left: -25%;
-}
-
-.divider.divider-right .divider-text {
-  float: right;
-  padding-right: 0;
-}
-
-.divider.divider-right .divider-text:after {
-  display: none;
-}
-
-.divider.divider-right-center .divider-text {
-  right: -25%;
-}
-
-.divider.divider-dotted .divider-text:before,
-.divider.divider-dotted .divider-text:after {
-  border-style: dotted;
-  border-width: 1px;
-  border-top-width: 0;
-  border-color: black;
-}
-
-.divider.divider-dashed .divider-text:before,
-.divider.divider-dashed .divider-text:after {
-  border-style: dashed;
-  border-width: 1px;
-  border-top-width: 0;
-  border-color: black;
-}
-
-.users-view-image {
-  width: 150px;
-}
-
 .valid-feedback,
 .invalid-feedback {
   font-size: 0.8rem;
 }
 
-.settings .settings-contents {
-  padding: 0 2.5rem;
+i.info-box {
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: rgb(17.5, 64.375, 67.5);
+}
+
+.tippy-info {
+  display: block;
+  cursor: pointer;
+  color: rgb(17.5, 64.375, 67.5);
 }
 
 form.form-horizontal label {

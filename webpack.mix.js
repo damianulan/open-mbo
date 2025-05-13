@@ -1,5 +1,6 @@
 // webpack.mix.js
 
+require("dotenv").config();
 let mix = require("laravel-mix");
 
 mix.webpackConfig((webpack) => {
