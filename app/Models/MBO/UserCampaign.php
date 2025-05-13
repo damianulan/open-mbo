@@ -64,11 +64,6 @@ class UserCampaign extends BaseModel
 
     public $timestamps = true;
 
-    protected static function boot()
-    {
-        parent::boot();
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);
