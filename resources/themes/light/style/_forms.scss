@@ -94,6 +94,10 @@ form label.required::after {
     border-color: rgba($secondary, 0.6);
 }
 
+.form-check.form-switch .form-check-input:focus {
+    box-shadow: none;
+}
+
 .form-check:not(.form-switch) .form-check-input {
     width: 1.2em;
     height: 1.2em;
