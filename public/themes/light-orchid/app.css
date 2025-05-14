@@ -25332,6 +25332,11 @@ ul.list-style-none {
   border-color: black;
 }
 
+.modal-header,
+.modal-footer {
+  border: none;
+}
+
 .btn {
   border-radius: 0.25rem;
   font-weight: 600 !important;
@@ -25536,29 +25541,29 @@ i.info-box {
   color: rgb(82.4539877301, 10.9938650307, 101.0061349693);
 }
 
-form.form-horizontal label {
+form.formforge-horizontal label {
   font-size: 0.85rem;
 }
 
-form.form-horizontal .action-btns {
+form.formforge-horizontal .action-btns {
   margin-left: auto;
   position: relative;
   display: flex;
   padding-top: 1rem;
 }
 
-form.form-horizontal .form-info {
+form.formforge-horizontal .form-info {
   margin-left: auto;
   align-self: center;
 }
 
-form.form-horizontal .form-info span.info-box {
+form.formforge-horizontal .form-info span.info-box {
   font-size: 1rem;
   cursor: pointer;
   color: #0892A5;
 }
 
-form.form-horizontal .action-btns .btn {
+form.formforge-horizontal .action-btns .btn {
   margin-left: auto;
 }
 
@@ -25604,11 +25609,6 @@ input[type=file]::file-selector-button {
   text-align: end;
   font-size: 0.7rem;
   margin-top: 0.3rem;
-}
-
-.modal-header,
-.modal-footer {
-  border: none;
 }
 
 .flatpickr-current-month {

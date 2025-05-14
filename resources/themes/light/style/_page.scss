@@ -350,3 +350,8 @@ ul.list-style-none {
     border-top-width: 0;
     border-color: black;
 }
+
+.modal-header,
+.modal-footer {
+    border: none;
+}
