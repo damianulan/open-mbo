@@ -22,7 +22,7 @@
         "php": "^8.3.0",
         "akaunting/laravel-apexcharts": "^3.0",
         "barryvdh/laravel-snappy": "^1.0",
-        "damianulan/laravel-form-forge": "dev-main",
+        "damianulan/laravel-form-forge": "^1.0",
         "diglactic/laravel-breadcrumbs": "^10.0",
         "guzzlehttp/guzzle": "^7.2",
         "lab404/laravel-impersonate": "^1.7",
