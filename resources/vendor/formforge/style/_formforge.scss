@@ -1,3 +1,5 @@
+@import "variables";
+
 select,
 input {
     display: block;
@@ -90,7 +92,7 @@ form label.required::after {
 }
 
 .form-check.form-switch .form-check-input:not(:checked) {
-    background-color: $sidebar-bg;
+    background: transparent;
     border-color: rgba($secondary, 0.6);
 }
 

@@ -1,0 +1,7 @@
+$prefix: "formforge-";
+
+$theme-colors: (
+    "formforge-primary": 1rem,
+);
+
+$input-color: var(--#{$prefix}input-color) !default;
