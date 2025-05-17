@@ -25541,30 +25541,33 @@ i.info-box {
   color: rgb(17.5, 64.375, 67.5);
 }
 
-form.formforge-horizontal label {
+form.formforge-form label {
   font-size: 0.85rem;
 }
 
-form.formforge-horizontal .action-btns {
-  margin-left: auto;
+form.formforge-form .action-btns {
   position: relative;
   display: flex;
   padding-top: 1rem;
 }
 
-form.formforge-horizontal .form-info {
+form.formforge-form .action-btns > * {
+  margin-left: 0.5rem;
+}
+
+form.formforge-form .action-btns > *:first-child {
+  margin-left: auto;
+}
+
+form.formforge-form .form-info {
   margin-left: auto;
   align-self: center;
 }
 
-form.formforge-horizontal .form-info span.info-box {
+form.formforge-form .form-info span.info-box {
   font-size: 1rem;
   cursor: pointer;
   color: #0892A5;
-}
-
-form.formforge-horizontal .action-btns .btn {
-  margin-left: auto;
 }
 
 form label.required::after {

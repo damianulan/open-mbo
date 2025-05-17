@@ -4,6 +4,7 @@ namespace App\Observers\MBO\Objectives;
 
 use App\Models\MBO\UserObjective;
 use App\Events\MBO\Campaigns\CampaignUserObjectiveAssigned;
+use App\Events\MBO\Campaigns\CampaignUserObjectiveUnassigned;
 use App\Events\MBO\Objectives\UserObjectiveAssigned;
 
 class UserObjectiveObserver
@@ -31,8 +32,12 @@ class UserObjectiveObserver
      */
     public function deleted(UserObjective $model): void
     {
-
-        UserObjectiveUnassigned::dispatch($model->user, $model->campaign);
+        $campaign = $model->objective->campaign ?? null;
+        if ($campaign) {
+            CampaignUserObjectiveUnAssigned::dispatch($model->user, $model->objective, $campaign);
+        } else {
+            UserObjectiveUnassigned::dispatch($model->user, $model->campaign);
+        }
     }
 
     /**
