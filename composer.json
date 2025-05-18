@@ -80,8 +80,9 @@
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
-            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "@php artisan vendor:publish --tag=formforge",
             "@php artisan vendor:publish --tag=formforge-resources --force",
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "@php artisan optimize:clear",
             "@php artisan ide-helper:generate",
             "@php artisan ide-helper:models -N",
