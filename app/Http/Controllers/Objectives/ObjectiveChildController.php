@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Objectives;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\AppController;
 use Illuminate\Http\Request;
 use App\Forms\MBO\Objective\ObjectiveChildEditForm;
 use App\Models\MBO\Objective;
 
-class ObjectiveChildController extends Controller
+class ObjectiveChildController extends AppController
 {
     public function store(Request $request, ObjectiveChildEditForm $form)
     {

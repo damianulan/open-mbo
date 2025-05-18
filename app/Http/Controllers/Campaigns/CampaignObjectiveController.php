@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Campaigns;
 
 use Illuminate\Http\Request;
 use App\Models\MBO\Objective;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\AppController;
 use App\Forms\MBO\Campaign\CampaignEditObjectiveForm;
 
-class CampaignObjectiveController extends Controller
+class CampaignObjectiveController extends AppController
 {
 
     public function store(Request $request, CampaignEditObjectiveForm $form)

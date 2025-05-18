@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Management;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\AppController;
 use Illuminate\Http\Request;
 use App\Facades\Page\MenuBuilder;
 use App\Facades\Page\Bars\MenubarMenu;
 use App\Facades\Page\Bars\MenuItem;
 
-class ManagementController extends Controller
+class ManagementController extends AppController
 {
     protected MenubarMenu $nav;
 
@@ -30,12 +30,9 @@ class ManagementController extends Controller
             MenuItem::make('notifications')
                 ->setTitle(__('menus.notifications.index'))
                 ->setRoute('management.notifications.index'),
-            MenuItem::make('reports')
-                ->setTitle(__('menus.reports.index'))
-                ->setRoute('management.reports.index'),
-            MenuItem::make('restoring')
-                ->setTitle(__('menus.management.restoring.index'))
-                ->setRoute('management.restoring.index'),
+            // MenuItem::make('reports')
+            //     ->setTitle(__('menus.reports.index'))
+            //     ->setRoute('management.reports.index'),
         ]);
     }
 }

@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Campaigns;
 
 use Illuminate\Http\Request;
 use App\Models\MBO\Campaign;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\AppController;
 use App\Forms\MBO\Campaign\CampaignEditUserForm;
 use App\Models\MBO\UserCampaign;
 use App\Services\Campaigns\CampaignService;
 
-class CampaignUserController extends Controller
+class CampaignUserController extends AppController
 {
 
     public function update(Request $request, $id, CampaignEditUserForm $form)

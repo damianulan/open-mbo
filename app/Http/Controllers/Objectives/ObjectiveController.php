@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Objectives;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\AppController;
 use Illuminate\Http\Request;
 use App\Models\MBO\Objective;
 use App\Models\Core\User;
 use App\Models\MBO\Campaign;
 use App\Enums\MBO\UserObjectiveStatus;
 
-class ObjectiveController extends Controller
+class ObjectiveController extends AppController
 {
     /**
      * Display a listing of the resource.
@@ -41,6 +41,7 @@ class ObjectiveController extends Controller
     public function show(Request $request, string $id)
     {
         $objective = Objective::checkAccess()->findOrFail($id);
+        $this->logShow($objective);
 
         $header = 'Podsumowanie Celu';
         return view('pages.mbo.objectives.show', [

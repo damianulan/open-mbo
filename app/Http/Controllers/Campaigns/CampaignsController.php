@@ -5,17 +5,18 @@ namespace App\Http\Controllers\Campaigns;
 use Illuminate\Http\Request;
 use App\Models\MBO\Campaign;
 use App\Forms\MBO\Campaign\CampaignEditForm;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\AppController;
 use App\Services\Campaigns\CampaignService;
 use App\Models\Core\User;
 
-class CampaignsController extends Controller
+class CampaignsController extends AppController
 {
     public function index(Request $request)
     {
         if ($request->user()->cannot('viewAny', Campaign::class)) {
             unauthorized();
         }
+        $this->logView('Wyświetlono listę kampanii pomiarowych');
         return view('pages.mbo.campaigns.index', [
             'campaigns' => Campaign::checkAccess()->paginate(30),
         ]);
@@ -69,6 +70,7 @@ class CampaignsController extends Controller
         if ($request->user()->cannot('view', $campaign)) {
             unauthorized();
         }
+        $this->logShow($campaign);
         $header = $campaign->name . ' [' . $campaign->period . ']';
         return view('pages.mbo.campaigns.show', [
             'campaign' => $campaign,
