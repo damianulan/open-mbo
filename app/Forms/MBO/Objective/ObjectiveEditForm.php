@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Forms\MBO\Campaign;
+namespace App\Forms\MBO\Objective;
 
 use FormForge\Base\Form;
 use FormForge\FormBuilder;
@@ -11,7 +11,7 @@ use App\Models\MBO\Objective;
 use Illuminate\Http\Request;
 
 // Ajax form
-class CampaignEditObjectiveForm extends Form
+class ObjectiveEditForm extends Form
 {
 
     // TODO - dodawanie użytkowników
