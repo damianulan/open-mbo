@@ -23,7 +23,7 @@
         "php": "^8.3.0",
         "akaunting/laravel-apexcharts": "^3.0",
         "barryvdh/laravel-snappy": "^1.0",
-        "damianulan/laravel-form-forge": "dev-beta/v1",
+        "damianulan/laravel-form-forge": "dev-main",
         "diglactic/laravel-breadcrumbs": "^10.0",
         "guzzlehttp/guzzle": "^7.2",
         "lab404/laravel-impersonate": "^1.7",
@@ -81,6 +81,7 @@
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "@php artisan vendor:publish --tag=formforge-resources --force",
             "@php artisan optimize:clear",
             "@php artisan ide-helper:generate",
             "@php artisan ide-helper:models -N",

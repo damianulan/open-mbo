@@ -101,6 +101,12 @@ $nav-tab-bg: #fff;
 $nav-tab-color-hover: #000;
 
 // Forms
+$input-border-color: lighten($primary, 10%);
+$input-border-focus-color: lighten($primary, 30%);
+$input-color: $secondary;
+$form-switch-width: 3em;
+$check-border-color: rgba($secondary, 0.6);
+$switch-border-color: rgba($secondary, 0.6);
 
 // Tables
 $table-bg: transparent;
