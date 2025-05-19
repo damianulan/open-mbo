@@ -26,8 +26,9 @@ class Kernel extends ConsoleKernel
             $schedule->command('backup:run')->daily()->at('01:30');
         }
 
+        $schedule->command(RepoUpdate::class)->everyFifteenMinutes();
+
         if (config('app.env') === 'development') {
-            $schedule->command(RepoUpdate::class)->hourlyAt(0);
 
             if (env('CRON_APP_REFRESH', false)) {
                 $schedule->command(AppRefresh::class)->daily()->at('00:00');
