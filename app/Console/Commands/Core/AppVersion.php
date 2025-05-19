@@ -28,29 +28,33 @@ class AppVersion extends Command
      */
     public function handle()
     {
-        $result = Process::run('git describe --exact-match --tags 2> /dev/null || git rev-parse --short HEAD');
+        $result = Process::run('git describe --tags --abbrev=0');
         $settings = new GeneralSettings();
         if ($settings) {
             $name = $settings->site_name ?? 'OpenMBO';
             $version = $settings->release ?? null;
             $new_version = trim($result->output());
-            $newVersionStyle = new OutputFormatterStyle('white', 'yellow', ['bold']);
-            $this->output->getFormatter()->setStyle('newversionblock', $newVersionStyle);
-            $newVersionStyle = new OutputFormatterStyle('white', 'green', ['bold']);
-            $this->output->getFormatter()->setStyle('versionblock', $newVersionStyle);
 
-            $this->line(PHP_EOL);
+            if ($new_version && strpos($new_version, '.') !== false) {
 
-            if ($version !== $new_version) {
-                $settings->release = $new_version;
-                if ($settings->save()) {
-                    $this->line("New $name version detected: <newversionblock>$new_version</newversionblock>");
+                $newVersionStyle = new OutputFormatterStyle('white', 'yellow', ['bold']);
+                $this->output->getFormatter()->setStyle('newversionblock', $newVersionStyle);
+                $newVersionStyle = new OutputFormatterStyle('white', 'green', ['bold']);
+                $this->output->getFormatter()->setStyle('versionblock', $newVersionStyle);
+
+                $this->line(PHP_EOL);
+
+                if ($version !== $new_version) {
+                    $settings->release = $new_version;
+                    if ($settings->save()) {
+                        $this->line("New $name version detected: <newversionblock>$new_version</newversionblock>");
+                    }
+                } else {
+                    $this->line("Current $name version: <versionblock>$version</versionblock>");
                 }
-            } else {
-                $this->line("Current $name version: <versionblock>$version</versionblock>");
-            }
 
-            $this->line(PHP_EOL);
+                $this->line(PHP_EOL);
+            }
         }
     }
 }
