@@ -2,7 +2,7 @@
 
 namespace App\Enums\Users;
 
-use FormForge\Enums\Enum;
+use App\Facades\Enum;
 
 class Gender extends Enum
 {

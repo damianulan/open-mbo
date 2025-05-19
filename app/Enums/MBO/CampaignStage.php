@@ -2,7 +2,7 @@
 
 namespace App\Enums\MBO;
 
-use FormForge\Enums\Enum;
+use App\Facades\Enum;
 
 /**
  * Campaign Stages can be assigned to campaigns and users in campaign.

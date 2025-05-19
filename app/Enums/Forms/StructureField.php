@@ -2,7 +2,7 @@
 
 namespace App\Enums\Forms;
 
-use FormForge\Enums\Enum;
+use App\Facades\Enum;
 
 class StructureField extends Enum
 {

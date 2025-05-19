@@ -47,7 +47,7 @@ class AppVersion extends Command
                 if ($version !== $new_version) {
                     $settings->release = $new_version;
                     if ($settings->save()) {
-                        $this->line("New $name version detected: <newversionblock>$new_version</newversionblock>");
+                        $this->line("New $name version detected: <newversionblock>^$new_version</newversionblock>");
                     }
                 } else {
                     $this->line("Current $name version: <versionblock>$version</versionblock>");

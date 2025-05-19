@@ -2,7 +2,7 @@
 
 namespace App\Enums\Core;
 
-use FormForge\Enums\Enum;
+use App\Facades\Enum;
 
 class SystemRolesLib extends Enum
 {
