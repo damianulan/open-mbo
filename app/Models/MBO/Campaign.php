@@ -4,16 +4,13 @@ namespace App\Models\MBO;
 
 use App\Models\BaseModel;
 use FormForge\Casts\TrixFieldCast;
-use App\Casts\CheckboxCast;
 use Illuminate\Support\Collection;
 use App\Models\MBO\Objective;
 use App\Models\MBO\UserCampaign;
 use Carbon\Carbon;
 use App\Models\Core\User;
 use App\Enums\MBO\CampaignStage;
-use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use App\Models\Scopes\MBO\CampaignScope;
-use App\Enums\Core\SystemRolesLib;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use App\Observers\MBO\Campaigns\CampaignObserver;
@@ -115,34 +112,6 @@ class Campaign extends BaseModel
 
     protected $accessScope = CampaignScope::class;
 
-    protected static function boot()
-    {
-        parent::boot();
-        static::creating(function ($model) {
-            if ($model->manual == 0) {
-                $model->setStageAuto();
-            } else {
-                $model->stage = CampaignStage::PENDING;
-            }
-
-            return $model;
-        });
-
-        static::updating(function ($model) {
-            if (!setting('mbo.campaigns_manual')) {
-                $model->manual = 0;
-            }
-
-            if ($model->manual == 0) {
-                $model->setStageAuto();
-            } else {
-                $model->stage = CampaignStage::PENDING;
-            }
-
-            return $model;
-        });
-    }
-
     public function user_campaigns()
     {
         return $this->hasMany(UserCampaign::class);
@@ -217,8 +186,9 @@ class Campaign extends BaseModel
         if ($user_id) {
             $params['user_id'] = $user_id;
         }
-        $enrols = $this->user_campaigns()->where($params)->get();
+
         $stage =  $this->getCurrentStages()->first();
+        $enrols = $this->user_campaigns()->where($params)->get();
         if (!empty($enrols)) {
             foreach ($enrols as $enrol) {
                 $enrol->timestamps = false;

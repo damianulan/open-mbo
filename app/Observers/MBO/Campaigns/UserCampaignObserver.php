@@ -28,10 +28,7 @@ class UserCampaignObserver
      */
     public function updated(UserCampaign $model): void
     {
-        if ($model->isManual() == 0 && $model->active == 1) {
-            $model->campaign->setUserStage($model->id);
-        }
-        $model->setObjectiveStatus();
+        $model->mapObjectiveStatus();
     }
 
     /**

@@ -148,13 +148,14 @@ class UserCampaign extends BaseModel
      *
      * @return void
      */
-    public function setObjectiveStatus(): void
+    public function mapObjectiveStatus(): void
     {
+        $setStage = null;
         if ($this->active) {
             $sequences = CampaignStage::sequences();
-            $setStage = null;
-            if (in_array($this->stage, CampaignStage::sequences())) {
-                if ($this->stage === CampaignStage::REALIZATION) {
+            dd($sequences);
+            if (in_array($this->stage, $sequences)) {
+                if ($this->stage === CampaignStage::REALIZATION || $this->stage === CampaignStage::IN_PROGRESS) {
                     $setStage = UserObjectiveStatus::PROGRESS;
                 } elseif ($sequences[$this->stage] < $sequences[CampaignStage::REALIZATION]) {
                     $setStage = UserObjectiveStatus::UNSTARTED;
@@ -164,18 +165,20 @@ class UserCampaign extends BaseModel
             } else {
                 $setStage = UserObjectiveStatus::INTERRUPTED;
             }
+        } else {
+            $setStage = UserObjectiveStatus::FAILED;
+        }
 
-            if ($setStage) {
-                $objectives = $this->objectives();
-                if ($objectives->count()) {
-                    foreach ($objectives as $objective) {
-                        $assignments = $objective->user_assignments()->active()->whereUserId($this->user_id)->get();
+        if ($setStage) {
+            $objectives = $this->objectives();
+            if ($objectives->count()) {
+                foreach ($objectives as $objective) {
+                    $assignments = $objective->user_assignments()->whereUserId($this->user_id)->get();
 
-                        if ($assignments->count()) {
-                            foreach ($assignments as $assignment) {
-                                $assignment->status = $setStage;
-                                $assignment->save();
-                            }
+                    if ($assignments->count()) {
+                        foreach ($assignments as $assignment) {
+                            $assignment->status = $setStage;
+                            $assignment->update();
                         }
                     }
                 }

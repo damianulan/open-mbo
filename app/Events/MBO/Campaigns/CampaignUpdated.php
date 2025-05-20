@@ -4,12 +4,11 @@ namespace App\Events\MBO\Campaigns;
 
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
 use App\Models\MBO\Campaign;
 use App\Models\Core\User;
-use App\Models\MBO\Objective;
+use Illuminate\Support\Facades\Auth;
 
-class CampaignUserObjectiveAssigned implements ShouldDispatchAfterCommit
+class CampaignUpdated
 {
     use Dispatchable, SerializesModels;
 
@@ -17,10 +16,7 @@ class CampaignUserObjectiveAssigned implements ShouldDispatchAfterCommit
      * Create a new event instance.
      */
     public function __construct(
-        public User $user,
-        public Objective $objective,
-        public Campaign $campaign
-    ) {
-        //
-    }
+        public Campaign $campaign,
+        public ?User $updated_by = null,
+    ) {}
 }

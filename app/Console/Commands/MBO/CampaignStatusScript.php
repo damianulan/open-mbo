@@ -49,7 +49,6 @@ class CampaignStatusScript extends BaseCommand
                 $campaign->timestamps = false;
                 $campaign->setStageAuto();
                 $campaign->update();
-                $campaign->setUserStage();
             }
 
             $this->info('Campaign statuses updated successfully');

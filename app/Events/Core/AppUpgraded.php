@@ -1,21 +1,19 @@
 <?php
 
-namespace {{ namespace }};
+namespace App\Events\Core;
 
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
 
-class {{ class }} implements ShouldDispatchAfterCommit
+class AppUpgraded
 {
     use Dispatchable, SerializesModels;
 
     /**
      * Create a new event instance.
      */
-    public function __construct()
+    public function __construct(public string $release)
     {
         //
     }
-
 }

@@ -18,26 +18,26 @@ The Software is free for commercial use and restricted for modifing and altering
 Firstly, after cloning the repo, install composer dependencies. For that You need to have composer v2 installed on Your machine.
 
 ```
-> composer install
+composer install
 ```
 
 Then, copy `.env.example` in order to create `.env` configuration file. Setup configuration to suit your needs, especially fill DB connection details. After that, set your unique artisan key:
 
 ```
-> php artisan key:generate
+php artisan key:generate
 ```
 
 Once You have your secret key injected in Your configuration, proceed with migration (make sure your database configuration details are correct), seed basic application data and clear all cache.
 
 ```
-> php artisan migrate --seed
-> php artisan optimize:clear
+php artisan migrate --seed
+php artisan optimize:clear
 ```
 
 Lastly, enable your storage by:
 
 ```
-> php artisan storage:link
+php artisan storage:link
 ```
 
 **Warning:** Application is still in production, so make sure your `.env` file contains following instructions:

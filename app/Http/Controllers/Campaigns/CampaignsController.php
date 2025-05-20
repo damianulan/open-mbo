@@ -70,6 +70,7 @@ class CampaignsController extends AppController
         if ($request->user()->cannot('view', $campaign)) {
             unauthorized();
         }
+
         $this->logShow($campaign);
         $header = $campaign->name . ' [' . $campaign->period . ']';
         return view('pages.mbo.campaigns.show', [

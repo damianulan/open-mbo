@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Process;
 use App\Settings\GeneralSettings;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use App\Events\Core\AppUpgraded;
 
 class AppVersion extends Command
 {
@@ -39,7 +40,7 @@ class AppVersion extends Command
 
                 $newVersionStyle = new OutputFormatterStyle('white', 'yellow', ['bold']);
                 $this->output->getFormatter()->setStyle('newversionblock', $newVersionStyle);
-                $newVersionStyle = new OutputFormatterStyle('white', 'green', ['bold']);
+                $newVersionStyle = new OutputFormatterStyle('white', 'blue', ['bold']);
                 $this->output->getFormatter()->setStyle('versionblock', $newVersionStyle);
 
                 $this->line(PHP_EOL);
@@ -48,6 +49,7 @@ class AppVersion extends Command
                     $settings->release = $new_version;
                     if ($settings->save()) {
                         $this->line("New $name version detected: <newversionblock>^$new_version</newversionblock>");
+                        AppUpgraded::dispatch($new_version);
                     }
                 } else {
                     $this->line("Current $name version: <versionblock>$version</versionblock>");

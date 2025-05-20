@@ -23,6 +23,7 @@ class UserObjectiveStatus extends Enum
         return [
             self::PASSED,
             self::FAILED,
+            self::INTERRUPTED,
         ];
     }
 }

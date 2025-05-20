@@ -7,6 +7,7 @@ namespace App\Facades;
  *
  * @author Damian Ułan <damian.ulan@protonmail.com>
  * @copyright 2025 damianulan
+ * @package Lucent
  */
 abstract class Enum
 {

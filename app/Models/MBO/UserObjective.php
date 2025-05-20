@@ -56,18 +56,6 @@ class UserObjective extends BaseModel
         'evaluation' => 'decimal:8,2',
     ];
 
-    protected static function boot()
-    {
-        parent::boot();
-        static::creating(function ($model) {
-            if (!$model->status) {
-                $model->status = UserObjectiveStatus::UNSTARTED;
-            }
-
-            return $model;
-        });
-    }
-
     public static function assign($user_id, $objective_id): bool
     {
         $output = false;
@@ -120,7 +108,7 @@ class UserObjective extends BaseModel
         return in_array($this->status, [UserObjectiveStatus::COMPLETED, UserObjectiveStatus::PASSED, UserObjectiveStatus::FAILED]);
     }
 
-    public function scopeActive(Builder $query): void
+    public function scopeWhereActive(Builder $query): void
     {
         $query->whereNotIn('status', UserObjectiveStatus::frozen());
     }

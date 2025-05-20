@@ -6,9 +6,20 @@ use App\Models\MBO\UserObjective;
 use App\Events\MBO\Campaigns\CampaignUserObjectiveAssigned;
 use App\Events\MBO\Campaigns\CampaignUserObjectiveUnassigned;
 use App\Events\MBO\Objectives\UserObjectiveAssigned;
+use App\Enums\MBO\UserObjectiveStatus;
 
 class UserObjectiveObserver
 {
+
+    public function creating(UserObjective $model): UserObjective
+    {
+        if (!$model->status) {
+            $model->status = UserObjectiveStatus::UNSTARTED;
+        }
+
+        return $model;
+    }
+
     /**
      * Handle the UserObjective "created" event.
      */
@@ -25,7 +36,10 @@ class UserObjectiveObserver
     /**
      * Handle the UserObjective "updated" event.
      */
-    public function updated(UserObjective $model): void {}
+    public function updated(UserObjective $model): void
+    {
+        //
+    }
 
     /**
      * Handle the UserObjective "deleted" event.
