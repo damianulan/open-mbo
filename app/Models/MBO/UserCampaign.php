@@ -7,9 +7,11 @@ use App\Casts\CheckboxCast;
 use App\Models\Core\User;
 use App\Models\MBO\Campaign;
 use App\Enums\MBO\CampaignStage;
-use App\Observers\MBO\Campaigns\UserCampaignObserver;
 use App\Enums\MBO\UserObjectiveStatus;
-use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use App\Models\MBO\UserObjective;
+use App\Events\MBO\Campaigns\UserCampaignAssigned;
+use App\Events\MBO\Campaigns\UserCampaignUnassigned;
+use App\Traits\Dispatcher;
 
 /**
  *
@@ -44,9 +46,10 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign withoutTrashed()
  * @mixin \Eloquent
  */
-#[ObservedBy([UserCampaignObserver::class])]
 class UserCampaign extends BaseModel
 {
+    use Dispatcher;
+
     public $logEntities = ['user_id' => User::class, 'campaign_id' => Campaign::class];
 
     protected $fillable = [
@@ -61,6 +64,7 @@ class UserCampaign extends BaseModel
         'active' => 'boolean',
         'manual' => 'boolean',
     ];
+
 
     public $timestamps = true;
 
@@ -150,11 +154,10 @@ class UserCampaign extends BaseModel
      */
     public function mapObjectiveStatus(): void
     {
-        $setStage = null;
+        $setStage = UserObjectiveStatus::FAILED;
         if ($this->active) {
             $sequences = CampaignStage::sequences();
-            dd($sequences);
-            if (in_array($this->stage, $sequences)) {
+            if (array_key_exists($this->stage, $sequences)) {
                 if ($this->stage === CampaignStage::REALIZATION || $this->stage === CampaignStage::IN_PROGRESS) {
                     $setStage = UserObjectiveStatus::PROGRESS;
                 } elseif ($sequences[$this->stage] < $sequences[CampaignStage::REALIZATION]) {
@@ -165,15 +168,13 @@ class UserCampaign extends BaseModel
             } else {
                 $setStage = UserObjectiveStatus::INTERRUPTED;
             }
-        } else {
-            $setStage = UserObjectiveStatus::FAILED;
         }
 
         if ($setStage) {
             $objectives = $this->objectives();
             if ($objectives->count()) {
                 foreach ($objectives as $objective) {
-                    $assignments = $objective->user_assignments()->whereUserId($this->user_id)->get();
+                    $assignments = $objective->user_assignments()->where('user_id', $this->user_id)->get();
 
                     if ($assignments->count()) {
                         foreach ($assignments as $assignment) {
@@ -184,5 +185,36 @@ class UserCampaign extends BaseModel
                 }
             }
         }
+    }
+
+    public static function createdUserCampaign(UserCampaign $model): void
+    {
+        $objectives = $model->campaign->objectives()->get();
+        foreach ($objectives as $objective) {
+            UserObjective::assign($model->user_id, $objective->id);
+        }
+
+        UserCampaignAssigned::dispatch($model->user, $model->campaign);
+    }
+
+    /**
+     * Handle the UserCampaign "updated" event.
+     */
+    public static function updatedUserCampaign(UserCampaign $model): void
+    {
+        $model->mapObjectiveStatus();
+    }
+
+    /**
+     * Handle the UserCampaign "deleted" event.
+     */
+    public static function deletedUserCampaign(UserCampaign $model): void
+    {
+        $objectives = $model->campaign->objectives()->get();
+        foreach ($objectives as $objective) {
+            UserObjective::unassign($model->user_id, $objective->id);
+        }
+
+        UserCampaignUnassigned::dispatch($model->user, $model->campaign);
     }
 }

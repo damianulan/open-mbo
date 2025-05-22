@@ -37,6 +37,13 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\MBO\Campaigns\UserCampaignUnassigned' => [
             'App\Listeners\MBO\Campaigns\UserUnassignedNotify',
         ],
+
+        'App\Events\MBO\Campaigns\CampaignUpdated' => [
+            'App\Listeners\MBO\Campaigns\UserCampaignStageCheck',
+        ],
+        'App\Events\MBO\Campaigns\CampaignViewed' => [
+            'App\Listeners\MBO\Campaigns\UserCampaignStageCheck',
+        ],
     ];
 
     /**

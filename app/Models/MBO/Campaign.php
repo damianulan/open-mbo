@@ -14,6 +14,8 @@ use App\Models\Scopes\MBO\CampaignScope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use App\Observers\MBO\Campaigns\CampaignObserver;
+use App\Events\MBO\Campaigns\CampaignUpdated;
+use App\Traits\Dispatcher;
 
 /**
  *
@@ -75,9 +77,10 @@ use App\Observers\MBO\Campaigns\CampaignObserver;
  * @property string $stage
  * @mixin \Eloquent
  */
-#[ObservedBy([CampaignObserver::class])]
 class Campaign extends BaseModel
 {
+    use Dispatcher;
+
     public $stages;
     public $timestamps = true;
     protected $log_name = 'mbo';
@@ -108,6 +111,10 @@ class Campaign extends BaseModel
         'manual' => 'boolean',
 
         'description' => TrixFieldCast::class,
+    ];
+
+    protected $defaults = [
+        'stage' => CampaignStage::PENDING,
     ];
 
     protected $accessScope = CampaignScope::class;
@@ -191,9 +198,11 @@ class Campaign extends BaseModel
         $enrols = $this->user_campaigns()->where($params)->get();
         if (!empty($enrols)) {
             foreach ($enrols as $enrol) {
-                $enrol->timestamps = false;
-                $enrol->stage = $stage;
-                $enrol->update();
+                if ($stage !== $enrol->stage) {
+                    $enrol->timestamps = false;
+                    $enrol->stage = $stage;
+                    $enrol->update();
+                }
             }
         }
         return $stage;
@@ -391,5 +400,38 @@ class Campaign extends BaseModel
                 $q->where('stage', CampaignStage::COMPLETED)
                     ->orWhereDate('self_evaluation_to', '<', Carbon::now());
             });
+    }
+
+    public static function retrievedCampaign(Campaign $model)
+    {
+        $model->setUserStage();
+    }
+
+    public static function creatingCampaign(Campaign $model)
+    {
+        return self::updatingCampaign($model);
+    }
+
+    public static function createdCampaign(Campaign $model)
+    {
+        CampaignCreated::dispatch($model);
+    }
+
+    public static function updatingCampaign(Campaign $model)
+    {
+        if (!setting('mbo.campaigns_manual')) {
+            $model->manual = 0;
+        }
+
+        if ($model->manual == 0) {
+            $model->setStageAuto();
+        }
+
+        return $model;
+    }
+
+    public static function updatedCampaign(Campaign $model)
+    {
+        CampaignUpdated::dispatch($model);
     }
 }

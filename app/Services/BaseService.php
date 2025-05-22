@@ -82,7 +82,7 @@ abstract class BaseService
         return true;
     }
 
-    protected function handleException()
+    public function handleException()
     {
         if ($this->exception) {
             report($this->exception);

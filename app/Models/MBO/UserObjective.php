@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use App\Observers\MBO\Objectives\UserObjectiveObserver;
+use App\Traits\Dispatcher;
 
 /**
  *
@@ -42,9 +43,10 @@ use App\Observers\MBO\Objectives\UserObjectiveObserver;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserObjective withoutTrashed()
  * @mixin \Eloquent
  */
-#[ObservedBy([UserObjectiveObserver::class])]
 class UserObjective extends BaseModel
 {
+    use Dispatcher;
+
     protected $fillable = [
         'user_id',
         'objective_id',
@@ -54,6 +56,10 @@ class UserObjective extends BaseModel
 
     protected $casts = [
         'evaluation' => 'decimal:8,2',
+    ];
+
+    protected $defaults = [
+        'status' => UserObjectiveStatus::UNSTARTED,
     ];
 
     public static function assign($user_id, $objective_id): bool
@@ -119,5 +125,37 @@ class UserObjective extends BaseModel
             $user = Auth::user();
         }
         $query->where('user_id', $user->id);
+    }
+
+    /**
+     * Handle the UserObjective "created" event.
+     */
+    public static function createdUserObjective(UserObjective $model): void
+    {
+        $campaign = $model->objective->campaign ?? null;
+        if ($campaign) {
+            CampaignUserObjectiveAssigned::dispatch($model->user, $model->objective, $campaign);
+        } else {
+            UserObjectiveAssigned::dispatch($model->user, $model->objective);
+        }
+    }
+
+    public static function updatedUserObjective(UserObjective $model): void
+    {
+        if (in_array('status', $model->getDirty())) {
+        }
+    }
+
+    /**
+     * Handle the UserObjective "deleted" event.
+     */
+    public static function deletedUserObjective(UserObjective $model): void
+    {
+        $campaign = $model->objective->campaign ?? null;
+        if ($campaign) {
+            CampaignUserObjectiveUnAssigned::dispatch($model->user, $model->objective, $campaign);
+        } else {
+            UserObjectiveUnassigned::dispatch($model->user, $model->campaign);
+        }
     }
 }

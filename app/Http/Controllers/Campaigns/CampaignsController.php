@@ -8,6 +8,7 @@ use App\Forms\MBO\Campaign\CampaignEditForm;
 use App\Http\Controllers\AppController;
 use App\Services\Campaigns\CampaignService;
 use App\Models\Core\User;
+use App\Events\MBO\Campaigns\CampaignViewed;
 
 class CampaignsController extends AppController
 {
@@ -56,7 +57,7 @@ class CampaignsController extends AppController
             $campaign = $service->getModel();
             return redirect()->route('campaigns.show', $campaign->id)->with('success', __('alerts.campaigns.success.create', ['name' => $campaign->name]));
         }
-        return redirect()->back()->with('error', __('alerts.campaigns.error.create'));
+        return redirect()->back()->with('error', $service->getMessage() ?? __('alerts.campaigns.error.create'));
     }
 
     /**
@@ -71,6 +72,7 @@ class CampaignsController extends AppController
             unauthorized();
         }
 
+        CampaignViewed::dispatch($campaign);
         $this->logShow($campaign);
         $header = $campaign->name . ' [' . $campaign->period . ']';
         return view('pages.mbo.campaigns.show', [

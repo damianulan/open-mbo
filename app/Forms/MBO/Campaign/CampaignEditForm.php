@@ -60,20 +60,20 @@ class CampaignEditForm extends Form
             'period' => 'max:10|required|unique:campaigns,period,' . $model_id,
             'description' => 'max:512|nullable',
 
-            'definition_from' => 'date|required',
-            'definition_to' => 'date|required|after_or_equal:definition_from',
+            'definition_from' => 'nullable|date|required_if:manual,0',
+            'definition_to' => 'nullable|date|required_if:manual,0|after_or_equal:definition_from',
 
-            'disposition_from' => 'date|required|after:definition_from',
-            'disposition_to' => 'date|required|after_or_equal:disposition_from',
+            'disposition_from' => 'nullable|date|required_if:manual,0|after:definition_from',
+            'disposition_to' => 'nullable|date|required_if:manual,0|after_or_equal:disposition_from',
 
-            'realization_from' => 'date|required|after:disposition_from',
-            'realization_to' => 'date|required|after_or_equal:realization_from',
+            'realization_from' => 'nullable|date|required_if:manual,0|after:disposition_from',
+            'realization_to' => 'nullable|date|required_if:manual,0|after_or_equal:realization_from',
 
-            'evaluation_from' => 'date|required|after:realization_from',
-            'evaluation_to' => 'date|required|after_or_equal:evaluation_from',
+            'evaluation_from' => 'nullable|date|required_if:manual,0|after:realization_from',
+            'evaluation_to' => 'nullable|date|required_if:manual,0|after_or_equal:evaluation_from',
 
-            'self_evaluation_from' => 'date|required|after:evaluation_from',
-            'self_evaluation_to' => 'date|required|after_or_equal:self_evaluation_from',
+            'self_evaluation_from' => 'nullable|date|required_if:manual,0|after:evaluation_from',
+            'self_evaluation_to' => 'nullable|date|required_if:manual,0|after_or_equal:self_evaluation_from',
 
             'draft' => 'boolean',
             'manual' => 'boolean',

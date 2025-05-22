@@ -7,9 +7,8 @@ use Illuminate\Queue\SerializesModels;
 use App\Models\MBO\Campaign;
 use App\Models\Core\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
 
-class CampaignCreated implements ShouldDispatchAfterCommit
+class CampaignViewed
 {
     use Dispatchable, SerializesModels;
 

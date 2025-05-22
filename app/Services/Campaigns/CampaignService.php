@@ -12,7 +12,7 @@ class CampaignService extends BaseService
     public function createOrUpdate(): self
     {
         $tmp = $this->transaction(function () {
-            $campaign = Campaign::fillFromRequest($this->request, $this->model->id);
+            $campaign = Campaign::fillFromRequest($this->request, $this->model->id ?? null);
             $user_ids = $this->request->input('user_ids');
 
             if ($campaign->save()) {
