@@ -15,6 +15,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * TODO static roles & static permissions
+ *
+ * @author Damian Ułan <damian.ulan@protonmail.com>
+ * @copyright 2025 damianulan
+ */
 trait HasRolesAndPermissions
 {
     /**

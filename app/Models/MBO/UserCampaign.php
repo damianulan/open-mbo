@@ -174,7 +174,7 @@ class UserCampaign extends BaseModel
             $objectives = $this->objectives();
             if ($objectives->count()) {
                 foreach ($objectives as $objective) {
-                    $assignments = $objective->user_assignments()->where('user_id', $this->user_id)->get();
+                    $assignments = $objective->user_assignments()->whereUserId($this->user_id)->get();
 
                     if ($assignments->count()) {
                         foreach ($assignments as $assignment) {
