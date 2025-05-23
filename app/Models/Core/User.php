@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Lab404\Impersonate\Models\Impersonate;
-use App\Traits\Impersonable;
+use App\Traits\Vendors\Impersonable;
 use App\Traits\HasRolesAndPermissions;
 use App\Traits\UUID;
 use Illuminate\Database\Eloquent\SoftDeletes;

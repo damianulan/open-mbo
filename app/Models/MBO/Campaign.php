@@ -12,9 +12,8 @@ use App\Models\Core\User;
 use App\Enums\MBO\CampaignStage;
 use App\Models\Scopes\MBO\CampaignScope;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Attributes\ObservedBy;
-use App\Observers\MBO\Campaigns\CampaignObserver;
 use App\Events\MBO\Campaigns\CampaignUpdated;
+use App\Events\MBO\Campaigns\CampaignCreated;
 use App\Traits\Dispatcher;
 
 /**

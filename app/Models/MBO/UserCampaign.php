@@ -12,6 +12,7 @@ use App\Models\MBO\UserObjective;
 use App\Events\MBO\Campaigns\UserCampaignAssigned;
 use App\Events\MBO\Campaigns\UserCampaignUnassigned;
 use App\Traits\Dispatcher;
+use App\Events\MBO\Campaigns\UserCampaignUpdated;
 
 /**
  *
@@ -154,33 +155,14 @@ class UserCampaign extends BaseModel
      */
     public function mapObjectiveStatus(): void
     {
-        $setStage = UserObjectiveStatus::FAILED;
-        if ($this->active) {
-            $sequences = CampaignStage::sequences();
-            if (array_key_exists($this->stage, $sequences)) {
-                if ($this->stage === CampaignStage::REALIZATION || $this->stage === CampaignStage::IN_PROGRESS) {
-                    $setStage = UserObjectiveStatus::PROGRESS;
-                } elseif ($sequences[$this->stage] < $sequences[CampaignStage::REALIZATION]) {
-                    $setStage = UserObjectiveStatus::UNSTARTED;
-                } elseif ($sequences[$this->stage] > $sequences[CampaignStage::REALIZATION]) {
-                    $setStage = UserObjectiveStatus::COMPLETED;
-                }
-            } else {
-                $setStage = UserObjectiveStatus::INTERRUPTED;
-            }
-        }
+        $objectives = $this->objectives();
+        if ($objectives->count()) {
+            foreach ($objectives as $objective) {
+                $assignments = $objective->user_assignments()->whereUserId($this->user_id)->get();
 
-        if ($setStage) {
-            $objectives = $this->objectives();
-            if ($objectives->count()) {
-                foreach ($objectives as $objective) {
-                    $assignments = $objective->user_assignments()->whereUserId($this->user_id)->get();
-
-                    if ($assignments->count()) {
-                        foreach ($assignments as $assignment) {
-                            $assignment->status = $setStage;
-                            $assignment->update();
-                        }
+                if ($assignments->count()) {
+                    foreach ($assignments as $assignment) {
+                        $assignment->setStatus()->update();
                     }
                 }
             }
@@ -203,6 +185,7 @@ class UserCampaign extends BaseModel
     public static function updatedUserCampaign(UserCampaign $model): void
     {
         $model->mapObjectiveStatus();
+        UserCampaignUpdated::dispatch($model);
     }
 
     /**

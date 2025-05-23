@@ -6,7 +6,7 @@
             @endphp
 
             @if($user)
-                <li class="{{ $ua->status }}">
+                <li class="status-{{ $ua->status }}">
                     <div class="list-grid">
                         <div class="list-content">
                             <div class="nowrap user" data-tippy-content="{{ $user->name() }}">

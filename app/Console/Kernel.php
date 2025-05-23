@@ -8,7 +8,7 @@ use App\Console\Commands\Core\AppRefresh;
 use App\Console\Commands\Core\SystemTest;
 use App\Console\Commands\Core\RepoUpdate;
 
-use App\Console\Commands\MBO\CampaignStatusScript;
+use App\Console\Commands\MBO\MBOVerifyStatusScript;
 
 class Kernel extends ConsoleKernel
 {
@@ -20,7 +20,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command(CampaignStatusScript::class)->dailyAt('00:01');
+        $schedule->command(MBOVerifyStatusScript::class)->dailyAt('00:01');
 
         if (config('backup.backup.auto') === true) {
             $schedule->command('backup:run')->daily()->at('01:30');

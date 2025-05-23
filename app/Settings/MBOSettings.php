@@ -9,6 +9,7 @@ class MBOSettings extends Settings
     public bool $enabled;
     public bool $campaigns_enabled;
     public bool $campaigns_manual;
+    public bool $objectives_autofail;
     public bool $rewards;
 
     public static function group(): string

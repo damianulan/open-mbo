@@ -25,6 +25,7 @@ return [
         UserObjectiveStatus::COMPLETED => 'Zakończone',
         UserObjectiveStatus::PASSED => 'Zaliczone',
         UserObjectiveStatus::FAILED => 'Niezaliczone',
+        UserObjectiveStatus::INTERRUPTED => 'Przerwane',
     ],
 
     'campaign' => 'Kampania',

@@ -8,9 +8,14 @@ use App\Models\MBO\Objective;
 use App\Enums\MBO\UserObjectiveStatus;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\Attributes\ObservedBy;
-use App\Observers\MBO\Objectives\UserObjectiveObserver;
 use App\Traits\Dispatcher;
+use Carbon\Carbon;
+use App\Models\MBO\UserCampaign;
+use App\Enums\MBO\CampaignStage;
+use App\Events\MBO\Campaigns\CampaignUserObjectiveAssigned;
+use App\Events\MBO\Campaigns\CampaignUserObjectiveUnassigned;
+use App\Events\MBO\Objectives\UserObjectiveAssigned;
+use App\Events\MBO\Objectives\UserObjectiveUnassigned;
 
 /**
  *
@@ -89,6 +94,55 @@ class UserObjective extends BaseModel
         return $output;
     }
 
+    public function isAfterDeadline(): bool
+    {
+        $deadline = Carbon::parse($this->objective->deadline);
+        if ($deadline) {
+            return $deadline->isPast();
+        }
+
+        return false;
+    }
+
+    public function setStatus(): self
+    {
+        $status = $this->status;
+        $frozen = UserObjectiveStatus::frozen();
+        $autofail = setting('mbo.objectives_autofail');
+
+        $campaign = $this->objective->campaign ?? null;
+        $userCampaign = null;
+        if ($campaign) {
+            $userCampaign = UserCampaign::where('user_id', $this->user_id)->where('campaign_id', $campaign->id)->first();
+        }
+
+        if ($userCampaign) {
+            if (!$userCampaign->active) {
+                $status = UserObjectiveStatus::INTERRUPTED;
+            } else {
+                $status = CampaignStage::mapObjectiveStatus($userCampaign->stage, $status);
+            }
+        }
+
+        if (!in_array($status, $frozen)) {
+            if ($this->isAfterDeadline()) {
+                if ($autofail) {
+                    // TODO fail when expected value is filled and not met
+                } else {
+                }
+                $status = UserObjectiveStatus::COMPLETED;
+            } else {
+                if (!$userCampaign) {
+                    $status = UserObjectiveStatus::PROGRESS;
+                }
+            }
+        }
+
+        $this->status = $status;
+
+        return $this;
+    }
+
     public function objective()
     {
         return $this->belongsTo(Objective::class);
@@ -119,12 +173,27 @@ class UserObjective extends BaseModel
         $query->whereNotIn('status', UserObjectiveStatus::frozen());
     }
 
+    public function scopeWhereNotEvaluated(Builder $query): void
+    {
+        $query->whereNotIn('status', UserObjectiveStatus::evaluated());
+    }
+
+    public function scopeWhereEvaluated(Builder $query): void
+    {
+        $query->whereIn('status', UserObjectiveStatus::evaluated());
+    }
+
     public function scopeMy(Builder $query, ?User $user = null): void
     {
         if (!$user) {
             $user = Auth::user();
         }
         $query->where('user_id', $user->id);
+    }
+
+    public static function retrievedUserObjective(UserObjective $model): void
+    {
+        $model->setStatus()->update();
     }
 
     /**
@@ -138,6 +207,12 @@ class UserObjective extends BaseModel
         } else {
             UserObjectiveAssigned::dispatch($model->user, $model->objective);
         }
+    }
+
+    public static function updatingUserObjective(UserObjective $model): UserObjective
+    {
+
+        return $model;
     }
 
     public static function updatedUserObjective(UserObjective $model): void

@@ -3,6 +3,7 @@
 namespace App\Enums\MBO;
 
 use App\Facades\Enum;
+use App\Enums\MBO\UserObjectiveStatus;
 
 /**
  * Campaign Stages can be assigned to campaigns and users in campaign.
@@ -105,6 +106,29 @@ class CampaignStage extends Enum
                 $status = 'bi-hourglass-bottom';
                 break;
         }
+        return $status;
+    }
+
+    /**
+     * @param string $stage - UserCampaign stage
+     * @param string $status - UserObjective status
+     * @return string $status
+     */
+    public static function mapObjectiveStatus(string $stage, string $status): string
+    {
+        $sequences = self::sequences();
+        $frozen = UserObjectiveStatus::evaluated();
+
+        if (array_key_exists($stage, $sequences) && !in_array($status, $frozen)) {
+            if ($stage === self::REALIZATION || $stage === self::IN_PROGRESS) {
+                $status = UserObjectiveStatus::PROGRESS;
+            } elseif ($sequences[$stage] < $sequences[self::REALIZATION]) {
+                $status = UserObjectiveStatus::UNSTARTED;
+            } elseif ($sequences[$stage] > $sequences[self::REALIZATION]) {
+                $status = UserObjectiveStatus::COMPLETED;
+            }
+        }
+
         return $status;
     }
 }

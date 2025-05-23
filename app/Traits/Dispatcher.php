@@ -2,11 +2,6 @@
 
 namespace App\Traits;
 
-use App\Models\MBO\Campaign;
-
-use App\Events\MBO\Campaigns\CampaignUpdated;
-use Reflection;
-
 trait Dispatcher
 {
 
