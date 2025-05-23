@@ -3,11 +3,11 @@
 namespace App\Facades\Fields;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\UUID;
 use FormForge\Traits\RequestForms;
+use Lucent\Support\Traits\UUID;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string $fullname
