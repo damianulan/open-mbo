@@ -2,7 +2,7 @@
 
 namespace App\Enums\Users;
 
-use App\Facades\Enum;
+use Lucent\Helpers\Enum;
 
 class Gender extends Enum
 {

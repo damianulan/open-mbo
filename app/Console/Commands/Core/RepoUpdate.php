@@ -30,6 +30,7 @@ class RepoUpdate extends BaseCommand
         try {
 
             $branch = $this->option('branch');
+            $result = Process::run('git fetch --all');
             $result = Process::run('git status');
             $this->info($result->output());
             if (!empty($branch)) {

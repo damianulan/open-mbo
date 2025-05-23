@@ -26673,7 +26673,7 @@ table.ombo-table tbody tr:hover {
   font-family: "IBM Plex Serif", serif;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: rgb(17.5, 64.375, 67.5);
+  color: #1C676C;
   font-size: 1.3rem;
   white-space: nowrap;
 }

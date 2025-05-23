@@ -2,7 +2,7 @@
 
 namespace App\Enums\Core;
 
-use App\Facades\Enum;
+use Lucent\Helpers\Enum;
 
 class SystemRolesLib extends Enum
 {

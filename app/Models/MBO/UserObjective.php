@@ -8,7 +8,7 @@ use App\Models\MBO\Objective;
 use App\Enums\MBO\UserObjectiveStatus;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
-use App\Traits\Dispatcher;
+use Lucent\Support\Traits\Dispatcher;
 use Carbon\Carbon;
 use App\Models\MBO\UserCampaign;
 use App\Enums\MBO\CampaignStage;

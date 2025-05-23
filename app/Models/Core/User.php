@@ -9,7 +9,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Lab404\Impersonate\Models\Impersonate;
 use App\Traits\Vendors\Impersonable;
 use App\Traits\HasRolesAndPermissions;
-use App\Traits\UUID;
+use Lucent\Support\Traits\UUID;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use FormForge\Traits\RequestForms;
 use App\Traits\UserMBO;
@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Traits\Vendors\ModelActivity;
 use Illuminate\Contracts\Translation\HasLocalePreference;
-use App\Traits\VirginModel;
+use Lucent\Support\Traits\VirginModel;
 use Illuminate\Support\Facades\Auth;
 use App\Enums\Users\Gender;
 

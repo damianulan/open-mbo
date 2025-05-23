@@ -11,7 +11,7 @@ use App\Enums\MBO\UserObjectiveStatus;
 use App\Models\MBO\UserObjective;
 use App\Events\MBO\Campaigns\UserCampaignAssigned;
 use App\Events\MBO\Campaigns\UserCampaignUnassigned;
-use App\Traits\Dispatcher;
+use Lucent\Support\Traits\Dispatcher;
 use App\Events\MBO\Campaigns\UserCampaignUpdated;
 
 /**

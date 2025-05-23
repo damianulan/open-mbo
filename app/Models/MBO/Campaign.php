@@ -14,7 +14,7 @@ use App\Models\Scopes\MBO\CampaignScope;
 use Illuminate\Database\Eloquent\Builder;
 use App\Events\MBO\Campaigns\CampaignUpdated;
 use App\Events\MBO\Campaigns\CampaignCreated;
-use App\Traits\Dispatcher;
+use Lucent\Support\Traits\Dispatcher;
 
 /**
  *
