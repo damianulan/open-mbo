@@ -20,12 +20,12 @@ return [
     ],
 
     'objective_status' => [
-        UserObjectiveStatus::UNSTARTED => 'Nierozpoczęte',
+        UserObjectiveStatus::UNSTARTED => 'Nierozpoczęty',
         UserObjectiveStatus::PROGRESS => 'W trakcie',
-        UserObjectiveStatus::COMPLETED => 'Zakończone',
-        UserObjectiveStatus::PASSED => 'Zaliczone',
-        UserObjectiveStatus::FAILED => 'Niezaliczone',
-        UserObjectiveStatus::INTERRUPTED => 'Przerwane',
+        UserObjectiveStatus::COMPLETED => 'Zakończony',
+        UserObjectiveStatus::PASSED => 'Zaliczony',
+        UserObjectiveStatus::FAILED => 'Niezaliczony',
+        UserObjectiveStatus::INTERRUPTED => 'Przerwany',
     ],
 
     'campaign' => 'Kampania',

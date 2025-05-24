@@ -193,7 +193,7 @@ li.nav-item {
 }
 
 .sidebar-menu .nav-pills .nav-link:hover {
-    color: lighten($sidebar-link, 10%) !important;
+    color: $sidebar-link-hover !important;
     transition: all 0.3s ease-in-out;
 }
 
@@ -210,7 +210,7 @@ li.nav-item {
 }
 
 .sidebar-menu .nav-pills .nav-link.active:hover {
-    color: darken($sidebar-link-active, 10%);
+    color: $sidebar-link-active-hover;
 }
 
 .sidebar-menu .nav .nav-item:not(.disabled) a {
@@ -227,7 +227,7 @@ li.nav-item {
     padding: 0 0 0.3rem 0;
     margin: 0 0 1rem 0;
     font-size: 0.85rem;
-    color: lighten($dark, 20%);
+    color: tint($dark, 20%);
 }
 
 .sidebar-menu .nav .nav-multi.first {
@@ -264,6 +264,11 @@ ul.user-bar {
     position: relative;
     margin-left: auto;
     align-items: center;
+}
+
+.user-nav .user-actions img {
+    border-radius: 50%;
+    border: 2px dotted $primary;
 }
 
 .user-nav .user-details {
@@ -562,6 +567,7 @@ a.dropdown-toggle {
 
 .icon-btn-nav {
     display: flex;
+    align-items: end;
 }
 
 .icon-btn-nav .panel-left {

@@ -102,6 +102,14 @@ class CampaignStage extends Enum
                 $status = 'bi-hourglass-split';
                 break;
 
+            case CampaignStage::TERMINATED:
+                $status = 'bi-pause-circle-fill';
+                break;
+
+            case CampaignStage::CANCELED:
+                $status = 'bi-x-circle-fill';
+                break;
+
             default:
                 $status = 'bi-hourglass-bottom';
                 break;

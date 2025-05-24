@@ -64,4 +64,16 @@ class UserObjectiveStatus extends Enum
             self::INTERRUPTED,
         ];
     }
+
+    public static function labels(): array
+    {
+        return [
+            self::UNSTARTED => __('mbo.objective_status.unstarted'),
+            self::PROGRESS => __('mbo.objective_status.progress'),
+            self::COMPLETED => __('mbo.objective_status.completed'),
+            self::PASSED => __('mbo.objective_status.passed'),
+            self::FAILED => __('mbo.objective_status.failed'),
+            self::INTERRUPTED => __('mbo.objective_status.interrupted'),
+        ];
+    }
 }

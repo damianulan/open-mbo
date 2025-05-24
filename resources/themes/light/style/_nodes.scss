@@ -1,0 +1,25 @@
+.profile-picture img {
+    border-radius: 50%;
+    border: 2px dotted $primary;
+}
+
+a .profile-picture img {
+    border-color: $link-color;
+}
+
+.user-banner {
+    display: flex;
+    align-items: center;
+    text-decoration: none !important;
+    background-color: transparent;
+    color: $link-color;
+}
+
+.user-banner:hover {
+    color: $link-color-hover;
+    transition: all 0.2s ease-in-out;
+}
+
+.user-banner:hover img {
+    border-color: $link-color-hover;
+}

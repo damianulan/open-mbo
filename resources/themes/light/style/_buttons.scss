@@ -18,7 +18,11 @@
 
 .btn-primary {
     border: 1px solid $primary;
-    color: $btn-color;
+    color: $text-btn;
+}
+
+.btn-primary:hover {
+    color: $text-btn-hover;
 }
 
 .btn-outline-primary:hover,
@@ -27,7 +31,7 @@
 .btn-outline-primary:focus,
 .btn-outline-primary:focus-visible {
     border: 1px solid $primary;
-    color: $btn-color;
+    color: $text-btn;
     background-color: $primary;
 }
 

@@ -9,61 +9,7 @@
 </div>
 <div class="row">
     <div class="@if($objective->coordinators())col-xl-8 col-lg-9 col-md-12 @else col-xl-12 col-lg-12 col-md-12 @endif pb-4">
-        <div class="content-card">
-            <div class="content-card-top">
-                <div class="content-card-header">
-                    <i class="bi-crosshair me-1"></i>
-                    <span>{{ $objective->name }}</span>
-                </div>
-                @if($objective->category()->exists())
-                    <div data-tippy-content="{{ __('fields.category') }}" class="align-self-center ms-2">
-                        <span class="badge bg-secondary">{{ $objective->category->name }}</span>
-                    </div>
-                @endif
-                <div class="content-card-icons ms-auto fw-bold">
-                    @if($objective->campaign()->exists())
-                        <a href={{ route('campaigns.show', $objective->campaign->id) }} data-tippy-content="{{ __('mbo.info.campaign_related', ['campaign' => $objective->campaign->name, 'period' => $objective->campaign->period]) }}">
-                            <i class="bi-bullseye"></i>
-                        </a>
-                    @endif
-                    @if($objective->draft)
-                        <div data-tippy-content="{{ __('forms.mbo.objectives.info.draft') }}">
-                            <i class="bi-feather"></i>
-                        </div>
-                    @endif
-                    @if($objective->isOverdued())
-                        <div class="text-danger" data-tippy-content="{{ __('alerts.objectives.error.overdued') }}">
-                            <i class="bi-exclamation-diamond-fill"></i>
-                        </div>
-                    @endif
-
-                </div>
-            </div>
-            <div class="my-3">{!! $objective->description->get() !!}</div>
-            <div class="content-card-icons text-secondary fw-bold">
-                    <div data-tippy-content="Waga celu">
-                        <i class="bi-minecart-loaded"></i>
-                        <span>{{ float_view($objective->weight) }}</span>
-                    </div>
-                @if($objective->expected)
-                    <div data-tippy-content="{{ __('forms.mbo.objectives.expected') }}">
-                        <i class="bi-patch-check"></i>
-                        <span>{{ float_view($objective->expected) }}</span>
-                    </div>
-                @endif
-                @if($objective->award)
-                    <div data-tippy-content="{{ __('forms.mbo.objectives.award') }}">
-                        <i class="bi-award"></i>
-                        <span>{{ float_view($objective->award) . '' . __('globals.pnts') }}</span>
-                    </div>
-                @endif
-                @if($objective->deadline)
-                    <div data-tippy-content="{{ __('forms.mbo.objectives.deadline') }}">
-                        <span class="badge {{ $objective->isOverdued() ? 'bg-danger':'bg-secondary' }}">{{ $objective->deadline }}</span>
-                    </div>
-                @endif
-            </div>
-        </div>
+        <x-objective-summary :objective="$objective" />
     </div>
     @if($objective->coordinators())
         <div class="col-xl-4 col-lg-3 col-md-12 pb-4">
@@ -112,7 +58,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <x-objective-users-list :userAssignments="$objective->user_assignments" />
+                    <x-objective-users-list :userAssignments="$objective->user_assignments()->whereNotEvaluated()->get()" />
                 </div>
             </div>
         </div>
@@ -126,8 +72,11 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
-
+                <div class="col-md-6">
+                    <x-objective-users-list :userAssignments="$objective->user_assignments()->wherePassed()->get()" />
+                </div>
+                <div class="col-md-6">
+                    <x-objective-users-list :userAssignments="$objective->user_assignments()->whereFailed()->get()" />
                 </div>
             </div>
         </div>

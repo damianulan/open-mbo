@@ -48,6 +48,7 @@ class UserObjectiveController extends AppController
         $header = 'Podsumowanie Celu';
         return view('pages.mbo.objectives.users.show', [
             'userObjective' => $userObjective,
+            'user' => $userObjective->user,
             'objective' => $userObjective->objective,
             'pagetitle' => $header,
             'isOwner' => $userObjective->user->id === Auth::user()->id,

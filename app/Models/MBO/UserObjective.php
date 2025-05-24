@@ -104,6 +104,11 @@ class UserObjective extends BaseModel
         return false;
     }
 
+    public function getStatusLabel(): string
+    {
+        return UserObjectiveStatus::labels()[$this->status] ?? '';
+    }
+
     public function setStatus(): self
     {
         $status = $this->status;
@@ -181,6 +186,21 @@ class UserObjective extends BaseModel
     public function scopeWhereEvaluated(Builder $query): void
     {
         $query->whereIn('status', UserObjectiveStatus::evaluated());
+    }
+
+    public function scopeWhereCompleted(Builder $query): void
+    {
+        $query->where('status', UserObjectiveStatus::COMPLETED);
+    }
+
+    public function scopeWherePassed(Builder $query): void
+    {
+        $query->where('status', UserObjectiveStatus::PASSED);
+    }
+
+    public function scopeWhereFailed(Builder $query): void
+    {
+        $query->where('status', UserObjectiveStatus::FAILED);
     }
 
     public function scopeMy(Builder $query, ?User $user = null): void

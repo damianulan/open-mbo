@@ -22,12 +22,14 @@
                             @can('manual', $uc->campaign)
                                 @setting('mbo.campaigns_manual')
                                     @if($uc->isManual())
-                                        <a href="{{ route('campaigns.users.prev_stage', $uc->id) }}" class="list-action me-2" data-ucid="{{ $uc->id }}" data-tippy-content="Przesuń do poprzedniego etapu">
-                                            <i class="bi-caret-left-fill"></i>
-                                        </a>
-                                        <a href="{{ route('campaigns.users.next_stage', $uc->id) }}" class="list-action me-2" data-ucid="{{ $uc->id }}" data-tippy-content="Przesuń do następnego etapu">
-                                            <i class="bi-caret-right-fill"></i>
-                                        </a>
+                                        @if(in_array($uc->stage, array_keys(\App\Enums\MBO\CampaignStage::sequences())))
+                                            <a href="{{ route('campaigns.users.prev_stage', $uc->id) }}" class="list-action me-2" data-ucid="{{ $uc->id }}" data-tippy-content="Przesuń do poprzedniego etapu">
+                                                <i class="bi-caret-left-fill"></i>
+                                            </a>
+                                            <a href="{{ route('campaigns.users.next_stage', $uc->id) }}" class="list-action me-2" data-ucid="{{ $uc->id }}" data-tippy-content="Przesuń do następnego etapu">
+                                                <i class="bi-caret-right-fill"></i>
+                                            </a>
+                                        @endif
                                         <a href="{{ route('campaigns.users.toggle_manual', $uc->id) }}" class="list-action me-2" data-ucid="{{ $uc->id }}" data-tippy-content="Wyłącz tryb ręczny">
                                             <i class="bi-hand-index-thumb-fill"></i>
                                         </a>

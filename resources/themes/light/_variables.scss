@@ -1,11 +1,11 @@
 // Typography
-$font-family-base: "IBM Plex Sans", "Helvetica", sans-serif;
-$font-family-sans-serif: "IBM Plex Sans", sans-serif;
+$font-family-sans-serif: "IBM Plex Sans", "Helvetica", sans-serif;
+$font-family-base: $font-family-sans-serif;
 $font-family-serif: "IBM Plex Serif", serif;
 $font-family-monospace: "JetBrains Mono", monospace;
 $font-family-icons: "bootstrap-icons";
 $font-size-base: 0.8rem;
-$line-height-base: 1.6;
+$line-height-base: 1.5;
 
 // Paths
 $imagesPath: "/themes/light/images";
@@ -13,16 +13,19 @@ $imagesPath: "/themes/light/images";
 /**
 /* Colors START
 **/
+$danger: #e56b6f;
+$warning: #e79a1d;
+$success: #4f9d69;
+$info: #0892a5;
 
 // Collection
-$aquamarine: #7fffd4;
 $coolgreen: #d7faf4;
 $columbia: #c5d5ea;
 $cyan: #00f2f2;
 $indigo: #1b4965;
-$cadet: #1c1f33;
 $violet: #564d80;
 $lazuli: #22577a;
+$blue: #285c7f;
 $dimm-blue: #7392b7;
 $celadon: #1bdcb8;
 $greenish: #a3aea7;
@@ -30,7 +33,7 @@ $greenish: #a3aea7;
 // Action colors
 $light: #fafafa;
 $dark: #111611;
-$disabled-text: #6c757d;
+$disabled-text: var(--bs-gray-600);
 
 $theme-colors: (
     "primary": $primary,
@@ -41,24 +44,35 @@ $theme-colors: (
     "info": $info,
     "dark": $dark,
 
-    "cadet": $cadet,
+    "indigo": $indigo,
     "coolgreen": $coolgreen,
     "dimm-blue": $dimm-blue,
     "lightgrey": $columbia,
 );
+
+$status-unstarted: var(--bs-gray-500);
+$status-progress: $warning;
+$status-completed: $info;
+$status-passed: $success;
+$status-failed: $danger;
+$status-interrupted: var(--bs-gray-700);
 
 // Component colors
 $body-bg: #fff;
 $body-wrapper-bg: rgba($primary, 0.06);
 $sidebar-bg: #fff;
 $sidebar-link: $primary;
-$sidebar-link-active: lighten($primary, 58%);
+$sidebar-link-hover: tint($primary, 30%);
+$sidebar-link-active: tint($primary, 90%);
+$sidebar-link-active-hover: tint($primary, 40%);
 $sidebar-brand-link: $primary;
-$sidebar-multi-title: lighten($dark, 10%);
+$sidebar-multi-title: tint($dark, 40%);
 $sidebar-usermenu: $dark;
 $page-header-color: $primary;
-$paragraph-color: lighten($dark, 10%);
-$btn-color: lighten($coolgreen, 15%);
+$paragraph-color: tint($dark, 20%);
+$text-btn: tint($coolgreen, 20%);
+$text-btn-hover: tint($coolgreen, 40%);
+$card-shadow: 5px 5px 12px 0px rgba($primary, 0.1);
 
 /**
 /* Colors END
@@ -91,7 +105,7 @@ $card-bg: transparent;
 
 // Typography
 $link-color: $primary;
-$link-hover-color: $primary;
+$link-color-hover: tint($primary, 20%);
 $link-color-active: $primary;
 $nav-link-font-size: 0.85rem;
 $nav-link-font-weight: 400;
@@ -101,8 +115,8 @@ $nav-tab-bg: #fff;
 $nav-tab-color-hover: #000;
 
 // Forms
-$input-border-color: lighten($primary, 10%);
-$input-border-focus-color: lighten($primary, 30%);
+$input-border-color: tint($primary, 10%);
+$input-border-focus-color: tint($primary, 30%);
 $input-color: $secondary;
 $form-switch-width: 3em;
 $check-border-color: rgba($secondary, 0.6);
@@ -118,7 +132,7 @@ $ombo-body-failed-hover: rgba($danger, 0.15);
 $ombo-body-completed: rgba($primary, 0.2);
 $ombo-body-completed-hover: rgba($primary, 0.25);
 $ombo-body-inactive: rgba($disabled-text, 0.2);
-$ombo-body-hover: rgba($primary, 0.1);
+$ombo-body-hover: rgba($primary, 0.15);
 $ombo-body-inactive-hover: rgba($primary, 0.25);
 $ombo-body-gradient: linear-gradient(
     120deg,

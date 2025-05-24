@@ -222,8 +222,13 @@ table.ombo-table tbody tr:hover {
     text-decoration: none;
     margin-right: 0.35rem;
     font-size: 1rem;
-    color: $secondary;
+    color: $link-color;
     white-space: nowrap;
+}
+
+.ombo-list li .list-actions .list-action:hover {
+    color: $link-color-hover;
+    transition: all 0.2s ease-in-out;
 }
 
 .ombo-list li .list-actions .list-action i {

@@ -8,12 +8,13 @@ use Illuminate\View\Component;
 
 class ObjectiveUsersList extends Component
 {
+    public $emptyInfo;
     /**
      * Create a new component instance.
      */
     public function __construct(public $userAssignments)
     {
-        //
+        $this->emptyInfo = __('mbo.info.no_users_added');
     }
 
     /**

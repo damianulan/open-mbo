@@ -14,7 +14,7 @@
                             </div>
                         </div>
                         <div class="list-actions">
-                            <div class="list-action tippy-info" data-tippy-content="{{ __('mbo.objective_status.' . $ua->status) }}"><x-icon key="info-circle-fill" /></div>
+                            <div class="list-action tippy-info" data-tippy-content="{{ $ua->getStatusLabel() }}"><x-icon key="circle-fill" classes="text-{{ $ua->status }}" /></div>
                             <a href="{{ route('objectives.assignment.show', $ua->id) }}" class="list-action" data-tippy-content="{{ __('buttons.summary') }}">
                                 <x-icon key="eye-fill" />
                             </a>
@@ -25,5 +25,5 @@
         @endforeach
     </ul>
 @else
-    <div><p class="text-primary">{{ __('mbo.info.no_users_added') }}</p></div>
+    <div><p class="text-primary pt-3">{{ $emptyInfo }}</p></div>
 @endif
