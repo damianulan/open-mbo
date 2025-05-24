@@ -266,7 +266,8 @@ ul.user-bar {
     align-items: center;
 }
 
-.user-nav .user-actions img {
+.user-actions img,
+.user-details img {
     border-radius: 50%;
     border: 2px dotted $primary;
 }

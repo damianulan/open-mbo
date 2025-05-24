@@ -9,6 +9,7 @@ use App\Http\Controllers\AppController;
 use App\Services\Campaigns\CampaignService;
 use App\Models\Core\User;
 use App\Events\MBO\Campaigns\CampaignViewed;
+use App\Services\Campaign\CampaignUpdateService;
 
 class CampaignsController extends AppController
 {
