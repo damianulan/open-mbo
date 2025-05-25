@@ -11,5 +11,7 @@ return new class extends SettingsMigration
         $this->migrator->add('mbo.campaigns_manual', true);
         $this->migrator->add('mbo.objectives_autofail', true);
         $this->migrator->add('mbo.rewards', true);
+        $this->migrator->add('mbo.reward_points_exchange', 1.00);
+        $this->migrator->add('mbo.reward_currency', 'EUR');
     }
 };

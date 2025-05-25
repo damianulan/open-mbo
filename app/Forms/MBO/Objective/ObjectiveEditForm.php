@@ -56,7 +56,7 @@ class ObjectiveEditForm extends Form
             'template_id' => 'required',
             'name' => 'max:120|required',
             'deadline' => 'nullable',
-            'description' => 'max:512|nullable',
+            'description' => 'max:2000|nullable',
             'weight' => 'decimal:2|required',
             'expected' => 'decimal:2|nullable',
             'award' => 'decimal:2|nullable',
