@@ -42,7 +42,7 @@ return [
     'objectives' => [
         'index' => 'Cele',
         'users' => [
-            'inprogress' => 'W trakcie realizacji celu',
+            'inprogress' => 'Podejścia nierozliczone',
             'completed' => 'Podejścia rozliczone',
         ],
     ],
