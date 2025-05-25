@@ -17,6 +17,9 @@ return [
         'manual_off' => 'Przełączono tryb zapisu na automatyczny.',
         'manual_on' => 'Przełączono tryb zapisu na ręczny.',
         'campaign_stage_changed' => 'Przesunięto etap zapisu na: :stage',
+        'objective_not_evaluated_no_users' => 'Żaden użytkownik nie realizuje tego celu.',
+        'objective_passed_no_users' => 'Żaden z zapisanych użytkowników nie zaliczył jeszcze tego celu.',
+        'objective_failed_no_users' => 'Nie odnotowano żadnych użytkowników, którzy nie zaliczyli tego celu.',
     ],
 
     'objective_status' => [
@@ -40,7 +43,7 @@ return [
         'index' => 'Cele',
         'users' => [
             'inprogress' => 'W trakcie realizacji celu',
-            'completed' => 'Podejścia zakończone',
+            'completed' => 'Podejścia rozliczone',
         ],
     ],
 

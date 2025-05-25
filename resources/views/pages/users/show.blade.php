@@ -46,7 +46,7 @@
                                 <i class="bi bi-person-badge-fill" data-tippy-content="Stanowisko"></i><div>Administrator przebiegów gospodarczo-produkcyjnych</div>
                             </div>
                             <div class="user-info col-xl-6 col-lg-12">
-                                <i class="bi bi-person-fill-gear" data-tippy-content="Role"></i><div>{{ $user->getRolesNames()->implode(', ') }}</div>
+                                <i class="bi bi-person-fill-gear" data-tippy-content="Role"></i><div>{{ $user->getRolesNames()->implode(' | ') }}</div>
                             </div>
                         </div>
 

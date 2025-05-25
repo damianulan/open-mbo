@@ -58,7 +58,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <x-objective-users-list :userAssignments="$objective->user_assignments()->whereNotEvaluated()->get()" />
+                    <x-objective-users-list :objective="$objective" :status="'progress'" />
                 </div>
             </div>
         </div>
@@ -73,10 +73,10 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <x-objective-users-list :userAssignments="$objective->user_assignments()->wherePassed()->get()" />
+                    <x-objective-users-list :objective="$objective" :status="'passed'" />
                 </div>
                 <div class="col-md-6">
-                    <x-objective-users-list :userAssignments="$objective->user_assignments()->whereFailed()->get()" />
+                    <x-objective-users-list :objective="$objective" :status="'failed'"  />
                 </div>
             </div>
         </div>
