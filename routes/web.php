@@ -137,12 +137,6 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
     Route::prefix('objectives')->name('objectives.')->middleware('module:mbo')->group(function () {
         Route::get('{user}', [App\Http\Controllers\Objectives\ObjectiveController::class, 'show'])->name('show');
 
-        Route::prefix('child')->name('child.')->group(function () {
-            Route::post('/', [App\Http\Controllers\Objectives\ObjectiveChildController::class, 'store'])->name('store');
-            Route::put('/{objective}', [App\Http\Controllers\Objectives\ObjectiveChildController::class, 'update'])->name('update');
-            Route::delete('/delete/{id}', [App\Http\Controllers\Objectives\ObjectiveChildController::class, 'delete'])->name('delete');
-        });
-
         Route::prefix('assignment')->name('assignment.')->group(function () {
             Route::get('/{id}', [App\Http\Controllers\Objectives\UserObjectiveController::class, 'show'])->name('show');
         });

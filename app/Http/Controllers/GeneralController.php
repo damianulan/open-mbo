@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Settings\GeneralSettings;
 use App\Forms\MBO\Campaign\CampaignEditObjectiveForm;
 use App\Forms\MBO\Campaign\CampaignEditUserForm;
-use App\Forms\MBO\Objective\ObjectiveChildEditForm;
 use App\Models\MBO\Campaign;
 use App\Models\MBO\Objective;
 
@@ -59,28 +58,6 @@ class GeneralController extends Controller
 
                 break;
 
-            case 'objectives.add_child':
-
-                $parent_id = $request->input('parent_id') ?? null;
-
-                if ($id) {
-                    $objective = Objective::checkAccess()->find($id);
-                    if ($objective) {
-                        $params = [
-                            'id' => $id,
-                            'form' => ObjectiveChildEditForm::definition($request, $objective),
-                        ];
-                        $status = 'ok';
-                    }
-                } else {
-                    $params = [
-                        'form' => ObjectiveChildEditForm::definition($request),
-                    ];
-                    $status = 'ok';
-                }
-
-
-                break;
 
             default:
                 # code...
