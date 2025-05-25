@@ -13,22 +13,32 @@ $imagesPath: "/themes/light/images";
 /**
 /* Colors START
 **/
-$danger: #e56b6f;
-$warning: #e79a1d;
-$success: #4f9d69;
-$info: #0892a5;
 
 // Collection
 $coolgreen: #d7faf4;
 $columbia: #c5d5ea;
-$cyan: #00f2f2;
 $indigo: #1b4965;
 $violet: #564d80;
 $lazuli: #22577a;
-$blue: #285c7f;
 $dimm-blue: #7392b7;
 $celadon: #1bdcb8;
 $greenish: #a3aea7;
+
+$red: #d66a6a;
+$orange: #e6a96d;
+$yellow: #e6d67a;
+$green: #4ea881;
+$teal: #66c5c7;
+$cyan: #6cb4d6;
+$blue: #6a8fd6;
+$purple: #a173d6;
+$pink: #d66ab2;
+$brown: #b88f75;
+
+$danger: $red;
+$warning: #e79a1d;
+$success: $green;
+$info: $cyan;
 
 // Action colors
 $light: tint($primary, 98%);
@@ -43,9 +53,12 @@ $theme-colors: (
     "warning": $warning,
     "info": $info,
     "dark": $dark,
+    "brown": $brown,
+    "violet": $violet,
 
-    "indigo": $indigo,
     "coolgreen": $coolgreen,
+    "columbia": $columbia,
+    "celadon": $celadon,
     "dimm-blue": $dimm-blue,
     "lightgrey": $columbia,
 );
@@ -61,10 +74,6 @@ $status-interrupted: var(--bs-gray-700);
 $body-bg: #fff;
 $body-wrapper-bg: rgba($primary, 0.06);
 $sidebar-bg: #fff;
-$sidebar-link: $primary;
-$sidebar-link-hover: tint($primary, 30%);
-$sidebar-link-active: tint($primary, 90%);
-$sidebar-link-active-hover: tint($primary, 40%);
 $sidebar-brand-link: $primary;
 $sidebar-multi-title: tint($dark, 40%);
 $sidebar-usermenu: $dark;
@@ -105,8 +114,11 @@ $card-bg: transparent;
 
 // Typography
 $link-color: $primary;
-$link-color-hover: tint($primary, 20%);
-$link-color-active: $primary;
+$link-color-hover: tint($primary, 25%);
+$link-color-active: $link-color-hover;
+$link-color-active-hover: tint($primary, 35%);
+$button-link-active: tint($primary, 90%);
+$button-link-active-hover: tint($primary, 80%);
 $nav-link-font-size: 0.85rem;
 $nav-link-font-weight: 400;
 

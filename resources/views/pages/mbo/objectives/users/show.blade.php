@@ -3,10 +3,12 @@
 
 <div class="icon-btn-nav">
     <div class="panel-right">
-        <x-user-banner :user="$user" />
+        @if(auth()->user()->id !== $user->id)
+            <x-user-banner :user="$user" />
+        @endif
     </div>
     <div class="panel-left">
-        <a class="icon-btn edit-objective" href="javascript:void(0);" data-modelid="" data-tippy-content="{{ __('buttons.edit') }}"><i class="bi-pencil-fill"></i></a>
+        {{-- <a class="icon-btn edit-objective" href="javascript:void(0);" data-modelid="" data-tippy-content="{{ __('buttons.edit') }}"><i class="bi-pencil-fill"></i></a> --}}
     </div>
 </div>
 <div class="row">

@@ -22,7 +22,7 @@ use App\Traits\Vendors\ModelActivity;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Lucent\Support\Traits\VirginModel;
 use Illuminate\Support\Facades\Auth;
-use App\Enums\Users\Gender;
+use Lucent\Support\Str\Alphabet;
 
 /**
  *
@@ -223,8 +223,22 @@ class User extends Authenticatable implements HasLocalePreference
 
         $fontSize = $height / 2.8;
         $initials = $this->getInitials();
+        $letterNum = Alphabet::getAlphabetPosition($initials);
 
-        return '<div class="profile-img" style="background-color: orange; font-size: ' . $fontSize . 'px; min-height: ' . $height . 'px; min-width: ' . $width . 'px;"><div>' . $initials . '</div></div>';
+        $color = '#111';
+        if ($letterNum < 4) {
+            $color = 'orange';
+        } else if ($letterNum < 8) {
+            $color = 'green';
+        } else if ($letterNum < 16) {
+            $color = 'cyan';
+        } else if ($letterNum < 20) {
+            $color = 'brown';
+        } else {
+            $color = 'red';
+        }
+
+        return '<div class="profile-img" style="background-color: var(--bs-' . $color . '); font-size: ' . $fontSize . 'px; min-height: ' . $height . 'px; min-width: ' . $width . 'px;"><div>' . $initials . '</div></div>';
     }
 
     public function canBeImpersonated(): bool

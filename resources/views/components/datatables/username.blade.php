@@ -1,4 +1,4 @@
 <div class="user-details">
     {!! $data->getAvatarView(30) !!}
-    <span>{{ $data->name() }}</span>
+    <span class="ms-2">{{ $data->name() }}</span>
 </div>

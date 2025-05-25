@@ -20,6 +20,10 @@ mix.webpackConfig((webpack) => {
     };
 });
 
+const scssOptions = {
+    outputStyle: "compressed",
+};
+
 // misc
 mix.copyDirectory("resources/themes/vendors", "public/themes/vendors");
 mix.copyDirectory("resources/images", "public/images");
@@ -31,17 +35,26 @@ mix.js("resources/themes/js/app.js", "public/themes/js")
 
 mix.sass(
     "resources/themes/light/green.scss",
-    "public/themes/light-green/app.css"
+    "public/themes/light-green/app.min.css",
+    {
+        sassOptions: scssOptions,
+    }
 ).version();
 
 mix.sass(
     "resources/themes/light/blue.scss",
-    "public/themes/light-blue/app.css"
+    "public/themes/light-blue/app.min.css",
+    {
+        sassOptions: scssOptions,
+    }
 ).version();
 
 mix.sass(
     "resources/themes/light/orchid.scss",
-    "public/themes/light-orchid/app.css"
+    "public/themes/light-orchid/app.min.css",
+    {
+        sassOptions: scssOptions,
+    }
 ).version();
 
 mix.copy("resources/themes/js/trix.esm.min.js.map", "public/themes/js");

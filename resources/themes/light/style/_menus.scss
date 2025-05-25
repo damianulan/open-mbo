@@ -144,6 +144,7 @@ html .sidebar-menu {
     font-size: 0.7rem;
     font-weight: 600;
     color: $primary;
+    text-align: end;
 }
 
 .sidebar-menu.menu-collapsed .sidebar-footer {
@@ -188,7 +189,7 @@ li.nav-item {
     font-size: 0.85rem;
     font-weight: 600;
     text-transform: capitalize;
-    color: $sidebar-link;
+    color: $link-color;
     padding: 0.3rem 1rem;
     margin: 0 0.75rem;
     background-color: transparent;
@@ -204,20 +205,20 @@ li.nav-item {
     display: flex;
     align-items: center;
     font-size: 0.85rem;
-    color: $sidebar-link;
+    color: $link-color;
     padding: 0.3rem 1rem;
     margin: 0 0.75rem;
     text-decoration: none;
 }
 
 .sidebar-menu .nav-pills .nav-link:hover {
-    color: $sidebar-link-hover !important;
+    color: $link-color-hover !important;
     transition: all 0.3s ease-in-out;
 }
 
 .sidebar-menu .nav-pills .nav-link.active {
     font-weight: 600;
-    color: $sidebar-link-active !important;
+    color: $button-link-active !important;
     background: $primary;
     background: linear-gradient(
         90deg,
@@ -228,7 +229,7 @@ li.nav-item {
 }
 
 .sidebar-menu .nav-pills .nav-link.active:hover {
-    color: $sidebar-link-active-hover;
+    color: $button-link-active-hover;
 }
 
 .sidebar-menu .nav .nav-item:not(.disabled) a {

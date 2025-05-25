@@ -130,7 +130,7 @@ a.btn-tile:hover i.on-hover {
 
 a.btn-tile.selected *,
 a.btn-tile:hover * {
-    color: $sidebar-link-active !important;
+    color: $button-link-active !important;
 }
 
 a.btn-tile.selected i.enter--icon {
