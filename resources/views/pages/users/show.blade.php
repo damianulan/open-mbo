@@ -9,7 +9,7 @@
                     <div class="row">
                         <div class="col-xl-2 col-lg-3 col-md-4 col-xs-6">
                             <div class="profile-picture p-2">
-                                <img src="{{ $user->getAvatar() }}" width="100%">
+                                {!! $user->getAvatarView(125) !!}
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-9 col-md-8 col-xs-6">

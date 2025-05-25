@@ -138,7 +138,7 @@ class User extends Authenticatable implements HasLocalePreference
 
     public function name(): string
     {
-        return $this->profile->firstname . ' ' . $this->profile->lastname;
+        return $this->profile?->firstname . ' ' . $this->profile?->lastname;
     }
 
     public function nameView(): string
@@ -161,12 +161,12 @@ class User extends Authenticatable implements HasLocalePreference
 
     public function firstname(): string
     {
-        return $this->profile->firstname;
+        return $this->profile?->firstname;
     }
 
     public function lastname(): string
     {
-        return $this->profile->lastname;
+        return $this->profile?->lastname;
     }
 
     public function toggleLock(): bool
@@ -203,12 +203,28 @@ class User extends Authenticatable implements HasLocalePreference
         if ($this->profile->avatar) {
             return asset($this->profile->avatar);
         }
-        if ($this->profile->gender === Gender::MALE) {
-            return asset('images/portrait/avatar-male.png');
-        } elseif ($this->profile->gender === Gender::FEMALE) {
-            return asset('images/portrait/avatar-female.png');
-        }
+
         return null;
+    }
+
+    public function getInitials(): string
+    {
+        return strtoupper(substr($this->firstname(), 0, 1) . substr($this->lastname(), 0, 1));
+    }
+
+    public function getAvatarView(int $height = 70, int $width = 70): string
+    {
+        if ($height !== $width) {
+            $width = $height;
+        }
+        if ($this->profile->avatar) {
+            return '<img class="profile-img" src="' . asset($this->profile->avatar) . '" height="' . $height . 'px" width="' . $width . 'px">';
+        }
+
+        $fontSize = $height / 2.8;
+        $initials = $this->getInitials();
+
+        return '<div class="profile-img" style="background-color: orange; font-size: ' . $fontSize . 'px; min-height: ' . $height . 'px; min-width: ' . $width . 'px;"><div>' . $initials . '</div></div>';
     }
 
     public function canBeImpersonated(): bool

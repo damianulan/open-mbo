@@ -31,7 +31,7 @@ $celadon: #1bdcb8;
 $greenish: #a3aea7;
 
 // Action colors
-$light: #fafafa;
+$light: tint($primary, 98%);
 $dark: #111611;
 $disabled-text: var(--bs-gray-600);
 

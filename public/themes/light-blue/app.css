@@ -4810,13 +4810,13 @@ progress {
 
 .table-light {
   --bs-table-color: #000;
-  --bs-table-bg: #fafafa;
-  --bs-table-border-color: #c8c8c8;
-  --bs-table-striped-bg: rgb(237.5, 237.5, 237.5);
+  --bs-table-bg: rgb(250.7, 251.74, 252.44);
+  --bs-table-border-color: rgb(200.56, 201.392, 201.952);
+  --bs-table-striped-bg: rgb(238.165, 239.153, 239.818);
   --bs-table-striped-color: #000;
-  --bs-table-active-bg: #e1e1e1;
+  --bs-table-active-bg: rgb(225.63, 226.566, 227.196);
   --bs-table-active-color: #000;
-  --bs-table-hover-bg: rgb(231.25, 231.25, 231.25);
+  --bs-table-hover-bg: rgb(231.8975, 232.8595, 233.507);
   --bs-table-hover-color: #000;
   color: var(--bs-table-color);
   border-color: var(--bs-table-border-color);
@@ -24988,6 +24988,7 @@ textarea::-webkit-scrollbar-thumb:active {
 
 a {
   color: #285c7f;
+  text-decoration: none;
 }
 
 a:hover {
@@ -25275,7 +25276,7 @@ section.content-wrapper {
 }
 
 .bg-light {
-  background-color: #fafafa !important;
+  background-color: rgb(250.7, 251.74, 252.44) !important;
 }
 
 .round {
@@ -26884,12 +26885,12 @@ table.ombo-table tbody tr:hover {
   text-decoration: none;
 }
 
-.profile-picture img {
+.profile-img {
   border-radius: 50%;
   border: 2px dotted #285c7f;
 }
 
-a .profile-picture img {
+.profile-img {
   border-color: #285c7f;
 }
 
@@ -26906,8 +26907,23 @@ a .profile-picture img {
   transition: all 0.2s ease-in-out;
 }
 
-.user-banner:hover img {
+.user-banner:hover .profile-img {
   border-color: rgb(83, 124.6, 152.6);
+}
+
+div.profile-img {
+  background-color: #285c7f;
+  display: flex;
+  position: relative;
+  text-decoration: none !important;
+}
+
+div.profile-img > div {
+  width: 100%;
+  color: rgb(250.7, 251.74, 252.44);
+  text-align: center;
+  align-self: center;
+  font-weight: 600;
 }
 
 .avatar-xl {

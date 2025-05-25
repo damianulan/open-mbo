@@ -2,7 +2,6 @@ function sidebarToggleAll() {
     if ($("#sidebar").hasClass("menu-hamburgered")) {
         $("#sidebar").removeClass("menu-hamburgered");
     }
-    console.log("sidebarToggleAll");
 
     $("#sidebar").toggleClass("menu-collapsed");
     $("#topbar").toggleClass("menu-collapsed");
@@ -32,7 +31,6 @@ function hamburgerClose() {
 }
 
 $("#menu-toggle").on("click", function () {
-    console.log("menu-toggle");
     sidebarToggleAll();
 });
 

@@ -1,9 +1,9 @@
-.profile-picture img {
+.profile-img {
     border-radius: 50%;
     border: 2px dotted $primary;
 }
 
-a .profile-picture img {
+.profile-img {
     border-color: $link-color;
 }
 
@@ -20,6 +20,21 @@ a .profile-picture img {
     transition: all 0.2s ease-in-out;
 }
 
-.user-banner:hover img {
+.user-banner:hover .profile-img {
     border-color: $link-color-hover;
+}
+
+div.profile-img {
+    background-color: $primary;
+    display: flex;
+    position: relative;
+    text-decoration: none !important;
+}
+
+div.profile-img > div {
+    width: 100%;
+    color: $light;
+    text-align: center;
+    align-self: center;
+    font-weight: 600;
 }

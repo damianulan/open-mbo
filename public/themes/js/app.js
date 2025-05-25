@@ -65955,7 +65955,6 @@ function sidebarToggleAll() {
   if ($("#sidebar").hasClass("menu-hamburgered")) {
     $("#sidebar").removeClass("menu-hamburgered");
   }
-  console.log("sidebarToggleAll");
   $("#sidebar").toggleClass("menu-collapsed");
   $("#topbar").toggleClass("menu-collapsed");
   $("#main-content").toggleClass("menu-collapsed");
@@ -65980,7 +65979,6 @@ function hamburgerClose() {
   }
 }
 $("#menu-toggle").on("click", function () {
-  console.log("menu-toggle");
   sidebarToggleAll();
 });
 $("#hamburger-toggle").on("click", function () {
@@ -66264,7 +66262,7 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 			"/themes/js/app": 0,
 /******/ 			"themes/light-orchid/app": 0,
 /******/ 			"themes/light-blue/app": 0,
-/******/ 			"themes/light-green/app": 0
+/******/ 			"themes/light-green/app.min": 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -66314,10 +66312,10 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["themes/light-orchid/app","themes/light-blue/app","themes/light-green/app"], () => (__webpack_require__("./resources/themes/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["themes/light-orchid/app","themes/light-blue/app","themes/light-green/app"], () => (__webpack_require__("./resources/themes/light/green.scss")))
-/******/ 	__webpack_require__.O(undefined, ["themes/light-orchid/app","themes/light-blue/app","themes/light-green/app"], () => (__webpack_require__("./resources/themes/light/blue.scss")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["themes/light-orchid/app","themes/light-blue/app","themes/light-green/app"], () => (__webpack_require__("./resources/themes/light/orchid.scss")))
+/******/ 	__webpack_require__.O(undefined, ["themes/light-orchid/app","themes/light-blue/app","themes/light-green/app.min"], () => (__webpack_require__("./resources/themes/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["themes/light-orchid/app","themes/light-blue/app","themes/light-green/app.min"], () => (__webpack_require__("./resources/themes/light/green.scss")))
+/******/ 	__webpack_require__.O(undefined, ["themes/light-orchid/app","themes/light-blue/app","themes/light-green/app.min"], () => (__webpack_require__("./resources/themes/light/blue.scss")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["themes/light-orchid/app","themes/light-blue/app","themes/light-green/app.min"], () => (__webpack_require__("./resources/themes/light/orchid.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

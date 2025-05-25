@@ -1,16 +1,14 @@
 {
-    "/themes/js/app.js": "/themes/js/app.js?id=e7c1a965db39c34738a29162a5b19ce0",
-    "/themes/light-orchid/app.css": "/themes/light-orchid/app.css?id=5c7e0053f040848ab1ebf527b8c2f605",
-    "/themes/light-blue/app.css": "/themes/light-blue/app.css?id=6f477a93703294ff4060b2915d9f5c10",
-    "/themes/light-green/app.css": "/themes/light-green/app.css?id=09d752ecc7fe98f5e0f94d258ab73f6f",
+    "/themes/js/app.js": "/themes/js/app.js?id=05785e396a86b3b0f1426e669418fbf7",
+    "/themes/light-orchid/app.css": "/themes/light-orchid/app.css?id=38cbfeeea5b111dcc13da3e238f7e699",
+    "/themes/light-blue/app.css": "/themes/light-blue/app.css?id=6893b9eb1ecc3d0434311027ced27cd0",
+    "/themes/light-green/app.min.css": "/themes/light-green/app.min.css?id=6d28f59de4684a371e073d3a70f0c4f1",
     "/themes/vendors/datatables/datatables.min.js": "/themes/vendors/datatables/datatables.min.js?id=028790892e63b1a0b87f4037fee45ca1",
     "/themes/vendors/datatables/pl.json": "/themes/vendors/datatables/pl.json?id=5252773cebbc6b8afc21f1eacd209d6a",
     "/themes/vendors/jquery.min.js": "/themes/vendors/jquery.min.js?id=cf2fbbf84281d9ecbffb4993203d543b",
     "/themes/vendors/jquery.min.map": "/themes/vendors/jquery.min.map?id=9fa7f86a9465f3ce534aa52df7189589",
     "/images/chosen-sprite.png": "/images/chosen-sprite.png?id=0de22e42b614304ab21e03ab99e56149",
     "/images/chosen-sprite@2x.png": "/images/chosen-sprite@2x.png?id=da1e3f69fcdb59582919488a1f679276",
-    "/images/portrait/avatar-female.png": "/images/portrait/avatar-female.png?id=70aab25d86b1b481f2ff41df8b19f497",
-    "/images/portrait/avatar-male.png": "/images/portrait/avatar-male.png?id=62fbb47559421f75e6e3208970b82381",
     "/images/resources/favicon.ico": "/images/resources/favicon.ico?id=29c9ffe751a68cf424f56ee0212ea1bd",
     "/themes/js/trix.esm.min.js.map": "/themes/js/trix.esm.min.js.map?id=8d0c6bb693f0450b8b3ea2025ee3cc6d"
 }
