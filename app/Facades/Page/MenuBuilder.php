@@ -25,11 +25,12 @@ class MenuBuilder
                 ->setTitle(__('menus.campaigns.index'))
                 ->setIcon('bullseye')
                 ->setRoute('campaigns.index')
+                ->settings('mbo.campaigns_enabled', 'mbo.enabled')
                 ->permission('mbo-campaign-*'),
-            MenuItem::make('reports')
-                ->setTitle(__('menus.reports.index'))
-                ->setIcon('bar-chart-steps')
-                ->setRoute('reports.index'),
+            // MenuItem::make('reports')
+            //     ->setTitle(__('menus.reports.index'))
+            //     ->setIcon('bar-chart-steps')
+            //     ->setRoute('reports.index'),
             MenuItem::make('users')
                 ->setTitle(__('menus.users.index'))
                 ->setIcon('person-fill')

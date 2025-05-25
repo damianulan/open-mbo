@@ -20,18 +20,22 @@ class CampaignEditUserForm extends Form
         $route = null;
         $method = 'POST';
         $title = 'Dodaj użytkowników do kampanii';
-        $user_ids = UserCampaign::where('campaign_id', $model->id)->get()->pluck('user_id');
-        $coordinators = $model->coordinators->pluck('id')->toArray();
         $selected = array();
         $exclude = array();
-        if (!empty($user_ids)) {
-            foreach ($user_ids as $tid) {
-                $selected[] = $tid;
+
+        if ($model) {
+            $user_ids = UserCampaign::where('campaign_id', $model->id)->get()->pluck('user_id');
+            $coordinators = $model->coordinators->pluck('id')->toArray();
+
+            if (!empty($user_ids)) {
+                foreach ($user_ids as $tid) {
+                    $selected[] = $tid;
+                }
             }
-        }
-        if (!empty($coordinators)) {
-            foreach ($coordinators as $tid) {
-                $exclude[] = ['id' => $tid];
+            if (!empty($coordinators)) {
+                foreach ($coordinators as $tid) {
+                    $exclude[] = ['id' => $tid];
+                }
             }
         }
 

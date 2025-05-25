@@ -48,11 +48,13 @@ class GeneralController extends Controller
                 //$id - objective_id
                 if ($id) {
                     $campaign = Campaign::checkAccess()->find($id);
-                    $params = [
-                        'id' => $id,
-                        'form' => CampaignEditUserForm::definition($request, $campaign),
-                    ];
-                    $status = 'ok';
+                    if ($campaign) {
+                        $params = [
+                            'id' => $id,
+                            'form' => CampaignEditUserForm::definition($request, $campaign),
+                        ];
+                        $status = 'ok';
+                    }
                 }
 
                 break;

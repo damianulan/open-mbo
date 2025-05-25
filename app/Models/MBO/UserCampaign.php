@@ -7,9 +7,12 @@ use App\Casts\CheckboxCast;
 use App\Models\Core\User;
 use App\Models\MBO\Campaign;
 use App\Enums\MBO\CampaignStage;
-use App\Observers\MBO\Campaigns\UserCampaignObserver;
 use App\Enums\MBO\UserObjectiveStatus;
-use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use App\Models\MBO\UserObjective;
+use App\Events\MBO\Campaigns\UserCampaignAssigned;
+use App\Events\MBO\Campaigns\UserCampaignUnassigned;
+use Lucent\Support\Traits\Dispatcher;
+use App\Events\MBO\Campaigns\UserCampaignUpdated;
 
 /**
  *
@@ -44,9 +47,10 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign withoutTrashed()
  * @mixin \Eloquent
  */
-#[ObservedBy([UserCampaignObserver::class])]
 class UserCampaign extends BaseModel
 {
+    use Dispatcher;
+
     public $logEntities = ['user_id' => User::class, 'campaign_id' => Campaign::class];
 
     protected $fillable = [
@@ -58,16 +62,12 @@ class UserCampaign extends BaseModel
     ];
 
     protected $casts = [
-        'active' => CheckboxCast::class,
-        'manual' => CheckboxCast::class,
+        'active' => 'boolean',
+        'manual' => 'boolean',
     ];
 
-    public $timestamps = true;
 
-    protected static function boot()
-    {
-        parent::boot();
-    }
+    public $timestamps = true;
 
     public function user()
     {
@@ -179,38 +179,51 @@ class UserCampaign extends BaseModel
      *
      * @return void
      */
-    public function setObjectiveStatus(): void
+    public function mapObjectiveStatus(): void
     {
-        if ($this->active) {
-            $sequences = CampaignStage::sequences();
-            $setStage = null;
-            if (in_array($this->stage, CampaignStage::sequences())) {
-                if ($this->stage === CampaignStage::REALIZATION) {
-                    $setStage = UserObjectiveStatus::PROGRESS;
-                } elseif ($sequences[$this->stage] < $sequences[CampaignStage::REALIZATION]) {
-                    $setStage = UserObjectiveStatus::UNSTARTED;
-                } elseif ($sequences[$this->stage] > $sequences[CampaignStage::REALIZATION]) {
-                    $setStage = UserObjectiveStatus::COMPLETED;
-                }
-            } else {
-                $setStage = UserObjectiveStatus::INTERRUPTED;
-            }
+        $objectives = $this->objectives();
+        if ($objectives->count()) {
+            foreach ($objectives as $objective) {
+                $assignments = $objective->user_assignments()->whereUserId($this->user_id)->get();
 
-            if ($setStage) {
-                $objectives = $this->objectives();
-                if ($objectives->count()) {
-                    foreach ($objectives as $objective) {
-                        $assignments = $objective->user_assignments()->active()->whereUserId($this->user_id)->get();
-
-                        if ($assignments->count()) {
-                            foreach ($assignments as $assignment) {
-                                $assignment->status = $setStage;
-                                $assignment->save();
-                            }
-                        }
+                if ($assignments->count()) {
+                    foreach ($assignments as $assignment) {
+                        $assignment->setStatus()->update();
                     }
                 }
             }
         }
+    }
+
+    public static function createdUserCampaign(UserCampaign $model): void
+    {
+        $objectives = $model->campaign->objectives()->get();
+        foreach ($objectives as $objective) {
+            UserObjective::assign($model->user_id, $objective->id);
+        }
+
+        UserCampaignAssigned::dispatch($model->user, $model->campaign);
+    }
+
+    /**
+     * Handle the UserCampaign "updated" event.
+     */
+    public static function updatedUserCampaign(UserCampaign $model): void
+    {
+        $model->mapObjectiveStatus();
+        UserCampaignUpdated::dispatch($model);
+    }
+
+    /**
+     * Handle the UserCampaign "deleted" event.
+     */
+    public static function deletedUserCampaign(UserCampaign $model): void
+    {
+        $objectives = $model->campaign->objectives()->get();
+        foreach ($objectives as $objective) {
+            UserObjective::unassign($model->user_id, $objective->id);
+        }
+
+        UserCampaignUnassigned::dispatch($model->user, $model->campaign);
     }
 }

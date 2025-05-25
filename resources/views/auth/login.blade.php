@@ -9,7 +9,7 @@
 
                 <div class="card-body pt-0">
                     @if(config('app.env') !== 'production' && config('app.maintenance') === false)
-                        <div class="alert alert-info mx-5 px-5 mb-4">
+                        <div class="alert alert-warning mx-5 px-5 mb-4">
                             <div class="text-center">{!! __('auth.login_info') !!}</div>
                             <div class="text-center pt-3">
                                 <div><strong>{{ __('fields.login') }}:</strong> admin@damianulan.me</div>
@@ -26,7 +26,7 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('fields.email') }}</label>
+                            <label for="email" class="col-md-3 col-form-label text-md-end">{{ __('fields.email') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('fields.password') }}</label>
+                            <label for="password" class="col-md-3 col-form-label text-md-end">{{ __('fields.password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-6 offset-md-3">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
@@ -66,7 +66,7 @@
                         </div>
 
                         <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
+                            <div class="col-md-8 offset-md-3">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('menus.login') }}
                                 </button>
@@ -82,8 +82,13 @@
                     @if(config('app.env') !== 'production')
                     <div class="mx-5 mt-3">
                         <div class="row">
-                            <div class="col-md-12 text-muted">
-                                Build: {{ config('app.build') }}
+                            <div class="col-md-12 text-muted d-flex">
+                                <div class="login-version">
+                                    Release: {{ config('app.release') }}
+                                </div>
+                                <div class="login-build ms-auto">
+                                    Build: {{ config('app.build') }}
+                                </div>
                             </div>
                         </div>
                     </div>

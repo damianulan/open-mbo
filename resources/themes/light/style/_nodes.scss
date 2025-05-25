@@ -1,0 +1,40 @@
+.profile-img {
+    border-radius: 50%;
+    border: 2px dotted $primary;
+}
+
+.profile-img {
+    border-color: $link-color;
+}
+
+.user-banner {
+    display: flex;
+    align-items: center;
+    text-decoration: none !important;
+    background-color: transparent;
+    color: $link-color;
+}
+
+.user-banner:hover {
+    color: $link-color-hover;
+    transition: all 0.2s ease-in-out;
+}
+
+.user-banner:hover .profile-img {
+    border-color: $link-color-hover;
+}
+
+div.profile-img {
+    background-color: $primary;
+    display: flex;
+    position: relative;
+    text-decoration: none !important;
+}
+
+div.profile-img > div {
+    width: 100%;
+    color: $light;
+    text-align: center;
+    align-self: center;
+    font-weight: 600;
+}

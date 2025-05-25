@@ -16,7 +16,7 @@
                             <x-icon key="feather" />
                         </div>
                         @endif
-                        <div class="list-action me-3" data-tippy-content="Waga celu">
+                        <div class="list-action me-3" data-tippy-content="{{ __('forms.mbo.objectives.weight') }}">
                             <x-icon key="minecart-loaded" />
                             <span>{{ $objective->weight }}</span>
                         </div>

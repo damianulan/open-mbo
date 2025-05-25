@@ -15,8 +15,41 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * TODO static roles & static permissions
+ *
+ * @author Damian Ułan <damian.ulan@protonmail.com>
+ * @copyright 2025 damianulan
+ */
 trait HasRolesAndPermissions
 {
+
+    /**
+     * Find all users with given role slugs.
+     *
+     * @param mixed ...$roles
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public static function role(...$roles): Builder
+    {
+        return self::whereHas('roles', function (Builder $q) use ($roles) {
+            $q->whereIn('slug', $roles);
+        });
+    }
+
+    /**
+     * Find all users with given permission slugs.
+     *
+     * @param mixed ...$permissions
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public static function permission(...$permissions): Builder
+    {
+        return self::whereHas('permissions', function (Builder $q) use ($permissions) {
+            $q->whereIn('slug', $permissions);
+        });
+    }
+
     /**
      * Context is not required, if not provided, checks for all contexts. System context is superior - if context is provided,
      * but assigned to System context, then it will return true.

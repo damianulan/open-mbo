@@ -3,7 +3,9 @@
 use App\Settings\GeneralSettings;
 use App\Settings\MailSettings;
 use App\Settings\MBOSettings;
-use App\Settings\SurveysSettings;
+use App\Settings\UserSettings;
+use App\Settings\ReportSettings;
+use App\Settings\NotificationSettings;
 
 return [
 
@@ -14,8 +16,10 @@ return [
     'settings' => [
         GeneralSettings::class,
         MailSettings::class,
-        SurveysSettings::class,
         MBOSettings::class,
+        UserSettings::class,
+        ReportSettings::class,
+        NotificationSettings::class,
     ],
 
     /*
@@ -74,7 +78,7 @@ return [
     'global_casts' => [
         DateTimeInterface::class => Spatie\LaravelSettings\SettingsCasts\DateTimeInterfaceCast::class,
         DateTimeZone::class => Spatie\LaravelSettings\SettingsCasts\DateTimeZoneCast::class,
-//        Spatie\DataTransferObject\DataTransferObject::class => Spatie\LaravelSettings\SettingsCasts\DtoCast::class,
+        //        Spatie\DataTransferObject\DataTransferObject::class => Spatie\LaravelSettings\SettingsCasts\DtoCast::class,
         Spatie\LaravelData\Data::class => Spatie\LaravelSettings\SettingsCasts\DataCast::class,
     ],
 

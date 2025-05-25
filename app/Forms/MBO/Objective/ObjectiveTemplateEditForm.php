@@ -37,7 +37,7 @@ class ObjectiveTemplateEditForm extends Form
             'category_id' => 'nullable',
             'name' => 'max:50|required',
             'description' => 'max:1000|nullable',
-            'draft' => 'in:on,off',
+            'draft' => 'boolean',
         ];
     }
 }

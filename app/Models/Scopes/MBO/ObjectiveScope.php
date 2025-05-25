@@ -5,7 +5,6 @@ namespace App\Models\Scopes\MBO;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
-use App\Models\MBO\Objective;
 use Illuminate\Support\Facades\Auth;
 use App\Enums\Core\PermissionLib;
 use App\Models\MBO\ObjectiveTemplateCategory;

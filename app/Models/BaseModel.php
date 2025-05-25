@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\UUID;
+use Lucent\Support\Traits\UUID;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use FormForge\Traits\RequestForms;
 use Watson\Rememberable\Rememberable;
 use App\Traits\Vendors\ModelActivity;
-use App\Traits\VirginModel;
+use Lucent\Support\Traits\VirginModel;
 use Carbon\Carbon;
-use App\Traits\Accessible;
+use Lucent\Support\Traits\Accessible;
 
 /**
  *

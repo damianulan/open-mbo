@@ -5,17 +5,20 @@ namespace App\Http\Controllers\Campaigns;
 use Illuminate\Http\Request;
 use App\Models\MBO\Campaign;
 use App\Forms\MBO\Campaign\CampaignEditForm;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\AppController;
 use App\Services\Campaigns\CampaignService;
 use App\Models\Core\User;
+use App\Events\MBO\Campaigns\CampaignViewed;
+use App\Services\Campaign\CampaignUpdateService;
 
-class CampaignsController extends Controller
+class CampaignsController extends AppController
 {
     public function index(Request $request)
     {
         if ($request->user()->cannot('viewAny', Campaign::class)) {
             unauthorized();
         }
+        $this->logView('Wyświetlono listę kampanii pomiarowych');
         return view('pages.mbo.campaigns.index', [
             'campaigns' => Campaign::checkAccess()->paginate(30),
         ]);
@@ -48,14 +51,14 @@ class CampaignsController extends Controller
             unauthorized();
         }
         $request = $form::reformatRequest($request);
-        $request->validate($form::validation($request));
+        $form::validate($request);
         $service = CampaignService::boot($request)->createOrUpdate();
 
         if ($service->check()) {
             $campaign = $service->getModel();
             return redirect()->route('campaigns.show', $campaign->id)->with('success', __('alerts.campaigns.success.create', ['name' => $campaign->name]));
         }
-        return redirect()->back()->with('error', __('alerts.campaigns.error.create'));
+        return redirect()->back()->with('error', $service->getMessage() ?? __('alerts.campaigns.error.create'));
     }
 
     /**
@@ -69,6 +72,9 @@ class CampaignsController extends Controller
         if ($request->user()->cannot('view', $campaign)) {
             unauthorized();
         }
+
+        CampaignViewed::dispatch($campaign);
+        $this->logShow($campaign);
         $header = $campaign->name . ' [' . $campaign->period . ']';
         return view('pages.mbo.campaigns.show', [
             'campaign' => $campaign,
@@ -103,7 +109,7 @@ class CampaignsController extends Controller
         }
 
         $request = $form::reformatRequest($request);
-        $request->validate($form::validation($request, $id));
+        $form::validate($request, $id);
         $service = CampaignService::boot($request, $campaign)->createOrUpdate();
 
         if ($service->check()) {

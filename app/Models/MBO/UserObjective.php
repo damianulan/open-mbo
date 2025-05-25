@@ -8,6 +8,14 @@ use App\Models\MBO\Objective;
 use App\Enums\MBO\UserObjectiveStatus;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Lucent\Support\Traits\Dispatcher;
+use Carbon\Carbon;
+use App\Models\MBO\UserCampaign;
+use App\Enums\MBO\CampaignStage;
+use App\Events\MBO\Campaigns\CampaignUserObjectiveAssigned;
+use App\Events\MBO\Campaigns\CampaignUserObjectiveUnassigned;
+use App\Events\MBO\Objectives\UserObjectiveAssigned;
+use App\Events\MBO\Objectives\UserObjectiveUnassigned;
 
 /**
  *
@@ -42,6 +50,8 @@ use Illuminate\Support\Facades\Auth;
  */
 class UserObjective extends BaseModel
 {
+    use Dispatcher;
+
     protected $fillable = [
         'user_id',
         'objective_id',
@@ -53,17 +63,9 @@ class UserObjective extends BaseModel
         'evaluation' => 'decimal:8,2',
     ];
 
-    protected static function boot()
-    {
-        parent::boot();
-        static::creating(function ($model) {
-            if (!$model->status) {
-                $model->status = UserObjectiveStatus::UNSTARTED;
-            }
-
-            return $model;
-        });
-    }
+    protected $defaults = [
+        'status' => UserObjectiveStatus::UNSTARTED,
+    ];
 
     public static function assign($user_id, $objective_id): bool
     {
@@ -92,6 +94,60 @@ class UserObjective extends BaseModel
         return $output;
     }
 
+    public function isAfterDeadline(): bool
+    {
+        $deadline = Carbon::parse($this->objective->deadline);
+        if ($deadline) {
+            return $deadline->isPast();
+        }
+
+        return false;
+    }
+
+    public function getStatusLabel(): string
+    {
+        return UserObjectiveStatus::labels()[$this->status] ?? '';
+    }
+
+    public function setStatus(): self
+    {
+        $status = $this->status;
+        $frozen = UserObjectiveStatus::frozen();
+        $autofail = setting('mbo.objectives_autofail');
+
+        $campaign = $this->objective->campaign ?? null;
+        $userCampaign = null;
+        if ($campaign) {
+            $userCampaign = UserCampaign::where('user_id', $this->user_id)->where('campaign_id', $campaign->id)->first();
+        }
+
+        if ($userCampaign) {
+            if (!$userCampaign->active) {
+                $status = UserObjectiveStatus::INTERRUPTED;
+            } else {
+                $status = CampaignStage::mapObjectiveStatus($userCampaign->stage, $status);
+            }
+        }
+
+        if (!in_array($status, $frozen)) {
+            if ($this->isAfterDeadline()) {
+                if ($autofail) {
+                    // TODO fail when expected value is filled and not met
+                } else {
+                }
+                $status = UserObjectiveStatus::COMPLETED;
+            } else {
+                if (!$userCampaign) {
+                    $status = UserObjectiveStatus::PROGRESS;
+                }
+            }
+        }
+
+        $this->status = $status;
+
+        return $this;
+    }
+
     public function objective()
     {
         return $this->belongsTo(Objective::class);
@@ -117,9 +173,34 @@ class UserObjective extends BaseModel
         return in_array($this->status, [UserObjectiveStatus::COMPLETED, UserObjectiveStatus::PASSED, UserObjectiveStatus::FAILED]);
     }
 
-    public function scopeActive(Builder $query): void
+    public function scopeWhereActive(Builder $query): void
     {
         $query->whereNotIn('status', UserObjectiveStatus::frozen());
+    }
+
+    public function scopeWhereNotEvaluated(Builder $query): void
+    {
+        $query->whereNotIn('status', UserObjectiveStatus::evaluated());
+    }
+
+    public function scopeWhereEvaluated(Builder $query): void
+    {
+        $query->whereIn('status', UserObjectiveStatus::evaluated());
+    }
+
+    public function scopeWhereCompleted(Builder $query): void
+    {
+        $query->where('status', UserObjectiveStatus::COMPLETED);
+    }
+
+    public function scopeWherePassed(Builder $query): void
+    {
+        $query->where('status', UserObjectiveStatus::PASSED);
+    }
+
+    public function scopeWhereFailed(Builder $query): void
+    {
+        $query->where('status', UserObjectiveStatus::FAILED);
     }
 
     public function scopeMy(Builder $query, ?User $user = null): void
@@ -128,5 +209,48 @@ class UserObjective extends BaseModel
             $user = Auth::user();
         }
         $query->where('user_id', $user->id);
+    }
+
+    public static function retrievedUserObjective(UserObjective $model): void
+    {
+        $model->setStatus()->update();
+    }
+
+    /**
+     * Handle the UserObjective "created" event.
+     */
+    public static function createdUserObjective(UserObjective $model): void
+    {
+        $campaign = $model->objective->campaign ?? null;
+        if ($campaign) {
+            CampaignUserObjectiveAssigned::dispatch($model->user, $model->objective, $campaign);
+        } else {
+            UserObjectiveAssigned::dispatch($model->user, $model->objective);
+        }
+    }
+
+    public static function updatingUserObjective(UserObjective $model): UserObjective
+    {
+
+        return $model;
+    }
+
+    public static function updatedUserObjective(UserObjective $model): void
+    {
+        if (in_array('status', $model->getDirty())) {
+        }
+    }
+
+    /**
+     * Handle the UserObjective "deleted" event.
+     */
+    public static function deletedUserObjective(UserObjective $model): void
+    {
+        $campaign = $model->objective->campaign ?? null;
+        if ($campaign) {
+            CampaignUserObjectiveUnAssigned::dispatch($model->user, $model->objective, $campaign);
+        } else {
+            UserObjectiveUnassigned::dispatch($model->user, $model->campaign);
+        }
     }
 }

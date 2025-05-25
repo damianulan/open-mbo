@@ -34,8 +34,14 @@ class ComponentServiceProvider extends ServiceProvider
 
         // MBO components
         Blade::component('card-progressbar', \App\View\Components\MBO\Campaign\CardProgressBar::class);
+        Blade::component('campaign-users-list', \App\View\Components\MBO\Campaign\CampaignUsersList::class);
+
         Blade::component('objectives-list', \App\View\Components\MBO\Objectives\ObjectivesList::class);
         Blade::component('objective-users-list', \App\View\Components\MBO\Objectives\ObjectiveUsersList::class);
-        Blade::component('campaign-users-list', \App\View\Components\MBO\Campaign\CampaignUsersList::class);
+        Blade::component('objective-summary', \App\View\Components\MBO\Objectives\ObjectiveSummary::class);
+
+        // Users
+        Blade::component('user-details-card', \App\View\Components\Users\UserDetailsCard::class);
+        Blade::component('user-banner', \App\View\Components\Users\UserBanner::class);
     }
 }

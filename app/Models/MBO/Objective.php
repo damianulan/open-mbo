@@ -67,7 +67,6 @@ class Objective extends BaseModel
 {
     protected $fillable = [
         'template_id',
-        'parent_id',
         'campaign_id',
         'name',
         'description',
@@ -79,7 +78,7 @@ class Objective extends BaseModel
     ];
 
     protected $casts = [
-        'draft' => CheckboxCast::class,
+        'draft' => 'boolean',
         'deadline' => CarbonDatetime::class,
         'description' => TrixFieldCast::class,
     ];
@@ -111,16 +110,6 @@ class Objective extends BaseModel
             }
         }
         return false;
-    }
-
-    public function parent()
-    {
-        return $this->belongsTo(self::class, 'parent_id');
-    }
-
-    public function children()
-    {
-        return $this->hasMany(self::class, 'parent_id');
     }
 
     public function template()

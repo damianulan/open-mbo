@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Objectives;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\AppController;
 use Illuminate\Http\Request;
 use App\Models\MBO\Objective;
 use App\Models\Core\User;
@@ -11,7 +11,7 @@ use App\Models\MBO\UserObjective;
 use App\Enums\MBO\UserObjectiveStatus;
 use Illuminate\Support\Facades\Auth;
 
-class UserObjectiveController extends Controller
+class UserObjectiveController extends AppController
 {
     /**
      * Display a listing of the resource.
@@ -43,10 +43,12 @@ class UserObjectiveController extends Controller
     public function show(Request $request, string $id)
     {
         $userObjective = UserObjective::checkAccess()->findOrFail($id);
+        $this->logShow($userObjective);
 
         $header = 'Podsumowanie Celu';
         return view('pages.mbo.objectives.users.show', [
             'userObjective' => $userObjective,
+            'user' => $userObjective->user,
             'objective' => $userObjective->objective,
             'pagetitle' => $header,
             'isOwner' => $userObjective->user->id === Auth::user()->id,

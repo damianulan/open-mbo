@@ -4,19 +4,17 @@ namespace App\Models\MBO;
 
 use App\Models\BaseModel;
 use FormForge\Casts\TrixFieldCast;
-use App\Casts\CheckboxCast;
 use Illuminate\Support\Collection;
 use App\Models\MBO\Objective;
 use App\Models\MBO\UserCampaign;
 use Carbon\Carbon;
 use App\Models\Core\User;
 use App\Enums\MBO\CampaignStage;
-use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use App\Models\Scopes\MBO\CampaignScope;
-use App\Enums\Core\SystemRolesLib;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Attributes\ObservedBy;
-use App\Observers\MBO\Campaigns\CampaignObserver;
+use App\Events\MBO\Campaigns\CampaignUpdated;
+use App\Events\MBO\Campaigns\CampaignCreated;
+use Lucent\Support\Traits\Dispatcher;
 
 /**
  *
@@ -78,9 +76,10 @@ use App\Observers\MBO\Campaigns\CampaignObserver;
  * @property string $stage
  * @mixin \Eloquent
  */
-#[ObservedBy([CampaignObserver::class])]
 class Campaign extends BaseModel
 {
+    use Dispatcher;
+
     public $stages;
     public $timestamps = true;
     protected $log_name = 'mbo';
@@ -107,37 +106,17 @@ class Campaign extends BaseModel
     ];
 
     protected $casts = [
-        'draft' => CheckboxCast::class,
-        'manual' => CheckboxCast::class,
+        'draft' => 'boolean',
+        'manual' => 'boolean',
 
         'description' => TrixFieldCast::class,
     ];
 
+    protected $defaults = [
+        'stage' => CampaignStage::PENDING,
+    ];
+
     protected $accessScope = CampaignScope::class;
-
-    protected static function boot()
-    {
-        parent::boot();
-        static::creating(function ($model) {
-            if ($model->manual == 0) {
-                $model->setStageAuto();
-            } else {
-                $model->stage = CampaignStage::PENDING;
-            }
-
-            return $model;
-        });
-
-        static::updating(function ($model) {
-            if ($model->manual == 0) {
-                $model->setStageAuto();
-            } else {
-                $model->stage = CampaignStage::PENDING;
-            }
-
-            return $model;
-        });
-    }
 
     public function user_campaigns()
     {
@@ -207,19 +186,22 @@ class Campaign extends BaseModel
         return true;
     }
 
-    public function setUserStage($enrol_id = null)
+    public function setUserStage($user_id = null)
     {
         $params = ['manual' => 0, 'active' => 1];
-        if ($enrol_id) {
-            $params['id'] = $enrol_id;
+        if ($user_id) {
+            $params['user_id'] = $user_id;
         }
-        $enrols = $this->user_campaigns()->where($params)->get();
+
         $stage =  $this->getCurrentStages()->first();
+        $enrols = $this->user_campaigns()->where($params)->get();
         if (!empty($enrols)) {
             foreach ($enrols as $enrol) {
-                $enrol->timestamps = false;
-                $enrol->stage = $stage;
-                $enrol->update();
+                if ($stage !== $enrol->stage) {
+                    $enrol->timestamps = false;
+                    $enrol->stage = $stage;
+                    $enrol->update();
+                }
             }
         }
         return $stage;
@@ -255,6 +237,7 @@ class Campaign extends BaseModel
         $now = Carbon::now();
 
         if ($this->stage === CampaignStage::IN_PROGRESS) {
+            $softStage = null;
             foreach (CampaignStage::softValues() as $tmp) {
                 $prop_start = $tmp . '_from';
                 $prop_end = $tmp . '_to';
@@ -262,8 +245,13 @@ class Campaign extends BaseModel
                 $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_end);
 
                 if ($now->between($start, $end)) {
+                    $softStage = $tmp;
                     $stages->push($tmp);
                 }
+            }
+
+            if (is_null($softStage)) {
+                $stages->push($this->stage);
             }
         } else {
             $stages->push($this->stage);
@@ -455,5 +443,38 @@ class Campaign extends BaseModel
                 $q->where('stage', CampaignStage::COMPLETED)
                     ->orWhereDate('self_evaluation_to', '<', Carbon::now());
             });
+    }
+
+    public static function retrievedCampaign(Campaign $model)
+    {
+        $model->setUserStage();
+    }
+
+    public static function creatingCampaign(Campaign $model)
+    {
+        return self::updatingCampaign($model);
+    }
+
+    public static function createdCampaign(Campaign $model)
+    {
+        CampaignCreated::dispatch($model);
+    }
+
+    public static function updatingCampaign(Campaign $model)
+    {
+        if (!setting('mbo.campaigns_manual')) {
+            $model->manual = 0;
+        }
+
+        if ($model->manual == 0) {
+            $model->setStageAuto();
+        }
+
+        return $model;
+    }
+
+    public static function updatedCampaign(Campaign $model)
+    {
+        CampaignUpdated::dispatch($model);
     }
 }

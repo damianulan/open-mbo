@@ -94,7 +94,8 @@ class LogsDataTable extends CustomDataTable
     {
         return $model->join('users', 'users.id', '=', 'activity_log.causer_id')
             ->join('user_profiles', 'user_profiles.user_id', '=', 'users.id')
-            ->select('activity_log.*', 'user_profiles.firstname', 'user_profiles.lastname');
+            ->select('activity_log.*', 'user_profiles.firstname', 'user_profiles.lastname')
+            ->whereIn('activity_log.event', ['viewed', 'created', 'updated', 'deleted', 'impersonated', 'auth_attempt_success', 'auth_attempt_fail']);
     }
 
     protected function defaultColumns(): array

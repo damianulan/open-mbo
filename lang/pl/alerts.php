@@ -2,6 +2,9 @@
 
 return [
 
+    'system' => [
+        'unauthorized_module' => 'Moduł, który próbujesz otworzyć został zablokowany przez administratora systemu.',
+    ],
     'success' => [
         'operation' => 'Operacja zakończona pomyślnie.',
     ],
@@ -27,20 +30,18 @@ return [
             // SETTINGS
             'cache_clear' => 'Pamięć podręczna aplikacji została pomyślnie wyczyszczona!',
             'mail_update' => 'Dane serwera SMTP zostały zaktualizowane. Cache został automatycznie wyczyszczony.',
+            'mbo_update'  => 'Ustawienia modułu MBO zostały zaktualizowane.',
             'general'     => 'Ustawienia platformy zostały zaktualizowane.',
         ],
         'error' => [
             //SETTINGS
             'cache_clear' => 'Podczas czyszczenia pamięci podręcznej aplikacji serwer napotkał problemy. Sprawdź uprawnienia serwera.',
             'mail_update' => 'Dane serwera SMTP nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd.',
+            'mbo_update'  => 'Ustawienia modułu MBO nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd.',
             'general'     => 'Ustawienia platformy nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd.',
         ],
-        'warning' => [
-
-        ],
-        'info' => [
-
-        ],
+        'warning' => [],
+        'info' => [],
 
     ],
 
@@ -60,7 +61,7 @@ return [
 
         'error' => [
             'create' => 'Kampanie nie mogła zostać dodana. Wystąpił błąd.',
-            'edit' => 'Kampania została pomyślnie zmodyfikowana.',
+            'edit' => 'Kampania nie została zmodyfikowana. W formularzu wystąpiły błędy.',
             'objective_added' => 'Wskazany cel został pomyślnie dodany do Kampanii.',
             'objective_deleted' => 'Cel został pomyślnie usunięty z Kampanii.',
             'users_added' => 'Dane nie zostały zaktualizowane. Odśwież stronę i spróbuj ponownie.',
@@ -70,9 +71,7 @@ return [
             'cancel' => 'Kampania nie została pomyślnie anulowana.',
         ],
 
-        'info' => [
-
-        ],
+        'info' => [],
 
     ],
 

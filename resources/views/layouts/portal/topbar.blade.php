@@ -55,7 +55,7 @@
               @endif
               >
                   <div class="user-actions" data-bs-toggle="dropdown" type="button" aria-expanded="false">
-                    <img class="rounded-circle" src="{{ auth()->user()->getAvatar() }}" width="30" height="30">
+                    {!! auth()->user()->getAvatarView(30, 30) !!}
                     <span class="profile-name{{auth()->user()->isImpersonating() ? ' text-info':''}}">{{ auth()->user()->name() }}</span>
                   </div>
                   <ul class="dropdown-menu">

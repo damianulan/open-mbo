@@ -1,17 +1,14 @@
 {
-    "/themes/js/app.js": "/themes/js/app.js?id=c9eae6b751807bee607ecbd3f8e6d96d",
-    "/themes/light-orchid/app.css": "/themes/light-orchid/app.css?id=4b511aa38e110ae74973e36cb8008bb4",
-    "/themes/light-blue/app.css": "/themes/light-blue/app.css?id=994966c9215ab724e133da488f86d8a7",
-    "/themes/light-green/app.css": "/themes/light-green/app.css?id=4dd6ce30a3311d3677b2a3b5751cb1f1",
+    "/themes/js/app.js": "/themes/js/app.js?id=5c00200b692388163fd5ab5e5405598d",
+    "/themes/light-orchid/app.min.css": "/themes/light-orchid/app.min.css?id=43d15d1bb4c36606a6b3aa59baaa61fd",
+    "/themes/light-blue/app.min.css": "/themes/light-blue/app.min.css?id=1523aa1f96c01832a3f05423eb7b1c62",
+    "/themes/light-green/app.min.css": "/themes/light-green/app.min.css?id=bcbc7257c92ae5cdf6f8223acea69ab5",
     "/themes/vendors/datatables/datatables.min.js": "/themes/vendors/datatables/datatables.min.js?id=028790892e63b1a0b87f4037fee45ca1",
     "/themes/vendors/datatables/pl.json": "/themes/vendors/datatables/pl.json?id=5252773cebbc6b8afc21f1eacd209d6a",
     "/themes/vendors/jquery.min.js": "/themes/vendors/jquery.min.js?id=cf2fbbf84281d9ecbffb4993203d543b",
     "/themes/vendors/jquery.min.map": "/themes/vendors/jquery.min.map?id=9fa7f86a9465f3ce534aa52df7189589",
     "/images/chosen-sprite.png": "/images/chosen-sprite.png?id=0de22e42b614304ab21e03ab99e56149",
     "/images/chosen-sprite@2x.png": "/images/chosen-sprite@2x.png?id=da1e3f69fcdb59582919488a1f679276",
-    "/images/portrait/avatar-female.png": "/images/portrait/avatar-female.png?id=70aab25d86b1b481f2ff41df8b19f497",
-    "/images/portrait/avatar-male.png": "/images/portrait/avatar-male.png?id=62fbb47559421f75e6e3208970b82381",
     "/images/resources/favicon.ico": "/images/resources/favicon.ico?id=29c9ffe751a68cf424f56ee0212ea1bd",
-    "/scripts/globals.js": "/scripts/globals.js?id=114b06b1f9238eafb5b03f2ab95c8f78",
     "/themes/js/trix.esm.min.js.map": "/themes/js/trix.esm.min.js.map?id=8d0c6bb693f0450b8b3ea2025ee3cc6d"
 }

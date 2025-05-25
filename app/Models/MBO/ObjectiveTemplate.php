@@ -59,7 +59,7 @@ class ObjectiveTemplate extends BaseModel
     ];
 
     protected $casts = [
-        'draft' => CheckboxCast::class,
+        'draft' => 'boolean',
         'description' => TrixFieldCast::class,
     ];
 

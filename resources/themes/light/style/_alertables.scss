@@ -1,6 +1,7 @@
 // badges
-.badge.badge-status, .badge.badge-tag {
-    padding: .3rem .5rem;
+.badge.badge-status,
+.badge.badge-tag {
+    padding: 0.3rem 0.5rem;
     font-size: 0.75rem;
     font-weight: 700;
 }
@@ -44,41 +45,45 @@
     color: $dark;
 }
 
+.badge.badge-rotated {
+    transform: rotate(15deg);
+}
 
 // alerts
 .alert-heading {
-    font-size: .9rem;
+    font-size: 0.9rem;
     font-weight: 700;
-    padding-bottom: .5rem;
+    padding-bottom: 0.5rem;
 }
 
 .alert {
-    box-shadow: 0 2px 15px -3px rgb(0 0 0 / 7%), 0 10px 20px -2px rgb(0 0 0 / 4%);
-    padding: .75rem 1.5rem;
-    margin-bottom: .35rem;
+    box-shadow: 0 2px 15px -3px rgb(0 0 0 / 7%),
+        0 10px 20px -2px rgb(0 0 0 / 4%);
+    padding: 0.75rem 1.5rem;
+    margin-bottom: 0.35rem;
 }
 
 .alert.alert-success {
-    background-color: rgba($success, .25);
-    border-color: rgba($success, .3);
+    background-color: rgba($success, 0.25);
+    border-color: rgba($success, 0.3);
     color: darken($success, 15%);
 }
 
 .alert.alert-danger {
-    background-color: rgba($danger, .25);
-    border-color: rgba($danger, .3);
+    background-color: rgba($danger, 0.25);
+    border-color: rgba($danger, 0.3);
     color: darken($danger, 20%);
 }
 
 .alert.alert-warning {
-    background-color: rgba($warning, .25);
-    border-color: rgba($warning, .3);
+    background-color: rgba($warning, 0.25);
+    border-color: rgba($warning, 0.3);
     color: darken($warning, 15%);
 }
 
 .alert.alert-info {
-    background-color: rgba($info, .25);
-    border-color: rgba($info, .3);
+    background-color: rgba($info, 0.25);
+    border-color: rgba($info, 0.3);
     color: darken($info, 15%);
 }
 
@@ -87,29 +92,33 @@
 }
 
 .toastify.success,
-.toastify.success *{
-    box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px rgba($success, 0.15);
+.toastify.success * {
+    box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12),
+        0 10px 36px -4px rgba($success, 0.15);
     background: rgba($success, 0.25);
     color: darken($success, 20%);
-  }
-  .toastify.error,
-  .toastify.error *{
-    box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px rgba($danger, 0.15);
+}
+.toastify.error,
+.toastify.error * {
+    box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12),
+        0 10px 36px -4px rgba($danger, 0.15);
     background: rgba($danger, 0.25);
     color: darken($danger, 20%);
-  }
-  .toastify.info,
-  .toastify.info *{
-    box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px rgba($primary, 0.15);
+}
+.toastify.info,
+.toastify.info * {
+    box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12),
+        0 10px 36px -4px rgba($primary, 0.15);
     background: rgba($primary, 0.25);
     color: $primary;
-  }
-  .toastify.warning,
-  .toastify.warning *{
-    box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px rgba($warning, 0.15);
+}
+.toastify.warning,
+.toastify.warning * {
+    box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.12),
+        0 10px 36px -4px rgba($warning, 0.15);
     background: rgba($warning, 0.25);
     color: darken($warning, 20%);
-  }
+}
 
 .toastify .toast-close {
     background: transparent;

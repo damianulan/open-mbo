@@ -2,7 +2,7 @@
 
 namespace App\Enums\Core;
 
-use FormForge\Enums\Enum;
+use Lucent\Support\Enum;
 
 class PermissionLib extends Enum
 {
