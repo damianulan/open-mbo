@@ -114,22 +114,40 @@ class CampaignsController extends Controller
     }
 
     public function terminate(Request $request, $id)
-    {
-        $campaign = Campaign::findOrFail($id);
-        // dd(vars: $campaign->terminate());
-        if ($campaign->terminate()) {
-            return ajax()->ok(__('alerts.campaigns.success.terminate'));
-        }
-        return ajax()->error(__('alerts.campaigns.error.terminate'));
+{
+    $campaign = Campaign::findOrFail($id);
+
+    if ($campaign->terminate()) {
+        return ajax()->ok(__('alerts.campaigns.success.terminate'));
     }
 
-    public function resume(Request $request, $id)
-    {
-        $campaign = Campaign::findOrFail($id);
-        // dd(vars: $campaign->resume());
-        if ($campaign->resume()) {
-            return ajax()->ok(__('alerts.campaigns.success.resume'));
-        }
-        return ajax()->error(__('alerts.campaigns.error.resume'));
+    return ajax()->error(__('alerts.campaigns.error.terminate'));
+}
+
+public function resume(Request $request, $id)
+{
+    $campaign = Campaign::findOrFail($id);
+
+    if ($campaign->resume()) {
+        return ajax()->ok(__('alerts.campaigns.success.resume'));
     }
+
+    return ajax()->error(__('alerts.campaigns.error.resume'));
+}
+
+public function cancel(Request $request, $id)
+{
+    $campaign = Campaign::findOrFail($id);
+
+    if ($campaign->cancel()) {
+        foreach ($campaign->user_campaigns as $uc) {
+            $uc->cancel();
+        }
+
+        return ajax()->ok(__('alerts.campaigns.success.cancel'));
+    }
+
+    return ajax()->error(__('alerts.campaigns.error.cancel'));
+}
+
 }

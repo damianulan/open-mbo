@@ -354,13 +354,31 @@ class Campaign extends BaseModel
         return $this->draft;
     }
 
+    public function cancel(): bool
+{
+    if ($this->stage !== CampaignStage::CANCELED) {
+        $this->stage = CampaignStage::CANCELED;
+
+        foreach ($this->user_campaigns as $userCampaign) {
+            $userCampaign->cancel();
+        }
+
+        return $this->update();
+    }
+    return false;
+}
+
     public function terminate(): bool
     {
         if ($this->stage !== CampaignStage::TERMINATED) {
             $this->stage = CampaignStage::TERMINATED;
+
+            foreach ($this->user_campaigns as $userCampaign) {
+                $userCampaign->terminate();
+            }
+
             return $this->update();
         }
-
         return false;
     }
 
@@ -368,11 +386,16 @@ class Campaign extends BaseModel
     {
         if ($this->stage === CampaignStage::TERMINATED) {
             $this->stage = CampaignStage::IN_PROGRESS;
+
+            foreach ($this->user_campaigns as $userCampaign) {
+                $userCampaign->resume();
+            }
+
             return $this->update();
         }
-
         return false;
     }
+
     public function terminated(): bool
     {
         return $this->stage === CampaignStage::TERMINATED;

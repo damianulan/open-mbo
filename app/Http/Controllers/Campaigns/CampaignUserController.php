@@ -64,4 +64,5 @@ class CampaignUserController extends Controller
         }
         return ajax()->error(__('alerts.campaigns.error.users_deleted'));
     }
+
 }

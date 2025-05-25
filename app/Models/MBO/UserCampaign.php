@@ -106,6 +106,32 @@ class UserCampaign extends BaseModel
         return $status;
     }
 
+    public function terminate(): bool
+    {
+        if ($this->stage !== CampaignStage::TERMINATED) {
+            $this->stage = CampaignStage::TERMINATED;
+            return $this->update();
+        }
+        return false;
+    }
+
+    public function resume(): bool
+    {
+        $this->stage = CampaignStage::IN_PROGRESS;
+        return $this->update();
+    }
+
+    public function cancel(): bool
+    {
+        if ($this->stage !== CampaignStage::CANCELED) {
+            $this->stage = CampaignStage::CANCELED;
+            return $this->update();
+        }
+        return false;
+    }
+
+
+
     public function nextStage(): bool
     {
         $stages = CampaignStage::sequences();

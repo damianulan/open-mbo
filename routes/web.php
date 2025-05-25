@@ -121,6 +121,7 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
         Route::put('{campaign}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'update'])->name('update');
         Route::post('/terminate/{id}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'terminate'])->name('terminate');
         Route::post('/resume/{id}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'resume'])->name('resume');
+        Route::post('/cancel/{id}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'cancel'])->name('cancel');
 
         Route::prefix('objective')->name('objective.')->group(function () {
             Route::post('/', [App\Http\Controllers\Campaigns\CampaignObjectiveController::class, 'store'])->name('store');

@@ -14,14 +14,14 @@
         @endcan
         @can('terminate', $campaign)
             @if ($campaign->terminated())
-                <a href="javascript:void(0);" class="icon-btn toggle-terminate" data-tippy-content="{{ __('buttons.resume_campaign') }}" data-url="{{ route('campaigns.resume', [$campaign->id]) }}"><i class="bi-play-fill"></i></a>
+                <a href="javascript:void(0);" class="icon-btn toggle-resume" data-tippy-content="{{ __('buttons.resume_campaign') }}" data-url="{{ route('campaigns.resume', [$campaign->id]) }}"><i class="bi-play-fill"></i></a>
             @else
                 <a href="javascript:void(0);" class="icon-btn toggle-terminate" data-tippy-content="{{ __('buttons.terminate_campaign') }}" data-url="{{ route('campaigns.terminate', [$campaign->id]) }}"><i class="bi-pause-fill"></i></a>
             @endif
         @endcan
         @can('cancel', $campaign)
             @if (!$campaign->canceled())
-                <a href="javascript:void(0);" class="icon-btn toggle-cancel" data-tippy-content="{{ __('buttons.cancel_campaign') }}"><i class="bi-x-circle"></i></a>
+                <a href="javascript:void(0);" class="icon-btn toggle-cancel" data-tippy-content="{{ __('buttons.cancel_campaign') }}" data-url="{{ route('campaigns.cancel', [$campaign->id]) }}"><i class="bi-x-circle"></i></a>
             @endif
         @endcan
     </div>
@@ -91,7 +91,7 @@
     var dataurl = $(this).attr('data-url');
     var uc = $(this).parents('li').first();
     $.confirm(
-        'Czy na pewno zawieścić tą kampanię? Użytkownicy przestaną widzieć cele przypisane w ramach tej kampanii, a administratorzy nie będą mogli dodawać nowych celów.',
+        'Czy na pewno przywrócić tą kampanię? Użytkownicy ponownie zobaczą cele przypisane w ramach tej kampanii, a administratorzy będą mogli ponownie dodawać nowe cele.',
         null,
         function() {
             $.jsonAjax(dataurl, {}, function(response) {
@@ -125,19 +125,23 @@ $('.toggle-terminate').on('click', function() {
     );
 });
 
+$('.toggle-cancel').on('click', function() {
+    var dataurl = $(this).attr('data-url');
+    var uc = $(this).parents('li').first();
+    $.confirm(
+        'Czy na pewno anulować tą kampanię? Wszelkie operacje przestaną być aktywne oraz znikną z agendy pozostałych użytkowników. Kampania pozostanie widoczna wyłącznie w celach archiwalnych. Operacja jest nieodwracalna!',
+        null,
+        function() {
+            $.jsonAjax(dataurl, {}, function(response) {
+                $.success(response.message, null, function() {
+                    location.reload();
+                });
+            }, function(response) {
+                $.error(response.message);
+            }, 'POST');
+        }
+    );
+});
 
-
-    $('.toggle-cancel').on('click', function() {
-        var dataurl = $(this).attr('data-url');
-        var uc = $(this).parents('li').first();
-        $.confirm('Czy na pewno zawieścić tą kampanię? Wszelkie operacje przestaną być aktywne oraz znikną z agendy pozostałych użytkowników. Kampania pozostanie widoczna wyłącznie w celach archiwalnych. Operacja jest nieodwracalna!', null, function() {
-            // $.jsonAjax(dataurl, {}, function(response) {
-            //     uc.remove();
-            //     $.success(response.message);
-            // }, function(response){
-            //     $.error(response.message);
-            // }, 'DELETE' );
-        });
-    });
 </script>
 @endpush
