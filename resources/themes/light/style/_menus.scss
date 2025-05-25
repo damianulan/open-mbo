@@ -132,6 +132,24 @@ html .sidebar-menu {
     padding: 1.5rem;
 }
 
+.sidebar-menu .sidebar-footer {
+    margin: 1rem 2rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.sidebar-menu .sidebar-footer .menu-release {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: $primary;
+}
+
+.sidebar-menu.menu-collapsed .sidebar-footer {
+    display: none;
+}
+
 .brand {
     display: flex;
     align-items: center;

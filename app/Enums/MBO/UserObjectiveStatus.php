@@ -2,7 +2,7 @@
 
 namespace App\Enums\MBO;
 
-use Lucent\Helpers\Enum;
+use Lucent\Support\Enum;
 
 class UserObjectiveStatus extends Enum
 {

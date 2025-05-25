@@ -23,7 +23,6 @@ mix.webpackConfig((webpack) => {
 // misc
 mix.copyDirectory("resources/themes/vendors", "public/themes/vendors");
 mix.copyDirectory("resources/images", "public/images");
-mix.copyDirectory("resources/scripts", "public/scripts");
 
 // base-theme
 mix.js("resources/themes/js/app.js", "public/themes/js")

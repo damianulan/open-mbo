@@ -1,8 +1,8 @@
 {
-    "/themes/js/app.js": "/themes/js/app.js?id=75057aadf5644e8146374a307d49b30f",
-    "/themes/light-orchid/app.css": "/themes/light-orchid/app.css?id=1eb88b7ca82f295b7f9e3da3896a53b2",
-    "/themes/light-blue/app.css": "/themes/light-blue/app.css?id=38151521c049d194014777d558498ceb",
-    "/themes/light-green/app.css": "/themes/light-green/app.css?id=4845d901a891d28a9717d2e1b0df599c",
+    "/themes/js/app.js": "/themes/js/app.js?id=e7c1a965db39c34738a29162a5b19ce0",
+    "/themes/light-orchid/app.css": "/themes/light-orchid/app.css?id=5c7e0053f040848ab1ebf527b8c2f605",
+    "/themes/light-blue/app.css": "/themes/light-blue/app.css?id=6f477a93703294ff4060b2915d9f5c10",
+    "/themes/light-green/app.css": "/themes/light-green/app.css?id=09d752ecc7fe98f5e0f94d258ab73f6f",
     "/themes/vendors/datatables/datatables.min.js": "/themes/vendors/datatables/datatables.min.js?id=028790892e63b1a0b87f4037fee45ca1",
     "/themes/vendors/datatables/pl.json": "/themes/vendors/datatables/pl.json?id=5252773cebbc6b8afc21f1eacd209d6a",
     "/themes/vendors/jquery.min.js": "/themes/vendors/jquery.min.js?id=cf2fbbf84281d9ecbffb4993203d543b",
@@ -12,6 +12,5 @@
     "/images/portrait/avatar-female.png": "/images/portrait/avatar-female.png?id=70aab25d86b1b481f2ff41df8b19f497",
     "/images/portrait/avatar-male.png": "/images/portrait/avatar-male.png?id=62fbb47559421f75e6e3208970b82381",
     "/images/resources/favicon.ico": "/images/resources/favicon.ico?id=29c9ffe751a68cf424f56ee0212ea1bd",
-    "/scripts/globals.js": "/scripts/globals.js?id=114b06b1f9238eafb5b03f2ab95c8f78",
     "/themes/js/trix.esm.min.js.map": "/themes/js/trix.esm.min.js.map?id=8d0c6bb693f0450b8b3ea2025ee3cc6d"
 }

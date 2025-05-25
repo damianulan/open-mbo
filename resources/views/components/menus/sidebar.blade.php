@@ -14,4 +14,11 @@
             {!! $sidebarItem->render() !!}
         @endforeach
     </ul>
+    <div class="sidebar-footer">
+        @if(config('app.debug'))
+            <div class="menu-release">
+                v. {{ config('app.release') }}
+            </div>
+        @endif
+    </div>
   </nav>

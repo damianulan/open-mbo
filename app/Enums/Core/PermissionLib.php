@@ -2,7 +2,7 @@
 
 namespace App\Enums\Core;
 
-use Lucent\Helpers\Enum;
+use Lucent\Support\Enum;
 
 class PermissionLib extends Enum
 {
