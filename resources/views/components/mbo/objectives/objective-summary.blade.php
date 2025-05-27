@@ -28,13 +28,9 @@
         </div>
     </div>
     <div class="py-2">{!! $objective->description->get() !!}</div>
-    @if(isset($userObjective))
-        <div class="content-card-icons pb-2">
-            <div class="badge bg-{{ $userObjective->status }}">{{ $userObjective->getStatusLabel() }}</div>
-        </div>
-    @endif
-    <div class="content-card-icons text-secondary fw-bold">
-            <div data-tippy-content="Waga celu">
+
+    <div class="content-card-icons text-secondary fw-bold pb-2">
+            <div data-tippy-content="{{ __('forms.mbo.objectives.weight') }}">
                 <i class="bi-minecart-loaded"></i>
                 <span>{{ float_view($objective->weight) }}</span>
             </div>
@@ -55,5 +51,11 @@
                 <span class="badge {{ $objective->isOverdued() ? 'bg-'.$warning:'bg-secondary' }}">{{ $objective->deadline }}</span>
             </div>
         @endif
+
     </div>
+    @if(isset($userObjective))
+        <div class="content-card-icons pb-2">
+            <div class="badge badge-{{ $userObjective->status }} fs-6" data-tippy-content="{{ __('forms.mbo.objectives.status') }}">{{ __('mbo.objective'). ' ' .strtolower($userObjective->getStatusLabel()) }}</div>
+        </div>
+    @endif
 </div>

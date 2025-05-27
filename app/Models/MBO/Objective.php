@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\JoinClause;
 use App\Enums\Core\SystemRolesLib;
 use App\Models\Scopes\MBO\ObjectiveScope;
+use Lucent\Support\Traits\Dispatcher;
 
 /**
  *
@@ -65,6 +66,8 @@ use App\Models\Scopes\MBO\ObjectiveScope;
  */
 class Objective extends BaseModel
 {
+    use Dispatcher;
+
     protected $fillable = [
         'template_id',
         'campaign_id',
@@ -150,5 +153,17 @@ class Objective extends BaseModel
                     ->where('user_objectives.user_id', $user->id);
             })
             ->published();
+    }
+
+    public static function creatingObjective(Objective $model): self
+    {
+        if ($model->campaign_id && empty($model->deadline)) {
+            $campaign = Campaign::find($model->campaign_id);
+            if ($campaign) {
+                $model->deadline = $campaign->realization_to;
+            }
+        }
+
+        return $model;
     }
 }

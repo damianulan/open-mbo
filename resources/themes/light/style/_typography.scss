@@ -170,6 +170,36 @@ hr {
     background-color: $status-interrupted !important;
 }
 
+.badge.badge-unstarted {
+    color: $status-unstarted;
+    background-color: rgba($status-unstarted, 0.2);
+}
+
+.badge.badge-progress {
+    color: $status-progress;
+    background-color: rgba($status-progress, 0.2);
+}
+
+.badge.badge-completed {
+    color: $status-completed;
+    background-color: rgba($status-completed, 0.2);
+}
+
+.badge.badge-passed {
+    color: $status-passed;
+    background-color: rgba($status-passed, 0.2);
+}
+
+.badge.badge-failed {
+    color: $status-failed;
+    background-color: rgba($status-failed, 0.2);
+}
+
+.badge.badge-interrupted {
+    color: $status-interrupted;
+    background-color: rgba($status-interrupted, 0.2);
+}
+
 .dashboard-widget-title {
     margin: 0;
 }

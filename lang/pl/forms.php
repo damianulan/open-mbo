@@ -32,12 +32,16 @@ return [
             'campaigns_enabled' => 'Kampanie pomiarowe',
             'campaigns_manual' => 'Tryb ręczny w kampaniach',
             'rewards' => 'Punkty nagrody',
+            'reward_points_exchange' => 'Przeliczanie punktów nagrody',
+            'reward_currency' => 'Waluta nagrody',
 
             'info' => [
                 'enabled' => 'Włącza moduł MBO',
                 'campaigns_enabled' => 'Włącza kampanie pomiarowe',
                 'campaigns_manual' => 'Włącza tryb ręczny w kampaniach',
                 'rewards' => 'Włącza punkty nagrody',
+                'reward_points_exchange' => 'Stosunek jednego punktu nagrody do jednego punktu w wybranej walucie',
+                'reward_currency' => 'Waluta przyznawania nagrody',
             ],
         ]
     ],
@@ -112,6 +116,7 @@ return [
             'draft' => 'Wersja robocza',
             'deadline' => 'Termin realizacji',
             'weight' => 'Waga celu',
+            'status' => 'Status celu',
             'type' => 'Typ celu',
             'expected' => 'Oczekiwany wynik',
             'award' => 'Punkty nagrody',

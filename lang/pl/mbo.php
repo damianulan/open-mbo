@@ -25,7 +25,7 @@ return [
     'objective_status' => [
         UserObjectiveStatus::UNSTARTED => 'Nierozpoczęty',
         UserObjectiveStatus::PROGRESS => 'W trakcie',
-        UserObjectiveStatus::COMPLETED => 'Zakończony',
+        UserObjectiveStatus::COMPLETED => 'W rozliczeniu',
         UserObjectiveStatus::PASSED => 'Zaliczony',
         UserObjectiveStatus::FAILED => 'Niezaliczony',
         UserObjectiveStatus::INTERRUPTED => 'Przerwany',

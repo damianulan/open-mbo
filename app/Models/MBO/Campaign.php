@@ -304,6 +304,30 @@ class Campaign extends BaseModel
         return $this->self_evaluation_to;
     }
 
+    public function inDates(): bool
+    {
+        $result = false;
+        $start = $this->dateStart();
+        $end = $this->dateEnd();
+        $now = now();
+        if ($start && $end) {
+            if (!$start instanceof Carbon) {
+                $start = Carbon::parse($start);
+            }
+            if (!$end instanceof Carbon) {
+                $end = Carbon::parse($end);
+            }
+
+            if ($now->between($start, $end)) {
+                $result = 1;
+            } else {
+                $result = 0;
+            }
+        }
+
+        return $result;
+    }
+
     public function dateStartView(): string
     {
         $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateStart());
@@ -365,6 +389,11 @@ class Campaign extends BaseModel
         return !$this->isDraft() && !$this->terminated() && !$this->canceled() && !$this->completed();
     }
 
+    public function inProgress(): bool
+    {
+        return $this->stage === CampaignStage::IN_PROGRESS;
+    }
+
     /**
      * LOCAL SCOPES
      */
@@ -401,6 +430,17 @@ class Campaign extends BaseModel
             });
     }
 
+    public function scopeOrderByStatus(Builder $query): void
+    {
+        $in_progess = CampaignStage::IN_PROGRESS;
+        $pending = CampaignStage::PENDING;
+        $completed = CampaignStage::COMPLETED;
+        $terminated = CampaignStage::TERMINATED;
+        $canceled = CampaignStage::CANCELED;
+
+        $query->orderByRaw("FIELD(stage, '$in_progess', '$pending', '$completed', '$terminated', '$canceled')");
+    }
+
     public static function retrievedCampaign(Campaign $model)
     {
         $model->setUserStage();
@@ -431,6 +471,32 @@ class Campaign extends BaseModel
 
     public static function updatedCampaign(Campaign $model)
     {
+        $ucs = $model->user_campaigns()->get();
+        if ($ucs && $ucs->count()) {
+            foreach ($ucs as $uc) {
+                $uc->active = $model->draft ? 0 : 1;
+                $uc->save();
+            }
+        }
+        $objectives = $model->objectives()->get();
+        if ($objectives && $objectives->count()) {
+            $realization_from = $model->realization_from ? Carbon::parse($model->realization_from) : null;
+            $realization_to = $model->realization_to ? Carbon::parse($model->realization_to) : null;
+
+            foreach ($objectives as $objective) {
+                $objective->draft = $model->draft;
+                $deadline = $objective->deadline ? Carbon::parse($objective->deadline) : null;
+                if ($deadline) {
+                    if ($deadline->isBefore($realization_from)) {
+                        $objective->deadline = $realization_from;
+                    }
+                    if ($deadline->isAfter($realization_to)) {
+                        $objective->deadline = $realization_to;
+                    }
+                }
+                $objective->save();
+            }
+        }
         CampaignUpdated::dispatch($model);
     }
 }

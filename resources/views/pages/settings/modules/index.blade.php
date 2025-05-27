@@ -23,7 +23,11 @@
         Ustawienia Użytkownicy
     </div>
     <div class="container pt-4" id="module-mbo" style="display: none;">
-        {{ $mboForm->render() }}
+        <div class="row">
+            <div class="col-md-8">
+                {{ $mboForm->render() }}
+            </div>
+        </div>
     </div>
 </div>
 

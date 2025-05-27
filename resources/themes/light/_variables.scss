@@ -63,12 +63,12 @@ $theme-colors: (
     "lightgrey": $columbia,
 );
 
-$status-unstarted: var(--bs-gray-500);
+$status-unstarted: shade(#adb5bd, 20%);
 $status-progress: $warning;
 $status-completed: $info;
 $status-passed: $success;
 $status-failed: $danger;
-$status-interrupted: var(--bs-gray-700);
+$status-interrupted: $secondary;
 
 // Component colors
 $body-bg: #fff;

@@ -12,7 +12,7 @@
                         <span class="badge bg-secondary">Draft</span>
                     </div>
                 @endif
-                @if($campaign->active())
+                @if($campaign->inProgress())
                     <div data-tippy-content="Kampania w toku">
                         <i class="bi bi-lightning-fill"></i>
                     </div>

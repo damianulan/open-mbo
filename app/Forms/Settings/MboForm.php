@@ -23,6 +23,8 @@ class MboForm extends Form
             ->add(FormComponent::switch('campaigns_enabled', $model)->label(__('forms.settings.mbo.campaigns_enabled'))->info(__('forms.settings.mbo.info.campaigns_enabled')))
             ->add(FormComponent::switch('campaigns_manual', $model)->label(__('forms.settings.mbo.campaigns_manual'))->info(__('forms.settings.mbo.info.campaigns_manual')))
             ->add(FormComponent::switch('rewards', $model)->label(__('forms.settings.mbo.rewards'))->info(__('forms.settings.mbo.info.rewards')))
+            ->add(FormComponent::decimal('reward_points_exchange', $model)->label(__('forms.settings.mbo.reward_points_exchange'))->info(__('forms.settings.mbo.info.reward_points_exchange')))
+            ->add(FormComponent::text('reward_currency', $model)->label(__('forms.settings.mbo.reward_currency'))->info(__('forms.settings.mbo.info.reward_currency')))
 
             ->addSubmit();
     }

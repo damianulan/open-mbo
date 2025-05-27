@@ -20,7 +20,7 @@ class CampaignsController extends AppController
         }
         $this->logView('Wyświetlono listę kampanii pomiarowych');
         return view('pages.mbo.campaigns.index', [
-            'campaigns' => Campaign::checkAccess()->paginate(30),
+            'campaigns' => Campaign::checkAccess()->orderByStatus()->paginate(30),
         ]);
     }
 

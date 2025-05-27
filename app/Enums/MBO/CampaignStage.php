@@ -63,6 +63,17 @@ class CampaignStage extends Enum
         ];
     }
 
+    public static function hardValuesOrder(): array
+    {
+        return [
+            self::IN_PROGRESS,
+            self::PENDING,
+            self::COMPLETED,
+            self::TERMINATED,
+            self::CANCELED,
+        ];
+    }
+
     public static function getName(string $value): string
     {
         return __('forms.campaigns.' . $value);

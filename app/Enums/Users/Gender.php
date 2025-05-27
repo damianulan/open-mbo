@@ -9,4 +9,12 @@ class Gender extends Enum
     const MALE = 'm';
     const FEMALE = 'f';
     const OTHER = 'o';
+
+    public static function conservative(): array
+    {
+        return [
+            self::MALE,
+            self::FEMALE,
+        ];
+    }
 }
