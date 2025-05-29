@@ -31,6 +31,7 @@ use Throwable;
  *     return response()->json($userService->getResponse(), 400);
  * }
  *
+ * @deprecated do not use
  * @abstract
  */
 abstract class BaseService
