@@ -41,13 +41,13 @@ class MBOSeeder extends Seeder
         $templates = ObjectiveTemplate::all();
         $users = User::all();
 
-        for ($i = 1; $i <= 50; $i++) {
+        for ($i = 1; $i <= 60; $i++) {
             $datetime = fake()->dateTimeBetween('-3 weeks', '+2 months');
             $now = Carbon::parse($datetime);
             $campaign = new Campaign();
             $campaign->name = 'Testowa kampania ' . $i;
-            $campaign->period = '2025 Q' . $i;
-            $campaign->description = fake()->paragraph(2);
+            $campaign->period = '2025 Q' . fake()->numberBetween(1, 4);
+            $campaign->description = fake()->text(fake()->numberBetween(500, 1000));
             $campaign->definition_from = $now->format('Y-m-d') . ' 00:00:00';
             $campaign->definition_to = $now->addDays(3)->format('Y-m-d') . ' 23:59:59';
             $campaign->disposition_from = $now->addDays(1)->format('Y-m-d') . ' 00:00:00';
@@ -71,7 +71,7 @@ class MBOSeeder extends Seeder
                         $objective->campaign_id = $campaign->id;
                         $objective->template_id = $template->id;
                         $objective->name = $template->name . "[$j]";
-                        $objective->description = fake()->paragraph(2);
+                        $objective->description = fake()->text(fake()->numberBetween(150, 250));
                         $objective->weight = fake()->randomFloat(2, 0, 1);
                         $objective->expected = fake()->numberBetween(1000, 5500);
                         $objective->award = fake()->randomFloat(2, 1, 100);

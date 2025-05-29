@@ -59,7 +59,7 @@ class CampaignEditForm extends Form
             'name' => 'max:120|required',
             //'period' => 'max:10|required|unique:campaigns,period,' . $model_id,
             'period' => 'max:10|required',
-            'description' => 'max:512|nullable',
+            'description' => 'max:1000|nullable',
 
             'definition_from' => 'nullable|date|required_if:manual,0',
             'definition_to' => 'nullable|date|required_if:manual,0|after_or_equal:definition_from',

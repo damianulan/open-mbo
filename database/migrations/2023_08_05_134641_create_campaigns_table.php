@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('campaigns', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
-            $table->string('period')->unique();
+            $table->string('period');
             $table->longText('description')->nullable();
 
             $table->dateTime(CampaignStage::DEFINITION . '_from')->nullable();
