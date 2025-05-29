@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
     {
         $admins_mbo = 10;
         $superadmins = 3;
-        for ($i = 1; $i <= 500; $i++) {
+        for ($i = 1; $i <= fake()->numberBetween(60, 150); $i++) {
             $user = User::factory()->has(UserProfile::factory()->count(1), 'profile')->create([
                 'email' => 'user' . $i . '@damianulan.me',
             ]);

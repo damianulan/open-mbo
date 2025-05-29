@@ -81,7 +81,7 @@ class MBOSeeder extends Seeder
                 }
             }
 
-            $tempUsers = $users->pop(fake()->numberBetween(3, 10));
+            $tempUsers = $users->random(fake()->numberBetween(4, 10));
             foreach ($tempUsers as $user) {
                 if ($user && isset($user->id)) {
                     $campaign->assignUser($user->id);

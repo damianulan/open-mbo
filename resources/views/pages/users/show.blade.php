@@ -24,6 +24,14 @@
             <i class="bi-person-fill-lock"></i>
         </a>
         @endif
+        @can('users-impersonate')
+            @if ($user->canBeImpersonated())
+                <a class="icon-btn" href="{{ route('users.impersonate', $user->id) }}" data-tippy-content="{{ __('buttons.impersonate') }}">
+                    <i class="bi-person-fill-up"></i>
+                </a>
+            @endif
+        @endcan
+
         <a class="icon-btn swal-confirm" href="{{ route('users.delete', $user->id) }}" data-tippy-content="{{ __('buttons.delete') }}" data-swal-text="{{ __('alerts.users.info.delete') }}">
             <i class="bi-trash-fill"></i>
         </a>
