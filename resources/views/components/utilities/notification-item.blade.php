@@ -6,9 +6,9 @@
                     <i class="{{ $notification->data['icon'] }}"></i>
                 </div>
             @endif
-            @if(isset($notification->data['message']))
+            @if($message)
                 <div class="notification-text px-1">
-                    {!! $notification->data['message'] !!}
+                    {!! $message !!}
                 </div>
             @endif
 

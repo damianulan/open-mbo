@@ -6,9 +6,6 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Core\User;
-use Illuminate\Notifications\Notification;
-use Illuminate\Notifications\DatabaseNotification;
 
 class NotificationDropdown extends Component
 {

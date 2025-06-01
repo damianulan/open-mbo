@@ -9,7 +9,7 @@
         <li><div class="dropdown-header">{{ __('globals.notifications') }}</div></li>
         @if($notifications->isNotEmpty())
             @foreach ($notifications as $notification)
-                <x-utilities.notification-item :notification="$notification"/>
+                <x-notification-item :notification="$notification"/>
             @endforeach
         @else
             <li>

@@ -6,10 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\MBO\Campaign;
 use App\Forms\MBO\Campaign\CampaignEditForm;
 use App\Http\Controllers\AppController;
-use App\Services\Campaigns\CampaignService;
-use App\Models\Core\User;
 use App\Events\MBO\Campaigns\CampaignViewed;
-use App\Services\Campaign\CampaignUpdateService;
+use App\Services\Campaigns\CreateOrUpdate;
 
 class CampaignsController extends AppController
 {
@@ -52,13 +50,13 @@ class CampaignsController extends AppController
         }
         $request = $form::reformatRequest($request);
         $form::validate($request);
-        $service = CampaignService::boot($request)->createOrUpdate();
+        $service = CreateOrUpdate::boot(request: $request)->execute();
 
-        if ($service->check()) {
-            $campaign = $service->getModel();
+        if ($service->passed()) {
+            $campaign = $service->campaign;
             return redirect()->route('campaigns.show', $campaign->id)->with('success', __('alerts.campaigns.success.create', ['name' => $campaign->name]));
         }
-        return redirect()->back()->with('error', $service->getMessage() ?? __('alerts.campaigns.error.create'));
+        return redirect()->back()->with('error', $service->getErrors() ?? __('alerts.campaigns.error.create'));
     }
 
     /**
@@ -110,10 +108,10 @@ class CampaignsController extends AppController
 
         $request = $form::reformatRequest($request);
         $form::validate($request, $id);
-        $service = CampaignService::boot($request, $campaign)->createOrUpdate();
+        $service = CreateOrUpdate::boot(request: $request, campaign: $campaign)->execute();
 
-        if ($service->check()) {
-            $campaign = $service->getModel();
+        if ($service->passed()) {
+            $campaign = $service->getResult();
             return redirect()->route('campaigns.show', $id)->with('success', __('alerts.campaigns.success.edit', ['name' => $campaign->name]));
         }
         return redirect()->back()->with('error', __('alerts.campaigns.error.edit', ['name' => $campaign->name]));

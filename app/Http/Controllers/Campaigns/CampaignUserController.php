@@ -7,7 +7,7 @@ use App\Models\MBO\Campaign;
 use App\Http\Controllers\AppController;
 use App\Forms\MBO\Campaign\CampaignEditUserForm;
 use App\Models\MBO\UserCampaign;
-use App\Services\Campaigns\CampaignService;
+use App\Services\Campaigns\BulkAssignUsers;
 
 class CampaignUserController extends AppController
 {
@@ -20,8 +20,8 @@ class CampaignUserController extends AppController
         $response = $form::validateJson($request, $id);
         if ($response['status'] === 'ok') {
 
-            $service = CampaignService::boot($request, $campaign)->bulkAssignUsers();
-            if ($service->check()) {
+            $service = BulkAssignUsers::boot(request: $request, campaign: $campaign)->execute();
+            if ($service->passed()) {
                 $response['message'] = __('alerts.campaigns.success.users_added');
                 return response()->json($response);
             }

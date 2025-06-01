@@ -30,6 +30,7 @@ class ComponentServiceProvider extends ServiceProvider
 
         Blade::component('icon', \App\View\Components\Layout\IconComponent::class);
         Blade::component('notification-dropdown', \App\View\Components\Layout\NotificationDropdown::class);
+        Blade::component('notification-item', \App\View\Components\Layout\NotificationItem::class);
         Blade::component('tile-button', \App\View\Components\Layout\TileButton::class);
 
         // MBO components
