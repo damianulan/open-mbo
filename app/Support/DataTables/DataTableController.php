@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Facades\DataTables;
+namespace App\Support\DataTables;
 
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Http\Request;
-use App\Facades\DataTables\CustomDataTable;
+use App\Support\DataTables\CustomDataTable;
 
 class DataTableController
 {

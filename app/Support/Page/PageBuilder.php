@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Facades\Page;
+namespace App\Support\Page;
 
 use App\Settings\GeneralSettings;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Lang;
-use App\Facades\Page\Bars\SidebarMenu;
-use App\Facades\Page\MenuBuilder;
+use App\Support\Page\Bars\SidebarMenu;
+use App\Support\Page\MenuBuilder;
 
 class PageBuilder
 {
@@ -24,14 +24,14 @@ class PageBuilder
     {
         $this->routename = Route::currentRouteName();
 
-        if(empty($pagetitle)){
+        if (empty($pagetitle)) {
             $this->title = $this->assignPageTitle();
         } else {
             $this->title = $pagetitle;
         }
         $this->info = null;
-        if(Lang::hasForLocale('menus.info.'.$this->routename)){
-            $this->info = __('menus.info.'.$this->routename);
+        if (Lang::hasForLocale('menus.info.' . $this->routename)) {
+            $this->info = __('menus.info.' . $this->routename);
         }
 
         $this->sitename = app(GeneralSettings::class)->site_name;
@@ -39,18 +39,16 @@ class PageBuilder
         $this->locale = app(GeneralSettings::class)->locale;
         $this->logo = app(GeneralSettings::class)->site_logo;
 
-        if(isset($_COOKIE['menu-collapsed']) && (bool) $_COOKIE['menu-collapsed']===true){
+        if (isset($_COOKIE['menu-collapsed']) && (bool) $_COOKIE['menu-collapsed'] === true) {
             $this->sidebar_collapsed = 'menu-collapsed';
         }
 
         $this->sidebar = MenuBuilder::bootSidebar($this->sitename)
-                            ->addClass($this->sidebar_collapsed);
+            ->addClass($this->sidebar_collapsed);
     }
 
     private function assignPageTitle()
     {
-        return __('menus.'.$this->routename);
+        return __('menus.' . $this->routename);
     }
-
-
 }

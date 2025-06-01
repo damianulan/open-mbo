@@ -1,6 +1,5 @@
 import { Tooltip } from "bootstrap";
 import Toastify from "toastify-js";
-import tippy from "tippy.js";
 
 const moment = require("moment");
 const Swal = require("sweetalert2");
@@ -21,10 +20,6 @@ const tooltipList = [...tooltipTriggerList].map(
     (tooltipTriggerEl) => new Tooltip(tooltipTriggerEl)
 );
 
-jQuery(function () {
-    buildVendors();
-});
-
 $("body").on("click", ".card-url", function () {
     var url = $(this).attr("data-url");
     if (url) {
@@ -44,15 +39,6 @@ $("body").on("click", ".swal-confirm", function (e) {
         }
     );
 });
-
-function buildVendors() {
-    $.buildChosen();
-    $.buildFlatpickr();
-
-    tippy("[data-tippy-content]", {
-        allowHTML: true,
-    });
-}
 
 $(".table-container").on("xhr.dt", function (e, settings, json, xhr) {
     $.rebuildVendors();

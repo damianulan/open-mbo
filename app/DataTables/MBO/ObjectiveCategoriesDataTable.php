@@ -8,7 +8,7 @@ use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Column;
 use Illuminate\Support\Carbon;
-use App\Facades\DataTables\CustomDataTable;
+use App\Support\DataTables\CustomDataTable;
 use App\Models\MBO\Objective;
 use Illuminate\Support\Collection;
 use App\Models\MBO\ObjectiveTemplateCategory;
@@ -29,16 +29,22 @@ class ObjectiveCategoriesDataTable extends CustomDataTable
     {
         return (new EloquentDataTable($query))
 
-            ->addColumn('action', function($data) {
+            ->addColumn('action', function ($data) {
                 return view('pages.mbo.categories.action', [
                     'data' => $data,
                 ]);
             })
-            ->addColumn('templates', function($data) {
+            ->addColumn('templates', function ($data) {
                 return $data->objective_templates()->count();
             })
-            ->editColumn('created_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format(config('app.datetime_format')); return $formatedDate; })
-            ->editColumn('updated_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format(config('app.datetime_format')); return $formatedDate; });
+            ->editColumn('created_at', function ($data) {
+                $formatedDate = Carbon::parse($data->created_at)->format(config('app.datetime_format'));
+                return $formatedDate;
+            })
+            ->editColumn('updated_at', function ($data) {
+                $formatedDate = Carbon::parse($data->created_at)->format(config('app.datetime_format'));
+                return $formatedDate;
+            });
     }
 
     /**
@@ -53,7 +59,12 @@ class ObjectiveCategoriesDataTable extends CustomDataTable
     protected function defaultColumns(): array
     {
         return [
-            'name', 'shortname', 'templates', 'created_at', 'updated_at', 'action'
+            'name',
+            'shortname',
+            'templates',
+            'created_at',
+            'updated_at',
+            'action'
         ];
     }
 
@@ -61,25 +72,25 @@ class ObjectiveCategoriesDataTable extends CustomDataTable
     {
         return [
             'name'          => Column::make('name')
-                                ->title(__('forms.mbo.categories.name'))
-                                ->searchable(true)
-                                ->orderable(true)
-                                ->addClass('firstcol'),
+                ->title(__('forms.mbo.categories.name'))
+                ->searchable(true)
+                ->orderable(true)
+                ->addClass('firstcol'),
             'shortname'          => Column::computed('shortname')
-                                ->title(__('forms.mbo.categories.shortname'))
-                                ->searchable(true)
-                                ->orderable(true),
+                ->title(__('forms.mbo.categories.shortname'))
+                ->searchable(true)
+                ->orderable(true),
             'templates'     => Column::computed('templates')
-                                ->title(__('forms.mbo.categories.template_count')),
+                ->title(__('forms.mbo.categories.template_count')),
             'created_at'    => Column::make('created_at')
-                                ->title(__('fields.created_at')),
+                ->title(__('fields.created_at')),
             'updated_at'    => Column::make('updated_at')
-                                ->title(__('fields.updated_at')),
-            'action'    => Column::computed('action')
-                                ->exportable(false)
-                                ->printable(false)
-                                ->addClass('lastcol action-btns')
-                                ->title(__('fields.action')),
+                ->title(__('fields.updated_at')),
+            'action'        => Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->addClass('lastcol action-btns')
+                ->title(__('fields.action')),
         ];
     }
 
@@ -91,5 +102,4 @@ class ObjectiveCategoriesDataTable extends CustomDataTable
     {
         return 'ObjectiveTemplateCategories_' . date('YmdHis');
     }
-
 }

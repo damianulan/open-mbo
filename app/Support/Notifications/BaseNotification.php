@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Facades\Notifications;
+namespace App\Support\Notifications;
 
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Support\Arrayable;
@@ -19,17 +19,17 @@ class BaseNotification extends Notification
         $params = [];
         $type = $this->type ?? null;
         $typeCondition = true;
-        if($type === 'system'){
+        if ($type === 'system') {
             $typeCondition = $notifiable->preferences->system_notifications ?? false;
         }
 
-        if($typeCondition) {
+        if ($typeCondition) {
             $mail = $notifiable->preferences->mail_notifications ?? 0;
             $database = $notifiable->preferences->app_notifications ?? 0;
-            if($mail && method_exists($this, 'toMail') && is_callable(array($this, 'toMail'))) {
+            if ($mail && method_exists($this, 'toMail') && is_callable(array($this, 'toMail'))) {
                 $params[] = 'mail';
             }
-            if($database && method_exists($this, 'toArray') && is_callable(array($this, 'toArray'))) {
+            if ($database && method_exists($this, 'toArray') && is_callable(array($this, 'toArray'))) {
                 $params[] = 'database';
             }
         }
@@ -37,5 +37,4 @@ class BaseNotification extends Notification
 
         return $params;
     }
-
 }

@@ -9,7 +9,7 @@ use App\Settings\MailSettings;
 use App\Forms\Settings\SmtpForm;
 use App\Settings\MBOSettings;
 use App\Forms\Settings\MboForm;
-use App\Facades\Modules\ModuleManager;
+use App\Support\Modules\ModuleManager;
 
 class ModuleController extends SettingsController
 {

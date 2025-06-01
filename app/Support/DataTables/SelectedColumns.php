@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Facades\DataTables;
+namespace App\Support\DataTables;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Core\User;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $user_id

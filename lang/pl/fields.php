@@ -18,13 +18,12 @@ return [
     'title' => 'Tytuł',
     'category' => 'Kategoria',
 
-
     'created_at' => 'Utworzono',
     'updated_at' => 'Zaktualizowano',
 
 
     // Enumerations
-    'enums' => [
+    'gender' => [
         Gender::MALE => 'Mężczyzna',
         Gender::FEMALE => 'Kobieta',
         Gender::OTHER => 'Inna',

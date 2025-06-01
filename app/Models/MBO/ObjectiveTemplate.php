@@ -9,8 +9,7 @@ use App\Models\Core\User;
 use App\Models\MBO\Objective;
 use App\Models\MBO\ObjectiveTemplateCategory;
 use App\Models\Scopes\MBO\ObjectiveTemplateScope;
-use App\Enums\Core\SystemRolesLib;
-use Illuminate\Database\Eloquent\Builder;
+use Laravel\Scout\Searchable;
 
 /**
  *
@@ -51,6 +50,8 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class ObjectiveTemplate extends BaseModel
 {
+    use Searchable;
+
     protected $fillable = [
         'category_id',
         'name',

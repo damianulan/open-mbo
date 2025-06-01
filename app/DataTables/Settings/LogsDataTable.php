@@ -5,7 +5,7 @@ namespace App\DataTables\Settings;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Column;
-use App\Facades\DataTables\CustomDataTable;
+use App\Support\DataTables\CustomDataTable;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Activity;
 
@@ -82,7 +82,7 @@ class LogsDataTable extends CustomDataTable
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->editColumn('created_at', function ($data) {
-                $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format(config('app.datetime_format'));
+                $formatedDate = Carbon::parse($data->created_at)->format(config('app.datetime_format'));
                 return $formatedDate;
             });
     }

@@ -8,8 +8,9 @@ use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Column;
 use Illuminate\Support\Carbon;
-use App\Facades\DataTables\CustomDataTable;
+use App\Support\DataTables\CustomDataTable;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class UsersDataTable extends CustomDataTable
 {
@@ -72,11 +73,11 @@ class UsersDataTable extends CustomDataTable
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->editColumn('created_at', function ($data) {
-                $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format(config('app.datetime_format'));
+                $formatedDate = Carbon::parse($data->created_at)->format(config('app.datetime_format'));
                 return $formatedDate;
             })
             ->editColumn('updated_at', function ($data) {
-                $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format(config('app.datetime_format'));
+                $formatedDate = Carbon::parse($data->created_at)->format(config('app.datetime_format'));
                 return $formatedDate;
             });
     }
@@ -88,7 +89,7 @@ class UsersDataTable extends CustomDataTable
     {
         $query = $model->leftJoin('user_profiles', 'user_profiles.user_id', '=', 'users.id')
             ->select('users.*', 'user_profiles.firstname', 'user_profiles.lastname')
-            ->whereNotIn('users.id', [auth()->user()->id]);
+            ->whereNotIn('users.id', [Auth::user()->id]);
         return $query;
     }
 

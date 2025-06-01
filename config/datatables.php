@@ -115,8 +115,8 @@ return [
      * JsonResponse header and options config.
      */
     'json'           => [
-        'header'  => [],
-        'options' => 0,
+        'header'  => ['Charset', 'utf-8'],
+        'options' => JSON_INVALID_UTF8_IGNORE,
     ],
 
     /*

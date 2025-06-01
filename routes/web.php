@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Livewire;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,9 @@ Auth::routes();
 
 Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+    Livewire::setUpdateRoute(function ($handle) {
+        return Route::post('/livewire/update', $handle);
+    });
 
     /**
      * Users START
@@ -147,9 +151,9 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
     });
 
     Route::prefix('datatables')->name('datatables.')->group(function () {
-        Route::post('/save_columns', [App\Facades\DataTables\CustomDataTable::class, 'saveColumns'])->name('save_columns');
-        Route::get('/excel/{class}', [App\Facades\DataTables\DataTableController::class, 'toExcel'])->name('excel');
-        Route::get('/csv/{class}', [App\Facades\DataTables\DataTableController::class, 'toCsv'])->name('csv');
+        Route::post('/save_columns', [App\Support\DataTables\CustomDataTable::class, 'saveColumns'])->name('save_columns');
+        Route::get('/excel/{class}', [App\Support\DataTables\DataTableController::class, 'toExcel'])->name('excel');
+        Route::get('/csv/{class}', [App\Support\DataTables\DataTableController::class, 'toCsv'])->name('csv');
     });
 
     Route::prefix('ajax')->name('ajax.')->group(function () {

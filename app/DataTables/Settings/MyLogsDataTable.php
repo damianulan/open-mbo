@@ -2,17 +2,13 @@
 
 namespace App\DataTables\Settings;
 
-use App\Models\Business\Company;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
-use App\Facades\DataTables\CustomDataTable;
+use App\Support\DataTables\CustomDataTable;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Activity;
+use Illuminate\Support\Facades\Auth;
 
 class MyLogsDataTable extends CustomDataTable
 {
@@ -60,7 +56,7 @@ class MyLogsDataTable extends CustomDataTable
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->editColumn('created_at', function ($data) {
-                $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format(config('app.datetime_format'));
+                $formatedDate = Carbon::parse($data->created_at)->format(config('app.datetime_format'));
                 return $formatedDate;
             });
     }
@@ -73,7 +69,7 @@ class MyLogsDataTable extends CustomDataTable
         return $model->join('users', 'users.id', '=', 'activity_log.causer_id')
             ->join('user_profiles', 'user_profiles.user_id', '=', 'users.id')
             ->select('activity_log.*', 'user_profiles.firstname', 'user_profiles.lastname')
-            ->where('users.id', auth()->user()->id);
+            ->where('users.id', Auth::user()->id);
     }
 
     protected function defaultColumns(): array

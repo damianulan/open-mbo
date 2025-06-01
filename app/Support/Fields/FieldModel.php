@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Facades\Fields;
+namespace App\Support\Fields;
 
 use Illuminate\Database\Eloquent\Model;
 use FormForge\Traits\RequestForms;

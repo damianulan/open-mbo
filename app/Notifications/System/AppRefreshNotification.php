@@ -5,7 +5,7 @@ namespace App\Notifications\System;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use App\Facades\Notifications\BaseNotification;
+use App\Support\Notifications\BaseNotification;
 
 class AppRefreshNotification extends BaseNotification
 {

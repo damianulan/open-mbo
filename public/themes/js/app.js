@@ -65469,9 +65469,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_navbar__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_components_navbar__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _components_requests__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/requests */ "./resources/themes/js/components/requests.js");
 /* harmony import */ var _components_requests__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_components_requests__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _components_validation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/validation */ "./resources/themes/js/components/validation.js");
-/* harmony import */ var _components_validation__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_components_validation__WEBPACK_IMPORTED_MODULE_4__);
-
 
 
 
@@ -65490,14 +65487,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
 /* harmony import */ var toastify_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! toastify-js */ "./node_modules/toastify-js/src/toastify.js");
 /* harmony import */ var toastify_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(toastify_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var tippy_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tippy.js */ "./node_modules/tippy.js/dist/tippy.esm.js");
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
 function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-
 
 
 var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
@@ -65516,9 +65511,6 @@ var tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 var tooltipList = _toConsumableArray(tooltipTriggerList).map(function (tooltipTriggerEl) {
   return new bootstrap__WEBPACK_IMPORTED_MODULE_0__.Tooltip(tooltipTriggerEl);
 });
-jQuery(function () {
-  buildVendors();
-});
 $("body").on("click", ".card-url", function () {
   var url = $(this).attr("data-url");
   if (url) {
@@ -65532,13 +65524,6 @@ $("body").on("click", ".swal-confirm", function (e) {
     window.location.href = url;
   });
 });
-function buildVendors() {
-  $.buildChosen();
-  $.buildFlatpickr();
-  (0,tippy_js__WEBPACK_IMPORTED_MODULE_2__["default"])("[data-tippy-content]", {
-    allowHTML: true
-  });
-}
 $(".table-container").on("xhr.dt", function (e, settings, json, xhr) {
   $.rebuildVendors();
 });
@@ -65836,7 +65821,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flatpickr__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flatpickr */ "./node_modules/flatpickr/dist/esm/index.js");
 /* harmony import */ var flatpickr_dist_l10n_pl_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flatpickr/dist/l10n/pl.js */ "./node_modules/flatpickr/dist/l10n/pl.js");
 /* harmony import */ var flatpickr_dist_l10n_pl_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flatpickr_dist_l10n_pl_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var tippy_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tippy.js */ "./node_modules/tippy.js/dist/tippy.esm.js");
 __webpack_require__(/*! chosen-js */ "./node_modules/chosen-js/chosen.jquery.js");
+
 
 
 
@@ -65942,6 +65929,25 @@ $('input[data-numeric="decimal"]').on("focusout", function () {
     $(this).val(val + ".00");
   }
 });
+$('input[data-validation="numeric"]').on("keypress", function (evt) {
+  $(this).val($(this).val().replace(/[^0-9\.|\,]/g, ""));
+  if (evt.which == 44) {
+    return true;
+  }
+  if ((evt.which != 46 || $(this).val().indexOf(".") != -1) && (evt.which < 48 || evt.which > 57)) {
+    evt.preventDefault();
+  }
+});
+jQuery(function () {
+  buildVendors();
+});
+function buildVendors() {
+  $.buildChosen();
+  $.buildFlatpickr();
+  (0,tippy_js__WEBPACK_IMPORTED_MODULE_3__["default"])("[data-tippy-content]", {
+    allowHTML: true
+  });
+}
 
 /***/ }),
 
@@ -66064,24 +66070,6 @@ $("#debugbarOptionSwitch").on("change", function () {
     },
     dataType: "json"
   });
-});
-
-/***/ }),
-
-/***/ "./resources/themes/js/components/validation.js":
-/*!******************************************************!*\
-  !*** ./resources/themes/js/components/validation.js ***!
-  \******************************************************/
-/***/ (() => {
-
-$('input[data-validation="numeric"]').on('keypress', function (evt) {
-  $(this).val($(this).val().replace(/[^0-9\.|\,]/g, ''));
-  if (evt.which == 44) {
-    return true;
-  }
-  if ((evt.which != 46 || $(this).val().indexOf('.') != -1) && (evt.which < 48 || evt.which > 57)) {
-    evt.preventDefault();
-  }
 });
 
 /***/ }),

@@ -47,9 +47,9 @@ function isRoot(bool $strict = false): bool
     return Auth::user()->isRoot($strict);
 }
 
-function ajax(): App\Facades\Http\ResponseAjax
+function ajax(): App\Support\Http\ResponseAjax
 {
-    return new App\Facades\Http\ResponseAjax();
+    return new App\Support\Http\ResponseAjax();
 }
 
 function current_theme(): string

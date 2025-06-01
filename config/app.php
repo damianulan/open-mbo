@@ -261,9 +261,9 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        'PageBuilder' => App\Facades\Page\PageBuilder::class,
+        'PageBuilder' => App\Support\Page\PageBuilder::class,
         'Theme' => App\Lib\Theme::class,
-        'ResponseAjax' => App\Facades\Http\ResponseAjax::class,
+        'ResponseAjax' => App\Support\Http\ResponseAjax::class,
         'PermissionsLib' => App\Enums\Core\PermissionLib::class,
         'SystemRolesLib' => App\Enums\Core\SystemRolesLib::class,
 

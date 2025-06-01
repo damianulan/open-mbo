@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Management;
 
 use App\Http\Controllers\AppController;
 use Illuminate\Http\Request;
-use App\Facades\Page\MenuBuilder;
-use App\Facades\Page\Bars\MenubarMenu;
-use App\Facades\Page\Bars\MenuItem;
+use App\Support\Page\MenuBuilder;
+use App\Support\Page\Bars\MenubarMenu;
+use App\Support\Page\Bars\MenuItem;
 
 class ManagementController extends AppController
 {

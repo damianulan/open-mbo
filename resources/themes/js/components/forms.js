@@ -2,6 +2,7 @@ require("chosen-js");
 import Trix from "trix";
 import flatpickr from "flatpickr";
 import { Polish } from "flatpickr/dist/l10n/pl.js";
+import tippy from "tippy.js";
 
 window.Trix = Trix;
 
@@ -129,3 +130,33 @@ $('input[data-numeric="decimal"]').on("focusout", function () {
         $(this).val(val + ".00");
     }
 });
+
+$('input[data-validation="numeric"]').on("keypress", function (evt) {
+    $(this).val(
+        $(this)
+            .val()
+            .replace(/[^0-9\.|\,]/g, "")
+    );
+    if (evt.which == 44) {
+        return true;
+    }
+    if (
+        (evt.which != 46 || $(this).val().indexOf(".") != -1) &&
+        (evt.which < 48 || evt.which > 57)
+    ) {
+        evt.preventDefault();
+    }
+});
+
+jQuery(function () {
+    buildVendors();
+});
+
+function buildVendors() {
+    $.buildChosen();
+    $.buildFlatpickr();
+
+    tippy("[data-tippy-content]", {
+        allowHTML: true,
+    });
+}

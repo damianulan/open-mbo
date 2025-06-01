@@ -1,19 +1,14 @@
 <?php
 
-namespace App\Facades\DataTables;
+namespace App\Support\DataTables;
 
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Http\Request;
-use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Button;
-use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\Html\SearchPane;
-use App\Facades\DataTables\SelectedColumns;
+use App\Support\DataTables\SelectedColumns;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class CustomDataTable extends DataTable
 {
@@ -162,7 +157,7 @@ class CustomDataTable extends DataTable
             $selected = $request->input('selected');
 
             $sc = SelectedColumns::findColumn($datatable_id) ?? new SelectedColumns();
-            $sc->user_id = auth()->user()->id;
+            $sc->user_id = Auth::user()->id;
             $sc->table_id = $datatable_id;
             $sc->columns = $columns;
             $sc->selected = $selected;
@@ -175,5 +170,33 @@ class CustomDataTable extends DataTable
         }
 
         return redirect()->back()->with('error', __('alerts.datatables.save_columns.error_data'));
+    }
+
+    /**
+     * Process dataTables needed render output.
+     *
+     * @phpstan-param view-string|null $view
+     *
+     * @return mixed
+     */
+    final public function render(?string $view = null, array $data = [], array $mergeData = [])
+    {
+        if ($this->request()->ajax() && $this->request()->wantsJson()) {
+            return app()->call($this->ajax(...));
+        }
+
+        /** @var string $action */
+        $action = $this->request()->get('action');
+        $actionMethod = $action === 'print' ? 'printPreview' : $action;
+
+        if (in_array($action, $this->actions) && method_exists($this, $actionMethod)) {
+            /** @var callable $callback */
+            $callback = [$this, $actionMethod];
+
+            return app()->call($callback);
+        }
+
+        /** @phpstan-ignore-next-line  */
+        return view($view, $data, $mergeData)->with($this->dataTableVariable, $this->getHtmlBuilder());
     }
 }

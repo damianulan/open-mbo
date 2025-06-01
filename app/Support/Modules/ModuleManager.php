@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Facades\Modules;
+namespace App\Support\Modules;
 
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Support\Arrayable;

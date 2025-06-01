@@ -3,9 +3,9 @@
 namespace App\Notifications\MBO\Campaign;
 
 use Illuminate\Bus\Queueable;
-use App\Facades\Notifications\BaseNotification;
+use App\Support\Notifications\BaseNotification;
 use App\Models\Core\User;
-use App\Facades\Notifications\NotificationAdhoc;
+use App\Support\Notifications\NotificationAdhoc;
 use App\Models\MBO\Campaign;
 
 class CampaignAssignment extends BaseNotification
