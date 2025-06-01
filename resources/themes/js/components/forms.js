@@ -152,6 +152,10 @@ jQuery(function () {
     buildVendors();
 });
 
+$.rebuildVendors = function () {
+    buildVendors();
+};
+
 function buildVendors() {
     $.buildChosen();
     $.buildFlatpickr();

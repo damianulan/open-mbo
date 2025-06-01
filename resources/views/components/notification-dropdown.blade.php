@@ -16,5 +16,6 @@
                 <div class="dropdown-header" style="white-space: normal;"><strong>{{ __('notifications.info.empty') }}</strong></div>
             </li>
         @endif
+        <li class="notification-li"><div class="dropdown-footer"><a href="#" class="link-muted">{{ __('notifications.info.show_all') }}</a></div></li>
     </ul>
 </div>

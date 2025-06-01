@@ -116,6 +116,8 @@ $card-bg: transparent;
 // Typography
 $link-color: $primary;
 $link-color-hover: tint($primary, 25%);
+$link-color-muted: $dimm-blue;
+$link-color-muted-hover: shade($dimm-blue, 25%);
 $link-color-active: $link-color-hover;
 $link-color-active-hover: tint($primary, 35%);
 $button-link-active: tint($primary, 90%);

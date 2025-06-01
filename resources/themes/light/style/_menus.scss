@@ -548,9 +548,14 @@ a.dropdown-toggle {
     opacity: 0.9rem;
 }
 
-.notification-dropdown .dropdown-menu .dropdown-header {
+.notification-dropdown .dropdown-menu .dropdown-header,
+.notification-dropdown .dropdown-menu .dropdown-footer {
     padding: 0.3rem 1rem;
     color: $gray-600;
+}
+
+.notification-dropdown .dropdown-menu .dropdown-footer {
+    float: right;
 }
 
 .notification-dropdown .notification-item .notification-contents {

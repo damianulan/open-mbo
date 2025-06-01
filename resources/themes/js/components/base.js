@@ -140,10 +140,6 @@ function toast_alert(text, type = "info", _callback = function () {}) {
 
 $.notify = toast_alert;
 
-$.rebuildVendors = function () {
-    buildVendors();
-};
-
 $.showOverlay = function () {
     $.overlay("show");
 };

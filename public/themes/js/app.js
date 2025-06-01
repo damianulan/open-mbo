@@ -65626,9 +65626,6 @@ function toast_alert(text) {
   }).showToast();
 }
 $.notify = toast_alert;
-$.rebuildVendors = function () {
-  buildVendors();
-};
 $.showOverlay = function () {
   $.overlay("show");
 };
@@ -65941,6 +65938,9 @@ $('input[data-validation="numeric"]').on("keypress", function (evt) {
 jQuery(function () {
   buildVendors();
 });
+$.rebuildVendors = function () {
+  buildVendors();
+};
 function buildVendors() {
   $.buildChosen();
   $.buildFlatpickr();

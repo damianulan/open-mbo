@@ -75,6 +75,14 @@ a.link-primary {
     color: $primary;
 }
 
+a.link-muted {
+    color: $link-color-muted;
+}
+
+a.link-muted:hover {
+    color: $link-color-muted-hover;
+}
+
 i.bi {
     font-size: 1rem;
 }
