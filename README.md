@@ -1,4 +1,4 @@
-## About OpenMBO
+## OpenMBO
 
 ### Introduction
 
