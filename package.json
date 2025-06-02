@@ -13,12 +13,10 @@
         "@popperjs/core": "^2.11.6",
         "axios": "^1.1.2",
         "bootstrap": "^5.3.0",
-        "chosen-js": "^1.8.7",
         "datatables.net-bs5": "^1.13.6",
         "datatables.net-buttons-bs5": "^2.4.1",
         "datatables.net-searchpanes-bs5": "^2.2.0",
         "datatables.net-select-bs5": "^1.7.0",
-        "flatpickr": "^4.6.13",
         "install": "^0.13.0",
         "laravel-mix": "^6.0.49",
         "laravel-mix-string-replace": "^0.1.0",
@@ -31,15 +29,13 @@
         "sass": "^1.56.1",
         "sass-loader": "^13.2.0",
         "sweetalert2": "^11.6.13",
-        "tippy.js": "^6.3.7",
-        "toastify-js": "^1.12.0",
-        "trix": "^2.1.8"
+        "toastify-js": "^1.12.0"
     },
     "devDependencies": {
         "@fontsource/ibm-plex-sans": "^5.1.0",
         "@fontsource/ibm-plex-serif": "^5.1.0",
         "@fontsource/jetbrains-mono": "^5.1.1",
-        "bootstrap-icons": "^1.10.5",
+        "bootstrap-icons": "^1.13.1",
         "jquery": "^3.6.3",
         "string-replace-loader": "^3.1.0"
     }

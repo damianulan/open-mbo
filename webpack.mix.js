@@ -33,6 +33,10 @@ mix.js("resources/themes/js/app.js", "public/themes/js")
     .stringReplace(replace_js)
     .version();
 
+// mix.js("resources/themes/js/formforge.js", "public/scripts")
+//     .stringReplace(replace_js)
+//     .version();
+
 mix.sass(
     "resources/themes/light/green.scss",
     "public/themes/light-green/app.min.css",
@@ -56,5 +60,3 @@ mix.sass(
         sassOptions: scssOptions,
     }
 ).version();
-
-mix.copy("resources/themes/js/trix.esm.min.js.map", "public/themes/js");

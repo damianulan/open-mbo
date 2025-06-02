@@ -1,14 +1,13 @@
 {
-    "/themes/js/app.js": "/themes/js/app.js?id=7170f6d70d59cc5272960c4372be7c66",
-    "/themes/light-orchid/app.min.css": "/themes/light-orchid/app.min.css?id=91392be0367953f9a6594af5457f35aa",
-    "/themes/light-blue/app.min.css": "/themes/light-blue/app.min.css?id=0d624a5aa612b0fbb08166844def73d7",
-    "/themes/light-green/app.min.css": "/themes/light-green/app.min.css?id=bf4116d12ee6d02b3a32d718d37cdc74",
+    "/themes/js/app.js": "/themes/js/app.js?id=35ed44f205f388c1e6e95c07dd18d605",
+    "/themes/light-orchid/app.min.css": "/themes/light-orchid/app.min.css?id=c7075e55026d4239c8050ed86eab328c",
+    "/themes/light-blue/app.min.css": "/themes/light-blue/app.min.css?id=dd25006c969faea05dbc68db29302ba5",
+    "/themes/light-green/app.min.css": "/themes/light-green/app.min.css?id=1213c68d5d3ba471df9686c9100fc216",
     "/themes/vendors/datatables/datatables.min.js": "/themes/vendors/datatables/datatables.min.js?id=028790892e63b1a0b87f4037fee45ca1",
     "/themes/vendors/datatables/pl.json": "/themes/vendors/datatables/pl.json?id=5252773cebbc6b8afc21f1eacd209d6a",
     "/themes/vendors/jquery.min.js": "/themes/vendors/jquery.min.js?id=cf2fbbf84281d9ecbffb4993203d543b",
     "/themes/vendors/jquery.min.map": "/themes/vendors/jquery.min.map?id=9fa7f86a9465f3ce534aa52df7189589",
     "/images/chosen-sprite.png": "/images/chosen-sprite.png?id=0de22e42b614304ab21e03ab99e56149",
     "/images/chosen-sprite@2x.png": "/images/chosen-sprite@2x.png?id=da1e3f69fcdb59582919488a1f679276",
-    "/images/resources/favicon.ico": "/images/resources/favicon.ico?id=29c9ffe751a68cf424f56ee0212ea1bd",
-    "/themes/js/trix.esm.min.js.map": "/themes/js/trix.esm.min.js.map?id=8d0c6bb693f0450b8b3ea2025ee3cc6d"
+    "/images/resources/favicon.ico": "/images/resources/favicon.ico?id=29c9ffe751a68cf424f56ee0212ea1bd"
 }
