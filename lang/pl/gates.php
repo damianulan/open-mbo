@@ -12,6 +12,7 @@ return [
         SystemRolesLib::HELPDESK => 'Helpdesk',
         'admin' => 'Administrator',
         'admin_mbo' => 'Administrator MBO',
+        'admin_hr' => 'Administrator HR',
         'manager' => 'Menadżer',
         'supervisor' => 'Przełożony',
         'employee' => 'Pracownik',

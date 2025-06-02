@@ -11,6 +11,7 @@ class SystemRolesLib extends Enum
     const HELPDESK = 'support';
     const ADMIN = 'admin';
     const ADMIN_MBO = 'admin_mbo';
+    const ADMIN_HR = 'admin_hr';
     const EMPLOYEE = 'employee';
 
     // non-assignable - context-required
@@ -21,4 +22,23 @@ class SystemRolesLib extends Enum
     const MANAGER = 'manager';
     const TEAM_LEADER = 'team_leader';
     const SUPERVISOR = 'supervisor';
+
+    public static function assignable(): array
+    {
+        return [
+            self::EMPLOYEE,
+            self::ADMIN,
+            self::ADMIN_MBO,
+            self::ADMIN_HR,
+        ];
+    }
+
+    public static function admins(): array
+    {
+        return [
+            self::ADMIN,
+            self::ROOT,
+            self::HELPDESK,
+        ];
+    }
 }
