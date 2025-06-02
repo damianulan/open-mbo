@@ -5,7 +5,6 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Core\Permission;
-use App\Enums\Core\PermissionLib;
 
 class PermissionServiceProvider extends ServiceProvider
 {

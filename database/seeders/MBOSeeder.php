@@ -41,6 +41,8 @@ class MBOSeeder extends Seeder
         $templates = ObjectiveTemplate::all();
         $users = User::all();
 
+        $coordinatorUsers = $users->random(fake()->numberBetween(10, 20));
+
         for ($i = 1; $i <= 60; $i++) {
             $datetime = fake()->dateTimeBetween('-3 weeks', '+2 months');
             $now = Carbon::parse($datetime);
@@ -87,6 +89,9 @@ class MBOSeeder extends Seeder
                     $campaign->assignUser($user->id);
                 }
             }
+
+            $coordinators = $coordinatorUsers->random(fake()->numberBetween(1, 3));
+            $campaign->refreshCoordinators($coordinators->pluck('id')->toArray());
         }
     }
 }
