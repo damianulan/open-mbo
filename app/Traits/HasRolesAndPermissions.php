@@ -59,10 +59,10 @@ trait HasRolesAndPermissions
      */
     public function roles($context = null): BelongsToMany
     {
-        $relation = $this->belongsToMany(Role::class, 'users_roles');
+        $relation = $this->morphToMany(Role::class, 'model', 'users_roles');
         if ($context && $context instanceof Model) {
             $system_context = new System();
-            $relation = $this->belongsToMany(Role::class, 'users_roles')->where(function (Builder $q) use ($context, $system_context) {
+            $relation = $this->morphToMany(Role::class, 'model', 'users_roles')->where(function (Builder $q) use ($context, $system_context) {
                 $q->where(['context_type' => $context::class, 'context_id' => $context->id])
                     ->orWhere(['context_type' => $system_context::class]);
             });
@@ -77,7 +77,7 @@ trait HasRolesAndPermissions
      */
     public function roleAssignments(): DBBuilder
     {
-        $builder = DB::table('users_roles')->where('user_id', $this->id);
+        $builder = DB::table('users_roles')->where('model_id', $this->id, 'model_type', $this->getMorphClass());
 
         return $builder;
     }
@@ -87,7 +87,7 @@ trait HasRolesAndPermissions
      */
     public function permissions()
     {
-        return $this->belongsToMany(Permission::class, 'users_permissions');
+        return $this->morphToMany(Permission::class, 'model', 'users_permissions');
     }
 
     /**

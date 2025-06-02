@@ -9,7 +9,7 @@ use App\Models\Business\UserEmployment;
 use App\Models\Core\Role;
 
 /**
- * 
+ *
  *
  * @property string $id
  * @property string|null $parent_id
@@ -64,7 +64,7 @@ class Department extends BaseModel
 
     public function managers()
     {
-        return $this->morphToMany(User::class, 'context', 'users_roles')->where('role_id', Role::getId('supervisor'));
+        return $this->morphToMany(User::class, 'context', 'users_roles', null, 'model_id')->where('role_id', Role::getId('supervisor'));
     }
 
     public function employments()

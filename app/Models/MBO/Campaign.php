@@ -131,7 +131,7 @@ class Campaign extends BaseModel
 
     public function coordinators()
     {
-        return $this->morphToMany(User::class, 'context', 'users_roles');
+        return $this->morphToMany(User::class, 'context', 'users_roles', null, 'model_id');
     }
 
     public function refreshCoordinators(?array $user_ids)

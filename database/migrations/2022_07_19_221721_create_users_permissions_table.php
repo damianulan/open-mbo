@@ -14,13 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users_permissions', function (Blueprint $table) {
-            $table->foreignUuid('user_id');
-            $table->foreignUuid('permission_id');
+            $table->uuidMorphs('model', 'model');
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignUuid('permission_id');
             $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
 
-            $table->primary(['user_id','permission_id']);
+            $table->primary(['model_type', 'model_id', 'permission_id']);
         });
     }
 
