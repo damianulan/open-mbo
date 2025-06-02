@@ -52,16 +52,7 @@ class UsersDataTable extends CustomDataTable
                 $query->orderBy('lastname', $order);
             })
             ->addColumn('roles', function ($data) {
-                $roles = $data->roles->pluck('slug');
-                $output = null;
-                $roles_collection = new Collection();
-                if (!empty($roles)) {
-                    foreach ($roles as $role) {
-                        $roles_collection->push(__('gates.roles.' . $role));
-                    }
-                    $output = $roles_collection->implode(', ');
-                }
-                return $output;
+                return $data->getRolesNames()->implode(', ');
             })
             ->addColumn('action', function ($data) {
                 return view('pages.users.action', [

@@ -107,7 +107,7 @@ trait HasRolesAndPermissions
      */
     public function getRolesNames(): Collection
     {
-        $slugs = $this->roles->pluck('slug');
+        $slugs = $this->roles->pluck('slug')->unique();
         $roles = new Collection();
         foreach ($slugs as $slug) {
             $roles->push(__('gates.roles.' . $slug));
