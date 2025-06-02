@@ -44,6 +44,7 @@
         "spatie/laravel-backup": "^9.1",
         "spatie/laravel-query-builder": "^5.2",
         "spatie/laravel-settings": "^3.1",
+        "spatie/laravel-tags": "^4.10",
         "tjvb/laravel-mail-catchall": "^4.4",
         "watson/rememberable": "^6.1",
         "yajra/laravel-datatables": "*",
