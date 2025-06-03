@@ -145,6 +145,11 @@ class Objective extends BaseModel
         return $this->hasMany(UserObjective::class);
     }
 
+    public function canBeDeleted(): bool
+    {
+        return $this->user_assignments()->count() ? false : true;
+    }
+
     public function scopeWhereAssigned(Builder $query, User $user): void
     {
         $query->select('objectives.*')

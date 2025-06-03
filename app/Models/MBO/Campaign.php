@@ -15,7 +15,6 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Events\MBO\Campaigns\CampaignUpdated;
 use App\Events\MBO\Campaigns\CampaignCreated;
 use Lucent\Support\Traits\Dispatcher;
-use Laravel\Scout\Searchable;
 
 /**
  *
@@ -79,7 +78,7 @@ use Laravel\Scout\Searchable;
  */
 class Campaign extends BaseModel
 {
-    use Dispatcher, Searchable;
+    use Dispatcher;
 
     public $stages;
     public $timestamps = true;

@@ -72,6 +72,10 @@ return [
         'error' => [
             'overdued' => 'Cel nie jest już aktualny - termin jego realizacji minął. Wszystkie nieukończone podejścia zostały oznaczone jako niezaliczone.',
         ],
+
+        'info' => [
+            'delete' => 'Usunięcie celu będzie nieodwracalne.',
+        ],
     ],
 
     'users' => [

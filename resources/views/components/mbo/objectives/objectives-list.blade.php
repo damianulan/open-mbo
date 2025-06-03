@@ -26,7 +26,7 @@
                             <span>{{ $objective->expected }}</span>
                         </div>
                         @endif
-                        <a href="{{ route('objectives.show', $objective->id) }}" class="list-action" data-modelid="{{ $objective->id }}" data-tippy-content="{{ __('buttons.summary') }}">
+                        <a href="{{ route('mbo.objectives.show', $objective->id) }}" class="list-action" data-modelid="{{ $objective->id }}" data-tippy-content="{{ __('buttons.summary') }}">
                             <x-icon key="eye-fill" />
                         </a>
                         <a href="javascript:void(0);" class="list-action edit-objective" data-modelid="{{ $objective->id }}" data-tippy-content="{{ __('buttons.edit') }}">

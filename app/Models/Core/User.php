@@ -243,7 +243,7 @@ class User extends Authenticatable implements HasLocalePreference
 
     public function canBeImpersonated(): bool
     {
-        return !$this->hasAnyRole('root', 'support') || isRoot(true);
+        return !$this->hasAnyRoles(['root', 'support']) || isRoot(true);
     }
 
     public function canImpersonate(): bool

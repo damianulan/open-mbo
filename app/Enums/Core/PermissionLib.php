@@ -33,16 +33,15 @@ class PermissionLib extends Enum
     public const SETTINGS_INTEGRATIONS = 'settings-integrations';
     public const SETTINGS_SERVER = 'settings-server';
     public const SETTINGS_LOGS = 'settings-logs';
+    public const SETTINGS_USERS = 'settings-users';
+    public const SETTINGS_ROLES = 'settings-roles';
+    public const SETTINGS_ORGANIZATION = 'settings-organization';
+    public const SETTINGS_NOTIFICATIONS = 'settings-notifications';
+    public const SETTINGS_REPORTS = 'settings-reports';
 
     // management
-    public const MANAGEMENT_MBO_TEMPLATES = 'management-mbo-templates';
-    public const MANAGEMENT_MBO_CATEGORIES = 'management-mbo-categories';
-    public const MANAGEMENT_USERS = 'management-users';
-    public const MANAGEMENT_ROLES = 'management-roles';
-    public const MANAGEMENT_STRUCTURE = 'management-structure';
-    public const MANAGEMENT_NOTIFICATIONS = 'management-notifications';
-    public const MANAGEMENT_REPORTS = 'management-reports';
-    public const MANAGEMENT_RECOVERY = 'management-recovery';
+    public const MBO_TEMPLATES = 'mbo-templates';
+    public const MBO_CATEGORIES = 'mbo-categories';
 
     // reports
     public const REPORTS_VIEW = 'reports-view';
@@ -124,16 +123,15 @@ class PermissionLib extends Enum
             self::SETTINGS_INTEGRATIONS => ['admins'],
             self::SETTINGS_SERVER => ['admins'],
             self::SETTINGS_LOGS => ['admins'],
+            self::SETTINGS_USERS => ['admins', 'admin_hr'],
+            self::SETTINGS_ROLES => ['admins'], // role/permission manipulations
+            self::SETTINGS_ORGANIZATION => ['admins'],
+            self::SETTINGS_NOTIFICATIONS => ['admins'],
+            self::SETTINGS_REPORTS => ['admins'],
 
             // management
-            self::MANAGEMENT_MBO_TEMPLATES => ['admins', 'admin_mbo', 'objective_coordinator'],
-            self::MANAGEMENT_MBO_CATEGORIES => ['admins', 'admin_mbo'],
-            self::MANAGEMENT_USERS => ['admins', 'admin_hr'],
-            self::MANAGEMENT_ROLES => ['admins'], // role/permission manipulations
-            self::MANAGEMENT_STRUCTURE => ['admins'],
-            self::MANAGEMENT_NOTIFICATIONS => ['admins'],
-            self::MANAGEMENT_REPORTS => ['admins'],
-            self::MANAGEMENT_RECOVERY => ['admins'],
+            self::MBO_TEMPLATES => ['admins', 'admin_mbo', 'objective_coordinator'],
+            self::MBO_CATEGORIES => ['admins', 'admin_mbo'],
 
             // reports
             self::REPORTS_VIEW => ['admins', 'admin_mbo', 'supervisor'], // and probably any other superior roles and team leader @TODO later

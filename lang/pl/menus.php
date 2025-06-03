@@ -64,13 +64,6 @@ return [
         'help' => [
             'index' => 'Pomoc',
         ],
-    ],
-
-    'management' => [
-        'index' => 'Zarządzanie',
-        'users' => [
-            'index' => 'Użytkownicy'
-        ],
         'organization' => [
             'index' => 'Struktura organizacyjna',
             'companies' => [
@@ -92,23 +85,27 @@ return [
         'teams' => [
             'index' => 'Zespoły'
         ],
-        'mbo' => [
-            'objectives' => [
-                'index' => 'Szablony celów',
-                'create' => 'Tworzenie szablonu celu',
-                'edit' => 'Modyfikacja szablonu celu',
+    ],
 
+    'mbo' => [
+        'index' => 'Zarządzanie celami',
+        'objectives' => [
+            'index' => 'Cele',
+            'create' => 'Tworzenie celu',
+            'edit' => 'Modyfikacja celu',
 
-            ],
-            'categories' => [
-                'index' => 'Kategorie celów',
-                'create' => 'Tworzenie kategorii MBO',
-                'edit' => 'Modyfikacja kategorii MBO',
-            ],
         ],
+        'templates' => [
+            'index' => 'Szablony celów',
+            'create' => 'Tworzenie szablonu celu',
+            'edit' => 'Modyfikacja szablonu celu',
 
-        'restoring' => [
-            'index' => 'Przywracanie danych',
+
+        ],
+        'categories' => [
+            'index' => 'Kategorie celów',
+            'create' => 'Tworzenie kategorii MBO',
+            'edit' => 'Modyfikacja kategorii MBO',
         ],
     ],
 

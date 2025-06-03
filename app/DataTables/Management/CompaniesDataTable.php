@@ -43,7 +43,7 @@ class CompaniesDataTable extends DataTable
                 $query->orderBy('lastname', $order);
             })
             ->addColumn('action', function ($data) {
-                return view('pages.management.organization.company.action', [
+                return view('pages.settings.organization.company.action', [
                     'data' => $data,
                 ]);
             })

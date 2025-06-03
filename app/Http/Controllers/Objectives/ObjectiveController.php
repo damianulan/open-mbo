@@ -2,21 +2,25 @@
 
 namespace App\Http\Controllers\Objectives;
 
-use App\Http\Controllers\AppController;
 use Illuminate\Http\Request;
 use App\Models\MBO\Objective;
+use App\Http\Controllers\Objectives\MBOController;
+use App\DataTables\MBO\ObjectiveDataTable;
 use App\Models\Core\User;
 use App\Models\MBO\Campaign;
 use App\Enums\MBO\UserObjectiveStatus;
 
-class ObjectiveController extends AppController
+class ObjectiveController extends MBOController
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(ObjectiveDataTable $dataTable)
     {
-        //
+        return $dataTable->render('pages.mbo.objectives.index', [
+            'table' => $dataTable,
+            'nav' => $this->nav(),
+        ]);
     }
 
     /**

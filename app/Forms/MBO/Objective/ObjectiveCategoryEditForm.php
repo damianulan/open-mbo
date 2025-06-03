@@ -15,7 +15,7 @@ class ObjectiveCategoryEditForm extends Form
 
     public static function definition(Request $request, $model = null): FormBuilder
     {
-        $route = route('management.mbo.categories.store');
+        $route = route('mbo.categories.store');
         $method = 'POST';
         $selected = array();
         $category = null;
@@ -23,7 +23,7 @@ class ObjectiveCategoryEditForm extends Form
         $shortnameType = 'text';
         if (!is_null($model)) {
             $method = 'PUT';
-            $route = route('management.mbo.categories.update', $model->id);
+            $route = route('mbo.categories.update', $model->id);
             $category = ObjectiveTemplateCategory::find($model->id);
             $selected = $category->coordinators->pluck('id')->toArray();
             if (in_array($category->shortname, ObjectiveTemplateCategory::baseCategories())) {

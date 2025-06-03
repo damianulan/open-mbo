@@ -183,7 +183,10 @@ class MenuItem
      */
     public function role(...$slug): self
     {
-        if (!auth()->user()->hasAnyRole($slug)) {
+        if (!is_array($slug)) {
+            $slug = array($slug);
+        }
+        if (!auth()->user()->hasAnyRoles($slug)) {
             $this->visible = false;
         }
         return $this;

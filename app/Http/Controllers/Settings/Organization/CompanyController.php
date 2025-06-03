@@ -1,26 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\Management\Organization;
+namespace App\Http\Controllers\Settings\Organization;
 
 use Illuminate\Http\Request;
 use App\Models\Business\Company;
 use App\DataTables\Management\CompaniesDataTable;
-use App\Forms\Management\CompanyEditForm;
-use App\Http\Controllers\Management\ManagementController;
+use App\Forms\Settings\Organization\CompanyEditForm;
+use App\Http\Controllers\Settings\SettingsController;
 
-class CompanyController extends ManagementController
+class CompanyController extends SettingsController
 {
 
     public function index(CompaniesDataTable $dataTable)
     {
-        return $dataTable->render('pages.management.organization.company.index', [
+        return $dataTable->render('pages.settings.organization.company.index', [
             'nav' => $this->nav(),
         ]);
     }
 
     public function create(Request $request)
     {
-        return view('pages.management.organization.company.edit', [
+        return view('pages.settings.organization.company.edit', [
             'form' => CompanyEditForm::definition($request)
         ]);
     }

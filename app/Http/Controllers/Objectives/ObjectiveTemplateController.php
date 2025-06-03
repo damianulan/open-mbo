@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Objectives;
 use Illuminate\Http\Request;
 use App\Forms\MBO\Objective\ObjectiveTemplateEditForm;
 use App\Models\MBO\ObjectiveTemplate;
-use App\Http\Controllers\Management\ManagementController;
+use App\Http\Controllers\Objectives\MBOController;
 
-class ObjectiveTemplateController extends ManagementController
+class ObjectiveTemplateController extends MBOController
 {
     /**
      * Show the application dashboard.
@@ -16,7 +16,7 @@ class ObjectiveTemplateController extends ManagementController
      */
     public function index()
     {
-        return view('pages.management.index', [
+        return view('pages.mbo.index', [
             'objectives' => ObjectiveTemplate::checkAccess()->paginate(30),
             'nav' => $this->nav(),
         ]);
@@ -48,7 +48,7 @@ class ObjectiveTemplateController extends ManagementController
         $objective = ObjectiveTemplate::fillFromRequest($request);
 
         if ($objective->save()) {
-            return redirect()->route('management.mbo.objectives.index')->with('success', __('alerts.objective_template.success.create'));
+            return redirect()->route('mbo.templates.index')->with('success', __('alerts.objective_template.success.create'));
         }
         return redirect()->back()->with('error', __('alerts.error.operation'));
     }
@@ -59,12 +59,7 @@ class ObjectiveTemplateController extends ManagementController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        // return view('pages.management.objectives.show', [
-        //     'objective' => ObjectiveTemplate::findOrFail($id),
-        // ]);
-    }
+    public function show($id) {}
 
     /**
      * Show the form for editing the specified resource.
@@ -94,7 +89,7 @@ class ObjectiveTemplateController extends ManagementController
         $form::validate($request, $id);
         $objective = ObjectiveTemplate::fillFromRequest($request, $id);
         if ($objective->update()) {
-            return redirect()->route('management.mbo.objectives.index')->with('success', __('alerts.objective_template.success.edit'));
+            return redirect()->route('mbo.templates.index')->with('success', __('alerts.objective_template.success.edit'));
         }
         return redirect()->back()->with('error', __('alerts.error.operation'));
     }
@@ -103,7 +98,7 @@ class ObjectiveTemplateController extends ManagementController
     {
         $objective = ObjectiveTemplate::checkAccess()->findOrFail($id);
         if ($objective->delete()) {
-            return redirect()->route('management.mbo.objectives.index')->with('success', __('alerts.objective_template.success.delete'));
+            return redirect()->route('mbo.templates.index')->with('success', __('alerts.objective_template.success.delete'));
         }
         return redirect()->back()->with('error', __('alerts.error.operation'));
     }

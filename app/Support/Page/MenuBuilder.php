@@ -26,6 +26,11 @@ class MenuBuilder
                 ->setRoute('campaigns.index')
                 ->settings('mbo.campaigns_enabled', 'mbo.enabled')
                 ->permission('mbo-campaign-*'),
+            MenuItem::make('mbo')
+                ->setTitle(__('menus.mbo.index'))
+                ->setIcon('crosshair')
+                ->setRoute('mbo.objectives.index')
+                ->permission('mbo-*'),
             // MenuItem::make('reports')
             //     ->setTitle(__('menus.reports.index'))
             //     ->setIcon('bar-chart-steps')
@@ -34,11 +39,7 @@ class MenuBuilder
                 ->setTitle(__('menus.users.index'))
                 ->setIcon('person-fill')
                 ->setRoute('users.index'),
-            MenuItem::make('management')
-                ->setTitle(__('menus.management.index'))
-                ->setIcon('diagram-3-fill')
-                ->setRoute('management.mbo.objectives.index')
-                ->permission('management-*'),
+
             MenuItem::make('settings')
                 ->setTitle(__('menus.settings.index'))
                 ->setIcon('gear-fill')

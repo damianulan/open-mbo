@@ -4,9 +4,7 @@ namespace App\Traits;
 
 use App\Models\Core\Role;
 use App\Models\Core\Permission;
-use App\Enums\Core\PermissionLib;
 use Illuminate\Support\Collection;
-use App\Models\MBO\Campaign;
 use Illuminate\Database\Eloquent\Model;
 use App\Lib\Contexts\System;
 use Illuminate\Database\Eloquent\Builder;
@@ -14,10 +12,10 @@ use Illuminate\Database\Query\Builder as DBBuilder;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use App\Enums\Core\SystemRolesLib;
+use App\Enums\Core\PermissionLib;
 
 /**
- * TODO static roles & static permissions
- *
  * @author Damian Ułan <damian.ulan@protonmail.com>
  * @copyright 2025 damianulan
  */
@@ -116,20 +114,43 @@ trait HasRolesAndPermissions
     }
 
     /**
-     * @param mixed ...$roles
+     * Check if has all of given roles.
+     *
+     * @param string $slug - role slug
      * @return bool
      */
-    public function hasRole(...$roles)
+    public function hasRole(string $slug)
     {
-        foreach ($roles as $role) {
-            if ($this->roles->contains('slug', $role)) {
-                return true;
-            }
+        if ($this->roles->contains('slug', $slug)) {
+            return true;
         }
         return false;
     }
 
-    public function hasAnyRole(...$roles)
+    /**
+     * Check if has all of given roles.
+     *
+     * @param array $roles - role slugs
+     * @return bool
+     */
+    public function hasRoles(array $roles)
+    {
+        $result = true;
+        foreach ($roles as $role) {
+            if (!$this->hasRole($role)) {
+                $result = false;
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Check if has any of given roles.
+     *
+     * @param array $roles - role slugs
+     * @return bool
+     */
+    public function hasAnyRoles(array $roles)
     {
         foreach ($roles as $role) {
             if ($this->hasRole($role)) {
@@ -236,6 +257,13 @@ trait HasRolesAndPermissions
         return $this->givePermissionsTo($permissions);
     }
 
+    /**
+     * Assign role by its slug.
+     *
+     * @param mixed $slug
+     * @param mixed $context
+     * @return void
+     */
     public function assignRoleSlug($slug, $context = null)
     {
         if (!$slug instanceof Role) {
@@ -247,6 +275,13 @@ trait HasRolesAndPermissions
         return true;
     }
 
+    /**
+     * Assign role by its id.
+     *
+     * @param mixed $role_id
+     * @param mixed $context
+     * @return void
+     */
     public function assignRole($role_id, $context = null)
     {
         if (!$role_id instanceof Role) {
@@ -261,6 +296,13 @@ trait HasRolesAndPermissions
         return true;
     }
 
+    /**
+     * Revoke role by its slug.
+     *
+     * @param mixed $slug
+     * @param mixed $context
+     * @return void
+     */
     public function revokeRoleSlug($slug, $context = null)
     {
         if (!$slug instanceof Role) {
@@ -275,6 +317,13 @@ trait HasRolesAndPermissions
         return true;
     }
 
+    /**
+     * Revoke role by its id.
+     *
+     * @param mixed $role_id
+     * @param mixed $context
+     * @return void
+     */
     public function revokeRole($role_id, $context = null)
     {
         if (!$role_id instanceof Role) {
@@ -302,6 +351,13 @@ trait HasRolesAndPermissions
         $this->roles()->attach($role, $additional);
     }
 
+    /**
+     * Revoking role by type context.
+     *
+     * @param \App\Models\Core\Role $role
+     * @param mixed                 $context
+     * @return void
+     */
     private function revokeRoleType(Role $role, $context = null)
     {
         $additional = array();
@@ -315,6 +371,12 @@ trait HasRolesAndPermissions
         $this->roles()->detach($role, $additional);
     }
 
+    /**
+     * Refresh role assignments.
+     *
+     * @param mixed $roles_ids
+     * @return void
+     */
     public function refreshRole($roles_ids = null)
     {
         if (!$roles_ids) {
@@ -369,26 +431,22 @@ trait HasRolesAndPermissions
         return $permissions;
     }
 
-    public function isMBOAdmin()
-    {
-        return $this->hasAnyRole('root', 'support', 'admin', 'admin_mbo');
-    }
 
+    /**
+     * Check if has any of admin roles.
+     *
+     * @return bool
+     */
     public function isAdmin()
     {
-        return $this->hasAnyRole('root', 'support', 'admin');
+        return $this->hasAnyRoles(SystemRolesLib::admins());
     }
 
     public function isRoot(bool $strict = false)
     {
         if ($strict) {
-            return $this->hasAnyRole('root');
+            return $this->hasAnyRoles(['root']);
         }
-        return $this->hasAnyRole('root', 'support');
-    }
-
-    public function isCampaignCoordinator(Campaign $campaign)
-    {
-        return $campaign->coordinators()->contains('coordinator_id', $this->id);
+        return $this->hasAnyRoles(['root', 'support']);
     }
 }

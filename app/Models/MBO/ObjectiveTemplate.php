@@ -4,12 +4,10 @@ namespace App\Models\MBO;
 
 use App\Models\BaseModel;
 use FormForge\Casts\TrixFieldCast;
-use App\Casts\CheckboxCast;
 use App\Models\Core\User;
 use App\Models\MBO\Objective;
 use App\Models\MBO\ObjectiveTemplateCategory;
 use App\Models\Scopes\MBO\ObjectiveTemplateScope;
-use Laravel\Scout\Searchable;
 
 /**
  *
@@ -50,7 +48,6 @@ use Laravel\Scout\Searchable;
  */
 class ObjectiveTemplate extends BaseModel
 {
-    use Searchable;
 
     protected $fillable = [
         'category_id',

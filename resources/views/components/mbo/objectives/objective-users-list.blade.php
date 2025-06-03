@@ -15,7 +15,7 @@
                         </div>
                         <div class="list-actions">
                             <div class="list-action tippy-info" data-tippy-content="{{ $ua->getStatusLabel() }}"><x-icon key="circle-fill" classes="text-{{ $ua->status }}" /></div>
-                            <a href="{{ route('objectives.assignment.show', $ua->id) }}" class="list-action" data-tippy-content="{{ __('buttons.summary') }}">
+                            <a href="{{ route('mbo.objectives.assignment.show', $ua->id) }}" class="list-action" data-tippy-content="{{ __('buttons.summary') }}">
                                 <x-icon key="eye-fill" />
                             </a>
                         </div>

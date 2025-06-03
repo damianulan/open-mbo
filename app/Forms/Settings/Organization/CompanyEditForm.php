@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Forms\Management;
+namespace App\Forms\Settings\Organization;
 
 use FormForge\Base\Form;
 use Illuminate\Http\Request;
@@ -13,12 +13,12 @@ class CompanyEditForm extends Form
 {
     public static function definition(Request $request, $model = null): FormBuilder
     {
-        $route = route('management.organization.company.store');
+        $route = route('settings.organization.company.store');
         $method = 'POST';
 
         if (!is_null($model)) {
             $method = 'PUT';
-            $route = route('management.organization.company.update', $model->id);
+            $route = route('settings.organization.company.update', $model->id);
         }
         return FormBuilder::boot($request, $method, $route, 'companies_edit')
             ->class('companies-create-form')

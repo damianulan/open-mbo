@@ -64,7 +64,7 @@
                 </div>
                 <div class="element">
                     <div class="element-title" data-tippy-content="Cele podstawowe">
-                        <i class="bi bi-bullseye me-2"></i>
+                        <i class="bi bi-crosshair me-2"></i>
                         <span>{{ $campaign->objectives()->count() }}</span>
                     </div>
                 </div>

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Settings;
 
 use App\Forms\Settings\GeneralForm;
-use App\Http\Controllers\Controller;
 use App\Settings\GeneralSettings;
 use Illuminate\Http\Request;
 

@@ -25,6 +25,12 @@ class SettingsController extends AppController
                 ->setTitle(__('menus.settings.modules.index'))
                 ->permission('settings-modules')
                 ->setRoute('settings.modules.index'),
+            MenuItem::make('organization')
+                ->setTitle(__('menus.settings.organization.index'))
+                ->setRoute('settings.organization.index'),
+            MenuItem::make('notifications')
+                ->setTitle(__('menus.notifications.index'))
+                ->setRoute('settings.notifications.index'),
             MenuItem::make('integrations')
                 ->setTitle(__('menus.settings.integrations.index'))
                 ->permission('settings-integrations')
