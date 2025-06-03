@@ -47,4 +47,8 @@ return [
         ],
     ],
 
+    'entities' => [
+        'campaign' => 'Kampania pomiarowa',
+    ]
+
 ];

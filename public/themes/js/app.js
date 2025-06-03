@@ -58794,6 +58794,7 @@ var tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 var tooltipList = _toConsumableArray(tooltipTriggerList).map(function (tooltipTriggerEl) {
   return new bootstrap__WEBPACK_IMPORTED_MODULE_0__.Tooltip(tooltipTriggerEl);
 });
+var modal_initialized = new Event("modal-initialized");
 $("body").on("click", ".card-url", function () {
   var url = $(this).attr("data-url");
   if (url) {
@@ -58940,6 +58941,7 @@ $.getModal = function (type) {
         $("body").find("#modal-container").children().remove();
         $("body").find("#modal-container").append(data.view);
         $("body").find("#modal-input").trigger("click");
+        $(document).trigger(modal_initialized);
       } else {
         if (data.status === "warning") {
           $.warning(data.message);
@@ -58957,6 +58959,9 @@ $.getModal = function (type) {
 $.hideModal = function () {
   $("body").find("#modal-input").trigger("click");
 };
+$(document).on("modal-initialized", function () {
+  $.rebuildVendors();
+});
 $.jsonAjax = function (url, datas) {
   var _success_callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (response) {};
   var _error_callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function (response) {};

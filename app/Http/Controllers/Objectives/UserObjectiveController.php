@@ -10,6 +10,7 @@ use App\Models\MBO\Campaign;
 use App\Models\MBO\UserObjective;
 use App\Enums\MBO\UserObjectiveStatus;
 use Illuminate\Support\Facades\Auth;
+use App\Forms\MBO\Objective\ObjectiveEditUserForm;
 
 class UserObjectiveController extends AppController
 {
@@ -63,12 +64,21 @@ class UserObjectiveController extends AppController
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id, ObjectiveEditUserForm $form)
     {
-        //
+        $objective = Objective::findOrFail($id);
+
+        $request = $form::reformatRequest($request);
+        $response = $form::validateJson($request, $id);
+        if ($response['status'] === 'ok') {
+
+            $service = BulkAssignUsers::boot(request: $request, objective: $objective)->execute();
+            if ($service->passed()) {
+                $response['message'] = __('alerts.objectives.success.users_added');
+                return response()->json($response);
+            }
+        }
+        return response()->json($response);
     }
 
     /**

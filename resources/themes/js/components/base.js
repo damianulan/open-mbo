@@ -20,6 +20,8 @@ const tooltipList = [...tooltipTriggerList].map(
     (tooltipTriggerEl) => new Tooltip(tooltipTriggerEl)
 );
 
+const modal_initialized = new Event("modal-initialized");
+
 $("body").on("click", ".card-url", function () {
     var url = $(this).attr("data-url");
     if (url) {
@@ -176,6 +178,7 @@ $.getModal = function (type, datas = {}) {
                     $("body").find("#modal-container").children().remove();
                     $("body").find("#modal-container").append(data.view);
                     $("body").find("#modal-input").trigger("click");
+                    $(document).trigger(modal_initialized);
                 } else {
                     if (data.status === "warning") {
                         $.warning(data.message);
@@ -195,6 +198,10 @@ $.getModal = function (type, datas = {}) {
 $.hideModal = function () {
     $("body").find("#modal-input").trigger("click");
 };
+
+$(document).on("modal-initialized", function () {
+    $.rebuildVendors();
+});
 
 $.jsonAjax = function (
     url,

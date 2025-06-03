@@ -72,12 +72,6 @@ class CampaignEditObjectiveForm extends Form
             $builder->where('id', '!=', $model_id);
         }
 
-        $weights = $builder->get()->pluck('weight');
-        $max_weight = 1;
-        foreach ($weights as $weight) {
-            $max_weight = $max_weight - (float) $weight;
-        }
-
         return [
             'template_id' => 'required',
             'name' => 'max:120|required',

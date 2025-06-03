@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Settings\GeneralSettings;
 use App\Forms\MBO\Campaign\CampaignEditObjectiveForm;
 use App\Forms\MBO\Campaign\CampaignEditUserForm;
+use App\Forms\MBO\Objective\ObjectiveEditUserForm;
+use App\Forms\MBO\Objective\ObjectiveEditForm;
 use App\Models\MBO\Campaign;
 use App\Models\MBO\Objective;
 
@@ -55,6 +57,42 @@ class GeneralController extends Controller
                         $status = 'ok';
                     }
                 }
+
+                break;
+
+
+            case 'objectives.add_users':
+                if ($id) {
+                    $objective = Objective::checkAccess()->find($id);
+                    if ($objective) {
+                        $params = [
+                            'id' => $id,
+                            'form' => ObjectiveEditUserForm::definition($request, $objective),
+                        ];
+                        $status = 'ok';
+                    }
+                }
+
+                break;
+
+            case 'objectives.add_objectives':
+
+                if ($id) {
+                    $objective = Objective::checkAccess()->find($id);
+                    if ($objective) {
+                        $params = [
+                            'id' => $id,
+                            'form' => ObjectiveEditForm::definition($request, $objective),
+                        ];
+                        $status = 'ok';
+                    }
+                } else {
+                    $params = [
+                        'form' => ObjectiveEditForm::definition($request),
+                    ];
+                    $status = 'ok';
+                }
+
 
                 break;
 

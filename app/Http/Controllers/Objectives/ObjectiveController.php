@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\MBO\Objective;
 use App\Http\Controllers\Objectives\MBOController;
 use App\DataTables\MBO\ObjectiveDataTable;
+use App\Forms\MBO\Objective\ObjectiveEditForm;
 use App\Models\Core\User;
 use App\Models\MBO\Campaign;
 use App\Enums\MBO\UserObjectiveStatus;
@@ -34,9 +35,19 @@ class ObjectiveController extends MBOController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, ObjectiveEditForm $form)
     {
-        //
+        $request = $form::reformatRequest($request);
+        $response = $form::validateJson($request);
+        if ($response['status'] === 'ok') {
+            $objective = Objective::fillFromRequest($request);
+
+            if ($objective->save()) {
+                $response['message'] = __('alerts.objectives.success.objective_added');
+                return response()->json($response);
+            }
+        }
+        return response()->json($response);
     }
 
     /**
@@ -62,12 +73,19 @@ class ObjectiveController extends MBOController
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id, ObjectiveEditForm $form)
     {
-        //
+        $request = $form::reformatRequest($request);
+        $response = $form::validateJson($request, $id);
+        if ($response['status'] === 'ok') {
+            $objective = Objective::fillFromRequest($request, $id);
+
+            if ($objective->update()) {
+                $response['message'] = __('alerts.objectives.success.objective_updated');
+                return response()->json($response);
+            }
+        }
+        return response()->json($response);
     }
 
     /**

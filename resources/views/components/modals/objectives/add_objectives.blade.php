@@ -32,7 +32,6 @@ $('select[name="template_id"]').on('change', function() {
             if(instance){
                 $('input[name="name"]').val(instance.name);
                 var descr_trix = document.querySelector("trix-editor");
-                //console.log(descr_trix.editor, instance.description);
                 $('input[name="award"]').val(instance.award);
 
                 // descr_trix.editor.setSelectedRange([0, 0]);
@@ -48,7 +47,7 @@ $('select[name="template_id"]').on('change', function() {
 
 $('#modal_save').on('click', function() {
     @if (isset($id))
-        $.ajaxForm('{{ route('objectives.child.update', $id) }}', 'objective_edit_child', function(response) {
+        $.ajaxForm('{{ route('mbo.objectives.update', $id) }}', 'objective_edit', function(response) {
             $.success(response.message, null, function() {
                 window.location.reload();
             })
@@ -57,7 +56,7 @@ $('#modal_save').on('click', function() {
 
         });
     @else
-        $.ajaxForm('{{ route('objectives.child.store') }}', 'objective_edit_child', function(response) {
+        $.ajaxForm('{{ route('mbo.objectives.store') }}', 'objective_edit', function(response) {
             $.success(response.message, null, function() {
                 window.location.reload();
             })
