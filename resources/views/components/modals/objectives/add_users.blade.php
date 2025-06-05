@@ -19,6 +19,10 @@
 </div>
 <script type="text/javascript">
 
+$(document).ready(function() {
+    $.rebuildVendors();
+});
+
 $('#modal_save').on('click', function() {
     @if (isset($id))
         $.ajaxForm('{{ route('mbo.objectives.assignment.update', $id) }}', 'objective_add_users', function(response) {

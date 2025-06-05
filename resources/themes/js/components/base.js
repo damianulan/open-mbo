@@ -199,10 +199,6 @@ $.hideModal = function () {
     $("body").find("#modal-input").trigger("click");
 };
 
-$(document).on("modal-initialized", function () {
-    $.rebuildVendors();
-});
-
 $.jsonAjax = function (
     url,
     datas,

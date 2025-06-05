@@ -33,32 +33,27 @@ class BulkAssignUsers extends Service
 
     public function assignUser($user_id): bool
     {
-        $result = DB::transaction(function () use ($user_id) {
-            $r = false;
-            $exists = $this->campaign->user_campaigns()->where('user_id', $user_id)->exists();
-            if (!$exists) {
-                $r = $this->campaign->user_campaigns()->create([
-                    'user_id' => $user_id,
-                    'stage' => $this->campaign->setUserStage($user_id),
-                    'manual' => $this->campaign->manual,
-                    'active' => $this->campaign->draft ? 0 : 1,
-                ]);
-            }
-            return $r;
-        });
+        $result = false;
+        $exists = $this->campaign->user_campaigns()->where('user_id', $user_id)->exists();
+        if (!$exists) {
+            $result = $this->campaign->user_campaigns()->create([
+                'user_id' => $user_id,
+                'stage' => $this->campaign->setUserStage($user_id),
+                'manual' => $this->campaign->manual,
+                'active' => $this->campaign->draft ? 0 : 1,
+            ]);
+        }
 
         return $result ? true : false;
     }
 
     public function unassignUser($user_id): bool
     {
-        $result = DB::transaction(function () use ($user_id) {
-            $record = $this->campaign->user_campaigns()->where('user_id', $user_id)->first();
-            if ($record) {
-                return $record->delete();
-            }
-            return true;
-        });
+        $result = false;
+        $record = $this->campaign->user_campaigns()->where('user_id', $user_id)->first();
+        if ($record) {
+            $result = $record->delete();
+        }
 
         return $result ? true : false;
     }

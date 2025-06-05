@@ -123,7 +123,7 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
 
             Route::prefix('assignment')->name('assignment.')->group(function () {
                 Route::get('/{id}', [App\Http\Controllers\Objectives\UserObjectiveController::class, 'show'])->name('show');
-                Route::put('{objective}', [App\Http\Controllers\Objectives\UserObjectiveController::class, 'update'])->name('update');
+                Route::post('{objective}', [App\Http\Controllers\Objectives\UserObjectiveController::class, 'update'])->name('update');
             });
         });
     });

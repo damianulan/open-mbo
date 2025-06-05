@@ -58959,9 +58959,6 @@ $.getModal = function (type) {
 $.hideModal = function () {
   $("body").find("#modal-input").trigger("click");
 };
-$(document).on("modal-initialized", function () {
-  $.rebuildVendors();
-});
 $.jsonAjax = function (url, datas) {
   var _success_callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function (response) {};
   var _error_callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function (response) {};

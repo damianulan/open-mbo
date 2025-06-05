@@ -11,6 +11,7 @@ use App\Models\MBO\UserObjective;
 use App\Enums\MBO\UserObjectiveStatus;
 use Illuminate\Support\Facades\Auth;
 use App\Forms\MBO\Objective\ObjectiveEditUserForm;
+use App\Services\Objectives\BulkAssignUsers;
 
 class UserObjectiveController extends AppController
 {
