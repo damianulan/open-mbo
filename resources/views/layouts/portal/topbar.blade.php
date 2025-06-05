@@ -47,7 +47,7 @@
                     <i class="bi bi-book-fill"></i>
                 </a>
               </div>
-              <x-notification-dropdown/>
+              <livewire:layout.notifications />
               <div class="user-nav dropup"
               @if(auth()->user()->isImpersonating())
               data-tippy-placement="left"
