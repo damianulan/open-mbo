@@ -31,7 +31,7 @@ return [
             'paragraph' => 'Przepraszamy, usługa chwilowo niedostępna. Trwają prace konserwacyjne, spróbuj ponownie później. Zostaniesz automatycznie wylogowany.',
         ],
         '404' => [
-            'title' => 'Nie znaleziono strony',
+            'title' => 'Nie znaleziono strony, lub jest ona tymczasowo niedostępna',
             'paragraph' => 'Nie udało się odnaleźć żądanej strony.',
         ],
         '403' => [

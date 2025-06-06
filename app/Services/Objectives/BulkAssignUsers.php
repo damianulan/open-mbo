@@ -43,7 +43,6 @@ class BulkAssignUsers extends Service
         if (!$exists) {
             $result = $this->objective->user_assignments()->create([
                 'user_id' => $user_id,
-                'status' => UserObjectiveStatus::PROGRESS,
             ]);
         }
 

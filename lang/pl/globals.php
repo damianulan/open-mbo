@@ -8,6 +8,7 @@ return [
     'search' => 'Szukaj',
     'you' => 'Ty',
     'no_data' => 'Brak danych',
+    'no_assigned' => 'Brak przypisanych',
     'turned_on_male' => 'Włączony',
     'turned_on_female' => 'Włączona',
     'turned_on_other' => 'Włączone',

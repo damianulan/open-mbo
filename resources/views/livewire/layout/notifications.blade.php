@@ -1,6 +1,6 @@
 <div class="notification-dropdown dropdown me-3" wire:poll.5000ms>
     <a class="dropdown-toggle @if($shown) show @endif" type="button" @if($shown) aria-expanded="true" @else aria-expanded="false" @endif
-        data-bs-toggle="dropdown" data-tippy-placement="bottom" data-tippy-content="Powiadomienia" wire:click="toggleShown">
+        data-bs-toggle="dropdown" data-tippy-placement="bottom" data-tippy-content="{{ __('globals.notifications') }}" wire:click="toggleShown">
         <i class="bi bi-bell-fill"></i>
         @if($notifications_count)
             <span class="badge badge-circle badge-primary">{{ $notifications_count }}</span>

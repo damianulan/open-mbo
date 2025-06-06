@@ -158,6 +158,22 @@ class UserObjective extends BaseModel
         return $this->belongsTo(User::class);
     }
 
+    public function canBeEvaluated(): bool
+    {
+        return true;
+    }
+
+    public function canBeFailed(): bool
+    {
+        return $this->canBeEvaluated() && $this->status !== UserObjectiveStatus::FAILED;
+    }
+
+    public function canBePassed(): bool
+    {
+        return $this->canBeEvaluated() && $this->status !== UserObjectiveStatus::PASSED;
+    }
+
+
     public function isPassed(): bool
     {
         return $this->status === UserObjectiveStatus::PASSED;
@@ -216,6 +232,12 @@ class UserObjective extends BaseModel
         $model->setStatus()->update();
     }
 
+    public static function creatingUserObjective(UserObjective $model): UserObjective
+    {
+        $model->setStatus();
+        return $model;
+    }
+
     /**
      * Handle the UserObjective "created" event.
      */
@@ -231,13 +253,13 @@ class UserObjective extends BaseModel
 
     public static function updatingUserObjective(UserObjective $model): UserObjective
     {
-
         return $model;
     }
 
     public static function updatedUserObjective(UserObjective $model): void
     {
-        if (in_array('status', $model->getDirty())) {
+        if (!in_array('status', $model->getDirty())) {
+            $model->setStatus()->update();
         }
     }
 

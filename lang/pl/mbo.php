@@ -45,10 +45,17 @@ return [
             'inprogress' => 'Podejścia nierozliczone',
             'completed' => 'Podejścia rozliczone',
         ],
+
+        'pass' => 'Oznacz cel jako zaliczony',
+        'fail' => 'Oznacz cel jako niezaliczony',
     ],
 
     'entities' => [
         'campaign' => 'Kampania pomiarowa',
+    ],
+
+    'buttons' => [
+        'add_evaluation' => '',
     ]
 
 ];

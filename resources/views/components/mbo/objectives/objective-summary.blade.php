@@ -54,8 +54,16 @@
 
     </div>
     @if(isset($userObjective))
-        <div class="content-card-icons pb-2">
+        <div class="content-card-icons mb-3">
             <div class="badge badge-{{ $userObjective->status }} fs-6" data-tippy-content="{{ __('forms.mbo.objectives.status') }}">{{ __('mbo.objective'). ' ' .strtolower($userObjective->getStatusLabel()) }}</div>
+        </div>
+        <div class="content-card-btns">
+            @if($userObjective->canBePassed())
+                <button class="btn btn-outline-primary"><i class="bi-btn bi-check2-circle"></i>{{ __('mbo.objectives.pass') }}</button>
+            @endif
+            @if($userObjective->canBeFailed())
+                <button class="btn btn-outline-primary"><i class="bi-btn bi-x-lg"></i>{{ __('mbo.objectives.fail') }}</button>
+            @endif
         </div>
     @endif
 </div>
