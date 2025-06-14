@@ -437,13 +437,8 @@ class Campaign extends BaseModel
         $completed = CampaignStage::COMPLETED;
         $terminated = CampaignStage::TERMINATED;
         $canceled = CampaignStage::CANCELED;
-
-        $query->orderByRaw("FIELD(stage, '$in_progess', '$pending', '$completed', '$terminated', '$canceled')");
-    }
-
-    public static function retrievedCampaign(Campaign $model)
-    {
-        $model->setUserStage();
+        $orderBy = "FIELD(stage, '$in_progess', '$pending', '$completed', '$terminated', '$canceled')";
+        $query->orderByRaw($orderBy);
     }
 
     public static function creatingCampaign(Campaign $model)
