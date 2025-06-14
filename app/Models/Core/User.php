@@ -23,6 +23,8 @@ use Illuminate\Contracts\Translation\HasLocalePreference;
 use Lucent\Support\Traits\VirginModel;
 use Illuminate\Support\Facades\Auth;
 use Lucent\Support\Str\Alphabet;
+use Lucent\Support\Traits\Accessible;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 /**
  *
@@ -136,9 +138,12 @@ class User extends Authenticatable implements HasLocalePreference
         return $this;
     }
 
-    public function name(): string
+    protected function name(): Attribute
     {
-        return $this->profile?->firstname . ' ' . $this->profile?->lastname;
+        $value = $this->profile?->firstname . ' ' . $this->profile?->lastname;
+        return Attribute::make(
+            get: fn() => ucfirst($value),
+        );
     }
 
     public function nameView(): string

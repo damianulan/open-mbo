@@ -32,7 +32,7 @@ class NotificationLog
         //     ->performedOn($event->response)
         //     ->withProperties(['notification_id' => $notification->id])
         //     ->event('notification_sent')
-        //     ->log(__('logging.description.notification_sent', ['username' => $user->name(), 'type' => $event->response->type]));
+        //     ->log(__('logging.description.notification_sent', ['username' => $user->name, 'type' => $event->response->type]));
         // }
     }
 }

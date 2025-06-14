@@ -10,8 +10,9 @@ use App\Forms\MBO\Objective\ObjectiveEditUserForm;
 use App\Forms\MBO\Objective\ObjectiveEditForm;
 use App\Models\MBO\Campaign;
 use App\Models\MBO\Objective;
+use App\Http\Controllers\AppController;
 
-class GeneralController extends Controller
+class GeneralController extends AppController
 {
 
     public function getModal(Request $request)

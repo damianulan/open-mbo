@@ -56,7 +56,7 @@
               >
                   <div class="user-actions" data-bs-toggle="dropdown" type="button" aria-expanded="false">
                     {!! auth()->user()->getAvatarView(30, 30) !!}
-                    <span class="profile-name{{auth()->user()->isImpersonating() ? ' text-info':''}}">{{ auth()->user()->name() }}</span>
+                    <span class="profile-name{{auth()->user()->isImpersonating() ? ' text-info':''}}">{{ auth()->user()->name }}</span>
                   </div>
                   <ul class="dropdown-menu">
                     <li><a href="{{ route('profile.index') }}" class="dropdown-item"><i class="bi-person me-2"></i>{{ __('menus.edit_profile') }}</a></li>

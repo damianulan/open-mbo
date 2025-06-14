@@ -8,8 +8,9 @@ use App\Models\Core\UserProfile;
 use App\DataTables\Users\UsersDataTable;
 use App\Forms\Users\UserEditForm;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\AppController;
 
-class UsersController extends Controller
+class UsersController extends AppController
 {
     /**
      * Display a listing of the resource.
@@ -109,11 +110,11 @@ class UsersController extends Controller
             $profile = UserProfile::fillFromRequest($request, $profile_id);
             if ($profile) {
                 if ($profile->update() && $user->refreshSupervisors($supervisors_ids) && $user->refreshRole($roles_ids)) {
-                    return redirect()->route('users.show', $id)->with('success', __('alerts.users.success.edit', ['name' => $user->name()]));
+                    return redirect()->route('users.show', $id)->with('success', __('alerts.users.success.edit', ['name' => $user->name]));
                 }
             }
         }
-        return redirect()->back()->with('error', __('alerts.users.error.edit', ['name' => $user->name()]));
+        return redirect()->back()->with('error', __('alerts.users.error.edit', ['name' => $user->name]));
     }
 
     /**
@@ -127,9 +128,9 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
 
         if ($user->delete()) {
-            return redirect()->route('users.index')->with('success', __('alerts.users.success.delete', ['name' => $user->name()]));
+            return redirect()->route('users.index')->with('success', __('alerts.users.success.delete', ['name' => $user->name]));
         }
-        return redirect()->back()->with('error', __('alerts.users.error.delete', ['name' => $user->name()]));
+        return redirect()->back()->with('error', __('alerts.users.error.delete', ['name' => $user->name]));
     }
 
     /**
@@ -145,9 +146,9 @@ class UsersController extends Controller
             $user->toggleLock();
         }
         if ($user->blocked()) {
-            return redirect()->back()->with('info', __('alerts.users.success.blocked', ['name' => $user->name()]));
+            return redirect()->back()->with('info', __('alerts.users.success.blocked', ['name' => $user->name]));
         }
-        return redirect()->back()->with('info', __('alerts.users.success.unblocked', ['name' => $user->name()]));
+        return redirect()->back()->with('info', __('alerts.users.success.unblocked', ['name' => $user->name]));
     }
 
     public function impersonate(User $user)

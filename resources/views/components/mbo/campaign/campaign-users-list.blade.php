@@ -8,7 +8,7 @@
                 <li>
                     <div class="list-grid">
                         <div class="list-content">
-                            <div class="nowrap user" data-tippy-content="{{ $user->name() }}">
+                            <div class="nowrap user" data-tippy-content="{{ $user->name }}">
                                 {!! $user->nameDetails() !!}
                             </div>
                         </div>
