@@ -5,11 +5,9 @@ return [
     // Sidebar
     'dashboard' => 'Dashboard',
 
-
-
     'admin_panel' => 'Panel administracyjny',
     'reports' => [
-        'index' => 'Raporty'
+        'index' => 'Raporty',
     ],
     'notifications' => [
         'index' => 'Powiadomienia',
@@ -55,7 +53,7 @@ return [
             'index' => 'Integracje',
         ],
         'server' => [
-            'index' => 'Serwer'
+            'index' => 'Serwer',
         ],
         'logs' => [
             'index' => 'Logi',
@@ -68,7 +66,7 @@ return [
     'management' => [
         'index' => 'Zarządzanie',
         'users' => [
-            'index' => 'Użytkownicy'
+            'index' => 'Użytkownicy',
         ],
         'organization' => [
             'index' => 'Struktura organizacyjna',
@@ -77,7 +75,7 @@ return [
             ],
         ],
         'teams' => [
-            'index' => 'Zespoły'
+            'index' => 'Zespoły',
         ],
         'objectives' => [
             'index' => 'Szablony celów',
@@ -110,14 +108,10 @@ return [
         'show' => 'Profil użytkownika',
     ],
 
-
-
     'info' => [
         'profile' => [
             'logs' => 'Strona przedstawia całą Twoją aktywność, jaka jest mierzona przez system.',
         ],
     ],
-
-
 
 ];

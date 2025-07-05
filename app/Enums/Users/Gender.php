@@ -7,7 +7,9 @@ use Lucent\Support\Enum;
 class Gender extends Enum
 {
     const MALE = 'm';
+
     const FEMALE = 'f';
+
     const OTHER = 'o';
 
     public static function conservative(): array
@@ -21,9 +23,9 @@ class Gender extends Enum
     public static function labels(): array
     {
         return [
-            self::MALE => __('fields.gender.' . self::MALE),
-            self::FEMALE => __('fields.gender.' . self::FEMALE),
-            self::OTHER => __('fields.gender.' . self::OTHER),
+            self::MALE => __('fields.gender.'.self::MALE),
+            self::FEMALE => __('fields.gender.'.self::FEMALE),
+            self::OTHER => __('fields.gender.'.self::OTHER),
         ];
     }
 }

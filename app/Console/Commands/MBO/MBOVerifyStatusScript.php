@@ -4,7 +4,6 @@ namespace App\Console\Commands\MBO;
 
 use App\Console\BaseCommand;
 use App\Models\MBO\Campaign;
-use App\Enums\MBO\CampaignStage;
 use App\Models\MBO\UserObjective;
 
 class MBOVerifyStatusScript extends BaseCommand
@@ -46,7 +45,7 @@ class MBOVerifyStatusScript extends BaseCommand
         if ($campaigns->count()) {
             foreach ($campaigns as $campaign) {
                 if ($echo) {
-                    $this->line('Updating campaign status for: ' . $campaign->name);
+                    $this->line('Updating campaign status for: '.$campaign->name);
                 }
                 $campaign->timestamps = false;
                 $campaign->setStageAuto();

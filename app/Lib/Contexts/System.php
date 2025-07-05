@@ -10,5 +10,4 @@ class System
     {
         $this->id = 0;
     }
-
 }

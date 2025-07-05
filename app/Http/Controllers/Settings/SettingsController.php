@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers\Settings;
 
-use App\Forms\Settings\GeneralForm;
 use App\Http\Controllers\AppController;
-use App\Settings\GeneralSettings;
-use Illuminate\Http\Request;
-use App\Support\Page\MenuBuilder;
 use App\Support\Page\Bars\MenubarMenu;
 use App\Support\Page\Bars\MenuItem;
+use App\Support\Page\MenuBuilder;
 
 class SettingsController extends AppController
 {

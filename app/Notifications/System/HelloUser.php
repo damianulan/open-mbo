@@ -2,10 +2,9 @@
 
 namespace App\Notifications\System;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use App\Support\Notifications\BaseNotification;
+use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class HelloUser extends BaseNotification
 {

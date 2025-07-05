@@ -16,6 +16,7 @@ class GeneralController extends SettingsController
     public function index(Request $request)
     {
         $model = app(GeneralSettings::class);
+
         return view('pages.settings.index', [
             'model' => $model,
             'form' => GeneralForm::definition($request, $model),
@@ -36,6 +37,7 @@ class GeneralController extends SettingsController
         if ($settings->save()) {
             return redirect()->back()->with('success', __('alerts.settings.success.general'));
         }
-        return redirect()->back()->with('error', __('alerts.settings.error.general'));;
+
+        return redirect()->back()->with('error', __('alerts.settings.error.general'));
     }
 }

@@ -2,10 +2,7 @@
 
 namespace App\Listeners\Activity;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Notifications\Events\NotificationSent;
-use App\Models\Core\User;
 
 class NotificationLog
 {

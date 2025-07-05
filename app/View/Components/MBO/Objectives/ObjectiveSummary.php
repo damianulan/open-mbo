@@ -2,12 +2,11 @@
 
 namespace App\View\Components\MBO\Objectives;
 
+use App\Models\MBO\Objective;
+use App\Models\MBO\UserObjective;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
-use App\Models\MBO\Objective;
-use App\Models\MBO\UserObjective;
-use Illuminate\Support\Str;
 
 class ObjectiveSummary extends Component
 {

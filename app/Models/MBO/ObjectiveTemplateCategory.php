@@ -3,16 +3,11 @@
 namespace App\Models\MBO;
 
 use App\Models\BaseModel;
-use FormForge\Casts\TrixFieldCast;
-use App\Casts\CheckboxCast;
-use App\Models\MBO\ObjectiveTemplate;
 use App\Models\Core\User;
 use App\Models\Scopes\MBO\ObjectiveTemplateCategoryScope;
-use App\Enums\Core\SystemRolesLib;
+use FormForge\Casts\TrixFieldCast;
 
 /**
- *
- *
  * @property string $id
  * @property string $name
  * @property mixed|null $description
@@ -25,6 +20,7 @@ use App\Enums\Core\SystemRolesLib;
  * @property-read int|null $activities_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, ObjectiveTemplate> $objective_templates
  * @property-read int|null $objective_templates_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory onlyTrashed()
@@ -39,9 +35,11 @@ use App\Enums\Core\SystemRolesLib;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory withoutTrashed()
+ *
  * @property string|null $shortname
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $coordinators
  * @property-read int|null $coordinators_count
+ *
  * @mixin \Eloquent
  */
 class ObjectiveTemplateCategory extends BaseModel
@@ -86,7 +84,7 @@ class ObjectiveTemplateCategory extends BaseModel
 
     public function canBeDeleted(): bool
     {
-        return !in_array($this->shortname, self::baseCategories());
+        return ! in_array($this->shortname, self::baseCategories());
     }
 
     public function coordinators()
@@ -96,16 +94,16 @@ class ObjectiveTemplateCategory extends BaseModel
 
     public function refreshCoordinators(?array $user_ids)
     {
-        if (!$user_ids) {
-            $user_ids = array();
+        if (! $user_ids) {
+            $user_ids = [];
         }
 
         $current = $this->coordinators->pluck('id')->toArray();
         $toDelete = array_filter($current, function ($value) use ($user_ids) {
-            return !in_array($value, $user_ids);
+            return ! in_array($value, $user_ids);
         });
         $toAdd = array_filter($user_ids, function ($value) use ($current) {
-            return !in_array($value, $current);
+            return ! in_array($value, $current);
         });
 
         foreach ($toDelete as $user_id) {

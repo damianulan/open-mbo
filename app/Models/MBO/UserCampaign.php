@@ -2,21 +2,15 @@
 
 namespace App\Models\MBO;
 
-use App\Models\BaseModel;
-use App\Casts\CheckboxCast;
-use App\Models\Core\User;
-use App\Models\MBO\Campaign;
 use App\Enums\MBO\CampaignStage;
-use App\Enums\MBO\UserObjectiveStatus;
-use App\Models\MBO\UserObjective;
 use App\Events\MBO\Campaigns\UserCampaignAssigned;
 use App\Events\MBO\Campaigns\UserCampaignUnassigned;
-use Lucent\Support\Traits\Dispatcher;
 use App\Events\MBO\Campaigns\UserCampaignUpdated;
+use App\Models\BaseModel;
+use App\Models\Core\User;
+use Lucent\Support\Traits\Dispatcher;
 
 /**
- *
- *
  * @property string $id
  * @property string $campaign_id
  * @property string $user_id
@@ -30,6 +24,7 @@ use App\Events\MBO\Campaigns\UserCampaignUpdated;
  * @property-read int|null $activities_count
  * @property-read Campaign $campaign
  * @property-read User $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign onlyTrashed()
@@ -45,6 +40,7 @@ use App\Events\MBO\Campaigns\UserCampaignUpdated;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserCampaign extends BaseModel
@@ -65,7 +61,6 @@ class UserCampaign extends BaseModel
         'active' => 'boolean',
         'manual' => 'boolean',
     ];
-
 
     public $timestamps = true;
 
@@ -96,7 +91,7 @@ class UserCampaign extends BaseModel
 
     public function stageDescription(): string
     {
-        return __('forms.campaigns.' . $this->stage);
+        return __('forms.campaigns.'.$this->stage);
     }
 
     public function stageIcon(): string
@@ -140,6 +135,7 @@ class UserCampaign extends BaseModel
     {
         $this->manual = $this->manual ? 0 : 1;
         $this->stage = $this->campaign->setUserStage();
+
         return $this->update();
     }
 
@@ -150,8 +146,6 @@ class UserCampaign extends BaseModel
 
     /**
      * Sets users' objectives statuses based on campaign stage changes.
-     *
-     * @return void
      */
     public function mapObjectiveStatus(): void
     {

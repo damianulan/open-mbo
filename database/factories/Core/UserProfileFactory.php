@@ -2,16 +2,15 @@
 
 namespace Database\Factories\Core;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Core\UserProfile;
 use App\Enums\Users\Gender;
+use App\Models\Core\UserProfile;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
 class UserProfileFactory extends Factory
 {
-
     protected $model = UserProfile::class;
 
     /**

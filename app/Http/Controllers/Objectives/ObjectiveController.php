@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers\Objectives;
 
-use Illuminate\Http\Request;
-use App\Models\MBO\Objective;
-use App\Http\Controllers\Objectives\MBOController;
 use App\DataTables\MBO\ObjectiveDataTable;
 use App\Forms\MBO\Objective\ObjectiveEditForm;
-use App\Models\Core\User;
-use App\Models\MBO\Campaign;
-use App\Enums\MBO\UserObjectiveStatus;
+use App\Models\MBO\Objective;
+use Illuminate\Http\Request;
 
 class ObjectiveController extends MBOController
 {
@@ -44,9 +40,11 @@ class ObjectiveController extends MBOController
 
             if ($objective->save()) {
                 $response['message'] = __('alerts.objectives.success.objective_added');
+
                 return response()->json($response);
             }
         }
+
         return response()->json($response);
     }
 
@@ -59,6 +57,7 @@ class ObjectiveController extends MBOController
         $this->logShow($objective);
 
         $header = 'Podsumowanie Celu';
+
         return view('pages.mbo.objectives.show', [
             'objective' => $objective,
             'pagetitle' => $header,
@@ -82,9 +81,11 @@ class ObjectiveController extends MBOController
 
             if ($objective->update()) {
                 $response['message'] = __('alerts.objectives.success.objective_updated');
+
                 return response()->json($response);
             }
         }
+
         return response()->json($response);
     }
 

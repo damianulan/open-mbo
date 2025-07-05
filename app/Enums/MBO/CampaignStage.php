@@ -3,7 +3,6 @@
 namespace App\Enums\MBO;
 
 use Lucent\Support\Enum;
-use App\Enums\MBO\UserObjectiveStatus;
 
 /**
  * Campaign Stages can be assigned to campaigns and users in campaign.
@@ -16,16 +15,24 @@ class CampaignStage extends Enum
     // in progress/soft stages - campaign can have multiple of them assigned.
     // if any assigned its generally an IN_PROGESS stage
     const DEFINITION = 'definition';
+
     const DISPOSITION = 'disposition';
+
     const REALIZATION = 'realization';
+
     const EVALUATION = 'evaluation';
+
     const SELF_EVALUATION = 'self_evaluation';
 
     // hard stages
     const PENDING = 'pending'; // starting point stage
+
     const IN_PROGRESS = 'in_progress'; // const when process is in progress
+
     const COMPLETED = 'completed'; // const when process is finished in time
+
     const TERMINATED = 'terminated'; // const when process has been terminated after it has started
+
     const CANCELED = 'canceled'; // const when process has been canceled
 
     public static function hardValues(): array
@@ -76,12 +83,12 @@ class CampaignStage extends Enum
 
     public static function getName(string $value): string
     {
-        return __('forms.campaigns.' . $value);
+        return __('forms.campaigns.'.$value);
     }
 
     public static function getInfo(string $value): string
     {
-        return __('forms.campaigns.info.' . $value);
+        return __('forms.campaigns.info.'.$value);
     }
 
     public static function getBySequence(int $sequence)
@@ -125,12 +132,13 @@ class CampaignStage extends Enum
                 $status = 'bi-hourglass-bottom';
                 break;
         }
+
         return $status;
     }
 
     /**
-     * @param string $stage - UserCampaign stage
-     * @param string $status - UserObjective status
+     * @param  string  $stage  - UserCampaign stage
+     * @param  string  $status  - UserObjective status
      * @return string $status
      */
     public static function mapObjectiveStatus(string $stage, string $status): string
@@ -138,7 +146,7 @@ class CampaignStage extends Enum
         $sequences = self::sequences();
         $frozen = UserObjectiveStatus::evaluated();
 
-        if (array_key_exists($stage, $sequences) && !in_array($status, $frozen)) {
+        if (array_key_exists($stage, $sequences) && ! in_array($status, $frozen)) {
             if ($stage === self::REALIZATION || $stage === self::IN_PROGRESS) {
                 $status = UserObjectiveStatus::PROGRESS;
             } elseif ($sequences[$stage] < $sequences[self::REALIZATION]) {

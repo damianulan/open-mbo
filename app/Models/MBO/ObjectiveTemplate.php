@@ -3,15 +3,11 @@
 namespace App\Models\MBO;
 
 use App\Models\BaseModel;
-use FormForge\Casts\TrixFieldCast;
 use App\Models\Core\User;
-use App\Models\MBO\Objective;
-use App\Models\MBO\ObjectiveTemplateCategory;
 use App\Models\Scopes\MBO\ObjectiveTemplateScope;
+use FormForge\Casts\TrixFieldCast;
 
 /**
- *
- *
  * @property string $id
  * @property string|null $category_id
  * @property string $name
@@ -27,6 +23,7 @@ use App\Models\Scopes\MBO\ObjectiveTemplateScope;
  * @property-read ObjectiveTemplateCategory|null $category
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Objective> $objectives
  * @property-read int|null $objectives_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate onlyTrashed()
@@ -44,11 +41,11 @@ use App\Models\Scopes\MBO\ObjectiveTemplateScope;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withoutTrashed()
  * @method static \Database\Factories\MBO\ObjectiveTemplateFactory factory($count = null, $state = [])
+ *
  * @mixin \Eloquent
  */
 class ObjectiveTemplate extends BaseModel
 {
-
     protected $fillable = [
         'category_id',
         'name',
@@ -110,13 +107,14 @@ class ObjectiveTemplate extends BaseModel
 
     public function assign(User $user): bool
     {
-        $objective = new Objective();
+        $objective = new Objective;
         $objective->template_id = $this->id;
         $objective->user_id = $user->id;
         $objective->name = $this->name;
         $objective->description = $this->description;
         $objective->draft = 1;
         $objective->award = $this->award;
+
         return $objective->save();
     }
 }

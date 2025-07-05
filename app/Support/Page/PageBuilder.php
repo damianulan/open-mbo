@@ -3,21 +3,28 @@
 namespace App\Support\Page;
 
 use App\Settings\GeneralSettings;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Lang;
 use App\Support\Page\Bars\SidebarMenu;
-use App\Support\Page\MenuBuilder;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Route;
 
 class PageBuilder
 {
     public $routename;
+
     public $sitename;
+
     public $title;
+
     public $info;
+
     public $theme;
+
     public $locale;
+
     public $logo;
+
     public $sidebar_collapsed = null;
+
     public SidebarMenu $sidebar;
 
     public function __construct(?string $pagetitle = null)
@@ -30,8 +37,8 @@ class PageBuilder
             $this->title = $pagetitle;
         }
         $this->info = null;
-        if (Lang::hasForLocale('menus.info.' . $this->routename)) {
-            $this->info = __('menus.info.' . $this->routename);
+        if (Lang::hasForLocale('menus.info.'.$this->routename)) {
+            $this->info = __('menus.info.'.$this->routename);
         }
 
         $this->sitename = app(GeneralSettings::class)->site_name;
@@ -49,6 +56,6 @@ class PageBuilder
 
     private function assignPageTitle()
     {
-        return __('menus.' . $this->routename);
+        return __('menus.'.$this->routename);
     }
 }

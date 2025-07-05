@@ -6,8 +6,6 @@ use App\Models\BaseModel;
 use FormForge\Casts\TrixFieldCast;
 
 /**
- * 
- *
  * @property string $id
  * @property string $name
  * @property mixed|null $description
@@ -18,6 +16,7 @@ use FormForge\Casts\TrixFieldCast;
  * @property-read int|null $activities_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\UserEmployment> $employments
  * @property-read int|null $employments_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract onlyTrashed()
@@ -30,7 +29,9 @@ use FormForge\Casts\TrixFieldCast;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract withoutTrashed()
+ *
  * @property string $shortname
+ *
  * @mixin \Eloquent
  */
 class TypeOfContract extends BaseModel
@@ -39,7 +40,7 @@ class TypeOfContract extends BaseModel
         'uop',
         'uz',
         'b2b',
-        'uod'
+        'uod',
     ];
 
     protected $fillable = [

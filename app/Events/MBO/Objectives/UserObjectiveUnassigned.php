@@ -2,11 +2,11 @@
 
 namespace App\Events\MBO\Objectives;
 
-use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Queue\SerializesModels;
 use App\Models\Core\User;
 use App\Models\MBO\Objective;
 use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 
 class UserObjectiveUnassigned implements ShouldDispatchAfterCommit
 {

@@ -7,6 +7,7 @@ use Livewire\Component;
 class Item extends Component
 {
     public $notification;
+
     public $message;
 
     public function mount($notification)

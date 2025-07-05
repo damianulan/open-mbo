@@ -2,26 +2,25 @@
 
 namespace App\Forms\MBO\Objective;
 
+use App\Models\Core\User;
+use App\Models\MBO\ObjectiveTemplateCategory;
 use FormForge\Base\Form;
-use Illuminate\Http\Request;
-use FormForge\FormBuilder;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
-use App\Models\MBO\ObjectiveTemplateCategory;
-use App\Models\Core\User;
+use FormForge\FormBuilder;
+use Illuminate\Http\Request;
 
 class ObjectiveCategoryEditForm extends Form
 {
-
     public static function definition(Request $request, $model = null): FormBuilder
     {
         $route = route('mbo.categories.store');
         $method = 'POST';
-        $selected = array();
+        $selected = [];
         $category = null;
 
         $shortnameType = 'text';
-        if (!is_null($model)) {
+        if (! is_null($model)) {
             $method = 'PUT';
             $route = route('mbo.categories.update', $model->id);
             $category = ObjectiveTemplateCategory::find($model->id);
@@ -31,7 +30,7 @@ class ObjectiveCategoryEditForm extends Form
             }
         }
 
-        return (FormBuilder::boot($request, $method, $route, 'objective_category_edit'))
+        return FormBuilder::boot($request, $method, $route, 'objective_category_edit')
             ->class('objective-category-create-form')
             ->add(FormComponent::text('name', $model)->label(__('forms.mbo.categories.name'))->required())
             ->add(FormComponent::{$shortnameType}('shortname', $model)->label(__('forms.mbo.categories.shortname')))
@@ -44,7 +43,7 @@ class ObjectiveCategoryEditForm extends Form
     {
         return [
             'name' => 'max:50|required',
-            'shortname' => 'max:20|required|unique:objective_template_categories,shortname,' . $model_id,
+            'shortname' => 'max:20|required|unique:objective_template_categories,shortname,'.$model_id,
             'description' => 'max:1000|nullable',
         ];
     }

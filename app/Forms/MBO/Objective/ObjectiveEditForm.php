@@ -2,25 +2,24 @@
 
 namespace App\Forms\MBO\Objective;
 
+use App\Models\MBO\Objective;
+use App\Models\MBO\ObjectiveTemplate;
 use FormForge\Base\Form;
-use FormForge\FormBuilder;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
-use App\Models\MBO\ObjectiveTemplate;
-use App\Models\MBO\Objective;
+use FormForge\FormBuilder;
 use Illuminate\Http\Request;
 
 // Ajax form
 class ObjectiveEditForm extends Form
 {
-
     // TODO - dodawanie użytkowników
     public static function definition(Request $request, $model = null): FormBuilder
     {
         $route = null;
         $method = 'POST';
         $title = 'Dodaj nowy cel';
-        if (!is_null($model)) {
+        if (! is_null($model)) {
             $method = 'PUT';
             $title = 'Edytuj cel';
         }

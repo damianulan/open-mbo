@@ -2,17 +2,14 @@
 
 namespace App\Models\Core;
 
+use App\Casts\Enigma;
+use App\Enums\Users\Gender;
+use FormForge\Traits\RequestForms;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Enums\Users\Gender;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Core\User;
-use FormForge\Traits\RequestForms;
-use App\Casts\Enigma;
 
 /**
- * 
- *
  * @property int $id
  * @property string $user_id
  * @property string $firstname
@@ -25,6 +22,7 @@ use App\Casts\Enigma;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read User $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile onlyTrashed()
@@ -42,13 +40,16 @@ use App\Casts\Enigma;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withoutTrashed()
+ *
  * @property string $lang
+ *
  * @method static \Database\Factories\Core\UserProfileFactory factory($count = null, $state = [])
+ *
  * @mixin \Eloquent
  */
 class UserProfile extends Model
 {
-    use HasFactory, SoftDeletes, RequestForms;
+    use HasFactory, RequestForms, SoftDeletes;
 
     protected $fillable = [
         'firstname',

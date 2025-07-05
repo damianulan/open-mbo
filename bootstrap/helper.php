@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use App\Exceptions\Core\UnauthorizedAccess;
+use Illuminate\Support\Facades\Auth;
 
 function lorem()
 {
@@ -21,13 +21,10 @@ function lorem_paragraph()
 /**
  *  Returns currently logged user instance or empty instance of User model.
  *  Do not call in class constructors.
- *
- * @param  string|null          $user_id
- * @return App\Models\Core\User
  */
 function user(?string $user_id = null): App\Models\Core\User
 {
-    $user = new App\Models\Core\User();
+    $user = new App\Models\Core\User;
     if (is_null($user_id)) {
         if (Auth::check()) {
             $user = Auth::user();
@@ -49,7 +46,7 @@ function isRoot(bool $strict = false): bool
 
 function ajax(): App\Support\Http\ResponseAjax
 {
-    return new App\Support\Http\ResponseAjax();
+    return new App\Support\Http\ResponseAjax;
 }
 
 function current_theme(): string
@@ -83,10 +80,6 @@ function production(): bool
 
 /**
  * Converts float values to their string representation based on current locale.
- *
- * @param  float  $value
- * @param  int    $decimals
- * @return string
  */
 function float_view(float $value, int $decimals = 2): string
 {
@@ -108,8 +101,8 @@ function unauthorized($message = '', $permission = null)
 /**
  * Returns settings value from Spatie Laravel Settings. Requires custom singletons in config service provider.
  *
- * @param string $key - use as group.setting
- * @param mixed  $default
+ * @param  string  $key  - use as group.setting
+ * @param  mixed  $default
  * @return void
  */
 function setting(string $key, $default = null)
@@ -120,7 +113,7 @@ function setting(string $key, $default = null)
     $setting = null;
 
     if ($group && $key) {
-        $appkey = 'settings.' . strtolower($group);
+        $appkey = 'settings.'.strtolower($group);
         $class = app($appkey) ?? null;
         $setting = $class ? $class->$key : null;
     }

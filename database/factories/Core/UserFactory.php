@@ -2,17 +2,16 @@
 
 namespace Database\Factories\Core;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use App\Models\Core\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Core\User>
  */
 class UserFactory extends Factory
 {
-
     protected $model = User::class;
 
     /**

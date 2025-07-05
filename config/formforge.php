@@ -19,7 +19,7 @@ return [
 
     'templates' => [
         'horizontal' => [],
-        '2columns' => []
+        '2columns' => [],
     ],
 
     /**

@@ -2,24 +2,20 @@
 
 namespace App\Models\MBO;
 
-use App\Models\BaseModel;
-use App\Models\Core\User;
-use App\Models\MBO\Objective;
-use App\Enums\MBO\UserObjectiveStatus;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Auth;
-use Lucent\Support\Traits\Dispatcher;
-use Carbon\Carbon;
-use App\Models\MBO\UserCampaign;
 use App\Enums\MBO\CampaignStage;
+use App\Enums\MBO\UserObjectiveStatus;
 use App\Events\MBO\Campaigns\CampaignUserObjectiveAssigned;
 use App\Events\MBO\Campaigns\CampaignUserObjectiveUnassigned;
 use App\Events\MBO\Objectives\UserObjectiveAssigned;
 use App\Events\MBO\Objectives\UserObjectiveUnassigned;
+use App\Models\BaseModel;
+use App\Models\Core\User;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
+use Lucent\Support\Traits\Dispatcher;
 
 /**
- *
- *
  * @property string $id
  * @property string $user_id
  * @property string $objective_id
@@ -32,6 +28,7 @@ use App\Events\MBO\Objectives\UserObjectiveUnassigned;
  * @property-read int|null $activities_count
  * @property-read Objective $objective
  * @property-read User $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserObjective newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserObjective newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserObjective onlyTrashed()
@@ -46,6 +43,7 @@ use App\Events\MBO\Objectives\UserObjectiveUnassigned;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserObjective whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserObjective withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserObjective withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserObjective extends BaseModel
@@ -71,14 +69,15 @@ class UserObjective extends BaseModel
     {
         $output = false;
         $existing = self::where('user_id', $user_id)->where('objective_id', $objective_id)->exists();
-        if (!$existing) {
-            $instance = new self();
+        if (! $existing) {
+            $instance = new self;
             $instance->user_id = $user_id;
             $instance->objective_id = $objective_id;
             if ($instance->save()) {
                 return true;
             }
         }
+
         return $output;
     }
 
@@ -91,6 +90,7 @@ class UserObjective extends BaseModel
                 $output = true;
             }
         }
+
         return $output;
     }
 
@@ -122,14 +122,14 @@ class UserObjective extends BaseModel
         }
 
         if ($userCampaign) {
-            if (!$userCampaign->active) {
+            if (! $userCampaign->active) {
                 $status = UserObjectiveStatus::INTERRUPTED;
             } else {
                 $status = CampaignStage::mapObjectiveStatus($userCampaign->stage, $status);
             }
         }
 
-        if (!in_array($status, $frozen)) {
+        if (! in_array($status, $frozen)) {
             if ($this->isAfterDeadline()) {
                 if ($autofail) {
                     // TODO fail when expected value is filled and not met
@@ -137,7 +137,7 @@ class UserObjective extends BaseModel
                 }
                 $status = UserObjectiveStatus::COMPLETED;
             } else {
-                if (!$userCampaign) {
+                if (! $userCampaign) {
                     $status = UserObjectiveStatus::PROGRESS;
                 }
             }
@@ -172,7 +172,6 @@ class UserObjective extends BaseModel
     {
         return $this->canBeEvaluated() && $this->status !== UserObjectiveStatus::PASSED;
     }
-
 
     public function isPassed(): bool
     {
@@ -221,7 +220,7 @@ class UserObjective extends BaseModel
 
     public function scopeMy(Builder $query, ?User $user = null): void
     {
-        if (!$user) {
+        if (! $user) {
             $user = Auth::user();
         }
         $query->where('user_id', $user->id);
@@ -235,6 +234,7 @@ class UserObjective extends BaseModel
     public static function creatingUserObjective(UserObjective $model): UserObjective
     {
         $model->setStatus();
+
         return $model;
     }
 
@@ -258,7 +258,7 @@ class UserObjective extends BaseModel
 
     public static function updatedUserObjective(UserObjective $model): void
     {
-        if (!in_array('status', $model->getDirty())) {
+        if (! in_array('status', $model->getDirty())) {
             $model->setStatus()->update();
         }
     }

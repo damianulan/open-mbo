@@ -2,9 +2,9 @@
 
 namespace App\Casts\Carbon;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 
 class CarbonDatetime implements CastsAttributes
 {
@@ -15,7 +15,7 @@ class CarbonDatetime implements CastsAttributes
      */
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        return empty($value) ? null:Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('app.datetime_format'));
+        return empty($value) ? null : Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('app.datetime_format'));
     }
 
     /**
@@ -25,6 +25,6 @@ class CarbonDatetime implements CastsAttributes
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        return empty($value) ? NULL:date('Y-m-d H:i:s', strtotime($value));
+        return empty($value) ? null : date('Y-m-d H:i:s', strtotime($value));
     }
 }

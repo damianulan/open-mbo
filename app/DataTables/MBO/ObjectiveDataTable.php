@@ -2,24 +2,25 @@
 
 namespace App\DataTables\MBO;
 
-use App\Models\Core\User;
+use App\Models\MBO\Objective;
+use App\Support\DataTables\CustomDataTable;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Carbon;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Column;
-use Illuminate\Support\Carbon;
-use App\Support\DataTables\CustomDataTable;
-use App\Models\MBO\Objective;
 
 class ObjectiveDataTable extends CustomDataTable
 {
     protected $id = 'objective_table';
+
     protected $orderBy = 'deadline';
+
     protected $orderByDir = 'desc';
 
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder $query Results from query() method.
+     * @param  QueryBuilder  $query  Results from query() method.
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
@@ -32,14 +33,17 @@ class ObjectiveDataTable extends CustomDataTable
             })
             ->editColumn('deadline', function ($data) {
                 $formatedDate = Carbon::parse($data->deadline)->format(config('app.date_format'));
+
                 return $formatedDate;
             })
             ->editColumn('created_at', function ($data) {
                 $formatedDate = Carbon::parse($data->created_at)->format(config('app.datetime_format'));
+
                 return $formatedDate;
             })
             ->editColumn('updated_at', function ($data) {
                 $formatedDate = Carbon::parse($data->created_at)->format(config('app.datetime_format'));
+
                 return $formatedDate;
             });
     }
@@ -50,6 +54,7 @@ class ObjectiveDataTable extends CustomDataTable
     public function query(Objective $model): QueryBuilder
     {
         $query = $model->query();
+
         return $query;
     }
 
@@ -63,35 +68,35 @@ class ObjectiveDataTable extends CustomDataTable
             'expected',
             'created_at',
             'updated_at',
-            'action'
+            'action',
         ];
     }
 
     protected function availableColumns(): array
     {
         return [
-            'name'          => Column::make('name')
+            'name' => Column::make('name')
                 ->title(__('forms.mbo.objectives.name'))
                 ->searchable(true)
                 ->orderable(true)
                 ->addClass('firstcol'),
-            'deadline'      => Column::make('deadline')
+            'deadline' => Column::make('deadline')
                 ->title(__('forms.mbo.objectives.deadline'))
                 ->orderable(true),
-            'weight'      => Column::make('weight')
+            'weight' => Column::make('weight')
                 ->title(__('forms.mbo.objectives.weight'))
                 ->orderable(true),
-            'award'      => Column::make('award')
+            'award' => Column::make('award')
                 ->title(__('forms.mbo.objectives.award'))
                 ->orderable(true),
-            'expected'      => Column::make('expected')
+            'expected' => Column::make('expected')
                 ->title(__('forms.mbo.objectives.expected'))
                 ->orderable(true),
-            'created_at'    => Column::make('created_at')
+            'created_at' => Column::make('created_at')
                 ->title(__('fields.created_at')),
-            'updated_at'    => Column::make('updated_at')
+            'updated_at' => Column::make('updated_at')
                 ->title(__('fields.updated_at')),
-            'action'        => Column::computed('action')
+            'action' => Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
                 ->addClass('lastcol action-btns')
@@ -99,12 +104,11 @@ class ObjectiveDataTable extends CustomDataTable
         ];
     }
 
-
     /**
      * Get the filename for export.
      */
     protected function filename(): string
     {
-        return 'Objectives_' . date('YmdHis');
+        return 'Objectives_'.date('YmdHis');
     }
 }

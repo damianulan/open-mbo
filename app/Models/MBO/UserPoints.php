@@ -3,12 +3,8 @@
 namespace App\Models\MBO;
 
 use App\Models\BaseModel;
-use App\Models\Core\User;
-use App\Models\MBO\Objective;
 
 /**
- * 
- *
  * @property int $id
  * @property string $user_id
  * @property string $subject_type
@@ -20,6 +16,7 @@ use App\Models\MBO\Objective;
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPoints newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPoints newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPoints onlyTrashed()
@@ -35,6 +32,7 @@ use App\Models\MBO\Objective;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPoints whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPoints withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPoints withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserPoints extends BaseModel
@@ -46,5 +44,4 @@ class UserPoints extends BaseModel
         'points',
         'assigned_by',
     ];
-
 }

@@ -2,10 +2,8 @@
 
 namespace App\Listeners\Activity;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Auth\Events\Failed as AuthFailed;
 use App\Models\Core\User;
+use Illuminate\Auth\Events\Failed as AuthFailed;
 
 class LogAuthFailed
 {
@@ -22,14 +20,14 @@ class LogAuthFailed
      */
     public function handle(AuthFailed $event): void
     {
-        if($event->user){
+        if ($event->user) {
             $user = User::find($event->user->id);
-            if($user){
+            if ($user) {
                 activity('auth')
-                ->causedBy($user)
-                ->withProperties(['authenticated' => false])
-                ->event('auth_attempt_fail')
-                ->log(__('logging.description.auth_attempt_fail'));
+                    ->causedBy($user)
+                    ->withProperties(['authenticated' => false])
+                    ->event('auth_attempt_fail')
+                    ->log(__('logging.description.auth_attempt_fail'));
             }
         }
     }

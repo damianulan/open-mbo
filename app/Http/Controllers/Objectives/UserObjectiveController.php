@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers\Objectives;
 
-use App\Http\Controllers\AppController;
-use Illuminate\Http\Request;
-use App\Models\MBO\Objective;
-use App\Models\Core\User;
-use App\Models\MBO\Campaign;
-use App\Models\MBO\UserObjective;
-use App\Enums\MBO\UserObjectiveStatus;
-use Illuminate\Support\Facades\Auth;
 use App\Forms\MBO\Objective\ObjectiveEditUserForm;
+use App\Http\Controllers\AppController;
+use App\Models\MBO\Objective;
+use App\Models\MBO\UserObjective;
 use App\Services\Objectives\BulkAssignUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserObjectiveController extends AppController
 {
@@ -48,6 +45,7 @@ class UserObjectiveController extends AppController
         $this->logShow($userObjective);
 
         $header = 'Podsumowanie Celu';
+
         return view('pages.mbo.objectives.users.show', [
             'userObjective' => $userObjective,
             'user' => $userObjective->user,
@@ -76,9 +74,11 @@ class UserObjectiveController extends AppController
             $service = BulkAssignUsers::boot(request: $request, objective: $objective)->execute();
             if ($service->passed()) {
                 $response['message'] = __('alerts.objectives.success.users_added');
+
                 return response()->json($response);
             }
         }
+
         return response()->json($response);
     }
 

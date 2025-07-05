@@ -2,33 +2,28 @@
 
 namespace App\Models\Core;
 
+use App\Traits\HasRolesAndPermissions;
+use App\Traits\UserBusiness;
+use App\Traits\UserMBO;
+use App\Traits\Vendors\Impersonable;
+use App\Traits\Vendors\ModelActivity;
+use FormForge\Traits\RequestForms;
+use Illuminate\Contracts\Translation\HasLocalePreference;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use Lab404\Impersonate\Models\Impersonate;
-use App\Traits\Vendors\Impersonable;
-use App\Traits\HasRolesAndPermissions;
-use Lucent\Support\Traits\UUID;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use FormForge\Traits\RequestForms;
-use App\Traits\UserMBO;
-use App\Traits\UserBusiness;
-use App\Models\Core\UserProfile;
-use App\Models\Core\UserPreference;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use App\Traits\Vendors\ModelActivity;
-use Illuminate\Contracts\Translation\HasLocalePreference;
-use Lucent\Support\Traits\VirginModel;
-use Illuminate\Support\Facades\Auth;
+use Lab404\Impersonate\Models\Impersonate;
+use Laravel\Sanctum\HasApiTokens;
 use Lucent\Support\Str\Alphabet;
-use Lucent\Support\Traits\Accessible;
-use Illuminate\Database\Eloquent\Casts\Attribute;
+use Lucent\Support\Traits\UUID;
+use Lucent\Support\Traits\VirginModel;
 
 /**
- *
- *
  * @property string $id
  * @property string $email
  * @property \Illuminate\Support\Carbon|null $email_verified_at
@@ -71,6 +66,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
  * @property-read int|null $teams_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User onlyTrashed()
@@ -89,13 +85,15 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutTrashed()
  * @method static \Database\Factories\Core\UserFactory factory($count = null, $state = [])
+ *
  * @property-read UserPreference|null $preferences
+ *
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements HasLocalePreference
 {
-    use UUID, HasApiTokens, HasFactory, Notifiable, HasRolesAndPermissions, SoftDeletes, RequestForms;
-    use UserMBO, UserBusiness, Impersonate, Impersonable, ModelActivity, VirginModel;
+    use HasApiTokens, HasFactory, HasRolesAndPermissions, Notifiable, RequestForms, SoftDeletes, UUID;
+    use Impersonable, Impersonate, ModelActivity, UserBusiness, UserMBO, VirginModel;
 
     protected $fillable = [
         'email',
@@ -135,23 +133,26 @@ class User extends Authenticatable implements HasLocalePreference
     public function generatePassword()
     {
         $this->password = Hash::make(Str::random(10));
+
         return $this;
     }
 
     protected function name(): Attribute
     {
-        $value = $this->profile?->firstname . ' ' . $this->profile?->lastname;
+        $value = $this->profile?->firstname.' '.$this->profile?->lastname;
+
         return Attribute::make(
-            get: fn() => ucfirst($value),
+            get: fn () => ucfirst($value),
         );
     }
 
     public function nameView(): string
     {
-        $link = '<span>' . $this->name() . '</span>';
+        $link = '<span>'.$this->name().'</span>';
         if (Auth::user()->can('view', $this)) {
-            $link = '<a href="' . route('users.show', $this->id) . '" class="text-primary">' . $this->name() . '</a>';
+            $link = '<a href="'.route('users.show', $this->id).'" class="text-primary">'.$this->name().'</a>';
         }
+
         return $link;
     }
 
@@ -161,6 +162,7 @@ class User extends Authenticatable implements HasLocalePreference
         if (Auth::user()->can('view', $this)) {
             $view = view('components.datatables.username_link', ['data' => $this]);
         }
+
         return $view;
     }
 
@@ -214,7 +216,7 @@ class User extends Authenticatable implements HasLocalePreference
 
     public function getInitials(): string
     {
-        return strtoupper(substr($this->firstname(), 0, 1) . substr($this->lastname(), 0, 1));
+        return strtoupper(substr($this->firstname(), 0, 1).substr($this->lastname(), 0, 1));
     }
 
     public function getAvatarView(int $height = 70, int $width = 70): string
@@ -223,7 +225,7 @@ class User extends Authenticatable implements HasLocalePreference
             $width = $height;
         }
         if ($this->profile->avatar) {
-            return '<img class="profile-img" src="' . asset($this->profile->avatar) . '" height="' . $height . 'px" width="' . $width . 'px">';
+            return '<img class="profile-img" src="'.asset($this->profile->avatar).'" height="'.$height.'px" width="'.$width.'px">';
         }
 
         $fontSize = $height / 2.8;
@@ -233,22 +235,22 @@ class User extends Authenticatable implements HasLocalePreference
         $color = '#111';
         if ($letterNum < 4) {
             $color = 'orange';
-        } else if ($letterNum < 8) {
+        } elseif ($letterNum < 8) {
             $color = 'green';
-        } else if ($letterNum < 16) {
+        } elseif ($letterNum < 16) {
             $color = 'cyan';
-        } else if ($letterNum < 20) {
+        } elseif ($letterNum < 20) {
             $color = 'brown';
         } else {
             $color = 'red';
         }
 
-        return '<div class="profile-img" style="background-color: var(--bs-' . $color . '); font-size: ' . $fontSize . 'px; min-height: ' . $height . 'px; min-width: ' . $width . 'px;"><div>' . $initials . '</div></div>';
+        return '<div class="profile-img" style="background-color: var(--bs-'.$color.'); font-size: '.$fontSize.'px; min-height: '.$height.'px; min-width: '.$width.'px;"><div>'.$initials.'</div></div>';
     }
 
     public function canBeImpersonated(): bool
     {
-        return !$this->hasAnyRoles(['root', 'support']) || isRoot(true);
+        return ! $this->hasAnyRoles(['root', 'support']) || isRoot(true);
     }
 
     public function canImpersonate(): bool

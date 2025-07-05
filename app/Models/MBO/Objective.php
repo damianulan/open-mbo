@@ -2,23 +2,16 @@
 
 namespace App\Models\MBO;
 
-use App\Models\BaseModel;
-use FormForge\Casts\TrixFieldCast;
-use App\Casts\CheckboxCast;
-use App\Models\MBO\ObjectiveTemplate;
-use App\Models\MBO\Campaign;
-use App\Models\Core\User;
 use App\Casts\Carbon\CarbonDatetime;
-use App\Models\MBO\UserObjective;
+use App\Models\BaseModel;
+use App\Models\Core\User;
+use App\Models\Scopes\MBO\ObjectiveScope;
+use FormForge\Casts\TrixFieldCast;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\JoinClause;
-use App\Enums\Core\SystemRolesLib;
-use App\Models\Scopes\MBO\ObjectiveScope;
 use Lucent\Support\Traits\Dispatcher;
 
 /**
- *
- *
  * @property string $id
  * @property string|null $template_id
  * @property string|null $parent_id
@@ -42,6 +35,7 @@ use Lucent\Support\Traits\Dispatcher;
  * @property-read ObjectiveTemplate|null $template
  * @property-read \Illuminate\Database\Eloquent\Collection<int, UserObjective> $user_assignments
  * @property-read int|null $user_assignments_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective onlyTrashed()
@@ -62,6 +56,7 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective whereWeight($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Objective extends BaseModel
@@ -85,7 +80,6 @@ class Objective extends BaseModel
         'deadline' => CarbonDatetime::class,
         'description' => TrixFieldCast::class,
     ];
-
 
     protected $accessScope = ObjectiveScope::class;
 
@@ -112,6 +106,7 @@ class Objective extends BaseModel
                 return true;
             }
         }
+
         return false;
     }
 

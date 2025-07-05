@@ -35,15 +35,13 @@ class UserObjectiveStatus extends Enum
 
     /**
      * Frozen values are not editable by most system processes that automatically change status..
-     *
-     * @return array
      */
     public static function frozen(): array
     {
         return [
             self::PASSED,
             self::FAILED,
-            self::INTERRUPTED
+            self::INTERRUPTED,
         ];
     }
 

@@ -2,23 +2,24 @@
 
 namespace App\DataTables\Settings;
 
+use App\Support\DataTables\CustomDataTable;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Activitylog\Models\Activity;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Column;
-use App\Support\DataTables\CustomDataTable;
-use Illuminate\Support\Carbon;
-use Spatie\Activitylog\Models\Activity;
-use Illuminate\Support\Facades\Auth;
 
 class MyLogsDataTable extends CustomDataTable
 {
     protected $id = 'my_logs_table';
+
     protected $orderBy = 'created_at';
 
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder $query Results from query() method.
+     * @param  QueryBuilder  $query  Results from query() method.
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
@@ -27,13 +28,13 @@ class MyLogsDataTable extends CustomDataTable
             ->addColumn('event', function ($data) {
                 return view('components.datatables.badge', [
                     'color' => $this->getEventColor($data->event),
-                    'text' => __('logging.events.' . $data->event),
+                    'text' => __('logging.events.'.$data->event),
                 ]);
             })
             ->addColumn('subject', function ($data) {
                 if ($data->subject) {
                     return view('components.datatables.link', [
-                        'route' => route(__('logging.route_mapping.' . $data->subject_type), $data->subject_id),
+                        'route' => route(__('logging.route_mapping.'.$data->subject_type), $data->subject_id),
                         'text' => $data->subject->name ?? null,
                     ]);
                 } else {
@@ -42,7 +43,7 @@ class MyLogsDataTable extends CustomDataTable
             })
             ->addColumn('subject_type', function ($data) {
                 if ($data->subject) {
-                    return __('logging.model_mapping.' . $data->subject_type);
+                    return __('logging.model_mapping.'.$data->subject_type);
                 } else {
                     return __('globals.not_applicable');
                 }
@@ -57,6 +58,7 @@ class MyLogsDataTable extends CustomDataTable
             })
             ->editColumn('created_at', function ($data) {
                 $formatedDate = Carbon::parse($data->created_at)->format(config('app.datetime_format'));
+
                 return $formatedDate;
             });
     }
@@ -78,23 +80,23 @@ class MyLogsDataTable extends CustomDataTable
             'event',
             'subject',
             'subject_type',
-            'created_at'
+            'created_at',
         ];
     }
 
     protected function availableColumns(): array
     {
         return [
-            'event'         => Column::computed('event')
+            'event' => Column::computed('event')
                 ->title(__('logging.columns.event'))
                 ->addClass('firstcol'),
-            'subject'       => Column::computed('subject')
+            'subject' => Column::computed('subject')
                 ->title(__('logging.columns.subject')),
-            'subject_type'  => Column::computed('subject_type')
+            'subject_type' => Column::computed('subject_type')
                 ->title(__('logging.columns.subject_type')),
-            'description'   => Column::make('description')
+            'description' => Column::make('description')
                 ->title(__('logging.columns.description')),
-            'created_at'    => Column::make('created_at')
+            'created_at' => Column::make('created_at')
                 ->title(__('logging.columns.created_at'))
                 ->addClass('lastcol'),
         ];
@@ -105,9 +107,8 @@ class MyLogsDataTable extends CustomDataTable
      */
     protected function filename(): string
     {
-        return 'MyLogs_' . date('YmdHis');
+        return 'MyLogs_'.date('YmdHis');
     }
-
 
     private function getEventColor(string $event): string
     {

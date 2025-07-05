@@ -2,30 +2,29 @@
 
 namespace App\Forms\MBO\Objective;
 
-use FormForge\Base\Form;
-use FormForge\FormBuilder;
-use FormForge\Base\FormComponent;
-use FormForge\Components\Dictionary;
 use App\Models\Core\User;
 use App\Models\MBO\UserObjective;
+use FormForge\Base\Form;
+use FormForge\Base\FormComponent;
+use FormForge\Components\Dictionary;
+use FormForge\FormBuilder;
 use Illuminate\Http\Request;
 
 // Ajax form
 class ObjectiveEditUserForm extends Form
 {
-
     public static function definition(Request $request, $model = null): FormBuilder
     {
         $route = null;
         $method = 'POST';
         $title = 'Dodaj użytkowników do realizacji celu';
-        $selected = array();
-        $exclude = array();
+        $selected = [];
+        $exclude = [];
 
         if ($model) {
             $user_ids = UserObjective::where('objective_id', $model->id)->get()->pluck('user_id');
 
-            if (!empty($user_ids)) {
+            if (! empty($user_ids)) {
                 foreach ($user_ids as $tid) {
                     $selected[] = $tid;
                 }

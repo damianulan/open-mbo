@@ -2,11 +2,10 @@
 
 namespace App\View\Components\Users;
 
+use App\Models\Core\User;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
-use Illuminate\Support\Collection;
-use App\Models\Core\User;
 
 class UserDetailsCard extends Component
 {

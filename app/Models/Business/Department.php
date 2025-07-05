@@ -3,14 +3,11 @@
 namespace App\Models\Business;
 
 use App\Models\BaseModel;
-use FormForge\Casts\TrixFieldCast;
-use App\Models\Core\User;
-use App\Models\Business\UserEmployment;
 use App\Models\Core\Role;
+use App\Models\Core\User;
+use FormForge\Casts\TrixFieldCast;
 
 /**
- *
- *
  * @property string $id
  * @property string|null $parent_id
  * @property string $manager_id
@@ -27,6 +24,7 @@ use App\Models\Core\Role;
  * @property-read int|null $employments_count
  * @property-read User $manager
  * @property-read Department|null $parent
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department onlyTrashed()
@@ -41,9 +39,11 @@ use App\Models\Core\Role;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department withoutTrashed()
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $managers
  * @property-read int|null $managers_count
  * @property string $shortname
+ *
  * @mixin \Eloquent
  */
 class Department extends BaseModel

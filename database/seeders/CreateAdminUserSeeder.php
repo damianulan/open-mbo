@@ -2,14 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
-use App\Models\Core\Role;
-use App\Models\Config;
+use App\Enums\Users\Gender;
 use App\Models\Core\User;
 use App\Models\Core\UserProfile;
-use App\Enums\Users\Gender;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class CreateAdminUserSeeder extends Seeder
 {
@@ -32,7 +29,7 @@ class CreateAdminUserSeeder extends Seeder
             'firstname' => 'Site',
             'lastname' => 'Admin',
             'birthday' => fake()->dateTimeBetween('-40 years', '-20years'),
-            'gender' => Gender::MALE
+            'gender' => Gender::MALE,
         ]);
         $user->profile()->save($profile);
         $user->assignRoleSlug('admin');
@@ -48,7 +45,7 @@ class CreateAdminUserSeeder extends Seeder
             'firstname' => 'Damian',
             'lastname' => 'Ułan',
             'birthday' => fake()->dateTimeBetween('-40 years', '-20years'),
-            'gender' => Gender::MALE
+            'gender' => Gender::MALE,
         ]);
         $user->profile()->save($profile);
         $user->assignRoleSlug('root');
@@ -63,7 +60,7 @@ class CreateAdminUserSeeder extends Seeder
             'firstname' => 'Admin',
             'lastname' => 'Helpdesk',
             'birthday' => fake()->dateTimeBetween('-40 years', '-20years'),
-            'gender' => Gender::MALE
+            'gender' => Gender::MALE,
         ]);
         $user->profile()->save($profile);
         $user->assignRoleSlug('support');
@@ -78,7 +75,7 @@ class CreateAdminUserSeeder extends Seeder
             'firstname' => 'Test',
             'lastname' => 'User',
             'birthday' => fake()->dateTimeBetween('-40 years', '-20years'),
-            'gender' => Gender::FEMALE
+            'gender' => Gender::FEMALE,
         ]);
         $user->profile()->save($profile);
         $user->assignRoleSlug('employee');

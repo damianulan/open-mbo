@@ -3,22 +3,24 @@
 namespace App\Support\Page\Bars;
 
 use Illuminate\Support\Collection;
-use App\Support\Page\Bars\MenuItem;
 
 class SidebarMenu
 {
     public $id = 'sidebar';
+
     public $sitename;
+
     public Collection $items;
+
     public $classes = [];
 
     public static function boot(string $sitename, array $items = []): self
     {
-        $instance = new self();
+        $instance = new self;
         $instance->sitename = $sitename;
-        $instance->items = new Collection();
+        $instance->items = new Collection;
 
-        if (!empty($items)) {
+        if (! empty($items)) {
             foreach ($items as $item) {
                 if ($item instanceof MenuItem) {
                     if ($item->id && $item->isVisible()) {
@@ -34,9 +36,10 @@ class SidebarMenu
 
     public function addClass(?string $class): self
     {
-        if (!empty($class)) {
+        if (! empty($class)) {
             $this->classes[] = $class;
         }
+
         return $this;
     }
 
@@ -47,7 +50,7 @@ class SidebarMenu
 
     public function isEmpty(): bool
     {
-        return !$this->items || $this->items->isEmpty();
+        return ! $this->items || $this->items->isEmpty();
     }
 
     public function render()

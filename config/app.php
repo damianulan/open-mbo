@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Facade;
 use App\Lib\Git;
-use App\Lib\Theme;
+use Illuminate\Support\Facades\Facade;
 
 return [
 
@@ -138,12 +137,11 @@ return [
 
     /**
      * Application Versioning
-     * @key release - increments by one after successful implementation of a milestone.
      *
+     * @key release - increments by one after successful implementation of a milestone.
      * @key build - YYYYMMDDV format.
      * V stands for version build for the specific day (max 9).
      */
-
     'release' => '0.0.1 beta',
     'build' => 0,
 
@@ -240,7 +238,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\ComponentServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        //App\Providers\TelescopeServiceProvider::class,
+        // App\Providers\TelescopeServiceProvider::class,
         App\Providers\PermissionServiceProvider::class,
         App\Providers\RolesServiceProvider::class,
         App\Providers\GateServiceProvider::class,

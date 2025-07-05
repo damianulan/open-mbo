@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Campaigns;
 
-use Illuminate\Http\Request;
-use App\Models\MBO\Campaign;
+use App\Events\MBO\Campaigns\CampaignViewed;
 use App\Forms\MBO\Campaign\CampaignEditForm;
 use App\Http\Controllers\AppController;
-use App\Events\MBO\Campaigns\CampaignViewed;
+use App\Models\MBO\Campaign;
 use App\Services\Campaigns\CreateOrUpdate;
+use Illuminate\Http\Request;
 
 class CampaignsController extends AppController
 {
@@ -19,6 +19,7 @@ class CampaignsController extends AppController
         $this->logView('Wyświetlono listę kampanii pomiarowych');
 
         $campaigns = Campaign::checkAccess()->orderByStatus()->paginate(30);
+
         return view('pages.mbo.campaigns.index', [
             'campaigns' => $campaigns,
         ]);
@@ -34,6 +35,7 @@ class CampaignsController extends AppController
         if ($request->user()->cannot('create', Campaign::class)) {
             unauthorized();
         }
+
         return view('pages.mbo.campaigns.edit', [
             'form' => CampaignEditForm::definition($request),
         ]);
@@ -42,7 +44,6 @@ class CampaignsController extends AppController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, CampaignEditForm $form)
@@ -56,8 +57,10 @@ class CampaignsController extends AppController
 
         if ($service->passed()) {
             $campaign = $service->campaign;
+
             return redirect()->route('campaigns.show', $campaign->id)->with('success', __('alerts.campaigns.success.create', ['name' => $campaign->name]));
         }
+
         return redirect()->back()->with('error', $service->getErrors() ?? __('alerts.campaigns.error.create'));
     }
 
@@ -75,7 +78,8 @@ class CampaignsController extends AppController
 
         CampaignViewed::dispatch($campaign);
         $this->logShow($campaign);
-        $header = $campaign->name . ' [' . $campaign->period . ']';
+        $header = $campaign->name.' ['.$campaign->period.']';
+
         return view('pages.mbo.campaigns.show', [
             'campaign' => $campaign,
             'pagetitle' => $header,
@@ -100,7 +104,6 @@ class CampaignsController extends AppController
         ]);
     }
 
-
     public function update(Request $request, $id, CampaignEditForm $form)
     {
         $campaign = Campaign::findOrFail($id);
@@ -114,8 +117,10 @@ class CampaignsController extends AppController
 
         if ($service->passed()) {
             $campaign = $service->getResult();
+
             return redirect()->route('campaigns.show', $id)->with('success', __('alerts.campaigns.success.edit', ['name' => $campaign->name]));
         }
+
         return redirect()->back()->with('error', __('alerts.campaigns.error.edit', ['name' => $campaign->name]));
     }
 }

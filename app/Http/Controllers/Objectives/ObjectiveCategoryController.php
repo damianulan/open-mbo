@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Objectives;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Objectives\MBOController;
-use App\Models\MBO\ObjectiveTemplateCategory;
 use App\DataTables\MBO\ObjectiveCategoriesDataTable;
 use App\Forms\MBO\Objective\ObjectiveCategoryEditForm;
+use App\Models\MBO\ObjectiveTemplateCategory;
+use Illuminate\Http\Request;
 
 class ObjectiveCategoryController extends MBOController
 {
@@ -27,7 +26,7 @@ class ObjectiveCategoryController extends MBOController
     public function create(Request $request)
     {
         return view('pages.mbo.categories.edit', [
-            'form' => ObjectiveCategoryEditForm::definition($request)
+            'form' => ObjectiveCategoryEditForm::definition($request),
         ]);
     }
 
@@ -42,8 +41,10 @@ class ObjectiveCategoryController extends MBOController
 
         if ($objective->save()) {
             $objective->refreshCoordinators($user_ids);
+
             return redirect()->route('mbo.categories.index')->with('success', __('alerts.objective_categories.success.create'));
         }
+
         return redirect()->back()->with('error', __('alerts.error.operation'));
     }
 
@@ -61,6 +62,7 @@ class ObjectiveCategoryController extends MBOController
     public function edit(Request $request, string $id)
     {
         $model = ObjectiveTemplateCategory::findOrFail($id);
+
         return view('pages.mbo.categories.edit', [
             'objective' => $model,
             'form' => ObjectiveCategoryEditForm::definition($request, $model),
@@ -77,8 +79,10 @@ class ObjectiveCategoryController extends MBOController
         $user_ids = $request->input('user_ids');
         if ($objective->update()) {
             $objective->refreshCoordinators($user_ids);
+
             return redirect()->route('mbo.categories.index')->with('success', __('alerts.objective_categories.success.edit'));
         }
+
         return redirect()->back()->with('error', __('alerts.error.operation'));
     }
 
@@ -91,6 +95,7 @@ class ObjectiveCategoryController extends MBOController
         if ($objective->delete()) {
             return redirect()->route('mbo.templates.index')->with('success', __('alerts.objective_categories.success.delete'));
         }
+
         return redirect()->back()->with('error', __('alerts.error.operation'));
     }
 }

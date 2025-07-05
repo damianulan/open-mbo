@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Settings\GeneralSettings;
 use App\Forms\MBO\Campaign\CampaignEditObjectiveForm;
 use App\Forms\MBO\Campaign\CampaignEditUserForm;
-use App\Forms\MBO\Objective\ObjectiveEditUserForm;
 use App\Forms\MBO\Objective\ObjectiveEditForm;
+use App\Forms\MBO\Objective\ObjectiveEditUserForm;
 use App\Models\MBO\Campaign;
 use App\Models\MBO\Objective;
-use App\Http\Controllers\AppController;
+use Illuminate\Http\Request;
 
 class GeneralController extends AppController
 {
-
     public function getModal(Request $request)
     {
         $type = $request->input('type') ?? null;
@@ -22,7 +19,7 @@ class GeneralController extends AppController
         $status = 'error';
         $message = 'error';
         $view = null;
-        $params = array();
+        $params = [];
 
         switch ($type) {
             case 'campaigns.add_objectives':
@@ -43,11 +40,10 @@ class GeneralController extends AppController
                     $status = 'ok';
                 }
 
-
                 break;
 
             case 'campaigns.add_users':
-                //$id - objective_id
+                // $id - objective_id
                 if ($id) {
                     $campaign = Campaign::checkAccess()->find($id);
                     if ($campaign) {
@@ -60,7 +56,6 @@ class GeneralController extends AppController
                 }
 
                 break;
-
 
             case 'objectives.add_users':
                 if ($id) {
@@ -94,17 +89,15 @@ class GeneralController extends AppController
                     $status = 'ok';
                 }
 
-
                 break;
 
-
             default:
-                # code...
+                // code...
                 break;
         }
 
         if ($status === 'ok') {
-            $view = view('components.modals.' . $type, $params)->render();
+            $view = view('components.modals.'.$type, $params)->render();
         }
 
         return response()->json([

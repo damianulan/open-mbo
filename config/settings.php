@@ -3,9 +3,9 @@
 use App\Settings\GeneralSettings;
 use App\Settings\MailSettings;
 use App\Settings\MBOSettings;
-use App\Settings\UserSettings;
-use App\Settings\ReportSettings;
 use App\Settings\NotificationSettings;
+use App\Settings\ReportSettings;
+use App\Settings\UserSettings;
 
 return [
 

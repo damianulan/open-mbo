@@ -2,13 +2,12 @@
 
 namespace App\Support\Page;
 
-use App\Support\Page\Bars\SidebarMenu;
 use App\Support\Page\Bars\MenubarMenu;
 use App\Support\Page\Bars\MenuItem;
+use App\Support\Page\Bars\SidebarMenu;
 
 class MenuBuilder
 {
-
     public static function bootSidebar(string $sitename): SidebarMenu
     {
         $sidebar = SidebarMenu::boot($sitename, [

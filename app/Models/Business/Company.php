@@ -4,12 +4,8 @@ namespace App\Models\Business;
 
 use App\Models\BaseModel;
 use FormForge\Casts\TrixFieldCast;
-use App\Models\Core\User;
-use App\Models\Business\Location;
 
 /**
- * 
- *
  * @property string $id
  * @property string $name
  * @property string $shortname
@@ -25,6 +21,7 @@ use App\Models\Business\Location;
  * @property-read int|null $employments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Location> $locations
  * @property-read int|null $locations_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company onlyTrashed()
@@ -41,6 +38,7 @@ use App\Models\Business\Location;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company withoutTrashed()
  * @method static \Database\Factories\Business\CompanyFactory factory($count = null, $state = [])
+ *
  * @mixin \Eloquent
  */
 class Company extends BaseModel

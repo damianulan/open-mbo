@@ -4,19 +4,19 @@ namespace App\DataTables\Management;
 
 use App\Models\Business\Company;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
 
 class CompaniesDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder $query Results from query() method.
+     * @param  QueryBuilder  $query  Results from query() method.
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
@@ -24,10 +24,11 @@ class CompaniesDataTable extends DataTable
             ->addColumn('status', function ($data) {
                 $color = 'primary';
                 $text = 'Aktywny';
-                if (!$data->active) {
+                if (! $data->active) {
                     $color = 'dark';
                     $text = 'Zablokowany';
                 }
+
                 return view('components.datatables.badge', [
                     'color' => $color,
                     'text' => $text,
@@ -53,10 +54,12 @@ class CompaniesDataTable extends DataTable
             })
             ->editColumn('created_at', function ($data) {
                 $formatedDate = Carbon::parse($data->created_at)->format(config('app.datetime_format'));
+
                 return $formatedDate;
             })
             ->editColumn('updated_at', function ($data) {
                 $formatedDate = Carbon::parse($data->created_at)->format(config('app.datetime_format'));
+
                 return $formatedDate;
             });
     }
@@ -81,13 +84,13 @@ class CompaniesDataTable extends DataTable
                 ],
                 'responsive' => true,
                 'buttons' => [
-                    'csv'
+                    'csv',
                 ],
                 'lengthMenu' => [
                     20,
                     50,
                     100,
-                    200
+                    200,
                 ],
             ])
             ->setTableId('companies-table')
@@ -129,6 +132,6 @@ class CompaniesDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Users_' . date('YmdHis');
+        return 'Users_'.date('YmdHis');
     }
 }

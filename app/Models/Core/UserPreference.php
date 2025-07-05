@@ -2,15 +2,12 @@
 
 namespace App\Models\Core;
 
+use FormForge\Traits\RequestForms;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Core\User;
-use FormForge\Traits\RequestForms;
 
 /**
- * 
- *
  * @property int $id
  * @property string $user_id
  * @property string $lang
@@ -22,18 +19,21 @@ use FormForge\Traits\RequestForms;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read User $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference withoutTrashed()
+ *
  * @property bool $system_notifications
+ *
  * @mixin \Eloquent
  */
 class UserPreference extends Model
 {
-    use HasFactory, SoftDeletes, RequestForms;
+    use HasFactory, RequestForms, SoftDeletes;
 
     protected $table = 'user_preferences';
 

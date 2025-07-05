@@ -56,6 +56,6 @@ return [
 
     'buttons' => [
         'add_evaluation' => '',
-    ]
+    ],
 
 ];

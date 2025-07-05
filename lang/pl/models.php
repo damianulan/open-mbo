@@ -5,5 +5,4 @@ return [
     'App\Models\MBO\Campaign' => 'Kampania MBO',
     'App\Models\MBO\Objective' => 'Cel',
 
-
 ];

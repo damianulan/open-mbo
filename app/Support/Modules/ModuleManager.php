@@ -2,13 +2,8 @@
 
 namespace App\Support\Modules;
 
-use Illuminate\Http\Request;
-use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Notifications\Notification;
-
 class ModuleManager
 {
-
     public static function getModules()
     {
         return [
@@ -42,7 +37,6 @@ class ModuleManager
     /**
      * Checks if given module is exists and is active/enabled.
      *
-     * @param string $module
      * @return bool
      */
     public static function check(string $module)
@@ -50,13 +44,13 @@ class ModuleManager
         $modules = array_keys(self::getModules());
         $verified = in_array($module, $modules);
         $result = true;
-        if (!$verified) {
+        if (! $verified) {
             $result = false;
         }
 
         switch ($module) {
             case 'mbo':
-                if (!setting('mbo.enabled')) {
+                if (! setting('mbo.enabled')) {
                     $result = false;
                 }
                 break;

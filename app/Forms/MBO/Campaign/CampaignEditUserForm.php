@@ -2,37 +2,35 @@
 
 namespace App\Forms\MBO\Campaign;
 
+use App\Models\Core\User;
+use App\Models\MBO\UserCampaign;
 use FormForge\Base\Form;
-use FormForge\FormBuilder;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
-use App\Models\MBO\UserCampaign;
-use App\Models\MBO\Campaign;
-use App\Models\Core\User;
+use FormForge\FormBuilder;
 use Illuminate\Http\Request;
 
 // Ajax form
 class CampaignEditUserForm extends Form
 {
-
     public static function definition(Request $request, $model = null): FormBuilder
     {
         $route = null;
         $method = 'POST';
         $title = 'Dodaj użytkowników do kampanii';
-        $selected = array();
-        $exclude = array();
+        $selected = [];
+        $exclude = [];
 
         if ($model) {
             $user_ids = UserCampaign::where('campaign_id', $model->id)->get()->pluck('user_id');
             $coordinators = $model->coordinators->pluck('id')->toArray();
 
-            if (!empty($user_ids)) {
+            if (! empty($user_ids)) {
                 foreach ($user_ids as $tid) {
                     $selected[] = $tid;
                 }
             }
-            if (!empty($coordinators)) {
+            if (! empty($coordinators)) {
                 foreach ($coordinators as $tid) {
                     $exclude[] = ['id' => $tid];
                 }

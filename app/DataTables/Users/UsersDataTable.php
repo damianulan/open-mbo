@@ -3,24 +3,23 @@
 namespace App\DataTables\Users;
 
 use App\Models\Core\User;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Column;
-use Illuminate\Support\Carbon;
 use App\Support\DataTables\CustomDataTable;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class UsersDataTable extends CustomDataTable
 {
     protected $id = 'users_table';
+
     protected $orderBy = 'created_at';
 
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder $query Results from query() method.
+     * @param  QueryBuilder  $query  Results from query() method.
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
@@ -33,10 +32,11 @@ class UsersDataTable extends CustomDataTable
             ->addColumn('status', function ($data) {
                 $color = 'primary';
                 $text = 'Aktywny';
-                if (!$data->active) {
+                if (! $data->active) {
                     $color = 'dark';
                     $text = 'Zablokowany';
                 }
+
                 return view('components.datatables.badge', [
                     'color' => $color,
                     'text' => $text,
@@ -65,10 +65,12 @@ class UsersDataTable extends CustomDataTable
             })
             ->editColumn('created_at', function ($data) {
                 $formatedDate = Carbon::parse($data->created_at)->format(config('app.datetime_format'));
+
                 return $formatedDate;
             })
             ->editColumn('updated_at', function ($data) {
                 $formatedDate = Carbon::parse($data->created_at)->format(config('app.datetime_format'));
+
                 return $formatedDate;
             });
     }
@@ -81,6 +83,7 @@ class UsersDataTable extends CustomDataTable
         $query = $model->leftJoin('user_profiles', 'user_profiles.user_id', '=', 'users.id')
             ->select('users.*', 'user_profiles.firstname', 'user_profiles.lastname')
             ->whereNotIn('users.id', [Auth::user()->id]);
+
         return $query;
     }
 
@@ -93,31 +96,31 @@ class UsersDataTable extends CustomDataTable
             'created_at',
             'updated_at',
             'roles',
-            'action'
+            'action',
         ];
     }
 
     protected function availableColumns(): array
     {
         return [
-            'name'          => Column::computed('name')
+            'name' => Column::computed('name')
                 ->title(__('fields.firstname_lastname'))
                 ->searchable(true)
                 ->orderable(true)
                 ->addClass('firstcol'),
-            'email'         => Column::make('email')
+            'email' => Column::make('email')
                 ->title(__('fields.email')),
-            'status'        => Column::computed('status')
+            'status' => Column::computed('status')
                 ->title(__('fields.status'))
                 ->orderable(true),
-            'created_at'    => Column::make('created_at')
+            'created_at' => Column::make('created_at')
                 ->title(__('fields.created_at')),
-            'updated_at'    => Column::make('updated_at')
+            'updated_at' => Column::make('updated_at')
                 ->title(__('fields.updated_at')),
-            'roles'          => Column::computed('roles')
+            'roles' => Column::computed('roles')
                 ->title(__('gates.roles_plural'))
                 ->searchable(true),
-            'action'    => Column::computed('action')
+            'action' => Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
                 ->addClass('lastcol action-btns')
@@ -125,12 +128,11 @@ class UsersDataTable extends CustomDataTable
         ];
     }
 
-
     /**
      * Get the filename for export.
      */
     protected function filename(): string
     {
-        return 'Users_' . date('YmdHis');
+        return 'Users_'.date('YmdHis');
     }
 }

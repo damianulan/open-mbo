@@ -30,15 +30,15 @@ return [
             // SETTINGS
             'cache_clear' => 'Pamięć podręczna aplikacji została pomyślnie wyczyszczona!',
             'mail_update' => 'Dane serwera SMTP zostały zaktualizowane. Cache został automatycznie wyczyszczony.',
-            'mbo_update'  => 'Ustawienia modułu MBO zostały zaktualizowane.',
-            'general'     => 'Ustawienia platformy zostały zaktualizowane.',
+            'mbo_update' => 'Ustawienia modułu MBO zostały zaktualizowane.',
+            'general' => 'Ustawienia platformy zostały zaktualizowane.',
         ],
         'error' => [
-            //SETTINGS
+            // SETTINGS
             'cache_clear' => 'Podczas czyszczenia pamięci podręcznej aplikacji serwer napotkał problemy. Sprawdź uprawnienia serwera.',
             'mail_update' => 'Dane serwera SMTP nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd.',
-            'mbo_update'  => 'Ustawienia modułu MBO nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd.',
-            'general'     => 'Ustawienia platformy nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd.',
+            'mbo_update' => 'Ustawienia modułu MBO nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd.',
+            'general' => 'Ustawienia platformy nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd.',
         ],
         'warning' => [],
         'info' => [],
@@ -135,12 +135,11 @@ return [
         ],
     ],
 
-
     'datatables' => [
         'save_columns' => [
             'error_data' => 'Nie wykryto nowych danych dotyczących wyświetlania kolumn w tabeli. Zmiany nie zostały zapisane.',
             'error' => 'Nie można było zapisać nowych danych dotyczących kolumn w tabeli. Wystąpił błąd.',
-        ]
-    ]
+        ],
+    ],
 
 ];

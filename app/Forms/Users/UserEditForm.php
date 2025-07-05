@@ -2,16 +2,14 @@
 
 namespace App\Forms\Users;
 
-use FormForge\Base\Form;
-use Illuminate\Http\Request;
-use FormForge\FormBuilder;
-use FormForge\Base\FormComponent;
-use FormForge\Components\Dictionary;
-use Illuminate\Validation\Rules\File;
 use App\Enums\Users\Gender;
 use App\Models\Core\Role;
-use Illuminate\Validation\Rules\Enum;
 use App\Models\Core\User;
+use FormForge\Base\Form;
+use FormForge\Base\FormComponent;
+use FormForge\Components\Dictionary;
+use FormForge\FormBuilder;
+use Illuminate\Http\Request;
 
 class UserEditForm extends Form
 {
@@ -19,10 +17,10 @@ class UserEditForm extends Form
     {
         $route = route('users.store');
         $method = 'POST';
-        $exclude = array();
-        $selected = array();
+        $exclude = [];
+        $selected = [];
         $profile = null;
-        if (!is_null($model)) {
+        if (! is_null($model)) {
             $method = 'PUT';
             $route = route('users.update', $model->id);
             $profile = $model->profile;
@@ -51,7 +49,7 @@ class UserEditForm extends Form
             'firstname' => 'max:255|required',
             'lastname' => 'max:255|required',
             'email' => 'max:255|email|required',
-            'birthday' => 'date|nullable'
+            'birthday' => 'date|nullable',
         ];
     }
 }

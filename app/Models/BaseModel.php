@@ -2,35 +2,35 @@
 
 namespace App\Models;
 
+use App\Traits\Vendors\ModelActivity;
+use Carbon\Carbon;
+use FormForge\Traits\RequestForms;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Lucent\Support\Traits\UUID;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use FormForge\Traits\RequestForms;
-use Watson\Rememberable\Rememberable;
-use App\Traits\Vendors\ModelActivity;
-use Lucent\Support\Traits\VirginModel;
-use Carbon\Carbon;
 use Lucent\Support\Traits\Accessible;
+use Lucent\Support\Traits\UUID;
+use Lucent\Support\Traits\VirginModel;
+use Watson\Rememberable\Rememberable;
 
 /**
- *
- *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class BaseModel extends Model
 {
-    use HasFactory, UUID, SoftDeletes, RequestForms;
-    use ModelActivity, VirginModel, Accessible;
-    //use Rememberable;
+    use Accessible, ModelActivity, VirginModel;
+    use HasFactory, RequestForms, SoftDeletes, UUID;
+    // use Rememberable;
 
     public function carbonDate(string $prop, string $format = 'Y-m-d')
     {
@@ -39,6 +39,7 @@ class BaseModel extends Model
         if ($date) {
             $date_carbon = Carbon::parse($date)->format($format);
         }
+
         return $date_carbon;
     }
 }

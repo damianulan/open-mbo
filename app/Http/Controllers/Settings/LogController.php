@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Settings;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\DataTables\Settings\LogsDataTable;
 use App\DataTables\Settings\MyLogsDataTable;
 
@@ -23,5 +21,4 @@ class LogController extends SettingsController
             'table' => $dataTable,
         ]);
     }
-
 }

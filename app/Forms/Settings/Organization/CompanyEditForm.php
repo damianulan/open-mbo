@@ -3,11 +3,9 @@
 namespace App\Forms\Settings\Organization;
 
 use FormForge\Base\Form;
-use Illuminate\Http\Request;
-use FormForge\FormBuilder;
 use FormForge\Base\FormComponent;
-use Illuminate\Validation\Rules\File;
-use App\Models\Core\Role;
+use FormForge\FormBuilder;
+use Illuminate\Http\Request;
 
 class CompanyEditForm extends Form
 {
@@ -16,10 +14,11 @@ class CompanyEditForm extends Form
         $route = route('settings.organization.company.store');
         $method = 'POST';
 
-        if (!is_null($model)) {
+        if (! is_null($model)) {
             $method = 'PUT';
             $route = route('settings.organization.company.update', $model->id);
         }
+
         return FormBuilder::boot($request, $method, $route, 'companies_edit')
             ->class('companies-create-form')
             ->add(FormComponent::text('firstname', $model)->label(__('forms.users.firstname')))

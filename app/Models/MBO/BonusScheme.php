@@ -3,12 +3,10 @@
 namespace App\Models\MBO;
 
 use App\Models\BaseModel;
-use FormForge\Casts\TrixFieldCast;
 use App\Models\Core\User;
+use FormForge\Casts\TrixFieldCast;
 
 /**
- * 
- *
  * @property string $id
  * @property string $name
  * @property mixed|null $description
@@ -22,6 +20,7 @@ use App\Models\Core\User;
  * @property-read int|null $assignments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $users
  * @property-read int|null $users_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme onlyTrashed()
@@ -35,6 +34,7 @@ use App\Models\Core\User;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class BonusScheme extends BaseModel

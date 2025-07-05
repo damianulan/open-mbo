@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Objectives;
 
-use Illuminate\Http\Request;
 use App\Forms\MBO\Objective\ObjectiveTemplateEditForm;
 use App\Models\MBO\ObjectiveTemplate;
-use App\Http\Controllers\Objectives\MBOController;
+use Illuminate\Http\Request;
 
 class ObjectiveTemplateController extends MBOController
 {
@@ -30,14 +29,13 @@ class ObjectiveTemplateController extends MBOController
     public function create(Request $request)
     {
         return view('components.forms.edit', [
-            'form' => ObjectiveTemplateEditForm::definition($request)
+            'form' => ObjectiveTemplateEditForm::definition($request),
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, ObjectiveTemplateEditForm $form)
@@ -50,12 +48,15 @@ class ObjectiveTemplateController extends MBOController
         if ($objective->save()) {
             return redirect()->route('mbo.templates.index')->with('success', __('alerts.objective_template.success.create'));
         }
+
         return redirect()->back()->with('error', __('alerts.error.operation'));
     }
 
     /**
      * Display the specified resource.
+     *
      * @TODO add view
+     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -70,6 +71,7 @@ class ObjectiveTemplateController extends MBOController
     public function edit(Request $request, $id)
     {
         $model = ObjectiveTemplate::checkAccess()->findOrFail($id);
+
         return view('components.forms.edit', [
             'objective' => $model,
             'form' => ObjectiveTemplateEditForm::definition($request, $model),
@@ -79,7 +81,6 @@ class ObjectiveTemplateController extends MBOController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -91,6 +92,7 @@ class ObjectiveTemplateController extends MBOController
         if ($objective->update()) {
             return redirect()->route('mbo.templates.index')->with('success', __('alerts.objective_template.success.edit'));
         }
+
         return redirect()->back()->with('error', __('alerts.error.operation'));
     }
 
@@ -100,6 +102,7 @@ class ObjectiveTemplateController extends MBOController
         if ($objective->delete()) {
             return redirect()->route('mbo.templates.index')->with('success', __('alerts.objective_template.success.delete'));
         }
+
         return redirect()->back()->with('error', __('alerts.error.operation'));
     }
 }

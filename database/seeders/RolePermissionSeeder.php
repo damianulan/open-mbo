@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Models\Core\Permission;
 use App\Enums\Core\PermissionLib;
 use App\Enums\Core\SystemRolesLib;
+use App\Models\Core\Permission;
 use App\Models\Core\Role;
+use Illuminate\Database\Seeder;
 
 class RolePermissionSeeder extends Seeder
 {
@@ -36,12 +36,11 @@ class RolePermissionSeeder extends Seeder
         }
 
         foreach (SystemRolesLib::values() as $name) {
-            $this->$name = new Role();
+            $this->$name = new Role;
             $this->$name->slug = $name;
             $this->$name->assignable = in_array($name, SystemRolesLib::assignable());
             $this->$name->save();
         }
-
 
         // PERMISSIONS
         $this->setPermissions();
@@ -50,7 +49,7 @@ class RolePermissionSeeder extends Seeder
     private function setPermissions()
     {
         foreach (PermissionLib::core() as $slug => $roles) {
-            $perm = new Permission();
+            $perm = new Permission;
             $perm->slug = $slug;
             $perm->assignable = false;
             if ($perm->save()) {
@@ -59,7 +58,7 @@ class RolePermissionSeeder extends Seeder
         }
 
         foreach (PermissionLib::normal() as $slug => $roles) {
-            $perm = new Permission();
+            $perm = new Permission;
             $perm->slug = $slug;
             $perm->assignable = true;
             if ($perm->save()) {

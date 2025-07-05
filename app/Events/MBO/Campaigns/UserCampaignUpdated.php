@@ -3,9 +3,9 @@
 namespace App\Events\MBO\Campaigns;
 
 use App\Models\MBO\UserCampaign;
+use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
 
 class UserCampaignUpdated implements ShouldDispatchAfterCommit
 {

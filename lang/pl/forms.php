@@ -43,7 +43,7 @@ return [
                 'reward_points_exchange' => 'Stosunek jednego punktu nagrody do jednego punktu w wybranej walucie',
                 'reward_currency' => 'Waluta przyznawania nagrody',
             ],
-        ]
+        ],
     ],
 
     'placeholders' => [

@@ -8,6 +8,7 @@ class PermissionLib extends Enum
 {
     // core
     public const TELESCOPE_VIEW = 'telescope-view';
+
     public const MAINTENANCE = 'maintenance';
 
     // global
@@ -19,28 +20,45 @@ class PermissionLib extends Enum
 
     // users
     public const USERS_IMPERSONATE = 'users-impersonate';
+
     public const USERS_LIST = 'users-list';
+
     public const USERS_VIEW = 'users-view';
+
     public const USERS_CREATE = 'users-create';
+
     public const USERS_EDIT = 'users-edit';
+
     public const USERS_TEAMS = 'users-teams';
+
     public const USERS_DELETE = 'users-delete';
+
     public const USERS_RESTORE = 'users-restore';
 
     // settings
     public const SETTINGS_GENERAL = 'settings-general';
+
     public const SETTINGS_MODULES = 'settings-modules';
+
     public const SETTINGS_INTEGRATIONS = 'settings-integrations';
+
     public const SETTINGS_SERVER = 'settings-server';
+
     public const SETTINGS_LOGS = 'settings-logs';
+
     public const SETTINGS_USERS = 'settings-users';
+
     public const SETTINGS_ROLES = 'settings-roles';
+
     public const SETTINGS_ORGANIZATION = 'settings-organization';
+
     public const SETTINGS_NOTIFICATIONS = 'settings-notifications';
+
     public const SETTINGS_REPORTS = 'settings-reports';
 
     // management
     public const MBO_TEMPLATES = 'mbo-templates';
+
     public const MBO_CATEGORIES = 'mbo-categories';
 
     // reports
@@ -52,13 +70,19 @@ class PermissionLib extends Enum
      * viewing always all objective templates
      */
     public const MBO_TEMPLATES_VIEW = 'mbo-templates-view';
+
     public const MBO_TEMPLATES_CREATE = 'mbo-templates-create';
+
     public const MBO_TEMPLATES_UPDATE = 'mbo-templates-update';
+
     public const MBO_TEMPLATES_DELETE = 'mbo-templates-delete';
 
     public const MBO_CATEGORIES_VIEW = 'mbo-categories-view';
+
     public const MBO_CATEGORIES_CREATE = 'mbo-categories-create';
+
     public const MBO_CATEGORIES_UPDATE = 'mbo-categories-update';
+
     public const MBO_CATEGORIES_DELETE = 'mbo-categories-delete';
 
     /**
@@ -67,25 +91,35 @@ class PermissionLib extends Enum
     public const MBO_CAMPAIGN_VIEW = 'mbo-campaign-view';
 
     public const MBO_CAMPAIGN_CREATE = 'mbo-campaign-create';
+
     public const MBO_CAMPAIGN_UPDATE = 'mbo-campaign-update';
+
     public const MBO_CAMPAIGN_DELETE = 'mbo-campaign-delete';
+
     public const MBO_CAMPAIGN_TERMINATE = 'mbo-campaign-terminate';
+
     public const MBO_CAMPAIGN_CANCEL = 'mbo-campaign-cancel';
+
     public const MBO_CAMPAIGN_MANAGE_OBJECTIVES = 'mbo-campaign-manage-objectives';
+
     public const MBO_CAMPAIGN_MANAGE_USERS = 'mbo-campaign-manage-users';
+
     public const MBO_CAMPAIGN_MANAGE_MANUAL = 'mbo-campaign-manage-manual';
 
     public const MBO_OBJECTIVE_VIEW = 'mbo-objective-view';
+
     public const MBO_OBJECTIVE_CREATE = 'mbo-objective-create';
+
     public const MBO_OBJECTIVE_UPDATE = 'mbo-objective-update';
+
     public const MBO_OBJECTIVE_DELETE = 'mbo-objective-delete';
+
     public const MBO_OBJECTIVE_MILESTONES = 'mbo-objective-milestones';
+
     public const MBO_OBJECTIVE_REALIZATION = 'mbo-objective-realization';
 
     /**
      * roles and their permissions for core functionality, cannot be manipulated in-app.
-     *
-     * @return array
      */
     public static function core(): array
     {
@@ -97,8 +131,6 @@ class PermissionLib extends Enum
 
     /**
      * roles and their permissions for common use, can be manipulated by admins in settings.
-     *
-     * @return array
      */
     public static function normal(): array
     {

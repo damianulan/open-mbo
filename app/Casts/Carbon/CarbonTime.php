@@ -2,9 +2,9 @@
 
 namespace App\Casts\Carbon;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 
 class CarbonTime implements CastsAttributes
 {

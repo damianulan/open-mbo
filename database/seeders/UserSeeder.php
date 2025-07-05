@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\Core\User;
 use App\Models\Core\UserProfile;
+use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
@@ -20,7 +19,7 @@ class UserSeeder extends Seeder
         $superadmins = 3;
         for ($i = 1; $i <= fake()->numberBetween(60, 150); $i++) {
             $user = User::factory()->has(UserProfile::factory()->count(1), 'profile')->create([
-                'email' => 'user' . $i . '@damianulan.me',
+                'email' => 'user'.$i.'@damianulan.me',
             ]);
             if ($user) {
                 $user->assignRoleSlug('employee');

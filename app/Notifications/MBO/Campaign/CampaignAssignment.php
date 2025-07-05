@@ -2,16 +2,15 @@
 
 namespace App\Notifications\MBO\Campaign;
 
-use Illuminate\Bus\Queueable;
-use App\Support\Notifications\BaseNotification;
 use App\Models\Core\User;
-use App\Support\Notifications\NotificationAdhoc;
 use App\Models\MBO\Campaign;
+use App\Support\Notifications\BaseNotification;
+use App\Support\Notifications\NotificationAdhoc;
+use Illuminate\Bus\Queueable;
 
 class CampaignAssignment extends BaseNotification
 {
     use Queueable;
-
 
     /**
      * Create a new notification instance.

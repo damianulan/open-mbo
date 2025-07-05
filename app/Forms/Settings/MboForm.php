@@ -3,15 +3,14 @@
 namespace App\Forms\Settings;
 
 use FormForge\Base\Form;
-use FormForge\FormBuilder;
 use FormForge\Base\FormComponent;
-use FormForge\Components\Dictionary;
+use FormForge\FormBuilder;
 use Illuminate\Http\Request;
-use App\Settings\MBOSettings;
 
 class MboForm extends Form
 {
     protected static ?string $backRoute = 'settings.modules.index';
+
     protected static array $backParams = ['module' => 'mbo'];
 
     public static function definition(Request $request, $model = null): FormBuilder

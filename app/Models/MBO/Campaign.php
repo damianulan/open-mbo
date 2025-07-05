@@ -2,23 +2,19 @@
 
 namespace App\Models\MBO;
 
-use App\Models\BaseModel;
-use FormForge\Casts\TrixFieldCast;
-use Illuminate\Support\Collection;
-use App\Models\MBO\Objective;
-use App\Models\MBO\UserCampaign;
-use Carbon\Carbon;
-use App\Models\Core\User;
 use App\Enums\MBO\CampaignStage;
-use App\Models\Scopes\MBO\CampaignScope;
-use Illuminate\Database\Eloquent\Builder;
-use App\Events\MBO\Campaigns\CampaignUpdated;
 use App\Events\MBO\Campaigns\CampaignCreated;
+use App\Events\MBO\Campaigns\CampaignUpdated;
+use App\Models\BaseModel;
+use App\Models\Core\User;
+use App\Models\Scopes\MBO\CampaignScope;
+use Carbon\Carbon;
+use FormForge\Casts\TrixFieldCast;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 use Lucent\Support\Traits\Dispatcher;
 
 /**
- *
- *
  * @property string $id
  * @property string $name
  * @property string $period
@@ -47,6 +43,7 @@ use Lucent\Support\Traits\Dispatcher;
  * @property-read int|null $objectives_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, UserCampaign> $user_campaigns
  * @property-read int|null $user_campaigns_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign onlyTrashed()
@@ -73,7 +70,9 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign withoutTrashed()
+ *
  * @property string $stage
+ *
  * @mixin \Eloquent
  */
 class Campaign extends BaseModel
@@ -81,7 +80,9 @@ class Campaign extends BaseModel
     use Dispatcher;
 
     public $stages;
+
     public $timestamps = true;
+
     protected $log_name = 'mbo';
 
     protected $fillable = [
@@ -135,16 +136,16 @@ class Campaign extends BaseModel
 
     public function refreshCoordinators(?array $user_ids)
     {
-        if (!$user_ids) {
-            $user_ids = array();
+        if (! $user_ids) {
+            $user_ids = [];
         }
 
         $current = $this->coordinators->pluck('id')->toArray();
         $toDelete = array_filter($current, function ($value) use ($user_ids) {
-            return !in_array($value, $user_ids);
+            return ! in_array($value, $user_ids);
         });
         $toAdd = array_filter($user_ids, function ($value) use ($current) {
-            return !in_array($value, $current);
+            return ! in_array($value, $current);
         });
 
         foreach ($toDelete as $user_id) {
@@ -166,7 +167,7 @@ class Campaign extends BaseModel
     public function assignUser($user_id)
     {
         $exists = $this->user_campaigns()->where('user_id', $user_id)->exists();
-        if (!$exists) {
+        if (! $exists) {
             $this->user_campaigns()->create([
                 'user_id' => $user_id,
                 'stage' => $this->setUserStage($user_id),
@@ -174,6 +175,7 @@ class Campaign extends BaseModel
                 'active' => $this->draft ? 0 : 1,
             ]);
         }
+
         return true;
     }
 
@@ -183,6 +185,7 @@ class Campaign extends BaseModel
         if ($record) {
             $record->delete();
         }
+
         return true;
     }
 
@@ -193,9 +196,9 @@ class Campaign extends BaseModel
             $params['user_id'] = $user_id;
         }
 
-        $stage =  $this->getCurrentStages()->first();
+        $stage = $this->getCurrentStages()->first();
         $enrols = $this->user_campaigns()->where($params)->get();
-        if (!empty($enrols)) {
+        if (! empty($enrols)) {
             foreach ($enrols as $enrol) {
                 if ($stage !== $enrol->stage) {
                     $enrol->timestamps = false;
@@ -204,6 +207,7 @@ class Campaign extends BaseModel
                 }
             }
         }
+
         return $stage;
     }
 
@@ -213,8 +217,8 @@ class Campaign extends BaseModel
         $now = Carbon::now();
 
         foreach (CampaignStage::softValues() as $tmp) {
-            $prop_start = $tmp . '_from';
-            $prop_end = $tmp . '_to';
+            $prop_start = $tmp.'_from';
+            $prop_end = $tmp.'_to';
             $start = Carbon::parse($this->$prop_start);
             $end = Carbon::parse($this->$prop_end);
 
@@ -231,14 +235,14 @@ class Campaign extends BaseModel
 
     public function getCurrentStages(): Collection
     {
-        $stages = new Collection();
+        $stages = new Collection;
         $now = Carbon::now();
 
         if ($this->stage === CampaignStage::IN_PROGRESS) {
             $softStage = null;
             foreach (CampaignStage::softValues() as $tmp) {
-                $prop_start = $tmp . '_from';
-                $prop_end = $tmp . '_to';
+                $prop_start = $tmp.'_from';
+                $prop_end = $tmp.'_to';
                 $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_start);
                 $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_end);
 
@@ -263,7 +267,8 @@ class Campaign extends BaseModel
         $now = Carbon::now();
         $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateStart());
         $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateEnd());
-        return $now->between($start, $end) && !$this->draft;
+
+        return $now->between($start, $end) && ! $this->draft;
     }
 
     public function finished(): bool
@@ -275,9 +280,9 @@ class Campaign extends BaseModel
 
         $now = Carbon::now();
         $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateEnd());
-        return $now->greaterThan($end) && !$this->manual;
-    }
 
+        return $now->greaterThan($end) && ! $this->manual;
+    }
 
     public function getProgress(): int
     {
@@ -299,6 +304,7 @@ class Campaign extends BaseModel
     {
         return $this->definition_from;
     }
+
     public function dateEnd(): string
     {
         return $this->self_evaluation_to;
@@ -311,10 +317,10 @@ class Campaign extends BaseModel
         $end = $this->dateEnd();
         $now = now();
         if ($start && $end) {
-            if (!$start instanceof Carbon) {
+            if (! $start instanceof Carbon) {
                 $start = Carbon::parse($start);
             }
-            if (!$end instanceof Carbon) {
+            if (! $end instanceof Carbon) {
                 $end = Carbon::parse($end);
             }
 
@@ -331,11 +337,14 @@ class Campaign extends BaseModel
     public function dateStartView(): string
     {
         $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateStart());
+
         return $start->format(config('app.date_format'));
     }
+
     public function dateEndView(): string
     {
         $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateEnd());
+
         return $end->format(config('app.date_format'));
     }
 
@@ -386,7 +395,7 @@ class Campaign extends BaseModel
 
     public function isActive(): bool
     {
-        return !$this->isDraft() && !$this->terminated() && !$this->canceled() && !$this->completed();
+        return ! $this->isDraft() && ! $this->terminated() && ! $this->canceled() && ! $this->completed();
     }
 
     public function inProgress(): bool
@@ -397,7 +406,6 @@ class Campaign extends BaseModel
     /**
      * LOCAL SCOPES
      */
-
     public function scopeWhereManual(Builder $query, int $manual): void
     {
         $query->where('manual', $manual);
@@ -453,7 +461,7 @@ class Campaign extends BaseModel
 
     public static function updatingCampaign(Campaign $model)
     {
-        if (!setting('mbo.campaigns_manual')) {
+        if (! setting('mbo.campaigns_manual')) {
             $model->manual = 0;
         }
 

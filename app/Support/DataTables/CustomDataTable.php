@@ -2,20 +2,20 @@
 
 namespace App\Support\DataTables;
 
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Services\DataTable;
-use App\Support\DataTables\SelectedColumns;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Auth;
 
 class CustomDataTable extends DataTable
 {
-
     protected $id = null;
+
     protected $orderBy = null;
+
     protected $orderByDir = 'desc';
+
     protected array $actions = ['csv', 'excel', 'column_selector'];
 
     /**
@@ -33,6 +33,7 @@ class CustomDataTable extends DataTable
         usort($output, function ($x, $y) use ($columns) {
             $pos_x = array_search($x->data, $columns);
             $pos_y = array_search($y->data, $columns);
+
             return $pos_x - $pos_y;
         });
 
@@ -48,6 +49,7 @@ class CustomDataTable extends DataTable
             uasort($available, function ($x, $y) use ($selected) {
                 $pos_x = array_search($x->name, $selected);
                 $pos_y = array_search($y->name, $selected);
+
                 return $pos_x - $pos_y;
             });
         }
@@ -59,7 +61,7 @@ class CustomDataTable extends DataTable
             'hasColumns' => in_array('column_selector', $this->actions),
             'hasCsv' => in_array('csv', $this->actions),
             'hasExcel' => in_array('excel', $this->actions),
-            'class' => static::class
+            'class' => static::class,
         ]);
 
         return $view;
@@ -67,9 +69,9 @@ class CustomDataTable extends DataTable
 
     protected function selectedColumns(): array
     {
-        $columns = array();
+        $columns = [];
         $model = SelectedColumns::findColumn($this->id);
-        $columns_raw = $model->selected ?? array();
+        $columns_raw = $model->selected ?? [];
         $available = $this->availableColumns();
 
         if (empty($columns_raw)) {
@@ -98,7 +100,7 @@ class CustomDataTable extends DataTable
         $orderBy = null;
         if ($this->orderBy) {
             $columns = $this->getColumns();
-            if (!empty($columns)) {
+            if (! empty($columns)) {
                 foreach ($columns as $key => $column) {
                     if ($column->name === $this->orderBy) {
                         $orderBy = $key;
@@ -123,13 +125,13 @@ class CustomDataTable extends DataTable
                 ],
                 'responsive' => true,
                 'buttons' => [
-                    'csv'
+                    'csv',
                 ],
                 'lengthMenu' => [
                     20,
                     50,
                     100,
-                    200
+                    200,
                 ],
             ])
             ->setTableId($this->id)
@@ -138,9 +140,10 @@ class CustomDataTable extends DataTable
             ->processing(true);
 
         $orderBy = $this->getOrderBy();
-        if (!is_null($orderBy)) {
+        if (! is_null($orderBy)) {
             $builder->orderBy($orderBy, $this->orderByDir);
         }
+
         return $builder;
     }
 
@@ -156,7 +159,7 @@ class CustomDataTable extends DataTable
             $columns = $request->input('columns');
             $selected = $request->input('selected');
 
-            $sc = SelectedColumns::findColumn($datatable_id) ?? new SelectedColumns();
+            $sc = SelectedColumns::findColumn($datatable_id) ?? new SelectedColumns;
             $sc->user_id = Auth::user()->id;
             $sc->table_id = $datatable_id;
             $sc->columns = $columns;

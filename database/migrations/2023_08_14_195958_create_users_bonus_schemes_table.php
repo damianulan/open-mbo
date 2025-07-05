@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('bonus_scheme_id')->references('id')->on('bonus_schemes')->onDelete('cascade');
 
-            $table->primary(['user_id','bonus_scheme_id']);
+            $table->primary(['user_id', 'bonus_scheme_id']);
         });
     }
 

@@ -2,12 +2,10 @@
 
 namespace App\Events\MBO\Campaigns;
 
+use App\Models\MBO\Campaign;
+use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\MBO\Campaign;
-use App\Models\Core\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
 
 class CampaignCreated implements ShouldDispatchAfterCommit
 {

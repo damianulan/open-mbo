@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Objectives;
 
 use App\Http\Controllers\AppController;
-use App\Support\Page\MenuBuilder;
 use App\Support\Page\Bars\MenubarMenu;
 use App\Support\Page\Bars\MenuItem;
+use App\Support\Page\MenuBuilder;
 
 class MBOController extends AppController
 {

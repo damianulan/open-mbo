@@ -2,19 +2,15 @@
 
 namespace App\Traits;
 
-use App\Models\Business\Company;
 use App\Models\Business\Department;
-use App\Models\Business\Position;
 use App\Models\Business\Team;
-use App\Models\Business\TypeOfContract;
 use App\Models\Business\UserEmployment;
-use App\Models\Core\User;
 use App\Models\Core\Role;
+use App\Models\Core\User;
 use Illuminate\Database\Eloquent\Builder;
 
 trait UserBusiness
 {
-
     public function teams()
     {
         return $this->belongsToMany(Team::class, 'users_teams');
@@ -84,10 +80,11 @@ trait UserBusiness
     {
         foreach ($supervisor_ids as $id) {
             $supervisor = static::find($id);
-            if ($supervisor->exists() && !$this->hasSupervisor($id)) {
+            if ($supervisor->exists() && ! $this->hasSupervisor($id)) {
                 $this->supervisors()->attach($supervisor, ['role_id' => Role::getId('supervisor')]);
             }
         }
+
         return true;
     }
 
@@ -96,22 +93,22 @@ trait UserBusiness
         foreach ($supervisor_ids as $id) {
             $this->supervisors()->detach($id);
         }
+
         return true;
     }
 
-
     public function refreshSupervisors(?array $user_ids)
     {
-        if (!$user_ids) {
-            $user_ids = array();
+        if (! $user_ids) {
+            $user_ids = [];
         }
 
         $current = $this->supervisors->pluck('id')->toArray();
         $toDelete = array_filter($current, function ($value) use ($user_ids) {
-            return !in_array($value, $user_ids);
+            return ! in_array($value, $user_ids);
         });
         $toAdd = array_filter($user_ids, function ($value) use ($current) {
-            return !in_array($value, $current);
+            return ! in_array($value, $current);
         });
 
         foreach ($toDelete as $user_id) {
@@ -124,8 +121,7 @@ trait UserBusiness
         return true;
     }
 
-
-    //MANAGER
+    // MANAGER
     public function departments_manager()
     {
         return $this->hasMany(Department::class, 'manager_id');

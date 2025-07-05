@@ -2,12 +2,10 @@
 
 namespace App\Support\DataTables;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Models\Core\User;
+use Illuminate\Database\Eloquent\Model;
 
 /**
- *
- *
  * @property int $id
  * @property string $user_id
  * @property string $table_id
@@ -16,6 +14,7 @@ use App\Models\Core\User;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read User $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns query()
@@ -26,11 +25,13 @@ use App\Models\Core\User;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns whereTableId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns whereUserId($value)
+ *
  * @mixin \Eloquent
  */
 class SelectedColumns extends Model
 {
     protected $table = 'datatables_columns_selected';
+
     protected $primaryKey = 'id';
 
     public $timestamps = true;

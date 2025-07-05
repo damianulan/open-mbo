@@ -21,7 +21,6 @@ return [
     'created_at' => 'Utworzono',
     'updated_at' => 'Zaktualizowano',
 
-
     // Enumerations
     'gender' => [
         Gender::MALE => 'Mężczyzna',

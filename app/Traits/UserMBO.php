@@ -2,14 +2,13 @@
 
 namespace App\Traits;
 
-use App\Models\MBO\UserObjective;
 use App\Models\MBO\Campaign;
 use App\Models\MBO\UserCampaign;
+use App\Models\MBO\UserObjective;
 use Illuminate\Database\Eloquent\Builder;
 
 trait UserMBO
 {
-
     public function objective_assignments()
     {
         return $this->hasMany(UserObjective::class);

@@ -2,9 +2,7 @@
 
 namespace App\Support\DataTables;
 
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Http\Request;
-use App\Support\DataTables\CustomDataTable;
 
 class DataTableController
 {

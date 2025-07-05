@@ -20,7 +20,6 @@ return [
         'telescope' => 'Teleskop',
     ],
 
-
     'errors' => [
         '500' => [
             'title' => 'Wewnętrzny błąd serwera',

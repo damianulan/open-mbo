@@ -2,9 +2,6 @@
 
 namespace App\Listeners\MBO\Campaigns;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-use App\Events\MBO\Campaigns\CampaignCreated;
 use App\Events\MBO\Campaigns\CampaignUpdated;
 use App\Events\MBO\Campaigns\CampaignViewed;
 

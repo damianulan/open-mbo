@@ -2,21 +2,20 @@
 
 namespace App\Models\Core;
 
+use FormForge\Traits\RequestForms;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Lucent\Support\Traits\UUID;
-use FormForge\Traits\RequestForms;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
- *
- *
  * @property string $id
  * @property string $slug
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Core\Permission> $permissions
  * @property-read int|null $permissions_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Role newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Role newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Role query()
@@ -24,14 +23,17 @@ use Illuminate\Database\Eloquent\Builder;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Role whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Role whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Role whereUpdatedAt($value)
+ *
  * @property bool $assignable
+ *
  * @mixin \Eloquent
  */
 class Role extends Model
 {
-    use UUID, HasFactory, RequestForms;
+    use HasFactory, RequestForms, UUID;
 
     protected $table = 'roles';
+
     protected $primaryKey = 'id';
 
     public $timestamps = true;
@@ -72,14 +74,15 @@ class Role extends Model
 
     public static function getSelectList(): array
     {
-        $output = array();
+        $output = [];
         $roles = self::where('assignable', 1)->get();
-        if (!$roles->isEmpty()) {
+        if (! $roles->isEmpty()) {
             foreach ($roles as $role) {
-                $name = __('gates.roles.' . $role->slug);
+                $name = __('gates.roles.'.$role->slug);
                 $output[$role->id] = $name;
             }
         }
+
         return $output;
     }
 

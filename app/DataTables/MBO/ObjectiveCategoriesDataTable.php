@@ -2,28 +2,25 @@
 
 namespace App\DataTables\MBO;
 
-use App\Models\Core\User;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Column;
-use Illuminate\Support\Carbon;
-use App\Support\DataTables\CustomDataTable;
-use App\Models\MBO\Objective;
-use Illuminate\Support\Collection;
 use App\Models\MBO\ObjectiveTemplateCategory;
-use DB;
+use App\Support\DataTables\CustomDataTable;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Carbon;
+use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class ObjectiveCategoriesDataTable extends CustomDataTable
 {
     protected $id = 'objective_template_categories_table';
+
     protected $orderBy = 'name';
+
     protected $orderByDir = 'asc';
 
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder $query Results from query() method.
+     * @param  QueryBuilder  $query  Results from query() method.
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
@@ -39,10 +36,12 @@ class ObjectiveCategoriesDataTable extends CustomDataTable
             })
             ->editColumn('created_at', function ($data) {
                 $formatedDate = Carbon::parse($data->created_at)->format(config('app.datetime_format'));
+
                 return $formatedDate;
             })
             ->editColumn('updated_at', function ($data) {
                 $formatedDate = Carbon::parse($data->created_at)->format(config('app.datetime_format'));
+
                 return $formatedDate;
             });
     }
@@ -53,6 +52,7 @@ class ObjectiveCategoriesDataTable extends CustomDataTable
     public function query(ObjectiveTemplateCategory $model): QueryBuilder
     {
         $query = $model->query();
+
         return $query;
     }
 
@@ -64,29 +64,29 @@ class ObjectiveCategoriesDataTable extends CustomDataTable
             'templates',
             'created_at',
             'updated_at',
-            'action'
+            'action',
         ];
     }
 
     protected function availableColumns(): array
     {
         return [
-            'name'          => Column::make('name')
+            'name' => Column::make('name')
                 ->title(__('forms.mbo.categories.name'))
                 ->searchable(true)
                 ->orderable(true)
                 ->addClass('firstcol'),
-            'shortname'          => Column::computed('shortname')
+            'shortname' => Column::computed('shortname')
                 ->title(__('forms.mbo.categories.shortname'))
                 ->searchable(true)
                 ->orderable(true),
-            'templates'     => Column::computed('templates')
+            'templates' => Column::computed('templates')
                 ->title(__('forms.mbo.categories.template_count')),
-            'created_at'    => Column::make('created_at')
+            'created_at' => Column::make('created_at')
                 ->title(__('fields.created_at')),
-            'updated_at'    => Column::make('updated_at')
+            'updated_at' => Column::make('updated_at')
                 ->title(__('fields.updated_at')),
-            'action'        => Column::computed('action')
+            'action' => Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
                 ->addClass('lastcol action-btns')
@@ -94,12 +94,11 @@ class ObjectiveCategoriesDataTable extends CustomDataTable
         ];
     }
 
-
     /**
      * Get the filename for export.
      */
     protected function filename(): string
     {
-        return 'ObjectiveTemplateCategories_' . date('YmdHis');
+        return 'ObjectiveTemplateCategories_'.date('YmdHis');
     }
 }

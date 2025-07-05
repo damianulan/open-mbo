@@ -2,18 +2,15 @@
 
 namespace Database\Factories\MBO;
 
-use App\Models\MBO\Objective;
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use App\Models\MBO\ObjectiveTemplate;
 use App\Models\MBO\ObjectiveTemplateCategory;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\MBO\ObjectiveTemplate>
  */
 class ObjectiveTemplateFactory extends Factory
 {
-
     protected $model = ObjectiveTemplate::class;
 
     /**
@@ -50,7 +47,7 @@ class ObjectiveTemplateFactory extends Factory
 
     public function draft()
     {
-        return $this->state(fn(array $attributes) => [
+        return $this->state(fn (array $attributes) => [
             'draft' => 1,
         ]);
     }

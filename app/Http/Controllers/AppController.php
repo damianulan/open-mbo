@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Core\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Auth;
 
 class AppController extends BaseController
 {
@@ -37,7 +35,7 @@ class AppController extends BaseController
         }
 
         if (empty($description) && $model && $user) {
-            $description = __('logging.description.view', ['model_map' => __('logging.model_mapping.' . $model::class), 'username' => $user->name]);
+            $description = __('logging.description.view', ['model_map' => __('logging.model_mapping.'.$model::class), 'username' => $user->name]);
         } else {
             if (empty($description)) {
                 $description = 'view';

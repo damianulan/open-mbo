@@ -2,8 +2,6 @@
 
 namespace App\Support\Http;
 
-use Illuminate\Http\Request;
-
 class ResponseAjax
 {
     public static function ok(string $message)

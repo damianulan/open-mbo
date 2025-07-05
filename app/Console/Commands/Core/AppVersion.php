@@ -2,11 +2,11 @@
 
 namespace App\Console\Commands\Core;
 
+use App\Events\Core\AppUpgraded;
+use App\Settings\GeneralSettings;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Process;
-use App\Settings\GeneralSettings;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
-use App\Events\Core\AppUpgraded;
 
 class AppVersion extends Command
 {
@@ -30,7 +30,7 @@ class AppVersion extends Command
     public function handle()
     {
         $result = Process::run('git describe --tags --abbrev=0');
-        $settings = new GeneralSettings();
+        $settings = new GeneralSettings;
         if ($settings) {
             $name = $settings->site_name ?? 'OpenMBO';
             $version = $settings->release ?? null;

@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
 
 /*
@@ -88,7 +87,6 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
         });
     });
 
-
     /**
      * Management START
      */
@@ -149,8 +147,6 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
             Route::delete('/delete/{id}', [App\Http\Controllers\Campaigns\CampaignUserController::class, 'delete'])->name('delete');
         });
     });
-
-
 
     Route::name('general.')->group(function () {
         Route::get('/get_modal', [App\Http\Controllers\GeneralController::class, 'getModal'])->name('get_modal');

@@ -3,9 +3,9 @@
 namespace App\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Contracts\Encryption\EncryptException;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Crypt;
 
 class Enigma implements CastsAttributes
@@ -18,12 +18,13 @@ class Enigma implements CastsAttributes
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
         $encryption = (bool) config('app.enigma_models');
-        if($encryption) {
-            if(!is_null($value)){
+        if ($encryption) {
+            if (! is_null($value)) {
                 try {
                     return Crypt::decryptString($value);
-                } catch (DecryptException $e){
+                } catch (DecryptException $e) {
                     report($e);
+
                     return false;
                 }
             }
@@ -40,12 +41,13 @@ class Enigma implements CastsAttributes
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
         $encryption = (bool) config('app.enigma_models');
-        if($encryption){
-            if(!is_null($value)){
+        if ($encryption) {
+            if (! is_null($value)) {
                 try {
                     return Crypt::encryptString($value);
-                } catch (EncryptException $e){
+                } catch (EncryptException $e) {
                     report($e);
+
                     return false;
                 }
             }

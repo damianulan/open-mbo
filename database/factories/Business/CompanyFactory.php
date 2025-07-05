@@ -17,7 +17,8 @@ class CompanyFactory extends Factory
     public function definition(): array
     {
         $shortname = fake()->company();
-        $fullname = $shortname . ' ' . fake()->companySuffix();
+        $fullname = $shortname.' '.fake()->companySuffix();
+
         return [
             'name' => $fullname,
             'shortname' => $shortname,

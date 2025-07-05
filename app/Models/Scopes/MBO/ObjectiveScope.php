@@ -2,16 +2,16 @@
 
 namespace App\Models\Scopes\MBO;
 
+use App\Enums\Core\PermissionLib;
+use App\Enums\Core\SystemRolesLib;
+use App\Models\Core\Role;
+use App\Models\MBO\Campaign;
+use App\Models\MBO\ObjectiveTemplateCategory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
-use Illuminate\Support\Facades\Auth;
-use App\Enums\Core\PermissionLib;
-use App\Models\MBO\ObjectiveTemplateCategory;
 use Illuminate\Database\Query\JoinClause;
-use App\Models\MBO\Campaign;
-use App\Models\Core\Role;
-use App\Enums\Core\SystemRolesLib;
+use Illuminate\Support\Facades\Auth;
 
 class ObjectiveScope implements Scope
 {

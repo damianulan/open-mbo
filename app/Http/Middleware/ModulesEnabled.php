@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Support\Modules\ModuleManager;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Support\Modules\ModuleManager;
 
 class ModulesEnabled
 {
@@ -17,7 +17,7 @@ class ModulesEnabled
     public function handle(Request $request, Closure $next, string $module): Response
     {
         $verified = ModuleManager::check($module);
-        if (!$verified) {
+        if (! $verified) {
             unauthorized(__('alerts.system.unauthorized_module'));
         }
 

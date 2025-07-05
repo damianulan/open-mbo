@@ -1,9 +1,9 @@
 <?php
 
+use App\Enums\MBO\UserObjectiveStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\MBO\UserObjectiveStatus;
 
 return new class extends Migration
 {
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreign('objective_id')->references('id')->on('objectives')->onDelete('cascade');
 
             $table->enum('status', UserObjectiveStatus::values());
-            $table->decimal('evaluation', 8,2)->nullable();
+            $table->decimal('evaluation', 8, 2)->nullable();
 
             $table->timestamps();
             $table->softDeletes();

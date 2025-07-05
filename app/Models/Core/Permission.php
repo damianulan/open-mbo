@@ -7,14 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Lucent\Support\Traits\UUID;
 
 /**
- *
- *
  * @property string $id
  * @property string $slug
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Core\Role> $roles
  * @property-read int|null $roles_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Permission newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Permission newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Permission query()
@@ -22,14 +21,17 @@ use Lucent\Support\Traits\UUID;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Permission whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Permission whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Permission whereUpdatedAt($value)
+ *
  * @property int $assignable
+ *
  * @mixin \Eloquent
  */
 class Permission extends Model
 {
-    use UUID, HasFactory;
+    use HasFactory, UUID;
 
     protected $table = 'permissions';
+
     protected $primaryKey = 'id';
 
     public $timestamps = true;
@@ -51,14 +53,15 @@ class Permission extends Model
 
     public static function getSelectList(): array
     {
-        $output = array();
+        $output = [];
         $permissions = self::where('assignable', 1)->get();
-        if (!$permissions->isEmpty()) {
+        if (! $permissions->isEmpty()) {
             foreach ($permissions as $permission) {
-                $name = __('gates.permissions.' . $permission->slug);
+                $name = __('gates.permissions.'.$permission->slug);
                 $output[$permission->id] = $name;
             }
         }
+
         return $output;
     }
 }

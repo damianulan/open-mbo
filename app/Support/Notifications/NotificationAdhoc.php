@@ -2,23 +2,23 @@
 
 namespace App\Support\Notifications;
 
-use Illuminate\Http\Request;
 use Illuminate\Contracts\Support\Arrayable;
 
 class NotificationAdhoc implements Arrayable
 {
-
     protected $icon;
+
     protected $message;
 
     public static function make(string $message, ?string $icon = null): self
     {
-        $instance = new self();
+        $instance = new self;
         if (is_null($icon)) {
             $icon = 'bi-bell-fill';
         }
         $instance->message = $message;
         $instance->icon = $icon;
+
         return $instance;
     }
 

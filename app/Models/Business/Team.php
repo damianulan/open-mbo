@@ -3,12 +3,10 @@
 namespace App\Models\Business;
 
 use App\Models\BaseModel;
-use FormForge\Casts\TrixFieldCast;
 use App\Models\Core\User;
+use FormForge\Casts\TrixFieldCast;
 
 /**
- * 
- *
  * @property string $id
  * @property string $leader_id
  * @property string $name
@@ -21,6 +19,7 @@ use App\Models\Core\User;
  * @property-read User $leader
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $users
  * @property-read int|null $users_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team onlyTrashed()
@@ -34,11 +33,11 @@ use App\Models\Core\User;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Team extends BaseModel
 {
-
     protected $fillable = [
         'leader_id',
         'name',

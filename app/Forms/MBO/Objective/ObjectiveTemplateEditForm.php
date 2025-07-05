@@ -2,21 +2,20 @@
 
 namespace App\Forms\MBO\Objective;
 
+use App\Models\MBO\ObjectiveTemplateCategory;
 use FormForge\Base\Form;
-use Illuminate\Http\Request;
-use FormForge\FormBuilder;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
-use App\Models\MBO\ObjectiveTemplateCategory;
+use FormForge\FormBuilder;
+use Illuminate\Http\Request;
 
 class ObjectiveTemplateEditForm extends Form
 {
-
     public static function definition(Request $request, $model = null): FormBuilder
     {
         $route = route('mbo.templates.store');
         $method = 'POST';
-        if (!is_null($model)) {
+        if (! is_null($model)) {
             $method = 'PUT';
             $route = route('mbo.templates.update', $model->id);
         }

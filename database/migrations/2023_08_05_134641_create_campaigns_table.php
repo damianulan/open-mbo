@@ -1,9 +1,9 @@
 <?php
 
+use App\Enums\MBO\CampaignStage;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\MBO\CampaignStage;
 
 return new class extends Migration
 {
@@ -18,20 +18,20 @@ return new class extends Migration
             $table->string('period');
             $table->longText('description')->nullable();
 
-            $table->dateTime(CampaignStage::DEFINITION . '_from')->nullable();
-            $table->dateTime(CampaignStage::DEFINITION . '_to')->nullable();
+            $table->dateTime(CampaignStage::DEFINITION.'_from')->nullable();
+            $table->dateTime(CampaignStage::DEFINITION.'_to')->nullable();
 
-            $table->dateTime(CampaignStage::DISPOSITION . '_from')->nullable();
-            $table->dateTime(CampaignStage::DISPOSITION . '_to')->nullable();
+            $table->dateTime(CampaignStage::DISPOSITION.'_from')->nullable();
+            $table->dateTime(CampaignStage::DISPOSITION.'_to')->nullable();
 
-            $table->dateTime(CampaignStage::REALIZATION . '_from')->nullable();
-            $table->dateTime(CampaignStage::REALIZATION . '_to')->nullable();
+            $table->dateTime(CampaignStage::REALIZATION.'_from')->nullable();
+            $table->dateTime(CampaignStage::REALIZATION.'_to')->nullable();
 
-            $table->dateTime(CampaignStage::EVALUATION . '_from')->nullable();
-            $table->dateTime(CampaignStage::EVALUATION . '_to')->nullable();
+            $table->dateTime(CampaignStage::EVALUATION.'_from')->nullable();
+            $table->dateTime(CampaignStage::EVALUATION.'_to')->nullable();
 
-            $table->dateTime(CampaignStage::SELF_EVALUATION . '_from')->nullable();
-            $table->dateTime(CampaignStage::SELF_EVALUATION . '_to')->nullable();
+            $table->dateTime(CampaignStage::SELF_EVALUATION.'_from')->nullable();
+            $table->dateTime(CampaignStage::SELF_EVALUATION.'_to')->nullable();
 
             $table->enum('stage', CampaignStage::hardValues())->default(CampaignStage::PENDING);
 

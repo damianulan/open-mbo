@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\Settings\Organization;
 
-use Illuminate\Http\Request;
-use App\Models\Business\Company;
 use App\DataTables\Management\CompaniesDataTable;
 use App\Forms\Settings\Organization\CompanyEditForm;
 use App\Http\Controllers\Settings\SettingsController;
+use App\Models\Business\Company;
+use Illuminate\Http\Request;
 
 class CompanyController extends SettingsController
 {
-
     public function index(CompaniesDataTable $dataTable)
     {
         return $dataTable->render('pages.settings.organization.company.index', [
@@ -21,7 +20,7 @@ class CompanyController extends SettingsController
     public function create(Request $request)
     {
         return view('pages.settings.organization.company.edit', [
-            'form' => CompanyEditForm::definition($request)
+            'form' => CompanyEditForm::definition($request),
         ]);
     }
 
@@ -34,15 +33,17 @@ class CompanyController extends SettingsController
 
             return redirect()->route('users.show', $company->id)->with('success', __('alerts.users.success.create'));
         }
+
         return redirect()->back()->with('error', __('alerts.users.error.create'));
     }
 
     public function edit(Request $request, $id)
     {
         $model = Company::findOrFail($id);
+
         return view('pages.users.edit', [
             'user' => $model,
-            'form' => CompanyEditForm::definition($request, $model)
+            'form' => CompanyEditForm::definition($request, $model),
         ]);
     }
 
@@ -54,6 +55,7 @@ class CompanyController extends SettingsController
         if ($company->update()) {
             return redirect()->route('users.show', $id)->with('success', __('alerts.users.success.edit', ['name' => $company->name()]));
         }
+
         return redirect()->back()->with('error', __('alerts.users.error.edit', ['name' => $company->name()]));
     }
 
@@ -64,6 +66,7 @@ class CompanyController extends SettingsController
         if ($company->delete()) {
             return redirect()->route('users.index')->with('success', __('alerts.users.success.delete', ['name' => $company->name()]));
         }
+
         return redirect()->back()->with('error', __('alerts.users.error.delete', ['name' => $company->name()]));
     }
 }

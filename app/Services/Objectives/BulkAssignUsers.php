@@ -2,10 +2,9 @@
 
 namespace App\Services\Objectives;
 
-use Lucent\Services\Service;
 use App\Models\MBO\Objective;
 use App\Models\MBO\UserObjective;
-use App\Enums\MBO\UserObjectiveStatus;
+use Lucent\Services\Service;
 
 class BulkAssignUsers extends Service
 {
@@ -21,7 +20,7 @@ class BulkAssignUsers extends Service
 
         if ($this->request()->input('user_ids')) {
             foreach ($this->request()->input('user_ids') as $user_id) {
-                if (!$current_ids->has($user_id)) {
+                if (! $current_ids->has($user_id)) {
                     $this->assignUser($user_id);
                 } else {
                     $current_ids->forget($user_id);
@@ -40,7 +39,7 @@ class BulkAssignUsers extends Service
     {
         $exists = $this->objective->user_assignments()->where('user_id', $user_id)->exists();
         $result = false;
-        if (!$exists) {
+        if (! $exists) {
             $result = $this->objective->user_assignments()->create([
                 'user_id' => $user_id,
             ]);

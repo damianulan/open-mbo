@@ -4,16 +4,8 @@ namespace App\Models\Business;
 
 use App\Models\BaseModel;
 use App\Models\Core\User;
-use App\Models\Business\Company;
-use App\Models\Business\Department;
-use App\Models\Business\Position;
-use App\Models\Business\Team;
-use App\Models\Business\TypeOfContract;
-use App\Casts\Carbon\CarbonDate;
 
 /**
- * 
- *
  * @property string $id
  * @property string|null $foreign_id
  * @property string $user_id
@@ -33,6 +25,7 @@ use App\Casts\Carbon\CarbonDate;
  * @property-read Department $department
  * @property-read Position $position
  * @property-read User $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserEmployment newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserEmployment newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserEmployment onlyTrashed()
@@ -51,6 +44,7 @@ use App\Casts\Carbon\CarbonDate;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserEmployment whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserEmployment withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserEmployment withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserEmployment extends BaseModel

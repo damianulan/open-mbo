@@ -33,8 +33,8 @@ class RepoUpdate extends BaseCommand
             $result = Process::run('git fetch --all');
             $result = Process::run('git status');
             $this->info($result->output());
-            if (!empty($branch)) {
-                $result = Process::run('git switch ' . $branch);
+            if (! empty($branch)) {
+                $result = Process::run('git switch '.$branch);
             }
             $result = Process::run('git pull origin');
             $this->info($result->output());
