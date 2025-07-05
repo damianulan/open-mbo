@@ -39,6 +39,9 @@ class Kernel extends ConsoleKernel
         if ($runTest) {
             $schedule->command(SystemTest::class)->everyMinute();
         }
+
+        // LARAVEL COMMANDS
+        $schedule->command('model:prune')->dailyAt('00:01');
     }
 
     /**

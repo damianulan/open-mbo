@@ -46,7 +46,7 @@ class MBOVerifyStatusScript extends BaseCommand
         if ($campaigns->count()) {
             foreach ($campaigns as $campaign) {
                 if ($echo) {
-                    $this->info('Updating campaign status for: ' . $campaign->name);
+                    $this->line('Updating campaign status for: ' . $campaign->name);
                 }
                 $campaign->timestamps = false;
                 $campaign->setStageAuto();
@@ -61,7 +61,7 @@ class MBOVerifyStatusScript extends BaseCommand
                 $objective->timestamps = false;
                 $objective->setStatus()->update();
             }
-            $this->info("Objective assignments' statuses updated successfully");
+            $this->line("Objective assignments' statuses updated successfully");
         }
     }
 }
