@@ -239,7 +239,6 @@ return [
         App\Providers\ComponentServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         // App\Providers\TelescopeServiceProvider::class,
-        App\Providers\PermissionServiceProvider::class,
         App\Providers\RolesServiceProvider::class,
         App\Providers\GateServiceProvider::class,
         App\Providers\ConfigServiceProvider::class,

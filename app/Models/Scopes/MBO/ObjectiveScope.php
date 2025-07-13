@@ -2,11 +2,11 @@
 
 namespace App\Models\Scopes\MBO;
 
-use App\Enums\Core\PermissionLib;
-use App\Enums\Core\SystemRolesLib;
 use App\Models\Core\Role;
 use App\Models\MBO\Campaign;
 use App\Models\MBO\ObjectiveTemplateCategory;
+use App\Warden\PermissionsLib;
+use App\Warden\RolesLib;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
@@ -22,10 +22,10 @@ class ObjectiveScope implements Scope
     {
         $user = Auth::user();
 
-        if ($user->cannot(PermissionLib::MBO_ADMINISTRATION)) {
-            if ($user->can(PermissionLib::MBO_OBJECTIVE_VIEW)) {
-                $objectiveRoleId = Role::getId(SystemRolesLib::OBJECTIVE_COORDINATOR);
-                $campaignRoleId = Role::getId(SystemRolesLib::CAMPAIGN_COORDINATOR);
+        if ($user->cannot(PermissionsLib::MBO_ADMINISTRATION)) {
+            if ($user->can(PermissionsLib::MBO_OBJECTIVE_VIEW)) {
+                $objectiveRoleId = Role::getId(RolesLib::OBJECTIVE_COORDINATOR);
+                $campaignRoleId = Role::getId(RolesLib::CAMPAIGN_COORDINATOR);
 
                 // allow access for objective coordinators
                 $category_ids = $user->roleAssignments()->where('role_id', $objectiveRoleId)->where('context_type', ObjectiveTemplateCategory::class)->get()->pluck('context_id');

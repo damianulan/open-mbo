@@ -2,7 +2,6 @@
 
 namespace App\Models\Core;
 
-use App\Traits\HasRolesAndPermissions;
 use App\Traits\UserBusiness;
 use App\Traits\UserMBO;
 use App\Traits\Vendors\Impersonable;
@@ -22,6 +21,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Lucent\Support\Str\Alphabet;
 use Lucent\Support\Traits\UUID;
 use Lucent\Support\Traits\VirginModel;
+use Sentinel\Traits\HasRolesAndPermissions;
 
 /**
  * @property string $id

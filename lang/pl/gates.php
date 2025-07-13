@@ -1,27 +1,27 @@
 <?php
 
-use App\Enums\Core\PermissionLib;
-use App\Enums\Core\SystemRolesLib;
+use App\Warden\PermissionsLib;
+use App\Warden\RolesLib;
 
 return [
 
     // Roles
     'roles_plural' => 'Role',
     'roles' => [
-        SystemRolesLib::ROOT => 'Root',
-        SystemRolesLib::HELPDESK => 'Helpdesk',
-        'admin' => 'Administrator',
-        'admin_mbo' => 'Administrator MBO',
-        'admin_hr' => 'Administrator HR',
-        'manager' => 'Menadżer',
-        'supervisor' => 'Przełożony',
-        'employee' => 'Pracownik',
-        'objective_coordinator' => 'Koordynator kategorii celów',
-        'campaign_coordinator' => 'Koordynator kampanii MBO',
+        RolesLib::ROOT => 'Root',
+        RolesLib::HELPDESK => 'Helpdesk',
+        RolesLib::ADMIN => 'Administrator',
+        RolesLib::ADMIN_MBO => 'Administrator MBO',
+        RolesLib::ADMIN_HR => 'Administrator HR',
+        RolesLib::MANAGER => 'Menadżer',
+        RolesLib::SUPERVISOR => 'Przełożony',
+        RolesLib::EMPLOYEE => 'Pracownik',
+        RolesLib::OBJECTIVE_COORDINATOR => 'Koordynator kategorii celów',
+        RolesLib::CAMPAIGN_COORDINATOR => 'Koordynator kampanii MBO',
     ],
 
     'permissions' => [
-        PermissionLib::MBO_ADMINISTRATION => 'Administracja MBO',
+        PermissionsLib::MBO_ADMINISTRATION => 'Administracja MBO',
 
         'info' => [],
     ],

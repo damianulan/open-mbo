@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Enums\Core;
+namespace App\Warden;
 
-use Lucent\Support\Enum;
+use Sentinel\Config\Warden\RoleWarden;
+use Illuminate\Support\Facades\Lang;
 
-class SystemRolesLib extends Enum
+final class RolesLib extends RoleWarden
 {
     const ROOT = 'root';
 
@@ -48,5 +49,10 @@ class SystemRolesLib extends Enum
             self::ROOT,
             self::HELPDESK,
         ];
+    }
+
+    public static function labels(): array
+    {
+        return __('gates.roles');
     }
 }

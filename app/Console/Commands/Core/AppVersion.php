@@ -6,6 +6,7 @@ use App\Events\Core\AppUpgraded;
 use App\Settings\GeneralSettings;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Process;
+use Illuminate\Support\Facades\Schema;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
 class AppVersion extends Command
@@ -29,6 +30,11 @@ class AppVersion extends Command
      */
     public function handle()
     {
+        if (! Schema::hasTable('settings')) {
+            $this->error('Settings table is not created!');
+
+            return false;
+        }
         $result = Process::run('git describe --tags --abbrev=0');
         $settings = new GeneralSettings;
         if ($settings) {

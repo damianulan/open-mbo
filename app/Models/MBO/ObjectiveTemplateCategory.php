@@ -89,7 +89,7 @@ class ObjectiveTemplateCategory extends BaseModel
 
     public function coordinators()
     {
-        return $this->morphToMany(User::class, 'context', 'users_roles', null, 'model_id');
+        return $this->morphToMany(User::class, 'context', 'has_roles', null, 'model_id');
     }
 
     public function refreshCoordinators(?array $user_ids)

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Enums\Core;
+namespace App\Warden;
 
-use Lucent\Support\Enum;
+use Sentinel\Config\Warden\PermissionWarden;
 
-class PermissionLib extends Enum
+final class PermissionsLib extends PermissionWarden
 {
     // core
     public const TELESCOPE_VIEW = 'telescope-view';
@@ -118,10 +118,7 @@ class PermissionLib extends Enum
 
     public const MBO_OBJECTIVE_REALIZATION = 'mbo-objective-realization';
 
-    /**
-     * roles and their permissions for core functionality, cannot be manipulated in-app.
-     */
-    public static function core(): array
+    public static function nonassignable(): array
     {
         return [
             self::TELESCOPE_VIEW => ['root', 'support'],
@@ -129,10 +126,7 @@ class PermissionLib extends Enum
         ];
     }
 
-    /**
-     * roles and their permissions for common use, can be manipulated by admins in settings.
-     */
-    public static function normal(): array
+    public static function assignable(): array
     {
         return [
             // global
@@ -196,5 +190,10 @@ class PermissionLib extends Enum
             self::MBO_OBJECTIVE_MILESTONES => ['admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator', 'supervisor'],
             self::MBO_OBJECTIVE_REALIZATION => ['admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator', 'supervisor'],
         ];
+    }
+
+    public static function labels(): array
+    {
+        return __('gates.permissions');
     }
 }
