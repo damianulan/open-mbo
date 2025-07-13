@@ -122,6 +122,7 @@ class Campaign extends BaseModel
         'manual' => 'boolean',
 
         'description' => TrixFieldCast::class,
+        'stage' => CampaignStage::class,
     ];
 
     protected $defaults = [
@@ -228,8 +229,8 @@ class Campaign extends BaseModel
         $now = Carbon::now();
 
         foreach (CampaignStage::softValues() as $tmp) {
-            $prop_start = $tmp.'_from';
-            $prop_end = $tmp.'_to';
+            $prop_start = $tmp . '_from';
+            $prop_end = $tmp . '_to';
             $start = Carbon::parse($this->$prop_start);
             $end = Carbon::parse($this->$prop_end);
 
@@ -252,8 +253,8 @@ class Campaign extends BaseModel
         if ($this->stage === CampaignStage::IN_PROGRESS) {
             $softStage = null;
             foreach (CampaignStage::softValues() as $tmp) {
-                $prop_start = $tmp.'_from';
-                $prop_end = $tmp.'_to';
+                $prop_start = $tmp . '_from';
+                $prop_end = $tmp . '_to';
                 $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_start);
                 $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_end);
 
