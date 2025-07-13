@@ -44,6 +44,11 @@ use App\Models\Core\User;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserEmployment whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserEmployment withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserEmployment withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserEmployment active()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserEmployment checkAccess()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserEmployment drafted()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserEmployment inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserEmployment published()
  *
  * @mixin \Eloquent
  */

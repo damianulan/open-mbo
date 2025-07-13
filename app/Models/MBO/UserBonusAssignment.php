@@ -36,6 +36,11 @@ use App\Models\Core\User;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserBonusAssignment whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserBonusAssignment withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserBonusAssignment withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserBonusAssignment active()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserBonusAssignment checkAccess()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserBonusAssignment drafted()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserBonusAssignment inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserBonusAssignment published()
  *
  * @mixin \Eloquent
  */

@@ -3,7 +3,6 @@
 namespace App\Warden;
 
 use Sentinel\Config\Warden\RoleWarden;
-use Illuminate\Support\Facades\Lang;
 
 final class RolesLib extends RoleWarden
 {

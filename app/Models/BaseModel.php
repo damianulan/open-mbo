@@ -23,6 +23,11 @@ use Watson\Rememberable\Rememberable;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel active()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel checkAccess()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel drafted()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel published()
  *
  * @mixin \Eloquent
  */

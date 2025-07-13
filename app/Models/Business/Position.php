@@ -29,6 +29,11 @@ use FormForge\Casts\TrixFieldCast;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Position whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Position withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Position withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Position active()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Position checkAccess()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Position drafted()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Position inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Position published()
  *
  * @mixin \Eloquent
  */

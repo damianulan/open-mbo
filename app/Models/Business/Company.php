@@ -38,6 +38,11 @@ use FormForge\Casts\TrixFieldCast;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company withoutTrashed()
  * @method static \Database\Factories\Business\CompanyFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Company active()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Company checkAccess()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Company drafted()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Company inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Company published()
  *
  * @mixin \Eloquent
  */

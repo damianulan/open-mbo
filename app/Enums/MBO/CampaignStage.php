@@ -83,12 +83,12 @@ class CampaignStage extends Enum
 
     public static function getName(string $value): string
     {
-        return __('forms.campaigns.' . $value);
+        return __('forms.campaigns.'.$value);
     }
 
     public static function getInfo(string $value): string
     {
-        return __('forms.campaigns.info.' . $value);
+        return __('forms.campaigns.info.'.$value);
     }
 
     public static function getBySequence(int $sequence)

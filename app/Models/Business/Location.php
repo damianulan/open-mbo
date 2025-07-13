@@ -45,6 +45,13 @@ use FormForge\Casts\TrixFieldCast;
  *
  * @property string|null $country
  *
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Location active()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Location checkAccess()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Location drafted()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Location inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Location published()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Location whereCountry($value)
+ *
  * @mixin \Eloquent
  */
 class Location extends BaseModel

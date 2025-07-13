@@ -40,6 +40,11 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign active()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign checkAccess()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign drafted()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign published()
  *
  * @mixin \Eloquent
  */

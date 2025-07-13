@@ -29,6 +29,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @property bool $system_notifications
  *
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereAppNotifications($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereExtendedNotifications($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereLang($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereMailNotifications($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereSystemNotifications($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereTheme($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereUserId($value)
+ *
  * @mixin \Eloquent
  */
 class UserPreference extends Model

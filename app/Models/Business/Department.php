@@ -44,6 +44,13 @@ use FormForge\Casts\TrixFieldCast;
  * @property-read int|null $managers_count
  * @property string $shortname
  *
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Department active()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Department checkAccess()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Department drafted()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Department inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Department published()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereShortname($value)
+ *
  * @mixin \Eloquent
  */
 class Department extends BaseModel

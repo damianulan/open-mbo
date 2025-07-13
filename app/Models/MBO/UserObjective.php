@@ -43,6 +43,18 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserObjective whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserObjective withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserObjective withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserObjective active()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserObjective checkAccess()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserObjective drafted()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserObjective inactive()
+ * @method static Builder<static>|UserObjective my(?\App\Models\Core\User $user = null)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserObjective published()
+ * @method static Builder<static>|UserObjective whereActive()
+ * @method static Builder<static>|UserObjective whereCompleted()
+ * @method static Builder<static>|UserObjective whereEvaluated()
+ * @method static Builder<static>|UserObjective whereFailed()
+ * @method static Builder<static>|UserObjective whereNotEvaluated()
+ * @method static Builder<static>|UserObjective wherePassed()
  *
  * @mixin \Eloquent
  */

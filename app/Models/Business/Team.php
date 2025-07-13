@@ -33,6 +33,11 @@ use FormForge\Casts\TrixFieldCast;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Team active()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Team checkAccess()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Team drafted()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Team inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Team published()
  *
  * @mixin \Eloquent
  */

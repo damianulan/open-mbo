@@ -32,6 +32,13 @@ use FormForge\Casts\TrixFieldCast;
  *
  * @property string $shortname
  *
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract active()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract checkAccess()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract drafted()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract published()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract whereShortname($value)
+ *
  * @mixin \Eloquent
  */
 class TypeOfContract extends BaseModel

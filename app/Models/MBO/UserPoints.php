@@ -32,6 +32,11 @@ use App\Models\BaseModel;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPoints whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPoints withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPoints withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPoints active()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPoints checkAccess()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPoints drafted()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPoints inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPoints published()
  *
  * @mixin \Eloquent
  */

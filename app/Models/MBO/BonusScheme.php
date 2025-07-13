@@ -34,6 +34,11 @@ use FormForge\Casts\TrixFieldCast;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme active()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme checkAccess()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme drafted()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme published()
  *
  * @mixin \Eloquent
  */

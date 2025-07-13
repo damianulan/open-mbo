@@ -87,6 +87,12 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @method static \Database\Factories\Core\UserFactory factory($count = null, $state = [])
  *
  * @property-read UserPreference|null $preferences
+ * @property-read mixed $name
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User active()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User drafted()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User published()
  *
  * @mixin \Eloquent
  */

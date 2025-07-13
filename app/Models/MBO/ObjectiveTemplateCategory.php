@@ -40,6 +40,13 @@ use FormForge\Casts\TrixFieldCast;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $coordinators
  * @property-read int|null $coordinators_count
  *
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory active()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory checkAccess()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory drafted()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory published()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory whereShortname($value)
+ *
  * @mixin \Eloquent
  */
 class ObjectiveTemplateCategory extends BaseModel

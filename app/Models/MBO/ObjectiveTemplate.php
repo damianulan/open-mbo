@@ -41,6 +41,11 @@ use FormForge\Casts\TrixFieldCast;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withoutTrashed()
  * @method static \Database\Factories\MBO\ObjectiveTemplateFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate active()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate checkAccess()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate drafted()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate published()
  *
  * @mixin \Eloquent
  */

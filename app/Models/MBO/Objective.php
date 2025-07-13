@@ -56,6 +56,12 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective whereWeight($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective active()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective checkAccess()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective drafted()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective published()
+ * @method static Builder<static>|Objective whereAssigned(\App\Models\Core\User $user)
  *
  * @mixin \Eloquent
  */
