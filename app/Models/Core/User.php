@@ -53,10 +53,10 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserObjective> $objective_assignments
  * @property-read int|null $objective_assignments_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Core\Permission> $permissions
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Sentinel\Models\Permission> $permissions
  * @property-read int|null $permissions_count
  * @property-read UserProfile|null $profile
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Core\Role> $roles
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Sentinel\Models\Role> $roles
  * @property-read int|null $roles_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $subordinates
  * @property-read int|null $subordinates_count

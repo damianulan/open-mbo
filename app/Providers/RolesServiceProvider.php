@@ -24,10 +24,6 @@ class RolesServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Blade::if('admin', function () {
-            return auth()->user()->isAdmin();
-        });
-
         Blade::if('root', function () {
             return auth()->user()->isRoot();
         });

@@ -261,8 +261,6 @@ return [
         'PageBuilder' => App\Support\Page\PageBuilder::class,
         'Theme' => App\Lib\Theme::class,
         'ResponseAjax' => App\Support\Http\ResponseAjax::class,
-        'PermissionsLib' => App\Enums\Core\PermissionLib::class,
-        'SystemRolesLib' => App\Enums\Core\SystemRolesLib::class,
 
         // CASTS
         'CheckboxCast' => App\Casts\CheckboxCast::class,

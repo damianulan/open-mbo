@@ -3,13 +3,13 @@
 namespace App\Forms\Users;
 
 use App\Enums\Users\Gender;
-use App\Models\Core\Role;
 use App\Models\Core\User;
 use FormForge\Base\Form;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
 use FormForge\FormBuilder;
 use Illuminate\Http\Request;
+use Sentinel\Models\Role;
 
 class UserEditForm extends Form
 {

@@ -19,6 +19,23 @@
             "role": "Developer"
         }
     ],
+    "repositories": [
+        {
+            "name": "damianulan/laravel-form-forge",
+            "type": "github",
+            "url": "https://github.com/damianulan/laravel-form-forge"
+        },
+        {
+            "name": "damianulan/laravel-lucent",
+            "type": "github",
+            "url": "https://github.com/damianulan/laravel-lucent"
+        },
+        {
+            "name": "damianulan/laravel-sentinel",
+            "type": "github",
+            "url": "https://github.com/damianulan/laravel-sentinel"
+        }
+    ],
     "require": {
         "php": "^8.3.0",
         "akaunting/laravel-apexcharts": "^3.0",
@@ -120,5 +137,7 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "require-dependencies": true,
+    "require-dev-dependencies": true
 }

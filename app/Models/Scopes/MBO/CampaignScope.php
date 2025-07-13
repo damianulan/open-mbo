@@ -2,7 +2,6 @@
 
 namespace App\Models\Scopes\MBO;
 
-use App\Models\Core\Role;
 use App\Models\MBO\Campaign;
 use App\Warden\PermissionsLib;
 use App\Warden\RolesLib;
@@ -10,6 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Support\Facades\Auth;
+use Sentinel\Models\Role;
 
 class CampaignScope implements Scope
 {

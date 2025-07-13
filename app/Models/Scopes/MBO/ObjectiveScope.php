@@ -2,7 +2,6 @@
 
 namespace App\Models\Scopes\MBO;
 
-use App\Models\Core\Role;
 use App\Models\MBO\Campaign;
 use App\Models\MBO\ObjectiveTemplateCategory;
 use App\Warden\PermissionsLib;
@@ -12,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Facades\Auth;
+use Sentinel\Models\Role;
 
 class ObjectiveScope implements Scope
 {

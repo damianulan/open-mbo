@@ -3,9 +3,9 @@
 namespace App\Models\Business;
 
 use App\Models\BaseModel;
-use App\Models\Core\Role;
 use App\Models\Core\User;
 use FormForge\Casts\TrixFieldCast;
+use Sentinel\Models\Role;
 
 /**
  * @property string $id
