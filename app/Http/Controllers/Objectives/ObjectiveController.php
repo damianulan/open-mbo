@@ -6,6 +6,7 @@ use App\DataTables\MBO\ObjectiveDataTable;
 use App\Forms\MBO\Objective\ObjectiveEditForm;
 use App\Models\MBO\Objective;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
 
 class ObjectiveController extends MBOController
 {
@@ -95,5 +96,24 @@ class ObjectiveController extends MBOController
     public function destroy(string $id)
     {
         //
+    }
+
+    public function addObjectives(Request $request, $id): View
+    {
+        $params = array();
+        if ($id) {
+            $objective = Objective::checkAccess()->find($id);
+            if ($objective) {
+                $params = [
+                    'id' => $id,
+                    'form' => ObjectiveEditForm::definition($request, $objective),
+                ];
+            }
+        } else {
+            $params = [
+                'form' => ObjectiveEditForm::definition($request),
+            ];
+        }
+        return view('components.modals.objectives.add_objectives', $params);
     }
 }

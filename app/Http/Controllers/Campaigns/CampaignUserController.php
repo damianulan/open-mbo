@@ -8,6 +8,7 @@ use App\Models\MBO\Campaign;
 use App\Models\MBO\UserCampaign;
 use App\Services\Campaigns\BulkAssignUsers;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
 
 class CampaignUserController extends AppController
 {
@@ -68,5 +69,20 @@ class CampaignUserController extends AppController
         }
 
         return ajax()->error(__('alerts.campaigns.error.users_deleted'));
+    }
+
+    public function addUsers(Request $request, $id): View
+    {
+        $params = array();
+        if ($id) {
+            $campaign = Campaign::checkAccess()->find($id);
+            if ($campaign) {
+                $params = [
+                    'id' => $id,
+                    'form' => CampaignEditUserForm::definition($request, $campaign),
+                ];
+            }
+        }
+        return view('components.modals.campaigns.add_users', $params);
     }
 }

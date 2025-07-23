@@ -9,6 +9,7 @@ use App\Models\MBO\UserObjective;
 use App\Services\Objectives\BulkAssignUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\View\View;
 
 class UserObjectiveController extends AppController
 {
@@ -88,5 +89,20 @@ class UserObjectiveController extends AppController
     public function destroy(string $id)
     {
         //
+    }
+
+    public function addUsers(Request $request, $id): View
+    {
+        $params = array();
+        if ($id) {
+            $objective = Objective::checkAccess()->find($id);
+            if ($objective) {
+                $params = [
+                    'id' => $id,
+                    'form' => ObjectiveEditUserForm::definition($request, $objective),
+                ];
+            }
+        }
+        return view('components.modals.objectives.add_users', $params);
     }
 }

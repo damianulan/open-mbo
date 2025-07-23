@@ -58935,24 +58935,31 @@ jQuery.fn.extend({
     this.find(".jsloader-row").remove();
   }
 });
-$.getModal = function (type) {
+$.getModal = function (target) {
   var datas = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  if (type && type != "") {
-    datas.type = type;
+  var _callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+  if (target && target != "") {
     $.ajax({
       cache: false,
       url: getModalUrl,
+      type: "GET",
       dataType: "json",
       headers: {
         "X-CSRF-Token": csrf
       },
-      data: datas
+      data: {
+        target: target,
+        datas: datas
+      }
     }).done(function (data) {
       if (data.status === "ok") {
         $("body").find("#modal-container").children().remove();
         $("body").find("#modal-container").append(data.view);
         $("body").find("#modal-input").trigger("click");
         $(document).trigger(modal_initialized);
+        if (_callback) {
+          _callback(data);
+        }
       } else {
         if (data.status === "warning") {
           $.warning(data.message);

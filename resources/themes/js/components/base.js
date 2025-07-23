@@ -161,17 +161,20 @@ jQuery.fn.extend({
     },
 });
 
-$.getModal = function (type, datas = {}) {
-    if (type && type != "") {
-        datas.type = type;
+$.getModal = function (target, datas = {}, _callback = null) {
+    if (target && target != "") {
         $.ajax({
             cache: false,
             url: getModalUrl,
+            type: "GET",
             dataType: "json",
             headers: {
                 "X-CSRF-Token": csrf,
             },
-            data: datas,
+            data: {
+                target: target,
+                datas: datas,
+            },
         })
             .done(function (data) {
                 if (data.status === "ok") {
@@ -179,6 +182,9 @@ $.getModal = function (type, datas = {}) {
                     $("body").find("#modal-container").append(data.view);
                     $("body").find("#modal-input").trigger("click");
                     $(document).trigger(modal_initialized);
+                    if (_callback) {
+                        _callback(data);
+                    }
                 } else {
                     if (data.status === "warning") {
                         $.warning(data.message);

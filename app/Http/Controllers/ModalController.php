@@ -1,0 +1,60 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\View\View;
+
+class ModalController extends AppController
+{
+    public function getModal(Request $request)
+    {
+        $target = $request->get('target', null);
+        $datas = $request->get('datas', []);
+        $status = 'error';
+        $message = 'error';
+        $view = null;
+        $params = [];
+
+        try {
+            if ($target) {
+                $partials = explode('@', $target);
+                if (count($partials) === 2) {
+                    $controller = $partials[0];
+                    $method = $partials[1];
+
+                    $object = new $controller;
+                    $id = $datas['id'] ?? null;
+                    if (is_array($datas) && count($datas)) {
+                        foreach ($datas as $key => $value) {
+                            $request->request->add([$key => $value]);
+                        }
+                    }
+                    $view = $object->$method(
+                        request: $request,
+                        id: $id
+                    );
+                    if ($view instanceof View) {
+                        $view = $view->render();
+                        $status = 'ok';
+                    } else {
+                        throw new \Exception('Modal method must return a Illuminate\View\View instance.');
+                    }
+                } else {
+                    throw new \Exception('Modal target must be in format "controller@method".');
+                }
+            } else {
+                throw new \Exception('Modal target is missing.');
+            }
+        } catch (\Throwable $e) {
+            $status = 'error';
+            $message = $e->getMessage();
+        }
+
+        return response()->json([
+            'status' => $status,
+            'message' => $message,
+            'view' => $view,
+        ]);
+    }
+}

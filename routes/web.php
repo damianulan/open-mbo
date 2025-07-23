@@ -149,7 +149,7 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
     });
 
     Route::name('general.')->group(function () {
-        Route::get('/get_modal', [App\Http\Controllers\GeneralController::class, 'getModal'])->name('get_modal');
+        Route::get('/get_modal', [App\Http\Controllers\ModalController::class, 'getModal'])->name('get_modal');
     });
 
     Route::prefix('datatables')->name('datatables.')->group(function () {

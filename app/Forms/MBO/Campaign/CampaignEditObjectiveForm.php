@@ -20,7 +20,7 @@ class CampaignEditObjectiveForm extends Form
         $route = null;
         $method = 'POST';
         $title = 'Dodaj nowy cel do kampanii';
-        $campaign_id = $request->input('campaign_id') ?? null;
+        $campaign_id = $request->get('campaign_id') ?? null;
         $selectedTemplate = [];
 
         if (! is_null($model)) {

@@ -89,7 +89,7 @@
         var model_id = $(this).attr('data-modelid');
 
         if(model_id && model_id !== ''){
-            $.getModal('campaigns.add_objectives', {id: model_id});
+            $.getModal('App\\Http\\Controllers\\Campaigns\\CampaignObjectiveController@addObjectives', {id: model_id});
         }
     });
 

@@ -26,15 +26,15 @@
 {{ $dataTable->scripts() }}
 <script type="text/javascript">
     function add_users(objective_id) {
-        $.getModal('objectives.add_users', {id: objective_id});
+        $.getModal('App\\Http\\Controllers\\Objectives\\UserObjectiveController@addUsers', {id: objective_id});
     }
 
     function edit_objective(objective_id) {
-        $.getModal('objectives.add_objectives', {id: objective_id});
+        $.getModal('App\\Http\\Controllers\\Objectives\\ObjectiveController@addObjectives', {id: objective_id});
     }
 
     $('.add-objective').on('click', function() {
-        $.getModal('objectives.add_objectives');
+        $.getModal('App\\Http\\Controllers\\Objectives\\ObjectiveController@addObjectives');
     });
 </script>
 @endpush

@@ -48,16 +48,16 @@
 <script type="text/javascript">
     var campaign_id = '{{ $campaign->id }}';
     $('.add-objective').on('click', function() {
-        $.getModal('campaigns.add_objectives', {campaign_id: campaign_id});
+        $.getModal('App\\Http\\Controllers\\Campaigns\\CampaignObjectiveController@addObjectives', {campaign_id: campaign_id});
     });
     $('.add-users').on('click', function() {
-        $.getModal('campaigns.add_users', {id: campaign_id});
+        $.getModal('App\\Http\\Controllers\\Campaigns\\CampaignUserController@addUsers', {id: campaign_id});
     });
     $('.edit-objective').on('click', function() {
         var model_id = $(this).attr('data-modelid');
 
         if(model_id && model_id !== ''){
-            $.getModal('campaigns.add_objectives', {id: model_id});
+            $.getModal('App\\Http\\Controllers\\Campaigns\\CampaignObjectiveController@addObjectives', {id: model_id});
         }
     });
 
