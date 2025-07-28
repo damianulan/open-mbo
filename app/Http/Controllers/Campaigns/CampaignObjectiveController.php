@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Campaigns;
 
+use App\Forms\MBO\Campaign\CampaignEditObjectiveForm;
 use App\Http\Controllers\AppController;
 use App\Models\MBO\Objective;
-use Illuminate\Http\Request;
-use App\Forms\MBO\Campaign\CampaignEditObjectiveForm;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 
 class CampaignObjectiveController extends AppController
 {
@@ -55,7 +55,7 @@ class CampaignObjectiveController extends AppController
 
     public function addObjectives(Request $request, $id): View
     {
-        $params = array();
+        $params = [];
         if ($id) {
             $objective = Objective::checkAccess()->find($id);
             if ($objective) {

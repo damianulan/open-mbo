@@ -7,8 +7,8 @@ use App\Http\Controllers\AppController;
 use App\Models\MBO\Campaign;
 use App\Models\MBO\UserCampaign;
 use App\Services\Campaigns\BulkAssignUsers;
-use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 
 class CampaignUserController extends AppController
 {
@@ -73,7 +73,7 @@ class CampaignUserController extends AppController
 
     public function addUsers(Request $request, $id): View
     {
-        $params = array();
+        $params = [];
         if ($id) {
             $campaign = Campaign::checkAccess()->find($id);
             if ($campaign) {
@@ -83,6 +83,7 @@ class CampaignUserController extends AppController
                 ];
             }
         }
+
         return view('components.modals.campaigns.add_users', $params);
     }
 }

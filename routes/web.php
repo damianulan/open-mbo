@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Laraverse\Config\Laraverse;
 use Livewire\Livewire;
 
 /*
@@ -22,6 +23,8 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
     Livewire::setUpdateRoute(function ($handle) {
         return Route::post('/livewire/update', $handle);
     });
+
+    Laraverse::routes();
 
     /**
      * Users START
