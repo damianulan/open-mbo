@@ -21,19 +21,20 @@
     ],
     "repositories": [
         {
-            "name": "damianulan/laravel-form-forge",
-            "type": "github",
-            "url": "https://github.com/damianulan/laravel-form-forge"
+            "type": "vcs",
+            "url": "git@github.com:damianulan/laravel-form-forge.git"
         },
         {
-            "name": "damianulan/laravel-lucent",
-            "type": "github",
-            "url": "https://github.com/damianulan/laravel-lucent"
+            "type": "vcs",
+            "url": "git@github.com:damianulan/laravel-lucent.git"
         },
         {
-            "name": "damianulan/laravel-sentinel",
-            "type": "github",
-            "url": "https://github.com/damianulan/laravel-sentinel"
+            "type": "vcs",
+            "url": "git@github.com:damianulan/laravel-sentinel.git"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:damianulan/laraverse.git"
         }
     ],
     "require": {
@@ -111,7 +112,7 @@
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "@php artisan optimize",
             "@php artisan ide-helper:generate",
-            "@php artisan ide-helper:models",
+            "@php artisan ide-helper:models -N",
             "@php artisan ide-helper:meta",
             "./vendor/bin/pint",
             "@php artisan app:version"
