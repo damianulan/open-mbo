@@ -36,12 +36,12 @@ class RepoUpdate extends BaseCommand
             $result = Process::run('git reset --hard');
             $this->info($result->output());
             if (! empty($branch)) {
-                $result = Process::run('git switch '.$branch);
+                $result = Process::run('git switch ' . $branch);
             }
             $result = Process::run('git pull origin');
             $this->info($result->output());
             $composer_exec = env('COMPOSER_EXECUTABLE', 'composer update');
-            $result = Process::run($composer_exec);
+            $result = Process::timeout(1200)->run($composer_exec);
             $this->info($result->output());
         } catch (\Throwable $th) {
             $this->log($th->getMessage(), false);
