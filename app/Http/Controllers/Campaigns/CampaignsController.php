@@ -76,7 +76,6 @@ class CampaignsController extends AppController
             unauthorized();
         }
 
-        $campaign->delete();
         CampaignViewed::dispatch($campaign);
         $this->logShow($campaign);
         $header = $campaign->name . ' [' . $campaign->period . ']';
