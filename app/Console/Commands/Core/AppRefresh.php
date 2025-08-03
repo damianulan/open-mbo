@@ -37,8 +37,10 @@ class AppRefresh extends BaseCommand
                 $branch = $this->option('branch');
                 $result = Process::run('git status');
                 $this->info($result->output());
+                $result = Process::run('git reset --hard');
+                $this->info($result->output());
                 if (! empty($branch)) {
-                    $result = Process::run('git switch '.$branch);
+                    $result = Process::run('git switch ' . $branch);
                 }
                 $result = Process::run('git pull origin');
                 $this->info($result->output());
@@ -53,6 +55,7 @@ class AppRefresh extends BaseCommand
             $this->info(Artisan::output());
             Artisan::call('optimize:clear');
             $this->info(Artisan::output());
+
             $user = User::findByEmail('kontakt@damianulan.me');
             if ($user && $notLocal) {
                 if ($user->notify(new AppRefreshNotification)) {

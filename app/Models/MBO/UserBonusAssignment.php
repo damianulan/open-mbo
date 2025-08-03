@@ -20,7 +20,6 @@ use App\Models\Core\User;
  * @property-read BonusScheme $bonus_scheme
  * @property-read Campaign $campaign
  * @property-read User $user
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserBonusAssignment newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserBonusAssignment newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserBonusAssignment onlyTrashed()
@@ -41,7 +40,37 @@ use App\Models\Core\User;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserBonusAssignment drafted()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserBonusAssignment inactive()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserBonusAssignment published()
- *
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment average(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment avg(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment avgFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment count(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment countFromCache(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment createMany(array $records)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment deleteQuietly()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment firstFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment flushCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment flushQueryCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment forceSave(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment getCacheKey($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment getFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment insert(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment insertGetId(array $values, $sequence = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment insertOrIgnore(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment max(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment maxFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment min(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment minFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment paginateFromCache(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment remember(int $minutes)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment restore()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment save(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment saveMany($models)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment sum(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment sumFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment truncate()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment updateOrInsert(array $attributes, $values = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment updateQuietly(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment withoutCache()
  * @mixin \Eloquent
  */
 class UserBonusAssignment extends BaseModel

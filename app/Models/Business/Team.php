@@ -19,7 +19,6 @@ use FormForge\Casts\TrixFieldCast;
  * @property-read User $leader
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $users
  * @property-read int|null $users_count
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team onlyTrashed()
@@ -38,7 +37,37 @@ use FormForge\Casts\TrixFieldCast;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team drafted()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team inactive()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team published()
- *
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team average(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team avg(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team avgFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team count(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team countFromCache(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team createMany(array $records)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team deleteQuietly()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team firstFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team flushCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team flushQueryCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team forceSave(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team getCacheKey($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team getFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team insert(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team insertGetId(array $values, $sequence = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team insertOrIgnore(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team max(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team maxFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team min(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team minFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team paginateFromCache(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team remember(int $minutes)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team restore()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team save(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team saveMany($models)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team sum(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team sumFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team truncate()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team updateOrInsert(array $attributes, $values = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team updateQuietly(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team withoutCache()
  * @mixin \Eloquent
  */
 class Team extends BaseModel

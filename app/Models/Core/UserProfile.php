@@ -22,7 +22,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read User $user
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile onlyTrashed()
@@ -40,11 +39,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withoutTrashed()
- *
  * @property string $lang
- *
  * @method static \Database\Factories\Core\UserProfileFactory factory($count = null, $state = [])
- *
  * @mixin \Eloquent
  */
 class UserProfile extends Model

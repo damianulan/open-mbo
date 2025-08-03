@@ -11,12 +11,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Lucent\Support\Traits\Accessible;
 use Lucent\Support\Traits\UUID;
 use Lucent\Support\Traits\VirginModel;
-use Watson\Rememberable\Rememberable;
+use YMigVal\LaravelModelCache\HasCachedQueries;
 
 /**
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel onlyTrashed()
@@ -28,14 +27,42 @@ use Watson\Rememberable\Rememberable;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel drafted()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel inactive()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel published()
- *
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel average(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel avg(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel avgFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel count(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel countFromCache(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel createMany(array $records)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel deleteQuietly()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel firstFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel flushCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel flushQueryCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel forceSave(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel getCacheKey($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel getFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel insert(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel insertGetId(array $values, $sequence = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel insertOrIgnore(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel max(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel maxFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel min(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel minFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel paginateFromCache(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel remember(int $minutes)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel restore()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel save(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel saveMany($models)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel sum(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel sumFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel truncate()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel updateOrInsert(array $attributes, $values = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel updateQuietly(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel withoutCache()
  * @mixin \Eloquent
  */
 class BaseModel extends Model
 {
-    use Accessible, ModelActivity, VirginModel;
-    use HasFactory, RequestForms, SoftDeletes, UUID;
-    // use Rememberable;
+    use Accessible, HasCachedQueries, HasFactory, ModelActivity, RequestForms, SoftDeletes, UUID, VirginModel;
 
     public function carbonDate(string $prop, string $format = 'Y-m-d')
     {

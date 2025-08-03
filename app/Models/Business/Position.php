@@ -16,7 +16,6 @@ use FormForge\Casts\TrixFieldCast;
  * @property-read int|null $activities_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\UserEmployment> $employments
  * @property-read int|null $employments_count
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Position newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Position newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Position onlyTrashed()
@@ -34,7 +33,37 @@ use FormForge\Casts\TrixFieldCast;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Position drafted()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Position inactive()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Position published()
- *
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position average(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position avg(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position avgFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position count(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position countFromCache(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position createMany(array $records)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position deleteQuietly()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position firstFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position flushCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position flushQueryCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position forceSave(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position getCacheKey($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position getFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position insert(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position insertGetId(array $values, $sequence = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position insertOrIgnore(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position max(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position maxFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position min(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position minFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position paginateFromCache(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position remember(int $minutes)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position restore()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position save(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position saveMany($models)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position sum(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position sumFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position truncate()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position updateOrInsert(array $attributes, $values = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position updateQuietly(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position withoutCache()
  * @mixin \Eloquent
  */
 class Position extends BaseModel

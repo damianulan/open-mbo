@@ -20,7 +20,6 @@ use FormForge\Casts\TrixFieldCast;
  * @property-read int|null $assignments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $users
  * @property-read int|null $users_count
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme onlyTrashed()
@@ -39,7 +38,37 @@ use FormForge\Casts\TrixFieldCast;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme drafted()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme inactive()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme published()
- *
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme average(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme avg(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme avgFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme count(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme countFromCache(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme createMany(array $records)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme deleteQuietly()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme firstFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme flushCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme flushQueryCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme forceSave(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme getCacheKey($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme getFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme insert(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme insertGetId(array $values, $sequence = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme insertOrIgnore(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme max(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme maxFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme min(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme minFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme paginateFromCache(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme remember(int $minutes)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme restore()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme save(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme saveMany($models)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme sum(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme sumFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme truncate()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme updateOrInsert(array $attributes, $values = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme updateQuietly(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme withoutCache()
  * @mixin \Eloquent
  */
 class BonusScheme extends BaseModel

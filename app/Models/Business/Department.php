@@ -24,7 +24,6 @@ use Sentinel\Models\Role;
  * @property-read int|null $employments_count
  * @property-read User $manager
  * @property-read Department|null $parent
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department onlyTrashed()
@@ -39,18 +38,46 @@ use Sentinel\Models\Role;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department withoutTrashed()
- *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $managers
  * @property-read int|null $managers_count
  * @property string $shortname
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department active()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department checkAccess()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department drafted()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department inactive()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department published()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereShortname($value)
- *
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department average(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department avg(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department avgFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department count(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department countFromCache(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department createMany(array $records)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department deleteQuietly()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department firstFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department flushCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department flushQueryCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department forceSave(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department getCacheKey($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department getFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department insert(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department insertGetId(array $values, $sequence = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department insertOrIgnore(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department max(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department maxFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department min(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department minFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department paginateFromCache(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department remember(int $minutes)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department restore()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department save(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department saveMany($models)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department sum(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department sumFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department truncate()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department updateOrInsert(array $attributes, $values = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department updateQuietly(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department withoutCache()
  * @mixin \Eloquent
  */
 class Department extends BaseModel

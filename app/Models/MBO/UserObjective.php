@@ -28,7 +28,6 @@ use Lucent\Support\Traits\Dispatcher;
  * @property-read int|null $activities_count
  * @property-read Objective $objective
  * @property-read User $user
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserObjective newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserObjective newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserObjective onlyTrashed()
@@ -55,7 +54,37 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static Builder<static>|UserObjective whereFailed()
  * @method static Builder<static>|UserObjective whereNotEvaluated()
  * @method static Builder<static>|UserObjective wherePassed()
- *
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective average(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective avg(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective avgFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective count(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective countFromCache(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective createMany(array $records)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective deleteQuietly()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective firstFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective flushCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective flushQueryCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective forceSave(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective getCacheKey($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective getFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective insert(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective insertGetId(array $values, $sequence = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective insertOrIgnore(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective max(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective maxFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective min(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective minFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective paginateFromCache(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective remember(int $minutes)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective restore()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective save(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective saveMany($models)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective sum(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective sumFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective truncate()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective updateOrInsert(array $attributes, $values = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective updateQuietly(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective withoutCache()
  * @mixin \Eloquent
  */
 class UserObjective extends BaseModel

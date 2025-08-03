@@ -43,7 +43,6 @@ use Lucent\Support\Traits\Dispatcher;
  * @property-read int|null $objectives_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, UserCampaign> $user_campaigns
  * @property-read int|null $user_campaigns_count
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign onlyTrashed()
@@ -70,9 +69,7 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign withoutTrashed()
- *
  * @property string $stage
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign active()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign checkAccess()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign drafted()
@@ -83,7 +80,37 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static Builder<static>|Campaign whereCompleted()
  * @method static Builder<static>|Campaign whereOngoing()
  * @method static Builder<static>|Campaign whereStage($value)
- *
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign average(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign avg(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign avgFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign count(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign countFromCache(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign createMany(array $records)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign deleteQuietly()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign firstFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign flushCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign flushQueryCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign forceSave(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign getCacheKey($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign getFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign insert(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign insertGetId(array $values, $sequence = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign insertOrIgnore(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign max(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign maxFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign min(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign minFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign paginateFromCache(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign remember(int $minutes)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign restore()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign save(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign saveMany($models)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign sum(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign sumFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign truncate()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign updateOrInsert(array $attributes, $values = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign updateQuietly(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign withoutCache()
  * @mixin \Eloquent
  */
 class Campaign extends BaseModel

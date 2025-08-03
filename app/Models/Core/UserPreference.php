@@ -19,16 +19,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read User $user
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference withoutTrashed()
- *
  * @property bool $system_notifications
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereAppNotifications($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereDeletedAt($value)
@@ -40,7 +37,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereTheme($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereUserId($value)
- *
  * @mixin \Eloquent
  */
 class UserPreference extends Model

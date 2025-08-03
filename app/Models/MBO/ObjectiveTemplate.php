@@ -23,7 +23,6 @@ use FormForge\Casts\TrixFieldCast;
  * @property-read ObjectiveTemplateCategory|null $category
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Objective> $objectives
  * @property-read int|null $objectives_count
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate onlyTrashed()
@@ -46,7 +45,37 @@ use FormForge\Casts\TrixFieldCast;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate drafted()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate inactive()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate published()
- *
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate average(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate avg(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate avgFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate count(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate countFromCache(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate createMany(array $records)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate deleteQuietly()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate firstFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate flushCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate flushQueryCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate forceSave(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate getCacheKey($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate getFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate insert(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate insertGetId(array $values, $sequence = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate insertOrIgnore(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate max(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate maxFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate min(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate minFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate paginateFromCache(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate remember(int $minutes)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate restore()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate save(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate saveMany($models)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate sum(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate sumFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate truncate()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate updateOrInsert(array $attributes, $values = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate updateQuietly(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate withoutCache()
  * @mixin \Eloquent
  */
 class ObjectiveTemplate extends BaseModel
