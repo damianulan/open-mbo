@@ -4,6 +4,7 @@ namespace App\Models\Business;
 
 use App\Models\BaseModel;
 use App\Models\Core\User;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property string $id
@@ -102,29 +103,29 @@ class UserEmployment extends BaseModel
         'release' => 'date',
     ];
 
-    public function user()
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withTrashed();
     }
 
-    public function company()
+    public function company(): BelongsTo
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(Company::class)->withTrashed();
     }
 
-    public function contract()
+    public function contract(): BelongsTo
     {
-        return $this->belongsTo(TypeOfContract::class, 'contract_id');
+        return $this->belongsTo(TypeOfContract::class, 'contract_id')->withTrashed();
     }
 
-    public function department()
+    public function department(): BelongsTo
     {
-        return $this->belongsTo(Department::class);
+        return $this->belongsTo(Department::class)->withTrashed();
     }
 
-    public function position()
+    public function position(): BelongsTo
     {
-        return $this->belongsTo(Position::class);
+        return $this->belongsTo(Position::class)->withTrashed();
     }
 
     public function team() {}

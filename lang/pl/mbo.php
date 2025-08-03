@@ -53,9 +53,4 @@ return [
     'entities' => [
         'campaign' => 'Kampania pomiarowa',
     ],
-
-    'buttons' => [
-        'add_evaluation' => '',
-    ],
-
 ];

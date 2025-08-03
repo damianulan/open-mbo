@@ -5,6 +5,8 @@ namespace App\Models\Business;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use FormForge\Casts\TrixFieldCast;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @property string $id
@@ -85,13 +87,13 @@ class Team extends BaseModel
         'description' => TrixFieldCast::class,
     ];
 
-    public function users()
+    public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'users_teams');
     }
 
-    public function leader()
+    public function leader(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'leader_id');
+        return $this->belongsTo(User::class, 'leader_id')->withTrashed();
     }
 }

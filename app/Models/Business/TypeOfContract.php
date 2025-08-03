@@ -4,6 +4,7 @@ namespace App\Models\Business;
 
 use App\Models\BaseModel;
 use FormForge\Casts\TrixFieldCast;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property string $id
@@ -92,12 +93,12 @@ class TypeOfContract extends BaseModel
         'description' => TrixFieldCast::class,
     ];
 
-    public static function findByShortname($name)
+    public static function findByShortname($name): ?self
     {
         return self::where('shortname', $name)->first();
     }
 
-    public function employments()
+    public function employments(): HasMany
     {
         return $this->hasMany(UserEmployment::class);
     }

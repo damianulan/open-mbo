@@ -103,12 +103,12 @@ class UserCampaign extends BaseModel
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withTrashed();
     }
 
     public function campaign()
     {
-        return $this->belongsTo(Campaign::class);
+        return $this->belongsTo(Campaign::class)->withTrashed();
     }
 
     public function objectives()
@@ -128,7 +128,7 @@ class UserCampaign extends BaseModel
 
     public function stageDescription(): string
     {
-        return __('forms.campaigns.stages.'.$this->stage);
+        return __('forms.campaigns.stages.' . $this->stage);
     }
 
     public function stageIcon(): string
@@ -215,7 +215,7 @@ class UserCampaign extends BaseModel
      */
     public static function updatedUserCampaign(UserCampaign $model): void
     {
-        $model->mapObjectiveStatus();
+        //$model->mapObjectiveStatus();
         UserCampaignUpdated::dispatch($model);
     }
 
@@ -224,11 +224,6 @@ class UserCampaign extends BaseModel
      */
     public static function deletedUserCampaign(UserCampaign $model): void
     {
-        $objectives = $model->campaign->objectives()->get();
-        foreach ($objectives as $objective) {
-            UserObjective::unassign($model->user_id, $objective->id);
-        }
-
         UserCampaignUnassigned::dispatch($model->user, $model->campaign);
     }
 }

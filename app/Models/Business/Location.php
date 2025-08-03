@@ -4,6 +4,7 @@ namespace App\Models\Business;
 
 use App\Models\BaseModel;
 use FormForge\Casts\TrixFieldCast;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @property string $id
@@ -109,7 +110,7 @@ class Location extends BaseModel
         'active' => 'boolean',
     ];
 
-    public function companies()
+    public function companies(): BelongsToMany
     {
         return $this->belongsToMany(Company::class, 'companies_locations');
     }

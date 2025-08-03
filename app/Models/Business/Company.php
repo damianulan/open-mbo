@@ -4,6 +4,8 @@ namespace App\Models\Business;
 
 use App\Models\BaseModel;
 use FormForge\Casts\TrixFieldCast;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property string $id
@@ -99,12 +101,12 @@ class Company extends BaseModel
         'created_at' => 'datetime',
     ];
 
-    public function employments()
+    public function employments(): HasMany
     {
         return $this->hasMany(UserEmployment::class);
     }
 
-    public function locations()
+    public function locations(): BelongsToMany
     {
         return $this->belongsToMany(Location::class, 'companies_locations');
     }

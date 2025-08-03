@@ -5,6 +5,8 @@ namespace App\Models\Business;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use FormForge\Casts\TrixFieldCast;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Sentinel\Models\Role;
 
 /**
@@ -96,17 +98,17 @@ class Department extends BaseModel
         'description' => TrixFieldCast::class,
     ];
 
-    public function children()
+    public function children(): HasMany
     {
         return $this->hasMany(self::class, 'parent_id');
     }
 
-    public function managers()
+    public function managers(): MorphToMany
     {
         return $this->morphToMany(User::class, 'context', 'has_roles', null, 'model_id')->where('role_id', Role::getId('supervisor'));
     }
 
-    public function employments()
+    public function employments(): HasMany
     {
         return $this->hasMany(UserEmployment::class);
     }

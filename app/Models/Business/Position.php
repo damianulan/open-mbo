@@ -4,6 +4,7 @@ namespace App\Models\Business;
 
 use App\Models\BaseModel;
 use FormForge\Casts\TrixFieldCast;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property string $id
@@ -80,7 +81,7 @@ class Position extends BaseModel
         'description' => TrixFieldCast::class,
     ];
 
-    public function employments()
+    public function employments(): HasMany
     {
         return $this->hasMany(UserEmployment::class);
     }

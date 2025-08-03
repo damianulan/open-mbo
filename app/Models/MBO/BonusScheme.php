@@ -5,6 +5,8 @@ namespace App\Models\MBO;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use FormForge\Casts\TrixFieldCast;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property string $id
@@ -87,12 +89,12 @@ class BonusScheme extends BaseModel
         'options' => 'array',
     ];
 
-    public function users()
+    public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'users_bonus_schemes');
     }
 
-    public function assignments()
+    public function assignments(): HasMany
     {
         return $this->hasMany(UserBonusAssignment::class);
     }
