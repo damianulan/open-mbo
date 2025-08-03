@@ -11,9 +11,9 @@ use App\Models\Scopes\MBO\CampaignScope;
 use Carbon\Carbon;
 use FormForge\Casts\TrixFieldCast;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Collection;
 use Lucent\Support\Traits\Dispatcher;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 /**
  * @property string $id
@@ -44,6 +44,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
  * @property-read int|null $objectives_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, UserCampaign> $user_campaigns
  * @property-read int|null $user_campaigns_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign onlyTrashed()
@@ -70,7 +71,9 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign withoutTrashed()
+ *
  * @property string $stage
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign active()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign checkAccess()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign drafted()
@@ -112,6 +115,12 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign updateOrInsert(array $attributes, $values = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign updateQuietly(array $values)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign withoutCache()
+ *
+ * @property-read mixed $timeend
+ * @property-read mixed $timestart
+ *
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign prunableSoftDeletes()
+ *
  * @mixin \Eloquent
  */
 class Campaign extends BaseModel
@@ -256,8 +265,8 @@ class Campaign extends BaseModel
         $now = Carbon::now();
 
         foreach (CampaignStage::softValues() as $tmp) {
-            $prop_start = $tmp . '_from';
-            $prop_end = $tmp . '_to';
+            $prop_start = $tmp.'_from';
+            $prop_end = $tmp.'_to';
             $start = Carbon::parse($this->$prop_start);
             $end = Carbon::parse($this->$prop_end);
 
@@ -285,8 +294,8 @@ class Campaign extends BaseModel
         if ($this->stage === CampaignStage::IN_PROGRESS) {
             $softStage = null;
             foreach (CampaignStage::softValues() as $tmp) {
-                $prop_start = $tmp . '_from';
-                $prop_end = $tmp . '_to';
+                $prop_start = $tmp.'_from';
+                $prop_end = $tmp.'_to';
                 $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_start);
                 $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_end);
 
@@ -357,14 +366,14 @@ class Campaign extends BaseModel
     protected function timestart(): Attribute
     {
         return Attribute::make(
-            get: fn() => Carbon::parse($this->definition_from),
+            get: fn () => Carbon::parse($this->definition_from),
         );
     }
 
     protected function timeend(): Attribute
     {
         return Attribute::make(
-            get: fn() => Carbon::parse($this->self_evaluation_to),
+            get: fn () => Carbon::parse($this->self_evaluation_to),
         );
     }
 
@@ -511,7 +520,6 @@ class Campaign extends BaseModel
     {
         return self::updatingCampaign($model);
     }
-
 
     public static function updatingCampaign(Campaign $model)
     {

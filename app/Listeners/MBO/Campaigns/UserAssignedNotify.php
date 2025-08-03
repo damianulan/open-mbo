@@ -11,6 +11,7 @@ use Illuminate\Queue\InteractsWithQueue;
 class UserAssignedNotify implements ShouldQueueAfterCommit
 {
     use InteractsWithQueue;
+
     /**
      * Create the event listener.
      */

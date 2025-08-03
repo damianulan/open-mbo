@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Lucent\Support\Traits\Accessible;
+use Lucent\Support\Traits\SoftDeletesPrunable;
 use Lucent\Support\Traits\UUID;
 use Lucent\Support\Traits\VirginModel;
 use YMigVal\LaravelModelCache\HasCachedQueries;
@@ -16,6 +17,7 @@ use YMigVal\LaravelModelCache\HasCachedQueries;
 /**
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel onlyTrashed()
@@ -58,11 +60,13 @@ use YMigVal\LaravelModelCache\HasCachedQueries;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel updateOrInsert(array $attributes, $values = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel updateQuietly(array $values)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel withoutCache()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel prunableSoftDeletes()
+ *
  * @mixin \Eloquent
  */
 class BaseModel extends Model
 {
-    use Accessible, HasCachedQueries, HasFactory, ModelActivity, RequestForms, SoftDeletes, UUID, VirginModel;
+    use Accessible, HasCachedQueries, HasFactory, ModelActivity, RequestForms, SoftDeletes, SoftDeletesPrunable, UUID, VirginModel;
 
     public function carbonDate(string $prop, string $format = 'Y-m-d')
     {

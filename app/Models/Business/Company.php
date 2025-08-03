@@ -21,6 +21,7 @@ use FormForge\Casts\TrixFieldCast;
  * @property-read int|null $employments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Location> $locations
  * @property-read int|null $locations_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company onlyTrashed()
@@ -73,6 +74,8 @@ use FormForge\Casts\TrixFieldCast;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company updateOrInsert(array $attributes, $values = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company updateQuietly(array $values)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company withoutCache()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company prunableSoftDeletes()
+ *
  * @mixin \Eloquent
  */
 class Company extends BaseModel

@@ -47,7 +47,7 @@ class MBOVerifyStatusScript extends BaseCommand
                 $campaign->setStageAuto();
                 if ($campaign->isDirty()) {
                     if ($echo) {
-                        $this->line('Updating campaign status for: ' . $campaign->name . ' - ' . $campaign->getOriginal('stage') . ' => ' . $campaign->stage);
+                        $this->line('Updating campaign status for: '.$campaign->name.' - '.$campaign->getOriginal('stage').' => '.$campaign->stage);
                     }
                     $campaign->update();
                 }
@@ -57,7 +57,7 @@ class MBOVerifyStatusScript extends BaseCommand
                 $objective->setStatus();
                 if ($objective->isDirty()) {
                     if ($echo) {
-                        $this->line('Updating objective status for: ' . $objective->objective->name . ' (' . $objective->user->name . ') - ' . $objective->getOriginal('status') . ' => ' . $objective->status);
+                        $this->line('Updating objective status for: '.$objective->objective->name.' ('.$objective->user->name.') - '.$objective->getOriginal('status').' => '.$objective->status);
                     }
                     $objective->update();
                 }

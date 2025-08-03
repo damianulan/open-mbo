@@ -19,6 +19,7 @@ use FormForge\Casts\TrixFieldCast;
  * @property-read User $leader
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $users
  * @property-read int|null $users_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team onlyTrashed()
@@ -68,6 +69,8 @@ use FormForge\Casts\TrixFieldCast;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team updateOrInsert(array $attributes, $values = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team updateQuietly(array $values)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team withoutCache()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team prunableSoftDeletes()
+ *
  * @mixin \Eloquent
  */
 class Team extends BaseModel

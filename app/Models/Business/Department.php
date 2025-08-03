@@ -24,6 +24,7 @@ use Sentinel\Models\Role;
  * @property-read int|null $employments_count
  * @property-read User $manager
  * @property-read Department|null $parent
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department onlyTrashed()
@@ -38,9 +39,11 @@ use Sentinel\Models\Role;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department withoutTrashed()
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $managers
  * @property-read int|null $managers_count
  * @property string $shortname
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department active()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department checkAccess()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department drafted()
@@ -78,6 +81,8 @@ use Sentinel\Models\Role;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department updateOrInsert(array $attributes, $values = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department updateQuietly(array $values)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department withoutCache()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department prunableSoftDeletes()
+ *
  * @mixin \Eloquent
  */
 class Department extends BaseModel

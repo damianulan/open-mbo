@@ -25,6 +25,7 @@ use App\Models\Core\User;
  * @property-read Department $department
  * @property-read Position $position
  * @property-read User $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserEmployment newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserEmployment newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserEmployment onlyTrashed()
@@ -79,6 +80,8 @@ use App\Models\Core\User;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment updateOrInsert(array $attributes, $values = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment updateQuietly(array $values)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment withoutCache()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment prunableSoftDeletes()
+ *
  * @mixin \Eloquent
  */
 class UserEmployment extends BaseModel

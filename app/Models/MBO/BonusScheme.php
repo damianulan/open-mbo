@@ -20,6 +20,7 @@ use FormForge\Casts\TrixFieldCast;
  * @property-read int|null $assignments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $users
  * @property-read int|null $users_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme onlyTrashed()
@@ -69,6 +70,8 @@ use FormForge\Casts\TrixFieldCast;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme updateOrInsert(array $attributes, $values = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme updateQuietly(array $values)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme withoutCache()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme prunableSoftDeletes()
+ *
  * @mixin \Eloquent
  */
 class BonusScheme extends BaseModel

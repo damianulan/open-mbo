@@ -66,6 +66,7 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @property-read int|null $teams_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User onlyTrashed()
@@ -84,14 +85,17 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutTrashed()
  * @method static \Database\Factories\Core\UserFactory factory($count = null, $state = [])
+ *
  * @property-read UserPreference|null $preferences
  * @property-read mixed $name
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User active()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User drafted()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User inactive()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User published()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withPermission(...$slugs)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withRole(...$slugs)
+ *
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements HasLocalePreference

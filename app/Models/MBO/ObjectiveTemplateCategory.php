@@ -20,6 +20,7 @@ use FormForge\Casts\TrixFieldCast;
  * @property-read int|null $activities_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, ObjectiveTemplate> $objective_templates
  * @property-read int|null $objective_templates_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory onlyTrashed()
@@ -34,9 +35,11 @@ use FormForge\Casts\TrixFieldCast;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory withoutTrashed()
+ *
  * @property string|null $shortname
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $coordinators
  * @property-read int|null $coordinators_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory active()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory checkAccess()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory drafted()
@@ -74,6 +77,8 @@ use FormForge\Casts\TrixFieldCast;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory updateOrInsert(array $attributes, $values = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory updateQuietly(array $values)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory withoutCache()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory prunableSoftDeletes()
+ *
  * @mixin \Eloquent
  */
 class ObjectiveTemplateCategory extends BaseModel

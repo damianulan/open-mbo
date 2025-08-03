@@ -35,6 +35,7 @@ use Lucent\Support\Traits\Dispatcher;
  * @property-read ObjectiveTemplate|null $template
  * @property-read \Illuminate\Database\Eloquent\Collection<int, UserObjective> $user_assignments
  * @property-read int|null $user_assignments_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Objective onlyTrashed()
@@ -92,6 +93,8 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective updateOrInsert(array $attributes, $values = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective updateQuietly(array $values)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective withoutCache()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective prunableSoftDeletes()
+ *
  * @mixin \Eloquent
  */
 class Objective extends BaseModel

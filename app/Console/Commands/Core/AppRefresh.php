@@ -40,7 +40,7 @@ class AppRefresh extends BaseCommand
                 $result = Process::run('git reset --hard');
                 $this->info($result->output());
                 if (! empty($branch)) {
-                    $result = Process::run('git switch ' . $branch);
+                    $result = Process::run('git switch '.$branch);
                 }
                 $result = Process::run('git pull origin');
                 $this->info($result->output());

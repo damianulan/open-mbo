@@ -28,6 +28,7 @@ use Lucent\Support\Traits\Dispatcher;
  * @property-read int|null $activities_count
  * @property-read Objective $objective
  * @property-read User $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserObjective newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserObjective newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserObjective onlyTrashed()
@@ -85,6 +86,8 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective updateOrInsert(array $attributes, $values = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective updateQuietly(array $values)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective withoutCache()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective prunableSoftDeletes()
+ *
  * @mixin \Eloquent
  */
 class UserObjective extends BaseModel
@@ -191,12 +194,12 @@ class UserObjective extends BaseModel
 
     public function objective()
     {
-        return $this->belongsTo(Objective::class);
+        return $this->belongsTo(Objective::class)->withTrashed();
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withTrashed();
     }
 
     public function canBeEvaluated(): bool

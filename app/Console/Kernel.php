@@ -43,6 +43,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('telescope:prune')->dailyAt('00:01');
         $schedule->command('activitylog:clean')->dailyAt('00:01');
         $schedule->command('auth:clear-resets')->dailyAt('00:01');
+        $schedule->command('model::prune-soft-deletes')->dailyAt('00:01');
     }
 
     /**
@@ -52,7 +53,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__ . '/Commands');
+        $this->load(__DIR__.'/Commands');
 
         require base_path('routes/console.php');
     }

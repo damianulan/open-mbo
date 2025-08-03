@@ -16,6 +16,7 @@ use FormForge\Casts\TrixFieldCast;
  * @property-read int|null $activities_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\UserEmployment> $employments
  * @property-read int|null $employments_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract onlyTrashed()
@@ -28,7 +29,9 @@ use FormForge\Casts\TrixFieldCast;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract withoutTrashed()
+ *
  * @property string $shortname
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract active()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract checkAccess()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract drafted()
@@ -66,6 +69,8 @@ use FormForge\Casts\TrixFieldCast;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|TypeOfContract updateOrInsert(array $attributes, $values = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|TypeOfContract updateQuietly(array $values)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|TypeOfContract withoutCache()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|TypeOfContract prunableSoftDeletes()
+ *
  * @mixin \Eloquent
  */
 class TypeOfContract extends BaseModel

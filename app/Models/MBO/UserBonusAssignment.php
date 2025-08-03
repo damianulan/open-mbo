@@ -20,6 +20,7 @@ use App\Models\Core\User;
  * @property-read BonusScheme $bonus_scheme
  * @property-read Campaign $campaign
  * @property-read User $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserBonusAssignment newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserBonusAssignment newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserBonusAssignment onlyTrashed()
@@ -71,6 +72,8 @@ use App\Models\Core\User;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment updateOrInsert(array $attributes, $values = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment updateQuietly(array $values)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment withoutCache()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment prunableSoftDeletes()
+ *
  * @mixin \Eloquent
  */
 class UserBonusAssignment extends BaseModel

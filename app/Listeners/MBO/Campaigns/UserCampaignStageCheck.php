@@ -10,6 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 class UserCampaignStageCheck implements ShouldQueueAfterCommit
 {
     use InteractsWithQueue;
+
     /**
      * Create the event listener.
      */

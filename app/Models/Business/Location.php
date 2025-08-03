@@ -22,6 +22,7 @@ use FormForge\Casts\TrixFieldCast;
  * @property-read int|null $activities_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Company> $companies
  * @property-read int|null $companies_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location onlyTrashed()
@@ -41,7 +42,9 @@ use FormForge\Casts\TrixFieldCast;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location withoutTrashed()
  * @method static \Database\Factories\Business\LocationFactory factory($count = null, $state = [])
+ *
  * @property string|null $country
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location active()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location checkAccess()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location drafted()
@@ -79,6 +82,8 @@ use FormForge\Casts\TrixFieldCast;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location updateOrInsert(array $attributes, $values = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location updateQuietly(array $values)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location withoutCache()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location prunableSoftDeletes()
+ *
  * @mixin \Eloquent
  */
 class Location extends BaseModel

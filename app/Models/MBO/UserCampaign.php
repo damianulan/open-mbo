@@ -24,6 +24,7 @@ use Lucent\Support\Traits\Dispatcher;
  * @property-read int|null $activities_count
  * @property-read Campaign $campaign
  * @property-read User $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign onlyTrashed()
@@ -75,6 +76,8 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign updateOrInsert(array $attributes, $values = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign updateQuietly(array $values)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign withoutCache()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign prunableSoftDeletes()
+ *
  * @mixin \Eloquent
  */
 class UserCampaign extends BaseModel

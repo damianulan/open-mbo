@@ -16,6 +16,7 @@ use App\Models\BaseModel;
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPoints newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPoints newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPoints onlyTrashed()
@@ -67,6 +68,8 @@ use App\Models\BaseModel;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints updateOrInsert(array $attributes, $values = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints updateQuietly(array $values)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints withoutCache()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints prunableSoftDeletes()
+ *
  * @mixin \Eloquent
  */
 class UserPoints extends BaseModel
