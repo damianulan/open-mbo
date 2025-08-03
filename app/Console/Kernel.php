@@ -18,7 +18,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command(MBOVerifyStatusScript::class)->dailyAt('00:01');
+        $schedule->command(MBOVerifyStatusScript::class)->dailyAt('01:01');
 
         if (config('backup.backup.auto') === true) {
             $schedule->command('backup:run')->daily()->at('01:30');
@@ -40,6 +40,9 @@ class Kernel extends ConsoleKernel
 
         // LARAVEL COMMANDS
         $schedule->command('model:prune')->dailyAt('00:01');
+        $schedule->command('telescope:prune')->dailyAt('00:01');
+        $schedule->command('activitylog:clean')->dailyAt('00:01');
+        $schedule->command('auth:clear-resets')->dailyAt('00:01');
     }
 
     /**
@@ -49,7 +52,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

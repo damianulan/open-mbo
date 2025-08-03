@@ -13,6 +13,7 @@ use FormForge\Casts\TrixFieldCast;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Lucent\Support\Traits\Dispatcher;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 /**
  * @property string $id
@@ -156,6 +157,11 @@ class Campaign extends BaseModel
         'stage' => CampaignStage::PENDING,
     ];
 
+    protected $dispatchesEvents = [
+        'updated' => CampaignUpdated::class,
+        'created' => CampaignCreated::class,
+    ];
+
     protected $accessScope = CampaignScope::class;
 
     public function user_campaigns()
@@ -230,22 +236,16 @@ class Campaign extends BaseModel
 
     public function setUserStage($user_id = null)
     {
-        $params = ['manual' => 0, 'active' => 1];
+        $params = ['manual' => 0, 'active' => 1, 'campaign_id' => $this->id];
         if ($user_id) {
             $params['user_id'] = $user_id;
         }
 
         $stage = $this->getCurrentStages()->first();
-        $enrols = $this->user_campaigns()->where($params)->get();
-        if (! empty($enrols)) {
-            foreach ($enrols as $enrol) {
-                if ($stage !== $enrol->stage) {
-                    $enrol->timestamps = false;
-                    $enrol->stage = $stage;
-                    $enrol->update();
-                }
-            }
-        }
+        UserCampaign::where($params)->where('stage', '!=', $stage)->get()->each(function (UserCampaign $uc) use ($stage) {
+            $uc->stage = $stage;
+            $uc->save();
+        });
 
         return $stage;
     }
@@ -256,8 +256,8 @@ class Campaign extends BaseModel
         $now = Carbon::now();
 
         foreach (CampaignStage::softValues() as $tmp) {
-            $prop_start = $tmp.'_from';
-            $prop_end = $tmp.'_to';
+            $prop_start = $tmp . '_from';
+            $prop_end = $tmp . '_to';
             $start = Carbon::parse($this->$prop_start);
             $end = Carbon::parse($this->$prop_end);
 
@@ -267,6 +267,11 @@ class Campaign extends BaseModel
             }
         }
 
+        $end = $this->timeend;
+
+        if ($end->isPast()) {
+            $stage = CampaignStage::COMPLETED;
+        }
         $this->stage = $stage;
 
         return $this;
@@ -280,8 +285,8 @@ class Campaign extends BaseModel
         if ($this->stage === CampaignStage::IN_PROGRESS) {
             $softStage = null;
             foreach (CampaignStage::softValues() as $tmp) {
-                $prop_start = $tmp.'_from';
-                $prop_end = $tmp.'_to';
+                $prop_start = $tmp . '_from';
+                $prop_end = $tmp . '_to';
                 $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_start);
                 $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_end);
 
@@ -347,6 +352,20 @@ class Campaign extends BaseModel
     public function dateEnd(): string
     {
         return $this->self_evaluation_to;
+    }
+
+    protected function timestart(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => Carbon::parse($this->definition_from),
+        );
+    }
+
+    protected function timeend(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => Carbon::parse($this->self_evaluation_to),
+        );
     }
 
     public function inDates(): bool
@@ -493,10 +512,6 @@ class Campaign extends BaseModel
         return self::updatingCampaign($model);
     }
 
-    public static function createdCampaign(Campaign $model)
-    {
-        CampaignCreated::dispatch($model);
-    }
 
     public static function updatingCampaign(Campaign $model)
     {
@@ -504,41 +519,36 @@ class Campaign extends BaseModel
             $model->manual = 0;
         }
 
-        if ($model->manual == 0) {
-            $model->setStageAuto();
-        }
-
         return $model;
     }
 
     public static function updatedCampaign(Campaign $model)
     {
-        $ucs = $model->user_campaigns()->get();
-        if ($ucs && $ucs->count()) {
-            foreach ($ucs as $uc) {
-                $uc->active = $model->draft ? 0 : 1;
-                $uc->save();
-            }
-        }
-        $objectives = $model->objectives()->get();
-        if ($objectives && $objectives->count()) {
-            $realization_from = $model->realization_from ? Carbon::parse($model->realization_from) : null;
-            $realization_to = $model->realization_to ? Carbon::parse($model->realization_to) : null;
+        // $ucs = $model->user_campaigns()->get();
+        // if ($ucs && $ucs->count()) {
+        //     foreach ($ucs as $uc) {
+        //         $uc->active = $model->draft ? 0 : 1;
+        //         $uc->save();
+        //     }
+        // }
+        // $objectives = $model->objectives()->get();
+        // if ($objectives && $objectives->count()) {
+        //     $realization_from = $model->realization_from ? Carbon::parse($model->realization_from) : null;
+        //     $realization_to = $model->realization_to ? Carbon::parse($model->realization_to) : null;
 
-            foreach ($objectives as $objective) {
-                $objective->draft = $model->draft;
-                $deadline = $objective->deadline ? Carbon::parse($objective->deadline) : null;
-                if ($deadline) {
-                    if ($deadline->isBefore($realization_from)) {
-                        $objective->deadline = $realization_from;
-                    }
-                    if ($deadline->isAfter($realization_to)) {
-                        $objective->deadline = $realization_to;
-                    }
-                }
-                $objective->save();
-            }
-        }
-        CampaignUpdated::dispatch($model);
+        //     foreach ($objectives as $objective) {
+        //         $objective->draft = $model->draft;
+        //         $deadline = $objective->deadline ? Carbon::parse($objective->deadline) : null;
+        //         if ($deadline) {
+        //             if ($deadline->isBefore($realization_from)) {
+        //                 $objective->deadline = $realization_from;
+        //             }
+        //             if ($deadline->isAfter($realization_to)) {
+        //                 $objective->deadline = $realization_to;
+        //             }
+        //         }
+        //         $objective->save();
+        //     }
+        // }
     }
 }

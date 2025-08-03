@@ -5,6 +5,7 @@ namespace App\Console\Commands\MBO;
 use App\Console\BaseCommand;
 use App\Models\MBO\Campaign;
 use App\Models\MBO\UserObjective;
+use Illuminate\Support\Facades\DB;
 
 class MBOVerifyStatusScript extends BaseCommand
 {
@@ -39,28 +40,32 @@ class MBOVerifyStatusScript extends BaseCommand
 
     public function campaignsSetStatus(bool $echo = true)
     {
-        $campaigns = Campaign::whereActive()->whereManual(0)->get();
-        $userObjectives = UserObjective::whereNotEvaluated()->get();
-
-        if ($campaigns->count()) {
-            foreach ($campaigns as $campaign) {
-                if ($echo) {
-                    $this->line('Updating campaign status for: '.$campaign->name);
-                }
+        try {
+            DB::beginTransaction();
+            $campaigns = Campaign::whereActive()->whereManual(0)->get()->each(function (Campaign $campaign) use ($echo) {
                 $campaign->timestamps = false;
                 $campaign->setStageAuto();
-                $campaign->update();
-            }
-
-            $this->info('Campaign statuses updated successfully');
-        }
-
-        if ($userObjectives->count()) {
-            foreach ($userObjectives as $objective) {
+                if ($campaign->isDirty()) {
+                    if ($echo) {
+                        $this->line('Updating campaign status for: ' . $campaign->name . ' - ' . $campaign->getOriginal('stage') . ' => ' . $campaign->stage);
+                    }
+                    $campaign->update();
+                }
+            });
+            $userObjectives = UserObjective::whereNotEvaluated()->get()->each(function (UserObjective $objective) use ($echo) {
                 $objective->timestamps = false;
-                $objective->setStatus()->update();
-            }
-            $this->line("Objective assignments' statuses updated successfully");
+                $objective->setStatus();
+                if ($objective->isDirty()) {
+                    if ($echo) {
+                        $this->line('Updating objective status for: ' . $objective->objective->name . ' (' . $objective->user->name . ') - ' . $objective->getOriginal('status') . ' => ' . $objective->status);
+                    }
+                    $objective->update();
+                }
+            });
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            $this->error($th->getMessage());
         }
     }
 }

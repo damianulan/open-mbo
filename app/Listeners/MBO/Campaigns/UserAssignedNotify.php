@@ -5,9 +5,12 @@ namespace App\Listeners\MBO\Campaigns;
 use App\Events\MBO\Campaigns\UserCampaignAssigned;
 use App\Notifications\MBO\Campaign\CampaignAssignment;
 use App\Notifications\MBO\Campaign\UserAssigned;
+use Illuminate\Contracts\Queue\ShouldQueueAfterCommit;
+use Illuminate\Queue\InteractsWithQueue;
 
-class UserAssignedNotify
+class UserAssignedNotify implements ShouldQueueAfterCommit
 {
+    use InteractsWithQueue;
     /**
      * Create the event listener.
      */
