@@ -148,18 +148,18 @@ class User extends Authenticatable implements HasLocalePreference
 
     protected function name(): Attribute
     {
-        $value = $this->profile?->firstname . ' ' . $this->profile?->lastname;
+        $value = $this->profile?->firstname.' '.$this->profile?->lastname;
 
         return Attribute::make(
-            get: fn() => ucfirst($value),
+            get: fn () => ucfirst($value),
         );
     }
 
     public function nameView(): string
     {
-        $link = '<span>' . $this->name() . '</span>';
+        $link = '<span>'.$this->name().'</span>';
         if (Auth::user()->can('view', $this)) {
-            $link = '<a href="' . route('users.show', $this->id) . '" class="text-primary">' . $this->name() . '</a>';
+            $link = '<a href="'.route('users.show', $this->id).'" class="text-primary">'.$this->name().'</a>';
         }
 
         return $link;
@@ -225,7 +225,7 @@ class User extends Authenticatable implements HasLocalePreference
 
     public function getInitials(): string
     {
-        return strtoupper(substr($this->firstname(), 0, 1) . substr($this->lastname(), 0, 1));
+        return strtoupper(substr($this->firstname(), 0, 1).substr($this->lastname(), 0, 1));
     }
 
     public function getAvatarView(int $height = 70, int $width = 70): string
@@ -234,7 +234,7 @@ class User extends Authenticatable implements HasLocalePreference
             $width = $height;
         }
         if ($this->profile->avatar) {
-            return '<img class="profile-img" src="' . asset($this->profile->avatar) . '" height="' . $height . 'px" width="' . $width . 'px">';
+            return '<img class="profile-img" src="'.asset($this->profile->avatar).'" height="'.$height.'px" width="'.$width.'px">';
         }
 
         $fontSize = $height / 2.8;
@@ -254,7 +254,7 @@ class User extends Authenticatable implements HasLocalePreference
             $color = 'red';
         }
 
-        return '<div class="profile-img" style="background-color: var(--bs-' . $color . '); font-size: ' . $fontSize . 'px; min-height: ' . $height . 'px; min-width: ' . $width . 'px;"><div>' . $initials . '</div></div>';
+        return '<div class="profile-img" style="background-color: var(--bs-'.$color.'); font-size: '.$fontSize.'px; min-height: '.$height.'px; min-width: '.$width.'px;"><div>'.$initials.'</div></div>';
     }
 
     public function canBeImpersonated(): bool

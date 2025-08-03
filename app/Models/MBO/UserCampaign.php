@@ -128,7 +128,7 @@ class UserCampaign extends BaseModel
 
     public function stageDescription(): string
     {
-        return __('forms.campaigns.stages.' . $this->stage);
+        return __('forms.campaigns.stages.'.$this->stage);
     }
 
     public function stageIcon(): string
@@ -215,7 +215,7 @@ class UserCampaign extends BaseModel
      */
     public static function updatedUserCampaign(UserCampaign $model): void
     {
-        //$model->mapObjectiveStatus();
+        // $model->mapObjectiveStatus();
         UserCampaignUpdated::dispatch($model);
     }
 
