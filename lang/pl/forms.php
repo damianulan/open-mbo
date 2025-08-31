@@ -122,6 +122,9 @@ return [
             'type' => 'Typ celu',
             'expected' => 'Oczekiwany wynik',
             'award' => 'Punkty nagrody',
+            'users' => [
+                'add' => 'Dodaj użytkowników',
+            ],
             'info' => [
                 'deadline' => 'Po upłynięciu tej daty, cel przypisany do użytkownika zostanie automatycznie oznaczony jako zaliczony lub niezaliczony.',
                 'weight' => 'Określ jaki wagowy udział ma ten cel w całej kampanii.',

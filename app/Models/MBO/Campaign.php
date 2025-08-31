@@ -32,9 +32,9 @@ use Lucent\Support\Traits\Dispatcher;
  * @property string|null $evaluation_to
  * @property string|null $self_evaluation_from
  * @property string|null $self_evaluation_to
- * @property mixed $stage
- * @property bool $draft
- * @property bool $manual
+ * @property mixed $stage Campaign current status whether in progress, pending, completed, terminated or canceled
+ * @property bool $draft Visible to admins only and is not automatically published.
+ * @property bool $manual Will not be automatically moved between stages.
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -264,8 +264,8 @@ class Campaign extends BaseModel
         $now = Carbon::now();
 
         foreach (CampaignStage::softValues() as $tmp) {
-            $prop_start = $tmp . '_from';
-            $prop_end = $tmp . '_to';
+            $prop_start = $tmp.'_from';
+            $prop_end = $tmp.'_to';
             $start = Carbon::parse($this->$prop_start);
             $end = Carbon::parse($this->$prop_end);
 
@@ -293,8 +293,8 @@ class Campaign extends BaseModel
         if ($this->stage === CampaignStage::IN_PROGRESS) {
             $softStage = null;
             foreach (CampaignStage::softValues() as $tmp) {
-                $prop_start = $tmp . '_from';
-                $prop_end = $tmp . '_to';
+                $prop_start = $tmp.'_from';
+                $prop_end = $tmp.'_to';
                 $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_start);
                 $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_end);
 
@@ -365,14 +365,14 @@ class Campaign extends BaseModel
     protected function timestart(): Attribute
     {
         return Attribute::make(
-            get: fn() => Carbon::parse($this->definition_from),
+            get: fn () => Carbon::parse($this->definition_from),
         );
     }
 
     protected function timeend(): Attribute
     {
         return Attribute::make(
-            get: fn() => Carbon::parse($this->self_evaluation_to),
+            get: fn () => Carbon::parse($this->self_evaluation_to),
         );
     }
 

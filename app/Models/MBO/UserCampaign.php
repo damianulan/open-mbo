@@ -14,9 +14,9 @@ use Lucent\Support\Traits\Dispatcher;
  * @property string $id
  * @property string $campaign_id
  * @property string $user_id
- * @property string $stage
- * @property bool $manual
- * @property bool $active
+ * @property string $stage User current campaign stage
+ * @property bool $manual User will not be automatically moved between stages.
+ * @property bool $active Is visible to users.
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at

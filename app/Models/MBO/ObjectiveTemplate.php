@@ -12,7 +12,7 @@ use FormForge\Casts\TrixFieldCast;
  * @property string|null $category_id
  * @property string $name
  * @property mixed|null $description
- * @property string|null $award
+ * @property string|null $award Max points to be awarded for objective completion
  * @property bool $draft
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -150,6 +150,6 @@ class ObjectiveTemplate extends BaseModel
         $objective->draft = 1;
         $objective->award = $this->award;
 
-        return $objective->save();
+        return $objective->save() ? true : false;
     }
 }

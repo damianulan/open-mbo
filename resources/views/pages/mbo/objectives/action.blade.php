@@ -9,7 +9,7 @@
 <a class="action-btn" onclick="edit_objective('{{ $data->id }}')" href="javascript:void(0);"  title="{{ __('buttons.edit') }}">
     <i class="bi bi-pencil-square me-1"></i>
 </a>
-<a class="action-btn" onclick="add_users('{{ $data->id }}')" href="javascript:void(0);" title="{{ __('buttons.edit') }}">
+<a class="action-btn" onclick="add_users('{{ $data->id }}')" href="javascript:void(0);" title="{{ __('buttons.add_users') }}">
     <i class="bi bi-person-fill-up me-1"></i>
 </a>
 @if($data->canBeDeleted())

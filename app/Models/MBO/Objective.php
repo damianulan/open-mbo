@@ -2,7 +2,6 @@
 
 namespace App\Models\MBO;
 
-use App\Casts\Carbon\CarbonDatetime;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Models\Scopes\MBO\ObjectiveScope;
@@ -17,11 +16,11 @@ use Lucent\Support\Traits\Dispatcher;
  * @property string|null $campaign_id
  * @property string $name
  * @property mixed|null $description
- * @property mixed|null $deadline
- * @property string $weight
- * @property string|null $award
- * @property string|null $expected
- * @property bool $draft
+ * @property \Illuminate\Support\Carbon|null $deadline Deadline for objective completion, to which realization should be approved, otherwise it turns out red.
+ * @property string $weight Corresponds to the importance of the objective, the higher the weight, the more important it is.
+ * @property string|null $award Max points to be awarded for objective completion
+ * @property string|null $expected Expected numerical value of objective realization, that corresponds to 100% evaluation
+ * @property bool $draft Is not visible to realization - only previewable to admins
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -110,7 +109,7 @@ class Objective extends BaseModel
 
     protected $casts = [
         'draft' => 'boolean',
-        'deadline' => CarbonDatetime::class,
+        'deadline' => 'datetime',
         'description' => TrixFieldCast::class,
     ];
 

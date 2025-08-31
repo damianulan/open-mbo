@@ -31,8 +31,8 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string $password
  * @property int $active
- * @property int $core
- * @property int $force_password_change
+ * @property int $core Core user - comes as default with the application - cannot be deleted
+ * @property int $force_password_change Force user to change password after first login
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -56,6 +56,8 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserObjective> $objective_assignments
  * @property-read int|null $objective_assignments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserObjective> $objectives
+ * @property-read int|null $objectives_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Sentinel\Models\Permission> $permissions
  * @property-read int|null $permissions_count
  * @property-read \App\Models\Core\UserPreference|null $preferences
@@ -68,6 +70,7 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @property-read int|null $teams_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
+ * @property-read \App\Models\MBO\UserBonusScheme|null $user_bonus_scheme
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User active()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User drafted()

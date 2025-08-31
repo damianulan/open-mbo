@@ -4,6 +4,7 @@
 <div class="icon-btn-nav">
     <div class="panel-left">
         <a class="icon-btn edit-objective" href="javascript:void(0);" data-modelid="{{ $objective->id }}" data-tippy-content="{{ __('buttons.edit') }}"><i class="bi-pencil-fill"></i></a>
+        <a class="icon-btn add-users" href="javascript:void(0);" data-modelid="{{ $objective->id }}" data-tippy-content="{{ __('buttons.add_users') }}"><i class="bi-person-fill-up"></i></a>
     </div>
 </div>
 <div class="row">
@@ -25,17 +26,17 @@
                         @if($objective->coordinators()->count())
                             <ul class="ombo-list">
                                 @foreach ($objective->coordinators()->get() as $user)
-                                @if($user)
-                                    <li>
-                                        <div class="list-grid">
-                                            <div class="list-content">
-                                                <div class="nowrap user" data-tippy-content="{{ $user->name }}">
-                                                    {!! $user->nameDetails() !!}
+                                    @if($user)
+                                        <li>
+                                            <div class="list-grid">
+                                                <div class="list-content">
+                                                    <div class="nowrap user" data-tippy-content="{{ $user->name }}">
+                                                        {!! $user->nameDetails() !!}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                @endif
+                                        </li>
+                                    @endif
                                 @endforeach
                             </ul>
 
@@ -93,12 +94,13 @@
         }
     });
 
-    $('.add-child-objective').on('click', function() {
-        var parent_id = $(this).attr('data-modelid');
+    $('.add-users').on('click', function() {
+        var model_id = $(this).attr('data-modelid');
 
-        if(parent_id && parent_id !== ''){
-            $.getModal('objectives.add_child', {parent_id: parent_id});
+        if(model_id && model_id !== ''){
+            $.getModal('App\\Http\\Controllers\\Objectives\\UserObjectiveController@addUsers', {id: model_id});
         }
     });
+
 </script>
 @endpush

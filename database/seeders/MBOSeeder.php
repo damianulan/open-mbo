@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Console\Commands\MBO\MBOVerifyStatusScript;
 use App\Models\Core\User;
 use App\Models\MBO\Campaign;
 use App\Models\MBO\Objective;
@@ -9,6 +10,7 @@ use App\Models\MBO\ObjectiveTemplate;
 use App\Models\MBO\ObjectiveTemplateCategory;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 
 class MBOSeeder extends Seeder
 {
@@ -92,5 +94,7 @@ class MBOSeeder extends Seeder
             $coordinators = $coordinatorUsers->random(fake()->numberBetween(1, 3));
             $campaign->refreshCoordinators($coordinators->pluck('id')->toArray());
         }
+
+        Artisan::call(MBOVerifyStatusScript::class);
     }
 }

@@ -20,8 +20,9 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('objective_id')->references('id')->on('objectives')->onDelete('cascade');
 
-            $table->enum('status', UserObjectiveStatus::values())->default(UserObjectiveStatus::UNSTARTED)->index();
-            $table->decimal('evaluation', 8, 2)->nullable();
+            $table->enum('status', UserObjectiveStatus::values())->default(UserObjectiveStatus::UNSTARTED)->index()->comment('objective status');
+            $table->decimal('realization', 8, 2)->nullable()->comment('Numerical value of the realization of the objective - in relation to the expected value in objective');
+            $table->decimal('evaluation', 8, 2)->nullable()->comment('Percentage evaluation of the objective - if realization is set, evaluation is calculated automatically');
 
             $table->timestamps();
             $table->softDeletes();

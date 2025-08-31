@@ -24,6 +24,7 @@ return new class extends Migration
 
             $table->timestamps();
             $table->softDeletes();
+            $table->comment('Points assigned to users. Subject describes the entity from which the points were assigned.');
         });
     }
 

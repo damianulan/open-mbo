@@ -27,6 +27,7 @@ return [
     'favourites_add' => 'Dodaj do ulubionych',
     'favourites_remove' => 'Usuń z ulubionych',
     'reset_password' => 'Resetuj hasło',
+    'add_users' => 'Dodaj użytkowników',
     'ok' => 'Ok',
     'ok_understand' => 'Ok, rozumiem',
     'choose_file' => 'Wybierz plik',
@@ -43,4 +44,6 @@ return [
 
     'list_view' => 'Tryb listy',
     'tile_view' => 'Tryb kafelkowy',
+
+    'add_realization' => 'Dodaj realizację celu',
 ];

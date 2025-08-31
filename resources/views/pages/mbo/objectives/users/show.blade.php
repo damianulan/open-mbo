@@ -8,7 +8,7 @@
         @endif
     </div>
     <div class="panel-left">
-        <a class="icon-btn edit-objective" href="javascript:void(0);" data-modelid="" data-tippy-content="{{ __('buttons.edit') }}"><i class="bi-layer-forward"></i></a>
+        <a class="icon-btn add-realization" href="javascript:void(0);" data-modelid="" data-tippy-content="{{ __('buttons.add_realization') }}"><i class="bi-layer-forward"></i></a>
     </div>
 </div>
 <div class="row">
@@ -27,12 +27,5 @@
         }
     });
 
-    $('.add-child-objective').on('click', function() {
-        var parent_id = $(this).attr('data-modelid');
-
-        if(parent_id && parent_id !== ''){
-            $.getModal('objectives.add_child', {parent_id: parent_id});
-        }
-    });
 </script>
 @endpush

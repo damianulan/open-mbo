@@ -18,7 +18,7 @@ return new class extends Migration
 
             $table->string('name');
             $table->longText('description')->nullable();
-            $table->decimal('award', 8, 2)->nullable();
+            $table->decimal('award', 8, 2)->nullable()->comment('Max points to be awarded for objective completion');
 
             $table->boolean('draft')->default(1);
             $table->softDeletes();

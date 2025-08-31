@@ -15,9 +15,9 @@ class ObjectiveSummary extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public Objective $objective, public ?UserObjective $userObjective = null)
+    public function __construct(public Objective $objective, public UserObjective $userObjective)
     {
-        if ($userObjective && $userObjective->isPassed()) {
+        if ($userObjective->exists && $userObjective->isPassed()) {
             $this->warning = 'passed';
         }
     }

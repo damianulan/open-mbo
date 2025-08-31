@@ -18,6 +18,11 @@
                             <a href="{{ route('mbo.objectives.assignment.show', $ua->id) }}" class="list-action" data-tippy-content="{{ __('buttons.summary') }}">
                                 <x-icon key="eye-fill" />
                             </a>
+                            @if($ua->campaign)
+                                <a href="{{ route('campaigns.show', $ua->campaign->id) }}" class="list-action" data-tippy-content="{{ $ua->campaign->name }}">
+                                    <x-icon key="bullseye" />
+                                </a>
+                            @endif
                         </div>
                     </div>
                 </li>

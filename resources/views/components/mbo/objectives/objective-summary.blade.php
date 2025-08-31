@@ -53,7 +53,7 @@
         @endif
 
     </div>
-    @if(isset($userObjective))
+    @if($userObjective->exists)
         <div class="content-card-icons mb-3">
             <div class="badge badge-{{ $userObjective->status }} fs-6" data-tippy-content="{{ __('forms.mbo.objectives.status') }}">{{ __('mbo.objective'). ' ' .strtolower($userObjective->getStatusLabel()) }}</div>
         </div>

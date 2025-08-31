@@ -6,20 +6,12 @@ use App\Models\BaseModel;
 use App\Models\Core\User;
 
 /**
- * @property string $id
- * @property string $user_id
- * @property string $bonus_scheme_id
- * @property string $campaign_id
- * @property int $score
- * @property User $approved_by
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\MBO\BonusScheme $bonus_scheme
- * @property-read \App\Models\MBO\Campaign $campaign
- * @property-read User $user
+ * @property-read User|null $approved_by
+ * @property-read \App\Models\MBO\BonusScheme|null $bonus_scheme
+ * @property-read \App\Models\MBO\Campaign|null $campaign
+ * @property-read User|null $user
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment average(string $column)
@@ -61,15 +53,6 @@ use App\Models\Core\User;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment truncate()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment updateOrInsert(array $attributes, $values = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment updateQuietly(array $values)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment whereApprovedBy($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment whereBonusSchemeId($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment whereCampaignId($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment whereCreatedAt($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment whereDeletedAt($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment whereId($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment whereScore($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment whereUpdatedAt($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserBonusAssignment withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserBonusAssignment withoutTrashed()

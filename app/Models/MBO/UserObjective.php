@@ -10,8 +10,9 @@ use App\Events\MBO\Objectives\UserObjectiveAssigned;
 use App\Events\MBO\Objectives\UserObjectiveUnassigned;
 use App\Models\BaseModel;
 use App\Models\Core\User;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 use Lucent\Support\Traits\Dispatcher;
 
@@ -19,13 +20,15 @@ use Lucent\Support\Traits\Dispatcher;
  * @property string $id
  * @property string $user_id
  * @property string $objective_id
- * @property string $status
- * @property numeric|null $evaluation
+ * @property string $status objective status
+ * @property string|null $realization Numerical value of the realization of the objective - in relation to the expected value in objective
+ * @property numeric|null $evaluation Percentage evaluation of the objective - if realization is set, evaluation is calculated automatically
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
+ * @property-read \App\Models\MBO\Campaign|null $campaign
  * @property-read \App\Models\MBO\Objective $objective
  * @property-read User $user
  *
@@ -81,6 +84,7 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereNotEvaluated()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereObjectiveId($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective wherePassed()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereRealization($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereStatus($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereUpdatedAt($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereUserId($value)
@@ -98,7 +102,8 @@ class UserObjective extends BaseModel
         'user_id',
         'objective_id',
         'status',
-        'evaluation',
+        'evaluation', // percentage evaluation
+        'realization', // actual realization value - can remain null
     ];
 
     protected $casts = [
@@ -140,9 +145,8 @@ class UserObjective extends BaseModel
 
     public function isAfterDeadline(): bool
     {
-        $deadline = Carbon::parse($this->objective->deadline);
-        if ($deadline) {
-            return $deadline->isPast();
+        if ($this->objective?->deadline) {
+            return $this->objective?->deadline->isPast();
         }
 
         return false;
@@ -192,14 +196,27 @@ class UserObjective extends BaseModel
         return $this;
     }
 
-    public function objective()
+    public function objective(): BelongsTo
     {
         return $this->belongsTo(Objective::class)->withTrashed();
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class)->withTrashed();
+    }
+
+    public function campaign(): Attribute
+    {
+        return Attribute::make(
+            get: function (): ?Campaign {
+                return Campaign::whereHas('objectives', function (Builder $query) {
+                    $query->where('id', $this->objective_id);
+                })->whereHas('user_campaigns', function (Builder $query) {
+                    $query->where('user_id', $this->user_id);
+                })->first();
+            }
+        );
     }
 
     public function canBeEvaluated(): bool

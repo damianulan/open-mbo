@@ -69,8 +69,13 @@ return [
     ],
 
     'objectives' => [
+        'success' => [
+            'users_added' => 'Uzupełniono przypisanie użytkowników do celu.',
+        ],
+
         'error' => [
             'overdued' => 'Cel nie jest już aktualny - termin jego realizacji minął. Wszystkie nieukończone podejścia zostały oznaczone jako niezaliczone.',
+            'users_added' => 'Dane nie zostały zaktualizowane. Odśwież stronę i spróbuj ponownie.',
         ],
 
         'info' => [

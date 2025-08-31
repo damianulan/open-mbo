@@ -5,8 +5,8 @@ namespace App\Models\MBO;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use FormForge\Casts\TrixFieldCast;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 /**
  * @property string $id
@@ -18,8 +18,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserBonusAssignment> $assignments
- * @property-read int|null $assignments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, UserBonusScheme> $user_schemes
+ * @property-read int|null $user_schemes_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $users
  * @property-read int|null $users_count
  *
@@ -89,13 +89,13 @@ class BonusScheme extends BaseModel
         'options' => 'array',
     ];
 
-    public function users(): BelongsToMany
+    public function user_schemes(): HasMany
     {
-        return $this->belongsToMany(User::class, 'users_bonus_schemes');
+        return $this->hasMany(UserBonusScheme::class);
     }
 
-    public function assignments(): HasMany
+    public function users(): HasManyThrough
     {
-        return $this->hasMany(UserBonusAssignment::class);
+        return $this->hasManyThrough(User::class, UserBonusScheme::class);
     }
 }
