@@ -81,16 +81,25 @@ function production(): bool
 /**
  * Converts float values to their string representation based on current locale.
  */
-function float_view(float $value, int $decimals = 2): string
+function float_view(?float $value, int $decimals = 2): string
 {
     $lang = app()->getLocale();
     $comma_locale = ['pl'];
+
+    if (is_null($value)) {
+        $value = floatval(0);
+    }
 
     if (in_array($lang, $comma_locale)) {
         return number_format($value, $decimals, ',', ' ');
     }
 
     return number_format($value, $decimals, '.', ',');
+}
+
+function percent_view($value): string
+{
+    return $value . '%';
 }
 
 function unauthorized($message = '', $permission = null)
@@ -105,7 +114,7 @@ function unauthorized($message = '', $permission = null)
  * @param  mixed  $default
  * @return void
  */
-function setting(string $key, $default = null)
+function settings(string $key, $default = null)
 {
     $keys = explode('.', $key);
     $group = $keys[0];
@@ -113,7 +122,7 @@ function setting(string $key, $default = null)
     $setting = null;
 
     if ($group && $key) {
-        $appkey = 'settings.'.strtolower($group);
+        $appkey = 'settings.' . strtolower($group);
         $class = app($appkey) ?? null;
         $setting = $class ? $class->$key : null;
     }

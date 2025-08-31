@@ -32,6 +32,7 @@ return [
             'campaigns_enabled' => 'Kampanie pomiarowe',
             'campaigns_manual' => 'Tryb ręczny w kampaniach',
             'rewards' => 'Punkty nagrody',
+            'min_evaluation' => 'Minimalny wynik oceny celu',
             'reward_points_exchange' => 'Przeliczanie punktów nagrody',
             'reward_currency' => 'Waluta nagrody',
 
@@ -40,6 +41,7 @@ return [
                 'campaigns_enabled' => 'Włącza kampanie pomiarowe',
                 'campaigns_manual' => 'Włącza tryb ręczny w kampaniach',
                 'rewards' => 'Włącza punkty nagrody',
+                'min_evaluation' => 'Minimalny wynik procentowy potrzebny do otrzymania punktów nagrody. Punkty nagrody będą przeliczane proporcjonalnie powyżej zadeklarowanej wartości. Aby wyłączyć tę funkcję, ustaw wartość na 0.',
                 'reward_points_exchange' => 'Stosunek jednego punktu nagrody do jednego punktu w wybranej walucie',
                 'reward_currency' => 'Waluta przyznawania nagrody',
             ],
@@ -124,6 +126,12 @@ return [
             'award' => 'Punkty nagrody',
             'users' => [
                 'add' => 'Dodaj użytkowników',
+                'realization' => 'Obecna realizacja celu',
+                'evaluation' => 'Wartość rozliczenia celu [%]',
+                'info' => [
+                    'realization' => 'Wskaż numeryczną wartość realizacji celu. Jeśli przy tworzeniu celu podano oczekwiany wynik, wartość rozliczenia celu zostanie wyliczona automatycznie.',
+                    'evaluation' => 'Wskaż wartość procentową realizacji celu. Jeśli przy tworzeniu celu podano oczekwiany wynik, wartość tego rozliczenia celu zostanie wyliczona automatycznie.',
+                ]
             ],
             'info' => [
                 'deadline' => 'Po upłynięciu tej daty, cel przypisany do użytkownika zostanie automatycznie oznaczony jako zaliczony lub niezaliczony.',

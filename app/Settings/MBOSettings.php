@@ -18,6 +18,8 @@ class MBOSettings extends Settings
 
     public float $reward_points_exchange;
 
+    public float $min_evaluation;
+
     public string $reward_currency;
 
     public static function group(): string

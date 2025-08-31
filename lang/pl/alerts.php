@@ -13,6 +13,7 @@ return [
         'no_permission' => 'Nie posiadasz odpowiednich uprawnień do wykonania tej akcji.',
         'ajax' => 'Wystąpił błąd podczas pobierania danych z serwera, żądanie nie zostało przetworzone. Zweryfikuj swoje połączenie internetowe.',
         'operation' => 'Wystąpił błąd podczas wykonywania operacji.',
+        'form' => 'W formularzu wystąpiły błędy. Popraw je i spróbuj ponownie.',
     ],
     'warning' => [
         'operation' => 'Uwaga!',
@@ -71,11 +72,13 @@ return [
     'objectives' => [
         'success' => [
             'users_added' => 'Uzupełniono przypisanie użytkowników do celu.',
+            'realization_updated' => 'Dane o realizacji celu zostały zaktualizowane.',
         ],
 
         'error' => [
             'overdued' => 'Cel nie jest już aktualny - termin jego realizacji minął. Wszystkie nieukończone podejścia zostały oznaczone jako niezaliczone.',
             'users_added' => 'Dane nie zostały zaktualizowane. Odśwież stronę i spróbuj ponownie.',
+            'realization_updated' => 'Dane o realizacji celu nie mogły zostać zaktualizowane. Wystąpił nieoczekiwany błąd.',
         ],
 
         'info' => [

@@ -24,8 +24,8 @@ class ComponentServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Blade::if('setting', function ($key) {
-            return setting($key);
+        Blade::if('settings', function ($key) {
+            return settings($key);
         });
 
         Blade::component('icon', \App\View\Components\Layout\IconComponent::class);

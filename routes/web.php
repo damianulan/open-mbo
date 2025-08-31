@@ -125,6 +125,7 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
             Route::prefix('assignment')->name('assignment.')->group(function () {
                 Route::get('/{id}', [App\Http\Controllers\Objectives\UserObjectiveController::class, 'show'])->name('show');
                 Route::post('{objective}', [App\Http\Controllers\Objectives\UserObjectiveController::class, 'update'])->name('update');
+                Route::post('evaluation/{id}', [App\Http\Controllers\Objectives\UserObjectiveController::class, 'updateEvaluation'])->name('update_evaluation');
             });
         });
     });
@@ -165,7 +166,7 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
         Route::get('/get_model_instance', [App\Http\Controllers\AjaxController::class, 'getModelInstance'])->name('get_model_instance');
     });
 
-    Route::fallback(function () {
-        return redirect()->route('dashboard')->with('error', 'Nie znaleziono strony');
-    })->name('fallback');
+    // Route::fallback(function () {
+    //     return redirect()->route('dashboard')->with('error', 'Nie znaleziono strony');
+    // })->name('fallback');
 });

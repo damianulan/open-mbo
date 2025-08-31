@@ -10,6 +10,9 @@ use App\Services\Objectives\BulkAssignUsers;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Forms\MBO\Objective\ObjectiveEditUserRealizationForm;
+use Illuminate\Http\JsonResponse;
+use App\Services\Objectives\UserRealization;
 
 class UserObjectiveController extends AppController
 {
@@ -105,5 +108,48 @@ class UserObjectiveController extends AppController
         }
 
         return view('components.modals.objectives.add_users', $params);
+    }
+
+    public function editRealization(Request $request, $id): View
+    {
+        $params = [];
+        if ($id) {
+            $objective = UserObjective::checkAccess()->find($id);
+            if ($objective) {
+                $params = [
+                    'id' => $id,
+                    'form' => ObjectiveEditUserRealizationForm::definition($request, $objective),
+                ];
+            }
+        }
+
+        return view('components.modals.objectives.edit_realization', $params);
+    }
+
+    public function updateEvaluation(Request $request, $id, ObjectiveEditUserRealizationForm $form): JsonResponse
+    {
+        $userObjective = UserObjective::findOrFail($id);
+
+        $request = $form::reformatRequest($request);
+        $response = $form::validateJson($request, $id);
+        if ($response['status'] === 'ok') {
+
+            $service = UserRealization::boot(request: $request, userObjective: $userObjective)->execute();
+            if ($service->passed()) {
+                $response['message'] = __('alerts.objectives.success.realization_updated');
+
+                return response()->json($response);
+            } else {
+                $errors = $service->getErrors();
+                if (!empty($errors)) {
+                    $response['status'] = 'error';
+                    $response['message'] = $errors[0];
+                }
+            }
+        } else {
+            $response['message'] = __('alerts.error.form');
+        }
+
+        return response()->json($response);
     }
 }

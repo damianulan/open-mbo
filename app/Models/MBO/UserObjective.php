@@ -106,10 +106,6 @@ class UserObjective extends BaseModel
         'realization', // actual realization value - can remain null
     ];
 
-    protected $casts = [
-        'evaluation' => 'decimal:8,2',
-    ];
-
     protected $defaults = [
         'status' => UserObjectiveStatus::UNSTARTED,
     ];
@@ -161,7 +157,7 @@ class UserObjective extends BaseModel
     {
         $status = $this->status;
         $frozen = UserObjectiveStatus::frozen();
-        $autofail = setting('mbo.objectives_autofail');
+        $autofail = settings('mbo.objectives_autofail');
 
         $campaign = $this->objective->campaign ?? null;
         $userCampaign = null;
@@ -221,7 +217,7 @@ class UserObjective extends BaseModel
 
     public function canBeEvaluated(): bool
     {
-        return true;
+        return in_array($this->status, UserObjectiveStatus::finished());
     }
 
     public function canBeFailed(): bool
@@ -312,15 +308,10 @@ class UserObjective extends BaseModel
         }
     }
 
-    public static function updatingUserObjective(UserObjective $model): UserObjective
-    {
-        return $model;
-    }
-
     public static function updatedUserObjective(UserObjective $model): void
     {
         if (! in_array('status', $model->getDirty())) {
-            $model->setStatus()->update();
+            $model->setStatus()->updateQuietly();
         }
     }
 

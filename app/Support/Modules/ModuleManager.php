@@ -50,7 +50,7 @@ class ModuleManager
 
         switch ($module) {
             case 'mbo':
-                if (! setting('mbo.enabled')) {
+                if (! settings('mbo.enabled')) {
                     $result = false;
                 }
                 break;

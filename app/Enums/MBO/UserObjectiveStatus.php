@@ -53,6 +53,15 @@ class UserObjectiveStatus extends Enum
         ];
     }
 
+    public static function finished(): array
+    {
+        return [
+            self::COMPLETED,
+            self::PASSED,
+            self::FAILED,
+        ];
+    }
+
     public static function inactive(): array
     {
         return [

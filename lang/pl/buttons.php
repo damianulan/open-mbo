@@ -46,4 +46,6 @@ return [
     'tile_view' => 'Tryb kafelkowy',
 
     'add_realization' => 'Dodaj realizację celu',
+    'edit_realization' => 'Modyfikuj realizację celu',
+
 ];

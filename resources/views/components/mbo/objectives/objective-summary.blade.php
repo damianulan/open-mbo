@@ -30,10 +30,10 @@
     <div class="py-2">{!! $objective->description->get() !!}</div>
 
     <div class="content-card-icons text-secondary fw-bold pb-2">
-            <div data-tippy-content="{{ __('forms.mbo.objectives.weight') }}">
-                <i class="bi-minecart-loaded"></i>
-                <span>{{ float_view($objective->weight) }}</span>
-            </div>
+        <div data-tippy-content="{{ __('forms.mbo.objectives.weight') }}">
+            <i class="bi-minecart-loaded"></i>
+            <span>{{ float_view($objective->weight) }}</span>
+        </div>
         @if($objective->expected)
             <div data-tippy-content="{{ __('forms.mbo.objectives.expected') }}">
                 <i class="bi-patch-check"></i>
@@ -51,7 +51,16 @@
                 <span class="badge {{ $objective->isOverdued() ? 'bg-'.$warning:'bg-secondary' }}">{{ $objective->deadline }}</span>
             </div>
         @endif
-
+        @if($userObjective->exists)
+            <div class="ms-auto" data-tippy-content="{{ __('forms.mbo.objectives.users.realization') }}">
+                <i class="bi-check-circle"></i>
+                <span>{{ float_view($userObjective->realization) }}</span>
+            </div>
+            <div data-tippy-content="{{ __('forms.mbo.objectives.users.evaluation') }}">
+                <i class="bi-shield-check"></i>
+                <span>{{ percent_view(float_view($userObjective->evaluation)) }}</span>
+            </div>
+        @endif
     </div>
     @if($userObjective->exists)
         <div class="content-card-icons mb-3">

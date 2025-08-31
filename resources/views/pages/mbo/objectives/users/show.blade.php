@@ -8,7 +8,7 @@
         @endif
     </div>
     <div class="panel-left">
-        <a class="icon-btn add-realization" href="javascript:void(0);" data-modelid="" data-tippy-content="{{ __('buttons.add_realization') }}"><i class="bi-layer-forward"></i></a>
+        <a class="icon-btn edit-realization" href="javascript:void(0);" data-modelid="{{ $userObjective->id }}" data-tippy-content="{{ __('buttons.edit_realization') }}"><i class="bi-layer-forward"></i></a>
     </div>
 </div>
 <div class="row">
@@ -19,11 +19,11 @@
 @endsection
 @push('scripts')
 <script type="text/javascript">
-    $('.edit-objective').on('click', function() {
+    $('.edit-realization').on('click', function() {
         var model_id = $(this).attr('data-modelid');
 
         if(model_id && model_id !== ''){
-            $.getModal('App\\Http\\Controllers\\Campaigns\\CampaignObjectiveController@addObjectives', {id: model_id});
+            $.getModal('App\\Http\\Controllers\\Objectives\\UserObjectiveController@editRealization', {id: model_id});
         }
     });
 

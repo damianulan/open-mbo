@@ -76,9 +76,9 @@ class CampaignEditObjectiveForm extends Form
             'name' => 'max:120|required',
             'deadline' => 'nullable',
             'description' => 'max:512|nullable',
-            'weight' => 'decimal:2|required',
-            'expected' => 'decimal:2|nullable',
-            'award' => 'decimal:2|nullable',
+            'weight' => 'numeric|required',
+            'expected' => 'numeric|nullable',
+            'award' => 'numeric|nullable',
             'draft' => 'boolean',
         ];
     }
