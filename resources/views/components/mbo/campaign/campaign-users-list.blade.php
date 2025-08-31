@@ -38,7 +38,7 @@
                                             <i class="bi-hand-index-thumb"></i>
                                         </a>
                                     @endif
-                                @endsetting
+                                @endsettings
                             @endcan
 
                             @can('users', $uc->campaign)
