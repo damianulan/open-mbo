@@ -98,6 +98,8 @@ return [
 
     'maintenance' => false,
 
+    'chunk_default' => env('CHUNK_DEFAULT', 250),
+
     'fallback_locale' => 'pl',
 
     'available_locales' => [

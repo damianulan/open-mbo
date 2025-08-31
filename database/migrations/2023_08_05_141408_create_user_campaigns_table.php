@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('campaign_id');
             $table->foreignUuid('user_id');
-            $table->enum('stage', CampaignStage::values());
+            $table->enum('stage', CampaignStage::values())->default(CampaignStage::PENDING)->index();
 
             $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

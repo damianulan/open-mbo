@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('objective_id')->references('id')->on('objectives')->onDelete('cascade');
 
-            $table->enum('status', UserObjectiveStatus::values());
+            $table->enum('status', UserObjectiveStatus::values())->default(UserObjectiveStatus::UNSTARTED)->index();
             $table->decimal('evaluation', 8, 2)->nullable();
 
             $table->timestamps();

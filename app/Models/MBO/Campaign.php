@@ -247,6 +247,9 @@ class Campaign extends BaseModel
         }
 
         $stage = $this->getCurrentStages()->first();
+        if (is_null($stage)) {
+            $stage = CampaignStage::PENDING;
+        }
         UserCampaign::where($params)->where('stage', '!=', $stage)->get()->each(function (UserCampaign $uc) use ($stage) {
             $uc->stage = $stage;
             $uc->save();
@@ -261,8 +264,8 @@ class Campaign extends BaseModel
         $now = Carbon::now();
 
         foreach (CampaignStage::softValues() as $tmp) {
-            $prop_start = $tmp.'_from';
-            $prop_end = $tmp.'_to';
+            $prop_start = $tmp . '_from';
+            $prop_end = $tmp . '_to';
             $start = Carbon::parse($this->$prop_start);
             $end = Carbon::parse($this->$prop_end);
 
@@ -290,8 +293,8 @@ class Campaign extends BaseModel
         if ($this->stage === CampaignStage::IN_PROGRESS) {
             $softStage = null;
             foreach (CampaignStage::softValues() as $tmp) {
-                $prop_start = $tmp.'_from';
-                $prop_end = $tmp.'_to';
+                $prop_start = $tmp . '_from';
+                $prop_end = $tmp . '_to';
                 $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_start);
                 $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_end);
 
@@ -362,14 +365,14 @@ class Campaign extends BaseModel
     protected function timestart(): Attribute
     {
         return Attribute::make(
-            get: fn () => Carbon::parse($this->definition_from),
+            get: fn() => Carbon::parse($this->definition_from),
         );
     }
 
     protected function timeend(): Attribute
     {
         return Attribute::make(
-            get: fn () => Carbon::parse($this->self_evaluation_to),
+            get: fn() => Carbon::parse($this->self_evaluation_to),
         );
     }
 
@@ -524,35 +527,5 @@ class Campaign extends BaseModel
         }
 
         return $model;
-    }
-
-    public static function updatedCampaign(Campaign $model)
-    {
-        // $ucs = $model->user_campaigns()->get();
-        // if ($ucs && $ucs->count()) {
-        //     foreach ($ucs as $uc) {
-        //         $uc->active = $model->draft ? 0 : 1;
-        //         $uc->save();
-        //     }
-        // }
-        // $objectives = $model->objectives()->get();
-        // if ($objectives && $objectives->count()) {
-        //     $realization_from = $model->realization_from ? Carbon::parse($model->realization_from) : null;
-        //     $realization_to = $model->realization_to ? Carbon::parse($model->realization_to) : null;
-
-        //     foreach ($objectives as $objective) {
-        //         $objective->draft = $model->draft;
-        //         $deadline = $objective->deadline ? Carbon::parse($objective->deadline) : null;
-        //         if ($deadline) {
-        //             if ($deadline->isBefore($realization_from)) {
-        //                 $objective->deadline = $realization_from;
-        //             }
-        //             if ($deadline->isAfter($realization_to)) {
-        //                 $objective->deadline = $realization_to;
-        //             }
-        //         }
-        //         $objective->save();
-        //     }
-        // }
     }
 }
