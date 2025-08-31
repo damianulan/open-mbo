@@ -152,4 +152,36 @@ class UserObjectiveController extends AppController
 
         return response()->json($response);
     }
+
+    public function pass(Request $request, $id)
+    {
+        try {
+            $userObjective = UserObjective::checkAccess()->findOrFail($id);
+
+            if ($request->user()->cannot('evaluate', $userObjective)) {
+                throw new Exception('no access');
+            }
+
+            if ($userObjective->canBePassed()) {
+            }
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function fail(Request $request, $id)
+    {
+        try {
+            $userObjective = UserObjective::checkAccess()->findOrFail($id);
+
+            if ($request->user()->cannot('evaluate', $userObjective)) {
+                throw new Exception('no access');
+            }
+
+            if ($userObjective->canBePassed()) {
+            }
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
 }

@@ -114,6 +114,8 @@ final class PermissionsLib extends PermissionWarden
 
     public const MBO_OBJECTIVE_DELETE = 'mbo-objective-delete';
 
+    public const MBO_OBJECTIVE_EVALUATE = 'mbo-objective-evaluate';
+
     public const MBO_OBJECTIVE_MILESTONES = 'mbo-objective-milestones';
 
     public const MBO_OBJECTIVE_REALIZATION = 'mbo-objective-realization';
@@ -187,6 +189,7 @@ final class PermissionsLib extends PermissionWarden
             self::MBO_OBJECTIVE_CREATE => ['admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator'],
             self::MBO_OBJECTIVE_UPDATE => ['admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator'],
             self::MBO_OBJECTIVE_DELETE => ['admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator'],
+            self::MBO_OBJECTIVE_EVALUATE => ['admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator', 'supervisor'],
             self::MBO_OBJECTIVE_MILESTONES => ['admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator', 'supervisor'],
             self::MBO_OBJECTIVE_REALIZATION => ['admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator', 'supervisor'],
         ];

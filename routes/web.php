@@ -126,6 +126,8 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
                 Route::get('/{id}', [App\Http\Controllers\Objectives\UserObjectiveController::class, 'show'])->name('show');
                 Route::post('{objective}', [App\Http\Controllers\Objectives\UserObjectiveController::class, 'update'])->name('update');
                 Route::post('evaluation/{id}', [App\Http\Controllers\Objectives\UserObjectiveController::class, 'updateEvaluation'])->name('update_evaluation');
+                Route::get('pass/{id}', [App\Http\Controllers\Objectives\UserObjectiveController::class, 'pass'])->name('pass');
+                Route::get('fail/{id}', [App\Http\Controllers\Objectives\UserObjectiveController::class, 'fail'])->name('fail');
             });
         });
     });
