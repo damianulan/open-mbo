@@ -5,7 +5,7 @@ namespace App\Services\Objectives;
 use App\Models\MBO\UserObjective;
 use Lucent\Services\Service;
 
-class UserRealization extends Service
+class UserRealizationUpdate extends Service
 {
     /**
      * Handle the service main logic.

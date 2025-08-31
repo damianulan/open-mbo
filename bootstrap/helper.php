@@ -99,7 +99,7 @@ function float_view(?float $value, int $decimals = 2): string
 
 function percent_view($value): string
 {
-    return $value . '%';
+    return $value.'%';
 }
 
 function unauthorized($message = '', $permission = null)
@@ -122,7 +122,7 @@ function settings(string $key, $default = null)
     $setting = null;
 
     if ($group && $key) {
-        $appkey = 'settings.' . strtolower($group);
+        $appkey = 'settings.'.strtolower($group);
         $class = app($appkey) ?? null;
         $setting = $class ? $class->$key : null;
     }

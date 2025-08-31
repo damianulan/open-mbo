@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Objectives;
 
 use App\Forms\MBO\Objective\ObjectiveEditUserForm;
+use App\Forms\MBO\Objective\ObjectiveEditUserRealizationForm;
 use App\Http\Controllers\AppController;
 use App\Models\MBO\Objective;
 use App\Models\MBO\UserObjective;
 use App\Services\Objectives\BulkAssignUsers;
+use App\Services\Objectives\UserRealizationUpdate;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Forms\MBO\Objective\ObjectiveEditUserRealizationForm;
-use Illuminate\Http\JsonResponse;
-use App\Services\Objectives\UserRealization;
 
 class UserObjectiveController extends AppController
 {
@@ -134,14 +134,14 @@ class UserObjectiveController extends AppController
         $response = $form::validateJson($request, $id);
         if ($response['status'] === 'ok') {
 
-            $service = UserRealization::boot(request: $request, userObjective: $userObjective)->execute();
+            $service = UserRealizationUpdate::boot(request: $request, userObjective: $userObjective)->execute();
             if ($service->passed()) {
                 $response['message'] = __('alerts.objectives.success.realization_updated');
 
                 return response()->json($response);
             } else {
                 $errors = $service->getErrors();
-                if (!empty($errors)) {
+                if (! empty($errors)) {
                     $response['status'] = 'error';
                     $response['message'] = $errors[0];
                 }
