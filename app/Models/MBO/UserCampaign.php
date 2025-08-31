@@ -15,49 +15,33 @@ use Lucent\Support\Traits\Dispatcher;
  * @property string $campaign_id
  * @property string $user_id
  * @property string $stage
- * @property mixed $manual
- * @property mixed $active
+ * @property bool $manual
+ * @property bool $active
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read Campaign $campaign
+ * @property-read \App\Models\MBO\Campaign $campaign
  * @property-read User $user
  *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign whereActive($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign whereCampaignId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign whereManual($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign whereStage($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign withoutTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign active()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign checkAccess()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign drafted()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign inactive()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign published()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign avg(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign avgFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign checkAccess()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign count(string $columns = '*')
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign countFromCache(string $columns = '*')
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign createMany(array $records)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign deleteQuietly()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign drafted()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign firstFromCache($columns = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign flushCache($columns = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign flushQueryCache($columns = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign forceSave(array $attributes = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign getCacheKey($columns = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign getFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign inactive()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign insert(array $values)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign insertGetId(array $values, $sequence = null)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign insertOrIgnore(array $values)
@@ -65,7 +49,13 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign maxFromCache(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign min(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign minFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign newModelQuery()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign onlyTrashed()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign paginateFromCache(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign prunableSoftDeletes()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign published()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign query()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign remember(int $minutes)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign restore()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign save(array $attributes = [])
@@ -75,8 +65,18 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign truncate()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign updateOrInsert(array $attributes, $values = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign updateQuietly(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign whereActive($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign whereCampaignId($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign whereCreatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign whereDeletedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign whereId($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign whereManual($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign whereStage($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign whereUpdatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign withoutCache()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign prunableSoftDeletes()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign withoutTrashed()
  *
  * @mixin \Eloquent
  */

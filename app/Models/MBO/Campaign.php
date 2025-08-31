@@ -22,18 +22,19 @@ use Lucent\Support\Traits\Dispatcher;
  * @property string $name
  * @property string $period
  * @property mixed|null $description
- * @property mixed $definition_from
- * @property mixed $definition_to
- * @property mixed $disposition_from
- * @property mixed $disposition_to
- * @property mixed $realization_from
- * @property mixed $realization_to
- * @property mixed $evaluation_from
- * @property mixed $evaluation_to
- * @property mixed $self_evaluation_from
- * @property mixed $self_evaluation_to
- * @property mixed $draft
- * @property mixed $manual
+ * @property string|null $definition_from
+ * @property string|null $definition_to
+ * @property string|null $disposition_from
+ * @property string|null $disposition_to
+ * @property string|null $realization_from
+ * @property string|null $realization_to
+ * @property string|null $evaluation_from
+ * @property string|null $evaluation_to
+ * @property string|null $self_evaluation_from
+ * @property string|null $self_evaluation_to
+ * @property mixed $stage
+ * @property bool $draft
+ * @property bool $manual
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -41,64 +42,30 @@ use Lucent\Support\Traits\Dispatcher;
  * @property-read int|null $activities_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $coordinators
  * @property-read int|null $coordinators_count
- * @property-read User $creator
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Objective> $objectives
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\Objective> $objectives
  * @property-read int|null $objectives_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, UserCampaign> $user_campaigns
+ * @property-read mixed $timeend
+ * @property-read mixed $timestart
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserCampaign> $user_campaigns
  * @property-read int|null $user_campaigns_count
  *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereDefinitionFrom($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereDefinitionTo($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereDispositionFrom($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereDispositionTo($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereDraft($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereEvaluationFrom($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereEvaluationTo($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereManual($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign wherePeriod($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereRealizationFrom($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereRealizationTo($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereSelfEvaluationFrom($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereSelfEvaluationTo($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign withoutTrashed()
- *
- * @property string $stage
- *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign active()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign checkAccess()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign drafted()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign inactive()
- * @method static Builder<static>|Campaign orderByStatus()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Campaign published()
- * @method static Builder<static>|Campaign whereActive()
- * @method static Builder<static>|Campaign whereCompleted()
- * @method static Builder<static>|Campaign whereOngoing()
- * @method static Builder<static>|Campaign whereStage($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign avg(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign avgFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign checkAccess()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign count(string $columns = '*')
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign countFromCache(string $columns = '*')
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign createMany(array $records)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign deleteQuietly()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign drafted()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign firstFromCache($columns = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign flushCache($columns = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign flushQueryCache($columns = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign forceSave(array $attributes = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign getCacheKey($columns = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign getFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign inactive()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign insert(array $values)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign insertGetId(array $values, $sequence = null)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign insertOrIgnore(array $values)
@@ -106,7 +73,14 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign maxFromCache(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign min(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign minFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign newModelQuery()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign newQuery()
+ * @method static Builder<static>|Campaign onlyTrashed()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign orderByStatus()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign paginateFromCache(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign prunableSoftDeletes()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign published()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign query()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign remember(int $minutes)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign restore()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign save(array $attributes = [])
@@ -116,12 +90,32 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign truncate()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign updateOrInsert(array $attributes, $values = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign updateQuietly(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereActive()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereCompleted()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereCreatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereDefinitionFrom($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereDefinitionTo($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereDeletedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereDescription($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereDispositionFrom($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereDispositionTo($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereDraft($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereEvaluationFrom($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereEvaluationTo($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereId($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereManual($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereName($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereOngoing()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign wherePeriod($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereRealizationFrom($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereRealizationTo($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereSelfEvaluationFrom($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereSelfEvaluationTo($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereStage($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereUpdatedAt($value)
+ * @method static Builder<static>|Campaign withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign withoutCache()
- *
- * @property-read mixed $timeend
- * @property-read mixed $timestart
- *
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign prunableSoftDeletes()
+ * @method static Builder<static>|Campaign withoutTrashed()
  *
  * @mixin \Eloquent
  */

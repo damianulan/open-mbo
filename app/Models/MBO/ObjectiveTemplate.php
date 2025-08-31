@@ -12,53 +12,35 @@ use FormForge\Casts\TrixFieldCast;
  * @property string|null $category_id
  * @property string $name
  * @property mixed|null $description
- * @property ObjectiveType $type
  * @property string|null $award
- * @property mixed $draft
+ * @property bool $draft
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read ObjectiveTemplateCategory|null $category
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Objective> $objectives
+ * @property-read \App\Models\MBO\ObjectiveTemplateCategory|null $category
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\Objective> $objectives
  * @property-read int|null $objectives_count
  *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereAward($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereCategoryId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereDraft($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withoutTrashed()
- * @method static \Database\Factories\MBO\ObjectiveTemplateFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate active()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate checkAccess()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate drafted()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate inactive()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate published()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate avg(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate avgFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate checkAccess()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate count(string $columns = '*')
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate countFromCache(string $columns = '*')
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate createMany(array $records)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate deleteQuietly()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate drafted()
+ * @method static \Database\Factories\MBO\ObjectiveTemplateFactory factory($count = null, $state = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate firstFromCache($columns = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate flushCache($columns = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate flushQueryCache($columns = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate forceSave(array $attributes = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate getCacheKey($columns = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate getFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate inactive()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate insert(array $values)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate insertGetId(array $values, $sequence = null)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate insertOrIgnore(array $values)
@@ -66,7 +48,13 @@ use FormForge\Casts\TrixFieldCast;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate maxFromCache(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate min(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate minFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate newModelQuery()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate onlyTrashed()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate paginateFromCache(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate prunableSoftDeletes()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate published()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate query()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate remember(int $minutes)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate restore()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate save(array $attributes = [])
@@ -76,8 +64,18 @@ use FormForge\Casts\TrixFieldCast;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate truncate()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate updateOrInsert(array $attributes, $values = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate updateQuietly(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate whereAward($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate whereCategoryId($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate whereCreatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate whereDeletedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate whereDescription($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate whereDraft($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate whereId($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate whereName($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate withoutCache()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate prunableSoftDeletes()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withoutTrashed()
  *
  * @mixin \Eloquent
  */

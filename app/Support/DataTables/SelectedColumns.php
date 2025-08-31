@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $user_id
  * @property string $table_id
- * @property array $columns
- * @property array $selected
+ * @property array<array-key, mixed> $columns
+ * @property array<array-key, mixed> $selected
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read User $user

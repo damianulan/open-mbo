@@ -11,9 +11,8 @@ use Sentinel\Models\Role;
 
 /**
  * @property string $id
- * @property string|null $parent_id
- * @property string $manager_id
  * @property string $name
+ * @property string $shortname
  * @property mixed|null $description
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -22,49 +21,28 @@ use Sentinel\Models\Role;
  * @property-read int|null $activities_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Department> $children
  * @property-read int|null $children_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, UserEmployment> $employments
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\UserEmployment> $employments
  * @property-read int|null $employments_count
- * @property-read User $manager
- * @property-read Department|null $parent
- *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Department newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Department newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Department onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Department query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereManagerId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereParentId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Department withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Department withoutTrashed()
- *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $managers
  * @property-read int|null $managers_count
- * @property string $shortname
  *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Department active()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Department checkAccess()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Department drafted()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Department inactive()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Department published()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereShortname($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department avg(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department avgFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department checkAccess()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department count(string $columns = '*')
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department countFromCache(string $columns = '*')
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department createMany(array $records)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department deleteQuietly()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department drafted()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department firstFromCache($columns = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department flushCache($columns = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department flushQueryCache($columns = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department forceSave(array $attributes = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department getCacheKey($columns = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department getFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department inactive()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department insert(array $values)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department insertGetId(array $values, $sequence = null)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department insertOrIgnore(array $values)
@@ -72,7 +50,13 @@ use Sentinel\Models\Role;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department maxFromCache(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department min(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department minFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department newModelQuery()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Department onlyTrashed()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department paginateFromCache(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department prunableSoftDeletes()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department published()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department query()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department remember(int $minutes)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department restore()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department save(array $attributes = [])
@@ -82,8 +66,16 @@ use Sentinel\Models\Role;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department truncate()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department updateOrInsert(array $attributes, $values = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department updateQuietly(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department whereCreatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department whereDeletedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department whereDescription($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department whereId($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department whereName($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department whereShortname($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Department withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department withoutCache()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department prunableSoftDeletes()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Department withoutTrashed()
  *
  * @mixin \Eloquent
  */

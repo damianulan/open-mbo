@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Lab404\Impersonate\Models\Impersonate;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Scout\Searchable;
 use Lucent\Support\Str\Alphabet;
 use Lucent\Support\Traits\UUID;
 use Lucent\Support\Traits\VirginModel;
@@ -50,15 +51,15 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @property-read int|null $employments_active_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\Team> $leader_teams
  * @property-read int|null $leader_teams_count
+ * @property-read mixed $name
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserObjective> $objective_assignments
  * @property-read int|null $objective_assignments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Sentinel\Models\Permission> $permissions
  * @property-read int|null $permissions_count
- * @property-read UserProfile|null $profile
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Sentinel\Models\Role> $roles
- * @property-read int|null $roles_count
+ * @property-read \App\Models\Core\UserPreference|null $preferences
+ * @property-read \App\Models\Core\UserProfile|null $profile
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $subordinates
  * @property-read int|null $subordinates_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $supervisors
@@ -68,9 +69,14 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  *
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User active()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User drafted()
+ * @method static \Database\Factories\Core\UserFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User inactive()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User published()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereActive($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereCore($value)
@@ -83,26 +89,17 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutTrashed()
- * @method static \Database\Factories\Core\UserFactory factory($count = null, $state = [])
- *
- * @property-read UserPreference|null $preferences
- * @property-read mixed $name
- *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User active()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User drafted()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User inactive()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User published()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withPermission(...$slugs)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withRole(...$slugs)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutTrashed()
  *
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements HasLocalePreference
 {
     use HasApiTokens, HasFactory, HasRolesAndPermissions, Notifiable, RequestForms, SoftDeletes, UUID;
-    use Impersonable, Impersonate, ModelActivity, UserBusiness, UserMBO, VirginModel;
+    use Impersonable, Impersonate, ModelActivity, Searchable, UserBusiness, UserMBO, VirginModel;
 
     protected $fillable = [
         'email',

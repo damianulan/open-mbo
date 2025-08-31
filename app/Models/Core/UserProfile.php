@@ -3,7 +3,6 @@
 namespace App\Models\Core;
 
 use App\Casts\Enigma;
-use App\Enums\Users\Gender;
 use FormForge\Traits\RequestForms;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,17 +12,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property int $id
  * @property string $user_id
- * @property string $firstname
- * @property string $lastname
- * @property Gender $gender
+ * @property mixed $firstname
+ * @property mixed $lastname
+ * @property string $gender
  * @property string|null $birthday
- * @property string|null $phone
+ * @property mixed|null $phone
  * @property string|null $avatar
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read User $user
+ * @property-read \App\Models\Core\User $user
  *
+ * @method static \Database\Factories\Core\UserProfileFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile onlyTrashed()
@@ -39,12 +39,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withoutTrashed()
- *
- * @property string $lang
- *
- * @method static \Database\Factories\Core\UserProfileFactory factory($count = null, $state = [])
  *
  * @mixin \Eloquent
  */
