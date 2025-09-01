@@ -20,7 +20,7 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-    $.rebuildVendors();
+    $.buildVendor();
 });
 
 $('#modal_save').on('click', function() {

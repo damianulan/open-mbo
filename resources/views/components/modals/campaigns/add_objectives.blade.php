@@ -20,7 +20,7 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-    $.rebuildVendors();
+    $.buildVendor();
 });
 
 $('select[name="template_id"]').on('change', function() {

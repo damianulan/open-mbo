@@ -22,6 +22,11 @@ const tooltipList = [...tooltipTriggerList].map(
 
 const modal_initialized = new Event("modal-initialized");
 
+$.buildVendor = function () {
+    $.rebuildVendors();
+    $.quillBuild();
+}
+
 $("body").on("click", ".card-url", function () {
     var url = $(this).attr("data-url");
     if (url) {
@@ -43,7 +48,7 @@ $("body").on("click", ".swal-confirm", function (e) {
 });
 
 $(".table-container").on("xhr.dt", function (e, settings, json, xhr) {
-    $.rebuildVendors();
+    $.buildVendor();
 });
 
 $.overlay = function (state) {

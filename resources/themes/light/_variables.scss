@@ -60,7 +60,7 @@ $theme-colors: (
     "columbia": $columbia,
     "celadon": $celadon,
     "dimm-blue": $dimm-blue,
-    "lightgrey": $columbia,
+    "lightgrey": $columbia
 );
 
 $status-unstarted: shade(#adb5bd, 20%);
@@ -136,6 +136,7 @@ $input-color: $secondary;
 $form-switch-width: 3em;
 $check-border-color: rgba($secondary, 0.6);
 $switch-border-color: rgba($secondary, 0.6);
+$border-radius: 0.3rem;
 
 // Tables
 $table-bg: transparent;

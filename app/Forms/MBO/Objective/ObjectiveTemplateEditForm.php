@@ -24,7 +24,7 @@ class ObjectiveTemplateEditForm extends Form
             ->class('campaign-create-form')
             ->add(FormComponent::select('category_id', $model, Dictionary::fromModel(ObjectiveTemplateCategory::class, 'name'))->label(__('forms.mbo.objectives.category')))
             ->add(FormComponent::text('name', $model)->label(__('forms.mbo.objectives.name'))->required())
-            ->add(FormComponent::trix('description', $model)->label(__('forms.mbo.objectives.description')))
+            ->add(FormComponent::container('description', $model)->label(__('forms.mbo.objectives.description'))->class('quill-default'))
             ->add(FormComponent::switch('draft', $model)->label(__('forms.mbo.objectives.draft'))->default(false)
                 ->info(__('forms.mbo.objectives.info.draft')))
             ->addSubmit();

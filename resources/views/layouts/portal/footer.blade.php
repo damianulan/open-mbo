@@ -5,7 +5,8 @@
 @formForgeScripts
 @livewireScripts
 <script src="{{ asset('themes/js/app.js') }}"></script>
-@include('layouts.components.alerts');
+@include('layouts.components.alerts')
+@include('layouts.portal.scripts')
 @stack('scripts')
 @stack('custom-scripts')
 

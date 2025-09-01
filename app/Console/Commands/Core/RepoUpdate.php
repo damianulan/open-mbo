@@ -3,8 +3,8 @@
 namespace App\Console\Commands\Core;
 
 use App\Console\BaseCommand;
-use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Process;
 
 class RepoUpdate extends BaseCommand
 {
@@ -37,7 +37,7 @@ class RepoUpdate extends BaseCommand
             $result = Process::run('git reset --hard');
             $this->info($result->output());
             if (! empty($branch)) {
-                $result = Process::run('git switch ' . $branch);
+                $result = Process::run('git switch '.$branch);
             }
             $result = Process::run('git pull origin');
             $this->info($result->output());
