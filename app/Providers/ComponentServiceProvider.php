@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Livewire\Livewire;
 
 class ComponentServiceProvider extends ServiceProvider
 {
@@ -42,5 +43,7 @@ class ComponentServiceProvider extends ServiceProvider
         // Users
         Blade::component('user-details-card', \App\View\Components\Users\UserDetailsCard::class);
         Blade::component('user-banner', \App\View\Components\Users\UserBanner::class);
+
+        Livewire::component('commentable', \App\Commentable\Components\CommentComponent::class);
     }
 }

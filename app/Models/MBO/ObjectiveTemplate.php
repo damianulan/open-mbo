@@ -11,7 +11,7 @@ use FormForge\Casts\TrixFieldCast;
  * @property string $id
  * @property string|null $category_id
  * @property string $name
- * @property mixed|null $description
+ * @property string|null $description
  * @property string|null $award Max points to be awarded for objective completion
  * @property bool $draft
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -22,7 +22,6 @@ use FormForge\Casts\TrixFieldCast;
  * @property-read \App\Models\MBO\ObjectiveTemplateCategory|null $category
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\Objective> $objectives
  * @property-read int|null $objectives_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate avg(string $column)
@@ -76,7 +75,6 @@ use FormForge\Casts\TrixFieldCast;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class ObjectiveTemplate extends BaseModel
@@ -90,7 +88,6 @@ class ObjectiveTemplate extends BaseModel
 
     protected $casts = [
         'draft' => 'boolean',
-        'description' => TrixFieldCast::class,
     ];
 
     protected $accessScope = ObjectiveTemplateScope::class;

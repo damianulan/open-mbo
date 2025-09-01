@@ -79550,6 +79550,7 @@ function swal_confirm(text) {
         _callback();
       }
     }
+    return result.isConfirmed;
   });
 }
 function swal_alert(text, title) {
@@ -79909,14 +79910,27 @@ $(".list-menu .menu-options .toggle-all").on("click", function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var quill__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! quill */ "./node_modules/quill/quill.js");
 
+window.Quill = quill__WEBPACK_IMPORTED_MODULE_0__["default"];
 $.quillBuild = function () {
-  quill_default();
+  quill_components();
 };
 $.quillInstances = [];
-function quill_default() {
+$.quillDefaultToolbar = [['bold', 'italic', 'underline', 'blockquote', 'code-block', 'link'], [{
+  'header': [1, 2, 3, false]
+}], ['clean']];
+$.quillSimpleToolbar = [['bold', 'italic', 'underline', 'blockquote', 'code-block', 'link']];
+$.quillSimpleOptions = {
+  modules: {
+    toolbar: $.quillSimpleToolbar
+  },
+  theme: 'snow'
+};
+function quill_components() {
   $('.quill-default').each(function () {
-    var toolbarOptions = [['bold', 'italic', 'underline', 'blockquote', 'link'], ['clean']];
-    quill_init(this, toolbarOptions);
+    quill_init(this, $.quillDefaultToolbar);
+  });
+  $('.quill-simple').each(function () {
+    quill_init(this, $.quillSimpleToolbar);
   });
 }
 function quill_init(element, toolbarOptions) {
@@ -79928,9 +79942,12 @@ function quill_init(element, toolbarOptions) {
     },
     theme: 'snow'
   });
-  quill.on('text-change', function (delta, oldDelta, source) {
-    input.val(quill.root.innerHTML);
-  });
+  if (input) {
+    quill.on('text-change', function (delta, oldDelta, source) {
+      input.val(quill.root.innerHTML);
+    });
+  }
+  window.quill = quill;
   $.quillInstances.push(quill);
 }
 

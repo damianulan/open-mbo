@@ -51,7 +51,7 @@
               <div class="user-nav dropup"
               @if(auth()->user()->isImpersonating())
               data-tippy-placement="left"
-              data-tippy-content="{{ __('menus.impersonated_by', ['name' => auth()->user()->impersonator()->name()]) }}"
+              data-tippy-content="{{ __('menus.impersonated_by', ['name' => auth()->user()->impersonator()->name]) }}"
               @endif
               >
                   <div class="user-actions" data-bs-toggle="dropdown" type="button" aria-expanded="false">

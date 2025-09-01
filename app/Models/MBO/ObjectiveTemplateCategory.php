@@ -11,7 +11,7 @@ use FormForge\Casts\TrixFieldCast;
  * @property string $id
  * @property string $name
  * @property string|null $shortname
- * @property mixed|null $description
+ * @property string|null $description
  * @property string|null $icon
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -22,7 +22,6 @@ use FormForge\Casts\TrixFieldCast;
  * @property-read int|null $coordinators_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\ObjectiveTemplate> $objective_templates
  * @property-read int|null $objective_templates_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory avg(string $column)
@@ -74,7 +73,6 @@ use FormForge\Casts\TrixFieldCast;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class ObjectiveTemplateCategory extends BaseModel
@@ -86,10 +84,6 @@ class ObjectiveTemplateCategory extends BaseModel
         'shortname',
         'description',
         'icon',
-    ];
-
-    protected $casts = [
-        'description' => TrixFieldCast::class,
     ];
 
     protected $accessScope = ObjectiveTemplateCategoryScope::class;

@@ -81,6 +81,21 @@
             </div>
         </div>
     </div>
+    <div class="col-xl-12 col-xs-12">
+        <div class="content-card">
+            <div class="content-card-top mb-4">
+                <div class="content-card-header">
+                    <i class="bi-chat-left-quote me-2"></i>
+                    <span>{{ __('Komentarze') }}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <livewire:commentable :subject="$objective" key="str()->random(50)" />
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @endsection

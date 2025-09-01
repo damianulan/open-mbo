@@ -2,6 +2,7 @@
 
 namespace App\Models\MBO;
 
+use App\Commentable\Support\Commentable;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Models\Scopes\MBO\ObjectiveScope;
@@ -15,7 +16,7 @@ use Lucent\Support\Traits\Dispatcher;
  * @property string|null $template_id
  * @property string|null $campaign_id
  * @property string $name
- * @property mixed|null $description
+ * @property string|null $description
  * @property \Illuminate\Support\Carbon|null $deadline Deadline for objective completion, to which realization should be approved, otherwise it turns out red.
  * @property string $weight Corresponds to the importance of the objective, the higher the weight, the more important it is.
  * @property string|null $award Max points to be awarded for objective completion
@@ -27,10 +28,11 @@ use Lucent\Support\Traits\Dispatcher;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
  * @property-read \App\Models\MBO\Campaign|null $campaign
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Commentable\Models\Comment> $comments
+ * @property-read int|null $comments_count
  * @property-read \App\Models\MBO\ObjectiveTemplate|null $template
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserObjective> $user_assignments
  * @property-read int|null $user_assignments_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective avg(string $column)
@@ -88,12 +90,11 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static Builder<static>|Objective withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective withoutCache()
  * @method static Builder<static>|Objective withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Objective extends BaseModel
 {
-    use Dispatcher;
+    use Dispatcher, Commentable;
 
     protected $fillable = [
         'template_id',
@@ -110,7 +111,6 @@ class Objective extends BaseModel
     protected $casts = [
         'draft' => 'boolean',
         'deadline' => 'datetime',
-        'description' => TrixFieldCast::class,
     ];
 
     protected $accessScope = ObjectiveScope::class;

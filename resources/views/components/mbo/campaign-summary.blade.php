@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">
-        {!! $campaign->description->get() !!}
+        {!! $campaign->description !!}
     </div>
 </div>
 <div class="row my-2">

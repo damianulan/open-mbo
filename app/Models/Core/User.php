@@ -2,6 +2,7 @@
 
 namespace App\Models\Core;
 
+use App\Commentable\Support\Commentator;
 use App\Traits\UserBusiness;
 use App\Traits\UserMBO;
 use App\Traits\Vendors\Impersonable;
@@ -51,6 +52,8 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @property-read int|null $employments_active_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\Team> $leader_teams
  * @property-read int|null $leader_teams_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Commentable\Models\Comment> $my_comments
+ * @property-read int|null $my_comments_count
  * @property-read mixed $name
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
@@ -71,7 +74,6 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @property-read \App\Models\MBO\UserBonusScheme|null $user_bonus_scheme
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User active()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User drafted()
  * @method static \Database\Factories\Core\UserFactory factory($count = null, $state = [])
@@ -96,13 +98,12 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withRole(...$slugs)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements HasLocalePreference
 {
     use HasApiTokens, HasFactory, HasRolesAndPermissions, Notifiable, RequestForms, SoftDeletes, UUID;
-    use Impersonable, Impersonate, ModelActivity, Searchable, UserBusiness, UserMBO, VirginModel;
+    use Impersonable, Impersonate, ModelActivity, Searchable, UserBusiness, UserMBO, VirginModel, Commentator;
 
     protected $fillable = [
         'email',
@@ -148,18 +149,18 @@ class User extends Authenticatable implements HasLocalePreference
 
     protected function name(): Attribute
     {
-        $value = $this->profile?->firstname.' '.$this->profile?->lastname;
+        $value = $this->profile?->firstname . ' ' . $this->profile?->lastname;
 
         return Attribute::make(
-            get: fn () => ucfirst($value),
+            get: fn() => ucfirst($value),
         );
     }
 
     public function nameView(): string
     {
-        $link = '<span>'.$this->name().'</span>';
+        $link = '<span>' . $this->name() . '</span>';
         if (Auth::user()->can('view', $this)) {
-            $link = '<a href="'.route('users.show', $this->id).'" class="text-primary">'.$this->name().'</a>';
+            $link = '<a href="' . route('users.show', $this->id) . '" class="text-primary">' . $this->name() . '</a>';
         }
 
         return $link;
@@ -225,7 +226,7 @@ class User extends Authenticatable implements HasLocalePreference
 
     public function getInitials(): string
     {
-        return strtoupper(substr($this->firstname(), 0, 1).substr($this->lastname(), 0, 1));
+        return strtoupper(substr($this->firstname(), 0, 1) . substr($this->lastname(), 0, 1));
     }
 
     public function getAvatarView(int $height = 70, int $width = 70): string
@@ -234,7 +235,7 @@ class User extends Authenticatable implements HasLocalePreference
             $width = $height;
         }
         if ($this->profile->avatar) {
-            return '<img class="profile-img" src="'.asset($this->profile->avatar).'" height="'.$height.'px" width="'.$width.'px">';
+            return '<img class="profile-img" src="' . asset($this->profile->avatar) . '" height="' . $height . 'px" width="' . $width . 'px">';
         }
 
         $fontSize = $height / 2.8;
@@ -254,7 +255,7 @@ class User extends Authenticatable implements HasLocalePreference
             $color = 'red';
         }
 
-        return '<div class="profile-img" style="background-color: var(--bs-'.$color.'); font-size: '.$fontSize.'px; min-height: '.$height.'px; min-width: '.$width.'px;"><div>'.$initials.'</div></div>';
+        return '<div class="profile-img" style="background-color: var(--bs-' . $color . '); font-size: ' . $fontSize . 'px; min-height: ' . $height . 'px; min-width: ' . $width . 'px;"><div>' . $initials . '</div></div>';
     }
 
     public function canBeImpersonated(): bool
@@ -285,5 +286,10 @@ class User extends Authenticatable implements HasLocalePreference
         }
 
         return $locale;
+    }
+
+    public function routeShow(): string
+    {
+        return route('users.show', $this->id);
     }
 }

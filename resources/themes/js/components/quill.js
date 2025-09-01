@@ -1,21 +1,36 @@
 import Quill from 'quill';
 
-$.quillBuild = function () {
-    quill_default();
-}
+window.Quill = Quill;
 
+$.quillBuild = function () {
+    quill_components();
+}
 $.quillInstances = [];
 
-function quill_default() {
+$.quillDefaultToolbar = [
+    ['bold', 'italic', 'underline', 'blockquote', 'code-block', 'link'],
+    [{ 'header': [1, 2, 3, false] }],
+    ['clean'],
+];
+
+$.quillSimpleToolbar = [
+    ['bold', 'italic', 'underline', 'blockquote', 'code-block', 'link'],
+];
+
+$.quillSimpleOptions = {
+    modules: {
+        toolbar: $.quillSimpleToolbar
+    },
+    theme: 'snow'
+};
+
+function quill_components() {
     $('.quill-default').each(function() {
+        quill_init(this, $.quillDefaultToolbar);
+    });
 
-        const toolbarOptions = [
-            ['bold', 'italic', 'underline', 'blockquote', 'link'],
-            ['clean'],
-        ];
-
-        quill_init(this, toolbarOptions);
-
+    $('.quill-simple').each(function() {
+        quill_init(this, $.quillSimpleToolbar);
     });
 }
 
@@ -28,10 +43,12 @@ function quill_init(element, toolbarOptions) {
         },
         theme: 'snow'
     });
-
-    quill.on('text-change', function(delta, oldDelta, source) {
-        input.val(quill.root.innerHTML);
-    });
+    if(input) {
+        quill.on('text-change', function(delta, oldDelta, source) {
+            input.val(quill.root.innerHTML);
+        });
+    }
+    window.quill = quill;
 
     $.quillInstances.push(quill);
 }

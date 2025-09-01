@@ -11,18 +11,17 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 /**
  * @property string $id
  * @property string $name
- * @property mixed|null $description
+ * @property string|null $description
  * @property array<array-key, mixed> $options
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, UserBonusScheme> $user_schemes
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserBonusScheme> $user_schemes
  * @property-read int|null $user_schemes_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $users
  * @property-read int|null $users_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme avg(string $column)
@@ -73,7 +72,6 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class BonusScheme extends BaseModel
@@ -85,7 +83,6 @@ class BonusScheme extends BaseModel
     ];
 
     protected $casts = [
-        'description' => TrixFieldCast::class,
         'options' => 'array',
     ];
 

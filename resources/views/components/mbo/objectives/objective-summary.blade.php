@@ -27,7 +27,7 @@
             @endif
         </div>
     </div>
-    <div class="py-2">{!! $objective->description->get() !!}</div>
+    <div class="py-2">{!! $objective->description !!}</div>
 
     <div class="content-card-icons text-secondary fw-bold pb-2">
         <div data-tippy-content="{{ __('forms.mbo.objectives.weight') }}">

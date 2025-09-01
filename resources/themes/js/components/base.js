@@ -79,6 +79,7 @@ function swal_confirm(text, title_input = null, _callback = null) {
                 _callback();
             }
         }
+        return result.isConfirmed;
     });
 }
 

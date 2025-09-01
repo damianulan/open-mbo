@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property string|null $city
  * @property string|null $country
  * @property string|null $postal_code
- * @property mixed|null $description
+ * @property string|null $description
  * @property bool $active
  * @property string|null $founded
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -24,7 +24,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property-read int|null $activities_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\Company> $companies
  * @property-read int|null $companies_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location avg(string $column)
@@ -82,7 +81,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Location extends BaseModel
@@ -103,7 +101,6 @@ class Location extends BaseModel
     ];
 
     protected $casts = [
-        'description' => TrixFieldCast::class,
         'created_at' => 'datetime',
         'active' => 'boolean',
     ];

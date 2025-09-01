@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="card-text">
-            {{ $campaign->description->stripFormat() }}
+            {{ strip_tags($campaign->description) }}
         </div>
         <div class="row details">
             <div class="col-xl-4 col-md-6 col-sm-12">

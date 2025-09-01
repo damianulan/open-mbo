@@ -2,6 +2,7 @@
 
 namespace App\Models\MBO;
 
+use App\Commentable\Support\Commentable;
 use App\Enums\MBO\CampaignStage;
 use App\Enums\MBO\UserObjectiveStatus;
 use App\Events\MBO\Campaigns\CampaignUserObjectiveAssigned;
@@ -22,16 +23,17 @@ use Lucent\Support\Traits\Dispatcher;
  * @property string $objective_id
  * @property string $status objective status
  * @property string|null $realization Numerical value of the realization of the objective - in relation to the expected value in objective
- * @property numeric|null $evaluation Percentage evaluation of the objective - if realization is set, evaluation is calculated automatically
+ * @property string|null $evaluation Percentage evaluation of the objective - if realization is set, evaluation is calculated automatically
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
  * @property-read \App\Models\MBO\Campaign|null $campaign
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Commentable\Models\Comment> $comments
+ * @property-read int|null $comments_count
  * @property-read \App\Models\MBO\Objective $objective
  * @property-read User $user
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective avg(string $column)
@@ -91,12 +93,11 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static Builder<static>|UserObjective withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective withoutCache()
  * @method static Builder<static>|UserObjective withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class UserObjective extends BaseModel
 {
-    use Dispatcher;
+    use Dispatcher, Commentable;
 
     protected $fillable = [
         'user_id',

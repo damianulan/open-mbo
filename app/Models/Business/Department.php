@@ -13,7 +13,7 @@ use Sentinel\Models\Role;
  * @property string $id
  * @property string $name
  * @property string $shortname
- * @property mixed|null $description
+ * @property string|null $description
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -25,7 +25,6 @@ use Sentinel\Models\Role;
  * @property-read int|null $employments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $managers
  * @property-read int|null $managers_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department avg(string $column)
@@ -76,7 +75,6 @@ use Sentinel\Models\Role;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Department extends BaseModel
@@ -84,10 +82,6 @@ class Department extends BaseModel
     protected $fillable = [
         'name',
         'description',
-    ];
-
-    protected $casts = [
-        'description' => TrixFieldCast::class,
     ];
 
     public function children(): HasMany

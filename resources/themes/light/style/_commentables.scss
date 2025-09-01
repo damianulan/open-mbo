@@ -1,0 +1,68 @@
+.commentable {
+    position: relative;
+    width: 100%;
+
+    .comment {
+        display: flex;
+        margin: 0.5rem 0;
+
+        .comment-group {
+            display: flex;
+            padding-left: 0;
+            padding-right: 2rem;
+        }
+
+        &.my-comment {
+            margin-left: auto;
+            .commentable-item {
+                background-color: rgba($primary, 0.2);
+            }
+
+            .comment-group {
+                margin-left: auto;
+                padding-left: 2rem;
+                padding-right: 0;
+            }
+        }
+
+        .commentable-item {
+            padding: 0.375rem 0.75rem;
+            margin-left: 0.5rem;
+            border: 1px solid transparent;
+            border-radius: $input-border-radius;
+            background-color: rgba($primary, 0.1);
+            color: $primary;
+
+            .commentable-toolbox {
+                position: relative;
+                display: flex;
+                align-items: center;
+
+                .commentable-author {
+                    margin-right: 0.375rem;
+                    font-weight: 600;
+                    font-size: 0.75rem;
+                }
+
+                .icon-btn {
+                    top: 0;
+                    font-size: 0.75rem !important;
+                    margin-left: 0.375rem;
+                }
+            }
+
+            .commentable-footer {
+                position: relative;
+                display: flex;
+                align-items: center;
+                bottom: 0;
+
+                .commentable-timestamp {
+                    margin-left: auto;
+                    padding-left: 1rem;
+                    font-size: 0.65rem;
+                }
+            }
+        }
+    }
+}
