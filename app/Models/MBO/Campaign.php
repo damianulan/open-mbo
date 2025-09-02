@@ -9,7 +9,6 @@ use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Models\Scopes\MBO\CampaignScope;
 use Carbon\Carbon;
-use FormForge\Casts\TrixFieldCast;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -48,6 +47,7 @@ use Lucent\Support\Traits\Dispatcher;
  * @property-read mixed $timestart
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserCampaign> $user_campaigns
  * @property-read int|null $user_campaigns_count
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign avg(string $column)
@@ -115,6 +115,7 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static Builder<static>|Campaign withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign withoutCache()
  * @method static Builder<static>|Campaign withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Campaign extends BaseModel
@@ -260,8 +261,8 @@ class Campaign extends BaseModel
         $now = Carbon::now();
 
         foreach (CampaignStage::softValues() as $tmp) {
-            $prop_start = $tmp . '_from';
-            $prop_end = $tmp . '_to';
+            $prop_start = $tmp.'_from';
+            $prop_end = $tmp.'_to';
             $start = Carbon::parse($this->$prop_start);
             $end = Carbon::parse($this->$prop_end);
 
@@ -289,8 +290,8 @@ class Campaign extends BaseModel
         if ($this->stage === CampaignStage::IN_PROGRESS) {
             $softStage = null;
             foreach (CampaignStage::softValues() as $tmp) {
-                $prop_start = $tmp . '_from';
-                $prop_end = $tmp . '_to';
+                $prop_start = $tmp.'_from';
+                $prop_end = $tmp.'_to';
                 $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_start);
                 $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_end);
 
@@ -361,14 +362,14 @@ class Campaign extends BaseModel
     protected function timestart(): Attribute
     {
         return Attribute::make(
-            get: fn() => Carbon::parse($this->definition_from),
+            get: fn () => Carbon::parse($this->definition_from),
         );
     }
 
     protected function timeend(): Attribute
     {
         return Attribute::make(
-            get: fn() => Carbon::parse($this->self_evaluation_to),
+            get: fn () => Carbon::parse($this->self_evaluation_to),
         );
     }
 

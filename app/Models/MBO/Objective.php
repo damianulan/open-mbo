@@ -6,7 +6,6 @@ use App\Commentable\Support\Commentable;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Models\Scopes\MBO\ObjectiveScope;
-use FormForge\Casts\TrixFieldCast;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\JoinClause;
 use Lucent\Support\Traits\Dispatcher;
@@ -33,6 +32,7 @@ use Lucent\Support\Traits\Dispatcher;
  * @property-read \App\Models\MBO\ObjectiveTemplate|null $template
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserObjective> $user_assignments
  * @property-read int|null $user_assignments_count
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective avg(string $column)
@@ -90,11 +90,12 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static Builder<static>|Objective withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective withoutCache()
  * @method static Builder<static>|Objective withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Objective extends BaseModel
 {
-    use Dispatcher, Commentable;
+    use Commentable, Dispatcher;
 
     protected $fillable = [
         'template_id',

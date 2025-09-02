@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Laravel\Scout\Searchable;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Scout\Searchable;
 
 /**
  * @property int $id
@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Auth;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Comment> $responses
  * @property-read int|null $responses_count
  * @property-read Model|\Eloquent $subject
+ *
  * @method static Builder<static>|Comment direct()
  * @method static Builder<static>|Comment newModelQuery()
  * @method static Builder<static>|Comment newQuery()
@@ -36,6 +37,7 @@ use Illuminate\Support\Facades\Auth;
  * @method static Builder<static>|Comment whereSubjectId($value)
  * @method static Builder<static>|Comment whereSubjectType($value)
  * @method static Builder<static>|Comment whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class Comment extends Model

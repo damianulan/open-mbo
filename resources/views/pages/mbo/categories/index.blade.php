@@ -10,12 +10,10 @@
     </div>
 </div>
 <div class="content-card">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="table-container row">
-                {{ $table->actions() }}
-                {{ $dataTable->table() }}
-            </div>
+    <div class="content-card-body">
+        <div class="table-container row">
+            {{ $table->actions() }}
+            {{ $dataTable->table() }}
         </div>
     </div>
 </div>

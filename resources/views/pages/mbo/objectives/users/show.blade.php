@@ -13,21 +13,19 @@
 </div>
 <div class="row">
 
-    <div class="col-xl-12 pb-4">
+    <div class="col-xl-12">
         <x-objective-summary :objective="$objective" :userObjective="$userObjective" />
     </div>
     <div class="col-xl-12 col-xs-12">
         <div class="content-card">
-            <div class="content-card-top mb-4">
+            <div class="content-card-top">
                 <div class="content-card-header">
                     <i class="bi-chat-left-quote me-2"></i>
                     <span>{{ __('Komentarze') }}</span>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <livewire:commentable :subject="$userObjective" key="str()->random(50)" />
-                </div>
+            <div class="content-card-body">
+                <livewire:commentable :subject="$userObjective" key="str()->random(50)" />
             </div>
         </div>
     </div>

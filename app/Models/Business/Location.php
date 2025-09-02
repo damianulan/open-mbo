@@ -3,7 +3,6 @@
 namespace App\Models\Business;
 
 use App\Models\BaseModel;
-use FormForge\Casts\TrixFieldCast;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
@@ -24,6 +23,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property-read int|null $activities_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\Company> $companies
  * @property-read int|null $companies_count
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location avg(string $column)
@@ -81,6 +81,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Location extends BaseModel

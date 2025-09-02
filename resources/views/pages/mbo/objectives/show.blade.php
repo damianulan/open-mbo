@@ -21,29 +21,27 @@
                         <i class="info-box bi-info-circle-fill ms-1" data-tippy-content="{{ __('mbo.info.objective_admins') }}"></i>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        @if($objective->coordinators()->count())
-                            <ul class="ombo-list">
-                                @foreach ($objective->coordinators()->get() as $user)
-                                    @if($user)
-                                        <li>
-                                            <div class="list-grid">
-                                                <div class="list-content">
-                                                    <div class="nowrap user" data-tippy-content="{{ $user->name }}">
-                                                        {!! $user->nameDetails() !!}
-                                                    </div>
+                <div class="content-card-body">
+                    @if($objective->coordinators()->count())
+                        <ul class="ombo-list">
+                            @foreach ($objective->coordinators()->get() as $user)
+                                @if($user)
+                                    <li>
+                                        <div class="list-grid">
+                                            <div class="list-content">
+                                                <div class="nowrap user" data-tippy-content="{{ $user->name }}">
+                                                    {!! $user->nameDetails() !!}
                                                 </div>
                                             </div>
-                                        </li>
-                                    @endif
-                                @endforeach
-                            </ul>
+                                        </div>
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ul>
 
-                        @else
-                            <div><p class="text-primary">{{ __('mbo.info.no_category_admins_added') }}</p></div>
-                        @endif
-                    </div>
+                    @else
+                        <div><p class="text-primary">{{ __('mbo.info.no_category_admins_added') }}</p></div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -56,10 +54,8 @@
                     <span>{{ __('mbo.objectives.users.inprogress') }}</span>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <x-objective-users-list :objective="$objective" :status="'progress'" />
-                </div>
+            <div class="content-card-body">
+                <x-objective-users-list :objective="$objective" :status="'progress'" />
             </div>
         </div>
     </div>
@@ -71,7 +67,7 @@
                     <span>{{ __('mbo.objectives.users.completed') }}</span>
                 </div>
             </div>
-            <div class="row">
+            <div class="content-card-body row">
                 <div class="col-md-6">
                     <x-objective-users-list :objective="$objective" :status="'passed'" />
                 </div>
@@ -83,16 +79,14 @@
     </div>
     <div class="col-xl-12 col-xs-12">
         <div class="content-card">
-            <div class="content-card-top mb-4">
+            <div class="content-card-top">
                 <div class="content-card-header">
                     <i class="bi-chat-left-quote me-2"></i>
                     <span>{{ __('Komentarze') }}</span>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <livewire:commentable :subject="$objective" key="str()->random(50)" />
-                </div>
+            <div class="content-card-body">
+                <livewire:commentable :subject="$objective" key="str()->random(50)" />
             </div>
         </div>
     </div>

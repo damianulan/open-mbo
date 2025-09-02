@@ -27,20 +27,21 @@
     </div>
 </div>
 <div class="content-card">
-    @include('components.mbo.campaign-summary')
-    <div class="container pt-4">
-        <div class="row">
-            <div class="col-md-5 pt-3">
-                <h4>{{ __('mbo.objectives.index') }}</h4>
-                <x-objectives-list :objectives="$campaign->objectives()->checkAccess()->get()" />
-            </div>
-            <div class="col-md-5 offset-md-2 pt-3">
-                <h4>{{ __('mbo.enroled_users') }}</h4>
-                <x-campaign-users-list :userCampaigns="$campaign->user_campaigns" />
+    <div class="content-card-body">
+        @include('components.mbo.campaign-summary')
+        <div class="container pt-4">
+            <div class="row">
+                <div class="col-md-5 pt-3">
+                    <h4>{{ __('mbo.objectives.index') }}</h4>
+                    <x-objectives-list :objectives="$campaign->objectives()->checkAccess()->get()" />
+                </div>
+                <div class="col-md-5 offset-md-2 pt-3">
+                    <h4>{{ __('mbo.enroled_users') }}</h4>
+                    <x-campaign-users-list :userCampaigns="$campaign->user_campaigns" />
+                </div>
             </div>
         </div>
     </div>
-
 </div>
 
 @endsection

@@ -34,6 +34,7 @@ use Lucent\Support\Traits\Dispatcher;
  * @property-read int|null $comments_count
  * @property-read \App\Models\MBO\Objective $objective
  * @property-read User $user
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective avg(string $column)
@@ -93,11 +94,12 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static Builder<static>|UserObjective withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective withoutCache()
  * @method static Builder<static>|UserObjective withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserObjective extends BaseModel
 {
-    use Dispatcher, Commentable;
+    use Commentable, Dispatcher;
 
     protected $fillable = [
         'user_id',

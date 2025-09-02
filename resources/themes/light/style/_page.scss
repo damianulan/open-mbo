@@ -54,25 +54,36 @@ body {
 .content-card {
     background-color: $body-bg;
     padding: 1.5rem 1.5rem;
-    margin: 0.75rem 0 2rem 0;
+    margin: 0.75rem 0 0.5rem 0;
     border-radius: 0.35rem;
-    min-height: 100%;
     box-shadow: $card-shadow;
-}
 
-.content-card .content-card-top {
-    display: flex;
-    align-items: center;
-    color: $primary;
-}
+    &.minified {
+        .content-card-body {
+            display: none;
+        }
+    }
 
-.content-card .content-card-top .content-card-header {
-    display: flex;
-    border: none;
-    font-size: 1.1rem;
-    font-family: $font-family-serif;
-    font-weight: 700;
-    background: transparent;
+    .content-card-body {
+        margin-top: 1rem;
+        padding: 0.5rem 0;
+        transition: all 0.4s ease-in-out;
+    }
+
+    & > .content-card-top {
+        display: flex;
+        align-items: center;
+        color: $primary;
+
+        & > .content-card-header {
+            display: flex;
+            border: none;
+            font-size: 1.1rem;
+            font-family: $font-family-serif;
+            font-weight: 700;
+            background: transparent;
+        }
+    }
 }
 
 .content-card-icons,
@@ -218,8 +229,7 @@ section.content-wrapper {
     bottom: 0;
     margin: auto;
     border: 4px solid;
-    border-color: transparent transparent rgba($primary, 0.5)
-        rgba($primary, 0.5);
+    border-color: transparent transparent rgba($primary, 0.5) rgba($primary, 0.5);
     width: 40px;
     height: 40px;
     border-radius: 50%;

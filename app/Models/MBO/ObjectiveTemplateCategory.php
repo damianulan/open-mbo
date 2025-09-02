@@ -5,7 +5,6 @@ namespace App\Models\MBO;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Models\Scopes\MBO\ObjectiveTemplateCategoryScope;
-use FormForge\Casts\TrixFieldCast;
 
 /**
  * @property string $id
@@ -22,6 +21,7 @@ use FormForge\Casts\TrixFieldCast;
  * @property-read int|null $coordinators_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\ObjectiveTemplate> $objective_templates
  * @property-read int|null $objective_templates_count
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory avg(string $column)
@@ -73,6 +73,7 @@ use FormForge\Casts\TrixFieldCast;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class ObjectiveTemplateCategory extends BaseModel

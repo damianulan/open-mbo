@@ -12,21 +12,23 @@
     </nav>
     @if (count($objectives))
         <div class="content-card">
-            <div class="row pagination-row">
-                <div class="col-md-12">
-                    {{ $objectives->links() }}
-                </div>
-            </div>
-            <div class="row">
-                @foreach($objectives as $objective)
-                    <div class="col-md-4 pb-3">
-                        @include('components.mbo.objective-card')
+            <div class="content-card-body">
+                <div class="row pagination-row">
+                    <div class="col-md-12">
+                        {{ $objectives->links() }}
                     </div>
-                @endforeach
-            </div>
-            <div class="row pagination-row">
-                <div class="col-md-12">
-                    {{ $objectives->links() }}
+                </div>
+                <div class="row">
+                    @foreach($objectives as $objective)
+                        <div class="col-md-4 pb-3">
+                            @include('components.mbo.objective-card')
+                        </div>
+                    @endforeach
+                </div>
+                <div class="row pagination-row">
+                    <div class="col-md-12">
+                        {{ $objectives->links() }}
+                    </div>
                 </div>
             </div>
         </div>

@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="content-card">
-    <div class="container">
+    <div class="content-card-body container">
         {{ $form->render() }}
     </div>
 </div>

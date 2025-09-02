@@ -4,7 +4,6 @@ namespace App\Models\Business;
 
 use App\Models\BaseModel;
 use App\Models\Core\User;
-use FormForge\Casts\TrixFieldCast;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Sentinel\Models\Role;
@@ -25,6 +24,7 @@ use Sentinel\Models\Role;
  * @property-read int|null $employments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $managers
  * @property-read int|null $managers_count
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department avg(string $column)
@@ -75,6 +75,7 @@ use Sentinel\Models\Role;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Department extends BaseModel
