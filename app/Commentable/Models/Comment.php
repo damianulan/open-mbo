@@ -4,6 +4,7 @@ namespace App\Commentable\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\Auth;
@@ -53,12 +54,27 @@ class Comment extends Model
         'author_type',
         'parent_id',
         'content',
+        'private'
     ];
 
     protected $casts = [
+        'private' => 'boolean',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    protected static function booted(): void
+    {
+        static::addGlobalScope('public', function (Builder $builder) {
+            $builder->where(function (Builder $query) {
+                $query->where('private', 0)
+                    ->orWhere(function (Builder $query) {
+                        $query->where('author_id', Auth::user()->id)
+                            ->where('author_type', Auth::user()->getMorphClass());
+                    });
+            });
+        });
+    }
 
     public function subject(): MorphTo
     {
@@ -73,6 +89,11 @@ class Comment extends Model
     public function responses(): HasMany
     {
         return $this->hasMany(self::class, 'parent_id');
+    }
+
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(self::class, 'parent_id');
     }
 
     public function isMine(): bool

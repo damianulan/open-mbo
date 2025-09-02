@@ -82,7 +82,7 @@
             <div class="content-card-top">
                 <div class="content-card-header">
                     <i class="bi-chat-left-quote me-2"></i>
-                    <span>{{ __('Komentarze') }}</span>
+                    <span>{{ __('Notatki') }}</span>
                 </div>
             </div>
             <div class="content-card-body">

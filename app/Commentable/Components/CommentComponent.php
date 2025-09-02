@@ -13,15 +13,11 @@ class CommentComponent extends Component
 {
     public Model $subject;
 
-    protected Collection $comments;
 
     public function mount(Model $subject)
     {
         $this->subject = $subject;
-        $this->comments = $subject->comments()->direct()->get();
     }
-
-    public function boot() {}
 
     #[On('commentable.submit')]
     public function submit(?string $content)
@@ -49,12 +45,12 @@ class CommentComponent extends Component
 
     public function flashSuccess(string $message)
     {
-        $this->js('$.success("'.$message.'")');
+        $this->js('$.success("' . $message . '")');
     }
 
     public function flashError(string $message)
     {
-        $this->js('$.error("'.$message.'")');
+        $this->js('$.error("' . $message . '")');
     }
 
     public function render()
