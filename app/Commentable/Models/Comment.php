@@ -78,6 +78,11 @@ class Comment extends Model
         return $this->author_id == Auth::user()->id && $this->author_type == Auth::user()->getMorphClass();
     }
 
+    public function scopeMine(Builder $query): void
+    {
+        $query->where('author_id', Auth::user()->id)->where('author_type', Auth::user()->getMorphClass());
+    }
+
     public function scopeDirect(Builder $query): void
     {
         $query->whereNull('parent_id');

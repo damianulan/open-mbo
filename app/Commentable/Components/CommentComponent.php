@@ -21,10 +21,7 @@ class CommentComponent extends Component
         $this->comments = $subject->comments()->direct()->get();
     }
 
-    public function boot()
-    {
-        $this->dispatch('commentable.initialize.quill');
-    }
+    public function boot() {}
 
     #[On('commentable.submit')]
     public function submit(?string $content)
@@ -42,10 +39,13 @@ class CommentComponent extends Component
             'content' => $content,
         ]);
 
-        $this->flashSuccess($content);
+        $this->dispatch('commentable.initialize.quill');
     }
 
-    public function delete() {}
+    public function delete($id)
+    {
+        Comment::mine()->find($id)->delete();
+    }
 
     public function flashSuccess(string $message)
     {

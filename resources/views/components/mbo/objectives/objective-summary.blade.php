@@ -46,11 +46,6 @@
                 <span>{{ float_view($objective->award) . '' . __('globals.pnts') }}</span>
             </div>
         @endif
-        @if($objective->deadline)
-            <div data-tippy-content="{{ __('forms.mbo.objectives.deadline') }}">
-                <span class="badge {{ $objective->isOverdued() ? 'bg-'.$warning:'bg-secondary' }}">{{ $objective->deadline }}</span>
-            </div>
-        @endif
         @if($userObjective->exists)
             <div class="ms-auto" data-tippy-content="{{ __('forms.mbo.objectives.users.realization') }}">
                 <i class="bi-check-circle"></i>
@@ -62,9 +57,18 @@
             </div>
         @endif
     </div>
+    <div class="content-card-icons">
+        @if($objective->deadline)
+            <div class="mb-3" data-tippy-content="{{ __('forms.mbo.objectives.deadline') }}">
+                <span class="badge {{ $objective->isOverdued() ? 'bg-'.$warning:'bg-secondary' }}">{{ $objective->deadline }}</span>
+            </div>
+        @endif
+    </div>
     @if($userObjective->exists)
         <div class="content-card-icons mb-3">
-            <div class="badge badge-{{ $userObjective->status }} fs-6" data-tippy-content="{{ __('forms.mbo.objectives.status') }}">{{ __('mbo.objective'). ' ' .strtolower($userObjective->getStatusLabel()) }}</div>
+            @if($userObjective->exists)
+                <div class="badge badge-{{ $userObjective->status }} fs-6" data-tippy-content="{{ __('forms.mbo.objectives.status') }}">{{ __('mbo.objective'). ' ' .strtolower($userObjective->getStatusLabel()) }}</div>
+            @endif
         </div>
         <div class="content-card-btns">
             @if($userObjective->canBePassed())
