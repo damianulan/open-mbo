@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
-use Illuminate\Support\Str;
 
 class CommentComponent extends Component
 {
@@ -24,7 +23,7 @@ class CommentComponent extends Component
     {
         $user = Auth::user();
 
-        if (!empty($content)) {
+        if (! empty($content)) {
             $this->subject->comments()->create([
                 'author_id' => $user->id,
                 'author_type' => $user->getMorphClass(),
@@ -43,12 +42,12 @@ class CommentComponent extends Component
 
     public function flashSuccess(string $message)
     {
-        $this->js('$.success("' . $message . '")');
+        $this->js('$.success("'.$message.'")');
     }
 
     public function flashError(string $message)
     {
-        $this->js('$.error("' . $message . '")');
+        $this->js('$.error("'.$message.'")');
     }
 
     public function render()

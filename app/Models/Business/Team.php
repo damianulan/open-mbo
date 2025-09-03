@@ -2,17 +2,17 @@
 
 namespace App\Models\Business;
 
+use App\Casts\FormattedText;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use App\Casts\FormattedText;
 
 /**
  * @property string $id
  * @property string $leader_id
  * @property string $name
- * @property string|null $description
+ * @property mixed|null $description
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -21,6 +21,7 @@ use App\Casts\FormattedText;
  * @property-read User $leader
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $users
  * @property-read int|null $users_count
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team avg(string $column)
@@ -71,6 +72,7 @@ use App\Casts\FormattedText;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Team extends BaseModel

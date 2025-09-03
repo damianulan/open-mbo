@@ -2,12 +2,12 @@
 
 namespace App\Commentable\Models;
 
+use App\Commentable\Casts\CommentContent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Scout\Searchable;
-use App\Commentable\Casts\CommentContent;
 
 /**
  * @property int $id
@@ -22,6 +22,7 @@ use App\Commentable\Casts\CommentContent;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read Model|\Eloquent $author
  * @property-read Model|\Eloquent $subject
+ *
  * @method static Builder<static>|Comment authoredBy(\Illuminate\Database\Eloquent\Model $author)
  * @method static Builder<static>|Comment mine()
  * @method static Builder<static>|Comment newModelQuery()
@@ -37,6 +38,7 @@ use App\Commentable\Casts\CommentContent;
  * @method static Builder<static>|Comment whereSubjectId($value)
  * @method static Builder<static>|Comment whereSubjectType($value)
  * @method static Builder<static>|Comment whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class Comment extends Model

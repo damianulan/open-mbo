@@ -2,16 +2,16 @@
 
 namespace App\Models\Business;
 
+use App\Casts\FormattedText;
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Casts\FormattedText;
 
 /**
  * @property string $id
  * @property string $name
  * @property string $shortname
- * @property string|null $description
+ * @property mixed|null $description
  * @property string|null $logo
  * @property \Illuminate\Support\Carbon|null $founded
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -23,6 +23,7 @@ use App\Casts\FormattedText;
  * @property-read int|null $employments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\Location> $locations
  * @property-read int|null $locations_count
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company avg(string $column)
@@ -76,6 +77,7 @@ use App\Casts\FormattedText;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Company extends BaseModel

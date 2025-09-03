@@ -109,7 +109,7 @@ return [
 
     'date_format' => env('DATEFORMAT', 'Y-m-d'),
     'time_format' => env('TIMEFORMAT', 'H:i'),
-    'datetime_format' =>  env('DATEFORMAT', 'Y-m-d') . ' ' . env('TIMEFORMAT', 'H:i'),
+    'datetime_format' => env('DATEFORMAT', 'Y-m-d').' '.env('TIMEFORMAT', 'H:i'),
 
     /*
     |--------------------------------------------------------------------------

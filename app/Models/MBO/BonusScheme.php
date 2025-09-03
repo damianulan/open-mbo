@@ -2,16 +2,16 @@
 
 namespace App\Models\MBO;
 
+use App\Casts\FormattedText;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use App\Casts\FormattedText;
 
 /**
  * @property string $id
  * @property string $name
- * @property string|null $description
+ * @property mixed|null $description
  * @property array<array-key, mixed> $options
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -22,6 +22,7 @@ use App\Casts\FormattedText;
  * @property-read int|null $user_schemes_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $users
  * @property-read int|null $users_count
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme avg(string $column)
@@ -72,6 +73,7 @@ use App\Casts\FormattedText;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class BonusScheme extends BaseModel

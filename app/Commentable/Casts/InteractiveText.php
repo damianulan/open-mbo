@@ -2,16 +2,18 @@
 
 namespace App\Commentable\Casts;
 
+use App\Models\Core\User;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
-use App\Models\Core\User;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 class InteractiveText implements CastsAttributes
 {
     private const MODE_GET = 'get';
+
     private const MODE_SET = 'set';
+
     private const MODE_NORMAL = 'normal';
 
     /**
@@ -22,6 +24,7 @@ class InteractiveText implements CastsAttributes
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
         $value = self::getInteractive($value);
+
         return $value;
     }
 
@@ -33,6 +36,7 @@ class InteractiveText implements CastsAttributes
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
         $value = self::setInteractive($value);
+
         return $value;
     }
 
@@ -42,6 +46,7 @@ class InteractiveText implements CastsAttributes
         if (Route::has($routeName)) {
             return route($routeName, $id);
         }
+
         return null;
     }
 
@@ -52,7 +57,7 @@ class InteractiveText implements CastsAttributes
 
     private static function tagPattern(string $name): string
     {
-        return '/<interactive-' . $name . ':([0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})>/i';
+        return '/<interactive-'.$name.':([0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})>/i';
     }
 
     private static function interactiveMentions(string $value, $mode): string
@@ -60,6 +65,7 @@ class InteractiveText implements CastsAttributes
         $pattern = '/@([\p{L}\p{M}]+)\s+([\p{L}\p{M}]+)/u';
 
         if ($mode === self::MODE_SET || $mode === self::MODE_NORMAL) {
+            // dd(preg_match_all($pattern, $value, $matches, PREG_SET_ORDER));
             if (preg_match_all($pattern, $value, $matches, PREG_SET_ORDER)) {
                 foreach ($matches as $match) {
                     $replaceTo = null;
@@ -75,7 +81,7 @@ class InteractiveText implements CastsAttributes
                             } elseif ($mode === self::MODE_NORMAL) {
                                 $route = self::getUserRoute($user->id);
                                 if ($route) {
-                                    $replaceTo = '<a class="user-mention" href="' . $route . '">' . $user->firstname() . ' ' . $user->lastname() . '</a>';
+                                    $replaceTo = '<a class="user-mention" href="'.$route.'">'.$user->firstname().' '.$user->lastname().'</a>';
                                 }
                             }
                         }
@@ -100,7 +106,7 @@ class InteractiveText implements CastsAttributes
                         if ($user) {
                             $route = self::getUserRoute($user->id);
                             if ($route) {
-                                $replaceTo = '<a class="user-mention" href="' . $route . '">' . $user->firstname() . ' ' . $user->lastname() . '</a>';
+                                $replaceTo = '<a class="user-mention" href="'.$route.'">'.$user->firstname().' '.$user->lastname().'</a>';
                             }
                         }
                         $value = Str::replace($search, $replaceTo, $value);

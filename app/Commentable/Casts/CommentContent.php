@@ -5,7 +5,6 @@ namespace App\Commentable\Casts;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use App\Commentable\Casts\InteractiveText;
 
 class CommentContent implements CastsAttributes
 {
@@ -17,6 +16,7 @@ class CommentContent implements CastsAttributes
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
         $value = InteractiveText::getInteractive($value);
+
         return $value;
     }
 
@@ -32,6 +32,7 @@ class CommentContent implements CastsAttributes
         $value = trim($value);
         $value = self::commentQuotation($value);
         $value = InteractiveText::setInteractive($value);
+
         return $value;
     }
 
@@ -46,9 +47,9 @@ class CommentContent implements CastsAttributes
             $end_after = ' </blockquote></div>';
 
             $quote_inner = Str::between($value, $start, $end);
-            if (!empty($quote_inner)) {
-                $quote_old = $start . $quote_inner . $end;
-                $quote = $start_after . $quote_inner . $end_after;
+            if (! empty($quote_inner)) {
+                $quote_old = $start.$quote_inner.$end;
+                $quote = $start_after.$quote_inner.$end_after;
 
                 $value = Str::replace($quote_old, $quote, $value);
             }

@@ -2,14 +2,14 @@
 
 namespace App\Models\Business;
 
+use App\Casts\FormattedText;
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Casts\FormattedText;
 
 /**
  * @property string $id
  * @property string $name
- * @property string|null $description
+ * @property mixed|null $description
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -17,6 +17,7 @@ use App\Casts\FormattedText;
  * @property-read int|null $activities_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\UserEmployment> $employments
  * @property-read int|null $employments_count
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position avg(string $column)
@@ -66,6 +67,7 @@ use App\Casts\FormattedText;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Position withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Position withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Position extends BaseModel

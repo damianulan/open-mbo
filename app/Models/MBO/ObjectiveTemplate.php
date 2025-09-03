@@ -2,16 +2,16 @@
 
 namespace App\Models\MBO;
 
+use App\Casts\FormattedText;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Models\Scopes\MBO\ObjectiveTemplateScope;
-use App\Casts\FormattedText;
 
 /**
  * @property string $id
  * @property string|null $category_id
  * @property string $name
- * @property string|null $description
+ * @property mixed|null $description
  * @property string|null $award Max points to be awarded for objective completion
  * @property bool $draft
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -22,6 +22,7 @@ use App\Casts\FormattedText;
  * @property-read \App\Models\MBO\ObjectiveTemplateCategory|null $category
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\Objective> $objectives
  * @property-read int|null $objectives_count
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate avg(string $column)
@@ -75,6 +76,7 @@ use App\Casts\FormattedText;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class ObjectiveTemplate extends BaseModel
