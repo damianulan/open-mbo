@@ -5,6 +5,7 @@ namespace App\Casts;
 use App\Commentable\Casts\InteractiveText;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class FormattedText implements CastsAttributes
 {
@@ -27,7 +28,10 @@ class FormattedText implements CastsAttributes
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        $value = InteractiveText::setInteractive($value);
+        $value = Str::replace('<p><br></p>', '', $value);
+        $value = Str::replace('<p></p>', '', $value);
+
+        $value = InteractiveText::setInteractive($value, $model);
 
         return $value;
     }
