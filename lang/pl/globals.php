@@ -21,6 +21,7 @@ return [
     'hello' => 'Cześć',
     'not_applicable' => 'Nie dotyczy',
     'pnts' => 'pkt',
+    'privately' => 'Prywatnie',
 
     'column' => 'Kolumna',
     'columns' => 'Kolumny',

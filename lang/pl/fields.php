@@ -21,6 +21,9 @@ return [
     'created_at' => 'Utworzono',
     'updated_at' => 'Zaktualizowano',
 
+    'quote_authored' => ' napisał(a)',
+    'quote_at' => 'o',
+
     // Enumerations
     'gender' => [
         Gender::MALE => 'Mężczyzna',

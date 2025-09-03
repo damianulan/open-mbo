@@ -107,10 +107,9 @@ return [
         'en',
     ],
 
-    'date_format' => 'Y-m-d',
-    'time_format' => 'H:i',
-    'datetime_format' => 'Y-m-d H:i',
-    'from_datetime_format' => 'Y-m-d H:i:s',
+    'date_format' => env('DATEFORMAT', 'Y-m-d'),
+    'time_format' => env('TIMEFORMAT', 'H:i'),
+    'datetime_format' =>  env('DATEFORMAT', 'Y-m-d') . ' ' . env('TIMEFORMAT', 'H:i'),
 
     /*
     |--------------------------------------------------------------------------

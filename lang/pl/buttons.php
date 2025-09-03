@@ -37,6 +37,8 @@ return [
     'impersonate' => 'Zaloguj jako',
     'impersonate_out' => 'Wyloguj się jako',
     'enrol_users' => 'Zapisz użytkowników',
+    'quote' => 'Cytuj',
+    'send' => 'Wyślij',
 
     'terminate_campaign' => 'Zawieś kampanię',
     'resume_campaign' => 'Wznów kampanię',

@@ -29,12 +29,9 @@ use Lucent\Support\Traits\Dispatcher;
  * @property-read \App\Models\MBO\Campaign|null $campaign
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Commentable\Models\Comment> $comments
  * @property-read int|null $comments_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Commentable\Models\Comment> $comments_direct
- * @property-read int|null $comments_direct_count
  * @property-read \App\Models\MBO\ObjectiveTemplate|null $template
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserObjective> $user_assignments
  * @property-read int|null $user_assignments_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective avg(string $column)
@@ -92,7 +89,6 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static Builder<static>|Objective withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective withoutCache()
  * @method static Builder<static>|Objective withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Objective extends BaseModel

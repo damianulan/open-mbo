@@ -15,8 +15,6 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->uuidMorphs('subject');
             $table->uuidMorphs('author');
-            $table->bigInteger('parent_id')->unsigned()->nullable();
-            $table->foreign('parent_id')->references('id')->on('commentables');
             $table->longText('content');
             $table->boolean('private')->default(false);
             $table->timestamps();

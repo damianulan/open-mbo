@@ -47,7 +47,6 @@ use Lucent\Support\Traits\Dispatcher;
  * @property-read mixed $timestart
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserCampaign> $user_campaigns
  * @property-read int|null $user_campaigns_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign avg(string $column)
@@ -115,7 +114,6 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static Builder<static>|Campaign withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign withoutCache()
  * @method static Builder<static>|Campaign withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Campaign extends BaseModel
@@ -261,8 +259,8 @@ class Campaign extends BaseModel
         $now = Carbon::now();
 
         foreach (CampaignStage::softValues() as $tmp) {
-            $prop_start = $tmp.'_from';
-            $prop_end = $tmp.'_to';
+            $prop_start = $tmp . '_from';
+            $prop_end = $tmp . '_to';
             $start = Carbon::parse($this->$prop_start);
             $end = Carbon::parse($this->$prop_end);
 
@@ -290,10 +288,10 @@ class Campaign extends BaseModel
         if ($this->stage === CampaignStage::IN_PROGRESS) {
             $softStage = null;
             foreach (CampaignStage::softValues() as $tmp) {
-                $prop_start = $tmp.'_from';
-                $prop_end = $tmp.'_to';
-                $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_start);
-                $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->$prop_end);
+                $prop_start = $tmp . '_from';
+                $prop_end = $tmp . '_to';
+                $start = Carbon::parse($this->$prop_start);
+                $end = Carbon::parse($this->$prop_end);
 
                 if ($now->between($start, $end)) {
                     $softStage = $tmp;
@@ -314,8 +312,8 @@ class Campaign extends BaseModel
     public function open(): bool
     {
         $now = Carbon::now();
-        $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateStart());
-        $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateEnd());
+        $start = Carbon::parse($this->dateStart());
+        $end = Carbon::parse($this->dateEnd());
 
         return $now->between($start, $end) && ! $this->draft;
     }
@@ -328,7 +326,7 @@ class Campaign extends BaseModel
         }
 
         $now = Carbon::now();
-        $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateEnd());
+        $end = Carbon::parse($this->dateEnd());
 
         return $now->greaterThan($end) && ! $this->manual;
     }
@@ -336,8 +334,8 @@ class Campaign extends BaseModel
     public function getProgress(): int
     {
         $now = Carbon::now();
-        $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateStart());
-        $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateEnd());
+        $start = Carbon::parse($this->dateStart());
+        $end = Carbon::parse($this->dateEnd());
         if ($now >= $start) {
             $fullDiff = $start->diffInDays($end, false);
             $diff = abs($now->diffInDays($start));
@@ -362,14 +360,14 @@ class Campaign extends BaseModel
     protected function timestart(): Attribute
     {
         return Attribute::make(
-            get: fn () => Carbon::parse($this->definition_from),
+            get: fn() => Carbon::parse($this->definition_from),
         );
     }
 
     protected function timeend(): Attribute
     {
         return Attribute::make(
-            get: fn () => Carbon::parse($this->self_evaluation_to),
+            get: fn() => Carbon::parse($this->self_evaluation_to),
         );
     }
 
@@ -399,14 +397,14 @@ class Campaign extends BaseModel
 
     public function dateStartView(): string
     {
-        $start = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateStart());
+        $start = Carbon::parse($this->dateStart());
 
         return $start->format(config('app.date_format'));
     }
 
     public function dateEndView(): string
     {
-        $end = Carbon::createFromFormat(config('app.from_datetime_format'), $this->dateEnd());
+        $end = Carbon::parse($this->dateEnd());
 
         return $end->format(config('app.date_format'));
     }

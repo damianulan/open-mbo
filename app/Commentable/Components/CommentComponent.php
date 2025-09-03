@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Illuminate\Support\Str;
 
 class CommentComponent extends Component
 {
@@ -15,25 +16,24 @@ class CommentComponent extends Component
     public function mount(Model $subject)
     {
         $this->subject = $subject;
+        Comment::all();
     }
 
     #[On('commentable.submit')]
-    public function submit(?string $content)
+    public function submit(?string $content, bool $private = false)
     {
         $user = Auth::user();
 
-        $comment = new Comment;
-        $comment->author_id = $user->id;
-        $comment->author_type = $user->getMorphClass();
-        $comment->content = $content;
+        if (!empty($content)) {
+            $this->subject->comments()->create([
+                'author_id' => $user->id,
+                'author_type' => $user->getMorphClass(),
+                'content' => $content,
+                'private' => $private,
+            ]);
 
-        $this->subject->comments()->create([
-            'author_id' => $user->id,
-            'author_type' => $user->getMorphClass(),
-            'content' => $content,
-        ]);
-
-        $this->dispatch('commentable.initialize.quill');
+            $this->dispatch('commentable.initialize.quill');
+        }
     }
 
     public function delete($id)
@@ -43,12 +43,12 @@ class CommentComponent extends Component
 
     public function flashSuccess(string $message)
     {
-        $this->js('$.success("'.$message.'")');
+        $this->js('$.success("' . $message . '")');
     }
 
     public function flashError(string $message)
     {
-        $this->js('$.error("'.$message.'")');
+        $this->js('$.error("' . $message . '")');
     }
 
     public function render()

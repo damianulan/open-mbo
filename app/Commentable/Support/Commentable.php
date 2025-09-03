@@ -11,9 +11,4 @@ trait Commentable
     {
         return $this->morphMany(Comment::class, 'subject');
     }
-
-    public function comments_direct(): MorphMany
-    {
-        return $this->morphMany(Comment::class, 'subject')->direct();
-    }
 }
