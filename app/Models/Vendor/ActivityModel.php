@@ -2,9 +2,9 @@
 
 namespace App\Models\Vendor;
 
-use Spatie\Activitylog\Models\Activity;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property int $id
@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Auth;
  * @property-read \Illuminate\Database\Eloquent\Model|null $causer
  * @property-read \Illuminate\Support\Collection $changes
  * @property-read \Illuminate\Database\Eloquent\Model|null $subject
+ *
  * @method static Builder<static>|ActivityModel causedBy(\Illuminate\Database\Eloquent\Model $causer)
  * @method static Builder<static>|ActivityModel forBatch(string $batchUuid)
  * @method static Builder<static>|ActivityModel forEvent(string $event)
@@ -45,11 +46,11 @@ use Illuminate\Support\Facades\Auth;
  * @method static Builder<static>|ActivityModel whereSubjectId($value)
  * @method static Builder<static>|ActivityModel whereSubjectType($value)
  * @method static Builder<static>|ActivityModel whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class ActivityModel extends Activity
 {
-
     public function scopeLogger(Builder $query): void
     {
         $query->whereIn('activity_log.event', ['viewed', 'created', 'updated', 'deleted', 'impersonated', 'auth_attempt_success', 'auth_attempt_fail']);

@@ -210,6 +210,7 @@ class CustomDataTable extends DataTable
                 'data' => $data->$relation,
             ]);
         }
+
         return '';
     }
 }

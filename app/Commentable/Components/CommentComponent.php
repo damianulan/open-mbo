@@ -3,7 +3,6 @@
 namespace App\Commentable\Components;
 
 use App\Commentable\Models\Comment;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
@@ -12,7 +11,6 @@ use Livewire\Component;
 class CommentComponent extends Component
 {
     public Model $subject;
-
 
     public function mount(Model $subject)
     {
@@ -45,12 +43,12 @@ class CommentComponent extends Component
 
     public function flashSuccess(string $message)
     {
-        $this->js('$.success("' . $message . '")');
+        $this->js('$.success("'.$message.'")');
     }
 
     public function flashError(string $message)
     {
-        $this->js('$.error("' . $message . '")');
+        $this->js('$.error("'.$message.'")');
     }
 
     public function render()

@@ -2,12 +2,11 @@
 
 namespace App\DataTables\Settings;
 
+use App\Models\Vendor\ActivityModel;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Carbon;
-use App\Models\Vendor\ActivityModel;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Column;
-use App\DataTables\Settings\BaseLogDataTable;
 
 class LogsDataTable extends BaseLogDataTable
 {
@@ -30,7 +29,7 @@ class LogsDataTable extends BaseLogDataTable
             ->addColumn('event', function ($data) {
                 return view('components.datatables.badge', [
                     'color' => $this->getEventColor($data->event),
-                    'text' => __('logging.events.' . $data->event),
+                    'text' => __('logging.events.'.$data->event),
                 ]);
             })
             ->addColumn('subject', function ($data) {
@@ -129,7 +128,7 @@ class LogsDataTable extends BaseLogDataTable
      */
     protected function filename(): string
     {
-        return 'Logs_' . date('YmdHis');
+        return 'Logs_'.date('YmdHis');
     }
 
     private function getEventColor(string $event): string

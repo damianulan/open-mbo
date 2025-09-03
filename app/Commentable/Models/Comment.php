@@ -26,6 +26,7 @@ use Laravel\Scout\Searchable;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Comment> $responses
  * @property-read int|null $responses_count
  * @property-read Model|\Eloquent $subject
+ *
  * @method static Builder<static>|Comment authoredBy(\Illuminate\Database\Eloquent\Model $author)
  * @method static Builder<static>|Comment direct()
  * @method static Builder<static>|Comment mine()
@@ -42,6 +43,7 @@ use Laravel\Scout\Searchable;
  * @method static Builder<static>|Comment whereSubjectId($value)
  * @method static Builder<static>|Comment whereSubjectType($value)
  * @method static Builder<static>|Comment whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class Comment extends Model
@@ -57,7 +59,7 @@ class Comment extends Model
         'author_type',
         'parent_id',
         'content',
-        'private'
+        'private',
     ];
 
     protected $casts = [
