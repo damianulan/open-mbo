@@ -1,5 +1,5 @@
 <div>
-    <div class="commentable">
+    <div class="commentable" wire:poll.10000ms>
         @foreach($this->subject->comments as $comment)
             <div class="comment{{ $comment->isMine() ? ' my-comment' : '' }}" wire:key="{{ str()->random(50) }}">
                 <div class="comment-group" wire:transition.opacity.duration.1000ms >
