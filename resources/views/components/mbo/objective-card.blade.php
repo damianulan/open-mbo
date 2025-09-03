@@ -1,5 +1,5 @@
 
-<div class="card card-url card-bg" data-url="{{ route('mbo.templates.edit', $objective->id) }}">
+<div class="card card-url card-bg" data-url="{{ route('templates.edit', $objective->id) }}">
     <div class="card-body">
         <div class="card-top">
             <div class="card-title" data-tippy-content="{{ $objective->name }}">

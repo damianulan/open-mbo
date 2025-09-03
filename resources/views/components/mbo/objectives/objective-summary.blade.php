@@ -73,10 +73,10 @@
             </div>
             <div class="content-card-btns">
                 @if($userObjective->canBePassed())
-                    <a href="{{ route('mbo.objectives.assignment.pass', $userObjective->id) }}" class="btn btn-outline-primary"><i class="bi-btn bi-check2-circle"></i>{{ __('mbo.objectives.pass') }}</a>
+                    <a href="{{ route('objectives.assignment.pass', $userObjective->id) }}" class="btn btn-outline-primary"><i class="bi-btn bi-check2-circle"></i>{{ __('mbo.objectives.pass') }}</a>
                 @endif
                 @if($userObjective->canBeFailed())
-                    <a href="{{ route('mbo.objectives.assignment.fail', $userObjective->id) }}" class="btn btn-outline-primary"><i class="bi-btn bi-x-lg"></i>{{ __('mbo.objectives.fail') }}</a>
+                    <a href="{{ route('objectives.assignment.fail', $userObjective->id) }}" class="btn btn-outline-primary"><i class="bi-btn bi-x-lg"></i>{{ __('mbo.objectives.fail') }}</a>
                 @endif
             </div>
         @endif

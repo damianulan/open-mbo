@@ -47,7 +47,6 @@ use Lucent\Support\Traits\Dispatcher;
  * @property-read mixed $timestart
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserCampaign> $user_campaigns
  * @property-read int|null $user_campaigns_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign avg(string $column)
@@ -115,7 +114,6 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static Builder<static>|Campaign withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign withoutCache()
  * @method static Builder<static>|Campaign withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Campaign extends BaseModel

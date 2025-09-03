@@ -47,7 +47,7 @@ $('select[name="template_id"]').on('change', function() {
 
 $('#modal_save').on('click', function() {
     @if (isset($id))
-        $.ajaxForm('{{ route('mbo.objectives.update', $id) }}', 'objective_edit', function(response) {
+        $.ajaxForm('{{ route('objectives.update', $id) }}', 'objective_edit', function(response) {
             $.success(response.message, null, function() {
                 window.location.reload();
             })
@@ -56,7 +56,7 @@ $('#modal_save').on('click', function() {
 
         });
     @else
-        $.ajaxForm('{{ route('mbo.objectives.store') }}', 'objective_edit', function(response) {
+        $.ajaxForm('{{ route('objectives.store') }}', 'objective_edit', function(response) {
             $.success(response.message, null, function() {
                 window.location.reload();
             })

@@ -2,14 +2,14 @@
 
 namespace App\DataTables\Settings;
 
-use App\Support\DataTables\CustomDataTable;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Carbon;
-use Spatie\Activitylog\Models\Activity;
+use App\Models\Vendor\ActivityModel;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Column;
+use App\DataTables\Settings\BaseLogDataTable;
 
-class LogsDataTable extends CustomDataTable
+class LogsDataTable extends BaseLogDataTable
 {
     protected $id = 'logs_table';
 
@@ -25,14 +25,12 @@ class LogsDataTable extends CustomDataTable
 
         return (new EloquentDataTable($query))
             ->addColumn('causer', function ($data) {
-                return view('components.datatables.username_link', [
-                    'data' => $data->causer,
-                ]);
+                return $this->userView($data, 'causer');
             })
             ->addColumn('event', function ($data) {
                 return view('components.datatables.badge', [
                     'color' => $this->getEventColor($data->event),
-                    'text' => __('logging.events.'.$data->event),
+                    'text' => __('logging.events.' . $data->event),
                 ]);
             })
             ->addColumn('subject', function ($data) {
@@ -58,21 +56,14 @@ class LogsDataTable extends CustomDataTable
                             // ]);
                         }
                     } else {
-                        return view('components.datatables.link', [
-                            'route' => route(__('logging.route_mapping.'.$data->subject_type), $data->subject_id),
-                            'text' => $data->subject->name ?? null,
-                        ]);
+                        return $this->subjectView($data);
                     }
                 } else {
                     return __('globals.not_applicable');
                 }
             })
             ->addColumn('subject_type', function ($data) {
-                if ($data->subject) {
-                    return __('logging.model_mapping.'.$data->subject_type);
-                } else {
-                    return __('globals.not_applicable');
-                }
+                return $this->subjectTypeView($data);
             })
             ->orderColumn('causer', function ($query, $order) {
                 $query->orderBy('firstname', $order);
@@ -92,12 +83,12 @@ class LogsDataTable extends CustomDataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(Activity $model): QueryBuilder
+    public function query(ActivityModel $model): QueryBuilder
     {
         return $model->join('users', 'users.id', '=', 'activity_log.causer_id')
             ->join('user_profiles', 'user_profiles.user_id', '=', 'users.id')
             ->select('activity_log.*', 'user_profiles.firstname', 'user_profiles.lastname')
-            ->whereIn('activity_log.event', ['viewed', 'created', 'updated', 'deleted', 'impersonated', 'auth_attempt_success', 'auth_attempt_fail']);
+            ->logger();
     }
 
     protected function defaultColumns(): array
@@ -138,7 +129,7 @@ class LogsDataTable extends CustomDataTable
      */
     protected function filename(): string
     {
-        return 'Logs_'.date('YmdHis');
+        return 'Logs_' . date('YmdHis');
     }
 
     private function getEventColor(string $event): string

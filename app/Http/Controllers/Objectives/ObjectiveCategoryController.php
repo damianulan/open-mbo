@@ -42,7 +42,7 @@ class ObjectiveCategoryController extends MBOController
         if ($objective->save()) {
             $objective->refreshCoordinators($user_ids);
 
-            return redirect()->route('mbo.categories.index')->with('success', __('alerts.objective_categories.success.create'));
+            return redirect()->route('categories.index')->with('success', __('alerts.objective_categories.success.create'));
         }
 
         return redirect()->back()->with('error', __('alerts.error.operation'));
@@ -80,7 +80,7 @@ class ObjectiveCategoryController extends MBOController
         if ($objective->update()) {
             $objective->refreshCoordinators($user_ids);
 
-            return redirect()->route('mbo.categories.index')->with('success', __('alerts.objective_categories.success.edit'));
+            return redirect()->route('categories.index')->with('success', __('alerts.objective_categories.success.edit'));
         }
 
         return redirect()->back()->with('error', __('alerts.error.operation'));
@@ -93,7 +93,7 @@ class ObjectiveCategoryController extends MBOController
     {
         $objective = ObjectiveTemplateCategory::findOrFail($id);
         if ($objective->delete()) {
-            return redirect()->route('mbo.templates.index')->with('success', __('alerts.objective_categories.success.delete'));
+            return redirect()->route('templates.index')->with('success', __('alerts.objective_categories.success.delete'));
         }
 
         return redirect()->back()->with('error', __('alerts.error.operation'));

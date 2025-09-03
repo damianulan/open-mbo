@@ -13,11 +13,11 @@ class ObjectiveTemplateEditForm extends Form
 {
     public static function definition(Request $request, $model = null): FormBuilder
     {
-        $route = route('mbo.templates.store');
+        $route = route('templates.store');
         $method = 'POST';
         if (! is_null($model)) {
             $method = 'PUT';
-            $route = route('mbo.templates.update', $model->id);
+            $route = route('templates.update', $model->id);
         }
 
         return FormBuilder::boot($request, $method, $route, 'campaign_edit')

@@ -202,4 +202,14 @@ class CustomDataTable extends DataTable
         /** @phpstan-ignore-next-line  */
         return view($view, $data, $mergeData)->with($this->dataTableVariable, $this->getHtmlBuilder());
     }
+
+    public function userView($data, $relation)
+    {
+        if ($data->$relation) {
+            return view('components.datatables.username_link', [
+                'data' => $data->$relation,
+            ]);
+        }
+        return '';
+    }
 }

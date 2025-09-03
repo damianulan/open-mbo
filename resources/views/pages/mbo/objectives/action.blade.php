@@ -1,4 +1,4 @@
-<a class="action-btn" href="{{ route('mbo.objectives.show', $data->id) }}" title="{{ __('buttons.summary') }}">
+<a class="action-btn" href="{{ route('objectives.show', $data->id) }}" title="{{ __('buttons.summary') }}">
     <i class="bi bi-eye-fill me-1"></i>
 </a>
 @if($data->campaign)
@@ -13,7 +13,7 @@
     <i class="bi bi-person-fill-up me-1"></i>
 </a>
 @if($data->canBeDeleted())
-<a class="action-btn swal-confirm" href="{{ route('mbo.objectives.delete', $data->id) }}" title="{{ __('buttons.delete') }}" data-swal-text="{{ __('alerts.objectives.info.delete') }}">
+<a class="action-btn swal-confirm" href="{{ route('objectives.delete', $data->id) }}" title="{{ __('buttons.delete') }}" data-swal-text="{{ __('alerts.objectives.info.delete') }}">
     <i class="bi bi-trash-fill"></i>
 </a>
 @endif

@@ -86,23 +86,24 @@ return [
 
     'mbo' => [
         'index' => 'Zarządzanie celami',
-        'objectives' => [
-            'index' => 'Cele',
-            'create' => 'Tworzenie celu',
-            'edit' => 'Modyfikacja celu',
+    ],
 
-        ],
-        'templates' => [
-            'index' => 'Szablony celów',
-            'create' => 'Tworzenie szablonu celu',
-            'edit' => 'Modyfikacja szablonu celu',
+    'objectives' => [
+        'index' => 'Cele',
+        'create' => 'Tworzenie celu',
+        'edit' => 'Modyfikacja celu',
 
-        ],
-        'categories' => [
-            'index' => 'Kategorie celów',
-            'create' => 'Tworzenie kategorii MBO',
-            'edit' => 'Modyfikacja kategorii MBO',
-        ],
+    ],
+    'templates' => [
+        'index' => 'Szablony celów',
+        'create' => 'Tworzenie szablonu celu',
+        'edit' => 'Modyfikacja szablonu celu',
+
+    ],
+    'categories' => [
+        'index' => 'Kategorie celów',
+        'create' => 'Tworzenie kategorii MBO',
+        'edit' => 'Modyfikacja kategorii MBO',
     ],
 
     'reports' => [

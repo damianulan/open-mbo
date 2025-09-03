@@ -46,7 +46,7 @@ class ObjectiveTemplateController extends MBOController
         $objective = ObjectiveTemplate::fillFromRequest($request);
 
         if ($objective->save()) {
-            return redirect()->route('mbo.templates.index')->with('success', __('alerts.objective_template.success.create'));
+            return redirect()->route('templates.index')->with('success', __('alerts.objective_template.success.create'));
         }
 
         return redirect()->back()->with('error', __('alerts.error.operation'));
@@ -90,7 +90,7 @@ class ObjectiveTemplateController extends MBOController
         $form::validate($request, $id);
         $objective = ObjectiveTemplate::fillFromRequest($request, $id);
         if ($objective->update()) {
-            return redirect()->route('mbo.templates.index')->with('success', __('alerts.objective_template.success.edit'));
+            return redirect()->route('templates.index')->with('success', __('alerts.objective_template.success.edit'));
         }
 
         return redirect()->back()->with('error', __('alerts.error.operation'));
@@ -100,7 +100,7 @@ class ObjectiveTemplateController extends MBOController
     {
         $objective = ObjectiveTemplate::checkAccess()->findOrFail($id);
         if ($objective->delete()) {
-            return redirect()->route('mbo.templates.index')->with('success', __('alerts.objective_template.success.delete'));
+            return redirect()->route('templates.index')->with('success', __('alerts.objective_template.success.delete'));
         }
 
         return redirect()->back()->with('error', __('alerts.error.operation'));

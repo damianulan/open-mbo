@@ -25,7 +25,7 @@ $(document).ready(function() {
 
 $('#modal_save').on('click', function() {
     @if (isset($id))
-        $.ajaxForm('{{ route('mbo.objectives.assignment.update_evaluation', $id) }}', 'user_objective_edit_realization', function(response) {
+        $.ajaxForm('{{ route('objectives.assignment.update_evaluation', $id) }}', 'user_objective_edit_realization', function(response) {
             $.success(response.message, null, function() {
                 window.location.reload();
             });

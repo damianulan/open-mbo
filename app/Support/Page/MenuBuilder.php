@@ -28,7 +28,7 @@ class MenuBuilder
             MenuItem::make('mbo')
                 ->setTitle(__('menus.mbo.index'))
                 ->setIcon('crosshair')
-                ->setRoute('mbo.objectives.index')
+                ->setRoute('objectives.index')
                 ->permission('mbo-*'),
             // MenuItem::make('reports')
             //     ->setTitle(__('menus.reports.index'))

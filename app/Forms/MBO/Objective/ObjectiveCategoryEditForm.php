@@ -14,7 +14,7 @@ class ObjectiveCategoryEditForm extends Form
 {
     public static function definition(Request $request, $model = null): FormBuilder
     {
-        $route = route('mbo.categories.store');
+        $route = route('categories.store');
         $method = 'POST';
         $selected = [];
         $category = null;
@@ -22,7 +22,7 @@ class ObjectiveCategoryEditForm extends Form
         $shortnameType = 'text';
         if (! is_null($model)) {
             $method = 'PUT';
-            $route = route('mbo.categories.update', $model->id);
+            $route = route('categories.update', $model->id);
             $category = ObjectiveTemplateCategory::find($model->id);
             $selected = $category->coordinators->pluck('id')->toArray();
             if (in_array($category->shortname, ObjectiveTemplateCategory::baseCategories())) {
@@ -43,7 +43,7 @@ class ObjectiveCategoryEditForm extends Form
     {
         return [
             'name' => 'max:50|required',
-            'shortname' => 'max:20|required|unique:objective_template_categories,shortname,'.$model_id,
+            'shortname' => 'max:20|required|unique:objective_template_categories,shortname,' . $model_id,
             'description' => 'max:1000|nullable',
         ];
     }

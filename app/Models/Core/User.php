@@ -74,7 +74,6 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @property-read \App\Models\MBO\UserBonusScheme|null $user_bonus_scheme
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User active()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User drafted()
  * @method static \Database\Factories\Core\UserFactory factory($count = null, $state = [])
@@ -99,7 +98,6 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withRole(...$slugs)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements HasLocalePreference

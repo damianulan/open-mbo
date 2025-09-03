@@ -15,14 +15,14 @@ class MBOController extends AppController
     {
         return MenuBuilder::bootMenubar('mbo', [
             MenuItem::make('objectives')
-                ->setTitle(__('menus.mbo.objectives.index'))
-                ->setRoute('mbo.objectives.index'),
+                ->setTitle(__('menus.objectives.index'))
+                ->setRoute('objectives.index'),
             MenuItem::make('templates')
-                ->setTitle(__('menus.mbo.templates.index'))
-                ->setRoute('mbo.templates.index'),
+                ->setTitle(__('menus.templates.index'))
+                ->setRoute('templates.index'),
             MenuItem::make('categories')
-                ->setTitle(__('menus.mbo.categories.index'))
-                ->setRoute('mbo.categories.index'),
+                ->setTitle(__('menus.categories.index'))
+                ->setRoute('categories.index'),
         ]);
     }
 }

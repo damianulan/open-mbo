@@ -38,10 +38,6 @@
 
     let quill = null;
 
-    $('#add_btn').on('click', function() {
-        console.log(quill.root.innerHTML);
-    });
-
     function initializeQuill(log = false) {
         $('#comment_container').empty();
         $('#comment_container').append('<div id="comment_editor" wire:ignore></div>');
