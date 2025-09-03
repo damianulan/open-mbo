@@ -5,6 +5,7 @@ namespace App\Models\MBO;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Models\Scopes\MBO\ObjectiveTemplateScope;
+use App\Casts\FormattedText;
 
 /**
  * @property string $id
@@ -86,6 +87,7 @@ class ObjectiveTemplate extends BaseModel
     ];
 
     protected $casts = [
+        'description' => FormattedText::class,
         'draft' => 'boolean',
     ];
 

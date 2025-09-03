@@ -4,6 +4,7 @@ namespace App\Models\Business;
 
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Casts\FormattedText;
 
 /**
  * @property string $id
@@ -72,6 +73,10 @@ class Position extends BaseModel
     protected $fillable = [
         'name',
         'description',
+    ];
+
+    protected $casts = [
+        'description' => FormattedText::class,
     ];
 
     public function employments(): HasMany

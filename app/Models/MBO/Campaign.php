@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Collection;
 use Lucent\Support\Traits\Dispatcher;
+use App\Casts\FormattedText;
 
 /**
  * @property string $id
@@ -148,6 +149,7 @@ class Campaign extends BaseModel
     ];
 
     protected $casts = [
+        'description' => FormattedText::class,
         'draft' => 'boolean',
         'manual' => 'boolean',
         'stage' => CampaignStage::class,

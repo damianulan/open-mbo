@@ -5,6 +5,7 @@ namespace App\Models\MBO;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Models\Scopes\MBO\ObjectiveTemplateCategoryScope;
+use App\Casts\FormattedText;
 
 /**
  * @property string $id
@@ -83,6 +84,10 @@ class ObjectiveTemplateCategory extends BaseModel
         'shortname',
         'description',
         'icon',
+    ];
+
+    protected $casts = [
+        'description' => FormattedText::class,
     ];
 
     protected $accessScope = ObjectiveTemplateCategoryScope::class;

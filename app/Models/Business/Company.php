@@ -5,6 +5,7 @@ namespace App\Models\Business;
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Casts\FormattedText;
 
 /**
  * @property string $id
@@ -93,6 +94,7 @@ class Company extends BaseModel
     ];
 
     protected $casts = [
+        'description' => FormattedText::class,
         'founded' => 'date',
         'created_at' => 'datetime',
     ];

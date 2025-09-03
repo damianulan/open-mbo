@@ -6,6 +6,7 @@ use App\Models\BaseModel;
 use App\Models\Core\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use App\Casts\FormattedText;
 
 /**
  * @property string $id
@@ -78,6 +79,10 @@ class Team extends BaseModel
         'leader_id',
         'name',
         'description',
+    ];
+
+    protected $casts = [
+        'description' => FormattedText::class,
     ];
 
     public function users(): BelongsToMany

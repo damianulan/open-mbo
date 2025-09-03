@@ -6,6 +6,7 @@ use App\Models\BaseModel;
 use App\Models\Core\User;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use App\Casts\FormattedText;
 
 /**
  * @property string $id
@@ -82,6 +83,7 @@ class BonusScheme extends BaseModel
     ];
 
     protected $casts = [
+        'description' => FormattedText::class,
         'options' => 'array',
     ];
 

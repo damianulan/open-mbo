@@ -9,6 +9,7 @@ use App\Models\Scopes\MBO\ObjectiveScope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\JoinClause;
 use Lucent\Support\Traits\Dispatcher;
+use App\Casts\FormattedText;
 
 /**
  * @property string $id
@@ -108,6 +109,7 @@ class Objective extends BaseModel
     ];
 
     protected $casts = [
+        'description' => FormattedText::class,
         'draft' => 'boolean',
         'deadline' => 'datetime',
     ];
