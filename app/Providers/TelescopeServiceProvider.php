@@ -45,7 +45,9 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
             $entry->isSlowQuery() ||
             $entry->isException() ||
             $entry->isDump() ||
-            $entry->isEvent();
+            $entry->isEvent() ||
+            $entry->hasMonitoredTag() ||
+            $entry->isGate();
     }
 
     protected function entryProduction(IncomingEntry $entry): bool
