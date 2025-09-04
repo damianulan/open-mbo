@@ -161,11 +161,13 @@ class User extends Authenticatable implements HasLocalePreference
         );
     }
 
+
+
     public function nameView(): string
     {
-        $link = '<span>' . $this->name() . '</span>';
+        $link = '<span>' . $this->name . '</span>';
         if (Auth::user()->can('view', $this)) {
-            $link = '<a href="' . route('users.show', $this->id) . '" class="text-primary">' . $this->name() . '</a>';
+            $link = '<a href="' . route('users.show', $this->id) . '" class="text-primary">' . $this->name . '</a>';
         }
 
         return $link;
