@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
             $schedule->command('backup:run')->daily()->at('01:30');
         }
 
-        $schedule->command(RepoUpdate::class)->everyThirtyMinutes();
+        $schedule->command(RepoUpdate::class)->everyOddHour();
 
         if (config('app.env') === 'development') {
 
@@ -53,7 +53,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

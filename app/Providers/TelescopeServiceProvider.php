@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Gate;
 use Laravel\Telescope\IncomingEntry;
 use Laravel\Telescope\Telescope;
 use Laravel\Telescope\TelescopeApplicationServiceProvider;
+use Spatie\LaravelSettings\Events\LoadingSettings;
+use Spatie\LaravelSettings\Events\SettingsLoaded;
 
 class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
 {
@@ -18,17 +20,49 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
 
         $this->hideSensitiveRequestDetails();
 
-        $isLocal = $this->app->environment('local');
-        $isDevelopment = $this->app->environment('development');
-
-        Telescope::filter(function (IncomingEntry $entry) use ($isLocal, $isDevelopment) {
-            return $isLocal || $isDevelopment ||
-                   $entry->isReportableException() ||
-                   $entry->isFailedRequest() ||
-                   $entry->isFailedJob() ||
-                   $entry->isScheduledTask() ||
-                   $entry->hasMonitoredTag();
+        Telescope::filter(function (IncomingEntry $entry) {
+            $method = 'entry' . ucfirst(config('app.env'));
+            return $this->$method($entry);
         });
+    }
+
+    protected function entryLocal(IncomingEntry $entry): bool
+    {
+        if ($entry->isEvent() && !$this->filterEvents($entry)) {
+            return false;
+        }
+        return true;
+    }
+
+    protected function entryDevelopment(IncomingEntry $entry): bool
+    {
+        if ($entry->isEvent() && !$this->filterEvents($entry)) {
+            return false;
+        }
+        return $entry->isScheduledTask() ||
+            $entry->isFailedRequest() ||
+            $entry->isLog() ||
+            $entry->isSlowQuery() ||
+            $entry->isException() ||
+            $entry->isDump() ||
+            $entry->isEvent();
+    }
+
+    protected function entryProduction(IncomingEntry $entry): bool
+    {
+        return $entry->isReportableException() ||
+            $entry->isFailedRequest() ||
+            $entry->isFailedJob() ||
+            $entry->isScheduledTask() ||
+            $entry->hasMonitoredTag();
+    }
+
+    private function filterEvents(IncomingEntry $entry): bool
+    {
+        return !in_array($entry->content['name'], [
+            SettingsLoaded::class,
+            LoadingSettings::class,
+        ]);
     }
 
     /**
