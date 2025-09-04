@@ -24,8 +24,10 @@ class UserCampaignStageCheck implements ShouldQueueAfterCommit
      */
     public function handle(CampaignUpdated|CampaignViewed $event): void
     {
+        $campaign = $event->campaign;
         if ($event instanceof CampaignUpdated) {
-            $event->campaign->setUserStage();
+            $campaign->setStageAuto()->updateQuietly();
+            $campaign->setUserStage();
         }
     }
 }

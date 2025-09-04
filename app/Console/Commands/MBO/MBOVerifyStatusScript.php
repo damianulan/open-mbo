@@ -46,26 +46,24 @@ class MBOVerifyStatusScript extends BaseCommand
             $this->line('Updating campaigns status ...');
             Campaign::whereActive()->whereManual(0)->chunk(config('app.chunk_default'), function (Collection $campaigns) use ($echo) {
                 foreach ($campaigns as $campaign) {
-                    $campaign->timestamps = false;
                     $campaign->setStageAuto();
                     if ($campaign->isDirty()) {
                         if ($echo) {
-                            $this->line('Updating campaign status for: '.$campaign->name.' - '.$campaign->getOriginal('stage').' => '.$campaign->stage);
+                            $this->line('Updating campaign status for: ' . $campaign->name . ' - ' . $campaign->getOriginal('stage') . ' => ' . $campaign->stage);
                         }
-                        $campaign->update();
+                        $campaign->updateQuietly();
                     }
                 }
             });
             $this->line('Updating objectives status ...');
             UserObjective::whereNotEvaluated()->chunk(config('app.chunk_default'), function (Collection $objectives) use ($echo) {
                 foreach ($objectives as $objective) {
-                    $objective->timestamps = false;
                     $objective->setStatus();
                     if ($objective->isDirty()) {
                         if ($echo) {
-                            $this->line('Updating objective status for: '.$objective->objective->name.' ('.$objective->user->name.') - '.$objective->getOriginal('status').' => '.$objective->status);
+                            $this->line('Updating objective status for: ' . $objective->objective->name . ' (' . $objective->user->name . ') - ' . $objective->getOriginal('status') . ' => ' . $objective->status);
                         }
-                        $objective->update();
+                        $objective->updateQuietly();
                     }
                 }
             });

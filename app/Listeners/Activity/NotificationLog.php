@@ -3,6 +3,7 @@
 namespace App\Listeners\Activity;
 
 use Illuminate\Notifications\Events\NotificationSent;
+use Illuminate\Support\Facades\Log;
 
 class NotificationLog
 {
@@ -21,6 +22,9 @@ class NotificationLog
     {
         $user = $event->notifiable;
         $notification = $event->notification;
+
+        Log::info('notification sent', ['user' => $user, 'notification' => $notification]);
+
         // TODO - check and store wether it was database or mail notification.
 
         // if($user && $notification){

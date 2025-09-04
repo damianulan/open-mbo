@@ -25,13 +25,15 @@ class UserAssignedNotify implements ShouldQueueAfterCommit
      */
     public function handle(UserCampaignAssigned $event): void
     {
-        $coordinators = $event->campaign->coordinators;
+        $campaign = $event->userCampaign->campaign;
+        $coordinators = $campaign->coordinators;
+        $user = $event->userCampaign->user;
         if ($coordinators && $coordinators->count()) {
             foreach ($coordinators as $coordinator) {
-                $coordinator->notify(new CampaignAssignment($event->user, $event->campaign));
+                $coordinator->notify(new CampaignAssignment($user, $event->userCampaign->campaign));
             }
         }
 
-        $event->user->notify(new UserAssigned($event->campaign));
+        $user->notify(new UserAssigned($campaign));
     }
 }

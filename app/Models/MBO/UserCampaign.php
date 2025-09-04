@@ -101,6 +101,12 @@ class UserCampaign extends BaseModel
 
     public $timestamps = true;
 
+    protected $dispatchesEvents = [
+        'created' => UserCampaignAssigned::class,
+        'updated' => UserCampaignUpdated::class,
+        'deleted' => UserCampaignUnassigned::class,
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class)->withTrashed();
@@ -128,7 +134,7 @@ class UserCampaign extends BaseModel
 
     public function stageDescription(): string
     {
-        return __('forms.campaigns.stages.'.$this->stage);
+        return __('forms.campaigns.stages.' . $this->stage);
     }
 
     public function stageIcon(): string
@@ -198,32 +204,5 @@ class UserCampaign extends BaseModel
                 }
             }
         }
-    }
-
-    public static function createdUserCampaign(UserCampaign $model): void
-    {
-        $objectives = $model->campaign->objectives()->get();
-        foreach ($objectives as $objective) {
-            UserObjective::assign($model->user_id, $objective->id);
-        }
-
-        UserCampaignAssigned::dispatch($model->user, $model->campaign);
-    }
-
-    /**
-     * Handle the UserCampaign "updated" event.
-     */
-    public static function updatedUserCampaign(UserCampaign $model): void
-    {
-        // $model->mapObjectiveStatus();
-        UserCampaignUpdated::dispatch($model);
-    }
-
-    /**
-     * Handle the UserCampaign "deleted" event.
-     */
-    public static function deletedUserCampaign(UserCampaign $model): void
-    {
-        UserCampaignUnassigned::dispatch($model->user, $model->campaign);
     }
 }
