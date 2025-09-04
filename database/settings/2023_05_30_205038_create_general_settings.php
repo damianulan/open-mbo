@@ -12,7 +12,7 @@ return new class extends SettingsMigration
         $this->migrator->add('general.timezone', 'Europe/Warsaw');
         $this->migrator->add('general.maintenance', false);
         $this->migrator->add('general.debug', true);
-        $this->migrator->add('general.debugbar', $this->app->environment('development') ? true : false);
+        $this->migrator->add('general.debugbar', config('app.env') === 'development' ? true : false);
         $this->migrator->add('general.locale', 'pl');
         $this->migrator->add('general.build', date('YmdHi'));
         $this->migrator->add('general.release', '0.0.1');
