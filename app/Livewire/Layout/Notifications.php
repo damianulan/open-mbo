@@ -28,8 +28,8 @@ class Notifications extends Component
     {
         $query = Auth::user()->notifications()->where('data', '!=', '[]');
         $notifications_count = $query->count();
-        $queryAlert = $query->whereNull('alerted_at');
-        $notificationsAlert = $queryAlert->get();
+        $queryAlert = clone $query;
+        $notificationsAlert = $queryAlert->whereNull('alerted_at')->get();
 
         $this->notifications = $query->take(15)->get();
 

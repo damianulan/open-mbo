@@ -10,7 +10,7 @@
         <li><div class="dropdown-header">{{ __('globals.notifications') }}</div></li>
         @if($this->notifications && $this->notifications->count())
             @foreach ($this->notifications as $notification)
-                <livewire:layout.notifications.item :notification="$notification" key="notification_{{ str()->random(15) }}"/>
+                <livewire:notification.item :notification="$notification" wire:key="notification_{{ str()->random(15) }}"/>
             @endforeach
         @else
             <li>

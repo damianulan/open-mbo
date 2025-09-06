@@ -45,6 +45,8 @@ class ComponentServiceProvider extends ServiceProvider
         Blade::component('user-banner', \App\View\Components\Users\UserBanner::class);
 
         Livewire::component('commentable', \App\Commentable\Components\CommentComponent::class);
+        Livewire::component('notifications', \App\Livewire\Layout\Notifications::class);
+        Livewire::component('notification.item', \App\Livewire\Layout\Notifications\Item::class);
 
         Blade::component('note-card', \App\View\Components\Cards\NoteCard::class);
     }
