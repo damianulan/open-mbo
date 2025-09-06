@@ -88,7 +88,7 @@ class CampaignStage extends Enum
 
     public static function getInfo(string $value): string
     {
-        return __('forms.campaigns.info.'.$value);
+        return __('forms.campaigns.info.' . $value);
     }
 
     public static function getBySequence(int $sequence)
@@ -137,11 +137,13 @@ class CampaignStage extends Enum
     }
 
     /**
+     * set user objective status based on current user campaign stage.
+     *
      * @param  string  $stage  - UserCampaign stage
      * @param  string|null  $status  - UserObjective status
      * @return string $status
      */
-    public static function mapObjectiveStatus(string $stage, ?string $status): string
+    public static function mapObjectiveStatus(string $stage, ?string $status): ?string
     {
         $sequences = self::sequences();
         $frozen = UserObjectiveStatus::evaluated();

@@ -13,8 +13,8 @@
             @endif
 
         </div>
-        <div class="notification-time px-1 text-end">
-            {{ $notification->created_at->diffForHumans() }}
+        <div class="notification-time px-1 d-flex">
+            <div class="ms-auto" data-tippy-content="{{ $notification->created_at->format(config('app.datetime_format')) }}">{{ $notification->created_at->diffForHumans() }}</div>
         </div>
     </a>
 </li>

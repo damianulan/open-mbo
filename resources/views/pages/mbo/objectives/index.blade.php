@@ -9,7 +9,7 @@
         </a>
     </div>
 </div>
-<div class="content-card">
+<div class="content-card page-card">
     <div class="content-card-body">
         <div class="table-container row">
             {{ $table->actions() }}

@@ -67,6 +67,11 @@
 
     </div>
 </div>
+<div class="row">
+    <div class="col-12">
+        <x-note-card :subject="$user" />
+    </div>
+</div>
 
 
 @endsection

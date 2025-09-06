@@ -73,6 +73,29 @@
     box-shadow: 0 4px 12px 0 rgba($secondary, 0.1);
 }
 
+.btn-outline-success:hover,
+.btn-outline-success:active,
+.btn-outline-success.active,
+.btn-outline-success:focus,
+.btn-outline-success:focus-visible,
+.btn-outline-danger:hover,
+.btn-outline-danger:active,
+.btn-outline-danger.active,
+.btn-outline-danger:focus,
+.btn-outline-danger:focus-visible,
+.btn-outline-warning:hover,
+.btn-outline-warning:active,
+.btn-outline-warning.active,
+.btn-outline-warning:focus,
+.btn-outline-warning:focus-visible,
+.btn-outline-info:hover,
+.btn-outline-info:active,
+.btn-outline-info.active,
+.btn-outline-info:focus,
+.btn-outline-info:focus-visible {
+    color: $white;
+}
+
 a.action-btn {
     text-decoration: none;
     white-space: nowrap;
@@ -113,12 +136,7 @@ a.btn-tile i.on-hover {
 a.btn-tile.selected,
 a.btn-tile:hover {
     background: $primary;
-    background: linear-gradient(
-        90deg,
-        rgba($primary, 1) 0%,
-        rgba($primary, 0.75) 70%,
-        rgba($primary, 0.65) 100%
-    );
+    background: linear-gradient(90deg, rgba($primary, 1) 0%, rgba($primary, 0.75) 70%, rgba($primary, 0.65) 100%);
 }
 
 a.btn-tile.selected span,

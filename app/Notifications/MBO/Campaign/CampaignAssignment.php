@@ -28,7 +28,7 @@ class CampaignAssignment extends BaseNotification
     public function toArray(object $notifiable): array
     {
         return NotificationAdhoc::make(__('notifications.app.campaign.coordinator_assignment', [
-            'username' => $this->assigned->name(),
+            'username' => $this->assigned->name,
             'campaignname' => $this->campaign->name,
         ]), 'bi-person-fill-up')->toArray();
     }

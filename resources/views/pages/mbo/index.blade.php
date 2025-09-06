@@ -11,7 +11,7 @@
         </div>
     </nav>
     @if (count($objectives))
-        <div class="content-card">
+        <div class="content-card page-card">
             <div class="content-card-body">
                 <div class="row pagination-row">
                     <div class="col-md-12">

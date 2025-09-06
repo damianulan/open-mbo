@@ -257,16 +257,18 @@ class User extends Authenticatable implements HasLocalePreference
         $letterNum = Alphabet::getAlphabetPosition($initials);
 
         $color = '#111';
-        if ($letterNum < 4) {
-            $color = 'orange';
-        } elseif ($letterNum < 8) {
-            $color = 'green';
-        } elseif ($letterNum < 16) {
-            $color = 'cyan';
-        } elseif ($letterNum < 20) {
-            $color = 'brown';
-        } else {
-            $color = 'red';
+        if (! $this->isAdmin()) {
+            if ($letterNum < 4) {
+                $color = 'orange';
+            } elseif ($letterNum < 8) {
+                $color = 'green';
+            } elseif ($letterNum < 16) {
+                $color = 'cyan';
+            } elseif ($letterNum < 20) {
+                $color = 'brown';
+            } else {
+                $color = 'red';
+            }
         }
 
         return '<div class="profile-img" style="background-color: var(--bs-'.$color.'); font-size: '.$fontSize.'px; min-height: '.$height.'px; min-width: '.$width.'px;"><div>'.$initials.'</div></div>';

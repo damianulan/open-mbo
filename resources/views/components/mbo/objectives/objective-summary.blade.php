@@ -5,11 +5,11 @@
             <span>{{ $objective->name }}</span>
         </div>
         @if($objective->category()->exists())
-            <div data-tippy-content="{{ __('fields.category') }}" class="align-self-center ms-2">
+            <div data-tippy-content="{{ __('fields.category') }}" class="align-self-center mx-2">
                 <span class="badge bg-secondary">{{ $objective->category->name }}</span>
             </div>
         @endif
-        <div class="content-card-icons ms-auto fw-bold">
+        <div class="content-card-icons ms-auto">
             @if($objective->campaign()->exists())
                 <a href={{ route('campaigns.show', $objective->campaign->id) }} data-tippy-content="{{ __('mbo.info.campaign_related', ['campaign' => $objective->campaign->name, 'period' => $objective->campaign->period]) }}">
                     <i class="bi-bullseye"></i>
@@ -66,17 +66,17 @@
             @endif
         </div>
         @if($userObjective->exists)
-            <div class="content-card-icons mb-3">
+            <div class="content-card-icons">
                 @if($userObjective->exists)
                     <div class="badge badge-{{ $userObjective->status }} fs-6" data-tippy-content="{{ __('forms.mbo.objectives.status') }}">{{ __('mbo.objective'). ' ' .strtolower($userObjective->getStatusLabel()) }}</div>
                 @endif
             </div>
-            <div class="content-card-btns">
+            <div class="content-card-btns flex-wrap">
                 @if($userObjective->canBePassed())
-                    <a href="{{ route('objectives.assignment.pass', $userObjective->id) }}" class="btn btn-outline-primary"><i class="bi-btn bi-check2-circle"></i>{{ __('mbo.objectives.pass') }}</a>
+                    <a href="{{ route('objectives.assignment.pass', $userObjective->id) }}" class="btn btn-outline-success mt-3"><i class="bi-btn bi-check2-circle"></i>{{ __('mbo.objectives.pass') }}</a>
                 @endif
                 @if($userObjective->canBeFailed())
-                    <a href="{{ route('objectives.assignment.fail', $userObjective->id) }}" class="btn btn-outline-primary"><i class="bi-btn bi-x-lg"></i>{{ __('mbo.objectives.fail') }}</a>
+                    <a href="{{ route('objectives.assignment.fail', $userObjective->id) }}" class="btn btn-outline-danger mt-3"><i class="bi-btn bi-x-lg"></i>{{ __('mbo.objectives.fail') }}</a>
                 @endif
             </div>
         @endif

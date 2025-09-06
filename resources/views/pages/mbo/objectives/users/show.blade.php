@@ -17,17 +17,7 @@
         <x-objective-summary :objective="$objective" :userObjective="$userObjective" />
     </div>
     <div class="col-xl-12 col-xs-12">
-        <div class="content-card">
-            <div class="content-card-top">
-                <div class="content-card-header">
-                    <i class="bi-chat-left-quote me-2"></i>
-                    <span>{{ __('Notatki') }}</span>
-                </div>
-            </div>
-            <div class="content-card-body">
-                <livewire:commentable :subject="$userObjective" key="str()->random(50)" />
-            </div>
-        </div>
+        <x-note-card :subject="$userObjective" />
     </div>
 </div>
 @endsection

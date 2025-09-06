@@ -28,16 +28,7 @@ $('select[name="template_id"]').on('change', function() {
         model: 'objective_template',
         id: $(this).val()
         }, function(response) {
-            var instance = response.instance;
-            if(instance){
-                $('input[name="name"]').val(instance.name);
-                var descr_trix = document.querySelector("trix-editor");
-                $('input[name="award"]').val(instance.award);
 
-                // descr_trix.editor.setSelectedRange([0, 0]);
-                // descr_trix.editor.insertHTML(instance.description);
-
-            }
         },
         function(response) {
             $.error('{{ __('alerts.error.ajax') }}');

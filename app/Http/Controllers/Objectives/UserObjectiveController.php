@@ -175,10 +175,10 @@ class UserObjectiveController extends AppController
             $userObjective = UserObjective::checkAccess()->findOrFail($id);
 
             if ($request->user()->cannot('evaluate', $userObjective)) {
-                throw new Exception('no access');
+                throw new Exception('No access');
             }
 
-            if ($userObjective->canBePassed()) {
+            if ($userObjective->canBeFailed()) {
             }
         } catch (\Throwable $th) {
             throw $th;

@@ -8,9 +8,9 @@
     </a>
     <ul class="dropdown-menu @if($shown) show @endif" @if($shown) style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(0px, 28px);" data-popper-placement="bottom-end" @endif>
         <li><div class="dropdown-header">{{ __('globals.notifications') }}</div></li>
-        @if($notifications && $notifications->isNotEmpty())
-            @foreach ($notifications as $notification)
-                <livewire:layout.notifications.item :notification="$notification" wire:key="notification_{{ $notification->id }}"/>
+        @if($this->notifications && $this->notifications->count())
+            @foreach ($this->notifications as $notification)
+                <livewire:layout.notifications.item :notification="$notification" key="notification_{{ str()->random(15) }}"/>
             @endforeach
         @else
             <li>
@@ -23,9 +23,8 @@
 @push('custom-scripts')
     <script type="text/javascript">
         document.addEventListener('livewire:init', () => {
-            Livewire.on('new-notification', (event) => {
-                console.log(event);
-                $.notify(event, 'info');
+            Livewire.on('new-notification', (event, title) => {
+                $.notify(event.title, 'info');
             });
         });
     </script>

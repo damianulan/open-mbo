@@ -16,7 +16,9 @@ use Livewire\Livewire;
 |
 */
 
-Auth::routes();
+Route::middleware('web')->group(function () {
+    Auth::routes();
+});
 
 Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');

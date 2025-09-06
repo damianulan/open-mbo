@@ -58,22 +58,47 @@ body {
     border-radius: 0.35rem;
     box-shadow: $card-shadow;
 
-    &.minified {
+    .content-card-icons i.minimize {
+        cursor: pointer;
+        font-style: normal;
+
+        &::after {
+            font-family: $font-family-icons;
+            content: "\f285";
+        }
+    }
+
+    &.minimized {
         .content-card-body {
-            display: none;
+            height: 0;
+            overflow: hidden;
+            padding: 0;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .content-card-icons i.minimize::after {
+            content: "\f282";
         }
     }
 
     .content-card-body {
         margin-top: 1rem;
         padding: 0.5rem 0;
-        transition: all 0.4s ease-in-out;
+    }
+
+    &:not(.page-card) {
+        .content-card-body {
+            max-height: 1000px;
+            overflow-y: auto;
+            overflow-x: clip;
+        }
     }
 
     & > .content-card-top {
         display: flex;
         align-items: center;
         color: $primary;
+        flex-wrap: wrap;
 
         & > .content-card-header {
             display: flex;
@@ -97,9 +122,9 @@ body {
     font-size: 1.1rem;
 }
 
-.content-card-icons > *:not(:first-child),
-.content-card-btns > *:not(:first-child) {
-    margin-left: 0.675rem;
+.content-card-icons > *:not(:last-child),
+.content-card-btns > *:not(:last-child) {
+    margin-right: 0.675rem;
 }
 
 @media (min-width: 992px) {

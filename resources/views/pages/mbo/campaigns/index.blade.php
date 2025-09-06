@@ -4,7 +4,7 @@
 @include('pages.mbo.campaigns.nav')
 
 @if (count($campaigns))
-<div class="content-card">
+<div class="content-card page-card">
 
     <div class="content-card-body">
         <div class="row pagination-row">

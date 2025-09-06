@@ -2,19 +2,47 @@
 
 namespace App\Livewire\Layout;
 
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Illuminate\Notifications\DatabaseNotificationCollection;
 
 class Notifications extends Component
 {
-    public Collection $notifications;
+    protected DatabaseNotificationCollection $notifications;
 
     public int $notifications_count = 0;
 
     public bool $shown = false;
 
-    public function mount() {}
+    public function mount()
+    {
+        $this->register();
+    }
+
+    public function boot()
+    {
+        $this->register();
+    }
+
+    public function register()
+    {
+        $query = Auth::user()->notifications()->where('data', '!=', '[]');
+        $notifications_count = $query->count();
+        $queryAlert = $query->whereNull('alerted_at');
+        $notificationsAlert = $queryAlert->get();
+
+        $this->notifications = $query->take(15)->get();
+
+        if ($notificationsAlert->count()) {
+            foreach ($notificationsAlert as $alert) {
+                $alert->alerted_at = now();
+                $alert->updateQuietly();
+                $this->dispatch('new-notification', title: $alert->data['message']);
+            }
+        }
+
+        $this->notifications_count = $notifications_count;
+    }
 
     public function toggleShown()
     {
@@ -23,31 +51,6 @@ class Notifications extends Component
 
     public function render()
     {
-        $notifications = Auth::user()->notifications()->where('data', '!=', '[]');
-        $notifications_count = $notifications->count();
-        $notifications_tmp = $notifications->take(15)->get();
-        $collection = new Collection;
-
-        if ($notifications_count) {
-            foreach ($notifications_tmp as $notification) {
-                $collection->put($notification->id, $notification);
-            }
-        }
-
-        if ($this->notifications_count) {
-            if ($this->notifications_count != $notifications_count) {
-                foreach ($collection->keys()->all() as $key) {
-                    if (! $this->notifications->keyBy($key)) {
-                        $n = $collection->keyBy($key);
-                        $this->dispatch('new-notification', title: $n->data['message']);
-                    }
-                }
-            }
-        }
-
-        $this->notifications_count = $notifications_count;
-        $this->notifications = $collection;
-
         return view('livewire.layout.notifications');
     }
 }

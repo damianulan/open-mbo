@@ -143,6 +143,7 @@ function toast_alert(text, type = "info", _callback = function () {}) {
         stopOnFocus: true, // Prevents dismissing of toast on hover
         className: type,
         callback: _callback,
+        escapeMarkup: false,
     }).showToast();
 }
 
@@ -371,3 +372,12 @@ $.eraseCookie = function (name, path, domain) {
         document.cookie = name + "=; Max-Age=-99999999;";
     }
 };
+
+$("i.minimize").on("click", function () {
+    var card = $(this).closest(".content-card");
+    if (card.hasClass("minimized")) {
+        card.removeClass("minimized");
+    } else {
+        card.addClass("minimized");
+    }
+});
