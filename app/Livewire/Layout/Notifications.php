@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Layout;
 
+use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use Illuminate\Notifications\DatabaseNotificationCollection;
 
 class Notifications extends Component
 {

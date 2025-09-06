@@ -35,7 +35,7 @@ class AppController extends BaseController
             }
 
             if (empty($description) && $model && $user) {
-                $description = __('logging.description.view', ['model_map' => __('logging.model_mapping.' . $model::class), 'username' => $user->name]);
+                $description = __('logging.description.view', ['model_map' => __('logging.model_mapping.'.$model::class), 'username' => $user->name]);
             } else {
                 if (empty($description)) {
                     $description = 'view';
@@ -50,7 +50,7 @@ class AppController extends BaseController
         ?string $message = null,
         ?UrlGenerator $redirect = null
     ): RedirectResponse|UrlGenerator {
-        if (!$exception instanceof AppException) {
+        if (! $exception instanceof AppException) {
             report($exception);
         }
 
@@ -68,7 +68,7 @@ class AppController extends BaseController
         ?string $message = null,
         array $datas = []
     ): JsonResponse {
-        if (!$exception instanceof AppException) {
+        if (! $exception instanceof AppException) {
             report($exception);
         }
 
