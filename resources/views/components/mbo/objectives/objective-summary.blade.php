@@ -68,7 +68,7 @@
         @if($userObjective->exists)
             <div class="content-card-icons">
                 @if($userObjective->exists)
-                    <div class="badge badge-{{ $userObjective->status }} fs-6" data-tippy-content="{{ __('forms.mbo.objectives.status') }}">{{ __('mbo.objective'). ' ' .strtolower($userObjective->getStatusLabel()) }}</div>
+                    <div class="badge badge-{{ $userObjective->status }} fs-6" data-tippy-content="{{ __('forms.mbo.objectives.status') }}">{{ __('mbo.objective'). ' ' .mb_strtolower($userObjective->getStatusLabel()) }}</div>
                 @endif
             </div>
             <div class="content-card-btns flex-wrap">
