@@ -2,11 +2,11 @@
 
 namespace App\Events\Core\User;
 
+use App\Models\Core\User;
 use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Database\Eloquent\Model;
-use App\Models\Core\User;
 
 class UserMentioned implements ShouldDispatchAfterCommit
 {

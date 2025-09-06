@@ -3,9 +3,9 @@
 namespace App\Listeners\MBO\Campaigns;
 
 use App\Events\MBO\Campaigns\UserCampaignAssigned;
-use Illuminate\Queue\InteractsWithQueue;
 use App\Models\MBO\UserObjective;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
 
 class UserAssignObjectives implements ShouldQueue
 {

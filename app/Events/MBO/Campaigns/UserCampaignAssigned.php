@@ -2,10 +2,10 @@
 
 namespace App\Events\MBO\Campaigns;
 
+use App\Models\MBO\UserCampaign;
 use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\MBO\UserCampaign;
 
 class UserCampaignAssigned implements ShouldDispatchAfterCommit
 {

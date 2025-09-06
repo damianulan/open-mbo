@@ -8,7 +8,6 @@ use FormForge\Traits\RequestForms;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Laravel\Scout\Searchable;
 use Lucent\Support\Traits\Accessible;
 use Lucent\Support\Traits\CascadeDeletes;
 use Lucent\Support\Traits\SoftDeletesPrunable;
@@ -68,7 +67,7 @@ use YMigVal\LaravelModelCache\HasCachedQueries;
  */
 class BaseModel extends Model
 {
-    use Accessible, CascadeDeletes, HasCachedQueries, HasFactory, ModelActivity, RequestForms, Searchable, SoftDeletes, SoftDeletesPrunable, UUID, VirginModel;
+    use Accessible, CascadeDeletes, HasCachedQueries, HasFactory, ModelActivity, RequestForms, SoftDeletes, SoftDeletesPrunable, UUID, VirginModel;
 
     public function carbonDate(string $prop, string $format = 'Y-m-d')
     {

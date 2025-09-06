@@ -3,6 +3,7 @@
 namespace App\Models\Core;
 
 use App\Commentable\Support\Commentator;
+use App\Models\Vendor\ActivityModel;
 use App\Traits\UserBusiness;
 use App\Traits\UserMBO;
 use App\Traits\Vendors\Impersonable;
@@ -23,6 +24,7 @@ use Lab404\Impersonate\Models\Impersonate;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Scout\Searchable;
 use Lucent\Support\Str\Alphabet;
+use Lucent\Support\Traits\CascadeDeletes;
 use Lucent\Support\Traits\UUID;
 use Lucent\Support\Traits\VirginModel;
 use Sentinel\Traits\HasRolesAndPermissions;
@@ -41,6 +43,8 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, ActivityModel> $activity
+ * @property-read int|null $activity_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserCampaign> $campaigns
  * @property-read int|null $campaigns_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $coordinator_campaigns
@@ -107,8 +111,8 @@ use Sentinel\Traits\HasRolesAndPermissions;
  */
 class User extends Authenticatable implements HasLocalePreference
 {
+    use CascadeDeletes, HasApiTokens, HasFactory, HasRolesAndPermissions, Notifiable, RequestForms, SoftDeletes, UUID;
     use Commentator, Impersonable, Impersonate, ModelActivity, Searchable, UserBusiness, UserMBO, VirginModel;
-    use HasApiTokens, HasFactory, HasRolesAndPermissions, Notifiable, RequestForms, SoftDeletes, UUID;
 
     protected $fillable = [
         'email',
@@ -125,6 +129,11 @@ class User extends Authenticatable implements HasLocalePreference
     protected $casts = [
         'email_verified_at' => 'datetime',
         'created_at' => 'datetime',
+    ];
+
+    protected $cascadeDeletes = [
+        'profile',
+        'preferences',
     ];
 
     protected static function booted()
@@ -154,20 +163,18 @@ class User extends Authenticatable implements HasLocalePreference
 
     protected function name(): Attribute
     {
-        $value = $this->profile?->firstname . ' ' . $this->profile?->lastname;
+        $value = $this->profile?->firstname.' '.$this->profile?->lastname;
 
         return Attribute::make(
-            get: fn() => ucfirst($value),
+            get: fn () => ucfirst($value),
         );
     }
 
-
-
     public function nameView(): string
     {
-        $link = '<span>' . $this->name . '</span>';
+        $link = '<span>'.$this->name.'</span>';
         if (Auth::user()->can('view', $this)) {
-            $link = '<a href="' . route('users.show', $this->id) . '" class="text-primary">' . $this->name . '</a>';
+            $link = '<a href="'.route('users.show', $this->id).'" class="text-primary">'.$this->name.'</a>';
         }
 
         return $link;
@@ -233,7 +240,7 @@ class User extends Authenticatable implements HasLocalePreference
 
     public function getInitials(): string
     {
-        return strtoupper(substr($this->firstname(), 0, 1) . substr($this->lastname(), 0, 1));
+        return strtoupper(substr($this->firstname(), 0, 1).substr($this->lastname(), 0, 1));
     }
 
     public function getAvatarView(int $height = 70, int $width = 70): string
@@ -242,7 +249,7 @@ class User extends Authenticatable implements HasLocalePreference
             $width = $height;
         }
         if ($this->profile->avatar) {
-            return '<img class="profile-img" src="' . asset($this->profile->avatar) . '" height="' . $height . 'px" width="' . $width . 'px">';
+            return '<img class="profile-img" src="'.asset($this->profile->avatar).'" height="'.$height.'px" width="'.$width.'px">';
         }
 
         $fontSize = $height / 2.8;
@@ -262,7 +269,7 @@ class User extends Authenticatable implements HasLocalePreference
             $color = 'red';
         }
 
-        return '<div class="profile-img" style="background-color: var(--bs-' . $color . '); font-size: ' . $fontSize . 'px; min-height: ' . $height . 'px; min-width: ' . $width . 'px;"><div>' . $initials . '</div></div>';
+        return '<div class="profile-img" style="background-color: var(--bs-'.$color.'); font-size: '.$fontSize.'px; min-height: '.$height.'px; min-width: '.$width.'px;"><div>'.$initials.'</div></div>';
     }
 
     public function canBeImpersonated(): bool
@@ -283,6 +290,11 @@ class User extends Authenticatable implements HasLocalePreference
     public function preferences(): HasOne
     {
         return $this->hasOne(UserPreference::class);
+    }
+
+    public function activity()
+    {
+        return $this->morphMany(ActivityModel::class, 'causer');
     }
 
     public function preferredLocale()

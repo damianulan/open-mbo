@@ -19,29 +19,29 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         Illuminate\Auth\Events\Logout::class => [
-            App\Listeners\Activity\LogSuccessfulLogout::class
+            App\Listeners\Activity\LogSuccessfulLogout::class,
         ],
         Illuminate\Auth\Events\Failed::class => [
-            App\Listeners\Activity\LogAuthFailed::class
+            App\Listeners\Activity\LogAuthFailed::class,
         ],
         Illuminate\Notifications\Events\NotificationSent::class => [
-            App\Listeners\Activity\NotificationLog::class
+            App\Listeners\Activity\NotificationLog::class,
         ],
 
         // MBO LISTENERS
         App\Events\MBO\Campaigns\UserCampaignAssigned::class => [
             App\Listeners\MBO\Campaigns\UserAssignedNotify::class,
-            App\Listeners\MBO\Campaigns\UserAssignObjectives::class
+            App\Listeners\MBO\Campaigns\UserAssignObjectives::class,
         ],
         App\Events\MBO\Campaigns\UserCampaignUnassigned::class => [
-            App\Listeners\MBO\Campaigns\UserUnassignedNotify::class
+            App\Listeners\MBO\Campaigns\UserUnassignedNotify::class,
         ],
 
         App\Events\MBO\Campaigns\CampaignUpdated::class => [
-            App\Listeners\MBO\Campaigns\UserCampaignStageCheck::class
+            App\Listeners\MBO\Campaigns\UserCampaignStageCheck::class,
         ],
         App\Events\MBO\Campaigns\CampaignViewed::class => [
-            App\Listeners\MBO\Campaigns\UserCampaignStageCheck::class
+            App\Listeners\MBO\Campaigns\UserCampaignStageCheck::class,
         ],
     ];
 

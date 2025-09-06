@@ -48,8 +48,8 @@ class CommentContent implements CastsAttributes
 
             $quote_inner = Str::between($value, $start, $end);
             if (! empty($quote_inner)) {
-                $quote_old = $start . $quote_inner . $end;
-                $quote = $start_after . $quote_inner . $end_after;
+                $quote_old = $start.$quote_inner.$end;
+                $quote = $start_after.$quote_inner.$end_after;
 
                 $value = Str::replace($quote_old, $quote, $value);
             }

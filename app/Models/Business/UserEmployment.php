@@ -127,6 +127,4 @@ class UserEmployment extends BaseModel
     {
         return $this->belongsTo(Position::class)->withTrashed();
     }
-
-    public function team() {}
 }

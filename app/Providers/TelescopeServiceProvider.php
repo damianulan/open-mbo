@@ -22,24 +22,27 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
         $this->hideSensitiveRequestDetails();
 
         Telescope::filter(function (IncomingEntry $entry) {
-            $method = 'entry' . ucfirst(config('app.env'));
+            $method = 'entry'.ucfirst(config('app.env'));
+
             return $this->$method($entry);
         });
     }
 
     protected function entryLocal(IncomingEntry $entry): bool
     {
-        if ($entry->isEvent() && !$this->filterEvents($entry)) {
+        if ($entry->isEvent() && ! $this->filterEvents($entry)) {
             return false;
         }
+
         return true;
     }
 
     protected function entryDevelopment(IncomingEntry $entry): bool
     {
-        if ($entry->isEvent() && !$this->filterEvents($entry)) {
+        if ($entry->isEvent() && ! $this->filterEvents($entry)) {
             return false;
         }
+
         return $entry->isScheduledTask() ||
             $entry->isFailedRequest() ||
             $entry->isLog() ||
@@ -63,7 +66,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
 
     private function filterEvents(IncomingEntry $entry): bool
     {
-        return !in_array($entry->content['name'], [
+        return ! in_array($entry->content['name'], [
             SettingsLoaded::class,
             LoadingSettings::class,
         ]);

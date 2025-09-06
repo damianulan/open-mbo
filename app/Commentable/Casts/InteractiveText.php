@@ -57,7 +57,7 @@ class InteractiveText implements CastsAttributes
 
     private static function tagPattern(string $name): string
     {
-        return '/<interactive-' . $name . ':([0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})>/i';
+        return '/<interactive-'.$name.':([0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})>/i';
     }
 
     private static function interactiveMentions(string $value, $mode, ?Model $model = null): string
@@ -80,7 +80,7 @@ class InteractiveText implements CastsAttributes
                             } elseif ($mode === self::MODE_NORMAL) {
                                 $route = self::getUserRoute($user->id);
                                 if ($route) {
-                                    $replaceTo = '<a class="user-mention" href="' . $route . '">' . $user->firstname() . ' ' . $user->lastname() . '</a>';
+                                    $replaceTo = '<a class="user-mention" href="'.$route.'">'.$user->firstname().' '.$user->lastname().'</a>';
                                 }
                             }
                         }
@@ -109,7 +109,7 @@ class InteractiveText implements CastsAttributes
                         if ($user) {
                             $route = self::getUserRoute($user->id);
                             if ($route) {
-                                $replaceTo = '<a class="user-mention" href="' . $route . '">' . $user->firstname() . ' ' . $user->lastname() . '</a>';
+                                $replaceTo = '<a class="user-mention" href="'.$route.'">'.$user->firstname().' '.$user->lastname().'</a>';
                             }
                         }
                         $value = Str::replace($search, $replaceTo, $value);

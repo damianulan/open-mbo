@@ -49,6 +49,7 @@ class UserPreference extends Model
     protected $table = 'user_preferences';
 
     protected $fillable = [
+        'user_id',
         'lang',
         'theme',
         'mail_notifications',
