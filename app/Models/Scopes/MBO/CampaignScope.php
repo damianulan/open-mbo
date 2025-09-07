@@ -18,6 +18,7 @@ class CampaignScope implements Scope
      */
     public function apply(Builder $builder, Model $model): void
     {
+        $builder->orderBy('campaigns.definition_from');
         if (Auth::check()) {
             $user = Auth::user();
 

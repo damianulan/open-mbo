@@ -123,6 +123,7 @@ return [
             'description' => 'Opis celu',
             'draft' => 'Wersja robocza',
             'deadline' => 'Termin realizacji',
+            'deadline_to' => 'Termin realizacji :term',
             'weight' => 'Waga celu',
             'status' => 'Status celu',
             'type' => 'Typ celu',

@@ -261,7 +261,7 @@ class User extends Authenticatable implements HasLocalePreference
         $initials = $this->getInitials();
         $letterNum = Alphabet::getAlphabetPosition($initials);
 
-        $color = '#111';
+        $color = 'primary';
         if (! $this->isAdmin()) {
             if ($letterNum < 4) {
                 $color = 'orange';

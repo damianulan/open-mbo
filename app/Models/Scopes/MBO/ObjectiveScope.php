@@ -20,6 +20,7 @@ class ObjectiveScope implements Scope
      */
     public function apply(Builder $builder, Model $model): void
     {
+        $builder->orderBy('objectives.deadline');
         if (Auth::check()) {
             $user = Auth::user();
 

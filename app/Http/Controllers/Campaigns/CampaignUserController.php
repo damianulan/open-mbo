@@ -14,21 +14,23 @@ class CampaignUserController extends AppController
 {
     public function update(Request $request, $id, CampaignEditUserForm $form)
     {
-        $campaign = Campaign::findOrFail($id);
+        try {
+            $campaign = Campaign::findOrFail($id);
 
-        $request = $form::reformatRequest($request);
-        $response = $form::validateJson($request, $id);
-        if ($response['status'] === 'ok') {
+            $request = $form::reformatRequest($request);
+            $response = $form::validateJson($request, $id);
+            if ($response['status'] === 'ok') {
 
-            $service = BulkAssignUsers::boot(request: $request, campaign: $campaign)->execute();
-            if ($service->passed()) {
-                $response['message'] = __('alerts.campaigns.success.users_added');
-
-                return response()->json($response);
+                $service = BulkAssignUsers::boot(request: $request, campaign: $campaign)->execute();
+                if ($service->passed()) {
+                    $response['message'] = __('alerts.campaigns.success.users_added');
+                }
             }
+        } catch (\Throwable $th) {
+            $this->e = $th;
         }
 
-        return response()->json($response);
+        return $this->responseJson($response);
     }
 
     public function toggleManual(Request $request, $id)

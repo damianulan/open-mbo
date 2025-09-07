@@ -5,7 +5,7 @@
           <h1 class="modal-title fs-3" id="containerModalLabel">{{ $form->title() }}</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ __('buttons.close') }}"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" style="min-height: 300px;">
             <div class="container-fluid">
                 {{ $form->render() }}
             </div>

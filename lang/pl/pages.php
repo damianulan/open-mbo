@@ -20,6 +20,11 @@ return [
         'telescope' => 'Teleskop',
     ],
 
+    'home' => [
+        'my_objectives' => 'Moje cele',
+        'my_campaigns' => 'Moje kampanie',
+    ],
+
     'errors' => [
         '500' => [
             'title' => 'Wewnętrzny błąd serwera',

@@ -4,7 +4,7 @@
             @foreach($this->subject->comments as $comment)
                 <div class="comment{{ $comment->isMine() ? ' my-comment' : '' }}" wire:key="{{ str()->random(50) }}">
                     <div class="comment-group" wire:transition.opacity.duration.1000ms >
-                        <a href="{{ $comment->author->routeShow() }}" target="_blank" class="commentable-avatar" data-tippy-content="{{ $comment->author->name }}">{!! $comment->author->getAvatarView(30, 30) !!}</a>
+                        <a href="{{ $comment->author->routeShow() }}" target="_blank" class="commentable-avatar" data-tippy-content="{{ $comment->author->name }}">{!! $comment->author->getAvatarView(25) !!}</a>
                         <div class="commentable-item">
                             <div class="commentable-header">
                                 <a class="commentable-author" href="{{ $comment->author->routeShow() }}" target="_blank">{{ $comment->author->name }}</a>

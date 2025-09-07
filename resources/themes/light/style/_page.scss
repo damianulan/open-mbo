@@ -82,7 +82,7 @@ body {
     }
 
     .content-card-body {
-        margin-top: 1rem;
+        margin-top: 0.85rem;
         padding: 0.5rem 0;
     }
 
@@ -91,6 +91,24 @@ body {
             max-height: 1000px;
             overflow-y: auto;
             overflow-x: clip;
+        }
+
+        &.content-card-xs {
+            .content-card-body {
+                max-height: 300px;
+            }
+        }
+
+        &.content-card-sm {
+            .content-card-body {
+                max-height: 500px;
+            }
+        }
+
+        &.content-card-lg {
+            .content-card-body {
+                max-height: 1500px;
+            }
         }
     }
 
@@ -397,4 +415,8 @@ ul.list-style-none li {
 .modal-header,
 .modal-footer {
     border: none;
+}
+
+.icon-badge {
+    white-space: nowrap;
 }
