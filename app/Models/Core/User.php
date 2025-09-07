@@ -2,6 +2,7 @@
 
 namespace App\Models\Core;
 
+use App\Commentable\Support\Commentable;
 use App\Commentable\Support\Commentator;
 use App\Models\Vendor\ActivityModel;
 use App\Traits\UserBusiness;
@@ -47,6 +48,8 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @property-read int|null $activity_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserCampaign> $campaigns
  * @property-read int|null $campaigns_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Commentable\Models\Comment> $comments
+ * @property-read int|null $comments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $coordinator_campaigns
  * @property-read int|null $coordinator_campaigns_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\Department> $departments_manager
@@ -62,9 +65,7 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @property-read mixed $name
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserObjective> $objective_assignments
- * @property-read int|null $objective_assignments_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserObjective> $objectives
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\Objective> $objectives
  * @property-read int|null $objectives_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Sentinel\Models\Permission> $permissions
  * @property-read int|null $permissions_count
@@ -79,6 +80,10 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @property-read \App\Models\MBO\UserBonusScheme|null $user_bonus_scheme
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserObjective> $user_objectives
+ * @property-read int|null $user_objectives_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserObjective> $user_objectives_active
+ * @property-read int|null $user_objectives_active_count
  *
  * @method static Builder<static>|User active()
  * @method static Builder<static>|User drafted()
@@ -112,7 +117,7 @@ use Sentinel\Traits\HasRolesAndPermissions;
 class User extends Authenticatable implements HasLocalePreference
 {
     use CascadeDeletes, HasApiTokens, HasFactory, HasRolesAndPermissions, Notifiable, RequestForms, SoftDeletes, UUID;
-    use Commentator, Impersonable, Impersonate, ModelActivity, Searchable, UserBusiness, UserMBO, VirginModel;
+    use Commentable, Commentator, Impersonable, Impersonate, ModelActivity, Searchable, UserBusiness, UserMBO, VirginModel;
 
     protected $fillable = [
         'email',
@@ -163,18 +168,18 @@ class User extends Authenticatable implements HasLocalePreference
 
     protected function name(): Attribute
     {
-        $value = $this->profile?->firstname . ' ' . $this->profile?->lastname;
+        $value = $this->profile?->firstname.' '.$this->profile?->lastname;
 
         return Attribute::make(
-            get: fn() => mb_ucfirst($value),
+            get: fn () => mb_ucfirst($value),
         );
     }
 
     public function nameView(): string
     {
-        $link = '<span>' . $this->name . '</span>';
+        $link = '<span>'.$this->name.'</span>';
         if (Auth::user()->can('view', $this)) {
-            $link = '<a href="' . route('users.show', $this->id) . '" class="text-primary">' . $this->name . '</a>';
+            $link = '<a href="'.route('users.show', $this->id).'" class="text-primary">'.$this->name.'</a>';
         }
 
         return $link;
@@ -240,7 +245,7 @@ class User extends Authenticatable implements HasLocalePreference
 
     public function getInitials(): string
     {
-        return mb_strtoupper(mb_substr($this->firstname(), 0, 1) . mb_substr($this->lastname(), 0, 1));
+        return mb_strtoupper(mb_substr($this->firstname(), 0, 1).mb_substr($this->lastname(), 0, 1));
     }
 
     public function getAvatarView(int $height = 70, int $width = 70): string
@@ -249,7 +254,7 @@ class User extends Authenticatable implements HasLocalePreference
             $width = $height;
         }
         if ($this->profile->avatar) {
-            return '<img class="profile-img" src="' . asset($this->profile->avatar) . '" height="' . $height . 'px" width="' . $width . 'px">';
+            return '<img class="profile-img" src="'.asset($this->profile->avatar).'" height="'.$height.'px" width="'.$width.'px">';
         }
 
         $fontSize = $height / 2.8;
@@ -271,7 +276,7 @@ class User extends Authenticatable implements HasLocalePreference
             }
         }
 
-        return '<div class="profile-img" style="background-color: var(--bs-' . $color . '); font-size: ' . $fontSize . 'px; min-height: ' . $height . 'px; min-width: ' . $width . 'px;"><div>' . $initials . '</div></div>';
+        return '<div class="profile-img" style="background-color: var(--bs-'.$color.'); font-size: '.$fontSize.'px; min-height: '.$height.'px; min-width: '.$width.'px;"><div>'.$initials.'</div></div>';
     }
 
     public function canBeImpersonated(): bool

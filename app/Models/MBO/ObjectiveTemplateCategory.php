@@ -78,7 +78,6 @@ use Illuminate\Database\Eloquent\Attributes\ScopedBy;
  *
  * @mixin \Eloquent
  */
-
 #[ScopedBy(ObjectiveTemplateCategoryScope::class)]
 class ObjectiveTemplateCategory extends BaseModel
 {

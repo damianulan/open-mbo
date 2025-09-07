@@ -7,10 +7,9 @@ use App\Commentable\Support\Commentable;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Models\Scopes\MBO\ObjectiveScope;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Query\JoinClause;
-use Lucent\Support\Traits\Dispatcher;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
+use Illuminate\Database\Eloquent\Builder;
+use Lucent\Support\Traits\Dispatcher;
 
 /**
  * @property string $id
@@ -32,8 +31,8 @@ use Illuminate\Database\Eloquent\Attributes\ScopedBy;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Commentable\Models\Comment> $comments
  * @property-read int|null $comments_count
  * @property-read \App\Models\MBO\ObjectiveTemplate|null $template
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserObjective> $user_assignments
- * @property-read int|null $user_assignments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserObjective> $user_objectives
+ * @property-read int|null $user_objectives_count
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective average(string $column)
@@ -95,7 +94,6 @@ use Illuminate\Database\Eloquent\Attributes\ScopedBy;
  *
  * @mixin \Eloquent
  */
-
 #[ScopedBy(ObjectiveScope::class)]
 class Objective extends BaseModel
 {
@@ -171,23 +169,21 @@ class Objective extends BaseModel
         return $this->template()->type;
     }
 
-    public function user_assignments()
+    public function user_objectives()
     {
         return $this->hasMany(UserObjective::class);
     }
 
     public function canBeDeleted(): bool
     {
-        return $this->user_assignments()->count() ? false : true;
+        return $this->user_objectives()->count() ? false : true;
     }
 
     public function scopeWhereAssigned(Builder $query, User $user): void
     {
-        $query->select('objectives.*')
-            ->join('user_objectives', function (JoinClause $join) use ($user) {
-                $join->on('objectives.id', '=', 'user_objectives.objective_id')
-                    ->where('user_objectives.user_id', $user->id);
-            })
+        $query->whereHas('user_objectives', function (Builder $q) use ($user) {
+            $q->where('user_id', $user->id);
+        })
             ->published();
     }
 

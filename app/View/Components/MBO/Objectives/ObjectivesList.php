@@ -2,13 +2,13 @@
 
 namespace App\View\Components\MBO\Objectives;
 
-use Closure;
-use Illuminate\Contracts\View\View;
-use Illuminate\View\Component;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 use App\Contracts\MBO\HasObjectives;
 use App\Traits\UserMBO;
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\View\Component;
 
 class ObjectivesList extends Component
 {
@@ -19,13 +19,13 @@ class ObjectivesList extends Component
      */
     public function __construct(public Model $model)
     {
-        if (!($model instanceof HasObjectives) || !isset(class_uses_recursive($model)[UserMBO::class])) {
+        if (! ($model instanceof HasObjectives) && ! isset(class_uses_recursive($model)[UserMBO::class])) {
             $e = new \Exception('Model must implement HasObjectives interface or UserMBO trait.');
             report($e);
             throw $e;
         }
 
-        $this->objectives = $model->objectives()->checkAccess()->get();
+        $this->objectives = $model->objectives;
     }
 
     /**

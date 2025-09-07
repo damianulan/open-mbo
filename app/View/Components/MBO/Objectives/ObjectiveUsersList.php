@@ -20,15 +20,15 @@ class ObjectiveUsersList extends Component
     {
         $this->emptyInfo = __('mbo.info.no_users_added');
         if ($status === 'all') {
-            $this->userAssignments = $objective->user_assignments()->get();
+            $this->userAssignments = $objective->user_objectives()->get();
         } elseif ($status === 'progress') {
-            $this->userAssignments = $objective->user_assignments()->whereNotEvaluated()->get();
+            $this->userAssignments = $objective->user_objectives()->whereNotEvaluated()->get();
             $this->emptyInfo = __('mbo.info.objective_not_evaluated_no_users');
         } elseif ($status === 'passed') {
-            $this->userAssignments = $objective->user_assignments()->wherePassed()->get();
+            $this->userAssignments = $objective->user_objectives()->wherePassed()->get();
             $this->emptyInfo = __('mbo.info.objective_passed_no_users');
         } elseif ($status === 'failed') {
-            $this->userAssignments = $objective->user_assignments()->whereFailed()->get();
+            $this->userAssignments = $objective->user_objectives()->whereFailed()->get();
             $this->emptyInfo = __('mbo.info.objective_failed_no_users');
         }
     }

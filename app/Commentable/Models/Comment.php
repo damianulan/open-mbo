@@ -15,7 +15,6 @@ use Laravel\Scout\Searchable;
  * @property string $subject_id
  * @property string $author_type
  * @property string $author_id
- * @property int|null $parent_id
  * @property mixed $content
  * @property bool $private
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -33,7 +32,6 @@ use Laravel\Scout\Searchable;
  * @method static Builder<static>|Comment whereContent($value)
  * @method static Builder<static>|Comment whereCreatedAt($value)
  * @method static Builder<static>|Comment whereId($value)
- * @method static Builder<static>|Comment whereParentId($value)
  * @method static Builder<static>|Comment wherePrivate($value)
  * @method static Builder<static>|Comment whereSubjectId($value)
  * @method static Builder<static>|Comment whereSubjectType($value)

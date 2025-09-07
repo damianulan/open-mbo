@@ -7,8 +7,8 @@ use App\Contracts\MBO\HasObjectives;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Models\Scopes\MBO\ObjectiveTemplateScope;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property string $id
@@ -82,7 +82,6 @@ use Illuminate\Database\Eloquent\Attributes\ScopedBy;
  *
  * @mixin \Eloquent
  */
-
 #[ScopedBy(ObjectiveTemplateScope::class)]
 class ObjectiveTemplate extends BaseModel implements HasObjectives
 {
@@ -126,7 +125,7 @@ class ObjectiveTemplate extends BaseModel implements HasObjectives
         $result = 0;
         if ($this->objectives) {
             foreach ($this->objectives as $objective) {
-                $result += $objective->user_assignments()->count();
+                $result += $objective->user_objectives()->count();
             }
         }
 

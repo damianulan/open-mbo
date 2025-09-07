@@ -1,32 +1,34 @@
 <div>
     <div class="commentable" wire:poll.10000ms>
-        @foreach($this->subject->comments as $comment)
-            <div class="comment{{ $comment->isMine() ? ' my-comment' : '' }}" wire:key="{{ str()->random(50) }}">
-                <div class="comment-group" wire:transition.opacity.duration.1000ms >
-                    <a href="{{ $comment->author->routeShow() }}" target="_blank" class="commentable-avatar" data-tippy-content="{{ $comment->author->name }}">{!! $comment->author->getAvatarView(30, 30) !!}</a>
-                    <div class="commentable-item">
-                        <div class="commentable-header">
-                            <a class="commentable-author" href="{{ $comment->author->routeShow() }}" target="_blank">{{ $comment->author->name }}</a>
-                            @if($comment->isMine())
-                                <a class="icon-btn ms-auto" wire:confirm="Na pewno?" wire:click="delete({{ $comment->id }})" data-tippy-content="{{ __('buttons.delete') }}"><i class="bi-trash3-fill"></i></a>
-                            @endif
-                            @if(!$comment->private)
-                                <a class="icon-btn ms-1 commentable-quote" href="javascript:void(0);" data-tippy-content="{{ __('buttons.quote') }}"><i class="bi-quote"></i></a>
-                            @endif
-                        </div>
-                        <div class="commentable-content">
-                            {!! $comment->content !!}
-                        </div>
-                        <div class="commentable-footer">
-                            @if($comment->private)
-                                <div class="badge bg-warning">{{ __('globals.privately') }}</div>
-                            @endif
-                            <div class="commentable-timestamp" data-tippy-content="{{ $comment->created_at->format(config('app.datetime_format')) }}">{{ $comment->created_at->diffForHumans() }}</div>
+        @if($this->subject->comments)
+            @foreach($this->subject->comments as $comment)
+                <div class="comment{{ $comment->isMine() ? ' my-comment' : '' }}" wire:key="{{ str()->random(50) }}">
+                    <div class="comment-group" wire:transition.opacity.duration.1000ms >
+                        <a href="{{ $comment->author->routeShow() }}" target="_blank" class="commentable-avatar" data-tippy-content="{{ $comment->author->name }}">{!! $comment->author->getAvatarView(30, 30) !!}</a>
+                        <div class="commentable-item">
+                            <div class="commentable-header">
+                                <a class="commentable-author" href="{{ $comment->author->routeShow() }}" target="_blank">{{ $comment->author->name }}</a>
+                                @if($comment->isMine())
+                                    <a class="icon-btn ms-auto" wire:confirm="Na pewno?" wire:click="delete({{ $comment->id }})" data-tippy-content="{{ __('buttons.delete') }}"><i class="bi-trash3-fill"></i></a>
+                                @endif
+                                @if(!$comment->private)
+                                    <a class="icon-btn ms-1 commentable-quote" href="javascript:void(0);" data-tippy-content="{{ __('buttons.quote') }}"><i class="bi-quote"></i></a>
+                                @endif
+                            </div>
+                            <div class="commentable-content">
+                                {!! $comment->content !!}
+                            </div>
+                            <div class="commentable-footer">
+                                @if($comment->private)
+                                    <div class="badge bg-warning">{{ __('globals.privately') }}</div>
+                                @endif
+                                <div class="commentable-timestamp" data-tippy-content="{{ $comment->created_at->format(config('app.datetime_format')) }}">{{ $comment->created_at->diffForHumans() }}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        @endif
     </div>
     <div class="w-100" id="comment_container" wire:ignore>
         <div id="comment_editor" wire:ignore></div>

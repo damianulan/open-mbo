@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 interface HasObjectives
 {
-    public function objectives(): HasMany;
+    public function objectives(): HasMany|HasManyThrough;
 }

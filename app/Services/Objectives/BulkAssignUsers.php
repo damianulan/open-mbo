@@ -37,10 +37,10 @@ class BulkAssignUsers extends Service
 
     public function assignUser($user_id): bool
     {
-        $exists = $this->objective->user_assignments()->where('user_id', $user_id)->exists();
+        $exists = $this->objective->user_objectives()->where('user_id', $user_id)->exists();
         $result = false;
         if (! $exists) {
-            $result = $this->objective->user_assignments()->create([
+            $result = $this->objective->user_objectives()->create([
                 'user_id' => $user_id,
             ]);
         }
@@ -51,7 +51,7 @@ class BulkAssignUsers extends Service
     public function unassignUser($user_id): bool
     {
         $result = false;
-        $record = $this->objective->user_assignments()->where('user_id', $user_id)->first();
+        $record = $this->objective->user_objectives()->where('user_id', $user_id)->first();
         if ($record) {
             $result = $record->delete();
         }

@@ -2,15 +2,15 @@
 
 namespace App\Models\MBO;
 
+use App\Contracts\MBO\HasObjectives;
 use App\Enums\MBO\CampaignStage;
 use App\Events\MBO\Campaigns\UserCampaignAssigned;
 use App\Events\MBO\Campaigns\UserCampaignUnassigned;
 use App\Events\MBO\Campaigns\UserCampaignUpdated;
 use App\Models\BaseModel;
 use App\Models\Core\User;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Lucent\Support\Traits\Dispatcher;
-use App\Contracts\MBO\HasObjectives;
 
 /**
  * @property string $id
@@ -119,9 +119,9 @@ class UserCampaign extends BaseModel implements HasObjectives
         return $this->belongsTo(Campaign::class)->withTrashed();
     }
 
-    public function objectives(): HasMany
+    public function objectives(): HasManyThrough
     {
-        return $this->campaign->objectives()->whereAssigned($this->user);
+        return $this->hasManyThrough(Objective::class, Campaign::class, 'id', 'campaign_id', 'campaign_id', 'id')->whereAssigned($this->user);
     }
 
     public function assignObjectives()
@@ -136,7 +136,7 @@ class UserCampaign extends BaseModel implements HasObjectives
 
     public function stageDescription(): string
     {
-        return __('forms.campaigns.stages.' . $this->stage);
+        return __('forms.campaigns.stages.'.$this->stage);
     }
 
     public function stageIcon(): string
@@ -197,7 +197,7 @@ class UserCampaign extends BaseModel implements HasObjectives
         $objectives = $this->objectives();
         if ($objectives->count()) {
             foreach ($objectives as $objective) {
-                $assignments = $objective->user_assignments()->whereUserId($this->user_id)->get();
+                $assignments = $objective->user_objectives()->whereUserId($this->user_id)->get();
 
                 if ($assignments->count()) {
                     foreach ($assignments as $assignment) {
