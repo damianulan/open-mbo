@@ -165,4 +165,15 @@ class CampaignStage extends Enum
     {
         return __('forms.campaigns.stages');
     }
+
+    public static function fromto_labels(): array
+    {
+        $arr = [];
+        foreach (__('forms.campaigns.stages') as $key => $value) {
+            $arr[$key.'_from'] = $value.' '.__('forms.from');
+            $arr[$key.'_to'] = $value.' '.__('forms.to');
+        }
+
+        return $arr;
+    }
 }

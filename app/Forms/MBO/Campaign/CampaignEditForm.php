@@ -79,4 +79,9 @@ class CampaignEditForm extends Form
             'manual' => 'boolean',
         ];
     }
+
+    public static function attributes(): array
+    {
+        return array_merge(CampaignStage::fromto_labels(), __('forms.campaigns'));
+    }
 }

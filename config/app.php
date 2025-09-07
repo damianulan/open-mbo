@@ -271,6 +271,10 @@ return [
 
         // VENDORS
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
+
+        'AppException' => App\Exceptions\AppException::class,
+
+        'MessageType' => App\Enums\Core\MessageType::class,
     ])->toArray(),
 
 ];

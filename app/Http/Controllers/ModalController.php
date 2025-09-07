@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ModalController extends AppController
 {
-    public function getModal(Request $request)
+    public function getModal(Request $request): JsonResponse
     {
         $target = $request->get('target', null);
         $datas = $request->get('datas', []);
-        $status = 'error';
         $message = 'error';
         $view = null;
-        $params = [];
+        $status = false;
 
         try {
             if ($target) {
@@ -36,7 +36,7 @@ class ModalController extends AppController
                     );
                     if ($view instanceof View) {
                         $view = $view->render();
-                        $status = 'ok';
+                        $status = true;
                     } else {
                         throw new \Exception('Modal method must return a Illuminate\View\View instance.');
                     }
@@ -47,13 +47,10 @@ class ModalController extends AppController
                 throw new \Exception('Modal target is missing.');
             }
         } catch (\Throwable $e) {
-            $status = 'error';
-            $message = $e->getMessage();
+            $this->e = $e;
         }
 
-        return response()->json([
-            'status' => $status,
-            'message' => $message,
+        return $this->responseJson($status, $message, [
             'view' => $view,
         ]);
     }

@@ -6,6 +6,7 @@ use App\DataTables\MBO\ObjectiveCategoriesDataTable;
 use App\Forms\MBO\Objective\ObjectiveCategoryEditForm;
 use App\Models\MBO\ObjectiveTemplateCategory;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ObjectiveCategoryController extends MBOController
 {
@@ -23,7 +24,7 @@ class ObjectiveCategoryController extends MBOController
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create(Request $request): View
     {
         return view('pages.mbo.categories.edit', [
             'form' => ObjectiveCategoryEditForm::definition($request),

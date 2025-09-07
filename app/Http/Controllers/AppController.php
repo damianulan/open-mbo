@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Core\MessageType;
 use App\Exceptions\AppException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -10,12 +11,15 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\Auth;
 use Throwable;
 
 class AppController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    protected ?Throwable $e = null;
 
     protected function logShow(?Model $model = null): void
     {
@@ -45,22 +49,40 @@ class AppController extends BaseController
         }
     }
 
+    protected function returnResponseRedirect(?RedirectResponse $defaultRedirect = null, ?string $errorMessage = null): RedirectResponse|UrlGenerator
+    {
+        if ($this->e) {
+            return $this->catchResponseRedirect($this->e, $errorMessage);
+        }
+
+        if (is_null($defaultRedirect)) {
+            $defaultRedirect = redirect()->back();
+            if (! is_null($errorMessage)) {
+                $defaultRedirect->with(MessageType::ERROR, $errorMessage);
+            }
+        }
+
+        return $defaultRedirect;
+    }
+
     protected function catchResponseRedirect(
         Throwable $exception,
         ?string $message = null,
-        ?UrlGenerator $redirect = null
+        UrlGenerator|RedirectResponse|null $redirect = null
     ): RedirectResponse|UrlGenerator {
         if (! $exception instanceof AppException) {
             report($exception);
         }
 
-        $message ??= __('alerts.error.operation');
-
         if (config('app.debug')) {
             $message = $exception->getMessage();
         }
 
-        return $redirect ?? redirect()->route('index')->with('error', $message);
+        if (is_null($message)) {
+            $message = __('alerts.error.operation');
+        }
+
+        return $redirect ?? redirect()->back()->with(MessageType::ERROR, $message);
     }
 
     protected function catchResponseJson(
@@ -78,10 +100,19 @@ class AppController extends BaseController
 
         $message ??= __('alerts.error.operation');
 
-        return $this->ajaxResponseError($message, $datas);
+        return $this->responseJsonError($message, $datas);
     }
 
-    protected function ajaxResponse(bool $success = true, string $message = '', array $datas = []): JsonResponse
+    protected function responseJson(bool $success = true, ?string $message = null, array $datas = []): JsonResponse
+    {
+        if ($this->e) {
+            return $this->catchResponseJson($this->e, $message, $datas);
+        }
+
+        return $this->finalResponseJson($success, $message, $datas);
+    }
+
+    private function finalResponseJson(bool $success = true, ?string $message = null, array $datas = []): JsonResponse
     {
         if (empty($message)) {
             $success ? $message = __('alerts.success.operation') : $message = __('alerts.error.operation');
@@ -96,13 +127,13 @@ class AppController extends BaseController
         ));
     }
 
-    protected function ajaxResponseError(string $message = '', array $datas = []): JsonResponse
+    protected function responseJsonError(?string $message = null, array $datas = []): JsonResponse
     {
-        return $this->ajaxResponse(false, $message, $datas);
+        return $this->finalResponseJson(false, $message, $datas);
     }
 
-    protected function ajaxResponseSuccess(string $message = '', array $datas = []): JsonResponse
+    protected function responseJsonSuccess(?string $message = null, array $datas = []): JsonResponse
     {
-        return $this->ajaxResponse(true, $message, $datas);
+        return $this->finalResponseJson(true, $message, $datas);
     }
 }

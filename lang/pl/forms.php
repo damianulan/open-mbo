@@ -57,12 +57,16 @@ return [
         'choose_daterange_to' => 'Wybierz datę do...',
     ],
 
+    'from' => '[OD]',
+    'to' => '[DO]',
+
     'campaigns' => [
         'name' => 'Nazwa kampanii',
         'period' => 'Okres pomiaru',
         'description' => 'Opis',
+
         'stages' => [
-            CampaignStage::DEFINITION => 'Tworzenie strategii i określanie celów przez kierownictwo',
+            CampaignStage::DEFINITION => 'Tworzenie strategii i określanie celów',
             CampaignStage::DISPOSITION => 'Dysponowanie celów przez kierowników zespołów',
             CampaignStage::REALIZATION => 'Realizacja celów',
             CampaignStage::EVALUATION => 'Ewaluacja celów i ocena pracowników przez kierowników',
@@ -76,7 +80,7 @@ return [
 
         'info' => [
             'period' => 'Wprowadź unikalny reprezentatywny okres pomiaru, np. dla pomiaru co kwartał: 2023 Q3.',
-            CampaignStage::DEFINITION => 'Tworzenie strategii i określanie celów przez kierownictwo',
+            CampaignStage::DEFINITION => 'Tworzenie strategii i określanie celów',
             CampaignStage::DISPOSITION => 'Dysponowanie celów przez kierowników zespołów',
             CampaignStage::REALIZATION => 'Realizacja celów',
             CampaignStage::EVALUATION => 'Ewaluacja celów i ocena pracowników przez kierowników',
