@@ -6,6 +6,7 @@ use App\Casts\FormattedText;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Models\Scopes\MBO\ObjectiveTemplateCategoryScope;
+use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 
 /**
  * @property string $id
@@ -77,6 +78,8 @@ use App\Models\Scopes\MBO\ObjectiveTemplateCategoryScope;
  *
  * @mixin \Eloquent
  */
+
+#[ScopedBy(ObjectiveTemplateCategoryScope::class)]
 class ObjectiveTemplateCategory extends BaseModel
 {
     protected $table = 'objective_template_categories';
@@ -91,8 +94,6 @@ class ObjectiveTemplateCategory extends BaseModel
     protected $casts = [
         'description' => FormattedText::class,
     ];
-
-    protected $accessScope = ObjectiveTemplateCategoryScope::class;
 
     protected static function boot()
     {

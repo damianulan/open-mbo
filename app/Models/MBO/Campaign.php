@@ -3,6 +3,7 @@
 namespace App\Models\MBO;
 
 use App\Casts\FormattedText;
+use App\Contracts\MBO\HasObjectives;
 use App\Enums\MBO\CampaignStage;
 use App\Events\MBO\Campaigns\CampaignCreated;
 use App\Events\MBO\Campaigns\CampaignUpdated;
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Collection;
 use Lucent\Support\Traits\Dispatcher;
+use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 
 /**
  * @property string $id
@@ -119,7 +121,9 @@ use Lucent\Support\Traits\Dispatcher;
  *
  * @mixin \Eloquent
  */
-class Campaign extends BaseModel
+
+#[ScopedBy(CampaignScope::class)]
+class Campaign extends BaseModel implements HasObjectives
 {
     use Dispatcher;
 
@@ -165,8 +169,6 @@ class Campaign extends BaseModel
         'updated' => CampaignUpdated::class,
         'created' => CampaignCreated::class,
     ];
-
-    protected $accessScope = CampaignScope::class;
 
     public function user_campaigns(): HasMany
     {
@@ -263,8 +265,8 @@ class Campaign extends BaseModel
         $now = Carbon::now();
 
         foreach (CampaignStage::softValues() as $tmp) {
-            $prop_start = $tmp.'_from';
-            $prop_end = $tmp.'_to';
+            $prop_start = $tmp . '_from';
+            $prop_end = $tmp . '_to';
             $start = Carbon::parse($this->$prop_start);
             $end = Carbon::parse($this->$prop_end);
 
@@ -292,8 +294,8 @@ class Campaign extends BaseModel
         if ($this->stage === CampaignStage::IN_PROGRESS) {
             $softStage = null;
             foreach (CampaignStage::softValues() as $tmp) {
-                $prop_start = $tmp.'_from';
-                $prop_end = $tmp.'_to';
+                $prop_start = $tmp . '_from';
+                $prop_end = $tmp . '_to';
                 $start = Carbon::parse($this->$prop_start);
                 $end = Carbon::parse($this->$prop_end);
 
@@ -364,14 +366,14 @@ class Campaign extends BaseModel
     protected function timestart(): Attribute
     {
         return Attribute::make(
-            get: fn () => Carbon::parse($this->definition_from),
+            get: fn() => Carbon::parse($this->definition_from),
         );
     }
 
     protected function timeend(): Attribute
     {
         return Attribute::make(
-            get: fn () => Carbon::parse($this->self_evaluation_to),
+            get: fn() => Carbon::parse($this->self_evaluation_to),
         );
     }
 

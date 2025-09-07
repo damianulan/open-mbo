@@ -8,7 +8,9 @@ use App\Events\MBO\Campaigns\UserCampaignUnassigned;
 use App\Events\MBO\Campaigns\UserCampaignUpdated;
 use App\Models\BaseModel;
 use App\Models\Core\User;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Lucent\Support\Traits\Dispatcher;
+use App\Contracts\MBO\HasObjectives;
 
 /**
  * @property string $id
@@ -80,7 +82,7 @@ use Lucent\Support\Traits\Dispatcher;
  *
  * @mixin \Eloquent
  */
-class UserCampaign extends BaseModel
+class UserCampaign extends BaseModel implements HasObjectives
 {
     use Dispatcher;
 
@@ -117,9 +119,9 @@ class UserCampaign extends BaseModel
         return $this->belongsTo(Campaign::class)->withTrashed();
     }
 
-    public function objectives()
+    public function objectives(): HasMany
     {
-        return $this->campaign->objectives()->whereAssigned($this->user)->get();
+        return $this->campaign->objectives()->whereAssigned($this->user);
     }
 
     public function assignObjectives()
@@ -134,7 +136,7 @@ class UserCampaign extends BaseModel
 
     public function stageDescription(): string
     {
-        return __('forms.campaigns.stages.'.$this->stage);
+        return __('forms.campaigns.stages.' . $this->stage);
     }
 
     public function stageIcon(): string

@@ -10,6 +10,7 @@ use App\Models\Scopes\MBO\ObjectiveScope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\JoinClause;
 use Lucent\Support\Traits\Dispatcher;
+use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 
 /**
  * @property string $id
@@ -94,6 +95,8 @@ use Lucent\Support\Traits\Dispatcher;
  *
  * @mixin \Eloquent
  */
+
+#[ScopedBy(ObjectiveScope::class)]
 class Objective extends BaseModel
 {
     use Commentable, Dispatcher;
@@ -115,8 +118,6 @@ class Objective extends BaseModel
         'draft' => 'boolean',
         'deadline' => 'datetime',
     ];
-
-    protected $accessScope = ObjectiveScope::class;
 
     protected static function boot()
     {

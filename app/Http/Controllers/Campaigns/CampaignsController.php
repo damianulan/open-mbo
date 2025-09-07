@@ -80,7 +80,7 @@ class CampaignsController extends AppController
 
         CampaignViewed::dispatch($campaign);
         $this->logShow($campaign);
-        $header = $campaign->name.' ['.$campaign->period.']';
+        $header = $campaign->name . ' [' . $campaign->period . ']';
 
         return view('pages.mbo.campaigns.show', [
             'campaign' => $campaign,

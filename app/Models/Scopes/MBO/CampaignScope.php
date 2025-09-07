@@ -18,16 +18,18 @@ class CampaignScope implements Scope
      */
     public function apply(Builder $builder, Model $model): void
     {
-        $user = Auth::user();
+        if (Auth::check()) {
+            $user = Auth::user();
 
-        if ($user->cannot(PermissionsLib::MBO_ADMINISTRATION)) {
-            if ($user->can(PermissionsLib::MBO_CAMPAIGN_VIEW)) {
-                $campaignRoleId = Role::getId(RolesLib::CAMPAIGN_COORDINATOR);
-                $campaign_ids = $user->roleAssignments()->where('role_id', $campaignRoleId)->where('context_type', Campaign::class)->get()->pluck('context_id');
+            if ($user->cannot(PermissionsLib::MBO_ADMINISTRATION)) {
+                if ($user->can(PermissionsLib::MBO_CAMPAIGN_VIEW)) {
+                    $campaignRoleId = Role::getId(RolesLib::CAMPAIGN_COORDINATOR);
+                    $campaign_ids = $user->roleAssignments()->where('role_id', $campaignRoleId)->where('context_type', Campaign::class)->get()->pluck('context_id');
 
-                $builder->whereIn('id', $campaign_ids);
-            } else {
-                $builder->whereRaw('1=0');
+                    $builder->whereIn('id', $campaign_ids);
+                } else {
+                    $builder->whereRaw('1=0');
+                }
             }
         }
     }

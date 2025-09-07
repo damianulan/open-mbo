@@ -3,9 +3,12 @@
 namespace App\Models\MBO;
 
 use App\Casts\FormattedText;
+use App\Contracts\MBO\HasObjectives;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Models\Scopes\MBO\ObjectiveTemplateScope;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 
 /**
  * @property string $id
@@ -79,7 +82,9 @@ use App\Models\Scopes\MBO\ObjectiveTemplateScope;
  *
  * @mixin \Eloquent
  */
-class ObjectiveTemplate extends BaseModel
+
+#[ScopedBy(ObjectiveTemplateScope::class)]
+class ObjectiveTemplate extends BaseModel implements HasObjectives
 {
     protected $fillable = [
         'category_id',
@@ -92,8 +97,6 @@ class ObjectiveTemplate extends BaseModel
         'description' => FormattedText::class,
         'draft' => 'boolean',
     ];
-
-    protected $accessScope = ObjectiveTemplateScope::class;
 
     protected static function boot()
     {
@@ -108,7 +111,7 @@ class ObjectiveTemplate extends BaseModel
         return $this->belongsTo(ObjectiveTemplateCategory::class, 'category_id');
     }
 
-    public function objectives()
+    public function objectives(): HasMany
     {
         return $this->hasMany(Objective::class, 'template_id');
     }

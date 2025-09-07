@@ -26,7 +26,7 @@ class UserAssignObjectives implements ShouldQueue
     {
         $model = $event->userCampaign;
 
-        $objectives = $model->campaign?->objectives;
+        $objectives = $model->campaign->objectives;
         foreach ($objectives as $objective) {
             UserObjective::assign($model->user_id, $objective->id);
         }

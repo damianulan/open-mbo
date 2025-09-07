@@ -33,7 +33,7 @@
             <div class="row">
                 <div class="col-md-5 pt-3">
                     <h4>{{ __('mbo.objectives.index') }}</h4>
-                    <x-objectives-list :objectives="$campaign->objectives()->checkAccess()->get()" />
+                    <x-objectives-list :model="$campaign" />
                 </div>
                 <div class="col-md-5 offset-md-2 pt-3">
                     <h4>{{ __('mbo.enroled_users') }}</h4>

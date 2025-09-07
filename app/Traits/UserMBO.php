@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\MBO\Campaign;
+use App\Models\MBO\Objective;
 use App\Models\MBO\UserBonusScheme;
 use App\Models\MBO\UserCampaign;
 use App\Models\MBO\UserObjective;
@@ -10,19 +11,25 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 trait UserMBO
 {
-    public function objective_assignments(): HasMany
+    public function user_objectives(): HasMany
     {
         return $this->hasMany(UserObjective::class);
     }
 
-    public function objectives(): HasMany
+    public function user_objectives_active(): HasMany
     {
-        return $this->objective_assignments()->whereHas('objective', function (Builder $query) {
+        return $this->user_objectives()->whereHas('objective', function (Builder $query) {
             $query->where('draft', 0);
         });
+    }
+
+    public function objectives(): HasManyThrough
+    {
+        return $this->hasManyThrough(Objective::class, UserObjective::class, 'user_id', 'id', 'id', 'objective_id');
     }
 
     public function user_bonus_scheme(): BelongsTo
