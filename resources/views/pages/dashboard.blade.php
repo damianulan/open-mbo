@@ -10,7 +10,7 @@
 
 <div class="row">
     <div class="col-lg-6 col-sm-12">
-        <div class="content-card content-card-sm">
+        <div class="content-card content-card-xs">
             <div class="content-card-top">
                 <div class="content-card-header">
                     <i class="bi-clipboard-check-fill me-2"></i>

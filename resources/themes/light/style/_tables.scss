@@ -167,6 +167,15 @@ table.ombo-table tbody tr:hover {
     transition: all 0.2s ease-in-out;
 }
 
+.ombo-list li.warning {
+    background-color: $ombo-body-warning;
+}
+
+.ombo-list li.warning:hover {
+    background-color: $ombo-body-warning-hover;
+    transition: all 0.2s ease-in-out;
+}
+
 .ombo-list li.completed {
     background-color: $ombo-body-completed;
 }

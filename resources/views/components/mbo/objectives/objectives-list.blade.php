@@ -1,7 +1,7 @@
 @if($objectives->count())
     <ul class="ombo-list">
         @foreach ($objectives as $objective)
-            <li>
+            <li class="{{ $objective->isDeadlineUpcoming() ? 'warning' : '' }}">
                 <div class="list-grid">
                     <div class="list-content">
                         <div class="nowrap" data-tippy-content="{{ $objective->name }}">

@@ -23,9 +23,7 @@ class InteractiveText implements CastsAttributes
      */
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        $value = self::getInteractive($value);
-
-        return $value;
+        return self::getInteractive($value);
     }
 
     /**
@@ -35,12 +33,10 @@ class InteractiveText implements CastsAttributes
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        $value = self::setInteractive($value, $model);
-
-        return $value;
+        return self::setInteractive($value, $model);
     }
 
-    private static function getUserRoute($id)
+    private static function getUserRoute($id): ?string
     {
         $routeName = 'users.show';
         if (Route::has($routeName)) {
@@ -57,7 +53,7 @@ class InteractiveText implements CastsAttributes
 
     private static function tagPattern(string $name): string
     {
-        return '/<interactive-'.$name.':([0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})>/i';
+        return '/<interactive-' . $name . ':([0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})>/i';
     }
 
     private static function interactiveMentions(string $value, $mode, ?Model $model = null): string
@@ -74,13 +70,13 @@ class InteractiveText implements CastsAttributes
                         $lastname = $match[2];
                         $user = User::whereFirstname($firstname)->whereLastname($lastname)->first();
                         if ($user) {
-                            $search = "@$firstname $lastname";
+                            $search = Str::lower("@$firstname $lastname");
                             if ($mode === self::MODE_SET) {
                                 $replaceTo = self::generateTag('mention', $user->id);
                             } elseif ($mode === self::MODE_NORMAL) {
                                 $route = self::getUserRoute($user->id);
                                 if ($route) {
-                                    $replaceTo = '<a class="user-mention" href="'.$route.'">'.$user->firstname().' '.$user->lastname().'</a>';
+                                    $replaceTo = '<a class="user-mention" href="' . $route . '">' . $user->firstname() . ' ' . $user->lastname() . '</a>';
                                 }
                             }
                         }
@@ -90,7 +86,7 @@ class InteractiveText implements CastsAttributes
                             if ($mode === self::MODE_SET) {
                             }
                         }
-                        $value = Str::replace($search, $replaceTo, $value);
+                        $value = Str::replace($search, $replaceTo, $value, false);
                     }
                 }
             }
@@ -109,10 +105,10 @@ class InteractiveText implements CastsAttributes
                         if ($user) {
                             $route = self::getUserRoute($user->id);
                             if ($route) {
-                                $replaceTo = '<a class="user-mention" href="'.$route.'">'.$user->firstname().' '.$user->lastname().'</a>';
+                                $replaceTo = '<a class="user-mention" href="' . $route . '">' . $user->firstname() . ' ' . $user->lastname() . '</a>';
                             }
                         }
-                        $value = Str::replace($search, $replaceTo, $value);
+                        $value = Str::replace($search, $replaceTo, $value, false);
                     }
                 }
             }
@@ -121,23 +117,29 @@ class InteractiveText implements CastsAttributes
         return $value;
     }
 
-    public static function interactiveOutput(string $value): string
+    public static function interactiveOutput(?string $value): ?string
     {
-        $value = self::interactiveMentions($value, self::MODE_NORMAL);
+        if (!empty($value)) {
+            $value = self::interactiveMentions($value, self::MODE_NORMAL);
+        }
 
         return $value;
     }
 
-    public static function getInteractive(string $value): string
+    public static function getInteractive(?string $value): ?string
     {
-        $value = self::interactiveMentions($value, self::MODE_GET);
+        if (!empty($value)) {
+            $value = self::interactiveMentions($value, self::MODE_GET);
+        }
 
         return $value;
     }
 
-    public static function setInteractive(string $value, Model $model): string
+    public static function setInteractive(?string $value, Model $model): ?string
     {
-        $value = self::interactiveMentions($value, self::MODE_SET, $model);
+        if (!empty($value)) {
+            $value = self::interactiveMentions($value, self::MODE_SET, $model);
+        }
 
         return $value;
     }
