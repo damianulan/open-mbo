@@ -41,6 +41,7 @@ use Lucent\Support\Traits\Dispatcher;
  * @property-read \App\Models\MBO\Objective $objective
  * @property-read \App\Models\MBO\UserPoints $points
  * @property-read User $user
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective avg(string $column)
@@ -102,6 +103,7 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static Builder<static>|UserObjective withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective withoutCache()
  * @method static Builder<static>|UserObjective withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserObjective extends BaseModel implements AssignsPoints
@@ -137,6 +139,7 @@ class UserObjective extends BaseModel implements AssignsPoints
             if ($instance->save()) {
                 $instance->refresh();
                 $instance->setStatus()->updateQuietly();
+
                 return true;
             }
         }
@@ -219,7 +222,7 @@ class UserObjective extends BaseModel implements AssignsPoints
     public function points(): MorphOne
     {
         return $this->morphOne(UserPoints::class, 'subject')->withDefault([
-            'user_id' => $this->user_id
+            'user_id' => $this->user_id,
         ])->whereUserId($this->user_id);
     }
 
@@ -331,7 +334,7 @@ class UserObjective extends BaseModel implements AssignsPoints
 
     public static function updatedUserObjective(UserObjective $model): void
     {
-        if ($model->isDirty('status') && !in_array($model->getOriginal('status'), UserObjectiveStatus::evaluated())) {
+        if ($model->isDirty('status') && ! in_array($model->getOriginal('status'), UserObjectiveStatus::evaluated())) {
             if ($model->isEvaluated()) {
                 UserObjectiveEvaluated::dispatch($model, Auth::user() ?? null);
             }
@@ -397,7 +400,7 @@ class UserObjective extends BaseModel implements AssignsPoints
             $this->evaluation = null;
         }
         $this->evaluated_at = now();
-        if (!$auto) {
+        if (! $auto) {
             $this->evaluated_by = Auth::user()->id;
         }
         $this->points()->delete();
@@ -419,10 +422,9 @@ class UserObjective extends BaseModel implements AssignsPoints
             $this->evaluation = 100;
         }
         $this->evaluated_at = now();
-        if (!$auto) {
+        if (! $auto) {
             $this->evaluated_by = Auth::user()->id;
         }
-
 
         // TODO do not commit
         $this->points()->updateOrCreate([

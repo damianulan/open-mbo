@@ -2,9 +2,9 @@
 
 namespace App\Listeners\MBO\Objectives;
 
+use App\Events\MBO\Objectives\UserObjectiveEvaluated;
 use Illuminate\Contracts\Queue\ShouldQueueAfterCommit;
 use Illuminate\Queue\InteractsWithQueue;
-use App\Events\MBO\Objectives\UserObjectiveEvaluated;
 
 class UserObjectiveStatusCheck implements ShouldQueueAfterCommit
 {

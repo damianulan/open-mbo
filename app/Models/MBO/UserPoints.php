@@ -3,10 +3,9 @@
 namespace App\Models\MBO;
 
 use App\Models\BaseModel;
+use App\Models\Core\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Lucent\Support\Traits\Dispatcher;
-use App\Models\Core\User;
 
 /**
  * @property string $id
@@ -23,6 +22,7 @@ use App\Models\Core\User;
  * @property-read User|null $assigner
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $subject
  * @property-read User $user
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints avg(string $column)
@@ -75,6 +75,7 @@ use App\Models\Core\User;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPoints withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPoints withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserPoints extends BaseModel

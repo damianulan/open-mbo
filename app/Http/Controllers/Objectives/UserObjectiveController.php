@@ -11,11 +11,11 @@ use App\Models\MBO\UserObjective;
 use App\Services\Objectives\BulkAssignUsers;
 use App\Services\Objectives\UserRealizationUpdate;
 use AppException;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserObjectiveController extends AppController
 {
