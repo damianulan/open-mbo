@@ -13,7 +13,7 @@ class UserAssignObjectives implements ShouldQueue
 
     public $tries = 3;
 
-    public $timeout = 1200;
+    public $timeout = 300;
 
     /**
      * Create the event listener.

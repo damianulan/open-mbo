@@ -10,7 +10,7 @@ class UserObjectiveStatusCheck implements ShouldQueueAfterCommit
 {
     use InteractsWithQueue;
 
-    public $delay = 300;
+    public $delay = 360;
 
     /**
      * Create the event listener.
