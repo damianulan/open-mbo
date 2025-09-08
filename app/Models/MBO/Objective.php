@@ -4,6 +4,8 @@ namespace App\Models\MBO;
 
 use App\Casts\FormattedText;
 use App\Commentable\Support\Commentable;
+use App\Events\MBO\Objectives\ObjectiveCreated;
+use App\Events\MBO\Objectives\ObjectiveUpdated;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Models\Scopes\MBO\ObjectiveScope;
@@ -33,7 +35,6 @@ use Lucent\Support\Traits\Dispatcher;
  * @property-read \App\Models\MBO\ObjectiveTemplate|null $template
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective avg(string $column)
@@ -91,7 +92,6 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static Builder<static>|Objective withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective withoutCache()
  * @method static Builder<static>|Objective withoutTrashed()
- *
  * @mixin \Eloquent
  */
 #[ScopedBy(ObjectiveScope::class)]
@@ -115,6 +115,15 @@ class Objective extends BaseModel
         'description' => FormattedText::class,
         'draft' => 'boolean',
         'deadline' => 'datetime',
+    ];
+
+    protected $cascadeDelete = [
+        'user_objectives',
+    ];
+
+    protected $dispatchesEvents = [
+        'updated' => ObjectiveUpdated::class,
+        'created' => ObjectiveCreated::class,
     ];
 
     protected static function boot()

@@ -11,6 +11,8 @@ class UserCampaignStageCheck implements ShouldQueueAfterCommit
 {
     use InteractsWithQueue;
 
+    public $timeout = 180;
+
     /**
      * Create the event listener.
      */

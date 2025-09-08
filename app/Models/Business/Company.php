@@ -23,7 +23,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read int|null $employments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\Location> $locations
  * @property-read int|null $locations_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company avg(string $column)
@@ -77,7 +76,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Company extends BaseModel

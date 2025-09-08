@@ -76,13 +76,24 @@ return [
         ],
 
         'error' => [
-            'overdued' => 'Cel nie jest już aktualny - termin jego realizacji minął. Wszystkie nieukończone podejścia zostały oznaczone jako niezaliczone.',
+            'overdued' => 'Termin realizacji tego celu minął :term',
             'users_added' => 'Dane nie zostały zaktualizowane. Odśwież stronę i spróbuj ponownie.',
             'realization_updated' => 'Dane o realizacji celu nie mogły zostać zaktualizowane. Wystąpił nieoczekiwany błąd.',
         ],
 
         'info' => [
             'delete' => 'Usunięcie celu będzie nieodwracalne.',
+        ],
+    ],
+
+    'user_objectives' => [
+        'success' => [
+            'set_passed' => 'Cel został oznaczony jako zaliczony.',
+            'set_failed' => 'Cel został oznaczony jako niezaliczony.',
+        ],
+        'error' => [
+            'set_passed' => 'Nie można oznaczyć celu jako zaliczony.',
+            'set_failed' => 'Nie można oznaczyć celu jako niezaliczony.',
         ],
     ],
 

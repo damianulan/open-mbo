@@ -47,21 +47,23 @@ class MBOVerifyStatusScript extends BaseCommand
             Campaign::whereActive()->whereManual(0)->chunk(config('app.chunk_default'), function (Collection $campaigns) use ($echo) {
                 foreach ($campaigns as $campaign) {
                     $campaign->setStageAuto();
-                    if ($campaign->isDirty()) {
+                    if ($campaign->isDirty('stage')) {
                         if ($echo) {
-                            $this->line('Updating campaign status for: '.$campaign->name.' - '.$campaign->getOriginal('stage').' => '.$campaign->stage);
+                            $this->line('Updating campaign status for: ' . $campaign->name . ' - ' . $campaign->getOriginal('stage') . ' => ' . $campaign->stage);
                         }
                         $campaign->updateQuietly();
                     }
+
+                    $campaign->setUserStage();
                 }
             });
             $this->line('Updating objectives status ...');
-            UserObjective::whereNotEvaluated()->chunk(config('app.chunk_default'), function (Collection $objectives) use ($echo) {
+            UserObjective::whereNotEvaluated()->whereHas('objective')->chunk(config('app.chunk_default'), function (Collection $objectives) use ($echo) {
                 foreach ($objectives as $objective) {
                     $objective->setStatus();
-                    if ($objective->isDirty()) {
+                    if ($objective->isDirty('status')) {
                         if ($echo) {
-                            $this->line('Updating objective status for: '.$objective->objective->name.' ('.$objective->user->name.') - '.$objective->getOriginal('status').' => '.$objective->status);
+                            $this->line('Updating objective status for: ' . $objective->objective->name . ' (' . $objective->user->name . ') - ' . $objective->getOriginal('status') . ' => ' . $objective->status);
                         }
                         $objective->updateQuietly();
                     }

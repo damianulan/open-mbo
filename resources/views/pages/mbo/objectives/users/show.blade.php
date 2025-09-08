@@ -8,7 +8,9 @@
         @endif
     </div>
     <div class="panel-left">
-        <a class="icon-btn edit-realization" href="javascript:void(0);" data-modelid="{{ $userObjective->id }}" data-tippy-content="{{ __('buttons.edit_realization') }}"><i class="bi-layer-forward"></i></a>
+        @if($userObjective && !$userObjective->isEvaluated())
+            <a class="icon-btn edit-realization" href="javascript:void(0);" data-modelid="{{ $userObjective->id }}" data-tippy-content="{{ __('buttons.edit_realization') }}"><i class="bi-layer-forward"></i></a>
+        @endif
     </div>
 </div>
 <div class="row">

@@ -19,7 +19,9 @@ class ObjectiveEditUserRealizationForm extends Form
         return FormBuilder::boot($request, $method, $route, 'user_objective_edit_realization')
             ->class('objective-add-users-form')
             ->add(FormComponent::hidden('id', $model))
-            ->add(FormComponent::decimal('realization', $model)->label(__('forms.mbo.objectives.users.realization'))->info(__('forms.mbo.objectives.users.info.realization')))
+            ->add(FormComponent::decimal('realization', $model)->label(__('forms.mbo.objectives.users.realization'))->info(__('forms.mbo.objectives.users.info.realization')), function () use ($model) {
+                return $model->objective->expected ?? false;
+            })
             ->add(FormComponent::decimal('evaluation', $model)->label(__('forms.mbo.objectives.users.evaluation'))->info(__('forms.mbo.objectives.users.info.evaluation')))
             ->addTitle($title);
     }

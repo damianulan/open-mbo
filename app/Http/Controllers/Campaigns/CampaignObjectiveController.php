@@ -57,7 +57,7 @@ class CampaignObjectiveController extends AppController
     {
         $params = [];
         if ($id) {
-            $objective = Objective::checkAccess()->find($id);
+            $objective = Objective::find($id);
             if ($objective) {
                 $params = [
                     'id' => $id,

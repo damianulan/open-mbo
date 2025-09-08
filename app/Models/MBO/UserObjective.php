@@ -3,17 +3,20 @@
 namespace App\Models\MBO;
 
 use App\Commentable\Support\Commentable;
+use App\Contracts\MBO\AssignsPoints;
 use App\Enums\MBO\CampaignStage;
 use App\Enums\MBO\UserObjectiveStatus;
 use App\Events\MBO\Campaigns\CampaignUserObjectiveAssigned;
 use App\Events\MBO\Campaigns\CampaignUserObjectiveUnassigned;
 use App\Events\MBO\Objectives\UserObjectiveAssigned;
+use App\Events\MBO\Objectives\UserObjectiveEvaluated;
 use App\Events\MBO\Objectives\UserObjectiveUnassigned;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Facades\Auth;
 use Lucent\Support\Traits\Dispatcher;
 
@@ -24,6 +27,8 @@ use Lucent\Support\Traits\Dispatcher;
  * @property string $status objective status
  * @property string|null $realization Numerical value of the realization of the objective - in relation to the expected value in objective
  * @property string|null $evaluation Percentage evaluation of the objective - if realization is set, evaluation is calculated automatically
+ * @property \Illuminate\Support\Carbon|null $evaluated_at Time when most recent evaluation was made
+ * @property string|null $evaluated_by Time when most recent evaluator has made any changes
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -32,9 +37,10 @@ use Lucent\Support\Traits\Dispatcher;
  * @property-read \App\Models\MBO\Campaign|null $campaign
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Commentable\Models\Comment> $comments
  * @property-read int|null $comments_count
+ * @property-read User|null $evaluator
  * @property-read \App\Models\MBO\Objective $objective
+ * @property-read \App\Models\MBO\UserPoints $points
  * @property-read User $user
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective avg(string $column)
@@ -81,6 +87,8 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereCreatedAt($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereDeletedAt($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereEvaluated()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereEvaluatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereEvaluatedBy($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereEvaluation($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereFailed()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereId($value)
@@ -94,10 +102,9 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static Builder<static>|UserObjective withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective withoutCache()
  * @method static Builder<static>|UserObjective withoutTrashed()
- *
  * @mixin \Eloquent
  */
-class UserObjective extends BaseModel
+class UserObjective extends BaseModel implements AssignsPoints
 {
     use Commentable, Dispatcher;
 
@@ -107,10 +114,16 @@ class UserObjective extends BaseModel
         'status',
         'evaluation', // percentage evaluation
         'realization', // actual realization value - can remain null
+        'evaluated_at',
+        'evaluated_by',
     ];
 
     protected $defaults = [
         'status' => UserObjectiveStatus::UNSTARTED,
+    ];
+
+    protected $casts = [
+        'evaluated_at' => 'datetime',
     ];
 
     public static function assign($user_id, $objective_id): bool
@@ -122,6 +135,8 @@ class UserObjective extends BaseModel
             $instance->user_id = $user_id;
             $instance->objective_id = $objective_id;
             if ($instance->save()) {
+                $instance->refresh();
+                $instance->setStatus()->updateQuietly();
                 return true;
             }
         }
@@ -144,11 +159,7 @@ class UserObjective extends BaseModel
 
     public function isAfterDeadline(): bool
     {
-        if ($this->objective?->deadline) {
-            return $this->objective?->deadline->isPast();
-        }
-
-        return false;
+        return $this->objective->isOverdued();
     }
 
     public function getStatusLabel(): string
@@ -160,7 +171,6 @@ class UserObjective extends BaseModel
     {
         $status = $this->status;
         $frozen = UserObjectiveStatus::frozen();
-        $autofail = settings('mbo.objectives_autofail');
 
         $campaign = $this->objective->campaign ?? null;
         $userCampaign = null;
@@ -178,11 +188,7 @@ class UserObjective extends BaseModel
 
         if (! in_array($status, $frozen)) {
             if ($this->isAfterDeadline()) {
-                if ($autofail) {
-                    // TODO fail when expected value is filled and not met
-                } else {
-                }
-                $status = UserObjectiveStatus::COMPLETED;
+                $this->autoEvaluate();
             } else {
                 if (! $userCampaign) {
                     $status = UserObjectiveStatus::PROGRESS;
@@ -190,7 +196,7 @@ class UserObjective extends BaseModel
             }
         }
 
-        $this->status = $status;
+        $this->status = $status ?? UserObjectiveStatus::UNSTARTED;
 
         return $this;
     }
@@ -203,6 +209,18 @@ class UserObjective extends BaseModel
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class)->withTrashed();
+    }
+
+    public function evaluator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'evaluated_by')->withTrashed();
+    }
+
+    public function points(): MorphOne
+    {
+        return $this->morphOne(UserPoints::class, 'subject')->withDefault([
+            'user_id' => $this->user_id
+        ])->whereUserId($this->user_id);
     }
 
     public function campaign(): Attribute
@@ -248,34 +266,39 @@ class UserObjective extends BaseModel
         return in_array($this->status, [UserObjectiveStatus::COMPLETED, UserObjectiveStatus::PASSED, UserObjectiveStatus::FAILED]);
     }
 
+    public function isEvaluated(): bool
+    {
+        return in_array($this->status, UserObjectiveStatus::evaluated());
+    }
+
     public function scopeWhereActive(Builder $query): void
     {
-        $query->whereNotIn('status', UserObjectiveStatus::frozen());
+        $query->whereNotIn('user_objectives.status', UserObjectiveStatus::frozen());
     }
 
     public function scopeWhereNotEvaluated(Builder $query): void
     {
-        $query->whereNotIn('status', UserObjectiveStatus::evaluated());
+        $query->whereNotIn('user_objectives.status', UserObjectiveStatus::evaluated());
     }
 
     public function scopeWhereEvaluated(Builder $query): void
     {
-        $query->whereIn('status', UserObjectiveStatus::evaluated());
+        $query->whereIn('user_objectives.status', UserObjectiveStatus::evaluated());
     }
 
     public function scopeWhereCompleted(Builder $query): void
     {
-        $query->where('status', UserObjectiveStatus::COMPLETED);
+        $query->where('user_objectives.status', UserObjectiveStatus::COMPLETED);
     }
 
     public function scopeWherePassed(Builder $query): void
     {
-        $query->where('status', UserObjectiveStatus::PASSED);
+        $query->where('user_objectives.status', UserObjectiveStatus::PASSED);
     }
 
     public function scopeWhereFailed(Builder $query): void
     {
-        $query->where('status', UserObjectiveStatus::FAILED);
+        $query->where('user_objectives.status', UserObjectiveStatus::FAILED);
     }
 
     public function scopeMy(Builder $query, ?User $user = null): void
@@ -283,12 +306,7 @@ class UserObjective extends BaseModel
         if (! $user) {
             $user = Auth::user();
         }
-        $query->where('user_id', $user->id);
-    }
-
-    public static function retrievedUserObjective(UserObjective $model): void
-    {
-        $model->setStatus()->update();
+        $query->where('user_objectives.user_id', $user->id);
     }
 
     public static function creatingUserObjective(UserObjective $model): UserObjective
@@ -313,7 +331,11 @@ class UserObjective extends BaseModel
 
     public static function updatedUserObjective(UserObjective $model): void
     {
-        if (! in_array('status', $model->getDirty())) {
+        if ($model->isDirty('status') && !in_array($model->getOriginal('status'), UserObjectiveStatus::evaluated())) {
+            if ($model->isEvaluated()) {
+                UserObjectiveEvaluated::dispatch($model, Auth::user() ?? null);
+            }
+        } else {
             $model->setStatus()->updateQuietly();
         }
     }
@@ -329,5 +351,86 @@ class UserObjective extends BaseModel
         } else {
             UserObjectiveUnassigned::dispatch($model->user, $model->campaign);
         }
+    }
+
+    public function calculatePoints(): float
+    {
+        $points = 0;
+
+        $award = $this->objective->award ?? 0;
+        if ($award > 0) {
+            $points = round($award * ($this->evaluation / 100), 2);
+        }
+
+        return $points;
+    }
+
+    public function setCompleted(): self
+    {
+        $this->status = UserObjectiveStatus::COMPLETED;
+
+        return $this;
+    }
+
+    public function autoEvaluate(): self
+    {
+        if ($this->isAfterDeadline()) {
+            $this->status = UserObjectiveStatus::COMPLETED;
+            $autofail = settings('mbo.objectives_autofail', true);
+            if ($autofail) {
+                if ((! $this->evaluation || $this->evaluation < 100)) {
+                    $this->setFailed(true);
+                } else {
+                    $this->setPassed(true);
+                }
+            }
+        }
+
+        return $this;
+    }
+
+    public function setFailed(bool $auto = false): self
+    {
+        $this->status = UserObjectiveStatus::FAILED;
+
+        if ($this->evaluation >= 100) {
+            $this->evaluation = null;
+        }
+        $this->evaluated_at = now();
+        if (!$auto) {
+            $this->evaluated_by = Auth::user()->id;
+        }
+        $this->points()->delete();
+
+        // based on settings - award event if failed
+        // $this->points()->updateOrCreate([
+        //     'user_id' => $this->user_id,
+        //     'points' => $this->calculatePoints(),
+        //     'assigned_by' => $this->evaluated_by,
+        // ]);
+
+        return $this;
+    }
+
+    public function setPassed(bool $auto = false): self
+    {
+        $this->status = UserObjectiveStatus::PASSED;
+        if (! $this->evaluation) {
+            $this->evaluation = 100;
+        }
+        $this->evaluated_at = now();
+        if (!$auto) {
+            $this->evaluated_by = Auth::user()->id;
+        }
+
+
+        // TODO do not commit
+        $this->points()->updateOrCreate([
+            'user_id' => $this->user_id,
+            'points' => $this->calculatePoints(),
+            'assigned_by' => $this->evaluated_by,
+        ]);
+
+        return $this;
     }
 }

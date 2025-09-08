@@ -77,7 +77,7 @@ class CampaignUserController extends AppController
     {
         $params = [];
         if ($id) {
-            $campaign = Campaign::checkAccess()->find($id);
+            $campaign = Campaign::find($id);
             if ($campaign) {
                 $params = [
                     'id' => $id,

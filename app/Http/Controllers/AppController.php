@@ -39,7 +39,7 @@ class AppController extends BaseController
             }
 
             if (empty($description) && $model && $user) {
-                $description = __('logging.description.view', ['model_map' => __('logging.model_mapping.'.$model::class), 'username' => $user->name]);
+                $description = __('logging.description.view', ['model_map' => __('logging.model_mapping.' . $model::class), 'username' => $user->name]);
             } else {
                 if (empty($description)) {
                     $description = 'view';
@@ -75,6 +75,7 @@ class AppController extends BaseController
         }
 
         if (config('app.debug')) {
+            throw $exception;
             $message = $exception->getMessage();
         }
 

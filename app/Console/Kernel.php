@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Console\Commands\Core\AppRefresh;
 use App\Console\Commands\Core\RepoUpdate;
+use App\Console\Commands\Core\SendNotifications;
 use App\Console\Commands\Core\SystemTest;
 use App\Console\Commands\MBO\MBOVerifyStatusScript;
 use Illuminate\Console\Scheduling\Schedule;
@@ -36,6 +37,11 @@ class Kernel extends ConsoleKernel
         $runTest = env('CRON_RUN_TEST', false);
         if ($runTest) {
             $schedule->command(SystemTest::class)->everyMinute();
+        }
+
+        $sendNotifications = env('CRON_SEND_NOTIFICATIONS', true);
+        if ($sendNotifications) {
+            $schedule->command(SendNotifications::class)->everyFifteenMinutes();
         }
 
         // LARAVEL COMMANDS

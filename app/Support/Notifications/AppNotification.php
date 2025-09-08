@@ -4,7 +4,7 @@ namespace App\Support\Notifications;
 
 use Illuminate\Contracts\Support\Arrayable;
 
-class NotificationAdhoc implements Arrayable
+class AppNotification implements Arrayable
 {
     protected $icon;
 

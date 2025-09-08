@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_points', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->foreignUuid('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->uuidMorphs('subject', 'subject');
 
             $table->decimal('points', 8, 2)->nullable();
 
-            $table->foreignUuid('assigned_by');
+            $table->foreignUuid('assigned_by')->nullable();
             $table->foreign('assigned_by')->references('id')->on('users')->onDelete('cascade');
 
             $table->timestamps();

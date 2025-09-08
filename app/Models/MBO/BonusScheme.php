@@ -22,7 +22,6 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property-read int|null $user_schemes_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $users
  * @property-read int|null $users_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme avg(string $column)
@@ -73,7 +72,6 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class BonusScheme extends BaseModel

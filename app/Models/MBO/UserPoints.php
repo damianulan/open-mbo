@@ -3,20 +3,26 @@
 namespace App\Models\MBO;
 
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Lucent\Support\Traits\Dispatcher;
+use App\Models\Core\User;
 
 /**
- * @property int $id
+ * @property string $id
  * @property string $user_id
  * @property string $subject_type
  * @property string $subject_id
  * @property string|null $points
- * @property string $assigned_by
+ * @property string|null $assigned_by
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- *
+ * @property-read User|null $assigner
+ * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $subject
+ * @property-read User $user
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints avg(string $column)
@@ -69,7 +75,6 @@ use App\Models\BaseModel;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPoints withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPoints withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class UserPoints extends BaseModel
@@ -81,4 +86,19 @@ class UserPoints extends BaseModel
         'points',
         'assigned_by',
     ];
+
+    public function subject(): MorphTo
+    {
+        return $this->morphTo('subject', 'subject_type');
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id')->withTrashed();
+    }
+
+    public function assigner(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'assigned_by')->withTrashed();
+    }
 }

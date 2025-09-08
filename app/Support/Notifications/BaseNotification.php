@@ -2,10 +2,13 @@
 
 namespace App\Support\Notifications;
 
+use App\Support\Notifications\Contracts\IsAppNotification;
 use Illuminate\Notifications\Notification;
 
-class BaseNotification extends Notification
+abstract class BaseNotification extends Notification
 {
+    private ?AppNotification $appNotification = null;
+
     /**
      * Get the notification's delivery channels.
      *
@@ -26,11 +29,20 @@ class BaseNotification extends Notification
             if ($mail && method_exists($this, 'toMail') && is_callable([$this, 'toMail'])) {
                 $params[] = 'mail';
             }
-            if ($database && method_exists($this, 'toArray') && is_callable([$this, 'toArray'])) {
-                $params[] = 'database';
+            if ($database && $this instanceof IsAppNotification) {
+                $notification = $this->toApp($notifiable);
+                if ($notification instanceof AppNotification) {
+                    $this->appNotification = $notification;
+                    $params[] = 'database';
+                }
             }
         }
 
         return $params;
+    }
+
+    final public function toArray(object $notifiable): array
+    {
+        return $this->appNotification ? $this->appNotification->toArray() : [];
     }
 }

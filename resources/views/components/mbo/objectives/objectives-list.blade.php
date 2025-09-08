@@ -1,7 +1,7 @@
 @if($objectives->count())
     <ul class="ombo-list">
         @foreach ($objectives as $objective)
-            <li class="{{ $objective->isDeadlineUpcoming() ? 'warning' : '' }}">
+            <li class="{{ $userObjective && $objective->isDeadlineUpcoming() ? 'warning' : '' }}">
                 <div class="list-grid">
                     <div class="list-content">
                         <div class="nowrap" data-tippy-content="{{ $objective->name }}">
@@ -26,9 +26,15 @@
                             <span>{{ $objective->expected }}</span>
                         </div>
                         @endif
-                        <a class="list-action" data-tippy-content="{{ __('forms.mbo.objectives.deadline_to', ['term' => $objective->deadline->format(config('app.datetime_format'))]) }}">
-                            <x-icon key="calendar2-week-fill" />
-                        </a>
+                        @if($objective->isOverdued())
+                            <a class="list-action text-failed" data-tippy-content="{{ __('alerts.objectives.error.overdued', ['term' => $objective->deadline->diffForHumans()]) }}">
+                                <x-icon key="exclamation-diamond-fill" />
+                            </a>
+                        @else
+                            <a class="list-action" data-tippy-content="{{ __('forms.mbo.objectives.deadline_to', ['term' => $objective->deadline->format(config('app.datetime_format'))]) }}">
+                                <x-icon key="calendar2-week-fill" />
+                            </a>
+                        @endif
                         <a href="{{ $userObjective ? route('objectives.assignment.show', $userObjective->id):route('objectives.show', $objective->id) }}" class="list-action" data-modelid="{{ $objective->id }}" data-tippy-content="{{ __('buttons.summary') }}">
                             <x-icon key="eye-fill" />
                         </a>

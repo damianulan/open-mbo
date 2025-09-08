@@ -9,8 +9,7 @@ $.quillInstances = [];
 
 $.quillDefaultToolbar = [
     ['bold', 'italic', 'underline', 'blockquote', 'code-block', 'link'],
-    [{ 'header': [1, 2, 3, false] }],
-    ['clean'],
+    [{ 'header': [1, 2, 3, false] }]
 ];
 
 $.quillSimpleToolbar = [

@@ -3,11 +3,12 @@
 namespace App\Notifications\MBO\Campaign;
 
 use App\Models\MBO\Campaign;
+use App\Support\Notifications\AppNotification;
 use App\Support\Notifications\BaseNotification;
-use App\Support\Notifications\NotificationAdhoc;
+use App\Support\Notifications\Contracts\IsAppNotification;
 use Illuminate\Bus\Queueable;
 
-class UserAssigned extends BaseNotification
+class UserAssigned extends BaseNotification implements IsAppNotification
 {
     use Queueable;
 
@@ -23,10 +24,10 @@ class UserAssigned extends BaseNotification
      *
      * @return array<string, mixed>
      */
-    public function toArray(object $notifiable): array
+    public function toApp(object $notifiable): AppNotification
     {
-        return NotificationAdhoc::make(__('notifications.app.campaign.user_assigned', [
+        return AppNotification::make(__('notifications.app.campaign.user_assigned', [
             'campaignname' => $this->campaign->name,
-        ]), 'bi-person-fill-up')->toArray();
+        ]), 'bi-person-fill-up');
     }
 }

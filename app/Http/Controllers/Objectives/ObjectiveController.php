@@ -54,7 +54,7 @@ class ObjectiveController extends MBOController
      */
     public function show(Request $request, string $id)
     {
-        $objective = Objective::checkAccess()->findOrFail($id);
+        $objective = Objective::findOrFail($id);
         $this->logShow($objective);
 
         $header = 'Podsumowanie Celu';
@@ -102,7 +102,7 @@ class ObjectiveController extends MBOController
     {
         $params = [];
         if ($id) {
-            $objective = Objective::checkAccess()->find($id);
+            $objective = Objective::find($id);
             if ($objective) {
                 $params = [
                     'id' => $id,

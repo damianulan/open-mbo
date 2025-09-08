@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read User $user
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns query()
@@ -25,7 +24,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns whereTableId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns whereUserId($value)
- *
  * @mixin \Eloquent
  */
 class SelectedColumns extends Model

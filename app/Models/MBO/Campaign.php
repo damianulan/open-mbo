@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Collection;
@@ -40,17 +41,16 @@ use Lucent\Support\Traits\Dispatcher;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read EloquentCollection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $coordinators
+ * @property-read EloquentCollection<int, User> $coordinators
  * @property-read int|null $coordinators_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\Objective> $objectives
+ * @property-read EloquentCollection<int, \App\Models\MBO\Objective> $objectives
  * @property-read int|null $objectives_count
  * @property-read mixed $timeend
  * @property-read mixed $timestart
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserCampaign> $user_campaigns
+ * @property-read EloquentCollection<int, \App\Models\MBO\UserCampaign> $user_campaigns
  * @property-read int|null $user_campaigns_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign avg(string $column)
@@ -118,7 +118,6 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static Builder<static>|Campaign withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign withoutCache()
  * @method static Builder<static>|Campaign withoutTrashed()
- *
  * @mixin \Eloquent
  */
 #[ScopedBy(CampaignScope::class)]
@@ -250,9 +249,12 @@ class Campaign extends BaseModel implements HasObjectives
         if (is_null($stage)) {
             $stage = CampaignStage::PENDING;
         }
-        UserCampaign::where($params)->where('stage', '!=', $stage)->get()->each(function (UserCampaign $uc) use ($stage) {
-            $uc->stage = $stage;
-            $uc->update();
+
+        UserCampaign::where($params)->where('stage', '!=', $stage)->chunk(config('app.chunk_default'), function (EloquentCollection $collection) use ($stage) {
+            foreach ($collection as $uc) {
+                $uc->stage = $stage;
+                $uc->update();
+            }
         });
 
         return $stage;
@@ -290,7 +292,7 @@ class Campaign extends BaseModel implements HasObjectives
         $stages = new Collection;
         $now = Carbon::now();
 
-        if ($this->stage === CampaignStage::IN_PROGRESS) {
+        if ((string) $this->stage === CampaignStage::IN_PROGRESS) {
             $softStage = null;
             foreach (CampaignStage::softValues() as $tmp) {
                 $prop_start = $tmp.'_from';

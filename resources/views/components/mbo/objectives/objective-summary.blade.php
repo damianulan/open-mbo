@@ -21,7 +21,7 @@
                 </div>
             @endif
             @if($objective->isOverdued())
-                <div class="text-{{ $warning }}" data-tippy-content="{{ __('alerts.objectives.error.overdued') }}">
+                <div class="text-{{ $warning }}" data-tippy-content="{{ __('alerts.objectives.error.overdued', ['term' => $objective->deadline->diffForHumans()]) }}">
                     <i class="bi-exclamation-diamond-fill"></i>
                 </div>
             @endif
@@ -41,13 +41,20 @@
                     <span>{{ float_view($objective->expected) }}</span>
                 </div>
             @endif
-            @if($objective->award)
-                <div class="icon-badge" data-tippy-content="{{ __('forms.mbo.objectives.award') }}">
-                    <i class="bi-award"></i>
-                    <span>{{ float_view($objective->award) . '' . __('globals.pnts') }}</span>
-                </div>
-            @endif
-            @if($userObjective->exists)
+            @if(!$userObjective->exists)
+                @if($objective->award)
+                    <div class="icon-badge" data-tippy-content="{{ __('forms.mbo.objectives.award') }}">
+                        <i class="bi-award"></i>
+                        <span>{{ float_view($objective->award) . '' . __('globals.pnts') }}</span>
+                    </div>
+                @endif
+            @else
+                @if($objective->award)
+                    <div class="icon-badge" data-tippy-content="{{ __('forms.mbo.objectives.award') }}">
+                        <i class="bi-award"></i>
+                        <span>{!! ($userObjective->points && $userObjective->points->points ? '<span class="text-success fs-4">' .float_view($userObjective->points->points) . '</span> / ' :'') . float_view($objective->award) . '' . __('globals.pnts') !!}</span>
+                    </div>
+                @endif
                 <div class="icon-badge ms-auto" data-tippy-content="{{ __('forms.mbo.objectives.users.realization') }}">
                     <i class="bi-check-circle"></i>
                     <span>{{ float_view($userObjective->realization) }}</span>

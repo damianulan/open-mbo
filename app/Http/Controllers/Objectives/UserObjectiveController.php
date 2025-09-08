@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Objectives;
 
+use App\Exceptions\Core\NoPermissionException;
 use App\Forms\MBO\Objective\ObjectiveEditUserForm;
 use App\Forms\MBO\Objective\ObjectiveEditUserRealizationForm;
 use App\Http\Controllers\AppController;
@@ -9,6 +10,8 @@ use App\Models\MBO\Objective;
 use App\Models\MBO\UserObjective;
 use App\Services\Objectives\BulkAssignUsers;
 use App\Services\Objectives\UserRealizationUpdate;
+use AppException;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -45,7 +48,7 @@ class UserObjectiveController extends AppController
      */
     public function show(Request $request, string $id)
     {
-        $userObjective = UserObjective::checkAccess()->findOrFail($id);
+        $userObjective = UserObjective::findOrFail($id);
         $this->logShow($userObjective);
 
         $header = 'Podsumowanie Celu';
@@ -98,7 +101,7 @@ class UserObjectiveController extends AppController
     {
         $params = [];
         if ($id) {
-            $objective = Objective::checkAccess()->find($id);
+            $objective = Objective::find($id);
             if ($objective) {
                 $params = [
                     'id' => $id,
@@ -114,7 +117,7 @@ class UserObjectiveController extends AppController
     {
         $params = [];
         if ($id) {
-            $objective = UserObjective::checkAccess()->find($id);
+            $objective = UserObjective::find($id);
             if ($objective) {
                 $params = [
                     'id' => $id,
@@ -156,32 +159,52 @@ class UserObjectiveController extends AppController
     public function pass(Request $request, $id)
     {
         try {
-            $userObjective = UserObjective::checkAccess()->findOrFail($id);
+            $userObjective = UserObjective::findOrFail($id);
 
             if ($request->user()->cannot('evaluate', $userObjective)) {
-                throw new Exception('no access');
+                throw new NoPermissionException;
             }
 
+            DB::beginTransaction();
             if ($userObjective->canBePassed()) {
+                $userObjective->setPassed()->update();
+            } else {
+                throw new AppException(__('alerts.user_objectives.error.set_passed'));
             }
+            DB::commit();
         } catch (\Throwable $th) {
-            throw $th;
+            DB::rollBack();
+            $this->e = $th;
         }
+
+        $redirect = redirect()->back()->with('success', __('alerts.user_objectives.success.set_passed'));
+
+        return $this->returnResponseRedirect($redirect);
     }
 
     public function fail(Request $request, $id)
     {
         try {
-            $userObjective = UserObjective::checkAccess()->findOrFail($id);
+            $userObjective = UserObjective::findOrFail($id);
 
             if ($request->user()->cannot('evaluate', $userObjective)) {
-                throw new Exception('No access');
+                throw new NoPermissionException('No access');
             }
 
+            DB::beginTransaction();
             if ($userObjective->canBeFailed()) {
+                $userObjective->setFailed()->update();
+            } else {
+                throw new AppException(__('alerts.user_objectives.error.set_failed'));
             }
+            DB::commit();
         } catch (\Throwable $th) {
-            throw $th;
+            DB::rollBack();
+            $this->e = $th;
         }
+
+        $redirect = redirect()->back()->with('success', __('alerts.user_objectives.success.set_failed'));
+
+        return $this->returnResponseRedirect($redirect);
     }
 }

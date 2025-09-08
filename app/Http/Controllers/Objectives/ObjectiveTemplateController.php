@@ -16,7 +16,7 @@ class ObjectiveTemplateController extends MBOController
     public function index()
     {
         return view('pages.mbo.index', [
-            'objectives' => ObjectiveTemplate::checkAccess()->paginate(30),
+            'objectives' => ObjectiveTemplate::paginate(30),
             'nav' => $this->nav(),
         ]);
     }
@@ -70,7 +70,7 @@ class ObjectiveTemplateController extends MBOController
      */
     public function edit(Request $request, $id)
     {
-        $model = ObjectiveTemplate::checkAccess()->findOrFail($id);
+        $model = ObjectiveTemplate::findOrFail($id);
 
         return view('components.forms.edit', [
             'objective' => $model,
@@ -98,7 +98,7 @@ class ObjectiveTemplateController extends MBOController
 
     public function delete($id)
     {
-        $objective = ObjectiveTemplate::checkAccess()->findOrFail($id);
+        $objective = ObjectiveTemplate::findOrFail($id);
         if ($objective->delete()) {
             return redirect()->route('templates.index')->with('success', __('alerts.objective_template.success.delete'));
         }
