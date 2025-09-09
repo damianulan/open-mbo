@@ -7,8 +7,6 @@ use Illuminate\Notifications\Notification;
 
 abstract class BaseNotification extends Notification
 {
-    private ?AppNotification $appNotification = null;
-
     /**
      * Get the notification's delivery channels.
      *
@@ -30,11 +28,7 @@ abstract class BaseNotification extends Notification
                 $params[] = 'mail';
             }
             if ($database && $this instanceof IsAppNotification) {
-                $notification = $this->toApp($notifiable);
-                if ($notification instanceof AppNotification) {
-                    $this->appNotification = $notification;
-                    $params[] = 'database';
-                }
+                $params[] = 'database';
             }
         }
 
@@ -43,6 +37,6 @@ abstract class BaseNotification extends Notification
 
     final public function toArray(object $notifiable): array
     {
-        return $this->appNotification ? $this->appNotification->toArray() : [];
+        return $this instanceof IsAppNotification ? $this->toApp($notifiable)->toArray() : [];
     }
 }
