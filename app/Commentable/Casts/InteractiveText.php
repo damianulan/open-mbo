@@ -2,7 +2,9 @@
 
 namespace App\Commentable\Casts;
 
+use App\Events\Core\User\UserMentioned;
 use App\Models\Core\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Route;
@@ -53,11 +55,12 @@ class InteractiveText implements CastsAttributes
 
     private static function tagPattern(string $name): string
     {
-        return '/<interactive-'.$name.':([0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})>/i';
+        return '/<interactive-' . $name . ':([0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})>/i';
     }
 
     private static function interactiveMentions(string $value, $mode, ?Model $model = null): string
     {
+        $sendEvent = false;
         $pattern = '/@([\p{L}\p{M}]+)\s+([\p{L}\p{M}]+)/u';
 
         if ($mode === self::MODE_SET || $mode === self::MODE_NORMAL) {
@@ -73,10 +76,11 @@ class InteractiveText implements CastsAttributes
                             $search = Str::lower("@$firstname $lastname");
                             if ($mode === self::MODE_SET) {
                                 $replaceTo = self::generateTag('mention', $user->id);
+                                $sendEvent = true;
                             } elseif ($mode === self::MODE_NORMAL) {
                                 $route = self::getUserRoute($user->id);
                                 if ($route) {
-                                    $replaceTo = '<a class="user-mention" href="'.$route.'">'.$user->firstname().' '.$user->lastname().'</a>';
+                                    $replaceTo = '<a class="user-mention" href="' . $route . '">' . $user->firstname() . ' ' . $user->lastname() . '</a>';
                                 }
                             }
                         }
@@ -105,13 +109,17 @@ class InteractiveText implements CastsAttributes
                         if ($user) {
                             $route = self::getUserRoute($user->id);
                             if ($route) {
-                                $replaceTo = '<a class="user-mention" href="'.$route.'">'.$user->firstname().' '.$user->lastname().'</a>';
+                                $replaceTo = '<a class="user-mention" href="' . $route . '">' . $user->firstname() . ' ' . $user->lastname() . '</a>';
                             }
                         }
                         $value = Str::replace($search, $replaceTo, $value, false);
                     }
                 }
             }
+        }
+
+        if ($sendEvent && Auth::check()) {
+            UserMentioned::dispatch($user, $model, Auth::user());
         }
 
         return $value;
