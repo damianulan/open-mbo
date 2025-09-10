@@ -267,26 +267,26 @@ class Campaign extends BaseModel implements HasObjectives
         $stage = CampaignStage::PENDING;
         $now = Carbon::now();
 
-        if(!in_array($this->stage, [CampaignStage::TERMINATED, CampaignStage::CANCELED])){
+        if (! in_array($this->stage, [CampaignStage::TERMINATED, CampaignStage::CANCELED])) {
             foreach (CampaignStage::softValues() as $tmp) {
-                $prop_start = $tmp . '_from';
-                $prop_end = $tmp . '_to';
+                $prop_start = $tmp.'_from';
+                $prop_end = $tmp.'_to';
                 $start = Carbon::parse($this->$prop_start);
                 $end = Carbon::parse($this->$prop_end);
 
-            if ($now->between($start, $end)) {
-                $stage = CampaignStage::IN_PROGRESS;
-                break;
+                if ($now->between($start, $end)) {
+                    $stage = CampaignStage::IN_PROGRESS;
+                    break;
+                }
             }
-        }
 
-        $end = $this->timeend;
+            $end = $this->timeend;
 
-        if ($end->isPast()) {
-            $stage = CampaignStage::COMPLETED;
-        }
+            if ($end->isPast()) {
+                $stage = CampaignStage::COMPLETED;
+            }
 
-        $this->stage = $stage;
+            $this->stage = $stage;
 
         }
 
@@ -448,18 +448,19 @@ class Campaign extends BaseModel implements HasObjectives
     }
 
     public function cancel(): bool
-{
-    if ($this->stage !== CampaignStage::CANCELED) {
-        $this->stage = CampaignStage::CANCELED;
+    {
+        if ($this->stage !== CampaignStage::CANCELED) {
+            $this->stage = CampaignStage::CANCELED;
 
-        foreach ($this->user_campaigns as $userCampaign) {
-            $userCampaign->cancel();
+            foreach ($this->user_campaigns as $userCampaign) {
+                $userCampaign->cancel();
+            }
+
+            return $this->update();
         }
 
-        return $this->update();
+        return false;
     }
-    return false;
-}
 
     public function terminate(): bool
     {
@@ -472,6 +473,7 @@ class Campaign extends BaseModel implements HasObjectives
 
             return $this->update();
         }
+
         return false;
     }
 
@@ -486,6 +488,7 @@ class Campaign extends BaseModel implements HasObjectives
 
             return $this->update();
         }
+
         return false;
     }
 
@@ -553,7 +556,6 @@ class Campaign extends BaseModel implements HasObjectives
                     ->orWhereDate('self_evaluation_to', '<', Carbon::now());
             });
     }
-
 
     public function scopeOrderByStatus(Builder $query): void
     {

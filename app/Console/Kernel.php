@@ -6,9 +6,9 @@ use App\Console\Commands\Core\AppRefresh;
 use App\Console\Commands\Core\RepoUpdate;
 use App\Console\Commands\Core\SystemTest;
 use App\Console\Commands\MBO\MBOVerifyStatusScript;
+use App\Support\Notifications\SendNotificationsJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Support\Notifications\SendNotificationsJob;
 
 class Kernel extends ConsoleKernel
 {
@@ -59,7 +59,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__ . '/Commands');
+        $this->load(__DIR__.'/Commands');
 
         require base_path('routes/console.php');
     }

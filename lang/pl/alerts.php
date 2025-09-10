@@ -54,8 +54,8 @@ return [
             'objective_deleted' => 'Cel został pomyślnie usunięty z Kampanii.',
             'users_added' => 'Uzupełniono stan osobowy Kampanii pomiarowej.',
             'users_deleted' => 'Użytkownik został wypisany z Kampanii.',
-            "terminate" => "Kampania została pomyślnie zawieszona.",
-            "resume" => "Kampania została pomyślnie odwieszona.",
+            'terminate' => 'Kampania została pomyślnie zawieszona.',
+            'resume' => 'Kampania została pomyślnie odwieszona.',
             'cancel' => 'Kampania została pomyślnie anulowana.',
 
         ],
@@ -67,8 +67,8 @@ return [
             'objective_deleted' => 'Cel został pomyślnie usunięty z Kampanii.',
             'users_added' => 'Dane nie zostały zaktualizowane. Odśwież stronę i spróbuj ponownie.',
             'users_deleted' => 'Wystąpił błąd podczas wypisywania użytkownika z Kampanii. Odśwież stronę i spróbuj ponownie.',
-            "terminate" => "Kampania nie została pomyślnie zawieszona.",
-            "resume" => "Kampania nie została pomyślnie odwieszona.",
+            'terminate' => 'Kampania nie została pomyślnie zawieszona.',
+            'resume' => 'Kampania nie została pomyślnie odwieszona.',
             'cancel' => 'Kampania nie została pomyślnie anulowana.',
         ],
 

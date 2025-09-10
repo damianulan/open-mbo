@@ -150,14 +150,17 @@ class UserCampaign extends BaseModel implements HasObjectives
     {
         if ($this->stage !== CampaignStage::TERMINATED) {
             $this->stage = CampaignStage::TERMINATED;
+
             return $this->update();
         }
+
         return false;
     }
 
     public function resume(): bool
     {
         $this->stage = CampaignStage::IN_PROGRESS;
+
         return $this->update();
     }
 
@@ -165,12 +168,12 @@ class UserCampaign extends BaseModel implements HasObjectives
     {
         if ($this->stage !== CampaignStage::CANCELED) {
             $this->stage = CampaignStage::CANCELED;
+
             return $this->update();
         }
+
         return false;
     }
-
-
 
     public function nextStage(): bool
     {

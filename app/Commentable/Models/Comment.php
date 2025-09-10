@@ -3,15 +3,15 @@
 namespace App\Commentable\Models;
 
 use App\Commentable\Casts\CommentContent;
+use App\Commentable\Events\CommentAdded;
+use App\Commentable\Events\CommentDeleted;
+use App\Traits\Vendors\ModelActivity;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Scout\Searchable;
-use App\Commentable\Events\CommentDeleted;
-use App\Commentable\Events\CommentAdded;
-use App\Traits\Vendors\ModelActivity;
-use Illuminate\Database\Eloquent\MassPrunable;
 use YMigVal\LaravelModelCache\HasCachedQueries;
 
 /**
@@ -46,7 +46,7 @@ use YMigVal\LaravelModelCache\HasCachedQueries;
  */
 class Comment extends Model
 {
-    use Searchable, ModelActivity, HasCachedQueries, MassPrunable;
+    use HasCachedQueries, MassPrunable, ModelActivity, Searchable;
 
     protected $table = 'commentables';
 
@@ -68,7 +68,7 @@ class Comment extends Model
 
     protected $dispatchesEvents = [
         'created' => CommentAdded::class,
-        'deleted' => CommentDeleted::class
+        'deleted' => CommentDeleted::class,
     ];
 
     protected static function booted(): void
