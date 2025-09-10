@@ -34,7 +34,7 @@ class BonusSchemeOptions implements Arrayable, Countable, Jsonable, JsonSerializ
         return [
             'reward_modifier' => 1,
             'campaigns_bonus' => settings('mbo.campaigns_bonus'),
-            'reward_rewards_min_evaluation' => settings('mbo.rewards_min_evaluation'),
+            'rewards_min_evaluation' => settings('mbo.rewards_min_evaluation'),
             'failed_rewards' => settings('mbo.failed_rewards'),
             'manipulate_rewards' => settings('mbo.manipulate_rewards'),
         ];
@@ -56,8 +56,8 @@ class BonusSchemeOptions implements Arrayable, Countable, Jsonable, JsonSerializ
     {
         return new static([
             'bonus' => 0.00,
-            'reward_rewards_min_evaluation' => fake()->randomFloat(2, 80, 100),
-            'failed_rewards' => fake()->randomNumberBetween(0, 1),
+            'rewards_min_evaluation' => fake()->randomFloat(2, 80, 100),
+            'failed_rewards' => fake()->numberBetween(0, 1),
         ]);
     }
 

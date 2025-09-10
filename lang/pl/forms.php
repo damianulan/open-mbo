@@ -36,7 +36,7 @@ return [
             'rewards' => 'Punkty nagrody',
             'rewards_proportional' => 'Przeliczaj punkty nagrody proporcjonalnie do rozliczenia',
             'manipulate_rewards' => 'Możliwość edycji przeliczonych punktów nagrody',
-            'failed_rewards' => 'Przyznawaj punkty nagrody przy dla niezaliczonych celów',
+            'failed_rewards' => 'Przyznawaj punkty nagrody dla niezaliczonych celów',
             'rewards_min_evaluation' => 'Minimalny wynik oceny celu',
             'rewards_points_exchange' => 'Przeliczanie punktów nagrody',
             'rewards_currency' => 'Waluta nagrody',
