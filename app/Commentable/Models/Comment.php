@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Scout\Searchable;
+use App\Commentable\Events\CommentDeleted;
+use App\Commentable\Events\CommentAdded;
+use App\Traits\Vendors\ModelActivity;
+use Illuminate\Database\Eloquent\MassPrunable;
+use YMigVal\LaravelModelCache\HasCachedQueries;
 
 /**
  * @property int $id
@@ -41,7 +46,7 @@ use Laravel\Scout\Searchable;
  */
 class Comment extends Model
 {
-    use Searchable;
+    use Searchable, ModelActivity, HasCachedQueries, MassPrunable;
 
     protected $table = 'commentables';
 
@@ -59,6 +64,11 @@ class Comment extends Model
         'private' => 'boolean',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+    ];
+
+    protected $dispatchesEvents = [
+        'created' => CommentAdded::class,
+        'deleted' => CommentDeleted::class
     ];
 
     protected static function booted(): void
@@ -83,12 +93,12 @@ class Comment extends Model
 
     public function subject(): MorphTo
     {
-        return $this->morphTo();
+        return $this->morphTo()->withTrashed();
     }
 
     public function author(): MorphTo
     {
-        return $this->morphTo();
+        return $this->morphTo()->withTrashed();
     }
 
     public function isMine(): bool
@@ -104,5 +114,14 @@ class Comment extends Model
     public function scopeMine(Builder $query): void
     {
         $query->where('author_id', Auth::user()->id)->where('author_type', Auth::user()->getMorphClass());
+    }
+
+    public function prunable(): Builder
+    {
+        return static::whereHas('subject', function (Builder $query) {
+            $query->whereNotNull('deleted_at');
+        })->orWhereHas('author', function (Builder $query) {
+            $query->whereNotNull('deleted_at');
+        });
     }
 }

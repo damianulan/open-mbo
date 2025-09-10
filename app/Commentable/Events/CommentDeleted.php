@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Events\Core\User;
+namespace App\Commentable\Events;
 
-use App\Models\Core\User;
-use Illuminate\Database\Eloquent\Model;
+use App\Commentable\Models\Comment;
+use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UserMentioned
+class CommentDeleted implements ShouldDispatchAfterCommit
 {
     use Dispatchable, SerializesModels;
 
@@ -15,8 +15,6 @@ class UserMentioned
      * Create a new event instance.
      */
     public function __construct(
-        public User $user,
-        public Model $context,
-        public User $mentionedBy
+        public Comment $comment
     ) {}
 }

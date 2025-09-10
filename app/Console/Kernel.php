@@ -45,11 +45,11 @@ class Kernel extends ConsoleKernel
         }
 
         // LARAVEL COMMANDS
-        $schedule->command('model:prune')->dailyAt('00:01');
         $schedule->command('telescope:prune')->dailyAt('00:01');
         $schedule->command('activitylog:clean')->dailyAt('00:01');
         $schedule->command('auth:clear-resets')->dailyAt('00:01');
-        $schedule->command('model::prune-soft-deletes')->dailyAt('00:01');
+        $schedule->command('model:prune')->dailyAt('00:01');
+        $schedule->command('model:prune-soft-deletes')->dailyAt('00:01');
     }
 
     /**

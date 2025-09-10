@@ -86,7 +86,7 @@ class BonusScheme extends BaseModel
 
     protected $casts = [
         'description' => FormattedText::class,
-        'options' => 'array',
+        'options' => 'collection',
     ];
 
     public function user_schemes(): HasMany
