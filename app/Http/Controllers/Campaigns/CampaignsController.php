@@ -2,35 +2,37 @@
 
 namespace App\Http\Controllers\Campaigns;
 
-use Illuminate\Http\Request;
-use App\Models\MBO\Campaign;
+use App\Events\MBO\Campaigns\CampaignViewed;
 use App\Forms\MBO\Campaign\CampaignEditForm;
-use App\Http\Controllers\Controller;
-use App\Services\Campaigns\CampaignService;
-use App\Models\Core\User;
+use App\Http\Controllers\AppController;
+use App\Models\MBO\Campaign;
+use App\Services\Campaigns\CreateOrUpdate;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
-class CampaignsController extends Controller
+class CampaignsController extends AppController
 {
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         if ($request->user()->cannot('viewAny', Campaign::class)) {
             unauthorized();
         }
+        $this->logView('Wyświetlono listę kampanii pomiarowych');
+
+        $campaigns = Campaign::orderByStatus()->paginate(30);
+
         return view('pages.mbo.campaigns.index', [
-            'campaigns' => Campaign::checkAccess()->paginate(30),
+            'campaigns' => $campaigns,
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
+    public function create(Request $request): View
     {
         if ($request->user()->cannot('create', Campaign::class)) {
             unauthorized();
         }
+
         return view('pages.mbo.campaigns.edit', [
             'form' => CampaignEditForm::definition($request),
         ]);
@@ -39,23 +41,29 @@ class CampaignsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, CampaignEditForm $form)
+    public function store(Request $request, CampaignEditForm $form): RedirectResponse
     {
         if ($request->user()->cannot('create', Campaign::class)) {
             unauthorized();
         }
-        $request = $form::reformatRequest($request);
-        $request->validate($form::validation($request));
-        $service = CampaignService::boot($request)->createOrUpdate();
+        $redirect = null;
+        try {
+            $request = $form::reformatRequest($request);
+            $form::validate($request);
+            $service = CreateOrUpdate::boot(request: $request)->execute();
 
-        if ($service->check()) {
-            $campaign = $service->getModel();
-            return redirect()->route('campaigns.show', $campaign->id)->with('success', __('alerts.campaigns.success.create', ['name' => $campaign->name]));
+            if ($service->passed()) {
+                $campaign = $service->campaign;
+
+                $redirect = redirect()->route('campaigns.show', $campaign->id)->with('success', __('alerts.campaigns.success.create', ['name' => $campaign->name]));
+            }
+        } catch (\Throwable $e) {
+            $this->e = $e;
         }
-        return redirect()->back()->with('error', __('alerts.campaigns.error.create'));
+
+        return $this->returnResponseRedirect($redirect, $service->getErrors() ?? __('alerts.campaigns.error.create'));
     }
 
     /**
@@ -64,25 +72,23 @@ class CampaignsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Campaign $campaign)
+    public function show(Request $request, Campaign $campaign): View
     {
         if ($request->user()->cannot('view', $campaign)) {
             unauthorized();
         }
-        $header = $campaign->name . ' [' . $campaign->period . ']';
+
+        CampaignViewed::dispatch($campaign);
+        $this->logShow($campaign);
+        $header = $campaign->name.' ['.$campaign->period.']';
+
         return view('pages.mbo.campaigns.show', [
             'campaign' => $campaign,
             'pagetitle' => $header,
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request, Campaign $campaign)
+    public function edit(Request $request, Campaign $campaign): View
     {
         if ($request->user()->cannot('mbo-campaign-update', $campaign)) {
             unauthorized();
@@ -94,23 +100,28 @@ class CampaignsController extends Controller
         ]);
     }
 
-
-    public function update(Request $request, $id, CampaignEditForm $form)
+    public function update(Request $request, $id, CampaignEditForm $form): RedirectResponse
     {
         $campaign = Campaign::findOrFail($id);
         if ($request->user()->cannot('mbo-campaign-update', $campaign)) {
             unauthorized();
         }
+        $redirect = null;
+        try {
+            $request = $form::reformatRequest($request);
+            $form::validate($request, $id);
+            $service = CreateOrUpdate::boot(request: $request, campaign: $campaign)->execute();
 
-        $request = $form::reformatRequest($request);
-        $request->validate($form::validation($request, $id));
-        $service = CampaignService::boot($request, $campaign)->createOrUpdate();
+            if ($service->passed()) {
+                $campaign = $service->getResult();
 
-        if ($service->check()) {
-            $campaign = $service->getModel();
-            return redirect()->route('campaigns.show', $id)->with('success', __('alerts.campaigns.success.edit', ['name' => $campaign->name]));
+                $redirect = redirect()->route('campaigns.show', $id)->with('success', __('alerts.campaigns.success.edit', ['name' => $campaign->name]));
+            }
+        } catch (\Throwable $e) {
+            $this->e = $e;
         }
-        return redirect()->back()->with('error', __('alerts.campaigns.error.edit', ['name' => $campaign->name]));
+
+        return $this->returnResponseRedirect($redirect, $service?->getErrors() ?? __('alerts.campaigns.error.edit', ['name' => $campaign->name]));
     }
 
     public function terminate(Request $request, $id)

@@ -19,6 +19,8 @@ return new class extends Migration
             $table->json('columns');
             $table->json('selected');
             $table->timestamps();
+
+            $table->comment('From all datatables custom preferences on columns selected as visible to specific user.');
         });
     }
 

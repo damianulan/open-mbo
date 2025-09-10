@@ -2,13 +2,13 @@
 
 namespace App\Forms\Settings;
 
-use FormForge\Base\Form;
-use Illuminate\Http\Request;
-use FormForge\FormBuilder;
-use FormForge\Base\FormComponent;
-use FormForge\Components\Dictionary;
 use App\Lib\Theme;
 use App\Settings\GeneralSettings;
+use FormForge\Base\Form;
+use FormForge\Base\FormComponent;
+use FormForge\Components\Dictionary;
+use FormForge\FormBuilder;
+use Illuminate\Http\Request;
 
 class GeneralForm extends Form
 {

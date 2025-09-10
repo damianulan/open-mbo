@@ -2,10 +2,8 @@
 
 namespace App\Listeners\Activity;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Notifications\Events\NotificationSent;
-use App\Models\Core\User;
+use Illuminate\Support\Facades\Log;
 
 class NotificationLog
 {
@@ -24,6 +22,9 @@ class NotificationLog
     {
         $user = $event->notifiable;
         $notification = $event->notification;
+
+        Log::info('notification sent', ['user' => $user, 'notification' => $notification]);
+
         // TODO - check and store wether it was database or mail notification.
 
         // if($user && $notification){
@@ -32,7 +33,7 @@ class NotificationLog
         //     ->performedOn($event->response)
         //     ->withProperties(['notification_id' => $notification->id])
         //     ->event('notification_sent')
-        //     ->log(__('logging.description.notification_sent', ['username' => $user->name(), 'type' => $event->response->type]));
+        //     ->log(__('logging.description.notification_sent', ['username' => $user->name, 'type' => $event->response->type]));
         // }
     }
 }

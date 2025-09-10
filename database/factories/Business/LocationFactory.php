@@ -18,8 +18,9 @@ class LocationFactory extends Factory
     {
         $city = fake()->city();
         $street = fake()->streetName();
-        $name = $city . ' - ' . $street;
-        $num = fake()->buildingNumber() . '/' . fake()->buildingNumber();
+        $name = $city.' - '.$street;
+        $num = fake()->buildingNumber().'/'.fake()->buildingNumber();
+
         return [
             'name' => $name,
             'address_line_1' => $street,

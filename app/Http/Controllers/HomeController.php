@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Settings\GeneralSettings;
+use Illuminate\Support\Facades\Auth;
 
-class HomeController extends Controller
+class HomeController extends AppController
 {
     /**
      * Create a new controller instance.
@@ -24,6 +23,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('pages.dashboard', []);
+        $user = Auth::user();
+
+        return view('pages.dashboard', [
+            'user' => $user,
+        ]);
     }
 }

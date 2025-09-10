@@ -12,7 +12,7 @@
                         <span class="badge bg-secondary">Draft</span>
                     </div>
                 @endif
-                @if($campaign->active())
+                @if($campaign->inProgress())
                     <div data-tippy-content="Kampania w toku">
                         <i class="bi bi-lightning-fill"></i>
                     </div>
@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="card-text">
-            {{ $campaign->description->stripFormat() }}
+            {{ strip_tags($campaign->description) }}
         </div>
         <div class="row details">
             <div class="col-xl-4 col-md-6 col-sm-12">
@@ -64,7 +64,7 @@
                 </div>
                 <div class="element">
                     <div class="element-title" data-tippy-content="Cele podstawowe">
-                        <i class="bi bi-bullseye me-2"></i>
+                        <i class="bi bi-crosshair me-2"></i>
                         <span>{{ $campaign->objectives()->count() }}</span>
                     </div>
                 </div>

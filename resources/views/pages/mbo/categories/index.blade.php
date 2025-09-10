@@ -4,18 +4,16 @@
 {!! $nav->render() !!}
 <div class="icon-btn-nav">
     <div class="panel-left">
-        <a class="icon-btn" href="{{ route('management.mbo.categories.create') }}" data-tippy-content="{{ __('buttons.add') }}">
+        <a class="icon-btn" href="{{ route('categories.create') }}" data-tippy-content="{{ __('buttons.add') }}">
             <i class="bi-plus-circle-fill"></i>
         </a>
     </div>
 </div>
-<div class="content-card">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="table-container row">
-                {{ $table->actions() }}
-                {{ $dataTable->table() }}
-            </div>
+<div class="content-card page-card">
+    <div class="content-card-body">
+        <div class="table-container row">
+            {{ $table->actions() }}
+            {{ $dataTable->table() }}
         </div>
     </div>
 </div>

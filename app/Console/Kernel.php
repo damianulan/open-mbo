@@ -2,39 +2,54 @@
 
 namespace App\Console;
 
+use App\Console\Commands\Core\AppRefresh;
+use App\Console\Commands\Core\RepoUpdate;
+use App\Console\Commands\Core\SystemTest;
+use App\Console\Commands\MBO\MBOVerifyStatusScript;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Console\Commands\Core\AppRefresh;
-use App\Console\Commands\AppReload;
-use App\Console\Commands\Core\SystemTest;
-
-use App\Console\Commands\MBO\CampaignStatusScript;
+use App\Support\Notifications\SendNotificationsJob;
 
 class Kernel extends ConsoleKernel
 {
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command(CampaignStatusScript::class)->everyThirtyMinutes();
+        $schedule->command(MBOVerifyStatusScript::class)->dailyAt('01:01');
 
         if (config('backup.backup.auto') === true) {
             $schedule->command('backup:run')->daily()->at('01:30');
         }
 
+        $schedule->command(RepoUpdate::class)->everyOddHour();
 
-        if (config('app.env') === 'development' && env('CRON_APP_REFRESH', false)) {
-            $schedule->command(AppRefresh::class)->daily()->at('01:01');
+        if (config('app.env') === 'development') {
+
+            if (env('CRON_APP_REFRESH', false)) {
+                $schedule->command(AppRefresh::class)->daily()->at('00:00');
+            }
         }
 
         $runTest = env('CRON_RUN_TEST', false);
         if ($runTest) {
             $schedule->command(SystemTest::class)->everyMinute();
         }
+
+        $sendNotifications = env('CRON_SEND_NOTIFICATIONS', true);
+        if ($sendNotifications) {
+            $schedule->job(SendNotificationsJob::class)->everyFifteenMinutes();
+        }
+
+        // LARAVEL COMMANDS
+        $schedule->command('telescope:prune')->dailyAt('00:01');
+        $schedule->command('activitylog:clean')->dailyAt('00:01');
+        $schedule->command('auth:clear-resets')->dailyAt('00:01');
+        $schedule->command('model:prune')->dailyAt('00:01');
+        $schedule->command('model:prune-soft-deletes')->dailyAt('00:01');
     }
 
     /**

@@ -4,7 +4,6 @@ namespace App\Policies\MBO;
 
 use App\Models\Core\User;
 use App\Models\MBO\Campaign;
-use Illuminate\Auth\Access\Response;
 
 class CampaignPolicy
 {
@@ -50,10 +49,6 @@ class CampaignPolicy
 
     /**
      * dodawanie/usuwanie użytkowników i celów do/z kampanii.
-     *
-     * @param  User     $user
-     * @param  Campaign $campaign
-     * @return bool
      */
     public function users(User $user, Campaign $campaign): bool
     {

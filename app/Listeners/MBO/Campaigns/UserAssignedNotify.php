@@ -2,14 +2,16 @@
 
 namespace App\Listeners\MBO\Campaigns;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-use App\Notifications\MBO\Campaign\CampaignAssignment;
 use App\Events\MBO\Campaigns\UserCampaignAssigned;
+use App\Notifications\MBO\Campaign\CampaignAssignment;
 use App\Notifications\MBO\Campaign\UserAssigned;
+use Illuminate\Contracts\Queue\ShouldQueueAfterCommit;
+use Illuminate\Queue\InteractsWithQueue;
 
-class UserAssignedNotify
+class UserAssignedNotify implements ShouldQueueAfterCommit
 {
+    use InteractsWithQueue;
+
     /**
      * Create the event listener.
      */
@@ -23,13 +25,15 @@ class UserAssignedNotify
      */
     public function handle(UserCampaignAssigned $event): void
     {
-        $coordinators = $event->campaign->coordinators;
+        $campaign = $event->userCampaign->campaign;
+        $coordinators = $campaign->coordinators;
+        $user = $event->userCampaign->user;
         if ($coordinators && $coordinators->count()) {
             foreach ($coordinators as $coordinator) {
-                $coordinator->notify(new CampaignAssignment($event->user, $event->campaign));
+                $coordinator->notify(new CampaignAssignment($user, $event->userCampaign->campaign));
             }
         }
 
-        $event->user->notify(new UserAssigned($event->campaign));
+        $user->notify(new UserAssigned($campaign));
     }
 }

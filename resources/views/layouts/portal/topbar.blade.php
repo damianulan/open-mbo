@@ -47,16 +47,16 @@
                     <i class="bi bi-book-fill"></i>
                 </a>
               </div>
-              <x-notification-dropdown/>
+              <livewire:notifications key="{{ str()->random(15) }}"/>
               <div class="user-nav dropup"
               @if(auth()->user()->isImpersonating())
               data-tippy-placement="left"
-              data-tippy-content="{{ __('menus.impersonated_by', ['name' => auth()->user()->impersonator()->name()]) }}"
+              data-tippy-content="{{ __('menus.impersonated_by', ['name' => auth()->user()->impersonator()->name]) }}"
               @endif
               >
                   <div class="user-actions" data-bs-toggle="dropdown" type="button" aria-expanded="false">
-                    <img class="rounded-circle" src="{{ auth()->user()->getAvatar() }}" width="30" height="30">
-                    <span class="profile-name{{auth()->user()->isImpersonating() ? ' text-info':''}}">{{ auth()->user()->name() }}</span>
+                    {!! auth()->user()->getAvatarView(30) !!}
+                    <span class="profile-name{{auth()->user()->isImpersonating() ? ' text-info':''}}">{{ auth()->user()->name }}</span>
                   </div>
                   <ul class="dropdown-menu">
                     <li><a href="{{ route('profile.index') }}" class="dropdown-item"><i class="bi-person me-2"></i>{{ __('menus.edit_profile') }}</a></li>

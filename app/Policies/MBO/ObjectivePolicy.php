@@ -4,8 +4,7 @@ namespace App\Policies\MBO;
 
 use App\Models\Core\User;
 use App\Models\MBO\Objective;
-use Illuminate\Auth\Access\Response;
-use App\Enums\Core\PermissionLib;
+use App\Warden\PermissionsLib;
 
 class ObjectivePolicy
 {
@@ -22,8 +21,8 @@ class ObjectivePolicy
      */
     public function view(User $user, Objective $objective): bool
     {
-        //dd($user->can(PermissionLib::MBO_OBJECTIVE_VIEW, $objective));
-        return $user->can(PermissionLib::MBO_OBJECTIVE_VIEW);
+        // dd($user->can(PermissionLib::MBO_OBJECTIVE_VIEW, $objective));
+        return $user->can(PermissionsLib::MBO_OBJECTIVE_VIEW);
     }
 
     /**

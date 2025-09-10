@@ -26,21 +26,20 @@
         @endcan
     </div>
 </div>
-<div class="content-card">
-    @include('components.mbo.campaign-summary')
-    <div class="container pt-4">
+<div class="content-card page-card">
+    <div class="content-card-body">
+        @include('components.mbo.campaign-summary')
         <div class="row">
-            <div class="col-md-5 pt-3">
+            <div class="col-lg-6 col-md-12 pt-3">
                 <h4>{{ __('mbo.objectives.index') }}</h4>
-                <x-objectives-list :objectives="$campaign->objectives()->checkAccess()->get()" />
+                <x-objectives-list :model="$campaign" />
             </div>
-            <div class="col-md-5 offset-md-2 pt-3">
+            <div class="col-lg-6 col-md-12 pt-3">
                 <h4>{{ __('mbo.enroled_users') }}</h4>
                 <x-campaign-users-list :userCampaigns="$campaign->user_campaigns" />
             </div>
         </div>
     </div>
-
 </div>
 
 @endsection
@@ -48,16 +47,16 @@
 <script type="text/javascript">
     var campaign_id = '{{ $campaign->id }}';
     $('.add-objective').on('click', function() {
-        $.getModal('campaigns.add_objectives', {campaign_id: campaign_id});
+        $.getModal('App\\Http\\Controllers\\Campaigns\\CampaignObjectiveController@addObjectives', {campaign_id: campaign_id});
     });
     $('.add-users').on('click', function() {
-        $.getModal('campaigns.add_users', {id: campaign_id});
+        $.getModal('App\\Http\\Controllers\\Campaigns\\CampaignUserController@addUsers', {id: campaign_id});
     });
     $('.edit-objective').on('click', function() {
         var model_id = $(this).attr('data-modelid');
 
         if(model_id && model_id !== ''){
-            $.getModal('campaigns.add_objectives', {id: model_id});
+            $.getModal('App\\Http\\Controllers\\Campaigns\\CampaignObjectiveController@addObjectives', {id: model_id});
         }
     });
 

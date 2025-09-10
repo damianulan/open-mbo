@@ -2,54 +2,88 @@
 
 namespace App\Models\MBO;
 
+use App\Casts\FormattedText;
+use App\Contracts\MBO\HasObjectives;
 use App\Models\BaseModel;
-use FormForge\Casts\TrixFieldCast;
-use App\Casts\CheckboxCast;
 use App\Models\Core\User;
-use App\Models\MBO\Objective;
-use App\Models\MBO\ObjectiveTemplateCategory;
 use App\Models\Scopes\MBO\ObjectiveTemplateScope;
-use App\Enums\Core\SystemRolesLib;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Attributes\ScopedBy;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- *
- *
  * @property string $id
  * @property string|null $category_id
  * @property string $name
  * @property mixed|null $description
- * @property ObjectiveType $type
- * @property string|null $award
- * @property mixed $draft
+ * @property string|null $award Max points to be awarded for objective completion
+ * @property bool $draft
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read ObjectiveTemplateCategory|null $category
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Objective> $objectives
+ * @property-read \App\Models\MBO\ObjectiveTemplateCategory|null $category
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\Objective> $objectives
  * @property-read int|null $objectives_count
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereAward($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereCategoryId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereDraft($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withoutTrashed()
+ *
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate active()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate average(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate avg(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate avgFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate checkAccess()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate count(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate countFromCache(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate createMany(array $records)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate deleteQuietly()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate drafted()
  * @method static \Database\Factories\MBO\ObjectiveTemplateFactory factory($count = null, $state = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate firstFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate flushCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate flushQueryCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate forceSave(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate getCacheKey($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate getFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate inactive()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate insert(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate insertGetId(array $values, $sequence = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate insertOrIgnore(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate max(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate maxFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate min(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate minFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate newModelQuery()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate onlyTrashed()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate paginateFromCache(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate prunableSoftDeletes()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate published()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate query()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate remember(int $minutes)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate restore()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate save(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate saveMany($models)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate sum(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate sumFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate truncate()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate updateOrInsert(array $attributes, $values = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate updateQuietly(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate whereAward($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate whereCategoryId($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate whereCreatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate whereDeletedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate whereDescription($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate whereDraft($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate whereId($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate whereName($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withTrashed(bool $withTrashed = true)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate withoutCache()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withoutTrashed()
+ *
  * @mixin \Eloquent
  */
-class ObjectiveTemplate extends BaseModel
+#[ScopedBy(ObjectiveTemplateScope::class)]
+class ObjectiveTemplate extends BaseModel implements HasObjectives
 {
     protected $fillable = [
         'category_id',
@@ -59,18 +93,17 @@ class ObjectiveTemplate extends BaseModel
     ];
 
     protected $casts = [
-        'draft' => CheckboxCast::class,
-        'description' => TrixFieldCast::class,
+        'description' => FormattedText::class,
+        'draft' => 'boolean',
     ];
 
-    protected $accessScope = ObjectiveTemplateScope::class;
+    protected $cascadeDelete = [
+        'objectives',
+    ];
 
     protected static function boot()
     {
         parent::boot();
-        static::deleted(function ($model) {
-            $model->objective_templates()->delete();
-        });
     }
 
     public function category()
@@ -78,7 +111,7 @@ class ObjectiveTemplate extends BaseModel
         return $this->belongsTo(ObjectiveTemplateCategory::class, 'category_id');
     }
 
-    public function objectives()
+    public function objectives(): HasMany
     {
         return $this->hasMany(Objective::class, 'template_id');
     }
@@ -93,7 +126,7 @@ class ObjectiveTemplate extends BaseModel
         $result = 0;
         if ($this->objectives) {
             foreach ($this->objectives as $objective) {
-                $result += $objective->user_assignments()->count();
+                $result += $objective->user_objectives()->count();
             }
         }
 
@@ -112,13 +145,14 @@ class ObjectiveTemplate extends BaseModel
 
     public function assign(User $user): bool
     {
-        $objective = new Objective();
+        $objective = new Objective;
         $objective->template_id = $this->id;
         $objective->user_id = $user->id;
         $objective->name = $this->name;
         $objective->description = $this->description;
         $objective->draft = 1;
         $objective->award = $this->award;
-        return $objective->save();
+
+        return $objective->save() ? true : false;
     }
 }

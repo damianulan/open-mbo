@@ -2,12 +2,7 @@
 
 namespace App\Providers;
 
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
-
-use Illuminate\Auth\Events\Authenticated;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -17,8 +12,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array<class-string, array<int, class-string>>
      */
     protected $listen = [
-        Registered::class => [
-            SendEmailVerificationNotification::class,
+        'Illuminate\Auth\Events\Registered' => [
+            'Illuminate\Auth\Listeners\SendEmailVerificationNotification',
         ],
         'Illuminate\Auth\Events\Logout' => [
             'App\Listeners\Activity\LogSuccessfulLogout',
@@ -31,11 +26,31 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         // MBO LISTENERS
+        // Campaigns
         'App\Events\MBO\Campaigns\UserCampaignAssigned' => [
             'App\Listeners\MBO\Campaigns\UserAssignedNotify',
+            'App\Listeners\MBO\Campaigns\UserAssignObjectives',
         ],
         'App\Events\MBO\Campaigns\UserCampaignUnassigned' => [
             'App\Listeners\MBO\Campaigns\UserUnassignedNotify',
+        ],
+        'App\Events\MBO\Campaigns\CampaignUpdated' => [
+            'App\Listeners\MBO\Campaigns\UserCampaignStageCheck',
+        ],
+        'App\Events\MBO\Campaigns\CampaignViewed' => [
+            'App\Listeners\MBO\Campaigns\UserCampaignStageCheck',
+        ],
+
+        // Objectives
+        'App\Events\MBO\Objectives\ObjectiveUpdated' => [
+            'App\Listeners\MBO\Objectives\UserObjectiveStatusCheck',
+        ],
+        'App\Events\MBO\Objectives\ObjectiveCreated' => [
+            'App\Listeners\MBO\Objectives\UserObjectiveStatusCheck',
+        ],
+
+        'App\Events\MBO\Objectives\UserObjectiveEvaluated' => [
+            'App\Listeners\MBO\Objectives\UserObjectiveEvaluation',
         ],
     ];
 

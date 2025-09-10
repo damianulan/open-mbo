@@ -3,16 +3,12 @@
 namespace App\Console;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Process;
-use Illuminate\Support\Facades\Artisan;
-use App\Notifications\System\AppRefreshNotification;
-use App\Models\Core\User;
-use App\Console\Commands\Core\MailTest;
 use Illuminate\Support\Carbon;
 
 class BaseCommand extends Command
 {
     private $start = null;
+
     private $end = null;
 
     protected function log($message, $success = true)
@@ -22,7 +18,7 @@ class BaseCommand extends Command
         $duration = null;
 
         $properties = [
-            'job' => static::class
+            'job' => static::class,
         ];
         if ($this->start && $this->end) {
             $diffMs = $this->end->valueOf() - $this->start->valueOf();
@@ -32,17 +28,16 @@ class BaseCommand extends Command
             $duration = "{$seconds}. {$milliseconds}";
         }
 
-        if (!empty($duration)) {
+        if (! empty($duration)) {
             $properties['duration'] = $duration;
         }
 
         $result = $success ? 'success' : 'failure';
-        $message = static::class . ' : ' . $message;
+        $message = static::class.' : '.$message;
         activity('cron')
             ->event($result)
             ->withProperties($properties)
-            ->log($message)
-        ;
+            ->log($message);
     }
 
     protected function logStart()

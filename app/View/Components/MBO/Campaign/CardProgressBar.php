@@ -4,24 +4,22 @@ namespace App\View\Components\MBO\Campaign;
 
 use Illuminate\View\Component;
 use Illuminate\View\View;
-use App\Models\Elearning\Course;
 
 class CardProgressBar extends Component
 {
-
     private $colors = [
         'in_progress' => '--bs-secondary',
         'ungraded' => '--bs-danger',
-        'completed' => '--bs-success'
+        'completed' => '--bs-success',
     ];
 
     public $color;
 
     public function __construct(public int $progress, bool $failed = false)
     {
-        if ($progress > 0 && $progress < 100 && !$failed) {
+        if ($progress > 0 && $progress < 100 && ! $failed) {
             $this->color = $this->colors['in_progress'];
-        } elseif ($progress === 100 && !$failed) {
+        } elseif ($progress === 100 && ! $failed) {
             $this->color = $this->colors['completed'];
         } else {
             $this->color = $this->colors['ungraded'];

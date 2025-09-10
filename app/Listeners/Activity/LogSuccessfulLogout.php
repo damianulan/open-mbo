@@ -2,10 +2,8 @@
 
 namespace App\Listeners\Activity;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Auth\Events\Logout;
 use App\Models\Core\User;
+use Illuminate\Auth\Events\Logout;
 
 class LogSuccessfulLogout
 {
@@ -22,13 +20,13 @@ class LogSuccessfulLogout
      */
     public function handle(Logout $event): void
     {
-        if($event->user){
+        if ($event->user) {
             $user = User::find($event->user->id);
-            if($user){
+            if ($user) {
                 activity('auth')
-                ->causedBy($user)
-                ->event('logged_out')
-                ->log(__('logging.description.auth_logout'));
+                    ->causedBy($user)
+                    ->event('logged_out')
+                    ->log(__('logging.description.auth_logout'));
             }
         }
     }

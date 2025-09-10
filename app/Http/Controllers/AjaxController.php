@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Settings\GeneralSettings;
 use App\Models\MBO\ObjectiveTemplate;
-use App\Models\MBO\Campaign;
+use Illuminate\Http\Request;
 
 class AjaxController extends Controller
 {
-
     public function getModelInstance(Request $request)
     {
         $model = $request->input('model') ?? null;
@@ -19,15 +16,15 @@ class AjaxController extends Controller
 
         switch ($model) {
             case 'objective_template':
-                    $instance = ObjectiveTemplate::find($id);
+                $instance = ObjectiveTemplate::find($id);
                 break;
 
             default:
-                # code...
+                // code...
                 break;
         }
 
-        if($instance){
+        if ($instance) {
             $status = 'ok';
         }
 

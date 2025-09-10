@@ -2,8 +2,9 @@
 
 namespace App\Traits\Vendors;
 
-use Spatie\Activitylog\Traits\LogsActivity;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 trait ModelActivity
 {
@@ -11,24 +12,21 @@ trait ModelActivity
 
     public function getActivitylogOptions(): LogOptions
     {
-        if(!auth()->user()){
+        if (! Auth::check()) {
             return LogOptions::defaults();
         }
         $log_name = $this->log_name ?? 'model';
 
         return LogOptions::defaults()
-                ->useLogName($log_name)
-                ->logOnly($this->fillable)
-                ->logOnlyDirty()
-                ->dontSubmitEmptyLogs()
-                ->setDescriptionForEvent(function(string $eventName) {
-                    return __('logging.description.'.$eventName, [
-                        'username' => auth()->user()->name(),
-                        'model_map' => __('logging.model_mapping.'.static::class),
-                    ]);
-                });
+            ->useLogName($log_name)
+            ->logOnly($this->fillable)
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs()
+            ->setDescriptionForEvent(function (string $eventName) {
+                return __('logging.description.'.$eventName, [
+                    'username' => Auth::user()->name,
+                    'model_map' => __('logging.model_mapping.'.static::class),
+                ]);
+            });
     }
-
-
-
 }

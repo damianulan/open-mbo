@@ -12,9 +12,10 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/resources/favicon.ico') }}">
 
     <!-- Theme -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('themes/'.$page->theme.'/app.css') }}">
+    @livewireStyles
+    <link rel="stylesheet" type="text/css" href="{{ asset('themes/'.$page->theme.'/app.min.css') }}">
     @stack('styles')
     <script src="{{asset('themes/vendors/jquery.min.js')}}"></script>
-    @include('layouts.portal.scripts')
+    @include('layouts.portal.script_variables')
 
 </head>

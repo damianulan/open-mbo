@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands\Core;
 
-use Illuminate\Console\Command;
 use App\Settings\GeneralSettings;
+use Illuminate\Console\Command;
 
 class Maintenance extends Command
 {
@@ -27,7 +27,7 @@ class Maintenance extends Command
     public function handle()
     {
         $type = $this->argument('arg');
-        $settings = new GeneralSettings();
+        $settings = new GeneralSettings;
 
         switch ($type) {
             case 'up':

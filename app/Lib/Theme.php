@@ -2,14 +2,15 @@
 
 namespace App\Lib;
 
-use App\Settings\GeneralSettings;
-use Symfony\Component\Finder\Finder;
 use Illuminate\Support\Collection;
+use Symfony\Component\Finder\Finder;
 
 class Theme
 {
     public $current;
+
     public $available;
+
     protected $images_path;
 
     public function __construct()
@@ -21,18 +22,19 @@ class Theme
 
     public static function getAvailable(): Collection
     {
-        $directories = new Collection();
+        $directories = new Collection;
         foreach (Finder::create()->in(public_path('themes'))->directories()->depth(0)->sortByName() as $dir) {
             $d = $dir->getFilename();
-            if(!in_array($d, ['js','vendors','images'])){
+            if (! in_array($d, ['js', 'vendors', 'images'])) {
                 $directories->push($d);
             }
         }
+
         return $directories;
     }
 
     public static function imagePath()
     {
-        return (new self())->images_path;
+        return (new self)->images_path;
     }
 }

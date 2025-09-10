@@ -1,6 +1,3 @@
-<a class="action-btn" href="{{ route('users.show', $data->id) }}" title="{{ __('buttons.profile_show') }}">
-    <i class="bi bi-person-badge me-1"></i>
-</a>
 <a class="action-btn" href="{{ route('users.edit', $data->id) }}" title="{{ __('buttons.edit') }}">
     <i class="bi bi-pencil-square me-1"></i>
 </a>

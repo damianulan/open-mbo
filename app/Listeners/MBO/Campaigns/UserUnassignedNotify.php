@@ -2,12 +2,10 @@
 
 namespace App\Listeners\MBO\Campaigns;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-use App\Notifications\MBO\Campaign\CampaignAssignment;
 use App\Events\MBO\Campaigns\UserCampaignUnassigned;
+use Illuminate\Contracts\Queue\ShouldQueueAfterCommit;
 
-class UserUnassignedNotify
+class UserUnassignedNotify implements ShouldQueueAfterCommit
 {
     /**
      * Create the event listener.

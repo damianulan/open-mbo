@@ -1,6 +1,5 @@
 import { Tooltip } from "bootstrap";
 import Toastify from "toastify-js";
-import tippy from "tippy.js";
 
 const moment = require("moment");
 const Swal = require("sweetalert2");
@@ -21,9 +20,12 @@ const tooltipList = [...tooltipTriggerList].map(
     (tooltipTriggerEl) => new Tooltip(tooltipTriggerEl)
 );
 
-jQuery(function () {
-    buildVendors();
-});
+const modal_initialized = new Event("modal-initialized");
+
+$.buildVendor = function () {
+    $.rebuildVendors();
+    $.quillBuild();
+}
 
 $("body").on("click", ".card-url", function () {
     var url = $(this).attr("data-url");
@@ -45,17 +47,8 @@ $("body").on("click", ".swal-confirm", function (e) {
     );
 });
 
-function buildVendors() {
-    $.buildChosen();
-    $.buildFlatpickr();
-
-    tippy("[data-tippy-content]", {
-        allowHTML: true,
-    });
-}
-
 $(".table-container").on("xhr.dt", function (e, settings, json, xhr) {
-    $.rebuildVendors();
+    $.buildVendor();
 });
 
 $.overlay = function (state) {
@@ -86,6 +79,7 @@ function swal_confirm(text, title_input = null, _callback = null) {
                 _callback();
             }
         }
+        return result.isConfirmed;
     });
 }
 
@@ -149,14 +143,11 @@ function toast_alert(text, type = "info", _callback = function () {}) {
         stopOnFocus: true, // Prevents dismissing of toast on hover
         className: type,
         callback: _callback,
+        escapeMarkup: false,
     }).showToast();
 }
 
 $.notify = toast_alert;
-
-$.rebuildVendors = function () {
-    buildVendors();
-};
 
 $.showOverlay = function () {
     $.overlay("show");
@@ -177,23 +168,30 @@ jQuery.fn.extend({
     },
 });
 
-$.getModal = function (type, datas = {}) {
-    if (type && type != "") {
-        datas.type = type;
+$.getModal = function (target, datas = {}, _callback = null) {
+    if (target && target != "") {
         $.ajax({
             cache: false,
             url: getModalUrl,
+            type: "GET",
             dataType: "json",
             headers: {
                 "X-CSRF-Token": csrf,
             },
-            data: datas,
+            data: {
+                target: target,
+                datas: datas,
+            },
         })
             .done(function (data) {
                 if (data.status === "ok") {
                     $("body").find("#modal-container").children().remove();
                     $("body").find("#modal-container").append(data.view);
                     $("body").find("#modal-input").trigger("click");
+                    $(document).trigger(modal_initialized);
+                    if (_callback) {
+                        _callback(data);
+                    }
                 } else {
                     if (data.status === "warning") {
                         $.warning(data.message);
@@ -346,3 +344,40 @@ $.clearErrorsForm = function (form_id) {
         .find(".is-invalid")
         .removeClass("is-invalid");
 };
+
+// GLOBAL FUNCTIONS
+$.setCookie = function (name, value, days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+};
+
+$.getCookie = function (name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(";");
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == " ") c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+};
+
+$.eraseCookie = function (name, path, domain) {
+    if ($.getCookie(name)) {
+        document.cookie = name + "=; Max-Age=-99999999;";
+    }
+};
+
+$("i.minimize").on("click", function () {
+    var card = $(this).closest(".content-card");
+    if (card.hasClass("minimized")) {
+        card.removeClass("minimized");
+    } else {
+        card.addClass("minimized");
+    }
+});

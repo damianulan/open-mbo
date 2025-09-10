@@ -1,26 +1,25 @@
 <?php
 
-namespace App\Forms\MBO\Campaign;
+namespace App\Forms\MBO\Objective;
 
+use App\Models\MBO\Objective;
+use App\Models\MBO\ObjectiveTemplate;
 use FormForge\Base\Form;
-use FormForge\FormBuilder;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
-use App\Models\MBO\ObjectiveTemplate;
-use App\Models\MBO\Objective;
+use FormForge\FormBuilder;
 use Illuminate\Http\Request;
 
 // Ajax form
-class CampaignEditObjectiveForm extends Form
+class ObjectiveEditForm extends Form
 {
-
     // TODO - dodawanie użytkowników
     public static function definition(Request $request, $model = null): FormBuilder
     {
         $route = null;
         $method = 'POST';
         $title = 'Dodaj nowy cel';
-        if (!is_null($model)) {
+        if (! is_null($model)) {
             $method = 'PUT';
             $title = 'Edytuj cel';
         }
@@ -30,7 +29,7 @@ class CampaignEditObjectiveForm extends Form
             ->add(FormComponent::hidden('id', $model))
             ->add(FormComponent::select('template_id', $model, Dictionary::fromModel(ObjectiveTemplate::class, 'name'))->required()->label(__('forms.mbo.objectives.template')))
             ->add(FormComponent::text('name', $model)->label(__('forms.mbo.objectives.name'))->required())
-            ->add(FormComponent::trix('description', $model)->label(__('forms.mbo.objectives.description')))
+            ->add(FormComponent::container('description', $model)->label(__('forms.mbo.objectives.description'))->class('quill-default'))
             ->add(FormComponent::datetime('deadline', $model)->label(__('forms.mbo.objectives.deadline'))->info(__('forms.mbo.objectives.info.deadline')))
             ->add(FormComponent::decimal('weight', $model)->label(__('forms.mbo.objectives.weight'))->info(__('forms.mbo.objectives.info.weight'))->required())
             ->add(FormComponent::decimal('expected', $model)->label(__('forms.mbo.objectives.expected'))->info(__('forms.mbo.objectives.info.expected')))
@@ -46,21 +45,15 @@ class CampaignEditObjectiveForm extends Form
             $builder->where('id', '!=', $model_id);
         }
 
-        $weights = $builder->get()->pluck('weight');
-        $max_weight = 1;
-        foreach ($weights as $weight) {
-            $max_weight = $max_weight - (float) $weight;
-        }
-
         return [
             'template_id' => 'required',
             'name' => 'max:120|required',
             'deadline' => 'nullable',
-            'description' => 'max:512|nullable',
-            'weight' => 'decimal:2|required',
-            'expected' => 'decimal:2|nullable',
-            'award' => 'decimal:2|nullable',
-            'draft' => 'in:on,off',
+            'description' => 'max:2000|nullable',
+            'weight' => 'numeric|required',
+            'expected' => 'numeric|nullable',
+            'award' => 'numeric|nullable',
+            'draft' => 'boolean',
         ];
     }
 }

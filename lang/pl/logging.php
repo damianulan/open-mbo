@@ -18,6 +18,7 @@ return [
     ],
 
     'events' => [
+        'viewed' => 'Wyświetlono',
         'created' => 'Utworzenie obiektu',
         'updated' => 'Aktualizacja danych',
         'logged_out' => 'Wylogowanie',
@@ -39,7 +40,8 @@ return [
         'auth_attempt_success' => 'Zarejestrowano pomyślną próbę logowania użytkownika.',
         'auth_attempt_fail' => 'Zarejestrowano pomyślną próbę logowania użytkownika.',
         'auth_logout' => 'Użytkownik wylogował się z systemu.',
-        'notification_sent' => 'Użytkownik :username otrzymał powiadomienie: :type'
+        'notification_sent' => 'Użytkownik :username otrzymał powiadomienie: :type',
+        'view' => 'Użytkownik :username wyświetlił obiekt: :model_map',
     ],
 
     'model_mapping' => [
@@ -52,7 +54,7 @@ return [
     ],
 
     'route_mapping' => [
-        'App\Models\MBO\ObjectiveTemplate' => 'management.mbo.objectives.edit',
+        'App\Models\MBO\ObjectiveTemplate' => 'templates.edit',
         'App\Models\MBO\Objective' => 'objectives.show',
         'App\Models\MBO\Campaign' => 'campaigns.show',
         'App\Models\MBO\UserObjective' => 'campaigns.users.update',

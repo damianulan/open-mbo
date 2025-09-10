@@ -3,8 +3,6 @@
 namespace App\Console\Commands\Core;
 
 use App\Console\BaseCommand;
-use App\Settings\MailSettings;
-use Illuminate\Support\Facades\Mail;
 
 class SystemTest extends BaseCommand
 {

@@ -2,35 +2,27 @@
 
 namespace App\Notifications\MBO\Campaign;
 
-use Illuminate\Bus\Queueable;
-use App\Facades\Notifications\BaseNotification;
 use App\Models\Core\User;
-use App\Facades\Notifications\NotificationAdhoc;
 use App\Models\MBO\Campaign;
+use App\Support\Notifications\AppNotification;
+use App\Support\Notifications\BaseNotification;
+use App\Support\Notifications\Contracts\IsAppNotification;
+use Illuminate\Bus\Queueable;
 
-class CampaignAssignment extends BaseNotification
+class CampaignAssignment extends BaseNotification implements IsAppNotification
 {
     use Queueable;
 
-
-    /**
-     * Create a new notification instance.
-     */
     public function __construct(
         public User $assigned,
         public Campaign $campaign
     ) {}
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @return array<string, mixed>
-     */
-    public function toArray(object $notifiable): array
+    public function toApp(object $notifiable): AppNotification
     {
-        return NotificationAdhoc::make(__('notifications.app.campaign.coordinator_assignment', [
-            'username' => $this->assigned->name(),
+        return AppNotification::make(__('notifications.app.campaign.coordinator_assignment', [
+            'username' => $this->assigned->name,
             'campaignname' => $this->campaign->name,
-        ]), 'bi-person-fill-up')->toArray();
+        ]), 'bi-person-fill-up');
     }
 }

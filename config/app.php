@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Facade;
 use App\Lib\Git;
-use App\Lib\Theme;
+use Illuminate\Support\Facades\Facade;
 
 return [
 
@@ -99,6 +98,8 @@ return [
 
     'maintenance' => false,
 
+    'chunk_default' => env('CHUNK_DEFAULT', 250),
+
     'fallback_locale' => 'pl',
 
     'available_locales' => [
@@ -106,10 +107,9 @@ return [
         'en',
     ],
 
-    'date_format' => 'Y-m-d',
-    'time_format' => 'H:i',
-    'datetime_format' => 'Y-m-d H:i',
-    'from_datetime_format' => 'Y-m-d H:i:s',
+    'date_format' => env('DATEFORMAT', 'Y-m-d'),
+    'time_format' => env('TIMEFORMAT', 'H:i'),
+    'datetime_format' => env('DATEFORMAT', 'Y-m-d').' '.env('TIMEFORMAT', 'H:i'),
 
     /*
     |--------------------------------------------------------------------------
@@ -138,12 +138,11 @@ return [
 
     /**
      * Application Versioning
-     * @key release - increments by one after successful implementation of a milestone.
      *
+     * @key release - increments by one after successful implementation of a milestone.
      * @key build - YYYYMMDDV format.
      * V stands for version build for the specific day (max 9).
      */
-
     'release' => '0.0.1 beta',
     'build' => 0,
 
@@ -240,8 +239,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\ComponentServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        //App\Providers\TelescopeServiceProvider::class,
-        App\Providers\PermissionServiceProvider::class,
+        // App\Providers\TelescopeServiceProvider::class,
         App\Providers\RolesServiceProvider::class,
         App\Providers\GateServiceProvider::class,
         App\Providers\ConfigServiceProvider::class,
@@ -261,11 +259,9 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        'PageBuilder' => App\Facades\Page\PageBuilder::class,
+        'PageBuilder' => App\Support\Page\PageBuilder::class,
         'Theme' => App\Lib\Theme::class,
-        'ResponseAjax' => App\Facades\Http\ResponseAjax::class,
-        'PermissionsLib' => App\Enums\Core\PermissionLib::class,
-        'SystemRolesLib' => App\Enums\Core\SystemRolesLib::class,
+        'ResponseAjax' => App\Support\Http\ResponseAjax::class,
 
         // CASTS
         'CheckboxCast' => App\Casts\CheckboxCast::class,
@@ -275,6 +271,10 @@ return [
 
         // VENDORS
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
+
+        'AppException' => App\Exceptions\AppException::class,
+
+        'MessageType' => App\Enums\Core\MessageType::class,
     ])->toArray(),
 
 ];

@@ -2,21 +2,23 @@
 
 namespace App\Http\Controllers\Objectives;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\DataTables\MBO\ObjectiveDataTable;
+use App\Forms\MBO\Objective\ObjectiveEditForm;
 use App\Models\MBO\Objective;
-use App\Models\Core\User;
-use App\Models\MBO\Campaign;
-use App\Enums\MBO\UserObjectiveStatus;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 
-class ObjectiveController extends Controller
+class ObjectiveController extends MBOController
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(ObjectiveDataTable $dataTable)
     {
-        //
+        return $dataTable->render('pages.mbo.objectives.index', [
+            'table' => $dataTable,
+            'nav' => $this->nav(),
+        ]);
     }
 
     /**
@@ -30,9 +32,21 @@ class ObjectiveController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, ObjectiveEditForm $form)
     {
-        //
+        $request = $form::reformatRequest($request);
+        $response = $form::validateJson($request);
+        if ($response['status'] === 'ok') {
+            $objective = Objective::fillFromRequest($request);
+
+            if ($objective->save()) {
+                $response['message'] = __('alerts.objectives.success.objective_added');
+
+                return response()->json($response);
+            }
+        }
+
+        return response()->json($response);
     }
 
     /**
@@ -40,9 +54,11 @@ class ObjectiveController extends Controller
      */
     public function show(Request $request, string $id)
     {
-        $objective = Objective::checkAccess()->findOrFail($id);
+        $objective = Objective::findOrFail($id);
+        $this->logShow($objective);
 
         $header = 'Podsumowanie Celu';
+
         return view('pages.mbo.objectives.show', [
             'objective' => $objective,
             'pagetitle' => $header,
@@ -57,12 +73,21 @@ class ObjectiveController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id, ObjectiveEditForm $form)
     {
-        //
+        $request = $form::reformatRequest($request);
+        $response = $form::validateJson($request, $id);
+        if ($response['status'] === 'ok') {
+            $objective = Objective::fillFromRequest($request, $id);
+
+            if ($objective->update()) {
+                $response['message'] = __('alerts.objectives.success.objective_updated');
+
+                return response()->json($response);
+            }
+        }
+
+        return response()->json($response);
     }
 
     /**
@@ -71,5 +96,25 @@ class ObjectiveController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function addObjectives(Request $request, $id): View
+    {
+        $params = [];
+        if ($id) {
+            $objective = Objective::find($id);
+            if ($objective) {
+                $params = [
+                    'id' => $id,
+                    'form' => ObjectiveEditForm::definition($request, $objective),
+                ];
+            }
+        } else {
+            $params = [
+                'form' => ObjectiveEditForm::definition($request),
+            ];
+        }
+
+        return view('components.modals.objectives.add_objectives', $params);
     }
 }

@@ -15,7 +15,7 @@ class IconComponent extends Component
         public string $key,
         public int $ml = 0,
         public int $mr = 0,
-        public array $classes = [],
+        public string $classes = '',
         public bool $bi = false
     ) {}
 
@@ -25,19 +25,19 @@ class IconComponent extends Component
     public function render(): View|Closure|string
     {
         if ($this->bi) {
-            $this->classes[] = 'bi';
+            $this->classes .= ' bi';
         }
         if ($this->ml > 0) {
-            $this->classes[] = 'ms-' . $this->ml;
+            $this->classes .= ' ms-'.$this->ml;
         }
         if ($this->mr > 0) {
-            $this->classes[] = 'me-' . $this->mr;
+            $this->classes .= ' me-'.$this->mr;
         }
 
-        $classes = implode(' ', $this->classes);
-        if (!empty($classes)) {
-            $classes = ' ' . $classes;
+        if (! empty($this->classes)) {
+            $this->classes = ' '.$this->classes;
         }
-        return '<i class="bi-' . $this->key . $classes . '"></i>';
+
+        return '<i class="bi-'.$this->key.' '.trim($this->classes).'"></i>';
     }
 }

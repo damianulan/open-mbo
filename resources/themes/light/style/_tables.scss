@@ -119,7 +119,6 @@ table.ombo-table tbody tr:hover {
 }
 .ombo-table .user-details img,
 .user > .user-details img {
-    border-radius: 50%;
     width: 1.55rem;
     margin-right: 0.5rem;
 }
@@ -146,8 +145,8 @@ table.ombo-table tbody tr:hover {
 .ombo-list li {
     border-radius: 0.35rem;
     background-color: $ombo-body;
-    padding: 0.5rem 1rem;
-    margin: 0.35rem 0;
+    padding: 0.55rem 1rem;
+    margin: 0.4rem 0;
 }
 
 .ombo-list li.passed {
@@ -165,6 +164,15 @@ table.ombo-table tbody tr:hover {
 
 .ombo-list li.failed:hover {
     background-color: $ombo-body-failed-hover;
+    transition: all 0.2s ease-in-out;
+}
+
+.ombo-list li.warning {
+    background-color: $ombo-body-warning;
+}
+
+.ombo-list li.warning:hover {
+    background-color: $ombo-body-warning-hover;
     transition: all 0.2s ease-in-out;
 }
 
@@ -222,8 +230,13 @@ table.ombo-table tbody tr:hover {
     text-decoration: none;
     margin-right: 0.35rem;
     font-size: 1rem;
-    color: $secondary;
+    color: $link-color;
     white-space: nowrap;
+}
+
+.ombo-list li .list-actions .list-action:hover {
+    color: $link-color-hover;
+    transition: all 0.2s ease-in-out;
 }
 
 .ombo-list li .list-actions .list-action i {

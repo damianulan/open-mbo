@@ -5,11 +5,9 @@ return [
     // Sidebar
     'dashboard' => 'Pulpit',
 
-
-
     'admin_panel' => 'Panel administracyjny',
     'reports' => [
-        'index' => 'Raporty'
+        'index' => 'Raporty',
     ],
     'notifications' => [
         'index' => 'Powiadomienia',
@@ -33,7 +31,6 @@ return [
         'index' => 'Moje cele',
     ],
 
-
     // User's profile menu
     'profile' => [
         'index' => 'Profil',
@@ -56,20 +53,13 @@ return [
             'index' => 'Integracje',
         ],
         'server' => [
-            'index' => 'Serwer'
+            'index' => 'Serwer',
         ],
         'logs' => [
             'index' => 'Logi',
         ],
         'help' => [
             'index' => 'Pomoc',
-        ],
-    ],
-
-    'management' => [
-        'index' => 'Zarządzanie',
-        'users' => [
-            'index' => 'Użytkownicy'
         ],
         'organization' => [
             'index' => 'Struktura organizacyjna',
@@ -90,26 +80,30 @@ return [
             'index' => 'Kreator struktury',
         ],
         'teams' => [
-            'index' => 'Zespoły'
+            'index' => 'Zespoły',
         ],
-        'mbo' => [
-            'objectives' => [
-                'index' => 'Szablony celów',
-                'create' => 'Tworzenie szablonu celu',
-                'edit' => 'Modyfikacja szablonu celu',
+    ],
 
+    'mbo' => [
+        'index' => 'Zarządzanie celami',
+    ],
 
-            ],
-            'categories' => [
-                'index' => 'Kategorie celów',
-                'create' => 'Tworzenie kategorii MBO',
-                'edit' => 'Modyfikacja kategorii MBO',
-            ],
-        ],
+    'objectives' => [
+        'index' => 'Cele',
+        'create' => 'Tworzenie celu',
+        'edit' => 'Modyfikacja celu',
 
-        'restoring' => [
-            'index' => 'Przywracanie danych',
-        ],
+    ],
+    'templates' => [
+        'index' => 'Szablony celów',
+        'create' => 'Tworzenie szablonu celu',
+        'edit' => 'Modyfikacja szablonu celu',
+
+    ],
+    'categories' => [
+        'index' => 'Kategorie celów',
+        'create' => 'Tworzenie kategorii MBO',
+        'edit' => 'Modyfikacja kategorii MBO',
     ],
 
     'reports' => [
@@ -129,14 +123,10 @@ return [
         'show' => 'Profil użytkownika',
     ],
 
-
-
     'info' => [
         'profile' => [
             'logs' => 'Strona przedstawia całą Twoją aktywność, jaka jest mierzona przez system.',
         ],
     ],
-
-
 
 ];

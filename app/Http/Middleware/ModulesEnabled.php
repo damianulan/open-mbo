@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Support\Modules\ModuleManager;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Facades\Modules\ModuleManager;
 
 class ModulesEnabled
 {
@@ -17,8 +17,8 @@ class ModulesEnabled
     public function handle(Request $request, Closure $next, string $module): Response
     {
         $verified = ModuleManager::check($module);
-        if (!$verified) {
-            unauthorized('Moduł, który próbujesz otworzyć został zablokowany przez administratora systemu.');
+        if (! $verified) {
+            unauthorized(__('alerts.system.unauthorized_module'));
         }
 
         return $next($request);

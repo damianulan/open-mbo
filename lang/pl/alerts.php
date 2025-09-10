@@ -2,6 +2,9 @@
 
 return [
 
+    'system' => [
+        'unauthorized_module' => 'Moduł, który próbujesz otworzyć został zablokowany przez administratora systemu.',
+    ],
     'success' => [
         'operation' => 'Operacja zakończona pomyślnie.',
     ],
@@ -10,6 +13,7 @@ return [
         'no_permission' => 'Nie posiadasz odpowiednich uprawnień do wykonania tej akcji.',
         'ajax' => 'Wystąpił błąd podczas pobierania danych z serwera, żądanie nie zostało przetworzone. Zweryfikuj swoje połączenie internetowe.',
         'operation' => 'Wystąpił błąd podczas wykonywania operacji.',
+        'form' => 'W formularzu wystąpiły błędy. Popraw je i spróbuj ponownie.',
     ],
     'warning' => [
         'operation' => 'Uwaga!',
@@ -27,20 +31,18 @@ return [
             // SETTINGS
             'cache_clear' => 'Pamięć podręczna aplikacji została pomyślnie wyczyszczona!',
             'mail_update' => 'Dane serwera SMTP zostały zaktualizowane. Cache został automatycznie wyczyszczony.',
-            'general'     => 'Ustawienia platformy zostały zaktualizowane.',
+            'mbo_update' => 'Ustawienia modułu MBO zostały zaktualizowane.',
+            'general' => 'Ustawienia platformy zostały zaktualizowane.',
         ],
         'error' => [
-            //SETTINGS
+            // SETTINGS
             'cache_clear' => 'Podczas czyszczenia pamięci podręcznej aplikacji serwer napotkał problemy. Sprawdź uprawnienia serwera.',
             'mail_update' => 'Dane serwera SMTP nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd.',
-            'general'     => 'Ustawienia platformy nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd.',
+            'mbo_update' => 'Ustawienia modułu MBO nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd.',
+            'general' => 'Ustawienia platformy nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd.',
         ],
-        'warning' => [
-
-        ],
-        'info' => [
-
-        ],
+        'warning' => [],
+        'info' => [],
 
     ],
 
@@ -60,7 +62,7 @@ return [
 
         'error' => [
             'create' => 'Kampanie nie mogła zostać dodana. Wystąpił błąd.',
-            'edit' => 'Kampania została pomyślnie zmodyfikowana.',
+            'edit' => 'Kampania nie została zmodyfikowana. W formularzu wystąpiły błędy.',
             'objective_added' => 'Wskazany cel został pomyślnie dodany do Kampanii.',
             'objective_deleted' => 'Cel został pomyślnie usunięty z Kampanii.',
             'users_added' => 'Dane nie zostały zaktualizowane. Odśwież stronę i spróbuj ponownie.',
@@ -70,15 +72,35 @@ return [
             'cancel' => 'Kampania nie została pomyślnie anulowana.',
         ],
 
-        'info' => [
-
-        ],
+        'info' => [],
 
     ],
 
     'objectives' => [
+        'success' => [
+            'users_added' => 'Uzupełniono przypisanie użytkowników do celu.',
+            'realization_updated' => 'Dane o realizacji celu zostały zaktualizowane.',
+        ],
+
         'error' => [
-            'overdued' => 'Cel nie jest już aktualny - termin jego realizacji minął. Wszystkie nieukończone podejścia zostały oznaczone jako niezaliczone.',
+            'overdued' => 'Termin realizacji tego celu minął :term',
+            'users_added' => 'Dane nie zostały zaktualizowane. Odśwież stronę i spróbuj ponownie.',
+            'realization_updated' => 'Dane o realizacji celu nie mogły zostać zaktualizowane. Wystąpił nieoczekiwany błąd.',
+        ],
+
+        'info' => [
+            'delete' => 'Usunięcie celu będzie nieodwracalne.',
+        ],
+    ],
+
+    'user_objectives' => [
+        'success' => [
+            'set_passed' => 'Cel został oznaczony jako zaliczony.',
+            'set_failed' => 'Cel został oznaczony jako niezaliczony.',
+        ],
+        'error' => [
+            'set_passed' => 'Nie można oznaczyć celu jako zaliczony.',
+            'set_failed' => 'Nie można oznaczyć celu jako niezaliczony.',
         ],
     ],
 
@@ -139,12 +161,11 @@ return [
         ],
     ],
 
-
     'datatables' => [
         'save_columns' => [
             'error_data' => 'Nie wykryto nowych danych dotyczących wyświetlania kolumn w tabeli. Zmiany nie zostały zapisane.',
             'error' => 'Nie można było zapisać nowych danych dotyczących kolumn w tabeli. Wystąpił błąd.',
-        ]
-    ]
+        ],
+    ],
 
 ];

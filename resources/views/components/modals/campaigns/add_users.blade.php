@@ -5,7 +5,7 @@
           <h1 class="modal-title fs-3" id="containerModalLabel">{{ $form->title() }}</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ __('buttons.close') }}"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" style="min-height: 300px;">
             <div class="container-fluid">
                 {{ $form->render() }}
             </div>
@@ -20,7 +20,7 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-    $.rebuildVendors();
+    $.buildVendor();
 });
 
 $('#modal_save').on('click', function() {
@@ -37,10 +37,4 @@ $('#modal_save').on('click', function() {
 
 });
 
-$('input[data-numeric="decimal"]').on('focusout', function() {
-    var val = $(this).val();
-    if(val != '' && !val.includes('.') && !val.includes(',')){
-        $(this).val(val + '.00');
-    }
-});
 </script>

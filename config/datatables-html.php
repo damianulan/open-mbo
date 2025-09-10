@@ -12,7 +12,7 @@ return [
      */
     'table' => [
         'class' => 'table ombo-table',
-        'id'    => 'dataTableBuilder',
+        'id' => 'dataTableBuilder',
     ],
 
     /*

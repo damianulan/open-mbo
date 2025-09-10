@@ -3,11 +3,10 @@
 namespace App\Forms\Settings;
 
 use FormForge\Base\Form;
-use FormForge\FormBuilder;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
+use FormForge\FormBuilder;
 use Illuminate\Http\Request;
-use App\Settings\MailSettings;
 
 class SmtpForm extends Form
 {

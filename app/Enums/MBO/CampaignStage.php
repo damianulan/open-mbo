@@ -2,7 +2,7 @@
 
 namespace App\Enums\MBO;
 
-use FormForge\Enums\Enum;
+use Lucent\Support\Enum;
 
 /**
  * Campaign Stages can be assigned to campaigns and users in campaign.
@@ -15,16 +15,24 @@ class CampaignStage extends Enum
     // in progress/soft stages - campaign can have multiple of them assigned.
     // if any assigned its generally an IN_PROGESS stage
     const DEFINITION = 'definition';
+
     const DISPOSITION = 'disposition';
+
     const REALIZATION = 'realization';
+
     const EVALUATION = 'evaluation';
+
     const SELF_EVALUATION = 'self_evaluation';
 
     // hard stages
     const PENDING = 'pending'; // starting point stage
+
     const IN_PROGRESS = 'in_progress'; // const when process is in progress
+
     const COMPLETED = 'completed'; // const when process is finished in time
+
     const TERMINATED = 'terminated'; // const when process has been terminated after it has started
+
     const CANCELED = 'canceled'; // const when process has been canceled
 
     public static function hardValues(): array
@@ -62,14 +70,25 @@ class CampaignStage extends Enum
         ];
     }
 
+    public static function hardValuesOrder(): array
+    {
+        return [
+            self::IN_PROGRESS,
+            self::PENDING,
+            self::COMPLETED,
+            self::TERMINATED,
+            self::CANCELED,
+        ];
+    }
+
     public static function getName(string $value): string
     {
-        return __('forms.campaigns.' . $value);
+        return self::labels()[$value] ?? $value;
     }
 
     public static function getInfo(string $value): string
     {
-        return __('forms.campaigns.info.' . $value);
+        return __('forms.campaigns.info.'.$value);
     }
 
     public static function getBySequence(int $sequence)
@@ -101,10 +120,60 @@ class CampaignStage extends Enum
                 $status = 'bi-hourglass-split';
                 break;
 
+            case CampaignStage::TERMINATED:
+                $status = 'bi-pause-circle-fill';
+                break;
+
+            case CampaignStage::CANCELED:
+                $status = 'bi-x-circle-fill';
+                break;
+
             default:
                 $status = 'bi-hourglass-bottom';
                 break;
         }
+
         return $status;
+    }
+
+    /**
+     * set user objective status based on current user campaign stage.
+     *
+     * @param  string  $stage  - UserCampaign stage
+     * @param  string|null  $status  - UserObjective status
+     * @return string $status
+     */
+    public static function mapObjectiveStatus(string $stage, ?string $status): ?string
+    {
+        $sequences = self::sequences();
+        $frozen = UserObjectiveStatus::evaluated();
+
+        if (array_key_exists($stage, $sequences) && ! in_array($status, $frozen)) {
+            if ($stage === self::REALIZATION || $stage === self::IN_PROGRESS) {
+                $status = UserObjectiveStatus::PROGRESS;
+            } elseif ($sequences[$stage] < $sequences[self::REALIZATION]) {
+                $status = UserObjectiveStatus::UNSTARTED;
+            } elseif ($sequences[$stage] > $sequences[self::REALIZATION]) {
+                $status = UserObjectiveStatus::COMPLETED;
+            }
+        }
+
+        return $status;
+    }
+
+    public static function labels(): array
+    {
+        return __('forms.campaigns.stages');
+    }
+
+    public static function fromto_labels(): array
+    {
+        $arr = [];
+        foreach (__('forms.campaigns.stages') as $key => $value) {
+            $arr[$key.'_from'] = $value.' '.__('forms.from');
+            $arr[$key.'_to'] = $value.' '.__('forms.to');
+        }
+
+        return $arr;
     }
 }

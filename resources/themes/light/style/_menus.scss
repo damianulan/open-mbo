@@ -132,6 +132,25 @@ html .sidebar-menu {
     padding: 1.5rem;
 }
 
+.sidebar-menu .sidebar-footer {
+    margin: 1rem 2rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.sidebar-menu .sidebar-footer .menu-release {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: $primary;
+    text-align: end;
+}
+
+.sidebar-menu.menu-collapsed .sidebar-footer {
+    display: none;
+}
+
 .brand {
     display: flex;
     align-items: center;
@@ -170,7 +189,7 @@ li.nav-item {
     font-size: 0.85rem;
     font-weight: 600;
     text-transform: capitalize;
-    color: $sidebar-link;
+    color: $link-color;
     padding: 0.3rem 1rem;
     margin: 0 0.75rem;
     background-color: transparent;
@@ -186,20 +205,20 @@ li.nav-item {
     display: flex;
     align-items: center;
     font-size: 0.85rem;
-    color: $sidebar-link;
+    color: $link-color;
     padding: 0.3rem 1rem;
     margin: 0 0.75rem;
     text-decoration: none;
 }
 
 .sidebar-menu .nav-pills .nav-link:hover {
-    color: lighten($sidebar-link, 10%) !important;
+    color: $link-color-hover !important;
     transition: all 0.3s ease-in-out;
 }
 
 .sidebar-menu .nav-pills .nav-link.active {
     font-weight: 600;
-    color: $sidebar-link-active !important;
+    color: $button-link-active !important;
     background: $primary;
     background: linear-gradient(
         90deg,
@@ -210,7 +229,7 @@ li.nav-item {
 }
 
 .sidebar-menu .nav-pills .nav-link.active:hover {
-    color: darken($sidebar-link-active, 10%);
+    color: $button-link-active-hover;
 }
 
 .sidebar-menu .nav .nav-item:not(.disabled) a {
@@ -227,7 +246,7 @@ li.nav-item {
     padding: 0 0 0.3rem 0;
     margin: 0 0 1rem 0;
     font-size: 0.85rem;
-    color: lighten($dark, 20%);
+    color: tint($dark, 20%);
 }
 
 .sidebar-menu .nav .nav-multi.first {
@@ -264,6 +283,12 @@ ul.user-bar {
     position: relative;
     margin-left: auto;
     align-items: center;
+}
+
+.user-actions img,
+.user-details img {
+    border-radius: 50%;
+    border: 2px dotted $primary;
 }
 
 .user-nav .user-details {
@@ -523,9 +548,14 @@ a.dropdown-toggle {
     opacity: 0.9rem;
 }
 
-.notification-dropdown .dropdown-menu .dropdown-header {
+.notification-dropdown .dropdown-menu .dropdown-header,
+.notification-dropdown .dropdown-menu .dropdown-footer {
     padding: 0.3rem 1rem;
     color: $gray-600;
+}
+
+.notification-dropdown .dropdown-menu .dropdown-footer {
+    float: right;
 }
 
 .notification-dropdown .notification-item .notification-contents {
@@ -562,19 +592,16 @@ a.dropdown-toggle {
 
 .icon-btn-nav {
     display: flex;
+    align-items: end;
 }
 
 .icon-btn-nav .panel-left {
     margin-left: auto;
 }
 
-.panel-left a.icon-btn {
+.icon-btn-nav .icon-btn,
+.icon-btn-nav .icon-btn-sm {
     margin-left: 0.5rem;
-}
-
-a.icon-btn {
-    font-size: 1.5rem;
-    text-decoration: none;
 }
 
 .nav .nav-item.disabled {

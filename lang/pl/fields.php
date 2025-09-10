@@ -18,13 +18,14 @@ return [
     'title' => 'Tytuł',
     'category' => 'Kategoria',
 
-
     'created_at' => 'Utworzono',
     'updated_at' => 'Zaktualizowano',
 
+    'quote_authored' => ' napisał(a)',
+    'quote_at' => 'o',
 
     // Enumerations
-    'enums' => [
+    'gender' => [
         Gender::MALE => 'Mężczyzna',
         Gender::FEMALE => 'Kobieta',
         Gender::OTHER => 'Inna',

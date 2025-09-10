@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col-md-12">
-        {!! $campaign->description->get() !!}
+        {!! $campaign->description !!}
     </div>
 </div>
-<div class="row my-2">
-    <div class="col-md-6">
+<div class="row">
+    <div class="col-xl-6 col-lg-8 col-sm-12 pt-3">
         @php
         $campaign->setStageAuto();
         $currentStages = $campaign->getCurrentStages();
@@ -29,7 +29,7 @@
         @endforeach
 
     </div>
-    <div class="col-md-6">
+    <div class="col-xl-6 col-lg-4 col-sm-12 pt-3">
         <div class="float-end fs-6">
             <div class="d-flex text-primary align-items-center">
                 <i class="bi-person-fill-gear fs-4 me-2"></i>

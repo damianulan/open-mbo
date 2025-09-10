@@ -1,5 +1,4 @@
-import "./components/forms";
+import "./components/quill";
 import "./components/base";
 import "./components/navbar";
 import "./components/requests";
-import "./components/validation";

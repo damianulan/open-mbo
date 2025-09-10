@@ -1,9 +1,9 @@
 <?php
 
+use App\Enums\Users\Gender;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\Users\Gender;
 
 return new class extends Migration
 {

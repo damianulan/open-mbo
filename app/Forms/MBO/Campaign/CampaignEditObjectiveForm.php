@@ -2,32 +2,31 @@
 
 namespace App\Forms\MBO\Campaign;
 
+use App\Models\MBO\Campaign;
+use App\Models\MBO\Objective;
+use App\Models\MBO\ObjectiveTemplate;
 use FormForge\Base\Form;
-use FormForge\FormBuilder;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
-use App\Models\MBO\ObjectiveTemplate;
-use App\Models\MBO\Objective;
+use FormForge\FormBuilder;
 use Illuminate\Http\Request;
-use App\Models\MBO\Campaign;
 use Illuminate\Support\Carbon;
 
 // Ajax form
 class CampaignEditObjectiveForm extends Form
 {
-
     public static function definition(Request $request, $model = null): FormBuilder
     {
         $route = null;
         $method = 'POST';
         $title = 'Dodaj nowy cel do kampanii';
-        $campaign_id = $request->input('campaign_id') ?? null;
-        $selectedTemplate = array();
+        $campaign_id = $request->get('campaign_id') ?? null;
+        $selectedTemplate = [];
 
-        if (!is_null($model)) {
+        if (! is_null($model)) {
             $method = 'PUT';
             $title = 'Edytuj cel w ramach kampanii';
-            if (!$campaign_id) {
+            if (! $campaign_id) {
                 $campaign_id = $model->campaign_id;
             }
             if ($model->template_id) {
@@ -37,10 +36,10 @@ class CampaignEditObjectiveForm extends Form
         $campaign = Campaign::findOrFail($campaign_id);
 
         $template_ids = Objective::where('campaign_id', $campaign_id)->get()->pluck('template_id');
-        $exclude = array();
-        if (!empty($template_ids)) {
+        $exclude = [];
+        if (! empty($template_ids)) {
             foreach ($template_ids as $tid) {
-                if (!in_array($tid, $selectedTemplate)) {
+                if (! in_array($tid, $selectedTemplate)) {
                     $exclude[] = ['id' => $tid];
                 }
             }
@@ -55,7 +54,7 @@ class CampaignEditObjectiveForm extends Form
             ->add(FormComponent::select('template_id', $model, Dictionary::fromModel(ObjectiveTemplate::class, 'name', 'getAll', $exclude), $selectedTemplate)->required()->label(__('forms.mbo.objectives.template')))
             ->add(FormComponent::hidden('campaign_id', $model, $campaign_id))
             ->add(FormComponent::text('name', $model)->label(__('forms.mbo.objectives.name'))->required())
-            ->add(FormComponent::trix('description', $model)->label(__('forms.mbo.objectives.description')))
+            ->add(FormComponent::container('description', $model)->label(__('forms.mbo.objectives.description'))->class('quill-default'))
             ->add(FormComponent::datetime('deadline', $model)->label(__('forms.mbo.objectives.deadline'))->minDate($realization_from)->maxDate($realization_to)->info(__('forms.mbo.objectives.info.deadline')))
             ->add(FormComponent::decimal('weight', $model)->label(__('forms.mbo.objectives.weight'))->info(__('forms.mbo.objectives.info.weight'))->required())
             ->add(FormComponent::decimal('expected', $model)->label(__('forms.mbo.objectives.expected'))->info(__('forms.mbo.objectives.info.expected')))
@@ -72,21 +71,15 @@ class CampaignEditObjectiveForm extends Form
             $builder->where('id', '!=', $model_id);
         }
 
-        $weights = $builder->get()->pluck('weight');
-        $max_weight = 1;
-        foreach ($weights as $weight) {
-            $max_weight = $max_weight - (float) $weight;
-        }
-
         return [
             'template_id' => 'required',
             'name' => 'max:120|required',
             'deadline' => 'nullable',
             'description' => 'max:512|nullable',
-            'weight' => 'decimal:2|required',
-            'expected' => 'decimal:2|nullable',
-            'award' => 'decimal:2|nullable',
-            'draft' => 'in:on,off',
+            'weight' => 'numeric|required',
+            'expected' => 'numeric|nullable',
+            'award' => 'numeric|nullable',
+            'draft' => 'boolean',
         ];
     }
 }

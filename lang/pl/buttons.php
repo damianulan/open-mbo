@@ -27,6 +27,7 @@ return [
     'favourites_add' => 'Dodaj do ulubionych',
     'favourites_remove' => 'Usuń z ulubionych',
     'reset_password' => 'Resetuj hasło',
+    'add_users' => 'Dodaj użytkowników',
     'ok' => 'Ok',
     'ok_understand' => 'Ok, rozumiem',
     'choose_file' => 'Wybierz plik',
@@ -36,6 +37,8 @@ return [
     'impersonate' => 'Zaloguj jako',
     'impersonate_out' => 'Wyloguj się jako',
     'enrol_users' => 'Zapisz użytkowników',
+    'quote' => 'Cytuj',
+    'send' => 'Wyślij',
 
     'terminate_campaign' => 'Zawieś kampanię',
     'resume_campaign' => 'Wznów kampanię',
@@ -43,4 +46,8 @@ return [
 
     'list_view' => 'Tryb listy',
     'tile_view' => 'Tryb kafelkowy',
+
+    'add_realization' => 'Dodaj realizację celu',
+    'edit_realization' => 'Modyfikuj realizację celu',
+
 ];

@@ -1,11 +1,11 @@
 @if($objectives->count())
     <ul class="ombo-list">
         @foreach ($objectives as $objective)
-            <li>
+            <li class="{{ $userObjective && $objective->isDeadlineUpcoming() ? 'warning' : '' }}">
                 <div class="list-grid">
                     <div class="list-content">
                         <div class="nowrap" data-tippy-content="{{ $objective->name }}">
-                            <i class="bi text-primary bi-crosshair me-1"></i>
+                            <i class="bi text-primary {{ $objective->campaign_id ? 'bi-bullseye':'bi-crosshair' }} me-1"></i>
                             <span>{{ $objective->name }}</span>
                         </div>
 
@@ -16,7 +16,7 @@
                             <x-icon key="feather" />
                         </div>
                         @endif
-                        <div class="list-action me-3" data-tippy-content="Waga celu">
+                        <div class="list-action me-3" data-tippy-content="{{ __('forms.mbo.objectives.weight') }}">
                             <x-icon key="minecart-loaded" />
                             <span>{{ $objective->weight }}</span>
                         </div>
@@ -26,15 +26,26 @@
                             <span>{{ $objective->expected }}</span>
                         </div>
                         @endif
-                        <a href="{{ route('objectives.show', $objective->id) }}" class="list-action" data-modelid="{{ $objective->id }}" data-tippy-content="{{ __('buttons.summary') }}">
+                        @if($objective->isOverdued())
+                            <a class="list-action text-failed" data-tippy-content="{{ __('alerts.objectives.error.overdued', ['term' => $objective->deadline->diffForHumans()]) }}">
+                                <x-icon key="exclamation-diamond-fill" />
+                            </a>
+                        @else
+                            <a class="list-action" data-tippy-content="{{ __('forms.mbo.objectives.deadline_to', ['term' => $objective->deadline->format(config('app.datetime_format'))]) }}">
+                                <x-icon key="calendar2-week-fill" />
+                            </a>
+                        @endif
+                        <a href="{{ $userObjective ? route('objectives.assignment.show', $userObjective->id):route('objectives.show', $objective->id) }}" class="list-action" data-modelid="{{ $objective->id }}" data-tippy-content="{{ __('buttons.summary') }}">
                             <x-icon key="eye-fill" />
                         </a>
                         <a href="javascript:void(0);" class="list-action edit-objective" data-modelid="{{ $objective->id }}" data-tippy-content="{{ __('buttons.edit') }}">
                             <x-icon key="pencil-fill" />
                         </a>
-                        <a href="javascript:void(0);" data-url="{{ route('campaigns.objective.delete', $objective->id) }}" class="list-action delete-objective" data-tippy-content="{{ __('buttons.delete') }}">
-                            <x-icon key="x-fill" />
-                        </a>
+                        @if(!$user->exists || $user->id !== auth()->user()->id)
+                            <a href="javascript:void(0);" data-url="{{ route('campaigns.objective.delete', $objective->id) }}" class="list-action delete-objective" data-tippy-content="{{ __('buttons.delete') }}">
+                                <x-icon key="x-lg" />
+                            </a>
+                        @endif
                     </div>
                 </div>
             </li>

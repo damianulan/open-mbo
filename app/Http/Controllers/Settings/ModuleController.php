@@ -2,18 +2,13 @@
 
 namespace App\Http\Controllers\Settings;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
-use App\Settings\MailSettings;
-use App\Forms\Settings\SmtpForm;
-use App\Settings\MBOSettings;
 use App\Forms\Settings\MboForm;
-use App\Facades\Modules\ModuleManager;
+use App\Settings\MBOSettings;
+use App\Support\Modules\ModuleManager;
+use Illuminate\Http\Request;
 
 class ModuleController extends SettingsController
 {
-
     /**
      * Show the application dashboard.
      *
@@ -22,11 +17,12 @@ class ModuleController extends SettingsController
     public function index(Request $request, ?string $module = null)
     {
         $modules = ModuleManager::getModules();
-        if (is_null($module) || !array_key_exists($module, $modules)) {
+        if (is_null($module) || ! array_key_exists($module, $modules)) {
             $module = 'users';
         }
 
         $mboModel = app(MBOSettings::class);
+
         return view('pages.settings.modules.index', [
             'modules' => $modules,
             'mod' => $modules[$module]['id'],
@@ -43,8 +39,9 @@ class ModuleController extends SettingsController
             $settings->$key = $value;
         }
         if ($settings->save()) {
-            return redirect()->to(route('settings.modules.index', ['module' => 'mbo']))->with('success', __('alerts.settings.success.mail_update'));
+            return redirect()->to(route('settings.modules.index', ['module' => 'mbo']))->with('success', __('alerts.settings.success.mbo_update'));
         }
-        return redirect()->to(route('settings.modules.index', ['module' => 'mbo']))->with('error', __('alerts.settings.error.mail_update'));;
+
+        return redirect()->to(route('settings.modules.index', ['module' => 'mbo']))->with('error', __('alerts.settings.error.mbo_update'));
     }
 }

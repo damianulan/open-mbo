@@ -1,9 +1,9 @@
 <?php
 
+use App\Enums\MBO\CampaignStage;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\MBO\CampaignStage;
 
 return new class extends Migration
 {
@@ -15,31 +15,32 @@ return new class extends Migration
         Schema::create('campaigns', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
-            $table->string('period')->unique();
+            $table->string('period');
             $table->longText('description')->nullable();
 
-            $table->dateTime(CampaignStage::DEFINITION . '_from');
-            $table->dateTime(CampaignStage::DEFINITION . '_to');
+            $table->dateTime(CampaignStage::DEFINITION.'_from')->nullable();
+            $table->dateTime(CampaignStage::DEFINITION.'_to')->nullable();
 
-            $table->dateTime(CampaignStage::DISPOSITION . '_from');
-            $table->dateTime(CampaignStage::DISPOSITION . '_to');
+            $table->dateTime(CampaignStage::DISPOSITION.'_from')->nullable();
+            $table->dateTime(CampaignStage::DISPOSITION.'_to')->nullable();
 
-            $table->dateTime(CampaignStage::REALIZATION . '_from');
-            $table->dateTime(CampaignStage::REALIZATION . '_to');
+            $table->dateTime(CampaignStage::REALIZATION.'_from')->nullable();
+            $table->dateTime(CampaignStage::REALIZATION.'_to')->nullable();
 
-            $table->dateTime(CampaignStage::EVALUATION . '_from');
-            $table->dateTime(CampaignStage::EVALUATION . '_to');
+            $table->dateTime(CampaignStage::EVALUATION.'_from')->nullable();
+            $table->dateTime(CampaignStage::EVALUATION.'_to')->nullable();
 
-            $table->dateTime(CampaignStage::SELF_EVALUATION . '_from');
-            $table->dateTime(CampaignStage::SELF_EVALUATION . '_to');
+            $table->dateTime(CampaignStage::SELF_EVALUATION.'_from')->nullable();
+            $table->dateTime(CampaignStage::SELF_EVALUATION.'_to')->nullable();
 
-            $table->enum('stage', CampaignStage::hardValues());
+            $table->enum('stage', CampaignStage::hardValues())->default(CampaignStage::PENDING)->index()->comment('Campaign current status whether in progress, pending, completed, terminated or canceled');
 
-            $table->boolean('draft')->default(1);
-            $table->boolean('manual')->default(0); // if on - do not automatically end stage after date passes
+            $table->boolean('draft')->default(1)->comment('Visible to admins only and is not automatically published.');
+            $table->boolean('manual')->default(0)->comment('Will not be automatically moved between stages.'); // if on - do not automatically end stage after date passes
 
             $table->timestamps();
             $table->softDeletes();
+            $table->comment('MBO Campaigns with users and objectives assigned to it.');
         });
     }
 

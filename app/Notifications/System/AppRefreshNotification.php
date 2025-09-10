@@ -2,12 +2,12 @@
 
 namespace App\Notifications\System;
 
+use App\Support\Notifications\BaseNotification;
+use App\Support\Notifications\Contracts\IsMailNotification;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use App\Facades\Notifications\BaseNotification;
 
-class AppRefreshNotification extends BaseNotification
+class AppRefreshNotification extends BaseNotification implements IsMailNotification
 {
     use Queueable;
 
@@ -29,17 +29,5 @@ class AppRefreshNotification extends BaseNotification
             ->line('The OpenMBO application has been refreshed.')
             ->action('Log in here', url('/'))
             ->line('Thanks!');
-    }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @return array<string, mixed>
-     */
-    public function toArray(object $notifiable): array
-    {
-        return [
-            //
-        ];
     }
 }

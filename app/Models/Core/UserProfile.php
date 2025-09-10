@@ -2,29 +2,28 @@
 
 namespace App\Models\Core;
 
+use App\Casts\Enigma;
+use FormForge\Traits\RequestForms;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Enums\Users\Gender;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Core\User;
-use FormForge\Traits\RequestForms;
-use App\Casts\Enigma;
 
 /**
- * 
- *
  * @property int $id
  * @property string $user_id
- * @property string $firstname
- * @property string $lastname
- * @property Gender $gender
+ * @property mixed $firstname
+ * @property mixed $lastname
+ * @property string $gender
  * @property string|null $birthday
- * @property string|null $phone
+ * @property mixed|null $phone
  * @property string|null $avatar
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read User $user
+ * @property-read \App\Models\Core\User $user
+ *
+ * @method static \Database\Factories\Core\UserProfileFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile onlyTrashed()
@@ -40,15 +39,14 @@ use App\Casts\Enigma;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withoutTrashed()
- * @property string $lang
- * @method static \Database\Factories\Core\UserProfileFactory factory($count = null, $state = [])
+ *
  * @mixin \Eloquent
  */
 class UserProfile extends Model
 {
-    use HasFactory, SoftDeletes, RequestForms;
+    use HasFactory, RequestForms, SoftDeletes;
 
     protected $fillable = [
         'firstname',
@@ -69,8 +67,8 @@ class UserProfile extends Model
         'phone' => Enigma::class,
     ];
 
-    public function user()
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withTrashed();
     }
 }

@@ -3,16 +3,13 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\Response;
 
 class RouteGate
 {
-
     private static $fallbacks = [
         'settings.general' => [
             'settings.server.index',
@@ -29,10 +26,9 @@ class RouteGate
     ];
 
     /**
-     * @param  mixed   $request
-     * @param  Closure $next
-     * @param  mixed   $permission
-     * @param  mixed   $context
+     * @param  mixed  $request
+     * @param  mixed  $permission
+     * @param  mixed  $context
      * @return void
      */
     public function handle($request, Closure $next, $permission, $context = null): Response
@@ -61,6 +57,7 @@ class RouteGate
                                 continue;
                             }
                         }
+
                         return redirect()->to($fallbackRoute->uri());
                     } catch (\Exception $e) {
                         continue;
@@ -70,6 +67,7 @@ class RouteGate
 
             return unauthorized();
         }
+
         return $next($request);
     }
 }
