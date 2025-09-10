@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property string $id
  * @property string $name
  * @property mixed|null $description
- * @property array<array-key, mixed> $options
+ * @property \Illuminate\Support\Collection<array-key, mixed> $options
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at

@@ -65,6 +65,9 @@ return [
         'period' => 'Okres pomiaru',
         'description' => 'Opis',
 
+        'date_start' => 'Data rozpoczęcia pomiaru',
+        'date_end' => 'Data zakończenia pomiaru',
+
         'stages' => [
             CampaignStage::DEFINITION => 'Tworzenie strategii i określanie celów',
             CampaignStage::DISPOSITION => 'Dysponowanie celów przez kierowników zespołów',
@@ -72,9 +75,9 @@ return [
             CampaignStage::EVALUATION => 'Ewaluacja celów i ocena pracowników przez kierowników',
             CampaignStage::SELF_EVALUATION => 'Samoocena pracowników',
             CampaignStage::COMPLETED => 'Ocena zakończona',
-            CampaignStage::TERMINATED => 'Proces przerwany',
-            CampaignStage::CANCELED => 'Proces odwołany',
-            CampaignStage::IN_PROGRESS => 'Proces w toku',
+            CampaignStage::TERMINATED => 'Kampania przerwana',
+            CampaignStage::CANCELED => 'Kampania odwołana',
+            CampaignStage::IN_PROGRESS => 'Kampania w toku',
             CampaignStage::PENDING => 'Oczekuje na rozpoczęcie pomiaru',
         ],
 
@@ -86,9 +89,9 @@ return [
             CampaignStage::EVALUATION => 'Ewaluacja celów i ocena pracowników przez kierowników',
             CampaignStage::SELF_EVALUATION => 'Samoocena pracowników',
             CampaignStage::COMPLETED => 'Ocena zakończona',
-            CampaignStage::TERMINATED => 'Proces przerwany',
-            CampaignStage::CANCELED => 'Proces odwołany',
-            CampaignStage::IN_PROGRESS => 'Proces w toku',
+            CampaignStage::TERMINATED => 'Kampania przerwana',
+            CampaignStage::CANCELED => 'Kampania odwołana',
+            CampaignStage::IN_PROGRESS => 'Kampania w toku',
             CampaignStage::PENDING => 'Oczekuje na rozpoczęcie pomiaru',
             'draft' => 'Kampania będzie widoczna tylko dla administratorów i nie zostanie uruchomiona automatycznie.',
             'manual' => 'Przejście pomiędzy etapami nie będzie uzależnione od dat, a od podjęcia akcji przez administratora. Opcję tą można także włączyć w trakcie trwania kampanii.',

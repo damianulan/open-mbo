@@ -25,7 +25,7 @@
         <div class="row details">
             <div class="col-xl-4 col-md-6 col-sm-12">
                 <div class="element">
-                    <div class="element-title" data-tippy-content="Powiązano z kampaniami">
+                    <div class="element-title" data-tippy-content="{{ __('mbo.linked_to_campaigns') }}">
                         <i class="bi bi-bullseye me-2"></i>
                         <span>{{ $objective->campaignsCount() }}</span>
                     </div>
@@ -33,7 +33,7 @@
             </div>
             <div class="col-xl-4 col-md-6 col-sm-12">
                 <div class="element">
-                    <div class="element-title" data-tippy-content="Ilość uczestników">
+                    <div class="element-title" data-tippy-content="{{ __('mbo.num_participants') }}">
                         <i class="bi bi-people-fill me-2"></i>
                         <span>{{ $objective->usersCount() }}</span>
                     </div>

@@ -22,6 +22,10 @@ return [
     'not_applicable' => 'Nie dotyczy',
     'pnts' => 'pkt',
     'privately' => 'Prywatnie',
+    'draft' => 'Kopia robocza',
+    'manual' => 'Tryb ręczny',
+    'page_no_content' => 'Brak zawartości strony',
+    'page_content_info' => 'Jeśli możesz - stwórz samodzielnie nową zawartość, lub wróć później.',
 
     'column' => 'Kolumna',
     'columns' => 'Kolumny',

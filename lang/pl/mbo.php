@@ -38,6 +38,9 @@ return [
     'objective_admins' => 'Administratorzy Celu',
     'category_admins' => 'Administratorzy Kategorii',
     'enroled_users' => 'Zapisani Użytkownicy',
+    'general_objectives' => 'Cele podstawowe',
+    'num_participants' => 'Liczba uczestników',
+    'linked_to_campaigns' => 'Powiązano z kampaniami',
 
     'objectives' => [
         'index' => 'Cele',
