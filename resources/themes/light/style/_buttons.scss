@@ -137,6 +137,7 @@ a.btn-tile.selected,
 a.btn-tile:hover {
     background: $primary;
     background: linear-gradient(90deg, rgba($primary, 1) 0%, rgba($primary, 0.75) 70%, rgba($primary, 0.65) 100%);
+    box-shadow: 0 4px 18px 0 rgba($primary, 0.4);
 }
 
 a.btn-tile.selected span,

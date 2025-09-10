@@ -27,6 +27,11 @@ return new class extends Migration
             $table->timestamp('evaluated_at')->nullable()->comment('Time when most recent evaluation was made');
             $table->foreignUuid('evaluated_by')->nullable()->comment('Time when most recent evaluator has made any changes');
             $table->foreign('evaluated_by')->references('id')->on('users');
+
+            $table->decimal('self_realization', 8, 2)->nullable()->comment('Numerical value of the realization of the objective - in relation to the expected value in objective');
+            $table->decimal('self_evaluation', 8, 2)->nullable()->comment('Percentage evaluation of the objective - if realization is set, evaluation is calculated automatically');
+            $table->timestamp('self_evaluated_at')->nullable()->comment('Time when most recent self evaluation was made');
+
             $table->timestamps();
             $table->softDeletes();
         });

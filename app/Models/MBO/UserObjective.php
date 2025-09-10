@@ -29,6 +29,9 @@ use Lucent\Support\Traits\Dispatcher;
  * @property string|null $evaluation Percentage evaluation of the objective - if realization is set, evaluation is calculated automatically
  * @property \Illuminate\Support\Carbon|null $evaluated_at Time when most recent evaluation was made
  * @property string|null $evaluated_by Time when most recent evaluator has made any changes
+ * @property string|null $self_realization Numerical value of the realization of the objective - in relation to the expected value in objective
+ * @property string|null $self_evaluation Percentage evaluation of the objective - if realization is set, evaluation is calculated automatically
+ * @property string|null $self_evaluated_at Time when most recent self evaluation was made
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -97,6 +100,9 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereObjectiveId($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective wherePassed()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereRealization($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereSelfEvaluatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereSelfEvaluation($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereSelfRealization($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereStatus($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereUpdatedAt($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereUserId($value)
@@ -118,6 +124,9 @@ class UserObjective extends BaseModel implements AssignsPoints
         'realization', // actual realization value - can remain null
         'evaluated_at',
         'evaluated_by',
+        'self_realization',
+        'self_evaluation',
+        'self_evaluation_at',
     ];
 
     protected $defaults = [
@@ -319,9 +328,6 @@ class UserObjective extends BaseModel implements AssignsPoints
         return $model;
     }
 
-    /**
-     * Handle the UserObjective "created" event.
-     */
     public static function createdUserObjective(UserObjective $model): void
     {
         $campaign = $model->objective->campaign ?? null;
@@ -343,9 +349,6 @@ class UserObjective extends BaseModel implements AssignsPoints
         }
     }
 
-    /**
-     * Handle the UserObjective "deleted" event.
-     */
     public static function deletedUserObjective(UserObjective $model): void
     {
         $campaign = $model->objective->campaign ?? null;

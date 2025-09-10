@@ -3,6 +3,7 @@
 namespace App\Models\MBO;
 
 use App\Casts\FormattedText;
+use App\Casts\MBO\BonusSchemeCast;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property string $id
  * @property string $name
  * @property mixed|null $description
- * @property \Illuminate\Support\Collection<array-key, mixed> $options
+ * @property mixed $options
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -33,6 +34,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme createMany(array $records)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme deleteQuietly()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme drafted()
+ * @method static \Database\Factories\MBO\BonusSchemeFactory factory($count = null, $state = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme firstFromCache($columns = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme flushCache($columns = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme flushQueryCache($columns = [])
@@ -86,7 +88,7 @@ class BonusScheme extends BaseModel
 
     protected $casts = [
         'description' => FormattedText::class,
-        'options' => 'collection',
+        'options' => BonusSchemeCast::class,
     ];
 
     public function user_schemes(): HasMany

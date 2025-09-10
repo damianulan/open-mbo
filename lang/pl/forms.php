@@ -31,10 +31,15 @@ return [
             'enabled' => 'Moduł MBO włączony',
             'campaigns_enabled' => 'Kampanie pomiarowe',
             'campaigns_manual' => 'Tryb ręczny w kampaniach',
+            'campaigns_bonus' => 'Bonus dla kampanii',
+            'objectives_autofail' => 'Automatyczne oznaczanie przedawnionych celów jako niezaliczone',
             'rewards' => 'Punkty nagrody',
-            'min_evaluation' => 'Minimalny wynik oceny celu',
-            'reward_points_exchange' => 'Przeliczanie punktów nagrody',
-            'reward_currency' => 'Waluta nagrody',
+            'rewards_proportional' => 'Przeliczaj punkty nagrody proporcjonalnie do rozliczenia',
+            'manipulate_rewards' => 'Możliwość edycji przeliczonych punktów nagrody',
+            'failed_rewards' => 'Przyznawaj punkty nagrody przy dla niezaliczonych celów',
+            'rewards_min_evaluation' => 'Minimalny wynik oceny celu',
+            'rewards_points_exchange' => 'Przeliczanie punktów nagrody',
+            'rewards_currency' => 'Waluta nagrody',
 
             'info' => [
                 'enabled' => 'Włącza moduł MBO',

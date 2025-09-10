@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Models\MBO\BonusScheme;
 use App\Models\MBO\Campaign;
 use App\Models\MBO\Objective;
 use App\Models\MBO\UserBonusScheme;
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 trait UserMBO
 {
@@ -27,6 +29,15 @@ trait UserMBO
         });
     }
 
+    public function assignBonusScheme(BonusScheme $scheme): void
+    {
+        $this->user_bonus_scheme()->delete();
+        $this->user_bonus_scheme()->create([
+            'user_id' => $this->id,
+            'bonus_scheme_id' => $scheme->id,
+        ]);
+    }
+
     public function objectives(): HasManyThrough
     {
         return $this->hasManyThrough(Objective::class, UserObjective::class, 'user_id', 'id', 'id', 'objective_id');
@@ -35,6 +46,11 @@ trait UserMBO
     public function user_bonus_scheme(): BelongsTo
     {
         return $this->belongsTo(UserBonusScheme::class);
+    }
+
+    public function bonus_scheme(): HasOneThrough
+    {
+        return $this->hasOneThrough(BonusScheme::class, UserBonusScheme::class, 'user_id', 'id', 'id', 'bonus_scheme_id');
     }
 
     public function campaigns(): HasMany

@@ -47,6 +47,7 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @property-read int|null $activities_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, ActivityModel> $activity
  * @property-read int|null $activity_count
+ * @property-read \App\Models\MBO\BonusScheme|null $bonus_scheme
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserCampaign> $campaigns
  * @property-read int|null $campaigns_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Commentable\Models\Comment> $comments

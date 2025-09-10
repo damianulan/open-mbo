@@ -9,10 +9,14 @@ return new class extends SettingsMigration
         $this->migrator->add('mbo.enabled', true);
         $this->migrator->add('mbo.campaigns_enabled', true);
         $this->migrator->add('mbo.campaigns_manual', true);
+        $this->migrator->add('mbo.campaigns_bonus', 20.00);
         $this->migrator->add('mbo.objectives_autofail', true);
         $this->migrator->add('mbo.rewards', true);
-        $this->migrator->add('mbo.min_evaluation', 0.00);
-        $this->migrator->add('mbo.reward_points_exchange', 1.00);
-        $this->migrator->add('mbo.reward_currency', 'EUR');
+        $this->migrator->add('mbo.rewards_proportional', true);
+        $this->migrator->add('mbo.manipulate_rewards', false);
+        $this->migrator->add('mbo.failed_rewards', false);
+        $this->migrator->add('mbo.rewards_min_evaluation', 100.00);
+        $this->migrator->add('mbo.rewards_points_exchange', 1.00);
+        $this->migrator->add('mbo.rewards_currency', 'EUR');
     }
 };

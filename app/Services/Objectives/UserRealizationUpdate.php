@@ -24,7 +24,7 @@ class UserRealizationUpdate extends Service
             }
         }
 
-        if (settings('mbo.min_evaluation') > $evaluation) {
+        if (settings('mbo.rewards_min_evaluation') > $evaluation) {
             $realization = 0;
         }
 

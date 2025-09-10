@@ -10,25 +10,26 @@
         </div>
     </div>
     <div class="row">
-        @if(!empty($modules))
-            @foreach ($modules as $module)
-                <div class="col-xl-3 col-md-4 col-sm-6 col-xs-12 pt-3">
-                    <x-tile-button id="{{ $module['id'] }}" title="{{ $module['title'] }}" link="{{ $module['route'] }}" icon="{{ $module['icon'] }}" classes="module-tile"/>
-                </div>
-            @endforeach
-
-        @endif
-    </div>
-    <div class="container pt-4" id="module-users" style="display: none;">
-        Ustawienia Użytkownicy
-    </div>
-    <div class="container pt-4" id="module-mbo" style="display: none;">
-        <div class="row">
-            <div class="col-md-8">
+        <div class="col-xl-3 col-lg-5 col-md-6 col-sm-12">
+            @if(!empty($modules))
+                @foreach ($modules as $module)
+                    <div class="my-3">
+                        <x-tile-button id="{{ $module['id'] }}" title="{{ $module['title'] }}" link="{{ $module['route'] }}" icon="{{ $module['icon'] }}" classes="module-tile"/>
+                    </div>
+                @endforeach
+            @endif
+        </div>
+        <div class="col-xl-9 col-lg-7 col-md-6 col-sm-12">
+            <div class="container pt-3" id="module-users" style="display: none;">
+                Ustawienia Użytkownicy
+            </div>
+            <div class="container pt-3" id="module-mbo" style="display: none;">
                 {{ $mboForm->render() }}
             </div>
         </div>
+
     </div>
+
 </div>
 
 @endsection

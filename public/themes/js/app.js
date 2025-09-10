@@ -79926,7 +79926,7 @@ $.quillBuild = function () {
 $.quillInstances = [];
 $.quillDefaultToolbar = [['bold', 'italic', 'underline', 'blockquote', 'code-block', 'link'], [{
   'header': [1, 2, 3, false]
-}], ['clean']];
+}]];
 $.quillSimpleToolbar = [['bold', 'italic', 'underline', 'blockquote', 'code-block', 'link']];
 $.quillSimpleOptions = {
   modules: {

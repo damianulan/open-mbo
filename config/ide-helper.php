@@ -140,7 +140,6 @@ return [
 
     'model_locations' => [
         'app',
-        'vendor/damianulan/laravel-sentinel/src/Models',
     ],
 
     /*
