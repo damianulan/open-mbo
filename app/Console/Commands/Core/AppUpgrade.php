@@ -50,6 +50,7 @@ class AppUpgrade extends Command
             $target_release = $settings->target_release ?? 'stable';
 
             $this->line("Version preference detected: <versionblock>$target_release</versionblock>");
+            $result = Process::run('git fetch --all');
 
             $latestRelease = Git::getLatestTagName();
             if (empty($latestRelease)) {
@@ -65,7 +66,6 @@ class AppUpgrade extends Command
             };
 
             $this->line("Checking to $git_branch branch/tag");
-            $result = Process::run('git fetch --all');
             if (! $local) {
                 $result = Process::run('git reset --hard');
             }
