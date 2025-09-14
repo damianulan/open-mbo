@@ -3,7 +3,7 @@
 return [
 
     // Sidebar
-    'dashboard' => 'Dashboard',
+    'dashboard' => 'Pulpit',
 
     'admin_panel' => 'Panel administracyjny',
     'reports' => [
@@ -61,34 +61,49 @@ return [
         'help' => [
             'index' => 'Pomoc',
         ],
-    ],
-
-    'management' => [
-        'index' => 'Zarządzanie',
-        'users' => [
-            'index' => 'Użytkownicy',
-        ],
         'organization' => [
             'index' => 'Struktura organizacyjna',
-            'company' => [
+            'companies' => [
                 'index' => 'Przedsiębiorstwa',
             ],
+            'departments' => [
+                'index' => 'Departamenty',
+            ],
+            'positions' => [
+                'index' => 'Stanowiska',
+            ],
+            'contracts' => [
+                'index' => 'Typy kontraktów',
+            ],
+        ],
+        'creator' => [
+            'index' => 'Kreator struktury',
         ],
         'teams' => [
             'index' => 'Zespoły',
         ],
-        'objectives' => [
-            'index' => 'Szablony celów',
-            'create' => 'Tworzenie szablonu celu',
-            'edit' => 'Modyfikacja szablonu celu',
-            'categories' => [
-                'index' => 'Kategorie celów',
-            ],
+    ],
 
-        ],
-        'restoring' => [
-            'index' => 'Przywracanie danych',
-        ],
+    'mbo' => [
+        'index' => 'Zarządzanie celami',
+    ],
+
+    'objectives' => [
+        'index' => 'Cele',
+        'create' => 'Tworzenie celu',
+        'edit' => 'Modyfikacja celu',
+
+    ],
+    'templates' => [
+        'index' => 'Szablony celów',
+        'create' => 'Tworzenie szablonu celu',
+        'edit' => 'Modyfikacja szablonu celu',
+
+    ],
+    'categories' => [
+        'index' => 'Kategorie celów',
+        'create' => 'Tworzenie kategorii MBO',
+        'edit' => 'Modyfikacja kategorii MBO',
     ],
 
     'reports' => [

@@ -11,7 +11,7 @@ return [
 
     'info' => [
         'empty' => 'Twoja skrzynka powiadomień jest pusta, nie otrzymano jeszcze żadnych wiadomości.',
-        'show_all' => 'Pokaż wszystkie',
+        'show_all' => 'Show all',
     ],
 
 ];

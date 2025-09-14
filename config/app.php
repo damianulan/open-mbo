@@ -1,7 +1,7 @@
 <?php
 
-use App\Lib\Git;
 use Illuminate\Support\Facades\Facade;
+use Lucent\Console\Git;
 
 return [
 

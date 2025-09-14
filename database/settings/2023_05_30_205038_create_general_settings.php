@@ -13,9 +13,10 @@ return new class extends SettingsMigration
         $this->migrator->add('general.maintenance', false);
         $this->migrator->add('general.debug', true);
         $this->migrator->add('general.debugbar', config('app.env') === 'development' ? true : false);
-        $this->migrator->add('general.locale', 'pl');
+        $this->migrator->add('general.locale', config('app.locale'));
         $this->migrator->add('general.build', date('YmdHi'));
-        $this->migrator->add('general.release', '0.0.1');
+        $this->migrator->add('general.release', '0.0.1-beta');
+        $this->migrator->add('general.target_release', 'newest');
 
         $this->migrator->add('general.date_format', 'd.m.Y');
         $this->migrator->add('general.time_format', 'H:i');

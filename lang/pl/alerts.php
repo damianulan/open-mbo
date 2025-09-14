@@ -41,9 +41,6 @@ return [
             'mbo_update' => 'Ustawienia modułu MBO nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd.',
             'general' => 'Ustawienia platformy nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd.',
         ],
-        'warning' => [],
-        'info' => [],
-
     ],
 
     'campaigns' => [
@@ -71,8 +68,6 @@ return [
             'resume' => 'Kampania nie została pomyślnie odwieszona.',
             'cancel' => 'Kampania nie została pomyślnie anulowana.',
         ],
-
-        'info' => [],
 
     ],
 

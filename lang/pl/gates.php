@@ -22,7 +22,5 @@ return [
 
     'permissions' => [
         PermissionsLib::MBO_ADMINISTRATION => 'Administracja MBO',
-
-        'info' => [],
     ],
 ];

@@ -26,6 +26,8 @@ class GeneralSettings extends Settings
 
     public string $release;
 
+    public string $target_release;
+
     public string $date_format;
 
     public string $time_format;

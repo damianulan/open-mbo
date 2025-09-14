@@ -7,9 +7,4 @@ return [
         'uz' => 'Umowa zlecenie',
         'b2b' => 'B2B',
     ],
-
-    // 'department' => [
-    //     'it' =>
-    // ],
-
 ];

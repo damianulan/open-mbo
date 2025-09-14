@@ -5,34 +5,34 @@ use App\Enums\MBO\CampaignStage;
 return [
 
     'generic' => [
-        'password' => 'Hasło',
+        'password' => 'Password',
         'login' => 'Login',
-        'email' => 'E-mail',
+        'email' => 'Email',
     ],
 
     'settings' => [
         'general' => [
-            'site_name' => 'Nazwa witryny',
-            'theme' => 'Szablon',
-            'lang' => 'Język aplikacji',
+            'site_name' => 'Site name',
+            'theme' => 'Theme',
+            'lang' => 'Application language',
         ],
         'server' => [
-            'mail_host' => 'Adres serwera',
-            'mail_port' => 'Port',
-            'mail_username' => 'Użytkownik',
-            'mail_encryption' => 'Metoda szyfrowania',
-            'mail_from_address' => 'Wysyłaj z adresu',
-            'mail_from_name' => 'Wysyłaj jako (nazwa)',
-            'mail_catchall_enabled' => 'Przekierowywanie wiadomości',
-            'mail_catchall_receiver' => 'Przekieruj na adres',
+            'mail_host' => 'Server address',
+            'mail_port' => 'Port number',
+            'mail_username' => 'Username',
+            'mail_encryption' => 'Encryption method',
+            'mail_from_address' => 'Send from address',
+            'mail_from_name' => 'Send from name',
+            'mail_catchall_enabled' => 'Catch-all',
+            'mail_catchall_receiver' => 'Catchall receiver',
         ],
 
         'mbo' => [
-            'enabled' => 'Moduł MBO włączony',
-            'campaigns_enabled' => 'Kampanie pomiarowe',
-            'campaigns_manual' => 'Tryb ręczny w kampaniach',
-            'campaigns_bonus' => 'Bonus dla kampanii',
-            'objectives_autofail' => 'Automatyczne oznaczanie przedawnionych celów jako niezaliczone',
+            'enabled' => 'MBO module enabled',
+            'campaigns_enabled' => 'Campaigns enabled',
+            'campaigns_manual' => 'Manual campaigns mode',
+            'campaigns_bonus' => 'Campaign bonus',
+            'objectives_autofail' => 'Automatically mark failed objectives',
             'rewards' => 'Punkty nagrody',
             'rewards_proportional' => 'Przeliczaj punkty nagrody proporcjonalnie do rozliczenia',
             'manipulate_rewards' => 'Możliwość edycji przeliczonych punktów nagrody',
@@ -54,7 +54,6 @@ return [
     ],
 
     'placeholders' => [
-        'choose' => 'Wybierz...',
         'choose_date' => 'Wybierz datę',
         'choose_birthdate' => 'Wybierz datę',
         'choose_time' => 'Wybierz godzinę',
@@ -108,7 +107,7 @@ return [
         'manual' => 'Tryb ręczny',
 
         'users' => [
-            'add' => 'Dodaj użytkowników',
+            'add' => 'Add users',
         ],
 
     ],

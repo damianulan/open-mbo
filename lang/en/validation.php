@@ -165,9 +165,9 @@ return [
     */
 
     'attributes' => [
-        'password' => 'hasło',
-        'email' => 'adres email',
-        'site_name' => 'nazwa witryny',
+        'password' => 'password',
+        'email' => 'email address',
+        'site_name' => 'site name',
     ],
 
 ];
