@@ -2,6 +2,7 @@
 
 namespace App\Forms\Settings;
 
+use App\Config\AppConfig;
 use App\Lib\Theme;
 use App\Settings\GeneralSettings;
 use FormForge\Base\Form;
@@ -9,7 +10,6 @@ use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
 use FormForge\FormBuilder;
 use Illuminate\Http\Request;
-use App\Config\AppConfig;
 
 class GeneralForm extends Form
 {

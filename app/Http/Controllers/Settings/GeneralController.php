@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Settings;
 
-use App;
 use App\Forms\Settings\GeneralForm;
+use App\Jobs\Core\AppUpdateAdhoc;
 use App\Settings\GeneralSettings;
 use Illuminate\Http\Request;
-use App\Jobs\Core\AppUpdateAdhoc;
 
 class GeneralController extends SettingsController
 {
@@ -41,6 +40,7 @@ class GeneralController extends SettingsController
             if ($settings->target_release !== $target_release) {
                 AppUpdateAdhoc::dispatch();
             }
+
             return redirect()->back()->with('success', __('alerts.settings.success.general'));
         }
 

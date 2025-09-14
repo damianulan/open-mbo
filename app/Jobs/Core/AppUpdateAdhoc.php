@@ -3,13 +3,13 @@
 namespace App\Jobs\Core;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 
-class AppUpdateAdhoc implements ShouldQueue, ShouldBeUnique
+class AppUpdateAdhoc implements ShouldBeUnique, ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable;
 

@@ -5,12 +5,12 @@ namespace App\Console\Commands\Core;
 use App\Events\Core\AppUpgraded;
 use App\Settings\GeneralSettings;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Schema;
-use Symfony\Component\Console\Formatter\OutputFormatterStyle;
-use Illuminate\Support\Facades\Artisan;
 use Lucent\Console\Git;
+use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
 class AppUpgrade extends Command
 {
@@ -65,13 +65,13 @@ class AppUpgrade extends Command
 
             $this->line("Checking to $git_branch branch/tag");
             $result = Process::run('git fetch --all');
-            if (!$local) {
+            if (! $local) {
                 $result = Process::run('git reset --hard');
             }
             $result = Process::run("git checkout $git_branch");
             $output = $result->output();
-            if (!$result->successful()) {
-                throw new \Exception("Unable to switch to branch/tag: {$git_branch} " . $output);
+            if (! $result->successful()) {
+                throw new \Exception("Unable to switch to branch/tag: {$git_branch} ".$output);
             }
             $result = Process::run('git pull');
 
@@ -80,10 +80,10 @@ class AppUpgrade extends Command
                 $result = Process::timeout(1200)->run($composer_exec);
                 $output = $result->output();
 
-                if (!$result->successful()) {
-                    throw new \Exception('Composer update failed: ' . $output);
+                if (! $result->successful()) {
+                    throw new \Exception('Composer update failed: '.$output);
                 }
-                $this->line("Composer finished successfully");
+                $this->line('Composer finished successfully');
             }
 
             Artisan::call('migrate');
@@ -95,7 +95,7 @@ class AppUpgrade extends Command
                 if ($settings->save()) {
                     $this->line("New $name version detected: <newversionblock>^$target_release</newversionblock>");
                     AppUpgraded::dispatch($target_release);
-                    Log::debug('App upgraded to ' . $target_release);
+                    Log::debug('App upgraded to '.$target_release);
                 }
             } else {
                 $this->line("Current $name version: <versionblock>$target_release</versionblock>");
@@ -103,6 +103,7 @@ class AppUpgrade extends Command
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             $this->error($th->getMessage());
+
             return false;
         }
 

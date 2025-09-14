@@ -15,7 +15,7 @@ class AppConfig
         foreach ($raw as $release) {
             $text = $release;
             if (in_array($release, $custom)) {
-                $text = __('forms.version.' . $release);
+                $text = __('forms.version.'.$release);
             }
             $releases[$release] = $text;
         }
