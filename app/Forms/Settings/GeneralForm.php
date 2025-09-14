@@ -9,6 +9,7 @@ use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
 use FormForge\FormBuilder;
 use Illuminate\Http\Request;
+use App\Config\AppConfig;
 
 class GeneralForm extends Form
 {
@@ -21,7 +22,8 @@ class GeneralForm extends Form
                 ->label(__('forms.settings.general.theme'))->noEmpty())
             ->add(FormComponent::select('locale', $model, Dictionary::fromUnassocArray(config('app.available_locales'), 'globals.langs'), app(GeneralSettings::class)->locale)
                 ->label(__('forms.settings.general.lang'))->noEmpty())
-
+            ->add(FormComponent::select('target_release', $model, Dictionary::fromAssocArray(AppConfig::getReleasesOptions()), app(GeneralSettings::class)->target_release)
+                ->label(__('forms.settings.version.stable')))
             ->addSubmit();
     }
 

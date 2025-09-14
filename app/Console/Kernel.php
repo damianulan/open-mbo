@@ -25,18 +25,15 @@ class Kernel extends ConsoleKernel
             $schedule->command('backup:run')->daily()->at('01:30');
         }
 
-        $schedule->command(RepoUpdate::class)->everyOddHour();
+        if (config('app.auto_update')) {
+            $schedule->command(RepoUpdate::class)->everyOddHour();
+        }
 
         if (config('app.env') === 'development') {
 
             if (env('CRON_APP_REFRESH', false)) {
                 $schedule->command(AppRefresh::class)->daily()->at('00:00');
             }
-        }
-
-        $runTest = env('CRON_RUN_TEST', false);
-        if ($runTest) {
-            $schedule->command(SystemTest::class)->everyMinute();
         }
 
         $sendNotifications = env('CRON_SEND_NOTIFICATIONS', true);
@@ -59,7 +56,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

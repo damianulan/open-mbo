@@ -10,11 +10,18 @@ return [
         'email' => 'E-mail',
     ],
 
+    'version' => [
+        'stable' => 'Najnowsza stabilna wersja',
+        'non-stable' => 'Najnowsza wersja testowa',
+        'dev' => 'Najnowsza wersja deweloperska',
+    ],
+
     'settings' => [
         'general' => [
             'site_name' => 'Nazwa witryny',
             'theme' => 'Szablon',
             'lang' => 'Język aplikacji',
+            'release' => 'Wersja aplikacji',
         ],
         'server' => [
             'mail_host' => 'Adres serwera',
