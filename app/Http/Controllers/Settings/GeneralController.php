@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Settings;
 
+use App;
 use App\Forms\Settings\GeneralForm;
 use App\Settings\GeneralSettings;
 use Illuminate\Http\Request;
+use App\Jobs\Core\AppUpdateAdhoc;
 
 class GeneralController extends SettingsController
 {
@@ -31,10 +33,14 @@ class GeneralController extends SettingsController
             'theme' => 'required',
             'locale' => 'required',
         ]);
+        $target_release = settings('general.target_release');
         foreach ($request->all() as $key => $value) {
             $settings->$key = $value;
         }
         if ($settings->save()) {
+            if ($settings->target_release !== $target_release) {
+                AppUpdateAdhoc::dispatch();
+            }
             return redirect()->back()->with('success', __('alerts.settings.success.general'));
         }
 

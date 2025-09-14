@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Schema;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use Illuminate\Support\Facades\Artisan;
 
 class AppUpgrade extends Command
 {
@@ -61,18 +62,20 @@ class AppUpgrade extends Command
             if (!$local) {
                 $result = Process::run('git reset --hard');
             }
-            $result = Process::run("Git checkout $git_branch");
+            $result = Process::run("git checkout $git_branch");
+            $output = $result->output();
             if (!$result->successful()) {
-                throw new \Exception("Unable to switch to branch/tag: {$git_branch} " . $result->output());
+                throw new \Exception("Unable to switch to branch/tag: {$git_branch} " . $output);
             }
             $result = Process::run('git pull');
 
             if ($runComposer) {
                 $composer_exec = env('COMPOSER_EXECUTABLE', 'composer update');
                 $result = Process::timeout(1200)->run($composer_exec);
+                $output = $result->output();
 
                 if (!$result->successful()) {
-                    throw new \Exception('Composer update failed: ' . $result->output());
+                    throw new \Exception('Composer update failed: ' . $output);
                 }
                 $this->line("Composer finished successfully");
             }
@@ -94,6 +97,9 @@ class AppUpgrade extends Command
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             $this->error($th->getMessage());
+            return false;
         }
+
+        return true;
     }
 }

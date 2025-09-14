@@ -3,8 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\Core\AppRefresh;
-use App\Console\Commands\Core\RepoUpdate;
-use App\Console\Commands\Core\SystemTest;
+use App\Console\Commands\Core\AppUpgrade;
 use App\Console\Commands\MBO\MBOVerifyStatusScript;
 use App\Support\Notifications\SendNotificationsJob;
 use Illuminate\Console\Scheduling\Schedule;
@@ -26,7 +25,7 @@ class Kernel extends ConsoleKernel
         }
 
         if (config('app.auto_update')) {
-            $schedule->command(RepoUpdate::class)->everyOddHour();
+            $schedule->command(AppUpgrade::class)->everyOddHour();
         }
 
         if (config('app.env') === 'development') {
