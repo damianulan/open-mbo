@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Schema;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Illuminate\Support\Facades\Artisan;
+use Lucent\Console\Git;
 
 class AppUpgrade extends Command
 {
@@ -49,6 +50,11 @@ class AppUpgrade extends Command
             $target_release = $settings->target_release ?? 'stable';
 
             $this->line("Version preference detected: <versionblock>$target_release</versionblock>");
+
+            $latestRelease = Git::getLatestTagName();
+            if (empty($latestRelease)) {
+                throw new \Exception('Unable to get latest release tag.');
+            }
 
             $git_branch = match ($target_release) {
                 'stable' => 'master',
