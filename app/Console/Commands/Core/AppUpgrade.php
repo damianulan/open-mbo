@@ -58,7 +58,7 @@ class AppUpgrade extends Command
 
             $git_branch = match ($target_release) {
                 'stable' => 'master',
-                'non-stable' => 'master',
+                'non-stable' => $latestRelease,
                 'dev' => 'dev',
                 default => $target_release,
             };
