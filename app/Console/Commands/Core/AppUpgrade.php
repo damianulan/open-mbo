@@ -48,6 +48,7 @@ class AppUpgrade extends Command
             $settings = new GeneralSettings;
             $name = $settings->site_name ?? env('APP_NAME');
             $target_release = $settings->target_release ?? 'stable';
+            $result = Process::run('git tag -l | xargs git tag -d');
 
             $this->line("Version preference detected: <versionblock>$target_release</versionblock>");
 
