@@ -55,6 +55,7 @@ class AppUpgrade extends Command
             if (empty($latestRelease)) {
                 throw new \Exception('Unable to get latest release tag.');
             }
+            $result = Process::run('git tag -l | xargs git tag -d');
 
             $git_branch = match ($target_release) {
                 'stable' => 'main',
@@ -71,7 +72,7 @@ class AppUpgrade extends Command
             $result = Process::run("git checkout $git_branch");
             $output = $result->output();
             if (! $result->successful()) {
-                throw new \Exception("Unable to switch to branch/tag: {$git_branch} ".$output);
+                throw new \Exception("Unable to switch to branch/tag: {$git_branch} " . $output);
             }
             $result = Process::run('git pull');
 
@@ -81,7 +82,7 @@ class AppUpgrade extends Command
                 $output = $result->output();
 
                 if (! $result->successful()) {
-                    throw new \Exception('Composer update failed: '.$output);
+                    throw new \Exception('Composer update failed: ' . $output);
                 }
                 $this->line('Composer finished successfully');
             }
@@ -95,7 +96,7 @@ class AppUpgrade extends Command
                 if ($settings->save()) {
                     $this->line("New $name version detected: <newversionblock>^$target_release</newversionblock>");
                     AppUpgraded::dispatch($target_release);
-                    Log::debug('App upgraded to '.$target_release);
+                    Log::debug('App upgraded to ' . $target_release);
                 }
             } else {
                 $this->line("Current $name version: <versionblock>$target_release</versionblock>");
