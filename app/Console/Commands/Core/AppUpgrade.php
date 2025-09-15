@@ -54,7 +54,7 @@ class AppUpgrade extends Command
             $result = Process::run('git describe --tags --abbrev=0');
             $latestRelease = $result->output();
             if (empty($latestRelease)) {
-                Log::warning('Unable to get latest release tag.' . " [$result->errorOutput()] ");
+                Log::warning('Unable to get latest release tag.' . ' [' . $result->errorOutput() . '] ');
                 $latestRelease = 'main';
             }
             $result = Process::run('git tag -l | xargs git tag -d');
