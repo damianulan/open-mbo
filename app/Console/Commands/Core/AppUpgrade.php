@@ -52,9 +52,10 @@ class AppUpgrade extends Command
             $this->line("Version preference detected: <versionblock>$target_release</versionblock>");
             $result = Process::run('git fetch --all');
 
-            $latestRelease = Git::getLatestTagName();
+            $latestRelease = Process::run('git describe --tags --abbrev=0');
             if (empty($latestRelease)) {
-                throw new \Exception('Unable to get latest release tag.');
+                Log::debug('Unable to get latest release tag.');
+                $latestRelease = 'main';
             }
             $result = Process::run('git tag -l | xargs git tag -d');
 
