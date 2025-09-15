@@ -19917,88 +19917,6 @@ if (typeof Object.assign !== "function") {
 
 /***/ }),
 
-/***/ "./node_modules/flatpickr/dist/l10n/pl.js":
-/*!************************************************!*\
-  !*** ./node_modules/flatpickr/dist/l10n/pl.js ***!
-  \************************************************/
-/***/ (function(__unused_webpack_module, exports) {
-
-(function (global, factory) {
-   true ? factory(exports) :
-  0;
-}(this, (function (exports) { 'use strict';
-
-  var fp = typeof window !== "undefined" && window.flatpickr !== undefined
-      ? window.flatpickr
-      : {
-          l10ns: {},
-      };
-  var Polish = {
-      weekdays: {
-          shorthand: ["Nd", "Pn", "Wt", "Śr", "Cz", "Pt", "So"],
-          longhand: [
-              "Niedziela",
-              "Poniedziałek",
-              "Wtorek",
-              "Środa",
-              "Czwartek",
-              "Piątek",
-              "Sobota",
-          ],
-      },
-      months: {
-          shorthand: [
-              "Sty",
-              "Lut",
-              "Mar",
-              "Kwi",
-              "Maj",
-              "Cze",
-              "Lip",
-              "Sie",
-              "Wrz",
-              "Paź",
-              "Lis",
-              "Gru",
-          ],
-          longhand: [
-              "Styczeń",
-              "Luty",
-              "Marzec",
-              "Kwiecień",
-              "Maj",
-              "Czerwiec",
-              "Lipiec",
-              "Sierpień",
-              "Wrzesień",
-              "Październik",
-              "Listopad",
-              "Grudzień",
-          ],
-      },
-      rangeSeparator: " do ",
-      weekAbbreviation: "tydz.",
-      scrollTitle: "Przewiń, aby zwiększyć",
-      toggleTitle: "Kliknij, aby przełączyć",
-      firstDayOfWeek: 1,
-      time_24hr: true,
-      ordinal: function () {
-          return ".";
-      },
-  };
-  fp.l10ns.pl = Polish;
-  var pl = fp.l10ns;
-
-  exports.Polish = Polish;
-  exports.default = pl;
-
-  Object.defineProperty(exports, '__esModule', { value: true });
-
-})));
-
-
-/***/ }),
-
 /***/ "./node_modules/ieee754/index.js":
 /*!***************************************!*\
   !*** ./node_modules/ieee754/index.js ***!
@@ -86791,15 +86709,13 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flatpickr__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! flatpickr */ "./node_modules/flatpickr/dist/esm/index.js");
-/* harmony import */ var flatpickr_dist_l10n_pl_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flatpickr/dist/l10n/pl.js */ "./node_modules/flatpickr/dist/l10n/pl.js");
-/* harmony import */ var flatpickr_dist_l10n_pl_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flatpickr_dist_l10n_pl_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var tippy_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tippy.js */ "./node_modules/tippy.js/dist/tippy.esm.js");
+/* harmony import */ var tippy_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tippy.js */ "./node_modules/tippy.js/dist/tippy.esm.js");
 __webpack_require__(/*! chosen-js */ "./node_modules/chosen-js/chosen.jquery.js");
 
 
 
+// build flatpickr objects
 $.buildFlatpickr = function () {
-  flatpickr__WEBPACK_IMPORTED_MODULE_0__["default"].localize(flatpickr_dist_l10n_pl_js__WEBPACK_IMPORTED_MODULE_1__.Polish);
   var dateTimePickerOptions = {
     allowInput: true,
     altFormat: datetime_format,
@@ -86831,6 +86747,8 @@ $.buildFlatpickr = function () {
     defaultDate: new Date().setFullYear(new Date().getFullYear() - 18),
     monthSelectorType: "dropdown"
   };
+
+  // find and build flatpickr objects by class
   $(document).find(".datetimepicker").each(function () {
     var minDate = $(this).attr("data-min-date");
     var maxDate = $(this).attr("data-max-date");
@@ -86876,6 +86794,8 @@ $.buildFlatpickr = function () {
     (0,flatpickr__WEBPACK_IMPORTED_MODULE_0__["default"])(this, birthdatePickerOptions);
   });
 };
+
+// build chosen objects
 $.buildChosen = function () {
   $("select").chosen({
     disable_search_threshold: 5,
@@ -86914,10 +86834,12 @@ jQuery(function () {
 $.rebuildVendors = function () {
   buildVendors();
 };
+
+// use this to build or rebuild chosen and flatpickr and other js form objects
 function buildVendors() {
   $.buildChosen();
   $.buildFlatpickr();
-  (0,tippy_js__WEBPACK_IMPORTED_MODULE_2__["default"])("[data-tippy-content]", {
+  (0,tippy_js__WEBPACK_IMPORTED_MODULE_1__["default"])("[data-tippy-content]", {
     allowHTML: true
   });
 }

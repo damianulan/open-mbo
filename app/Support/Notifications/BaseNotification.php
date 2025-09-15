@@ -4,6 +4,7 @@ namespace App\Support\Notifications;
 
 use App\Support\Notifications\Contracts\IsAppNotification;
 use Illuminate\Notifications\Notification;
+use App\Support\Notifications\AppNotification;
 
 abstract class BaseNotification extends Notification
 {
@@ -27,7 +28,7 @@ abstract class BaseNotification extends Notification
             if ($mail && method_exists($this, 'toMail') && is_callable([$this, 'toMail'])) {
                 $params[] = 'mail';
             }
-            if ($database && $this instanceof IsAppNotification) {
+            if ($database && method_exists(static::class, 'toApp')) {
                 $params[] = 'database';
             }
         }
@@ -37,6 +38,13 @@ abstract class BaseNotification extends Notification
 
     final public function toArray(object $notifiable): array
     {
-        return $this instanceof IsAppNotification ? $this->toApp($notifiable)->toArray() : [];
+        $arr = [];
+        if (method_exists($this, 'toApp') && is_callable([$this, 'toApp'])) {
+            $app = $this->toApp($notifiable);
+            if ($app instanceof AppNotification) {
+                $arr = $app->toArray();
+            }
+        }
+        return $arr;
     }
 }

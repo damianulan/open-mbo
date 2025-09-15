@@ -25,6 +25,11 @@ class MBOSettings extends Settings
     public float $campaigns_bonus;
 
     /**
+     * Allow to make actions default to certain stages if stage is not active.
+     */
+    public bool $campaigns_ignore_dates = true;
+
+    /**
      * Autofail objectives when deadline reached.
      */
     public bool $objectives_autofail;

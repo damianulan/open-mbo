@@ -18,19 +18,28 @@ class MboForm extends Form
         return FormBuilder::boot($request, 'post', route('settings.modules.mbo.store'), 'mbo_settings')
             ->class('settings-form')
             ->add(FormComponent::hidden('module', 'mbo'))
-            ->add(FormComponent::switch('enabled', $model)->label(__('forms.settings.mbo.enabled'))->info(__('forms.settings.mbo.info.enabled')))
-            ->add(FormComponent::switch('campaigns_enabled', $model)->label(__('forms.settings.mbo.campaigns_enabled'))->info(__('forms.settings.mbo.info.campaigns_enabled')))
-            ->add(FormComponent::switch('campaigns_manual', $model)->label(__('forms.settings.mbo.campaigns_manual'))->info(__('forms.settings.mbo.info.campaigns_manual')))
-            ->add(FormComponent::decimal('campaigns_bonus', $model)->label(__('forms.settings.mbo.campaigns_bonus'))->info(__('forms.settings.mbo.info.campaigns_bonus')))
-            ->add(FormComponent::switch('objectives_autofail', $model)->label(__('forms.settings.mbo.objectives_autofail'))->info(__('forms.settings.mbo.info.objectives_autofail')))
-            ->add(FormComponent::switch('rewards', $model)->label(__('forms.settings.mbo.rewards'))->info(__('forms.settings.mbo.info.rewards')))
-            ->add(FormComponent::switch('rewards_proportional', $model)->label(__('forms.settings.mbo.rewards_proportional'))->info(__('forms.settings.mbo.info.rewards_proportional')))
-            ->add(FormComponent::switch('manipulate_rewards', $model)->label(__('forms.settings.mbo.manipulate_rewards'))->info(__('forms.settings.mbo.info.manipulate_rewards')))
-            ->add(FormComponent::switch('failed_rewards', $model)->label(__('forms.settings.mbo.failed_rewards'))->info(__('forms.settings.mbo.info.failed_rewards')))
-            ->add(FormComponent::decimal('rewards_min_evaluation', $model)->label(__('forms.settings.mbo.rewards_min_evaluation'))->info(__('forms.settings.mbo.info.rewards_min_evaluation')))
-            ->add(FormComponent::decimal('rewards_points_exchange', $model)->label(__('forms.settings.mbo.rewards_points_exchange'))->info(__('forms.settings.mbo.info.rewards_points_exchange')))
-            ->add(FormComponent::text('rewards_currency', $model)->label(__('forms.settings.mbo.rewards_currency'))->info(__('forms.settings.mbo.info.rewards_currency')))
-
+            ->addSection(__('Ogólne'), function (FormBuilder $builder) use ($model) {
+                return $builder
+                    ->add(FormComponent::switch('enabled', $model)->label(__('forms.settings.mbo.enabled'))->info(__('forms.settings.mbo.info.enabled')))
+                    ->add(FormComponent::switch('objectives_autofail', $model)->label(__('forms.settings.mbo.objectives_autofail'))->info(__('forms.settings.mbo.info.objectives_autofail')));
+            })
+            ->addSection(__('mbo.campaigns_full'), function (FormBuilder $builder) use ($model) {
+                return $builder
+                    ->add(FormComponent::switch('campaigns_enabled', $model)->label(__('forms.settings.mbo.campaigns_enabled'))->info(__('forms.settings.mbo.info.campaigns_enabled')))
+                    ->add(FormComponent::switch('campaigns_ignore_dates', $model)->label(__('forms.settings.mbo.campaigns_ignore_dates'))->info(__('forms.settings.mbo.info.campaigns_ignore_dates')))
+                    ->add(FormComponent::switch('campaigns_manual', $model)->label(__('forms.settings.mbo.campaigns_manual'))->info(__('forms.settings.mbo.info.campaigns_manual')))
+                    ->add(FormComponent::decimal('campaigns_bonus', $model)->label(__('forms.settings.mbo.campaigns_bonus'))->info(__('forms.settings.mbo.info.campaigns_bonus')));
+            })
+            ->addSection(__('mbo.rewards'), function (FormBuilder $builder) use ($model) {
+                return $builder
+                    ->add(FormComponent::switch('rewards', $model)->label(__('forms.settings.mbo.rewards'))->info(__('forms.settings.mbo.info.rewards')))
+                    ->add(FormComponent::switch('rewards_proportional', $model)->label(__('forms.settings.mbo.rewards_proportional'))->info(__('forms.settings.mbo.info.rewards_proportional')))
+                    ->add(FormComponent::switch('manipulate_rewards', $model)->label(__('forms.settings.mbo.manipulate_rewards'))->info(__('forms.settings.mbo.info.manipulate_rewards')))
+                    ->add(FormComponent::switch('failed_rewards', $model)->label(__('forms.settings.mbo.failed_rewards'))->info(__('forms.settings.mbo.info.failed_rewards')))
+                    ->add(FormComponent::decimal('rewards_min_evaluation', $model)->label(__('forms.settings.mbo.rewards_min_evaluation'))->info(__('forms.settings.mbo.info.rewards_min_evaluation')))
+                    ->add(FormComponent::decimal('rewards_points_exchange', $model)->label(__('forms.settings.mbo.rewards_points_exchange'))->info(__('forms.settings.mbo.info.rewards_points_exchange')))
+                    ->add(FormComponent::text('rewards_currency', $model)->label(__('forms.settings.mbo.rewards_currency'))->info(__('forms.settings.mbo.info.rewards_currency')));
+            })
             ->addSubmit();
     }
 
