@@ -73,7 +73,7 @@ class AppUpgrade extends Command
             $result = Process::run("git checkout $git_branch");
             $output = $result->output();
             if (! $result->successful()) {
-                throw new \Exception("Unable to switch to branch/tag: {$git_branch} " . $output);
+                throw new \Exception("Unable to switch to branch/tag: {$git_branch} " . $result->errorOutput());
             }
             $result = Process::run('git pull');
 
