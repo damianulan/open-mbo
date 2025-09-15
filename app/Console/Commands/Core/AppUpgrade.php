@@ -46,7 +46,7 @@ class AppUpgrade extends Command
                 throw new \Exception('Settings table is not created!');
             }
             $settings = new GeneralSettings;
-            $name = $settings->site_name ?? env('APP_NAME');
+            $name = config('app.name');
             $target_release = $settings->target_release ?? 'stable';
 
             $this->line("Version preference detected: <versionblock>$target_release</versionblock>");
@@ -54,7 +54,7 @@ class AppUpgrade extends Command
 
             $latestRelease = Process::run('git describe --tags --abbrev=0')->output();
             if (empty($latestRelease)) {
-                Log::debug('Unable to get latest release tag.');
+                Log::warning('Unable to get latest release tag.');
                 $latestRelease = 'main';
             }
             $result = Process::run('git tag -l | xargs git tag -d');

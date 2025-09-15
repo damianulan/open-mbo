@@ -96,9 +96,9 @@ return [
     |
     */
 
-    'maintenance' => env('APP_MAINTENANCE', false),
+    'maintenance' => (bool) env('APP_MAINTENANCE', false),
 
-    'auto_update' => env('APP_AUTO_UPDATE', false),
+    'auto_update' => (bool) env('APP_AUTO_UPDATE', false),
 
     'chunk_default' => env('CHUNK_DEFAULT', 250),
 
@@ -111,7 +111,7 @@ return [
 
     'date_format' => env('DATEFORMAT', 'Y-m-d'),
     'time_format' => env('TIMEFORMAT', 'H:i'),
-    'datetime_format' => env('DATEFORMAT', 'Y-m-d').' '.env('TIMEFORMAT', 'H:i'),
+    'datetime_format' => env('DATEFORMAT', 'Y-m-d') . ' ' . env('TIMEFORMAT', 'H:i'),
 
     /*
     |--------------------------------------------------------------------------
