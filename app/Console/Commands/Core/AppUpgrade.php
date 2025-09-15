@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Schema;
-use Lucent\Console\Git;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
 class AppUpgrade extends Command
