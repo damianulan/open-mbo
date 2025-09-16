@@ -6,7 +6,7 @@ use App\Events\MBO\Objectives\UserObjectiveEvaluated;
 use Illuminate\Contracts\Queue\ShouldQueueAfterCommit;
 use Illuminate\Queue\InteractsWithQueue;
 
-class UserObjectiveStatusCheck implements ShouldQueueAfterCommit
+class UserObjectiveEvaluation implements ShouldQueueAfterCommit
 {
     use InteractsWithQueue;
 

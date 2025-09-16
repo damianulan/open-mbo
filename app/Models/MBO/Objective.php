@@ -154,7 +154,7 @@ class Objective extends BaseModel
         return false;
     }
 
-    public function isDeadlineUpcoming(int $days = 5): bool
+    public function isDeadlineUpcoming(int $days = 3): bool
     {
         if ($this->deadline) {
             if ($this->deadline->subDays($days)->isPast()) {

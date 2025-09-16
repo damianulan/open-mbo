@@ -12,11 +12,6 @@ trait Commentator
         return $this->morphMany(Comment::class, 'author');
     }
 
-    public function getAvatarView(int $height = 70, int $width = 70): string
-    {
-        return '';
-    }
-
     public function routeShow(): string
     {
         return url('/');

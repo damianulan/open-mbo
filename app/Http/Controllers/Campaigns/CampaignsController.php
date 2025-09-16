@@ -10,6 +10,7 @@ use App\Services\Campaigns\CreateOrUpdate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
 
 class CampaignsController extends AppController
 {
@@ -21,7 +22,7 @@ class CampaignsController extends AppController
         $this->logView('Wyświetlono listę kampanii pomiarowych');
 
         $campaigns = Campaign::orderByStatus()->paginate(30);
-
+        //dd(Auth::user()->sessions);
         return view('pages.mbo.campaigns.index', [
             'campaigns' => $campaigns,
         ]);
@@ -80,7 +81,7 @@ class CampaignsController extends AppController
 
         CampaignViewed::dispatch($campaign);
         $this->logShow($campaign);
-        $header = $campaign->name.' ['.$campaign->period.']';
+        $header = $campaign->name . ' [' . $campaign->period . ']';
 
         return view('pages.mbo.campaigns.show', [
             'campaign' => $campaign,

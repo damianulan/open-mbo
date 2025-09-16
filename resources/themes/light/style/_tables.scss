@@ -137,129 +137,136 @@ table.ombo-table tbody tr:hover {
     border-bottom-right-radius: 0.35rem;
 }
 
-.ombo-list {
+ul.ombo-list {
     list-style: none;
     padding: 0.5rem 0;
-}
 
-.ombo-list li {
-    border-radius: 0.35rem;
-    background-color: $ombo-body;
-    padding: 0.55rem 1rem;
-    margin: 0.4rem 0;
-}
+    li {
+        border-radius: 0.35rem;
+        background-color: $ombo-body;
+        padding: 0.55rem 1rem;
+        margin: 0.4rem 0;
 
-.ombo-list li.passed {
-    background-color: $ombo-body-passed;
-}
+        &:hover {
+            -webkit-box-shadow: inset -5px -15px 75px -28px $ombo-body-hover;
+            -moz-box-shadow: inset -5px -15px 75px -28px $ombo-body-hover;
+            box-shadow: inset -5px -15px 75px -28px $ombo-body-hover;
+            transition: all 0.2s ease-in-out;
+        }
 
-.ombo-list li.passed:hover {
-    background-color: $ombo-body-passed-hover;
-    transition: all 0.2s ease-in-out;
-}
+        &.inactive:hover {
+            -webkit-box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
+            -moz-box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
+            box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
+            transition: all 0.2s ease-in-out;
+        }
+    }
 
-.ombo-list li.failed {
-    background-color: $ombo-body-failed;
-}
+    li.passed {
+        background-color: $ombo-body-passed;
+    }
 
-.ombo-list li.failed:hover {
-    background-color: $ombo-body-failed-hover;
-    transition: all 0.2s ease-in-out;
-}
+    li.passed:hover {
+        background-color: $ombo-body-passed-hover;
+        transition: all 0.2s ease-in-out;
+    }
 
-.ombo-list li.warning {
-    background-color: $ombo-body-warning;
-}
+    li.failed {
+        background-color: $ombo-body-failed;
+    }
 
-.ombo-list li.warning:hover {
-    background-color: $ombo-body-warning-hover;
-    transition: all 0.2s ease-in-out;
-}
+    li.failed:hover {
+        background-color: $ombo-body-failed-hover;
+        transition: all 0.2s ease-in-out;
+    }
 
-.ombo-list li.completed {
-    background-color: $ombo-body-completed;
-}
+    li.warning {
+        background-color: $ombo-body-warning;
+    }
 
-.ombo-list li.completed:hover {
-    background-color: $ombo-body-completed-hover;
-    transition: all 0.2s ease-in-out;
-}
+    li.warning:hover {
+        background-color: $ombo-body-warning-hover;
+        transition: all 0.2s ease-in-out;
+    }
 
-.ombo-list li.inactive {
-    background-color: $ombo-body-inactive;
-}
+    li.completed {
+        background-color: $ombo-body-completed;
+    }
 
-.ombo-list li.inactive:hover {
-    background-color: $ombo-body-inactive-hover;
-    transition: all 0.2s ease-in-out;
-}
+    li.completed:hover {
+        background-color: $ombo-body-completed-hover;
+        transition: all 0.2s ease-in-out;
+    }
 
-.ombo-list li .list-grid {
-    display: flex;
-    align-items: center;
-}
+    li.inactive {
+        background-color: $ombo-body-inactive;
+    }
 
-.ombo-list li .list-content {
-    display: flex;
-    align-items: center;
-    font-size: 0.8rem;
-    width: 100%;
-    flex: 1 1 auto;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    word-wrap: break-word;
-}
+    li.inactive:hover {
+        background-color: $ombo-body-inactive-hover;
+        transition: all 0.2s ease-in-out;
+    }
 
-.ombo-list li .list-content span {
-    color: $secondary;
-    white-space: nowrap;
-    position: relative;
-}
+    li .list-grid {
+        display: flex;
+        align-items: center;
+    }
 
-.ombo-list li .list-actions {
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-    position: relative;
-    z-index: 10;
-    padding-left: 0.5rem;
-    background-color: transparent;
-}
+    li .list-content {
+        display: flex;
+        align-items: center;
+        font-size: 0.8rem;
+        width: 100%;
+        flex: 1 1 auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+    }
 
-.ombo-list li .list-actions .list-action {
-    text-decoration: none;
-    margin-right: 0.35rem;
-    font-size: 1rem;
-    color: $link-color;
-    white-space: nowrap;
-}
+    li .list-content span {
+        color: $secondary;
+        white-space: nowrap;
+        position: relative;
+    }
 
-.ombo-list li .list-actions .list-action:hover {
-    color: $link-color-hover;
-    transition: all 0.2s ease-in-out;
-}
+    li .list-actions {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+        position: relative;
+        z-index: 10;
+        padding-left: 0.5rem;
+        background-color: transparent;
+    }
 
-.ombo-list li .list-actions .list-action i {
-    margin-right: 0.2rem;
-}
+    li .list-actions .list-action {
+        text-decoration: none;
+        margin-right: 0.35rem;
+        font-size: 1rem;
+        color: $link-color;
+        white-space: nowrap;
+    }
 
-.ombo-list li .list-actions .list-action span {
-    font-size: 0.85rem;
-    font-weight: 600;
-}
+    li .list-actions .list-action:hover {
+        color: $link-color-hover;
+        transition: all 0.2s ease-in-out;
+    }
 
-.ombo-list li:hover {
-    -webkit-box-shadow: inset -5px -15px 75px -28px $ombo-body-hover;
-    -moz-box-shadow: inset -5px -15px 75px -28px $ombo-body-hover;
-    box-shadow: inset -5px -15px 75px -28px $ombo-body-hover;
-    transition: all 0.2s ease-in-out;
-}
+    li .list-actions .list-action i {
+        margin-right: 0.2rem;
+    }
 
-.ombo-list li.inactive:hover {
-    -webkit-box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
-    -moz-box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
-    box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
-    transition: all 0.2s ease-in-out;
+    li .list-actions .list-action span {
+        margin-right: 0.5rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    @media (max-width: 820px) {
+        li .list-actions .list-action span {
+            display: none;
+        }
+    }
 }
 
 .dataTables_paginate a {

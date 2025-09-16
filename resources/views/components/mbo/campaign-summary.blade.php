@@ -5,28 +5,33 @@
 </div>
 <div class="row">
     <div class="col-xl-6 col-lg-8 col-sm-12 pt-3">
-        @php
-        $campaign->setStageAuto();
-        $currentStages = $campaign->getCurrentStages();
-        @endphp
-        @foreach($campaign->getSoftStages() as $stage)
+        <table>
             @php
-                $start_prop = $stage . '_from';
-                $end_prop = $stage . '_to';
-                $current = false;
-                if(in_array($stage, $currentStages->toArray())){
-                    $current = true;
-                }
+            $campaign->setStageAuto();
+            $currentStages = $campaign->getCurrentStages();
             @endphp
-            <div class="d-flex {{ $current ? 'text-success':'text-primary' }} align-items-center">
-                <div class="me-2" data-tippy-content=" {{ $campaign->getStageInfo($stage) }}"">
-                    <i class="{{ $campaign->getStageIcon($stage) }} fs-5"></i>
-                </div>
-                <div class="fw-bold me-2">{{ $campaign->carbonDate($start_prop) }} - {{ $campaign->carbonDate($end_prop) }}</div>
-                <div class="fw-bold me-2">{{ $campaign->getStageName($stage) }}</div>
-            </div>
-
-        @endforeach
+            @foreach($campaign->getSoftStages() as $stage)
+                @php
+                    $start_prop = $stage . '_from';
+                    $end_prop = $stage . '_to';
+                    $current = false;
+                    if(in_array($stage, $currentStages->toArray())){
+                        $current = true;
+                    }
+                @endphp
+                <tr class="{{ $current ? 'text-success':'text-primary' }} fw-bold p-1" data-tippy-content="{{ $campaign->getStageInfo($stage) }}">
+                    <td class="px-1 align-content-center">
+                        <i class="{{ $campaign->getStageIcon($stage) }} fs-5"></i>
+                    </td>
+                    <td class="px-1 align-content-baseline">
+                        {{ $campaign->carbonDate($start_prop) }} - {{ $campaign->carbonDate($end_prop) }}
+                    </td>
+                    <td class="px-1 align-content-baseline">
+                        {{ $campaign->getStageName($stage) }}
+                    </td>
+                </tr>
+            @endforeach
+        </table>
 
     </div>
     <div class="col-xl-6 col-lg-4 col-sm-12 pt-3">

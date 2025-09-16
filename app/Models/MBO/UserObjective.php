@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Facades\Auth;
 use Lucent\Support\Traits\Dispatcher;
+use App\Traits\Guards\MBO\CanUserObjective;
 
 /**
  * @property string $id
@@ -114,7 +115,7 @@ use Lucent\Support\Traits\Dispatcher;
  */
 class UserObjective extends BaseModel implements AssignsPoints
 {
-    use Commentable, Dispatcher;
+    use Commentable, Dispatcher, CanUserObjective;
 
     protected $fillable = [
         'user_id',
@@ -246,21 +247,6 @@ class UserObjective extends BaseModel implements AssignsPoints
                 })->first();
             }
         );
-    }
-
-    public function canBeEvaluated(): bool
-    {
-        return in_array($this->status, UserObjectiveStatus::finished());
-    }
-
-    public function canBeFailed(): bool
-    {
-        return $this->canBeEvaluated() && $this->status !== UserObjectiveStatus::FAILED;
-    }
-
-    public function canBePassed(): bool
-    {
-        return $this->canBeEvaluated() && $this->status !== UserObjectiveStatus::PASSED;
     }
 
     public function isPassed(): bool

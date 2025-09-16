@@ -30,6 +30,8 @@ use Lucent\Support\Traits\CascadeDeletes;
 use Lucent\Support\Traits\UUID;
 use Lucent\Support\Traits\VirginModel;
 use Sentinel\Traits\HasRolesAndPermissions;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
 
 /**
  * @property string $id
@@ -170,18 +172,27 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     protected function name(): Attribute
     {
-        $value = $this->profile?->firstname.' '.$this->profile?->lastname;
+        $value = $this->profile?->firstname . ' ' . $this->profile?->lastname;
 
         return Attribute::make(
-            get: fn () => mb_ucfirst($value),
+            get: fn() => mb_ucfirst($value),
+        );
+    }
+
+    protected function sessions(): Attribute
+    {
+        return Attribute::make(
+            get: function (): Collection {
+                return config('session.driver') === 'database' ? DB::table('sessions')->where('user_id', $this->id)->orderByDesc('last_activity')->get() : new Collection;
+            },
         );
     }
 
     public function nameView(): string
     {
-        $link = '<span>'.$this->name.'</span>';
+        $link = '<span>' . $this->name . '</span>';
         if (Auth::user()->can('view', $this)) {
-            $link = '<a href="'.route('users.show', $this->id).'" class="text-primary">'.$this->name.'</a>';
+            $link = '<a href="' . route('users.show', $this->id) . '" class="text-primary">' . $this->name . '</a>';
         }
 
         return $link;
@@ -245,21 +256,36 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         return null;
     }
 
-    public function getInitials(): string
+    public function itsMe(): bool
     {
-        return mb_strtoupper(mb_substr($this->firstname(), 0, 1).mb_substr($this->lastname(), 0, 1));
+        return Auth::check() && $this->id == Auth::user()->id;
     }
 
-    public function getAvatarView(int $height = 70, int $width = 70): string
+    public function isLoggedIn(): bool
     {
-        if ($height !== $width) {
-            $width = $height;
+        $lifetime = 0;
+        if ($this->sessions->isNotEmpty()) {
+            $lastSession = $this->sessions->first();
+            if ($lastSession) {
+                $lifetime = (int) config('session.lifetime') * 60;
+                $lastActivity = (int) $lastSession->last_activity;
+                $lifetime = ($lastActivity + $lifetime);
+            }
         }
-        if ($this->profile->avatar) {
-            return '<img class="profile-img" src="'.asset($this->profile->avatar).'" height="'.$height.'px" width="'.$width.'px">';
-        }
+        return ($lastActivity + $lifetime) > time();
+    }
 
-        $fontSize = $height / 2.8;
+    public function getInitials(): string
+    {
+        return mb_strtoupper(mb_substr($this->firstname(), 0, 1) . mb_substr($this->lastname(), 0, 1));
+    }
+
+    public function getAvatarView($size = 'lg'): string
+    {
+        // if ($this->profile->avatar) {
+        //     return '<img class="profile-img" src="' . asset($this->profile->avatar) . '" height="' . $height . 'px" width="' . $width . 'px">';
+        // }
+
         $initials = $this->getInitials();
         $letterNum = Alphabet::getAlphabetPosition($initials);
 
@@ -277,8 +303,12 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
                 $color = 'red';
             }
         }
+        $indicator = '';
+        if (!$this->itsMe() && $this->isLoggedIn()) {
+            $indicator = '<div class="profile-indicator"></div>';
+        }
 
-        return '<div class="profile-img" style="background-color: var(--bs-'.$color.'); font-size: '.$fontSize.'px; min-height: '.$height.'px; min-width: '.$width.'px;"><div>'.$initials.'</div></div>';
+        return '<div class="profile-img-' . $size . '" style="background-color: var(--bs-' . $color . ');"><div>' . $initials . '</div>' . $indicator . '</div>';
     }
 
     public function canBeImpersonated(): bool

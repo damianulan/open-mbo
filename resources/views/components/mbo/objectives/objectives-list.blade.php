@@ -12,22 +12,22 @@
                     </div>
                     <div class="list-actions">
                         @if($objective->draft)
-                        <div class="list-action me-3" data-tippy-content="{{ __('forms.mbo.objectives.info.draft') }}">
+                        <div class="list-action" data-tippy-content="{{ __('forms.mbo.objectives.info.draft') }}">
                             <x-icon key="feather" />
                         </div>
                         @endif
-                        <div class="list-action me-3" data-tippy-content="{{ __('forms.mbo.objectives.weight') }}">
+                        <div class="list-action" data-tippy-content="{{ __('forms.mbo.objectives.weight') }}: {{ $objective->weight }}">
                             <x-icon key="minecart-loaded" />
                             <span>{{ $objective->weight }}</span>
                         </div>
                         @if($objective->expected)
-                        <div class="list-action me-3" data-tippy-content="{{ __('forms.mbo.objectives.expected') }}">
+                        <div class="list-action" data-tippy-content="{{ __('forms.mbo.objectives.expected') }}: {{ $objective->expected }}">
                             <x-icon key="patch-check" />
                             <span>{{ $objective->expected }}</span>
                         </div>
                         @endif
                         @if($objective->isOverdued())
-                            <a class="list-action text-failed" data-tippy-content="{{ __('alerts.objectives.error.overdued', ['term' => $objective->deadline->diffForHumans()]) }}">
+                            <a class="list-action text-warning" data-tippy-content="{{ __('alerts.objectives.error.overdued', ['term' => $objective->deadline->diffForHumans()]) }}">
                                 <x-icon key="exclamation-diamond-fill" />
                             </a>
                         @else
