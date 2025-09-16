@@ -161,10 +161,6 @@ class UserObjectiveController extends AppController
         try {
             $userObjective = UserObjective::findOrFail($id);
 
-            if ($request->user()->cannot('evaluate', $userObjective)) {
-                throw new NoPermissionException;
-            }
-
             DB::beginTransaction();
             if ($userObjective->canBePassed()) {
                 $userObjective->setPassed()->update();
@@ -186,10 +182,6 @@ class UserObjectiveController extends AppController
     {
         try {
             $userObjective = UserObjective::findOrFail($id);
-
-            if ($request->user()->cannot('evaluate', $userObjective)) {
-                throw new NoPermissionException('No access');
-            }
 
             DB::beginTransaction();
             if ($userObjective->canBeFailed()) {
