@@ -35,6 +35,11 @@ class CampaignStage extends Enum
 
     const CANCELED = 'canceled'; // const when process has been canceled
 
+    /**
+     * Pending, In Progress, Completed, Terminated, Canceled
+     *
+     * @return array
+     */
     public static function hardValues(): array
     {
         return [
@@ -46,6 +51,11 @@ class CampaignStage extends Enum
         ];
     }
 
+    /**
+     * Definition, Disposition, Realization, Evaluation, Self Evaluation
+     *
+     * @return array
+     */
     public static function softValues(): array
     {
         return [
@@ -57,6 +67,11 @@ class CampaignStage extends Enum
         ];
     }
 
+    /**
+     * Pending, Definition, Disposition, Realization, Evaluation, Self Evaluation, Completed
+     *
+     * @return array
+     */
     public static function sequences(): array
     {
         return [
@@ -70,6 +85,11 @@ class CampaignStage extends Enum
         ];
     }
 
+    /**
+     * In Progress, Pending, Completed, Terminated, Canceled
+     *
+     * @return array
+     */
     public static function hardValuesOrder(): array
     {
         return [
@@ -88,7 +108,7 @@ class CampaignStage extends Enum
 
     public static function getInfo(string $value): string
     {
-        return __('forms.campaigns.info.'.$value);
+        return __('forms.campaigns.info.' . $value);
     }
 
     public static function getBySequence(int $sequence)
@@ -170,8 +190,8 @@ class CampaignStage extends Enum
     {
         $arr = [];
         foreach (__('forms.campaigns.stages') as $key => $value) {
-            $arr[$key.'_from'] = $value.' '.__('forms.from');
-            $arr[$key.'_to'] = $value.' '.__('forms.to');
+            $arr[$key . '_from'] = $value . ' ' . __('forms.from');
+            $arr[$key . '_to'] = $value . ' ' . __('forms.to');
         }
 
         return $arr;

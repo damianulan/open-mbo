@@ -35,6 +35,7 @@ class UserObjectiveStatus extends Enum
 
     /**
      * Frozen values are not editable by most system processes that automatically change status..
+     * Passed, Failed, Interrupted
      */
     public static function frozen(): array
     {
@@ -45,6 +46,11 @@ class UserObjectiveStatus extends Enum
         ];
     }
 
+    /**
+     * Passed, Failed
+     *
+     * @return array
+     */
     public static function evaluated(): array
     {
         return [
@@ -53,6 +59,11 @@ class UserObjectiveStatus extends Enum
         ];
     }
 
+    /**
+     * Completed, Passed, Failed
+     *
+     * @return array
+     */
     public static function finished(): array
     {
         return [
@@ -62,6 +73,11 @@ class UserObjectiveStatus extends Enum
         ];
     }
 
+    /**
+     * Completed, Passed, Failed, Interrupted
+     *
+     * @return array
+     */
     public static function inactive(): array
     {
         return [

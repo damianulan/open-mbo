@@ -2,6 +2,7 @@
 
 namespace App\Policies\MBO;
 
+use App\Enums\MBO\CampaignStage;
 use App\Models\Core\User;
 use App\Models\MBO\Campaign;
 
@@ -52,12 +53,12 @@ class CampaignPolicy
      */
     public function users(User $user, Campaign $campaign): bool
     {
-        return $campaign->isActive() && $user->can('mbo-campaign-manage-users', $campaign);
+        return $campaign->isActive() && $user->can('mbo-campaign-manage-users', $campaign) && ($this->checkStage($campaign, CampaignStage::DEFINITION) || $this->checkStage($campaign, CampaignStage::DISPOSITION));
     }
 
     public function objectives(User $user, Campaign $campaign): bool
     {
-        return $campaign->isActive() && $user->can('mbo-campaign-manage-objectives', $campaign);
+        return $campaign->isActive() && $user->can('mbo-campaign-manage-objectives', $campaign) && $this->checkStage($campaign, CampaignStage::DEFINITION);
     }
 
     public function manual(User $user, Campaign $campaign): bool
@@ -81,5 +82,10 @@ class CampaignPolicy
     public function delete(User $user, Campaign $campaign): bool
     {
         return $user->can('mbo-campaign-delete', $campaign);
+    }
+
+    private function checkStage(Campaign $campaign, string $stage): bool
+    {
+        return $campaign->isStageActive($stage) || settings('mbo.campaigns_ignore_dates');
     }
 }

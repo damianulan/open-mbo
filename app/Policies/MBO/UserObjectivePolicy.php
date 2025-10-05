@@ -13,7 +13,7 @@ class UserObjectivePolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return $user->can(PermissionsLib::MBO_OBJECTIVE_VIEW);
     }
 
     /**
@@ -21,7 +21,7 @@ class UserObjectivePolicy
      */
     public function view(User $user, UserObjective $userObjective): bool
     {
-        return $user->can(PermissionsLib::MBO_OBJECTIVE_VIEW);
+        return $user->can(PermissionsLib::MBO_OBJECTIVE_VIEW) || $user->id === $userObjective->user_id;
     }
 
     /**
@@ -29,12 +29,19 @@ class UserObjectivePolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->can(PermissionsLib::MBO_OBJECTIVE_CREATE);
     }
 
     public function evaluate(User $user, UserObjective $userObjective): bool
     {
-        return $user->can(PermissionsLib::MBO_OBJECTIVE_EVALUATE);
+        $campaignCondition = $userObjective->user_campaign() ? $userObjective->user_campaign()->objectivesCanBeEvaluated() : true;
+        return ($user->can(PermissionsLib::MBO_OBJECTIVE_EVALUATE) && !$userObjective->isSelfEvaluated()) && $userObjective->isAfterDeadline() && $campaignCondition;
+    }
+
+    public function self_evaluate(User $user, UserObjective $userObjective): bool
+    {
+        $campaignCondition = $userObjective->user_campaign() ? $userObjective->user_campaign()->objectivesCanBeSelfEvaluated() : true;
+        return $userObjective->user_id === $user->id && $userObjective->isEvaluated() && !$userObjective->isSelfEvaluated() && $userObjective->isAfterDeadline() && $campaignCondition;
     }
 
     /**
@@ -42,7 +49,7 @@ class UserObjectivePolicy
      */
     public function update(User $user, UserObjective $userObjective): bool
     {
-        //
+        return $user->can(PermissionsLib::MBO_OBJECTIVE_UPDATE) && $userObjective->user_id !== $user->id;
     }
 
     /**
@@ -50,15 +57,7 @@ class UserObjectivePolicy
      */
     public function delete(User $user, UserObjective $userObjective): bool
     {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, UserObjective $userObjective): bool
-    {
-        //
+        return $user->can(PermissionsLib::MBO_OBJECTIVE_DELETE) && $userObjective->user_id !== $user->id;
     }
 
     /**
@@ -66,6 +65,6 @@ class UserObjectivePolicy
      */
     public function forceDelete(User $user, UserObjective $userObjective): bool
     {
-        //
+        return $user->isAdmin();
     }
 }
