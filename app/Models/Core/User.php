@@ -261,18 +261,21 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         return Auth::check() && $this->id == Auth::user()->id;
     }
 
-    public function isLoggedIn(): bool
+    public function lastActivityTime(): int
     {
-        $lifetime = 0;
+        $activity = 0;
         if ($this->sessions->isNotEmpty()) {
             $lastSession = $this->sessions->first();
             if ($lastSession) {
-                $lifetime = (int) config('session.lifetime') * 60;
-                $lastActivity = (int) $lastSession->last_activity;
-                $lifetime = ($lastActivity + $lifetime);
+                $activity = (int) $lastSession->last_activity;
             }
         }
-        return ($lastActivity + $lifetime) > time();
+        return $activity;
+    }
+
+    public function isLoggedIn(): bool
+    {
+        return ($this->lastActivityTime() + ((int) config('session.lifetime') * 60)) > time();
     }
 
     public function getInitials(): string
@@ -282,10 +285,6 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function getAvatarView($size = 'lg'): string
     {
-        // if ($this->profile->avatar) {
-        //     return '<img class="profile-img" src="' . asset($this->profile->avatar) . '" height="' . $height . 'px" width="' . $width . 'px">';
-        // }
-
         $initials = $this->getInitials();
         $letterNum = Alphabet::getAlphabetPosition($initials);
 
