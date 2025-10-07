@@ -19,7 +19,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Lab404\Impersonate\Models\Impersonate;
@@ -30,8 +32,6 @@ use Lucent\Support\Traits\CascadeDeletes;
 use Lucent\Support\Traits\UUID;
 use Lucent\Support\Traits\VirginModel;
 use Sentinel\Traits\HasRolesAndPermissions;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Collection;
 
 /**
  * @property string $id
@@ -89,6 +89,7 @@ use Illuminate\Support\Collection;
  * @property-read int|null $user_objectives_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserObjective> $user_objectives_active
  * @property-read int|null $user_objectives_active_count
+ *
  * @method static Builder<static>|User active()
  * @method static Builder<static>|User drafted()
  * @method static \Database\Factories\Core\UserFactory factory($count = null, $state = [])
@@ -115,6 +116,7 @@ use Illuminate\Support\Collection;
  * @method static Builder<static>|User withRole(...$slugs)
  * @method static Builder<static>|User withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|User withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements HasLocalePreference, HasShowRoute
@@ -171,10 +173,10 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     protected function name(): Attribute
     {
-        $value = $this->profile?->firstname . ' ' . $this->profile?->lastname;
+        $value = $this->profile?->firstname.' '.$this->profile?->lastname;
 
         return Attribute::make(
-            get: fn() => mb_ucfirst($value),
+            get: fn () => mb_ucfirst($value),
         );
     }
 
@@ -189,9 +191,9 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function nameView(): string
     {
-        $link = '<span>' . $this->name . '</span>';
+        $link = '<span>'.$this->name.'</span>';
         if (Auth::user()->can('view', $this)) {
-            $link = '<a href="' . route('users.show', $this->id) . '" class="text-primary">' . $this->name . '</a>';
+            $link = '<a href="'.route('users.show', $this->id).'" class="text-primary">'.$this->name.'</a>';
         }
 
         return $link;
@@ -269,6 +271,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
                 $activity = (int) $lastSession->last_activity;
             }
         }
+
         return $activity;
     }
 
@@ -279,7 +282,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function getInitials(): string
     {
-        return mb_strtoupper(mb_substr($this->firstname(), 0, 1) . mb_substr($this->lastname(), 0, 1));
+        return mb_strtoupper(mb_substr($this->firstname(), 0, 1).mb_substr($this->lastname(), 0, 1));
     }
 
     public function getAvatarView($size = 'lg'): string
@@ -302,11 +305,11 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
             }
         }
         $indicator = '';
-        if (!$this->itsMe() && $this->isLoggedIn()) {
+        if (! $this->itsMe() && $this->isLoggedIn()) {
             $indicator = '<div class="profile-indicator"></div>';
         }
 
-        return '<div class="profile-img-' . $size . '" style="background-color: var(--bs-' . $color . ');"><div>' . $initials . '</div>' . $indicator . '</div>';
+        return '<div class="profile-img-'.$size.'" style="background-color: var(--bs-'.$color.');"><div>'.$initials.'</div>'.$indicator.'</div>';
     }
 
     public function canBeImpersonated(): bool

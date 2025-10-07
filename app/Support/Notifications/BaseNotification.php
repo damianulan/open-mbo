@@ -2,9 +2,7 @@
 
 namespace App\Support\Notifications;
 
-use App\Support\Notifications\Contracts\IsAppNotification;
 use Illuminate\Notifications\Notification;
-use App\Support\Notifications\AppNotification;
 
 abstract class BaseNotification extends Notification
 {
@@ -45,6 +43,7 @@ abstract class BaseNotification extends Notification
                 $arr = $app->toArray();
             }
         }
+
         return $arr;
     }
 }

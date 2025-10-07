@@ -48,8 +48,6 @@ class UserObjectiveStatus extends Enum
 
     /**
      * Passed, Failed
-     *
-     * @return array
      */
     public static function evaluated(): array
     {
@@ -61,8 +59,6 @@ class UserObjectiveStatus extends Enum
 
     /**
      * Completed, Passed, Failed
-     *
-     * @return array
      */
     public static function finished(): array
     {
@@ -75,8 +71,6 @@ class UserObjectiveStatus extends Enum
 
     /**
      * Completed, Passed, Failed, Interrupted
-     *
-     * @return array
      */
     public static function inactive(): array
     {
