@@ -33,6 +33,7 @@ use Lucent\Support\Traits\CascadeDeletes;
 use Lucent\Support\Traits\UUID;
 use Lucent\Support\Traits\VirginModel;
 use Sentinel\Traits\HasRolesAndPermissions;
+use Illuminate\Support\Collection;
 
 /**
  * @property string $id
