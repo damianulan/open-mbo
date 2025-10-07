@@ -3,8 +3,6 @@
 namespace App\Console\Commands\Core;
 
 use App\Console\BaseCommand;
-use App\Models\Core\User;
-use App\Notifications\System\AppRefreshNotification;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Process;
 
@@ -40,7 +38,7 @@ class AppRefresh extends BaseCommand
                 $result = Process::run('git reset --hard');
                 $this->info($result->output());
                 if (! empty($branch)) {
-                    $result = Process::run('git switch '.$branch);
+                    $result = Process::run('git switch ' . $branch);
                 }
                 $result = Process::run('git pull origin');
                 $this->info($result->output());
@@ -56,12 +54,6 @@ class AppRefresh extends BaseCommand
             Artisan::call('optimize:clear');
             $this->info(Artisan::output());
 
-            $user = User::findByEmail('kontakt@damianulan.me');
-            if ($user && $notLocal) {
-                if ($user->notify(new AppRefreshNotification)) {
-                    $this->info('Job Success notification sent.');
-                }
-            }
             $this->log('completed', true);
         } catch (\Throwable $th) {
             $this->log($th->getMessage(), false);

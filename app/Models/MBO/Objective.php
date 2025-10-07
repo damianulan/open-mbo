@@ -81,7 +81,7 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective truncate()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective updateOrInsert(array $attributes, $values = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective updateQuietly(array $values)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective whereAssigned(\App\Models\Core\User $user)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective whereAssigned(?\App\Models\Core\User $user = null)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective whereAward($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective whereCampaignId($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective whereCreatedAt($value)
@@ -213,10 +213,13 @@ class Objective extends BaseModel implements HasDeadline
         return $this->user_objectives()->count() ? false : true;
     }
 
-    public function scopeWhereAssigned(Builder $query, User $user): void
+    public function scopeWhereAssigned(Builder $query, ?User $user = null): void
     {
+
         $query->whereHas('user_objectives', function (Builder $q) use ($user) {
-            $q->where('user_id', $user->id);
+            if ($user) {
+                $q->where('user_id', $user->id);
+            }
         })
             ->published();
     }

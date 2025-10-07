@@ -9,6 +9,9 @@ use App\Events\MBO\Campaigns\UserCampaignUnassigned;
 use App\Events\MBO\Campaigns\UserCampaignUpdated;
 use App\Models\BaseModel;
 use App\Models\Core\User;
+use App\Support\Notifications\Contracts\HasNotificationResource;
+use App\Notifications\Resources\UserCampaignResource;
+use App\Support\Notifications\Contracts\NotificationResource;
 use App\Traits\Guards\MBO\CanUserCampaign;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Lucent\Support\Traits\Dispatcher;
@@ -26,6 +29,8 @@ use Lucent\Support\Traits\Dispatcher;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
  * @property-read \App\Models\MBO\Campaign $campaign
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\Objective> $objectives
+ * @property-read int|null $objectives_count
  * @property-read User $user
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign active()
@@ -83,7 +88,7 @@ use Lucent\Support\Traits\Dispatcher;
  *
  * @mixin \Eloquent
  */
-class UserCampaign extends BaseModel implements HasObjectives
+class UserCampaign extends BaseModel implements HasObjectives, HasNotificationResource
 {
     use CanUserCampaign, Dispatcher;
 
@@ -113,6 +118,11 @@ class UserCampaign extends BaseModel implements HasObjectives
     public function user()
     {
         return $this->belongsTo(User::class)->withTrashed();
+    }
+
+    public function notificationResource(): NotificationResource
+    {
+        return new UserCampaignResource($this);
     }
 
     public function campaign()

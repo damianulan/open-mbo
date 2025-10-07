@@ -7,6 +7,8 @@ use App\Forms\MBO\Campaign\CampaignEditForm;
 use App\Http\Controllers\AppController;
 use App\Models\MBO\Campaign;
 use App\Services\Campaigns\CreateOrUpdate;
+use App\Support\Notifications\Models\Notification;
+use App\Support\Notifications\NotificationMessage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -15,6 +17,13 @@ class CampaignsController extends AppController
 {
     public function index(Request $request): View
     {
+        $user = Auth::user();
+        $campaign = $user->campaigns->first();
+        $notification = Notification::byKey('CAMPAIGN_ASSIGNED');
+        $message = new NotificationMessage($notification, $user, [
+            $campaign
+        ]);
+        $message->send();
         if ($request->user()->cannot('viewAny', Campaign::class)) {
             unauthorized();
         }

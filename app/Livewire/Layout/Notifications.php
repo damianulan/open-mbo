@@ -2,13 +2,12 @@
 
 namespace App\Livewire\Layout;
 
-use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Notifications extends Component
 {
-    protected DatabaseNotificationCollection $notifications;
+    protected $notifications;
 
     public int $notifications_count = 0;
 
@@ -26,22 +25,23 @@ class Notifications extends Component
 
     public function register()
     {
-        $query = Auth::user()->notifications()->where('data', '!=', '[]');
-        $notifications_count = $query->count();
-        $queryAlert = clone $query;
-        $notificationsAlert = $queryAlert->whereNull('alerted_at')->get();
+        // $query = Auth::user()->notifications()->where('data', '!=', '[]');
+        // $notifications_count = $query->count();
+        // $queryAlert = clone $query;
+        // $notificationsAlert = $queryAlert->whereNull('alerted_at')->get();
 
-        $this->notifications = $query->take(15)->get();
+        // $this->notifications = $query->take(15)->get();
 
-        if ($notificationsAlert->count()) {
-            foreach ($notificationsAlert as $alert) {
-                $alert->alerted_at = now();
-                $alert->updateQuietly();
-                $this->dispatch('new-notification', title: $alert->data['message']);
-            }
-        }
+        // if ($notificationsAlert->count()) {
+        //     foreach ($notificationsAlert as $alert) {
+        //         $alert->alerted_at = now();
+        //         $alert->updateQuietly();
+        //         $this->dispatch('new-notification', title: $alert->data['message']);
+        //     }
+        // }
 
-        $this->notifications_count = $notifications_count;
+        $this->notifications = [];
+        $this->notifications_count = 0;
     }
 
     public function toggleShown()

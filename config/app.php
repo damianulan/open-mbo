@@ -241,6 +241,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\ComponentServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\NotificationServiceProvider::class,
         // App\Providers\TelescopeServiceProvider::class,
         App\Providers\RolesServiceProvider::class,
         App\Providers\GateServiceProvider::class,

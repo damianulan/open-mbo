@@ -13,12 +13,17 @@ return new class extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('type');
-            $table->uuidMorphs('notifiable');
-            $table->text('data');
-            $table->timestamp('read_at')->nullable();
-            $table->timestamp('alerted_at')->nullable();
+            $table->string('key', 255)->unique();
+            $table->json('resources')->nullable();
+            $table->json('contents')->nullable();
+            $table->boolean('system')->default(true);
+            $table->boolean('email')->default(true);
+            $table->string('event', 255)->nullable();
+            $table->string('schedule')->nullable();
+            $table->json('conditions')->nullable();
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
