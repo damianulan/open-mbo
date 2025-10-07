@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Support\Notifications\Models\Notification;
-use Illuminate\Database\Seeder;
 use App\Events\MBO\Campaigns\UserCampaignAssigned;
 use App\Models\MBO\UserCampaign;
+use App\Support\Notifications\Models\Notification;
 use App\Support\Notifications\NotificationContents;
+use Illuminate\Database\Seeder;
 
 class NotificationSeeder extends Seeder
 {

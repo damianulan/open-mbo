@@ -2,14 +2,15 @@
 
 namespace App\Support\Notifications;
 
-use Illuminate\Mail\Mailable;
+use App\Support\Notifications\Contracts\NotificationResource;
 use App\Support\Notifications\Models\Notification;
 use Illuminate\Database\Eloquent\Model;
-use App\Support\Notifications\Contracts\NotificationResource;
+use Illuminate\Mail\Mailable;
 
 class NotificationMessage
 {
     protected array $placeholders = [];
+
     protected NotificationContents $contents;
 
     public function __construct(

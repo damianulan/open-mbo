@@ -5,32 +5,34 @@ namespace App\Support\Notifications;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Database\Eloquent\Model;
-use JsonSerializable;
 
 class NotificationContents implements CastsAttributes, Jsonable
 {
     public $system_contents;
+
     public $email_contents;
+
     public $subject;
 
     public static function boot(?string $system_contents = null, ?string $email_contents = null, ?string $subject = null): self
     {
-        $instance = new self();
+        $instance = new self;
         $instance->system_contents = $system_contents;
         $instance->email_contents = $email_contents;
         $instance->subject = $subject;
+
         return $instance;
     }
 
     public function fill(array $placeholders): self
     {
-        if (!empty($this->system_contents)) {
+        if (! empty($this->system_contents)) {
             $this->system_contents = $this->replacePlaceholders($this->system_contents, $placeholders);
         }
-        if (!empty($this->email_contents)) {
+        if (! empty($this->email_contents)) {
             $this->email_contents = $this->replacePlaceholders($this->email_contents, $placeholders);
         }
-        if (!empty($this->subject)) {
+        if (! empty($this->subject)) {
             $this->subject = $this->replacePlaceholders($this->subject, $placeholders);
         }
 
@@ -42,6 +44,7 @@ class NotificationContents implements CastsAttributes, Jsonable
         // Use regex to find all occurrences of {% key %}
         return preg_replace_callback('/{%\s*(\w+)\s*%}/', function ($matches) use ($arr) {
             $key = $matches[1];
+
             // Replace with corresponding value if it exists, otherwise leave unchanged
             return isset($arr[$key]) ? $arr[$key] : $matches[0];
         }, $text);

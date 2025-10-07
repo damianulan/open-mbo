@@ -9,8 +9,8 @@ use App\Events\MBO\Campaigns\UserCampaignUnassigned;
 use App\Events\MBO\Campaigns\UserCampaignUpdated;
 use App\Models\BaseModel;
 use App\Models\Core\User;
-use App\Support\Notifications\Contracts\HasNotificationResource;
 use App\Notifications\Resources\UserCampaignResource;
+use App\Support\Notifications\Contracts\HasNotificationResource;
 use App\Support\Notifications\Contracts\NotificationResource;
 use App\Traits\Guards\MBO\CanUserCampaign;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
@@ -88,7 +88,7 @@ use Lucent\Support\Traits\Dispatcher;
  *
  * @mixin \Eloquent
  */
-class UserCampaign extends BaseModel implements HasObjectives, HasNotificationResource
+class UserCampaign extends BaseModel implements HasNotificationResource, HasObjectives
 {
     use CanUserCampaign, Dispatcher;
 

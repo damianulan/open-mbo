@@ -2,8 +2,6 @@
 
 namespace App\Support\Notifications\Models;
 
-use App\Support\Notifications\Models\NotificationModel;
-
 /**
  * @property string $id
  * @property string $notification_id
@@ -14,6 +12,7 @@ use App\Support\Notifications\Models\NotificationModel;
  * @property string $contents
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification query()
@@ -26,6 +25,7 @@ use App\Support\Notifications\Models\NotificationModel;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification whereResources($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification whereSubject($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class MailNotification extends NotificationModel

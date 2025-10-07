@@ -21,7 +21,7 @@ class CampaignsController extends AppController
         $campaign = $user->campaigns->first();
         $notification = Notification::byKey('CAMPAIGN_ASSIGNED');
         $message = new NotificationMessage($notification, $user, [
-            $campaign
+            $campaign,
         ]);
         $message->send();
         if ($request->user()->cannot('viewAny', Campaign::class)) {

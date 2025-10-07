@@ -3,7 +3,6 @@
 namespace App\Support\Notifications\Contracts;
 
 use Illuminate\Contracts\Support\Jsonable;
-use Illuminate\Database\Eloquent\Model;
 
 abstract class NotificationResource implements Jsonable
 {

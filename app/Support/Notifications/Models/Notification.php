@@ -20,6 +20,7 @@ use Lucent\Support\Traits\UUID;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification onlyTrashed()
@@ -38,6 +39,7 @@ use Lucent\Support\Traits\UUID;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Notification extends Model
@@ -73,18 +75,20 @@ class Notification extends Model
     public static function createOrUpdate(string $key, array $attributes = []): self
     {
         $notification = self::byKey($key);
-        if (!$notification) {
+        if (! $notification) {
             $notification = new self;
             $attributes['key'] = $key;
         }
         $notification->fill($attributes);
         $notification->save();
+
         return $notification;
     }
 
-    public function setContents(?string $system_contents = null, ?string $email_contents = null, ?string $subject): self
+    public function setContents(?string $system_contents, ?string $email_contents, ?string $subject): self
     {
         $this->contents = new NotificationContents($system_contents, $email_contents, $subject);
+
         return $this;
     }
 
