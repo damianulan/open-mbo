@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -33,7 +34,6 @@ use Lucent\Support\Traits\CascadeDeletes;
 use Lucent\Support\Traits\UUID;
 use Lucent\Support\Traits\VirginModel;
 use Sentinel\Traits\HasRolesAndPermissions;
-use Illuminate\Support\Collection;
 
 /**
  * @property string $id
