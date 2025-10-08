@@ -5,13 +5,14 @@ namespace App\Support\Notifications\Jobs;
 use App\Support\Notifications\Contracts\NotifiableEvent;
 use App\Support\Notifications\Models\Notification;
 use App\Support\Notifications\Traits\Notifiable;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueueAfterCommit;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Queue\InteractsWithQueue;
 
 class NotifyOnEvent implements ShouldQueueAfterCommit
 {
-    use InteractsWithQueue;
+    use InteractsWithQueue, Queueable;
 
     public function handle(NotifiableEvent $event)
     {
@@ -27,15 +28,15 @@ class NotifyOnEvent implements ShouldQueueAfterCommit
         }
     }
 
-    private function getEventProperties(NotifiableEvent $object): array
+    private function getEventProperties(NotifiableEvent $event): array
     {
-        $reflection = new \ReflectionClass($object);
+        $reflection = new \ReflectionClass($event);
 
         $models = [];
 
         foreach ($reflection->getProperties() as $property) {
             $property->setAccessible(true);
-            $value = $property->getValue($object);
+            $value = $property->getValue($event);
 
             if ($value instanceof Model) {
                 $models[] = $value;

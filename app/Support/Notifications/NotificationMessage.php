@@ -61,6 +61,11 @@ class NotificationMessage
         }
     }
 
+    public function getModels(): array
+    {
+        return $this->resourceModels;
+    }
+
     private function addPlaceholders($resource): void
     {
         if ($resource && $resource instanceof NotificationResource) {
@@ -70,7 +75,7 @@ class NotificationMessage
                 $this->placeholders[$key] = $value;
             }
         } else {
-            throw new \Exception('Given notification resource is not of type '.NotificationResource::class);
+            throw new \Exception('Given notification resource is not of type ' . NotificationResource::class);
         }
     }
 

@@ -59,6 +59,8 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @property-read int|null $coordinator_campaigns_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\Department> $departments_manager
  * @property-read int|null $departments_manager_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Support\Notifications\Models\MailNotification> $email_notifications
+ * @property-read int|null $email_notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\UserEmployment> $employments
  * @property-read int|null $employments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\UserEmployment> $employments_active
@@ -79,6 +81,8 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @property-read int|null $subordinates_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $supervisors
  * @property-read int|null $supervisors_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Support\Notifications\Models\SystemNotification> $system_notifications
+ * @property-read int|null $system_notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\Team> $teams
  * @property-read int|null $teams_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
@@ -88,7 +92,6 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @property-read int|null $user_objectives_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserObjective> $user_objectives_active
  * @property-read int|null $user_objectives_active_count
- *
  * @method static Builder<static>|User active()
  * @method static Builder<static>|User drafted()
  * @method static \Database\Factories\Core\UserFactory factory($count = null, $state = [])
@@ -115,7 +118,6 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @method static Builder<static>|User withRole(...$slugs)
  * @method static Builder<static>|User withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|User withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements HasLocalePreference, HasShowRoute

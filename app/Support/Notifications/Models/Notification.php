@@ -21,26 +21,25 @@ use Lucent\Support\Traits\UUID;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification whereConditions($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification whereContents($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification whereEvent($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification whereKey($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification whereResources($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification whereSchedule($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification whereSystem($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Notification withoutTrashed()
- *
+ * @method static Builder<static>|Notification events()
+ * @method static Builder<static>|Notification newModelQuery()
+ * @method static Builder<static>|Notification newQuery()
+ * @method static Builder<static>|Notification onlyTrashed()
+ * @method static Builder<static>|Notification query()
+ * @method static Builder<static>|Notification whereConditions($value)
+ * @method static Builder<static>|Notification whereContents($value)
+ * @method static Builder<static>|Notification whereCreatedAt($value)
+ * @method static Builder<static>|Notification whereDeletedAt($value)
+ * @method static Builder<static>|Notification whereEmail($value)
+ * @method static Builder<static>|Notification whereEvent($value)
+ * @method static Builder<static>|Notification whereId($value)
+ * @method static Builder<static>|Notification whereKey($value)
+ * @method static Builder<static>|Notification whereResources($value)
+ * @method static Builder<static>|Notification whereSchedule($value)
+ * @method static Builder<static>|Notification whereSystem($value)
+ * @method static Builder<static>|Notification whereUpdatedAt($value)
+ * @method static Builder<static>|Notification withTrashed(bool $withTrashed = true)
+ * @method static Builder<static>|Notification withoutTrashed()
  * @mixin \Eloquent
  */
 class Notification extends Model

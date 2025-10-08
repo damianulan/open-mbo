@@ -40,7 +40,7 @@ class NotificationServiceProvider extends ServiceProvider
         }
     }
 
-    private function getNotifiableEventClasses(): array
+    public static function getNotifiableEventClasses(): array
     {
         $classes = [];
         if (Cache::has('notifiable_event_classes')) {
@@ -52,11 +52,11 @@ class NotificationServiceProvider extends ServiceProvider
             $directory = app_path(); // You can narrow this down, e.g. app_path('Events')
 
             $classes = collect(File::allFiles($directory))
-                ->filter(fn ($file) => $file->getExtension() === 'php')
+                ->filter(fn($file) => $file->getExtension() === 'php')
                 ->map(function ($file) use ($namespace) {
                     $path = $file->getRealPath();
-                    $relativePath = str_replace([app_path().DIRECTORY_SEPARATOR, '.php'], '', $path);
-                    $class = $namespace.str_replace(DIRECTORY_SEPARATOR, '\\', $relativePath);
+                    $relativePath = str_replace([app_path() . DIRECTORY_SEPARATOR, '.php'], '', $path);
+                    $class = $namespace . str_replace(DIRECTORY_SEPARATOR, '\\', $relativePath);
 
                     return $class;
                 })

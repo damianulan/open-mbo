@@ -26,4 +26,9 @@ class UserCampaignAssigned implements NotifiableEvent, ShouldDispatchAfterCommit
     {
         return $this->userCampaign->user;
     }
+
+    public function description(): string
+    {
+        return 'User campaign assigned';
+    }
 }
