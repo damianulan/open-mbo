@@ -6,14 +6,13 @@ use App\Support\Notifications\Contracts\NotificationResource;
 use App\Support\Notifications\Events\MailNotificationSent;
 use App\Support\Notifications\Events\SystemNotificationSent;
 use App\Support\Notifications\Exceptions\ModelTraitNotUsed;
+use App\Support\Notifications\Models\MailNotification;
 use App\Support\Notifications\Models\Notification;
+use App\Support\Notifications\Models\SystemNotification;
+use App\Support\Notifications\Traits\Notifiable;
+use App\Support\Notifications\Traits\NotifiableResource;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Mail\Mailable;
-use App\Support\Notifications\Traits\NotifiableResource;
-use App\Support\Notifications\Traits\Notifiable;
-use App\Support\Notifications\MailMessage;
-use App\Support\Notifications\Models\MailNotification;
-use App\Support\Notifications\Models\SystemNotification;
 use Illuminate\Support\Facades\Mail;
 
 class NotificationMessage
@@ -27,6 +26,7 @@ class NotificationMessage
     private bool $valid = false;
 
     protected $email_sent = false;
+
     protected $system_sent = false;
 
     public function __construct(
@@ -70,7 +70,7 @@ class NotificationMessage
                 $this->placeholders[$key] = $value;
             }
         } else {
-            throw new \Exception("Given notification resource is not of type " . NotificationResource::class);
+            throw new \Exception('Given notification resource is not of type '.NotificationResource::class);
         }
     }
 
@@ -112,7 +112,7 @@ class NotificationMessage
                     $mailable = $this->toMail();
                     if ($mailable) {
                         $mailSent = Mail::to($this->notifiable)->send($mailable);
-                        if (!$mailSent) {
+                        if (! $mailSent) {
                             $result = false;
                         } else {
                             $this->email_sent = true;
@@ -122,7 +122,7 @@ class NotificationMessage
                                 'notifiable_type' => $this->notifiable::class,
                                 'resources' => json_encode($this->resources),
                                 'subject' => $this->contents->subject,
-                                'contents' => $this->contents->email_contents
+                                'contents' => $this->contents->email_contents,
                             ]);
                             MailNotificationSent::dispatch($toMail);
                         }

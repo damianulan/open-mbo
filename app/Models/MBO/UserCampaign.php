@@ -143,7 +143,7 @@ class UserCampaign extends BaseModel implements HasObjectives
 
     public function stageDescription(): string
     {
-        return __('forms.campaigns.stages.' . $this->stage);
+        return __('forms.campaigns.stages.'.$this->stage);
     }
 
     public function stageIcon(): string

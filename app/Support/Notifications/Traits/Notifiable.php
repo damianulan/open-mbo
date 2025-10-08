@@ -21,6 +21,7 @@ trait Notifiable
 
         throw new ModelResourceNotFound($this);
     }
+
     public function system_notifications()
     {
         //

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UserCampaignAssigned implements ShouldDispatchAfterCommit, NotifiableEvent
+class UserCampaignAssigned implements NotifiableEvent, ShouldDispatchAfterCommit
 {
     use Dispatchable, SerializesModels;
 

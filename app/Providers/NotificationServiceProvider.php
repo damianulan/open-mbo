@@ -2,13 +2,13 @@
 
 namespace App\Providers;
 
+use App\Support\Notifications\Jobs\NotifyOnEvent;
 use App\Support\Notifications\Models\Notification;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\ServiceProvider;
 use ReflectionClass;
-use App\Support\Notifications\Jobs\NotifyOnEvent;
 
 class NotificationServiceProvider extends ServiceProvider
 {
@@ -52,11 +52,12 @@ class NotificationServiceProvider extends ServiceProvider
             $directory = app_path(); // You can narrow this down, e.g. app_path('Events')
 
             $classes = collect(File::allFiles($directory))
-                ->filter(fn($file) => $file->getExtension() === 'php')
+                ->filter(fn ($file) => $file->getExtension() === 'php')
                 ->map(function ($file) use ($namespace) {
                     $path = $file->getRealPath();
-                    $relativePath = str_replace([app_path() . DIRECTORY_SEPARATOR, '.php'], '', $path);
-                    $class = $namespace . str_replace(DIRECTORY_SEPARATOR, '\\', $relativePath);
+                    $relativePath = str_replace([app_path().DIRECTORY_SEPARATOR, '.php'], '', $path);
+                    $class = $namespace.str_replace(DIRECTORY_SEPARATOR, '\\', $relativePath);
+
                     return $class;
                 })
                 ->filter(function ($class) use ($interface) {

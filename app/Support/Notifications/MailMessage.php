@@ -3,11 +3,9 @@
 namespace App\Support\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Queue\SerializesModels;
-use App\Support\Notifications\NotificationContents;
 
 class MailMessage extends Mailable
 {

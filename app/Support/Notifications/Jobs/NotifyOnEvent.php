@@ -4,10 +4,10 @@ namespace App\Support\Notifications\Jobs;
 
 use App\Support\Notifications\Contracts\NotifiableEvent;
 use App\Support\Notifications\Models\Notification;
-use Illuminate\Contracts\Queue\ShouldQueueAfterCommit;
-use Illuminate\Queue\InteractsWithQueue;
 use App\Support\Notifications\Traits\Notifiable;
+use Illuminate\Contracts\Queue\ShouldQueueAfterCommit;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Queue\InteractsWithQueue;
 
 class NotifyOnEvent implements ShouldQueueAfterCommit
 {

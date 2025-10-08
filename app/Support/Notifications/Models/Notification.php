@@ -3,10 +3,10 @@
 namespace App\Support\Notifications\Models;
 
 use App\Support\Notifications\NotificationContents;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Lucent\Support\Traits\UUID;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @property string $id

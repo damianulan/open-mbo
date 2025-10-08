@@ -48,7 +48,7 @@ class ConfigServiceProvider extends ServiceProvider
                 'app.release' => $general->release ?? null,
                 'app.date_format' => $general->date_format ?? null,
                 'app.time_format' => $general->time_format ?? null,
-                'app.datetime_format' => $general->date_format && $general->time_format ? $general->date_format . ' ' . $general->time_format : null,
+                'app.datetime_format' => $general->date_format && $general->time_format ? $general->date_format.' '.$general->time_format : null,
 
                 // SERVER
                 'mail.default' => $mail->mail_mailer ?? null,

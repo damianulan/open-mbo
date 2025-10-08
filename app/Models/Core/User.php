@@ -7,9 +7,7 @@ use App\Commentable\Support\Commentator;
 use App\Contracts\Core\HasShowRoute;
 use App\Models\Vendor\ActivityModel;
 use App\Notifications\Resources\UserResource;
-use App\Support\Notifications\Contracts\NotificationResource;
 use App\Support\Notifications\Traits\Notifiable;
-use App\Support\Notifications\Traits\NotifiableResource;
 use App\Traits\UserBusiness;
 use App\Traits\UserMBO;
 use App\Traits\Vendors\Impersonable;
@@ -176,10 +174,10 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     protected function name(): Attribute
     {
-        $value = $this->profile?->firstname . ' ' . $this->profile?->lastname;
+        $value = $this->profile?->firstname.' '.$this->profile?->lastname;
 
         return Attribute::make(
-            get: fn() => mb_ucfirst($value),
+            get: fn () => mb_ucfirst($value),
         );
     }
 
@@ -194,9 +192,9 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function nameView(): string
     {
-        $link = '<span>' . $this->name . '</span>';
+        $link = '<span>'.$this->name.'</span>';
         if (Auth::user()->can('view', $this)) {
-            $link = '<a href="' . route('users.show', $this->id) . '" class="text-primary">' . $this->name . '</a>';
+            $link = '<a href="'.route('users.show', $this->id).'" class="text-primary">'.$this->name.'</a>';
         }
 
         return $link;
@@ -285,7 +283,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function getInitials(): string
     {
-        return mb_strtoupper(mb_substr($this->firstname(), 0, 1) . mb_substr($this->lastname(), 0, 1));
+        return mb_strtoupper(mb_substr($this->firstname(), 0, 1).mb_substr($this->lastname(), 0, 1));
     }
 
     public function getAvatarView($size = 'lg'): string
@@ -312,7 +310,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
             $indicator = '<div class="profile-indicator"></div>';
         }
 
-        return '<div class="profile-img-' . $size . '" style="background-color: var(--bs-' . $color . ');"><div>' . $initials . '</div>' . $indicator . '</div>';
+        return '<div class="profile-img-'.$size.'" style="background-color: var(--bs-'.$color.');"><div>'.$initials.'</div>'.$indicator.'</div>';
     }
 
     public function canBeImpersonated(): bool
