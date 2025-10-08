@@ -75,7 +75,7 @@ class NotificationMessage
                 $this->placeholders[$key] = $value;
             }
         } else {
-            throw new \Exception('Given notification resource is not of type ' . NotificationResource::class);
+            throw new \Exception('Given notification resource is not of type '.NotificationResource::class);
         }
     }
 

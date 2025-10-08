@@ -13,6 +13,7 @@ namespace App\Support\Notifications\Models;
  * @property \Illuminate\Support\Carbon|null $notified_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification query()
@@ -26,6 +27,7 @@ namespace App\Support\Notifications\Models;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification whereReadAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification whereResources($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class SystemNotification extends NotificationModel

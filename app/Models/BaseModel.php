@@ -18,6 +18,7 @@ use YMigVal\LaravelModelCache\HasCachedQueries;
 /**
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel avg(string $column)
@@ -61,6 +62,7 @@ use YMigVal\LaravelModelCache\HasCachedQueries;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class BaseModel extends Model
