@@ -2,4 +2,9 @@
 
 namespace App\Support\Notifications\Contracts;
 
-interface NotifiableEvent {}
+use Illuminate\Database\Eloquent\Model;
+
+interface NotifiableEvent
+{
+    public function notifiable(): Model;
+}

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->json('contents')->nullable();
             $table->boolean('system')->default(true);
             $table->boolean('email')->default(true);
-            $table->string('event', 255)->nullable();
+            $table->string('event', 255)->nullable()->index();
             $table->string('schedule')->nullable();
             $table->json('conditions')->nullable();
 

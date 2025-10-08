@@ -45,6 +45,7 @@ class SystemNotification extends NotificationModel
     ];
 
     protected $casts = [
+        'resources' => 'array',
         'read_at' => 'datetime',
         'notified_at' => 'datetime',
         'created_at' => 'datetime',

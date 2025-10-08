@@ -30,7 +30,7 @@ class CampaignUserController extends AppController
             $this->e = $th;
         }
 
-        return $this->responseJson($response);
+        return $response;
     }
 
     public function toggleManual(Request $request, $id)

@@ -42,6 +42,7 @@ class MailNotification extends NotificationModel
     ];
 
     protected $casts = [
+        'resources' => 'array',
         'created_at' => 'datetime',
     ];
 }

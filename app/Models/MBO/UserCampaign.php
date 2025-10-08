@@ -10,8 +10,7 @@ use App\Events\MBO\Campaigns\UserCampaignUpdated;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Notifications\Resources\UserCampaignResource;
-use App\Support\Notifications\Contracts\HasNotificationResource;
-use App\Support\Notifications\Contracts\NotificationResource;
+use App\Support\Notifications\Traits\NotifiableResource;
 use App\Traits\Guards\MBO\CanUserCampaign;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Lucent\Support\Traits\Dispatcher;
@@ -88,9 +87,9 @@ use Lucent\Support\Traits\Dispatcher;
  *
  * @mixin \Eloquent
  */
-class UserCampaign extends BaseModel implements HasNotificationResource, HasObjectives
+class UserCampaign extends BaseModel implements HasObjectives
 {
-    use CanUserCampaign, Dispatcher;
+    use CanUserCampaign, Dispatcher, NotifiableResource;
 
     public $logEntities = ['user_id' => User::class, 'campaign_id' => Campaign::class];
 
@@ -115,14 +114,11 @@ class UserCampaign extends BaseModel implements HasNotificationResource, HasObje
         'deleted' => UserCampaignUnassigned::class,
     ];
 
+    protected $notificationResource = UserCampaignResource::class;
+
     public function user()
     {
         return $this->belongsTo(User::class)->withTrashed();
-    }
-
-    public function notificationResource(): NotificationResource
-    {
-        return new UserCampaignResource($this);
     }
 
     public function campaign()
@@ -147,7 +143,7 @@ class UserCampaign extends BaseModel implements HasNotificationResource, HasObje
 
     public function stageDescription(): string
     {
-        return __('forms.campaigns.stages.'.$this->stage);
+        return __('forms.campaigns.stages.' . $this->stage);
     }
 
     public function stageIcon(): string

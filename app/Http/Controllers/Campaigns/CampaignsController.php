@@ -12,18 +12,12 @@ use App\Support\Notifications\NotificationMessage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
 
 class CampaignsController extends AppController
 {
     public function index(Request $request): View
     {
-        $user = Auth::user();
-        $campaign = $user->campaigns->first();
-        $notification = Notification::byKey('CAMPAIGN_ASSIGNED');
-        $message = new NotificationMessage($notification, $user, [
-            $campaign,
-        ]);
-        $message->send();
         if ($request->user()->cannot('viewAny', Campaign::class)) {
             unauthorized();
         }
@@ -89,7 +83,7 @@ class CampaignsController extends AppController
 
         CampaignViewed::dispatch($campaign);
         $this->logShow($campaign);
-        $header = $campaign->name.' ['.$campaign->period.']';
+        $header = $campaign->name . ' [' . $campaign->period . ']';
 
         return view('pages.mbo.campaigns.show', [
             'campaign' => $campaign,

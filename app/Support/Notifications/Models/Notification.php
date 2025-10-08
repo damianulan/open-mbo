@@ -6,6 +6,7 @@ use App\Support\Notifications\NotificationContents;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Lucent\Support\Traits\UUID;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @property string $id
@@ -69,7 +70,7 @@ class Notification extends Model
 
     public static function byKey(string $key): ?self
     {
-        return self::where('key', $key)->first();
+        return self::where('notifications.key', $key)->first();
     }
 
     public static function createOrUpdate(string $key, array $attributes = []): self
@@ -92,8 +93,13 @@ class Notification extends Model
         return $this;
     }
 
+    public function scopeEvents(Builder $query): void
+    {
+        $query->select('notifications.event')->groupBy('notifications.event');
+    }
+
     public function scopeWhereEvent(Builder $query, string $event): void
     {
-        $query->where('event', 'like', $event);
+        $query->where('notifications.event', $event);
     }
 }
