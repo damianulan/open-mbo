@@ -14,14 +14,13 @@ use App\Events\MBO\Objectives\UserObjectiveEvaluated;
 use App\Events\MBO\Objectives\UserObjectiveUnassigned;
 use App\Models\BaseModel;
 use App\Models\Core\User;
+use App\Traits\Guards\MBO\CanUserObjective;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Facades\Auth;
 use Lucent\Support\Traits\Dispatcher;
-use App\Traits\Guards\MBO\CanUserObjective;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 /**
  * @property string $id
@@ -47,6 +46,7 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
  * @property-read \App\Models\MBO\Objective $objective
  * @property-read \App\Models\MBO\UserPoints $points
  * @property-read User $user
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective avg(string $column)
@@ -111,11 +111,12 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
  * @method static Builder<static>|UserObjective withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective withoutCache()
  * @method static Builder<static>|UserObjective withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
 {
-    use Commentable, Dispatcher, CanUserObjective;
+    use CanUserObjective, Commentable, Dispatcher;
 
     protected $fillable = [
         'user_id',
@@ -150,7 +151,7 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
                 $instance->refresh();
                 $instance->setStatus()->updateQuietly();
 
-                return true;
+                $output = true;
             }
         }
 
@@ -205,7 +206,7 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
         }
 
         if (! in_array($status, $frozen)) {
-            if ($this->Overdued()) {
+            if ($this->isOverdued()) {
                 $this->autoEvaluate();
             } else {
                 if (! $userCampaign) {
@@ -251,6 +252,7 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
         if ($this->campaign) {
             return $this->campaign?->user_campaigns()->where('user_id', $this->user_id)->first();
         }
+
         return null;
     }
 
@@ -266,8 +268,6 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
 
     /**
      * Is objective completed
-     *
-     * @return bool
      */
     public function isCompleted(): bool
     {
@@ -276,8 +276,6 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
 
     /**
      * Is objective evaluated by a superior user.
-     *
-     * @return bool
      */
     public function isEvaluated(): bool
     {
@@ -286,8 +284,6 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
 
     /**
      * Is objective evaluated by the user itself.
-     *
-     * @return bool
      */
     public function isSelfEvaluated(): bool
     {

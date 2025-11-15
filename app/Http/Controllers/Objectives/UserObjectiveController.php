@@ -162,6 +162,7 @@ class UserObjectiveController extends AppController
         } catch (\Throwable $th) {
             report($th);
             $this->e = $th;
+
             return $this->responseJson(false);
         }
 

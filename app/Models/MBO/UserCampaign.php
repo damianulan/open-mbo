@@ -11,7 +11,6 @@ use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Traits\Guards\MBO\CanUserCampaign;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Lucent\Support\Traits\Dispatcher;
 
 /**
  * @property string $id
@@ -26,7 +25,10 @@ use Lucent\Support\Traits\Dispatcher;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
  * @property-read \App\Models\MBO\Campaign $campaign
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\Objective> $objectives
+ * @property-read int|null $objectives_count
  * @property-read User $user
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign avg(string $column)
@@ -79,11 +81,12 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserCampaign extends BaseModel implements HasObjectives
 {
-    use Dispatcher, CanUserCampaign;
+    use CanUserCampaign;
 
     public $logEntities = ['user_id' => User::class, 'campaign_id' => Campaign::class];
 
@@ -135,7 +138,7 @@ class UserCampaign extends BaseModel implements HasObjectives
 
     public function stageDescription(): string
     {
-        return __('forms.campaigns.stages.' . $this->stage);
+        return __('forms.campaigns.stages.'.$this->stage);
     }
 
     public function stageIcon(): string

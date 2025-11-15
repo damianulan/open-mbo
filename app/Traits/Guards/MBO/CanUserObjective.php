@@ -15,8 +15,6 @@ trait CanUserObjective
 {
     /**
      * Check whether campaign can be evaluated whether by a superior user or by the user himself.
-     *
-     * @return bool
      */
     public function canBeEvaluated(): bool
     {

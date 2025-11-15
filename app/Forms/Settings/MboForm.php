@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 class MboForm extends Form
 {
     use SettingsForm;
+
     protected static ?string $backRoute = 'settings.modules.index';
 
     protected static array $backParams = ['module' => 'mbo'];

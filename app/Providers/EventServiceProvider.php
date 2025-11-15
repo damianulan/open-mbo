@@ -21,18 +21,11 @@ class EventServiceProvider extends ServiceProvider
         'Illuminate\Auth\Events\Failed' => [
             'App\Listeners\Activity\LogAuthFailed',
         ],
-        'Illuminate\Notifications\Events\NotificationSent' => [
-            'App\Listeners\Activity\NotificationLog',
-        ],
 
         // MBO LISTENERS
         // Campaigns
         'App\Events\MBO\Campaigns\UserCampaignAssigned' => [
-            'App\Listeners\MBO\Campaigns\UserAssignedNotify',
             'App\Listeners\MBO\Campaigns\UserAssignObjectives',
-        ],
-        'App\Events\MBO\Campaigns\UserCampaignUnassigned' => [
-            'App\Listeners\MBO\Campaigns\UserUnassignedNotify',
         ],
         'App\Events\MBO\Campaigns\CampaignUpdated' => [
             'App\Listeners\MBO\Campaigns\UserCampaignStageCheck',

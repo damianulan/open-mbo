@@ -75,6 +75,9 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
         Route::prefix('logs')->name('logs.')->middleware('route.gate:settings-logs')->group(function () {
             Route::get('/', [App\Http\Controllers\Settings\LogController::class, 'index'])->name('index');
         });
+        Route::prefix('notifications')->name('notifications.')->middleware('route.gate:settings-notifications')->group(function () {
+            Route::get('/', [App\Http\Controllers\Settings\NotificationsController::class, 'index'])->name('index');
+        });
         Route::prefix('modules')->name('modules.')->middleware('route.gate:settings-modules')->group(function () {
             Route::get('/{module?}', [App\Http\Controllers\Settings\ModuleController::class, 'index'])->name('index');
             Route::post('/mbo/store', [App\Http\Controllers\Settings\ModuleController::class, 'storeMbo'])->name('mbo.store');

@@ -40,6 +40,7 @@ use Lucent\Support\Traits\Dispatcher;
  * @property-read \App\Models\MBO\ObjectiveTemplate|null $template
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective avg(string $column)
@@ -80,7 +81,7 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective truncate()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective updateOrInsert(array $attributes, $values = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective updateQuietly(array $values)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective whereAssigned(\App\Models\Core\User $user)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective whereAssigned(?\App\Models\Core\User $user = null)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective whereAward($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective whereCampaignId($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective whereCreatedAt($value)
@@ -97,6 +98,7 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static Builder<static>|Objective withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective withoutCache()
  * @method static Builder<static>|Objective withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 #[ScopedBy(ObjectiveScope::class)]
@@ -164,9 +166,6 @@ class Objective extends BaseModel implements HasDeadline
 
     /**
      * Is deadline is briefly upcoming.
-     *
-     * @param int $days
-     * @return bool
      */
     public function isDeadlineUpcoming(int $days = 3): bool
     {
@@ -214,10 +213,13 @@ class Objective extends BaseModel implements HasDeadline
         return $this->user_objectives()->count() ? false : true;
     }
 
-    public function scopeWhereAssigned(Builder $query, User $user): void
+    public function scopeWhereAssigned(Builder $query, ?User $user = null): void
     {
+
         $query->whereHas('user_objectives', function (Builder $q) use ($user) {
-            $q->where('user_id', $user->id);
+            if ($user) {
+                $q->where('user_id', $user->id);
+            }
         })
             ->published();
     }
