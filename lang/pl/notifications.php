@@ -23,6 +23,6 @@ return [
         'conditions' => 'Wskutek spełnienia warunków',
         'status' => 'Status',
         'action' => 'Akcje',
-    ]
+    ],
 
 ];
