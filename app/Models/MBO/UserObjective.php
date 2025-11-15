@@ -46,7 +46,6 @@ use Lucent\Support\Traits\Dispatcher;
  * @property-read \App\Models\MBO\Objective $objective
  * @property-read \App\Models\MBO\UserPoints $points
  * @property-read User $user
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective avg(string $column)
@@ -111,7 +110,6 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static Builder<static>|UserObjective withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective withoutCache()
  * @method static Builder<static>|UserObjective withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
@@ -206,7 +204,7 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
         }
 
         if (! in_array($status, $frozen)) {
-            if ($this->Overdued()) {
+            if ($this->isOverdued()) {
                 $this->autoEvaluate();
             } else {
                 if (! $userCampaign) {

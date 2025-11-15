@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(BusinessSeeder::class);
         $this->call(CreateAdminUserSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(NotificationSeeder::class);
 
         $this->call(MBOSeeder::class);
     }

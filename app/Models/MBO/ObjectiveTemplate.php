@@ -25,7 +25,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read \App\Models\MBO\ObjectiveTemplateCategory|null $category
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\Objective> $objectives
  * @property-read int|null $objectives_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate avg(string $column)
@@ -79,7 +78,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withoutTrashed()
- *
  * @mixin \Eloquent
  */
 #[ScopedBy(ObjectiveTemplateScope::class)]

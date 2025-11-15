@@ -77,10 +77,6 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @property-read \App\Models\Core\UserPreference|null $preferences
  * @property-read \App\Models\Core\UserProfile|null $profile
  * @property-read Collection $sessions
- * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $subordinates
- * @property-read int|null $subordinates_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $supervisors
- * @property-read int|null $supervisors_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Support\Notifications\Models\SystemNotification> $system_notifications
  * @property-read int|null $system_notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\Team> $teams
@@ -92,7 +88,6 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @property-read int|null $user_objectives_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserObjective> $user_objectives_active
  * @property-read int|null $user_objectives_active_count
- *
  * @method static Builder<static>|User active()
  * @method static Builder<static>|User drafted()
  * @method static \Database\Factories\Core\UserFactory factory($count = null, $state = [])
@@ -119,7 +114,6 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @method static Builder<static>|User withRole(...$slugs)
  * @method static Builder<static>|User withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|User withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements HasLocalePreference, HasShowRoute

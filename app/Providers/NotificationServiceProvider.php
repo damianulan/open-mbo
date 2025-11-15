@@ -7,6 +7,7 @@ use App\Support\Notifications\Models\Notification;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use ReflectionClass;
 
@@ -30,7 +31,10 @@ class NotificationServiceProvider extends ServiceProvider
     public function boot()
     {
         $classes = $this->getNotifiableEventClasses();
-        $events = Notification::events()->get()->pluck('event')->toArray();
+        $events = [];
+        if (Schema::hasTable('notifications')) {
+            $events = Notification::events()->get()->pluck('event')->toArray();
+        }
         $classes = array_filter($classes, function ($class) use ($events) {
             return in_array($class, $events);
         });
@@ -52,11 +56,11 @@ class NotificationServiceProvider extends ServiceProvider
             $directory = app_path(); // You can narrow this down, e.g. app_path('Events')
 
             $classes = collect(File::allFiles($directory))
-                ->filter(fn ($file) => $file->getExtension() === 'php')
+                ->filter(fn($file) => $file->getExtension() === 'php')
                 ->map(function ($file) use ($namespace) {
                     $path = $file->getRealPath();
-                    $relativePath = str_replace([app_path().DIRECTORY_SEPARATOR, '.php'], '', $path);
-                    $class = $namespace.str_replace(DIRECTORY_SEPARATOR, '\\', $relativePath);
+                    $relativePath = str_replace([app_path() . DIRECTORY_SEPARATOR, '.php'], '', $path);
+                    $class = $namespace . str_replace(DIRECTORY_SEPARATOR, '\\', $relativePath);
 
                     return $class;
                 })

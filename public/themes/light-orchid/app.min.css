@@ -476,7 +476,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 300;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-300-normal.woff2?47d573178e1ea9626f5e23600450838b) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-300-normal.woff?bed2ca5b6383cf21ecf3b04a72a7dbcc) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-300-normal.woff2?5e91fdf81b6aa1b063dc1414465ee9f4) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-300-normal.woff?a0dca059fd0a526f4156ae5c03a2de25) format('woff');
   unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
@@ -486,7 +486,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 300;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-300-normal.woff2?64f49c695195baae59d2f4d9ba824a83) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-300-normal.woff?761140487d164da414bb7d9feb604906) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-300-normal.woff2?f5b18b8f61885e8f10b47c7bf2341611) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-300-normal.woff?ec8caeb4287e18bb8ef78dfa2d1d34ef) format('woff');
   unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
 }
 
@@ -496,7 +496,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 300;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-300-normal.woff2?9fb677c7e958fd8b9f45489e28a81bac) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-300-normal.woff?845e8475dbeb5e2fd44a4a2960038487) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-300-normal.woff2?b9ffcc7fda4c2210044cf4fd94e3bd1d) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-300-normal.woff?c70c3608d7c872e34de214ff0870f64d) format('woff');
   unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
 }
 
@@ -506,7 +506,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 300;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-300-normal.woff2?bb90469fc1fc459af7305e7a7638831f) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-300-normal.woff?ccc03ec0757c624ee647f3d3a29e0b21) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-300-normal.woff2?2bf5c8a6e49d01dc09d63e18bd6e0fab) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-300-normal.woff?66971bca189cf5373e8535afb81ec84f) format('woff');
   unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
@@ -516,7 +516,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 300;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-300-normal.woff2?71cb2de9a920d3691685de7c48be2923) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-300-normal.woff?9dc9adf3c83f443110cdc8a70aed4bb6) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-300-normal.woff2?d2d3cc6625e173bedea7f9757017a86a) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-300-normal.woff?fd9a43b901e6593fefea991e1f1ee061) format('woff');
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-serif-cyrillic-ext-400-normal */
@@ -525,7 +525,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 400;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-400-normal.woff2?d51fb4e1b62b7a3fd759888a843f7c6c) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-400-normal.woff?2b82a9386e35adc728a2bc67330a557e) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-400-normal.woff2?9b68ff00c0afad2aa3134bd5de97e6ad) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-400-normal.woff?f44eb888eda77fb3df859ee216c24de1) format('woff');
   unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
@@ -535,7 +535,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 400;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-400-normal.woff2?bf1df6d54ea50357fd886d7bf73b7d92) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-400-normal.woff?7ca53e83f0e6e650fcd109b985f94b9d) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-400-normal.woff2?7c6d4c1d8ae2896f2298fcc67fc482e2) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-400-normal.woff?f5ca9ccfd8ff87172f4eb073879d270a) format('woff');
   unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
 }
 
@@ -545,7 +545,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 400;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-400-normal.woff2?c81e16ec671bf9297d818bc2906b7df1) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-400-normal.woff?dc02b662511ad675b68c439e64d99cc5) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-400-normal.woff2?9a3a5a7692c75ea55de8425a1a223578) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-400-normal.woff?be548db8fdd900ef116e3ffc02dd5306) format('woff');
   unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
 }
 
@@ -555,7 +555,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 400;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-400-normal.woff2?061ffefb0a8336f5c14c31f8096028ee) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-400-normal.woff?34eccc4a704034c029f7153a46fa2cc6) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-400-normal.woff2?d70a58715447513deadc7ba23b9ca798) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-400-normal.woff?9493587a573bf489f0951b5b0912457d) format('woff');
   unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
@@ -565,7 +565,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 400;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-400-normal.woff2?130c2d62503949e4d4e6c7810d96adeb) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-400-normal.woff?82236381b6e1ffd399b625a7a72b09aa) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-400-normal.woff2?45bf05fb9030ea4df3721750429d27d4) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-400-normal.woff?f4388d218609d4929b179b34c8a3e153) format('woff');
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-serif-cyrillic-ext-600-normal */
@@ -574,7 +574,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 600;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-600-normal.woff2?9906b742dec01458696667a48b79a18c) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-600-normal.woff?1004c7d2483f74291785fab58377404d) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-600-normal.woff2?1f278f443e11737fe8250f21cabdf3a4) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-600-normal.woff?b0711b3a5c9dc88898b572f085c056f2) format('woff');
   unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
@@ -584,7 +584,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 600;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-600-normal.woff2?77ea140f50888066200f5af8f2e66d7e) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-600-normal.woff?db37c45ed725b639cb87ed2bce1e2cbe) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-600-normal.woff2?def82f11822d6cf6b48a8a0527e4fd5b) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-600-normal.woff?24e1f2c1c5c4784912eea02b320d8661) format('woff');
   unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
 }
 
@@ -594,7 +594,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 600;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-600-normal.woff2?0291d438a5e920d58606696045faa95e) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-600-normal.woff?071423826f314bcdb5d4666309186c10) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-600-normal.woff2?380b1133cb5b98ee5822e4c75d52e361) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-600-normal.woff?5fd8fd494790ac216e230ad632da8557) format('woff');
   unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
 }
 
@@ -604,7 +604,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 600;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-600-normal.woff2?c6ff24c947e65a538403ca79a5be3a46) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-600-normal.woff?b62bbccef406aa0611023c8d649e8834) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-600-normal.woff2?10f72f93838c4c9aafbd4dfa84cc866c) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-600-normal.woff?08059aabd05d51c5c86e22773ef88459) format('woff');
   unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
@@ -614,7 +614,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 600;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-600-normal.woff2?d50d092eda8d2941ee9143c4a92590f9) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-600-normal.woff?879ddb5ae0346b73012d3bdbaef7b16a) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-600-normal.woff2?2ed576dab2010787b1f685a184ee9cb3) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-600-normal.woff?0037bd71526bbe00d3b7e2c2ced03cef) format('woff');
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-serif-cyrillic-ext-700-normal */
@@ -623,7 +623,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 700;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-700-normal.woff2?ba44f0c8735dd01d8481f783be7fe7f8) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-700-normal.woff?595c69cc1633112aab1682986f969f18) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-700-normal.woff2?32b4507ebb87446570e9c44b68dcff0f) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-700-normal.woff?c0d036a648388c8d5f056f88f735ad26) format('woff');
   unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
@@ -633,7 +633,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 700;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-700-normal.woff2?b34444ac3900c2d36fead9bcb48211d1) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-700-normal.woff?c66eca3ad4711923876514479a615ed2) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-700-normal.woff2?cae72e440d6658176f35324b91e827a2) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-700-normal.woff?f0777903eba951e3236fb7192df63188) format('woff');
   unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
 }
 
@@ -643,7 +643,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 700;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-700-normal.woff2?041403396b39de1f4327bab623390857) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-700-normal.woff?bdb9b973a8659384970a577f14927fbd) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-700-normal.woff2?7040b55bc996592d2f568771b3dba457) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-700-normal.woff?32da269912d787c7ceab4b86496407fb) format('woff');
   unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
 }
 
@@ -653,7 +653,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 700;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-700-normal.woff2?2b5c5f5ada809568adf6bde9317cd938) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-700-normal.woff?f14cc1b43e2fbd48bd452591dbc76fc9) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-700-normal.woff2?8923f10edc9e7ea27fa3ab56658c6317) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-700-normal.woff?051cd8473da55c3c7c79356612a617e2) format('woff');
   unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
@@ -663,7 +663,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 700;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-700-normal.woff2?f8afafec4a53cb9ecb065ca9a7ed5537) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-700-normal.woff?9453c7c29d238f8aacdffd2c7ef8e719) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-700-normal.woff2?a98cb8f998e53efde02071284f2221f4) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-700-normal.woff?65045b1028a3c9f907a3edf9f247d5e8) format('woff');
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-serif-cyrillic-ext-300-italic */
@@ -672,7 +672,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 300;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-300-italic.woff2?c7d9a7d3ad65965b344cf9973092f8b2) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-300-italic.woff?1d118f92eb6e21c1b45c3406db901b18) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-300-italic.woff2?e50748145302af9224b8c05abb8cb7c5) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-300-italic.woff?0b5b67e8ea27e17c3868f5e664dc1b3c) format('woff');
   unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
@@ -682,7 +682,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 300;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-300-italic.woff2?1f9f9c75461860b969cae4c5525f8226) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-300-italic.woff?7563b8dd87398f5403a096e326d528df) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-300-italic.woff2?68fefa8814dcf1e1ebb0862a9bce7b5c) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-300-italic.woff?81ffe96518d97dda1ecc5027ca5acdad) format('woff');
   unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
 }
 
@@ -692,7 +692,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 300;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-300-italic.woff2?1fad971d1d47e1c01ea3e26ffc8c66f7) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-300-italic.woff?80f0e9d0f9c7e2188407d81b16ff4782) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-300-italic.woff2?4233a4acc94a2d7024f984fac7454a5c) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-300-italic.woff?04da9af70273549f327a4375e6fe1870) format('woff');
   unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
 }
 
@@ -702,7 +702,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 300;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-300-italic.woff2?60dd0cfcbbb62419537c126f792d5729) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-300-italic.woff?5b082d7029f6f6eb0d8e60e4dd24f059) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-300-italic.woff2?bfc7017cce38ddf9c8fa10efbca20fdb) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-300-italic.woff?c16c443a85825b34fa464a8e0d82a8c1) format('woff');
   unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
@@ -712,7 +712,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 300;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-300-italic.woff2?4b210c2a1a495e8edb33ce11b963680e) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-300-italic.woff?aff85bfffec9f4f62ff6a1a5e119394e) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-300-italic.woff2?4f6490ef7fbf4e7a9f6c35bc5d449013) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-300-italic.woff?b2c7335f965b8df6dadfe1b26f11fcc9) format('woff');
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-serif-cyrillic-ext-400-italic */
@@ -721,7 +721,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 400;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-400-italic.woff2?9a705eb84d993efa627c8891f2454cc0) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-400-italic.woff?86fa44d84542f971a22499cf2e18dcd4) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-400-italic.woff2?954bcdb0793b62b36757f1dd0c21e11b) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-400-italic.woff?c5e2ac074d869ef422025d6e3ffb9b36) format('woff');
   unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
@@ -731,7 +731,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 400;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-400-italic.woff2?f57ec9685f984a4eaecdcf758c7cdb85) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-400-italic.woff?6f81fb15539cda3b5544f41e5de76ffd) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-400-italic.woff2?80708214de76f4ae225f9181948b158c) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-400-italic.woff?2d508949fcd791a4a0d871bd7dfa3e9d) format('woff');
   unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
 }
 
@@ -741,7 +741,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 400;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-400-italic.woff2?dd03c7dc4eb77c00e817888d52168c8a) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-400-italic.woff?0cef7dcce1022c8a444188f6038cb804) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-400-italic.woff2?e45cd28429fbe4c39fe633ec3d6e63cb) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-400-italic.woff?0ea0438ec679c569db2bb8c489d883f8) format('woff');
   unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
 }
 
@@ -751,7 +751,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 400;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-400-italic.woff2?08b395eb7eb552eef52f7b927dd41773) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-400-italic.woff?7bdbde1fa797983227e6e0cf7b4ca21a) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-400-italic.woff2?9cfd1fe72a3e67420a03fad289e51bf9) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-400-italic.woff?2e8105dd69ec02b4622c4f700e377404) format('woff');
   unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
@@ -761,7 +761,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 400;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-400-italic.woff2?eb89a03c637c9caf093821803dd199fb) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-400-italic.woff?c5240b6e7fab8b435f676dfea4084f32) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-400-italic.woff2?65fa643d0604dff1c39058714a8fde26) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-400-italic.woff?40ac09a7d50ccf4c82ff63a48bcd1837) format('woff');
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-serif-cyrillic-ext-600-italic */
@@ -770,7 +770,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 600;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-600-italic.woff2?7245622ab748fe1e6f3de929c636c95d) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-600-italic.woff?9a3dab045115aa1018b8f4b375868266) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-600-italic.woff2?6b35232e82e1b969c837f1bfae7c23b7) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-600-italic.woff?c0f9ebb7b862a0b1503306fb3aa1fed5) format('woff');
   unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
@@ -780,7 +780,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 600;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-600-italic.woff2?ade86626c71923d1d92611e68441e251) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-600-italic.woff?1b7006835949be1d037ee1ba6133b343) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-600-italic.woff2?746ddcd4de19c0f95910884edfc0439d) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-600-italic.woff?b689c164a11886f39c02322df45f4f27) format('woff');
   unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
 }
 
@@ -790,7 +790,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 600;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-600-italic.woff2?05f9c7d224e6422f54ffaa7c80b588a7) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-600-italic.woff?5326b9dad8410ed1c888086f9f1c1d1d) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-600-italic.woff2?ec9f032d2fd13e5698ed19da2960963d) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-600-italic.woff?03eeab1351381ccd4c9ac9189d945009) format('woff');
   unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
 }
 
@@ -800,7 +800,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 600;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-600-italic.woff2?2b04521c44af8650b9e9afb7b5c104fc) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-600-italic.woff?221dcd7124a5caa32e193701c5f09983) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-600-italic.woff2?965def3fa96e6ed040a908e5cf8194fe) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-600-italic.woff?76a725f4fec9e03610efe6502140ed2c) format('woff');
   unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
@@ -810,7 +810,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 600;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-600-italic.woff2?65cacedc4433bfabebc744697b83f2a5) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-600-italic.woff?0debe7e5e6285349210079cae1e029a0) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-600-italic.woff2?64c86852f7372c6084a3fbe9a8fe2a13) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-600-italic.woff?987b7c6278608e507206b9a311eb33b0) format('woff');
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* ibm-plex-serif-cyrillic-ext-700-italic */
@@ -819,7 +819,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 700;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-700-italic.woff2?d9d1f9ffed0c33c986a0e46e4ec876bd) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-700-italic.woff?35570dd8c3a67656c9735cd88a7ce940) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-700-italic.woff2?313790969b46002844d2aa2e03a20c48) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-ext-700-italic.woff?8617623e4826337b7640e439b893b250) format('woff');
   unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
 }
 
@@ -829,7 +829,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 700;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-700-italic.woff2?7435f6eb6268424d0e49ea4d34c3274b) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-700-italic.woff?9e21cd16a4233a3e2e29897e23709646) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-700-italic.woff2?2dd95b62aef02204b1821c80482ee4b1) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-cyrillic-700-italic.woff?a9888c19850caa61d4f0efb08c834921) format('woff');
   unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
 }
 
@@ -839,7 +839,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 700;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-700-italic.woff2?c65493698e10a14b7c56b9427f32f18b) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-700-italic.woff?3b1f59c82741f2d75401cc89cd5ed21e) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-700-italic.woff2?9f94100fba5fd9cacb40571855153002) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-vietnamese-700-italic.woff?22d14d0413c9e849eb3e8e8454c04b05) format('woff');
   unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
 }
 
@@ -849,7 +849,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 700;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-700-italic.woff2?8959e352f1afd0e8de2c1f37f9bfdcc4) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-700-italic.woff?5abfbd042b4d5b5fe6b0c85080e1f67d) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-700-italic.woff2?8e4b6243888bbefe5e06bebf3dc745b4) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-ext-700-italic.woff?87c6a06cda078e69519a9f5593de4a1d) format('woff');
   unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
@@ -859,7 +859,7 @@
   font-style: italic;
   font-display: swap;
   font-weight: 700;
-  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-700-italic.woff2?119dc81c6a8dfe21891317ba4ff6538e) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-700-italic.woff?38a51dbbf8dca448ae0a812ecfdb4b1a) format('woff');
+  src: url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-700-italic.woff2?06742ee2bd7dc361994604786cc60ab2) format('woff2'), url(/fonts/vendor/@fontsource/ibm-plex-serif/files/ibm-plex-serif-latin-700-italic.woff?128e73d4e21880606ac8068a723c1dce) format('woff');
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 /* jetbrains-mono-cyrillic-ext-300-normal */
