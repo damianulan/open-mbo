@@ -35,6 +35,9 @@ class CampaignStage extends Enum
 
     const CANCELED = 'canceled'; // const when process has been canceled
 
+    /**
+     * Pending, In Progress, Completed, Terminated, Canceled
+     */
     public static function hardValues(): array
     {
         return [
@@ -46,6 +49,9 @@ class CampaignStage extends Enum
         ];
     }
 
+    /**
+     * Definition, Disposition, Realization, Evaluation, Self Evaluation
+     */
     public static function softValues(): array
     {
         return [
@@ -57,6 +63,9 @@ class CampaignStage extends Enum
         ];
     }
 
+    /**
+     * Pending, Definition, Disposition, Realization, Evaluation, Self Evaluation, Completed
+     */
     public static function sequences(): array
     {
         return [
@@ -70,6 +79,9 @@ class CampaignStage extends Enum
         ];
     }
 
+    /**
+     * In Progress, Pending, Completed, Terminated, Canceled
+     */
     public static function hardValuesOrder(): array
     {
         return [

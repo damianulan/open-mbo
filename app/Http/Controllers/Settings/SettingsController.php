@@ -27,6 +27,7 @@ class SettingsController extends AppController
                 ->setRoute('settings.organization.index'),
             MenuItem::make('notifications')
                 ->setTitle(__('menus.notifications.index'))
+                ->permission('settings-notifications')
                 ->setRoute('settings.notifications.index'),
             MenuItem::make('integrations')
                 ->setTitle(__('menus.settings.integrations.index'))

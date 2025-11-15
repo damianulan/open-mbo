@@ -26,6 +26,8 @@ return [
     'manual' => 'Tryb ręczny',
     'page_no_content' => 'Brak zawartości strony',
     'page_content_info' => 'Jeśli możesz - stwórz samodzielnie nową zawartość, lub wróć później.',
+    'active' => 'Aktywne',
+    'inactive' => 'Nieaktywne',
 
     'column' => 'Kolumna',
     'columns' => 'Kolumny',

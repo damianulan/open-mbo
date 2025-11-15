@@ -6,6 +6,7 @@ use App\Commentable\Support\Commentable;
 use App\Commentable\Support\Commentator;
 use App\Contracts\Core\HasShowRoute;
 use App\Models\Vendor\ActivityModel;
+use App\Support\Notifications\Traits\Notifiable;
 use App\Traits\UserBusiness;
 use App\Traits\UserMBO;
 use App\Traits\Vendors\Impersonable;
@@ -18,8 +19,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Lab404\Impersonate\Models\Impersonate;
@@ -30,8 +32,6 @@ use Lucent\Support\Traits\CascadeDeletes;
 use Lucent\Support\Traits\UUID;
 use Lucent\Support\Traits\VirginModel;
 use Sentinel\Traits\HasRolesAndPermissions;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Collection;
 
 /**
  * @property string $id
@@ -58,6 +58,8 @@ use Illuminate\Support\Collection;
  * @property-read int|null $coordinator_campaigns_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\Department> $departments_manager
  * @property-read int|null $departments_manager_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Support\Notifications\Models\MailNotification> $email_notifications
+ * @property-read int|null $email_notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\UserEmployment> $employments
  * @property-read int|null $employments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\UserEmployment> $employments_active
@@ -67,18 +69,19 @@ use Illuminate\Support\Collection;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Commentable\Models\Comment> $my_comments
  * @property-read int|null $my_comments_count
  * @property-read mixed $name
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
- * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\Objective> $objectives
  * @property-read int|null $objectives_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Sentinel\Models\Permission> $permissions
  * @property-read int|null $permissions_count
  * @property-read \App\Models\Core\UserPreference|null $preferences
  * @property-read \App\Models\Core\UserProfile|null $profile
+ * @property-read Collection $sessions
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $subordinates
  * @property-read int|null $subordinates_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $supervisors
  * @property-read int|null $supervisors_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Support\Notifications\Models\SystemNotification> $system_notifications
+ * @property-read int|null $system_notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\Team> $teams
  * @property-read int|null $teams_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
@@ -172,10 +175,10 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     protected function name(): Attribute
     {
-        $value = $this->profile?->firstname . ' ' . $this->profile?->lastname;
+        $value = $this->profile?->firstname.' '.$this->profile?->lastname;
 
         return Attribute::make(
-            get: fn() => mb_ucfirst($value),
+            get: fn () => mb_ucfirst($value),
         );
     }
 
@@ -190,9 +193,9 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function nameView(): string
     {
-        $link = '<span>' . $this->name . '</span>';
+        $link = '<span>'.$this->name.'</span>';
         if (Auth::user()->can('view', $this)) {
-            $link = '<a href="' . route('users.show', $this->id) . '" class="text-primary">' . $this->name . '</a>';
+            $link = '<a href="'.route('users.show', $this->id).'" class="text-primary">'.$this->name.'</a>';
         }
 
         return $link;
@@ -261,31 +264,31 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         return Auth::check() && $this->id == Auth::user()->id;
     }
 
-    public function isLoggedIn(): bool
+    public function lastActivityTime(): int
     {
-        $lifetime = 0;
+        $activity = 0;
         if ($this->sessions->isNotEmpty()) {
             $lastSession = $this->sessions->first();
             if ($lastSession) {
-                $lifetime = (int) config('session.lifetime') * 60;
-                $lastActivity = (int) $lastSession->last_activity;
-                $lifetime = ($lastActivity + $lifetime);
+                $activity = (int) $lastSession->last_activity;
             }
         }
-        return ($lastActivity + $lifetime) > time();
+
+        return $activity;
+    }
+
+    public function isLoggedIn(): bool
+    {
+        return ($this->lastActivityTime() + ((int) config('session.lifetime') * 60)) > time();
     }
 
     public function getInitials(): string
     {
-        return mb_strtoupper(mb_substr($this->firstname(), 0, 1) . mb_substr($this->lastname(), 0, 1));
+        return mb_strtoupper(mb_substr($this->firstname(), 0, 1).mb_substr($this->lastname(), 0, 1));
     }
 
     public function getAvatarView($size = 'lg'): string
     {
-        // if ($this->profile->avatar) {
-        //     return '<img class="profile-img" src="' . asset($this->profile->avatar) . '" height="' . $height . 'px" width="' . $width . 'px">';
-        // }
-
         $initials = $this->getInitials();
         $letterNum = Alphabet::getAlphabetPosition($initials);
 
@@ -304,11 +307,11 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
             }
         }
         $indicator = '';
-        if (!$this->itsMe() && $this->isLoggedIn()) {
+        if (! $this->itsMe() && $this->isLoggedIn()) {
             $indicator = '<div class="profile-indicator"></div>';
         }
 
-        return '<div class="profile-img-' . $size . '" style="background-color: var(--bs-' . $color . ');"><div>' . $initials . '</div>' . $indicator . '</div>';
+        return '<div class="profile-img-'.$size.'" style="background-color: var(--bs-'.$color.');"><div>'.$initials.'</div>'.$indicator.'</div>';
     }
 
     public function canBeImpersonated(): bool

@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 
 class GeneralForm extends Form
 {
+    use SettingsForm;
+
     public static function definition(Request $request, $model = null): FormBuilder
     {
         return FormBuilder::boot($request, 'post', route('settings.general.store'), 'general_settings')

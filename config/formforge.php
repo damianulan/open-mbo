@@ -4,7 +4,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | FormForge Default Options v1.0
+    | FormForge Default Options v1.1
     |--------------------------------------------------------------------------
     |
     | These are default options that will be used in module.
@@ -34,5 +34,10 @@ return [
      * Process uploaded files with reformatRequest method.
      */
     'handling_files' => env('FORMFORGE_HANDLING_FILES', true),
+
+    /**
+     * Dispatches FormForge rendering events.
+     */
+    'dispatches_events' => false,
 
 ];

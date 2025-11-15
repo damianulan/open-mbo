@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 
 class SmtpForm extends Form
 {
+    use SettingsForm;
+
     public static function definition(Request $request, $model = null): FormBuilder
     {
         return FormBuilder::boot($request, 'post', route('settings.server.mail.store'), 'mail_settings')

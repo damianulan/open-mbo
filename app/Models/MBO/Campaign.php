@@ -321,6 +321,11 @@ class Campaign extends BaseModel implements HasObjectives
         return $stages;
     }
 
+    public function isStageActive(string $stage)
+    {
+        return $this->getCurrentStages()->contains($stage);
+    }
+
     public function open(): bool
     {
         $now = Carbon::now();

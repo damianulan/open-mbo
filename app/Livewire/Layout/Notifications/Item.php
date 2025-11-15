@@ -13,7 +13,7 @@ class Item extends Component
     public function mount($notification)
     {
         $this->notification = $notification;
-        $message = $this->notification->data['message'] ?? null;
+        $message = $this->notification->contents ?? null;
         if ($message) {
             $message = strip_tags($message, '<strong><i>');
         }

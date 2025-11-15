@@ -111,7 +111,7 @@ return [
 
     'date_format' => env('DATEFORMAT', 'Y-m-d'),
     'time_format' => env('TIMEFORMAT', 'H:i'),
-    'datetime_format' => env('DATEFORMAT', 'Y-m-d') . ' ' . env('TIMEFORMAT', 'H:i'),
+    'datetime_format' => env('DATEFORMAT', 'Y-m-d').' '.env('TIMEFORMAT', 'H:i'),
 
     /*
     |--------------------------------------------------------------------------
@@ -241,6 +241,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\ComponentServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\NotificationServiceProvider::class,
         // App\Providers\TelescopeServiceProvider::class,
         App\Providers\RolesServiceProvider::class,
         App\Providers\GateServiceProvider::class,

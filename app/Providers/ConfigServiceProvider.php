@@ -33,32 +33,34 @@ class ConfigServiceProvider extends ServiceProvider
     {
         if (Schema::hasTable('settings')) {
             // load settings from database and overwrite existing
-            config([
 
+            $general = app(GeneralSettings::class);
+            $mail = app(MailSettings::class);
+            config([
                 // GENERAL
-                'app.name' => app(GeneralSettings::class)->site_name ?? env('APP_NAME', 'OpenMBO'),
-                'app.debug' => app(GeneralSettings::class)->debug ?? env('APP_DEBUG', true),
-                'debugbar.enabled' => app(GeneralSettings::class)->debugbar ?? env('DEBUGBAR_ENABLED', true),
-                'app.timezone' => app(GeneralSettings::class)->timezone ?? env('APP_TIMEZONE', 'UTC'),
-                'app.locale' => app(GeneralSettings::class)->locale ?? env('APP_LOCALE', 'en'),
-                'app.maintenance' => app(GeneralSettings::class)->maintenance ?? null,
-                'app.build' => app(GeneralSettings::class)->build ?? null,
-                'app.release' => app(GeneralSettings::class)->release ?? null,
-                'app.date_format' => app(GeneralSettings::class)->date_format ?? null,
-                'app.time_format' => app(GeneralSettings::class)->time_format ?? null,
-                'app.datetime_format' => app(GeneralSettings::class)->date_format && app(GeneralSettings::class)->time_format ? app(GeneralSettings::class)->date_format.' '.app(GeneralSettings::class)->time_format : null,
+                'app.name' => $general->site_name ?? env('APP_NAME', 'OpenMBO'),
+                'app.debug' => $general->debug ?? env('APP_DEBUG', true),
+                'debugbar.enabled' => $general->debugbar ?? env('DEBUGBAR_ENABLED', true),
+                'app.timezone' => $general->timezone ?? env('APP_TIMEZONE', 'UTC'),
+                'app.locale' => $general->locale ?? env('APP_LOCALE', 'en'),
+                'app.maintenance' => $general->maintenance ?? null,
+                'app.build' => $general->build ?? null,
+                'app.release' => $general->release ?? null,
+                'app.date_format' => $general->date_format ?? null,
+                'app.time_format' => $general->time_format ?? null,
+                'app.datetime_format' => $general->date_format && $general->time_format ? $general->date_format.' '.$general->time_format : null,
 
                 // SERVER
-                'mail.default' => app(MailSettings::class)->mail_mailer ?? null,
-                'mail.mailers.smtp.host' => app(MailSettings::class)->mail_host ?? null,
-                'mail.mailers.smtp.port' => app(MailSettings::class)->mail_port ?? null,
-                'mail.mailers.smtp.encryption' => app(MailSettings::class)->mail_encryption ?? null,
-                'mail.mailers.smtp.username' => app(MailSettings::class)->mail_username ?? null,
-                'mail.mailers.smtp.password' => app(MailSettings::class)->mail_password ?? null,
-                'mail.from.address' => app(MailSettings::class)->mail_from_address ?? null,
-                'mail.from.name' => app(MailSettings::class)->mail_from_name ?? null,
-                'mailcatchall.enabled' => app(MailSettings::class)->mail_catchall_enabled ?? null,
-                'mailcatchall.receiver' => app(MailSettings::class)->mail_catchall_receiver ?? null,
+                'mail.default' => $mail->mail_mailer ?? null,
+                'mail.mailers.smtp.host' => $mail->mail_host ?? null,
+                'mail.mailers.smtp.port' => $mail->mail_port ?? null,
+                'mail.mailers.smtp.encryption' => $mail->mail_encryption ?? null,
+                'mail.mailers.smtp.username' => $mail->mail_username ?? null,
+                'mail.mailers.smtp.password' => $mail->mail_password ?? null,
+                'mail.from.address' => $mail->mail_from_address ?? null,
+                'mail.from.name' => $mail->mail_from_name ?? null,
+                'mailcatchall.enabled' => $mail->mail_catchall_enabled ?? null,
+                'mailcatchall.receiver' => $mail->mail_catchall_receiver ?? null,
             ]);
         }
     }

@@ -9,8 +9,8 @@ use App\Events\MBO\Campaigns\UserCampaignUnassigned;
 use App\Events\MBO\Campaigns\UserCampaignUpdated;
 use App\Models\BaseModel;
 use App\Models\Core\User;
+use App\Traits\Guards\MBO\CanUserCampaign;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Lucent\Support\Traits\Dispatcher;
 
 /**
  * @property string $id
@@ -25,6 +25,8 @@ use Lucent\Support\Traits\Dispatcher;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
  * @property-read \App\Models\MBO\Campaign $campaign
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\Objective> $objectives
+ * @property-read int|null $objectives_count
  * @property-read User $user
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign active()
@@ -84,7 +86,7 @@ use Lucent\Support\Traits\Dispatcher;
  */
 class UserCampaign extends BaseModel implements HasObjectives
 {
-    use Dispatcher;
+    use CanUserCampaign;
 
     public $logEntities = ['user_id' => User::class, 'campaign_id' => Campaign::class];
 

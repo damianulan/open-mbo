@@ -52,6 +52,9 @@ return [
         'integrations' => [
             'index' => 'Integracje',
         ],
+        'notifications' => [
+            'index' => 'Powiadomienia',
+        ],
         'server' => [
             'index' => 'Serwer',
         ],

@@ -49,6 +49,9 @@ class UserObjectiveController extends AppController
     public function show(Request $request, string $id)
     {
         $userObjective = UserObjective::findOrFail($id);
+        if ($request->user()->cannot('view', $userObjective)) {
+            unauthorized();
+        }
         $this->logShow($userObjective);
 
         $header = 'Podsumowanie Celu';
@@ -131,26 +134,36 @@ class UserObjectiveController extends AppController
 
     public function updateEvaluation(Request $request, $id, ObjectiveEditUserRealizationForm $form): JsonResponse
     {
-        $userObjective = UserObjective::findOrFail($id);
-
-        $request = $form::reformatRequest($request);
-        $response = $form::validateJson($request, $id);
-        if ($response['status'] === 'ok') {
-
-            $service = UserRealizationUpdate::boot(request: $request, userObjective: $userObjective)->execute();
-            if ($service->passed()) {
-                $response['message'] = __('alerts.objectives.success.realization_updated');
-
-                return response()->json($response);
-            } else {
-                $errors = $service->getErrors();
-                if (! empty($errors)) {
-                    $response['status'] = 'error';
-                    $response['message'] = $errors[0];
-                }
+        try {
+            $userObjective = UserObjective::findOrFail($id);
+            if ($userObjective->canBeEvaluated()) {
+                throw new NoPermissionException;
             }
-        } else {
-            $response['message'] = __('alerts.error.form');
+
+            $request = $form::reformatRequest($request);
+            $response = $form::validateJson($request, $id);
+            if ($response['status'] === 'ok') {
+
+                $service = UserRealizationUpdate::boot(request: $request, userObjective: $userObjective)->execute();
+                if ($service->passed()) {
+                    $response['message'] = __('alerts.objectives.success.realization_updated');
+
+                    return response()->json($response);
+                } else {
+                    $errors = $service->getErrors();
+                    if (! empty($errors)) {
+                        $response['status'] = 'error';
+                        $response['message'] = $errors[0];
+                    }
+                }
+            } else {
+                $response['message'] = __('alerts.error.form');
+            }
+        } catch (\Throwable $th) {
+            report($th);
+            $this->e = $th;
+
+            return $this->responseJson(false);
         }
 
         return response()->json($response);

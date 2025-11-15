@@ -5,7 +5,7 @@ namespace App\Console;
 use App\Console\Commands\Core\AppRefresh;
 use App\Console\Commands\Core\AppUpgrade;
 use App\Console\Commands\MBO\MBOVerifyStatusScript;
-use App\Support\Notifications\SendNotificationsJob;
+use App\Support\Notifications\NotificationScheduler;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -35,17 +35,15 @@ class Kernel extends ConsoleKernel
             }
         }
 
-        $sendNotifications = env('CRON_SEND_NOTIFICATIONS', true);
-        if ($sendNotifications) {
-            $schedule->job(SendNotificationsJob::class)->everyFifteenMinutes();
-        }
-
         // LARAVEL COMMANDS
         $schedule->command('telescope:prune')->dailyAt('00:01');
         $schedule->command('activitylog:clean')->dailyAt('00:01');
         $schedule->command('auth:clear-resets')->dailyAt('00:01');
         $schedule->command('model:prune')->dailyAt('00:01');
         $schedule->command('model:prune-soft-deletes')->dailyAt('00:01');
+
+        // NOTIFICATIONS
+        NotificationScheduler::load();
     }
 
     /**

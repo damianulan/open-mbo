@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notifications', function (Blueprint $table) {
+        Schema::create('mail_notifications', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('type');
+            $table->foreignUuid('notification_id');
+            $table->foreign('notification_id')->references('id')->on('notifications')->onDelete('cascade');
             $table->uuidMorphs('notifiable');
-            $table->text('data');
-            $table->timestamp('read_at')->nullable();
-            $table->timestamp('alerted_at')->nullable();
+            $table->json('resources')->nullable();
+            $table->string('subject', 255);
+            $table->longText('contents');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notifications');
+        Schema::dropIfExists('mail_notifications');
     }
 };

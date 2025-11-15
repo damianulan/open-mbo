@@ -2,6 +2,7 @@
 
 namespace App\Support\Page\Bars;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 class MenuItem
@@ -57,13 +58,13 @@ class MenuItem
         if ($this->route) {
             if ($this->routeDirectiveStrict) {
                 if (strrpos($this->route, '.') !== false) {
-                    $this->parentRoute = substr($this->route, 0, strrpos($this->route, '.')).'.*';
+                    $this->parentRoute = substr($this->route, 0, strrpos($this->route, '.')) . '.*';
                 } else {
                     $this->parentRoute = $this->route;
                 }
             } else {
                 if (strpos($this->route, '.') !== false) {
-                    $this->parentRoute = substr($this->route, 0, strpos($this->route, '.')).'.*';
+                    $this->parentRoute = substr($this->route, 0, strpos($this->route, '.')) . '.*';
                 } else {
                     $this->parentRoute = $this->route;
                 }
@@ -83,7 +84,7 @@ class MenuItem
     public function setIcon(string $iconname): self
     {
         if ($iconname) {
-            $this->icon = '<i class="bi bi-'.$iconname.'"></i>';
+            $this->icon = '<i class="bi bi-' . $iconname . '"></i>';
         }
 
         return $this;
@@ -201,7 +202,7 @@ class MenuItem
         if (! is_array($slug)) {
             $slug = [$slug];
         }
-        if (! auth()->user()->hasAnyRoles($slug)) {
+        if (! Auth::user()->hasAnyRoles($slug)) {
             $this->visible = false;
         }
 
