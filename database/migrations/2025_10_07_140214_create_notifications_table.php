@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('key', 255)->unique();
-            $table->json('resources')->nullable();
             $table->json('contents')->nullable();
             $table->boolean('system')->default(true);
             $table->boolean('email')->default(true);

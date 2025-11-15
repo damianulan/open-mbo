@@ -4,6 +4,7 @@ namespace App\Livewire\Layout;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use App\Support\Notifications\Models\Notification;
 
 class Notifications extends Component
 {
@@ -25,23 +26,22 @@ class Notifications extends Component
 
     public function register()
     {
-        // $query = Auth::user()->notifications()->where('data', '!=', '[]');
-        // $notifications_count = $query->count();
-        // $queryAlert = clone $query;
-        // $notificationsAlert = $queryAlert->whereNull('alerted_at')->get();
+        $query = Auth::user()->system_notifications();
+        $notifications_count = $query->count();
+        $queryAlert = clone $query;
+        $notificationsAlert = $queryAlert->whereNull('notified_at')->get();
 
-        // $this->notifications = $query->take(15)->get();
+        $this->notifications = $query->take(15)->get();
 
-        // if ($notificationsAlert->count()) {
-        //     foreach ($notificationsAlert as $alert) {
-        //         $alert->alerted_at = now();
-        //         $alert->updateQuietly();
-        //         $this->dispatch('new-notification', title: $alert->data['message']);
-        //     }
-        // }
+        if ($notificationsAlert->count()) {
+            foreach ($notificationsAlert as $alert) {
+                $alert->notified_at = now();
+                $alert->updateQuietly();
+                $this->dispatch('new-notification', title: $alert->contents);
+            }
+        }
 
-        $this->notifications = [];
-        $this->notifications_count = 0;
+        $this->notifications_count = $notifications_count;
     }
 
     public function toggleShown()

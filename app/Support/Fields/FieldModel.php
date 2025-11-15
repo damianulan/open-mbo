@@ -14,7 +14,6 @@ use Lucent\Support\Traits\UUID;
  * @property string $db_type
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FieldModel newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FieldModel newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FieldModel query()
@@ -25,7 +24,6 @@ use Lucent\Support\Traits\UUID;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FieldModel whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FieldModel whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FieldModel whereUpdatedAt($value)
- *
  * @mixin \Eloquent
  */
 class FieldModel extends Model

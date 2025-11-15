@@ -7,13 +7,12 @@ namespace App\Support\Notifications\Models;
  * @property string $notification_id
  * @property string $notifiable_type
  * @property string $notifiable_id
- * @property array<array-key, mixed>|null $resources
+ * @property \Illuminate\Support\Collection $resources
  * @property string $contents
  * @property \Illuminate\Support\Carbon|null $read_at
  * @property \Illuminate\Support\Carbon|null $notified_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification query()
@@ -27,7 +26,6 @@ namespace App\Support\Notifications\Models;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification whereReadAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification whereResources($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification whereUpdatedAt($value)
- *
  * @mixin \Eloquent
  */
 class SystemNotification extends NotificationModel
@@ -45,9 +43,13 @@ class SystemNotification extends NotificationModel
     ];
 
     protected $casts = [
-        'resources' => 'array',
         'read_at' => 'datetime',
         'notified_at' => 'datetime',
         'created_at' => 'datetime',
     ];
+
+    public function unread()
+    {
+        return is_null($this->read_at);
+    }
 }

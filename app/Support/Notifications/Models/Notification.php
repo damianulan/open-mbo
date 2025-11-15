@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Lucent\Support\Traits\UUID;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Support\Notifications\Factories\ResourceFactory;
+use Illuminate\Support\Collection;
 
 /**
  * @property string $id
  * @property string $key
- * @property array<array-key, mixed>|null $resources
  * @property mixed|null $contents
  * @property bool $system
  * @property bool $email
@@ -21,7 +23,7 @@ use Lucent\Support\Traits\UUID;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- *
+ * @property-read Collection $resources
  * @method static Builder<static>|Notification events()
  * @method static Builder<static>|Notification newModelQuery()
  * @method static Builder<static>|Notification newQuery()
@@ -35,13 +37,11 @@ use Lucent\Support\Traits\UUID;
  * @method static Builder<static>|Notification whereEvent($value)
  * @method static Builder<static>|Notification whereId($value)
  * @method static Builder<static>|Notification whereKey($value)
- * @method static Builder<static>|Notification whereResources($value)
  * @method static Builder<static>|Notification whereSchedule($value)
  * @method static Builder<static>|Notification whereSystem($value)
  * @method static Builder<static>|Notification whereUpdatedAt($value)
  * @method static Builder<static>|Notification withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|Notification withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Notification extends Model
@@ -52,7 +52,6 @@ class Notification extends Model
 
     protected $fillable = [
         'key',
-        'resources',
         'contents',
         'system',
         'email',
@@ -62,7 +61,6 @@ class Notification extends Model
     ];
 
     protected $casts = [
-        'resources' => 'array',
         'contents' => NotificationContents::class,
         'system' => 'boolean',
         'email' => 'boolean',
@@ -92,6 +90,28 @@ class Notification extends Model
         $this->contents = new NotificationContents($system_contents, $email_contents, $subject);
 
         return $this;
+    }
+
+    protected function resources(): Attribute
+    {
+        return Attribute::make(
+            get: function (): Collection {
+                $models = [];
+                if ($this->event) {
+                    $models = ResourceFactory::getEventResourceModels($this->event);
+                }
+                if ($notifiable = config('auth.providers.users.model')) {
+                    $models[$notifiable] = new $notifiable();
+                }
+                $resources = array_map(function ($model) {
+                    return ResourceFactory::matchModel($model);
+                }, $models);
+                $resources = array_filter($resources, function ($item) {
+                    return !is_null($item);
+                });
+                return collect($resources);
+            },
+        );
     }
 
     public function scopeEvents(Builder $query): void

@@ -7,7 +7,8 @@ use App\Support\Notifications\Contracts\NotificationResource;
 
 class UserCampaignResource extends NotificationResource
 {
-    public function __construct(protected UserCampaign $userCampaign)
+
+    public function __construct(UserCampaign $userCampaign)
     {
         parent::__construct($userCampaign);
     }
@@ -15,11 +16,11 @@ class UserCampaignResource extends NotificationResource
     public function datas(): array
     {
         return [
-            'campaign_name' => $this->userCampaign->campaign->name,
+            'campaign_name' => $this->model->campaign->name,
         ];
     }
 
-    public function descriptions(): array
+    public static function descriptions(): array
     {
         return [
             'campaign_name' => 'Campaign name',

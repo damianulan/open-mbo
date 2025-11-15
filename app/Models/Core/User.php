@@ -6,7 +6,6 @@ use App\Commentable\Support\Commentable;
 use App\Commentable\Support\Commentator;
 use App\Contracts\Core\HasShowRoute;
 use App\Models\Vendor\ActivityModel;
-use App\Notifications\Resources\UserResource;
 use App\Support\Notifications\Traits\Notifiable;
 use App\Traits\UserBusiness;
 use App\Traits\UserMBO;
@@ -77,6 +76,10 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @property-read \App\Models\Core\UserPreference|null $preferences
  * @property-read \App\Models\Core\UserProfile|null $profile
  * @property-read Collection $sessions
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $subordinates
+ * @property-read int|null $subordinates_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $supervisors
+ * @property-read int|null $supervisors_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Support\Notifications\Models\SystemNotification> $system_notifications
  * @property-read int|null $system_notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\Team> $teams
@@ -88,7 +91,6 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @property-read int|null $user_objectives_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserObjective> $user_objectives_active
  * @property-read int|null $user_objectives_active_count
- *
  * @method static Builder<static>|User active()
  * @method static Builder<static>|User drafted()
  * @method static \Database\Factories\Core\UserFactory factory($count = null, $state = [])
@@ -115,7 +117,6 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @method static Builder<static>|User withRole(...$slugs)
  * @method static Builder<static>|User withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|User withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements HasLocalePreference, HasShowRoute
@@ -145,8 +146,6 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         'preferences',
     ];
 
-    protected $notificationResource = UserResource::class;
-
     protected static function booted()
     {
         static::created(function (User $user) {
@@ -174,10 +173,10 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     protected function name(): Attribute
     {
-        $value = $this->profile?->firstname.' '.$this->profile?->lastname;
+        $value = $this->profile?->firstname . ' ' . $this->profile?->lastname;
 
         return Attribute::make(
-            get: fn () => mb_ucfirst($value),
+            get: fn() => mb_ucfirst($value),
         );
     }
 
@@ -192,9 +191,9 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function nameView(): string
     {
-        $link = '<span>'.$this->name.'</span>';
+        $link = '<span>' . $this->name . '</span>';
         if (Auth::user()->can('view', $this)) {
-            $link = '<a href="'.route('users.show', $this->id).'" class="text-primary">'.$this->name.'</a>';
+            $link = '<a href="' . route('users.show', $this->id) . '" class="text-primary">' . $this->name . '</a>';
         }
 
         return $link;
@@ -283,7 +282,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function getInitials(): string
     {
-        return mb_strtoupper(mb_substr($this->firstname(), 0, 1).mb_substr($this->lastname(), 0, 1));
+        return mb_strtoupper(mb_substr($this->firstname(), 0, 1) . mb_substr($this->lastname(), 0, 1));
     }
 
     public function getAvatarView($size = 'lg'): string
@@ -310,7 +309,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
             $indicator = '<div class="profile-indicator"></div>';
         }
 
-        return '<div class="profile-img-'.$size.'" style="background-color: var(--bs-'.$color.');"><div>'.$initials.'</div>'.$indicator.'</div>';
+        return '<div class="profile-img-' . $size . '" style="background-color: var(--bs-' . $color . ');"><div>' . $initials . '</div>' . $indicator . '</div>';
     }
 
     public function canBeImpersonated(): bool

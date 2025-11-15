@@ -21,10 +21,10 @@ abstract class NotificationResource implements Jsonable
 
     abstract public function datas(): array;
 
-    abstract public function descriptions(): array;
+    abstract public static function descriptions(): array;
 
     public function toJson($options = 0)
     {
-        return json_encode($this->datas());
+        return json_encode($this->datas(), $options);
     }
 }

@@ -7,12 +7,11 @@ namespace App\Support\Notifications\Models;
  * @property string $notification_id
  * @property string $notifiable_type
  * @property string $notifiable_id
- * @property array<array-key, mixed>|null $resources
+ * @property \Illuminate\Support\Collection $resources
  * @property string $subject
  * @property string $contents
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification query()
@@ -25,7 +24,6 @@ namespace App\Support\Notifications\Models;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification whereResources($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification whereSubject($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification whereUpdatedAt($value)
- *
  * @mixin \Eloquent
  */
 class MailNotification extends NotificationModel
@@ -42,7 +40,6 @@ class MailNotification extends NotificationModel
     ];
 
     protected $casts = [
-        'resources' => 'array',
         'created_at' => 'datetime',
     ];
 }

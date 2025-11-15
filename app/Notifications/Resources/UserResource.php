@@ -7,7 +7,7 @@ use App\Support\Notifications\Contracts\NotificationResource;
 
 class UserResource extends NotificationResource
 {
-    public function __construct(protected User $user)
+    public function __construct(User $user)
     {
         parent::__construct($user);
     }
@@ -15,13 +15,13 @@ class UserResource extends NotificationResource
     public function datas(): array
     {
         return [
-            'firstname' => $this->user->firstname(),
-            'lastname' => $this->user->lastname(),
-            'email' => $this->user->email,
+            'firstname' => $this->model->firstname(),
+            'lastname' => $this->model->lastname(),
+            'email' => $this->model->email,
         ];
     }
 
-    public function descriptions(): array
+    public static function descriptions(): array
     {
         return [
             'firstname' => 'First name',

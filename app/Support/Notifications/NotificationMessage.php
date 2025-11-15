@@ -10,10 +10,10 @@ use App\Support\Notifications\Models\MailNotification;
 use App\Support\Notifications\Models\Notification;
 use App\Support\Notifications\Models\SystemNotification;
 use App\Support\Notifications\Traits\Notifiable;
-use App\Support\Notifications\Traits\NotifiableResource;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Mail\Mailable;
 use Illuminate\Support\Facades\Mail;
+use App\Support\Notifications\Factories\ResourceFactory;
 
 class NotificationMessage
 {
@@ -36,16 +36,12 @@ class NotificationMessage
     ) {
         try {
             foreach ($resourceModels as $model) {
-                if (class_uses_trait(NotifiableResource::class, $model::class)) {
-                    $resource = $model->getNotificationResource() ?? null;
-                    $this->addPlaceholders($resource);
-                } else {
-                    throw new ModelTraitNotUsed($model, NotifiableResource::class);
-                }
+                $resource = ResourceFactory::matchModel($model);
+                $this->addPlaceholders($resource);
             }
 
             if (class_uses_trait(Notifiable::class, $notifiable::class)) {
-                $resource = $notifiable->getNotificationResource() ?? null;
+                $resource = ResourceFactory::matchModel($notifiable);
                 $this->addPlaceholders($resource);
             } else {
                 throw new ModelTraitNotUsed($notifiable, Notifiable::class);
@@ -69,13 +65,13 @@ class NotificationMessage
     private function addPlaceholders($resource): void
     {
         if ($resource && $resource instanceof NotificationResource) {
-            $class = $resource::class;
+            $class = $resource->getModel()::class;
             $this->resources[$class] = $resource->getKey();
             foreach ($resource->datas() as $key => $value) {
                 $this->placeholders[$key] = $value;
             }
         } else {
-            throw new \Exception('Given notification resource is not of type '.NotificationResource::class);
+            throw new \Exception('Given notification resource ' . $resource::class . ' is not of type ' . NotificationResource::class);
         }
     }
 

@@ -4,12 +4,11 @@ namespace App\Events\MBO\Campaigns;
 
 use App\Models\MBO\UserCampaign;
 use App\Support\Notifications\Contracts\NotifiableEvent;
-use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UserCampaignAssigned implements NotifiableEvent, ShouldDispatchAfterCommit
+class UserCampaignAssigned implements NotifiableEvent
 {
     use Dispatchable, SerializesModels;
 
@@ -27,7 +26,7 @@ class UserCampaignAssigned implements NotifiableEvent, ShouldDispatchAfterCommit
         return $this->userCampaign->user;
     }
 
-    public function description(): string
+    public static function description(): string
     {
         return 'User campaign assigned';
     }

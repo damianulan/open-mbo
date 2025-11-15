@@ -8,5 +8,5 @@ interface NotifiableEvent
 {
     public function notifiable(): Model;
 
-    public function description(): string;
+    public static function description(): string;
 }
