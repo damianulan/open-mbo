@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('type_of_contracts', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
-            $table->string('name', 255);
-            $table->string('shortname', 4);
+            $table->string('name', 255)->unique();
             $table->longText('description')->nullable();
 
             $table->softDeletes();

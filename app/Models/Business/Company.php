@@ -87,17 +87,17 @@ class Company extends BaseModel
         'shortname',
         'description',
         'logo',
-        'founded',
+        'founded_at',
     ];
 
     protected $dates = [
-        'founded',
+        'founded_at',
         'created_at',
     ];
 
     protected $casts = [
         'description' => FormattedText::class,
-        'founded' => 'date',
+        'founded_at' => 'date',
         'created_at' => 'datetime',
     ];
 

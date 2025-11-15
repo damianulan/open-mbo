@@ -7,6 +7,7 @@ use App\Models\Business\Team;
 use App\Models\Business\UserEmployment;
 use App\Models\Core\User;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Sentinel\Models\Role;
 
 trait UserBusiness
@@ -21,7 +22,7 @@ trait UserBusiness
         return $this->hasMany(Team::class, 'leader_id');
     }
 
-    public function employments()
+    public function employments(): ?HasMany
     {
         return $this->hasMany(UserEmployment::class);
     }

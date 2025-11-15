@@ -108,17 +108,17 @@ class UserEmployment extends BaseModel
         return $this->belongsTo(User::class)->withTrashed();
     }
 
-    public function company(): BelongsTo
+    public function company(): ?BelongsTo
     {
         return $this->belongsTo(Company::class)->withTrashed();
     }
 
-    public function contract(): BelongsTo
+    public function contract(): ?BelongsTo
     {
         return $this->belongsTo(TypeOfContract::class, 'contract_id')->withTrashed();
     }
 
-    public function department(): BelongsTo
+    public function department(): ?BelongsTo
     {
         return $this->belongsTo(Department::class)->withTrashed();
     }
