@@ -17,7 +17,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read int|null $activities_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\UserEmployment> $employments
  * @property-read int|null $employments_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position avg(string $column)
@@ -28,6 +27,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position createMany(array $records)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position deleteQuietly()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position drafted()
+ * @method static \Database\Factories\Business\PositionFactory factory($count = null, $state = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position firstFromCache($columns = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position flushCache($columns = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position flushQueryCache($columns = [])
@@ -67,7 +67,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Position withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Position withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Position extends BaseModel

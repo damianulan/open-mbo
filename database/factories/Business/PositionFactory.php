@@ -15,7 +15,7 @@ class PositionFactory extends Factory
     public function definition(): array
     {
         $title = null;
-        while (is_null($title) || Position::where('name', $title)->exists()) {
+        while (is_null($title) || Position::where('name', $title)->get()->count() > 0) {
             $title = $this->jobTitle();
         }
 
@@ -29,7 +29,7 @@ class PositionFactory extends Factory
     {
         $output = null;
         if (config('app.faker_locale') === 'pl_PL') {
-            $dict = $this->dict_pl();
+            $dict = self::dict_pl();
             $output = $dict[fake()->numberBetween(0, count($dict) - 1)];
         }
 
@@ -40,7 +40,23 @@ class PositionFactory extends Factory
         return mb_ucfirst($output);
     }
 
-    public function dict_pl(): array
+    public static function seedAdminPositions(): void
+    {
+        $positions = [
+            'CEO' => 'Chief Executive Officer',
+            'CTO' => 'Chief Technology Officer',
+            'CFO' => 'Chief Financial Officer',
+        ];
+
+        foreach ($positions as $name => $description) {
+            Position::create([
+                'name' => $name,
+                'description' => $description,
+            ]);
+        }
+    }
+
+    public static function dict_pl(): array
     {
         return [
             'Asystent biurowy',

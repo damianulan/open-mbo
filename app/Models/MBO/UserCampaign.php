@@ -28,7 +28,6 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\Objective> $objectives
  * @property-read int|null $objectives_count
  * @property-read User $user
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign avg(string $column)
@@ -81,7 +80,6 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class UserCampaign extends BaseModel implements HasObjectives

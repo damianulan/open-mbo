@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('shortname', 128)->unique();
             $table->longText('description')->nullable();
             $table->string('logo')->nullable();
+            $table->string('taxpayerid')->nullable();
             $table->date('founded_at')->nullable();
 
             $table->softDeletes();

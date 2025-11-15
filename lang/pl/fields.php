@@ -17,6 +17,7 @@ return [
     'name' => 'Nazwa',
     'title' => 'Tytuł',
     'category' => 'Kategoria',
+    'position' => 'Stanowisko',
 
     'created_at' => 'Utworzono',
     'updated_at' => 'Zaktualizowano',

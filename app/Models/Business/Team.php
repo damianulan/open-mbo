@@ -21,7 +21,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property-read User $leader
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $users
  * @property-read int|null $users_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team avg(string $column)
@@ -72,7 +71,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Team extends BaseModel
@@ -94,6 +92,6 @@ class Team extends BaseModel
 
     public function leader(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'leader_id')->withTrashed();
+        return $this->belongsTo(User::class, 'leader_id');
     }
 }

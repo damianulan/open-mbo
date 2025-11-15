@@ -22,7 +22,7 @@ return new class extends Migration
                 Gender::MALE,
                 Gender::FEMALE,
                 Gender::OTHER,
-            ])->default(Gender::OTHER);
+            ])->nullable();
             $table->date('birthday')->nullable();
             $table->string('phone')->nullable();
             $table->string('avatar')->nullable();
