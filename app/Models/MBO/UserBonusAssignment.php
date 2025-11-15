@@ -12,6 +12,7 @@ use App\Models\Core\User;
  * @property-read \App\Models\MBO\BonusScheme|null $bonus_scheme
  * @property-read \App\Models\MBO\Campaign|null $campaign
  * @property-read User|null $user
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment avg(string $column)
@@ -55,6 +56,7 @@ use App\Models\Core\User;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserBonusAssignment withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserBonusAssignment withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserBonusAssignment extends BaseModel

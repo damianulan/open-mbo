@@ -64,7 +64,7 @@ class UsersDataTable extends CustomDataTable
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->filterColumn('position', function ($query, $keyword) {
-                $sql = "positions.name like ?";
+                $sql = 'positions.name like ?';
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->editColumn('created_at', function ($data) {
@@ -144,6 +144,6 @@ class UsersDataTable extends CustomDataTable
      */
     protected function filename(): string
     {
-        return 'Users_' . date('YmdHis');
+        return 'Users_'.date('YmdHis');
     }
 }

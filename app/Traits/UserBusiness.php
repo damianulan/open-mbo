@@ -2,11 +2,9 @@
 
 namespace App\Traits;
 
-use App\Models\Business\Department;
 use App\Models\Business\Team;
 use App\Models\Business\UserEmployment;
 use App\Models\Core\User;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Sentinel\Models\Role;

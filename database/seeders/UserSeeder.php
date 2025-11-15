@@ -2,14 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\Business\Company;
+use App\Models\Business\Department;
+use App\Models\Business\Position;
+use App\Models\Business\TypeOfContract;
 use App\Models\Business\UserEmployment;
 use App\Models\Core\User;
 use App\Models\Core\UserProfile;
 use Illuminate\Database\Seeder;
-use App\Models\Business\TypeOfContract;
-use App\Models\Business\Company;
-use App\Models\Business\Department;
-use App\Models\Business\Position;
 use Illuminate\Support\Facades\DB;
 
 class UserSeeder extends Seeder
@@ -36,9 +36,8 @@ class UserSeeder extends Seeder
                     $user = User::factory()
                         ->has(UserProfile::factory()->count(1), 'profile')
                         ->create([
-                            'email' => 'user' . $y . '@damianulan.me',
+                            'email' => 'user'.$y.'@damianulan.me',
                         ]);
-
 
                     $position = null;
                     if ($user) {
@@ -61,7 +60,7 @@ class UserSeeder extends Seeder
                     }
 
                     $isManagement = true;
-                    if (!$position) {
+                    if (! $position) {
                         $position = Position::whereNotIn('name', ['CEO', 'CTO', 'CFO'])->get()->random(1)->first();
                         $isManagement = false;
                     }
@@ -74,7 +73,7 @@ class UserSeeder extends Seeder
                         'position_id' => $position->id,
                         'department_id' => Department::all()->random(1)->first()->id,
                         'employment' => fake()->dateTimeBetween('-10 years', '-3 months'),
-                        'release' => $chance === 3 && !$isManagement ? fake()->dateTimeBetween('-10 months', '+1 year') : null,
+                        'release' => $chance === 3 && ! $isManagement ? fake()->dateTimeBetween('-10 months', '+1 year') : null,
 
                     ]);
                 }
