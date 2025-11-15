@@ -2,13 +2,11 @@
 
 namespace App\DataTables\Settings;
 
-use App\Models\Vendor\ActivityModel;
+use App\Support\DataTables\CustomDataTable;
 use App\Support\Notifications\Models\Notification;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Illuminate\Support\Carbon;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Column;
-use App\Support\DataTables\CustomDataTable;
 
 class NotificationsDataTable extends CustomDataTable
 {
@@ -41,7 +39,8 @@ class NotificationsDataTable extends CustomDataTable
                 return $data->conditions ? __('globals.yes') : __('globals.no');
             })
             ->addColumn('status', function ($data) {
-                $active = !$data->email && !$data->system ? false : true;
+                $active = ! $data->email && ! $data->system ? false : true;
+
                 return view('components.datatables.badge', [
                     'color' => $active ? 'primary' : 'warning',
                     'text' => $active ? __('globals.active') : __('globals.inactive'),
@@ -72,7 +71,7 @@ class NotificationsDataTable extends CustomDataTable
             'schedule',
             'conditions',
             'status',
-            'action'
+            'action',
         ];
     }
 
@@ -107,6 +106,6 @@ class NotificationsDataTable extends CustomDataTable
      */
     protected function filename(): string
     {
-        return 'Notifications_' . date('YmdHis');
+        return 'Notifications_'.date('YmdHis');
     }
 }

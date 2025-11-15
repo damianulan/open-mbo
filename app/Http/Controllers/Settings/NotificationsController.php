@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers\Settings;
 
-use App\Forms\Settings\SmtpForm;
-use App\Settings\GeneralSettings;
-use App\Settings\MailSettings;
-use Illuminate\Http\Request;
 use App\DataTables\Settings\NotificationsDataTable;
 
 class NotificationsController extends SettingsController
