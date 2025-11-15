@@ -78,9 +78,9 @@ class CampaignsController extends AppController
             unauthorized();
         }
 
-        //CampaignViewed::dispatch($campaign);
+        // CampaignViewed::dispatch($campaign);
         $this->logShow($campaign);
-        $header = $campaign->name . ' [' . $campaign->period . ']';
+        $header = $campaign->name.' ['.$campaign->period.']';
 
         return view('pages.mbo.campaigns.show', [
             'campaign' => $campaign,

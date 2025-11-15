@@ -4,7 +4,6 @@ namespace App\Livewire\Layout;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use App\Support\Notifications\Models\Notification;
 
 class Notifications extends Component
 {

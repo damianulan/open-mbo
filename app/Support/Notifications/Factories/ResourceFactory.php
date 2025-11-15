@@ -2,15 +2,14 @@
 
 namespace App\Support\Notifications\Factories;
 
-use App\Notifications\Resources\UserResource;
 use App\Notifications\Resources\UserCampaignResource;
+use App\Notifications\Resources\UserResource;
+use App\Support\Notifications\Contracts\NotifiableEvent;
 use App\Support\Notifications\Contracts\NotificationResource;
 use Illuminate\Database\Eloquent\Model;
-use App\Support\Notifications\Contracts\NotifiableEvent;
 
 class ResourceFactory
 {
-
     public static function matchModel(Model $model): ?NotificationResource
     {
         return match ($model::class) {
@@ -35,7 +34,7 @@ class ResourceFactory
                 } else {
                     if (class_exists($property->getType())) {
                         $class = $property->getType()->__toString();
-                        $value = new $class();
+                        $value = new $class;
                     }
                 }
 

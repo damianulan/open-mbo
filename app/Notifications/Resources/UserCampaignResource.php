@@ -7,7 +7,6 @@ use App\Support\Notifications\Contracts\NotificationResource;
 
 class UserCampaignResource extends NotificationResource
 {
-
     public function __construct(UserCampaign $userCampaign)
     {
         parent::__construct($userCampaign);

@@ -6,6 +6,7 @@ use App\Support\Notifications\Contracts\NotificationResource;
 use App\Support\Notifications\Events\MailNotificationSent;
 use App\Support\Notifications\Events\SystemNotificationSent;
 use App\Support\Notifications\Exceptions\ModelTraitNotUsed;
+use App\Support\Notifications\Factories\ResourceFactory;
 use App\Support\Notifications\Models\MailNotification;
 use App\Support\Notifications\Models\Notification;
 use App\Support\Notifications\Models\SystemNotification;
@@ -13,7 +14,6 @@ use App\Support\Notifications\Traits\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Mail\Mailable;
 use Illuminate\Support\Facades\Mail;
-use App\Support\Notifications\Factories\ResourceFactory;
 
 class NotificationMessage
 {
@@ -71,7 +71,7 @@ class NotificationMessage
                 $this->placeholders[$key] = $value;
             }
         } else {
-            throw new \Exception('Given notification resource ' . $resource::class . ' is not of type ' . NotificationResource::class);
+            throw new \Exception('Given notification resource '.$resource::class.' is not of type '.NotificationResource::class);
         }
     }
 

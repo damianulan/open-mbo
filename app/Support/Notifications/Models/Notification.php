@@ -2,14 +2,14 @@
 
 namespace App\Support\Notifications\Models;
 
+use App\Support\Notifications\Factories\ResourceFactory;
 use App\Support\Notifications\NotificationContents;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Lucent\Support\Traits\UUID;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use App\Support\Notifications\Factories\ResourceFactory;
 use Illuminate\Support\Collection;
+use Lucent\Support\Traits\UUID;
 
 /**
  * @property string $id
@@ -24,6 +24,7 @@ use Illuminate\Support\Collection;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read Collection $resources
+ *
  * @method static Builder<static>|Notification events()
  * @method static Builder<static>|Notification newModelQuery()
  * @method static Builder<static>|Notification newQuery()
@@ -42,6 +43,7 @@ use Illuminate\Support\Collection;
  * @method static Builder<static>|Notification whereUpdatedAt($value)
  * @method static Builder<static>|Notification withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|Notification withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Notification extends Model
@@ -101,14 +103,15 @@ class Notification extends Model
                     $models = ResourceFactory::getEventResourceModels($this->event);
                 }
                 if ($notifiable = config('auth.providers.users.model')) {
-                    $models[$notifiable] = new $notifiable();
+                    $models[$notifiable] = new $notifiable;
                 }
                 $resources = array_map(function ($model) {
                     return ResourceFactory::matchModel($model);
                 }, $models);
                 $resources = array_filter($resources, function ($item) {
-                    return !is_null($item);
+                    return ! is_null($item);
                 });
+
                 return collect($resources);
             },
         );

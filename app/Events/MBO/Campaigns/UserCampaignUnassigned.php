@@ -3,10 +3,10 @@
 namespace App\Events\MBO\Campaigns;
 
 use App\Models\MBO\UserCampaign;
+use App\Support\Notifications\Contracts\NotifiableEvent;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Database\Eloquent\Model;
-use App\Support\Notifications\Contracts\NotifiableEvent;
 
 class UserCampaignUnassigned implements NotifiableEvent
 {
