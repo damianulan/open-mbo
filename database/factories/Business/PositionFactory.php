@@ -9,23 +9,23 @@ class PositionFactory extends Factory
 {
     public static function seedAdminPositions(): void
     {
-        $positions = array(
+        $positions = [
             'CEO' => 'Chief Executive Officer',
             'CTO' => 'Chief Technology Officer',
             'CFO' => 'Chief Financial Officer',
-        );
+        ];
 
         foreach ($positions as $name => $description) {
-            Position::create(array(
+            Position::create([
                 'name' => $name,
                 'description' => $description,
-            ));
+            ]);
         }
     }
 
     public static function dict_pl(): array
     {
-        return array(
+        return [
             'Asystent biurowy',
             'Asystent administracyjny',
             'Asystent zarządu',
@@ -280,7 +280,7 @@ class PositionFactory extends Factory
             'Rejestrator dokumentów',
             'Operator wprowadzania danych',
             'Weryfikator danych',
-        );
+        ];
     }
 
     /**
@@ -295,10 +295,10 @@ class PositionFactory extends Factory
             $title = $this->jobTitle();
         }
 
-        return array(
+        return [
             'name' => $title,
             'description' => fake()->realTextBetween(300, 900),
-        );
+        ];
     }
 
     public function jobTitle(): string

@@ -20,14 +20,15 @@ use Spatie\Activitylog\Models\Activity;
  * @property mixed|null $description
  * @property string|null $award Max points to be awarded for objective completion
  * @property bool $draft
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\MBO\ObjectiveTemplateCategory|null $category
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\Objective> $objectives
+ * @property-read ObjectiveTemplateCategory|null $category
+ * @property-read Collection<int, Objective> $objectives
  * @property-read int|null $objectives_count
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\ObjectiveTemplate active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\ObjectiveTemplate average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\ObjectiveTemplate avg(string $column)
@@ -81,26 +82,27 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\MBO\ObjectiveTemplate withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\ObjectiveTemplate withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\MBO\ObjectiveTemplate withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 #[ScopedBy(ObjectiveTemplateScope::class)]
 class ObjectiveTemplate extends BaseModel implements HasObjectives
 {
-    protected $fillable = array(
+    protected $fillable = [
         'category_id',
         'name',
         'description',
         'award',
-    );
+    ];
 
-    protected $casts = array(
+    protected $casts = [
         'description' => FormattedText::class,
         'draft' => 'boolean',
-    );
+    ];
 
-    protected $cascadeDelete = array(
+    protected $cascadeDelete = [
         'objectives',
-    );
+    ];
 
     public function category()
     {

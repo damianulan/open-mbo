@@ -39,9 +39,9 @@ class AppUpgrade extends Command
         $this->line('Checking for updates...');
         try {
             Log::debug('Upgrade check initialized');
-            $newVersionStyle = new OutputFormatterStyle('white', 'yellow', array('bold'));
+            $newVersionStyle = new OutputFormatterStyle('white', 'yellow', ['bold']);
             $this->output->getFormatter()->setStyle('newversionblock', $newVersionStyle);
-            $newVersionStyle = new OutputFormatterStyle('white', 'blue', array('bold'));
+            $newVersionStyle = new OutputFormatterStyle('white', 'blue', ['bold']);
             $this->output->getFormatter()->setStyle('versionblock', $newVersionStyle);
             if ( ! Schema::hasTable('settings')) {
                 throw new Exception('Settings table is not created!');

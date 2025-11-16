@@ -88,7 +88,7 @@ function production(): bool
 function float_view(?float $value, int $decimals = 2): string
 {
     $lang = app()->getLocale();
-    $comma_locale = array('pl');
+    $comma_locale = ['pl'];
 
     if (is_null($value)) {
         $value = (float) 0;

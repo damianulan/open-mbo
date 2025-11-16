@@ -1,17 +1,17 @@
 <?php
 
-return array(
+return [
 
     // Sidebar
     'dashboard' => 'Pulpit',
 
     'admin_panel' => 'Panel administracyjny',
-    'reports' => array(
+    'reports' => [
         'index' => 'Raporty',
-    ),
-    'notifications' => array(
+    ],
+    'notifications' => [
         'index' => 'Powiadomienia',
-    ),
+    ],
 
     // User menu
     'edit_profile' => 'Edytuj profil',
@@ -27,109 +27,109 @@ return array(
 
     // Submenus / Page menus
 
-    'my_objectives' => array(
+    'my_objectives' => [
         'index' => 'Moje cele',
-    ),
+    ],
 
     // User's profile menu
-    'profile' => array(
+    'profile' => [
         'index' => 'Profil',
         'edit' => 'Edytuj',
         'reset' => 'Reset hasła',
         'personal_data' => 'Dane personalne',
         'settings' => 'Ustawienia konta',
         'logs' => 'Twoja aktywność',
-    ),
+    ],
 
-    'settings' => array(
+    'settings' => [
         'index' => 'Ustawienia',
-        'general' => array(
+        'general' => [
             'index' => 'Główne',
-        ),
-        'modules' => array(
+        ],
+        'modules' => [
             'index' => 'Moduły',
-        ),
-        'integrations' => array(
+        ],
+        'integrations' => [
             'index' => 'Integracje',
-        ),
-        'notifications' => array(
+        ],
+        'notifications' => [
             'index' => 'Powiadomienia',
-        ),
-        'server' => array(
+        ],
+        'server' => [
             'index' => 'Serwer',
-        ),
-        'logs' => array(
+        ],
+        'logs' => [
             'index' => 'Logi',
-        ),
-        'help' => array(
+        ],
+        'help' => [
             'index' => 'Pomoc',
-        ),
-        'organization' => array(
+        ],
+        'organization' => [
             'index' => 'Struktura organizacyjna',
-            'companies' => array(
+            'companies' => [
                 'index' => 'Przedsiębiorstwa',
-            ),
-            'departments' => array(
+            ],
+            'departments' => [
                 'index' => 'Działy',
-            ),
-            'positions' => array(
+            ],
+            'positions' => [
                 'index' => 'Stanowiska',
-            ),
-            'contracts' => array(
+            ],
+            'contracts' => [
                 'index' => 'Typy kontraktów',
-            ),
-        ),
-        'creator' => array(
+            ],
+        ],
+        'creator' => [
             'index' => 'Kreator struktury',
-        ),
-        'teams' => array(
+        ],
+        'teams' => [
             'index' => 'Zespoły',
-        ),
-    ),
+        ],
+    ],
 
-    'mbo' => array(
+    'mbo' => [
         'index' => 'Zarządzanie celami',
-    ),
+    ],
 
-    'objectives' => array(
+    'objectives' => [
         'index' => 'Cele',
         'create' => 'Tworzenie celu',
         'edit' => 'Modyfikacja celu',
 
-    ),
-    'templates' => array(
+    ],
+    'templates' => [
         'index' => 'Szablony celów',
         'create' => 'Tworzenie szablonu celu',
         'edit' => 'Modyfikacja szablonu celu',
 
-    ),
-    'categories' => array(
+    ],
+    'categories' => [
         'index' => 'Kategorie celów',
         'create' => 'Tworzenie kategorii MBO',
         'edit' => 'Modyfikacja kategorii MBO',
-    ),
+    ],
 
-    'reports' => array(
+    'reports' => [
         'index' => 'Raporty',
-    ),
+    ],
 
-    'campaigns' => array(
+    'campaigns' => [
         'index' => 'Kampanie Pomiarowe',
         'create' => 'Tworzenie nowej kampanii pomiarowej',
         'edit' => 'Edycja kampanii',
-    ),
+    ],
 
-    'users' => array(
+    'users' => [
         'index' => 'Użytkownicy',
         'edit' => 'Edycja użytkownika',
         'create' => 'Tworzenie użytkownika',
         'show' => 'Profil użytkownika',
-    ),
+    ],
 
-    'info' => array(
-        'profile' => array(
+    'info' => [
+        'profile' => [
             'logs' => 'Strona przedstawia całą Twoją aktywność, jaka jest mierzona przez system.',
-        ),
-    ),
+        ],
+    ],
 
-);
+];

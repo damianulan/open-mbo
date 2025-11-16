@@ -48,13 +48,13 @@ class UserObjectiveController extends AppController
 
         $header = 'Podsumowanie Celu';
 
-        return view('pages.mbo.objectives.users.show', array(
+        return view('pages.mbo.objectives.users.show', [
             'userObjective' => $userObjective,
             'user' => $userObjective->user,
             'objective' => $userObjective->objective,
             'pagetitle' => $header,
             'isOwner' => $userObjective->user->id === Auth::user()->id,
-        ));
+        ]);
     }
 
     /**
@@ -88,14 +88,14 @@ class UserObjectiveController extends AppController
 
     public function addUsers(Request $request, $id): View
     {
-        $params = array();
+        $params = [];
         if ($id) {
             $objective = Objective::find($id);
             if ($objective) {
-                $params = array(
+                $params = [
                     'id' => $id,
                     'form' => ObjectiveEditUserForm::definition($request, $objective),
-                );
+                ];
             }
         }
 
@@ -104,14 +104,14 @@ class UserObjectiveController extends AppController
 
     public function editRealization(Request $request, $id): View
     {
-        $params = array();
+        $params = [];
         if ($id) {
             $objective = UserObjective::find($id);
             if ($objective) {
-                $params = array(
+                $params = [
                     'id' => $id,
                     'form' => ObjectiveEditUserRealizationForm::definition($request, $objective),
-                );
+                ];
             }
         }
 

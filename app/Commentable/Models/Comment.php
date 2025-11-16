@@ -26,12 +26,13 @@ use YMigVal\LaravelModelCache\HasCachedQueries;
  * @property string $author_id
  * @property mixed $content
  * @property bool $private
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $author
- * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $subject
+ * @property-read Model|Eloquent $author
+ * @property-read Model|Eloquent $subject
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment authoredBy(\Illuminate\Database\Eloquent\Model $author)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment avg(string $column)
@@ -77,6 +78,7 @@ use YMigVal\LaravelModelCache\HasCachedQueries;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment whereSubjectType($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment whereUpdatedAt($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment withoutCache()
+ *
  * @mixin \Eloquent
  */
 class Comment extends Model
@@ -85,26 +87,26 @@ class Comment extends Model
 
     protected $table = 'commentables';
 
-    protected $fillable = array(
+    protected $fillable = [
         'subject_id',
         'subject_type',
         'author_id',
         'author_type',
         'content',
         'private',
-    );
+    ];
 
-    protected $casts = array(
+    protected $casts = [
         'content' => CommentContent::class,
         'private' => 'boolean',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
-    );
+    ];
 
-    protected $dispatchesEvents = array(
+    protected $dispatchesEvents = [
         'created' => CommentAdded::class,
         'deleted' => CommentDeleted::class,
-    );
+    ];
 
     public function subject(): MorphTo
     {

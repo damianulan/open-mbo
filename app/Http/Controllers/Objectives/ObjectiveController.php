@@ -15,10 +15,10 @@ class ObjectiveController extends MBOController
      */
     public function index(ObjectiveDataTable $dataTable)
     {
-        return $dataTable->render('pages.mbo.objectives.index', array(
+        return $dataTable->render('pages.mbo.objectives.index', [
             'table' => $dataTable,
             'nav' => $this->nav(),
-        ));
+        ]);
     }
 
     /**
@@ -56,10 +56,10 @@ class ObjectiveController extends MBOController
 
         $header = 'Podsumowanie Celu';
 
-        return view('pages.mbo.objectives.show', array(
+        return view('pages.mbo.objectives.show', [
             'objective' => $objective,
             'pagetitle' => $header,
-        ));
+        ]);
     }
 
     /**
@@ -91,19 +91,19 @@ class ObjectiveController extends MBOController
 
     public function addObjectives(Request $request, $id): View
     {
-        $params = array();
+        $params = [];
         if ($id) {
             $objective = Objective::find($id);
             if ($objective) {
-                $params = array(
+                $params = [
                     'id' => $id,
                     'form' => ObjectiveEditForm::definition($request, $objective),
-                );
+                ];
             }
         } else {
-            $params = array(
+            $params = [
                 'form' => ObjectiveEditForm::definition($request),
-            );
+            ];
         }
 
         return view('components.modals.objectives.add_objectives', $params);

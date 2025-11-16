@@ -34,9 +34,9 @@ class UserSeeder extends Seeder
                     $y++;
                     $user = User::factory()
                         ->has(UserProfile::factory()->count(1), 'profile')
-                        ->create(array(
+                        ->create([
                             'email' => 'user' . $y . '@damianulan.me',
-                        ));
+                        ]);
 
                     $position = null;
                     if ($user) {
@@ -60,12 +60,12 @@ class UserSeeder extends Seeder
 
                     $isManagement = true;
                     if ( ! $position) {
-                        $position = Position::whereNotIn('name', array('CEO', 'CTO', 'CFO'))->get()->random(1)->first();
+                        $position = Position::whereNotIn('name', ['CEO', 'CTO', 'CFO'])->get()->random(1)->first();
                         $isManagement = false;
                     }
 
                     $chance = fake()->numberBetween(1, 3);
-                    UserEmployment::create(array(
+                    UserEmployment::create([
                         'user_id' => $user->id,
                         'company_id' => $company->id,
                         'contract_id' => TypeOfContract::all()->random(1)->first()->id,
@@ -74,7 +74,7 @@ class UserSeeder extends Seeder
                         'employment' => fake()->dateTimeBetween('-10 years', '-3 months'),
                         'release' => 3 === $chance && ! $isManagement ? fake()->dateTimeBetween('-10 months', '+1 year') : null,
 
-                    ));
+                    ]);
                 }
                 DB::commit();
             } catch (Throwable $th) {

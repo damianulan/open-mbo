@@ -32,6 +32,6 @@ class SmtpForm extends Form
 
     public static function validation(Request $request, $model_id = null): array
     {
-        return array();
+        return [];
     }
 }

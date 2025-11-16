@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'notifications' => 'Notifications',
 
     'yes' => 'Yes',
@@ -30,8 +30,8 @@ return array(
     'column' => 'Column',
     'columns' => 'Columns',
 
-    'langs' => array(
+    'langs' => [
         'pl' => 'Polish',
         'en' => 'English',
-    ),
-);
+    ],
+];

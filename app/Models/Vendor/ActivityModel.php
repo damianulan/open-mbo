@@ -20,11 +20,12 @@ use Spatie\Activitylog\Models\Activity;
  * @property string|null $causer_id
  * @property Collection<array-key, mixed>|null $properties
  * @property string|null $batch_uuid
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Model|null $causer
- * @property-read \Illuminate\Support\Collection $changes
- * @property-read \Illuminate\Database\Eloquent\Model|null $subject
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Model|null $causer
+ * @property-read Collection $changes
+ * @property-read Model|null $subject
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel causedBy(\Illuminate\Database\Eloquent\Model $causer)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel forBatch(string $batchUuid)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel forEvent(string $event)
@@ -48,13 +49,14 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel whereSubjectId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel whereSubjectType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class ActivityModel extends Activity
 {
     public function scopeLogger(Builder $query): void
     {
-        $query->whereIn('activity_log.event', array('viewed', 'created', 'updated', 'deleted', 'impersonated', 'auth_attempt_success', 'auth_attempt_fail'));
+        $query->whereIn('activity_log.event', ['viewed', 'created', 'updated', 'deleted', 'impersonated', 'auth_attempt_success', 'auth_attempt_fail']);
     }
 
     public function scopeMine(Builder $query): void

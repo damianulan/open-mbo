@@ -29,10 +29,10 @@ class CompaniesDataTable extends DataTable
                     $text = 'Zablokowany';
                 }
 
-                return view('components.datatables.badge', array(
+                return view('components.datatables.badge', [
                     'color' => $color,
                     'text' => $text,
-                ));
+                ]);
             })
             ->orderColumn('status', function ($query, $order): void {
                 $o = 'asc' === $order ? 'desc' : 'asc';
@@ -43,12 +43,12 @@ class CompaniesDataTable extends DataTable
                 $query->orderBy('firstname', $order);
                 $query->orderBy('lastname', $order);
             })
-            ->addColumn('action', fn ($data) => view('pages.settings.organization.company.action', array(
+            ->addColumn('action', fn ($data) => view('pages.settings.organization.company.action', [
                 'data' => $data,
-            )))
+            ]))
             ->filterColumn('name', function ($query, $keyword): void {
                 $sql = "CONCAT(users.firstname,'-',users.lastname)  like ?";
-                $query->whereRaw($sql, array("%{$keyword}%"));
+                $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->editColumn('created_at', function ($data) {
                 $formatedDate = Carbon::parse($data->created_at)->format(config('app.datetime_format'));
@@ -67,7 +67,7 @@ class CompaniesDataTable extends DataTable
      */
     public function query(Company $model): QueryBuilder
     {
-        return $model->with('profile')->whereNotIn('id', array(Auth::user()->id));
+        return $model->with('profile')->whereNotIn('id', [Auth::user()->id]);
     }
 
     /**
@@ -76,21 +76,21 @@ class CompaniesDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->parameters(array(
-                'language' => array(
+            ->parameters([
+                'language' => [
                     'url' => asset('themes/vendors/datatables/pl.json'),
-                ),
+                ],
                 'responsive' => true,
-                'buttons' => array(
+                'buttons' => [
                     'csv',
-                ),
-                'lengthMenu' => array(
+                ],
+                'lengthMenu' => [
                     20,
                     50,
                     100,
                     200,
-                ),
-            ))
+                ],
+            ])
             ->setTableId('companies-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
@@ -103,7 +103,7 @@ class CompaniesDataTable extends DataTable
      */
     public function getColumns(): array
     {
-        return array(
+        return [
             Column::computed('name')
                 ->title(__('fields.firstname_lastname'))
                 ->sortable(true)
@@ -122,7 +122,7 @@ class CompaniesDataTable extends DataTable
                 ->printable(false)
                 ->addClass('lastcol action-btns')
                 ->title(__('fields.action')),
-        );
+        ];
     }
 
     /**

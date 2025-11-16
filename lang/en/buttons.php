@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'add' => 'Add',
     'create' => 'Create',
     'remove' => 'Remove',
@@ -49,4 +49,4 @@ return array(
 
     'add_realization' => 'Add goal achievement',
     'edit_realization' => 'Edit goal achievement',
-);
+];

@@ -22,9 +22,9 @@ class UsersController extends AppController
      */
     public function index(UsersDataTable $dataTable)
     {
-        return $dataTable->render('pages.users.index', array(
+        return $dataTable->render('pages.users.index', [
             'table' => $dataTable,
-        ));
+        ]);
     }
 
     /**
@@ -34,10 +34,10 @@ class UsersController extends AppController
      */
     public function create(Request $request)
     {
-        return view('pages.users.edit', array(
+        return view('pages.users.edit', [
             'form' => UserEditForm::definition($request),
-            'employments' => array(),
-        ));
+            'employments' => [],
+        ]);
     }
 
     /**
@@ -83,9 +83,9 @@ class UsersController extends AppController
     {
         $user = User::findOrFail($id);
 
-        return view('pages.users.show', array(
+        return view('pages.users.show', [
             'user' => $user,
-        ));
+        ]);
     }
 
     /**
@@ -98,13 +98,13 @@ class UsersController extends AppController
     {
         $model = User::findOrFail($id);
 
-        $request->request->add(array('user_id' => $id));
+        $request->request->add(['user_id' => $id]);
 
-        return view('pages.users.edit', array(
+        return view('pages.users.edit', [
             'user' => $model,
             'employments' => $this->getEmploymentFroms($request, $model),
             'form' => UserEditForm::definition($request, $model),
-        ));
+        ]);
     }
 
     /**
@@ -123,10 +123,10 @@ class UsersController extends AppController
         if ($service->passed()) {
             $user = $service->user;
 
-            return redirect()->route('users.show', $id)->with('success', __('alerts.users.success.edit', array('name' => $user->name)));
+            return redirect()->route('users.show', $id)->with('success', __('alerts.users.success.edit', ['name' => $user->name]));
         }
 
-        return redirect()->back()->with('error', __('alerts.users.error.edit', array('name' => $user->name)));
+        return redirect()->back()->with('error', __('alerts.users.error.edit', ['name' => $user->name]));
     }
 
     public function updateEmployment(Request $request, $id, EmploymentEditForm $form)
@@ -154,10 +154,10 @@ class UsersController extends AppController
         $user = User::findOrFail($id);
 
         if ($user->delete()) {
-            return redirect()->route('users.index')->with('success', __('alerts.users.success.delete', array('name' => $user->name)));
+            return redirect()->route('users.index')->with('success', __('alerts.users.success.delete', ['name' => $user->name]));
         }
 
-        return redirect()->back()->with('error', __('alerts.users.error.delete', array('name' => $user->name)));
+        return redirect()->back()->with('error', __('alerts.users.error.delete', ['name' => $user->name]));
     }
 
     public function deleteEmployment($id)
@@ -184,10 +184,10 @@ class UsersController extends AppController
             $user->toggleLock();
         }
         if ($user->blocked()) {
-            return redirect()->back()->with('info', __('alerts.users.success.blocked', array('name' => $user->name)));
+            return redirect()->back()->with('info', __('alerts.users.success.blocked', ['name' => $user->name]));
         }
 
-        return redirect()->back()->with('info', __('alerts.users.success.unblocked', array('name' => $user->name)));
+        return redirect()->back()->with('info', __('alerts.users.success.unblocked', ['name' => $user->name]));
     }
 
     /**
@@ -222,7 +222,7 @@ class UsersController extends AppController
                 if ($employment->main) {
                     $langKey = 'forms.employments.header_main';
                 }
-                $employments[__($langKey, array('no' => $i))] = EmploymentEditForm::definition($request, $employment);
+                $employments[__($langKey, ['no' => $i])] = EmploymentEditForm::definition($request, $employment);
             }
         }
 

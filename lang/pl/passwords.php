@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -19,4 +19,4 @@ return array(
     'token' => 'Token odebrany przez serwer nie jest ważny.',
     'user' => 'Nie możemy znaleźć użytkownika z takim adresem e-mail.',
 
-);
+];

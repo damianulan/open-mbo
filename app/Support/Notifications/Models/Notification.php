@@ -21,10 +21,11 @@ use Lucent\Support\Traits\UUID;
  * @property string|null $event
  * @property string|null $schedule
  * @property array<array-key, mixed>|null $conditions
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Illuminate\Support\Collection $resources
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read Collection $resources
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification events()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification newQuery()
@@ -43,6 +44,7 @@ use Lucent\Support\Traits\UUID;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Notification extends Model
@@ -51,7 +53,7 @@ class Notification extends Model
 
     protected $table = 'notifications';
 
-    protected $fillable = array(
+    protected $fillable = [
         'key',
         'contents',
         'system',
@@ -59,24 +61,24 @@ class Notification extends Model
         'event',
         'schedule',
         'conditions',
-    );
+    ];
 
-    protected $casts = array(
+    protected $casts = [
         'contents' => NotificationContents::class,
         'system' => 'boolean',
         'email' => 'boolean',
         'conditions' => 'array',
-    );
+    ];
 
     public static function byKey(string $key): ?self
     {
         return self::where('notifications.key', $key)->first();
     }
 
-    public static function createOrUpdate(string $key, array $attributes = array()): self
+    public static function createOrUpdate(string $key, array $attributes = []): self
     {
         $notification = self::byKey($key);
-        if (! $notification) {
+        if ( ! $notification) {
             $notification = new self();
             $attributes['key'] = $key;
         }
@@ -107,15 +109,15 @@ class Notification extends Model
     {
         return Attribute::make(
             get: function (): Collection {
-                $models = array();
+                $models = [];
                 if ($this->event) {
                     $models = ResourceFactory::getEventResourceModels($this->event);
                 }
                 if ($notifiable = config('auth.providers.users.model')) {
                     $models[$notifiable] = new $notifiable();
                 }
-                $resources = array_map(fn($model) => ResourceFactory::matchModel($model), $models);
-                $resources = array_filter($resources, fn($item) => ! is_null($item));
+                $resources = array_map(fn ($model) => ResourceFactory::matchModel($model), $models);
+                $resources = array_filter($resources, fn ($item) => ! is_null($item));
 
                 return collect($resources);
             },

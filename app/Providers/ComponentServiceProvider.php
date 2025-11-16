@@ -33,7 +33,7 @@ class ComponentServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Blade::if('settings', fn($key) => settings($key));
+        Blade::if('settings', fn ($key) => settings($key));
 
         Blade::component('icon', IconComponent::class);
         Blade::component('tile-button', TileButton::class);

@@ -9,11 +9,11 @@ class CardProgressBar extends Component
 {
     public $color;
 
-    private $colors = array(
+    private $colors = [
         'in_progress' => '--bs-secondary',
         'ungraded' => '--bs-danger',
         'completed' => '--bs-success',
-    );
+    ];
 
     public function __construct(public int $progress, bool $failed = false)
     {

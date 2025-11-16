@@ -10,11 +10,11 @@ use App\Events\MBO\Campaigns\UserCampaignUpdated;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Traits\Guards\MBO\CanUserCampaign;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Activity;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @property string $id
@@ -23,15 +23,16 @@ use Illuminate\Database\Eloquent\Builder;
  * @property mixed $stage User current campaign stage
  * @property bool $manual User will not be automatically moved between stages.
  * @property bool $active Is visible to users.
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\MBO\Campaign $campaign
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\Objective> $objectives
+ * @property-read Campaign $campaign
+ * @property-read Collection<int, Objective> $objectives
  * @property-read int|null $objectives_count
- * @property-read \App\Models\Core\User $user
+ * @property-read User $user
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserCampaign active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserCampaign average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserCampaign avg(string $column)
@@ -86,35 +87,36 @@ use Illuminate\Database\Eloquent\Builder;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\MBO\UserCampaign withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserCampaign withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\MBO\UserCampaign withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserCampaign extends BaseModel implements HasObjectives
 {
     use CanUserCampaign;
 
-    public $logEntities = array('user_id' => User::class, 'campaign_id' => Campaign::class);
+    public $logEntities = ['user_id' => User::class, 'campaign_id' => Campaign::class];
 
     public $timestamps = true;
 
-    protected $fillable = array(
+    protected $fillable = [
         'campaign_id',
         'user_id',
         'stage',
         'manual',
         'active',
-    );
+    ];
 
-    protected $casts = array(
+    protected $casts = [
         'active' => 'boolean',
         'manual' => 'boolean',
         'stage' => CampaignStage::class,
-    );
+    ];
 
-    protected $dispatchesEvents = array(
+    protected $dispatchesEvents = [
         'created' => UserCampaignAssigned::class,
         'updated' => UserCampaignUpdated::class,
         'deleted' => UserCampaignUnassigned::class,
-    );
+    ];
 
     public function user()
     {
@@ -244,16 +246,16 @@ class UserCampaign extends BaseModel implements HasObjectives
         }
     }
 
-    public function scopeOngoing(Builder $query)
+    public function scopeOngoing(Builder $query): void
     {
-        $query->where(function (Builder $query) {
+        $query->where(function (Builder $query): void {
             $query->whereHas('campaign');
             $query->where('active', 1)
-                ->whereNotIn('stage', array(CampaignStage::TERMINATED, CampaignStage::CANCELED, CampaignStage::COMPLETED));
+                ->whereNotIn('stage', [CampaignStage::TERMINATED, CampaignStage::CANCELED, CampaignStage::COMPLETED]);
         });
     }
 
-    public function scopeOrderForUser(Builder $query)
+    public function scopeOrderForUser(Builder $query): void
     {
         $query->orderByRaw(
             'FIELD(stage, "' . CampaignStage::SELF_EVALUATION . '", "' . CampaignStage::REALIZATION . '", "' . CampaignStage::EVALUATION . '", "' . CampaignStage::DISPOSITION . '", "' . CampaignStage::DEFINITION . '", "' . CampaignStage::IN_PROGRESS . '", "' . CampaignStage::PENDING . '")'

@@ -2,21 +2,21 @@
 
 use App\Enums\MBO\CampaignStage;
 
-return array(
+return [
 
-    'generic' => array(
+    'generic' => [
         'password' => 'Password',
         'login' => 'Login',
         'email' => 'Email',
-    ),
+    ],
 
-    'settings' => array(
-        'general' => array(
+    'settings' => [
+        'general' => [
             'site_name' => 'Site name',
             'theme' => 'Theme',
             'lang' => 'Application language',
-        ),
-        'server' => array(
+        ],
+        'server' => [
             'mail_host' => 'Server address',
             'mail_port' => 'Port number',
             'mail_username' => 'Username',
@@ -25,9 +25,9 @@ return array(
             'mail_from_name' => 'Send from name',
             'mail_catchall_enabled' => 'Catch-all',
             'mail_catchall_receiver' => 'Catchall receiver',
-        ),
+        ],
 
-        'mbo' => array(
+        'mbo' => [
             'enabled' => 'MBO module enabled',
             'campaigns_enabled' => 'Campaigns enabled',
             'campaigns_manual' => 'Manual campaigns mode',
@@ -41,7 +41,7 @@ return array(
             'rewards_points_exchange' => 'Przeliczanie punktów nagrody',
             'rewards_currency' => 'Waluta nagrody',
 
-            'info' => array(
+            'info' => [
                 'enabled' => 'Włącza moduł MBO',
                 'campaigns_enabled' => 'Włącza kampanie pomiarowe',
                 'campaigns_manual' => 'Włącza tryb ręczny w kampaniach',
@@ -49,23 +49,23 @@ return array(
                 'min_evaluation' => 'Minimalny wynik procentowy potrzebny do otrzymania punktów nagrody. Punkty nagrody będą przeliczane proporcjonalnie powyżej zadeklarowanej wartości. Aby wyłączyć tę funkcję, ustaw wartość na 0.',
                 'reward_points_exchange' => 'Stosunek jednego punktu nagrody do jednego punktu w wybranej walucie',
                 'reward_currency' => 'Waluta przyznawania nagrody',
-            ),
-        ),
-    ),
+            ],
+        ],
+    ],
 
-    'placeholders' => array(
+    'placeholders' => [
         'choose_date' => 'Wybierz datę',
         'choose_birthdate' => 'Wybierz datę',
         'choose_time' => 'Wybierz godzinę',
         'choose_datetime' => 'Wybierz datę oraz godzinę',
         'choose_daterange_from' => 'Wybierz datę od...',
         'choose_daterange_to' => 'Wybierz datę do...',
-    ),
+    ],
 
     'from' => '[OD]',
     'to' => '[DO]',
 
-    'campaigns' => array(
+    'campaigns' => [
         'name' => 'Nazwa kampanii',
         'period' => 'Okres pomiaru',
         'description' => 'Opis',
@@ -73,7 +73,7 @@ return array(
         'date_start' => 'Data rozpoczęcia pomiaru',
         'date_end' => 'Data zakończenia pomiaru',
 
-        'stages' => array(
+        'stages' => [
             CampaignStage::DEFINITION => 'Tworzenie strategii i określanie celów',
             CampaignStage::DISPOSITION => 'Dysponowanie celów przez kierowników zespołów',
             CampaignStage::REALIZATION => 'Realizacja celów',
@@ -84,9 +84,9 @@ return array(
             CampaignStage::CANCELED => 'Kampania odwołana',
             CampaignStage::IN_PROGRESS => 'Kampania w toku',
             CampaignStage::PENDING => 'Oczekuje na rozpoczęcie pomiaru',
-        ),
+        ],
 
-        'info' => array(
+        'info' => [
             'period' => 'Wprowadź unikalny reprezentatywny okres pomiaru, np. dla pomiaru co kwartał: 2023 Q3.',
             CampaignStage::DEFINITION => 'Tworzenie strategii i określanie celów',
             CampaignStage::DISPOSITION => 'Dysponowanie celów przez kierowników zespołów',
@@ -100,19 +100,19 @@ return array(
             CampaignStage::PENDING => 'Oczekuje na rozpoczęcie pomiaru',
             'draft' => 'Kampania będzie widoczna tylko dla administratorów i nie zostanie uruchomiona automatycznie.',
             'manual' => 'Przejście pomiędzy etapami nie będzie uzależnione od dat, a od podjęcia akcji przez administratora. Opcję tą można także włączyć w trakcie trwania kampanii.',
-        ),
+        ],
 
         'coordinators' => 'Koordynatorzy kampanii',
         'draft' => 'Przechowuj jako wersję roboczą',
         'manual' => 'Tryb ręczny',
 
-        'users' => array(
+        'users' => [
             'add' => 'Add users',
-        ),
+        ],
 
-    ),
+    ],
 
-    'users' => array(
+    'users' => [
         'avatar' => 'Zdjęcie profilowe',
         'firstname' => 'Imię',
         'lastname' => 'Nazwisko',
@@ -121,10 +121,10 @@ return array(
         'birthday' => 'Data urodzenia',
         'supervisors' => 'Bezpośredni przełożeni',
         'roles' => 'Role systemowe',
-    ),
+    ],
 
-    'mbo' => array(
-        'objectives' => array(
+    'mbo' => [
+        'objectives' => [
             'category' => 'Kategoria',
             'template' => 'Szablon celu',
             'name' => 'Nazwa celu',
@@ -137,29 +137,29 @@ return array(
             'type' => 'Typ celu',
             'expected' => 'Oczekiwany wynik',
             'award' => 'Punkty nagrody',
-            'users' => array(
+            'users' => [
                 'add' => 'Dodaj użytkowników',
                 'realization' => 'Obecna realizacja celu',
                 'evaluation' => 'Wartość rozliczenia celu [%]',
-                'info' => array(
+                'info' => [
                     'realization' => 'Wskaż numeryczną wartość realizacji celu. Jeśli przy tworzeniu celu podano oczekwiany wynik, wartość rozliczenia celu zostanie wyliczona automatycznie.',
                     'evaluation' => 'Wskaż wartość procentową realizacji celu. Jeśli przy tworzeniu celu podano oczekwiany wynik, wartość tego rozliczenia celu zostanie wyliczona automatycznie.',
-                ),
-            ),
-            'info' => array(
+                ],
+            ],
+            'info' => [
                 'deadline' => 'Po upłynięciu tej daty, cel przypisany do użytkownika zostanie automatycznie oznaczony jako zaliczony lub niezaliczony.',
                 'weight' => 'Określ jaki wagowy udział ma ten cel w całej kampanii.',
                 'expected' => 'Określ minimalny wynik potrzebny do zaliczenia celu. W razie nieosiągnięcia wyniku, Administratorzy nadal będą mogli wymusić zaliczenie celu.',
                 'award' => 'W razie zaliczenia celu, na konto użytkownika wpadną określone tutaj punkty.',
                 'draft' => 'Cel w wersji roboczej nie zostanie udostępniony do realizacji, jest także wyłączony z raportowania.',
-            ),
-        ),
-        'categories' => array(
+            ],
+        ],
+        'categories' => [
             'name' => 'Nazwa kategorii',
             'template_count' => 'Powiązane szablony',
             'shortname' => 'Unikalny identyfikator kategorii',
             'description' => 'Opis kategorii',
             'coordinators' => 'Koordynatorzy kategorii',
-        ),
-    ),
-);
+        ],
+    ],
+];

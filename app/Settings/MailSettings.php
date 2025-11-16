@@ -35,9 +35,9 @@ class MailSettings extends Settings
 
     public static function casts(): array
     {
-        return array(
+        return [
             'mail_password' => CryptCast::class,
-        );
+        ];
     }
 
     public function safePassword()

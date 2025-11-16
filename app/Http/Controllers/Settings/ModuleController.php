@@ -24,12 +24,12 @@ class ModuleController extends SettingsController
 
         $mboModel = app(MBOSettings::class);
 
-        return view('pages.settings.modules.index', array(
+        return view('pages.settings.modules.index', [
             'modules' => $modules,
             'mod' => $modules[$module]['id'],
             'mboForm' => MboForm::definition($request, $mboModel),
             'nav' => $this->nav(),
-        ));
+        ]);
     }
 
     public function storeMbo(Request $request, MboForm $form, MBOSettings $settings)
@@ -40,9 +40,9 @@ class ModuleController extends SettingsController
             $settings->{$key} = $value;
         }
         if ($settings->save()) {
-            return redirect()->to(route('settings.modules.index', array('module' => 'mbo')))->with('success', __('alerts.settings.success.mbo_update'));
+            return redirect()->to(route('settings.modules.index', ['module' => 'mbo']))->with('success', __('alerts.settings.success.mbo_update'));
         }
 
-        return redirect()->to(route('settings.modules.index', array('module' => 'mbo')))->with('error', __('alerts.settings.error.mbo_update'));
+        return redirect()->to(route('settings.modules.index', ['module' => 'mbo']))->with('error', __('alerts.settings.error.mbo_update'));
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -20,12 +20,12 @@ return array(
     'ascii' => ':attribute może zawierać tylko jednobajtowe znaki alfanumeryczne i symbole.',
     'before' => ':attribute musi być datą wcześniejszą niż :date.',
     'before_or_equal' => ':attribute musi być datą nie późniejszą niż :date.',
-    'between' => array(
+    'between' => [
         'array' => ':attribute musi mieć od :min do :max elementów.',
         'file' => ':attribute musi mieć od :min do :max kilobajtów.',
         'numeric' => ':attribute musi mieć wartość od :min do :max.',
         'string' => ':attribute musi mieć od :min do :max znaków.',
-    ),
+    ],
     'boolean' => 'Pole :attribute musi być prawdą lub fałszem.',
     'confirmed' => 'Potwierdzenie :attribute nie pasuje.',
     'current_password' => 'Hasło jest nieprawidłowe.',
@@ -48,18 +48,18 @@ return array(
     'exists' => 'Wybrany :attribute jest nieprawidłowy.',
     'file' => ':attribute musi być plikiem.',
     'filled' => 'Pole :attribute musi mieć wartość.',
-    'gt' => array(
+    'gt' => [
         'array' => ':attribute musi mieć więcej niż :value elementów.',
         'file' => ':attribute musi być większy niż :value kilobajtów.',
         'numeric' => ':attribute musi być większy niż :value.',
         'string' => ':attribute musi być dłuższy niż :value znaków.',
-    ),
-    'gte' => array(
+    ],
+    'gte' => [
         'array' => ':attribute musi mieć :value elementów lub więcej.',
         'file' => ':attribute musi być większy lub równy :value kilobajtów.',
         'numeric' => ':attribute musi być większy lub równy :value.',
         'string' => ':attribute musi być dłuższy lub równy :value znaków.',
-    ),
+    ],
     'image' => ':attribute musi być obrazem.',
     'in' => 'Wybrany :attribute jest nieprawidłowy.',
     'in_array' => 'Pole :attribute nie istnieje w :other.',
@@ -69,46 +69,46 @@ return array(
     'ipv6' => ':attribute musi być prawidłowym adresem IPv6.',
     'json' => ':attribute musi być prawidłowym ciągiem JSON.',
     'lowercase' => ':attribute musi być pisane małymi literami.',
-    'lt' => array(
+    'lt' => [
         'array' => ':attribute musi mieć mniej niż :value elementów.',
         'file' => ':attribute musi być mniejszy niż :value kilobajtów.',
         'numeric' => ':attribute musi być mniejszy niż :value.',
         'string' => ':attribute musi być krótszy niż :value znaków.',
-    ),
-    'lte' => array(
+    ],
+    'lte' => [
         'array' => ':attribute nie może mieć więcej niż :value elementów.',
         'file' => ':attribute musi być mniejszy lub równy :value kilobajtów.',
         'numeric' => ':attribute musi być mniejszy lub równy :value.',
         'string' => ':attribute musi być krótszy lub równy :value znaków.',
-    ),
+    ],
     'mac_address' => ':attribute musi być prawidłowym adresem MAC.',
-    'max' => array(
+    'max' => [
         'array' => ':attribute nie może mieć więcej niż :max elementów.',
         'file' => ':attribute nie może być większy niż :max kilobajtów.',
         'numeric' => ':attribute nie może być większy niż :max.',
         'string' => ':attribute nie może być dłuższy niż :max znaków.',
-    ),
+    ],
     'max_digits' => ':attribute nie może mieć więcej niż :max cyfr.',
     'mimes' => ':attribute musi być plikiem typu: :values.',
     'mimetypes' => ':attribute musi być plikiem typu: :values.',
-    'min' => array(
+    'min' => [
         'array' => ':attribute musi mieć przynajmniej :min elementów.',
         'file' => ':attribute musi mieć przynajmniej :min kilobajtów.',
         'numeric' => ':attribute musi mieć przynajmniej :min.',
         'string' => ':attribute musi mieć przynajmniej :min znaków.',
-    ),
+    ],
     'min_digits' => ':attribute musi mieć przynajmniej :min cyfr.',
     'multiple_of' => ':attribute musi być wielokrotnością :value.',
     'not_in' => 'Wybrany :attribute jest nieprawidłowy.',
     'not_regex' => 'Format :attribute jest nieprawidłowy.',
     'numeric' => ':attribute musi być liczbą.',
-    'password' => array(
+    'password' => [
         'letters' => ':attribute musi zawierać co najmniej jedną literę.',
         'mixed' => ':attribute musi zawierać co najmniej jedną dużą i jedną małą literę.',
         'numbers' => ':attribute musi zawierać co najmniej jedną cyfrę.',
         'symbols' => ':attribute musi zawierać co najmniej jeden symbol.',
         'uncompromised' => 'Podany :attribute pojawił się w wycieku danych. Proszę użyć innego :attribute.',
-    ),
+    ],
     'present' => 'Pole :attribute musi być obecne.',
     'prohibited' => 'Pole :attribute jest zabronione.',
     'prohibited_if' => 'Pole :attribute jest zabronione, gdy :other ma wartość :value.',
@@ -125,12 +125,12 @@ return array(
     'required_without' => 'Pole :attribute jest wymagane, gdy :values nie jest obecne.',
     'required_without_all' => 'Pole :attribute jest wymagane, gdy żadne z :values nie są obecne.',
     'same' => ':attribute i :other muszą się zgadzać.',
-    'size' => array(
+    'size' => [
         'array' => ':attribute musi zawierać :size elementów.',
         'file' => ':attribute musi mieć :size kilobajtów.',
         'numeric' => ':attribute musi wynosić :size.',
         'string' => ':attribute musi mieć :size znaków.',
-    ),
+    ],
     'starts_with' => ':attribute musi zaczynać się jednym z następujących: :values.',
     'string' => ':attribute musi być ciągiem znaków.',
     'timezone' => ':attribute musi być prawidłową strefą czasową.',
@@ -147,11 +147,11 @@ return array(
     |--------------------------------------------------------------------------
     */
 
-    'custom' => array(
-        'definition_to' => array(
+    'custom' => [
+        'definition_to' => [
             'after_or_equal' => 'Data końca etapu musi być późniejsza niż data początku.',
-        ),
-    ),
+        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -159,10 +159,10 @@ return array(
     |--------------------------------------------------------------------------
     */
 
-    'attributes' => array(
+    'attributes' => [
         'password' => 'hasło',
         'email' => 'adres email',
         'site_name' => 'nazwa witryny',
-    ),
+    ],
 
-);
+];

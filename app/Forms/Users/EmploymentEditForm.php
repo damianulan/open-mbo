@@ -47,11 +47,11 @@ class EmploymentEditForm extends Form
 
     public static function validation(Request $request, $model = null): array
     {
-        return array(
+        return [
             'user_id' => 'required',
             'company_id' => 'required',
             'employment' => 'date|nullable',
             'release' => 'date|nullable',
-        );
+        ];
     }
 }

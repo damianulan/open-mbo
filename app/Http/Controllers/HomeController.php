@@ -26,8 +26,8 @@ class HomeController extends AppController
     {
         $user = Auth::user();
 
-        return view('pages.dashboard', array(
+        return view('pages.dashboard', [
             'user' => $user,
-        ));
+        ]);
     }
 }

@@ -19,14 +19,15 @@ use Spatie\Activitylog\Models\Activity;
  * @property string $subject_id
  * @property string|null $points
  * @property string|null $assigned_by
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\Core\User|null $assigner
- * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $subject
- * @property-read \App\Models\Core\User $user
+ * @property-read User|null $assigner
+ * @property-read Model|Eloquent $subject
+ * @property-read User $user
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints avg(string $column)
@@ -79,17 +80,18 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\MBO\UserPoints withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\MBO\UserPoints withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserPoints extends BaseModel
 {
-    protected $fillable = array(
+    protected $fillable = [
         'user_id',
         'subject_id',
         'subject_type',
         'points',
         'assigned_by',
-    );
+    ];
 
     public function subject(): MorphTo
     {

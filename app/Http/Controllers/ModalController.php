@@ -13,7 +13,7 @@ class ModalController extends AppController
     public function getModal(Request $request): JsonResponse
     {
         $target = $request->get('target', null);
-        $datas = $request->get('datas', array());
+        $datas = $request->get('datas', []);
         $message = 'error';
         $view = null;
         $status = false;
@@ -29,7 +29,7 @@ class ModalController extends AppController
                     $id = $datas['id'] ?? null;
                     if (is_array($datas) && count($datas)) {
                         foreach ($datas as $key => $value) {
-                            $request->request->add(array($key => $value));
+                            $request->request->add([$key => $value]);
                         }
                     }
                     $view = $object->{$method}(
@@ -52,8 +52,8 @@ class ModalController extends AppController
             $this->e = $e;
         }
 
-        return $this->responseJson($status, $message, array(
+        return $this->responseJson($status, $message, [
             'view' => $view,
-        ));
+        ]);
     }
 }

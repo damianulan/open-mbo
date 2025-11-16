@@ -8,8 +8,8 @@ class OrganizationController extends SettingsController
 {
     public function index()
     {
-        return view('pages.settings.organization.index', array(
+        return view('pages.settings.organization.index', [
             'nav' => $this->nav(),
-        ));
+        ]);
     }
 }

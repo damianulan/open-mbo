@@ -1,7 +1,7 @@
 <?php
 
-return array(
-    'settings' => array(
+return [
+    'settings' => [
         'server_info' => 'Informacje o serwerze',
         'git_status' => 'Git status',
         'debugging' => 'Tryb debugowania',
@@ -18,39 +18,39 @@ return array(
         'info' => 'Konfiguracja PHP',
         'phpinfo' => 'PHP Info',
         'telescope' => 'Teleskop',
-    ),
+    ],
 
-    'home' => array(
+    'home' => [
         'my_objectives' => 'Moje cele',
         'my_campaigns' => 'Moje kampanie',
-    ),
+    ],
 
-    'errors' => array(
-        '500' => array(
+    'errors' => [
+        '500' => [
             'title' => 'Wewnętrzny błąd serwera',
             'paragraph' => 'Serwer nie był w stanie przetworzyć żądania. Zarejestrowaliśmy ten incydent i przeanalizujemy źródło błędu. Dziękujemy.',
-        ),
-        '503' => array(
+        ],
+        '503' => [
             'title' => 'Usługa niedostępna',
             'paragraph' => 'Przepraszamy, usługa chwilowo niedostępna. Trwają prace konserwacyjne, spróbuj ponownie później. Zostaniesz automatycznie wylogowany.',
-        ),
-        '404' => array(
+        ],
+        '404' => [
             'title' => 'Nie znaleziono strony, lub jest ona tymczasowo niedostępna',
             'paragraph' => 'Nie udało się odnaleźć żądanej strony.',
-        ),
-        '403' => array(
+        ],
+        '403' => [
             'title' => 'Odmowa dostępu',
             'paragraph' => 'Nie posiadasz wystarczających uprawnień niezbędnych do wyświetlania tej strony. Jeśli to błąd, skontaktuj się z administratorem systemu.',
-        ),
-        '401' => array(
+        ],
+        '401' => [
             'title' => 'Dostęp nieautoryzowany',
             'paragraph' => '',
-        ),
-        '419' => array(
+        ],
+        '419' => [
             'title' => 'Sesja wygasła',
             'paragraph' => 'Twój sekretny klucz jest nieprawidłowy, bądź wygasła twoja sesja. Zaloguj się jeszcze raz i spróbuj ponownie.',
-        ),
+        ],
         'common' => 'To chyba nie strona, której szukasz...',
 
-    ),
-);
+    ],
+];

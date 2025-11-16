@@ -26,7 +26,7 @@ class ResourceFactory
     {
         $reflection = new ReflectionClass($event);
 
-        $models = array();
+        $models = [];
 
         if ($reflection->implementsInterface(NotifiableEvent::class)) {
             foreach ($reflection->getProperties() as $property) {

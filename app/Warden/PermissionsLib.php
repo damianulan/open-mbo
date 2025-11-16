@@ -122,77 +122,77 @@ final class PermissionsLib extends PermissionWarden
 
     public static function nonassignable(): array
     {
-        return array(
-            self::TELESCOPE_VIEW => array('root', 'support'),
-            self::MAINTENANCE => array('root', 'support'),
-        );
+        return [
+            self::TELESCOPE_VIEW => ['root', 'support'],
+            self::MAINTENANCE => ['root', 'support'],
+        ];
     }
 
     public static function assignable(): array
     {
-        return array(
+        return [
             // global
 
-            self::MBO_ADMINISTRATION => array('admins', 'admin_mbo'),
+            self::MBO_ADMINISTRATION => ['admins', 'admin_mbo'],
 
             // users
-            self::USERS_IMPERSONATE => array('admins'),
-            self::USERS_LIST => array('admins', 'admin_mbo', 'admin_hr', 'supervisor'), // and probably any other superior roles and team leader @TODO later
-            self::USERS_VIEW => array('admins', 'admin_mbo', 'admin_hr', 'supervisor'), // and probably any other superior roles and team leader @TODO later
-            self::USERS_CREATE => array('admins'),
-            self::USERS_EDIT => array('admins', 'admin_hr'), // includes assigning assignable roles (not based on role context)
-            self::USERS_TEAMS => array('admins', 'admin_hr'),
-            self::USERS_DELETE => array('admins'),
-            self::USERS_RESTORE => array('admins'),
+            self::USERS_IMPERSONATE => ['admins'],
+            self::USERS_LIST => ['admins', 'admin_mbo', 'admin_hr', 'supervisor'], // and probably any other superior roles and team leader @TODO later
+            self::USERS_VIEW => ['admins', 'admin_mbo', 'admin_hr', 'supervisor'], // and probably any other superior roles and team leader @TODO later
+            self::USERS_CREATE => ['admins'],
+            self::USERS_EDIT => ['admins', 'admin_hr'], // includes assigning assignable roles (not based on role context)
+            self::USERS_TEAMS => ['admins', 'admin_hr'],
+            self::USERS_DELETE => ['admins'],
+            self::USERS_RESTORE => ['admins'],
 
             // settings
-            self::SETTINGS_GENERAL => array('admins'),
-            self::SETTINGS_MODULES => array('admins'),
-            self::SETTINGS_INTEGRATIONS => array('admins'),
-            self::SETTINGS_SERVER => array('admins'),
-            self::SETTINGS_LOGS => array('admins'),
-            self::SETTINGS_USERS => array('admins', 'admin_hr'),
-            self::SETTINGS_ROLES => array('admins'), // role/permission manipulations
-            self::SETTINGS_ORGANIZATION => array('admins'),
-            self::SETTINGS_NOTIFICATIONS => array('admins'),
-            self::SETTINGS_REPORTS => array('admins'),
+            self::SETTINGS_GENERAL => ['admins'],
+            self::SETTINGS_MODULES => ['admins'],
+            self::SETTINGS_INTEGRATIONS => ['admins'],
+            self::SETTINGS_SERVER => ['admins'],
+            self::SETTINGS_LOGS => ['admins'],
+            self::SETTINGS_USERS => ['admins', 'admin_hr'],
+            self::SETTINGS_ROLES => ['admins'], // role/permission manipulations
+            self::SETTINGS_ORGANIZATION => ['admins'],
+            self::SETTINGS_NOTIFICATIONS => ['admins'],
+            self::SETTINGS_REPORTS => ['admins'],
 
             // management
-            self::MBO_TEMPLATES => array('admins', 'admin_mbo', 'objective_coordinator'),
-            self::MBO_CATEGORIES => array('admins', 'admin_mbo'),
+            self::MBO_TEMPLATES => ['admins', 'admin_mbo', 'objective_coordinator'],
+            self::MBO_CATEGORIES => ['admins', 'admin_mbo'],
 
             // reports
-            self::REPORTS_VIEW => array('admins', 'admin_mbo', 'supervisor'), // and probably any other superior roles and team leader @TODO later
+            self::REPORTS_VIEW => ['admins', 'admin_mbo', 'supervisor'], // and probably any other superior roles and team leader @TODO later
 
             // mbo
-            self::MBO_TEMPLATES_VIEW => array('admins', 'admin_mbo', 'objective_coordinator'),
-            self::MBO_TEMPLATES_CREATE => array('admins', 'admin_mbo', 'objective_coordinator'),
-            self::MBO_TEMPLATES_UPDATE => array('admins', 'admin_mbo', 'objective_coordinator'),
-            self::MBO_TEMPLATES_DELETE => array('admins', 'admin_mbo', 'objective_coordinator'),
+            self::MBO_TEMPLATES_VIEW => ['admins', 'admin_mbo', 'objective_coordinator'],
+            self::MBO_TEMPLATES_CREATE => ['admins', 'admin_mbo', 'objective_coordinator'],
+            self::MBO_TEMPLATES_UPDATE => ['admins', 'admin_mbo', 'objective_coordinator'],
+            self::MBO_TEMPLATES_DELETE => ['admins', 'admin_mbo', 'objective_coordinator'],
 
-            self::MBO_CATEGORIES_VIEW => array('admins', 'admin_mbo'),
-            self::MBO_CATEGORIES_CREATE => array('admins', 'admin_mbo'),
-            self::MBO_CATEGORIES_UPDATE => array('admins', 'admin_mbo'),
-            self::MBO_CATEGORIES_DELETE => array('admins', 'admin_mbo'),
+            self::MBO_CATEGORIES_VIEW => ['admins', 'admin_mbo'],
+            self::MBO_CATEGORIES_CREATE => ['admins', 'admin_mbo'],
+            self::MBO_CATEGORIES_UPDATE => ['admins', 'admin_mbo'],
+            self::MBO_CATEGORIES_DELETE => ['admins', 'admin_mbo'],
 
-            self::MBO_CAMPAIGN_CREATE => array('admins', 'admin_mbo'),
-            self::MBO_CAMPAIGN_VIEW => array('admins', 'admin_mbo', 'campaign_coordinator'),
-            self::MBO_CAMPAIGN_UPDATE => array('admins', 'admin_mbo', 'campaign_coordinator'),
-            self::MBO_CAMPAIGN_DELETE => array('admins', 'admin_mbo'),
-            self::MBO_CAMPAIGN_TERMINATE => array('admins', 'admin_mbo', 'campaign_coordinator'),
-            self::MBO_CAMPAIGN_CANCEL => array('admins', 'admin_mbo'), // operation is not reversible -- keep it strict
-            self::MBO_CAMPAIGN_MANAGE_OBJECTIVES => array('admins', 'admin_mbo', 'campaign_coordinator'), // adding/removing users and objectives to/from campaign.
-            self::MBO_CAMPAIGN_MANAGE_USERS => array('admins', 'admin_mbo', 'campaign_coordinator'),
-            self::MBO_CAMPAIGN_MANAGE_MANUAL => array('admins', 'admin_mbo', 'campaign_coordinator'),
+            self::MBO_CAMPAIGN_CREATE => ['admins', 'admin_mbo'],
+            self::MBO_CAMPAIGN_VIEW => ['admins', 'admin_mbo', 'campaign_coordinator'],
+            self::MBO_CAMPAIGN_UPDATE => ['admins', 'admin_mbo', 'campaign_coordinator'],
+            self::MBO_CAMPAIGN_DELETE => ['admins', 'admin_mbo'],
+            self::MBO_CAMPAIGN_TERMINATE => ['admins', 'admin_mbo', 'campaign_coordinator'],
+            self::MBO_CAMPAIGN_CANCEL => ['admins', 'admin_mbo'], // operation is not reversible -- keep it strict
+            self::MBO_CAMPAIGN_MANAGE_OBJECTIVES => ['admins', 'admin_mbo', 'campaign_coordinator'], // adding/removing users and objectives to/from campaign.
+            self::MBO_CAMPAIGN_MANAGE_USERS => ['admins', 'admin_mbo', 'campaign_coordinator'],
+            self::MBO_CAMPAIGN_MANAGE_MANUAL => ['admins', 'admin_mbo', 'campaign_coordinator'],
 
-            self::MBO_OBJECTIVE_VIEW => array('admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator', 'supervisor'),
-            self::MBO_OBJECTIVE_CREATE => array('admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator'),
-            self::MBO_OBJECTIVE_UPDATE => array('admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator'),
-            self::MBO_OBJECTIVE_DELETE => array('admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator'),
-            self::MBO_OBJECTIVE_EVALUATE => array('admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator', 'supervisor'),
-            self::MBO_OBJECTIVE_MILESTONES => array('admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator', 'supervisor'),
-            self::MBO_OBJECTIVE_REALIZATION => array('admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator', 'supervisor'),
-        );
+            self::MBO_OBJECTIVE_VIEW => ['admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator', 'supervisor'],
+            self::MBO_OBJECTIVE_CREATE => ['admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator'],
+            self::MBO_OBJECTIVE_UPDATE => ['admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator'],
+            self::MBO_OBJECTIVE_DELETE => ['admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator'],
+            self::MBO_OBJECTIVE_EVALUATE => ['admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator', 'supervisor'],
+            self::MBO_OBJECTIVE_MILESTONES => ['admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator', 'supervisor'],
+            self::MBO_OBJECTIVE_REALIZATION => ['admins', 'admin_mbo', 'objective_coordinator', 'campaign_coordinator', 'supervisor'],
+        ];
     }
 
     public static function labels(): array

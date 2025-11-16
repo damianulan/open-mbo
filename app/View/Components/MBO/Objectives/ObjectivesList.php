@@ -4,7 +4,6 @@ namespace App\View\Components\MBO\Objectives;
 
 use App\Contracts\MBO\HasObjectives;
 use App\Models\Core\User;
-use App\Models\MBO\UserObjective;
 use App\Traits\UserMBO;
 use Closure;
 use Exception;
@@ -24,7 +23,7 @@ class ObjectivesList extends Component
      */
     public function __construct(public Model $model, User $user = new User())
     {
-        if (! ($model instanceof HasObjectives) && ! isset(class_uses_recursive($model)[UserMBO::class])) {
+        if ( ! ($model instanceof HasObjectives) && ! isset(class_uses_recursive($model)[UserMBO::class])) {
             $e = new Exception('Model must implement HasObjectives interface or UserMBO trait.');
             report($e);
             throw $e;

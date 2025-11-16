@@ -16,7 +16,7 @@ class CustomDataTable extends DataTable
 
     protected $orderByDir = 'desc';
 
-    protected array $actions = array('csv', 'excel', 'column_selector');
+    protected array $actions = ['csv', 'excel', 'column_selector'];
 
     /**
      * Get the dataTable columns definition.
@@ -52,7 +52,7 @@ class CustomDataTable extends DataTable
             });
         }
 
-        $view = view('components.datatables.partials.columns', array(
+        $view = view('components.datatables.partials.columns', [
             'datatable_id' => $this->id,
             'columns' => $available,
             'selected' => $this->selectedColumns(),
@@ -60,7 +60,7 @@ class CustomDataTable extends DataTable
             'hasCsv' => in_array('csv', $this->actions),
             'hasExcel' => in_array('excel', $this->actions),
             'class' => static::class,
-        ));
+        ]);
 
         return $view;
     }
@@ -71,21 +71,21 @@ class CustomDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         $builder = $this->builder()
-            ->parameters(array(
-                'language' => array(
+            ->parameters([
+                'language' => [
                     'url' => asset('themes/vendors/datatables/pl.json'),
-                ),
+                ],
                 'responsive' => true,
-                'buttons' => array(
+                'buttons' => [
                     'csv',
-                ),
-                'lengthMenu' => array(
+                ],
+                'lengthMenu' => [
                     20,
                     50,
                     100,
                     200,
-                ),
-            ))
+                ],
+            ])
             ->setTableId($this->id)
             ->columns($this->getColumns())
             ->minifiedAjax()
@@ -101,10 +101,10 @@ class CustomDataTable extends DataTable
 
     public function saveColumns(Request $request)
     {
-        $validator = Validator::make($request->all(), array(
+        $validator = Validator::make($request->all(), [
             'datatable_id' => 'required|string',
             'selected' => 'present|array',
-        ));
+        ]);
 
         if ($validator->passes()) {
             $datatable_id = $request->input('datatable_id');
@@ -135,7 +135,7 @@ class CustomDataTable extends DataTable
      *
      * @return mixed
      */
-    final public function render(?string $view = null, array $data = array(), array $mergeData = array())
+    final public function render(?string $view = null, array $data = [], array $mergeData = [])
     {
         if ($this->request()->ajax() && $this->request()->wantsJson()) {
             return app()->call($this->ajax(...));
@@ -147,7 +147,7 @@ class CustomDataTable extends DataTable
 
         if (in_array($action, $this->actions) && method_exists($this, $actionMethod)) {
             /** @var callable $callback */
-            $callback = array($this, $actionMethod);
+            $callback = [$this, $actionMethod];
 
             return app()->call($callback);
         }
@@ -159,9 +159,9 @@ class CustomDataTable extends DataTable
     public function userView($data, $relation)
     {
         if ($data->{$relation}) {
-            return view('components.datatables.username_link', array(
+            return view('components.datatables.username_link', [
                 'data' => $data->{$relation},
-            ));
+            ]);
         }
 
         return '';
@@ -169,9 +169,9 @@ class CustomDataTable extends DataTable
 
     protected function selectedColumns(): array
     {
-        $columns = array();
+        $columns = [];
         $model = SelectedColumns::findColumn($this->id);
-        $columns_raw = $model->selected ?? array();
+        $columns_raw = $model->selected ?? [];
         $available = $this->availableColumns();
 
         if (empty($columns_raw)) {
@@ -185,12 +185,12 @@ class CustomDataTable extends DataTable
 
     protected function defaultColumns(): array
     {
-        return array();
+        return [];
     }
 
     protected function availableColumns(): array
     {
-        return array();
+        return [];
     }
 
     protected function getOrderBy(): ?int

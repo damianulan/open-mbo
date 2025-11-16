@@ -18,9 +18,9 @@ use Illuminate\Support\Carbon;
  * @property bool $app_notifications
  * @property bool $extended_notifications
  * @property bool $system_notifications
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
  * @property-read User $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserPreference newModelQuery()
@@ -49,7 +49,7 @@ class UserPreference extends Model
 
     protected $table = 'user_preferences';
 
-    protected $fillable = array(
+    protected $fillable = [
         'user_id',
         'lang',
         'theme',
@@ -57,23 +57,23 @@ class UserPreference extends Model
         'app_notifications',
         'extended_notifications',
         'system_notifications',
-    );
+    ];
 
-    protected $attributes = array(
+    protected $attributes = [
         'lang' => 'auto',
         'theme' => 'auto',
         'mail_notifications' => 1,
         'app_notifications' => 1,
         'extended_notifications' => 1,
         'system_notifications' => 1,
-    );
+    ];
 
-    protected $casts = array(
+    protected $casts = [
         'mail_notifications' => 'boolean',
         'app_notifications' => 'boolean',
         'extended_notifications' => 'boolean',
         'system_notifications' => 'boolean',
-    );
+    ];
 
     public function user(): BelongsTo
     {

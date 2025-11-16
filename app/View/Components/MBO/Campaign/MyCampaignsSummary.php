@@ -2,19 +2,17 @@
 
 namespace App\View\Components\MBO\Campaign;
 
-use App\Contracts\MBO\HasObjectives;
 use App\Models\Core\User;
-use App\Models\MBO\UserCampaign;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\View\Component;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\Component;
 
 class MyCampaignsSummary extends Component
 {
     public User $user;
+
     public Collection $userCampaigns;
 
     /**
@@ -22,7 +20,7 @@ class MyCampaignsSummary extends Component
      */
     public function __construct(User $user)
     {
-        if (!$user->exists) {
+        if ( ! $user->exists) {
             $user = Auth::user();
         }
 

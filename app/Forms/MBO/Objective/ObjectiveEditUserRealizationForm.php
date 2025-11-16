@@ -31,11 +31,11 @@ class ObjectiveEditUserRealizationForm extends Form
 
     public static function validation(Request $request, $model_id = null): array
     {
-        return array(
+        return [
             'realization' => 'nullable|numeric',
             'evaluation' => 'nullable|numeric',
             'self_realization' => 'nullable|numeric',
             'self_evaluation' => 'nullable|numeric',
-        );
+        ];
     }
 }

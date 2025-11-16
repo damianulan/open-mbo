@@ -21,7 +21,7 @@ class CampaignEditObjectiveForm extends Form
         $method = 'POST';
         $title = 'Dodaj nowy cel do kampanii';
         $campaign_id = $request->get('campaign_id') ?? null;
-        $selectedTemplate = array();
+        $selectedTemplate = [];
 
         if ( ! is_null($model)) {
             $method = 'PUT';
@@ -30,17 +30,17 @@ class CampaignEditObjectiveForm extends Form
                 $campaign_id = $model->campaign_id;
             }
             if ($model->template_id) {
-                $selectedTemplate = array($model->template_id);
+                $selectedTemplate = [$model->template_id];
             }
         }
         $campaign = Campaign::findOrFail($campaign_id);
 
         $template_ids = Objective::where('campaign_id', $campaign_id)->get()->pluck('template_id');
-        $exclude = array();
+        $exclude = [];
         if ( ! empty($template_ids)) {
             foreach ($template_ids as $tid) {
                 if ( ! in_array($tid, $selectedTemplate)) {
-                    $exclude[] = array('id' => $tid);
+                    $exclude[] = ['id' => $tid];
                 }
             }
         }
@@ -71,7 +71,7 @@ class CampaignEditObjectiveForm extends Form
             $builder->where('id', '!=', $model_id);
         }
 
-        return array(
+        return [
             'template_id' => 'required',
             'name' => 'max:120|required',
             'deadline' => 'nullable',
@@ -80,6 +80,6 @@ class CampaignEditObjectiveForm extends Form
             'expected' => 'numeric|nullable',
             'award' => 'numeric|nullable',
             'draft' => 'boolean',
-        );
+        ];
     }
 }

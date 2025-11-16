@@ -33,23 +33,24 @@ use Spatie\Activitylog\Models\Activity;
  * @property string $status objective status
  * @property string|null $realization Numerical value of the realization of the objective - in relation to the expected value in objective
  * @property string|null $evaluation Percentage evaluation of the objective - if realization is set, evaluation is calculated automatically
- * @property \Illuminate\Support\Carbon|null $evaluated_at Time when most recent evaluation was made
+ * @property Carbon|null $evaluated_at Time when most recent evaluation was made
  * @property string|null $evaluated_by Time when most recent evaluator has made any changes
  * @property string|null $self_realization Numerical value of the realization of the objective - in relation to the expected value in objective
  * @property string|null $self_evaluation Percentage evaluation of the objective - if realization is set, evaluation is calculated automatically
  * @property string|null $self_evaluated_at Time when most recent self evaluation was made
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\MBO\Campaign|null $campaign
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Commentable\Models\Comment> $comments
+ * @property-read Campaign|null $campaign
+ * @property-read Collection<int, Comment> $comments
  * @property-read int|null $comments_count
- * @property-read \App\Models\Core\User|null $evaluator
- * @property-read \App\Models\MBO\Objective $objective
- * @property-read \App\Models\MBO\UserPoints $points
- * @property-read \App\Models\Core\User $user
+ * @property-read User|null $evaluator
+ * @property-read Objective $objective
+ * @property-read UserPoints $points
+ * @property-read User $user
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective avg(string $column)
@@ -114,13 +115,14 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\MBO\UserObjective withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\MBO\UserObjective withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
 {
     use CanUserObjective, Commentable, Dispatcher;
 
-    protected $fillable = array(
+    protected $fillable = [
         'user_id',
         'objective_id',
         'status',
@@ -131,21 +133,21 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
         'self_realization',
         'self_evaluation',
         'self_evaluation_at',
-    );
+    ];
 
-    protected $defaults = array(
+    protected $defaults = [
         'status' => UserObjectiveStatus::UNSTARTED,
-    );
+    ];
 
-    protected $casts = array(
+    protected $casts = [
         'evaluated_at' => 'datetime',
-    );
+    ];
 
     public static function assign($user_id, $objective_id): bool
     {
         $output = false;
         $existing = self::where('user_id', $user_id)->where('objective_id', $objective_id)->exists();
-        if (! $existing) {
+        if ( ! $existing) {
             $instance = new self();
             $instance->user_id = $user_id;
             $instance->objective_id = $objective_id;
@@ -254,18 +256,18 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
         }
 
         if ($userCampaign) {
-            if (! $userCampaign->active) {
+            if ( ! $userCampaign->active) {
                 $status = UserObjectiveStatus::INTERRUPTED;
             } else {
                 $status = CampaignStage::mapObjectiveStatus($userCampaign->stage, $status);
             }
         }
 
-        if (! in_array($status, $frozen)) {
+        if ( ! in_array($status, $frozen)) {
             if ($this->isOverdued()) {
                 $this->autoEvaluate();
             } else {
-                if (! $userCampaign) {
+                if ( ! $userCampaign) {
                     $status = UserObjectiveStatus::PROGRESS;
                 }
             }
@@ -293,9 +295,9 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
 
     public function points(): MorphOne
     {
-        return $this->morphOne(UserPoints::class, 'subject')->withDefault(array(
+        return $this->morphOne(UserPoints::class, 'subject')->withDefault([
             'user_id' => $this->user_id,
-        ))->whereUserId($this->user_id);
+        ])->whereUserId($this->user_id);
     }
 
     public function campaign(): HasOneThrough
@@ -327,7 +329,7 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
      */
     public function isCompleted(): bool
     {
-        return in_array($this->status, array(UserObjectiveStatus::COMPLETED, UserObjectiveStatus::PASSED, UserObjectiveStatus::FAILED));
+        return in_array($this->status, [UserObjectiveStatus::COMPLETED, UserObjectiveStatus::PASSED, UserObjectiveStatus::FAILED]);
     }
 
     /**
@@ -378,7 +380,7 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
 
     public function scopeMy(Builder $query, ?User $user = null): void
     {
-        if (! $user) {
+        if ( ! $user) {
             $user = Auth::user();
         }
         $query->where('user_objectives.user_id', $user->id);
@@ -409,7 +411,7 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
             $this->status = UserObjectiveStatus::COMPLETED;
             $autofail = settings('mbo.objectives_autofail', true);
             if ($autofail) {
-                if ((! $this->evaluation || $this->evaluation < 100)) {
+                if (( ! $this->evaluation || $this->evaluation < 100)) {
                     $this->setFailed(true);
                 } else {
                     $this->setPassed(true);
@@ -428,7 +430,7 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
             $this->evaluation = null;
         }
         $this->evaluated_at = now();
-        if (! $auto) {
+        if ( ! $auto) {
             $this->evaluated_by = Auth::user()->id;
         }
         $this->points()->delete();
@@ -446,20 +448,20 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
     public function setPassed(bool $auto = false): self
     {
         $this->status = UserObjectiveStatus::PASSED;
-        if (! $this->evaluation) {
+        if ( ! $this->evaluation) {
             $this->evaluation = 100;
         }
         $this->evaluated_at = now();
-        if (! $auto) {
+        if ( ! $auto) {
             $this->evaluated_by = Auth::user()->id;
         }
 
         // TODO do not commit
-        $this->points()->updateOrCreate(array(
+        $this->points()->updateOrCreate([
             'user_id' => $this->user_id,
             'points' => $this->calculatePoints(),
             'assigned_by' => $this->evaluated_by,
-        ));
+        ]);
 
         return $this;
     }

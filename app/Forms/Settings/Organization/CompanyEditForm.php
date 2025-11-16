@@ -30,11 +30,11 @@ class CompanyEditForm extends Form
 
     public static function validation(Request $request, $model_id = null): array
     {
-        return array(
+        return [
             'firstname' => 'max:255|required',
             'lastname' => 'max:255|required',
             'email' => 'max:255|email|required',
             'birthday' => 'date|nullable',
-        );
+        ];
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'add' => 'Dodaj',
     'create' => 'Utwórz',
     'remove' => 'Usuń',
@@ -51,4 +51,4 @@ return array(
     'add_realization' => 'Dodaj realizację celu',
     'edit_realization' => 'Modyfikuj realizację celu',
 
-);
+];
