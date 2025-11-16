@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\UserEmployment> $employments
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, UserEmployment> $employments
  * @property-read int|null $employments_count
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position active()

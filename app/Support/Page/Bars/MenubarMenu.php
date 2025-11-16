@@ -14,11 +14,11 @@ class MenubarMenu
 
     public static function boot(string $id, array $items = []): self
     {
-        $instance = new self;
+        $instance = new self();
         $instance->id = $id;
-        $instance->items = new Collection;
+        $instance->items = new Collection();
 
-        if (! empty($items)) {
+        if ( ! empty($items)) {
             foreach ($items as $item) {
                 if ($item instanceof MenuItem) {
                     if ($item->id && $item->isVisible()) {
@@ -35,7 +35,7 @@ class MenubarMenu
 
     public function addClass(?string $class): self
     {
-        if (! empty($class)) {
+        if ( ! empty($class)) {
             $this->classes[] = $class;
         }
 

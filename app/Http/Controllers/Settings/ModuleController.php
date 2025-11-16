@@ -36,7 +36,7 @@ class ModuleController extends SettingsController
         $request = $form::reformatRequest($request);
         $form::validate($request);
         foreach ($request->all() as $key => $value) {
-            $settings->$key = $value;
+            $settings->{$key} = $value;
         }
         if ($settings->save()) {
             return redirect()->to(route('settings.modules.index', ['module' => 'mbo']))->with('success', __('alerts.settings.success.mbo_update'));

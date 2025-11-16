@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserBonusScheme> $user_schemes
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, UserBonusScheme> $user_schemes
  * @property-read int|null $user_schemes_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $users
  * @property-read int|null $users_count

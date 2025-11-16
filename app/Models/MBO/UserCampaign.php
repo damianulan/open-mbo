@@ -24,8 +24,8 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\MBO\Campaign $campaign
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\Objective> $objectives
+ * @property-read Campaign $campaign
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Objective> $objectives
  * @property-read int|null $objectives_count
  * @property-read User $user
  *
@@ -90,6 +90,8 @@ class UserCampaign extends BaseModel implements HasObjectives
 
     public $logEntities = ['user_id' => User::class, 'campaign_id' => Campaign::class];
 
+    public $timestamps = true;
+
     protected $fillable = [
         'campaign_id',
         'user_id',
@@ -102,8 +104,6 @@ class UserCampaign extends BaseModel implements HasObjectives
         'active' => 'boolean',
         'manual' => 'boolean',
     ];
-
-    public $timestamps = true;
 
     protected $dispatchesEvents = [
         'created' => UserCampaignAssigned::class,
@@ -126,7 +126,7 @@ class UserCampaign extends BaseModel implements HasObjectives
         return $this->hasManyThrough(Objective::class, Campaign::class, 'id', 'campaign_id', 'campaign_id', 'id')->whereAssigned($this->user);
     }
 
-    public function assignObjectives()
+    public function assignObjectives(): void
     {
         $templates = $this->campaign->objective_templates();
         if ($templates) {
@@ -138,7 +138,7 @@ class UserCampaign extends BaseModel implements HasObjectives
 
     public function stageDescription(): string
     {
-        return __('forms.campaigns.stages.'.$this->stage);
+        return __('forms.campaigns.stages.' . $this->stage);
     }
 
     public function stageIcon(): string
@@ -150,7 +150,7 @@ class UserCampaign extends BaseModel implements HasObjectives
 
     public function terminate(): bool
     {
-        if ($this->stage !== CampaignStage::TERMINATED) {
+        if (CampaignStage::TERMINATED !== $this->stage) {
             $this->stage = CampaignStage::TERMINATED;
 
             return $this->update();
@@ -168,7 +168,7 @@ class UserCampaign extends BaseModel implements HasObjectives
 
     public function cancel(): bool
     {
-        if ($this->stage !== CampaignStage::CANCELED) {
+        if (CampaignStage::CANCELED !== $this->stage) {
             $this->stage = CampaignStage::CANCELED;
 
             return $this->update();

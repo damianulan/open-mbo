@@ -14,7 +14,7 @@ class CompanyEditForm extends Form
         $route = route('settings.organization.company.store');
         $method = 'POST';
 
-        if (! is_null($model)) {
+        if ( ! is_null($model)) {
             $method = 'PUT';
             $route = route('settings.organization.company.update', $model->id);
         }

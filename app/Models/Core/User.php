@@ -72,8 +72,8 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @property-read int|null $objectives_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Sentinel\Models\Permission> $permissions
  * @property-read int|null $permissions_count
- * @property-read \App\Models\Core\UserPreference|null $preferences
- * @property-read \App\Models\Core\UserProfile|null $profile
+ * @property-read UserPreference|null $preferences
+ * @property-read UserProfile|null $profile
  * @property-read Collection $sessions
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $subordinates
  * @property-read int|null $subordinates_count
@@ -147,24 +147,6 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         'preferences',
     ];
 
-    protected static function booted()
-    {
-        static::creating(function (User $user) {
-            $user->generatePassword();
-            return $user;
-        });
-
-        static::created(function (User $user) {
-            if (empty($user->preferences)) {
-                $user->preferences()->create();
-            }
-        });
-        static::deleting(function (User $user) {
-            $user->profile->delete();
-            $user->preferences->delete();
-        });
-    }
-
     public static function findByEmail(string $email): ?User
     {
         return self::where('email', $email)->first();
@@ -175,24 +157,6 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         $this->password = Hash::make(Str::random(10));
 
         return $this;
-    }
-
-    protected function name(): Attribute
-    {
-        $value = $this->profile?->firstname . ' ' . $this->profile?->lastname;
-
-        return Attribute::make(
-            get: fn() => mb_ucfirst($value),
-        );
-    }
-
-    protected function sessions(): Attribute
-    {
-        return Attribute::make(
-            get: function (): Collection {
-                return config('session.driver') === 'database' ? DB::table('sessions')->where('user_id', $this->id)->orderByDesc('last_activity')->get() : new Collection;
-            },
-        );
     }
 
     public function nameView(): string
@@ -227,16 +191,13 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function toggleLock(): bool
     {
-        if ($this->active == 1) {
+        if (1 === $this->active) {
             $this->active = 0;
         } else {
             $this->active = 1;
         }
-        if ($this->update()) {
-            return true;
-        }
 
-        return false;
+        return (bool) ($this->update());
     }
 
     public function blocked(): bool
@@ -246,12 +207,12 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function canBeDeleted(): bool
     {
-        return $this->core == 0 || isRoot() ? true : false;
+        return 0 === $this->core || isRoot() ? true : false;
     }
 
     public function canBeSuspended(): bool
     {
-        return $this->core == 0 || isRoot() ? true : false;
+        return 0 === $this->core || isRoot() ? true : false;
     }
 
     public function getAvatar(): ?string
@@ -265,7 +226,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function itsMe(): bool
     {
-        return Auth::check() && $this->id == Auth::user()->id;
+        return Auth::check() && $this->id === Auth::user()->id;
     }
 
     public function lastActivityTime(): int
@@ -297,7 +258,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         $letterNum = Alphabet::getAlphabetPosition($initials);
 
         $color = 'primary';
-        if (! $this->isAdmin()) {
+        if ( ! $this->isAdmin()) {
             if ($letterNum < 4) {
                 $color = 'orange';
             } elseif ($letterNum < 8) {
@@ -311,7 +272,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
             }
         }
         $indicator = '';
-        if (! $this->itsMe() && $this->isLoggedIn()) {
+        if ( ! $this->itsMe() && $this->isLoggedIn()) {
             $indicator = '<div class="profile-indicator"></div>';
         }
 
@@ -346,23 +307,23 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     public function preferredLocale()
     {
         $locale = $this->preferences->lang ?? 'auto';
-        if ($locale === 'auto') {
+        if ('auto' === $locale) {
             $locale = app()->getLocale();
         }
 
         return $locale;
     }
 
-    public function scopeWhereFirstname(Builder $query, string $value)
+    public function scopeWhereFirstname(Builder $query, string $value): void
     {
-        $query->whereHas('profile', function (Builder $query) use ($value) {
+        $query->whereHas('profile', function (Builder $query) use ($value): void {
             $query->whereRaw('LOWER(`firstname`) LIKE ?', [Str::lower($value)]);
         });
     }
 
-    public function scopeWhereLastname(Builder $query, string $value)
+    public function scopeWhereLastname(Builder $query, string $value): void
     {
-        $query->whereHas('profile', function (Builder $query) use ($value) {
+        $query->whereHas('profile', function (Builder $query) use ($value): void {
             $query->whereRaw('LOWER(`lastname`) LIKE ?', [Str::lower($value)]);
         });
     }
@@ -370,5 +331,40 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     public function routeShow(): string
     {
         return route('users.show', $this->id);
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (User $user) {
+            $user->generatePassword();
+
+            return $user;
+        });
+
+        static::created(function (User $user): void {
+            if (empty($user->preferences)) {
+                $user->preferences()->create();
+            }
+        });
+        static::deleting(function (User $user): void {
+            $user->profile->delete();
+            $user->preferences->delete();
+        });
+    }
+
+    protected function name(): Attribute
+    {
+        $value = $this->profile?->firstname . ' ' . $this->profile?->lastname;
+
+        return Attribute::make(
+            get: fn () => mb_ucfirst($value),
+        );
+    }
+
+    protected function sessions(): Attribute
+    {
+        return Attribute::make(
+            get: fn (): Collection => 'database' === config('session.driver') ? DB::table('sessions')->where('user_id', $this->id)->orderByDesc('last_activity')->get() : new Collection(),
+        );
     }
 }

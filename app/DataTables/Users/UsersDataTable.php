@@ -24,15 +24,13 @@ class UsersDataTable extends CustomDataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('name', function ($data) {
-                return view('components.datatables.username_link', [
-                    'data' => $data,
-                ]);
-            })
+            ->addColumn('name', fn ($data) => view('components.datatables.username_link', [
+                'data' => $data,
+            ]))
             ->addColumn('status', function ($data) {
                 $color = 'primary';
                 $text = 'Aktywny';
-                if (! $data->active) {
+                if ( ! $data->active) {
                     $color = 'dark';
                     $text = 'Zablokowany';
                 }
@@ -42,28 +40,24 @@ class UsersDataTable extends CustomDataTable
                     'text' => $text,
                 ]);
             })
-            ->orderColumn('status', function ($query, $order) {
-                $o = $order === 'asc' ? 'desc' : 'asc';
+            ->orderColumn('status', function ($query, $order): void {
+                $o = 'asc' === $order ? 'desc' : 'asc';
                 $query->orderBy('active', $o);
                 $query->orderBy('active', $o);
             })
-            ->orderColumn('name', function ($query, $order) {
+            ->orderColumn('name', function ($query, $order): void {
                 $query->orderBy('firstname', $order);
                 $query->orderBy('lastname', $order);
             })
-            ->addColumn('roles', function ($data) {
-                return $data->getRolesNames()->implode(', ');
-            })
-            ->addColumn('action', function ($data) {
-                return view('pages.users.action', [
-                    'data' => $data,
-                ]);
-            })
-            ->filterColumn('name', function ($query, $keyword) {
+            ->addColumn('roles', fn ($data) => $data->getRolesNames()->implode(', '))
+            ->addColumn('action', fn ($data) => view('pages.users.action', [
+                'data' => $data,
+            ]))
+            ->filterColumn('name', function ($query, $keyword): void {
                 $sql = "CONCAT(firstname,' ',lastname)  like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
-            ->filterColumn('position', function ($query, $keyword) {
+            ->filterColumn('position', function ($query, $keyword): void {
                 $sql = 'positions.name like ?';
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
@@ -144,6 +138,6 @@ class UsersDataTable extends CustomDataTable
      */
     protected function filename(): string
     {
-        return 'Users_'.date('YmdHis');
+        return 'Users_' . date('YmdHis');
     }
 }

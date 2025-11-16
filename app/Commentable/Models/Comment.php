@@ -6,6 +6,7 @@ use App\Commentable\Casts\CommentContent;
 use App\Commentable\Events\CommentAdded;
 use App\Commentable\Events\CommentDeleted;
 use App\Traits\Vendors\ModelActivity;
+use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
@@ -26,8 +27,8 @@ use YMigVal\LaravelModelCache\HasCachedQueries;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read Model|\Eloquent $author
- * @property-read Model|\Eloquent $subject
+ * @property-read Model|Eloquent $author
+ * @property-read Model|Eloquent $subject
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment authoredBy(\Illuminate\Database\Eloquent\Model $author)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment average(string $column)
@@ -104,26 +105,6 @@ class Comment extends Model
         'deleted' => CommentDeleted::class,
     ];
 
-    protected static function booted(): void
-    {
-        $user = Auth::user() ?? null;
-        if ($user) {
-            $id = $user->id ?? null;
-            $morph = $user->getMorphClass() ?? null;
-            if ($id && $morph) {
-                static::addGlobalScope('public', function (Builder $builder) use ($id, $morph) {
-                    $builder->where(function (Builder $query) use ($id, $morph) {
-                        $query->where('private', 0)
-                            ->orWhere(function (Builder $query) use ($id, $morph) {
-                                $query->where('author_id', $id)
-                                    ->where('author_type', $morph);
-                            });
-                    });
-                });
-            }
-        }
-    }
-
     public function subject(): MorphTo
     {
         return $this->morphTo()->withTrashed();
@@ -136,7 +117,7 @@ class Comment extends Model
 
     public function isMine(): bool
     {
-        return $this->author_id == Auth::user()->id && $this->author_type == Auth::user()->getMorphClass();
+        return $this->author_id === Auth::user()->id && $this->author_type === Auth::user()->getMorphClass();
     }
 
     public function scopeAuthoredBy(Builder $query, Model $author): void
@@ -151,10 +132,30 @@ class Comment extends Model
 
     public function prunable(): Builder
     {
-        return static::whereHas('subject', function (Builder $query) {
+        return static::whereHas('subject', function (Builder $query): void {
             $query->whereNotNull('deleted_at');
-        })->orWhereHas('author', function (Builder $query) {
+        })->orWhereHas('author', function (Builder $query): void {
             $query->whereNotNull('deleted_at');
         });
+    }
+
+    protected static function booted(): void
+    {
+        $user = Auth::user() ?? null;
+        if ($user) {
+            $id = $user->id ?? null;
+            $morph = $user->getMorphClass() ?? null;
+            if ($id && $morph) {
+                static::addGlobalScope('public', function (Builder $builder) use ($id, $morph): void {
+                    $builder->where(function (Builder $query) use ($id, $morph): void {
+                        $query->where('private', 0)
+                            ->orWhere(function (Builder $query) use ($id, $morph): void {
+                                $query->where('author_id', $id)
+                                    ->where('author_type', $morph);
+                            });
+                    });
+                });
+            }
+        }
     }
 }

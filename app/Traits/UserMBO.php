@@ -24,7 +24,7 @@ trait UserMBO
 
     public function user_objectives_active(): HasMany
     {
-        return $this->user_objectives()->whereHas('objective', function (Builder $query) {
+        return $this->user_objectives()->whereHas('objective', function (Builder $query): void {
             $query->where('draft', 0);
         });
     }

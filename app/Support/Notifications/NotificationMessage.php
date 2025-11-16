@@ -11,6 +11,7 @@ use App\Support\Notifications\Models\MailNotification;
 use App\Support\Notifications\Models\Notification;
 use App\Support\Notifications\Models\SystemNotification;
 use App\Support\Notifications\Traits\Notifiable;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Mail\Mailable;
 use Illuminate\Support\Facades\Mail;
@@ -23,11 +24,11 @@ class NotificationMessage
 
     protected array $resources = [];
 
-    private bool $valid = false;
-
     protected $email_sent = false;
 
     protected $system_sent = false;
+
+    private bool $valid = false;
 
     public function __construct(
         protected Notification $notification,
@@ -49,7 +50,7 @@ class NotificationMessage
             $this->contents = $this->notification->contents->fill($this->placeholders);
 
             $this->valid = true;
-        } catch (\Exception $th) {
+        } catch (Exception $th) {
             report($th);
             if (config('app.debug')) {
                 throw $th;
@@ -60,35 +61,6 @@ class NotificationMessage
     public function getModels(): array
     {
         return $this->resourceModels;
-    }
-
-    private function addPlaceholders($resource): void
-    {
-        if ($resource && $resource instanceof NotificationResource) {
-            $class = $resource->getModel()::class;
-            $this->resources[$class] = $resource->getKey();
-            foreach ($resource->datas() as $key => $value) {
-                $this->placeholders[$key] = $value;
-            }
-        } else {
-            throw new \Exception('Given notification resource '.$resource::class.' is not of type '.NotificationResource::class);
-        }
-    }
-
-    protected function toMail(): ?Mailable
-    {
-        return new MailMessage($this->content);
-    }
-
-    protected function toSystem(): array
-    {
-        return [
-            'notification_id' => $this->notification->id,
-            'notifiable_id' => $this->notifiable->id,
-            'notifiable_type' => $this->notifiable::class,
-            'resources' => json_encode($this->resources),
-            'contents' => $this->contents->system_contents,
-        ];
     }
 
     public function send(): bool
@@ -113,7 +85,7 @@ class NotificationMessage
                     $mailable = $this->toMail();
                     if ($mailable) {
                         $mailSent = Mail::to($this->notifiable)->send($mailable);
-                        if (! $mailSent) {
+                        if ( ! $mailSent) {
                             $result = false;
                         } else {
                             $this->email_sent = true;
@@ -129,16 +101,45 @@ class NotificationMessage
                         }
                     }
                 }
-            } catch (\Exception $th) {
+            } catch (Exception $th) {
                 report($th);
                 if (config('app.debug')) {
                     throw $th;
-                } else {
-                    $result = false;
                 }
+                $result = false;
+
             }
         }
 
         return $result;
+    }
+
+    protected function toMail(): ?Mailable
+    {
+        return new MailMessage($this->content);
+    }
+
+    protected function toSystem(): array
+    {
+        return [
+            'notification_id' => $this->notification->id,
+            'notifiable_id' => $this->notifiable->id,
+            'notifiable_type' => $this->notifiable::class,
+            'resources' => json_encode($this->resources),
+            'contents' => $this->contents->system_contents,
+        ];
+    }
+
+    private function addPlaceholders($resource): void
+    {
+        if ($resource && $resource instanceof NotificationResource) {
+            $class = $resource->getModel()::class;
+            $this->resources[$class] = $resource->getKey();
+            foreach ($resource->datas() as $key => $value) {
+                $this->placeholders[$key] = $value;
+            }
+        } else {
+            throw new Exception('Given notification resource ' . $resource::class . ' is not of type ' . NotificationResource::class);
+        }
     }
 }

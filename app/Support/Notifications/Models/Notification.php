@@ -77,8 +77,8 @@ class Notification extends Model
     public static function createOrUpdate(string $key, array $attributes = []): self
     {
         $notification = self::byKey($key);
-        if (! $notification) {
-            $notification = new self;
+        if ( ! $notification) {
+            $notification = new self();
             $attributes['key'] = $key;
         }
         $notification->fill($attributes);
@@ -94,6 +94,16 @@ class Notification extends Model
         return $this;
     }
 
+    public function scopeEvents(Builder $query): void
+    {
+        $query->select('notifications.event')->groupBy('notifications.event');
+    }
+
+    public function scopeWhereEvent(Builder $query, string $event): void
+    {
+        $query->where('notifications.event', $event);
+    }
+
     protected function resources(): Attribute
     {
         return Attribute::make(
@@ -103,27 +113,13 @@ class Notification extends Model
                     $models = ResourceFactory::getEventResourceModels($this->event);
                 }
                 if ($notifiable = config('auth.providers.users.model')) {
-                    $models[$notifiable] = new $notifiable;
+                    $models[$notifiable] = new $notifiable();
                 }
-                $resources = array_map(function ($model) {
-                    return ResourceFactory::matchModel($model);
-                }, $models);
-                $resources = array_filter($resources, function ($item) {
-                    return ! is_null($item);
-                });
+                $resources = array_map(fn ($model) => ResourceFactory::matchModel($model), $models);
+                $resources = array_filter($resources, fn ($item) => ! is_null($item));
 
                 return collect($resources);
             },
         );
-    }
-
-    public function scopeEvents(Builder $query): void
-    {
-        $query->select('notifications.event')->groupBy('notifications.event');
-    }
-
-    public function scopeWhereEvent(Builder $query, string $event): void
-    {
-        $query->where('notifications.event', $event);
     }
 }

@@ -7,6 +7,7 @@ use App\Models\Core\User;
 use App\Models\MBO\UserObjective;
 use App\Traits\UserMBO;
 use Closure;
+use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -21,10 +22,10 @@ class ObjectivesList extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public Model $model, public User $user = new User)
+    public function __construct(public Model $model, public User $user = new User())
     {
-        if (! ($model instanceof HasObjectives) && ! isset(class_uses_recursive($model)[UserMBO::class])) {
-            $e = new \Exception('Model must implement HasObjectives interface or UserMBO trait.');
+        if ( ! ($model instanceof HasObjectives) && ! isset(class_uses_recursive($model)[UserMBO::class])) {
+            $e = new Exception('Model must implement HasObjectives interface or UserMBO trait.');
             report($e);
             throw $e;
         }

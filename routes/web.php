@@ -16,22 +16,20 @@ use Livewire\Livewire;
 |
 */
 
-Route::middleware('web')->group(function () {
+Route::middleware('web')->group(function (): void {
     Auth::routes();
 });
 
-Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
+Route::middleware(['web', 'auth', 'maintenance'])->group(function (): void {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
-    Livewire::setUpdateRoute(function ($handle) {
-        return Route::post('/livewire/update', $handle);
-    });
+    Livewire::setUpdateRoute(fn ($handle) => Route::post('/livewire/update', $handle));
 
     Laraverse::routes();
 
     /**
      * Users START
      */
-    Route::prefix('users')->name('users.')->group(function () {
+    Route::prefix('users')->name('users.')->group(function (): void {
         Route::get('/', [App\Http\Controllers\UsersController::class, 'index'])->name('index');
         Route::post('/', [App\Http\Controllers\UsersController::class, 'store'])->name('store');
         Route::get('create', [App\Http\Controllers\UsersController::class, 'create'])->name('create');
@@ -44,7 +42,7 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
         Route::get('/impersonate/leave', [App\Http\Controllers\UsersController::class, 'impersonateLeave'])->name('impersonate.leave');
     });
 
-    Route::prefix('profile')->name('profile.')->group(function () {
+    Route::prefix('profile')->name('profile.')->group(function (): void {
         Route::get('/', [App\Http\Controllers\ProfileController::class, 'index'])->name('index');
         Route::get('/activity', [App\Http\Controllers\Settings\LogController::class, 'myLogs'])->name('logs');
     });
@@ -56,36 +54,36 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
     /**
      * Settings START
      */
-    Route::prefix('settings')->name('settings.')->group(function () {
-        Route::prefix('general')->name('general.')->middleware('route.gate:settings-general')->group(function () {
+    Route::prefix('settings')->name('settings.')->group(function (): void {
+        Route::prefix('general')->name('general.')->middleware('route.gate:settings-general')->group(function (): void {
             Route::get('/', [App\Http\Controllers\Settings\GeneralController::class, 'index'])->name('index');
             Route::post('general/store', [App\Http\Controllers\Settings\GeneralController::class, 'storeGeneral'])->name('store');
         });
 
-        Route::prefix('server')->name('server.')->middleware('route.gate:settings-server')->group(function () {
+        Route::prefix('server')->name('server.')->middleware('route.gate:settings-server')->group(function (): void {
             Route::get('/', [App\Http\Controllers\Settings\ServerController::class, 'index'])->name('index');
             Route::post('store/mail', [App\Http\Controllers\Settings\ServerController::class, 'storeMail'])->name('mail.store');
             Route::get('clearcache', [App\Http\Controllers\Settings\ServerController::class, 'cache'])->name('clearcache');
             Route::post('debugging', [App\Http\Controllers\Settings\ServerController::class, 'debugging'])->name('debugging');
             Route::post('debugbar-enable', [App\Http\Controllers\Settings\ServerController::class, 'debugbar'])->name('debugbar');
-            Route::get('phpinfo', function () {
+            Route::get('phpinfo', function (): void {
                 echo phpinfo();
             })->name('phpinfo');
         });
-        Route::prefix('logs')->name('logs.')->middleware('route.gate:settings-logs')->group(function () {
+        Route::prefix('logs')->name('logs.')->middleware('route.gate:settings-logs')->group(function (): void {
             Route::get('/', [App\Http\Controllers\Settings\LogController::class, 'index'])->name('index');
         });
-        Route::prefix('notifications')->name('notifications.')->middleware('route.gate:settings-notifications')->group(function () {
+        Route::prefix('notifications')->name('notifications.')->middleware('route.gate:settings-notifications')->group(function (): void {
             Route::get('/', [App\Http\Controllers\Settings\NotificationsController::class, 'index'])->name('index');
         });
-        Route::prefix('modules')->name('modules.')->middleware('route.gate:settings-modules')->group(function () {
+        Route::prefix('modules')->name('modules.')->middleware('route.gate:settings-modules')->group(function (): void {
             Route::get('/{module?}', [App\Http\Controllers\Settings\ModuleController::class, 'index'])->name('index');
             Route::post('/mbo/store', [App\Http\Controllers\Settings\ModuleController::class, 'storeMbo'])->name('mbo.store');
         });
 
-        Route::prefix('organization')->name('organization.')->group(function () {
+        Route::prefix('organization')->name('organization.')->group(function (): void {
             Route::get('/', [App\Http\Controllers\Settings\Organization\OrganizationController::class, 'index'])->name('index');
-            Route::prefix('company')->name('company.')->group(function () {
+            Route::prefix('company')->name('company.')->group(function (): void {
                 Route::get('/', [App\Http\Controllers\Settings\Organization\CompanyController::class, 'index'])->name('index');
                 Route::post('/', [App\Http\Controllers\Settings\Organization\CompanyController::class, 'store'])->name('store');
                 Route::get('create', [App\Http\Controllers\Settings\Organization\CompanyController::class, 'create'])->name('create');
@@ -98,8 +96,8 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
     /**
      * Management START
      */
-    Route::prefix('mbo')->middleware('module:mbo')->group(function () {
-        Route::prefix('templates')->name('templates.')->group(function () {
+    Route::prefix('mbo')->middleware('module:mbo')->group(function (): void {
+        Route::prefix('templates')->name('templates.')->group(function (): void {
             Route::get('/', [App\Http\Controllers\Objectives\ObjectiveTemplateController::class, 'index'])->name('index');
             Route::post('/', [App\Http\Controllers\Objectives\ObjectiveTemplateController::class, 'store'])->name('store');
             Route::get('create', [App\Http\Controllers\Objectives\ObjectiveTemplateController::class, 'create'])->name('create');
@@ -108,7 +106,7 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
             Route::put('{objective}', [App\Http\Controllers\Objectives\ObjectiveTemplateController::class, 'update'])->name('update');
             Route::get('/delete/{objective}', [App\Http\Controllers\Objectives\ObjectiveTemplateController::class, 'delete'])->name('delete');
         });
-        Route::prefix('categories')->name('categories.')->group(function () {
+        Route::prefix('categories')->name('categories.')->group(function (): void {
             Route::get('/', [App\Http\Controllers\Objectives\ObjectiveCategoryController::class, 'index'])->name('index');
             Route::post('/', [App\Http\Controllers\Objectives\ObjectiveCategoryController::class, 'store'])->name('store');
             Route::get('create', [App\Http\Controllers\Objectives\ObjectiveCategoryController::class, 'create'])->name('create');
@@ -118,7 +116,7 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
             Route::get('/delete/{objective}', [App\Http\Controllers\Objectives\ObjectiveCategoryController::class, 'delete'])->name('delete');
         });
 
-        Route::prefix('objectives')->name('objectives.')->group(function () {
+        Route::prefix('objectives')->name('objectives.')->group(function (): void {
             Route::get('/', [App\Http\Controllers\Objectives\ObjectiveController::class, 'index'])->name('index');
             Route::post('/', [App\Http\Controllers\Objectives\ObjectiveController::class, 'store'])->name('store');
             Route::get('create', [App\Http\Controllers\Objectives\ObjectiveController::class, 'create'])->name('create');
@@ -127,7 +125,7 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
             Route::put('{objective}', [App\Http\Controllers\Objectives\ObjectiveController::class, 'update'])->name('update');
             Route::get('/delete/{objective}', [App\Http\Controllers\Objectives\ObjectiveController::class, 'delete'])->name('delete');
 
-            Route::prefix('assignment')->name('assignment.')->group(function () {
+            Route::prefix('assignment')->name('assignment.')->group(function (): void {
                 Route::get('/{id}', [App\Http\Controllers\Objectives\UserObjectiveController::class, 'show'])->name('show');
                 Route::post('{objective}', [App\Http\Controllers\Objectives\UserObjectiveController::class, 'update'])->name('update');
                 Route::post('evaluation/{id}', [App\Http\Controllers\Objectives\UserObjectiveController::class, 'updateEvaluation'])->name('update_evaluation');
@@ -136,7 +134,7 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
             });
         });
 
-        Route::prefix('campaigns')->name('campaigns.')->group(function () {
+        Route::prefix('campaigns')->name('campaigns.')->group(function (): void {
             Route::get('/', [App\Http\Controllers\Campaigns\CampaignsController::class, 'index'])->name('index');
             Route::post('/', [App\Http\Controllers\Campaigns\CampaignsController::class, 'store'])->name('store');
             Route::get('create', [App\Http\Controllers\Campaigns\CampaignsController::class, 'create'])->name('create');
@@ -147,12 +145,12 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
             Route::post('/resume/{id}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'resume'])->name('resume');
             Route::post('/cancel/{id}', [App\Http\Controllers\Campaigns\CampaignsController::class, 'cancel'])->name('cancel');
 
-            Route::prefix('objective')->name('objective.')->group(function () {
+            Route::prefix('objective')->name('objective.')->group(function (): void {
                 Route::post('/', [App\Http\Controllers\Campaigns\CampaignObjectiveController::class, 'store'])->name('store');
                 Route::put('/{objective}', [App\Http\Controllers\Campaigns\CampaignObjectiveController::class, 'update'])->name('update');
                 Route::delete('/delete/{id}', [App\Http\Controllers\Campaigns\CampaignObjectiveController::class, 'delete'])->name('delete');
             });
-            Route::prefix('users')->name('users.')->group(function () {
+            Route::prefix('users')->name('users.')->group(function (): void {
                 Route::post('/{campaign}', [App\Http\Controllers\Campaigns\CampaignUserController::class, 'update'])->name('update');
                 Route::get('/toggle-manual/{id}', [App\Http\Controllers\Campaigns\CampaignUserController::class, 'toggleManual'])->name('toggle_manual');
                 Route::get('/next-stage/{id}', [App\Http\Controllers\Campaigns\CampaignUserController::class, 'moveStageUp'])->name('next_stage');
@@ -162,17 +160,17 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function () {
         });
     });
 
-    Route::name('general.')->group(function () {
+    Route::name('general.')->group(function (): void {
         Route::get('/get_modal', [App\Http\Controllers\ModalController::class, 'getModal'])->name('get_modal');
     });
 
-    Route::prefix('datatables')->name('datatables.')->group(function () {
+    Route::prefix('datatables')->name('datatables.')->group(function (): void {
         Route::post('/save_columns', [App\Support\DataTables\CustomDataTable::class, 'saveColumns'])->name('save_columns');
         Route::get('/excel/{class}', [App\Support\DataTables\DataTableController::class, 'toExcel'])->name('excel');
         Route::get('/csv/{class}', [App\Support\DataTables\DataTableController::class, 'toCsv'])->name('csv');
     });
 
-    Route::prefix('ajax')->name('ajax.')->group(function () {
+    Route::prefix('ajax')->name('ajax.')->group(function (): void {
         Route::get('/get_model_instance', [App\Http\Controllers\AjaxController::class, 'getModelInstance'])->name('get_model_instance');
     });
 

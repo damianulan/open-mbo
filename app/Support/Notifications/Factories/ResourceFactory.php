@@ -7,6 +7,7 @@ use App\Notifications\Resources\UserResource;
 use App\Support\Notifications\Contracts\NotifiableEvent;
 use App\Support\Notifications\Contracts\NotificationResource;
 use Illuminate\Database\Eloquent\Model;
+use ReflectionClass;
 
 class ResourceFactory
 {
@@ -21,7 +22,7 @@ class ResourceFactory
 
     public static function getEventResourceModels($event): array
     {
-        $reflection = new \ReflectionClass($event);
+        $reflection = new ReflectionClass($event);
 
         $models = [];
 
@@ -34,7 +35,7 @@ class ResourceFactory
                 } else {
                     if (class_exists($property->getType())) {
                         $class = $property->getType()->__toString();
-                        $value = new $class;
+                        $value = new $class();
                     }
                 }
 

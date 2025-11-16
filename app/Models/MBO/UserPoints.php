@@ -4,6 +4,7 @@ namespace App\Models\MBO;
 
 use App\Models\BaseModel;
 use App\Models\Core\User;
+use Eloquent;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
@@ -20,7 +21,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
  * @property-read User|null $assigner
- * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $subject
+ * @property-read \Illuminate\Database\Eloquent\Model|Eloquent $subject
  * @property-read User $user
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints active()

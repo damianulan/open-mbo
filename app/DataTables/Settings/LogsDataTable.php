@@ -23,15 +23,11 @@ class LogsDataTable extends BaseLogDataTable
     {
 
         return (new EloquentDataTable($query))
-            ->addColumn('causer', function ($data) {
-                return $this->userView($data, 'causer');
-            })
-            ->addColumn('event', function ($data) {
-                return view('components.datatables.badge', [
-                    'color' => $this->getEventColor($data->event),
-                    'text' => __('logging.events.'.$data->event),
-                ]);
-            })
+            ->addColumn('causer', fn ($data) => $this->userView($data, 'causer'))
+            ->addColumn('event', fn ($data) => view('components.datatables.badge', [
+                'color' => $this->getEventColor($data->event),
+                'text' => __('logging.events.' . $data->event),
+            ]))
             ->addColumn('subject', function ($data) {
                 if ($data->subject) {
                     $logEntities = $data->subject->logEntities ?? null;
@@ -49,7 +45,7 @@ class LogsDataTable extends BaseLogDataTable
                             }
                         }
 
-                        if (! empty($instances)) {
+                        if ( ! empty($instances)) {
                             // return view('components.datatables.link_multiple', [
                             //     'instances' => $instances,
                             // ]);
@@ -61,14 +57,12 @@ class LogsDataTable extends BaseLogDataTable
                     return __('globals.not_applicable');
                 }
             })
-            ->addColumn('subject_type', function ($data) {
-                return $this->subjectTypeView($data);
-            })
-            ->orderColumn('causer', function ($query, $order) {
+            ->addColumn('subject_type', fn ($data) => $this->subjectTypeView($data))
+            ->orderColumn('causer', function ($query, $order): void {
                 $query->orderBy('firstname', $order);
                 $query->orderBy('lastname', $order);
             })
-            ->filterColumn('causer', function ($query, $keyword) {
+            ->filterColumn('causer', function ($query, $keyword): void {
                 $sql = "CONCAT(firstname,'-',lastname)  like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
@@ -128,14 +122,14 @@ class LogsDataTable extends BaseLogDataTable
      */
     protected function filename(): string
     {
-        return 'Logs_'.date('YmdHis');
+        return 'Logs_' . date('YmdHis');
     }
 
     private function getEventColor(string $event): string
     {
         $color = 'primary';
 
-        if ($event === 'auth_attempt_fail') {
+        if ('auth_attempt_fail' === $event) {
             $color = 'danger';
         }
 

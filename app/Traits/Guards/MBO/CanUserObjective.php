@@ -23,11 +23,11 @@ trait CanUserObjective
 
     public function canBeFailed(): bool
     {
-        return $this->canBeEvaluated() && $this->status !== UserObjectiveStatus::FAILED;
+        return $this->canBeEvaluated() && UserObjectiveStatus::FAILED !== $this->status;
     }
 
     public function canBePassed(): bool
     {
-        return $this->canBeEvaluated() && $this->status !== UserObjectiveStatus::PASSED;
+        return $this->canBeEvaluated() && UserObjectiveStatus::PASSED !== $this->status;
     }
 }

@@ -17,17 +17,15 @@ class UserCampaignUnassigned implements NotifiableEvent
      */
     public function __construct(
         public UserCampaign $userCampaign
-    ) {
-        //
+    ) {}
+
+    public static function description(): string
+    {
+        return 'User campaign unassigned';
     }
 
     public function notifiable(): Model
     {
         return $this->userCampaign->user;
-    }
-
-    public static function description(): string
-    {
-        return 'User campaign unassigned';
     }
 }

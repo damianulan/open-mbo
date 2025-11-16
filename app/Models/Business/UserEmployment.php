@@ -21,10 +21,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\Business\Company|null $company
- * @property-read \App\Models\Business\TypeOfContract|null $contract
- * @property-read \App\Models\Business\Department|null $department
- * @property-read \App\Models\Business\Position|null $position
+ * @property-read Company|null $company
+ * @property-read TypeOfContract|null $contract
+ * @property-read Department|null $department
+ * @property-read Position|null $position
  * @property-read User $user
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment active()
@@ -102,13 +102,6 @@ class UserEmployment extends BaseModel
         'release' => 'date',
     ];
 
-    protected static function booted()
-    {
-        static::addGlobalScope('order', function (Builder $builder) {
-            $builder->orderByDesc('employment');
-        });
-    }
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class)->withTrashed();
@@ -137,9 +130,16 @@ class UserEmployment extends BaseModel
     public function scopeActive(Builder $query): void
     {
         $query->where('user_employments.employment', '<', now())
-            ->where(function (Builder $q) {
+            ->where(function (Builder $q): void {
                 $q->whereNull('user_employments.release')
                     ->orWhere('user_employments.release', '>', now());
             });
+    }
+
+    protected static function booted(): void
+    {
+        static::addGlobalScope('order', function (Builder $builder): void {
+            $builder->orderByDesc('employment');
+        });
     }
 }

@@ -2,9 +2,9 @@
 
 namespace App\Services\Users;
 
-use Lucent\Services\Service;
 use App\Models\Core\User;
 use App\Models\Core\UserProfile;
+use Lucent\Services\Service;
 
 final class CreateOrUpdate extends Service
 {

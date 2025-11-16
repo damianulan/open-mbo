@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\Company> $companies
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Company> $companies
  * @property-read int|null $companies_count
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location active()

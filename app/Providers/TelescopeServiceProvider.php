@@ -22,19 +22,15 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
         $this->hideSensitiveRequestDetails();
 
         Telescope::filter(function (IncomingEntry $entry) {
-            $method = 'entry'.ucfirst(config('app.env'));
+            $method = 'entry' . ucfirst(config('app.env'));
 
-            return $this->$method($entry);
+            return $this->{$method}($entry);
         });
     }
 
     protected function entryLocal(IncomingEntry $entry): bool
     {
-        if ($entry->isEvent() && ! $this->filterEvents($entry)) {
-            return false;
-        }
-
-        return true;
+        return ! ($entry->isEvent() && ! $this->filterEvents($entry));
     }
 
     protected function entryDevelopment(IncomingEntry $entry): bool
@@ -52,7 +48,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
             $entry->isEvent() ||
             $entry->hasMonitoredTag() ||
             $entry->isGate() ||
-            $entry->type === EntryType::JOB;
+            EntryType::JOB === $entry->type;
     }
 
     protected function entryProduction(IncomingEntry $entry): bool
@@ -62,14 +58,6 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
             $entry->isFailedJob() ||
             $entry->isScheduledTask() ||
             $entry->hasMonitoredTag();
-    }
-
-    private function filterEvents(IncomingEntry $entry): bool
-    {
-        return ! in_array($entry->content['name'], [
-            SettingsLoaded::class,
-            LoadingSettings::class,
-        ]);
     }
 
     /**
@@ -97,8 +85,14 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
      */
     protected function gate(): void
     {
-        Gate::define('viewTelescope', function ($user) {
-            return $user->can('telescope-view');
-        });
+        Gate::define('viewTelescope', fn ($user) => $user->can('telescope-view'));
+    }
+
+    private function filterEvents(IncomingEntry $entry): bool
+    {
+        return ! in_array($entry->content['name'], [
+            SettingsLoaded::class,
+            LoadingSettings::class,
+        ]);
     }
 }

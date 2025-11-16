@@ -42,7 +42,7 @@ class MailSettings extends Settings
 
     public function safePassword()
     {
-        if (! empty($this->mail_password)) {
+        if ( ! empty($this->mail_password)) {
             $this->mail_password = 'PassProtection123@';
         }
 

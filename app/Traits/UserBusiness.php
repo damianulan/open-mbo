@@ -99,17 +99,13 @@ trait UserBusiness
 
     public function refreshSupervisors(?array $user_ids)
     {
-        if (! $user_ids) {
+        if ( ! $user_ids) {
             $user_ids = [];
         }
 
         $current = $this->supervisors->pluck('id')->toArray();
-        $toDelete = array_filter($current, function ($value) use ($user_ids) {
-            return ! in_array($value, $user_ids);
-        });
-        $toAdd = array_filter($user_ids, function ($value) use ($current) {
-            return ! in_array($value, $current);
-        });
+        $toDelete = array_filter($current, fn ($value) => ! in_array($value, $user_ids));
+        $toAdd = array_filter($user_ids, fn ($value) => ! in_array($value, $current));
 
         foreach ($toDelete as $user_id) {
             $this->revokeSupervisor($user_id);

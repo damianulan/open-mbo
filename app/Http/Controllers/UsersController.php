@@ -5,10 +5,9 @@ namespace App\Http\Controllers;
 use App\DataTables\Users\UsersDataTable;
 use App\Forms\Users\UserEditForm;
 use App\Models\Core\User;
-use App\Models\Core\UserProfile;
+use App\Services\Users\CreateOrUpdate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Services\Users\CreateOrUpdate;
 
 class UsersController extends AppController
 {
@@ -49,6 +48,7 @@ class UsersController extends AppController
 
         if ($service->passed()) {
             $user = $service->user;
+
             return redirect()->route('users.show', $user->id)->with('success', __('alerts.users.success.create'));
         }
 
@@ -101,6 +101,7 @@ class UsersController extends AppController
 
         if ($service->passed()) {
             $user = $service->user;
+
             return redirect()->route('users.show', $id)->with('success', __('alerts.users.success.edit', ['name' => $user->name]));
         }
 

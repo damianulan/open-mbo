@@ -15,7 +15,7 @@ return [
     /**
      * The event that we catch to change the receiver
      */
-    'event' => \Illuminate\Mail\Events\MessageSending::class,
+    'event' => Illuminate\Mail\Events\MessageSending::class,
 
     /**
      * If we add the receivers to text mail

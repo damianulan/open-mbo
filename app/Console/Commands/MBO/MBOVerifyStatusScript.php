@@ -7,6 +7,7 @@ use App\Models\MBO\Campaign;
 use App\Models\MBO\UserObjective;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class MBOVerifyStatusScript extends BaseCommand
 {
@@ -27,13 +28,13 @@ class MBOVerifyStatusScript extends BaseCommand
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         $this->logStart();
         try {
             $this->campaignsSetStatus();
             $this->log('completed', true);
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             $this->log($th->getMessage(), false);
             $this->error($th->getMessage());
         }
@@ -44,12 +45,12 @@ class MBOVerifyStatusScript extends BaseCommand
         try {
             DB::beginTransaction();
             $this->line('Updating campaigns status ...');
-            Campaign::whereActive()->whereManual(0)->chunk(config('app.chunk_default'), function (Collection $campaigns) use ($echo) {
+            Campaign::whereActive()->whereManual(0)->chunk(config('app.chunk_default'), function (Collection $campaigns) use ($echo): void {
                 foreach ($campaigns as $campaign) {
                     $campaign->setStageAuto();
                     if ($campaign->isDirty('stage')) {
                         if ($echo) {
-                            $this->line('Updating campaign status for: '.$campaign->name.' - '.$campaign->getOriginal('stage').' => '.$campaign->stage);
+                            $this->line('Updating campaign status for: ' . $campaign->name . ' - ' . $campaign->getOriginal('stage') . ' => ' . $campaign->stage);
                         }
                         $campaign->updateQuietly();
                     }
@@ -58,19 +59,19 @@ class MBOVerifyStatusScript extends BaseCommand
                 }
             });
             $this->line('Updating objectives status ...');
-            UserObjective::whereNotEvaluated()->whereHas('objective')->chunk(config('app.chunk_default'), function (Collection $objectives) use ($echo) {
+            UserObjective::whereNotEvaluated()->whereHas('objective')->chunk(config('app.chunk_default'), function (Collection $objectives) use ($echo): void {
                 foreach ($objectives as $objective) {
                     $objective->setStatus();
                     if ($objective->isDirty('status')) {
                         if ($echo) {
-                            $this->line('Updating objective status for: '.$objective->objective->name.' ('.$objective->user->name.') - '.$objective->getOriginal('status').' => '.$objective->status);
+                            $this->line('Updating objective status for: ' . $objective->objective->name . ' (' . $objective->user->name . ') - ' . $objective->getOriginal('status') . ' => ' . $objective->status);
                         }
                         $objective->updateQuietly();
                     }
                 }
             });
             DB::commit();
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             DB::rollBack();
             $this->error($th->getMessage());
         }

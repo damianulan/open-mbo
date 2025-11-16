@@ -39,7 +39,7 @@ class AppController extends BaseController
             }
 
             if (empty($description) && $model && $user) {
-                $description = __('logging.description.view', ['model_map' => __('logging.model_mapping.'.$model::class), 'username' => $user->name]);
+                $description = __('logging.description.view', ['model_map' => __('logging.model_mapping.' . $model::class), 'username' => $user->name]);
             } else {
                 if (empty($description)) {
                     $description = 'view';
@@ -57,7 +57,7 @@ class AppController extends BaseController
 
         if (is_null($defaultRedirect)) {
             $defaultRedirect = redirect()->back();
-            if (! is_null($errorMessage)) {
+            if ( ! is_null($errorMessage)) {
                 $defaultRedirect->with(MessageType::ERROR, $errorMessage);
             }
         }
@@ -70,7 +70,7 @@ class AppController extends BaseController
         ?string $message = null,
         UrlGenerator|RedirectResponse|null $redirect = null
     ): RedirectResponse|UrlGenerator {
-        if (! $exception instanceof AppException) {
+        if ( ! $exception instanceof AppException) {
             report($exception);
         }
 
@@ -91,7 +91,7 @@ class AppController extends BaseController
         ?string $message = null,
         array $datas = []
     ): JsonResponse {
-        if (! $exception instanceof AppException) {
+        if ( ! $exception instanceof AppException) {
             report($exception);
         }
 
@@ -113,6 +113,16 @@ class AppController extends BaseController
         return $this->finalResponseJson($success, $message, $datas);
     }
 
+    protected function responseJsonError(?string $message = null, array $datas = []): JsonResponse
+    {
+        return $this->finalResponseJson(false, $message, $datas);
+    }
+
+    protected function responseJsonSuccess(?string $message = null, array $datas = []): JsonResponse
+    {
+        return $this->finalResponseJson(true, $message, $datas);
+    }
+
     private function finalResponseJson(bool $success = true, ?string $message = null, array $datas = []): JsonResponse
     {
         if (empty($message)) {
@@ -126,15 +136,5 @@ class AppController extends BaseController
             ],
             $datas
         ));
-    }
-
-    protected function responseJsonError(?string $message = null, array $datas = []): JsonResponse
-    {
-        return $this->finalResponseJson(false, $message, $datas);
-    }
-
-    protected function responseJsonSuccess(?string $message = null, array $datas = []): JsonResponse
-    {
-        return $this->finalResponseJson(true, $message, $datas);
     }
 }

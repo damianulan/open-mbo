@@ -27,10 +27,10 @@ class BusinessSeeder extends Seeder
         Company::factory(2)->has(Location::factory()->count(fake()->numberBetween(1, 3)), 'locations')->create();
     }
 
-    private function createContract(string $name)
+    private function createContract(string $name): void
     {
         $contract = new TypeOfContract([
-            'name' => __('faker.type_of_contract.'.$name),
+            'name' => __('faker.type_of_contract.' . $name),
         ]);
         $contract->save();
     }

@@ -33,12 +33,12 @@ use Lucent\Support\Traits\Dispatcher;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\MBO\Campaign|null $campaign
- * @property-read \App\Models\MBO\ObjectiveTemplateCategory|null $category
+ * @property-read Campaign|null $campaign
+ * @property-read ObjectiveTemplateCategory|null $category
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Commentable\Models\Comment> $comments
  * @property-read int|null $comments_count
- * @property-read \App\Models\MBO\ObjectiveTemplate|null $template
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserObjective> $user_objectives
+ * @property-read ObjectiveTemplate|null $template
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective active()
@@ -133,19 +133,16 @@ class Objective extends BaseModel implements HasDeadline
         'created' => ObjectiveCreated::class,
     ];
 
-    protected static function boot()
+    public static function creatingObjective(Objective $model): self
     {
-        parent::boot();
-        static::created(function ($model) {
-            if ($model->campaign_id) {
-                $ucs = $model->campaign->user_campaigns;
-                if ($ucs) {
-                    foreach ($ucs as $uc) {
-                        UserObjective::assign($uc->user_id, $model->id);
-                    }
-                }
+        if ($model->campaign_id && empty($model->deadline)) {
+            $campaign = Campaign::find($model->campaign_id);
+            if ($campaign) {
+                $model->deadline = $campaign->realization_to;
             }
-        });
+        }
+
+        return $model;
     }
 
     public function isOverdued(): bool
@@ -216,7 +213,7 @@ class Objective extends BaseModel implements HasDeadline
     public function scopeWhereAssigned(Builder $query, ?User $user = null): void
     {
 
-        $query->whereHas('user_objectives', function (Builder $q) use ($user) {
+        $query->whereHas('user_objectives', function (Builder $q) use ($user): void {
             if ($user) {
                 $q->where('user_id', $user->id);
             }
@@ -224,15 +221,18 @@ class Objective extends BaseModel implements HasDeadline
             ->published();
     }
 
-    public static function creatingObjective(Objective $model): self
+    protected static function boot(): void
     {
-        if ($model->campaign_id && empty($model->deadline)) {
-            $campaign = Campaign::find($model->campaign_id);
-            if ($campaign) {
-                $model->deadline = $campaign->realization_to;
+        parent::boot();
+        static::created(function ($model): void {
+            if ($model->campaign_id) {
+                $ucs = $model->campaign->user_campaigns;
+                if ($ucs) {
+                    foreach ($ucs as $uc) {
+                        UserObjective::assign($uc->user_id, $model->id);
+                    }
+                }
             }
-        }
-
-        return $model;
+        });
     }
 }

@@ -71,7 +71,7 @@ class BaseModel extends Model
 
     public function carbonDate(string $prop, string $format = 'Y-m-d')
     {
-        $date = $this->$prop;
+        $date = $this->{$prop};
         $date_carbon = null;
         if ($date) {
             $date_carbon = Carbon::parse($date)->format($format);

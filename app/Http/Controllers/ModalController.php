@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Throwable;
 
 class ModalController extends AppController
 {
@@ -19,18 +21,18 @@ class ModalController extends AppController
         try {
             if ($target) {
                 $partials = explode('@', $target);
-                if (count($partials) === 2) {
+                if (2 === count($partials)) {
                     $controller = $partials[0];
                     $method = $partials[1];
 
-                    $object = new $controller;
+                    $object = new $controller();
                     $id = $datas['id'] ?? null;
                     if (is_array($datas) && count($datas)) {
                         foreach ($datas as $key => $value) {
                             $request->request->add([$key => $value]);
                         }
                     }
-                    $view = $object->$method(
+                    $view = $object->{$method}(
                         request: $request,
                         id: $id
                     );
@@ -38,15 +40,15 @@ class ModalController extends AppController
                         $view = $view->render();
                         $status = true;
                     } else {
-                        throw new \Exception('Modal method must return a Illuminate\View\View instance.');
+                        throw new Exception('Modal method must return a Illuminate\View\View instance.');
                     }
                 } else {
-                    throw new \Exception('Modal target must be in format "controller@method".');
+                    throw new Exception('Modal target must be in format "controller@method".');
                 }
             } else {
-                throw new \Exception('Modal target is missing.');
+                throw new Exception('Modal target is missing.');
             }
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->e = $e;
         }
 

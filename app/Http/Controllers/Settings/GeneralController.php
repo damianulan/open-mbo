@@ -34,7 +34,7 @@ class GeneralController extends SettingsController
         ]);
         $target_release = settings('general.target_release');
         foreach ($request->all() as $key => $value) {
-            $settings->$key = $value;
+            $settings->{$key} = $value;
         }
         if ($settings->save()) {
             if ($settings->target_release !== $target_release) {

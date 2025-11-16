@@ -16,7 +16,5 @@ class ObjectiveUpdated implements ShouldDispatchAfterCommit
      */
     public function __construct(
         public Objective $objective
-    ) {
-        //
-    }
+    ) {}
 }

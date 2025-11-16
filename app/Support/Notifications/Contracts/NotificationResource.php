@@ -9,6 +9,10 @@ abstract class NotificationResource implements Jsonable
 {
     public function __construct(protected Model $model) {}
 
+    abstract public function datas(): array;
+
+    abstract public static function descriptions(): array;
+
     final public function getModel(): Model
     {
         return $this->model;
@@ -18,10 +22,6 @@ abstract class NotificationResource implements Jsonable
     {
         return $this->model->getKey();
     }
-
-    abstract public function datas(): array;
-
-    abstract public static function descriptions(): array;
 
     public function toJson($options = 0)
     {

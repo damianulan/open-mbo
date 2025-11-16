@@ -13,37 +13,6 @@ use ReflectionClass;
 
 class NotificationServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
-
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        $classes = $this->getNotifiableEventClasses();
-        $events = [];
-        if (Schema::hasTable('notifications')) {
-            $events = Notification::events()->get()->pluck('event')->toArray();
-        }
-        $classes = array_filter($classes, function ($class) use ($events) {
-            return in_array($class, $events);
-        });
-
-        foreach ($classes as $class) {
-            Event::listen($class, NotifyOnEvent::class);
-        }
-    }
-
     public static function getNotifiableEventClasses(): array
     {
         $classes = [];
@@ -56,16 +25,16 @@ class NotificationServiceProvider extends ServiceProvider
             $directory = app_path(); // You can narrow this down, e.g. app_path('Events')
 
             $classes = collect(File::allFiles($directory))
-                ->filter(fn ($file) => $file->getExtension() === 'php')
+                ->filter(fn ($file) => 'php' === $file->getExtension())
                 ->map(function ($file) use ($namespace) {
                     $path = $file->getRealPath();
-                    $relativePath = str_replace([app_path().DIRECTORY_SEPARATOR, '.php'], '', $path);
-                    $class = $namespace.str_replace(DIRECTORY_SEPARATOR, '\\', $relativePath);
+                    $relativePath = str_replace([app_path() . DIRECTORY_SEPARATOR, '.php'], '', $path);
+                    $class = $namespace . str_replace(DIRECTORY_SEPARATOR, '\\', $relativePath);
 
                     return $class;
                 })
                 ->filter(function ($class) use ($interface) {
-                    if (! class_exists($class)) {
+                    if ( ! class_exists($class)) {
                         return false;
                     }
 
@@ -81,5 +50,31 @@ class NotificationServiceProvider extends ServiceProvider
         }
 
         return $classes;
+    }
+
+    /**
+     * Register services.
+     *
+     * @return void
+     */
+    public function register(): void {}
+
+    /**
+     * Bootstrap services.
+     *
+     * @return void
+     */
+    public function boot(): void
+    {
+        $classes = $this->getNotifiableEventClasses();
+        $events = [];
+        if (Schema::hasTable('notifications')) {
+            $events = Notification::events()->get()->pluck('event')->toArray();
+        }
+        $classes = array_filter($classes, fn ($class) => in_array($class, $events));
+
+        foreach ($classes as $class) {
+            Event::listen($class, NotifyOnEvent::class);
+        }
     }
 }

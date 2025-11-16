@@ -20,7 +20,7 @@ class UserEditForm extends Form
         $exclude = [];
         $selected = [];
         $profile = null;
-        if (! is_null($model)) {
+        if ( ! is_null($model)) {
             $method = 'PUT';
             $route = route('users.update', $model->id);
             $profile = $model->profile;

@@ -10,39 +10,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class DepartmentFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
-    {
-        $title = null;
-        while (is_null($title) || Department::where('name', $title)->get()->count() > 0) {
-            $title = $this->getName();
-        }
-
-        return [
-            'name' => $title,
-            'description' => fake()->realTextBetween(300, 900),
-        ];
-    }
-
-    public function getName(): string
-    {
-        $output = null;
-        if (config('app.faker_locale') === 'pl_PL') {
-            $dict = self::dict_pl();
-            $output = $dict[fake()->numberBetween(0, count($dict) - 1)];
-        }
-
-        if (empty($output)) {
-            $output = fake()->jobTitle();
-        }
-
-        return $output;
-    }
-
     public static function dict_pl(): array
     {
         return [
@@ -244,5 +211,38 @@ class DepartmentFactory extends Factory
             'Dział Digitalizacji',
             'Dział Procesów Administracyjnych',
         ];
+    }
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        $title = null;
+        while (is_null($title) || Department::where('name', $title)->get()->count() > 0) {
+            $title = $this->getName();
+        }
+
+        return [
+            'name' => $title,
+            'description' => fake()->realTextBetween(300, 900),
+        ];
+    }
+
+    public function getName(): string
+    {
+        $output = null;
+        if ('pl_PL' === config('app.faker_locale')) {
+            $dict = self::dict_pl();
+            $output = $dict[fake()->numberBetween(0, count($dict) - 1)];
+        }
+
+        if (empty($output)) {
+            $output = fake()->jobTitle();
+        }
+
+        return $output;
     }
 }

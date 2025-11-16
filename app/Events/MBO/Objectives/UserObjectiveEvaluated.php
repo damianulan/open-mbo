@@ -18,7 +18,5 @@ class UserObjectiveEvaluated implements ShouldDispatchAfterCommit
     public function __construct(
         public UserObjective $userObjective,
         public ?User $evaluator,
-    ) {
-        //
-    }
+    ) {}
 }

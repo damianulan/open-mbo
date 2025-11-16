@@ -30,7 +30,7 @@ class NotificationModel extends Model
     {
         return Attribute::make(
             get: function ($resources): Collection {
-                $collection = new Collection;
+                $collection = new Collection();
                 foreach (json_decode($resources, true) as $key => $id) {
                     if (class_exists($key)) {
                         if ($model = $key::withTrashed()->find($id)) {

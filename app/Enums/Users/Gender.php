@@ -23,9 +23,9 @@ class Gender extends Enum
     public static function labels(): array
     {
         return [
-            self::MALE => __('fields.gender.'.self::MALE),
-            self::FEMALE => __('fields.gender.'.self::FEMALE),
-            self::OTHER => __('fields.gender.'.self::OTHER),
+            self::MALE => __('fields.gender.' . self::MALE),
+            self::FEMALE => __('fields.gender.' . self::FEMALE),
+            self::OTHER => __('fields.gender.' . self::OTHER),
         ];
     }
 }

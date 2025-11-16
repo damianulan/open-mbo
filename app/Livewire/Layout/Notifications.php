@@ -7,23 +7,23 @@ use Livewire\Component;
 
 class Notifications extends Component
 {
-    protected $notifications;
-
     public int $notifications_count = 0;
 
     public bool $shown = false;
 
-    public function mount()
+    protected $notifications;
+
+    public function mount(): void
     {
         $this->register();
     }
 
-    public function boot()
+    public function boot(): void
     {
         $this->register();
     }
 
-    public function register()
+    public function register(): void
     {
         $query = Auth::user()->system_notifications();
         $notifications_count = $query->count();
@@ -43,7 +43,7 @@ class Notifications extends Component
         $this->notifications_count = $notifications_count;
     }
 
-    public function toggleShown()
+    public function toggleShown(): void
     {
         $this->shown = ! $this->shown;
     }

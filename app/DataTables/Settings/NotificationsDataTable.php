@@ -23,21 +23,11 @@ class NotificationsDataTable extends CustomDataTable
     {
 
         return (new EloquentDataTable($query))
-            ->editColumn('system', function ($data) {
-                return $data->system ? __('globals.yes') : __('globals.no');
-            })
-            ->editColumn('email', function ($data) {
-                return $data->email ? __('globals.yes') : __('globals.no');
-            })
-            ->editColumn('event', function ($data) {
-                return $data->event ? __('globals.yes') : __('globals.no');
-            })
-            ->editColumn('schedule', function ($data) {
-                return $data->schedule ? __('globals.yes') : __('globals.no');
-            })
-            ->editColumn('conditions', function ($data) {
-                return $data->conditions ? __('globals.yes') : __('globals.no');
-            })
+            ->editColumn('system', fn ($data) => $data->system ? __('globals.yes') : __('globals.no'))
+            ->editColumn('email', fn ($data) => $data->email ? __('globals.yes') : __('globals.no'))
+            ->editColumn('event', fn ($data) => $data->event ? __('globals.yes') : __('globals.no'))
+            ->editColumn('schedule', fn ($data) => $data->schedule ? __('globals.yes') : __('globals.no'))
+            ->editColumn('conditions', fn ($data) => $data->conditions ? __('globals.yes') : __('globals.no'))
             ->addColumn('status', function ($data) {
                 $active = ! $data->email && ! $data->system ? false : true;
 
@@ -46,11 +36,9 @@ class NotificationsDataTable extends CustomDataTable
                     'text' => $active ? __('globals.active') : __('globals.inactive'),
                 ]);
             })
-            ->addColumn('action', function ($data) {
-                return view('pages.settings.notifications.action', [
-                    'data' => $data,
-                ]);
-            });
+            ->addColumn('action', fn ($data) => view('pages.settings.notifications.action', [
+                'data' => $data,
+            ]));
     }
 
     /**
@@ -106,6 +94,6 @@ class NotificationsDataTable extends CustomDataTable
      */
     protected function filename(): string
     {
-        return 'Notifications_'.date('YmdHis');
+        return 'Notifications_' . date('YmdHis');
     }
 }

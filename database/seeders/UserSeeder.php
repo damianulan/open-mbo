@@ -11,6 +11,7 @@ use App\Models\Core\User;
 use App\Models\Core\UserProfile;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class UserSeeder extends Seeder
 {
@@ -19,7 +20,7 @@ class UserSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $companies = Company::all();
         $y = 0;
@@ -36,7 +37,7 @@ class UserSeeder extends Seeder
                     $user = User::factory()
                         ->has(UserProfile::factory()->count(1), 'profile')
                         ->create([
-                            'email' => 'user'.$y.'@damianulan.me',
+                            'email' => 'user' . $y . '@damianulan.me',
                         ]);
 
                     $position = null;
@@ -60,7 +61,7 @@ class UserSeeder extends Seeder
                     }
 
                     $isManagement = true;
-                    if (! $position) {
+                    if ( ! $position) {
                         $position = Position::whereNotIn('name', ['CEO', 'CTO', 'CFO'])->get()->random(1)->first();
                         $isManagement = false;
                     }
@@ -73,12 +74,12 @@ class UserSeeder extends Seeder
                         'position_id' => $position->id,
                         'department_id' => Department::all()->random(1)->first()->id,
                         'employment' => fake()->dateTimeBetween('-10 years', '-3 months'),
-                        'release' => $chance === 3 && ! $isManagement ? fake()->dateTimeBetween('-10 months', '+1 year') : null,
+                        'release' => 3 === $chance && ! $isManagement ? fake()->dateTimeBetween('-10 months', '+1 year') : null,
 
                     ]);
                 }
                 DB::commit();
-            } catch (\Throwable $th) {
+            } catch (Throwable $th) {
                 DB::rollBack();
                 throw $th;
             }

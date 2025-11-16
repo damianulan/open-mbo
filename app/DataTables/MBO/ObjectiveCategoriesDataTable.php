@@ -26,14 +26,10 @@ class ObjectiveCategoriesDataTable extends CustomDataTable
     {
         return (new EloquentDataTable($query))
 
-            ->addColumn('action', function ($data) {
-                return view('pages.mbo.categories.action', [
-                    'data' => $data,
-                ]);
-            })
-            ->addColumn('templates', function ($data) {
-                return $data->objective_templates()->count();
-            })
+            ->addColumn('action', fn ($data) => view('pages.mbo.categories.action', [
+                'data' => $data,
+            ]))
+            ->addColumn('templates', fn ($data) => $data->objective_templates()->count())
             ->editColumn('created_at', function ($data) {
                 $formatedDate = Carbon::parse($data->created_at)->format(config('app.datetime_format'));
 
@@ -99,6 +95,6 @@ class ObjectiveCategoriesDataTable extends CustomDataTable
      */
     protected function filename(): string
     {
-        return 'ObjectiveTemplateCategories_'.date('YmdHis');
+        return 'ObjectiveTemplateCategories_' . date('YmdHis');
     }
 }

@@ -21,7 +21,7 @@ use Sentinel\Models\Role;
  * @property-read int|null $activities_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Department> $children
  * @property-read int|null $children_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\UserEmployment> $employments
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, UserEmployment> $employments
  * @property-read int|null $employments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $managers
  * @property-read int|null $managers_count

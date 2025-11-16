@@ -13,21 +13,16 @@ class ComponentServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
-    {
-        //
-    }
+    public function register(): void {}
 
     /**
      * Bootstrap services.
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        Blade::if('settings', function ($key) {
-            return settings($key);
-        });
+        Blade::if('settings', fn ($key) => settings($key));
 
         Blade::component('icon', \App\View\Components\Layout\IconComponent::class);
         Blade::component('tile-button', \App\View\Components\Layout\TileButton::class);

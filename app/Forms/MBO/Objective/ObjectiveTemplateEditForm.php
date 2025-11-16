@@ -15,7 +15,7 @@ class ObjectiveTemplateEditForm extends Form
     {
         $route = route('templates.store');
         $method = 'POST';
-        if (! is_null($model)) {
+        if ( ! is_null($model)) {
             $method = 'PUT';
             $route = route('templates.update', $model->id);
         }
