@@ -16,14 +16,15 @@ use Spatie\Activitylog\Models\Activity;
  * @property string $leader_id
  * @property string $name
  * @property mixed|null $description
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\Core\User $leader
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Core\User> $users
+ * @property-read User $leader
+ * @property-read Collection<int, User> $users
  * @property-read int|null $users_count
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Team active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Team average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Team avg(string $column)
@@ -74,6 +75,7 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Business\Team withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Team withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Business\Team withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Team extends BaseModel
