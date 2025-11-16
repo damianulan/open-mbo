@@ -128,6 +128,7 @@ return [
     ],
 
     'users' => [
+        'header' => 'Dane użytkownika',
         'avatar' => 'Zdjęcie profilowe',
         'firstname' => 'Imię',
         'lastname' => 'Nazwisko',
@@ -136,6 +137,20 @@ return [
         'birthday' => 'Data urodzenia',
         'supervisors' => 'Bezpośredni przełożeni',
         'roles' => 'Role systemowe',
+        'roles_short' => 'Role',
+    ],
+
+    'employments' => [
+        'add' => 'Dodaj nowe zatrudnienie',
+        'header' => 'Zatrudnienie #:no',
+        'header_main' => 'Zatrudnienie podstawowe',
+        'company' => 'Przedsiębiorstwo',
+        'position' => 'Stanowisko',
+        'contract' => 'Typ umowy',
+        'department' => 'Dział',
+
+        'employment' => 'Data zatrudnienia',
+        'release' => 'Data końca zatrudnienia',
     ],
 
     'mbo' => [

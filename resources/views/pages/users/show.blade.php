@@ -46,16 +46,16 @@
                         <div class="col-xl-10 col-lg-9 col-md-8 col-xs-6">
                             <div class="row user-summary">
                                 <div class="user-info col-xl-6 col-lg-12">
-                                    <i class="bi bi-building-fill" data-tippy-content="Przedsiębiorstwo"></i><div>{{ $user->employment?->company?->name }}</div>
+                                    <i class="bi bi-building-fill" data-tippy-content="{{ __('forms.employments.company') }}"></i><div>{{ $user->employment?->company?->name }}</div>
                                 </div>
                                 <div class="user-info col-xl-6 col-lg-12">
-                                    <i class="bi bi-diagram-3-fill" data-tippy-content="Departament"></i><div>{{ $user->employment?->department?->name }}</div>
+                                    <i class="bi bi-diagram-3-fill" data-tippy-content="{{ __('forms.employments.department') }}"></i><div>{{ $user->employment?->department?->name }}</div>
                                 </div>
                                 <div class="user-info col-xl-6 col-lg-12">
-                                    <i class="bi bi-person-badge-fill" data-tippy-content="Stanowisko"></i><div>{{ $user->employment?->position?->name }}</div>
+                                    <i class="bi bi-person-badge-fill" data-tippy-content="{{ __('forms.employments.position') }}"></i><div>{{ $user->employment?->position?->name }}</div>
                                 </div>
                                 <div class="user-info col-xl-6 col-lg-12">
-                                    <i class="bi bi-person-fill-gear" data-tippy-content="Role"></i><div>{{ $user->getRolesNames()->implode(' | ') }}</div>
+                                    <i class="bi bi-person-fill-gear" data-tippy-content="{{ __('forms.users.roles_short') }}"></i><div>{{ $user->getRolesNames()->implode(' | ') }}</div>
                                 </div>
                             </div>
 

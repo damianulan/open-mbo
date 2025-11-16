@@ -67,7 +67,7 @@ return [
                 'index' => 'Przedsiębiorstwa',
             ],
             'departments' => [
-                'index' => 'Departamenty',
+                'index' => 'Działy',
             ],
             'positions' => [
                 'index' => 'Stanowiska',

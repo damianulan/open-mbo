@@ -28,6 +28,20 @@
     color: $text-btn-hover;
 }
 
+.btn-danger,
+.btn-info,
+.btn-warning,
+.btn-success {
+    color: $text-btn;
+}
+
+.btn-danger:hover,
+.btn-info:hover,
+.btn-warning:hover,
+.btn-success:hover {
+    color: $text-btn-hover;
+}
+
 .btn-outline-primary:hover,
 .btn-outline-primary:active,
 .btn-outline-primary.active,

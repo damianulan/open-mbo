@@ -22,7 +22,7 @@ Route::middleware('web')->group(function (): void {
 
 Route::middleware(['web', 'auth', 'maintenance'])->group(function (): void {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
-    Livewire::setUpdateRoute(fn ($handle) => Route::post('/livewire/update', $handle));
+    Livewire::setUpdateRoute(fn($handle) => Route::post('/livewire/update', $handle));
 
     Laraverse::routes();
 
@@ -41,6 +41,13 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function (): void {
         Route::get('/{user}/impersonate', [App\Http\Controllers\UsersController::class, 'impersonate'])->name('impersonate');
         Route::get('/impersonate/leave', [App\Http\Controllers\UsersController::class, 'impersonateLeave'])->name('impersonate.leave');
     });
+
+    Route::prefix('employments')->name('employments.')->group(function (): void {
+        Route::post('/', [App\Http\Controllers\UsersController::class, 'storeEmployment'])->name('store');
+        Route::get('{user}/delete', [App\Http\Controllers\UsersController::class, 'deleteEmployment'])->name('delete');
+        Route::put('{user}', [App\Http\Controllers\UsersController::class, 'updateEmployment'])->name('update');
+    });
+
 
     Route::prefix('profile')->name('profile.')->group(function (): void {
         Route::get('/', [App\Http\Controllers\ProfileController::class, 'index'])->name('index');

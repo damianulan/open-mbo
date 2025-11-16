@@ -6,6 +6,10 @@ use App\Models\BaseModel;
 use App\Models\Core\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Events\Core\User\EmploymentCreated;
+use App\Events\Core\User\EmploymentUpdated;
+use App\Events\Core\User\EmploymentDeleted;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 /**
  * @property string $id
@@ -102,6 +106,12 @@ class UserEmployment extends BaseModel
         'release' => 'date',
     ];
 
+    protected $dispatchesEvents = [
+        'created' => EmploymentCreated::class,
+        'updated' => EmploymentUpdated::class,
+        'deleted' => EmploymentDeleted::class,
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class)->withTrashed();
@@ -125,6 +135,15 @@ class UserEmployment extends BaseModel
     public function position(): ?BelongsTo
     {
         return $this->belongsTo(Position::class)->withTrashed();
+    }
+
+    protected function main(): Attribute
+    {
+        return Attribute::make(
+            get: function (): bool {
+                return $this->id == UserEmployment::where('user_id', $this->user_id)->active()->first()->id;
+            },
+        );
     }
 
     public function scopeActive(Builder $query): void

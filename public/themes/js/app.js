@@ -86256,6 +86256,9 @@ $("body").on("click", ".swal-confirm", function (e) {
     window.location.href = url;
   });
 });
+$("body").on("click", "button[type=submit]", function () {
+  $.overlay('show');
+});
 $(".table-container").on("xhr.dt", function (e, settings, json, xhr) {
   $.buildVendor();
 });

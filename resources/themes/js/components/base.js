@@ -47,6 +47,10 @@ $("body").on("click", ".swal-confirm", function (e) {
     );
 });
 
+$("body").on("click", "button[type=submit]", function () {
+    $.overlay('show');
+});
+
 $(".table-container").on("xhr.dt", function (e, settings, json, xhr) {
     $.buildVendor();
 });

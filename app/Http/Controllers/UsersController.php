@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\Users\UsersDataTable;
+use App\Forms\Users\EmploymentEditForm;
 use App\Forms\Users\UserEditForm;
+use App\Models\Business\UserEmployment;
 use App\Models\Core\User;
-use App\Services\Users\CreateOrUpdate;
+use App\Services\Users\CreateOrUpdate as UserCreateOrUpdate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\Employments\CreateOrUpdate as EmploymentCreateOrUpdate;
 
 class UsersController extends AppController
 {
@@ -32,6 +35,7 @@ class UsersController extends AppController
     {
         return view('pages.users.edit', [
             'form' => UserEditForm::definition($request),
+            'employments' => [],
         ]);
     }
 
@@ -44,7 +48,7 @@ class UsersController extends AppController
     {
         $request = $form::reformatRequest($request);
         $form::validate($request);
-        $service = CreateOrUpdate::boot(request: $request)->execute();
+        $service = UserCreateOrUpdate::boot(request: $request)->execute();
 
         if ($service->passed()) {
             $user = $service->user;
@@ -53,6 +57,19 @@ class UsersController extends AppController
         }
 
         return redirect()->back()->with('error', __('alerts.users.error.create'));
+    }
+
+    public function storeEmployment(Request $request, EmploymentEditForm $form)
+    {
+        $request = $form::reformatRequest($request);
+        $form::validate($request);
+        $service = EmploymentCreateOrUpdate::boot(request: $request)->execute();
+
+        if ($service->passed()) {
+            return redirect()->back()->with('success', __('alerts.employments.success.create'));
+        }
+
+        return redirect()->back()->with('error', __('alerts.employments.error.create'));
     }
 
     /**
@@ -80,10 +97,31 @@ class UsersController extends AppController
     {
         $model = User::findOrFail($id);
 
+        $request->request->add(['user_id' => $id]);
+
         return view('pages.users.edit', [
             'user' => $model,
+            'employments' => $this->getEmploymentFroms($request, $model),
             'form' => UserEditForm::definition($request, $model),
         ]);
+    }
+
+    private function getEmploymentFroms(Request $request, ?User $model = null): array
+    {
+        $employments[__('forms.employments.add')] = EmploymentEditForm::definition($request);
+
+        if ($model) {
+            $i = 0;
+            foreach ($model->employments as $employment) {
+                $i++;
+                $langKey = 'forms.employments.header';
+                if ($employment->main) {
+                    $langKey = 'forms.employments.header_main';
+                }
+                $employments[__($langKey, ['no' => $i])] = EmploymentEditForm::definition($request, $employment);
+            }
+        }
+        return $employments;
     }
 
     /**
@@ -97,7 +135,7 @@ class UsersController extends AppController
         $request = $form::reformatRequest($request);
         $form::validate($request);
         $user = User::findOrFail($id);
-        $service = CreateOrUpdate::boot(request: $request, user: $user)->execute();
+        $service = UserCreateOrUpdate::boot(request: $request, user: $user)->execute();
 
         if ($service->passed()) {
             $user = $service->user;
@@ -106,6 +144,20 @@ class UsersController extends AppController
         }
 
         return redirect()->back()->with('error', __('alerts.users.error.edit', ['name' => $user->name]));
+    }
+
+    public function updateEmployment(Request $request, $id, EmploymentEditForm $form)
+    {
+        $request = $form::reformatRequest($request);
+        $form::validate($request);
+        $employment = UserEmployment::findOrFail($id);
+        $service = EmploymentCreateOrUpdate::boot(request: $request, employment: $employment)->execute();
+
+        if ($service->passed()) {
+            return redirect()->back()->with('success', __('alerts.employments.success.edit'));
+        }
+
+        return redirect()->back()->with('error', __('alerts.employments.error.edit'));
     }
 
     /**
@@ -123,6 +175,17 @@ class UsersController extends AppController
         }
 
         return redirect()->back()->with('error', __('alerts.users.error.delete', ['name' => $user->name]));
+    }
+
+    public function deleteEmployment($id)
+    {
+        $employment = UserEmployment::findOrFail($id);
+
+        if ($employment->delete()) {
+            return redirect()->back()->with('success', __('alerts.employments.success.delete'));
+        }
+
+        return redirect()->back()->with('error', __('alerts.employments.error.delete'));
     }
 
     /**
@@ -144,6 +207,10 @@ class UsersController extends AppController
         return redirect()->back()->with('info', __('alerts.users.success.unblocked', ['name' => $user->name]));
     }
 
+    /**
+     * @param \App\Models\Core\User $user
+     * @return void
+     */
     public function impersonate(User $user)
     {
         Auth::user()->impersonate($user);
@@ -151,6 +218,9 @@ class UsersController extends AppController
         return redirect()->back();
     }
 
+    /**
+     * @return void
+     */
     public function impersonateLeave()
     {
         Auth::user()->leaveImpersonation();
