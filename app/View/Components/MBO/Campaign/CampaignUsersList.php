@@ -10,6 +10,8 @@ class CampaignUsersList extends Component
 {
     /**
      * Create a new component instance.
+     *
+     * @param  mixed  $userCampaigns
      */
     public function __construct(public $userCampaigns) {}
 
