@@ -29,6 +29,7 @@
         "modernize_strpos": true,
         "new_with_braces": true,
         "no_empty_comment": true,
+        "no_empty_statement": true,
         "not_operator_with_space": true,
         "ordered_traits": true,
         "protected_to_private": true,
@@ -40,10 +41,17 @@
         "void_return": true,
         "yoda_style": true,
         "array_push": true,
+        "single_line_empty_body": true,
         "assign_null_coalescing_to_coalesce_equal": true,
         "explicit_indirect_variable": true,
+        "statement_indentation": {
+            "stick_comment_to_next_continuous_control_statement": true
+        },
+        "whitespace_after_comma_in_array": {
+            "ensure_single_space": true
+        },
         "method_argument_space": {
-        "on_multiline": "ensure_fully_multiline"
+            "on_multiline": "ensure_fully_multiline"
         },
         "modernize_types_casting": true,
         "no_superfluous_elseif": true,
@@ -53,29 +61,29 @@
         "sort_algorithm": "alpha"
         },
         "ordered_class_elements": {
-        "order": [
-            "use_trait",
-            "case",
-            "constant",
-            "constant_public",
-            "constant_protected",
-            "constant_private",
-            "property_public",
-            "property_protected",
-            "property_private",
-            "construct",
-            "destruct",
-            "magic",
-            "phpunit",
-            "method_abstract",
-            "method_public_static",
-            "method_public",
-            "method_protected_static",
-            "method_protected",
-            "method_private_static",
-            "method_private"
-        ],
-        "sort_algorithm": "none"
+            "order": [
+                "use_trait",
+                "case",
+                "constant",
+                "constant_public",
+                "constant_protected",
+                "constant_private",
+                "property_public",
+                "property_protected",
+                "property_private",
+                "construct",
+                "destruct",
+                "magic",
+                "phpunit",
+                "method_abstract",
+                "method_public_static",
+                "method_public",
+                "method_protected_static",
+                "method_protected",
+                "method_private_static",
+                "method_private"
+            ],
+            "sort_algorithm": "none"
         }
     }
 }
