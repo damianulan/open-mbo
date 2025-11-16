@@ -9,6 +9,24 @@
 </div>
 
 <div class="row">
+    @if(auth()->user()->campaigns_ongoing->count())
+        <div class="col-12">
+            <div class="content-card content-card-md">
+                <div class="content-card-top">
+                    <div class="content-card-header">
+                        <i class="bi-bullseye me-2"></i>
+                        <div>{{ __('pages.home.my_campaigns') }}</div>
+                    </div>
+                    <div class="content-card-icons ms-auto">
+                        <i class="minimize"></i>
+                    </div>
+                </div>
+                <div class="content-card-body">
+                    <x-my-campaigns-summary />
+                </div>
+            </div>
+        </div>
+    @endif
     <div class="col-lg-6 col-sm-12">
         <div class="content-card content-card-xs">
             <div class="content-card-top">
@@ -25,6 +43,7 @@
             </div>
         </div>
     </div>
+
 </div>
 
 @endsection

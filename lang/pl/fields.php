@@ -11,6 +11,7 @@ return array(
     'login' => 'Login',
     'password' => 'Hasło',
     'status' => 'Status',
+    'stage' => 'Etap',
 
     // Miscellaneous
     'action' => 'Akcje',

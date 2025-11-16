@@ -8,8 +8,10 @@ use App\Livewire\Layout\Notifications\Item;
 use App\View\Components\Cards\NoteCard;
 use App\View\Components\Layout\IconComponent;
 use App\View\Components\Layout\TileButton;
+use App\View\Components\MBO\Campaign\CampaignCard;
 use App\View\Components\MBO\Campaign\CampaignUsersList;
 use App\View\Components\MBO\Campaign\CardProgressBar;
+use App\View\Components\MBO\Campaign\MyCampaignsSummary;
 use App\View\Components\MBO\Objectives\ObjectivesList;
 use App\View\Components\MBO\Objectives\ObjectiveSummary;
 use App\View\Components\MBO\Objectives\ObjectiveUsersList;
@@ -31,13 +33,15 @@ class ComponentServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Blade::if('settings', fn ($key) => settings($key));
+        Blade::if('settings', fn($key) => settings($key));
 
         Blade::component('icon', IconComponent::class);
         Blade::component('tile-button', TileButton::class);
 
         // MBO components
         Blade::component('card-progressbar', CardProgressBar::class);
+        Blade::component('campaign-card', CampaignCard::class);
+        Blade::component('my-campaigns-summary', MyCampaignsSummary::class);
         Blade::component('campaign-users-list', CampaignUsersList::class);
 
         Blade::component('objectives-list', ObjectivesList::class);

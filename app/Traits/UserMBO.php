@@ -58,6 +58,11 @@ trait UserMBO
         return $this->hasMany(UserCampaign::class);
     }
 
+    public function campaigns_ongoing(): HasMany
+    {
+        return $this->hasMany(UserCampaign::class)->ongoing()->orderForUser();
+    }
+
     public function isCampaignCoordinator(Campaign $campaign): bool
     {
         return $campaign->coordinators()->contains('coordinator_id', $this->id);

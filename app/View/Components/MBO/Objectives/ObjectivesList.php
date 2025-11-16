@@ -15,16 +15,16 @@ use Illuminate\View\Component;
 
 class ObjectivesList extends Component
 {
-    public Collection $objectives;
+    public ?User $user = null;
 
-    public ?UserObjective $userObjective = null;
+    public Collection $objectives;
 
     /**
      * Create a new component instance.
      */
-    public function __construct(public Model $model, public User $user = new User())
+    public function __construct(public Model $model, User $user = new User())
     {
-        if ( ! ($model instanceof HasObjectives) && ! isset(class_uses_recursive($model)[UserMBO::class])) {
+        if (! ($model instanceof HasObjectives) && ! isset(class_uses_recursive($model)[UserMBO::class])) {
             $e = new Exception('Model must implement HasObjectives interface or UserMBO trait.');
             report($e);
             throw $e;
@@ -32,7 +32,7 @@ class ObjectivesList extends Component
 
         $this->objectives = $model->objectives;
         if ($user && $user->exists) {
-            $this->userObjective = $model->user_objectives()->whereUserId($user->id)->whereNotEvaluated()->first();
+            $this->user = $user;
         }
     }
 

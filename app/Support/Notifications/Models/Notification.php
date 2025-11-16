@@ -21,28 +21,28 @@ use Lucent\Support\Traits\UUID;
  * @property string|null $event
  * @property string|null $schedule
  * @property array<array-key, mixed>|null $conditions
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property Carbon|null $deleted_at
- * @property-read Collection $resources
- * @method static Builder<static>|Notification events()
- * @method static Builder<static>|Notification newModelQuery()
- * @method static Builder<static>|Notification newQuery()
- * @method static Builder<static>|Notification onlyTrashed()
- * @method static Builder<static>|Notification query()
- * @method static Builder<static>|Notification whereConditions($value)
- * @method static Builder<static>|Notification whereContents($value)
- * @method static Builder<static>|Notification whereCreatedAt($value)
- * @method static Builder<static>|Notification whereDeletedAt($value)
- * @method static Builder<static>|Notification whereEmail($value)
- * @method static Builder<static>|Notification whereEvent($value)
- * @method static Builder<static>|Notification whereId($value)
- * @method static Builder<static>|Notification whereKey($value)
- * @method static Builder<static>|Notification whereSchedule($value)
- * @method static Builder<static>|Notification whereSystem($value)
- * @method static Builder<static>|Notification whereUpdatedAt($value)
- * @method static Builder<static>|Notification withTrashed(bool $withTrashed = true)
- * @method static Builder<static>|Notification withoutTrashed()
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Support\Collection $resources
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification events()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification whereConditions($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification whereContents($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification whereEvent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification whereKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification whereSchedule($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification whereSystem($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification withoutTrashed()
  * @mixin \Eloquent
  */
 class Notification extends Model

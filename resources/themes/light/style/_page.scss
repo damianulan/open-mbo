@@ -52,6 +52,8 @@ body {
 }
 
 .content-card {
+    position: relative;
+    display: block;
     background-color: $body-bg;
     padding: 1.5rem 1.5rem;
     margin: 0.75rem 0 0.5rem 0;
@@ -64,7 +66,7 @@ body {
 
         &::after {
             font-family: $font-family-icons;
-            content: "\f285";
+            content: '\f285';
         }
     }
 
@@ -77,18 +79,18 @@ body {
         }
 
         .content-card-icons i.minimize::after {
-            content: "\f282";
+            content: '\f282';
         }
     }
 
     .content-card-body {
+        position: relative;
         margin-top: 0.85rem;
         padding: 0.5rem 0;
     }
 
     &:not(.page-card) {
         .content-card-body {
-            max-height: 1000px;
             overflow-y: auto;
             overflow-x: clip;
         }
@@ -105,7 +107,19 @@ body {
             }
         }
 
+        &.content-card-md {
+            .content-card-body {
+                max-height: 800px;
+            }
+        }
+
         &.content-card-lg {
+            .content-card-body {
+                max-height: 1200px;
+            }
+        }
+
+        &.content-card-xl {
             .content-card-body {
                 max-height: 1500px;
             }
@@ -267,7 +281,7 @@ section.content-wrapper {
 }
 .mbo-loader::after,
 .mbo-loader::before {
-    content: "";
+    content: '';
     box-sizing: border-box;
     position: absolute;
     left: 0;
@@ -369,7 +383,7 @@ ul.list-style-none li {
 }
 .divider .divider-text:before,
 .divider .divider-text:after {
-    content: "";
+    content: '';
     position: absolute;
     top: 50%;
     width: 9999px;

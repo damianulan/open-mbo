@@ -19,28 +19,28 @@ use Illuminate\Support\Carbon;
  * @property string|null $birthday
  * @property mixed|null $phone
  * @property string|null $avatar
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Models\Core\User $user
  * @method static \Database\Factories\Core\UserProfileFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereAvatar($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereBirthday($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereFirstname($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereGender($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereLastname($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile wherePhone($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserProfile newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserProfile newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserProfile onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserProfile query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserProfile whereAvatar($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserProfile whereBirthday($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserProfile whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserProfile whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserProfile whereFirstname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserProfile whereGender($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserProfile whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserProfile whereLastname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserProfile wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserProfile whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserProfile whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserProfile withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserProfile withoutTrashed()
  * @mixin \Eloquent
  */
 class UserProfile extends Model

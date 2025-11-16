@@ -56,6 +56,10 @@ textarea::-webkit-scrollbar-thumb:active {
     font-weight: 600 !important;
 }
 
+.fw-bold {
+    font-weight: 700 !important;
+}
+
 a {
     color: $link-color;
     text-decoration: none;
@@ -237,4 +241,9 @@ hr {
 
 .text-muted {
     font-size: 0.7rem;
+}
+
+.text-highlight {
+    color: $primary;
+    font-weight: 600;
 }
