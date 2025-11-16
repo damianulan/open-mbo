@@ -19,10 +19,11 @@ use Illuminate\Support\Carbon;
  * @property string|null $birthday
  * @property mixed|null $phone
  * @property string|null $avatar
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \App\Models\Core\User $user
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read User $user
+ *
  * @method static \Database\Factories\Core\UserProfileFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserProfile newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserProfile newQuery()
@@ -41,6 +42,7 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserProfile whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserProfile withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserProfile withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserProfile extends Model

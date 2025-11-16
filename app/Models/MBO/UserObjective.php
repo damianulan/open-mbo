@@ -33,23 +33,24 @@ use Spatie\Activitylog\Models\Activity;
  * @property string $status objective status
  * @property string|null $realization Numerical value of the realization of the objective - in relation to the expected value in objective
  * @property string|null $evaluation Percentage evaluation of the objective - if realization is set, evaluation is calculated automatically
- * @property \Illuminate\Support\Carbon|null $evaluated_at Time when most recent evaluation was made
+ * @property Carbon|null $evaluated_at Time when most recent evaluation was made
  * @property string|null $evaluated_by Time when most recent evaluator has made any changes
  * @property string|null $self_realization Numerical value of the realization of the objective - in relation to the expected value in objective
  * @property string|null $self_evaluation Percentage evaluation of the objective - if realization is set, evaluation is calculated automatically
  * @property string|null $self_evaluated_at Time when most recent self evaluation was made
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\MBO\Campaign|null $campaign
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Commentable\Models\Comment> $comments
+ * @property-read Campaign|null $campaign
+ * @property-read Collection<int, Comment> $comments
  * @property-read int|null $comments_count
- * @property-read \App\Models\Core\User|null $evaluator
- * @property-read \App\Models\MBO\Objective $objective
- * @property-read \App\Models\MBO\UserPoints $points
- * @property-read \App\Models\Core\User $user
+ * @property-read User|null $evaluator
+ * @property-read Objective $objective
+ * @property-read UserPoints $points
+ * @property-read User $user
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective avg(string $column)
@@ -114,6 +115,7 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\MBO\UserObjective withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\MBO\UserObjective withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
