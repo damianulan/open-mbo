@@ -58,11 +58,6 @@ trait UserMBO
         return $this->hasMany(UserCampaign::class);
     }
 
-    public function coordinator_campaigns(): BelongsToMany
-    {
-        return $this->belongsToMany(static::class, 'campaigns_coordinators', 'coordinator_id', 'campaign_id')->where('active', 1);
-    }
-
     public function isCampaignCoordinator(Campaign $campaign): bool
     {
         return $campaign->coordinators()->contains('coordinator_id', $this->id);

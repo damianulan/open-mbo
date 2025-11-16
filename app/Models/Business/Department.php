@@ -24,12 +24,11 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read int|null $activities_count
  * @property-read Collection<int, Department> $children
  * @property-read int|null $children_count
- * @property-read Collection<int, UserEmployment> $employments
+ * @property-read Collection<int, \App\Models\Business\UserEmployment> $employments
  * @property-read int|null $employments_count
  * @property-read Collection<int, User> $managers
  * @property-read int|null $managers_count
  * @property-read Department|null $parent
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department avg(string $column)
@@ -81,7 +80,6 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Department extends BaseModel
