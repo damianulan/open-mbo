@@ -137,7 +137,7 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true,
+    "prefer-stable": false,
     "require-dependencies": true,
     "require-dev-dependencies": true
 }
