@@ -270,7 +270,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         $letterNum = Alphabet::getAlphabetPosition($initials);
 
         $color = 'primary';
-        if ( ! $this->isAdmin()) {
+        if (! $this->isAdmin()) {
             if ($letterNum < 4) {
                 $color = 'orange';
             } elseif ($letterNum < 8) {
@@ -284,7 +284,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
             }
         }
         $indicator = '';
-        if ( ! $this->itsMe() && $this->isLoggedIn()) {
+        if (! $this->itsMe() && $this->isLoggedIn()) {
             $indicator = '<div class="profile-indicator"></div>';
         }
 
@@ -369,14 +369,14 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         $value = $this->profile?->firstname . ' ' . $this->profile?->lastname;
 
         return Attribute::make(
-            get: fn () => mb_ucfirst($value),
+            get: fn() => mb_ucfirst($value),
         );
     }
 
     protected function sessions(): Attribute
     {
         return Attribute::make(
-            get: fn (): Collection => 'database' === config('session.driver') ? DB::table('sessions')->where('user_id', $this->id)->orderByDesc('last_activity')->get() : new Collection(),
+            get: fn(): Collection => 'database' === config('session.driver') ? DB::table('sessions')->where('user_id', $this->id)->orderByDesc('last_activity')->get() : new Collection(),
         );
     }
 }

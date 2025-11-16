@@ -121,13 +121,13 @@ class ObjectiveTemplateCategory extends BaseModel
 
     public function refreshCoordinators(?array $user_ids): void
     {
-        if ( ! $user_ids) {
+        if (! $user_ids) {
             $user_ids = array();
         }
 
         $current = $this->coordinators->pluck('id')->toArray();
-        $toDelete = array_filter($current, fn ($value) => ! in_array($value, $user_ids));
-        $toAdd = array_filter($user_ids, fn ($value) => ! in_array($value, $current));
+        $toDelete = array_filter($current, fn($value) => ! in_array($value, $user_ids));
+        $toAdd = array_filter($user_ids, fn($value) => ! in_array($value, $current));
 
         foreach ($toDelete as $user_id) {
             $user = User::find($user_id);

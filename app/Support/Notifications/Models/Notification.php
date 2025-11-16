@@ -76,7 +76,7 @@ class Notification extends Model
     public static function createOrUpdate(string $key, array $attributes = array()): self
     {
         $notification = self::byKey($key);
-        if ( ! $notification) {
+        if (! $notification) {
             $notification = new self();
             $attributes['key'] = $key;
         }
@@ -114,8 +114,8 @@ class Notification extends Model
                 if ($notifiable = config('auth.providers.users.model')) {
                     $models[$notifiable] = new $notifiable();
                 }
-                $resources = array_map(fn ($model) => ResourceFactory::matchModel($model), $models);
-                $resources = array_filter($resources, fn ($item) => ! is_null($item));
+                $resources = array_map(fn($model) => ResourceFactory::matchModel($model), $models);
+                $resources = array_filter($resources, fn($item) => ! is_null($item));
 
                 return collect($resources);
             },

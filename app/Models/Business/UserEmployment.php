@@ -28,9 +28,9 @@ use Spatie\Activitylog\Models\Activity;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\Business\Company|null $company
- * @property-read \App\Models\Business\TypeOfContract|null $contract
- * @property-read \App\Models\Business\Department|null $department
+ * @property-read Company|null $company
+ * @property-read TypeOfContract|null $contract
+ * @property-read Department|null $department
  * @property-read bool $main
  * @property-read \App\Models\Business\Position|null $position
  * @property-read \App\Models\Core\User $user
@@ -158,7 +158,7 @@ class UserEmployment extends BaseModel
     protected function main(): Attribute
     {
         return Attribute::make(
-            get: fn (): bool => $this->id === UserEmployment::where('user_id', $this->user_id)->active()->first()->id,
+            get: fn(): bool => $this->id === UserEmployment::where('user_id', $this->user_id)->active()->first()->id,
         );
     }
 }
