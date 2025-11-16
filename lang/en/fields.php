@@ -2,7 +2,7 @@
 
 use App\Enums\Users\Gender;
 
-return [
+return array(
     // User & common column Fields
     'firstname' => 'First name',
     'lastname' => 'Last name',
@@ -25,10 +25,10 @@ return [
     'quote_at' => 'at',
 
     // Enumerations
-    'gender' => [
+    'gender' => array(
         Gender::MALE => 'Male',
         Gender::FEMALE => 'Female',
         Gender::OTHER => 'Other',
-    ],
+    ),
 
-];
+);

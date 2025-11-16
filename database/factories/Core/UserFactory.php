@@ -21,12 +21,12 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        return [
+        return array(
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => Hash::make('123456'),
             'remember_token' => Str::random(10),
-        ];
+        );
     }
 
     /**
@@ -36,8 +36,8 @@ class UserFactory extends Factory
      */
     public function unverified()
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn (array $attributes) => array(
             'email_verified_at' => null,
-        ]);
+        ));
     }
 }

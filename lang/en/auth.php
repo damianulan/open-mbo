@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -19,4 +19,4 @@ return [
     'login_info' => '<strong>UWAGA</strong> - serwis jest na etapie produkcji. Nie wszystkie funkcjonalności są sprawne.<br/>Zaloguj się z użyciem globalnych danych zawartych poniżej.',
     'maintenance_info' => '<strong>UWAGA</strong> - obecnie serwis jest zamknięty na potrzeby prac konserwacyjnych.<br/>Dostęp do serwisu jest ograniczony, spróbuj ponownie później.',
 
-];
+);

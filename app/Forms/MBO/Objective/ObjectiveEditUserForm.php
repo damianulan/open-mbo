@@ -18,8 +18,8 @@ class ObjectiveEditUserForm extends Form
         $route = null;
         $method = 'POST';
         $title = 'Dodaj użytkowników do realizacji celu';
-        $selected = [];
-        $exclude = [];
+        $selected = array();
+        $exclude = array();
 
         if ($model) {
             $user_ids = UserObjective::where('objective_id', $model->id)->get()->pluck('user_id');
@@ -41,6 +41,6 @@ class ObjectiveEditUserForm extends Form
     public static function validation(Request $request, $model_id = null): array
     {
 
-        return [];
+        return array();
     }
 }

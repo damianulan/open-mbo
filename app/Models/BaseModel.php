@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\Vendors\ModelActivity;
 use Carbon\Carbon;
 use FormForge\Traits\RequestForms;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,10 +14,11 @@ use Lucent\Support\Traits\CascadeDeletes;
 use Lucent\Support\Traits\SoftDeletesPrunable;
 use Lucent\Support\Traits\UUID;
 use Lucent\Support\Traits\VirginModel;
+use Spatie\Activitylog\Models\Activity;
 use YMigVal\LaravelModelCache\HasCachedQueries;
 
 /**
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel active()

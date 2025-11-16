@@ -5,21 +5,24 @@ namespace App\Models\Business;
 use App\Casts\FormattedText;
 use App\Models\BaseModel;
 use App\Models\Core\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Carbon;
+use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property string $id
  * @property string $leader_id
  * @property string $name
  * @property mixed|null $description
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read User $leader
- * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $users
+ * @property-read Collection<int, User> $users
  * @property-read int|null $users_count
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team active()
@@ -77,15 +80,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class Team extends BaseModel
 {
-    protected $fillable = [
+    protected $fillable = array(
         'leader_id',
         'name',
         'description',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'description' => FormattedText::class,
-    ];
+    );
 
     public function users(): BelongsToMany
     {

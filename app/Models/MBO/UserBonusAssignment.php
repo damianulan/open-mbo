@@ -4,9 +4,11 @@ namespace App\Models\MBO;
 
 use App\Models\BaseModel;
 use App\Models\Core\User;
+use Illuminate\Database\Eloquent\Collection;
+use Spatie\Activitylog\Models\Activity;
 
 /**
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read User|null $approved_by
  * @property-read BonusScheme|null $bonus_scheme
@@ -61,13 +63,13 @@ use App\Models\Core\User;
  */
 class UserBonusAssignment extends BaseModel
 {
-    protected $fillable = [
+    protected $fillable = array(
         'user_id',
         'bonus_scheme_id',
         'campaign_id',
         'score',
         'approved_by',
-    ];
+    );
 
     public function user()
     {

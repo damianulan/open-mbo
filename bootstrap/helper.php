@@ -1,6 +1,10 @@
 <?php
 
 use App\Exceptions\Core\UnauthorizedAccess;
+use App\Lib\Theme;
+use App\Models\Core\User;
+use App\Settings\GeneralSettings;
+use App\Support\Http\ResponseAjax;
 use Illuminate\Support\Facades\Auth;
 
 function lorem()
@@ -22,15 +26,15 @@ function lorem_paragraph()
  *  Returns currently logged user instance or empty instance of User model.
  *  Do not call in class constructors.
  */
-function user(?string $user_id = null): App\Models\Core\User
+function user(?string $user_id = null): User
 {
-    $user = new App\Models\Core\User();
+    $user = new User();
     if (is_null($user_id)) {
         if (Auth::check()) {
             $user = Auth::user();
         }
     } else {
-        $user = App\Models\Core\User::find($user_id);
+        $user = User::find($user_id);
     }
 
     return $user;
@@ -44,14 +48,14 @@ function isRoot(bool $strict = false): bool
     return Auth::user()->isRoot($strict);
 }
 
-function ajax(): App\Support\Http\ResponseAjax
+function ajax(): ResponseAjax
 {
-    return new App\Support\Http\ResponseAjax();
+    return new ResponseAjax();
 }
 
 function current_theme(): string
 {
-    $theme = app(App\Settings\GeneralSettings::class)->theme;
+    $theme = app(GeneralSettings::class)->theme;
     $user = Auth::user();
     if ($user) {
         $userTheme = $user->preferences->theme;
@@ -59,7 +63,7 @@ function current_theme(): string
             $theme = $userTheme;
         }
     }
-    $available = App\Lib\Theme::getAvailable();
+    $available = Theme::getAvailable();
 
     if (false === $available->contains($theme)) {
         $theme = $available->first();
@@ -84,7 +88,7 @@ function production(): bool
 function float_view(?float $value, int $decimals = 2): string
 {
     $lang = app()->getLocale();
-    $comma_locale = ['pl'];
+    $comma_locale = array('pl');
 
     if (is_null($value)) {
         $value = (float) 0;

@@ -12,8 +12,8 @@ final class CreateOrUpdate extends Service
     {
         $id = $this->user->id ?? null;
         $user = User::fillFromRequest($this->request(), $id);
-        $supervisors_ids = $this->request()->input('supervisors_ids') ?? [];
-        $roles_ids = $this->request()->input('roles_ids') ?? [];
+        $supervisors_ids = $this->request()->input('supervisors_ids') ?? array();
+        $roles_ids = $this->request()->input('roles_ids') ?? array();
 
         if ($user->save()) {
             $profile = UserProfile::fillFromRequest($this->request());

@@ -4,26 +4,29 @@ namespace App\Models\Business;
 
 use App\Models\BaseModel;
 use App\Models\Core\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Support\Carbon;
 use Sentinel\Models\Role;
+use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property string $id
  * @property string|null $parent_id
  * @property string $name
  * @property string|null $description
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Department> $children
+ * @property-read Collection<int, Department> $children
  * @property-read int|null $children_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, UserEmployment> $employments
+ * @property-read Collection<int, UserEmployment> $employments
  * @property-read int|null $employments_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $managers
+ * @property-read Collection<int, User> $managers
  * @property-read int|null $managers_count
  * @property-read Department|null $parent
  *
@@ -83,11 +86,11 @@ use Sentinel\Models\Role;
  */
 class Department extends BaseModel
 {
-    protected $fillable = [
+    protected $fillable = array(
         'parent_id',
         'name',
         'description',
-    ];
+    );
 
     public function children(): HasMany
     {

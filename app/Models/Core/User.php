@@ -2,10 +2,20 @@
 
 namespace App\Models\Core;
 
+use App\Commentable\Models\Comment;
 use App\Commentable\Support\Commentable;
 use App\Commentable\Support\Commentator;
 use App\Contracts\Core\HasShowRoute;
+use App\Models\Business\Team;
+use App\Models\Business\UserEmployment;
+use App\Models\MBO\BonusScheme;
+use App\Models\MBO\Objective;
+use App\Models\MBO\UserBonusScheme;
+use App\Models\MBO\UserCampaign;
+use App\Models\MBO\UserObjective;
 use App\Models\Vendor\ActivityModel;
+use App\Support\Notifications\Models\MailNotification;
+use App\Support\Notifications\Models\SystemNotification;
 use App\Support\Notifications\Traits\Notifiable;
 use App\Traits\UserBusiness;
 use App\Traits\UserMBO;
@@ -19,6 +29,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -26,51 +37,54 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Lab404\Impersonate\Models\Impersonate;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Sanctum\PersonalAccessToken;
 use Laravel\Scout\Searchable;
 use Lucent\Support\Str\Alphabet;
 use Lucent\Support\Traits\CascadeDeletes;
 use Lucent\Support\Traits\UUID;
 use Lucent\Support\Traits\VirginModel;
+use Sentinel\Models\Permission;
 use Sentinel\Traits\HasRolesAndPermissions;
+use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property string $id
  * @property string $email
- * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property Carbon|null $email_verified_at
  * @property string $password
  * @property int $active
  * @property int $core Core user - comes as default with the application - cannot be deleted
  * @property int $force_password_change Force user to change password after first login
  * @property string|null $remember_token
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, ActivityModel> $activity
  * @property-read int|null $activity_count
- * @property-read \App\Models\MBO\BonusScheme|null $bonus_scheme
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserCampaign> $campaigns
+ * @property-read BonusScheme|null $bonus_scheme
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, UserCampaign> $campaigns
  * @property-read int|null $campaigns_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Commentable\Models\Comment> $comments
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Comment> $comments
  * @property-read int|null $comments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $coordinator_campaigns
  * @property-read int|null $coordinator_campaigns_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Support\Notifications\Models\MailNotification> $email_notifications
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, MailNotification> $email_notifications
  * @property-read int|null $email_notifications_count
- * @property-read \App\Models\Business\UserEmployment|null $employment
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\UserEmployment> $employments
+ * @property-read UserEmployment|null $employment
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, UserEmployment> $employments
  * @property-read int|null $employments_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\UserEmployment> $employments_active
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, UserEmployment> $employments_active
  * @property-read int|null $employments_active_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\Team> $leader_teams
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Team> $leader_teams
  * @property-read int|null $leader_teams_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Commentable\Models\Comment> $my_comments
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Comment> $my_comments
  * @property-read int|null $my_comments_count
  * @property-read mixed $name
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\Objective> $objectives
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Objective> $objectives
  * @property-read int|null $objectives_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Sentinel\Models\Permission> $permissions
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Permission> $permissions
  * @property-read int|null $permissions_count
  * @property-read UserPreference|null $preferences
  * @property-read UserProfile|null $profile
@@ -79,16 +93,16 @@ use Sentinel\Traits\HasRolesAndPermissions;
  * @property-read int|null $subordinates_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $supervisors
  * @property-read int|null $supervisors_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Support\Notifications\Models\SystemNotification> $system_notifications
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, SystemNotification> $system_notifications
  * @property-read int|null $system_notifications_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\Team> $teams
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Team> $teams
  * @property-read int|null $teams_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
- * @property-read \App\Models\MBO\UserBonusScheme|null $user_bonus_scheme
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserObjective> $user_objectives
+ * @property-read UserBonusScheme|null $user_bonus_scheme
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserObjective> $user_objectives_active
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, UserObjective> $user_objectives_active
  * @property-read int|null $user_objectives_active_count
  *
  * @method static Builder<static>|User active()
@@ -125,27 +139,27 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     use CascadeDeletes, HasApiTokens, HasFactory, HasRolesAndPermissions, Notifiable, RequestForms, SoftDeletes, UUID;
     use Commentable, Commentator, Impersonable, Impersonate, ModelActivity, Searchable, UserBusiness, UserMBO, VirginModel;
 
-    protected $fillable = [
+    protected $fillable = array(
         'email',
         'active',
         'core',
         'force_password_change',
-    ];
+    );
 
-    protected $hidden = [
+    protected $hidden = array(
         'password',
         'remember_token',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'email_verified_at' => 'datetime',
         'created_at' => 'datetime',
-    ];
+    );
 
-    protected $cascadeDeletes = [
+    protected $cascadeDeletes = array(
         'profile',
         'preferences',
-    ];
+    );
 
     public static function findByEmail(string $email): ?User
     {
@@ -171,9 +185,9 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function nameDetails()
     {
-        $view = view('components.datatables.username', ['data' => $this]);
+        $view = view('components.datatables.username', array('data' => $this));
         if (Auth::user()->can('view', $this)) {
-            $view = view('components.datatables.username_link', ['data' => $this]);
+            $view = view('components.datatables.username_link', array('data' => $this));
         }
 
         return $view;
@@ -281,7 +295,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function canBeImpersonated(): bool
     {
-        return ! $this->hasAnyRoles(['root', 'support']) || isRoot(true);
+        return ! $this->hasAnyRoles(array('root', 'support')) || isRoot(true);
     }
 
     public function canImpersonate(): bool
@@ -317,14 +331,14 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     public function scopeWhereFirstname(Builder $query, string $value): void
     {
         $query->whereHas('profile', function (Builder $query) use ($value): void {
-            $query->whereRaw('LOWER(`firstname`) LIKE ?', [Str::lower($value)]);
+            $query->whereRaw('LOWER(`firstname`) LIKE ?', array(Str::lower($value)));
         });
     }
 
     public function scopeWhereLastname(Builder $query, string $value): void
     {
         $query->whereHas('profile', function (Builder $query) use ($value): void {
-            $query->whereRaw('LOWER(`lastname`) LIKE ?', [Str::lower($value)]);
+            $query->whereRaw('LOWER(`lastname`) LIKE ?', array(Str::lower($value)));
         });
     }
 

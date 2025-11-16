@@ -2,14 +2,17 @@
 
 namespace App\Models\Business;
 
+use App\Events\Core\User\EmploymentCreated;
+use App\Events\Core\User\EmploymentDeleted;
+use App\Events\Core\User\EmploymentUpdated;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Events\Core\User\EmploymentCreated;
-use App\Events\Core\User\EmploymentUpdated;
-use App\Events\Core\User\EmploymentDeleted;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
+use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property string $id
@@ -18,12 +21,12 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
  * @property string|null $contract_id
  * @property string|null $department_id
  * @property string|null $position_id
- * @property \Illuminate\Support\Carbon|null $employment Date of employment
- * @property \Illuminate\Support\Carbon|null $release Date of employee release (end of employment)
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon|null $employment Date of employment
+ * @property Carbon|null $release Date of employee release (end of employment)
+ * @property Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read Company|null $company
  * @property-read TypeOfContract|null $contract
@@ -90,7 +93,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
  */
 class UserEmployment extends BaseModel
 {
-    protected $fillable = [
+    protected $fillable = array(
         'user_id',
         'company_id',
         'contract_id',
@@ -99,18 +102,18 @@ class UserEmployment extends BaseModel
 
         'employment',
         'release',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'employment' => 'date',
         'release' => 'date',
-    ];
+    );
 
-    protected $dispatchesEvents = [
+    protected $dispatchesEvents = array(
         'created' => EmploymentCreated::class,
         'updated' => EmploymentUpdated::class,
         'deleted' => EmploymentDeleted::class,
-    ];
+    );
 
     public function user(): BelongsTo
     {
@@ -137,15 +140,6 @@ class UserEmployment extends BaseModel
         return $this->belongsTo(Position::class)->withTrashed();
     }
 
-    protected function main(): Attribute
-    {
-        return Attribute::make(
-            get: function (): bool {
-                return $this->id == UserEmployment::where('user_id', $this->user_id)->active()->first()->id;
-            },
-        );
-    }
-
     public function scopeActive(Builder $query): void
     {
         $query->where('user_employments.employment', '<', now())
@@ -160,5 +154,12 @@ class UserEmployment extends BaseModel
         static::addGlobalScope('order', function (Builder $builder): void {
             $builder->orderByDesc('employment');
         });
+    }
+
+    protected function main(): Attribute
+    {
+        return Attribute::make(
+            get: fn (): bool => $this->id === UserEmployment::where('user_id', $this->user_id)->active()->first()->id,
+        );
     }
 }

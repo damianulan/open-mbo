@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Support\Notifications\Contracts\NotifiableEvent;
 use App\Support\Notifications\Jobs\NotifyOnEvent;
 use App\Support\Notifications\Models\Notification;
 use Illuminate\Support\Facades\Cache;
@@ -15,12 +16,12 @@ class NotificationServiceProvider extends ServiceProvider
 {
     public static function getNotifiableEventClasses(): array
     {
-        $classes = [];
+        $classes = array();
         if (Cache::has('notifiable_event_classes')) {
             $classes = Cache::get('notifiable_event_classes');
         } else {
             $namespace = 'App\\';
-            $interface = \App\Support\Notifications\Contracts\NotifiableEvent::class;
+            $interface = NotifiableEvent::class;
 
             $directory = app_path(); // You can narrow this down, e.g. app_path('Events')
 
@@ -28,7 +29,7 @@ class NotificationServiceProvider extends ServiceProvider
                 ->filter(fn ($file) => 'php' === $file->getExtension())
                 ->map(function ($file) use ($namespace) {
                     $path = $file->getRealPath();
-                    $relativePath = str_replace([app_path() . DIRECTORY_SEPARATOR, '.php'], '', $path);
+                    $relativePath = str_replace(array(app_path() . DIRECTORY_SEPARATOR, '.php'), '', $path);
                     $class = $namespace . str_replace(DIRECTORY_SEPARATOR, '\\', $relativePath);
 
                     return $class;
@@ -63,7 +64,7 @@ class NotificationServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $classes = $this->getNotifiableEventClasses();
-        $events = [];
+        $events = array();
         if (Schema::hasTable('notifications')) {
             $events = Notification::events()->get()->pluck('event')->toArray();
         }

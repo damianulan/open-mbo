@@ -3,7 +3,10 @@
 namespace App\Models\Business;
 
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Carbon;
+use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property string $id
@@ -16,12 +19,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property string|null $description
  * @property bool $active
  * @property string|null $founded
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Company> $companies
+ * @property-read Collection<int, Company> $companies
  * @property-read int|null $companies_count
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location active()
@@ -86,7 +89,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class Location extends BaseModel
 {
-    protected $fillable = [
+    protected $fillable = array(
         'name',
         'address_line_1',
         'address_line_2',
@@ -95,16 +98,16 @@ class Location extends BaseModel
         'postal_code',
         'description',
         'active',
-    ];
+    );
 
-    protected $dates = [
+    protected $dates = array(
         'created_at',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'created_at' => 'datetime',
         'active' => 'boolean',
-    ];
+    );
 
     public function companies(): BelongsToMany
     {

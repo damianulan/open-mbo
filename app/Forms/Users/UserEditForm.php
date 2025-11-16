@@ -6,11 +6,11 @@ use App\Enums\Users\Gender;
 use App\Models\Core\User;
 use FormForge\Base\Form;
 use FormForge\Base\FormComponent;
+use FormForge\Components\Button;
 use FormForge\Components\Dictionary;
 use FormForge\FormBuilder;
 use Illuminate\Http\Request;
 use Sentinel\Models\Role;
-use FormForge\Components\Button;
 
 class UserEditForm extends Form
 {
@@ -18,10 +18,10 @@ class UserEditForm extends Form
     {
         $route = route('users.store');
         $method = 'POST';
-        $exclude = [];
-        $selected = [];
+        $exclude = array();
+        $selected = array();
         $profile = null;
-        if (! is_null($model)) {
+        if ( ! is_null($model)) {
             $method = 'PUT';
             $route = route('users.update', $model->id);
             $profile = $model->profile;
@@ -41,7 +41,7 @@ class UserEditForm extends Form
                 ->label(__('forms.users.roles')))
             ->add(FormComponent::multiselect('supervisors_ids', $model, Dictionary::fromModel(User::class, 'name', 'allActive', $exclude), 'supervisors', $selected)
                 ->label(__('forms.users.supervisors')))
-            ->onCondition(!is_null($model), function (FormBuilder $builder) {
+            ->onCondition( ! is_null($model), function (FormBuilder $builder): void {
                 $builder->addButton(new Button(title: __('buttons.add_employment'), classes: 'btn-outline-primary add-employment'));
             })
             ->addSubmit();
@@ -49,11 +49,11 @@ class UserEditForm extends Form
 
     public static function validation(Request $request, $model = null): array
     {
-        return [
+        return array(
             'firstname' => 'max:255|required',
             'lastname' => 'max:255|required',
             'email' => 'max:255|email|required',
             'birthday' => 'date|nullable',
-        ];
+        );
     }
 }

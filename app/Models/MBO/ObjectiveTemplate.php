@@ -8,7 +8,10 @@ use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Models\Scopes\MBO\ObjectiveTemplateScope;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
+use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property string $id
@@ -17,13 +20,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property mixed|null $description
  * @property string|null $award Max points to be awarded for objective completion
  * @property bool $draft
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read ObjectiveTemplateCategory|null $category
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Objective> $objectives
+ * @property-read Collection<int, Objective> $objectives
  * @property-read int|null $objectives_count
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate active()
@@ -85,21 +88,21 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 #[ScopedBy(ObjectiveTemplateScope::class)]
 class ObjectiveTemplate extends BaseModel implements HasObjectives
 {
-    protected $fillable = [
+    protected $fillable = array(
         'category_id',
         'name',
         'description',
         'award',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'description' => FormattedText::class,
         'draft' => 'boolean',
-    ];
+    );
 
-    protected $cascadeDelete = [
+    protected $cascadeDelete = array(
         'objectives',
-    ];
+    );
 
     public function category()
     {

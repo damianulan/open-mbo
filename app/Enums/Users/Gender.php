@@ -14,18 +14,18 @@ class Gender extends Enum
 
     public static function conservative(): array
     {
-        return [
+        return array(
             self::MALE,
             self::FEMALE,
-        ];
+        );
     }
 
     public static function labels(): array
     {
-        return [
+        return array(
             self::MALE => __('fields.gender.' . self::MALE),
             self::FEMALE => __('fields.gender.' . self::FEMALE),
             self::OTHER => __('fields.gender.' . self::OTHER),
-        ];
+        );
     }
 }

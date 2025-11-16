@@ -12,18 +12,18 @@ class NotificationSeeder extends Seeder
 {
     public function run(): void
     {
-        Notification::createOrUpdate('CAMPAIGN_ASSIGNED', [
+        Notification::createOrUpdate('CAMPAIGN_ASSIGNED', array(
             'contents' => NotificationContents::boot('{% firstname %}, Przypisano Cię do kampanii {% campaign_name %}.'),
             'event' => UserCampaignAssigned::class,
             'system' => true,
             'email' => false,
-        ]);
+        ));
 
-        Notification::createOrUpdate('CAMPAIGN_UNASSIGNED', [
+        Notification::createOrUpdate('CAMPAIGN_UNASSIGNED', array(
             'contents' => NotificationContents::boot('{% firstname %}, Wypisano Cię z kampanii {% campaign_name %}.'),
             'event' => UserCampaignUnassigned::class,
             'system' => true,
             'email' => false,
-        ]);
+        ));
     }
 }

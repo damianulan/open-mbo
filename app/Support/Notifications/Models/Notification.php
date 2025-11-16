@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Lucent\Support\Traits\UUID;
 
@@ -20,9 +21,9 @@ use Lucent\Support\Traits\UUID;
  * @property string|null $event
  * @property string|null $schedule
  * @property array<array-key, mixed>|null $conditions
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
  * @property-read Collection $resources
  *
  * @method static Builder<static>|Notification events()
@@ -52,7 +53,7 @@ class Notification extends Model
 
     protected $table = 'notifications';
 
-    protected $fillable = [
+    protected $fillable = array(
         'key',
         'contents',
         'system',
@@ -60,21 +61,21 @@ class Notification extends Model
         'event',
         'schedule',
         'conditions',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'contents' => NotificationContents::class,
         'system' => 'boolean',
         'email' => 'boolean',
         'conditions' => 'array',
-    ];
+    );
 
     public static function byKey(string $key): ?self
     {
         return self::where('notifications.key', $key)->first();
     }
 
-    public static function createOrUpdate(string $key, array $attributes = []): self
+    public static function createOrUpdate(string $key, array $attributes = array()): self
     {
         $notification = self::byKey($key);
         if ( ! $notification) {
@@ -108,7 +109,7 @@ class Notification extends Model
     {
         return Attribute::make(
             get: function (): Collection {
-                $models = [];
+                $models = array();
                 if ($this->event) {
                     $models = ResourceFactory::getEventResourceModels($this->event);
                 }

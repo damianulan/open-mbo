@@ -4,8 +4,11 @@ namespace App\Models\Business;
 
 use App\Casts\FormattedText;
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
+use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property string $id
@@ -14,15 +17,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property mixed|null $description
  * @property string|null $logo
  * @property string|null $taxpayerid
- * @property \Illuminate\Support\Carbon|null $founded_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon|null $founded_at
+ * @property Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, UserEmployment> $employments
+ * @property-read Collection<int, UserEmployment> $employments
  * @property-read int|null $employments_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Location> $locations
+ * @property-read Collection<int, Location> $locations
  * @property-read int|null $locations_count
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company active()
@@ -84,25 +87,25 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Company extends BaseModel
 {
-    protected $fillable = [
+    protected $fillable = array(
         'name',
         'shortname',
         'description',
         'logo',
         'taxpayerid',
         'founded_at',
-    ];
+    );
 
-    protected $dates = [
+    protected $dates = array(
         'founded_at',
         'created_at',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'description' => FormattedText::class,
         'founded_at' => 'date',
         'created_at' => 'datetime',
-    ];
+    );
 
     public function employments(): HasMany
     {

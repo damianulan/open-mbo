@@ -50,7 +50,7 @@ class LoginController extends Controller
         if ($user) {
             activity('auth')
                 ->causedBy($user)
-                ->withProperties(['authenticated' => true])
+                ->withProperties(array('authenticated' => true))
                 ->event('auth_attempt_success')
                 ->log(__('logging.description.auth_attempt_success'));
         }

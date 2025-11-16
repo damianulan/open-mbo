@@ -1,7 +1,7 @@
 <?php
 
-return [
-    'settings' => [
+return array(
+    'settings' => array(
         'server_info' => 'Informacje o serwerze',
         'git_status' => 'Git status',
         'debugging' => 'Tryb debugowania',
@@ -18,39 +18,39 @@ return [
         'info' => 'Konfiguracja PHP',
         'phpinfo' => 'PHP Info',
         'telescope' => 'Teleskop',
-    ],
+    ),
 
-    'home' => [
+    'home' => array(
         'my_objectives' => 'Moje cele',
         'my_campaigns' => 'Moje kampanie',
-    ],
+    ),
 
-    'errors' => [
-        '500' => [
+    'errors' => array(
+        '500' => array(
             'title' => 'Wewnętrzny błąd serwera',
             'paragraph' => 'Serwer nie był w stanie przetworzyć żądania. Zarejestrowaliśmy ten incydent i przeanalizujemy źródło błędu. Dziękujemy.',
-        ],
-        '503' => [
+        ),
+        '503' => array(
             'title' => 'Usługa niedostępna',
             'paragraph' => 'Przepraszamy, usługa chwilowo niedostępna. Trwają prace konserwacyjne, spróbuj ponownie później. Zostaniesz automatycznie wylogowany.',
-        ],
-        '404' => [
+        ),
+        '404' => array(
             'title' => 'Nie znaleziono strony, lub jest ona tymczasowo niedostępna',
             'paragraph' => 'Nie udało się odnaleźć żądanej strony.',
-        ],
-        '403' => [
+        ),
+        '403' => array(
             'title' => 'Odmowa dostępu',
             'paragraph' => 'Nie posiadasz wystarczających uprawnień niezbędnych do wyświetlania tej strony. Jeśli to błąd, skontaktuj się z administratorem systemu.',
-        ],
-        '401' => [
+        ),
+        '401' => array(
             'title' => 'Dostęp nieautoryzowany',
             'paragraph' => '',
-        ],
-        '419' => [
+        ),
+        '419' => array(
             'title' => 'Sesja wygasła',
             'paragraph' => 'Twój sekretny klucz jest nieprawidłowy, bądź wygasła twoja sesja. Zaloguj się jeszcze raz i spróbuj ponownie.',
-        ],
+        ),
         'common' => 'To chyba nie strona, której szukasz...',
 
-    ],
-];
+    ),
+);

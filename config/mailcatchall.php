@@ -1,6 +1,8 @@
 <?php
 
-return [
+use Illuminate\Mail\Events\MessageSending;
+
+return array(
 
     /**
      * If we have the mail catchall enabled
@@ -15,7 +17,7 @@ return [
     /**
      * The event that we catch to change the receiver
      */
-    'event' => Illuminate\Mail\Events\MessageSending::class,
+    'event' => MessageSending::class,
 
     /**
      * If we add the receivers to text mail
@@ -26,4 +28,4 @@ return [
      * If we add the receivers to html mail
      */
     'add_receivers_to_html' => true,
-];
+);

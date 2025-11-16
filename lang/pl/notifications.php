@@ -1,20 +1,20 @@
 <?php
 
-return [
-    'app' => [
-        'campaign' => [
+return array(
+    'app' => array(
+        'campaign' => array(
             'coordinator_assignment' => '<strong>:username</strong> to nowy uczestnik kampanii <i class="bi-bullseye"></i> <strong>:campaignname</strong>, którą prowadzisz. Dostępne cele zostały automatycznie przypisane.',
             'user_assigned' => 'Przypisano Cię do kampanii <i class="bi-bullseye"></i> <strong>:campaignname</strong>.',
-        ],
+        ),
 
-    ],
+    ),
 
-    'info' => [
+    'info' => array(
         'empty' => 'Twoja skrzynka powiadomień jest pusta, nie otrzymano jeszcze żadnych wiadomości.',
         'show_all' => 'Pokaż wszystkie',
-    ],
+    ),
 
-    'table' => [
+    'table' => array(
         'key' => 'Identyfikator',
         'system' => 'Powiadomienie systemowe',
         'email' => 'Powiadomienie mailowe',
@@ -23,6 +23,6 @@ return [
         'conditions' => 'Wskutek spełnienia warunków',
         'status' => 'Status',
         'action' => 'Akcje',
-    ],
+    ),
 
-];
+);

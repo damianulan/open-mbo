@@ -3,10 +3,11 @@
 namespace App\Traits\Guards\MBO;
 
 use App\Enums\MBO\CampaignStage;
+use App\Models\MBO\Campaign;
 use Illuminate\Support\Facades\Auth;
 
 /**
- * @var \App\Models\MBO\Campaign $this
+ * @var Campaign $this
  *
  * @author Damian Ułan <damian.ulan@protonmail.com>
  * @copyright 2025 damianulan

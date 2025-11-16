@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Collection;
 use Lucent\Support\Traits\Dispatcher;
+use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property string $id
@@ -41,7 +42,7 @@ use Lucent\Support\Traits\Dispatcher;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read EloquentCollection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read EloquentCollection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read EloquentCollection<int, User> $coordinators
  * @property-read int|null $coordinators_count
@@ -133,7 +134,7 @@ class Campaign extends BaseModel implements HasObjectives
 
     protected $log_name = 'mbo';
 
-    protected $fillable = [
+    protected $fillable = array(
         'name',
         'period',
         'description',
@@ -152,23 +153,23 @@ class Campaign extends BaseModel implements HasObjectives
 
         'draft',
         'manual',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'description' => FormattedText::class,
         'draft' => 'boolean',
         'manual' => 'boolean',
         'stage' => CampaignStage::class,
-    ];
+    );
 
-    protected $defaults = [
+    protected $defaults = array(
         'stage' => CampaignStage::PENDING,
-    ];
+    );
 
-    protected $dispatchesEvents = [
+    protected $dispatchesEvents = array(
         'updated' => CampaignUpdated::class,
         'created' => CampaignCreated::class,
-    ];
+    );
 
     public static function creatingCampaign(Campaign $model)
     {
@@ -202,7 +203,7 @@ class Campaign extends BaseModel implements HasObjectives
     public function refreshCoordinators(?array $user_ids)
     {
         if ( ! $user_ids) {
-            $user_ids = [];
+            $user_ids = array();
         }
 
         $current = $this->coordinators->pluck('id')->toArray();
@@ -229,12 +230,12 @@ class Campaign extends BaseModel implements HasObjectives
     {
         $exists = $this->user_campaigns()->where('user_id', $user_id)->exists();
         if ( ! $exists) {
-            $this->user_campaigns()->create([
+            $this->user_campaigns()->create(array(
                 'user_id' => $user_id,
                 'stage' => $this->setUserStage($user_id),
                 'manual' => $this->manual,
                 'active' => $this->draft ? 0 : 1,
-            ]);
+            ));
         }
 
         return true;
@@ -252,7 +253,7 @@ class Campaign extends BaseModel implements HasObjectives
 
     public function setUserStage($user_id = null)
     {
-        $params = ['manual' => 0, 'active' => 1, 'campaign_id' => $this->id];
+        $params = array('manual' => 0, 'active' => 1, 'campaign_id' => $this->id);
         if ($user_id) {
             $params['user_id'] = $user_id;
         }
@@ -277,7 +278,7 @@ class Campaign extends BaseModel implements HasObjectives
         $stage = CampaignStage::PENDING;
         $now = Carbon::now();
 
-        if ( ! in_array($this->stage, [CampaignStage::TERMINATED, CampaignStage::CANCELED])) {
+        if ( ! in_array($this->stage, array(CampaignStage::TERMINATED, CampaignStage::CANCELED))) {
             foreach (CampaignStage::softValues() as $tmp) {
                 $prop_start = $tmp . '_from';
                 $prop_end = $tmp . '_to';
@@ -534,7 +535,7 @@ class Campaign extends BaseModel implements HasObjectives
     {
         $query->where('draft', 0)
             ->where(function (Builder $q): void {
-                $q->whereIn('stage', [CampaignStage::PENDING, CampaignStage::IN_PROGRESS]);
+                $q->whereIn('stage', array(CampaignStage::PENDING, CampaignStage::IN_PROGRESS));
             });
     }
 
@@ -550,7 +551,7 @@ class Campaign extends BaseModel implements HasObjectives
     public function scopeWhereCompleted(Builder $query): void
     {
         $query->where('draft', 0)
-            ->whereNotIn('stage', [CampaignStage::TERMINATED, CampaignStage::CANCELED])
+            ->whereNotIn('stage', array(CampaignStage::TERMINATED, CampaignStage::CANCELED))
             ->where(function (Builder $q): void {
                 $q->where('stage', CampaignStage::COMPLETED)
                     ->orWhereDate('self_evaluation_to', '<', Carbon::now());

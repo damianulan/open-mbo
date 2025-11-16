@@ -24,12 +24,12 @@ class CommentComponent extends Component
         $user = Auth::user();
 
         if ( ! empty($content)) {
-            $this->subject->comments()->create([
+            $this->subject->comments()->create(array(
                 'author_id' => $user->id,
                 'author_type' => $user->getMorphClass(),
                 'content' => $content,
                 'private' => $private,
-            ]);
+            ));
 
             $this->dispatch('commentable.initialize.quill');
         }

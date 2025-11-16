@@ -18,11 +18,11 @@ return new class() extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('firstname');
             $table->string('lastname');
-            $table->enum('gender', [
+            $table->enum('gender', array(
                 Gender::MALE,
                 Gender::FEMALE,
                 Gender::OTHER,
-            ])->nullable();
+            ))->nullable();
             $table->date('birthday')->nullable();
             $table->string('phone')->nullable();
             $table->string('avatar')->nullable();

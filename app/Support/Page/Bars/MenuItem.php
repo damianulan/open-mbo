@@ -138,9 +138,9 @@ class MenuItem
 
     public function render()
     {
-        return view('components.menus.item', [
+        return view('components.menus.item', array(
             'item' => $this,
-        ])->render();
+        ))->render();
     }
 
     public function isVisible(): bool
@@ -200,7 +200,7 @@ class MenuItem
     public function role(...$slug): self
     {
         if ( ! is_array($slug)) {
-            $slug = [$slug];
+            $slug = array($slug);
         }
         if ( ! Auth::user()->hasAnyRoles($slug)) {
             $this->visible = false;

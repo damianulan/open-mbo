@@ -1,6 +1,10 @@
 <?php
 
-return [
+use Sentinel\Contexts\System;
+use Sentinel\Models\Permission;
+use Sentinel\Models\Role;
+
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -21,17 +25,17 @@ return [
      * Choose default context for Sentinel. This context will be used when
      * creating new roles and permissions that don't have context specified.
      */
-    'default_context' => Sentinel\Contexts\System::class,
+    'default_context' => System::class,
 
     /**
      * Sentinel uses those models to determine Eloquent relations.
      * If you want to use your own models, you can specify them here.
      * Your custom models must extend Sentinel ones.
      */
-    'models' => [
-        'role' => Sentinel\Models\Role::class,
-        'permission' => Sentinel\Models\Permission::class,
-    ],
+    'models' => array(
+        'role' => Role::class,
+        'permission' => Permission::class,
+    ),
 
     /**
      * Here pass role slug that will be assigned with root privileges.
@@ -43,7 +47,7 @@ return [
      * Sentinel uses cache to store roles and permissions datas in order to speed up
      * roles and permissions loading. You can change cache prefix here and cache driver.
      */
-    'cache' => [
+    'cache' => array(
         /*
          * You may optionally indicate a specific cache driver to use for permission and
          * role caching using any of the `store` drivers listed in the cache.php config
@@ -61,6 +65,6 @@ return [
          * Cache is automatically cleared when artisan sentinel:run command is executed.
          */
         'expire_after' => 86400,
-    ],
+    ),
 
-];
+);

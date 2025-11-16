@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     /*
     |--------------------------------------------------------------------------
     | Cache Duration
@@ -55,4 +55,4 @@ return [
     |
     */
     'debug_mode' => env('MODEL_CACHE_DEBUG', false),
-];
+);

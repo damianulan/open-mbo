@@ -18,11 +18,11 @@ use Illuminate\Support\Facades\Mail;
 
 class NotificationMessage
 {
-    protected array $placeholders = [];
+    protected array $placeholders = array();
 
     protected NotificationContents $contents;
 
-    protected array $resources = [];
+    protected array $resources = array();
 
     protected $email_sent = false;
 
@@ -33,7 +33,7 @@ class NotificationMessage
     public function __construct(
         protected Notification $notification,
         protected Model $notifiable,
-        protected array $resourceModels = []
+        protected array $resourceModels = array()
     ) {
         try {
             foreach ($resourceModels as $model) {
@@ -89,14 +89,14 @@ class NotificationMessage
                             $result = false;
                         } else {
                             $this->email_sent = true;
-                            $toMail = MailNotification::create([
+                            $toMail = MailNotification::create(array(
                                 'notification_id' => $this->notification->id,
                                 'notifiable_id' => $this->notifiable->id,
                                 'notifiable_type' => $this->notifiable::class,
                                 'resources' => json_encode($this->resources),
                                 'subject' => $this->contents->subject,
                                 'contents' => $this->contents->email_contents,
-                            ]);
+                            ));
                             MailNotificationSent::dispatch($toMail);
                         }
                     }
@@ -121,13 +121,13 @@ class NotificationMessage
 
     protected function toSystem(): array
     {
-        return [
+        return array(
             'notification_id' => $this->notification->id,
             'notifiable_id' => $this->notifiable->id,
             'notifiable_type' => $this->notifiable::class,
             'resources' => json_encode($this->resources),
             'contents' => $this->contents->system_contents,
-        ];
+        );
     }
 
     private function addPlaceholders($resource): void

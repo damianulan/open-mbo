@@ -13,7 +13,7 @@ class MboForm extends Form
 
     protected static ?string $backRoute = 'settings.modules.index';
 
-    protected static array $backParams = ['module' => 'mbo'];
+    protected static array $backParams = array('module' => 'mbo');
 
     public static function definition(Request $request, $model = null): FormBuilder
     {
@@ -41,7 +41,7 @@ class MboForm extends Form
 
     public static function validation(Request $request, $model_id = null): array
     {
-        return [
+        return array(
             'enabled' => 'boolean',
             'campaigns_enabled' => 'boolean',
             'campaigns_manual' => 'boolean',
@@ -51,6 +51,6 @@ class MboForm extends Form
             'manipulate_rewards' => 'boolean',
             'failed_rewards' => 'boolean',
             'rewards_currency' => 'required|string|max:3',
-        ];
+        );
     }
 }

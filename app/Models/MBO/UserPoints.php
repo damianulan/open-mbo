@@ -5,8 +5,12 @@ namespace App\Models\MBO;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use Eloquent;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Support\Carbon;
+use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property string $id
@@ -15,13 +19,13 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @property string $subject_id
  * @property string|null $points
  * @property string|null $assigned_by
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read User|null $assigner
- * @property-read \Illuminate\Database\Eloquent\Model|Eloquent $subject
+ * @property-read Model|Eloquent $subject
  * @property-read User $user
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints active()
@@ -81,13 +85,13 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  */
 class UserPoints extends BaseModel
 {
-    protected $fillable = [
+    protected $fillable = array(
         'user_id',
         'subject_id',
         'subject_type',
         'points',
         'assigned_by',
-    ];
+    );
 
     public function subject(): MorphTo
     {

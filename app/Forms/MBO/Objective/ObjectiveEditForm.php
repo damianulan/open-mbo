@@ -45,7 +45,7 @@ class ObjectiveEditForm extends Form
             $builder->where('id', '!=', $model_id);
         }
 
-        return [
+        return array(
             'template_id' => 'required',
             'name' => 'max:120|required',
             'deadline' => 'nullable',
@@ -54,6 +54,6 @@ class ObjectiveEditForm extends Form
             'expected' => 'numeric|nullable',
             'award' => 'numeric|nullable',
             'draft' => 'boolean',
-        ];
+        );
     }
 }

@@ -4,39 +4,41 @@ namespace App\Http\Controllers\Objectives;
 
 use App\Forms\MBO\Objective\ObjectiveTemplateEditForm;
 use App\Models\MBO\ObjectiveTemplate;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ObjectiveTemplateController extends MBOController
 {
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
     public function index()
     {
-        return view('pages.mbo.index', [
+        return view('pages.mbo.index', array(
             'objectives' => ObjectiveTemplate::paginate(30),
             'nav' => $this->nav(),
-        ]);
+        ));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create(Request $request)
     {
-        return view('components.forms.edit', [
+        return view('components.forms.edit', array(
             'form' => ObjectiveTemplateEditForm::definition($request),
-        ]);
+        ));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request, ObjectiveTemplateEditForm $form)
     {
@@ -58,7 +60,7 @@ class ObjectiveTemplateController extends MBOController
      * @TODO add view
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id) {}
 
@@ -66,23 +68,23 @@ class ObjectiveTemplateController extends MBOController
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Request $request, $id)
     {
         $model = ObjectiveTemplate::findOrFail($id);
 
-        return view('components.forms.edit', [
+        return view('components.forms.edit', array(
             'objective' => $model,
             'form' => ObjectiveTemplateEditForm::definition($request, $model),
-        ]);
+        ));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, $id, ObjectiveTemplateEditForm $form)
     {

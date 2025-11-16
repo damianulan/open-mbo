@@ -39,11 +39,11 @@ class UserObjectiveStatus extends Enum
      */
     public static function frozen(): array
     {
-        return [
+        return array(
             self::PASSED,
             self::FAILED,
             self::INTERRUPTED,
-        ];
+        );
     }
 
     /**
@@ -51,10 +51,10 @@ class UserObjectiveStatus extends Enum
      */
     public static function evaluated(): array
     {
-        return [
+        return array(
             self::PASSED,
             self::FAILED,
-        ];
+        );
     }
 
     /**
@@ -62,11 +62,11 @@ class UserObjectiveStatus extends Enum
      */
     public static function finished(): array
     {
-        return [
+        return array(
             self::COMPLETED,
             self::PASSED,
             self::FAILED,
-        ];
+        );
     }
 
     /**
@@ -74,23 +74,23 @@ class UserObjectiveStatus extends Enum
      */
     public static function inactive(): array
     {
-        return [
+        return array(
             self::COMPLETED,
             self::PASSED,
             self::FAILED,
             self::INTERRUPTED,
-        ];
+        );
     }
 
     public static function labels(): array
     {
-        return [
+        return array(
             self::UNSTARTED => __('mbo.objective_status.unstarted'),
             self::PROGRESS => __('mbo.objective_status.progress'),
             self::COMPLETED => __('mbo.objective_status.completed'),
             self::PASSED => __('mbo.objective_status.passed'),
             self::FAILED => __('mbo.objective_status.failed'),
             self::INTERRUPTED => __('mbo.objective_status.interrupted'),
-        ];
+        );
     }
 }

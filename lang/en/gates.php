@@ -3,11 +3,11 @@
 use App\Warden\PermissionsLib;
 use App\Warden\RolesLib;
 
-return [
+return array(
 
     // Roles
     'roles_plural' => 'Roles',
-    'roles' => [
+    'roles' => array(
         RolesLib::ROOT => 'Root',
         RolesLib::HELPDESK => 'Helpdesk',
         RolesLib::ADMIN => 'Admin',
@@ -18,9 +18,9 @@ return [
         RolesLib::EMPLOYEE => 'Employee',
         RolesLib::OBJECTIVE_COORDINATOR => 'Objective Coordinator',
         RolesLib::CAMPAIGN_COORDINATOR => 'Campaign Coordinator',
-    ],
+    ),
 
-    'permissions' => [
+    'permissions' => array(
         PermissionsLib::MBO_ADMINISTRATION => 'MBO Administration',
-    ],
-];
+    ),
+);

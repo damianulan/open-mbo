@@ -40,13 +40,13 @@ class CampaignStage extends Enum
      */
     public static function hardValues(): array
     {
-        return [
+        return array(
             self::PENDING,
             self::IN_PROGRESS,
             self::COMPLETED,
             self::TERMINATED,
             self::CANCELED,
-        ];
+        );
     }
 
     /**
@@ -54,13 +54,13 @@ class CampaignStage extends Enum
      */
     public static function softValues(): array
     {
-        return [
+        return array(
             self::DEFINITION,
             self::DISPOSITION,
             self::REALIZATION,
             self::EVALUATION,
             self::SELF_EVALUATION,
-        ];
+        );
     }
 
     /**
@@ -68,7 +68,7 @@ class CampaignStage extends Enum
      */
     public static function sequences(): array
     {
-        return [
+        return array(
             self::PENDING => 0,
             self::DEFINITION => 1,
             self::DISPOSITION => 2,
@@ -76,7 +76,7 @@ class CampaignStage extends Enum
             self::EVALUATION => 4,
             self::SELF_EVALUATION => 5,
             self::COMPLETED => 6,
-        ];
+        );
     }
 
     /**
@@ -84,13 +84,13 @@ class CampaignStage extends Enum
      */
     public static function hardValuesOrder(): array
     {
-        return [
+        return array(
             self::IN_PROGRESS,
             self::PENDING,
             self::COMPLETED,
             self::TERMINATED,
             self::CANCELED,
-        ];
+        );
     }
 
     public static function getName(string $value): string
@@ -180,7 +180,7 @@ class CampaignStage extends Enum
 
     public static function fromto_labels(): array
     {
-        $arr = [];
+        $arr = array();
         foreach (__('forms.campaigns.stages') as $key => $value) {
             $arr[$key . '_from'] = $value . ' ' . __('forms.from');
             $arr[$key . '_to'] = $value . ' ' . __('forms.to');

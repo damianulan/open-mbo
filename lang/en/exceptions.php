@@ -2,6 +2,6 @@
 
 use App\Exceptions\MBO\UnableToSetObjectiveRealization;
 
-return [
+return array(
     UnableToSetObjectiveRealization::class => 'You are unable to set objective realization',
-];
+);

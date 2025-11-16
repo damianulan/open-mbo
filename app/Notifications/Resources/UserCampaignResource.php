@@ -14,15 +14,15 @@ class UserCampaignResource extends NotificationResource
 
     public static function descriptions(): array
     {
-        return [
+        return array(
             'campaign_name' => 'Campaign name',
-        ];
+        );
     }
 
     public function datas(): array
     {
-        return [
+        return array(
             'campaign_name' => $this->model->campaign->name,
-        ];
+        );
     }
 }

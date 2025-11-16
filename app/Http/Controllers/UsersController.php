@@ -7,42 +7,43 @@ use App\Forms\Users\EmploymentEditForm;
 use App\Forms\Users\UserEditForm;
 use App\Models\Business\UserEmployment;
 use App\Models\Core\User;
+use App\Services\Employments\CreateOrUpdate as EmploymentCreateOrUpdate;
 use App\Services\Users\CreateOrUpdate as UserCreateOrUpdate;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use App\Services\Employments\CreateOrUpdate as EmploymentCreateOrUpdate;
 
 class UsersController extends AppController
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index(UsersDataTable $dataTable)
     {
-        return $dataTable->render('pages.users.index', [
+        return $dataTable->render('pages.users.index', array(
             'table' => $dataTable,
-        ]);
+        ));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create(Request $request)
     {
-        return view('pages.users.edit', [
+        return view('pages.users.edit', array(
             'form' => UserEditForm::definition($request),
-            'employments' => [],
-        ]);
+            'employments' => array(),
+        ));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request, UserEditForm $form)
     {
@@ -76,59 +77,41 @@ class UsersController extends AppController
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id)
     {
         $user = User::findOrFail($id);
 
-        return view('pages.users.show', [
+        return view('pages.users.show', array(
             'user' => $user,
-        ]);
+        ));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Request $request, $id)
     {
         $model = User::findOrFail($id);
 
-        $request->request->add(['user_id' => $id]);
+        $request->request->add(array('user_id' => $id));
 
-        return view('pages.users.edit', [
+        return view('pages.users.edit', array(
             'user' => $model,
             'employments' => $this->getEmploymentFroms($request, $model),
             'form' => UserEditForm::definition($request, $model),
-        ]);
-    }
-
-    private function getEmploymentFroms(Request $request, ?User $model = null): array
-    {
-        $employments[__('forms.employments.add')] = EmploymentEditForm::definition($request);
-
-        if ($model) {
-            $i = 0;
-            foreach ($model->employments as $employment) {
-                $i++;
-                $langKey = 'forms.employments.header';
-                if ($employment->main) {
-                    $langKey = 'forms.employments.header_main';
-                }
-                $employments[__($langKey, ['no' => $i])] = EmploymentEditForm::definition($request, $employment);
-            }
-        }
-        return $employments;
+        ));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, $id, UserEditForm $form)
     {
@@ -140,10 +123,10 @@ class UsersController extends AppController
         if ($service->passed()) {
             $user = $service->user;
 
-            return redirect()->route('users.show', $id)->with('success', __('alerts.users.success.edit', ['name' => $user->name]));
+            return redirect()->route('users.show', $id)->with('success', __('alerts.users.success.edit', array('name' => $user->name)));
         }
 
-        return redirect()->back()->with('error', __('alerts.users.error.edit', ['name' => $user->name]));
+        return redirect()->back()->with('error', __('alerts.users.error.edit', array('name' => $user->name)));
     }
 
     public function updateEmployment(Request $request, $id, EmploymentEditForm $form)
@@ -164,17 +147,17 @@ class UsersController extends AppController
      * Delete User instance.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function delete($id)
     {
         $user = User::findOrFail($id);
 
         if ($user->delete()) {
-            return redirect()->route('users.index')->with('success', __('alerts.users.success.delete', ['name' => $user->name]));
+            return redirect()->route('users.index')->with('success', __('alerts.users.success.delete', array('name' => $user->name)));
         }
 
-        return redirect()->back()->with('error', __('alerts.users.error.delete', ['name' => $user->name]));
+        return redirect()->back()->with('error', __('alerts.users.error.delete', array('name' => $user->name)));
     }
 
     public function deleteEmployment($id)
@@ -192,7 +175,7 @@ class UsersController extends AppController
      * Toggles User blocking if was nat blocked and unlocking otherwise.
      *
      * @param  mixed  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function block($id)
     {
@@ -201,14 +184,13 @@ class UsersController extends AppController
             $user->toggleLock();
         }
         if ($user->blocked()) {
-            return redirect()->back()->with('info', __('alerts.users.success.blocked', ['name' => $user->name]));
+            return redirect()->back()->with('info', __('alerts.users.success.blocked', array('name' => $user->name)));
         }
 
-        return redirect()->back()->with('info', __('alerts.users.success.unblocked', ['name' => $user->name]));
+        return redirect()->back()->with('info', __('alerts.users.success.unblocked', array('name' => $user->name)));
     }
 
     /**
-     * @param \App\Models\Core\User $user
      * @return void
      */
     public function impersonate(User $user)
@@ -226,5 +208,24 @@ class UsersController extends AppController
         Auth::user()->leaveImpersonation();
 
         return redirect()->back();
+    }
+
+    private function getEmploymentFroms(Request $request, ?User $model = null): array
+    {
+        $employments[__('forms.employments.add')] = EmploymentEditForm::definition($request);
+
+        if ($model) {
+            $i = 0;
+            foreach ($model->employments as $employment) {
+                $i++;
+                $langKey = 'forms.employments.header';
+                if ($employment->main) {
+                    $langKey = 'forms.employments.header_main';
+                }
+                $employments[__($langKey, array('no' => $i))] = EmploymentEditForm::definition($request, $employment);
+            }
+        }
+
+        return $employments;
     }
 }

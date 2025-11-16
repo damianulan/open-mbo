@@ -2,6 +2,7 @@
 
 namespace App\Models\MBO;
 
+use App\Commentable\Models\Comment;
 use App\Commentable\Support\Commentable;
 use App\Contracts\MBO\AssignsPoints;
 use App\Contracts\MBO\HasDeadline;
@@ -16,11 +17,14 @@ use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Traits\Guards\MBO\CanUserObjective;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Lucent\Support\Traits\Dispatcher;
+use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property string $id
@@ -29,18 +33,18 @@ use Lucent\Support\Traits\Dispatcher;
  * @property string $status objective status
  * @property string|null $realization Numerical value of the realization of the objective - in relation to the expected value in objective
  * @property string|null $evaluation Percentage evaluation of the objective - if realization is set, evaluation is calculated automatically
- * @property \Illuminate\Support\Carbon|null $evaluated_at Time when most recent evaluation was made
+ * @property Carbon|null $evaluated_at Time when most recent evaluation was made
  * @property string|null $evaluated_by Time when most recent evaluator has made any changes
  * @property string|null $self_realization Numerical value of the realization of the objective - in relation to the expected value in objective
  * @property string|null $self_evaluation Percentage evaluation of the objective - if realization is set, evaluation is calculated automatically
  * @property string|null $self_evaluated_at Time when most recent self evaluation was made
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read Campaign|null $campaign
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Commentable\Models\Comment> $comments
+ * @property-read Collection<int, Comment> $comments
  * @property-read int|null $comments_count
  * @property-read User|null $evaluator
  * @property-read Objective $objective
@@ -118,7 +122,7 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
 {
     use CanUserObjective, Commentable, Dispatcher;
 
-    protected $fillable = [
+    protected $fillable = array(
         'user_id',
         'objective_id',
         'status',
@@ -129,15 +133,15 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
         'self_realization',
         'self_evaluation',
         'self_evaluation_at',
-    ];
+    );
 
-    protected $defaults = [
+    protected $defaults = array(
         'status' => UserObjectiveStatus::UNSTARTED,
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'evaluated_at' => 'datetime',
-    ];
+    );
 
     public static function assign($user_id, $objective_id): bool
     {
@@ -275,9 +279,9 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
 
     public function points(): MorphOne
     {
-        return $this->morphOne(UserPoints::class, 'subject')->withDefault([
+        return $this->morphOne(UserPoints::class, 'subject')->withDefault(array(
             'user_id' => $this->user_id,
-        ])->whereUserId($this->user_id);
+        ))->whereUserId($this->user_id);
     }
 
     public function campaign(): HasOneThrough
@@ -309,7 +313,7 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
      */
     public function isCompleted(): bool
     {
-        return in_array($this->status, [UserObjectiveStatus::COMPLETED, UserObjectiveStatus::PASSED, UserObjectiveStatus::FAILED]);
+        return in_array($this->status, array(UserObjectiveStatus::COMPLETED, UserObjectiveStatus::PASSED, UserObjectiveStatus::FAILED));
     }
 
     /**
@@ -437,11 +441,11 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
         }
 
         // TODO do not commit
-        $this->points()->updateOrCreate([
+        $this->points()->updateOrCreate(array(
             'user_id' => $this->user_id,
             'points' => $this->calculatePoints(),
             'assigned_by' => $this->evaluated_by,
-        ]);
+        ));
 
         return $this;
     }

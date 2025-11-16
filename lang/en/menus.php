@@ -1,17 +1,17 @@
 <?php
 
-return [
+return array(
 
     // Sidebar
     'dashboard' => 'Pulpit',
 
     'admin_panel' => 'Panel administracyjny',
-    'reports' => [
+    'reports' => array(
         'index' => 'Raporty',
-    ],
-    'notifications' => [
+    ),
+    'notifications' => array(
         'index' => 'Powiadomienia',
-    ],
+    ),
 
     // User menu
     'edit_profile' => 'Edytuj profil',
@@ -27,106 +27,106 @@ return [
 
     // Submenus / Page menus
 
-    'my_objectives' => [
+    'my_objectives' => array(
         'index' => 'Moje cele',
-    ],
+    ),
 
     // User's profile menu
-    'profile' => [
+    'profile' => array(
         'index' => 'Profil',
         'edit' => 'Edytuj',
         'reset' => 'Reset hasła',
         'personal_data' => 'Dane personalne',
         'settings' => 'Ustawienia konta',
         'logs' => 'Twoja aktywność',
-    ],
+    ),
 
-    'settings' => [
+    'settings' => array(
         'index' => 'Ustawienia',
-        'general' => [
+        'general' => array(
             'index' => 'Główne',
-        ],
-        'modules' => [
+        ),
+        'modules' => array(
             'index' => 'Moduły',
-        ],
-        'integrations' => [
+        ),
+        'integrations' => array(
             'index' => 'Integracje',
-        ],
-        'server' => [
+        ),
+        'server' => array(
             'index' => 'Serwer',
-        ],
-        'logs' => [
+        ),
+        'logs' => array(
             'index' => 'Logi',
-        ],
-        'help' => [
+        ),
+        'help' => array(
             'index' => 'Pomoc',
-        ],
-        'organization' => [
+        ),
+        'organization' => array(
             'index' => 'Struktura organizacyjna',
-            'companies' => [
+            'companies' => array(
                 'index' => 'Przedsiębiorstwa',
-            ],
-            'departments' => [
+            ),
+            'departments' => array(
                 'index' => 'Działy',
-            ],
-            'positions' => [
+            ),
+            'positions' => array(
                 'index' => 'Stanowiska',
-            ],
-            'contracts' => [
+            ),
+            'contracts' => array(
                 'index' => 'Typy kontraktów',
-            ],
-        ],
-        'creator' => [
+            ),
+        ),
+        'creator' => array(
             'index' => 'Kreator struktury',
-        ],
-        'teams' => [
+        ),
+        'teams' => array(
             'index' => 'Zespoły',
-        ],
-    ],
+        ),
+    ),
 
-    'mbo' => [
+    'mbo' => array(
         'index' => 'Zarządzanie celami',
-    ],
+    ),
 
-    'objectives' => [
+    'objectives' => array(
         'index' => 'Cele',
         'create' => 'Tworzenie celu',
         'edit' => 'Modyfikacja celu',
 
-    ],
-    'templates' => [
+    ),
+    'templates' => array(
         'index' => 'Szablony celów',
         'create' => 'Tworzenie szablonu celu',
         'edit' => 'Modyfikacja szablonu celu',
 
-    ],
-    'categories' => [
+    ),
+    'categories' => array(
         'index' => 'Kategorie celów',
         'create' => 'Tworzenie kategorii MBO',
         'edit' => 'Modyfikacja kategorii MBO',
-    ],
+    ),
 
-    'reports' => [
+    'reports' => array(
         'index' => 'Raporty',
-    ],
+    ),
 
-    'campaigns' => [
+    'campaigns' => array(
         'index' => 'Kampanie Pomiarowe',
         'create' => 'Tworzenie nowej kampanii pomiarowej',
         'edit' => 'Edycja kampanii',
-    ],
+    ),
 
-    'users' => [
+    'users' => array(
         'index' => 'Użytkownicy',
         'edit' => 'Edycja użytkownika',
         'create' => 'Tworzenie użytkownika',
         'show' => 'Profil użytkownika',
-    ],
+    ),
 
-    'info' => [
-        'profile' => [
+    'info' => array(
+        'profile' => array(
             'logs' => 'Strona przedstawia całą Twoją aktywność, jaka jest mierzona przez system.',
-        ],
-    ],
+        ),
+    ),
 
-];
+);

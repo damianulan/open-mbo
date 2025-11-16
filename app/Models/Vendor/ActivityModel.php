@@ -3,6 +3,9 @@
 namespace App\Models\Vendor;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Activitylog\Models\Activity;
 
@@ -15,13 +18,13 @@ use Spatie\Activitylog\Models\Activity;
  * @property string|null $subject_id
  * @property string|null $causer_type
  * @property string|null $causer_id
- * @property \Illuminate\Support\Collection<array-key, mixed>|null $properties
+ * @property Collection<array-key, mixed>|null $properties
  * @property string|null $batch_uuid
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Model|null $causer
- * @property-read \Illuminate\Support\Collection $changes
- * @property-read \Illuminate\Database\Eloquent\Model|null $subject
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Model|null $causer
+ * @property-read Collection $changes
+ * @property-read Model|null $subject
  *
  * @method static Builder<static>|ActivityModel causedBy(\Illuminate\Database\Eloquent\Model $causer)
  * @method static Builder<static>|ActivityModel forBatch(string $batchUuid)
@@ -53,7 +56,7 @@ class ActivityModel extends Activity
 {
     public function scopeLogger(Builder $query): void
     {
-        $query->whereIn('activity_log.event', ['viewed', 'created', 'updated', 'deleted', 'impersonated', 'auth_attempt_success', 'auth_attempt_fail']);
+        $query->whereIn('activity_log.event', array('viewed', 'created', 'updated', 'deleted', 'impersonated', 'auth_attempt_success', 'auth_attempt_fail'));
     }
 
     public function scopeMine(Builder $query): void

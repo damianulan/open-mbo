@@ -2,18 +2,16 @@
 
 namespace App\Forms\Users;
 
-use App\Enums\Users\Gender;
-use App\Models\Core\User;
-use FormForge\Base\Form;
-use FormForge\Base\FormComponent;
-use FormForge\Components\Dictionary;
-use FormForge\FormBuilder;
-use Illuminate\Http\Request;
 use App\Models\Business\Company;
 use App\Models\Business\Department;
 use App\Models\Business\Position;
 use App\Models\Business\TypeOfContract;
+use FormForge\Base\Form;
+use FormForge\Base\FormComponent;
 use FormForge\Components\Button;
+use FormForge\Components\Dictionary;
+use FormForge\FormBuilder;
+use Illuminate\Http\Request;
 
 class EmploymentEditForm extends Form
 {
@@ -23,7 +21,7 @@ class EmploymentEditForm extends Form
         $method = 'POST';
         $user_id = $model->user_id ?? $request->get('user_id');
 
-        if (! is_null($model)) {
+        if ( ! is_null($model)) {
             $method = 'PUT';
             $route = route('employments.update', $model->id);
         }
@@ -42,18 +40,18 @@ class EmploymentEditForm extends Form
             ->add(FormComponent::date('employment', $model)->label(__('forms.employments.employment')))
             ->add(FormComponent::date('release', $model)->label(__('forms.employments.release')))
             ->addSubmit()
-            ->onCondition(!is_null($model), function (FormBuilder $builder) use ($model) {
+            ->onCondition( ! is_null($model), function (FormBuilder $builder) use ($model): void {
                 $builder->addButton(new Button(title: __('buttons.delete'), href: route('employments.delete', $model->id), classes: 'btn-danger delete-employment'));
             });
     }
 
     public static function validation(Request $request, $model = null): array
     {
-        return [
+        return array(
             'user_id' => 'required',
             'company_id' => 'required',
             'employment' => 'date|nullable',
             'release' => 'date|nullable',
-        ];
+        );
     }
 }

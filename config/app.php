@@ -1,9 +1,53 @@
 <?php
 
+use App\Casts\CheckboxCast;
+use App\Enums\Core\MessageType;
+use App\Exceptions\AppException;
+use App\Lib\Theme;
+use App\Models\Core\User;
+use App\Providers\AppServiceProvider;
+use App\Providers\ComponentServiceProvider;
+use App\Providers\ConfigServiceProvider;
+use App\Providers\EventServiceProvider;
+use App\Providers\GateServiceProvider;
+use App\Providers\RolesServiceProvider;
+use App\Providers\RouteServiceProvider;
+use App\Support\Http\ResponseAjax;
+use App\Support\Page\PageBuilder;
+use Barryvdh\Debugbar\ServiceProvider;
+use Illuminate\Auth\AuthServiceProvider;
+use Illuminate\Auth\Passwords\PasswordResetServiceProvider;
+use Illuminate\Broadcasting\BroadcastServiceProvider;
+use Illuminate\Bus\BusServiceProvider;
+use Illuminate\Cache\CacheServiceProvider;
+use Illuminate\Cookie\CookieServiceProvider;
+use Illuminate\Database\DatabaseServiceProvider;
+use Illuminate\Encryption\EncryptionServiceProvider;
+use Illuminate\Filesystem\FilesystemServiceProvider;
+use Illuminate\Foundation\Providers\ConsoleSupportServiceProvider;
+use Illuminate\Foundation\Providers\FoundationServiceProvider;
+use Illuminate\Hashing\HashServiceProvider;
+use Illuminate\Mail\MailServiceProvider;
+use Illuminate\Notifications\NotificationServiceProvider;
+use Illuminate\Pagination\PaginationServiceProvider;
+use Illuminate\Pipeline\PipelineServiceProvider;
+use Illuminate\Queue\QueueServiceProvider;
+use Illuminate\Redis\RedisServiceProvider;
+use Illuminate\Session\SessionServiceProvider;
 use Illuminate\Support\Facades\Facade;
+use Illuminate\Translation\TranslationServiceProvider;
+use Illuminate\Validation\ValidationServiceProvider;
+use Illuminate\View\ViewServiceProvider;
+use Lab404\Impersonate\ImpersonateServiceProvider;
 use Lucent\Console\Git;
+use Mews\Purifier\Facades\Purifier;
+use Mews\Purifier\PurifierServiceProvider;
+use Yajra\DataTables\ButtonsServiceProvider;
+use Yajra\DataTables\DataTablesServiceProvider;
+use Yajra\DataTables\ExportServiceProvider;
+use Yajra\DataTables\HtmlServiceProvider;
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -104,10 +148,10 @@ return [
 
     'fallback_locale' => 'pl',
 
-    'available_locales' => [
+    'available_locales' => array(
         'pl',
         'en',
-    ],
+    ),
 
     'date_format' => env('DATEFORMAT', 'Y-m-d'),
     'time_format' => env('TIMEFORMAT', 'H:i'),
@@ -178,10 +222,10 @@ return [
     |
     */
 
-    'maintenance' => [
+    'maintenance' => array(
         'driver' => 'file',
         // 'store'  => 'redis',
-    ],
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -194,60 +238,60 @@ return [
     |
     */
 
-    'providers' => [
+    'providers' => array(
 
         /*
          * Laravel Framework Service Providers...
          */
-        Illuminate\Auth\AuthServiceProvider::class,
-        Illuminate\Broadcasting\BroadcastServiceProvider::class,
-        Illuminate\Bus\BusServiceProvider::class,
-        Illuminate\Cache\CacheServiceProvider::class,
-        Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
-        Illuminate\Cookie\CookieServiceProvider::class,
-        Illuminate\Database\DatabaseServiceProvider::class,
-        Illuminate\Encryption\EncryptionServiceProvider::class,
-        Illuminate\Filesystem\FilesystemServiceProvider::class,
-        Illuminate\Foundation\Providers\FoundationServiceProvider::class,
-        Illuminate\Hashing\HashServiceProvider::class,
-        Illuminate\Mail\MailServiceProvider::class,
-        Illuminate\Notifications\NotificationServiceProvider::class,
-        Illuminate\Pagination\PaginationServiceProvider::class,
-        Illuminate\Pipeline\PipelineServiceProvider::class,
-        Illuminate\Queue\QueueServiceProvider::class,
-        Illuminate\Redis\RedisServiceProvider::class,
-        Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
-        Illuminate\Session\SessionServiceProvider::class,
-        Illuminate\Translation\TranslationServiceProvider::class,
-        Illuminate\Validation\ValidationServiceProvider::class,
-        Illuminate\View\ViewServiceProvider::class,
+        AuthServiceProvider::class,
+        BroadcastServiceProvider::class,
+        BusServiceProvider::class,
+        CacheServiceProvider::class,
+        ConsoleSupportServiceProvider::class,
+        CookieServiceProvider::class,
+        DatabaseServiceProvider::class,
+        EncryptionServiceProvider::class,
+        FilesystemServiceProvider::class,
+        FoundationServiceProvider::class,
+        HashServiceProvider::class,
+        MailServiceProvider::class,
+        NotificationServiceProvider::class,
+        PaginationServiceProvider::class,
+        PipelineServiceProvider::class,
+        QueueServiceProvider::class,
+        RedisServiceProvider::class,
+        PasswordResetServiceProvider::class,
+        SessionServiceProvider::class,
+        TranslationServiceProvider::class,
+        ValidationServiceProvider::class,
+        ViewServiceProvider::class,
 
         /*
          * Package Service Providers...
          */
-        Yajra\DataTables\DataTablesServiceProvider::class,
-        Yajra\DataTables\ButtonsServiceProvider::class,
-        Yajra\DataTables\HtmlServiceProvider::class,
-        Yajra\DataTables\ExportServiceProvider::class,
-        Mews\Purifier\PurifierServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
+        DataTablesServiceProvider::class,
+        ButtonsServiceProvider::class,
+        HtmlServiceProvider::class,
+        ExportServiceProvider::class,
+        PurifierServiceProvider::class,
+        ServiceProvider::class,
 
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
+        AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\ComponentServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        EventServiceProvider::class,
+        ComponentServiceProvider::class,
+        RouteServiceProvider::class,
         App\Providers\NotificationServiceProvider::class,
         // App\Providers\TelescopeServiceProvider::class,
-        App\Providers\RolesServiceProvider::class,
-        App\Providers\GateServiceProvider::class,
-        App\Providers\ConfigServiceProvider::class,
-        Lab404\Impersonate\ImpersonateServiceProvider::class,
-    ],
+        RolesServiceProvider::class,
+        GateServiceProvider::class,
+        ConfigServiceProvider::class,
+        ImpersonateServiceProvider::class,
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -260,24 +304,24 @@ return [
     |
     */
 
-    'aliases' => Facade::defaultAliases()->merge([
+    'aliases' => Facade::defaultAliases()->merge(array(
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        'PageBuilder' => App\Support\Page\PageBuilder::class,
-        'Theme' => App\Lib\Theme::class,
-        'ResponseAjax' => App\Support\Http\ResponseAjax::class,
+        'PageBuilder' => PageBuilder::class,
+        'Theme' => Theme::class,
+        'ResponseAjax' => ResponseAjax::class,
 
         // CASTS
-        'CheckboxCast' => App\Casts\CheckboxCast::class,
+        'CheckboxCast' => CheckboxCast::class,
 
         // MODELS
-        'User' => App\Models\Core\User::class,
+        'User' => User::class,
 
         // VENDORS
-        'Purifier' => Mews\Purifier\Facades\Purifier::class,
+        'Purifier' => Purifier::class,
 
-        'AppException' => App\Exceptions\AppException::class,
+        'AppException' => AppException::class,
 
-        'MessageType' => App\Enums\Core\MessageType::class,
-    ])->toArray(),
+        'MessageType' => MessageType::class,
+    ))->toArray(),
 
-];
+);

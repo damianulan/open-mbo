@@ -2,6 +2,8 @@
 
 namespace App\Support\Notifications\Factories;
 
+use App\Models\Core\User;
+use App\Models\MBO\UserCampaign;
 use App\Notifications\Resources\UserCampaignResource;
 use App\Notifications\Resources\UserResource;
 use App\Support\Notifications\Contracts\NotifiableEvent;
@@ -14,8 +16,8 @@ class ResourceFactory
     public static function matchModel(Model $model): ?NotificationResource
     {
         return match ($model::class) {
-            \App\Models\MBO\UserCampaign::class => new UserCampaignResource($model),
-            \App\Models\Core\User::class => new UserResource($model),
+            UserCampaign::class => new UserCampaignResource($model),
+            User::class => new UserResource($model),
             default => null
         };
     }
@@ -24,7 +26,7 @@ class ResourceFactory
     {
         $reflection = new ReflectionClass($event);
 
-        $models = [];
+        $models = array();
 
         if ($reflection->implementsInterface(NotifiableEvent::class)) {
             foreach ($reflection->getProperties() as $property) {

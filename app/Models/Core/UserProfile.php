@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
@@ -18,9 +19,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|null $birthday
  * @property mixed|null $phone
  * @property string|null $avatar
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
  * @property-read User $user
  *
  * @method static \Database\Factories\Core\UserProfileFactory factory($count = null, $state = [])
@@ -48,7 +49,7 @@ class UserProfile extends Model
 {
     use HasFactory, RequestForms, SoftDeletes;
 
-    protected $fillable = [
+    protected $fillable = array(
         'user_id',
         'firstname',
         'lastname',
@@ -56,17 +57,17 @@ class UserProfile extends Model
         'birthday',
         'phone',
         'avatar',
-    ];
+    );
 
-    protected $dates = [
+    protected $dates = array(
         'birthday',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'firstname' => Enigma::class,
         'lastname' => Enigma::class,
         'phone' => Enigma::class,
-    ];
+    );
 
     public function user(): BelongsTo
     {

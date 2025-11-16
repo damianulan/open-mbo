@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
 /*
     |--------------------------------------------------------------------------
@@ -9,4 +9,4 @@ return [
     |
     | These are package's default configuration options.
     |
-    */];
+    */);

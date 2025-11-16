@@ -10,7 +10,10 @@ use App\Events\MBO\Campaigns\UserCampaignUpdated;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Traits\Guards\MBO\CanUserCampaign;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Support\Carbon;
+use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property string $id
@@ -19,13 +22,13 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property string $stage User current campaign stage
  * @property bool $manual User will not be automatically moved between stages.
  * @property bool $active Is visible to users.
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read Campaign $campaign
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Objective> $objectives
+ * @property-read Collection<int, Objective> $objectives
  * @property-read int|null $objectives_count
  * @property-read User $user
  *
@@ -88,28 +91,28 @@ class UserCampaign extends BaseModel implements HasObjectives
 {
     use CanUserCampaign;
 
-    public $logEntities = ['user_id' => User::class, 'campaign_id' => Campaign::class];
+    public $logEntities = array('user_id' => User::class, 'campaign_id' => Campaign::class);
 
     public $timestamps = true;
 
-    protected $fillable = [
+    protected $fillable = array(
         'campaign_id',
         'user_id',
         'stage',
         'manual',
         'active',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'active' => 'boolean',
         'manual' => 'boolean',
-    ];
+    );
 
-    protected $dispatchesEvents = [
+    protected $dispatchesEvents = array(
         'created' => UserCampaignAssigned::class,
         'updated' => UserCampaignUpdated::class,
         'deleted' => UserCampaignUnassigned::class,
-    ];
+    );
 
     public function user()
     {

@@ -2,16 +2,19 @@
 
 namespace App\Support\Notifications\Models;
 
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
+
 /**
  * @property string $id
  * @property string $notification_id
  * @property string $notifiable_type
  * @property string $notifiable_id
- * @property \Illuminate\Support\Collection $resources
+ * @property Collection $resources
  * @property string $subject
  * @property string $contents
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification newQuery()
@@ -32,16 +35,16 @@ class MailNotification extends NotificationModel
 {
     protected $table = 'mail_notifications';
 
-    protected $fillable = [
+    protected $fillable = array(
         'notification_id',
         'notifiable_type',
         'notifiable_id',
         'resources',
         'subject',
         'contents',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'created_at' => 'datetime',
-    ];
+    );
 }

@@ -7,6 +7,9 @@ use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Models\Scopes\MBO\ObjectiveTemplateCategoryScope;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Carbon;
+use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property string $id
@@ -14,14 +17,14 @@ use Illuminate\Database\Eloquent\Attributes\ScopedBy;
  * @property string|null $shortname
  * @property mixed|null $description
  * @property string|null $icon
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $coordinators
+ * @property-read Collection<int, User> $coordinators
  * @property-read int|null $coordinators_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, ObjectiveTemplate> $objective_templates
+ * @property-read Collection<int, ObjectiveTemplate> $objective_templates
  * @property-read int|null $objective_templates_count
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory active()
@@ -83,16 +86,16 @@ class ObjectiveTemplateCategory extends BaseModel
 {
     protected $table = 'objective_template_categories';
 
-    protected $fillable = [
+    protected $fillable = array(
         'name',
         'shortname',
         'description',
         'icon',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'description' => FormattedText::class,
-    ];
+    );
 
     public static function findByShortname(string $shortname): ?self
     {
@@ -101,11 +104,11 @@ class ObjectiveTemplateCategory extends BaseModel
 
     public static function baseCategories(): array
     {
-        return [
+        return array(
             'global',
             'audit',
             'individual',
-        ];
+        );
     }
 
     public function canBeDeleted(): bool
@@ -121,7 +124,7 @@ class ObjectiveTemplateCategory extends BaseModel
     public function refreshCoordinators(?array $user_ids): void
     {
         if ( ! $user_ids) {
-            $user_ids = [];
+            $user_ids = array();
         }
 
         $current = $this->coordinators->pluck('id')->toArray();

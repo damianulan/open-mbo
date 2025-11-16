@@ -3,6 +3,7 @@
 namespace App\Models\MBO;
 
 use App\Casts\FormattedText;
+use App\Commentable\Models\Comment;
 use App\Commentable\Support\Commentable;
 use App\Contracts\MBO\HasDeadline;
 use App\Events\MBO\Objectives\ObjectiveCreated;
@@ -12,10 +13,13 @@ use App\Models\Core\User;
 use App\Models\Scopes\MBO\ObjectiveScope;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
+use Illuminate\Support\Carbon;
 use Lucent\Support\Traits\Dispatcher;
+use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property string $id
@@ -23,22 +27,22 @@ use Lucent\Support\Traits\Dispatcher;
  * @property string|null $campaign_id
  * @property string $name
  * @property mixed|null $description
- * @property \Illuminate\Support\Carbon|null $deadline Deadline for objective completion, to which realization should be approved, otherwise it turns out red.
+ * @property Carbon|null $deadline Deadline for objective completion, to which realization should be approved, otherwise it turns out red.
  * @property string $weight Corresponds to the importance of the objective, the higher the weight, the more important it is.
  * @property string|null $award Max points to be awarded for objective completion
  * @property string|null $expected Expected numerical value of objective realization, that corresponds to 100% evaluation
  * @property bool $draft Is not visible to realization - only previewable to admins
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read Campaign|null $campaign
  * @property-read ObjectiveTemplateCategory|null $category
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Commentable\Models\Comment> $comments
+ * @property-read Collection<int, Comment> $comments
  * @property-read int|null $comments_count
  * @property-read ObjectiveTemplate|null $template
- * @property-read \Illuminate\Database\Eloquent\Collection<int, UserObjective> $user_objectives
+ * @property-read Collection<int, UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective active()
@@ -106,7 +110,7 @@ class Objective extends BaseModel implements HasDeadline
 {
     use Commentable, Dispatcher;
 
-    protected $fillable = [
+    protected $fillable = array(
         'template_id',
         'campaign_id',
         'name',
@@ -116,22 +120,22 @@ class Objective extends BaseModel implements HasDeadline
         'draft',
         'award',
         'expected',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'description' => FormattedText::class,
         'draft' => 'boolean',
         'deadline' => 'datetime',
-    ];
+    );
 
-    protected $cascadeDelete = [
+    protected $cascadeDelete = array(
         'user_objectives',
-    ];
+    );
 
-    protected $dispatchesEvents = [
+    protected $dispatchesEvents = array(
         'updated' => ObjectiveUpdated::class,
         'created' => ObjectiveCreated::class,
-    ];
+    );
 
     public static function creatingObjective(Objective $model): self
     {

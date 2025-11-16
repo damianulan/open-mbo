@@ -24,7 +24,7 @@ return new class() extends Migration
 
             $table->uuidMorphs('taggable');
 
-            $table->unique(['tag_id', 'taggable_id', 'taggable_type']);
+            $table->unique(array('tag_id', 'taggable_id', 'taggable_type'));
         });
     }
 

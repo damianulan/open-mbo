@@ -3,10 +3,11 @@
 namespace App\Traits\Guards\MBO;
 
 use App\Enums\MBO\UserObjectiveStatus;
+use App\Models\MBO\UserObjective;
 use Illuminate\Support\Facades\Auth;
 
 /**
- * @var \App\Models\MBO\UserObjective $this
+ * @var UserObjective $this
  *
  * @author Damian Ułan <damian.ulan@protonmail.com>
  * @copyright 2025 damianulan

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Settings;
 use App\Forms\Settings\MboForm;
 use App\Settings\MBOSettings;
 use App\Support\Modules\ModuleManager;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 
 class ModuleController extends SettingsController
@@ -12,7 +13,7 @@ class ModuleController extends SettingsController
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
     public function index(Request $request, ?string $module = null)
     {
@@ -23,12 +24,12 @@ class ModuleController extends SettingsController
 
         $mboModel = app(MBOSettings::class);
 
-        return view('pages.settings.modules.index', [
+        return view('pages.settings.modules.index', array(
             'modules' => $modules,
             'mod' => $modules[$module]['id'],
             'mboForm' => MboForm::definition($request, $mboModel),
             'nav' => $this->nav(),
-        ]);
+        ));
     }
 
     public function storeMbo(Request $request, MboForm $form, MBOSettings $settings)
@@ -39,9 +40,9 @@ class ModuleController extends SettingsController
             $settings->{$key} = $value;
         }
         if ($settings->save()) {
-            return redirect()->to(route('settings.modules.index', ['module' => 'mbo']))->with('success', __('alerts.settings.success.mbo_update'));
+            return redirect()->to(route('settings.modules.index', array('module' => 'mbo')))->with('success', __('alerts.settings.success.mbo_update'));
         }
 
-        return redirect()->to(route('settings.modules.index', ['module' => 'mbo']))->with('error', __('alerts.settings.error.mbo_update'));
+        return redirect()->to(route('settings.modules.index', array('module' => 'mbo')))->with('error', __('alerts.settings.error.mbo_update'));
     }
 }

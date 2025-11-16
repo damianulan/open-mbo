@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Settings;
 use App\Forms\Settings\SmtpForm;
 use App\Settings\GeneralSettings;
 use App\Settings\MailSettings;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 
@@ -13,7 +14,7 @@ class ServerController extends SettingsController
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
     public function index(Request $request)
     {
@@ -24,21 +25,21 @@ class ServerController extends SettingsController
 
         $model = app(MailSettings::class); // ->safePassword();
 
-        return view('pages.settings.server', [
+        return view('pages.settings.server', array(
             'git_text' => $git_text,
             'mail' => $model,
             'form' => SmtpForm::definition($request, $model),
             'nav' => $this->nav(),
-        ]);
+        ));
     }
 
     public function storeMail(Request $request, MailSettings $settings)
     {
-        $request->validate([
+        $request->validate(array(
             'mail_port' => 'numeric',
             'mail_from_address' => 'email',
             'mail_catchall_receiver' => 'email',
-        ]);
+        ));
         foreach ($request->all() as $key => $value) {
             $settings->{$key} = $value;
         }
