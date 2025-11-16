@@ -27,24 +27,23 @@ use Spatie\Activitylog\Models\Activity;
  * @property string|null $campaign_id
  * @property string $name
  * @property mixed|null $description
- * @property Carbon|null $deadline Deadline for objective completion, to which realization should be approved, otherwise it turns out red.
+ * @property \Illuminate\Support\Carbon|null $deadline Deadline for objective completion, to which realization should be approved, otherwise it turns out red.
  * @property string $weight Corresponds to the importance of the objective, the higher the weight, the more important it is.
  * @property string|null $award Max points to be awarded for objective completion
  * @property string|null $expected Expected numerical value of objective realization, that corresponds to 100% evaluation
  * @property bool $draft Is not visible to realization - only previewable to admins
- * @property Carbon|null $deleted_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property-read Collection<int, Activity> $activities
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read Campaign|null $campaign
- * @property-read ObjectiveTemplateCategory|null $category
- * @property-read Collection<int, Comment> $comments
+ * @property-read \App\Models\MBO\Campaign|null $campaign
+ * @property-read \App\Models\MBO\ObjectiveTemplateCategory|null $category
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Commentable\Models\Comment> $comments
  * @property-read int|null $comments_count
- * @property-read ObjectiveTemplate|null $template
- * @property-read Collection<int, UserObjective> $user_objectives
+ * @property-read \App\Models\MBO\ObjectiveTemplate|null $template
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\Objective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\Objective average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\Objective avg(string $column)
@@ -102,7 +101,6 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\MBO\Objective withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\Objective withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\MBO\Objective withoutTrashed()
- *
  * @mixin \Eloquent
  */
 #[ScopedBy(ObjectiveScope::class)]

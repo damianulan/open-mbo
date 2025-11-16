@@ -21,20 +21,19 @@ use Spatie\Activitylog\Models\Activity;
  * @property string|null $contract_id
  * @property string|null $department_id
  * @property string|null $position_id
- * @property Carbon|null $employment Date of employment
- * @property Carbon|null $release Date of employee release (end of employment)
- * @property Carbon|null $deleted_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property-read Collection<int, Activity> $activities
+ * @property \Illuminate\Support\Carbon|null $employment Date of employment
+ * @property \Illuminate\Support\Carbon|null $release Date of employee release (end of employment)
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read Company|null $company
- * @property-read TypeOfContract|null $contract
- * @property-read Department|null $department
+ * @property-read \App\Models\Business\Company|null $company
+ * @property-read \App\Models\Business\TypeOfContract|null $contract
+ * @property-read \App\Models\Business\Department|null $department
  * @property-read bool $main
- * @property-read Position|null $position
- * @property-read User $user
- *
+ * @property-read \App\Models\Business\Position|null $position
+ * @property-read \App\Models\Core\User $user
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment avg(string $column)
@@ -89,7 +88,6 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Business\UserEmployment withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Business\UserEmployment withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class UserEmployment extends BaseModel

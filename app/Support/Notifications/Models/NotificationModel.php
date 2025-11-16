@@ -9,12 +9,10 @@ use Illuminate\Support\Collection;
 use Lucent\Support\Traits\UUID;
 
 /**
- * @property-read Collection $resources
- *
+ * @property-read \Illuminate\Support\Collection $resources
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\NotificationModel newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\NotificationModel newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\NotificationModel query()
- *
  * @mixin \Eloquent
  */
 class NotificationModel extends Model

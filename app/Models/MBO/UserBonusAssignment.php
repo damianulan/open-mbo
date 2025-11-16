@@ -8,13 +8,12 @@ use Illuminate\Database\Eloquent\Collection;
 use Spatie\Activitylog\Models\Activity;
 
 /**
- * @property-read Collection<int, Activity> $activities
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read User|null $approved_by
- * @property-read BonusScheme|null $bonus_scheme
- * @property-read Campaign|null $campaign
- * @property-read User|null $user
- *
+ * @property-read \App\Models\Core\User|null $approved_by
+ * @property-read \App\Models\MBO\BonusScheme|null $bonus_scheme
+ * @property-read \App\Models\MBO\Campaign|null $campaign
+ * @property-read \App\Models\Core\User|null $user
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserBonusAssignment active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserBonusAssignment average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserBonusAssignment avg(string $column)
@@ -58,7 +57,6 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\MBO\UserBonusAssignment withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserBonusAssignment withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\MBO\UserBonusAssignment withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class UserBonusAssignment extends BaseModel

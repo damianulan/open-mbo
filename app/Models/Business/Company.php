@@ -17,17 +17,16 @@ use Spatie\Activitylog\Models\Activity;
  * @property mixed|null $description
  * @property string|null $logo
  * @property string|null $taxpayerid
- * @property Carbon|null $founded_at
- * @property Carbon|null $deleted_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property-read Collection<int, Activity> $activities
+ * @property \Illuminate\Support\Carbon|null $founded_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read Collection<int, UserEmployment> $employments
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\UserEmployment> $employments
  * @property-read int|null $employments_count
- * @property-read Collection<int, Location> $locations
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\Location> $locations
  * @property-read int|null $locations_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Company active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Company average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Company avg(string $column)
@@ -82,7 +81,6 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Business\Company withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Company withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Business\Company withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Company extends BaseModel

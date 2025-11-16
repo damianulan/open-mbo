@@ -21,11 +21,10 @@ use Lucent\Support\Traits\UUID;
  * @property string|null $event
  * @property string|null $schedule
  * @property array<array-key, mixed>|null $conditions
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property Carbon|null $deleted_at
- * @property-read Collection $resources
- *
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Support\Collection $resources
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification events()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification newQuery()
@@ -44,7 +43,6 @@ use Lucent\Support\Traits\UUID;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\Notification withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Notification extends Model

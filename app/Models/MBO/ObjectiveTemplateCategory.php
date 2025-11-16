@@ -17,16 +17,15 @@ use Spatie\Activitylog\Models\Activity;
  * @property string|null $shortname
  * @property mixed|null $description
  * @property string|null $icon
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property Carbon|null $deleted_at
- * @property-read Collection<int, Activity> $activities
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read Collection<int, User> $coordinators
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Core\User> $coordinators
  * @property-read int|null $coordinators_count
- * @property-read Collection<int, ObjectiveTemplate> $objective_templates
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\ObjectiveTemplate> $objective_templates
  * @property-read int|null $objective_templates_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\ObjectiveTemplateCategory active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\ObjectiveTemplateCategory average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\ObjectiveTemplateCategory avg(string $column)
@@ -78,7 +77,6 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\MBO\ObjectiveTemplateCategory withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\ObjectiveTemplateCategory withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\MBO\ObjectiveTemplateCategory withoutTrashed()
- *
  * @mixin \Eloquent
  */
 #[ScopedBy(ObjectiveTemplateCategoryScope::class)]

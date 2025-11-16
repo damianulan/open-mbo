@@ -13,14 +13,13 @@ use Spatie\Activitylog\Models\Activity;
  * @property string $id
  * @property string $user_id
  * @property string $bonus_scheme_id
- * @property Carbon|null $deleted_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property-read Collection<int, Activity> $activities
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read BonusScheme $bonus_scheme
- * @property-read User $user
- *
+ * @property-read \App\Models\MBO\BonusScheme $bonus_scheme
+ * @property-read \App\Models\Core\User $user
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserBonusScheme active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserBonusScheme average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserBonusScheme avg(string $column)
@@ -70,7 +69,6 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\MBO\UserBonusScheme withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserBonusScheme withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\MBO\UserBonusScheme withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class UserBonusScheme extends BaseModel

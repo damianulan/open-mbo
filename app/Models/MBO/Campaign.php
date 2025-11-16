@@ -42,17 +42,16 @@ use Spatie\Activitylog\Models\Activity;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read EloquentCollection<int, Activity> $activities
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read EloquentCollection<int, User> $coordinators
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Core\User> $coordinators
  * @property-read int|null $coordinators_count
- * @property-read EloquentCollection<int, Objective> $objectives
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\Objective> $objectives
  * @property-read int|null $objectives_count
  * @property-read mixed $timeend
  * @property-read mixed $timestart
- * @property-read EloquentCollection<int, UserCampaign> $user_campaigns
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserCampaign> $user_campaigns
  * @property-read int|null $user_campaigns_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\Campaign active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\Campaign average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\Campaign avg(string $column)
@@ -120,7 +119,6 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\MBO\Campaign withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\Campaign withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\MBO\Campaign withoutTrashed()
- *
  * @mixin \Eloquent
  */
 #[ScopedBy(CampaignScope::class)]

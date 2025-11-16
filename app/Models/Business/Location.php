@@ -19,14 +19,13 @@ use Spatie\Activitylog\Models\Activity;
  * @property string|null $description
  * @property bool $active
  * @property string|null $founded
- * @property Carbon|null $deleted_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property-read Collection<int, Activity> $activities
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read Collection<int, Company> $companies
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\Company> $companies
  * @property-read int|null $companies_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location avg(string $column)
@@ -84,7 +83,6 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Business\Location withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Business\Location withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Location extends BaseModel

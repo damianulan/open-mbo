@@ -50,61 +50,60 @@ use Spatie\Activitylog\Models\Activity;
 /**
  * @property string $id
  * @property string $email
- * @property Carbon|null $email_verified_at
+ * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string $password
  * @property int $active
  * @property int $core Core user - comes as default with the application - cannot be deleted
  * @property int $force_password_change Force user to change password after first login
  * @property string|null $remember_token
- * @property Carbon|null $deleted_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Activity> $activities
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, ActivityModel> $activity
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Vendor\ActivityModel> $activity
  * @property-read int|null $activity_count
- * @property-read BonusScheme|null $bonus_scheme
- * @property-read \Illuminate\Database\Eloquent\Collection<int, UserCampaign> $campaigns
+ * @property-read \App\Models\MBO\BonusScheme|null $bonus_scheme
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserCampaign> $campaigns
  * @property-read int|null $campaigns_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, UserCampaign> $campaigns_ongoing
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserCampaign> $campaigns_ongoing
  * @property-read int|null $campaigns_ongoing_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Comment> $comments
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Commentable\Models\Comment> $comments
  * @property-read int|null $comments_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, MailNotification> $email_notifications
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Support\Notifications\Models\MailNotification> $email_notifications
  * @property-read int|null $email_notifications_count
- * @property-read UserEmployment|null $employment
- * @property-read \Illuminate\Database\Eloquent\Collection<int, UserEmployment> $employments
+ * @property-read \App\Models\Business\UserEmployment|null $employment
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\UserEmployment> $employments
  * @property-read int|null $employments_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, UserEmployment> $employments_active
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\UserEmployment> $employments_active
  * @property-read int|null $employments_active_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Team> $leader_teams
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\Team> $leader_teams
  * @property-read int|null $leader_teams_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Comment> $my_comments
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Commentable\Models\Comment> $my_comments
  * @property-read int|null $my_comments_count
  * @property-read mixed $name
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Objective> $objectives
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\Objective> $objectives
  * @property-read int|null $objectives_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Permission> $permissions
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Sentinel\Models\Permission> $permissions
  * @property-read int|null $permissions_count
- * @property-read UserPreference|null $preferences
- * @property-read UserProfile|null $profile
- * @property-read Collection $sessions
- * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $subordinates
+ * @property-read \App\Models\Core\UserPreference|null $preferences
+ * @property-read \App\Models\Core\UserProfile|null $profile
+ * @property-read \Illuminate\Support\Collection $sessions
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Core\User> $subordinates
  * @property-read int|null $subordinates_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $supervisors
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Core\User> $supervisors
  * @property-read int|null $supervisors_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, SystemNotification> $system_notifications
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Support\Notifications\Models\SystemNotification> $system_notifications
  * @property-read int|null $system_notifications_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Team> $teams
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\Team> $teams
  * @property-read int|null $teams_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, PersonalAccessToken> $tokens
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
- * @property-read UserBonusScheme|null $user_bonus_scheme
- * @property-read \Illuminate\Database\Eloquent\Collection<int, UserObjective> $user_objectives
+ * @property-read \App\Models\MBO\UserBonusScheme|null $user_bonus_scheme
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, UserObjective> $user_objectives_active
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserObjective> $user_objectives_active
  * @property-read int|null $user_objectives_active_count
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User active()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User drafted()
  * @method static \Database\Factories\Core\UserFactory factory($count = null, $state = [])
@@ -131,7 +130,6 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User withRole(...$slugs)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements HasLocalePreference, HasShowRoute

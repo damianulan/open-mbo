@@ -10,13 +10,12 @@ use Illuminate\Support\Collection;
  * @property string $notification_id
  * @property string $notifiable_type
  * @property string $notifiable_id
- * @property Collection $resources
+ * @property \Illuminate\Support\Collection $resources
  * @property string $contents
- * @property Carbon|null $read_at
- * @property Carbon|null $notified_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- *
+ * @property \Illuminate\Support\Carbon|null $read_at
+ * @property \Illuminate\Support\Carbon|null $notified_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\SystemNotification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\SystemNotification newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\SystemNotification query()
@@ -30,7 +29,6 @@ use Illuminate\Support\Collection;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\SystemNotification whereReadAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\SystemNotification whereResources($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\SystemNotification whereUpdatedAt($value)
- *
  * @mixin \Eloquent
  */
 class SystemNotification extends NotificationModel
