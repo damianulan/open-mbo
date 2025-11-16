@@ -24,6 +24,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read User $leader
  * @property-read Collection<int, User> $users
  * @property-read int|null $users_count
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team avg(string $column)
@@ -74,6 +75,7 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Team extends BaseModel

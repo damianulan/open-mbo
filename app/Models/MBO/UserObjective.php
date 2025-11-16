@@ -43,13 +43,14 @@ use Spatie\Activitylog\Models\Activity;
  * @property Carbon|null $deleted_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\MBO\Campaign|null $campaign
+ * @property-read Campaign|null $campaign
  * @property-read Collection<int, Comment> $comments
  * @property-read int|null $comments_count
  * @property-read User|null $evaluator
- * @property-read \App\Models\MBO\Objective $objective
- * @property-read \App\Models\MBO\UserPoints $points
+ * @property-read Objective $objective
+ * @property-read UserPoints $points
  * @property-read User $user
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective avg(string $column)
@@ -114,6 +115,7 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder<static>|UserObjective withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective withoutCache()
  * @method static Builder<static>|UserObjective withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
