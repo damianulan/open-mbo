@@ -10,8 +10,8 @@
 
 <div class="row">
     @if(auth()->user()->campaigns_ongoing->count())
-        <div class="col-12">
-            <div class="content-card content-card-md">
+        <div class="col-lg-8">
+            <div class="content-card content-card-sm">
                 <div class="content-card-top">
                     <div class="content-card-header">
                         <i class="bi-bullseye me-2"></i>
@@ -27,8 +27,8 @@
             </div>
         </div>
     @endif
-    <div class="col-lg-6 col-sm-12">
-        <div class="content-card content-card-xs">
+    <div class="col-lg-4 col-sm-12">
+        <div class="content-card content-card-sm">
             <div class="content-card-top">
                 <div class="content-card-header">
                     <i class="bi-clipboard-check-fill me-2"></i>

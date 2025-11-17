@@ -19,6 +19,8 @@
 }
 
 .card {
+    display: block;
+    position: relative;
     height: 100%;
     box-shadow: none;
     border: 1px solid transparent;
@@ -30,26 +32,30 @@
 
 .card.card-url {
     background: $ombo-body-gradient;
-}
 
-.card.card-url:hover {
-    cursor: pointer;
-    -webkit-box-shadow: inset -5px -15px 75px -28px $ombo-body-hover;
-    -moz-box-shadow: inset -5px -15px 75px -28px $ombo-body-hover;
-    box-shadow: inset -5px -15px 75px -28px $ombo-body-hover;
-    transition: all 0.2s ease-in-out;
-}
+    *:hover {
+        color: inherit;
+        text-decoration: none;
+    }
 
-.card.card-url.inactive {
-    background-color: $ombo-body-inactive !important;
-}
+    &:hover {
+        cursor: pointer;
+        -webkit-box-shadow: inset -5px -15px 75px -28px $ombo-body-hover;
+        -moz-box-shadow: inset -5px -15px 75px -28px $ombo-body-hover;
+        box-shadow: inset -5px -15px 75px -28px $ombo-body-hover;
+        transition: all 0.2s ease-in-out;
+    }
 
-.card.inactive:hover {
-    cursor: pointer;
-    -webkit-box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
-    -moz-box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
-    box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
-    transition: all 0.2s ease-in-out;
+    &.inactive {
+        background-color: $ombo-body-inactive !important;
+        &:hover {
+            cursor: pointer;
+            -webkit-box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
+            -moz-box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
+            box-shadow: inset -5px -15px 75px -28px $ombo-body-inactive-hover;
+            transition: all 0.2s ease-in-out;
+        }
+    }
 }
 
 .card.failed {
@@ -125,6 +131,7 @@
     text-overflow: ellipsis;
     line-height: 1.5em;
     margin-bottom: 0.7rem;
+    color: $primary;
 }
 
 .card-bg .details .element,

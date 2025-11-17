@@ -53,9 +53,21 @@ return [
 
         'pass' => 'Oznacz cel jako zaliczony',
         'fail' => 'Oznacz cel jako niezaliczony',
+        'passed' => 'Zaliczony',
+        'failed' => 'Niezaliczony',
     ],
 
     'entities' => [
         'campaign' => 'Kampania pomiarowa',
     ],
+
+    // misc
+    'passed' => 'Zaliczone',
+    'failed' => 'Niezaliczone',
+    'completed' => 'Ukończone',
+    'unstarted' => 'Nierozpoczęte',
+    'progress' => 'W trakcie',
+    'uncompleted' => 'Nieukończone',
+    'not_evaluated' => 'Nierozliczone',
+    'evaluated' => 'Rozliczone',
 ];

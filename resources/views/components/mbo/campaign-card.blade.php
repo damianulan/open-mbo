@@ -1,5 +1,5 @@
 
-<div class="card card-url card-bg" data-url="{{ route('campaigns.show', $campaign->id) }}">
+<a class="card card-url card-bg" href="{{ route('campaigns.show', $campaign->id) }}">
     <div class="card-body">
         <div class="card-top">
             <div class="card-title" data-tippy-content="{{ $campaign->name }}">
@@ -40,8 +40,8 @@
         <div class="card-text">
             {{ strip_tags($campaign->description) }}
         </div>
-        <div class="row details">
-            <div class="col-xl-4 col-md-6 col-sm-12">
+        <div class="d-flex gap-3 details">
+            <div class="">
                 <div class="element">
                     <div class="element-title" data-tippy-content="{{ __('forms.campaigns.date_start') }}">
                         <i class="bi bi bi-calendar-check me-2"></i>
@@ -55,7 +55,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-4 col-md-6 col-sm-12">
+            <div class="">
                 <div class="element">
                     <div class="element-title" data-tippy-content="{{ __('mbo.num_participants') }}">
                         <i class="bi bi-people-fill me-2"></i>
@@ -69,7 +69,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-4 col-md-6 col-sm-12">
+            <div class="">
 
             </div>
         </div>
@@ -80,4 +80,4 @@
     @if ($progress)
         <x-card-progressbar :progress="$progress" :failed="false"/>
     @endif
-</div>
+</a>

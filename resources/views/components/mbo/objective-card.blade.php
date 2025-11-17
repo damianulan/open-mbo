@@ -1,5 +1,5 @@
 
-<div class="card card-url card-bg" data-url="{{ route('templates.edit', $objective->id) }}">
+<a class="card card-url card-bg" href="{{ route('templates.edit', $objective->id) }}">
     <div class="card-body">
         <div class="card-top">
             <div class="card-title" data-tippy-content="{{ $objective->name }}">
@@ -22,8 +22,8 @@
         <div class="card-text">
             {{ strip_tags($objective->description) }}
         </div>
-        <div class="row details">
-            <div class="col-xl-4 col-md-6 col-sm-12">
+        <div class="d-flex gap-3 details">
+            <div>
                 <div class="element">
                     <div class="element-title" data-tippy-content="{{ __('mbo.linked_to_campaigns') }}">
                         <i class="bi bi-bullseye me-2"></i>
@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-4 col-md-6 col-sm-12">
+            <div>
                 <div class="element">
                     <div class="element-title" data-tippy-content="{{ __('mbo.num_participants') }}">
                         <i class="bi bi-people-fill me-2"></i>
@@ -42,4 +42,4 @@
             </div>
         </div>
     </div>
-</div>
+</a>

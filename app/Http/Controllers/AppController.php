@@ -57,7 +57,7 @@ class AppController extends BaseController
 
         if (is_null($defaultRedirect)) {
             $defaultRedirect = redirect()->back();
-            if ( ! is_null($errorMessage)) {
+            if (! is_null($errorMessage)) {
                 $defaultRedirect->with(MessageType::ERROR, $errorMessage);
             }
         }
@@ -70,18 +70,7 @@ class AppController extends BaseController
         ?string $message = null,
         UrlGenerator|RedirectResponse|null $redirect = null
     ): RedirectResponse|UrlGenerator {
-        if ( ! $exception instanceof AppException) {
-            report($exception);
-        }
-
-        if (config('app.debug')) {
-            throw $exception;
-            $message = $exception->getMessage();
-        }
-
-        if (is_null($message)) {
-            $message = __('alerts.error.operation');
-        }
+        $message = $this->getExceptionMessage($exception, $message);
 
         return $redirect ?? redirect()->back()->with(MessageType::ERROR, $message);
     }
@@ -91,17 +80,28 @@ class AppController extends BaseController
         ?string $message = null,
         array $datas = []
     ): JsonResponse {
-        if ( ! $exception instanceof AppException) {
+        $message = $this->getExceptionMessage($exception, $message);
+
+        return $this->responseJsonError($message, $datas);
+    }
+
+    private function getExceptionMessage(Throwable $exception, ?string $default = null): string
+    {
+        if (! $exception instanceof AppException) {
             report($exception);
         }
 
+        $message = $default;
         if (config('app.debug')) {
+            if (config('app.always_throw')) {
+                throw $exception;
+            }
             $message = $exception->getMessage();
         }
 
         $message ??= __('alerts.error.operation');
 
-        return $this->responseJsonError($message, $datas);
+        return $message;
     }
 
     protected function responseJson(bool $success = true, ?string $message = null, array $datas = []): JsonResponse

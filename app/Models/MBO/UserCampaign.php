@@ -2,6 +2,7 @@
 
 namespace App\Models\MBO;
 
+use Akaunting\Apexcharts\Chart;
 use App\Contracts\MBO\HasObjectives;
 use App\Enums\MBO\CampaignStage;
 use App\Events\MBO\Campaigns\UserCampaignAssigned;
@@ -15,6 +16,9 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Activity;
+use App\Models\MBO\UserObjective;
+use App\Enums\MBO\UserObjectiveStatus;
+use App\Traits\HasCharts;
 
 /**
  * @property string $id
@@ -90,7 +94,7 @@ use Spatie\Activitylog\Models\Activity;
  */
 class UserCampaign extends BaseModel implements HasObjectives
 {
-    use CanUserCampaign;
+    use CanUserCampaign, HasCharts;
 
     public $logEntities = ['user_id' => User::class, 'campaign_id' => Campaign::class];
 
@@ -131,14 +135,9 @@ class UserCampaign extends BaseModel implements HasObjectives
         return $this->hasManyThrough(Objective::class, Campaign::class, 'id', 'campaign_id', 'campaign_id', 'id')->whereAssigned($this->user);
     }
 
-    public function assignObjectives(): void
+    public function user_objectives(): HasManyThrough
     {
-        $templates = $this->campaign->objective_templates();
-        if ($templates) {
-            foreach ($templates as $template) {
-                // TODO assign objectives from template assigned to a Campaign.
-            }
-        }
+        return $this->hasManyThrough(UserObjective::class, Objective::class, 'campaign_id', 'objective_id', 'campaign_id', 'id')->where('user_objectives.user_id', $this->user_id);
     }
 
     public function stageDescription(): string
@@ -155,8 +154,8 @@ class UserCampaign extends BaseModel implements HasObjectives
 
     public function terminate(): bool
     {
-        if (CampaignStage::TERMINATED !== $this->stage) {
-            $this->stage = CampaignStage::TERMINATED;
+        if (CampaignStage::TERMINATED !== $this->stage->value()) {
+            $this->stage = CampaignStage::tryFrom(CampaignStage::TERMINATED);
 
             return $this->update();
         }

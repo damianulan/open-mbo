@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
+use App\Enums\MBO\CampaignStage;
 
 class MyCampaignsSummary extends Component
 {
@@ -20,7 +21,7 @@ class MyCampaignsSummary extends Component
      */
     public function __construct(User $user)
     {
-        if ( ! $user->exists) {
+        if (! $user->exists) {
             $user = Auth::user();
         }
 
