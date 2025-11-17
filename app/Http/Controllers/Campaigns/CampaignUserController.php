@@ -9,6 +9,7 @@ use App\Models\MBO\UserCampaign;
 use App\Services\Campaigns\BulkAssignUsers;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Throwable;
 
 class CampaignUserController extends AppController
 {
@@ -19,14 +20,14 @@ class CampaignUserController extends AppController
 
             $request = $form::reformatRequest($request);
             $response = $form::validateJson($request, $id);
-            if ($response['status'] === 'ok') {
+            if ('ok' === $response['status']) {
 
                 $service = BulkAssignUsers::boot(request: $request, campaign: $campaign)->execute();
                 if ($service->passed()) {
                     $response['message'] = __('alerts.campaigns.success.users_added');
                 }
             }
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             $this->e = $th;
         }
 

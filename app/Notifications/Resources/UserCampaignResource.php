@@ -12,17 +12,17 @@ class UserCampaignResource extends NotificationResource
         parent::__construct($userCampaign);
     }
 
-    public function datas(): array
-    {
-        return [
-            'campaign_name' => $this->model->campaign->name,
-        ];
-    }
-
     public static function descriptions(): array
     {
         return [
             'campaign_name' => 'Campaign name',
+        ];
+    }
+
+    public function datas(): array
+    {
+        return [
+            'campaign_name' => $this->model->campaign->name,
         ];
     }
 }

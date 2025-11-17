@@ -2,11 +2,11 @@
 
 namespace App\Traits;
 
-use App\Models\Business\Department;
 use App\Models\Business\Team;
 use App\Models\Business\UserEmployment;
 use App\Models\Core\User;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Sentinel\Models\Role;
 
 trait UserBusiness
@@ -21,19 +21,19 @@ trait UserBusiness
         return $this->hasMany(Team::class, 'leader_id');
     }
 
-    public function employments()
+    public function employment(): ?HasOne
+    {
+        return $this->hasOne(UserEmployment::class)->active();
+    }
+
+    public function employments(): ?HasMany
     {
         return $this->hasMany(UserEmployment::class);
     }
 
-    public function employments_active()
+    public function employments_active(): ?HasMany
     {
-        return $this->hasMany(UserEmployment::class)
-            ->where('employment', '<', now())
-            ->where(function (Builder $q) {
-                $q->whereNull('release')
-                    ->orWhere('release', '>', now());
-            });
+        return $this->hasMany(UserEmployment::class)->active();
     }
 
     public function current_employment()
@@ -48,12 +48,12 @@ trait UserBusiness
 
     public function supervisors()
     {
-        return $this->morphToMany(User::class, 'context', 'users_roles', null, 'model_id')->where('role_id', Role::getId('supervisor'));
+        return $this->morphToMany(User::class, 'context', 'has_roles', null, 'model_id')->where('role_id', Role::getId('supervisor'));
     }
 
     public function subordinates()
     {
-        return $this->morphToMany(User::class, 'context', 'users_roles', 'model_id', 'context_id')->where('role_id', Role::getId('supervisor'));
+        return $this->morphToMany(User::class, 'context', 'has_roles', 'model_id', 'context_id')->where('role_id', Role::getId('supervisor'));
     }
 
     public function hasSupervisor($supervisor_id): bool
@@ -99,17 +99,13 @@ trait UserBusiness
 
     public function refreshSupervisors(?array $user_ids)
     {
-        if (! $user_ids) {
+        if ( ! $user_ids) {
             $user_ids = [];
         }
 
         $current = $this->supervisors->pluck('id')->toArray();
-        $toDelete = array_filter($current, function ($value) use ($user_ids) {
-            return ! in_array($value, $user_ids);
-        });
-        $toAdd = array_filter($user_ids, function ($value) use ($current) {
-            return ! in_array($value, $current);
-        });
+        $toDelete = array_filter($current, fn ($value) => ! in_array($value, $user_ids));
+        $toAdd = array_filter($user_ids, fn ($value) => ! in_array($value, $current));
 
         foreach ($toDelete as $user_id) {
             $this->revokeSupervisor($user_id);
@@ -119,16 +115,5 @@ trait UserBusiness
         }
 
         return true;
-    }
-
-    // MANAGER
-    public function departments_manager()
-    {
-        return $this->hasMany(Department::class, 'manager_id');
-    }
-
-    public function isManager(): bool
-    {
-        return $this->departments_manager()->count() ? true : false;
     }
 }

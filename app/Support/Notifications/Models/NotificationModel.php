@@ -11,9 +11,9 @@ use Lucent\Support\Traits\UUID;
 /**
  * @property-read Collection $resources
  *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationModel newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationModel newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationModel query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\NotificationModel newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\NotificationModel newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\NotificationModel query()
  *
  * @mixin \Eloquent
  */
@@ -30,7 +30,7 @@ class NotificationModel extends Model
     {
         return Attribute::make(
             get: function ($resources): Collection {
-                $collection = new Collection;
+                $collection = new Collection();
                 foreach (json_decode($resources, true) as $key => $id) {
                     if (class_exists($key)) {
                         if ($model = $key::withTrashed()->find($id)) {

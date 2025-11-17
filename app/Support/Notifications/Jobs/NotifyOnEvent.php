@@ -13,7 +13,7 @@ class NotifyOnEvent implements ShouldQueueAfterCommit
 {
     use InteractsWithQueue, Queueable;
 
-    public function handle($event)
+    public function handle($event): void
     {
         $eventClass = $event::class;
         $notifications = Notification::whereEvent($eventClass)->get();

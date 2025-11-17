@@ -6,6 +6,11 @@ use App\Settings\MBOSettings;
 use App\Settings\NotificationSettings;
 use App\Settings\ReportSettings;
 use App\Settings\UserSettings;
+use Spatie\LaravelData\Data;
+use Spatie\LaravelSettings\SettingsCasts\DataCast;
+use Spatie\LaravelSettings\SettingsCasts\DateTimeInterfaceCast;
+use Spatie\LaravelSettings\SettingsCasts\DateTimeZoneCast;
+use Spatie\LaravelSettings\SettingsRepositories\DatabaseSettingsRepository;
 
 return [
 
@@ -47,7 +52,7 @@ return [
      */
     'repositories' => [
         'database' => [
-            'type' => Spatie\LaravelSettings\SettingsRepositories\DatabaseSettingsRepository::class,
+            'type' => DatabaseSettingsRepository::class,
             'model' => null,
             'table' => 'settings',
             'connection' => null,
@@ -76,10 +81,10 @@ return [
      * your settings class isn't a default PHP type.
      */
     'global_casts' => [
-        DateTimeInterface::class => Spatie\LaravelSettings\SettingsCasts\DateTimeInterfaceCast::class,
-        DateTimeZone::class => Spatie\LaravelSettings\SettingsCasts\DateTimeZoneCast::class,
+        DateTimeInterface::class => DateTimeInterfaceCast::class,
+        DateTimeZone::class => DateTimeZoneCast::class,
         //        Spatie\DataTransferObject\DataTransferObject::class => Spatie\LaravelSettings\SettingsCasts\DtoCast::class,
-        Spatie\LaravelData\Data::class => Spatie\LaravelSettings\SettingsCasts\DataCast::class,
+        Data::class => DataCast::class,
     ],
 
     /*

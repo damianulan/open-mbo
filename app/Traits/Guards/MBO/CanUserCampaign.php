@@ -3,10 +3,11 @@
 namespace App\Traits\Guards\MBO;
 
 use App\Enums\MBO\CampaignStage;
+use App\Models\MBO\Campaign;
 use Illuminate\Support\Facades\Auth;
 
 /**
- * @var \App\Models\MBO\Campaign $this
+ * @var Campaign $this
  *
  * @author Damian Ułan <damian.ulan@protonmail.com>
  * @copyright 2025 damianulan
@@ -18,11 +19,11 @@ trait CanUserCampaign
      */
     public function objectivesCanBeEvaluated(): bool
     {
-        return $this->stage === CampaignStage::EVALUATION || settings('mbo.campaigns_ignore_dates');
+        return CampaignStage::EVALUATION === $this->stage || settings('mbo.campaigns_ignore_dates');
     }
 
     public function objectivesCanBeSelfEvaluated(): bool
     {
-        return Auth::user()->id === $this->user_id && ($this->stage === CampaignStage::SELF_EVALUATION || settings('mbo.campaigns_ignore_dates'));
+        return Auth::user()->id === $this->user_id && (CampaignStage::SELF_EVALUATION === $this->stage || settings('mbo.campaigns_ignore_dates'));
     }
 }

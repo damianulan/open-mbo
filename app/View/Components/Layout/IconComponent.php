@@ -28,16 +28,16 @@ class IconComponent extends Component
             $this->classes .= ' bi';
         }
         if ($this->ml > 0) {
-            $this->classes .= ' ms-'.$this->ml;
+            $this->classes .= ' ms-' . $this->ml;
         }
         if ($this->mr > 0) {
-            $this->classes .= ' me-'.$this->mr;
+            $this->classes .= ' me-' . $this->mr;
         }
 
-        if (! empty($this->classes)) {
-            $this->classes = ' '.$this->classes;
+        if ( ! empty($this->classes)) {
+            $this->classes = ' ' . $this->classes;
         }
 
-        return '<i class="bi-'.$this->key.' '.trim($this->classes).'"></i>';
+        return '<i class="bi-' . $this->key . ' ' . trim($this->classes) . '"></i>';
     }
 }

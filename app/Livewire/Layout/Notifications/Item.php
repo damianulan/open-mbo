@@ -10,7 +10,7 @@ class Item extends Component
 
     public $message;
 
-    public function mount($notification)
+    public function mount($notification): void
     {
         $this->notification = $notification;
         $message = $this->notification->contents ?? null;

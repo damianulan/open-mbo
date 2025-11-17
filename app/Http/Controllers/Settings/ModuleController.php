@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Settings;
 use App\Forms\Settings\MboForm;
 use App\Settings\MBOSettings;
 use App\Support\Modules\ModuleManager;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 
 class ModuleController extends SettingsController
@@ -12,7 +13,7 @@ class ModuleController extends SettingsController
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
     public function index(Request $request, ?string $module = null)
     {
@@ -36,7 +37,7 @@ class ModuleController extends SettingsController
         $request = $form::reformatRequest($request);
         $form::validate($request);
         foreach ($request->all() as $key => $value) {
-            $settings->$key = $value;
+            $settings->{$key} = $value;
         }
         if ($settings->save()) {
             return redirect()->to(route('settings.modules.index', ['module' => 'mbo']))->with('success', __('alerts.settings.success.mbo_update'));

@@ -100,7 +100,7 @@ class CampaignStage extends Enum
 
     public static function getInfo(string $value): string
     {
-        return __('forms.campaigns.info.'.$value);
+        return __('forms.campaigns.info.' . $value);
     }
 
     public static function getBySequence(int $sequence)
@@ -161,7 +161,7 @@ class CampaignStage extends Enum
         $frozen = UserObjectiveStatus::evaluated();
 
         if (array_key_exists($stage, $sequences) && ! in_array($status, $frozen)) {
-            if ($stage === self::REALIZATION || $stage === self::IN_PROGRESS) {
+            if (self::REALIZATION === $stage || self::IN_PROGRESS === $stage) {
                 $status = UserObjectiveStatus::PROGRESS;
             } elseif ($sequences[$stage] < $sequences[self::REALIZATION]) {
                 $status = UserObjectiveStatus::UNSTARTED;
@@ -182,8 +182,8 @@ class CampaignStage extends Enum
     {
         $arr = [];
         foreach (__('forms.campaigns.stages') as $key => $value) {
-            $arr[$key.'_from'] = $value.' '.__('forms.from');
-            $arr[$key.'_to'] = $value.' '.__('forms.to');
+            $arr[$key . '_from'] = $value . ' ' . __('forms.from');
+            $arr[$key . '_to'] = $value . ' ' . __('forms.to');
         }
 
         return $arr;

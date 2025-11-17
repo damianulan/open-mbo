@@ -16,32 +16,24 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class UserObjectiveController extends AppController
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
-    }
+    public function index(): void {}
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
+    public function create(): void {}
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function store(Request $request): void {}
 
     /**
      * Display the specified resource.
@@ -68,10 +60,7 @@ class UserObjectiveController extends AppController
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-    }
+    public function edit(string $id): void {}
 
     public function update(Request $request, $id, ObjectiveEditUserForm $form)
     {
@@ -79,7 +68,7 @@ class UserObjectiveController extends AppController
 
         $request = $form::reformatRequest($request);
         $response = $form::validateJson($request, $id);
-        if ($response['status'] === 'ok') {
+        if ('ok' === $response['status']) {
 
             $service = BulkAssignUsers::boot(request: $request, objective: $objective)->execute();
             if ($service->passed()) {
@@ -95,10 +84,7 @@ class UserObjectiveController extends AppController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
-    }
+    public function destroy(string $id): void {}
 
     public function addUsers(Request $request, $id): View
     {
@@ -120,13 +106,11 @@ class UserObjectiveController extends AppController
     {
         $params = [];
         if ($id) {
-            $objective = UserObjective::find($id);
-            if ($objective) {
-                $params = [
-                    'id' => $id,
-                    'form' => ObjectiveEditUserRealizationForm::definition($request, $objective),
-                ];
-            }
+            $objective = UserObjective::findOrFail($id);
+            $params = [
+                'id' => $id,
+                'form' => ObjectiveEditUserRealizationForm::definition($request, $objective),
+            ];
         }
 
         return view('components.modals.objectives.edit_realization', $params);
@@ -136,30 +120,29 @@ class UserObjectiveController extends AppController
     {
         try {
             $userObjective = UserObjective::findOrFail($id);
-            if ($userObjective->canBeEvaluated()) {
-                throw new NoPermissionException;
+            if (!$userObjective->canBeEvaluated()) {
+                throw new NoPermissionException();
             }
 
             $request = $form::reformatRequest($request);
             $response = $form::validateJson($request, $id);
-            if ($response['status'] === 'ok') {
+            if ('ok' === $response['status']) {
 
                 $service = UserRealizationUpdate::boot(request: $request, userObjective: $userObjective)->execute();
                 if ($service->passed()) {
                     $response['message'] = __('alerts.objectives.success.realization_updated');
 
                     return response()->json($response);
-                } else {
-                    $errors = $service->getErrors();
-                    if (! empty($errors)) {
-                        $response['status'] = 'error';
-                        $response['message'] = $errors[0];
-                    }
+                }
+                $errors = $service->getErrors();
+                if (! empty($errors)) {
+                    $response['status'] = 'error';
+                    $response['message'] = $errors[0];
                 }
             } else {
                 $response['message'] = __('alerts.error.form');
             }
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             report($th);
             $this->e = $th;
 
@@ -181,7 +164,7 @@ class UserObjectiveController extends AppController
                 throw new AppException(__('alerts.user_objectives.error.set_passed'));
             }
             DB::commit();
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             DB::rollBack();
             $this->e = $th;
         }
@@ -203,7 +186,7 @@ class UserObjectiveController extends AppController
                 throw new AppException(__('alerts.user_objectives.error.set_failed'));
             }
             DB::commit();
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             DB::rollBack();
             $this->e = $th;
         }

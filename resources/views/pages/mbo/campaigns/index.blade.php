@@ -15,7 +15,7 @@
         <div class="row">
             @foreach ($campaigns as $campaign)
                 <div class="col-md-4 card-col">
-                    @include('components.mbo.campaign-card')
+                    <x-campaign-card :campaign="$campaign" />
                 </div>
             @endforeach
 

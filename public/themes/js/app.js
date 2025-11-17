@@ -86243,18 +86243,15 @@ $.buildVendor = function () {
   $.rebuildVendors();
   $.quillBuild();
 };
-$("body").on("click", ".card-url", function () {
-  var url = $(this).attr("data-url");
-  if (url) {
-    window.location.href = url;
-  }
-});
 $("body").on("click", ".swal-confirm", function (e) {
   e.preventDefault();
   var url = $(this).attr("href");
   swal_confirm($(this).attr("data-swal-text"), $(this).attr("data-swal-title"), function () {
     window.location.href = url;
   });
+});
+$("body").on("click", "*:not(.modal) button[type=submit]", function () {
+  $.overlay('show');
 });
 $(".table-container").on("xhr.dt", function (e, settings, json, xhr) {
   $.buildVendor();

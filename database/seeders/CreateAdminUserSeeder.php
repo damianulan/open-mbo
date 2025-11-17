@@ -12,10 +12,8 @@ class CreateAdminUserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         if (User::count() > 0) {
             return;
@@ -34,7 +32,6 @@ class CreateAdminUserSeeder extends Seeder
         $user->profile()->save($profile);
         $user->assignRoleSlug('admin');
 
-        //
         $user = new User([
             'email' => 'kontakt@damianulan.me',
             'password' => Hash::make('12345678'),
@@ -65,7 +62,6 @@ class CreateAdminUserSeeder extends Seeder
         $user->profile()->save($profile);
         $user->assignRoleSlug('support');
 
-        //
         $user = new User([
             'email' => 'demo@damianulan.me',
             'password' => Hash::make('12345678'),

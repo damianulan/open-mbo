@@ -3,6 +3,7 @@
 <div id="modal-container"></div>
 <script src="{{ asset('themes/vendors/datatables/datatables.min.js') }}"></script>
 @livewireScripts
+@apexchartsScripts
 <script src="{{ asset('themes/js/app.js') }}"></script>
 @include('layouts.components.alerts')
 @include('layouts.portal.scripts')

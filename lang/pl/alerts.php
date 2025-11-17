@@ -124,6 +124,19 @@ return [
         ],
     ],
 
+    'employments' => [
+        'success' => [
+            'create' => 'Nowe zatrudnienie zostało pomyślnie dodane.',
+            'edit' => 'Zatrudnienie zostało pomyślnie zmodyfikowane.',
+            'delete' => 'Zatrudnienie zostało pomyślnie usunięte.',
+        ],
+        'error' => [
+            'create' => 'Nowe zatrudnienie nie mógło zostać dodane. Wystąpił błąd.',
+            'edit' => 'Zatrudnienie nie mógło zostać zmodyfikowane. Wystąpił błąd.',
+            'delete' => 'Zatrudnienie nie mógło zostać usunięte. Wystąpił błąd.',
+        ],
+    ],
+
     'objective_template' => [
         'success' => [
             'create' => 'Nowy szablon celu został pomyślnie dodany.',

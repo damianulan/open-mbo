@@ -37,36 +37,27 @@
         </a>
     </div>
 </div>
-<div class="row">
-    <div class="col-xl-8 col-lg-10 col-sm-12">
-        <div class="content-card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-xl-10 col-lg-9 col-md-8 col-xs-6">
-                        <div class="row user-summary">
-                            <div class="user-info col-xl-6 col-lg-12">
-                                <i class="bi bi-building-fill" data-tippy-content="Przedsiębiorstwo"></i><div>OpenMBO LLP</div>
-                            </div>
-                            <div class="user-info col-xl-6 col-lg-12">
-                                <i class="bi bi-diagram-3-fill" data-tippy-content="Departament"></i><div>Departament menadżerski MBO</div>
-                            </div>
-                            <div class="user-info col-xl-6 col-lg-12">
-                                <i class="bi bi-person-badge-fill" data-tippy-content="Stanowisko"></i><div>Administrator przebiegów gospodarczo-produkcyjnych</div>
-                            </div>
-                            <div class="user-info col-xl-6 col-lg-12">
-                                <i class="bi bi-person-fill-gear" data-tippy-content="Role"></i><div>{{ $user->getRolesNames()->implode(' | ') }}</div>
-                            </div>
-                        </div>
-
-                    </div>
+@if($user->employment)
+    <div class="row">
+        <div class="col-xl-6 col-lg-8 col-md-10 col-xs-12">
+            <div class="row user-summary">
+                <div class="user-info col-xl-6 col-lg-12">
+                    <i class="bi bi-building-fill" data-tippy-content="{{ __('forms.employments.company') }}"></i><div>{{ $user->employment?->company?->name }}</div>
+                </div>
+                <div class="user-info col-xl-6 col-lg-12">
+                    <i class="bi bi-diagram-3-fill" data-tippy-content="{{ __('forms.employments.department') }}"></i><div>{{ $user->employment?->department?->name }}</div>
+                </div>
+                <div class="user-info col-xl-6 col-lg-12">
+                    <i class="bi bi-person-badge-fill" data-tippy-content="{{ __('forms.employments.position') }}"></i><div>{{ $user->employment?->position?->name }}</div>
+                </div>
+                <div class="user-info col-xl-6 col-lg-12">
+                    <i class="bi bi-person-fill-gear" data-tippy-content="{{ __('forms.users.roles_short') }}"></i><div>{{ $user->getRolesNames()->implode(' | ') }}</div>
                 </div>
             </div>
+
         </div>
     </div>
-    <div class="col-xl-4 col-lg-2 col-sm-12">
-
-    </div>
-</div>
+@endif
 <div class="row">
     <div class="col-12">
         <x-note-card :subject="$user" />

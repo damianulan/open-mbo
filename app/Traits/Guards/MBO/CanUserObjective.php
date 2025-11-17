@@ -3,10 +3,11 @@
 namespace App\Traits\Guards\MBO;
 
 use App\Enums\MBO\UserObjectiveStatus;
+use App\Models\MBO\UserObjective;
 use Illuminate\Support\Facades\Auth;
 
 /**
- * @var \App\Models\MBO\UserObjective $this
+ * @var UserObjective $this
  *
  * @author Damian Ułan <damian.ulan@protonmail.com>
  * @copyright 2025 damianulan
@@ -23,11 +24,11 @@ trait CanUserObjective
 
     public function canBeFailed(): bool
     {
-        return $this->canBeEvaluated() && $this->status !== UserObjectiveStatus::FAILED;
+        return $this->canBeEvaluated() && UserObjectiveStatus::FAILED !== $this->status;
     }
 
     public function canBePassed(): bool
     {
-        return $this->canBeEvaluated() && $this->status !== UserObjectiveStatus::PASSED;
+        return $this->canBeEvaluated() && UserObjectiveStatus::PASSED !== $this->status;
     }
 }

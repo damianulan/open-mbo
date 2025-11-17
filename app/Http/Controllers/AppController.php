@@ -39,7 +39,7 @@ class AppController extends BaseController
             }
 
             if (empty($description) && $model && $user) {
-                $description = __('logging.description.view', ['model_map' => __('logging.model_mapping.'.$model::class), 'username' => $user->name]);
+                $description = __('logging.description.view', ['model_map' => __('logging.model_mapping.' . $model::class), 'username' => $user->name]);
             } else {
                 if (empty($description)) {
                     $description = 'view';
@@ -70,18 +70,7 @@ class AppController extends BaseController
         ?string $message = null,
         UrlGenerator|RedirectResponse|null $redirect = null
     ): RedirectResponse|UrlGenerator {
-        if (! $exception instanceof AppException) {
-            report($exception);
-        }
-
-        if (config('app.debug')) {
-            throw $exception;
-            $message = $exception->getMessage();
-        }
-
-        if (is_null($message)) {
-            $message = __('alerts.error.operation');
-        }
+        $message = $this->getExceptionMessage($exception, $message);
 
         return $redirect ?? redirect()->back()->with(MessageType::ERROR, $message);
     }
@@ -91,17 +80,28 @@ class AppController extends BaseController
         ?string $message = null,
         array $datas = []
     ): JsonResponse {
+        $message = $this->getExceptionMessage($exception, $message);
+
+        return $this->responseJsonError($message, $datas);
+    }
+
+    private function getExceptionMessage(Throwable $exception, ?string $default = null): string
+    {
         if (! $exception instanceof AppException) {
             report($exception);
         }
 
+        $message = $default;
         if (config('app.debug')) {
+            if (config('app.always_throw')) {
+                throw $exception;
+            }
             $message = $exception->getMessage();
         }
 
         $message ??= __('alerts.error.operation');
 
-        return $this->responseJsonError($message, $datas);
+        return $message;
     }
 
     protected function responseJson(bool $success = true, ?string $message = null, array $datas = []): JsonResponse
@@ -111,6 +111,16 @@ class AppController extends BaseController
         }
 
         return $this->finalResponseJson($success, $message, $datas);
+    }
+
+    protected function responseJsonError(?string $message = null, array $datas = []): JsonResponse
+    {
+        return $this->finalResponseJson(false, $message, $datas);
+    }
+
+    protected function responseJsonSuccess(?string $message = null, array $datas = []): JsonResponse
+    {
+        return $this->finalResponseJson(true, $message, $datas);
     }
 
     private function finalResponseJson(bool $success = true, ?string $message = null, array $datas = []): JsonResponse
@@ -126,15 +136,5 @@ class AppController extends BaseController
             ],
             $datas
         ));
-    }
-
-    protected function responseJsonError(?string $message = null, array $datas = []): JsonResponse
-    {
-        return $this->finalResponseJson(false, $message, $datas);
-    }
-
-    protected function responseJsonSuccess(?string $message = null, array $datas = []): JsonResponse
-    {
-        return $this->finalResponseJson(true, $message, $datas);
     }
 }

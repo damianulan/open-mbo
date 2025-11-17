@@ -13,14 +13,12 @@ class Kernel extends ConsoleKernel
 {
     /**
      * Define the application's command schedule.
-     *
-     * @return void
      */
-    protected function schedule(Schedule $schedule)
+    protected function schedule(Schedule $schedule): void
     {
         $schedule->command(MBOVerifyStatusScript::class)->dailyAt('01:01');
 
-        if (config('backup.backup.auto') === true) {
+        if (true === config('backup.backup.auto')) {
             $schedule->command('backup:run')->daily()->at('01:30');
         }
 
@@ -28,7 +26,7 @@ class Kernel extends ConsoleKernel
             $schedule->command(AppUpgrade::class)->everyOddHour();
         }
 
-        if (config('app.env') === 'development') {
+        if ('development' === config('app.env')) {
 
             if (env('CRON_APP_REFRESH', false)) {
                 $schedule->command(AppRefresh::class)->daily()->at('00:00');
@@ -48,12 +46,10 @@ class Kernel extends ConsoleKernel
 
     /**
      * Register the commands for the application.
-     *
-     * @return void
      */
-    protected function commands()
+    protected function commands(): void
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

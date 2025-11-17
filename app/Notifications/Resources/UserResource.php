@@ -12,21 +12,21 @@ class UserResource extends NotificationResource
         parent::__construct($user);
     }
 
-    public function datas(): array
-    {
-        return [
-            'firstname' => $this->model->firstname(),
-            'lastname' => $this->model->lastname(),
-            'email' => $this->model->email,
-        ];
-    }
-
     public static function descriptions(): array
     {
         return [
             'firstname' => 'First name',
             'lastname' => 'Last name',
             'email' => 'Email',
+        ];
+    }
+
+    public function datas(): array
+    {
+        return [
+            'firstname' => $this->model->firstname(),
+            'lastname' => $this->model->lastname(),
+            'email' => $this->model->email,
         ];
     }
 }

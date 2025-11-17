@@ -4,21 +4,22 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+return new class() extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('companies', function (Blueprint $table): void {
             $table->uuid('id')->primary();
 
-            $table->string('name', 255);
-            $table->string('shortname', 128);
+            $table->string('name', 255)->unique();
+            $table->string('shortname', 128)->unique();
             $table->longText('description')->nullable();
             $table->string('logo')->nullable();
-            $table->date('founded')->nullable();
+            $table->string('taxpayerid')->nullable();
+            $table->date('founded_at')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

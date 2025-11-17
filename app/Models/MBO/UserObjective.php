@@ -2,6 +2,7 @@
 
 namespace App\Models\MBO;
 
+use App\Commentable\Models\Comment;
 use App\Commentable\Support\Commentable;
 use App\Contracts\MBO\AssignsPoints;
 use App\Contracts\MBO\HasDeadline;
@@ -16,11 +17,14 @@ use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Traits\Guards\MBO\CanUserObjective;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Lucent\Support\Traits\Dispatcher;
+use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property string $id
@@ -29,88 +33,88 @@ use Lucent\Support\Traits\Dispatcher;
  * @property string $status objective status
  * @property string|null $realization Numerical value of the realization of the objective - in relation to the expected value in objective
  * @property string|null $evaluation Percentage evaluation of the objective - if realization is set, evaluation is calculated automatically
- * @property \Illuminate\Support\Carbon|null $evaluated_at Time when most recent evaluation was made
+ * @property Carbon|null $evaluated_at Time when most recent evaluation was made
  * @property string|null $evaluated_by Time when most recent evaluator has made any changes
  * @property string|null $self_realization Numerical value of the realization of the objective - in relation to the expected value in objective
  * @property string|null $self_evaluation Percentage evaluation of the objective - if realization is set, evaluation is calculated automatically
  * @property string|null $self_evaluated_at Time when most recent self evaluation was made
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\MBO\Campaign|null $campaign
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Commentable\Models\Comment> $comments
+ * @property-read Campaign|null $campaign
+ * @property-read Collection<int, Comment> $comments
  * @property-read int|null $comments_count
  * @property-read User|null $evaluator
- * @property-read \App\Models\MBO\Objective $objective
- * @property-read \App\Models\MBO\UserPoints $points
+ * @property-read Objective $objective
+ * @property-read UserPoints $points
  * @property-read User $user
  *
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective active()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective average(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective avg(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective avgFromCache(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective checkAccess()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective count(string $columns = '*')
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective countFromCache(string $columns = '*')
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective createMany(array $records)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective deleteQuietly()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective drafted()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective firstFromCache($columns = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective flushCache($columns = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective flushQueryCache($columns = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective forceSave(array $attributes = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective getCacheKey($columns = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective getFromCache($columns = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective inactive()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective insert(array $values)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective insertGetId(array $values, $sequence = null)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective insertOrIgnore(array $values)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective max(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective maxFromCache(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective min(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective minFromCache(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective my(?\App\Models\Core\User $user = null)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective newModelQuery()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective newQuery()
- * @method static Builder<static>|UserObjective onlyTrashed()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective paginateFromCache(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective prunableSoftDeletes()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective published()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective query()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective remember(int $minutes)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective restore()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective save(array $attributes = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective saveMany($models)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective sum(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective sumFromCache(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective truncate()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective updateOrInsert(array $attributes, $values = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective updateQuietly(array $values)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereActive()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereCompleted()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereCreatedAt($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereDeletedAt($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereEvaluated()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereEvaluatedAt($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereEvaluatedBy($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereEvaluation($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereFailed()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereId($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereNotEvaluated()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereObjectiveId($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective wherePassed()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereRealization($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereSelfEvaluatedAt($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereSelfEvaluation($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereSelfRealization($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereStatus($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereUpdatedAt($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective whereUserId($value)
- * @method static Builder<static>|UserObjective withTrashed(bool $withTrashed = true)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective withoutCache()
- * @method static Builder<static>|UserObjective withoutTrashed()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective active()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective average(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective avg(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective avgFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective checkAccess()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective count(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective countFromCache(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective createMany(array $records)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective deleteQuietly()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective drafted()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective firstFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective flushCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective flushQueryCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective forceSave(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective getCacheKey($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective getFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective inactive()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective insert(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective insertGetId(array $values, $sequence = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective insertOrIgnore(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective max(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective maxFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective min(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective minFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective my(?\App\Models\Core\User $user = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective newModelQuery()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\MBO\UserObjective onlyTrashed()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective paginateFromCache(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective prunableSoftDeletes()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective published()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective query()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective remember(int $minutes)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective restore()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective save(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective saveMany($models)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective sum(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective sumFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective truncate()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective updateOrInsert(array $attributes, $values = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective updateQuietly(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective whereActive()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective whereCompleted()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective whereCreatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective whereDeletedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective whereEvaluated()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective whereEvaluatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective whereEvaluatedBy($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective whereEvaluation($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective whereFailed()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective whereId($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective whereNotEvaluated()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective whereObjectiveId($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective wherePassed()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective whereRealization($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective whereSelfEvaluatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective whereSelfEvaluation($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective whereSelfRealization($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective whereStatus($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective whereUpdatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\MBO\UserObjective withTrashed(bool $withTrashed = true)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserObjective withoutCache()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\MBO\UserObjective withoutTrashed()
  *
  * @mixin \Eloquent
  */
@@ -144,7 +148,7 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
         $output = false;
         $existing = self::where('user_id', $user_id)->where('objective_id', $objective_id)->exists();
         if (! $existing) {
-            $instance = new self;
+            $instance = new self();
             $instance->user_id = $user_id;
             $instance->objective_id = $objective_id;
             if ($instance->save()) {
@@ -171,6 +175,44 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
         return $output;
     }
 
+    public static function creatingUserObjective(UserObjective $model): UserObjective
+    {
+        $model->setStatus();
+
+        return $model;
+    }
+
+    public static function createdUserObjective(UserObjective $model): void
+    {
+        $campaign = $model->objective->campaign ?? null;
+        if ($campaign) {
+            CampaignUserObjectiveAssigned::dispatch($model->user, $model->objective, $campaign);
+        } else {
+            UserObjectiveAssigned::dispatch($model->user, $model->objective);
+        }
+    }
+
+    public static function updatedUserObjective(UserObjective $model): void
+    {
+        if ($model->isDirty('status') && ! in_array($model->getOriginal('status'), UserObjectiveStatus::evaluated())) {
+            if ($model->isEvaluated()) {
+                UserObjectiveEvaluated::dispatch($model, Auth::user() ?? null);
+            }
+        } else {
+            $model->setStatus()->updateQuietly();
+        }
+    }
+
+    public static function deletedUserObjective(UserObjective $model): void
+    {
+        $campaign = $model->objective->campaign ?? null;
+        if ($campaign) {
+            CampaignUserObjectiveUnassigned::dispatch($model->user, $model->objective, $campaign);
+        } else {
+            UserObjectiveUnassigned::dispatch($model->user, $model->campaign);
+        }
+    }
+
     public function isOverdued(): bool
     {
         return $this->objective->isOverdued();
@@ -184,6 +226,22 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
     public function getStatusLabel(): string
     {
         return UserObjectiveStatus::labels()[$this->status] ?? '';
+    }
+
+    public function getStatusColor(): string
+    {
+        $output = match ($this->status) {
+            UserObjectiveStatus::PASSED => 'passed',
+            UserObjectiveStatus::FAILED => 'failed',
+            UserObjectiveStatus::COMPLETED => 'completed',
+            UserObjectiveStatus::INTERRUPTED => 'inactive',
+            default => ''
+        };
+        if (empty($output) && $this->objective->isDeadlineUpcoming()) {
+            $output = 'warning';
+        }
+
+        return $output;
     }
 
     public function setStatus(): self
@@ -258,12 +316,12 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
 
     public function isPassed(): bool
     {
-        return $this->status === UserObjectiveStatus::PASSED;
+        return UserObjectiveStatus::PASSED === $this->status;
     }
 
     public function isFailed(): bool
     {
-        return $this->status === UserObjectiveStatus::FAILED;
+        return UserObjectiveStatus::FAILED === $this->status;
     }
 
     /**
@@ -279,7 +337,7 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
      */
     public function isEvaluated(): bool
     {
-        return in_array($this->status, UserObjectiveStatus::evaluated()) || $this->evaluated_at !== null;
+        return in_array($this->status, UserObjectiveStatus::evaluated()) || null !== $this->evaluated_at;
     }
 
     /**
@@ -287,7 +345,7 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
      */
     public function isSelfEvaluated(): bool
     {
-        return $this->self_evaluated_at !== null;
+        return null !== $this->self_evaluated_at;
     }
 
     public function scopeWhereActive(Builder $query): void
@@ -326,44 +384,6 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
             $user = Auth::user();
         }
         $query->where('user_objectives.user_id', $user->id);
-    }
-
-    public static function creatingUserObjective(UserObjective $model): UserObjective
-    {
-        $model->setStatus();
-
-        return $model;
-    }
-
-    public static function createdUserObjective(UserObjective $model): void
-    {
-        $campaign = $model->objective->campaign ?? null;
-        if ($campaign) {
-            CampaignUserObjectiveAssigned::dispatch($model->user, $model->objective, $campaign);
-        } else {
-            UserObjectiveAssigned::dispatch($model->user, $model->objective);
-        }
-    }
-
-    public static function updatedUserObjective(UserObjective $model): void
-    {
-        if ($model->isDirty('status') && ! in_array($model->getOriginal('status'), UserObjectiveStatus::evaluated())) {
-            if ($model->isEvaluated()) {
-                UserObjectiveEvaluated::dispatch($model, Auth::user() ?? null);
-            }
-        } else {
-            $model->setStatus()->updateQuietly();
-        }
-    }
-
-    public static function deletedUserObjective(UserObjective $model): void
-    {
-        $campaign = $model->objective->campaign ?? null;
-        if ($campaign) {
-            CampaignUserObjectiveUnAssigned::dispatch($model->user, $model->objective, $campaign);
-        } else {
-            UserObjectiveUnassigned::dispatch($model->user, $model->campaign);
-        }
     }
 
     public function calculatePoints(): float

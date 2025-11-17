@@ -23,23 +23,17 @@ class MyLogsDataTable extends BaseLogDataTable
     {
 
         return (new EloquentDataTable($query))
-            ->addColumn('event', function ($data) {
-                return view('components.datatables.badge', [
-                    'color' => $this->getEventColor($data->event),
-                    'text' => __('logging.events.'.$data->event),
-                ]);
-            })
-            ->addColumn('subject', function ($data) {
-                return $this->subjectView($data);
-            })
-            ->addColumn('subject_type', function ($data) {
-                return $this->subjectTypeView($data);
-            })
-            ->orderColumn('causer', function ($query, $order) {
+            ->addColumn('event', fn ($data) => view('components.datatables.badge', [
+                'color' => $this->getEventColor($data->event),
+                'text' => __('logging.events.' . $data->event),
+            ]))
+            ->addColumn('subject', fn ($data) => $this->subjectView($data))
+            ->addColumn('subject_type', fn ($data) => $this->subjectTypeView($data))
+            ->orderColumn('causer', function ($query, $order): void {
                 $query->orderBy('firstname', $order);
                 $query->orderBy('lastname', $order);
             })
-            ->filterColumn('causer', function ($query, $keyword) {
+            ->filterColumn('causer', function ($query, $keyword): void {
                 $sql = "CONCAT(firstname,'-',lastname)  like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
@@ -94,14 +88,14 @@ class MyLogsDataTable extends BaseLogDataTable
      */
     protected function filename(): string
     {
-        return 'MyLogs_'.date('YmdHis');
+        return 'MyLogs_' . date('YmdHis');
     }
 
     private function getEventColor(string $event): string
     {
         $color = 'primary';
 
-        if ($event === 'auth_attempt_fail') {
+        if ('auth_attempt_fail' === $event) {
             $color = 'danger';
         }
 

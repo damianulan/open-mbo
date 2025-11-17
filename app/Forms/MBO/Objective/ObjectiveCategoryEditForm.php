@@ -20,7 +20,7 @@ class ObjectiveCategoryEditForm extends Form
         $category = null;
 
         $shortnameType = 'text';
-        if (! is_null($model)) {
+        if ( ! is_null($model)) {
             $method = 'PUT';
             $route = route('categories.update', $model->id);
             $category = ObjectiveTemplateCategory::find($model->id);
@@ -43,7 +43,7 @@ class ObjectiveCategoryEditForm extends Form
     {
         return [
             'name' => 'max:50|required',
-            'shortname' => 'max:20|required|unique:objective_template_categories,shortname,'.$model_id,
+            'shortname' => 'max:20|required|unique:objective_template_categories,shortname,' . $model_id,
             'description' => 'max:1000|nullable',
         ];
     }

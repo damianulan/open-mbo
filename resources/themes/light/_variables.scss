@@ -1,14 +1,14 @@
 // Typography
-$font-family-sans-serif: "IBM Plex Sans", "Helvetica", sans-serif;
+$font-family-sans-serif: 'IBM Plex Sans', 'Helvetica', sans-serif;
 $font-family-base: $font-family-sans-serif;
-$font-family-serif: "IBM Plex Serif", serif;
-$font-family-monospace: "JetBrains Mono", monospace;
-$font-family-icons: "bootstrap-icons";
+$font-family-serif: 'IBM Plex Serif', serif;
+$font-family-monospace: 'JetBrains Mono', monospace;
+$font-family-icons: 'bootstrap-icons';
 $font-size-base: 0.8rem;
 $line-height-base: 1.5;
 
 // Paths
-$imagesPath: "/themes/light/images";
+$imagesPath: '/themes/light/images';
 
 /**
 /* Colors START
@@ -43,32 +43,48 @@ $info: $cyan;
 // Action colors
 $light: tint($primary, 98%);
 $dark: #111611;
-$disabled-text: var(--bs-gray-600);
+$disabled-text: #6c757d;
 
-$theme-colors: (
-    "primary": $primary,
-    "secondary": $secondary,
-    "success": $success,
-    "danger": $danger,
-    "warning": $warning,
-    "info": $info,
-    "dark": $dark,
-    "brown": $brown,
-    "violet": $violet,
-
-    "coolgreen": $coolgreen,
-    "columbia": $columbia,
-    "celadon": $celadon,
-    "dimm-blue": $dimm-blue,
-    "lightgrey": $columbia
-);
-
-$status-unstarted: shade(#adb5bd, 20%);
+$status-unstarted: shade(#adb5bd, 10%);
 $status-progress: $warning;
 $status-completed: $info;
 $status-passed: $success;
 $status-failed: $danger;
 $status-interrupted: $secondary;
+
+$theme-colors: (
+    'primary': $primary,
+    'primary-100': tint($primary, 80%),
+    'primary-200': tint($primary, 60%),
+    'primary-300': tint($primary, 40%),
+    'primary-400': tint($primary, 20%),
+    'primary-500': $primary,
+    'primary-600': shade($primary, 20%),
+    'primary-700': shade($primary, 40%),
+    'primary-800': shade($primary, 60%),
+    'primary-900': shade($primary, 80%),
+    'secondary': $secondary,
+    'success': $success,
+    'danger': $danger,
+    'warning': $warning,
+    'disabled': $disabled-text,
+    'info': $info,
+    'dark': $dark,
+    'brown': $brown,
+    'violet': $violet,
+
+    'coolgreen': $coolgreen,
+    'columbia': $columbia,
+    'celadon': $celadon,
+    'dimm-blue': $dimm-blue,
+    'lightgrey': $columbia,
+    'unstarted': $status-unstarted,
+    'progress': $status-progress,
+    'completed': $status-completed,
+    'passed': $status-passed,
+    'failed': $status-failed,
+    'interrupted': $status-interrupted
+);
 
 // Component colors
 $body-bg: #fff;

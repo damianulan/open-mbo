@@ -6,12 +6,16 @@ use App\Commentable\Casts\CommentContent;
 use App\Commentable\Events\CommentAdded;
 use App\Commentable\Events\CommentDeleted;
 use App\Traits\Vendors\ModelActivity;
+use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Scout\Searchable;
+use Spatie\Activitylog\Models\Activity;
 use YMigVal\LaravelModelCache\HasCachedQueries;
 
 /**
@@ -22,58 +26,58 @@ use YMigVal\LaravelModelCache\HasCachedQueries;
  * @property string $author_id
  * @property mixed $content
  * @property bool $private
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read Model|\Eloquent $author
- * @property-read Model|\Eloquent $subject
+ * @property-read Model|Eloquent $author
+ * @property-read Model|Eloquent $subject
  *
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment authoredBy(\Illuminate\Database\Eloquent\Model $author)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment average(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment avg(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment avgFromCache(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment count(string $columns = '*')
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment countFromCache(string $columns = '*')
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment createMany(array $records)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment deleteQuietly()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment firstFromCache($columns = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment flushCache($columns = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment flushQueryCache($columns = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment forceSave(array $attributes = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment getCacheKey($columns = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment getFromCache($columns = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment insert(array $values)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment insertGetId(array $values, $sequence = null)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment insertOrIgnore(array $values)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment max(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment maxFromCache(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment min(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment minFromCache(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment mine()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment newModelQuery()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment newQuery()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment paginateFromCache(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment query()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment remember(int $minutes)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment restore()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment save(array $attributes = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment saveMany($models)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment sum(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment sumFromCache(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment truncate()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment updateOrInsert(array $attributes, $values = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment updateQuietly(array $values)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment whereAuthorId($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment whereAuthorType($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment whereContent($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment whereCreatedAt($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment whereId($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment wherePrivate($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment whereSubjectId($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment whereSubjectType($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment whereUpdatedAt($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment withoutCache()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment authoredBy(\Illuminate\Database\Eloquent\Model $author)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment average(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment avg(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment avgFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment count(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment countFromCache(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment createMany(array $records)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment deleteQuietly()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment firstFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment flushCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment flushQueryCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment forceSave(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment getCacheKey($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment getFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment insert(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment insertGetId(array $values, $sequence = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment insertOrIgnore(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment max(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment maxFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment min(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment minFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment mine()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment newModelQuery()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment newQuery()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment paginateFromCache(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment query()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment remember(int $minutes)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment restore()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment save(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment saveMany($models)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment sum(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment sumFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment truncate()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment updateOrInsert(array $attributes, $values = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment updateQuietly(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment whereAuthorId($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment whereAuthorType($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment whereContent($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment whereCreatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment whereId($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment wherePrivate($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment whereSubjectId($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment whereSubjectType($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment whereUpdatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Commentable\Models\Comment withoutCache()
  *
  * @mixin \Eloquent
  */
@@ -104,26 +108,6 @@ class Comment extends Model
         'deleted' => CommentDeleted::class,
     ];
 
-    protected static function booted(): void
-    {
-        $user = Auth::user() ?? null;
-        if ($user) {
-            $id = $user->id ?? null;
-            $morph = $user->getMorphClass() ?? null;
-            if ($id && $morph) {
-                static::addGlobalScope('public', function (Builder $builder) use ($id, $morph) {
-                    $builder->where(function (Builder $query) use ($id, $morph) {
-                        $query->where('private', 0)
-                            ->orWhere(function (Builder $query) use ($id, $morph) {
-                                $query->where('author_id', $id)
-                                    ->where('author_type', $morph);
-                            });
-                    });
-                });
-            }
-        }
-    }
-
     public function subject(): MorphTo
     {
         return $this->morphTo()->withTrashed();
@@ -136,7 +120,7 @@ class Comment extends Model
 
     public function isMine(): bool
     {
-        return $this->author_id == Auth::user()->id && $this->author_type == Auth::user()->getMorphClass();
+        return $this->author_id === Auth::user()->id && $this->author_type === Auth::user()->getMorphClass();
     }
 
     public function scopeAuthoredBy(Builder $query, Model $author): void
@@ -151,10 +135,30 @@ class Comment extends Model
 
     public function prunable(): Builder
     {
-        return static::whereHas('subject', function (Builder $query) {
+        return static::whereHas('subject', function (Builder $query): void {
             $query->whereNotNull('deleted_at');
-        })->orWhereHas('author', function (Builder $query) {
+        })->orWhereHas('author', function (Builder $query): void {
             $query->whereNotNull('deleted_at');
         });
+    }
+
+    protected static function booted(): void
+    {
+        $user = Auth::user() ?? null;
+        if ($user) {
+            $id = $user->id ?? null;
+            $morph = $user->getMorphClass() ?? null;
+            if ($id && $morph) {
+                static::addGlobalScope('public', function (Builder $builder) use ($id, $morph): void {
+                    $builder->where(function (Builder $query) use ($id, $morph): void {
+                        $query->where('private', 0)
+                            ->orWhere(function (Builder $query) use ($id, $morph): void {
+                                $query->where('author_id', $id)
+                                    ->where('author_type', $morph);
+                            });
+                    });
+                });
+            }
+        }
     }
 }

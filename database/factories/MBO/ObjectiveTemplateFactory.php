@@ -4,6 +4,7 @@ namespace Database\Factories\MBO;
 
 use App\Models\MBO\ObjectiveTemplate;
 use App\Models\MBO\ObjectiveTemplateCategory;
+use Exception;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -40,9 +41,8 @@ class ObjectiveTemplateFactory extends Factory
                 'draft' => 0,
                 'award' => fake()->randomFloat(2, 1, 30),
             ];
-        } else {
-            throw new \Exception('No category found');
         }
+        throw new Exception('No category found');
     }
 
     public function draft()

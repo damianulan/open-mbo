@@ -3,8 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Business\Company;
+use App\Models\Business\Department;
 use App\Models\Business\Location;
+use App\Models\Business\Position;
 use App\Models\Business\TypeOfContract;
+use Database\Factories\Business\PositionFactory;
 use Illuminate\Database\Seeder;
 
 class BusinessSeeder extends Seeder
@@ -18,14 +21,16 @@ class BusinessSeeder extends Seeder
             $this->createContract($contract);
         }
 
-        Company::factory(3)->has(Location::factory()->count(fake()->numberBetween(1, 3)), 'locations')->create();
+        PositionFactory::seedAdminPositions();
+        Position::factory(15)->create();
+        Department::factory(10)->create();
+        Company::factory(2)->has(Location::factory()->count(fake()->numberBetween(1, 3)), 'locations')->create();
     }
 
-    private function createContract(string $name)
+    private function createContract(string $name): void
     {
         $contract = new TypeOfContract([
-            'name' => __('faker.type_of_contract.'.$name),
-            'shortname' => $name,
+            'name' => __('faker.type_of_contract.' . $name),
         ]);
         $contract->save();
     }

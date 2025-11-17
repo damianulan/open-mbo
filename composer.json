@@ -70,12 +70,12 @@
         "tjvb/laravel-mail-catchall": "^4.4",
         "yajra/laravel-datatables": "*",
         "yajra/laravel-datatables-export": "*",
-        "ymigval/laravel-model-cache": "^1.1"
+        "ymigval/laravel-model-cache": "^1.1",
+        "fakerphp/faker": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.15",
         "barryvdh/laravel-ide-helper": "^3.1",
-        "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "larastan/larastan": "^3.0",
         "laravel/sail": "^1.0.1",
@@ -137,7 +137,7 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true,
+    "prefer-stable": false,
     "require-dependencies": true,
     "require-dev-dependencies": true
 }

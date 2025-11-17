@@ -9,7 +9,7 @@ class CryptCast implements SettingsCast
 {
     public function get($payload)
     {
-        if (! empty($payload)) {
+        if ( ! empty($payload)) {
             return Crypt::decryptString($payload);
         }
 
@@ -18,7 +18,7 @@ class CryptCast implements SettingsCast
 
     public function set($payload)
     {
-        if (! empty($payload) && $payload !== 'PassProtection123@') {
+        if ( ! empty($payload) && 'PassProtection123@' !== $payload) {
             return Crypt::encryptString($payload);
         }
 

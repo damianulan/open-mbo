@@ -4,6 +4,7 @@ namespace App\Console\Commands\Core;
 
 use App\Console\BaseCommand;
 use App\Settings\MailSettings;
+use Throwable;
 
 class MailTest extends BaseCommand
 {
@@ -24,12 +25,12 @@ class MailTest extends BaseCommand
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         $this->logStart();
         try {
-            if (config('app.env') !== 'production') {
-                $settings = new MailSettings;
+            if ('production' !== config('app.env')) {
+                $settings = new MailSettings();
                 $settings->mail_username = env('MAIL_USERNAME');
                 $settings->mail_password = env('MAIL_PASSWORD');
                 $settings->mail_port = (int) env('MAIL_PORT');
@@ -48,7 +49,7 @@ class MailTest extends BaseCommand
                 $this->error('Application runs in production mode!');
             }
             $this->log('completed', true);
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             $this->log($th->getMessage(), false);
             $this->error($th->getMessage());
         }

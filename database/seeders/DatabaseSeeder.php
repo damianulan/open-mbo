@@ -10,10 +10,8 @@ class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         Artisan::call('sentinel:run');
         $this->call(BusinessSeeder::class);

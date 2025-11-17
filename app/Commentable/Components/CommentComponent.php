@@ -12,18 +12,18 @@ class CommentComponent extends Component
 {
     public Model $subject;
 
-    public function mount(Model $subject)
+    public function mount(Model $subject): void
     {
         $this->subject = $subject;
         Comment::all();
     }
 
     #[On('commentable.submit')]
-    public function submit(?string $content, bool $private = false)
+    public function submit(?string $content, bool $private = false): void
     {
         $user = Auth::user();
 
-        if (! empty($content)) {
+        if ( ! empty($content)) {
             $this->subject->comments()->create([
                 'author_id' => $user->id,
                 'author_type' => $user->getMorphClass(),
@@ -35,19 +35,19 @@ class CommentComponent extends Component
         }
     }
 
-    public function delete($id)
+    public function delete($id): void
     {
         Comment::mine()->find($id)->delete();
     }
 
-    public function flashSuccess(string $message)
+    public function flashSuccess(string $message): void
     {
-        $this->js('$.success("'.$message.'")');
+        $this->js('$.success("' . $message . '")');
     }
 
-    public function flashError(string $message)
+    public function flashError(string $message): void
     {
-        $this->js('$.error("'.$message.'")');
+        $this->js('$.error("' . $message . '")');
     }
 
     public function render()

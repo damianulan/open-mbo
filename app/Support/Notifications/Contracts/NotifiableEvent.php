@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 interface NotifiableEvent
 {
-    public function notifiable(): Model;
-
     public static function description(): string;
+
+    public function notifiable(): Model;
 }

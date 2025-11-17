@@ -10,7 +10,6 @@ use App\Models\MBO\UserCampaign;
 use App\Models\MBO\UserObjective;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
@@ -24,7 +23,7 @@ trait UserMBO
 
     public function user_objectives_active(): HasMany
     {
-        return $this->user_objectives()->whereHas('objective', function (Builder $query) {
+        return $this->user_objectives()->whereHas('objective', function (Builder $query): void {
             $query->where('draft', 0);
         });
     }
@@ -58,9 +57,9 @@ trait UserMBO
         return $this->hasMany(UserCampaign::class);
     }
 
-    public function coordinator_campaigns(): BelongsToMany
+    public function campaigns_ongoing(): HasMany
     {
-        return $this->belongsToMany(static::class, 'campaigns_coordinators', 'coordinator_id', 'campaign_id')->where('active', 1);
+        return $this->hasMany(UserCampaign::class)->ongoing()->orderForUser();
     }
 
     public function isCampaignCoordinator(Campaign $campaign): bool

@@ -15,15 +15,9 @@ class ConfigServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton('settings.general', function () {
-            return app(GeneralSettings::class);
-        });
-        $this->app->singleton('settings.mail', function () {
-            return app(MailSettings::class);
-        });
-        $this->app->singleton('settings.mbo', function () {
-            return app(MBOSettings::class);
-        });
+        $this->app->singleton('settings.general', fn () => app(GeneralSettings::class));
+        $this->app->singleton('settings.mail', fn () => app(MailSettings::class));
+        $this->app->singleton('settings.mbo', fn () => app(MBOSettings::class));
     }
 
     /**
@@ -48,7 +42,7 @@ class ConfigServiceProvider extends ServiceProvider
                 'app.release' => $general->release ?? null,
                 'app.date_format' => $general->date_format ?? null,
                 'app.time_format' => $general->time_format ?? null,
-                'app.datetime_format' => $general->date_format && $general->time_format ? $general->date_format.' '.$general->time_format : null,
+                'app.datetime_format' => $general->date_format && $general->time_format ? $general->date_format . ' ' . $general->time_format : null,
 
                 // SERVER
                 'mail.default' => $mail->mail_mailer ?? null,

@@ -1,7 +1,16 @@
 @if($objectives->count())
     <ul class="ombo-list">
         @foreach ($objectives as $objective)
-            <li class="{{ $userObjective && $objective->isDeadlineUpcoming() ? 'warning' : '' }}">
+            @php
+                $userObjective = null;
+                if($user){
+                    $userObjective = $objective->user_objective($user);
+                    if(!$userObjective){
+                        continue;
+                    }
+                }
+            @endphp
+            <li class="{{ $userObjective ? $userObjective->getStatusColor() : '' }}">
                 <div class="list-grid">
                     <div class="list-content">
                         <div class="nowrap" data-tippy-content="{{ $objective->name }}">
@@ -11,6 +20,11 @@
 
                     </div>
                     <div class="list-actions">
+                        @if($userObjective && $userObjective->evaluation)
+                            <div class="list-action">
+                                <span class="">{{ percent_view(float_view($userObjective->evaluation)) }}</span>
+                            </div>
+                        @endif
                         @if($objective->draft)
                         <div class="list-action" data-tippy-content="{{ __('forms.mbo.objectives.info.draft') }}">
                             <x-icon key="feather" />
@@ -38,13 +52,15 @@
                         <a href="{{ $userObjective ? route('objectives.assignment.show', $userObjective->id):route('objectives.show', $objective->id) }}" class="list-action" data-modelid="{{ $objective->id }}" data-tippy-content="{{ __('buttons.summary') }}">
                             <x-icon key="eye-fill" />
                         </a>
-                        <a href="javascript:void(0);" class="list-action edit-objective" data-modelid="{{ $objective->id }}" data-tippy-content="{{ __('buttons.edit') }}">
-                            <x-icon key="pencil-fill" />
-                        </a>
-                        @if(!$user->exists || $user->id !== auth()->user()->id)
-                            <a href="javascript:void(0);" data-url="{{ route('campaigns.objective.delete', $objective->id) }}" class="list-action delete-objective" data-tippy-content="{{ __('buttons.delete') }}">
-                                <x-icon key="x-lg" />
+                        @if(!$userObjective)
+                            <a href="javascript:void(0);" class="list-action edit-objective" data-modelid="{{ $objective->id }}" data-tippy-content="{{ __('buttons.edit') }}">
+                                <x-icon key="pencil-fill" />
                             </a>
+                            @if(!$user || $user->id !== auth()->user()->id)
+                                <a href="javascript:void(0);" data-url="{{ route('campaigns.objective.delete', $objective->id) }}" class="list-action delete-objective" data-tippy-content="{{ __('buttons.delete') }}">
+                                    <x-icon key="x-lg" />
+                                </a>
+                            @endif
                         @endif
                     </div>
                 </div>

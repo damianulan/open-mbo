@@ -24,10 +24,10 @@ class Maintenance extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         $type = $this->argument('arg');
-        $settings = new GeneralSettings;
+        $settings = new GeneralSettings();
 
         switch ($type) {
             case 'up':

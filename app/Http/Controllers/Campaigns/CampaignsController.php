@@ -9,7 +9,9 @@ use App\Models\MBO\Campaign;
 use App\Services\Campaigns\CreateOrUpdate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
+use Throwable;
 
 class CampaignsController extends AppController
 {
@@ -41,7 +43,7 @@ class CampaignsController extends AppController
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request, CampaignEditForm $form): RedirectResponse
     {
@@ -59,7 +61,7 @@ class CampaignsController extends AppController
 
                 $redirect = redirect()->route('campaigns.show', $campaign->id)->with('success', __('alerts.campaigns.success.create', ['name' => $campaign->name]));
             }
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->e = $e;
         }
 
@@ -70,7 +72,7 @@ class CampaignsController extends AppController
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Request $request, Campaign $campaign): View
     {
@@ -80,7 +82,7 @@ class CampaignsController extends AppController
 
         // CampaignViewed::dispatch($campaign);
         $this->logShow($campaign);
-        $header = $campaign->name.' ['.$campaign->period.']';
+        $header = $campaign->name . ' [' . $campaign->period . ']';
 
         return view('pages.mbo.campaigns.show', [
             'campaign' => $campaign,
@@ -117,7 +119,7 @@ class CampaignsController extends AppController
 
                 $redirect = redirect()->route('campaigns.show', $id)->with('success', __('alerts.campaigns.success.edit', ['name' => $campaign->name]));
             }
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->e = $e;
         }
 
