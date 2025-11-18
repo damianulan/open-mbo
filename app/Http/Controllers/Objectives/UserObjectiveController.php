@@ -120,7 +120,7 @@ class UserObjectiveController extends AppController
     {
         try {
             $userObjective = UserObjective::findOrFail($id);
-            if (!$userObjective->canBeEvaluated()) {
+            if ( ! $userObjective->canBeEvaluated()) {
                 throw new NoPermissionException();
             }
 
@@ -135,7 +135,7 @@ class UserObjectiveController extends AppController
                     return response()->json($response);
                 }
                 $errors = $service->getErrors();
-                if (! empty($errors)) {
+                if ( ! empty($errors)) {
                     $response['status'] = 'error';
                     $response['message'] = $errors[0];
                 }

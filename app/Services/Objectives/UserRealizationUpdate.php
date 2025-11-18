@@ -18,7 +18,7 @@ class UserRealizationUpdate extends Service
         $evaluation = $this->request()->input('evaluation') ?? null;
         $prefix = '';
 
-        if (!$realization && !$evaluation) {
+        if ( ! $realization && ! $evaluation) {
             $prefix = 'self_';
             $realization = $this->request()->input('self_realization') ?? null;
             $evaluation = $this->request()->input('self_evaluation') ?? null;
@@ -36,7 +36,7 @@ class UserRealizationUpdate extends Service
         // }
 
         $this->userObjective->{$prefix . 'realization'} = $realization;
-        $this->userObjective->{$prefix . 'evaluation'}  = $evaluation;
+        $this->userObjective->{$prefix . 'evaluation'} = $evaluation;
 
         $this->userObjective->update();
 

@@ -3,11 +3,8 @@
 namespace App\Factories\Charts;
 
 use Akaunting\Apexcharts\Chart;
-use Illuminate\Database\Eloquent\Model;
-
 use App\Enums\MBO\UserObjectiveStatus;
 use App\Models\MBO\UserCampaign;
-use App\Models\MBO\Campaign;
 
 class ModelCharts extends ChartsLib
 {

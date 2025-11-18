@@ -57,7 +57,7 @@ class AppController extends BaseController
 
         if (is_null($defaultRedirect)) {
             $defaultRedirect = redirect()->back();
-            if (! is_null($errorMessage)) {
+            if ( ! is_null($errorMessage)) {
                 $defaultRedirect->with(MessageType::ERROR, $errorMessage);
             }
         }
@@ -85,25 +85,6 @@ class AppController extends BaseController
         return $this->responseJsonError($message, $datas);
     }
 
-    private function getExceptionMessage(Throwable $exception, ?string $default = null): string
-    {
-        if (! $exception instanceof AppException) {
-            report($exception);
-        }
-
-        $message = $default;
-        if (config('app.debug')) {
-            if (config('app.always_throw')) {
-                throw $exception;
-            }
-            $message = $exception->getMessage();
-        }
-
-        $message ??= __('alerts.error.operation');
-
-        return $message;
-    }
-
     protected function responseJson(bool $success = true, ?string $message = null, array $datas = []): JsonResponse
     {
         if ($this->e) {
@@ -121,6 +102,25 @@ class AppController extends BaseController
     protected function responseJsonSuccess(?string $message = null, array $datas = []): JsonResponse
     {
         return $this->finalResponseJson(true, $message, $datas);
+    }
+
+    private function getExceptionMessage(Throwable $exception, ?string $default = null): string
+    {
+        if ( ! $exception instanceof AppException) {
+            report($exception);
+        }
+
+        $message = $default;
+        if (config('app.debug')) {
+            if (config('app.always_throw')) {
+                throw $exception;
+            }
+            $message = $exception->getMessage();
+        }
+
+        $message ??= __('alerts.error.operation');
+
+        return $message;
     }
 
     private function finalResponseJson(bool $success = true, ?string $message = null, array $datas = []): JsonResponse
