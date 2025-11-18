@@ -1,5 +1,5 @@
 <a class="action-btn" href="" title="{{ __('buttons.edit') }}">
-    <i class="bi bi-pencil-square me-1"></i>
+    <i class="bi bi-pencil-square"></i>
 </a>
 
 <a class="action-btn swal-confirm" href="" title="{{ __('buttons.delete') }}" data-swal-text="{{ __('alerts.users.info.delete') }}">

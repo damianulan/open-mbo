@@ -194,24 +194,3 @@ a.btn-round.btn-secondary i.bi,
 button.btn-round.btn-secondary i.bi {
     color: $body-bg;
 }
-
-.icon-btn,
-.icon-btn-sm {
-    display: inline-block;
-    text-decoration: none;
-}
-
-.icon-btn {
-    font-size: 1.5rem;
-}
-
-.icon-btn-sm {
-    font-size: 1.15rem;
-}
-
-button.btn.icon-btn,
-button.btn.icon-btn-sm {
-    padding: 0;
-    background: transparent;
-    color: $primary;
-}

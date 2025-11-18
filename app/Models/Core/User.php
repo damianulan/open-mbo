@@ -9,6 +9,7 @@ use App\Contracts\Core\HasShowRoute;
 use App\Models\Business\Team;
 use App\Models\Business\UserEmployment;
 use App\Models\MBO\BonusScheme;
+use App\Models\MBO\Campaign;
 use App\Models\MBO\Objective;
 use App\Models\MBO\UserBonusScheme;
 use App\Models\MBO\UserCampaign;
@@ -17,6 +18,7 @@ use App\Models\Vendor\ActivityModel;
 use App\Support\Notifications\Models\MailNotification;
 use App\Support\Notifications\Models\SystemNotification;
 use App\Support\Notifications\Traits\Notifiable;
+use App\Traits\Favouritable;
 use App\Traits\UserBusiness;
 use App\Traits\UserMBO;
 use App\Traits\Vendors\Impersonable;
@@ -46,6 +48,7 @@ use Lucent\Support\Traits\VirginModel;
 use Sentinel\Models\Permission;
 use Sentinel\Traits\HasRolesAndPermissions;
 use Spatie\Activitylog\Models\Activity;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property string $id
@@ -136,7 +139,7 @@ use Spatie\Activitylog\Models\Activity;
  */
 class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 {
-    use CascadeDeletes, HasApiTokens, HasFactory, HasRolesAndPermissions, Notifiable, RequestForms, SoftDeletes, UUID;
+    use CascadeDeletes, HasApiTokens, HasFactory, HasRolesAndPermissions, Notifiable, RequestForms, SoftDeletes, UUID, Favouritable;
     use Commentable, Commentator, Impersonable, Impersonate, ModelActivity, Searchable, UserBusiness, UserMBO, VirginModel;
 
     protected $fillable = [
@@ -272,7 +275,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         $letterNum = Alphabet::getAlphabetPosition($initials);
 
         $color = 'primary';
-        if ( ! $this->isAdmin()) {
+        if (! $this->isAdmin()) {
             if ($letterNum < 4) {
                 $color = 'orange';
             } elseif ($letterNum < 8) {
@@ -286,7 +289,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
             }
         }
         $indicator = '';
-        if ( ! $this->itsMe() && $this->isLoggedIn()) {
+        if (! $this->itsMe() && $this->isLoggedIn()) {
             $indicator = '<div class="profile-indicator"></div>';
         }
 
@@ -316,6 +319,16 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     public function activity()
     {
         return $this->morphMany(ActivityModel::class, 'causer');
+    }
+
+    public function favourite_users()
+    {
+        return $this->morphedByMany(User::class, 'subject', 'favourities');
+    }
+
+    public function favourite_campaigns()
+    {
+        return $this->morphedByMany(Campaign::class, 'subject', 'favourities');
     }
 
     public function preferredLocale()
@@ -371,14 +384,14 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         $value = $this->profile?->firstname . ' ' . $this->profile?->lastname;
 
         return Attribute::make(
-            get: fn () => mb_ucfirst($value),
+            get: fn() => mb_ucfirst($value),
         );
     }
 
     protected function sessions(): Attribute
     {
         return Attribute::make(
-            get: fn (): Collection => 'database' === config('session.driver') ? DB::table('sessions')->where('user_id', $this->id)->orderByDesc('last_activity')->get() : new Collection(),
+            get: fn(): Collection => 'database' === config('session.driver') ? DB::table('sessions')->where('user_id', $this->id)->orderByDesc('last_activity')->get() : new Collection(),
         );
     }
 }

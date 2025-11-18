@@ -80,6 +80,8 @@
 }
 
 .ombo-table .action-btns {
+    display: flex;
+    gap: 0.375rem;
     text-align: center;
     white-space: nowrap;
 }
@@ -115,6 +117,7 @@ table.ombo-table tbody tr:hover {
 .ombo-table .user-details,
 .user > .user-details {
     display: flex;
+    gap: 0.5rem;
     align-items: center;
 }
 .ombo-table .user-details img,

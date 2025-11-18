@@ -66,7 +66,7 @@ class MBOVerifyStatusScript extends BaseCommand
                         if ($echo) {
                             $this->line('Updating objective status for: ' . $objective->objective->name . ' (' . $objective->user->name . ') - ' . $objective->getOriginal('status') . ' => ' . $objective->status);
                         }
-                        $objective->updateQuietly();
+                        $objective->update();
                     }
                 }
             });

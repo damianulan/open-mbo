@@ -13,16 +13,16 @@
             <li class="{{ $userObjective ? $userObjective->getStatusColor() : '' }}">
                 <div class="list-grid">
                     <div class="list-content">
-                        <div class="nowrap" data-tippy-content="{{ $objective->name }}">
-                            <i class="bi text-primary {{ $objective->campaign_id ? 'bi-bullseye':'bi-crosshair' }} me-1"></i>
-                            <span>{{ $objective->name }}</span>
+                        <div class="nowrap d-flex gap-2 align-items-center" data-tippy-content="{{ $objective->name }}">
+                            <i class="bi text-primary {{ $objective->campaign_id ? 'bi-bullseye':'bi-crosshair' }}"></i>
+                            <div>{{ $objective->name }}</div>
                         </div>
 
                     </div>
                     <div class="list-actions">
                         @if($userObjective && $userObjective->evaluation)
-                            <div class="list-action">
-                                <span class="">{{ percent_view(float_view($userObjective->evaluation)) }}</span>
+                            <div class="list-action" data-tippy-content="{{ __('forms.mbo.objectives.evaluation') }}">
+                                <span>{{ percent_view($userObjective->evaluation) }}</span>
                             </div>
                         @endif
                         @if($objective->draft)

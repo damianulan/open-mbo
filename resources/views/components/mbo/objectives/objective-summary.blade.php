@@ -1,7 +1,7 @@
 <div class="content-card">
     <div class="content-card-top">
         <div class="content-card-header">
-            <i class="bi-crosshair me-1"></i>
+            <i class="bi-crosshair"></i>
             <span>{{ $objective->name }}</span>
         </div>
         @if($objective->category)

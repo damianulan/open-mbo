@@ -53,6 +53,21 @@ $status-passed: $success;
 $status-failed: #e4281f;
 $status-interrupted: $secondary;
 
+// Component colors
+$body-bg: $light;
+$body-wrapper-bg: rgba($primary, 0.06);
+$sidebar-bg: $light;
+$sidebar-brand-link: $primary;
+$sidebar-multi-title: tint($dark, 40%);
+$sidebar-usermenu: $dark;
+$page-header-color: $primary;
+$paragraph-color: tint($dark, 20%);
+$text-btn: tint($coolgreen, 20%);
+$text-btn-hover: tint($coolgreen, 40%);
+$btn-active-color: #fff;
+$card-shadow: 5px 5px 12px 0px rgba($primary, 0.1);
+$info-box-color: $info;
+
 $theme-colors: (
     'primary': $primary,
     'primary-100': tint($primary, 80%),
@@ -87,21 +102,6 @@ $theme-colors: (
     'failed': $status-failed,
     'interrupted': $status-interrupted
 );
-
-// Component colors
-$body-bg: $light;
-$body-wrapper-bg: rgba($primary, 0.06);
-$sidebar-bg: $light;
-$sidebar-brand-link: $primary;
-$sidebar-multi-title: tint($dark, 40%);
-$sidebar-usermenu: $dark;
-$page-header-color: $primary;
-$paragraph-color: tint($dark, 20%);
-$text-btn: tint($coolgreen, 20%);
-$text-btn-hover: tint($coolgreen, 40%);
-$btn-active-color: #fff;
-$card-shadow: 5px 5px 12px 0px rgba($primary, 0.1);
-$info-box-color: $info;
 
 /**
 /* Colors END

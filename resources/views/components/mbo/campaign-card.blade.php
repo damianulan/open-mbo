@@ -1,5 +1,5 @@
 
-<a class="card card-url card-bg" href="{{ route('campaigns.show', $campaign->id) }}">
+<a class="card card-url card-bg" href="{{ $userCampaign && $userCampaign->exists ? route('campaigns.users.show', $userCampaign->id) : route('campaigns.show', $campaign->id) }}">
     <div class="card-body">
         <div class="card-top">
             <div class="card-title" data-tippy-content="{{ $campaign->name }}">

@@ -103,7 +103,7 @@ function float_view(?float $value, int $decimals = 2): string
 
 function percent_view($value): string
 {
-    return $value . '%';
+    return float_view((float) $value) . '%';
 }
 
 function unauthorized($message = '', $permission = null): void

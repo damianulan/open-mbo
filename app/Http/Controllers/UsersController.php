@@ -76,13 +76,10 @@ class UsersController extends AppController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        $user = User::findOrFail($id);
-
         return view('pages.users.show', [
             'user' => $user,
         ]);
@@ -149,10 +146,8 @@ class UsersController extends AppController
      * @param  int  $id
      * @return Response
      */
-    public function delete($id)
+    public function delete(User $user)
     {
-        $user = User::findOrFail($id);
-
         if ($user->delete()) {
             return redirect()->route('users.index')->with('success', __('alerts.users.success.delete', ['name' => $user->name]));
         }
@@ -173,13 +168,9 @@ class UsersController extends AppController
 
     /**
      * Toggles User blocking if was nat blocked and unlocking otherwise.
-     *
-     * @param  mixed  $id
-     * @return Response
      */
-    public function block($id)
+    public function block(User $user)
     {
-        $user = User::findOrFail($id);
         if ($user) {
             $user->toggleLock();
         }
@@ -188,6 +179,18 @@ class UsersController extends AppController
         }
 
         return redirect()->back()->with('info', __('alerts.users.success.unblocked', ['name' => $user->name]));
+    }
+
+    public function favourite(User $user)
+    {
+        $auth = Auth::user();
+        if ($auth->favourite_users->contains($user)) {
+            $auth->favourite_users()->detach($user->id);
+        } else {
+            $auth->favourite_users()->attach($user->id);
+        }
+
+        return redirect()->back();
     }
 
     /**

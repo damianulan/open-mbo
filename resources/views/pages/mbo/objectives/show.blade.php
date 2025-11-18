@@ -16,9 +16,9 @@
             <div class="content-card">
                 <div class="content-card-top">
                     <div class="content-card-header">
-                        <i class="bi-person-fill-gear me-1"></i>
+                        <i class="bi-person-fill-gear"></i>
                         <span>{{ __('mbo.objective_admins') }}</span>
-                        <i class="info-box bi-info-circle-fill ms-1" data-tippy-content="{{ __('mbo.info.objective_admins') }}"></i>
+                        <i class="info-box bi-info-circle-fill" data-tippy-content="{{ __('mbo.info.objective_admins') }}"></i>
                     </div>
                 </div>
                 <div class="content-card-body">
@@ -50,7 +50,7 @@
         <div class="content-card">
             <div class="content-card-top">
                 <div class="content-card-header">
-                    <x-icon key="lightning-fill" mr="1" />
+                    <i class="bi-journal-text"></i>
                     <span>{{ __('mbo.objectives.users.inprogress') }}</span>
                 </div>
             </div>
@@ -63,16 +63,18 @@
         <div class="content-card">
             <div class="content-card-top">
                 <div class="content-card-header">
-                    <x-icon key="check2-square" mr="1" />
+                    <i class="bi-check2-square"></i>
                     <span>{{ __('mbo.objectives.users.completed') }}</span>
                 </div>
             </div>
             <div class="content-card-body row">
                 <div class="col-md-6">
-                    <x-objective-users-list :objective="$objective" :status="'passed'" />
+                    <h5>Zaliczone</h5>
+                    <div><x-objective-users-list :objective="$objective" :status="'passed'" /></div>
                 </div>
                 <div class="col-md-6">
-                    <x-objective-users-list :objective="$objective" :status="'failed'"  />
+                    <h5>Niezaliczone</h5>
+                    <div><x-objective-users-list :objective="$objective" :status="'failed'"  /></div>
                 </div>
             </div>
         </div>

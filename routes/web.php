@@ -43,7 +43,7 @@ Route::middleware('web')->group(function (): void {
 
 Route::middleware(['web', 'auth', 'maintenance'])->group(function (): void {
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
-    Livewire::setUpdateRoute(fn ($handle) => Route::post('/livewire/update', $handle));
+    Livewire::setUpdateRoute(fn($handle) => Route::post('/livewire/update', $handle));
 
     Laraverse::routes();
 
@@ -57,6 +57,7 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function (): void {
         Route::get('edit/{user}', [UsersController::class, 'edit'])->name('edit');
         Route::get('{user}', [UsersController::class, 'show'])->name('show');
         Route::get('{user}/block', [UsersController::class, 'block'])->name('block');
+        Route::get('{user}/favourite', [UsersController::class, 'favourite'])->name('favourite');
         Route::get('{user}/delete', [UsersController::class, 'delete'])->name('delete');
         Route::put('{user}', [UsersController::class, 'update'])->name('update');
         Route::get('/{user}/impersonate', [UsersController::class, 'impersonate'])->name('impersonate');
@@ -82,12 +83,12 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function (): void {
      * Settings START
      */
     Route::prefix('settings')->name('settings.')->group(function (): void {
-        Route::prefix('general')->name('general.')->middleware('route.gate:settings-general')->group(function (): void {
+        Route::prefix('general')->name('general.')->group(function (): void {
             Route::get('/', [GeneralController::class, 'index'])->name('index');
             Route::post('general/store', [GeneralController::class, 'storeGeneral'])->name('store');
         });
 
-        Route::prefix('server')->name('server.')->middleware('route.gate:settings-server')->group(function (): void {
+        Route::prefix('server')->name('server.')->group(function (): void {
             Route::get('/', [ServerController::class, 'index'])->name('index');
             Route::post('store/mail', [ServerController::class, 'storeMail'])->name('mail.store');
             Route::get('clearcache', [ServerController::class, 'cache'])->name('clearcache');
@@ -178,6 +179,7 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function (): void {
                 Route::delete('/delete/{id}', [CampaignObjectiveController::class, 'delete'])->name('delete');
             });
             Route::prefix('users')->name('users.')->group(function (): void {
+                Route::get('{userCampaign}', [CampaignUserController::class, 'show'])->name('show');
                 Route::post('/{campaign}', [CampaignUserController::class, 'update'])->name('update');
                 Route::get('/toggle-manual/{id}', [CampaignUserController::class, 'toggleManual'])->name('toggle_manual');
                 Route::get('/next-stage/{id}', [CampaignUserController::class, 'moveStageUp'])->name('next_stage');

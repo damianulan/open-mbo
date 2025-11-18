@@ -41,10 +41,6 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\MBO\Objectives\ObjectiveCreated' => [
             'App\Listeners\MBO\Objectives\UserObjectiveStatusCheck',
         ],
-
-        'App\Events\MBO\Objectives\UserObjectiveEvaluated' => [
-            'App\Listeners\MBO\Objectives\UserObjectiveEvaluation',
-        ],
     ];
 
     /**

@@ -13,6 +13,22 @@ use Throwable;
 
 class CampaignUserController extends AppController
 {
+    public function show(Request $request, UserCampaign $userCampaign): View
+    {
+        if ($request->user()->cannot('view', $userCampaign)) {
+            unauthorized();
+        }
+
+        $this->logShow($userCampaign);
+        $header = $userCampaign->campaign->name . ' [' . $userCampaign->campaign->period . ']';
+
+        return view('pages.mbo.campaigns.user', [
+            'campaign' => $userCampaign->campaign,
+            'userCampaign' => $userCampaign,
+            'pagetitle' => $header,
+        ]);
+    }
+
     public function update(Request $request, $id, CampaignEditUserForm $form)
     {
         try {

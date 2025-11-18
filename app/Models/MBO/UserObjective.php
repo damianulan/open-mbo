@@ -11,7 +11,8 @@ use App\Enums\MBO\UserObjectiveStatus;
 use App\Events\MBO\Campaigns\CampaignUserObjectiveAssigned;
 use App\Events\MBO\Campaigns\CampaignUserObjectiveUnassigned;
 use App\Events\MBO\Objectives\UserObjectiveAssigned;
-use App\Events\MBO\Objectives\UserObjectiveEvaluated;
+use App\Events\MBO\Objectives\UserObjectiveFailed;
+use App\Events\MBO\Objectives\UserObjectivePassed;
 use App\Events\MBO\Objectives\UserObjectiveUnassigned;
 use App\Models\BaseModel;
 use App\Models\Core\User;
@@ -143,11 +144,28 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
         'evaluated_at' => 'datetime',
     ];
 
+    protected static function boot(): void
+    {
+        parent::boot();
+        static::updating(function (self $model): self {
+            if ($model->isDirty('status')) {
+                if ($model->isPassed()) {
+                    UserObjectivePassed::dispatch($model, Auth::user() ?? null);
+                } elseif ($model->isFailed()) {
+                    UserObjectiveFailed::dispatch($model, Auth::user() ?? null);
+                }
+            } else {
+                $model->setStatus();
+            }
+            return $model;
+        });
+    }
+
     public static function assign($user_id, $objective_id): bool
     {
         $output = false;
         $existing = self::where('user_id', $user_id)->where('objective_id', $objective_id)->exists();
-        if ( ! $existing) {
+        if (! $existing) {
             $instance = new self();
             $instance->user_id = $user_id;
             $instance->objective_id = $objective_id;
@@ -189,17 +207,6 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
             CampaignUserObjectiveAssigned::dispatch($model->user, $model->objective, $campaign);
         } else {
             UserObjectiveAssigned::dispatch($model->user, $model->objective);
-        }
-    }
-
-    public static function updatedUserObjective(UserObjective $model): void
-    {
-        if ($model->isDirty('status') && ! in_array($model->getOriginal('status'), UserObjectiveStatus::evaluated())) {
-            if ($model->isEvaluated()) {
-                UserObjectiveEvaluated::dispatch($model, Auth::user() ?? null);
-            }
-        } else {
-            $model->setStatus()->updateQuietly();
         }
     }
 
@@ -256,18 +263,18 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
         }
 
         if ($userCampaign) {
-            if ( ! $userCampaign->active) {
+            if (! $userCampaign->active) {
                 $status = UserObjectiveStatus::INTERRUPTED;
             } else {
                 $status = CampaignStage::mapObjectiveStatus($userCampaign->stage, $status);
             }
         }
 
-        if ( ! in_array($status, $frozen)) {
+        if (! in_array($status, $frozen)) {
             if ($this->isOverdued()) {
-                $this->autoEvaluate();
+                $status = $this->autoEvaluate()->status;
             } else {
-                if ( ! $userCampaign) {
+                if (! $userCampaign) {
                     $status = UserObjectiveStatus::PROGRESS;
                 }
             }
@@ -380,7 +387,7 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
 
     public function scopeMy(Builder $query, ?User $user = null): void
     {
-        if ( ! $user) {
+        if (! $user) {
             $user = Auth::user();
         }
         $query->where('user_objectives.user_id', $user->id);
@@ -411,7 +418,7 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
             $this->status = UserObjectiveStatus::COMPLETED;
             $autofail = settings('mbo.objectives_autofail', true);
             if ($autofail) {
-                if (( ! $this->evaluation || $this->evaluation < 100)) {
+                if ((! $this->evaluation || $this->evaluation < 100)) {
                     $this->setFailed(true);
                 } else {
                     $this->setPassed(true);
@@ -430,7 +437,7 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
             $this->evaluation = null;
         }
         $this->evaluated_at = now();
-        if ( ! $auto) {
+        if (! $auto) {
             $this->evaluated_by = Auth::user()->id;
         }
         $this->points()->delete();
@@ -448,11 +455,11 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
     public function setPassed(bool $auto = false): self
     {
         $this->status = UserObjectiveStatus::PASSED;
-        if ( ! $this->evaluation) {
+        if (! $this->evaluation) {
             $this->evaluation = 100;
         }
         $this->evaluated_at = now();
-        if ( ! $auto) {
+        if (! $auto) {
             $this->evaluated_by = Auth::user()->id;
         }
 

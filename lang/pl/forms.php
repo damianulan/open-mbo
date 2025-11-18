@@ -167,6 +167,7 @@ return [
             'type' => 'Typ celu',
             'expected' => 'Oczekiwany wynik',
             'award' => 'Punkty nagrody',
+            'evaluation' => 'Aktualna realizacja celu',
             'users' => [
                 'add' => 'Dodaj użytkowników',
                 'realization' => 'Obecna realizacja celu',
