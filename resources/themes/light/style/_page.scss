@@ -54,7 +54,7 @@ body {
 .content-card {
     position: relative;
     display: block;
-    background-color: $body-bg;
+    background-color: $card-bg;
     padding: 1.5rem 1.5rem;
     margin: 0.75rem 0 0.5rem 0;
     border-radius: 0.35rem;
@@ -220,7 +220,7 @@ section.content-wrapper {
 }
 
 .bg-light {
-    background-color: $light !important;
+    background-color: $lighttint !important;
 }
 
 .round {
@@ -376,7 +376,7 @@ ul.list-style-none li {
     display: inline-block;
     font-size: 0.8rem;
     padding: 0 1rem;
-    background-color: #fff;
+    background-color: $light;
 }
 .divider .divider-text i {
     font-size: 1rem;

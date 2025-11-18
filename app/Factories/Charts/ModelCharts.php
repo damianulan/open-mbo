@@ -24,7 +24,7 @@ class ModelCharts extends ChartsLib
         return $this->getChart()
             ->setLabels([__('mbo.not_evaluated'), __('mbo.passed'), __('mbo.failed')])
             ->setColors([
-                'var(--bs-primary-400)',
+                'var(--bs-info)',
                 'var(--bs-passed)',
                 'var(--bs-failed)',
             ])
@@ -44,7 +44,7 @@ class ModelCharts extends ChartsLib
         return $this->getChart()
             ->setLabels([__('mbo.completed'), __('mbo.uncompleted')])
             ->setColors([
-                'var(--bs-primary-300)',
+                'var(--bs-info)',
                 'var(--bs-unstarted)',
             ])
             ->setHeight('150')

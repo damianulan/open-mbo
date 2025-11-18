@@ -237,13 +237,14 @@ ul.ombo-list {
         z-index: 10;
         padding-left: 0.5rem;
         background-color: transparent;
+        gap: 0.5rem;
     }
 
     li .list-actions .list-action {
         text-decoration: none;
-        margin-right: 0.35rem;
         font-size: 1rem;
         color: $link-color;
+        cursor: pointer;
         white-space: nowrap;
     }
 
@@ -252,12 +253,7 @@ ul.ombo-list {
         transition: all 0.2s ease-in-out;
     }
 
-    li .list-actions .list-action i {
-        margin-right: 0.2rem;
-    }
-
     li .list-actions .list-action span {
-        margin-right: 0.5rem;
         font-size: 0.85rem;
         font-weight: 600;
     }

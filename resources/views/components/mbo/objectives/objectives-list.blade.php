@@ -40,7 +40,7 @@
                             <span>{{ $objective->expected }}</span>
                         </div>
                         @endif
-                        @if($objective->isOverdued())
+                        @if($objective->isOverdued() && (!$userObjective || !$userObjective->isCompleted()))
                             <a class="list-action text-warning" data-tippy-content="{{ __('alerts.objectives.error.overdued', ['term' => $objective->deadline->diffForHumans()]) }}">
                                 <x-icon key="exclamation-diamond-fill" />
                             </a>

@@ -25,31 +25,32 @@ $celadon: #1bdcb8;
 $greenish: #a3aea7;
 
 $red: #d66a6a;
-$orange: #e6a96d;
-$yellow: #e6d67a;
+$orange: #e79a1d;
+$yellow: #ffe16d;
 $green: #4ea881;
 $teal: #66c5c7;
 $cyan: #6cb4d6;
-$blue: #6a8fd6;
+$blue: #6eabc6;
 $purple: #a173d6;
 $pink: #d66ab2;
 $brown: #b88f75;
 
 $danger: $red;
-$warning: #e79a1d;
+$warning: #d3622c;
 $success: $green;
-$info: $cyan;
+$info: $blue;
 
 // Action colors
-$light: tint($primary, 98%);
-$dark: #111611;
+$light: #fff;
+$lighttint: tint($primary, 98%);
+$dark: #253e4c;
 $disabled-text: #6c757d;
 
 $status-unstarted: shade(#adb5bd, 10%);
 $status-progress: $warning;
 $status-completed: $info;
 $status-passed: $success;
-$status-failed: $danger;
+$status-failed: #e4281f;
 $status-interrupted: $secondary;
 
 $theme-colors: (
@@ -68,6 +69,7 @@ $theme-colors: (
     'danger': $danger,
     'warning': $warning,
     'disabled': $disabled-text,
+    'light': $light,
     'info': $info,
     'dark': $dark,
     'brown': $brown,
@@ -87,9 +89,9 @@ $theme-colors: (
 );
 
 // Component colors
-$body-bg: #fff;
+$body-bg: $light;
 $body-wrapper-bg: rgba($primary, 0.06);
-$sidebar-bg: #fff;
+$sidebar-bg: $light;
 $sidebar-brand-link: $primary;
 $sidebar-multi-title: tint($dark, 40%);
 $sidebar-usermenu: $dark;
@@ -128,7 +130,7 @@ $badge-font-size: 0.75em;
 $badge-font-weight: 600;
 
 // Cards
-$card-bg: transparent;
+$card-bg: $light;
 
 // Typography
 $link-color: $primary;
@@ -143,7 +145,7 @@ $nav-link-font-size: 0.85rem;
 $nav-link-font-weight: 400;
 
 // Navigation
-$nav-tab-bg: #fff;
+$nav-tab-bg: $light;
 $nav-tab-color-hover: #000;
 
 // Forms
@@ -158,14 +160,14 @@ $border-radius: 0.3rem;
 // Tables
 $table-bg: transparent;
 $ombo-body: rgba($primary, 0.06); //lighten($primary, 60%);
-$ombo-body-passed: rgba($success, 0.1);
-$ombo-body-passed-hover: rgba($success, 0.15);
+$ombo-body-passed: rgba($status-passed, 0.15);
+$ombo-body-passed-hover: rgba($status-passed, 0.2);
 $ombo-body-warning: rgba($warning, 0.1);
 $ombo-body-warning-hover: rgba($warning, 0.15);
-$ombo-body-failed: rgba($danger, 0.1);
-$ombo-body-failed-hover: rgba($danger, 0.15);
-$ombo-body-completed: rgba($primary, 0.25);
-$ombo-body-completed-hover: rgba($primary, 0.35);
+$ombo-body-failed: rgba($status-failed, 0.15);
+$ombo-body-failed-hover: rgba($status-failed, 0.2);
+$ombo-body-completed: rgba($status-completed, 0.25);
+$ombo-body-completed-hover: rgba($status-completed, 0.35);
 $ombo-body-inactive: rgba($disabled-text, 0.2);
 $ombo-body-hover: rgba($primary, 0.15);
 $ombo-body-inactive-hover: rgba($primary, 0.25);
