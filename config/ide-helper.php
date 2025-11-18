@@ -248,7 +248,7 @@ return [
     | magic methods and properties.
     |
     */
-    'include_class_docblocks' => false,
+    'include_class_docblocks' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -260,7 +260,7 @@ return [
     | or there is an import (use className) of the class.
     |
     */
-    'force_fqn' => true,
+    'force_fqn' => false,
 
     /*
     |--------------------------------------------------------------------------

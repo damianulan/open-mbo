@@ -21,26 +21,24 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
- * @property-read User $user
- *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserPreference newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserPreference newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserPreference onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserPreference query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserPreference whereAppNotifications($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserPreference whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserPreference whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserPreference whereExtendedNotifications($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserPreference whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserPreference whereLang($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserPreference whereMailNotifications($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserPreference whereSystemNotifications($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserPreference whereTheme($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserPreference whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserPreference whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserPreference withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\UserPreference withoutTrashed()
- *
+ * @property-read \App\Models\Core\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereAppNotifications($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereExtendedNotifications($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereLang($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereMailNotifications($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereSystemNotifications($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereTheme($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference withoutTrashed()
  * @mixin \Eloquent
  */
 class UserPreference extends Model

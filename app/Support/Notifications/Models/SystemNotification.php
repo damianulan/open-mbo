@@ -16,21 +16,19 @@ use Illuminate\Support\Collection;
  * @property Carbon|null $notified_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\SystemNotification newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\SystemNotification newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\SystemNotification query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\SystemNotification whereContents($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\SystemNotification whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\SystemNotification whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\SystemNotification whereNotifiableId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\SystemNotification whereNotifiableType($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\SystemNotification whereNotificationId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\SystemNotification whereNotifiedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\SystemNotification whereReadAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\SystemNotification whereResources($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\SystemNotification whereUpdatedAt($value)
- *
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification whereContents($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification whereNotifiableId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification whereNotifiableType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification whereNotificationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification whereNotifiedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification whereReadAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification whereResources($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class SystemNotification extends NotificationModel

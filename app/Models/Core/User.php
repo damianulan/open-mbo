@@ -86,8 +86,8 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read int|null $objectives_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Permission> $permissions
  * @property-read int|null $permissions_count
- * @property-read UserPreference|null $preferences
- * @property-read UserProfile|null $profile
+ * @property-read \App\Models\Core\UserPreference|null $preferences
+ * @property-read \App\Models\Core\UserProfile|null $profile
  * @property-read Collection $sessions
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $subordinates
  * @property-read int|null $subordinates_count
@@ -104,34 +104,32 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read int|null $user_objectives_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, UserObjective> $user_objectives_active
  * @property-read int|null $user_objectives_active_count
- *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User active()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User drafted()
+ * @method static Builder<static>|User active()
+ * @method static Builder<static>|User drafted()
  * @method static \Database\Factories\Core\UserFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User inactive()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User published()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User whereActive($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User whereCore($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User whereEmailVerifiedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User whereFirstname(string $value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User whereForcePasswordChange($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User whereLastname(string $value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User wherePassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User withPermission(...$slugs)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User withRole(...$slugs)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Core\User withoutTrashed()
- *
+ * @method static Builder<static>|User inactive()
+ * @method static Builder<static>|User newModelQuery()
+ * @method static Builder<static>|User newQuery()
+ * @method static Builder<static>|User onlyTrashed()
+ * @method static Builder<static>|User published()
+ * @method static Builder<static>|User query()
+ * @method static Builder<static>|User whereActive($value)
+ * @method static Builder<static>|User whereCore($value)
+ * @method static Builder<static>|User whereCreatedAt($value)
+ * @method static Builder<static>|User whereDeletedAt($value)
+ * @method static Builder<static>|User whereEmail($value)
+ * @method static Builder<static>|User whereEmailVerifiedAt($value)
+ * @method static Builder<static>|User whereFirstname(string $value)
+ * @method static Builder<static>|User whereForcePasswordChange($value)
+ * @method static Builder<static>|User whereId($value)
+ * @method static Builder<static>|User whereLastname(string $value)
+ * @method static Builder<static>|User wherePassword($value)
+ * @method static Builder<static>|User whereRememberToken($value)
+ * @method static Builder<static>|User whereUpdatedAt($value)
+ * @method static Builder<static>|User withPermission(...$slugs)
+ * @method static Builder<static>|User withRole(...$slugs)
+ * @method static Builder<static>|User withTrashed(bool $withTrashed = true)
+ * @method static Builder<static>|User withoutTrashed()
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements HasLocalePreference, HasShowRoute
