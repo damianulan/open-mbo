@@ -16,7 +16,7 @@ class MBOVerifyStatusScript extends BaseCommand
      *
      * @var string
      */
-    protected $signature = 'mbo:statuses';
+    protected $signature = 'app:mbo:statuses';
 
     /**
      * The console command description.

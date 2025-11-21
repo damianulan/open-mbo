@@ -5,6 +5,7 @@ namespace App\Factories\Charts;
 use Akaunting\Apexcharts\Chart;
 use App\Enums\MBO\UserObjectiveStatus;
 use App\Models\MBO\UserCampaign;
+use App\Models\MBO\UserObjective;
 
 class ModelCharts extends ChartsLib
 {
@@ -35,8 +36,14 @@ class ModelCharts extends ChartsLib
         $this->type = 'donut';
 
         $userObjectives = $model->user_objectives;
-        $completed = (clone $userObjectives)->whereIn('status', UserObjectiveStatus::finished())->count();
-        $other = (clone $userObjectives)->count() - $completed;
+        $totalNotCompleted = 0;
+        $totalCompleted = 0;
+        $userObjectives->each(function (UserObjective $userObjective) use (&$totalCompleted) {
+            if ($userObjective->isCompleted()) {
+                $totalCompleted += $userObjective->getWeightAttribute();
+            }
+        });
+        $totalNotCompleted = $userObjectives->getTotalWeight() - $totalCompleted;
 
         return $this->getChart()
             ->setLabels([__('mbo.completed'), __('mbo.uncompleted')])
@@ -45,6 +52,6 @@ class ModelCharts extends ChartsLib
                 'var(--bs-unstarted)',
             ])
             ->setHeight('150')
-            ->setDataset('set-1', $this->type, [$completed, $other]);
+            ->setDataset('set-1', $this->type, [$totalCompleted, $totalNotCompleted]);
     }
 }

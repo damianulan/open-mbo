@@ -6,6 +6,7 @@ use App\Casts\FormattedText;
 use App\Commentable\Models\Comment;
 use App\Commentable\Support\Commentable;
 use App\Contracts\MBO\HasDeadline;
+use App\Contracts\MBO\HasWeight;
 use App\Events\MBO\Objectives\ObjectiveCreated;
 use App\Events\MBO\Objectives\ObjectiveUpdated;
 use App\Models\BaseModel;
@@ -106,7 +107,7 @@ use Spatie\Activitylog\Models\Activity;
  * @mixin \Eloquent
  */
 #[ScopedBy(ObjectiveScope::class)]
-class Objective extends BaseModel implements HasDeadline
+class Objective extends BaseModel implements HasDeadline, HasWeight
 {
     use Commentable, Dispatcher;
 
@@ -147,6 +148,11 @@ class Objective extends BaseModel implements HasDeadline
         }
 
         return $model;
+    }
+
+    public function getWeightAttribute(): float
+    {
+        return $this->weight ?? 0;
     }
 
     public function isOverdued(): bool
@@ -216,7 +222,7 @@ class Objective extends BaseModel implements HasDeadline
 
     public function user_objective(?User $user = null): ?UserObjective
     {
-        if ( ! $user) {
+        if (! $user) {
             $user = Auth::user();
         }
 
@@ -225,7 +231,7 @@ class Objective extends BaseModel implements HasDeadline
 
     public function scopeWhereAssigned(Builder $query, ?User $user = null): void
     {
-        if ( ! $user) {
+        if (! $user) {
             $user = Auth::user();
         }
         $query->whereHas('user_objectives', function (Builder $q) use ($user): void {

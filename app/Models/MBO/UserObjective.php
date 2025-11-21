@@ -6,6 +6,7 @@ use App\Commentable\Models\Comment;
 use App\Commentable\Support\Commentable;
 use App\Contracts\MBO\AssignsPoints;
 use App\Contracts\MBO\HasDeadline;
+use App\Contracts\MBO\HasWeight;
 use App\Enums\MBO\CampaignStage;
 use App\Enums\MBO\UserObjectiveStatus;
 use App\Events\MBO\Campaigns\CampaignUserObjectiveAssigned;
@@ -119,7 +120,7 @@ use Spatie\Activitylog\Models\Activity;
  *
  * @mixin \Eloquent
  */
-class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
+class UserObjective extends BaseModel implements AssignsPoints, HasDeadline, HasWeight
 {
     use CanUserObjective, Commentable, Dispatcher;
 
@@ -220,6 +221,11 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
         }
     }
 
+    public function getWeightAttribute(): float
+    {
+        return $this->objective->getWeightAttribute() ?? 0;
+    }
+
     public function isOverdued(): bool
     {
         return $this->objective->isOverdued();
@@ -300,11 +306,23 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
         return $this->belongsTo(User::class, 'evaluated_by')->withTrashed();
     }
 
-    public function points(): MorphOne
+    public function points(): ?MorphOne
     {
         return $this->morphOne(UserPoints::class, 'subject')->withDefault([
             'user_id' => $this->user_id,
         ])->whereUserId($this->user_id);
+    }
+
+    public function calculatePoints(): float
+    {
+        $points = 0;
+
+        $award = $this->objective->award ?? 0;
+        if ($award > 0) {
+            $points = round($award * ($this->evaluation / 100), 2);
+        }
+
+        return $points;
     }
 
     public function campaign(): HasOneThrough
@@ -391,18 +409,6 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
             $user = Auth::user();
         }
         $query->where('user_objectives.user_id', $user->id);
-    }
-
-    public function calculatePoints(): float
-    {
-        $points = 0;
-
-        $award = $this->objective->award ?? 0;
-        if ($award > 0) {
-            $points = round($award * ($this->evaluation / 100), 2);
-        }
-
-        return $points;
     }
 
     public function setCompleted(): self

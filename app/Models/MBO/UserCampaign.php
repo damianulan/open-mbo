@@ -2,6 +2,7 @@
 
 namespace App\Models\MBO;
 
+use App\Contracts\MBO\AssignsPoints;
 use App\Contracts\MBO\HasObjectives;
 use App\Enums\MBO\CampaignStage;
 use App\Events\MBO\Campaigns\UserCampaignAssigned;
@@ -12,10 +13,12 @@ use App\Models\Core\User;
 use App\Traits\Guards\MBO\CanUserCampaign;
 use App\Traits\HasCharts;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Activity;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property string $id
@@ -91,7 +94,7 @@ use Spatie\Activitylog\Models\Activity;
  *
  * @mixin \Eloquent
  */
-class UserCampaign extends BaseModel implements HasObjectives
+class UserCampaign extends BaseModel implements HasObjectives, AssignsPoints
 {
     use CanUserCampaign, HasCharts;
 
@@ -137,6 +140,32 @@ class UserCampaign extends BaseModel implements HasObjectives
     public function user_objectives(): HasManyThrough
     {
         return $this->hasManyThrough(UserObjective::class, Objective::class, 'campaign_id', 'objective_id', 'campaign_id', 'id')->where('user_objectives.user_id', $this->user_id);
+    }
+
+    public function points(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                $collection = new Collection();
+                $this->user_objectives->each(function (UserObjective $userObjective) use (&$collection) {
+                    if ($userObjective->points) {
+                        $collection->push($userObjective->points);
+                    }
+                });
+            }
+        );
+    }
+
+    public function calculatePoints(): float
+    {
+        $points = 0;
+
+        $award = $this->objective->award ?? 0;
+        if ($award > 0) {
+            $points = round($award * ($this->evaluation / 100), 2);
+        }
+
+        return $points;
     }
 
     public function stageDescription(): string

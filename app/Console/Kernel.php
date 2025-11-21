@@ -8,6 +8,7 @@ use App\Console\Commands\MBO\MBOVerifyStatusScript;
 use App\Support\Notifications\NotificationScheduler;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Console\Commands\Settings\SettingsMigrate;
 
 class Kernel extends ConsoleKernel
 {
@@ -16,9 +17,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command(MBOVerifyStatusScript::class)->dailyAt('01:01');
+        $schedule->command(MBOVerifyStatusScript::class)->dailyAt('00:30');
 
-        if (true === config('backup.backup.auto')) {
+        if (config('backup.backup.auto')) {
             $schedule->command('backup:run')->daily()->at('01:30');
         }
 
@@ -39,9 +40,10 @@ class Kernel extends ConsoleKernel
         $schedule->command('auth:clear-resets')->dailyAt('00:01');
         $schedule->command('model:prune')->dailyAt('00:01');
         $schedule->command('model:prune-soft-deletes')->dailyAt('00:01');
+        $schedule->command(SettingsMigrate::class)->dailyAt('00:01');
 
         // NOTIFICATIONS
-        NotificationScheduler::load();
+        NotificationScheduler::load($schedule);
     }
 
     /**

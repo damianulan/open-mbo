@@ -49,7 +49,7 @@
                                 <x-icon key="calendar2-week-fill" />
                             </a>
                         @endif
-                        <a href="{{ $userObjective ? route('objectives.assignment.show', $userObjective->id):route('objectives.show', $objective->id) }}" class="list-action" data-modelid="{{ $objective->id }}" data-tippy-content="{{ __('buttons.summary') }}">
+                        <a href="{{ $userObjective ? route('objectives.assignment.show', $userObjective->id):route('objectives.show', $objective->id) }}" class="list-action" data-modelid="{{ $objective->id }}" data-tippy-content="{{ __('buttons.preview') }}">
                             <x-icon key="eye-fill" />
                         </a>
                         @if(!$userObjective)

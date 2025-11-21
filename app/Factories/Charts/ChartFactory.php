@@ -23,11 +23,11 @@ class ChartFactory
 
         try {
             $method = Collection::make($reflection->getMethods(ReflectionMethod::IS_PUBLIC))
-                ->filter(fn ($method) => $method->getName() === $name)
-                ->map(fn ($method) => $method->getName())
+                ->filter(fn($method) => $method->getName() === $name)
+                ->map(fn($method) => $method->getName())
                 ->first();
 
-            if ( ! $method) {
+            if (! $method) {
                 throw new ChartNotFound($name);
             }
 
@@ -35,9 +35,9 @@ class ChartFactory
 
             return $chart;
         } catch (Throwable $th) {
-            if ($th instanceof TypeError) {
-                $th = new IncorrectModel($name, $model);
-            }
+            // if ($th instanceof TypeError) {
+            //     $th = new IncorrectModel($name, $model);
+            // }
 
             report($th);
             throw $th;

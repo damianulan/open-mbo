@@ -10,6 +10,7 @@ use App\Providers\ComponentServiceProvider;
 use App\Providers\ConfigServiceProvider;
 use App\Providers\EventServiceProvider;
 use App\Providers\GateServiceProvider;
+use App\Providers\MacroServiceProvider;
 use App\Providers\RolesServiceProvider;
 use App\Providers\RouteServiceProvider;
 use App\Support\Http\ResponseAjax;
@@ -282,6 +283,7 @@ return [
          * Application Service Providers...
          */
         AppServiceProvider::class,
+        MacroServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         EventServiceProvider::class,

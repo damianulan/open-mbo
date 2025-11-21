@@ -3,9 +3,9 @@
 namespace App\Settings;
 
 use App\Settings\Casts\CryptCast;
-use Spatie\LaravelSettings\Settings;
+use App\Settings\Abstract\BaseSettings;
 
-class MailSettings extends Settings
+class MailSettings extends BaseSettings
 {
     // MAILING
     public ?string $mail_mailer;
@@ -42,7 +42,7 @@ class MailSettings extends Settings
 
     public function safePassword()
     {
-        if ( ! empty($this->mail_password)) {
+        if (! empty($this->mail_password)) {
             $this->mail_password = 'PassProtection123@';
         }
 

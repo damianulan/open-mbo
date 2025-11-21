@@ -20,7 +20,7 @@
                     <i class="bi-feather"></i>
                 </div>
             @endif
-            @if($objective->isOverdued())
+            @if($objective->isOverdued() && (!$userObjective->exists || !$userObjective->isEvaluated()))
                 <div class="text-{{ $warning }}" data-tippy-content="{{ __('alerts.objectives.error.overdued', ['term' => $objective->deadline->diffForHumans()]) }}">
                     <i class="bi-exclamation-diamond-fill"></i>
                 </div>

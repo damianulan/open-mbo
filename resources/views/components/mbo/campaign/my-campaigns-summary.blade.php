@@ -14,6 +14,7 @@
                     <div><x-objectives-list :model="$uc->campaign" :user="$user" /></div>
                 </div>
             </div>
+            <div class="divider"></div>
             @push('scripts')
                 {!! $chart->script() !!}
             @endpush
