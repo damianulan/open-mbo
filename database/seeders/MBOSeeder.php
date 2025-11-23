@@ -46,7 +46,7 @@ class MBOSeeder extends Seeder
             $category->shortname = 'individual';
             $category->save();
 
-            ObjectiveTemplate::factory(200)->create();
+            ObjectiveTemplate::factory(350)->create();
 
             $this->templates = ObjectiveTemplate::all();
             $this->users = User::all();
@@ -102,7 +102,7 @@ class MBOSeeder extends Seeder
     {
         $coordinatorUsers = $this->users->random(fake()->numberBetween(10, 20));
 
-        for ($i = 1; $i <= 60; $i++) {
+        for ($i = 1; $i <= 30; $i++) {
             $datetime = fake()->dateTimeBetween('-3 weeks', '+2 months');
             $now = Carbon::parse($datetime);
             $campaign = new Campaign();
