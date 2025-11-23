@@ -2,49 +2,48 @@
 
 namespace App\Livewire\Layout;
 
-use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Notifications extends Component
 {
-    protected DatabaseNotificationCollection $notifications;
-
     public int $notifications_count = 0;
 
     public bool $shown = false;
 
-    public function mount()
+    protected $notifications;
+
+    public function mount(): void
     {
         $this->register();
     }
 
-    public function boot()
+    public function boot(): void
     {
         $this->register();
     }
 
-    public function register()
+    public function register(): void
     {
-        $query = Auth::user()->notifications()->where('data', '!=', '[]');
+        $query = Auth::user()->system_notifications();
         $notifications_count = $query->count();
         $queryAlert = clone $query;
-        $notificationsAlert = $queryAlert->whereNull('alerted_at')->get();
+        $notificationsAlert = $queryAlert->whereNull('notified_at')->get();
 
         $this->notifications = $query->take(15)->get();
 
         if ($notificationsAlert->count()) {
             foreach ($notificationsAlert as $alert) {
-                $alert->alerted_at = now();
+                $alert->notified_at = now();
                 $alert->updateQuietly();
-                $this->dispatch('new-notification', title: $alert->data['message']);
+                $this->dispatch('new-notification', title: $alert->contents);
             }
         }
 
         $this->notifications_count = $notifications_count;
     }
 
-    public function toggleShown()
+    public function toggleShown(): void
     {
         $this->shown = ! $this->shown;
     }

@@ -1,4 +1,4 @@
 <div class="user-details">
-    {!! $data->getAvatarView(23) !!}
-    <span class="ms-2">{{ $data->name }}</span>
+    {!! $data->getAvatarView('xs') !!}
+    <span class="{{ auth()->user()->id === $data->id ? ' text-highlight':'' }}">{{ $data->name }}</span>
 </div>

@@ -2,11 +2,12 @@
 
 namespace App\Contracts\MBO;
 
-use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 interface AssignsPoints
 {
-    public function points(): MorphOne;
+    public function points(): Relation|Attribute|null;
 
     public function calculatePoints(): float;
 }

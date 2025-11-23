@@ -11,7 +11,7 @@ class BaseCommand extends Command
 
     private $end = null;
 
-    protected function log($message, $success = true)
+    protected function log($message, $success = true): void
     {
 
         $this->end = Carbon::now();
@@ -28,19 +28,19 @@ class BaseCommand extends Command
             $duration = "{$seconds}. {$milliseconds}";
         }
 
-        if (! empty($duration)) {
+        if ( ! empty($duration)) {
             $properties['duration'] = $duration;
         }
 
         $result = $success ? 'success' : 'failure';
-        $message = static::class.' : '.$message;
+        $message = static::class . ' : ' . $message;
         activity('cron')
             ->event($result)
             ->withProperties($properties)
             ->log($message);
     }
 
-    protected function logStart()
+    protected function logStart(): void
     {
         $this->start = Carbon::now();
     }

@@ -2,6 +2,7 @@
 
 namespace App\Models\MBO;
 
+use App\Contracts\MBO\AssignsPoints;
 use App\Contracts\MBO\HasObjectives;
 use App\Enums\MBO\CampaignStage;
 use App\Events\MBO\Campaigns\UserCampaignAssigned;
@@ -9,23 +10,32 @@ use App\Events\MBO\Campaigns\UserCampaignUnassigned;
 use App\Events\MBO\Campaigns\UserCampaignUpdated;
 use App\Models\BaseModel;
 use App\Models\Core\User;
+use App\Traits\Guards\MBO\CanUserCampaign;
+use App\Traits\HasCharts;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Lucent\Support\Traits\Dispatcher;
+use Illuminate\Support\Carbon;
+use Spatie\Activitylog\Models\Activity;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property string $id
  * @property string $campaign_id
  * @property string $user_id
- * @property string $stage User current campaign stage
+ * @property mixed $stage User current campaign stage
  * @property bool $manual User will not be automatically moved between stages.
  * @property bool $active Is visible to users.
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\MBO\Campaign $campaign
+ * @property-read Campaign $campaign
  * @property-read User $user
+ * @property-read Collection<int, UserObjective> $user_objectives
+ * @property-read int|null $user_objectives_count
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign average(string $column)
@@ -53,7 +63,9 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign minFromCache(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign newModelQuery()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign onlyTrashed()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign ongoing()
+ * @method static Builder<static>|UserCampaign onlyTrashed()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign orderForUser()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign paginateFromCache(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign prunableSoftDeletes()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign published()
@@ -76,17 +88,19 @@ use Lucent\Support\Traits\Dispatcher;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign whereStage($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign whereUpdatedAt($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign withTrashed(bool $withTrashed = true)
+ * @method static Builder<static>|UserCampaign withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign withoutCache()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserCampaign withoutTrashed()
+ * @method static Builder<static>|UserCampaign withoutTrashed()
  *
  * @mixin \Eloquent
  */
-class UserCampaign extends BaseModel implements HasObjectives
+class UserCampaign extends BaseModel implements HasObjectives, AssignsPoints
 {
-    use Dispatcher;
+    use CanUserCampaign, HasCharts;
 
     public $logEntities = ['user_id' => User::class, 'campaign_id' => Campaign::class];
+
+    public $timestamps = true;
 
     protected $fillable = [
         'campaign_id',
@@ -99,9 +113,8 @@ class UserCampaign extends BaseModel implements HasObjectives
     protected $casts = [
         'active' => 'boolean',
         'manual' => 'boolean',
+        'stage' => CampaignStage::class,
     ];
-
-    public $timestamps = true;
 
     protected $dispatchesEvents = [
         'created' => UserCampaignAssigned::class,
@@ -124,32 +137,53 @@ class UserCampaign extends BaseModel implements HasObjectives
         return $this->hasManyThrough(Objective::class, Campaign::class, 'id', 'campaign_id', 'campaign_id', 'id')->whereAssigned($this->user);
     }
 
-    public function assignObjectives()
+    public function user_objectives(): HasManyThrough
     {
-        $templates = $this->campaign->objective_templates();
-        if ($templates) {
-            foreach ($templates as $template) {
-                // TODO assign objectives from template assigned to a Campaign.
+        return $this->hasManyThrough(UserObjective::class, Objective::class, 'campaign_id', 'objective_id', 'campaign_id', 'id')->where('user_objectives.user_id', $this->user_id);
+    }
+
+    public function points(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                $collection = new Collection();
+                $this->user_objectives->each(function (UserObjective $userObjective) use (&$collection) {
+                    if ($userObjective->points) {
+                        $collection->push($userObjective->points);
+                    }
+                });
             }
+        );
+    }
+
+    public function calculatePoints(): float
+    {
+        $points = 0;
+
+        $award = $this->objective->award ?? 0;
+        if ($award > 0) {
+            $points = round($award * ($this->evaluation / 100), 2);
         }
+
+        return $points;
     }
 
     public function stageDescription(): string
     {
-        return __('forms.campaigns.stages.'.$this->stage);
+        return __('forms.campaigns.stages.' . $this->stage->value());
     }
 
     public function stageIcon(): string
     {
-        $status = CampaignStage::stageIcon($this->stage);
+        $status = CampaignStage::stageIcon($this->stage->value());
 
         return $status;
     }
 
     public function terminate(): bool
     {
-        if ($this->stage !== CampaignStage::TERMINATED) {
-            $this->stage = CampaignStage::TERMINATED;
+        if (CampaignStage::TERMINATED !== $this->stage->value()) {
+            $this->stage = CampaignStage::tryFrom(CampaignStage::TERMINATED);
 
             return $this->update();
         }
@@ -159,15 +193,15 @@ class UserCampaign extends BaseModel implements HasObjectives
 
     public function resume(): bool
     {
-        $this->stage = CampaignStage::IN_PROGRESS;
+        $this->stage = CampaignStage::tryFrom(CampaignStage::IN_PROGRESS);
 
         return $this->update();
     }
 
     public function cancel(): bool
     {
-        if ($this->stage !== CampaignStage::CANCELED) {
-            $this->stage = CampaignStage::CANCELED;
+        if (CampaignStage::CANCELED !== $this->stage->value()) {
+            $this->stage = CampaignStage::tryFrom(CampaignStage::CANCELED);
 
             return $this->update();
         }
@@ -235,5 +269,21 @@ class UserCampaign extends BaseModel implements HasObjectives
                 }
             }
         }
+    }
+
+    public function scopeOngoing(Builder $query): void
+    {
+        $query->where(function (Builder $query): void {
+            $query->whereHas('campaign');
+            $query->where('active', 1)
+                ->whereNotIn('stage', [CampaignStage::TERMINATED, CampaignStage::CANCELED, CampaignStage::COMPLETED]);
+        });
+    }
+
+    public function scopeOrderForUser(Builder $query): void
+    {
+        $query->orderByRaw(
+            'FIELD(stage, "' . CampaignStage::SELF_EVALUATION . '", "' . CampaignStage::REALIZATION . '", "' . CampaignStage::EVALUATION . '", "' . CampaignStage::DISPOSITION . '", "' . CampaignStage::DEFINITION . '", "' . CampaignStage::IN_PROGRESS . '", "' . CampaignStage::PENDING . '")'
+        );
     }
 }

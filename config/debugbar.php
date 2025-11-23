@@ -62,7 +62,7 @@ return [
     |
     */
 
-    'editor' => env('DEBUGBAR_EDITOR') ?: env('IGNITION_EDITOR', 'phpstorm'),
+    'editor' => env('DEBUGBAR_EDITOR') ?: env('IGNITION_EDITOR', 'vscode'),
 
     /*
     |--------------------------------------------------------------------------
@@ -170,22 +170,22 @@ return [
         'log' => true,  // Logs from Monolog (merged in messages if enabled)
         'db' => true,  // Show database (PDO) queries and bindings
         'views' => true,  // Views with their data
-        'route' => false,  // Current route information
-        'auth' => false, // Display Laravel authentication status
+        'route' => true,  // Current route information
+        'auth' => true, // Display Laravel authentication status
         'gate' => true,  // Display Laravel Gate checks
         'session' => false,  // Display session data
         'symfony_request' => true,  // Only one can be enabled..
         'mail' => true,  // Catch mail messages
         'laravel' => true, // Laravel version and environment
-        'events' => false, // All events fired
+        'events' => true, // All events fired
         'default_request' => false, // Regular or special Symfony request logger
-        'logs' => false, // Add the latest log messages
+        'logs' => true, // Add the latest log messages
         'files' => false, // Show the included files
         'config' => false, // Display config settings
         'cache' => false, // Display cache events
         'models' => true,  // Display models
         'livewire' => true,  // Display Livewire (when available)
-        'jobs' => false, // Display dispatched jobs
+        'jobs' => true, // Display dispatched jobs
         'pennant' => false, // Display Pennant feature flags
     ],
 
@@ -319,7 +319,7 @@ return [
      | Switches between light and dark theme. If set to auto it will respect system preferences
      | Possible values: auto, light, dark
      */
-    'theme' => env('DEBUGBAR_THEME', 'auto'),
+    'theme' => env('DEBUGBAR_THEME', 'dark'),
 
     /*
      |--------------------------------------------------------------------------
@@ -329,5 +329,5 @@ return [
      | By default, the Debugbar limits the number of frames returned by the 'debug_backtrace()' function.
      | If you need larger stacktraces, you can increase this number. Setting it to 0 will result in no limit.
      */
-    'debug_backtrace_limit' => 50,
+    'debug_backtrace_limit' => 100,
 ];

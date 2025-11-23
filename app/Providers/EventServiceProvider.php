@@ -21,18 +21,11 @@ class EventServiceProvider extends ServiceProvider
         'Illuminate\Auth\Events\Failed' => [
             'App\Listeners\Activity\LogAuthFailed',
         ],
-        'Illuminate\Notifications\Events\NotificationSent' => [
-            'App\Listeners\Activity\NotificationLog',
-        ],
 
         // MBO LISTENERS
         // Campaigns
         'App\Events\MBO\Campaigns\UserCampaignAssigned' => [
-            'App\Listeners\MBO\Campaigns\UserAssignedNotify',
             'App\Listeners\MBO\Campaigns\UserAssignObjectives',
-        ],
-        'App\Events\MBO\Campaigns\UserCampaignUnassigned' => [
-            'App\Listeners\MBO\Campaigns\UserUnassignedNotify',
         ],
         'App\Events\MBO\Campaigns\CampaignUpdated' => [
             'App\Listeners\MBO\Campaigns\UserCampaignStageCheck',
@@ -48,21 +41,12 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\MBO\Objectives\ObjectiveCreated' => [
             'App\Listeners\MBO\Objectives\UserObjectiveStatusCheck',
         ],
-
-        'App\Events\MBO\Objectives\UserObjectiveEvaluated' => [
-            'App\Listeners\MBO\Objectives\UserObjectiveEvaluation',
-        ],
     ];
 
     /**
      * Register any events for your application.
-     *
-     * @return void
      */
-    public function boot()
-    {
-        //
-    }
+    public function boot(): void {}
 
     /**
      * Determine if events and listeners should be automatically discovered.

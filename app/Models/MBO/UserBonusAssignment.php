@@ -4,13 +4,15 @@ namespace App\Models\MBO;
 
 use App\Models\BaseModel;
 use App\Models\Core\User;
+use Illuminate\Database\Eloquent\Collection;
+use Spatie\Activitylog\Models\Activity;
 
 /**
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read User|null $approved_by
- * @property-read \App\Models\MBO\BonusScheme|null $bonus_scheme
- * @property-read \App\Models\MBO\Campaign|null $campaign
+ * @property-read BonusScheme|null $bonus_scheme
+ * @property-read Campaign|null $campaign
  * @property-read User|null $user
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment active()

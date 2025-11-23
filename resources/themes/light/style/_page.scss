@@ -52,10 +52,13 @@ body {
 }
 
 .content-card {
-    background-color: $body-bg;
+    position: relative;
+    display: block;
+    background-color: $card-bg;
     padding: 1.5rem 1.5rem;
     margin: 0.75rem 0 0.5rem 0;
     border-radius: 0.35rem;
+    height: 100%;
     box-shadow: $card-shadow;
 
     .content-card-icons i.minimize {
@@ -64,7 +67,7 @@ body {
 
         &::after {
             font-family: $font-family-icons;
-            content: "\f285";
+            content: '\f285';
         }
     }
 
@@ -77,18 +80,18 @@ body {
         }
 
         .content-card-icons i.minimize::after {
-            content: "\f282";
+            content: '\f282';
         }
     }
 
     .content-card-body {
+        position: relative;
         margin-top: 0.85rem;
         padding: 0.5rem 0;
     }
 
     &:not(.page-card) {
         .content-card-body {
-            max-height: 1000px;
             overflow-y: auto;
             overflow-x: clip;
         }
@@ -105,7 +108,19 @@ body {
             }
         }
 
+        &.content-card-md {
+            .content-card-body {
+                max-height: 800px;
+            }
+        }
+
         &.content-card-lg {
+            .content-card-body {
+                max-height: 1200px;
+            }
+        }
+
+        &.content-card-xl {
             .content-card-body {
                 max-height: 1500px;
             }
@@ -120,6 +135,7 @@ body {
 
         & > .content-card-header {
             display: flex;
+            gap: 0.5rem;
             border: none;
             font-size: 1.1rem;
             font-family: $font-family-serif;
@@ -134,15 +150,15 @@ body {
     display: flex;
     align-items: center;
     cursor: pointer;
+    gap: 0.5rem;
+}
+
+.content-card-icons {
+    margin-left: auto;
 }
 
 .content-card-icons i {
     font-size: 1.1rem;
-}
-
-.content-card-icons > *:not(:last-child),
-.content-card-btns > *:not(:last-child) {
-    margin-right: 0.675rem;
 }
 
 @media (min-width: 992px) {
@@ -202,7 +218,7 @@ section.content-wrapper {
 }
 
 .bg-light {
-    background-color: $light !important;
+    background-color: $lighttint !important;
 }
 
 .round {
@@ -263,7 +279,7 @@ section.content-wrapper {
 }
 .mbo-loader::after,
 .mbo-loader::before {
-    content: "";
+    content: '';
     box-sizing: border-box;
     position: absolute;
     left: 0;
@@ -358,14 +374,14 @@ ul.list-style-none li {
     display: inline-block;
     font-size: 0.8rem;
     padding: 0 1rem;
-    background-color: #fff;
+    background-color: $light;
 }
 .divider .divider-text i {
     font-size: 1rem;
 }
 .divider .divider-text:before,
 .divider .divider-text:after {
-    content: "";
+    content: '';
     position: absolute;
     top: 50%;
     width: 9999px;

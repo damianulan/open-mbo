@@ -9,9 +9,28 @@ use App\Models\MBO\UserCampaign;
 use App\Services\Campaigns\BulkAssignUsers;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Throwable;
 
 class CampaignUserController extends AppController
 {
+    public function show(Request $request, UserCampaign $userCampaign): View
+    {
+        if ($request->user()->cannot('view', $userCampaign)) {
+            unauthorized();
+        }
+
+        $this->logShow($userCampaign);
+        $header = $userCampaign->campaign->name . ' [' . $userCampaign->campaign->period . ']';
+
+        return view('pages.mbo.campaigns.user', [
+            'campaign' => $userCampaign->campaign,
+            'userCampaign' => $userCampaign,
+            'user' => $userCampaign->user,
+            'chartCompletion' => $userCampaign->chart('user_campaign_completion'),
+            'pagetitle' => $header,
+        ]);
+    }
+
     public function update(Request $request, $id, CampaignEditUserForm $form)
     {
         try {
@@ -19,18 +38,18 @@ class CampaignUserController extends AppController
 
             $request = $form::reformatRequest($request);
             $response = $form::validateJson($request, $id);
-            if ($response['status'] === 'ok') {
+            if ('ok' === $response['status']) {
 
                 $service = BulkAssignUsers::boot(request: $request, campaign: $campaign)->execute();
                 if ($service->passed()) {
                     $response['message'] = __('alerts.campaigns.success.users_added');
                 }
             }
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             $this->e = $th;
         }
 
-        return $this->responseJson($response);
+        return $response;
     }
 
     public function toggleManual(Request $request, $id)

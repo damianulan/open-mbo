@@ -19,7 +19,7 @@ class Enigma implements CastsAttributes
     {
         $encryption = (bool) config('app.enigma_models');
         if ($encryption) {
-            if (! is_null($value)) {
+            if ( ! is_null($value)) {
                 try {
                     return Crypt::decryptString($value);
                 } catch (DecryptException $e) {
@@ -42,7 +42,7 @@ class Enigma implements CastsAttributes
     {
         $encryption = (bool) config('app.enigma_models');
         if ($encryption) {
-            if (! is_null($value)) {
+            if ( ! is_null($value)) {
                 try {
                     return Crypt::encryptString($value);
                 } catch (EncryptException $e) {

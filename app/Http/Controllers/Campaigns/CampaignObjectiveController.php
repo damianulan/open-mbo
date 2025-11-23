@@ -14,7 +14,7 @@ class CampaignObjectiveController extends AppController
     {
         $request = $form::reformatRequest($request);
         $response = $form::validateJson($request);
-        if ($response['status'] === 'ok') {
+        if ('ok' === $response['status']) {
             $objective = Objective::fillFromRequest($request);
             if ($objective->save()) {
                 $response['message'] = __('alerts.campaigns.success.objective_added');
@@ -30,7 +30,7 @@ class CampaignObjectiveController extends AppController
     {
         $request = $form::reformatRequest($request);
         $response = $form::validateJson($request, $id);
-        if ($response['status'] === 'ok') {
+        if ('ok' === $response['status']) {
             $objective = Objective::fillFromRequest($request, $id);
 
             if ($objective->update()) {

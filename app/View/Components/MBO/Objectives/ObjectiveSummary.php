@@ -10,7 +10,7 @@ use Illuminate\View\Component;
 
 class ObjectiveSummary extends Component
 {
-    public $warning = 'failed';
+    public $warning = 'warning';
 
     /**
      * Create a new component instance.

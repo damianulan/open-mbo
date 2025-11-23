@@ -7,5 +7,4 @@
         <div class="">{{ $user->email }}</div>
         <div class="text-muted">{{ $user->getRolesNames()->implode(' | ') }}</div>
     </div>
-
 </a>

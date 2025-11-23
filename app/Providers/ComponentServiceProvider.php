@@ -2,6 +2,21 @@
 
 namespace App\Providers;
 
+use App\Commentable\Components\CommentComponent;
+use App\Livewire\Layout\Notifications;
+use App\Livewire\Layout\Notifications\Item;
+use App\View\Components\Cards\NoteCard;
+use App\View\Components\Layout\IconComponent;
+use App\View\Components\Layout\TileButton;
+use App\View\Components\MBO\Campaign\CampaignCard;
+use App\View\Components\MBO\Campaign\CampaignUsersList;
+use App\View\Components\MBO\Campaign\CardProgressBar;
+use App\View\Components\MBO\Campaign\MyCampaignsSummary;
+use App\View\Components\MBO\Objectives\ObjectivesList;
+use App\View\Components\MBO\Objectives\ObjectiveSummary;
+use App\View\Components\MBO\Objectives\ObjectiveUsersList;
+use App\View\Components\Users\UserBanner;
+use App\View\Components\Users\UserDetailsCard;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
@@ -10,44 +25,37 @@ class ComponentServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
-     *
-     * @return void
      */
-    public function register()
-    {
-        //
-    }
+    public function register(): void {}
 
     /**
      * Bootstrap services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        Blade::if('settings', function ($key) {
-            return settings($key);
-        });
+        Blade::if('settings', fn ($key) => settings($key));
 
-        Blade::component('icon', \App\View\Components\Layout\IconComponent::class);
-        Blade::component('tile-button', \App\View\Components\Layout\TileButton::class);
+        Blade::component('icon', IconComponent::class);
+        Blade::component('tile-button', TileButton::class);
 
         // MBO components
-        Blade::component('card-progressbar', \App\View\Components\MBO\Campaign\CardProgressBar::class);
-        Blade::component('campaign-users-list', \App\View\Components\MBO\Campaign\CampaignUsersList::class);
+        Blade::component('card-progressbar', CardProgressBar::class);
+        Blade::component('campaign-card', CampaignCard::class);
+        Blade::component('my-campaigns-summary', MyCampaignsSummary::class);
+        Blade::component('campaign-users-list', CampaignUsersList::class);
 
-        Blade::component('objectives-list', \App\View\Components\MBO\Objectives\ObjectivesList::class);
-        Blade::component('objective-users-list', \App\View\Components\MBO\Objectives\ObjectiveUsersList::class);
-        Blade::component('objective-summary', \App\View\Components\MBO\Objectives\ObjectiveSummary::class);
+        Blade::component('objectives-list', ObjectivesList::class);
+        Blade::component('objective-users-list', ObjectiveUsersList::class);
+        Blade::component('objective-summary', ObjectiveSummary::class);
 
         // Users
-        Blade::component('user-details-card', \App\View\Components\Users\UserDetailsCard::class);
-        Blade::component('user-banner', \App\View\Components\Users\UserBanner::class);
+        Blade::component('user-details-card', UserDetailsCard::class);
+        Blade::component('user-banner', UserBanner::class);
 
-        Livewire::component('commentable', \App\Commentable\Components\CommentComponent::class);
-        Livewire::component('notifications', \App\Livewire\Layout\Notifications::class);
-        Livewire::component('notification.item', \App\Livewire\Layout\Notifications\Item::class);
+        Livewire::component('commentable', CommentComponent::class);
+        Livewire::component('notifications', Notifications::class);
+        Livewire::component('notification.item', Item::class);
 
-        Blade::component('note-card', \App\View\Components\Cards\NoteCard::class);
+        Blade::component('note-card', NoteCard::class);
     }
 }

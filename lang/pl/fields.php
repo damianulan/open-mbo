@@ -11,12 +11,14 @@ return [
     'login' => 'Login',
     'password' => 'Hasło',
     'status' => 'Status',
+    'stage' => 'Etap',
 
     // Miscellaneous
     'action' => 'Akcje',
     'name' => 'Nazwa',
     'title' => 'Tytuł',
     'category' => 'Kategoria',
+    'position' => 'Stanowisko',
 
     'created_at' => 'Utworzono',
     'updated_at' => 'Zaktualizowano',

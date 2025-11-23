@@ -5,22 +5,21 @@ namespace App\Console;
 use App\Console\Commands\Core\AppRefresh;
 use App\Console\Commands\Core\AppUpgrade;
 use App\Console\Commands\MBO\MBOVerifyStatusScript;
-use App\Support\Notifications\SendNotificationsJob;
+use App\Support\Notifications\NotificationScheduler;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Console\Commands\Settings\SettingsMigrate;
 
 class Kernel extends ConsoleKernel
 {
     /**
      * Define the application's command schedule.
-     *
-     * @return void
      */
-    protected function schedule(Schedule $schedule)
+    protected function schedule(Schedule $schedule): void
     {
-        $schedule->command(MBOVerifyStatusScript::class)->dailyAt('01:01');
+        $schedule->command(MBOVerifyStatusScript::class)->dailyAt('00:30');
 
-        if (config('backup.backup.auto') === true) {
+        if (config('backup.backup.auto')) {
             $schedule->command('backup:run')->daily()->at('01:30');
         }
 
@@ -28,16 +27,11 @@ class Kernel extends ConsoleKernel
             $schedule->command(AppUpgrade::class)->everyOddHour();
         }
 
-        if (config('app.env') === 'development') {
+        if ('development' === config('app.env')) {
 
             if (env('CRON_APP_REFRESH', false)) {
                 $schedule->command(AppRefresh::class)->daily()->at('00:00');
             }
-        }
-
-        $sendNotifications = env('CRON_SEND_NOTIFICATIONS', true);
-        if ($sendNotifications) {
-            $schedule->job(SendNotificationsJob::class)->everyFifteenMinutes();
         }
 
         // LARAVEL COMMANDS
@@ -46,14 +40,16 @@ class Kernel extends ConsoleKernel
         $schedule->command('auth:clear-resets')->dailyAt('00:01');
         $schedule->command('model:prune')->dailyAt('00:01');
         $schedule->command('model:prune-soft-deletes')->dailyAt('00:01');
+        $schedule->command(SettingsMigrate::class)->dailyAt('00:01');
+
+        // NOTIFICATIONS
+        NotificationScheduler::load($schedule);
     }
 
     /**
      * Register the commands for the application.
-     *
-     * @return void
      */
-    protected function commands()
+    protected function commands(): void
     {
         $this->load(__DIR__ . '/Commands');
 

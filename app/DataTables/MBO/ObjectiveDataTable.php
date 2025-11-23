@@ -26,11 +26,9 @@ class ObjectiveDataTable extends CustomDataTable
     {
         return (new EloquentDataTable($query))
 
-            ->addColumn('action', function ($data) {
-                return view('pages.mbo.objectives.action', [
-                    'data' => $data,
-                ]);
-            })
+            ->addColumn('action', fn ($data) => view('pages.mbo.objectives.action', [
+                'data' => $data,
+            ]))
             ->editColumn('deadline', function ($data) {
                 $formatedDate = Carbon::parse($data->deadline)->format(config('app.date_format'));
 
@@ -109,6 +107,6 @@ class ObjectiveDataTable extends CustomDataTable
      */
     protected function filename(): string
     {
-        return 'Objectives_'.date('YmdHis');
+        return 'Objectives_' . date('YmdHis');
     }
 }

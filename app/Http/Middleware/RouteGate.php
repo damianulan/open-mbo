@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -47,7 +48,7 @@ class RouteGate
                         $middlewares = $fallbackRoute->gatherMiddleware();
                         $permission = null;
                         foreach ($middlewares as $middleware) {
-                            if (strpos($middleware, 'route.gate') !== false) {
+                            if (str_contains($middleware, 'route.gate')) {
                                 $permission = Str::of($middleware)->after('route.gate:')->toString();
                             }
                         }
@@ -59,7 +60,7 @@ class RouteGate
                         }
 
                         return redirect()->to($fallbackRoute->uri());
-                    } catch (\Exception $e) {
+                    } catch (Exception $e) {
                         continue;
                     }
                 }

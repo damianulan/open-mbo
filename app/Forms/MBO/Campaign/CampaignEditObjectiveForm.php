@@ -23,10 +23,10 @@ class CampaignEditObjectiveForm extends Form
         $campaign_id = $request->get('campaign_id') ?? null;
         $selectedTemplate = [];
 
-        if (! is_null($model)) {
+        if ( ! is_null($model)) {
             $method = 'PUT';
             $title = 'Edytuj cel w ramach kampanii';
-            if (! $campaign_id) {
+            if ( ! $campaign_id) {
                 $campaign_id = $model->campaign_id;
             }
             if ($model->template_id) {
@@ -37,9 +37,9 @@ class CampaignEditObjectiveForm extends Form
 
         $template_ids = Objective::where('campaign_id', $campaign_id)->get()->pluck('template_id');
         $exclude = [];
-        if (! empty($template_ids)) {
+        if ( ! empty($template_ids)) {
             foreach ($template_ids as $tid) {
-                if (! in_array($tid, $selectedTemplate)) {
+                if ( ! in_array($tid, $selectedTemplate)) {
                     $exclude[] = ['id' => $tid];
                 }
             }

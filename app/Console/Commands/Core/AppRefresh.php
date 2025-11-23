@@ -3,10 +3,9 @@
 namespace App\Console\Commands\Core;
 
 use App\Console\BaseCommand;
-use App\Models\Core\User;
-use App\Notifications\System\AppRefreshNotification;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Process;
+use Throwable;
 
 class AppRefresh extends BaseCommand
 {
@@ -27,11 +26,11 @@ class AppRefresh extends BaseCommand
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         $this->logStart();
         try {
-            $notLocal = config('app.env') !== 'local';
+            $notLocal = 'local' !== config('app.env');
 
             if ($notLocal) {
                 $branch = $this->option('branch');
@@ -39,8 +38,8 @@ class AppRefresh extends BaseCommand
                 $this->info($result->output());
                 $result = Process::run('git reset --hard');
                 $this->info($result->output());
-                if (! empty($branch)) {
-                    $result = Process::run('git switch '.$branch);
+                if ( ! empty($branch)) {
+                    $result = Process::run('git switch ' . $branch);
                 }
                 $result = Process::run('git pull origin');
                 $this->info($result->output());
@@ -56,14 +55,8 @@ class AppRefresh extends BaseCommand
             Artisan::call('optimize:clear');
             $this->info(Artisan::output());
 
-            $user = User::findByEmail('kontakt@damianulan.me');
-            if ($user && $notLocal) {
-                if ($user->notify(new AppRefreshNotification)) {
-                    $this->info('Job Success notification sent.');
-                }
-            }
             $this->log('completed', true);
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             $this->log($th->getMessage(), false);
             $this->error($th->getMessage());
         }

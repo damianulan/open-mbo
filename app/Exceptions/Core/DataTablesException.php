@@ -2,7 +2,9 @@
 
 namespace App\Exceptions\Core;
 
-class DataTablesException extends \Exception
+use Exception;
+
+class DataTablesException extends Exception
 {
     public function __construct($message = '')
     {

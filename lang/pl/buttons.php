@@ -39,6 +39,8 @@ return [
     'enrol_users' => 'Zapisz użytkowników',
     'quote' => 'Cytuj',
     'send' => 'Wyślij',
+    'add_employment' => 'Dodaj zatrudnienie',
+    'preview' => 'Podgląd',
 
     'terminate_campaign' => 'Zawieś kampanię',
     'resume_campaign' => 'Wznów kampanię',

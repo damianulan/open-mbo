@@ -2,6 +2,7 @@
 
 namespace App\Support\Page\Bars;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 class MenuItem
@@ -16,19 +17,19 @@ class MenuItem
 
     protected $parentRoute = null;
 
-    private $routeDirectiveStrict = false;
-
     protected $icon = null;
 
     protected $disabled = false;
 
     protected $visible = true;
 
+    private $routeDirectiveStrict = false;
+
     private $blockVisibility = false;
 
     public static function make(string $id): self
     {
-        $instance = new self;
+        $instance = new self();
         $instance->id = $id;
 
         return $instance;
@@ -56,14 +57,14 @@ class MenuItem
     {
         if ($this->route) {
             if ($this->routeDirectiveStrict) {
-                if (strrpos($this->route, '.') !== false) {
-                    $this->parentRoute = substr($this->route, 0, strrpos($this->route, '.')).'.*';
+                if (false !== mb_strrpos($this->route, '.')) {
+                    $this->parentRoute = mb_substr($this->route, 0, mb_strrpos($this->route, '.')) . '.*';
                 } else {
                     $this->parentRoute = $this->route;
                 }
             } else {
-                if (strpos($this->route, '.') !== false) {
-                    $this->parentRoute = substr($this->route, 0, strpos($this->route, '.')).'.*';
+                if (str_contains($this->route, '.')) {
+                    $this->parentRoute = mb_substr($this->route, 0, mb_strpos($this->route, '.')) . '.*';
                 } else {
                     $this->parentRoute = $this->route;
                 }
@@ -83,7 +84,7 @@ class MenuItem
     public function setIcon(string $iconname): self
     {
         if ($iconname) {
-            $this->icon = '<i class="bi bi-'.$iconname.'"></i>';
+            $this->icon = '<i class="bi bi-' . $iconname . '"></i>';
         }
 
         return $this;
@@ -162,8 +163,8 @@ class MenuItem
     {
         foreach ($setting as $s) {
             $set = (bool) settings($s) ?? false;
-            if (! $set) {
-                if (! $this->blockVisibility) {
+            if ( ! $set) {
+                if ( ! $this->blockVisibility) {
                     $this->visible = false;
                     $this->blockVisibility = true;
                 }
@@ -180,7 +181,7 @@ class MenuItem
     {
         $this->visible = false;
         foreach ($slug as $s) {
-            if (! $this->blockVisibility) {
+            if ( ! $this->blockVisibility) {
                 if (user()->hasPermissionTo($s)) {
                     $this->visible = true;
                 } else {
@@ -198,10 +199,10 @@ class MenuItem
      */
     public function role(...$slug): self
     {
-        if (! is_array($slug)) {
+        if ( ! is_array($slug)) {
             $slug = [$slug];
         }
-        if (! auth()->user()->hasAnyRoles($slug)) {
+        if ( ! Auth::user()->hasAnyRoles($slug)) {
             $this->visible = false;
         }
 

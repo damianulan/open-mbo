@@ -24,10 +24,7 @@ class ObjectiveController extends MBOController
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
+    public function create(): void {}
 
     /**
      * Store a newly created resource in storage.
@@ -36,7 +33,7 @@ class ObjectiveController extends MBOController
     {
         $request = $form::reformatRequest($request);
         $response = $form::validateJson($request);
-        if ($response['status'] === 'ok') {
+        if ('ok' === $response['status']) {
             $objective = Objective::fillFromRequest($request);
 
             if ($objective->save()) {
@@ -68,16 +65,13 @@ class ObjectiveController extends MBOController
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-    }
+    public function edit(string $id): void {}
 
     public function update(Request $request, $id, ObjectiveEditForm $form)
     {
         $request = $form::reformatRequest($request);
         $response = $form::validateJson($request, $id);
-        if ($response['status'] === 'ok') {
+        if ('ok' === $response['status']) {
             $objective = Objective::fillFromRequest($request, $id);
 
             if ($objective->update()) {
@@ -93,10 +87,7 @@ class ObjectiveController extends MBOController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
-    }
+    public function destroy(string $id): void {}
 
     public function addObjectives(Request $request, $id): View
     {

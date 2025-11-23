@@ -2,23 +2,31 @@
 
 namespace App\Models\MBO;
 
+use App\Commentable\Models\Comment;
 use App\Commentable\Support\Commentable;
 use App\Contracts\MBO\AssignsPoints;
+use App\Contracts\MBO\HasDeadline;
+use App\Contracts\MBO\HasWeight;
 use App\Enums\MBO\CampaignStage;
 use App\Enums\MBO\UserObjectiveStatus;
 use App\Events\MBO\Campaigns\CampaignUserObjectiveAssigned;
 use App\Events\MBO\Campaigns\CampaignUserObjectiveUnassigned;
 use App\Events\MBO\Objectives\UserObjectiveAssigned;
-use App\Events\MBO\Objectives\UserObjectiveEvaluated;
+use App\Events\MBO\Objectives\UserObjectiveFailed;
+use App\Events\MBO\Objectives\UserObjectivePassed;
 use App\Events\MBO\Objectives\UserObjectiveUnassigned;
 use App\Models\BaseModel;
 use App\Models\Core\User;
+use App\Traits\Guards\MBO\CanUserObjective;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Lucent\Support\Traits\Dispatcher;
+use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property string $id
@@ -27,22 +35,22 @@ use Lucent\Support\Traits\Dispatcher;
  * @property string $status objective status
  * @property string|null $realization Numerical value of the realization of the objective - in relation to the expected value in objective
  * @property string|null $evaluation Percentage evaluation of the objective - if realization is set, evaluation is calculated automatically
- * @property \Illuminate\Support\Carbon|null $evaluated_at Time when most recent evaluation was made
+ * @property Carbon|null $evaluated_at Time when most recent evaluation was made
  * @property string|null $evaluated_by Time when most recent evaluator has made any changes
  * @property string|null $self_realization Numerical value of the realization of the objective - in relation to the expected value in objective
  * @property string|null $self_evaluation Percentage evaluation of the objective - if realization is set, evaluation is calculated automatically
  * @property string|null $self_evaluated_at Time when most recent self evaluation was made
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\MBO\Campaign|null $campaign
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Commentable\Models\Comment> $comments
+ * @property-read Campaign|null $campaign
+ * @property-read Collection<int, Comment> $comments
  * @property-read int|null $comments_count
  * @property-read User|null $evaluator
- * @property-read \App\Models\MBO\Objective $objective
- * @property-read \App\Models\MBO\UserPoints $points
+ * @property-read Objective $objective
+ * @property-read UserPoints $points
  * @property-read User $user
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective active()
@@ -112,9 +120,9 @@ use Lucent\Support\Traits\Dispatcher;
  *
  * @mixin \Eloquent
  */
-class UserObjective extends BaseModel implements AssignsPoints
+class UserObjective extends BaseModel implements AssignsPoints, HasDeadline, HasWeight
 {
-    use Commentable, Dispatcher;
+    use CanUserObjective, Commentable, Dispatcher;
 
     protected $fillable = [
         'user_id',
@@ -137,19 +145,36 @@ class UserObjective extends BaseModel implements AssignsPoints
         'evaluated_at' => 'datetime',
     ];
 
+    protected static function boot(): void
+    {
+        parent::boot();
+        static::updating(function (self $model): self {
+            if ($model->isDirty('status')) {
+                if ($model->isPassed()) {
+                    UserObjectivePassed::dispatch($model, Auth::user() ?? null);
+                } elseif ($model->isFailed()) {
+                    UserObjectiveFailed::dispatch($model, Auth::user() ?? null);
+                }
+            } else {
+                $model->setStatus();
+            }
+            return $model;
+        });
+    }
+
     public static function assign($user_id, $objective_id): bool
     {
         $output = false;
         $existing = self::where('user_id', $user_id)->where('objective_id', $objective_id)->exists();
         if (! $existing) {
-            $instance = new self;
+            $instance = new self();
             $instance->user_id = $user_id;
             $instance->objective_id = $objective_id;
             if ($instance->save()) {
                 $instance->refresh();
                 $instance->setStatus()->updateQuietly();
 
-                return true;
+                $output = true;
             }
         }
 
@@ -169,14 +194,67 @@ class UserObjective extends BaseModel implements AssignsPoints
         return $output;
     }
 
-    public function isAfterDeadline(): bool
+    public static function creatingUserObjective(UserObjective $model): UserObjective
+    {
+        $model->setStatus();
+
+        return $model;
+    }
+
+    public static function createdUserObjective(UserObjective $model): void
+    {
+        $campaign = $model->objective->campaign ?? null;
+        if ($campaign) {
+            CampaignUserObjectiveAssigned::dispatch($model->user, $model->objective, $campaign);
+        } else {
+            UserObjectiveAssigned::dispatch($model->user, $model->objective);
+        }
+    }
+
+    public static function deletedUserObjective(UserObjective $model): void
+    {
+        $campaign = $model->objective->campaign ?? null;
+        if ($campaign) {
+            CampaignUserObjectiveUnassigned::dispatch($model->user, $model->objective, $campaign);
+        } else {
+            UserObjectiveUnassigned::dispatch($model->user, $model->campaign);
+        }
+    }
+
+    public function getWeightAttribute(): float
+    {
+        return $this->objective->getWeightAttribute() ?? 0;
+    }
+
+    public function isOverdued(): bool
     {
         return $this->objective->isOverdued();
+    }
+
+    public function isAfterDeadline(): bool
+    {
+        return $this->objective->isAfterDeadline();
     }
 
     public function getStatusLabel(): string
     {
         return UserObjectiveStatus::labels()[$this->status] ?? '';
+    }
+
+    public function getStatusColor(): string
+    {
+        $output = match ($this->status) {
+            UserObjectiveStatus::PASSED => 'passed',
+            UserObjectiveStatus::FAILED => 'failed',
+            UserObjectiveStatus::COMPLETED => 'completed',
+            UserObjectiveStatus::INTERRUPTED => 'inactive',
+            default => ''
+        };
+        if (empty($output) && $this->objective->isDeadlineUpcoming()) {
+            $output = 'warning';
+        }
+
+        return $output;
     }
 
     public function setStatus(): self
@@ -199,8 +277,8 @@ class UserObjective extends BaseModel implements AssignsPoints
         }
 
         if (! in_array($status, $frozen)) {
-            if ($this->isAfterDeadline()) {
-                $this->autoEvaluate();
+            if ($this->isOverdued()) {
+                $status = $this->autoEvaluate()->status;
             } else {
                 if (! $userCampaign) {
                     $status = UserObjectiveStatus::PROGRESS;
@@ -228,59 +306,71 @@ class UserObjective extends BaseModel implements AssignsPoints
         return $this->belongsTo(User::class, 'evaluated_by')->withTrashed();
     }
 
-    public function points(): MorphOne
+    public function points(): ?MorphOne
     {
         return $this->morphOne(UserPoints::class, 'subject')->withDefault([
             'user_id' => $this->user_id,
         ])->whereUserId($this->user_id);
     }
 
-    public function campaign(): Attribute
+    public function calculatePoints(): float
     {
-        return Attribute::make(
-            get: function (): ?Campaign {
-                return Campaign::whereHas('objectives', function (Builder $query) {
-                    $query->where('id', $this->objective_id);
-                })->whereHas('user_campaigns', function (Builder $query) {
-                    $query->where('user_id', $this->user_id);
-                })->first();
-            }
-        );
+        $points = 0;
+
+        $award = $this->objective->award ?? 0;
+        if ($award > 0) {
+            $points = round($award * ($this->evaluation / 100), 2);
+        }
+
+        return $points;
     }
 
-    public function canBeEvaluated(): bool
+    public function campaign(): HasOneThrough
     {
-        return in_array($this->status, UserObjectiveStatus::finished());
+        return $this->hasOneThrough(Campaign::class, Objective::class, 'campaign_id', 'id', 'id', 'campaign_id');
     }
 
-    public function canBeFailed(): bool
+    public function user_campaign(): ?UserCampaign
     {
-        return $this->canBeEvaluated() && $this->status !== UserObjectiveStatus::FAILED;
-    }
+        if ($this->campaign) {
+            return $this->campaign?->user_campaigns()->where('user_id', $this->user_id)->first();
+        }
 
-    public function canBePassed(): bool
-    {
-        return $this->canBeEvaluated() && $this->status !== UserObjectiveStatus::PASSED;
+        return null;
     }
 
     public function isPassed(): bool
     {
-        return $this->status === UserObjectiveStatus::PASSED;
+        return UserObjectiveStatus::PASSED === $this->status;
     }
 
     public function isFailed(): bool
     {
-        return $this->status === UserObjectiveStatus::FAILED;
+        return UserObjectiveStatus::FAILED === $this->status;
     }
 
+    /**
+     * Is objective completed
+     */
     public function isCompleted(): bool
     {
         return in_array($this->status, [UserObjectiveStatus::COMPLETED, UserObjectiveStatus::PASSED, UserObjectiveStatus::FAILED]);
     }
 
+    /**
+     * Is objective evaluated by a superior user.
+     */
     public function isEvaluated(): bool
     {
-        return in_array($this->status, UserObjectiveStatus::evaluated());
+        return in_array($this->status, UserObjectiveStatus::evaluated()) || null !== $this->evaluated_at;
+    }
+
+    /**
+     * Is objective evaluated by the user itself.
+     */
+    public function isSelfEvaluated(): bool
+    {
+        return null !== $this->self_evaluated_at;
     }
 
     public function scopeWhereActive(Builder $query): void
@@ -321,56 +411,6 @@ class UserObjective extends BaseModel implements AssignsPoints
         $query->where('user_objectives.user_id', $user->id);
     }
 
-    public static function creatingUserObjective(UserObjective $model): UserObjective
-    {
-        $model->setStatus();
-
-        return $model;
-    }
-
-    public static function createdUserObjective(UserObjective $model): void
-    {
-        $campaign = $model->objective->campaign ?? null;
-        if ($campaign) {
-            CampaignUserObjectiveAssigned::dispatch($model->user, $model->objective, $campaign);
-        } else {
-            UserObjectiveAssigned::dispatch($model->user, $model->objective);
-        }
-    }
-
-    public static function updatedUserObjective(UserObjective $model): void
-    {
-        if ($model->isDirty('status') && ! in_array($model->getOriginal('status'), UserObjectiveStatus::evaluated())) {
-            if ($model->isEvaluated()) {
-                UserObjectiveEvaluated::dispatch($model, Auth::user() ?? null);
-            }
-        } else {
-            $model->setStatus()->updateQuietly();
-        }
-    }
-
-    public static function deletedUserObjective(UserObjective $model): void
-    {
-        $campaign = $model->objective->campaign ?? null;
-        if ($campaign) {
-            CampaignUserObjectiveUnAssigned::dispatch($model->user, $model->objective, $campaign);
-        } else {
-            UserObjectiveUnassigned::dispatch($model->user, $model->campaign);
-        }
-    }
-
-    public function calculatePoints(): float
-    {
-        $points = 0;
-
-        $award = $this->objective->award ?? 0;
-        if ($award > 0) {
-            $points = round($award * ($this->evaluation / 100), 2);
-        }
-
-        return $points;
-    }
-
     public function setCompleted(): self
     {
         $this->status = UserObjectiveStatus::COMPLETED;
@@ -380,7 +420,7 @@ class UserObjective extends BaseModel implements AssignsPoints
 
     public function autoEvaluate(): self
     {
-        if ($this->isAfterDeadline()) {
+        if ($this->isOverdued()) {
             $this->status = UserObjectiveStatus::COMPLETED;
             $autofail = settings('mbo.objectives_autofail', true);
             if ($autofail) {

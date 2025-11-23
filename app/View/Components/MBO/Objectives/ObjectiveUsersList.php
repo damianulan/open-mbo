@@ -19,15 +19,15 @@ class ObjectiveUsersList extends Component
     public function __construct(public Objective $objective, public string $status = 'all')
     {
         $this->emptyInfo = __('mbo.info.no_users_added');
-        if ($status === 'all') {
+        if ('all' === $status) {
             $this->userAssignments = $objective->user_objectives()->get();
-        } elseif ($status === 'progress') {
+        } elseif ('progress' === $status) {
             $this->userAssignments = $objective->user_objectives()->whereNotEvaluated()->get();
             $this->emptyInfo = __('mbo.info.objective_not_evaluated_no_users');
-        } elseif ($status === 'passed') {
+        } elseif ('passed' === $status) {
             $this->userAssignments = $objective->user_objectives()->wherePassed()->get();
             $this->emptyInfo = __('mbo.info.objective_passed_no_users');
-        } elseif ($status === 'failed') {
+        } elseif ('failed' === $status) {
             $this->userAssignments = $objective->user_objectives()->whereFailed()->get();
             $this->emptyInfo = __('mbo.info.objective_failed_no_users');
         }

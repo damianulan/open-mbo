@@ -26,7 +26,7 @@ class ObjectiveTemplateScope implements Scope
                     $objectiveRoleId = Role::getId(RolesLib::OBJECTIVE_COORDINATOR);
                     $category_ids = $user->roleAssignments()->where('role_id', $objectiveRoleId)->where('context_type', ObjectiveTemplateCategory::class)->get()->pluck('context_id');
 
-                    $builder->whereIn('category_id', $category_ids);
+                    $builder->whereIn('objective_templates.category_id', $category_ids);
                 } else {
                     $builder->whereRaw('1=0');
                 }

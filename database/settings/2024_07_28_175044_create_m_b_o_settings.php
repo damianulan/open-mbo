@@ -2,15 +2,18 @@
 
 use Spatie\LaravelSettings\Migrations\SettingsMigration;
 
-return new class extends SettingsMigration
+return new class() extends SettingsMigration
 {
     public function up(): void
     {
         $this->migrator->add('mbo.enabled', true);
         $this->migrator->add('mbo.campaigns_enabled', true);
         $this->migrator->add('mbo.campaigns_manual', true);
-        $this->migrator->add('mbo.campaigns_bonus', 20.00);
+        $this->migrator->add('mbo.campaigns_bonus', 10.00);
+        $this->migrator->add('mbo.campaigns_ignore_dates', true);
         $this->migrator->add('mbo.objectives_autofail', true);
+        $this->migrator->add('mbo.objectives_self_final_evaluation', true);
+        $this->migrator->add('mbo.objectives_weights', true);
         $this->migrator->add('mbo.rewards', true);
         $this->migrator->add('mbo.rewards_proportional', true);
         $this->migrator->add('mbo.manipulate_rewards', false);

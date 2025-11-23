@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Settings;
 use App\Forms\Settings\SmtpForm;
 use App\Settings\GeneralSettings;
 use App\Settings\MailSettings;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 
@@ -13,13 +14,13 @@ class ServerController extends SettingsController
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
     public function index(Request $request)
     {
         $git_text = __('globals.no_data');
-        if (! empty(config('app.head'))) {
-            $git_text = 'On branch <strong>'.config('app.head').'</strong>';
+        if ( ! empty(config('app.head'))) {
+            $git_text = 'On branch <strong>' . config('app.head') . '</strong>';
         }
 
         $model = app(MailSettings::class); // ->safePassword();
@@ -40,7 +41,7 @@ class ServerController extends SettingsController
             'mail_catchall_receiver' => 'email',
         ]);
         foreach ($request->all() as $key => $value) {
-            $settings->$key = $value;
+            $settings->{$key} = $value;
         }
         if ($settings->save()) {
             return redirect()->back()->with('success', __('alerts.settings.success.mail_update'));
@@ -53,13 +54,13 @@ class ServerController extends SettingsController
     {
         $command = Artisan::call('optimize:clear');
 
-        if ($command === 0) {
+        if (0 === $command) {
             return redirect()->back()->with('success', __('alerts.settings.success.cache_clear'));
         }
 
         $msg = __('alerts.settings.error.cache_clear');
         if (config('app.debug')) {
-            $msg .= '<br/>'.str_replace("\n", '<br/>', Artisan::output());
+            $msg .= '<br/>' . str_replace("\n", '<br/>', Artisan::output());
         }
 
         return redirect()->back()->with('error', $msg);

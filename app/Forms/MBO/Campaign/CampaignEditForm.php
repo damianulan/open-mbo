@@ -19,7 +19,7 @@ class CampaignEditForm extends Form
         $method = 'POST';
         $selected = [];
         $campaign = null;
-        if (! is_null($model)) {
+        if ( ! is_null($model)) {
             $method = 'PUT';
             $route = route('campaigns.update', $model->id);
             $campaign = Campaign::find($model->id);
@@ -33,22 +33,20 @@ class CampaignEditForm extends Form
                 ->info(__('forms.campaigns.info.period')))
             ->add(FormComponent::multiselect('user_ids', $model, Dictionary::fromModel(User::class, 'name', 'allActive'), 'users', $selected)->label(__('forms.campaigns.coordinators')))
             ->add(FormComponent::container('description', $model)->label(__('forms.campaigns.description'))->class('quill-default'))
-            ->add(FormComponent::daterange(CampaignStage::DEFINITION, $model)->label(__('forms.campaigns.stages.'.CampaignStage::DEFINITION))->required()
-                ->info(__('forms.campaigns.info.'.CampaignStage::DEFINITION)))
-            ->add(FormComponent::daterange(CampaignStage::DISPOSITION, $model)->label(__('forms.campaigns.stages.'.CampaignStage::DISPOSITION))->required()
-                ->info(__('forms.campaigns.info.'.CampaignStage::DISPOSITION)))
-            ->add(FormComponent::daterange(CampaignStage::REALIZATION, $model)->label(__('forms.campaigns.stages.'.CampaignStage::REALIZATION))->required()
-                ->info(__('forms.campaigns.info.'.CampaignStage::REALIZATION)))
-            ->add(FormComponent::daterange(CampaignStage::EVALUATION, $model)->label(__('forms.campaigns.stages.'.CampaignStage::EVALUATION))->required()
-                ->info(__('forms.campaigns.info.'.CampaignStage::EVALUATION)))
-            ->add(FormComponent::daterange(CampaignStage::SELF_EVALUATION, $model)->label(__('forms.campaigns.stages.'.CampaignStage::SELF_EVALUATION))->required()
-                ->info(__('forms.campaigns.info.'.CampaignStage::SELF_EVALUATION)))
+            ->add(FormComponent::daterange(CampaignStage::DEFINITION, $model)->label(__('forms.campaigns.stages.' . CampaignStage::DEFINITION))->required()
+                ->info(__('forms.campaigns.info.' . CampaignStage::DEFINITION)))
+            ->add(FormComponent::daterange(CampaignStage::DISPOSITION, $model)->label(__('forms.campaigns.stages.' . CampaignStage::DISPOSITION))->required()
+                ->info(__('forms.campaigns.info.' . CampaignStage::DISPOSITION)))
+            ->add(FormComponent::daterange(CampaignStage::REALIZATION, $model)->label(__('forms.campaigns.stages.' . CampaignStage::REALIZATION))->required()
+                ->info(__('forms.campaigns.info.' . CampaignStage::REALIZATION)))
+            ->add(FormComponent::daterange(CampaignStage::EVALUATION, $model)->label(__('forms.campaigns.stages.' . CampaignStage::EVALUATION))->required()
+                ->info(__('forms.campaigns.info.' . CampaignStage::EVALUATION)))
+            ->add(FormComponent::daterange(CampaignStage::SELF_EVALUATION, $model)->label(__('forms.campaigns.stages.' . CampaignStage::SELF_EVALUATION))->required()
+                ->info(__('forms.campaigns.info.' . CampaignStage::SELF_EVALUATION)))
             ->add(FormComponent::switch('draft', $model)->label(__('forms.campaigns.draft'))->default(true)
                 ->info(__('forms.campaigns.info.draft')))
             ->add(FormComponent::switch('manual', $model)->label(__('forms.campaigns.manual'))->default(false)
-                ->condition(function () {
-                    return settings('mbo.campaigns_manual');
-                })->info(__('forms.campaigns.info.manual')))
+                ->condition(fn () => settings('mbo.campaigns_manual'))->info(__('forms.campaigns.info.manual')))
             ->addSubmit();
     }
 

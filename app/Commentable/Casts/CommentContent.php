@@ -8,6 +8,28 @@ use Illuminate\Support\Str;
 
 class CommentContent implements CastsAttributes
 {
+    public static function commentQuotation(string $value): string
+    {
+        if (Str::contains($value, '<blockquote><em>--- @')) {
+
+            $start = '<blockquote><em>--- @';
+            $end = ' ---</blockquote>';
+
+            $start_after = '<div class="commentable-quotation"><blockquote><em>--- @';
+            $end_after = ' </blockquote></div>';
+
+            $quote_inner = Str::between($value, $start, $end);
+            if ( ! empty($quote_inner)) {
+                $quote_old = $start . $quote_inner . $end;
+                $quote = $start_after . $quote_inner . $end_after;
+
+                $value = Str::replace($quote_old, $quote, $value);
+            }
+        }
+
+        return $value;
+    }
+
     /**
      * Cast the given value.
      *
@@ -32,28 +54,6 @@ class CommentContent implements CastsAttributes
         $value = trim($value);
         $value = self::commentQuotation($value);
         $value = InteractiveText::setInteractive($value, $model);
-
-        return $value;
-    }
-
-    public static function commentQuotation(string $value): string
-    {
-        if (Str::contains($value, '<blockquote><em>--- @')) {
-
-            $start = '<blockquote><em>--- @';
-            $end = ' ---</blockquote>';
-
-            $start_after = '<div class="commentable-quotation"><blockquote><em>--- @';
-            $end_after = ' </blockquote></div>';
-
-            $quote_inner = Str::between($value, $start, $end);
-            if (! empty($quote_inner)) {
-                $quote_old = $start.$quote_inner.$end;
-                $quote = $start_after.$quote_inner.$end_after;
-
-                $value = Str::replace($quote_old, $quote, $value);
-            }
-        }
 
         return $value;
     }

@@ -26,9 +26,7 @@ class CustomDataTable extends DataTable
         $columns = $this->selectedColumns();
         $available = $this->availableColumns();
 
-        $output = array_filter($available, function ($key) use ($columns) {
-            return in_array($key, $columns);
-        }, ARRAY_FILTER_USE_KEY);
+        $output = array_filter($available, fn ($key) => in_array($key, $columns), ARRAY_FILTER_USE_KEY);
 
         usort($output, function ($x, $y) use ($columns) {
             $pos_x = array_search($x->data, $columns);
@@ -67,52 +65,6 @@ class CustomDataTable extends DataTable
         return $view;
     }
 
-    protected function selectedColumns(): array
-    {
-        $columns = [];
-        $model = SelectedColumns::findColumn($this->id);
-        $columns_raw = $model->selected ?? [];
-        $available = $this->availableColumns();
-
-        if (empty($columns_raw)) {
-            $columns = $this->defaultColumns();
-        } else {
-            $columns = array_filter($columns_raw, function ($c) use ($available) {
-                return array_key_exists($c, $available);
-            });
-        }
-
-        return $columns;
-    }
-
-    protected function defaultColumns(): array
-    {
-        return [];
-    }
-
-    protected function availableColumns(): array
-    {
-        return [];
-    }
-
-    protected function getOrderBy(): ?int
-    {
-        $orderBy = null;
-        if ($this->orderBy) {
-            $columns = $this->getColumns();
-            if (! empty($columns)) {
-                foreach ($columns as $key => $column) {
-                    if ($column->name === $this->orderBy) {
-                        $orderBy = $key;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return $orderBy;
-    }
-
     /**
      * Optional method if you want to use the html builder.
      */
@@ -140,7 +92,7 @@ class CustomDataTable extends DataTable
             ->processing(true);
 
         $orderBy = $this->getOrderBy();
-        if (! is_null($orderBy)) {
+        if ( ! is_null($orderBy)) {
             $builder->orderBy($orderBy, $this->orderByDir);
         }
 
@@ -159,7 +111,7 @@ class CustomDataTable extends DataTable
             $columns = $request->input('columns');
             $selected = $request->input('selected');
 
-            $sc = SelectedColumns::findColumn($datatable_id) ?? new SelectedColumns;
+            $sc = SelectedColumns::findColumn($datatable_id) ?? new SelectedColumns();
             $sc->user_id = Auth::user()->id;
             $sc->table_id = $datatable_id;
             $sc->columns = $columns;
@@ -167,9 +119,10 @@ class CustomDataTable extends DataTable
 
             if ($sc->save()) {
                 return redirect()->back();
-            } else {
-                return redirect()->back()->with('error', __('alerts.datatables.save_columns.error'));
             }
+
+            return redirect()->back()->with('error', __('alerts.datatables.save_columns.error'));
+
         }
 
         return redirect()->back()->with('error', __('alerts.datatables.save_columns.error_data'));
@@ -190,7 +143,7 @@ class CustomDataTable extends DataTable
 
         /** @var string $action */
         $action = $this->request()->get('action');
-        $actionMethod = $action === 'print' ? 'printPreview' : $action;
+        $actionMethod = 'print' === $action ? 'printPreview' : $action;
 
         if (in_array($action, $this->actions) && method_exists($this, $actionMethod)) {
             /** @var callable $callback */
@@ -205,12 +158,56 @@ class CustomDataTable extends DataTable
 
     public function userView($data, $relation)
     {
-        if ($data->$relation) {
+        if ($data->{$relation}) {
             return view('components.datatables.username_link', [
-                'data' => $data->$relation,
+                'data' => $data->{$relation},
             ]);
         }
 
         return '';
+    }
+
+    protected function selectedColumns(): array
+    {
+        $columns = [];
+        $model = SelectedColumns::findColumn($this->id);
+        $columns_raw = $model->selected ?? [];
+        $available = $this->availableColumns();
+
+        if (empty($columns_raw)) {
+            $columns = $this->defaultColumns();
+        } else {
+            $columns = array_filter($columns_raw, fn ($c) => array_key_exists($c, $available));
+        }
+
+        return $columns;
+    }
+
+    protected function defaultColumns(): array
+    {
+        return [];
+    }
+
+    protected function availableColumns(): array
+    {
+        return [];
+    }
+
+    protected function getOrderBy(): ?int
+    {
+        $orderBy = null;
+        if ($this->orderBy) {
+            $columns = $this->getColumns();
+            if ( ! empty($columns)) {
+                foreach ($columns as $key => $column) {
+                    if ($column->name === $this->orderBy) {
+                        $orderBy = $key;
+                        break;
+                    }
+                }
+            }
+        }
+
+        return $orderBy;
     }
 }

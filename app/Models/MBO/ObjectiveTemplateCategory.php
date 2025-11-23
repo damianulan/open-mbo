@@ -7,6 +7,9 @@ use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Models\Scopes\MBO\ObjectiveTemplateCategoryScope;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Carbon;
+use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property string $id
@@ -14,14 +17,14 @@ use Illuminate\Database\Eloquent\Attributes\ScopedBy;
  * @property string|null $shortname
  * @property mixed|null $description
  * @property string|null $icon
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $coordinators
+ * @property-read Collection<int, User> $coordinators
  * @property-read int|null $coordinators_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\ObjectiveTemplate> $objective_templates
+ * @property-read Collection<int, ObjectiveTemplate> $objective_templates
  * @property-read int|null $objective_templates_count
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory active()
@@ -94,15 +97,6 @@ class ObjectiveTemplateCategory extends BaseModel
         'description' => FormattedText::class,
     ];
 
-    protected static function boot()
-    {
-        parent::boot();
-        static::deleted(function ($model) {
-            $model->objective_templates()->delete();
-            $model->coordinators()->delete();
-        });
-    }
-
     public static function findByShortname(string $shortname): ?self
     {
         return self::where('shortname', $shortname)->first();
@@ -127,19 +121,15 @@ class ObjectiveTemplateCategory extends BaseModel
         return $this->morphToMany(User::class, 'context', 'has_roles', null, 'model_id');
     }
 
-    public function refreshCoordinators(?array $user_ids)
+    public function refreshCoordinators(?array $user_ids): void
     {
-        if (! $user_ids) {
+        if ( ! $user_ids) {
             $user_ids = [];
         }
 
         $current = $this->coordinators->pluck('id')->toArray();
-        $toDelete = array_filter($current, function ($value) use ($user_ids) {
-            return ! in_array($value, $user_ids);
-        });
-        $toAdd = array_filter($user_ids, function ($value) use ($current) {
-            return ! in_array($value, $current);
-        });
+        $toDelete = array_filter($current, fn ($value) => ! in_array($value, $user_ids));
+        $toAdd = array_filter($user_ids, fn ($value) => ! in_array($value, $current));
 
         foreach ($toDelete as $user_id) {
             $user = User::find($user_id);
@@ -158,5 +148,14 @@ class ObjectiveTemplateCategory extends BaseModel
     public function objective_templates()
     {
         return $this->hasMany(ObjectiveTemplate::class, 'category_id');
+    }
+
+    protected static function boot(): void
+    {
+        parent::boot();
+        static::deleted(function ($model): void {
+            $model->objective_templates()->delete();
+            $model->coordinators()->delete();
+        });
     }
 }

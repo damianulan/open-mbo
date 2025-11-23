@@ -37,8 +37,8 @@ class PageBuilder
             $this->title = $pagetitle;
         }
         $this->info = null;
-        if (Lang::hasForLocale('menus.info.'.$this->routename)) {
-            $this->info = __('menus.info.'.$this->routename);
+        if (Lang::hasForLocale('menus.info.' . $this->routename)) {
+            $this->info = __('menus.info.' . $this->routename);
         }
 
         $this->sitename = app(GeneralSettings::class)->site_name;
@@ -46,7 +46,7 @@ class PageBuilder
         $this->locale = app(GeneralSettings::class)->locale;
         $this->logo = app(GeneralSettings::class)->site_logo;
 
-        if (isset($_COOKIE['menu-collapsed']) && (bool) $_COOKIE['menu-collapsed'] === true) {
+        if (isset($_COOKIE['menu-collapsed']) && true === (bool) $_COOKIE['menu-collapsed']) {
             $this->sidebar_collapsed = 'menu-collapsed';
         }
 
@@ -56,6 +56,6 @@ class PageBuilder
 
     private function assignPageTitle()
     {
-        return __('menus.'.$this->routename);
+        return __('menus.' . $this->routename);
     }
 }

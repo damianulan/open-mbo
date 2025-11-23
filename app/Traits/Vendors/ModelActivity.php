@@ -12,7 +12,7 @@ trait ModelActivity
 
     public function getActivitylogOptions(): LogOptions
     {
-        if (! Auth::check()) {
+        if ( ! Auth::check()) {
             return LogOptions::defaults();
         }
         $log_name = $this->log_name ?? 'model';
@@ -22,11 +22,9 @@ trait ModelActivity
             ->logOnly($this->fillable)
             ->logOnlyDirty()
             ->dontSubmitEmptyLogs()
-            ->setDescriptionForEvent(function (string $eventName) {
-                return __('logging.description.'.$eventName, [
-                    'username' => Auth::user()->name,
-                    'model_map' => __('logging.model_mapping.'.static::class),
-                ]);
-            });
+            ->setDescriptionForEvent(fn (string $eventName) => __('logging.description.' . $eventName, [
+                'username' => Auth::user()->name,
+                'model_map' => __('logging.model_mapping.' . static::class),
+            ]));
     }
 }

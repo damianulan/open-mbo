@@ -14,8 +14,8 @@ return [
     'options' => [
         'chart' => [
             'type' => 'line',
-            'height' => 500,
-            'width' => null,
+            'height' => 300,
+            'width' => '100%',
             'toolbar' => [
                 'show' => false,
             ],
@@ -23,8 +23,8 @@ return [
             'zoom' => [
                 'enabled' => true,
             ],
-            'fontFamily' => 'Inter',
-            'foreColor' => '#373d3f',
+            'fontFamily' => 'inherit',
+            'foreColor' => 'var(--bs-primary)',
         ],
 
         'plotOptions' => [
@@ -34,8 +34,19 @@ return [
         ],
 
         'colors' => [
-            '#008FFB', '#00E396', '#feb019', '#ff455f', '#775dd0', '#80effe',
-            '#0077B5', '#ff6384', '#c9cbcf', '#0057ff', '#00a9f4', '#2ccdc9', '#5e72e4',
+            '#008FFB',
+            '#00E396',
+            '#feb019',
+            '#ff455f',
+            '#775dd0',
+            '#80effe',
+            '#0077B5',
+            '#ff6384',
+            '#c9cbcf',
+            '#0057ff',
+            '#00a9f4',
+            '#2ccdc9',
+            '#5e72e4',
         ],
 
         'series' => [],
@@ -46,12 +57,17 @@ return [
 
         'labels' => [],
 
+        'legend' => [
+            'fontFamily' => 'inherit',
+        ],
+
         'title' => [
             'text' => [],
         ],
 
         'subtitle' => [
-            'text' => 'undefined',
+            'show' => false,
+            'text' => '',
             'align' => 'left',
         ],
 
@@ -66,8 +82,19 @@ return [
         'markers' => [
             'size' => 4,
             'colors' => [
-                '#008FFB', '#00E396', '#feb019', '#ff455f', '#775dd0', '#80effe',
-                '#0077B5', '#ff6384', '#c9cbcf', '#0057ff', '#00a9f4', '#2ccdc9', '#5e72e4',
+                '#008FFB',
+                '#00E396',
+                '#feb019',
+                '#ff455f',
+                '#775dd0',
+                '#80effe',
+                '#0077B5',
+                '#ff6384',
+                '#c9cbcf',
+                '#0057ff',
+                '#00a9f4',
+                '#2ccdc9',
+                '#5e72e4',
             ],
             'strokeColors' => '#fff',
             'strokeWidth' => 2,
@@ -77,11 +104,22 @@ return [
         ],
 
         'stroke' => [
-            'show' => true,
+            'show' => false,
             'width' => 4,
             'colors' => [
-                '#008FFB', '#00E396', '#feb019', '#ff455f', '#775dd0', '#80effe',
-                '#0077B5', '#ff6384', '#c9cbcf', '#0057ff', '#00a9f4', '#2ccdc9', '#5e72e4',
+                '#008FFB',
+                '#00E396',
+                '#feb019',
+                '#ff455f',
+                '#775dd0',
+                '#80effe',
+                '#0077B5',
+                '#ff6384',
+                '#c9cbcf',
+                '#0057ff',
+                '#00a9f4',
+                '#2ccdc9',
+                '#5e72e4',
             ],
         ],
     ],

@@ -19,7 +19,7 @@ class ObjectiveEditForm extends Form
         $route = null;
         $method = 'POST';
         $title = 'Dodaj nowy cel';
-        if (! is_null($model)) {
+        if ( ! is_null($model)) {
             $method = 'PUT';
             $title = 'Edytuj cel';
         }

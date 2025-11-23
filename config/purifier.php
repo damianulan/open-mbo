@@ -45,11 +45,11 @@ return [
             'elements' => [
                 // http://developers.whatwg.org/sections.html
                 ['section', 'Block', 'Flow', 'Common'],
-                ['nav',     'Block', 'Flow', 'Common'],
+                ['nav', 'Block', 'Flow', 'Common'],
                 ['article', 'Block', 'Flow', 'Common'],
-                ['aside',   'Block', 'Flow', 'Common'],
-                ['header',  'Block', 'Flow', 'Common'],
-                ['footer',  'Block', 'Flow', 'Common'],
+                ['aside', 'Block', 'Flow', 'Common'],
+                ['header', 'Block', 'Flow', 'Common'],
+                ['footer', 'Block', 'Flow', 'Common'],
 
                 // Content model actually excludes several tags, not modelled here
                 ['address', 'Block', 'Flow', 'Common'],
@@ -75,12 +75,12 @@ return [
                 ]],
 
                 // http://developers.whatwg.org/text-level-semantics.html
-                ['s',    'Inline', 'Inline', 'Common'],
-                ['var',  'Inline', 'Inline', 'Common'],
-                ['sub',  'Inline', 'Inline', 'Common'],
-                ['sup',  'Inline', 'Inline', 'Common'],
+                ['s', 'Inline', 'Inline', 'Common'],
+                ['var', 'Inline', 'Inline', 'Common'],
+                ['sub', 'Inline', 'Inline', 'Common'],
+                ['sup', 'Inline', 'Inline', 'Common'],
                 ['mark', 'Inline', 'Inline', 'Common'],
-                ['wbr',  'Inline', 'Empty', 'Core'],
+                ['wbr', 'Inline', 'Empty', 'Core'],
 
                 // http://developers.whatwg.org/edits.html
                 ['ins', 'Block', 'Flow', 'Common', ['cite' => 'URI', 'datetime' => 'CDATA']],

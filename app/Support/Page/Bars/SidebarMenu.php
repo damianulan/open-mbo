@@ -16,11 +16,11 @@ class SidebarMenu
 
     public static function boot(string $sitename, array $items = []): self
     {
-        $instance = new self;
+        $instance = new self();
         $instance->sitename = $sitename;
-        $instance->items = new Collection;
+        $instance->items = new Collection();
 
-        if (! empty($items)) {
+        if ( ! empty($items)) {
             foreach ($items as $item) {
                 if ($item instanceof MenuItem) {
                     if ($item->id && $item->isVisible()) {
@@ -36,7 +36,7 @@ class SidebarMenu
 
     public function addClass(?string $class): self
     {
-        if (! empty($class)) {
+        if ( ! empty($class)) {
             $this->classes[] = $class;
         }
 

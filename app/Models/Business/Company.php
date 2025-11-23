@@ -4,8 +4,11 @@ namespace App\Models\Business;
 
 use App\Casts\FormattedText;
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
+use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property string $id
@@ -13,15 +16,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $shortname
  * @property mixed|null $description
  * @property string|null $logo
- * @property \Illuminate\Support\Carbon|null $founded
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property string|null $taxpayerid
+ * @property Carbon|null $founded_at
+ * @property Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\UserEmployment> $employments
+ * @property-read Collection<int, UserEmployment> $employments
  * @property-read int|null $employments_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\Location> $locations
+ * @property-read Collection<int, Location> $locations
  * @property-read int|null $locations_count
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company active()
@@ -68,11 +72,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company whereCreatedAt($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company whereDeletedAt($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company whereDescription($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company whereFounded($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company whereFoundedAt($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company whereId($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company whereLogo($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company whereName($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company whereShortname($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company whereTaxpayerid($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company withoutCache()
@@ -87,17 +92,18 @@ class Company extends BaseModel
         'shortname',
         'description',
         'logo',
-        'founded',
+        'taxpayerid',
+        'founded_at',
     ];
 
     protected $dates = [
-        'founded',
+        'founded_at',
         'created_at',
     ];
 
     protected $casts = [
         'description' => FormattedText::class,
-        'founded' => 'date',
+        'founded_at' => 'date',
         'created_at' => 'datetime',
     ];
 

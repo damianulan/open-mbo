@@ -25,8 +25,22 @@ class BonusSchemeOptions implements Arrayable, Countable, Jsonable, JsonSerializ
             if (isset($attributes[$key])) {
                 $value = $attributes[$key];
             }
-            $this->$key = $value;
+            $this->{$key} = $value;
         }
+    }
+
+    public static function make(array $attributes = []): static
+    {
+        return new static($attributes);
+    }
+
+    public static function fake(): static
+    {
+        return new static([
+            'bonus' => 0.00,
+            'rewards_min_evaluation' => fake()->randomFloat(2, 80, 100),
+            'failed_rewards' => fake()->numberBetween(0, 1),
+        ]);
     }
 
     public function defaults(): array
@@ -45,21 +59,7 @@ class BonusSchemeOptions implements Arrayable, Countable, Jsonable, JsonSerializ
         return [];
     }
 
-    public function validator() {}
-
-    public static function make(array $attributes = []): static
-    {
-        return new static($attributes);
-    }
-
-    public static function fake(): static
-    {
-        return new static([
-            'bonus' => 0.00,
-            'rewards_min_evaluation' => fake()->randomFloat(2, 80, 100),
-            'failed_rewards' => fake()->numberBetween(0, 1),
-        ]);
-    }
+    public function validator(): void {}
 
     public function count(): int
     {

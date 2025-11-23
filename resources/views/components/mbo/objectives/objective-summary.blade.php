@@ -1,10 +1,10 @@
 <div class="content-card">
     <div class="content-card-top">
         <div class="content-card-header">
-            <i class="bi-crosshair me-1"></i>
+            <i class="bi-crosshair"></i>
             <span>{{ $objective->name }}</span>
         </div>
-        @if($objective->category()->exists())
+        @if($objective->category)
             <div data-tippy-content="{{ __('fields.category') }}" class="align-self-center mx-2">
                 <span class="badge bg-secondary">{{ $objective->category->name }}</span>
             </div>
@@ -20,7 +20,7 @@
                     <i class="bi-feather"></i>
                 </div>
             @endif
-            @if($objective->isOverdued())
+            @if($objective->isOverdued() && (!$userObjective->exists || !$userObjective->isEvaluated()))
                 <div class="text-{{ $warning }}" data-tippy-content="{{ __('alerts.objectives.error.overdued', ['term' => $objective->deadline->diffForHumans()]) }}">
                     <i class="bi-exclamation-diamond-fill"></i>
                 </div>

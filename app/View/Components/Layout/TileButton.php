@@ -23,7 +23,7 @@ class TileButton extends Component
         public bool $enter_icon = true
     ) {
         if ($icon) {
-            $this->icon_html = '<i class="bi bi-'.$icon.'"></i>';
+            $this->icon_html = '<i class="bi bi-' . $icon . '"></i>';
         }
 
         if (empty($link)) {

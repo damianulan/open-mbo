@@ -24,7 +24,7 @@ class ObjectiveEditUserForm extends Form
         if ($model) {
             $user_ids = UserObjective::where('objective_id', $model->id)->get()->pluck('user_id');
 
-            if (! empty($user_ids)) {
+            if ( ! empty($user_ids)) {
                 foreach ($user_ids as $tid) {
                     $selected[] = $tid;
                 }

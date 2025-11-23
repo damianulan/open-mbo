@@ -52,6 +52,9 @@ return [
         'integrations' => [
             'index' => 'Integracje',
         ],
+        'notifications' => [
+            'index' => 'Powiadomienia',
+        ],
         'server' => [
             'index' => 'Serwer',
         ],
@@ -67,7 +70,7 @@ return [
                 'index' => 'Przedsiębiorstwa',
             ],
             'departments' => [
-                'index' => 'Departamenty',
+                'index' => 'Działy',
             ],
             'positions' => [
                 'index' => 'Stanowiska',

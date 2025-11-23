@@ -10,10 +10,10 @@ class Item extends Component
 
     public $message;
 
-    public function mount($notification)
+    public function mount($notification): void
     {
         $this->notification = $notification;
-        $message = $this->notification->data['message'] ?? null;
+        $message = $this->notification->contents ?? null;
         if ($message) {
             $message = strip_tags($message, '<strong><i>');
         }

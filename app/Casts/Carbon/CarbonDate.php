@@ -3,6 +3,7 @@
 namespace App\Casts\Carbon;
 
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,10 +16,10 @@ class CarbonDate implements CastsAttributes
      */
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        $value_format = strpos($value, ':') !== false ? 'Y-m-d H:i:s' : 'Y-m-d';
+        $value_format = str_contains($value, ':') ? 'Y-m-d H:i:s' : 'Y-m-d';
         try {
             return Carbon::createFromFormat($value_format, $value)->format(config('app.date_format'));
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return null;
         }
     }

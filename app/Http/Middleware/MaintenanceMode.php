@@ -12,15 +12,15 @@ class MaintenanceMode
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  Closure(Request): (Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $maintenance = config('app.maintenance') === true;
+        $maintenance = true === config('app.maintenance');
         $user = Auth::user();
         if ($maintenance) {
             if ($user && Auth::check()) {
-                if (! $user->can('maintenance')) {
+                if ( ! $user->can('maintenance')) {
                     Auth::logout();
                     abort(503);
                 }

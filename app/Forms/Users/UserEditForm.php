@@ -6,6 +6,7 @@ use App\Enums\Users\Gender;
 use App\Models\Core\User;
 use FormForge\Base\Form;
 use FormForge\Base\FormComponent;
+use FormForge\Components\Button;
 use FormForge\Components\Dictionary;
 use FormForge\FormBuilder;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class UserEditForm extends Form
         $exclude = [];
         $selected = [];
         $profile = null;
-        if (! is_null($model)) {
+        if ( ! is_null($model)) {
             $method = 'PUT';
             $route = route('users.update', $model->id);
             $profile = $model->profile;
@@ -40,6 +41,9 @@ class UserEditForm extends Form
                 ->label(__('forms.users.roles')))
             ->add(FormComponent::multiselect('supervisors_ids', $model, Dictionary::fromModel(User::class, 'name', 'allActive', $exclude), 'supervisors', $selected)
                 ->label(__('forms.users.supervisors')))
+            ->onCondition( ! is_null($model), function (FormBuilder $builder): void {
+                $builder->addButton(new Button(title: __('buttons.add_employment'), classes: 'btn-outline-primary add-employment'));
+            })
             ->addSubmit();
     }
 

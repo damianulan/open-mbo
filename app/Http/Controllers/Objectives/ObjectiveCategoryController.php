@@ -52,10 +52,7 @@ class ObjectiveCategoryController extends MBOController
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
-    }
+    public function show(string $id): void {}
 
     /**
      * Show the form for editing the specified resource.
@@ -72,6 +69,8 @@ class ObjectiveCategoryController extends MBOController
 
     /**
      * Update the specified resource in storage.
+     *
+     * @param  mixed  $id
      */
     public function update(Request $request, $id, ObjectiveCategoryEditForm $form)
     {

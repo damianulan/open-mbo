@@ -33,7 +33,7 @@ return [
     | Note: For tag support, use Redis or Memcached drivers.
     |
     */
-    'cache_store' => env('MODEL_CACHE_STORE', null),
+    'cache_store' => env('MODEL_CACHE_STORE', 'file'),
 
     /*
     |--------------------------------------------------------------------------

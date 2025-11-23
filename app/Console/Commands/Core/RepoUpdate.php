@@ -5,6 +5,7 @@ namespace App\Console\Commands\Core;
 use App\Console\BaseCommand;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Process;
+use Throwable;
 
 class RepoUpdate extends BaseCommand
 {
@@ -25,7 +26,7 @@ class RepoUpdate extends BaseCommand
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         $this->logStart();
         try {
@@ -36,8 +37,8 @@ class RepoUpdate extends BaseCommand
             $this->info($result->output());
             $result = Process::run('git reset --hard');
             $this->info($result->output());
-            if (! empty($branch)) {
-                $result = Process::run('git switch '.$branch);
+            if ( ! empty($branch)) {
+                $result = Process::run('git switch ' . $branch);
             }
             $result = Process::run('git pull origin');
             $this->info($result->output());
@@ -46,7 +47,7 @@ class RepoUpdate extends BaseCommand
             $this->info($result->output());
             Artisan::call('migrate');
             $this->info(Artisan::output());
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             $this->log($th->getMessage(), false);
             $this->error($th->getMessage());
         }

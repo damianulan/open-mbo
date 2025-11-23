@@ -2,6 +2,7 @@
 
 namespace App\Support\DataTables;
 
+use Exception;
 use Illuminate\Http\Request;
 
 class DataTableController
@@ -14,7 +15,7 @@ class DataTableController
             return $dataTable->excel();
         }
 
-        throw new \Exception("DataTable class: [$class] not found");
+        throw new Exception("DataTable class: [{$class}] not found");
     }
 
     public function toCsv(Request $request, $class)
@@ -25,6 +26,6 @@ class DataTableController
             return $dataTable->csv();
         }
 
-        throw new \Exception("DataTable class: [$class] not found");
+        throw new Exception("DataTable class: [{$class}] not found");
     }
 }

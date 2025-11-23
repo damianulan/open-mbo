@@ -17,15 +17,15 @@ class Theme
     {
         $this->available = self::getAvailable();
         $this->current = current_theme();
-        $this->images_path = 'themes/'.$this->current.'/images/';
+        $this->images_path = 'themes/' . $this->current . '/images/';
     }
 
     public static function getAvailable(): Collection
     {
-        $directories = new Collection;
+        $directories = new Collection();
         foreach (Finder::create()->in(public_path('themes'))->directories()->depth(0)->sortByName() as $dir) {
             $d = $dir->getFilename();
-            if (! in_array($d, ['js', 'vendors', 'images'])) {
+            if ( ! in_array($d, ['js', 'vendors', 'images'])) {
                 $directories->push($d);
             }
         }
@@ -35,6 +35,6 @@ class Theme
 
     public static function imagePath()
     {
-        return (new self)->images_path;
+        return (new self())->images_path;
     }
 }

@@ -4,26 +4,31 @@ namespace App\Models\Business;
 
 use App\Models\BaseModel;
 use App\Models\Core\User;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Support\Carbon;
 use Sentinel\Models\Role;
+use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property string $id
+ * @property string|null $parent_id
  * @property string $name
- * @property string $shortname
  * @property string|null $description
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Department> $children
+ * @property-read Collection<int, Department> $children
  * @property-read int|null $children_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\UserEmployment> $employments
+ * @property-read Collection<int, UserEmployment> $employments
  * @property-read int|null $employments_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $managers
+ * @property-read Collection<int, User> $managers
  * @property-read int|null $managers_count
+ * @property-read Department|null $parent
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department average(string $column)
@@ -35,6 +40,7 @@ use Sentinel\Models\Role;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department createMany(array $records)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department deleteQuietly()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department drafted()
+ * @method static \Database\Factories\Business\DepartmentFactory factory($count = null, $state = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department firstFromCache($columns = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department flushCache($columns = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department flushQueryCache($columns = [])
@@ -70,7 +76,7 @@ use Sentinel\Models\Role;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department whereDescription($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department whereId($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department whereName($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department whereShortname($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department whereParentId($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department withoutCache()
@@ -81,6 +87,7 @@ use Sentinel\Models\Role;
 class Department extends BaseModel
 {
     protected $fillable = [
+        'parent_id',
         'name',
         'description',
     ];
@@ -88,6 +95,11 @@ class Department extends BaseModel
     public function children(): HasMany
     {
         return $this->hasMany(self::class, 'parent_id');
+    }
+
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(self::class, 'parent_id');
     }
 
     public function managers(): MorphToMany

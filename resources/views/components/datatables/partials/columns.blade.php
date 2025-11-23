@@ -1,12 +1,12 @@
 <div class="d-flex">
-    <div class="ms-auto">
+    <div class="ms-auto d-flex gap-2">
         @if ($hasExcel)
-            <a class="btn btn-primary btn-round me-1" href="{{ route('datatables.excel', ['class' => $class]) }}" data-tippy-content="{{ __('facades.datatables.to_excel') }}">
+            <a class="btn btn-primary btn-round" href="{{ route('datatables.excel', ['class' => $class]) }}" data-tippy-content="{{ __('facades.datatables.to_excel') }}">
                 <i class="bi bi-filetype-xlsx"></i>
             </a>
         @endif
         @if ($hasCsv)
-            <a class="btn btn-primary btn-round me-1" href="{{ route('datatables.excel', ['class' => $class]) }}" data-tippy-content="{{ __('facades.datatables.to_csv') }}">
+            <a class="btn btn-primary btn-round" href="{{ route('datatables.excel', ['class' => $class]) }}" data-tippy-content="{{ __('facades.datatables.to_csv') }}">
                 <i class="bi bi-filetype-csv"></i>
             </a>
         @endif

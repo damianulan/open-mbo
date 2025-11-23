@@ -27,7 +27,7 @@ class CampaignScope implements Scope
                     $campaignRoleId = Role::getId(RolesLib::CAMPAIGN_COORDINATOR);
                     $campaign_ids = $user->roleAssignments()->where('role_id', $campaignRoleId)->where('context_type', Campaign::class)->get()->pluck('context_id');
 
-                    $builder->whereIn('id', $campaign_ids);
+                    $builder->whereIn('campaigns.id', $campaign_ids);
                 } else {
                     $builder->whereRaw('1=0');
                 }

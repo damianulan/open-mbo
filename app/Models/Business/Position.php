@@ -4,18 +4,21 @@ namespace App\Models\Business;
 
 use App\Casts\FormattedText;
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
+use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property string $id
  * @property string $name
  * @property mixed|null $description
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Activitylog\Models\Activity> $activities
+ * @property Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Business\UserEmployment> $employments
+ * @property-read Collection<int, UserEmployment> $employments
  * @property-read int|null $employments_count
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position active()
@@ -28,6 +31,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position createMany(array $records)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position deleteQuietly()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position drafted()
+ * @method static \Database\Factories\Business\PositionFactory factory($count = null, $state = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position firstFromCache($columns = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position flushCache($columns = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position flushQueryCache($columns = [])

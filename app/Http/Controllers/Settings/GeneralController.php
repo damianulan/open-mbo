@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\Settings;
 
-use App;
 use App\Forms\Settings\GeneralForm;
-use App\Settings\GeneralSettings;
-use Illuminate\Http\Request;
 use App\Jobs\Core\AppUpdateAdhoc;
+use App\Settings\GeneralSettings;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\Request;
 
 class GeneralController extends SettingsController
 {
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
     public function index(Request $request)
     {
@@ -35,12 +35,13 @@ class GeneralController extends SettingsController
         ]);
         $target_release = settings('general.target_release');
         foreach ($request->all() as $key => $value) {
-            $settings->$key = $value;
+            $settings->{$key} = $value;
         }
         if ($settings->save()) {
             if ($settings->target_release !== $target_release) {
                 AppUpdateAdhoc::dispatch();
             }
+
             return redirect()->back()->with('success', __('alerts.settings.success.general'));
         }
 

@@ -15,34 +15,34 @@
           </header>
           <div class="page-quick-actions">
             @if(config('app.maintenance') === true)
-                <div class="me-3">
+                <div>
                     <a href="javascript:void(0);" data-tippy-placement="bottom" data-tippy-content="{{ __('alerts.info.maintenance') }}">
                         <i class="bi text-danger bi-exclamation-triangle-fill"></i>
                     </a>
                 </div>
             @endif
             @if(config('app.env') === 'local')
-                <div class="me-3">
+                <div>
                     <a href="javascript:void(0);" data-tippy-placement="bottom" data-tippy-content="{{ __('alerts.info.env_local') }}">
                         <i class="bi bi-code-square"></i>
                     </a>
                 </div>
             @endif
             @if(config('app.env') === 'development')
-                <div class="me-3">
+                <div>
                     <a href="javascript:void(0);" data-tippy-placement="bottom" data-tippy-content="{{ __('alerts.info.env_development') }}">
                         <i class="bi bi-code-slash"></i>
                     </a>
                 </div>
             @endif
             @if(config('app.debug') === true)
-                <div class="me-3">
+                <div>
                     <a href="javascript:void(0);" data-tippy-placement="bottom" data-tippy-content="{{ __('alerts.info.debugging') }}">
                         <i class="bi bi-bug-fill"></i>
                     </a>
                 </div>
             @endif
-              <div class="me-3">
+              <div>
                 <a href="#" data-tippy-placement="bottom" data-tippy-content="Baza wiedzy">
                     <i class="bi bi-book-fill"></i>
                 </a>
@@ -55,7 +55,7 @@
               @endif
               >
                   <div class="user-actions" data-bs-toggle="dropdown" type="button" aria-expanded="false">
-                    {!! auth()->user()->getAvatarView(30) !!}
+                    {!! auth()->user()->getAvatarView('md') !!}
                     <span class="profile-name{{auth()->user()->isImpersonating() ? ' text-info':''}}">{{ auth()->user()->name }}</span>
                   </div>
                   <ul class="dropdown-menu">

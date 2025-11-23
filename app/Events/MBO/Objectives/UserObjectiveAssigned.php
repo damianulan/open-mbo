@@ -18,7 +18,5 @@ class UserObjectiveAssigned implements ShouldDispatchAfterCommit
     public function __construct(
         public User $user,
         public Objective $objective
-    ) {
-        //
-    }
+    ) {}
 }

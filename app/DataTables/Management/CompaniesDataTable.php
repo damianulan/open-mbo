@@ -24,7 +24,7 @@ class CompaniesDataTable extends DataTable
             ->addColumn('status', function ($data) {
                 $color = 'primary';
                 $text = 'Aktywny';
-                if (! $data->active) {
+                if ( ! $data->active) {
                     $color = 'dark';
                     $text = 'Zablokowany';
                 }
@@ -34,21 +34,19 @@ class CompaniesDataTable extends DataTable
                     'text' => $text,
                 ]);
             })
-            ->orderColumn('status', function ($query, $order) {
-                $o = $order === 'asc' ? 'desc' : 'asc';
+            ->orderColumn('status', function ($query, $order): void {
+                $o = 'asc' === $order ? 'desc' : 'asc';
                 $query->orderBy('firstname', $o);
                 $query->orderBy('lastname', $o);
             })
-            ->orderColumn('name', function ($query, $order) {
+            ->orderColumn('name', function ($query, $order): void {
                 $query->orderBy('firstname', $order);
                 $query->orderBy('lastname', $order);
             })
-            ->addColumn('action', function ($data) {
-                return view('pages.settings.organization.company.action', [
-                    'data' => $data,
-                ]);
-            })
-            ->filterColumn('name', function ($query, $keyword) {
+            ->addColumn('action', fn ($data) => view('pages.settings.organization.company.action', [
+                'data' => $data,
+            ]))
+            ->filterColumn('name', function ($query, $keyword): void {
                 $sql = "CONCAT(users.firstname,'-',users.lastname)  like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
@@ -132,6 +130,6 @@ class CompaniesDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Users_'.date('YmdHis');
+        return 'Users_' . date('YmdHis');
     }
 }

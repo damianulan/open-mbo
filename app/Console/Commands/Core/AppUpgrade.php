@@ -4,13 +4,14 @@ namespace App\Console\Commands\Core;
 
 use App\Events\Core\AppUpgraded;
 use App\Settings\GeneralSettings;
+use Exception;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Schema;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
-use Illuminate\Support\Facades\Artisan;
-use Lucent\Console\Git;
+use Throwable;
 
 class AppUpgrade extends Command
 {
@@ -33,7 +34,7 @@ class AppUpgrade extends Command
      */
     public function handle()
     {
-        $local = config('app.env') === 'local';
+        $local = 'local' === config('app.env');
         $runComposer = $this->option('nocomposer') ? false : true;
         $this->line('Checking for updates...');
         try {
@@ -42,37 +43,40 @@ class AppUpgrade extends Command
             $this->output->getFormatter()->setStyle('newversionblock', $newVersionStyle);
             $newVersionStyle = new OutputFormatterStyle('white', 'blue', ['bold']);
             $this->output->getFormatter()->setStyle('versionblock', $newVersionStyle);
-            if (! Schema::hasTable('settings')) {
-                throw new \Exception('Settings table is not created!');
+            if ( ! Schema::hasTable('settings')) {
+                throw new Exception('Settings table is not created!');
             }
-            $settings = new GeneralSettings;
-            $name = $settings->site_name ?? env('APP_NAME');
+            $settings = new GeneralSettings();
+            $name = config('app.name');
             $target_release = $settings->target_release ?? 'stable';
             $result = Process::run('git tag -l | xargs git tag -d');
 
-            $this->line("Version preference detected: <versionblock>$target_release</versionblock>");
+            $this->line("Version preference detected: <versionblock>{$target_release}</versionblock>");
+            $result = Process::run('git fetch --all');
 
-            $latestRelease = Git::getLatestTagName();
+            $result = Process::run('git describe --tags --abbrev=0');
+            $latestRelease = $result->output();
             if (empty($latestRelease)) {
-                throw new \Exception('Unable to get latest release tag.');
+                Log::warning('Unable to get latest release tag.' . ' [' . $result->errorOutput() . '] ');
+                $latestRelease = 'main';
             }
+            $result = Process::run('git tag -l | xargs git tag -d');
 
             $git_branch = match ($target_release) {
-                'stable' => 'master',
-                'non-stable' => 'master',
+                'stable' => 'main',
+                'non-stable' => $latestRelease,
                 'dev' => 'dev',
                 default => $target_release,
             };
 
-            $this->line("Checking to $git_branch branch/tag");
-            $result = Process::run('git fetch --all');
-            if (!$local) {
+            $this->line("Checking to {$git_branch} branch/tag");
+            if ( ! $local) {
                 $result = Process::run('git reset --hard');
             }
-            $result = Process::run("git checkout $git_branch");
+            $result = Process::run("git checkout {$git_branch}");
             $output = $result->output();
-            if (!$result->successful()) {
-                throw new \Exception("Unable to switch to branch/tag: {$git_branch} " . $output);
+            if ( ! $result->successful()) {
+                throw new Exception("Unable to switch to branch/tag: {$git_branch} " . $result->errorOutput());
             }
             $result = Process::run('git pull');
 
@@ -81,10 +85,10 @@ class AppUpgrade extends Command
                 $result = Process::timeout(1200)->run($composer_exec);
                 $output = $result->output();
 
-                if (!$result->successful()) {
-                    throw new \Exception('Composer update failed: ' . $output);
+                if ( ! $result->successful()) {
+                    throw new Exception('Composer update failed: ' . $output);
                 }
-                $this->line("Composer finished successfully");
+                $this->line('Composer finished successfully');
             }
 
             Artisan::call('migrate');
@@ -94,16 +98,20 @@ class AppUpgrade extends Command
             if ($target_release !== $settings->release) {
                 $settings->release = $target_release;
                 if ($settings->save()) {
-                    $this->line("New $name version detected: <newversionblock>^$target_release</newversionblock>");
+                    $this->line("New {$name} version detected: <newversionblock>^{$target_release}</newversionblock>");
                     AppUpgraded::dispatch($target_release);
                     Log::debug('App upgraded to ' . $target_release);
                 }
             } else {
-                $this->line("Current $name version: <versionblock>$target_release</versionblock>");
+                $this->line("Current {$name} version: <versionblock>{$target_release}</versionblock>");
             }
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             Log::error($th->getMessage());
             $this->error($th->getMessage());
+            if (config('app.debug')) {
+                throw $th;
+            }
+
             return false;
         }
 

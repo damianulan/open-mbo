@@ -16,10 +16,7 @@ class UserObjectiveStatusCheck implements ShouldQueueAfterCommit
     /**
      * Create the event listener.
      */
-    public function __construct()
-    {
-        //
-    }
+    public function __construct() {}
 
     /**
      * Handle the event.

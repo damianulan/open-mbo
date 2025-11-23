@@ -33,6 +33,7 @@ return [
 
     'campaign' => 'Kampania',
     'campaigns' => 'Kampanie',
+    'campaigns_full' => 'Kampanie pomiarowe',
     'campaign_coordinators' => 'Koordynatorzy Kampanii',
     'objective' => 'Cel',
     'objective_admins' => 'Administratorzy Celu',
@@ -41,6 +42,7 @@ return [
     'general_objectives' => 'Cele podstawowe',
     'num_participants' => 'Liczba uczestników',
     'linked_to_campaigns' => 'Powiązano z kampaniami',
+    'rewards' => 'Punkty nagrody',
 
     'objectives' => [
         'index' => 'Cele',
@@ -51,9 +53,21 @@ return [
 
         'pass' => 'Oznacz cel jako zaliczony',
         'fail' => 'Oznacz cel jako niezaliczony',
+        'passed' => 'Zaliczony',
+        'failed' => 'Niezaliczony',
     ],
 
     'entities' => [
         'campaign' => 'Kampania pomiarowa',
     ],
+
+    // misc
+    'passed' => 'Zaliczone',
+    'failed' => 'Niezaliczone',
+    'completed' => 'Ukończone',
+    'unstarted' => 'Nierozpoczęte',
+    'progress' => 'W trakcie',
+    'uncompleted' => 'Nieukończone',
+    'not_evaluated' => 'Nierozliczone',
+    'evaluated' => 'Rozliczone',
 ];
