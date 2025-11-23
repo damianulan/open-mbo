@@ -102,7 +102,7 @@ class MBOSeeder extends Seeder
     {
         $coordinatorUsers = $this->users->random(fake()->numberBetween(10, 20));
 
-        for ($i = 1; $i <= 30; $i++) {
+        for ($i = 1; $i <= 50; $i++) {
             $datetime = fake()->dateTimeBetween('-3 weeks', '+2 months');
             $now = Carbon::parse($datetime);
             $campaign = new Campaign();
