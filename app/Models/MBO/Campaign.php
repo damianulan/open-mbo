@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Collection;
 use Lucent\Support\Traits\Dispatcher;
 use Spatie\Activitylog\Models\Activity;
+use Spatie\Translatable\HasTranslations;
 
 /**
  * @property string $id
@@ -129,7 +130,7 @@ use Spatie\Activitylog\Models\Activity;
 #[ScopedBy(CampaignScope::class)]
 class Campaign extends BaseModel implements HasObjectives
 {
-    use Dispatcher;
+    use Dispatcher, HasTranslations;
 
     public $stages;
 
@@ -158,6 +159,8 @@ class Campaign extends BaseModel implements HasObjectives
         'manual',
     ];
 
+    public array $translatable = ['name'];
+
     protected $casts = [
         'description' => FormattedText::class,
         'draft' => 'boolean',
@@ -181,7 +184,7 @@ class Campaign extends BaseModel implements HasObjectives
 
     public static function updatingCampaign(Campaign $model)
     {
-        if ( ! settings('mbo.campaigns_manual')) {
+        if (! settings('mbo.campaigns_manual')) {
             $model->manual = 0;
         }
 
@@ -210,13 +213,13 @@ class Campaign extends BaseModel implements HasObjectives
 
     public function refreshCoordinators(?array $user_ids)
     {
-        if ( ! $user_ids) {
+        if (! $user_ids) {
             $user_ids = [];
         }
 
         $current = $this->coordinators->pluck('id')->toArray();
-        $toDelete = array_filter($current, fn ($value) => ! in_array($value, $user_ids));
-        $toAdd = array_filter($user_ids, fn ($value) => ! in_array($value, $current));
+        $toDelete = array_filter($current, fn($value) => ! in_array($value, $user_ids));
+        $toAdd = array_filter($user_ids, fn($value) => ! in_array($value, $current));
 
         foreach ($toDelete as $user_id) {
             $user = User::find($user_id);
@@ -237,7 +240,7 @@ class Campaign extends BaseModel implements HasObjectives
     public function assignUser($user_id)
     {
         $exists = $this->user_campaigns()->where('user_id', $user_id)->exists();
-        if ( ! $exists) {
+        if (! $exists) {
             $this->user_campaigns()->create([
                 'user_id' => $user_id,
                 'stage' => $this->setUserStage($user_id),
@@ -286,7 +289,7 @@ class Campaign extends BaseModel implements HasObjectives
         $stage = CampaignStage::PENDING;
         $now = Carbon::now();
 
-        if ( ! in_array($this->stage, [CampaignStage::TERMINATED, CampaignStage::CANCELED])) {
+        if (! in_array($this->stage, [CampaignStage::TERMINATED, CampaignStage::CANCELED])) {
             foreach (CampaignStage::softValues() as $tmp) {
                 $prop_start = $tmp . '_from';
                 $prop_end = $tmp . '_to';
@@ -400,10 +403,10 @@ class Campaign extends BaseModel implements HasObjectives
         $end = $this->dateEnd();
         $now = now();
         if ($start && $end) {
-            if ( ! $start instanceof Carbon) {
+            if (! $start instanceof Carbon) {
                 $start = Carbon::parse($start);
             }
-            if ( ! $end instanceof Carbon) {
+            if (! $end instanceof Carbon) {
                 $end = Carbon::parse($end);
             }
 
@@ -580,14 +583,14 @@ class Campaign extends BaseModel implements HasObjectives
     protected function timestart(): Attribute
     {
         return Attribute::make(
-            get: fn () => Carbon::parse($this->definition_from),
+            get: fn() => Carbon::parse($this->definition_from),
         );
     }
 
     protected function timeend(): Attribute
     {
         return Attribute::make(
-            get: fn () => Carbon::parse($this->self_evaluation_to),
+            get: fn() => Carbon::parse($this->self_evaluation_to),
         );
     }
 }

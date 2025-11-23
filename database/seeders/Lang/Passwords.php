@@ -1,0 +1,29 @@
+<?php
+
+namespace Database\Seeders\Lang;
+
+use Illuminate\Database\Seeder;
+
+class Passwords extends Seeder
+{
+    public static function list(): array
+    {
+        return [
+            'reset' => [
+                'pl' => 'Twoje hasło zostało zresetowane!',
+            ],
+            'sent' => [
+                'pl' => 'Na twój adres e-mail została wysłana wiadomość z linkiem umożliwiającym zresetowanie hasła.',
+            ],
+            'throttled' => [
+                'pl' => 'Poczekaj chwilę zanim spróbujesz ponownie.',
+            ],
+            'token' => [
+                'pl' => 'Token odebrany przez serwer nie jest ważny.',
+            ],
+            'user' => [
+                'pl' => 'Nie możemy znaleźć użytkownika z takim adresem e-mail.',
+            ],
+        ];
+    }
+}

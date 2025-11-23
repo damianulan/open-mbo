@@ -48,7 +48,6 @@ use Lucent\Support\Traits\VirginModel;
 use Sentinel\Models\Permission;
 use Sentinel\Traits\HasRolesAndPermissions;
 use Spatie\Activitylog\Models\Activity;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property string $id
@@ -363,7 +362,9 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     protected static function booted(): void
     {
         static::creating(function (User $user) {
-            $user->generatePassword();
+            if (!isset($user->password) || empty($user->password)) {
+                $user->generatePassword();
+            }
 
             return $user;
         });

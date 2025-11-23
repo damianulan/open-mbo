@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\Users\Gender;
+
 return [
 
     'placeholders' => [

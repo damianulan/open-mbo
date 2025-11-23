@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Spatie\TranslationLoader\LanguageLine;
-use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class LanguageSeeder extends Seeder
 {
@@ -15,21 +15,39 @@ class LanguageSeeder extends Seeder
     {
         LanguageLine::all()->delete();
         $langs = [
-            'alerts' => Arr::dot(__('alerts')),
-            'auth' => Arr::dot(__('auth')),
-            'buttons' => Arr::dot(__('buttons')),
-            'charts' => Arr::dot(__('charts')),
-            'exceptions' => Arr::dot(__('exceptions')),
-            'mbo' => Arr::dot(__('mbo')),
+            '\Database\Seeders\Lang\Alerts',
+            '\Database\Seeders\Lang\Auth',
+            '\Database\Seeders\Lang\Buttons',
+            '\Database\Seeders\Lang\Charts',
+            '\Database\Seeders\Lang\Exceptions',
+            '\Database\Seeders\Lang\Fields',
+            '\Database\Seeders\Lang\MBO',
+            '\Database\Seeders\Lang\Forms',
+            '\Database\Seeders\Lang\Gates',
+            '\Database\Seeders\Lang\Globals',
+            '\Database\Seeders\Lang\Logging',
+            '\Database\Seeders\Lang\Menus',
+            '\Database\Seeders\Lang\Models',
+            '\Database\Seeders\Lang\Notifications',
+            '\Database\Seeders\Lang\Pages',
+            '\Database\Seeders\Lang\Pagination',
+            '\Database\Seeders\Lang\Passwords',
+            '\Database\Seeders\Lang\Validation',
         ];
-        foreach ($langs as $group => $lines) {
-            echo "[" . PHP_EOL;
-            foreach ($lines as $key => $value) {
-                echo "'$key' => [
-                        'pl' => '$value',
-                    ]," . PHP_EOL;
+        foreach ($langs as $class) {
+            $list = $class::list();
+            $reflection = new \ReflectionClass($class);
+            $group = Str::lower($reflection->getShortName());
+            foreach ($list as $key => $value) {
+                $instance = LanguageLine::where('group', $group)->where('key', $key)->first();
+
+                LanguageLine::updateOrCreate([
+                    'id' => $instance?->id ?? NULL,
+                    'group' => $group,
+                    'key' => $key,
+                    'text' => $value
+                ]);
             }
-            echo "];" . PHP_EOL;
         }
     }
 }

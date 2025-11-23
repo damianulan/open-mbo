@@ -58,11 +58,5 @@ class CreateAdminUserSeeder extends Seeder
         ]);
         $user->profile()->save($profile);
         $user->assignRoleSlug('support');
-
-        $user = new User([
-            'email' => 'demo@damianulan.me',
-            'password' => Hash::make('12345678'),
-        ]);
-        $user->save();
     }
 }

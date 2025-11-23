@@ -13,11 +13,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(LanguageSeeder::class);
+
         Artisan::call(SettingsMigrate::class);
         Artisan::call('sentinel:run');
-        $this->call(BusinessSeeder::class);
         $this->call(CreateAdminUserSeeder::class);
-        Artisan::call('cache:clear');
+        $this->call(BusinessSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(NotificationSeeder::class);
 

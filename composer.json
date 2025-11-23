@@ -45,8 +45,8 @@
         "php": "^8.3.0",
         "akaunting/laravel-apexcharts": "^3.0",
         "barryvdh/laravel-snappy": "^1.0",
-        "damianulan/laravel-form-forge": "dev-main",
         "damianulan/laravel-feature-kit": "dev-main",
+        "damianulan/laravel-form-forge": "dev-main",
         "damianulan/laravel-lucent": "dev-main",
         "damianulan/laravel-sentinel": "dev-main",
         "damianulan/laraverse": "dev-main",
@@ -72,6 +72,7 @@
         "spatie/laravel-query-builder": "^5.2",
         "spatie/laravel-settings": "^3.1",
         "spatie/laravel-tags": "^4.10",
+        "spatie/laravel-translatable": "^6.11",
         "spatie/laravel-translation-loader": "^2.8",
         "spatie/shiki-php": "^2.3",
         "tjvb/laravel-mail-catchall": "^4.4",
@@ -144,7 +145,7 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": false,
+    "prefer-stable": true,
     "require-dependencies": true,
     "require-dev-dependencies": true
 }

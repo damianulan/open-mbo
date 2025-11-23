@@ -41,6 +41,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('model:prune')->dailyAt('00:01');
         $schedule->command('model:prune-soft-deletes')->dailyAt('00:01');
         $schedule->command(SettingsMigrate::class)->dailyAt('00:01');
+        $schedule->command('db:seed --class=LanguageSeeder')->dailyAt('00:02');
 
         // NOTIFICATIONS
         NotificationScheduler::load($schedule);

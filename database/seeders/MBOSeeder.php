@@ -106,7 +106,11 @@ class MBOSeeder extends Seeder
             $datetime = fake()->dateTimeBetween('-3 weeks', '+2 months');
             $now = Carbon::parse($datetime);
             $campaign = new Campaign();
-            $campaign->name = 'Testowa kampania ' . $i;
+            $campaign->name = [
+                'pl' => 'Testowa kampania ' . $i,
+                'en' => 'Test campaign ' . $i,
+                'it' => 'Campagna di prova ' . $i,
+            ];
             $campaign->period = '2025 Q' . fake()->numberBetween(1, 4);
             $campaign->description = fake()->text(fake()->numberBetween(500, 1000));
             $campaign->definition_from = $now->format('Y-m-d') . ' 00:00:00';
