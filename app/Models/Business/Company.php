@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Activity;
+use App\Models\Business\Department;
 
 /**
  * @property string $id
@@ -106,6 +107,11 @@ class Company extends BaseModel
         'founded_at' => 'date',
         'created_at' => 'datetime',
     ];
+
+    public function departments(): HasMany
+    {
+        return $this->hasMany(Department::class);
+    }
 
     public function employments(): HasMany
     {

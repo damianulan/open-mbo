@@ -80,8 +80,8 @@ trait UserBusiness
     {
         foreach ($supervisor_ids as $id) {
             $supervisor = static::find($id);
-            if ($supervisor->exists() && ! $this->hasSupervisor($id)) {
-                $this->supervisors()->attach($supervisor, ['role_id' => Role::getId('supervisor')]);
+            if ($supervisor->exists && ! $this->hasSupervisor($id)) {
+                $this->supervisors()->attach($supervisor, ['model_type' => static::class, 'role_id' => Role::getId('supervisor')]);
             }
         }
 
@@ -99,13 +99,13 @@ trait UserBusiness
 
     public function refreshSupervisors(?array $user_ids)
     {
-        if ( ! $user_ids) {
+        if (! $user_ids) {
             $user_ids = [];
         }
 
         $current = $this->supervisors->pluck('id')->toArray();
-        $toDelete = array_filter($current, fn ($value) => ! in_array($value, $user_ids));
-        $toAdd = array_filter($user_ids, fn ($value) => ! in_array($value, $current));
+        $toDelete = array_filter($current, fn($value) => ! in_array($value, $user_ids));
+        $toAdd = array_filter($user_ids, fn($value) => ! in_array($value, $current));
 
         foreach ($toDelete as $user_id) {
             $this->revokeSupervisor($user_id);

@@ -15,9 +15,6 @@ class CreateAdminUserSeeder extends Seeder
      */
     public function run(): void
     {
-        if (User::count() > 0) {
-            return;
-        }
         $user = new User([
             'email' => 'admin@damianulan.me',
             'password' => Hash::make('123456'),
@@ -67,13 +64,5 @@ class CreateAdminUserSeeder extends Seeder
             'password' => Hash::make('12345678'),
         ]);
         $user->save();
-        $profile = new UserProfile([
-            'firstname' => 'Test',
-            'lastname' => 'User',
-            'birthday' => fake()->dateTimeBetween('-40 years', '-20years'),
-            'gender' => Gender::FEMALE,
-        ]);
-        $user->profile()->save($profile);
-        $user->assignRoleSlug('employee');
     }
 }

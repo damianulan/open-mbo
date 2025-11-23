@@ -56,32 +56,32 @@ class MBOSettings extends BaseSettings
     /**
      * Calculate rewards proportionally to an evaluation. Otherwise, when passed, always assign 100% of the reward.
      */
-    public bool $rewards_proportional;
+    public bool $rewards_proportional = true;
 
     /**
      * Enable manipulation of calculated rewards by admins and evaluators.
      */
-    public bool $manipulate_rewards;
+    public bool $manipulate_rewards = false;
 
     /**
      * Adds rewards for failed objectives, proportionally to an evaluation.
      */
-    public bool $failed_rewards;
+    public bool $failed_rewards = false;
 
     /**
      * 1 unit of a current currency equals to x points.
      */
-    public float $rewards_points_exchange;
+    public float $rewards_points_exchange = 1.00;
 
     /**
      * Min evaluation percentage required to pass an objective.
      */
-    public float $rewards_min_evaluation;
+    public float $rewards_min_evaluation = 100.00;
 
     /**
      * Currency used for presenting values of rewards.
      */
-    public string $rewards_currency;
+    public string $rewards_currency = 'PLN';
 
     public static function group(): string
     {

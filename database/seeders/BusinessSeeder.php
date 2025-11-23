@@ -21,16 +21,19 @@ class BusinessSeeder extends Seeder
             $this->createContract($contract);
         }
 
-        PositionFactory::seedAdminPositions();
-        Position::factory(15)->create();
-        Department::factory(10)->create();
+        PositionFactory::seedPositions(30);
+
         Company::factory(2)->has(Location::factory()->count(fake()->numberBetween(1, 3)), 'locations')->create();
+
+        Company::all()->each(function (Company $company) {
+            $company->departments()->saveMany(Department::factory(fake()->numberBetween(4, 8))->make());
+        });
     }
 
     private function createContract(string $name): void
     {
         $contract = new TypeOfContract([
-            'name' => __('faker.type_of_contract.' . $name),
+            'name' => __('fields.type_of_contract.' . $name),
         ]);
         $contract->save();
     }

@@ -87,7 +87,7 @@ use Spatie\Activitylog\Models\Activity;
 class Department extends BaseModel
 {
     protected $fillable = [
-        'parent_id',
+        'company_id',
         'name',
         'description',
     ];
@@ -97,9 +97,9 @@ class Department extends BaseModel
         return $this->hasMany(self::class, 'parent_id');
     }
 
-    public function parent(): BelongsTo
+    public function company(): BelongsTo
     {
-        return $this->belongsTo(self::class, 'parent_id');
+        return $this->belongsTo(Company::class, 'company_id');
     }
 
     public function managers(): MorphToMany

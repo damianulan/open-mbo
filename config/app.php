@@ -265,7 +265,8 @@ return [
         RedisServiceProvider::class,
         PasswordResetServiceProvider::class,
         SessionServiceProvider::class,
-        TranslationServiceProvider::class,
+        //TranslationServiceProvider::class,
+        Spatie\TranslationLoader\TranslationServiceProvider::class,
         ValidationServiceProvider::class,
         ViewServiceProvider::class,
 

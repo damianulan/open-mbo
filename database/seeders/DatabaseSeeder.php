@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Console\Commands\Settings\SettingsMigrate;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
 
@@ -13,9 +13,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        Artisan::call(SettingsMigrate::class);
         Artisan::call('sentinel:run');
         $this->call(BusinessSeeder::class);
         $this->call(CreateAdminUserSeeder::class);
+        Artisan::call('cache:clear');
         $this->call(UserSeeder::class);
         $this->call(NotificationSeeder::class);
 

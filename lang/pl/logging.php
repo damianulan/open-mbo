@@ -38,7 +38,7 @@ return [
         'updated' => 'Użytkownik :username zmodyfikował instancję obiektu: :model_map.',
         'deleted' => 'Użytkownik :username usunął instancję obiektu: :model_map.',
         'auth_attempt_success' => 'Zarejestrowano pomyślną próbę logowania użytkownika.',
-        'auth_attempt_fail' => 'Zarejestrowano pomyślną próbę logowania użytkownika.',
+        'auth_attempt_fail' => 'Zarejestrowano próbę logowania użytkownika zakończoną niepowodzeniem.',
         'auth_logout' => 'Użytkownik wylogował się z systemu.',
         'notification_sent' => 'Użytkownik :username otrzymał powiadomienie: :type',
         'view' => 'Użytkownik :username wyświetlił obiekt: :model_map',

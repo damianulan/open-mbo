@@ -33,5 +33,17 @@ class MacroServiceProvider extends ServiceProvider
             });
             return $weight;
         });
+
+        EloquentCollection::macro('delete', function (): void {
+            $this->each(function (Model $model): void {
+                $model->delete();
+            });
+        });
+
+        EloquentCollection::macro('purge', function (): void {
+            $this->each(function (Model $model): void {
+                $model->forceDelete();
+            });
+        });
     }
 }
