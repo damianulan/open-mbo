@@ -120,7 +120,7 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder<static>|UserObjective withoutTrashed()
  * @mixin \Eloquent
  */
-class UserObjective extends BaseModel implements AssignsPoints, HasDeadline, HasWeight
+class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
 {
     use CanUserObjective, Commentable, Dispatcher;
 
@@ -221,7 +221,7 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline, Has
 
     public function getWeightAttribute(): float
     {
-        return $this->objective->getWeightAttribute() ?? 0;
+        return $this->objective->getAttribute('weight');
     }
 
     public function isOverdued(): bool

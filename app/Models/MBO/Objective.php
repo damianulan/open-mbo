@@ -150,12 +150,12 @@ class Objective extends BaseModel implements HasDeadline, HasWeight
         return $model;
     }
 
-    public function getWeightAttribute(): float
+    public function getWeightAttribute($value): float
     {
         if(!settings('mbo.objectives_weights')){
             return 1;
         }
-        return $this->weight ?? 0;
+        return $value;
     }
 
     public function isOverdued(): bool
