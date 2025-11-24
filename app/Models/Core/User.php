@@ -19,6 +19,7 @@ use App\Support\Notifications\Models\MailNotification;
 use App\Support\Notifications\Models\SystemNotification;
 use App\Support\Notifications\Traits\Notifiable;
 use App\Traits\Favouritable;
+use App\Traits\IsTranslated;
 use App\Traits\UserBusiness;
 use App\Traits\UserMBO;
 use App\Traits\Vendors\Impersonable;
@@ -65,6 +66,8 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read int|null $activities_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, ActivityModel> $activity
  * @property-read int|null $activity_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserPoints> $awards
+ * @property-read int|null $awards_count
  * @property-read BonusScheme|null $bonus_scheme
  * @property-read \Illuminate\Database\Eloquent\Collection<int, UserCampaign> $campaigns
  * @property-read int|null $campaigns_count
@@ -79,6 +82,12 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read int|null $employments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, UserEmployment> $employments_active
  * @property-read int|null $employments_active_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Campaign> $favourite_campaigns
+ * @property-read int|null $favourite_campaigns_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $favourite_to
+ * @property-read int|null $favourite_to_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $favourite_users
+ * @property-read int|null $favourite_users_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Team> $leader_teams
  * @property-read int|null $leader_teams_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Comment> $my_comments
@@ -88,8 +97,9 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read int|null $objectives_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Permission> $permissions
  * @property-read int|null $permissions_count
- * @property-read UserPreference|null $preferences
- * @property-read UserProfile|null $profile
+ * @property-read mixed $points
+ * @property-read \App\Models\Core\UserPreference|null $preferences
+ * @property-read \App\Models\Core\UserProfile|null $profile
  * @property-read Collection $sessions
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $subordinates
  * @property-read int|null $subordinates_count
@@ -101,12 +111,12 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read int|null $teams_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
+ * @property-read mixed $trans
  * @property-read UserBonusScheme|null $user_bonus_scheme
  * @property-read \Illuminate\Database\Eloquent\Collection<int, UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, UserObjective> $user_objectives_active
  * @property-read int|null $user_objectives_active_count
- *
  * @method static Builder<static>|User active()
  * @method static Builder<static>|User drafted()
  * @method static \Database\Factories\Core\UserFactory factory($count = null, $state = [])
@@ -133,13 +143,12 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder<static>|User withRole(...$slugs)
  * @method static Builder<static>|User withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|User withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 {
     use CascadeDeletes, HasApiTokens, HasFactory, HasRolesAndPermissions, Notifiable, RequestForms, SoftDeletes, UUID, Favouritable;
-    use Commentable, Commentator, Impersonable, Impersonate, ModelActivity, Searchable, UserBusiness, UserMBO, VirginModel;
+    use Commentable, Commentator, Impersonable, Impersonate, ModelActivity, Searchable, UserBusiness, UserMBO, VirginModel, IsTranslated;
 
     protected $fillable = [
         'email',

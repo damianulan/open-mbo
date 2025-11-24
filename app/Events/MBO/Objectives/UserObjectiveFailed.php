@@ -2,7 +2,6 @@
 
 namespace App\Events\MBO\Objectives;
 
-use App\Models\Core\User;
 use App\Models\MBO\UserObjective;
 use App\Support\Notifications\Contracts\NotifiableEvent;
 use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
@@ -18,8 +17,7 @@ class UserObjectiveFailed implements ShouldDispatchAfterCommit, NotifiableEvent
      * Create a new event instance.
      */
     public function __construct(
-        public UserObjective $userObjective,
-        public ?User $evaluator,
+        public UserObjective $userObjective
     ) {}
 
     public static function description(): string
@@ -30,5 +28,15 @@ class UserObjectiveFailed implements ShouldDispatchAfterCommit, NotifiableEvent
     public function notifiable(): Model
     {
         return $this->userObjective->user;
+    }
+
+    public function checkConditions(): bool
+    {
+        return $this->userObjective->isFailed();
+    }
+
+    public function notificationDelay(): int
+    {
+        return 60;
     }
 }

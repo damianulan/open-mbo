@@ -28,4 +28,14 @@ class UserCampaignAssigned implements NotifiableEvent
     {
         return $this->userCampaign->user;
     }
+
+    public function checkConditions(): bool
+    {
+        return true;
+    }
+
+    public function notificationDelay(): int
+    {
+        return 0;
+    }
 }

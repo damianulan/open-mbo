@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\IsTranslated;
 use App\Traits\Vendors\ModelActivity;
 use Carbon\Carbon;
 use FormForge\Traits\RequestForms;
@@ -15,6 +16,7 @@ use Lucent\Support\Traits\SoftDeletesPrunable;
 use Lucent\Support\Traits\UUID;
 use Lucent\Support\Traits\VirginModel;
 use Spatie\Activitylog\Models\Activity;
+use Spatie\LaravelPackageTools\Concerns\Package\HasTranslations;
 use YMigVal\LaravelModelCache\HasCachedQueries;
 
 /**
@@ -67,9 +69,9 @@ use YMigVal\LaravelModelCache\HasCachedQueries;
  *
  * @mixin \Eloquent
  */
-class BaseModel extends Model
+abstract class BaseModel extends Model
 {
-    use Accessible, CascadeDeletes, HasCachedQueries, HasFactory, ModelActivity, RequestForms, SoftDeletes, SoftDeletesPrunable, UUID, VirginModel;
+    use Accessible, CascadeDeletes, HasCachedQueries, HasFactory, ModelActivity, RequestForms, SoftDeletes, SoftDeletesPrunable, UUID, VirginModel, HasTranslations, IsTranslated;
 
     public function carbonDate(string $prop, string $format = 'Y-m-d')
     {

@@ -4,6 +4,7 @@ namespace App\Factories\Charts;
 
 use Akaunting\Apexcharts\Chart;
 use App\Enums\MBO\UserObjectiveStatus;
+use App\Models\Core\User;
 use App\Models\MBO\UserCampaign;
 use App\Models\MBO\UserObjective;
 
@@ -53,5 +54,20 @@ class ModelCharts extends ChartsLib
             ])
             ->setHeight('150')
             ->setDataset('set-1', $this->type, [$totalCompleted, $totalNotCompleted]);
+    }
+
+    public function userPointsGrouped(User $model): Chart
+    {
+        $this->title = 'User points grouped';
+        $this->type = 'donut';
+
+        return $this->getChart()
+            ->setLabels([__('mbo.completed'), __('mbo.uncompleted')])
+            ->setColors([
+                'var(--bs-info)',
+                'var(--bs-unstarted)',
+            ])
+            ->setHeight('150')
+            ->setDataset('set-1', $this->type, []);
     }
 }

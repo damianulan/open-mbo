@@ -25,7 +25,7 @@ use Spatie\Translatable\HasTranslations;
 
 /**
  * @property string $id
- * @property string $name
+ * @property array<array-key, mixed> $name
  * @property string $period
  * @property mixed|null $description
  * @property string|null $definition_from
@@ -48,15 +48,16 @@ use Spatie\Translatable\HasTranslations;
  * @property-read int|null $activities_count
  * @property-read EloquentCollection<int, User> $coordinators
  * @property-read int|null $coordinators_count
- * @property-read EloquentCollection<int, Objective> $objectives
+ * @property-read EloquentCollection<int, \App\Models\MBO\Objective> $objectives
  * @property-read int|null $objectives_count
  * @property-read mixed $timeend
  * @property-read mixed $timestart
- * @property-read EloquentCollection<int, UserCampaign> $user_campaigns
+ * @property-read mixed $trans
+ * @property-read mixed $translations
+ * @property-read EloquentCollection<int, \App\Models\MBO\UserCampaign> $user_campaigns
  * @property-read int|null $user_campaigns_count
- * @property-read EloquentCollection<int, UserObjective> $user_objectives
+ * @property-read EloquentCollection<int, \App\Models\MBO\UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign avg(string $column)
@@ -111,6 +112,10 @@ use Spatie\Translatable\HasTranslations;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereEvaluationFrom($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereEvaluationTo($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereId($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereJsonContainsLocale(string $column, string $locale, ?mixed $value, string $operand = '=')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereJsonContainsLocales(string $column, array $locales, ?mixed $value, string $operand = '=')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereLocale(string $column, string $locale)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereLocales(string $column, array $locales)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereManual($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereName($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereOngoing()
@@ -124,7 +129,6 @@ use Spatie\Translatable\HasTranslations;
  * @method static Builder<static>|Campaign withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign withoutCache()
  * @method static Builder<static>|Campaign withoutTrashed()
- *
  * @mixin \Eloquent
  */
 #[ScopedBy(CampaignScope::class)]

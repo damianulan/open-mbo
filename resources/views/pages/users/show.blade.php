@@ -6,6 +6,10 @@
         <x-user-banner :user="$user" />
     </div>
     <div class="panel-left">
+        <a class="icon-btn ms-2" href="#" class="" data-tippy-content="{{ __('forms.mbo.objectives.award') }}">
+            <i class="bi-award"></i>
+            <span>{{ $user->points }}</span>
+        </a>
         @can('users-impersonate')
             @if ($user->canBeImpersonated())
                 <a class="icon-btn" href="{{ route('users.impersonate', $user->id) }}" data-tippy-content="{{ __('buttons.impersonate') }}">

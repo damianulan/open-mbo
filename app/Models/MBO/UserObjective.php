@@ -45,14 +45,15 @@ use Spatie\Activitylog\Models\Activity;
  * @property Carbon|null $deleted_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read Campaign|null $campaign
+ * @property-read \App\Models\MBO\Campaign|null $campaign
  * @property-read Collection<int, Comment> $comments
  * @property-read int|null $comments_count
  * @property-read User|null $evaluator
- * @property-read Objective $objective
- * @property-read UserPoints $points
+ * @property-read float $weight
+ * @property-read \App\Models\MBO\Objective $objective
+ * @property-read \App\Models\MBO\UserPoints $points
+ * @property-read mixed $trans
  * @property-read User $user
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective avg(string $column)
@@ -117,7 +118,6 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder<static>|UserObjective withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective withoutCache()
  * @method static Builder<static>|UserObjective withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class UserObjective extends BaseModel implements AssignsPoints, HasDeadline, HasWeight
@@ -151,9 +151,9 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline, Has
         static::updating(function (self $model): self {
             if ($model->isDirty('status')) {
                 if ($model->isPassed()) {
-                    UserObjectivePassed::dispatch($model, Auth::user() ?? null);
+                    UserObjectivePassed::dispatch($model);
                 } elseif ($model->isFailed()) {
-                    UserObjectiveFailed::dispatch($model, Auth::user() ?? null);
+                    UserObjectiveFailed::dispatch($model);
                 }
             } else {
                 $model->setStatus();

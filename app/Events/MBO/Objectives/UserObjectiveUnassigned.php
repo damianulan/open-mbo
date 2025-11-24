@@ -29,4 +29,14 @@ class UserObjectiveUnassigned implements ShouldDispatchAfterCommit, NotifiableEv
     {
         return $this->userObjective->user;
     }
+
+    public function checkConditions(): bool
+    {
+        return true;
+    }
+
+    public function notificationDelay(): int
+    {
+        return 0;
+    }
 }

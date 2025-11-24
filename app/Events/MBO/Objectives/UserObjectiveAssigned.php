@@ -2,8 +2,6 @@
 
 namespace App\Events\MBO\Objectives;
 
-use App\Models\Core\User;
-use App\Models\MBO\Objective;
 use App\Models\MBO\UserObjective;
 use App\Support\Notifications\Contracts\NotifiableEvent;
 use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
@@ -19,7 +17,7 @@ class UserObjectiveAssigned implements ShouldDispatchAfterCommit, NotifiableEven
      * Create a new event instance.
      */
     public function __construct(
-        public UserObjective $userObjective,
+        public UserObjective $userObjective
     ) {}
 
     public static function description(): string
@@ -30,5 +28,15 @@ class UserObjectiveAssigned implements ShouldDispatchAfterCommit, NotifiableEven
     public function notifiable(): Model
     {
         return $this->userObjective->user;
+    }
+
+    public function checkConditions(): bool
+    {
+        return true;
+    }
+
+    public function notificationDelay(): int
+    {
+        return 0;
     }
 }
