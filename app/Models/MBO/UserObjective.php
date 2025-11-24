@@ -160,6 +160,24 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline, Has
             }
             return $model;
         });
+
+        static::created(function (self $model) {
+            $campaign = $model->objective->campaign ?? null;
+            if ($campaign) {
+                CampaignUserObjectiveAssigned::dispatch($model->user, $model->objective, $campaign);
+            } else {
+                UserObjectiveAssigned::dispatch($model);
+            }
+        });
+
+        static::deleted(function (self $model) {
+            $campaign = $model->objective->campaign ?? null;
+            if ($campaign) {
+                CampaignUserObjectiveUnassigned::dispatch($model, $model->objective, $campaign);
+            } else {
+                UserObjectiveUnassigned::dispatch($model);
+            }
+        });
     }
 
     public static function assign($user_id, $objective_id): bool
@@ -199,26 +217,6 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline, Has
         $model->setStatus();
 
         return $model;
-    }
-
-    public static function createdUserObjective(UserObjective $model): void
-    {
-        $campaign = $model->objective->campaign ?? null;
-        if ($campaign) {
-            CampaignUserObjectiveAssigned::dispatch($model->user, $model->objective, $campaign);
-        } else {
-            UserObjectiveAssigned::dispatch($model->user, $model->objective);
-        }
-    }
-
-    public static function deletedUserObjective(UserObjective $model): void
-    {
-        $campaign = $model->objective->campaign ?? null;
-        if ($campaign) {
-            CampaignUserObjectiveUnassigned::dispatch($model->user, $model->objective, $campaign);
-        } else {
-            UserObjectiveUnassigned::dispatch($model->user, $model->campaign);
-        }
     }
 
     public function getWeightAttribute(): float

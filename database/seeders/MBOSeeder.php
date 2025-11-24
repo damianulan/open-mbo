@@ -58,8 +58,8 @@ class MBOSeeder extends Seeder
                 $bonusScheme = $bonusSchemes->random(1)->first();
                 $user->assignBonusScheme($bonusScheme);
             }
-            $this->campaigns();
             $this->objectives();
+            $this->campaigns();
 
             Artisan::call(MBOVerifyStatusScript::class);
 
@@ -72,14 +72,15 @@ class MBOSeeder extends Seeder
 
     public function objectives(): void
     {
-        foreach ($this->templates as $template) {
+        $templates = $this->templates->random(fake()->numberBetween(80, 120));
+        foreach ($templates as $template) {
             if ($template && isset($template->id)) {
                 for ($j = 1; $j <= fake()->numberBetween(1, 3); $j++) {
                     $objective = new Objective();
                     $objective->template_id = $template->id;
                     $objective->name = $template->name . "[{$j}]";
                     $objective->description = fake()->text(fake()->numberBetween(150, 250));
-                    $objective->weight = fake()->randomFloat(2, 0, 1);
+                    $objective->weight = fake()->randomFloat(2, 0.1, 1);
                     $objective->expected = fake()->numberBetween(1000, 5500);
                     $objective->award = fake()->randomFloat(2, 1, 100);
                     $objective->draft = 0;
@@ -137,7 +138,7 @@ class MBOSeeder extends Seeder
                         $objective->template_id = $template->id;
                         $objective->name = $template->name . "[{$j}]";
                         $objective->description = fake()->text(fake()->numberBetween(150, 250));
-                        $objective->weight = fake()->randomFloat(2, 0, 1);
+                        $objective->weight = fake()->randomFloat(2, 0.1, 1);
                         $objective->expected = fake()->numberBetween(1000, 5500);
                         $objective->award = fake()->randomFloat(2, 1, 100);
                         $objective->draft = 0;

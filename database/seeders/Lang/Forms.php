@@ -27,8 +27,17 @@ class Forms extends Seeder
             'version.dev' => [
                 'pl' => 'Najnowsza wersja deweloperska',
             ],
+            'settings.mbo.index' => [
+                'pl' => 'Moduł MBO',
+            ],
+            'settings.modules' => [
+                'pl' => 'Zarządanie ustawieniami modułów',
+            ],
             'settings.general.site_name' => [
                 'pl' => 'Nazwa witryny',
+            ],
+            'settings.general.general' => [
+                'pl' => 'Ogólne',
             ],
             'settings.general.theme' => [
                 'pl' => 'Szablon',
@@ -71,6 +80,12 @@ class Forms extends Seeder
             ],
             'settings.mbo.campaigns_ignore_dates' => [
                 'pl' => 'Zezwalaj na akcje po upływie terminu etapu',
+            ],
+            'settings.mbo.objectives_self_final_evaluation' => [
+                'pl' => 'Zezwalaj administratorom na samodzielnie ocenianie swoich celów',
+            ],
+            'settings.mbo.objectives_weights' => [
+                'pl' => 'Wagi celów',
             ],
             'settings.mbo.campaigns_manual' => [
                 'pl' => 'Tryb ręczny w kampaniach',
@@ -123,6 +138,9 @@ class Forms extends Seeder
             'settings.mbo.info.manipulate_rewards' => [
                 'pl' => 'Administratorzy mają możliwość edycji przeliczonych proporcjonalnie punktów nagrody, po ich rozliczeniu.',
             ],
+            'settings.mbo.info.objectives_weights' => [
+                'pl' => 'Jeśli wagi celów są wyłączone, każdy cel ma domyślnie wagę = 1.',
+            ],
             'settings.mbo.info.rewards' => [
                 'pl' => 'Włącza punkty nagrody',
             ],
@@ -140,6 +158,30 @@ class Forms extends Seeder
             ],
             'settings.mbo.info.rewards_currency' => [
                 'pl' => 'Waluta przyznawania nagrody',
+            ],
+            'settings.users.multiple_employments' => [
+                'pl' => 'Wielozatrudnienie',
+            ],
+            'settings.users.info.multiple_employments' => [
+                'pl' => 'Zezwalaj na dodawanie wielu aktywnych zatrudnień dla pojedynczego profilu.',
+            ],
+            'settings.users.password_change_firstlogin' => [
+                'pl' => 'Wymuszaj zmianę hasła',
+            ],
+            'settings.users.info.password_change_firstlogin' => [
+                'pl' => 'Wymuszaj zmianę hasła po pierwszym logowaniu',
+            ],
+            'settings.notifications.mail_notifications' => [
+                'pl' => 'Wysyłanie powiadomień e-mail',
+            ],
+            'settings.notifications.info.mail_notifications' => [
+                'pl' => 'Wyłączona funkcja oznacza zablokowanie wszelkiej wysyłki powiadomień e-mail, niezależnie od preferencji użytkowników. Nie dotyczy podstawowych funkcjonalności systemu - np. reset hasła, email powitalny itp.',
+            ],
+            'settings.notifications.system_notifications' => [
+                'pl' => 'Wysyłanie powiadomień w systemie',
+            ],
+            'settings.notifications.info.system_notifications' => [
+                'pl' => 'Wyłączona funkcja oznacza zablokowanie wszelkiej wysyłki powiadomień w systemie (ikona dzwonka w górnym menu), niezależnie od preferencji użytkowników.',
             ],
             'placeholders.choose' => [
                 'pl' => 'Wybierz...',
@@ -293,6 +335,9 @@ class Forms extends Seeder
             ],
             'users.roles_short' => [
                 'pl' => 'Role',
+            ],
+            'employments.index' => [
+                'pl' => 'Zatrudnienia',
             ],
             'employments.add' => [
                 'pl' => 'Dodaj nowe zatrudnienie',

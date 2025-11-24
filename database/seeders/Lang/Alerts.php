@@ -51,8 +51,8 @@ class Alerts extends Seeder
             'settings.success.mail_update' => [
                 'pl' => 'Dane serwera SMTP zostały zaktualizowane. Cache został automatycznie wyczyszczony.',
             ],
-            'settings.success.mbo_update' => [
-                'pl' => 'Ustawienia modułu MBO zostały zaktualizowane.',
+            'settings.success.update' => [
+                'pl' => 'Ustawienia modułu zostały zaktualizowane.',
             ],
             'settings.success.general' => [
                 'pl' => 'Ustawienia platformy zostały zaktualizowane.',
@@ -63,8 +63,8 @@ class Alerts extends Seeder
             'settings.error.mail_update' => [
                 'pl' => 'Dane serwera SMTP nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd.',
             ],
-            'settings.error.mbo_update' => [
-                'pl' => 'Ustawienia modułu MBO nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd.',
+            'settings.error.update' => [
+                'pl' => 'Ustawienia modułu nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd.',
             ],
             'settings.error.general' => [
                 'pl' => 'Ustawienia platformy nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd.',

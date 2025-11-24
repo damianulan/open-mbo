@@ -13,7 +13,6 @@ class LanguageSeeder extends Seeder
      */
     public function run(): void
     {
-        LanguageLine::all()->delete();
         $langs = [
             '\Database\Seeders\Lang\Alerts',
             '\Database\Seeders\Lang\Auth',
@@ -41,12 +40,19 @@ class LanguageSeeder extends Seeder
             foreach ($list as $key => $value) {
                 $instance = LanguageLine::where('group', $group)->where('key', $key)->first();
 
-                LanguageLine::updateOrCreate([
-                    'id' => $instance?->id ?? NULL,
-                    'group' => $group,
-                    'key' => $key,
-                    'text' => $value
-                ]);
+                if ($instance) {
+                    LanguageLine::create([
+                        'group' => $group,
+                        'key' => $key,
+                        'text' => $value
+                    ]);
+                } else {
+                    LanguageLine::create([
+                        'group' => $group,
+                        'key' => $key,
+                        'text' => $value
+                    ]);
+                }
             }
         }
     }

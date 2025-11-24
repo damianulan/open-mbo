@@ -106,6 +106,8 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function (): void {
         });
         Route::prefix('modules')->name('modules.')->middleware('route.gate:settings-modules')->group(function (): void {
             Route::get('/{module?}', [ModuleController::class, 'index'])->name('index');
+            Route::post('/users/store', [ModuleController::class, 'storeUsers'])->name('users.store');
+            Route::post('/notifications/store', [ModuleController::class, 'storeNotifications'])->name('notifications.store');
             Route::post('/mbo/store', [ModuleController::class, 'storeMbo'])->name('mbo.store');
         });
 

@@ -15,9 +15,9 @@ class UserResource extends NotificationResource
     public static function descriptions(): array
     {
         return [
-            'firstname' => 'First name',
-            'lastname' => 'Last name',
-            'email' => 'Email',
+            'firstname' => __('fields.firstname'),
+            'lastname' => __('fields.lastname'),
+            'email' => __('fields.email'),
         ];
     }
 
