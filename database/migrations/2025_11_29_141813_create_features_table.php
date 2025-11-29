@@ -14,7 +14,6 @@ return new class () extends Migration {
     {
         Schema::create(config('featurekit.drivers.database.table_name'), function (Blueprint $table): void {
             $table->id();
-            $table->string('type')->unique();
             $table->string('key')->unique();
             $table->boolean('enabled')->default(1);
             $table->timestamps();
