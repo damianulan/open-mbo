@@ -7,9 +7,9 @@ use App\Models\Core\User;
 use App\Models\MBO\BonusScheme;
 use App\Models\MBO\Campaign;
 use App\Models\MBO\Objective;
-use App\Models\MBO\UserObjective;
 use App\Models\MBO\ObjectiveTemplate;
 use App\Models\MBO\ObjectiveTemplateCategory;
+use App\Models\MBO\UserObjective;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
@@ -107,11 +107,11 @@ class MBOSeeder extends Seeder
             $datetime = fake()->dateTimeBetween('-3 weeks', '+2 months');
             $now = Carbon::parse($datetime);
             $campaign = new Campaign();
-            $campaign->name = [
+            $campaign->name = array(
                 'pl' => 'Testowa kampania ' . $i,
                 'en' => 'Test campaign ' . $i,
                 'it' => 'Campagna di prova ' . $i,
-            ];
+            );
             $campaign->period = '2025 Q' . fake()->numberBetween(1, 4);
             $campaign->description = fake()->text(fake()->numberBetween(500, 1000));
             $campaign->definition_from = $now->format('Y-m-d') . ' 00:00:00';

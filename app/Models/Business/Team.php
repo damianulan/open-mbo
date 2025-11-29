@@ -79,15 +79,15 @@ use Spatie\Activitylog\Models\Activity;
  */
 class Team extends BaseModel
 {
-    protected $fillable = [
+    protected $fillable = array(
         'leader_id',
         'name',
         'description',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'description' => FormattedText::class,
-    ];
+    );
 
     public function users(): BelongsToMany
     {

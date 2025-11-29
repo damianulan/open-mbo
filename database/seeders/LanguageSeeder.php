@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Spatie\TranslationLoader\LanguageLine;
 use Illuminate\Support\Str;
+use ReflectionClass;
+use Spatie\TranslationLoader\LanguageLine;
 
 class LanguageSeeder extends Seeder
 {
@@ -13,7 +14,7 @@ class LanguageSeeder extends Seeder
      */
     public function run(): void
     {
-        $langs = [
+        $langs = array(
             '\Database\Seeders\Lang\Alerts',
             '\Database\Seeders\Lang\Auth',
             '\Database\Seeders\Lang\Buttons',
@@ -32,26 +33,26 @@ class LanguageSeeder extends Seeder
             '\Database\Seeders\Lang\Pagination',
             '\Database\Seeders\Lang\Passwords',
             '\Database\Seeders\Lang\Validation',
-        ];
+        );
         foreach ($langs as $class) {
             $list = $class::list();
-            $reflection = new \ReflectionClass($class);
+            $reflection = new ReflectionClass($class);
             $group = Str::lower($reflection->getShortName());
             foreach ($list as $key => $value) {
                 $instance = LanguageLine::where('group', $group)->where('key', $key)->first();
 
                 if ($instance) {
-                    LanguageLine::create([
+                    LanguageLine::create(array(
                         'group' => $group,
                         'key' => $key,
                         'text' => $value
-                    ]);
+                    ));
                 } else {
-                    LanguageLine::create([
+                    LanguageLine::create(array(
                         'group' => $group,
                         'key' => $key,
                         'text' => $value
-                    ]);
+                    ));
                 }
             }
         }

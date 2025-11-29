@@ -10,6 +10,11 @@ class IconComponent extends Component
 {
     /**
      * Create a new component instance.
+     * @param string $key
+     * @param int $ml
+     * @param int $mr
+     * @param string $classes
+     * @param bool $bi
      */
     public function __construct(
         public string $key,

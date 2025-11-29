@@ -86490,27 +86490,29 @@ $.ajaxForm = function (url, form_id) {
   }
 };
 $.makeErrorsForm = function (form_id, response) {
-  Object.keys(response.messages).forEach(function (key) {
-    var input = $(document).find("#" + form_id).find('[name="' + key + '"]');
-    if (!input || input.length == 0) {
-      input = $(document).find("#" + form_id).find('[name="' + key + '[]"]');
-    }
-    if (input) {
-      input.each(function () {
-        var element = $(this);
-        var element_id = element.attr("id");
-        var is_chosenjs = $(document).find("#" + element_id + "_chosen");
-        element.addClass("is-invalid");
-        response.messages[key].forEach(function (message) {
-          var feedback = '<div class="invalid-feedback">' + message + "</div>";
-          element.parent().closest("div").append(feedback);
+  if (response.messages && response.messages.length > 0) {
+    Object.keys(response.messages).forEach(function (key) {
+      var input = $(document).find("#" + form_id).find('[name="' + key + '"]');
+      if (!input || input.length == 0) {
+        input = $(document).find("#" + form_id).find('[name="' + key + '[]"]');
+      }
+      if (input) {
+        input.each(function () {
+          var element = $(this);
+          var element_id = element.attr("id");
+          var is_chosenjs = $(document).find("#" + element_id + "_chosen");
+          element.addClass("is-invalid");
+          response.messages[key].forEach(function (message) {
+            var feedback = '<div class="invalid-feedback">' + message + "</div>";
+            element.parent().closest("div").append(feedback);
+          });
+          if (is_chosenjs) {
+            element.trigger("chosen:updated");
+          }
         });
-        if (is_chosenjs) {
-          element.trigger("chosen:updated");
-        }
-      });
-    }
-  });
+      }
+    });
+  }
 };
 $.clearErrorsForm = function (form_id) {
   $(document).find("#" + form_id).find(".invalid-feedback").remove();

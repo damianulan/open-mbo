@@ -2,7 +2,7 @@
 
 use Spatie\Activitylog\Models\Activity;
 
-return [
+return array(
 
     /*
      * If set to false, no activities will be saved to the database.
@@ -51,4 +51,4 @@ return [
      * Laravel's database.default will be used instead.
      */
     'database_connection' => env('ACTIVITY_LOGGER_DB_CONNECTION'),
-];
+);

@@ -8,43 +8,43 @@ class Gates extends Seeder
 {
     public static function list(): array
     {
-        return [
-            'roles_plural' => [
+        return array(
+            'roles_plural' => array(
                 'pl' => 'Role',
-            ],
-            'roles.root' => [
+            ),
+            'roles.root' => array(
                 'pl' => 'Root',
-            ],
-            'roles.support' => [
+            ),
+            'roles.support' => array(
                 'pl' => 'Helpdesk',
-            ],
-            'roles.admin' => [
+            ),
+            'roles.admin' => array(
                 'pl' => 'Administrator',
-            ],
-            'roles.admin_mbo' => [
+            ),
+            'roles.admin_mbo' => array(
                 'pl' => 'Administrator MBO',
-            ],
-            'roles.admin_hr' => [
+            ),
+            'roles.admin_hr' => array(
                 'pl' => 'Administrator HR',
-            ],
-            'roles.manager' => [
+            ),
+            'roles.manager' => array(
                 'pl' => 'Menadżer',
-            ],
-            'roles.supervisor' => [
+            ),
+            'roles.supervisor' => array(
                 'pl' => 'Przełożony',
-            ],
-            'roles.employee' => [
+            ),
+            'roles.employee' => array(
                 'pl' => 'Pracownik',
-            ],
-            'roles.objective_coordinator' => [
+            ),
+            'roles.objective_coordinator' => array(
                 'pl' => 'Koordynator kategorii celów',
-            ],
-            'roles.campaign_coordinator' => [
+            ),
+            'roles.campaign_coordinator' => array(
                 'pl' => 'Koordynator kampanii MBO',
-            ],
-            'permissions.mbo-administration' => [
+            ),
+            'permissions.mbo-administration' => array(
                 'pl' => 'Administracja MBO',
-            ],
-        ];
+            ),
+        );
     }
 }

@@ -25,8 +25,8 @@ use Spatie\Activitylog\Models\Activity;
  * @property Carbon|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\MBO\ObjectiveTemplateCategory|null $category
- * @property-read Collection<int, \App\Models\MBO\Objective> $objectives
+ * @property-read ObjectiveTemplateCategory|null $category
+ * @property-read Collection<int, Objective> $objectives
  * @property-read int|null $objectives_count
  * @property-read mixed $trans
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate active()
@@ -87,21 +87,21 @@ use Spatie\Activitylog\Models\Activity;
 #[ScopedBy(ObjectiveTemplateScope::class)]
 class ObjectiveTemplate extends BaseModel implements HasObjectives
 {
-    protected $fillable = [
+    protected $fillable = array(
         'category_id',
         'name',
         'description',
         'award',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'description' => FormattedText::class,
         'draft' => 'boolean',
-    ];
+    );
 
-    protected $cascadeDelete = [
+    protected $cascadeDelete = array(
         'objectives',
-    ];
+    );
 
     public function category()
     {

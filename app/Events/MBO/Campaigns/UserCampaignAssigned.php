@@ -10,10 +10,12 @@ use Illuminate\Queue\SerializesModels;
 
 class UserCampaignAssigned implements NotifiableEvent
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable;
+    use SerializesModels;
 
     /**
      * Create a new event instance.
+     * @param UserCampaign $userCampaign
      */
     public function __construct(
         public UserCampaign $userCampaign

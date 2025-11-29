@@ -15,7 +15,7 @@ use TypeError;
 
 class ChartFactory
 {
-    public static function loadForModel(string $name, Model $model, array $options = []): Chart
+    public static function loadForModel(string $name, Model $model, array $options = array()): Chart
     {
         $lib = new ModelCharts($options);
         $reflection = new ReflectionClass($lib);
@@ -23,11 +23,11 @@ class ChartFactory
 
         try {
             $method = Collection::make($reflection->getMethods(ReflectionMethod::IS_PUBLIC))
-                ->filter(fn($method) => $method->getName() === $name)
-                ->map(fn($method) => $method->getName())
+                ->filter(fn ($method) => $method->getName() === $name)
+                ->map(fn ($method) => $method->getName())
                 ->first();
 
-            if (! $method) {
+            if ( ! $method) {
                 throw new ChartNotFound($name);
             }
 

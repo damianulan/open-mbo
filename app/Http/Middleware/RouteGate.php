@@ -11,25 +11,26 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RouteGate
 {
-    private static $fallbacks = [
-        'settings.general' => [
+    private static $fallbacks = array(
+        'settings.general' => array(
             'settings.server.index',
             'settings.logs.index',
-        ],
-        'settings.server' => [
+        ),
+        'settings.server' => array(
             'settings.general.index',
             'settings.logs.index',
-        ],
-        'settings.logs' => [
+        ),
+        'settings.logs' => array(
             'settings.general.index',
             'settings.server.index',
-        ],
-    ];
+        ),
+    );
 
     /**
      * @param  mixed  $request
      * @param  mixed  $permission
      * @param  mixed  $context
+     * @param Closure $next
      * @return void
      */
     public function handle($request, Closure $next, $permission, $context = null): Response

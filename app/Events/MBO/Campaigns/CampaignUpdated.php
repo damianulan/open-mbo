@@ -9,10 +9,12 @@ use Illuminate\Queue\SerializesModels;
 
 class CampaignUpdated implements ShouldDispatchAfterCommit
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable;
+    use SerializesModels;
 
     /**
      * Create a new event instance.
+     * @param Campaign $campaign
      */
     public function __construct(
         public Campaign $campaign

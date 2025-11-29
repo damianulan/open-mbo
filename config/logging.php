@@ -5,7 +5,7 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
 use Monolog\Processor\PsrLogMessageProcessor;
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -31,10 +31,10 @@ return [
     |
     */
 
-    'deprecations' => [
+    'deprecations' => array(
         'channel' => env('LOG_DEPRECATIONS_CHANNEL', 'null'),
         'trace' => env('LOG_DEPRECATIONS_TRACE', false),
-    ],
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -50,81 +50,81 @@ return [
     |
     */
 
-    'channels' => [
+    'channels' => array(
 
-        'stack' => [
+        'stack' => array(
             'driver' => 'stack',
             'channels' => explode(',', env('LOG_STACK', 'single')),
             'ignore_exceptions' => false,
-        ],
+        ),
 
-        'single' => [
+        'single' => array(
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             'replace_placeholders' => true,
-        ],
+        ),
 
-        'daily' => [
+        'daily' => array(
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => env('LOG_DAILY_DAYS', 14),
             'replace_placeholders' => true,
-        ],
+        ),
 
-        'papertrail' => [
+        'papertrail' => array(
             'driver' => 'monolog',
             'level' => env('LOG_LEVEL', 'debug'),
             'handler' => env('LOG_PAPERTRAIL_HANDLER', SyslogUdpHandler::class),
-            'handler_with' => [
+            'handler_with' => array(
                 'host' => env('PAPERTRAIL_URL'),
                 'port' => env('PAPERTRAIL_PORT'),
                 'connectionString' => 'tls://' . env('PAPERTRAIL_URL') . ':' . env('PAPERTRAIL_PORT'),
-            ],
-            'processors' => [PsrLogMessageProcessor::class],
-        ],
+            ),
+            'processors' => array(PsrLogMessageProcessor::class),
+        ),
 
-        'stderr' => [
+        'stderr' => array(
             'driver' => 'monolog',
             'level' => env('LOG_LEVEL', 'debug'),
             'handler' => StreamHandler::class,
             'formatter' => env('LOG_STDERR_FORMATTER'),
-            'with' => [
+            'with' => array(
                 'stream' => 'php://stderr',
-            ],
-            'processors' => [PsrLogMessageProcessor::class],
-        ],
+            ),
+            'processors' => array(PsrLogMessageProcessor::class),
+        ),
 
-        'syslog' => [
+        'syslog' => array(
             'driver' => 'syslog',
             'level' => env('LOG_LEVEL', 'debug'),
             'facility' => env('LOG_SYSLOG_FACILITY', LOG_USER),
             'replace_placeholders' => true,
-        ],
+        ),
 
-        'errorlog' => [
+        'errorlog' => array(
             'driver' => 'errorlog',
             'level' => env('LOG_LEVEL', 'debug'),
             'replace_placeholders' => true,
-        ],
+        ),
 
-        'null' => [
+        'null' => array(
             'driver' => 'monolog',
             'handler' => NullHandler::class,
-        ],
+        ),
 
-        'emergency' => [
+        'emergency' => array(
             'path' => storage_path('logs/laravel.log'),
-        ],
+        ),
 
-        'states' => [
+        'states' => array(
             'driver' => 'daily',
             'path' => storage_path('logs/states/states.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => env('LOG_DAILY_DAYS', 0),
-        ],
+        ),
 
-    ],
+    ),
 
-];
+);

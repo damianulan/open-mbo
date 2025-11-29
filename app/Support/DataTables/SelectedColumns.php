@@ -35,17 +35,17 @@ class SelectedColumns extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = [
+    protected $fillable = array(
         'user_id',
         'table_id',
         'columns',
         'selected',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'columns' => 'array',
         'selected' => 'array',
-    ];
+    );
 
     public static function findColumn(string $datatable_id)
     {

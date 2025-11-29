@@ -13,7 +13,7 @@ class UsersForm extends Form
 
     protected static ?string $backRoute = 'settings.modules.index';
 
-    protected static array $backParams = ['module' => 'users'];
+    protected static array $backParams = array('module' => 'users');
 
     public static function definition(Request $request, $model = null): FormBuilder
     {
@@ -22,17 +22,19 @@ class UsersForm extends Form
             ->add(FormComponent::hidden('module', 'users'))
             ->addSection(__('forms.settings.general.general'), fn (FormBuilder $builder) => $builder
                 ->add(FormComponent::switch('password_change_firstlogin', $model)->label(__('forms.settings.users.password_change_firstlogin'))->info(__('forms.settings.users.info.password_change_firstlogin'))->key(self::settingsKey('users.password_change_firstlogin'))))
-            ->addSection(__('forms.employments.index'), fn (FormBuilder $builder) => $builder
-                ->add(FormComponent::switch('multiple_employments', $model)->label(__('forms.settings.users.multiple_employments'))->info(__('forms.settings.users.info.multiple_employments'))->key(self::settingsKey('users.multiple_employments')))
-                )
+            ->addSection(
+                __('forms.employments.index'),
+                fn (FormBuilder $builder) => $builder
+                    ->add(FormComponent::switch('multiple_employments', $model)->label(__('forms.settings.users.multiple_employments'))->info(__('forms.settings.users.info.multiple_employments'))->key(self::settingsKey('users.multiple_employments')))
+            )
             ->addSubmit();
     }
 
     public static function validation(Request $request, $model_id = null): array
     {
-        return [
+        return array(
             'password_change_firstlogin' => 'boolean',
             'multiple_employments' => 'boolean',
-        ];
+        );
     }
 }

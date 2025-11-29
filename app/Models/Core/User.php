@@ -14,6 +14,7 @@ use App\Models\MBO\Objective;
 use App\Models\MBO\UserBonusScheme;
 use App\Models\MBO\UserCampaign;
 use App\Models\MBO\UserObjective;
+use App\Models\MBO\UserPoints;
 use App\Models\Vendor\ActivityModel;
 use App\Support\Notifications\Models\MailNotification;
 use App\Support\Notifications\Models\SystemNotification;
@@ -66,7 +67,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read int|null $activities_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, ActivityModel> $activity
  * @property-read int|null $activity_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\MBO\UserPoints> $awards
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, UserPoints> $awards
  * @property-read int|null $awards_count
  * @property-read BonusScheme|null $bonus_scheme
  * @property-read \Illuminate\Database\Eloquent\Collection<int, UserCampaign> $campaigns
@@ -98,8 +99,8 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Permission> $permissions
  * @property-read int|null $permissions_count
  * @property-read mixed $points
- * @property-read \App\Models\Core\UserPreference|null $preferences
- * @property-read \App\Models\Core\UserProfile|null $profile
+ * @property-read UserPreference|null $preferences
+ * @property-read UserProfile|null $profile
  * @property-read Collection $sessions
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $subordinates
  * @property-read int|null $subordinates_count
@@ -147,30 +148,47 @@ use Spatie\Activitylog\Models\Activity;
  */
 class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 {
-    use CascadeDeletes, HasApiTokens, HasFactory, HasRolesAndPermissions, Notifiable, RequestForms, SoftDeletes, UUID, Favouritable;
-    use Commentable, Commentator, Impersonable, Impersonate, ModelActivity, Searchable, UserBusiness, UserMBO, VirginModel, IsTranslated;
+    use CascadeDeletes;
+    use Commentable;
+    use Commentator;
+    use Favouritable;
+    use HasApiTokens;
+    use HasFactory;
+    use HasRolesAndPermissions;
+    use Impersonable;
+    use Impersonate;
+    use IsTranslated;
+    use ModelActivity;
+    use Notifiable;
+    use RequestForms;
+    use Searchable;
+    use SoftDeletes;
+    use UUID;
+    use UserBusiness;
+    use UserMBO;
+    use VirginModel;
 
-    protected $fillable = [
+    protected $fillable = array(
         'email',
         'active',
         'core',
         'force_password_change',
-    ];
+    );
 
-    protected $hidden = [
+    protected $hidden = array(
         'password',
         'remember_token',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'email_verified_at' => 'datetime',
         'created_at' => 'datetime',
-    ];
+    );
 
-    protected $cascadeDeletes = [
+    protected $cascadeDeletes = array(
         'profile',
         'preferences',
-    ];
+    );
 
     public static function findByEmail(string $email): ?User
     {
@@ -196,9 +214,9 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function nameDetails()
     {
-        $view = view('components.datatables.username', ['data' => $this]);
+        $view = view('components.datatables.username', array('data' => $this));
         if (Auth::user()->can('view', $this)) {
-            $view = view('components.datatables.username_link', ['data' => $this]);
+            $view = view('components.datatables.username_link', array('data' => $this));
         }
 
         return $view;
@@ -283,7 +301,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         $letterNum = Alphabet::getAlphabetPosition($initials);
 
         $color = 'primary';
-        if (! $this->isAdmin()) {
+        if ( ! $this->isAdmin()) {
             if ($letterNum < 4) {
                 $color = 'orange';
             } elseif ($letterNum < 8) {
@@ -297,7 +315,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
             }
         }
         $indicator = '';
-        if (! $this->itsMe() && $this->isLoggedIn()) {
+        if ( ! $this->itsMe() && $this->isLoggedIn()) {
             $indicator = '<div class="profile-indicator"></div>';
         }
 
@@ -306,7 +324,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function canBeImpersonated(): bool
     {
-        return ! $this->hasAnyRoles(['root', 'support']) || isRoot(true);
+        return ! $this->hasAnyRoles(array('root', 'support')) || isRoot(true);
     }
 
     public function canImpersonate(): bool
@@ -352,14 +370,14 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     public function scopeWhereFirstname(Builder $query, string $value): void
     {
         $query->whereHas('profile', function (Builder $query) use ($value): void {
-            $query->whereRaw('LOWER(`firstname`) LIKE ?', [Str::lower($value)]);
+            $query->whereRaw('LOWER(`firstname`) LIKE ?', array(Str::lower($value)));
         });
     }
 
     public function scopeWhereLastname(Builder $query, string $value): void
     {
         $query->whereHas('profile', function (Builder $query) use ($value): void {
-            $query->whereRaw('LOWER(`lastname`) LIKE ?', [Str::lower($value)]);
+            $query->whereRaw('LOWER(`lastname`) LIKE ?', array(Str::lower($value)));
         });
     }
 
@@ -371,7 +389,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     protected static function booted(): void
     {
         static::creating(function (User $user) {
-            if (!isset($user->password) || empty($user->password)) {
+            if ( ! isset($user->password) || empty($user->password)) {
                 $user->generatePassword();
             }
 
@@ -394,14 +412,14 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         $value = $this->profile?->firstname . ' ' . $this->profile?->lastname;
 
         return Attribute::make(
-            get: fn() => mb_ucfirst($value),
+            get: fn () => mb_ucfirst($value),
         );
     }
 
     protected function sessions(): Attribute
     {
         return Attribute::make(
-            get: fn(): Collection => 'database' === config('session.driver') ? DB::table('sessions')->where('user_id', $this->id)->orderByDesc('last_activity')->get() : new Collection(),
+            get: fn (): Collection => 'database' === config('session.driver') ? DB::table('sessions')->where('user_id', $this->id)->orderByDesc('last_activity')->get() : new Collection(),
         );
     }
 }

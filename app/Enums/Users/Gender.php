@@ -6,26 +6,26 @@ use Lucent\Support\Enum;
 
 class Gender extends Enum
 {
-    const MALE = 'm';
+    public const MALE = 'm';
 
-    const FEMALE = 'f';
+    public const FEMALE = 'f';
 
-    const OTHER = 'o';
+    public const OTHER = 'o';
 
     public static function conservative(): array
     {
-        return [
+        return array(
             self::MALE,
             self::FEMALE,
-        ];
+        );
     }
 
     public static function labels(): array
     {
-        return [
+        return array(
             self::MALE => __('fields.gender.' . self::MALE),
             self::FEMALE => __('fields.gender.' . self::FEMALE),
             self::OTHER => __('fields.gender.' . self::OTHER),
-        ];
+        );
     }
 }

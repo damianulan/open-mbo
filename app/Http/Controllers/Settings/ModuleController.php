@@ -16,10 +16,10 @@ class ModuleController extends SettingsController
 {
     /**
      * Show the application dashboard.
-     *
-     * @return Renderable
+     * @param Request $request
+     * @param ?string $module
      */
-    public function index(Request $request, ?string $module = null)
+    public function index(Request $request, ?string $module = null): Renderable
     {
         $modules = ModuleManager::getModules();
         if (is_null($module) || ! array_key_exists($module, $modules)) {
@@ -30,14 +30,14 @@ class ModuleController extends SettingsController
         $mboModel = app(MBOSettings::class);
         $notificationModel = app(NotificationSettings::class);
 
-        return view('pages.settings.modules.index', [
+        return view('pages.settings.modules.index', array(
             'modules' => $modules,
             'mod' => $modules[$module]['id'],
             'usersForm' => UsersForm::definition($request, $userModel),
             'mboForm' => MboForm::definition($request, $mboModel),
             'notificationsForm' => NotificationsForm::definition($request, $notificationModel),
             'nav' => $this->nav(),
-        ]);
+        ));
     }
 
     public function storeMbo(Request $request, MboForm $form, MBOSettings $settings)
@@ -48,12 +48,11 @@ class ModuleController extends SettingsController
             $settings->{$key} = $value;
         }
         if ($settings->save()) {
-            return redirect()->to(route('settings.modules.index', ['module' => 'mbo']))->with('success', __('alerts.settings.success.update'));
+            return redirect()->to(route('settings.modules.index', array('module' => 'mbo')))->with('success', __('alerts.settings.success.update'));
         }
 
-        return redirect()->to(route('settings.modules.index', ['module' => 'mbo']))->with('error', __('alerts.settings.error.update'));
+        return redirect()->to(route('settings.modules.index', array('module' => 'mbo')))->with('error', __('alerts.settings.error.update'));
     }
-
 
     public function storeUsers(Request $request, UsersForm $form, UserSettings $settings)
     {
@@ -63,10 +62,10 @@ class ModuleController extends SettingsController
             $settings->{$key} = $value;
         }
         if ($settings->save()) {
-            return redirect()->to(route('settings.modules.index', ['module' => 'users']))->with('success', __('alerts.settings.success.update'));
+            return redirect()->to(route('settings.modules.index', array('module' => 'users')))->with('success', __('alerts.settings.success.update'));
         }
 
-        return redirect()->to(route('settings.modules.index', ['module' => 'users']))->with('error', __('alerts.settings.error.update'));
+        return redirect()->to(route('settings.modules.index', array('module' => 'users')))->with('error', __('alerts.settings.error.update'));
     }
 
     public function storeNotifications(Request $request, NotificationsForm $form, NotificationSettings $settings)
@@ -77,9 +76,9 @@ class ModuleController extends SettingsController
             $settings->{$key} = $value;
         }
         if ($settings->save()) {
-            return redirect()->to(route('settings.modules.index', ['module' => 'notifications']))->with('success', __('alerts.settings.success.update'));
+            return redirect()->to(route('settings.modules.index', array('module' => 'notifications')))->with('success', __('alerts.settings.success.update'));
         }
 
-        return redirect()->to(route('settings.modules.index', ['module' => 'notifications']))->with('error', __('alerts.settings.error.update'));
+        return redirect()->to(route('settings.modules.index', array('module' => 'notifications')))->with('error', __('alerts.settings.error.update'));
     }
 }

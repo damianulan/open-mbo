@@ -12,13 +12,14 @@ class ObjectiveController extends MBOController
 {
     /**
      * Display a listing of the resource.
+     * @param ObjectiveDataTable $dataTable
      */
     public function index(ObjectiveDataTable $dataTable)
     {
-        return $dataTable->render('pages.mbo.objectives.index', [
+        return $dataTable->render('pages.mbo.objectives.index', array(
             'table' => $dataTable,
             'nav' => $this->nav(),
-        ]);
+        ));
     }
 
     /**
@@ -28,6 +29,8 @@ class ObjectiveController extends MBOController
 
     /**
      * Store a newly created resource in storage.
+     * @param Request $request
+     * @param ObjectiveEditForm $form
      */
     public function store(Request $request, ObjectiveEditForm $form)
     {
@@ -48,6 +51,8 @@ class ObjectiveController extends MBOController
 
     /**
      * Display the specified resource.
+     * @param Request $request
+     * @param string $id
      */
     public function show(Request $request, string $id)
     {
@@ -56,14 +61,15 @@ class ObjectiveController extends MBOController
 
         $header = 'Podsumowanie Celu';
 
-        return view('pages.mbo.objectives.show', [
+        return view('pages.mbo.objectives.show', array(
             'objective' => $objective,
             'pagetitle' => $header,
-        ]);
+        ));
     }
 
     /**
      * Show the form for editing the specified resource.
+     * @param string $id
      */
     public function edit(string $id): void {}
 
@@ -86,24 +92,25 @@ class ObjectiveController extends MBOController
 
     /**
      * Remove the specified resource from storage.
+     * @param string $id
      */
     public function destroy(string $id): void {}
 
     public function addObjectives(Request $request, $id): View
     {
-        $params = [];
+        $params = array();
         if ($id) {
             $objective = Objective::find($id);
             if ($objective) {
-                $params = [
+                $params = array(
                     'id' => $id,
                     'form' => ObjectiveEditForm::definition($request, $objective),
-                ];
+                );
             }
         } else {
-            $params = [
+            $params = array(
                 'form' => ObjectiveEditForm::definition($request),
-            ];
+            );
         }
 
         return view('components.modals.objectives.add_objectives', $params);

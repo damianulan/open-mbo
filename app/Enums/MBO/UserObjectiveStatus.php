@@ -6,32 +6,32 @@ use Lucent\Support\Enum;
 
 class UserObjectiveStatus extends Enum
 {
-    const UNSTARTED = 'unstarted';
+    public const UNSTARTED = 'unstarted';
 
     /**
      * Objective in progress - can be marked as completed when deadline is not set and adding eveluation is possible
      */
-    const PROGRESS = 'progress';
+    public const PROGRESS = 'progress';
 
     /**
      * Evaluation is in progress
      */
-    const COMPLETED = 'completed';
+    public const COMPLETED = 'completed';
 
     /**
      * Objective marked as passed
      */
-    const PASSED = 'passed';
+    public const PASSED = 'passed';
 
     /**
      * Objective marked as failed
      */
-    const FAILED = 'failed';
+    public const FAILED = 'failed';
 
     /**
      * Objective interrupted - when involved in interrupted campaign or inactive campaign assignment
      */
-    const INTERRUPTED = 'interrupted';
+    public const INTERRUPTED = 'interrupted';
 
     /**
      * Frozen values are not editable by most system processes that automatically change status..
@@ -39,11 +39,11 @@ class UserObjectiveStatus extends Enum
      */
     public static function frozen(): array
     {
-        return [
+        return array(
             self::PASSED,
             self::FAILED,
             self::INTERRUPTED,
-        ];
+        );
     }
 
     /**
@@ -51,10 +51,10 @@ class UserObjectiveStatus extends Enum
      */
     public static function evaluated(): array
     {
-        return [
+        return array(
             self::PASSED,
             self::FAILED,
-        ];
+        );
     }
 
     /**
@@ -62,11 +62,11 @@ class UserObjectiveStatus extends Enum
      */
     public static function finished(): array
     {
-        return [
+        return array(
             self::COMPLETED,
             self::PASSED,
             self::FAILED,
-        ];
+        );
     }
 
     /**
@@ -74,23 +74,23 @@ class UserObjectiveStatus extends Enum
      */
     public static function inactive(): array
     {
-        return [
+        return array(
             self::COMPLETED,
             self::PASSED,
             self::FAILED,
             self::INTERRUPTED,
-        ];
+        );
     }
 
     public static function labels(): array
     {
-        return [
+        return array(
             self::UNSTARTED => __('mbo.objective_status.unstarted'),
             self::PROGRESS => __('mbo.objective_status.progress'),
             self::COMPLETED => __('mbo.objective_status.completed'),
             self::PASSED => __('mbo.objective_status.passed'),
             self::FAILED => __('mbo.objective_status.failed'),
             self::INTERRUPTED => __('mbo.objective_status.interrupted'),
-        ];
+        );
     }
 }

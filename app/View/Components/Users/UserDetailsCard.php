@@ -11,6 +11,7 @@ class UserDetailsCard extends Component
 {
     /**
      * Create a new component instance.
+     * @param User $user
      */
     public function __construct(public User $user) {}
 

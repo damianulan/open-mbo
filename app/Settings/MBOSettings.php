@@ -36,15 +36,11 @@ class MBOSettings extends BaseSettings
 
     /**
      * Allow administrators to evaluate their own objectives.
-     *
-     * @var bool
      */
     public bool $objectives_self_final_evaluation = true;
 
     /**
      * If weights are enabled. If not, every objective's weight equals to 1
-     *
-     * @var bool
      */
     public bool $objectives_weights = true;
 

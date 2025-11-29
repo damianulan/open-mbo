@@ -18,8 +18,8 @@ class CampaignEditUserForm extends Form
         $route = null;
         $method = 'POST';
         $title = 'Dodaj użytkowników do kampanii';
-        $selected = [];
-        $exclude = [];
+        $selected = array();
+        $exclude = array();
 
         if ($model) {
             $user_ids = UserCampaign::where('campaign_id', $model->id)->get()->pluck('user_id');
@@ -32,7 +32,7 @@ class CampaignEditUserForm extends Form
             }
             if ( ! empty($coordinators)) {
                 foreach ($coordinators as $tid) {
-                    $exclude[] = ['id' => $tid];
+                    $exclude[] = array('id' => $tid);
                 }
             }
         }
@@ -47,6 +47,6 @@ class CampaignEditUserForm extends Form
     public static function validation(Request $request, $model_id = null): array
     {
 
-        return [];
+        return array();
     }
 }

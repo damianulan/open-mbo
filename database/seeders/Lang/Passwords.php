@@ -8,22 +8,22 @@ class Passwords extends Seeder
 {
     public static function list(): array
     {
-        return [
-            'reset' => [
+        return array(
+            'reset' => array(
                 'pl' => 'Twoje hasło zostało zresetowane!',
-            ],
-            'sent' => [
+            ),
+            'sent' => array(
                 'pl' => 'Na twój adres e-mail została wysłana wiadomość z linkiem umożliwiającym zresetowanie hasła.',
-            ],
-            'throttled' => [
+            ),
+            'throttled' => array(
                 'pl' => 'Poczekaj chwilę zanim spróbujesz ponownie.',
-            ],
-            'token' => [
+            ),
+            'token' => array(
                 'pl' => 'Token odebrany przez serwer nie jest ważny.',
-            ],
-            'user' => [
+            ),
+            'user' => array(
                 'pl' => 'Nie możemy znaleźć użytkownika z takim adresem e-mail.',
-            ],
-        ];
+            ),
+        );
     }
 }

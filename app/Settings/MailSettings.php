@@ -2,8 +2,8 @@
 
 namespace App\Settings;
 
-use App\Settings\Casts\CryptCast;
 use App\Settings\Abstract\BaseSettings;
+use App\Settings\Casts\CryptCast;
 
 class MailSettings extends BaseSettings
 {
@@ -35,14 +35,14 @@ class MailSettings extends BaseSettings
 
     public static function casts(): array
     {
-        return [
+        return array(
             'mail_password' => CryptCast::class,
-        ];
+        );
     }
 
     public function safePassword()
     {
-        if (! empty($this->mail_password)) {
+        if ( ! empty($this->mail_password)) {
             $this->mail_password = 'PassProtection123@';
         }
 

@@ -17,7 +17,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property Carbon|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read Collection<int, \App\Models\Business\UserEmployment> $employments
+ * @property-read Collection<int, UserEmployment> $employments
  * @property-read int|null $employments_count
  * @property-read mixed $trans
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|TypeOfContract active()
@@ -73,18 +73,18 @@ use Spatie\Activitylog\Models\Activity;
  */
 class TypeOfContract extends BaseModel
 {
-    public static $contracts = [
+    public static $contracts = array(
         'uop',
         'uz',
         'b2b',
         'uod',
-    ];
+    );
 
-    protected $fillable = [
+    protected $fillable = array(
         'name',
         'shortname',
         'description',
-    ];
+    );
 
     public static function findByShortname($name): ?self
     {

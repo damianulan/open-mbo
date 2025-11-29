@@ -9,10 +9,10 @@ use App\Models\Business\TypeOfContract;
 use App\Models\Business\UserEmployment;
 use App\Models\Core\User;
 use App\Models\Core\UserProfile;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Throwable;
-use Illuminate\Database\Eloquent\Builder;
 
 class UserSeeder extends Seeder
 {
@@ -34,9 +34,9 @@ class UserSeeder extends Seeder
                     $y++;
                     $user = User::factory()
                         ->has(UserProfile::factory()->count(1), 'profile')
-                        ->create([
+                        ->create(array(
                             'email' => 'user' . $y . '@damianulan.me',
-                        ]);
+                        ));
 
                     $position = null;
                     if ($user) {
@@ -59,13 +59,13 @@ class UserSeeder extends Seeder
                     }
 
                     $isManagement = true;
-                    if (! $position) {
-                        $position = Position::whereNotIn('name', ['CEO', 'CTO', 'CFO'])->get()->random(1)->first();
+                    if ( ! $position) {
+                        $position = Position::whereNotIn('name', array('CEO', 'CTO', 'CFO'))->get()->random(1)->first();
                         $isManagement = false;
                     }
 
                     $chance = fake()->numberBetween(1, 3);
-                    UserEmployment::create([
+                    UserEmployment::create(array(
                         'user_id' => $user->id,
                         'company_id' => $company->id,
                         'contract_id' => TypeOfContract::all()->random(1)->first()->id,
@@ -74,22 +74,22 @@ class UserSeeder extends Seeder
                         'employment' => fake()->dateTimeBetween('-10 years', '-3 months'),
                         'release' => 3 === $chance && ! $isManagement ? fake()->dateTimeBetween('-10 months', '+1 year') : null,
 
-                    ]);
+                    ));
                 }
 
-                $company->departments->each(function (Department $department) use ($company) {
-                    User::whereHas('employments', function (Builder $query) use ($company) {
+                $company->departments->each(function (Department $department) use ($company): void {
+                    User::whereHas('employments', function (Builder $query) use ($company): void {
                         $query->whereNull('release');
                         $query->where('company_id', $company->id);
-                    })->take(1)->get()->each(function (User $supervisor) use ($company, $department) {
+                    })->take(1)->get()->each(function (User $supervisor) use ($company, $department): void {
                         $supervisor->assignRoleSlug('supervisor');
 
-                        User::whereHas('employments', function (Builder $query) use ($company, $department) {
+                        User::whereHas('employments', function (Builder $query) use ($company, $department): void {
                             $query->whereNull('release');
                             $query->where('company_id', $company->id);
                             $query->where('department_id', $department->id);
-                        })->get()->each(function (User $user) use ($supervisor) {
-                            $user->refreshSupervisors([$supervisor->id]);
+                        })->get()->each(function (User $user) use ($supervisor): void {
+                            $user->refreshSupervisors(array($supervisor->id));
                         });
                     });
                 });

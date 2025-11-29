@@ -8,109 +8,109 @@ class Globals extends Seeder
 {
     public static function list(): array
     {
-        return [
-            'notifications' => [
+        return array(
+            'notifications' => array(
                 'pl' => 'Powiadomienia',
-            ],
-            'yes' => [
+            ),
+            'yes' => array(
                 'pl' => 'Tak',
-            ],
-            'no' => [
+            ),
+            'no' => array(
                 'pl' => 'Nie',
-            ],
-            'search' => [
+            ),
+            'search' => array(
                 'pl' => 'Szukaj',
-            ],
-            'you' => [
+            ),
+            'you' => array(
                 'pl' => 'Ty',
-            ],
-            'no_data' => [
+            ),
+            'no_data' => array(
                 'pl' => 'Brak danych',
-            ],
-            'no_assigned' => [
+            ),
+            'no_assigned' => array(
                 'pl' => 'Brak przypisanych',
-            ],
-            'turned_on_male' => [
+            ),
+            'turned_on_male' => array(
                 'pl' => 'Włączony',
-            ],
-            'turned_on_female' => [
+            ),
+            'turned_on_female' => array(
                 'pl' => 'Włączona',
-            ],
-            'turned_on_other' => [
+            ),
+            'turned_on_other' => array(
                 'pl' => 'Włączone',
-            ],
-            'turned_off_male' => [
+            ),
+            'turned_off_male' => array(
                 'pl' => 'Wyłączony',
-            ],
-            'turned_off_female' => [
+            ),
+            'turned_off_female' => array(
                 'pl' => 'Wyłączona',
-            ],
-            'turned_off_other' => [
+            ),
+            'turned_off_other' => array(
                 'pl' => 'Wyłączone',
-            ],
-            'select_choose' => [
+            ),
+            'select_choose' => array(
                 'pl' => 'Wybierz...',
-            ],
-            'search_no_results' => [
+            ),
+            'search_no_results' => array(
                 'pl' => 'Brak wyników dla wyszukiwanej frazy.',
-            ],
-            'enter_address' => [
+            ),
+            'enter_address' => array(
                 'pl' => 'Wprowadź adres',
-            ],
-            'hello' => [
+            ),
+            'hello' => array(
                 'pl' => 'Cześć',
-            ],
-            'not_applicable' => [
+            ),
+            'not_applicable' => array(
                 'pl' => 'Nie dotyczy',
-            ],
-            'pnts' => [
+            ),
+            'pnts' => array(
                 'pl' => 'pkt',
-            ],
-            'privately' => [
+            ),
+            'privately' => array(
                 'pl' => 'Prywatnie',
-            ],
-            'draft' => [
+            ),
+            'draft' => array(
                 'pl' => 'Kopia robocza',
-            ],
-            'manual' => [
+            ),
+            'manual' => array(
                 'pl' => 'Tryb ręczny',
-            ],
-            'page_no_content' => [
+            ),
+            'page_no_content' => array(
                 'pl' => 'Brak zawartości strony',
-            ],
-            'page_content_info' => [
+            ),
+            'page_content_info' => array(
                 'pl' => 'Jeśli możesz - stwórz samodzielnie nową zawartość, lub wróć później.',
-            ],
-            'active' => [
+            ),
+            'active' => array(
                 'pl' => 'Aktywne',
-            ],
-            'inactive' => [
+            ),
+            'inactive' => array(
                 'pl' => 'Nieaktywne',
-            ],
-            'summary' => [
+            ),
+            'summary' => array(
                 'pl' => 'Podsumowanie',
-            ],
-            'column' => [
+            ),
+            'column' => array(
                 'pl' => 'Kolumna',
-            ],
-            'columns' => [
+            ),
+            'columns' => array(
                 'pl' => 'Kolumny',
-            ],
-            'langs.pl' => [
+            ),
+            'langs.pl' => array(
                 'pl' => 'Polski',
-            ],
-            'langs.en' => [
+            ),
+            'langs.en' => array(
                 'pl' => 'Angielski',
-            ],
-            'datatables.select_columns' => [
+            ),
+            'datatables.select_columns' => array(
                 'pl' => 'Wybierz kolumny do wyświetlenia',
-            ],
-            'datatables.to_excel' => [
+            ),
+            'datatables.to_excel' => array(
                 'pl' => 'Eksport do pliku Excel',
-            ],
-            'datatables.to_csv' => [
+            ),
+            'datatables.to_csv' => array(
                 'pl' => 'Eksport do pliku CSV',
-            ],
-        ];
+            ),
+        );
     }
 }

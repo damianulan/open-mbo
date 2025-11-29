@@ -22,13 +22,13 @@ class CampaignUserController extends AppController
         $this->logShow($userCampaign);
         $header = $userCampaign->campaign->name . ' [' . $userCampaign->campaign->period . ']';
 
-        return view('pages.mbo.campaigns.user', [
+        return view('pages.mbo.campaigns.user', array(
             'campaign' => $userCampaign->campaign,
             'userCampaign' => $userCampaign,
             'user' => $userCampaign->user,
             'chartCompletion' => $userCampaign->chart('user_campaign_completion'),
             'pagetitle' => $header,
-        ]);
+        ));
     }
 
     public function update(Request $request, $id, CampaignEditUserForm $form)
@@ -68,7 +68,7 @@ class CampaignUserController extends AppController
     {
         $uc = UserCampaign::findOrFail($id);
         $uc->nextStage();
-        $message = __('mbo.info.campaign_stage_changed', ['stage' => $uc->stageDescription()]);
+        $message = __('mbo.info.campaign_stage_changed', array('stage' => $uc->stageDescription()));
 
         return redirect()->back()->with('success', $message);
     }
@@ -77,7 +77,7 @@ class CampaignUserController extends AppController
     {
         $uc = UserCampaign::findOrFail($id);
         $uc->previousStage();
-        $message = __('mbo.info.campaign_stage_changed', ['stage' => $uc->stageDescription()]);
+        $message = __('mbo.info.campaign_stage_changed', array('stage' => $uc->stageDescription()));
 
         return redirect()->back()->with('success', $message);
     }
@@ -94,14 +94,14 @@ class CampaignUserController extends AppController
 
     public function addUsers(Request $request, $id): View
     {
-        $params = [];
+        $params = array();
         if ($id) {
             $campaign = Campaign::find($id);
             if ($campaign) {
-                $params = [
+                $params = array(
                     'id' => $id,
                     'form' => CampaignEditUserForm::definition($request, $campaign),
-                ];
+                );
             }
         }
 

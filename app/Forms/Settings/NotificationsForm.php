@@ -13,25 +13,27 @@ class NotificationsForm extends Form
 
     protected static ?string $backRoute = 'settings.modules.index';
 
-    protected static array $backParams = ['module' => 'notifications'];
+    protected static array $backParams = array('module' => 'notifications');
 
     public static function definition(Request $request, $model = null): FormBuilder
     {
         return FormBuilder::boot($request, 'post', route('settings.modules.notifications.store'), 'notifications_settings')
             ->class('settings-form')
             ->add(FormComponent::hidden('module', 'notifications'))
-            ->addSection(__('forms.settings.general.general'), fn (FormBuilder $builder) => $builder
-                ->add(FormComponent::switch('mail_notifications', $model)->label(__('forms.settings.notifications.mail_notifications'))->info(__('forms.settings.notifications.info.mail_notifications'))->key(self::settingsKey('notifications.mail_notifications')))
-                ->add(FormComponent::switch('system_notifications', $model)->label(__('forms.settings.notifications.system_notifications'))->info(__('forms.settings.notifications.info.system_notifications'))->key(self::settingsKey('notifications.system_notifications')))
-                )
+            ->addSection(
+                __('forms.settings.general.general'),
+                fn (FormBuilder $builder) => $builder
+                    ->add(FormComponent::switch('mail_notifications', $model)->label(__('forms.settings.notifications.mail_notifications'))->info(__('forms.settings.notifications.info.mail_notifications'))->key(self::settingsKey('notifications.mail_notifications')))
+                    ->add(FormComponent::switch('system_notifications', $model)->label(__('forms.settings.notifications.system_notifications'))->info(__('forms.settings.notifications.info.system_notifications'))->key(self::settingsKey('notifications.system_notifications')))
+            )
             ->addSubmit();
     }
 
     public static function validation(Request $request, $model_id = null): array
     {
-        return [
+        return array(
             'mail_notifications' => 'boolean',
             'system_notifications' => 'boolean',
-        ];
+        );
     }
 }

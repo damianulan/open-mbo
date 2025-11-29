@@ -8,79 +8,79 @@ class Fields extends Seeder
 {
     public static function list(): array
     {
-        return [
-            'firstname' => [
+        return array(
+            'firstname' => array(
                 'pl' => 'Imię',
-            ],
-            'lastname' => [
+            ),
+            'lastname' => array(
                 'pl' => 'Nazwisko',
-            ],
-            'firstname_lastname' => [
+            ),
+            'firstname_lastname' => array(
                 'pl' => 'Imię i nazwisko',
-            ],
-            'email' => [
+            ),
+            'email' => array(
                 'pl' => 'E-mail',
-            ],
-            'login' => [
+            ),
+            'login' => array(
                 'pl' => 'Login',
-            ],
-            'password' => [
+            ),
+            'password' => array(
                 'pl' => 'Hasło',
-            ],
-            'status' => [
+            ),
+            'status' => array(
                 'pl' => 'Status',
-            ],
-            'stage' => [
+            ),
+            'stage' => array(
                 'pl' => 'Etap',
-            ],
-            'action' => [
+            ),
+            'action' => array(
                 'pl' => 'Akcje',
-            ],
-            'name' => [
+            ),
+            'name' => array(
                 'pl' => 'Nazwa',
-            ],
-            'title' => [
+            ),
+            'title' => array(
                 'pl' => 'Tytuł',
-            ],
-            'category' => [
+            ),
+            'category' => array(
                 'pl' => 'Kategoria',
-            ],
-            'position' => [
+            ),
+            'position' => array(
                 'pl' => 'Stanowisko',
-            ],
-            'created_at' => [
+            ),
+            'created_at' => array(
                 'pl' => 'Utworzono',
-            ],
-            'updated_at' => [
+            ),
+            'updated_at' => array(
                 'pl' => 'Zaktualizowano',
-            ],
-            'quote_authored' => [
+            ),
+            'quote_authored' => array(
                 'pl' => ' napisał(a)',
-            ],
-            'quote_at' => [
+            ),
+            'quote_at' => array(
                 'pl' => 'o',
-            ],
-            'gender.m' => [
+            ),
+            'gender.m' => array(
                 'pl' => 'Mężczyzna',
-            ],
-            'gender.f' => [
+            ),
+            'gender.f' => array(
                 'pl' => 'Kobieta',
-            ],
-            'gender.o' => [
+            ),
+            'gender.o' => array(
                 'pl' => 'Inna',
-            ],
-            'type_of_contract.uop' => [
+            ),
+            'type_of_contract.uop' => array(
                 'pl' => 'Umowa o pracę',
-            ],
-            'type_of_contract.uod' => [
+            ),
+            'type_of_contract.uod' => array(
                 'pl' => 'Umowa o dzieło',
-            ],
-            'type_of_contract.uz' => [
+            ),
+            'type_of_contract.uz' => array(
                 'pl' => 'Umowa zlecenie',
-            ],
-            'type_of_contract.b2b' => [
+            ),
+            'type_of_contract.b2b' => array(
                 'pl' => 'B2B',
-            ],
-        ];
+            ),
+        );
     }
 }

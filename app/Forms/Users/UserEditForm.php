@@ -18,8 +18,8 @@ class UserEditForm extends Form
     {
         $route = route('users.store');
         $method = 'POST';
-        $exclude = [];
-        $selected = [];
+        $exclude = array();
+        $selected = array();
         $profile = null;
         if ( ! is_null($model)) {
             $method = 'PUT';
@@ -49,11 +49,11 @@ class UserEditForm extends Form
 
     public static function validation(Request $request, $model = null): array
     {
-        return [
+        return array(
             'firstname' => 'max:255|required',
             'lastname' => 'max:255|required',
             'email' => 'max:255|email|required',
             'birthday' => 'date|nullable',
-        ];
+        );
     }
 }

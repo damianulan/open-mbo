@@ -9,10 +9,12 @@ use Illuminate\Queue\SerializesModels;
 
 class EmploymentUpdated implements ShouldDispatchAfterCommit
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable;
+    use SerializesModels;
 
     /**
      * Create a new event instance.
+     * @param UserEmployment $employment
      */
     public function __construct(
         public UserEmployment $employment

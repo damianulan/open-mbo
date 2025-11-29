@@ -33,16 +33,16 @@ class MailNotification extends NotificationModel
 {
     protected $table = 'mail_notifications';
 
-    protected $fillable = [
+    protected $fillable = array(
         'notification_id',
         'notifiable_type',
         'notifiable_id',
         'resources',
         'subject',
         'contents',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'created_at' => 'datetime',
-    ];
+    );
 }

@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class() extends Migration
-{
+return new class () extends Migration {
     public function up(): void
     {
         Schema::create('tags', function (Blueprint $table): void {
@@ -24,7 +23,7 @@ return new class() extends Migration
 
             $table->uuidMorphs('taggable');
 
-            $table->unique(['tag_id', 'taggable_id', 'taggable_type']);
+            $table->unique(array('tag_id', 'taggable_id', 'taggable_type'));
         });
     }
 

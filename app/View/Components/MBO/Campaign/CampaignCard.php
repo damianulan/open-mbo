@@ -12,6 +12,8 @@ class CampaignCard extends Component
 {
     /**
      * Create a new component instance.
+     * @param Campaign $campaign
+     * @param UserCampaign $userCampaign
      */
     public function __construct(public Campaign $campaign, public UserCampaign $userCampaign = new UserCampaign()) {}
 

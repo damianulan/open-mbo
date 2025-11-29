@@ -1,10 +1,10 @@
 <?php
 
-return [
+return array(
     /*
      * Namespaces used by the generator.
      */
-    'namespace' => [
+    'namespace' => array(
         /*
          * Base namespace/directory to create the new file.
          * This is appended on default Laravel namespace.
@@ -24,7 +24,7 @@ return [
          * Export filename: posts_timestamp
          */
         'model' => 'App\\Models',
-    ],
+    ),
 
     /*
      * Set Custom stub folder
@@ -42,37 +42,37 @@ return [
     /*
      * Snappy PDF options.
      */
-    'snappy' => [
-        'options' => [
+    'snappy' => array(
+        'options' => array(
             'no-outline' => true,
             'margin-left' => '0',
             'margin-right' => '0',
             'margin-top' => '10mm',
             'margin-bottom' => '10mm',
-        ],
+        ),
         'orientation' => 'landscape',
-    ],
+    ),
 
     /*
      * Default html builder parameters.
      */
-    'parameters' => [
+    'parameters' => array(
         'dom' => 'Bfrtip',
-        'order' => [[0, 'desc']],
-        'buttons' => [
+        'order' => array(array(0, 'desc')),
+        'buttons' => array(
             'excel',
             'csv',
             'pdf',
             'print',
             'reset',
             'reload',
-        ],
-    ],
+        ),
+    ),
 
     /*
      * Generator command default options value.
      */
-    'generator' => [
+    'generator' => array(
         /*
          * Default columns to generate when not set.
          */
@@ -87,5 +87,5 @@ return [
          * Default DOM to generate when not set.
          */
         'dom' => 'Bfrtip',
-    ],
-];
+    ),
+);

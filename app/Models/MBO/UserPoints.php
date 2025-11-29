@@ -25,7 +25,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read User|null $assigner
- * @property-read Model|\Eloquent $subject
+ * @property-read Model|Eloquent $subject
  * @property-read mixed $trans
  * @property-read User $user
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints active()
@@ -84,13 +84,13 @@ use Spatie\Activitylog\Models\Activity;
  */
 class UserPoints extends BaseModel
 {
-    protected $fillable = [
+    protected $fillable = array(
         'user_id',
         'subject_id',
         'subject_type',
         'points',
         'assigned_by',
-    ];
+    );
 
     public function subject(): MorphTo
     {

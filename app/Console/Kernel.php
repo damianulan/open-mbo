@@ -5,15 +5,16 @@ namespace App\Console;
 use App\Console\Commands\Core\AppRefresh;
 use App\Console\Commands\Core\AppUpgrade;
 use App\Console\Commands\MBO\MBOVerifyStatusScript;
+use App\Console\Commands\Settings\SettingsMigrate;
 use App\Support\Notifications\NotificationScheduler;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Console\Commands\Settings\SettingsMigrate;
 
 class Kernel extends ConsoleKernel
 {
     /**
      * Define the application's command schedule.
+     * @param Schedule $schedule
      */
     protected function schedule(Schedule $schedule): void
     {

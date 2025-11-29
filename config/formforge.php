@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -17,11 +17,11 @@ return [
      */
     'default' => env('FORMFORGE_TEMPLATE', 'horizontal'),
 
-    'templates' => [
-        'horizontal' => [],
-        '2columns' => [],
-        'vertical' => [],
-    ],
+    'templates' => array(
+        'horizontal' => array(),
+        '2columns' => array(),
+        'vertical' => array(),
+    ),
 
     /**
      * Declare the default date format, that will be used in date fields.
@@ -40,4 +40,4 @@ return [
      */
     'dispatches_events' => false,
 
-];
+);

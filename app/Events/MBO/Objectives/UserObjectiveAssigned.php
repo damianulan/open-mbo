@@ -5,16 +5,18 @@ namespace App\Events\MBO\Objectives;
 use App\Models\MBO\UserObjective;
 use App\Support\Notifications\Contracts\NotifiableEvent;
 use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Database\Eloquent\Model;
 
 class UserObjectiveAssigned implements ShouldDispatchAfterCommit, NotifiableEvent
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable;
+    use SerializesModels;
 
     /**
      * Create a new event instance.
+     * @param UserObjective $userObjective
      */
     public function __construct(
         public UserObjective $userObjective

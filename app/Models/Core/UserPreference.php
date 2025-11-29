@@ -21,7 +21,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
- * @property-read \App\Models\Core\User $user
+ * @property-read User $user
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference onlyTrashed()
@@ -43,11 +43,13 @@ use Illuminate\Support\Carbon;
  */
 class UserPreference extends Model
 {
-    use HasFactory, RequestForms, SoftDeletes;
+    use HasFactory;
+    use RequestForms;
+    use SoftDeletes;
 
     protected $table = 'user_preferences';
 
-    protected $fillable = [
+    protected $fillable = array(
         'user_id',
         'lang',
         'theme',
@@ -55,23 +57,23 @@ class UserPreference extends Model
         'app_notifications',
         'extended_notifications',
         'system_notifications',
-    ];
+    );
 
-    protected $attributes = [
+    protected $attributes = array(
         'lang' => 'auto',
         'theme' => 'auto',
         'mail_notifications' => 1,
         'app_notifications' => 1,
         'extended_notifications' => 1,
         'system_notifications' => 1,
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'mail_notifications' => 'boolean',
         'app_notifications' => 'boolean',
         'extended_notifications' => 'boolean',
         'system_notifications' => 'boolean',
-    ];
+    );
 
     public function user(): BelongsTo
     {

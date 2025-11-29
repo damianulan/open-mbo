@@ -6,7 +6,7 @@ use Lucent\Support\Enum;
 
 class StructureField extends Enum
 {
-    const TEXT = 'text';
+    public const TEXT = 'text';
 
-    const SELECT = 'select';
+    public const SELECT = 'select';
 }

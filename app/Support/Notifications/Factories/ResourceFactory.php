@@ -5,8 +5,9 @@ namespace App\Support\Notifications\Factories;
 use App\Support\Notifications\Contracts\NotifiableEvent;
 use App\Support\Notifications\Contracts\NotificationResource;
 use Illuminate\Database\Eloquent\Model;
-use ReflectionClass;
 use Illuminate\Support\Facades\Log;
+use ReflectionClass;
+use ReflectionProperty;
 
 class ResourceFactory
 {
@@ -15,10 +16,10 @@ class ResourceFactory
         $reflection = new ReflectionClass($model);
         $shortname = $reflection->getShortName() . 'Resource';
         $class = match (get_class($model)) {
-            default => "\\App\\Notifications\\Resources\\$shortname",
+            default => "\\App\\Notifications\\Resources\\{$shortname}",
         };
-        Log::debug("NotificationResource::matchModel class $class");
-        if(class_exists($class)){
+        Log::debug("NotificationResource::matchModel class {$class}");
+        if (class_exists($class)) {
             return new $class($model);
         }
 
@@ -29,10 +30,10 @@ class ResourceFactory
     {
         $reflection = new ReflectionClass($event);
 
-        $models = [];
+        $models = array();
 
         if ($reflection->implementsInterface(NotifiableEvent::class)) {
-            foreach ($reflection->getProperties(\ReflectionProperty::IS_PUBLIC) as $property) {
+            foreach ($reflection->getProperties(ReflectionProperty::IS_PUBLIC) as $property) {
                 $value = null;
                 if (is_object($event)) {
                     $value = $property->getValue($event);

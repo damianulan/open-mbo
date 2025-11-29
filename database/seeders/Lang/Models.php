@@ -8,16 +8,16 @@ class Models extends Seeder
 {
     public static function list(): array
     {
-        return [
-            'App\Models\Core\User' => [
+        return array(
+            'App\Models\Core\User' => array(
                 'pl' => 'Użytkownik',
-            ],
-            'App\Models\MBO\Campaign' => [
+            ),
+            'App\Models\MBO\Campaign' => array(
                 'pl' => 'Kampania MBO',
-            ],
-            'App\Models\MBO\Objective' => [
+            ),
+            'App\Models\MBO\Objective' => array(
                 'pl' => 'Cel',
-            ],
-        ];
+            ),
+        );
     }
 }

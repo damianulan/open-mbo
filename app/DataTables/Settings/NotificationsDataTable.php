@@ -31,18 +31,19 @@ class NotificationsDataTable extends CustomDataTable
             ->addColumn('status', function ($data) {
                 $active = ! $data->email && ! $data->system ? false : true;
 
-                return view('components.datatables.badge', [
+                return view('components.datatables.badge', array(
                     'color' => $active ? 'primary' : 'warning',
                     'text' => $active ? __('globals.active') : __('globals.inactive'),
-                ]);
+                ));
             })
-            ->addColumn('action', fn ($data) => view('pages.settings.notifications.action', [
+            ->addColumn('action', fn ($data) => view('pages.settings.notifications.action', array(
                 'data' => $data,
-            ]));
+            )));
     }
 
     /**
      * Get the query source of dataTable.
+     * @param Notification $model
      */
     public function query(Notification $model): QueryBuilder
     {
@@ -51,7 +52,7 @@ class NotificationsDataTable extends CustomDataTable
 
     protected function defaultColumns(): array
     {
-        return [
+        return array(
             'key',
             'system',
             'email',
@@ -60,12 +61,12 @@ class NotificationsDataTable extends CustomDataTable
             'conditions',
             'status',
             'action',
-        ];
+        );
     }
 
     protected function availableColumns(): array
     {
-        return [
+        return array(
             'key' => Column::make('key')
                 ->title(__('notifications.table.key'))
                 ->orderable(true)
@@ -86,7 +87,7 @@ class NotificationsDataTable extends CustomDataTable
             'action' => Column::computed('action')
                 ->title(__('notifications.table.action'))
                 ->addClass('lastcol'),
-        ];
+        );
     }
 
     /**

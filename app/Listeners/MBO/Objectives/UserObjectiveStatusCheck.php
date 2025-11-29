@@ -20,6 +20,7 @@ class UserObjectiveStatusCheck implements ShouldQueueAfterCommit
 
     /**
      * Handle the event.
+     * @param ObjectiveCreated|ObjectiveUpdated $event
      */
     public function handle(ObjectiveCreated|ObjectiveUpdated $event): void
     {

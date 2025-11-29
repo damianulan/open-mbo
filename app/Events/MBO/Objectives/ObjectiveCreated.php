@@ -9,10 +9,12 @@ use Illuminate\Queue\SerializesModels;
 
 class ObjectiveCreated implements ShouldDispatchAfterCommit
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable;
+    use SerializesModels;
 
     /**
      * Create a new event instance.
+     * @param Objective $objective
      */
     public function __construct(
         public Objective $objective

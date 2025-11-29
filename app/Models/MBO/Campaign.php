@@ -48,15 +48,15 @@ use Spatie\Translatable\HasTranslations;
  * @property-read int|null $activities_count
  * @property-read EloquentCollection<int, User> $coordinators
  * @property-read int|null $coordinators_count
- * @property-read EloquentCollection<int, \App\Models\MBO\Objective> $objectives
+ * @property-read EloquentCollection<int, Objective> $objectives
  * @property-read int|null $objectives_count
  * @property-read mixed $timeend
  * @property-read mixed $timestart
  * @property-read mixed $trans
  * @property-read mixed $translations
- * @property-read EloquentCollection<int, \App\Models\MBO\UserCampaign> $user_campaigns
+ * @property-read EloquentCollection<int, UserCampaign> $user_campaigns
  * @property-read int|null $user_campaigns_count
- * @property-read EloquentCollection<int, \App\Models\MBO\UserObjective> $user_objectives
+ * @property-read EloquentCollection<int, UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign average(string $column)
@@ -134,15 +134,18 @@ use Spatie\Translatable\HasTranslations;
 #[ScopedBy(CampaignScope::class)]
 class Campaign extends BaseModel implements HasObjectives
 {
-    use Dispatcher, HasTranslations;
+    use Dispatcher;
+    use HasTranslations;
 
     public $stages;
 
     public $timestamps = true;
 
+    public array $translatable = array('name');
+
     protected $log_name = 'mbo';
 
-    protected $fillable = [
+    protected $fillable = array(
         'name',
         'period',
         'description',
@@ -161,25 +164,23 @@ class Campaign extends BaseModel implements HasObjectives
 
         'draft',
         'manual',
-    ];
+    );
 
-    public array $translatable = ['name'];
-
-    protected $casts = [
+    protected $casts = array(
         'description' => FormattedText::class,
         'draft' => 'boolean',
         'manual' => 'boolean',
         'stage' => CampaignStage::class,
-    ];
+    );
 
-    protected $defaults = [
+    protected $defaults = array(
         'stage' => CampaignStage::PENDING,
-    ];
+    );
 
-    protected $dispatchesEvents = [
+    protected $dispatchesEvents = array(
         'updated' => CampaignUpdated::class,
         'created' => CampaignCreated::class,
-    ];
+    );
 
     public static function creatingCampaign(Campaign $model)
     {
@@ -188,7 +189,7 @@ class Campaign extends BaseModel implements HasObjectives
 
     public static function updatingCampaign(Campaign $model)
     {
-        if (! settings('mbo.campaigns_manual')) {
+        if ( ! settings('mbo.campaigns_manual')) {
             $model->manual = 0;
         }
 
@@ -217,13 +218,13 @@ class Campaign extends BaseModel implements HasObjectives
 
     public function refreshCoordinators(?array $user_ids)
     {
-        if (! $user_ids) {
-            $user_ids = [];
+        if ( ! $user_ids) {
+            $user_ids = array();
         }
 
         $current = $this->coordinators->pluck('id')->toArray();
-        $toDelete = array_filter($current, fn($value) => ! in_array($value, $user_ids));
-        $toAdd = array_filter($user_ids, fn($value) => ! in_array($value, $current));
+        $toDelete = array_filter($current, fn ($value) => ! in_array($value, $user_ids));
+        $toAdd = array_filter($user_ids, fn ($value) => ! in_array($value, $current));
 
         foreach ($toDelete as $user_id) {
             $user = User::find($user_id);
@@ -244,13 +245,13 @@ class Campaign extends BaseModel implements HasObjectives
     public function assignUser($user_id)
     {
         $exists = $this->user_campaigns()->where('user_id', $user_id)->exists();
-        if (! $exists) {
-            $this->user_campaigns()->create([
+        if ( ! $exists) {
+            $this->user_campaigns()->create(array(
                 'user_id' => $user_id,
                 'stage' => $this->setUserStage($user_id),
                 'manual' => $this->manual,
                 'active' => $this->draft ? 0 : 1,
-            ]);
+            ));
         }
 
         return true;
@@ -268,7 +269,7 @@ class Campaign extends BaseModel implements HasObjectives
 
     public function setUserStage($user_id = null)
     {
-        $params = ['manual' => 0, 'active' => 1, 'campaign_id' => $this->id];
+        $params = array('manual' => 0, 'active' => 1, 'campaign_id' => $this->id);
         if ($user_id) {
             $params['user_id'] = $user_id;
         }
@@ -293,7 +294,7 @@ class Campaign extends BaseModel implements HasObjectives
         $stage = CampaignStage::PENDING;
         $now = Carbon::now();
 
-        if (! in_array($this->stage, [CampaignStage::TERMINATED, CampaignStage::CANCELED])) {
+        if ( ! in_array($this->stage, array(CampaignStage::TERMINATED, CampaignStage::CANCELED))) {
             foreach (CampaignStage::softValues() as $tmp) {
                 $prop_start = $tmp . '_from';
                 $prop_end = $tmp . '_to';
@@ -407,10 +408,10 @@ class Campaign extends BaseModel implements HasObjectives
         $end = $this->dateEnd();
         $now = now();
         if ($start && $end) {
-            if (! $start instanceof Carbon) {
+            if ( ! $start instanceof Carbon) {
                 $start = Carbon::parse($start);
             }
-            if (! $end instanceof Carbon) {
+            if ( ! $end instanceof Carbon) {
                 $end = Carbon::parse($end);
             }
 
@@ -540,6 +541,8 @@ class Campaign extends BaseModel implements HasObjectives
 
     /**
      * LOCAL SCOPES
+     * @param Builder $query
+     * @param int $manual
      */
     public function scopeWhereManual(Builder $query, int $manual): void
     {
@@ -550,7 +553,7 @@ class Campaign extends BaseModel implements HasObjectives
     {
         $query->where('draft', 0)
             ->where(function (Builder $q): void {
-                $q->whereIn('stage', [CampaignStage::PENDING, CampaignStage::IN_PROGRESS]);
+                $q->whereIn('stage', array(CampaignStage::PENDING, CampaignStage::IN_PROGRESS));
             });
     }
 
@@ -566,7 +569,7 @@ class Campaign extends BaseModel implements HasObjectives
     public function scopeWhereCompleted(Builder $query): void
     {
         $query->where('draft', 0)
-            ->whereNotIn('stage', [CampaignStage::TERMINATED, CampaignStage::CANCELED])
+            ->whereNotIn('stage', array(CampaignStage::TERMINATED, CampaignStage::CANCELED))
             ->where(function (Builder $q): void {
                 $q->where('stage', CampaignStage::COMPLETED)
                     ->orWhereDate('self_evaluation_to', '<', Carbon::now());
@@ -587,14 +590,14 @@ class Campaign extends BaseModel implements HasObjectives
     protected function timestart(): Attribute
     {
         return Attribute::make(
-            get: fn() => Carbon::parse($this->definition_from),
+            get: fn () => Carbon::parse($this->definition_from),
         );
     }
 
     protected function timeend(): Attribute
     {
         return Attribute::make(
-            get: fn() => Carbon::parse($this->self_evaluation_to),
+            get: fn () => Carbon::parse($this->self_evaluation_to),
         );
     }
 }

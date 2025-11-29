@@ -71,7 +71,18 @@ use YMigVal\LaravelModelCache\HasCachedQueries;
  */
 abstract class BaseModel extends Model
 {
-    use Accessible, CascadeDeletes, HasCachedQueries, HasFactory, ModelActivity, RequestForms, SoftDeletes, SoftDeletesPrunable, UUID, VirginModel, HasTranslations, IsTranslated;
+    use Accessible;
+    use CascadeDeletes;
+    use HasCachedQueries;
+    use HasFactory;
+    use HasTranslations;
+    use IsTranslated;
+    use ModelActivity;
+    use RequestForms;
+    use SoftDeletes;
+    use SoftDeletesPrunable;
+    use UUID;
+    use VirginModel;
 
     public function carbonDate(string $prop, string $format = 'Y-m-d')
     {

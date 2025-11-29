@@ -19,15 +19,13 @@ class HomeController extends AppController
 
     /**
      * Show the application dashboard.
-     *
-     * @return Renderable
      */
-    public function index()
+    public function index(): Renderable
     {
         $user = Auth::user();
 
-        return view('pages.dashboard', [
+        return view('pages.dashboard', array(
             'user' => $user,
-        ]);
+        ));
     }
 }

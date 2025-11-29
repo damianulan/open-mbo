@@ -18,7 +18,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property Carbon|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read Collection<int, \App\Models\Business\UserEmployment> $employments
+ * @property-read Collection<int, UserEmployment> $employments
  * @property-read int|null $employments_count
  * @property-read mixed $trans
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position active()
@@ -75,14 +75,14 @@ use Spatie\Activitylog\Models\Activity;
  */
 class Position extends BaseModel
 {
-    protected $fillable = [
+    protected $fillable = array(
         'name',
         'description',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'description' => FormattedText::class,
-    ];
+    );
 
     public function employments(): HasMany
     {

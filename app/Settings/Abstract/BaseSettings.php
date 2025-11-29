@@ -2,23 +2,24 @@
 
 namespace App\Settings\Abstract;
 
+use ReflectionClass;
 use ReflectionProperty;
-use Spatie\LaravelSettings\Settings;
 use Spatie\LaravelSettings\Migrations\SettingsMigrator;
 use Spatie\LaravelSettings\Models\SettingsProperty;
+use Spatie\LaravelSettings\Settings;
 
 abstract class BaseSettings extends Settings
 {
     public static function migrate(): array
     {
-        $logs = [];
+        $logs = array();
         $class = static::class;
         $instance = new $class();
         $group = static::group();
-        $reflection = new \ReflectionClass(static::class);
+        $reflection = new ReflectionClass(static::class);
         $properties = $reflection->getProperties(ReflectionProperty::IS_PUBLIC);
 
-        if (!empty($properties)) {
+        if ( ! empty($properties)) {
             $migrator = app(SettingsMigrator::class);
 
             foreach ($properties as $property) {
@@ -30,10 +31,10 @@ abstract class BaseSettings extends Settings
                         continue;
                     }
                     $setting = $group . '.' . $prop;
-                    $value = $instance->$prop;
+                    $value = $instance->{$prop};
                     $migrator->add($setting, $value);
 
-                    $logs[] = "Setting $setting added with default value.";
+                    $logs[] = "Setting {$setting} added with default value.";
                 }
             }
         }

@@ -15,47 +15,47 @@ class CreateAdminUserSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = new User([
+        $user = new User(array(
             'email' => 'admin@damianulan.me',
             'password' => Hash::make('123456'),
-        ]);
+        ));
         $user->save();
-        $profile = new UserProfile([
+        $profile = new UserProfile(array(
             'firstname' => 'Site',
             'lastname' => 'Admin',
             'birthday' => fake()->dateTimeBetween('-40 years', '-20years'),
             'gender' => Gender::MALE,
-        ]);
+        ));
         $user->profile()->save($profile);
         $user->assignRoleSlug('admin');
 
-        $user = new User([
+        $user = new User(array(
             'email' => 'kontakt@damianulan.me',
             'password' => Hash::make('12345678'),
             'core' => 1,
-        ]);
+        ));
         $user->save();
-        $profile = new UserProfile([
+        $profile = new UserProfile(array(
             'firstname' => 'Damian',
             'lastname' => 'Ułan',
             'birthday' => fake()->dateTimeBetween('-40 years', '-20years'),
             'gender' => Gender::MALE,
-        ]);
+        ));
         $user->profile()->save($profile);
         $user->assignRoleSlug('root');
 
-        $user = new User([
+        $user = new User(array(
             'email' => 'helpdesk@damianulan.me',
             'password' => Hash::make('123456'),
             'core' => 1,
-        ]);
+        ));
         $user->save();
-        $profile = new UserProfile([
+        $profile = new UserProfile(array(
             'firstname' => 'Admin',
             'lastname' => 'Helpdesk',
             'birthday' => fake()->dateTimeBetween('-40 years', '-20years'),
             'gender' => Gender::MALE,
-        ]);
+        ));
         $user->profile()->save($profile);
         $user->assignRoleSlug('support');
     }

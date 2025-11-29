@@ -4,10 +4,8 @@ namespace App\Console\Commands\Core;
 
 use App\Console\BaseCommand;
 use Illuminate\Database\Eloquent\Builder;
-use Spatie\TranslationLoader\LanguageLine;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Throwable;
+use Spatie\TranslationLoader\LanguageLine;
 
 class LangList extends BaseCommand
 {
@@ -30,7 +28,7 @@ class LangList extends BaseCommand
      */
     public function handle(): void
     {
-        $this->call('db:seed', ['--class' => 'LanguageSeeder']);
+        $this->call('db:seed', array('--class' => 'LanguageSeeder'));
         $lang = $this->option('lang') ?? config('app.locale');
         $group = $this->option('group') ?? null;
 
@@ -41,18 +39,18 @@ class LangList extends BaseCommand
         }
         $langs = $query->get();
 
-        $langs->each(function (LanguageLine $line) use ($lang) {
+        $langs->each(function (LanguageLine $line) use ($lang): void {
             $text = $line->text[$lang] ?? '';
             $this->info($line->group . '.' . $line->key . ' => ' . $text);
         });
         $this->call('optimize:clear');
     }
 
-    public function toFile(Builder $query)
+    public function toFile(Builder $query): void
     {
-        $output = [];
+        $output = array();
 
-        $query->get()->each(function (LanguageLine $line) use (&$output) {
+        $query->get()->each(function (LanguageLine $line) use (&$output): void {
             $text = $line->text[config('app.fallback_locale')] ?? '';
             $output[$line->group . '.' . $line->key] = $text;
         });

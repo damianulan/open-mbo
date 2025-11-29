@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class() extends Migration
-{
+return new class () extends Migration {
     /**
      * Get the migration connection name.
      */
@@ -35,14 +34,14 @@ return new class() extends Migration
             $table->index('batch_id');
             $table->index('family_hash');
             $table->index('created_at');
-            $table->index(['type', 'should_display_on_index']);
+            $table->index(array('type', 'should_display_on_index'));
         });
 
         $schema->create('telescope_entries_tags', function (Blueprint $table): void {
             $table->uuid('entry_uuid');
             $table->string('tag');
 
-            $table->primary(['entry_uuid', 'tag']);
+            $table->primary(array('entry_uuid', 'tag'));
             $table->index('tag');
 
             $table->foreign('entry_uuid')

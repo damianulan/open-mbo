@@ -6,11 +6,11 @@ use Lucent\Support\Enum;
 
 class MessageType extends Enum
 {
-    const SUCCESS = 'success';
+    public const SUCCESS = 'success';
 
-    const ERROR = 'error';
+    public const ERROR = 'error';
 
-    const WARNING = 'warning';
+    public const WARNING = 'warning';
 
-    const INFO = 'info';
+    public const INFO = 'info';
 }

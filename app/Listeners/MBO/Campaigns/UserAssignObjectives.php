@@ -22,6 +22,7 @@ class UserAssignObjectives implements ShouldQueue
 
     /**
      * Handle the event.
+     * @param UserCampaignAssigned $event
      */
     public function handle(UserCampaignAssigned $event): void
     {

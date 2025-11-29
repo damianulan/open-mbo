@@ -19,12 +19,12 @@ class CompanyFactory extends Factory
         $shortname = fake()->company();
         $fullname = $shortname . ' ' . fake()->companySuffix();
 
-        return [
+        return array(
             'name' => $fullname,
             'shortname' => $shortname,
             'description' => fake()->realTextBetween(300, 900),
             'taxpayerid' => fake()->taxpayerIdentificationNumber() ?? null,
             'founded_at' => fake()->date(),
-        ];
+        );
     }
 }

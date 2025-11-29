@@ -20,7 +20,7 @@ trait Notifiable
         return $this->morphMany(MailNotification::class, 'notifiable');
     }
 
-    public function notify(Notification $notification, array $models = []): bool
+    public function notify(Notification $notification, array $models = array()): bool
     {
         return (new NotificationMessage($notification, $this, $models))->send();
     }

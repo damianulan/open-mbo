@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Activity;
-use App\Models\Business\Department;
 
 /**
  * @property string $id
@@ -26,9 +25,9 @@ use App\Models\Business\Department;
  * @property-read int|null $activities_count
  * @property-read Collection<int, Department> $departments
  * @property-read int|null $departments_count
- * @property-read Collection<int, \App\Models\Business\UserEmployment> $employments
+ * @property-read Collection<int, UserEmployment> $employments
  * @property-read int|null $employments_count
- * @property-read Collection<int, \App\Models\Business\Location> $locations
+ * @property-read Collection<int, Location> $locations
  * @property-read int|null $locations_count
  * @property-read mixed $trans
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company active()
@@ -89,25 +88,25 @@ use App\Models\Business\Department;
  */
 class Company extends BaseModel
 {
-    protected $fillable = [
+    protected $fillable = array(
         'name',
         'shortname',
         'description',
         'logo',
         'taxpayerid',
         'founded_at',
-    ];
+    );
 
-    protected $dates = [
+    protected $dates = array(
         'founded_at',
         'created_at',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'description' => FormattedText::class,
         'founded_at' => 'date',
         'created_at' => 'datetime',
-    ];
+    );
 
     public function departments(): HasMany
     {

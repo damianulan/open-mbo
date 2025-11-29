@@ -31,6 +31,6 @@ class GeneralForm extends Form
 
     public static function validation(Request $request, $model_id = null): array
     {
-        return [];
+        return array();
     }
 }

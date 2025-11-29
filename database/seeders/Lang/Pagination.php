@@ -8,25 +8,25 @@ class Pagination extends Seeder
 {
     public static function list(): array
     {
-        return [
-            'previous' => [
+        return array(
+            'previous' => array(
                 'pl' => '&laquo; Poprzednia',
-            ],
-            'next' => [
+            ),
+            'next' => array(
                 'pl' => 'Następna &raquo;',
-            ],
-            'showing' => [
+            ),
+            'showing' => array(
                 'pl' => 'Wyświetlono',
-            ],
-            'to' => [
+            ),
+            'to' => array(
                 'pl' => ' - ',
-            ],
-            'of' => [
+            ),
+            'of' => array(
                 'pl' => 'z',
-            ],
-            'results' => [
+            ),
+            'results' => array(
                 'pl' => 'wyników',
-            ],
-        ];
+            ),
+        );
     }
 }

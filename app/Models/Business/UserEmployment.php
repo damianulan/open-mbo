@@ -28,11 +28,11 @@ use Spatie\Activitylog\Models\Activity;
  * @property Carbon|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\Business\Company|null $company
- * @property-read \App\Models\Business\TypeOfContract|null $contract
- * @property-read \App\Models\Business\Department|null $department
+ * @property-read Company|null $company
+ * @property-read TypeOfContract|null $contract
+ * @property-read Department|null $department
  * @property-read bool $main
- * @property-read \App\Models\Business\Position|null $position
+ * @property-read Position|null $position
  * @property-read mixed $trans
  * @property-read User $user
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment active()
@@ -93,7 +93,7 @@ use Spatie\Activitylog\Models\Activity;
  */
 class UserEmployment extends BaseModel
 {
-    protected $fillable = [
+    protected $fillable = array(
         'user_id',
         'company_id',
         'contract_id',
@@ -102,18 +102,18 @@ class UserEmployment extends BaseModel
 
         'employment',
         'release',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'employment' => 'date',
         'release' => 'date',
-    ];
+    );
 
-    protected $dispatchesEvents = [
+    protected $dispatchesEvents = array(
         'created' => EmploymentCreated::class,
         'updated' => EmploymentUpdated::class,
         'deleted' => EmploymentDeleted::class,
-    ];
+    );
 
     public function user(): BelongsTo
     {

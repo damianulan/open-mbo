@@ -33,10 +33,10 @@ trait UserMBO
     public function assignBonusScheme(BonusScheme $scheme): void
     {
         $this->user_bonus_scheme()->delete();
-        $this->user_bonus_scheme()->create([
+        $this->user_bonus_scheme()->create(array(
             'user_id' => $this->id,
             'bonus_scheme_id' => $scheme->id,
-        ]);
+        ));
     }
 
     public function objectives(): HasManyThrough
@@ -62,7 +62,7 @@ trait UserMBO
     public function points(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->awards->sum('points'),
+            get: fn () => $this->awards->sum('points'),
         );
     }
 
@@ -83,6 +83,6 @@ trait UserMBO
 
     public function isMBOAdmin(): bool
     {
-        return $this->hasAnyRoles(['root', 'support', 'admin', 'admin_mbo']);
+        return $this->hasAnyRoles(array('root', 'support', 'admin', 'admin_mbo'));
     }
 }

@@ -16,46 +16,46 @@ class NotificationSeeder extends Seeder
 {
     public function run(): void
     {
-        Notification::createOrUpdate('CAMPAIGN_ASSIGNED', [
+        Notification::createOrUpdate('CAMPAIGN_ASSIGNED', array(
             'contents' => NotificationContents::boot('{% firstname %}, Przypisano Cię do kampanii {% campaign_name %}.'),
             'event' => UserCampaignAssigned::class,
             'system' => true,
             'email' => false,
-        ]);
+        ));
 
-        Notification::createOrUpdate('CAMPAIGN_UNASSIGNED', [
+        Notification::createOrUpdate('CAMPAIGN_UNASSIGNED', array(
             'contents' => NotificationContents::boot('{% firstname %}, Wypisano Cię z kampanii {% campaign_name %}.'),
             'event' => UserCampaignUnassigned::class,
             'system' => true,
             'email' => false,
-        ]);
+        ));
 
-        Notification::createOrUpdate('OBJECTIVE_ASSIGNED', [
+        Notification::createOrUpdate('OBJECTIVE_ASSIGNED', array(
             'contents' => NotificationContents::boot('{% firstname %}, Przypisano ci nowy cel do realizacji {% objective_name %}.'),
             'event' => UserObjectiveAssigned::class,
             'system' => true,
             'email' => false,
-        ]);
+        ));
 
-        Notification::createOrUpdate('OBJECTIVE_UNASSIGNED', [
+        Notification::createOrUpdate('OBJECTIVE_UNASSIGNED', array(
             'contents' => NotificationContents::boot('{% firstname %}, Wypisano Cię z realizacji celu {% objective_name %}.'),
             'event' => UserObjectiveUnassigned::class,
             'system' => true,
             'email' => false,
-        ]);
+        ));
 
-        Notification::createOrUpdate('OBJECTIVE_PASSED', [
+        Notification::createOrUpdate('OBJECTIVE_PASSED', array(
             'contents' => NotificationContents::boot('{% firstname %}, przypisany do Ciebie cel {% objective_name %} został oznaczony jako zaliczony.'),
             'event' => UserObjectivePassed::class,
             'system' => true,
             'email' => false,
-        ]);
+        ));
 
-        Notification::createOrUpdate('OBJECTIVE_FAILED', [
+        Notification::createOrUpdate('OBJECTIVE_FAILED', array(
             'contents' => NotificationContents::boot('{% firstname %}, przypisany do Ciebie cel {% objective_name %} został oznaczony jako niezaliczony.'),
             'event' => UserObjectiveFailed::class,
             'system' => true,
             'email' => false,
-        ]);
+        ));
     }
 }

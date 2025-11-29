@@ -12,6 +12,13 @@ class TileButton extends Component
 
     /**
      * Create a new component instance.
+     * @param string $title
+     * @param ?string $id
+     * @param ?string $link
+     * @param ?string $icon
+     * @param string $classes
+     * @param bool $selected
+     * @param bool $enter_icon
      */
     public function __construct(
         public string $title,

@@ -14,7 +14,6 @@ use App\Models\Core\User;
 use App\Models\Scopes\MBO\ObjectiveScope;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -39,13 +38,13 @@ use Spatie\Activitylog\Models\Activity;
  * @property Carbon|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\MBO\Campaign|null $campaign
- * @property-read \App\Models\MBO\ObjectiveTemplateCategory|null $category
+ * @property-read Campaign|null $campaign
+ * @property-read ObjectiveTemplateCategory|null $category
  * @property-read Collection<int, Comment> $comments
  * @property-read int|null $comments_count
- * @property-read \App\Models\MBO\ObjectiveTemplate|null $template
+ * @property-read ObjectiveTemplate|null $template
  * @property-read mixed $trans
- * @property-read Collection<int, \App\Models\MBO\UserObjective> $user_objectives
+ * @property-read Collection<int, UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective average(string $column)
@@ -109,9 +108,10 @@ use Spatie\Activitylog\Models\Activity;
 #[ScopedBy(ObjectiveScope::class)]
 class Objective extends BaseModel implements HasDeadline, HasWeight
 {
-    use Commentable, Dispatcher;
+    use Commentable;
+    use Dispatcher;
 
-    protected $fillable = [
+    protected $fillable = array(
         'template_id',
         'campaign_id',
         'name',
@@ -121,22 +121,22 @@ class Objective extends BaseModel implements HasDeadline, HasWeight
         'draft',
         'award',
         'expected',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'description' => FormattedText::class,
         'draft' => 'boolean',
         'deadline' => 'datetime',
-    ];
+    );
 
-    protected $cascadeDelete = [
+    protected $cascadeDelete = array(
         'user_objectives',
-    ];
+    );
 
-    protected $dispatchesEvents = [
+    protected $dispatchesEvents = array(
         'updated' => ObjectiveUpdated::class,
         'created' => ObjectiveCreated::class,
-    ];
+    );
 
     public static function creatingObjective(Objective $model): self
     {
@@ -152,7 +152,7 @@ class Objective extends BaseModel implements HasDeadline, HasWeight
 
     public function getWeightAttribute($value): float
     {
-        if(!settings('mbo.objectives_weights')){
+        if ( ! settings('mbo.objectives_weights')) {
             return 1;
         }
         return $value;
@@ -176,6 +176,7 @@ class Objective extends BaseModel implements HasDeadline, HasWeight
 
     /**
      * Is deadline is briefly upcoming.
+     * @param int $days
      */
     public function isDeadlineUpcoming(int $days = 3): bool
     {
@@ -225,7 +226,7 @@ class Objective extends BaseModel implements HasDeadline, HasWeight
 
     public function user_objective(?User $user = null): ?UserObjective
     {
-        if (! $user) {
+        if ( ! $user) {
             $user = Auth::user();
         }
 
@@ -234,7 +235,7 @@ class Objective extends BaseModel implements HasDeadline, HasWeight
 
     public function scopeWhereAssigned(Builder $query, ?User $user = null): void
     {
-        if (! $user) {
+        if ( ! $user) {
             $user = Auth::user();
         }
         $query->whereHas('user_objectives', function (Builder $q) use ($user): void {

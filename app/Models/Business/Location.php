@@ -24,7 +24,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property Carbon|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read Collection<int, \App\Models\Business\Company> $companies
+ * @property-read Collection<int, Company> $companies
  * @property-read int|null $companies_count
  * @property-read mixed $trans
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location active()
@@ -88,7 +88,7 @@ use Spatie\Activitylog\Models\Activity;
  */
 class Location extends BaseModel
 {
-    protected $fillable = [
+    protected $fillable = array(
         'name',
         'address_line_1',
         'address_line_2',
@@ -97,16 +97,16 @@ class Location extends BaseModel
         'postal_code',
         'description',
         'active',
-    ];
+    );
 
-    protected $dates = [
+    protected $dates = array(
         'created_at',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'created_at' => 'datetime',
         'active' => 'boolean',
-    ];
+    );
 
     public function companies(): BelongsToMany
     {

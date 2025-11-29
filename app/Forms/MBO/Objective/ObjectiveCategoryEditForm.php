@@ -16,7 +16,7 @@ class ObjectiveCategoryEditForm extends Form
     {
         $route = route('categories.store');
         $method = 'POST';
-        $selected = [];
+        $selected = array();
         $category = null;
 
         $shortnameType = 'text';
@@ -41,10 +41,10 @@ class ObjectiveCategoryEditForm extends Form
 
     public static function validation(Request $request, $model_id = null): array
     {
-        return [
+        return array(
             'name' => 'max:50|required',
             'shortname' => 'max:20|required|unique:objective_template_categories,shortname,' . $model_id,
             'description' => 'max:1000|nullable',
-        ];
+        );
     }
 }

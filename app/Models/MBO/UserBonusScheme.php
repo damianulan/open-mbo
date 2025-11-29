@@ -18,7 +18,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property Carbon|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\MBO\BonusScheme $bonus_scheme
+ * @property-read BonusScheme $bonus_scheme
  * @property-read mixed $trans
  * @property-read User $user
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusScheme active()
@@ -74,10 +74,10 @@ use Spatie\Activitylog\Models\Activity;
  */
 class UserBonusScheme extends BaseModel
 {
-    protected $fillable = [
+    protected $fillable = array(
         'user_id',
         'bonus_scheme_id',
-    ];
+    );
 
     public function user(): BelongsTo
     {

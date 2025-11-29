@@ -8,115 +8,115 @@ class Logging extends Seeder
 {
     public static function list(): array
     {
-        return [
-            'columns.causer' => [
+        return array(
+            'columns.causer' => array(
                 'pl' => 'Inicjator',
-            ],
-            'columns.subject' => [
+            ),
+            'columns.subject' => array(
                 'pl' => 'Odnosi się do',
-            ],
-            'columns.subject_type' => [
+            ),
+            'columns.subject_type' => array(
                 'pl' => 'Odnosi się do typu',
-            ],
-            'columns.created_at' => [
+            ),
+            'columns.created_at' => array(
                 'pl' => 'Kiedy',
-            ],
-            'columns.event' => [
+            ),
+            'columns.event' => array(
                 'pl' => 'Zdarzenie',
-            ],
-            'columns.description' => [
+            ),
+            'columns.description' => array(
                 'pl' => 'Opis',
-            ],
-            'events.viewed' => [
+            ),
+            'events.viewed' => array(
                 'pl' => 'Wyświetlono',
-            ],
-            'events.created' => [
+            ),
+            'events.created' => array(
                 'pl' => 'Utworzenie obiektu',
-            ],
-            'events.updated' => [
+            ),
+            'events.updated' => array(
                 'pl' => 'Aktualizacja danych',
-            ],
-            'events.logged_out' => [
+            ),
+            'events.logged_out' => array(
                 'pl' => 'Wylogowanie',
-            ],
-            'events.auth_attempt_success' => [
+            ),
+            'events.auth_attempt_success' => array(
                 'pl' => 'Pomyślnie logowanie',
-            ],
-            'events.auth_attempt_fail' => [
+            ),
+            'events.auth_attempt_fail' => array(
                 'pl' => 'Niepowodzenie logowania',
-            ],
-            'events.deleted' => [
+            ),
+            'events.deleted' => array(
                 'pl' => 'Usunięcie obiektu',
-            ],
-            'log_name.system' => [
+            ),
+            'log_name.system' => array(
                 'pl' => 'System',
-            ],
-            'log_name.auth' => [
+            ),
+            'log_name.auth' => array(
                 'pl' => 'Identyfikacja użytkownika',
-            ],
-            'log_name.model' => [
+            ),
+            'log_name.model' => array(
                 'pl' => 'Zmiana danych',
-            ],
-            'description.created' => [
+            ),
+            'description.created' => array(
                 'pl' => 'Użytkownik :username utworzył nową instancję obiektu: :model_map.',
-            ],
-            'description.updated' => [
+            ),
+            'description.updated' => array(
                 'pl' => 'Użytkownik :username zmodyfikował instancję obiektu: :model_map.',
-            ],
-            'description.deleted' => [
+            ),
+            'description.deleted' => array(
                 'pl' => 'Użytkownik :username usunął instancję obiektu: :model_map.',
-            ],
-            'description.auth_attempt_success' => [
+            ),
+            'description.auth_attempt_success' => array(
                 'pl' => 'Zarejestrowano pomyślną próbę logowania użytkownika.',
-            ],
-            'description.auth_attempt_fail' => [
+            ),
+            'description.auth_attempt_fail' => array(
                 'pl' => 'Zarejestrowano próbę logowania użytkownika zakończoną niepowodzeniem.',
-            ],
-            'description.auth_logout' => [
+            ),
+            'description.auth_logout' => array(
                 'pl' => 'Użytkownik wylogował się z systemu.',
-            ],
-            'description.notification_sent' => [
+            ),
+            'description.notification_sent' => array(
                 'pl' => 'Użytkownik :username otrzymał powiadomienie: :type',
-            ],
-            'description.view' => [
+            ),
+            'description.view' => array(
                 'pl' => 'Użytkownik :username wyświetlił obiekt: :model_map',
-            ],
-            'model_mapping.App\Models\MBO\ObjectiveTemplate' => [
+            ),
+            'model_mapping.App\Models\MBO\ObjectiveTemplate' => array(
                 'pl' => 'Szablon celu',
-            ],
-            'model_mapping.App\Models\MBO\Objective' => [
+            ),
+            'model_mapping.App\Models\MBO\Objective' => array(
                 'pl' => 'Cel',
-            ],
-            'model_mapping.App\Models\MBO\Campaign' => [
+            ),
+            'model_mapping.App\Models\MBO\Campaign' => array(
                 'pl' => 'Kampania pomiarowa',
-            ],
-            'model_mapping.App\Models\MBO\ObjectiveTemplateCategory' => [
+            ),
+            'model_mapping.App\Models\MBO\ObjectiveTemplateCategory' => array(
                 'pl' => 'Kategoria MBO',
-            ],
-            'model_mapping.App\Models\MBO\UserCampaign' => [
+            ),
+            'model_mapping.App\Models\MBO\UserCampaign' => array(
                 'pl' => 'Modyfikacja przypisania użytkownika do kampanii',
-            ],
-            'model_mapping.App\Models\MBO\UserObjective' => [
+            ),
+            'model_mapping.App\Models\MBO\UserObjective' => array(
                 'pl' => 'Modyfikacja przypisania użytkownika do celu',
-            ],
-            'route_mapping.App\Models\MBO\ObjectiveTemplate' => [
+            ),
+            'route_mapping.App\Models\MBO\ObjectiveTemplate' => array(
                 'pl' => 'templates.edit',
-            ],
-            'route_mapping.App\Models\MBO\Objective' => [
+            ),
+            'route_mapping.App\Models\MBO\Objective' => array(
                 'pl' => 'objectives.show',
-            ],
-            'route_mapping.App\Models\MBO\Campaign' => [
+            ),
+            'route_mapping.App\Models\MBO\Campaign' => array(
                 'pl' => 'campaigns.show',
-            ],
-            'route_mapping.App\Models\MBO\UserObjective' => [
+            ),
+            'route_mapping.App\Models\MBO\UserObjective' => array(
                 'pl' => 'campaigns.users.update',
-            ],
-            'route_mapping.App\Models\MBO\UserCampaign' => [
+            ),
+            'route_mapping.App\Models\MBO\UserCampaign' => array(
                 'pl' => 'campaigns.users.update',
-            ],
-            'route_mapping.App\Models\MBO\ObjectiveTemplateCategory' => [
+            ),
+            'route_mapping.App\Models\MBO\ObjectiveTemplateCategory' => array(
                 'pl' => 'management.mbo.categories.edit',
-            ],
-        ];
+            ),
+        );
     }
 }

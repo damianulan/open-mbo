@@ -8,361 +8,361 @@ class Validation extends Seeder
 {
     public static function list(): array
     {
-        return [
-            'accepted' => [
+        return array(
+            'accepted' => array(
                 'pl' => ':attribute musi zostać zaakceptowany.',
-            ],
-            'accepted_if' => [
+            ),
+            'accepted_if' => array(
                 'pl' => ':attribute musi zostać zaakceptowany, gdy :other ma wartość :value.',
-            ],
-            'active_url' => [
+            ),
+            'active_url' => array(
                 'pl' => ':attribute nie jest prawidłowym adresem URL.',
-            ],
-            'after' => [
+            ),
+            'after' => array(
                 'pl' => ':attribute musi być datą późniejszą niż :date.',
-            ],
-            'after_or_equal' => [
+            ),
+            'after_or_equal' => array(
                 'pl' => ':attribute musi być datą nie wcześniejszą niż :date.',
-            ],
-            'alpha' => [
+            ),
+            'alpha' => array(
                 'pl' => ':attribute może zawierać tylko litery.',
-            ],
-            'alpha_dash' => [
+            ),
+            'alpha_dash' => array(
                 'pl' => ':attribute może zawierać tylko litery, cyfry, myślniki i podkreślenia.',
-            ],
-            'alpha_num' => [
+            ),
+            'alpha_num' => array(
                 'pl' => ':attribute może zawierać tylko litery i cyfry.',
-            ],
-            'array' => [
+            ),
+            'array' => array(
                 'pl' => ':attribute musi być tablicą.',
-            ],
-            'ascii' => [
+            ),
+            'ascii' => array(
                 'pl' => ':attribute może zawierać tylko jednobajtowe znaki alfanumeryczne i symbole.',
-            ],
-            'before' => [
+            ),
+            'before' => array(
                 'pl' => ':attribute musi być datą wcześniejszą niż :date.',
-            ],
-            'before_or_equal' => [
+            ),
+            'before_or_equal' => array(
                 'pl' => ':attribute musi być datą nie późniejszą niż :date.',
-            ],
-            'between.array' => [
+            ),
+            'between.array' => array(
                 'pl' => ':attribute musi mieć od :min do :max elementów.',
-            ],
-            'between.file' => [
+            ),
+            'between.file' => array(
                 'pl' => ':attribute musi mieć od :min do :max kilobajtów.',
-            ],
-            'between.numeric' => [
+            ),
+            'between.numeric' => array(
                 'pl' => ':attribute musi mieć wartość od :min do :max.',
-            ],
-            'between.string' => [
+            ),
+            'between.string' => array(
                 'pl' => ':attribute musi mieć od :min do :max znaków.',
-            ],
-            'boolean' => [
+            ),
+            'boolean' => array(
                 'pl' => 'Pole :attribute musi być prawdą lub fałszem.',
-            ],
-            'confirmed' => [
+            ),
+            'confirmed' => array(
                 'pl' => 'Potwierdzenie :attribute nie pasuje.',
-            ],
-            'current_password' => [
+            ),
+            'current_password' => array(
                 'pl' => 'Hasło jest nieprawidłowe.',
-            ],
-            'date' => [
+            ),
+            'date' => array(
                 'pl' => ':attribute nie jest prawidłową datą.',
-            ],
-            'date_equals' => [
+            ),
+            'date_equals' => array(
                 'pl' => ':attribute musi być datą równą :date.',
-            ],
-            'date_format' => [
+            ),
+            'date_format' => array(
                 'pl' => ':attribute nie pasuje do formatu :format.',
-            ],
-            'decimal' => [
+            ),
+            'decimal' => array(
                 'pl' => ':attribute musi mieć :decimal miejsc dziesiętnych.',
-            ],
-            'declined' => [
+            ),
+            'declined' => array(
                 'pl' => ':attribute musi zostać odrzucony.',
-            ],
-            'declined_if' => [
+            ),
+            'declined_if' => array(
                 'pl' => ':attribute musi zostać odrzucony, gdy :other ma wartość :value.',
-            ],
-            'different' => [
+            ),
+            'different' => array(
                 'pl' => ':attribute i :other muszą się różnić.',
-            ],
-            'digits' => [
+            ),
+            'digits' => array(
                 'pl' => ':attribute musi składać się z :digits cyfr.',
-            ],
-            'digits_between' => [
+            ),
+            'digits_between' => array(
                 'pl' => ':attribute musi mieć od :min do :max cyfr.',
-            ],
-            'dimensions' => [
+            ),
+            'dimensions' => array(
                 'pl' => ':attribute ma nieprawidłowe wymiary obrazu.',
-            ],
-            'distinct' => [
+            ),
+            'distinct' => array(
                 'pl' => 'Pole :attribute ma zduplikowaną wartość.',
-            ],
-            'doesnt_end_with' => [
+            ),
+            'doesnt_end_with' => array(
                 'pl' => ':attribute nie może kończyć się jednym z następujących: :values.',
-            ],
-            'doesnt_start_with' => [
+            ),
+            'doesnt_start_with' => array(
                 'pl' => ':attribute nie może zaczynać się od jednego z następujących: :values.',
-            ],
-            'email' => [
+            ),
+            'email' => array(
                 'pl' => ':attribute musi być prawidłowym adresem e-mail.',
-            ],
-            'ends_with' => [
+            ),
+            'ends_with' => array(
                 'pl' => ':attribute musi kończyć się jednym z następujących: :values.',
-            ],
-            'enum' => [
+            ),
+            'enum' => array(
                 'pl' => 'Wybrany :attribute jest nieprawidłowy.',
-            ],
-            'exists' => [
+            ),
+            'exists' => array(
                 'pl' => 'Wybrany :attribute jest nieprawidłowy.',
-            ],
-            'file' => [
+            ),
+            'file' => array(
                 'pl' => ':attribute musi być plikiem.',
-            ],
-            'filled' => [
+            ),
+            'filled' => array(
                 'pl' => 'Pole :attribute musi mieć wartość.',
-            ],
-            'gt.array' => [
+            ),
+            'gt.array' => array(
                 'pl' => ':attribute musi mieć więcej niż :value elementów.',
-            ],
-            'gt.file' => [
+            ),
+            'gt.file' => array(
                 'pl' => ':attribute musi być większy niż :value kilobajtów.',
-            ],
-            'gt.numeric' => [
+            ),
+            'gt.numeric' => array(
                 'pl' => ':attribute musi być większy niż :value.',
-            ],
-            'gt.string' => [
+            ),
+            'gt.string' => array(
                 'pl' => ':attribute musi być dłuższy niż :value znaków.',
-            ],
-            'gte.array' => [
+            ),
+            'gte.array' => array(
                 'pl' => ':attribute musi mieć :value elementów lub więcej.',
-            ],
-            'gte.file' => [
+            ),
+            'gte.file' => array(
                 'pl' => ':attribute musi być większy lub równy :value kilobajtów.',
-            ],
-            'gte.numeric' => [
+            ),
+            'gte.numeric' => array(
                 'pl' => ':attribute musi być większy lub równy :value.',
-            ],
-            'gte.string' => [
+            ),
+            'gte.string' => array(
                 'pl' => ':attribute musi być dłuższy lub równy :value znaków.',
-            ],
-            'image' => [
+            ),
+            'image' => array(
                 'pl' => ':attribute musi być obrazem.',
-            ],
-            'in' => [
+            ),
+            'in' => array(
                 'pl' => 'Wybrany :attribute jest nieprawidłowy.',
-            ],
-            'in_array' => [
+            ),
+            'in_array' => array(
                 'pl' => 'Pole :attribute nie istnieje w :other.',
-            ],
-            'integer' => [
+            ),
+            'integer' => array(
                 'pl' => ':attribute musi być liczbą całkowitą.',
-            ],
-            'ip' => [
+            ),
+            'ip' => array(
                 'pl' => ':attribute musi być prawidłowym adresem IP.',
-            ],
-            'ipv4' => [
+            ),
+            'ipv4' => array(
                 'pl' => ':attribute musi być prawidłowym adresem IPv4.',
-            ],
-            'ipv6' => [
+            ),
+            'ipv6' => array(
                 'pl' => ':attribute musi być prawidłowym adresem IPv6.',
-            ],
-            'json' => [
+            ),
+            'json' => array(
                 'pl' => ':attribute musi być prawidłowym ciągiem JSON.',
-            ],
-            'lowercase' => [
+            ),
+            'lowercase' => array(
                 'pl' => ':attribute musi być pisane małymi literami.',
-            ],
-            'lt.array' => [
+            ),
+            'lt.array' => array(
                 'pl' => ':attribute musi mieć mniej niż :value elementów.',
-            ],
-            'lt.file' => [
+            ),
+            'lt.file' => array(
                 'pl' => ':attribute musi być mniejszy niż :value kilobajtów.',
-            ],
-            'lt.numeric' => [
+            ),
+            'lt.numeric' => array(
                 'pl' => ':attribute musi być mniejszy niż :value.',
-            ],
-            'lt.string' => [
+            ),
+            'lt.string' => array(
                 'pl' => ':attribute musi być krótszy niż :value znaków.',
-            ],
-            'lte.array' => [
+            ),
+            'lte.array' => array(
                 'pl' => ':attribute nie może mieć więcej niż :value elementów.',
-            ],
-            'lte.file' => [
+            ),
+            'lte.file' => array(
                 'pl' => ':attribute musi być mniejszy lub równy :value kilobajtów.',
-            ],
-            'lte.numeric' => [
+            ),
+            'lte.numeric' => array(
                 'pl' => ':attribute musi być mniejszy lub równy :value.',
-            ],
-            'lte.string' => [
+            ),
+            'lte.string' => array(
                 'pl' => ':attribute musi być krótszy lub równy :value znaków.',
-            ],
-            'mac_address' => [
+            ),
+            'mac_address' => array(
                 'pl' => ':attribute musi być prawidłowym adresem MAC.',
-            ],
-            'max.array' => [
+            ),
+            'max.array' => array(
                 'pl' => ':attribute nie może mieć więcej niż :max elementów.',
-            ],
-            'max.file' => [
+            ),
+            'max.file' => array(
                 'pl' => ':attribute nie może być większy niż :max kilobajtów.',
-            ],
-            'max.numeric' => [
+            ),
+            'max.numeric' => array(
                 'pl' => ':attribute nie może być większy niż :max.',
-            ],
-            'max.string' => [
+            ),
+            'max.string' => array(
                 'pl' => ':attribute nie może być dłuższy niż :max znaków.',
-            ],
-            'max_digits' => [
+            ),
+            'max_digits' => array(
                 'pl' => ':attribute nie może mieć więcej niż :max cyfr.',
-            ],
-            'mimes' => [
+            ),
+            'mimes' => array(
                 'pl' => ':attribute musi być plikiem typu: :values.',
-            ],
-            'mimetypes' => [
+            ),
+            'mimetypes' => array(
                 'pl' => ':attribute musi być plikiem typu: :values.',
-            ],
-            'min.array' => [
+            ),
+            'min.array' => array(
                 'pl' => ':attribute musi mieć przynajmniej :min elementów.',
-            ],
-            'min.file' => [
+            ),
+            'min.file' => array(
                 'pl' => ':attribute musi mieć przynajmniej :min kilobajtów.',
-            ],
-            'min.numeric' => [
+            ),
+            'min.numeric' => array(
                 'pl' => ':attribute musi mieć przynajmniej :min.',
-            ],
-            'min.string' => [
+            ),
+            'min.string' => array(
                 'pl' => ':attribute musi mieć przynajmniej :min znaków.',
-            ],
-            'min_digits' => [
+            ),
+            'min_digits' => array(
                 'pl' => ':attribute musi mieć przynajmniej :min cyfr.',
-            ],
-            'multiple_of' => [
+            ),
+            'multiple_of' => array(
                 'pl' => ':attribute musi być wielokrotnością :value.',
-            ],
-            'not_in' => [
+            ),
+            'not_in' => array(
                 'pl' => 'Wybrany :attribute jest nieprawidłowy.',
-            ],
-            'not_regex' => [
+            ),
+            'not_regex' => array(
                 'pl' => 'Format :attribute jest nieprawidłowy.',
-            ],
-            'numeric' => [
+            ),
+            'numeric' => array(
                 'pl' => ':attribute musi być liczbą.',
-            ],
-            'password.letters' => [
+            ),
+            'password.letters' => array(
                 'pl' => ':attribute musi zawierać co najmniej jedną literę.',
-            ],
-            'password.mixed' => [
+            ),
+            'password.mixed' => array(
                 'pl' => ':attribute musi zawierać co najmniej jedną dużą i jedną małą literę.',
-            ],
-            'password.numbers' => [
+            ),
+            'password.numbers' => array(
                 'pl' => ':attribute musi zawierać co najmniej jedną cyfrę.',
-            ],
-            'password.symbols' => [
+            ),
+            'password.symbols' => array(
                 'pl' => ':attribute musi zawierać co najmniej jeden symbol.',
-            ],
-            'password.uncompromised' => [
+            ),
+            'password.uncompromised' => array(
                 'pl' => 'Podany :attribute pojawił się w wycieku danych. Proszę użyć innego :attribute.',
-            ],
-            'present' => [
+            ),
+            'present' => array(
                 'pl' => 'Pole :attribute musi być obecne.',
-            ],
-            'prohibited' => [
+            ),
+            'prohibited' => array(
                 'pl' => 'Pole :attribute jest zabronione.',
-            ],
-            'prohibited_if' => [
+            ),
+            'prohibited_if' => array(
                 'pl' => 'Pole :attribute jest zabronione, gdy :other ma wartość :value.',
-            ],
-            'prohibited_unless' => [
+            ),
+            'prohibited_unless' => array(
                 'pl' => 'Pole :attribute jest zabronione, chyba że :other znajduje się w :values.',
-            ],
-            'prohibits' => [
+            ),
+            'prohibits' => array(
                 'pl' => 'Pole :attribute zabrania obecności :other.',
-            ],
-            'regex' => [
+            ),
+            'regex' => array(
                 'pl' => 'Format :attribute jest nieprawidłowy.',
-            ],
-            'required' => [
+            ),
+            'required' => array(
                 'pl' => 'To pole jest wymagane.',
-            ],
-            'required_array_keys' => [
+            ),
+            'required_array_keys' => array(
                 'pl' => 'Pole :attribute musi zawierać wpisy dla: :values.',
-            ],
-            'required_if' => [
+            ),
+            'required_if' => array(
                 'pl' => 'Pole :attribute jest wymagane, gdy :other ma wartość :value.',
-            ],
-            'required_if_accepted' => [
+            ),
+            'required_if_accepted' => array(
                 'pl' => 'Pole :attribute jest wymagane, gdy :other jest zaakceptowane.',
-            ],
-            'required_unless' => [
+            ),
+            'required_unless' => array(
                 'pl' => 'Pole :attribute jest wymagane, chyba że :other znajduje się w :values.',
-            ],
-            'required_with' => [
+            ),
+            'required_with' => array(
                 'pl' => 'Pole :attribute jest wymagane, gdy :values jest obecne.',
-            ],
-            'required_with_all' => [
+            ),
+            'required_with_all' => array(
                 'pl' => 'Pole :attribute jest wymagane, gdy :values są obecne.',
-            ],
-            'required_without' => [
+            ),
+            'required_without' => array(
                 'pl' => 'Pole :attribute jest wymagane, gdy :values nie jest obecne.',
-            ],
-            'required_without_all' => [
+            ),
+            'required_without_all' => array(
                 'pl' => 'Pole :attribute jest wymagane, gdy żadne z :values nie są obecne.',
-            ],
-            'same' => [
+            ),
+            'same' => array(
                 'pl' => ':attribute i :other muszą się zgadzać.',
-            ],
-            'size.array' => [
+            ),
+            'size.array' => array(
                 'pl' => ':attribute musi zawierać :size elementów.',
-            ],
-            'size.file' => [
+            ),
+            'size.file' => array(
                 'pl' => ':attribute musi mieć :size kilobajtów.',
-            ],
-            'size.numeric' => [
+            ),
+            'size.numeric' => array(
                 'pl' => ':attribute musi wynosić :size.',
-            ],
-            'size.string' => [
+            ),
+            'size.string' => array(
                 'pl' => ':attribute musi mieć :size znaków.',
-            ],
-            'starts_with' => [
+            ),
+            'starts_with' => array(
                 'pl' => ':attribute musi zaczynać się jednym z następujących: :values.',
-            ],
-            'string' => [
+            ),
+            'string' => array(
                 'pl' => ':attribute musi być ciągiem znaków.',
-            ],
-            'timezone' => [
+            ),
+            'timezone' => array(
                 'pl' => ':attribute musi być prawidłową strefą czasową.',
-            ],
-            'unique' => [
+            ),
+            'unique' => array(
                 'pl' => ':attribute został już wcześniej użyty.',
-            ],
-            'uploaded' => [
+            ),
+            'uploaded' => array(
                 'pl' => 'Przesyłanie :attribute nie powiodło się.',
-            ],
-            'uppercase' => [
+            ),
+            'uppercase' => array(
                 'pl' => ':attribute musi być zapisany wielkimi literami.',
-            ],
-            'url' => [
+            ),
+            'url' => array(
                 'pl' => ':attribute musi być prawidłowym adresem URL.',
-            ],
-            'ulid' => [
+            ),
+            'ulid' => array(
                 'pl' => ':attribute musi być prawidłowym ULID.',
-            ],
-            'uuid' => [
+            ),
+            'uuid' => array(
                 'pl' => ':attribute musi być prawidłowym UUID.',
-            ],
-            'custom.definition_to.after_or_equal' => [
+            ),
+            'custom.definition_to.after_or_equal' => array(
                 'pl' => 'Data końca etapu musi być późniejsza niż data początku.',
-            ],
-            'attributes.password' => [
+            ),
+            'attributes.password' => array(
                 'pl' => 'hasło',
-            ],
-            'attributes.email' => [
+            ),
+            'attributes.email' => array(
                 'pl' => 'adres email',
-            ],
-            'attributes.site_name' => [
+            ),
+            'attributes.site_name' => array(
                 'pl' => 'nazwa witryny',
-            ],
-        ];
+            ),
+        );
     }
 }

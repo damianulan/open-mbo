@@ -3,9 +3,12 @@
 namespace App\Console\Commands\Settings;
 
 use App\Console\BaseCommand;
-use App\Models\MBO\Campaign;
-use App\Models\MBO\UserObjective;
-use Illuminate\Database\Eloquent\Collection;
+use App\Settings\GeneralSettings;
+use App\Settings\MailSettings;
+use App\Settings\MBOSettings;
+use App\Settings\NotificationSettings;
+use App\Settings\ReportSettings;
+use App\Settings\UserSettings;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
@@ -30,24 +33,24 @@ class SettingsMigrate extends BaseCommand
      */
     public function handle(): void
     {
-        $map = [
-            'GeneralSettings' => \App\Settings\GeneralSettings::class,
-            'MBOSettings' => \App\Settings\MBOSettings::class,
-            'MailSettings' => \App\Settings\MailSettings::class,
-            'NotificationSettings' => \App\Settings\NotificationSettings::class,
-            'ReportSettings' => \App\Settings\ReportSettings::class,
-            'UserSettings' => \App\Settings\UserSettings::class,
-        ];
+        $map = array(
+            'GeneralSettings' => GeneralSettings::class,
+            'MBOSettings' => MBOSettings::class,
+            'MailSettings' => MailSettings::class,
+            'NotificationSettings' => NotificationSettings::class,
+            'ReportSettings' => ReportSettings::class,
+            'UserSettings' => UserSettings::class,
+        );
         $classOption = $this->option('class');
 
         try {
             DB::beginTransaction();
             if ($classOption) {
-                $map = [$map[$classOption]];
+                $map = array($map[$classOption]);
             }
 
             foreach ($map as $class) {
-                $this->comment("Migration check $class ...");
+                $this->comment("Migration check {$class} ...");
                 $results = $class::migrate();
                 foreach ($results as $result) {
                     $this->info($result);
@@ -55,7 +58,7 @@ class SettingsMigrate extends BaseCommand
                 $this->comment("Migration END.");
             }
             DB::commit();
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             DB::rollBack();
             throw $e;
         }

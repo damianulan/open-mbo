@@ -8,148 +8,148 @@ class Buttons extends Seeder
 {
     public static function list(): array
     {
-        return [
-            'add' => [
+        return array(
+            'add' => array(
                 'pl' => 'Dodaj',
-            ],
-            'create' => [
+            ),
+            'create' => array(
                 'pl' => 'Utwórz',
-            ],
-            'remove' => [
+            ),
+            'remove' => array(
                 'pl' => 'Usuń',
-            ],
-            'delete' => [
+            ),
+            'delete' => array(
                 'pl' => 'Usuń',
-            ],
-            'suspend' => [
+            ),
+            'suspend' => array(
                 'pl' => 'Zawieś',
-            ],
-            'follow' => [
+            ),
+            'follow' => array(
                 'pl' => 'Obserwuj',
-            ],
-            'favourite' => [
+            ),
+            'favourite' => array(
                 'pl' => 'Ulubione',
-            ],
-            'edit' => [
+            ),
+            'edit' => array(
                 'pl' => 'Edytuj',
-            ],
-            'like' => [
+            ),
+            'like' => array(
                 'pl' => 'Polub',
-            ],
-            'reject' => [
+            ),
+            'reject' => array(
                 'pl' => 'Odrzuć',
-            ],
-            'accept' => [
+            ),
+            'accept' => array(
                 'pl' => 'Akceptuj',
-            ],
-            'save' => [
+            ),
+            'save' => array(
                 'pl' => 'Zapisz',
-            ],
-            'save_changes' => [
+            ),
+            'save_changes' => array(
                 'pl' => 'Zapisz zmiany',
-            ],
-            'cancel' => [
+            ),
+            'cancel' => array(
                 'pl' => 'Anuluj',
-            ],
-            'assign' => [
+            ),
+            'assign' => array(
                 'pl' => 'Przypisz',
-            ],
-            'revoke' => [
+            ),
+            'revoke' => array(
                 'pl' => 'Odbierz',
-            ],
-            'block' => [
+            ),
+            'block' => array(
                 'pl' => 'Zablokuj',
-            ],
-            'unblock' => [
+            ),
+            'unblock' => array(
                 'pl' => 'Odblokuj',
-            ],
-            'close' => [
+            ),
+            'close' => array(
                 'pl' => 'Zamknij',
-            ],
-            'summary' => [
+            ),
+            'summary' => array(
                 'pl' => 'Podsumowanie',
-            ],
-            'hide' => [
+            ),
+            'hide' => array(
                 'pl' => 'Ukryj',
-            ],
-            'unhide' => [
+            ),
+            'unhide' => array(
                 'pl' => 'Odkryj',
-            ],
-            'profile_show' => [
+            ),
+            'profile_show' => array(
                 'pl' => 'Przeglądaj profil',
-            ],
-            'favourites_add' => [
+            ),
+            'favourites_add' => array(
                 'pl' => 'Dodaj do ulubionych',
-            ],
-            'favourites_remove' => [
+            ),
+            'favourites_remove' => array(
                 'pl' => 'Usuń z ulubionych',
-            ],
-            'reset_password' => [
+            ),
+            'reset_password' => array(
                 'pl' => 'Resetuj hasło',
-            ],
-            'add_users' => [
+            ),
+            'add_users' => array(
                 'pl' => 'Dodaj użytkowników',
-            ],
-            'ok' => [
+            ),
+            'ok' => array(
                 'pl' => 'Ok',
-            ],
-            'ok_understand' => [
+            ),
+            'ok_understand' => array(
                 'pl' => 'Ok, rozumiem',
-            ],
-            'choose_file' => [
+            ),
+            'choose_file' => array(
                 'pl' => 'Wybierz plik',
-            ],
-            'redirect_back' => [
+            ),
+            'redirect_back' => array(
                 'pl' => 'Powrót',
-            ],
-            'redirect_login' => [
+            ),
+            'redirect_login' => array(
                 'pl' => 'Do strony logowania',
-            ],
-            'create_template' => [
+            ),
+            'create_template' => array(
                 'pl' => 'Utwórz szablon',
-            ],
-            'impersonate' => [
+            ),
+            'impersonate' => array(
                 'pl' => 'Zaloguj jako',
-            ],
-            'impersonate_out' => [
+            ),
+            'impersonate_out' => array(
                 'pl' => 'Wyloguj się jako',
-            ],
-            'enrol_users' => [
+            ),
+            'enrol_users' => array(
                 'pl' => 'Zapisz użytkowników',
-            ],
-            'quote' => [
+            ),
+            'quote' => array(
                 'pl' => 'Cytuj',
-            ],
-            'send' => [
+            ),
+            'send' => array(
                 'pl' => 'Wyślij',
-            ],
-            'add_employment' => [
+            ),
+            'add_employment' => array(
                 'pl' => 'Dodaj zatrudnienie',
-            ],
-            'preview' => [
+            ),
+            'preview' => array(
                 'pl' => 'Podgląd',
-            ],
-            'terminate_campaign' => [
+            ),
+            'terminate_campaign' => array(
                 'pl' => 'Zawieś kampanię',
-            ],
-            'resume_campaign' => [
+            ),
+            'resume_campaign' => array(
                 'pl' => 'Wznów kampanię',
-            ],
-            'cancel_campaign' => [
+            ),
+            'cancel_campaign' => array(
                 'pl' => 'Anuluj kampanię',
-            ],
-            'list_view' => [
+            ),
+            'list_view' => array(
                 'pl' => 'Tryb listy',
-            ],
-            'tile_view' => [
+            ),
+            'tile_view' => array(
                 'pl' => 'Tryb kafelkowy',
-            ],
-            'add_realization' => [
+            ),
+            'add_realization' => array(
                 'pl' => 'Dodaj realizację celu',
-            ],
-            'edit_realization' => [
+            ),
+            'edit_realization' => array(
                 'pl' => 'Modyfikuj realizację celu',
-            ],
-        ];
+            ),
+        );
     }
 }

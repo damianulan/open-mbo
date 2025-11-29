@@ -48,7 +48,7 @@ use Yajra\DataTables\DataTablesServiceProvider;
 use Yajra\DataTables\ExportServiceProvider;
 use Yajra\DataTables\HtmlServiceProvider;
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -151,10 +151,10 @@ return [
 
     'fallback_locale' => 'pl',
 
-    'available_locales' => [
+    'available_locales' => array(
         'pl',
         'en',
-    ],
+    ),
 
     'date_format' => env('DATEFORMAT', 'Y-m-d'),
     'time_format' => env('TIMEFORMAT', 'H:i'),
@@ -225,10 +225,10 @@ return [
     |
     */
 
-    'maintenance' => [
+    'maintenance' => array(
         'driver' => 'file',
         // 'store'  => 'redis',
-    ],
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -241,7 +241,7 @@ return [
     |
     */
 
-    'providers' => [
+    'providers' => array(
 
         /*
          * Laravel Framework Service Providers...
@@ -265,7 +265,7 @@ return [
         RedisServiceProvider::class,
         PasswordResetServiceProvider::class,
         SessionServiceProvider::class,
-        //TranslationServiceProvider::class,
+        // TranslationServiceProvider::class,
         Spatie\TranslationLoader\TranslationServiceProvider::class,
         ValidationServiceProvider::class,
         ViewServiceProvider::class,
@@ -296,7 +296,7 @@ return [
         GateServiceProvider::class,
         ConfigServiceProvider::class,
         ImpersonateServiceProvider::class,
-    ],
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -309,7 +309,7 @@ return [
     |
     */
 
-    'aliases' => Facade::defaultAliases()->merge([
+    'aliases' => Facade::defaultAliases()->merge(array(
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'PageBuilder' => PageBuilder::class,
         'Theme' => Theme::class,
@@ -327,6 +327,6 @@ return [
         'AppException' => AppException::class,
 
         'MessageType' => MessageType::class,
-    ])->toArray(),
+    ))->toArray(),
 
-];
+);

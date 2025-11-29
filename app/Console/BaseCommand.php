@@ -17,9 +17,9 @@ class BaseCommand extends Command
         $this->end = Carbon::now();
         $duration = null;
 
-        $properties = [
+        $properties = array(
             'job' => static::class,
-        ];
+        );
         if ($this->start && $this->end) {
             $diffMs = $this->end->valueOf() - $this->start->valueOf();
             $seconds = floor($diffMs / 1000);

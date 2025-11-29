@@ -13,9 +13,9 @@ class BulkAssignUsers extends Service
         $exists = $this->objective->user_objectives()->where('user_id', $user_id)->exists();
         $result = false;
         if ( ! $exists) {
-            $result = $this->objective->user_objectives()->create([
+            $result = $this->objective->user_objectives()->create(array(
                 'user_id' => $user_id,
-            ]);
+            ));
         }
 
         return $result ? true : false;
