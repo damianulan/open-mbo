@@ -36,9 +36,6 @@ class ModuleManager
 
     /**
      * Checks if given module is exists and is active/enabled.
-     *
-     * @return bool
-     * @param string $module
      */
     public static function check(string $module): bool
     {

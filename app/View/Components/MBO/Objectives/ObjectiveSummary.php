@@ -14,8 +14,6 @@ class ObjectiveSummary extends Component
 
     /**
      * Create a new component instance.
-     * @param Objective $objective
-     * @param UserObjective $userObjective
      */
     public function __construct(public Objective $objective, public UserObjective $userObjective)
     {

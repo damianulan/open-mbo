@@ -55,7 +55,7 @@ class SettingsMigrate extends BaseCommand
                 foreach ($results as $result) {
                     $this->info($result);
                 }
-                $this->comment("Migration END.");
+                $this->comment('Migration END.');
             }
             DB::commit();
         } catch (Throwable $e) {

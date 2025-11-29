@@ -19,6 +19,7 @@ use Throwable;
 class MBOSeeder extends Seeder
 {
     protected $users;
+
     protected $templates;
 
     /**

@@ -10,7 +10,6 @@ class CampaignPolicy
 {
     /**
      * Determine whether the user can view any models.
-     * @param User $user
      */
     public function viewAny(User $user): bool
     {
@@ -19,8 +18,6 @@ class CampaignPolicy
 
     /**
      * Determine whether the user can view the model.
-     * @param User $user
-     * @param Campaign $campaign
      */
     public function preview(User $user, Campaign $campaign): bool
     {
@@ -29,8 +26,6 @@ class CampaignPolicy
 
     /**
      * Determine whether the user can view the model.
-     * @param User $user
-     * @param Campaign $campaign
      */
     public function view(User $user, Campaign $campaign): bool
     {
@@ -39,7 +34,6 @@ class CampaignPolicy
 
     /**
      * Determine whether the user can create models.
-     * @param User $user
      */
     public function create(User $user): bool
     {
@@ -48,8 +42,6 @@ class CampaignPolicy
 
     /**
      * Determine whether the user can update the model.
-     * @param User $user
-     * @param Campaign $campaign
      */
     public function update(User $user, Campaign $campaign): bool
     {
@@ -58,8 +50,6 @@ class CampaignPolicy
 
     /**
      * dodawanie/usuwanie użytkowników i celów do/z kampanii.
-     * @param User $user
-     * @param Campaign $campaign
      */
     public function users(User $user, Campaign $campaign): bool
     {
@@ -88,8 +78,6 @@ class CampaignPolicy
 
     /**
      * Determine whether the user can delete the model.
-     * @param User $user
-     * @param Campaign $campaign
      */
     public function delete(User $user, Campaign $campaign): bool
     {

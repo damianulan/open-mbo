@@ -14,7 +14,6 @@ class EmploymentUpdated implements ShouldDispatchAfterCommit
 
     /**
      * Create a new event instance.
-     * @param UserEmployment $employment
      */
     public function __construct(
         public UserEmployment $employment

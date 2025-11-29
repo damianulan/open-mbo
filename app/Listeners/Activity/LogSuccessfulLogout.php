@@ -14,7 +14,6 @@ class LogSuccessfulLogout
 
     /**
      * Handle the event.
-     * @param Logout $event
      */
     public function handle(Logout $event): void
     {

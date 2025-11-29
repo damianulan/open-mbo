@@ -6,7 +6,6 @@ use App\Forms\MBO\Objective\ObjectiveTemplateEditForm;
 use App\Models\MBO\ObjectiveTemplate;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class ObjectiveTemplateController extends MBOController
 {
@@ -23,9 +22,8 @@ class ObjectiveTemplateController extends MBOController
 
     /**
      * Show the form for creating a new resource.
-     * @param Request $request
      */
-    public function create(Request $request): Response
+    public function create(Request $request)
     {
         return view('components.forms.edit', array(
             'form' => ObjectiveTemplateEditForm::definition($request),
@@ -34,10 +32,8 @@ class ObjectiveTemplateController extends MBOController
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
-     * @param ObjectiveTemplateEditForm $form
      */
-    public function store(Request $request, ObjectiveTemplateEditForm $form): Response
+    public function store(Request $request, ObjectiveTemplateEditForm $form)
     {
         $request = $form::reformatRequest($request);
         $request->validate();
@@ -58,15 +54,14 @@ class ObjectiveTemplateController extends MBOController
      *
      * @param  int  $id
      */
-    public function show($id): Response {}
+    public function show($id): void {}
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @param Request $request
      */
-    public function edit(Request $request, $id): Response
+    public function edit(Request $request, $id)
     {
         $model = ObjectiveTemplate::findOrFail($id);
 
@@ -80,10 +75,8 @@ class ObjectiveTemplateController extends MBOController
      * Update the specified resource in storage.
      *
      * @param  int  $id
-     * @param Request $request
-     * @param ObjectiveTemplateEditForm $form
      */
-    public function update(Request $request, $id, ObjectiveTemplateEditForm $form): Response
+    public function update(Request $request, $id, ObjectiveTemplateEditForm $form)
     {
         $request = $form::reformatRequest($request);
         $form::validate($request, $id);

@@ -13,7 +13,6 @@ class ServerController extends SettingsController
 {
     /**
      * Show the application dashboard.
-     * @param Request $request
      */
     public function index(Request $request): Renderable
     {

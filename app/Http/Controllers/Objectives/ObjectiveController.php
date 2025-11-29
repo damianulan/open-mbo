@@ -12,7 +12,6 @@ class ObjectiveController extends MBOController
 {
     /**
      * Display a listing of the resource.
-     * @param ObjectiveDataTable $dataTable
      */
     public function index(ObjectiveDataTable $dataTable)
     {
@@ -29,8 +28,6 @@ class ObjectiveController extends MBOController
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
-     * @param ObjectiveEditForm $form
      */
     public function store(Request $request, ObjectiveEditForm $form)
     {
@@ -51,8 +48,6 @@ class ObjectiveController extends MBOController
 
     /**
      * Display the specified resource.
-     * @param Request $request
-     * @param string $id
      */
     public function show(Request $request, string $id)
     {
@@ -69,7 +64,6 @@ class ObjectiveController extends MBOController
 
     /**
      * Show the form for editing the specified resource.
-     * @param string $id
      */
     public function edit(string $id): void {}
 
@@ -92,7 +86,6 @@ class ObjectiveController extends MBOController
 
     /**
      * Remove the specified resource from storage.
-     * @param string $id
      */
     public function destroy(string $id): void {}
 

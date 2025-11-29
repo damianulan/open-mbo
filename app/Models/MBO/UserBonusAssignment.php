@@ -15,6 +15,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read Campaign|null $campaign
  * @property-read mixed $trans
  * @property-read User|null $user
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment avg(string $column)
@@ -58,6 +59,7 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserBonusAssignment withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserBonusAssignment withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserBonusAssignment extends BaseModel

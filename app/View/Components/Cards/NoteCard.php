@@ -11,9 +11,6 @@ class NoteCard extends Component
 {
     /**
      * Create a new component instance.
-     * @param Model $subject
-     * @param ?string $title
-     * @param bool $minimized
      */
     public function __construct(public Model $subject, public ?string $title = null, public bool $minimized = false)
     {

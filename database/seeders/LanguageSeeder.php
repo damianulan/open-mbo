@@ -45,13 +45,13 @@ class LanguageSeeder extends Seeder
                     LanguageLine::create(array(
                         'group' => $group,
                         'key' => $key,
-                        'text' => $value
+                        'text' => $value,
                     ));
                 } else {
                     LanguageLine::create(array(
                         'group' => $group,
                         'key' => $key,
-                        'text' => $value
+                        'text' => $value,
                     ));
                 }
             }

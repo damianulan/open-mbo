@@ -44,8 +44,6 @@ class CampaignsController extends AppController
      * Store a newly created resource in storage.
      *
      * @return Response
-     * @param Request $request
-     * @param CampaignEditForm $form
      */
     public function store(Request $request, CampaignEditForm $form): RedirectResponse
     {
@@ -74,8 +72,6 @@ class CampaignsController extends AppController
      * Display the specified resource.
      *
      * @param  int  $id
-     * @param Request $request
-     * @param Campaign $campaign
      * @return Response
      */
     public function show(Request $request, Campaign $campaign): View

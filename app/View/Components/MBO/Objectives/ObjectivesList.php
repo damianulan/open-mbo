@@ -20,8 +20,6 @@ class ObjectivesList extends Component
 
     /**
      * Create a new component instance.
-     * @param Model $model
-     * @param User $user
      */
     public function __construct(public Model $model, User $user = new User())
     {

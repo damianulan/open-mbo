@@ -16,7 +16,6 @@ class MailMessage extends Mailable
 
     /**
      * Create a new message instance.
-     * @param NotificationContents $contents
      */
     public function __construct(
         protected NotificationContents $contents,

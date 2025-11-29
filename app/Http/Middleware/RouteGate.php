@@ -30,7 +30,6 @@ class RouteGate
      * @param  mixed  $request
      * @param  mixed  $permission
      * @param  mixed  $context
-     * @param Closure $next
      * @return void
      */
     public function handle($request, Closure $next, $permission, $context = null): Response

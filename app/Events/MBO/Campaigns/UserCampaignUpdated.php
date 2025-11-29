@@ -14,7 +14,6 @@ class UserCampaignUpdated implements ShouldDispatchAfterCommit
 
     /**
      * Create a new event instance.
-     * @param UserCampaign $userCampaign
      */
     public function __construct(
         public UserCampaign $userCampaign

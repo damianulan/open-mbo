@@ -16,9 +16,6 @@ class CampaignUserObjectiveAssigned implements ShouldDispatchAfterCommit
 
     /**
      * Create a new event instance.
-     * @param User $user
-     * @param Objective $objective
-     * @param Campaign $campaign
      */
     public function __construct(
         public User $user,

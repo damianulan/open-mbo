@@ -132,11 +132,6 @@ class CustomDataTable extends DataTable
      * Process dataTables needed render output.
      *
      * @phpstan-param view-string|null $view
-     *
-     * @return mixed
-     * @param ?string $view
-     * @param array $data
-     * @param array $mergeData
      */
     final public function render(?string $view = null, array $data = array(), array $mergeData = array()): mixed
     {

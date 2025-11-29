@@ -64,7 +64,6 @@ class CompaniesDataTable extends DataTable
 
     /**
      * Get the query source of dataTable.
-     * @param Company $model
      */
     public function query(Company $model): QueryBuilder
     {

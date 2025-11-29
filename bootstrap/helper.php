@@ -25,7 +25,6 @@ function lorem_paragraph()
 /**
  * Returns currently logged user instance or empty instance of User model.
  * Do not call in class constructors.
- * @param ?string $user_id
  */
 function user(?string $user_id = null): User
 {
@@ -43,7 +42,6 @@ function user(?string $user_id = null): User
 
 /**
  * Checks if currently logged user is a Root user
- * @param bool $strict
  */
 function isRoot(bool $strict = false): bool
 {
@@ -86,8 +84,6 @@ function production(): bool
 
 /**
  * Converts float values to their string representation based on current locale.
- * @param ?float $value
- * @param int $decimals
  */
 function float_view(?float $value, int $decimals = 2): string
 {

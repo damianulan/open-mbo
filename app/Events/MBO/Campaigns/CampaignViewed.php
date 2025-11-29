@@ -13,7 +13,6 @@ class CampaignViewed
 
     /**
      * Create a new event instance.
-     * @param Campaign $campaign
      */
     public function __construct(
         public Campaign $campaign

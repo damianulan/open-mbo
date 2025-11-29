@@ -20,7 +20,6 @@ class UserCampaignStageCheck implements ShouldQueueAfterCommit
 
     /**
      * Handle the event.
-     * @param CampaignUpdated|CampaignViewed $event
      */
     public function handle(CampaignUpdated|CampaignViewed $event): void
     {

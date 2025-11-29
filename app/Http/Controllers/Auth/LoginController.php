@@ -43,7 +43,6 @@ class LoginController extends Controller
      * The user has been authenticated.
      *
      * @param  mixed  $user
-     * @param Request $request
      */
     final protected function authenticated(Request $request, $user): mixed
     {

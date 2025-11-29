@@ -46,6 +46,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read mixed $trans
  * @property-read Collection<int, UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective avg(string $column)
@@ -103,6 +104,7 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder<static>|Objective withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective withoutCache()
  * @method static Builder<static>|Objective withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 #[ScopedBy(ObjectiveScope::class)]
@@ -155,6 +157,7 @@ class Objective extends BaseModel implements HasDeadline, HasWeight
         if ( ! settings('mbo.objectives_weights')) {
             return 1;
         }
+
         return $value;
     }
 
@@ -176,7 +179,6 @@ class Objective extends BaseModel implements HasDeadline, HasWeight
 
     /**
      * Is deadline is briefly upcoming.
-     * @param int $days
      */
     public function isDeadlineUpcoming(int $days = 3): bool
     {

@@ -75,7 +75,6 @@ class UsersDataTable extends CustomDataTable
 
     /**
      * Get the query source of dataTable.
-     * @param User $model
      */
     public function query(User $model): QueryBuilder
     {

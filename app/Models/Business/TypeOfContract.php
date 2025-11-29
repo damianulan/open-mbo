@@ -20,6 +20,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read Collection<int, UserEmployment> $employments
  * @property-read int|null $employments_count
  * @property-read mixed $trans
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|TypeOfContract active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|TypeOfContract average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|TypeOfContract avg(string $column)
@@ -69,6 +70,7 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|TypeOfContract withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class TypeOfContract extends BaseModel

@@ -13,8 +13,6 @@ class ModulesEnabled
      * Handle an incoming request.
      *
      * @param  Closure(Request): (Response)  $next
-     * @param Request $request
-     * @param string $module
      */
     public function handle(Request $request, Closure $next, string $module): Response
     {

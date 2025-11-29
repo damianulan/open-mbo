@@ -14,9 +14,6 @@ class UserMentioned
 
     /**
      * Create a new event instance.
-     * @param User $user
-     * @param Model $context
-     * @param User $mentionedBy
      */
     public function __construct(
         public User $user,

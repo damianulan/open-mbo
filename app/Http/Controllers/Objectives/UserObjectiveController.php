@@ -32,14 +32,11 @@ class UserObjectiveController extends AppController
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
      */
     public function store(Request $request): void {}
 
     /**
      * Display the specified resource.
-     * @param Request $request
-     * @param string $id
      */
     public function show(Request $request, string $id)
     {
@@ -62,7 +59,6 @@ class UserObjectiveController extends AppController
 
     /**
      * Show the form for editing the specified resource.
-     * @param string $id
      */
     public function edit(string $id): void {}
 
@@ -87,7 +83,6 @@ class UserObjectiveController extends AppController
 
     /**
      * Remove the specified resource from storage.
-     * @param string $id
      */
     public function destroy(string $id): void {}
 

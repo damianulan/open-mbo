@@ -43,7 +43,6 @@ class NotificationsDataTable extends CustomDataTable
 
     /**
      * Get the query source of dataTable.
-     * @param Notification $model
      */
     public function query(Notification $model): QueryBuilder
     {

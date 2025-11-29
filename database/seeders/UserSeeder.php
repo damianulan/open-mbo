@@ -95,8 +95,6 @@ class UserSeeder extends Seeder
                 });
             }
 
-
-
             DB::commit();
         } catch (Throwable $th) {
             DB::rollBack();

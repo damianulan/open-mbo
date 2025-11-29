@@ -27,6 +27,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read Collection<int, Company> $companies
  * @property-read int|null $companies_count
  * @property-read mixed $trans
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location avg(string $column)
@@ -84,6 +85,7 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Location extends BaseModel

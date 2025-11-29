@@ -58,6 +58,7 @@ use Spatie\Translatable\HasTranslations;
  * @property-read int|null $user_campaigns_count
  * @property-read EloquentCollection<int, UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign avg(string $column)
@@ -129,6 +130,7 @@ use Spatie\Translatable\HasTranslations;
  * @method static Builder<static>|Campaign withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign withoutCache()
  * @method static Builder<static>|Campaign withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 #[ScopedBy(CampaignScope::class)]
@@ -541,8 +543,6 @@ class Campaign extends BaseModel implements HasObjectives
 
     /**
      * LOCAL SCOPES
-     * @param Builder $query
-     * @param int $manual
      */
     public function scopeWhereManual(Builder $query, int $manual): void
     {

@@ -75,7 +75,6 @@ class LogsDataTable extends BaseLogDataTable
 
     /**
      * Get the query source of dataTable.
-     * @param ActivityModel $model
      */
     public function query(ActivityModel $model): QueryBuilder
     {

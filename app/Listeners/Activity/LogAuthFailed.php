@@ -14,7 +14,6 @@ class LogAuthFailed
 
     /**
      * Handle the event.
-     * @param AuthFailed $event
      */
     public function handle(AuthFailed $event): void
     {

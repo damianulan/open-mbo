@@ -10,18 +10,14 @@ use App\Models\Core\User;
 use App\Services\Employments\CreateOrUpdate as EmploymentCreateOrUpdate;
 use App\Services\Users\CreateOrUpdate as UserCreateOrUpdate;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class UsersController extends AppController
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return Response
-     * @param UsersDataTable $dataTable
      */
-    public function index(UsersDataTable $dataTable): Response
+    public function index(UsersDataTable $dataTable)
     {
         return $dataTable->render('pages.users.index', array(
             'table' => $dataTable,
@@ -30,11 +26,8 @@ class UsersController extends AppController
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return Response
-     * @param Request $request
      */
-    public function create(Request $request): Response
+    public function create(Request $request)
     {
         return view('pages.users.edit', array(
             'form' => UserEditForm::definition($request),
@@ -44,12 +37,8 @@ class UsersController extends AppController
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return Response
-     * @param Request $request
-     * @param UserEditForm $form
      */
-    public function store(Request $request, UserEditForm $form): Response
+    public function store(Request $request, UserEditForm $form)
     {
         $request = $form::reformatRequest($request);
         $form::validate($request);
@@ -79,11 +68,8 @@ class UsersController extends AppController
 
     /**
      * Display the specified resource.
-     *
-     * @return Response
-     * @param User $user
      */
-    public function show(User $user): Response
+    public function show(User $user)
     {
         return view('pages.users.show', array(
             'user' => $user,
@@ -94,10 +80,8 @@ class UsersController extends AppController
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @param Request $request
-     * @return Response
      */
-    public function edit(Request $request, $id): Response
+    public function edit(Request $request, $id)
     {
         $model = User::findOrFail($id);
 
@@ -114,11 +98,8 @@ class UsersController extends AppController
      * Update the specified resource in storage.
      *
      * @param  int  $id
-     * @param Request $request
-     * @param UserEditForm $form
-     * @return Response
      */
-    public function update(Request $request, $id, UserEditForm $form): Response
+    public function update(Request $request, $id, UserEditForm $form)
     {
         $request = $form::reformatRequest($request);
         $form::validate($request);
@@ -152,10 +133,8 @@ class UsersController extends AppController
      * Delete User instance.
      *
      * @param  int  $id
-     * @param User $user
-     * @return Response
      */
-    public function delete(User $user): Response
+    public function delete(User $user)
     {
         if ($user->delete()) {
             return redirect()->route('users.index')->with('success', __('alerts.users.success.delete', array('name' => $user->name)));
@@ -177,7 +156,6 @@ class UsersController extends AppController
 
     /**
      * Toggles User blocking if was nat blocked and unlocking otherwise.
-     * @param User $user
      */
     public function block(User $user)
     {
@@ -203,21 +181,14 @@ class UsersController extends AppController
         return redirect()->back();
     }
 
-    /**
-     * @return void
-     * @param User $user
-     */
-    public function impersonate(User $user): void
+    public function impersonate(User $user)
     {
         Auth::user()->impersonate($user);
 
         return redirect()->back();
     }
 
-    /**
-     * @return void
-     */
-    public function impersonateLeave(): void
+    public function impersonateLeave()
     {
         Auth::user()->leaveImpersonation();
 

@@ -9,7 +9,6 @@ class NotificationsController extends SettingsController
 {
     /**
      * Show the application dashboard.
-     * @param NotificationsDataTable $dataTable
      */
     public function index(NotificationsDataTable $dataTable): Renderable
     {

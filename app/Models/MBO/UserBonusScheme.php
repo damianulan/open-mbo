@@ -21,6 +21,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read BonusScheme $bonus_scheme
  * @property-read mixed $trans
  * @property-read User $user
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusScheme active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusScheme average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusScheme avg(string $column)
@@ -70,6 +71,7 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserBonusScheme withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusScheme withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserBonusScheme withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserBonusScheme extends BaseModel

@@ -12,7 +12,6 @@ class ObjectiveCategoryController extends MBOController
 {
     /**
      * Display a listing of the resource.
-     * @param ObjectiveCategoriesDataTable $dataTable
      */
     public function index(ObjectiveCategoriesDataTable $dataTable)
     {
@@ -24,7 +23,6 @@ class ObjectiveCategoryController extends MBOController
 
     /**
      * Show the form for creating a new resource.
-     * @param Request $request
      */
     public function create(Request $request): View
     {
@@ -35,8 +33,6 @@ class ObjectiveCategoryController extends MBOController
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
-     * @param ObjectiveCategoryEditForm $form
      */
     public function store(Request $request, ObjectiveCategoryEditForm $form)
     {
@@ -55,14 +51,11 @@ class ObjectiveCategoryController extends MBOController
 
     /**
      * Display the specified resource.
-     * @param string $id
      */
     public function show(string $id): void {}
 
     /**
      * Show the form for editing the specified resource.
-     * @param Request $request
-     * @param string $id
      */
     public function edit(Request $request, string $id)
     {
@@ -78,8 +71,6 @@ class ObjectiveCategoryController extends MBOController
      * Update the specified resource in storage.
      *
      * @param  mixed  $id
-     * @param Request $request
-     * @param ObjectiveCategoryEditForm $form
      */
     public function update(Request $request, $id, ObjectiveCategoryEditForm $form)
     {
@@ -97,7 +88,6 @@ class ObjectiveCategoryController extends MBOController
 
     /**
      * Remove the specified resource from storage.
-     * @param string $id
      */
     public function delete(string $id)
     {

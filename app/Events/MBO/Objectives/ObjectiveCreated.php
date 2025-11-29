@@ -14,7 +14,6 @@ class ObjectiveCreated implements ShouldDispatchAfterCommit
 
     /**
      * Create a new event instance.
-     * @param Objective $objective
      */
     public function __construct(
         public Objective $objective

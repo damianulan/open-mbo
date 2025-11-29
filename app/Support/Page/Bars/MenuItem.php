@@ -158,7 +158,8 @@ class MenuItem
     /**
      * Use this method to check if given setting allows to view menu element.
      * Setting should represent a boolean value.
-     * @param array $setting
+     *
+     * @param  array  $setting
      */
     public function settings(...$setting): self
     {
@@ -177,7 +178,8 @@ class MenuItem
 
     /**
      * User is required to be assigned to ANY of the given permissions, in order to view menu element.
-     * @param array $slug
+     *
+     * @param  array  $slug
      */
     public function permission(...$slug): self
     {
@@ -198,7 +200,8 @@ class MenuItem
 
     /**
      * User is required to be assigned to at least one of the given roles, in order to view menu element.
-     * @param array $slug
+     *
+     * @param  array  $slug
      */
     public function role(...$slug): self
     {

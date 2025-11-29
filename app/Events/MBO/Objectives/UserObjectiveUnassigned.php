@@ -9,14 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UserObjectiveUnassigned implements ShouldDispatchAfterCommit, NotifiableEvent
+class UserObjectiveUnassigned implements NotifiableEvent, ShouldDispatchAfterCommit
 {
     use Dispatchable;
     use SerializesModels;
 
     /**
      * Create a new event instance.
-     * @param UserObjective $userObjective
      */
     public function __construct(
         public UserObjective $userObjective,

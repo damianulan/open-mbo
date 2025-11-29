@@ -12,7 +12,6 @@ class AppUpgraded
 
     /**
      * Create a new event instance.
-     * @param string $release
      */
     public function __construct(public string $release) {}
 }

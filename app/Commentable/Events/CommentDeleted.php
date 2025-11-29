@@ -14,7 +14,6 @@ class CommentDeleted implements ShouldDispatchAfterCommit
 
     /**
      * Create a new event instance.
-     * @param Comment $comment
      */
     public function __construct(
         public Comment $comment

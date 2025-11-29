@@ -27,9 +27,7 @@ trait IsTranslated
             Objective::class => 'Cel',
             UserObjective::class => 'Przypisanie do celu',
 
-
             default => null,
         };
     }
-
 }

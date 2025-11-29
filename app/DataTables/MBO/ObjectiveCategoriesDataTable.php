@@ -44,7 +44,6 @@ class ObjectiveCategoriesDataTable extends CustomDataTable
 
     /**
      * Get the query source of dataTable.
-     * @param ObjectiveTemplateCategory $model
      */
     public function query(ObjectiveTemplateCategory $model): QueryBuilder
     {

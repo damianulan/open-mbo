@@ -16,8 +16,6 @@ class ModuleController extends SettingsController
 {
     /**
      * Show the application dashboard.
-     * @param Request $request
-     * @param ?string $module
      */
     public function index(Request $request, ?string $module = null): Renderable
     {

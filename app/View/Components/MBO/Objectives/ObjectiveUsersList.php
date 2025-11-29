@@ -15,8 +15,6 @@ class ObjectiveUsersList extends Component
 
     /**
      * Create a new component instance.
-     * @param Objective $objective
-     * @param string $status
      */
     public function __construct(public Objective $objective, public string $status = 'all')
     {

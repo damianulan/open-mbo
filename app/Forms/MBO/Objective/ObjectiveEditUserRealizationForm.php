@@ -14,7 +14,6 @@ class ObjectiveEditUserRealizationForm extends Form
 {
     /**
      * @param  UserObjective  $model
-     * @param Request $request
      */
     public static function definition(Request $request, $model = null): FormBuilder
     {

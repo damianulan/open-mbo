@@ -13,7 +13,6 @@ class MaintenanceMode
      * Handle an incoming request.
      *
      * @param  Closure(Request): (Response)  $next
-     * @param Request $request
      */
     public function handle(Request $request, Closure $next): Response
     {

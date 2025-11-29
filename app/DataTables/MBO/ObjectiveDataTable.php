@@ -48,7 +48,6 @@ class ObjectiveDataTable extends CustomDataTable
 
     /**
      * Get the query source of dataTable.
-     * @param Objective $model
      */
     public function query(Objective $model): QueryBuilder
     {
