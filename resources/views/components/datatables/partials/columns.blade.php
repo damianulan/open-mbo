@@ -6,8 +6,18 @@
             </a>
         @endif
         @if ($hasCsv)
-            <a class="btn btn-primary btn-round" href="{{ route('datatables.excel', ['class' => $class]) }}" data-tippy-content="{{ __('globals.datatables.to_csv') }}">
+            <a class="btn btn-primary btn-round" href="{{ route('datatables.csv', ['class' => $class]) }}" data-tippy-content="{{ __('globals.datatables.to_csv') }}">
                 <i class="bi bi-filetype-csv"></i>
+            </a>
+        @endif
+        @if ($hasPdf)
+            <a class="btn btn-primary btn-round" href="{{ route('datatables.pdf', ['class' => $class]) }}" data-tippy-content="{{ __('globals.datatables.to_pdf') }}">
+                <i class="bi bi-filetype-pdf"></i>
+            </a>
+        @endif
+        @if ($hasJson)
+            <a class="btn btn-primary btn-round" href="{{ route('datatables.json', ['class' => $class]) }}" data-tippy-content="{{ __('globals.datatables.to_json') }}">
+                <i class="bi bi-filetype-json"></i>
             </a>
         @endif
         @if ($hasColumns)

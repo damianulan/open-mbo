@@ -199,6 +199,8 @@ Route::middleware(array('web', 'auth', 'maintenance'))->group(function (): void 
         Route::post('/save_columns', array(CustomDataTable::class, 'saveColumns'))->name('save_columns');
         Route::get('/excel/{class}', array(DataTableController::class, 'toExcel'))->name('excel');
         Route::get('/csv/{class}', array(DataTableController::class, 'toCsv'))->name('csv');
+        Route::get('/pdf/{class}', array(DataTableController::class, 'toPdf'))->name('pdf');
+        Route::get('/json/{class}', array(DataTableController::class, 'toJson'))->name('json');
     });
 
     Route::prefix('ajax')->name('ajax.')->group(function (): void {

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Services\DataTable;
+use Illuminate\Support\Facades\File;
 
 class CustomDataTable extends DataTable
 {
@@ -59,6 +60,8 @@ class CustomDataTable extends DataTable
             'hasColumns' => in_array('column_selector', $this->actions),
             'hasCsv' => in_array('csv', $this->actions),
             'hasExcel' => in_array('excel', $this->actions),
+            'hasJson' => in_array('json', $this->actions),
+            'hasPdf' => in_array('pdf', $this->actions),
             'class' => static::class,
         ));
 
@@ -207,5 +210,15 @@ class CustomDataTable extends DataTable
         }
 
         return $orderBy;
+    }
+
+    public function json()
+    {
+        $collection = $this->getDataForExport();
+        $filename = $this->getFilename() . '.json';
+        $fullpath = storage_path('app/public/' . $filename);
+        File::put($fullpath, json_encode($collection, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE));
+
+        return response()->download($fullpath, $filename);
     }
 }

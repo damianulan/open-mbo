@@ -16,6 +16,8 @@ class UsersDataTable extends CustomDataTable
 
     protected $orderBy = 'created_at';
 
+    protected array $actions = array('csv', 'excel', 'json', 'column_selector');
+
     /**
      * Build the DataTable class.
      *
