@@ -30,10 +30,12 @@
                             <x-icon key="feather" />
                         </div>
                         @endif
-                        <div class="list-action" data-tippy-content="{{ __('forms.mbo.objectives.weight') }}: {{ $objective->weight }}">
-                            <x-icon key="minecart-loaded" />
-                            <span>{{ $objective->weight }}</span>
-                        </div>
+                        @feature('objectives.weights')
+                            <div class="list-action" data-tippy-content="{{ __('forms.mbo.objectives.weight') }}: {{ $objective->weight }}">
+                                <x-icon key="minecart-loaded" />
+                                <span>{{ $objective->weight }}</span>
+                            </div>
+                        @endfeature
                         @if($objective->expected)
                         <div class="list-action" data-tippy-content="{{ __('forms.mbo.objectives.expected') }}: {{ $objective->expected }}">
                             <x-icon key="patch-check" />

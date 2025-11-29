@@ -8,7 +8,7 @@ class Weights extends Feature
 {
     public function define(): bool
     {
-        return true;
+        return false;
     }
 
     public function key(): string
