@@ -7,6 +7,7 @@ use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
 use FormForge\FormBuilder;
 use Illuminate\Http\Request;
+use App\Forms\Traits\SettingsForm;
 
 class SmtpForm extends Form
 {

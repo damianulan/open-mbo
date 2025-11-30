@@ -2,7 +2,7 @@
 
 namespace App\Enums\MBO;
 
-use Lucent\Support\Enum;
+use Enumerable\LaraEnum;
 
 /**
  * Campaign Stages can be assigned to campaigns and users in campaign.
@@ -10,7 +10,7 @@ use Lucent\Support\Enum;
  * Campaigns while in progress can have multiple SOFT STAGES assigned.
  * User can only have one of any STAGES assigned at a time.
  */
-class CampaignStage extends Enum
+class CampaignStage extends LaraEnum
 {
     // in progress/soft stages - campaign can have multiple of them assigned.
     // if any assigned its generally an IN_PROGESS stage

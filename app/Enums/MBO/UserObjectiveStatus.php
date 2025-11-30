@@ -2,9 +2,9 @@
 
 namespace App\Enums\MBO;
 
-use Lucent\Support\Enum;
+use Enumerable\LaraEnum;
 
-class UserObjectiveStatus extends Enum
+class UserObjectiveStatus extends LaraEnum
 {
     public const UNSTARTED = 'unstarted';
 

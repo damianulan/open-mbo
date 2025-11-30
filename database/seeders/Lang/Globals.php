@@ -120,6 +120,21 @@ class Globals extends Seeder
             'datatables.print' => array(
                 'pl' => 'Podgląd wydruku',
             ),
+            'exports.excel' => array(
+                'pl' => 'Excel',
+            ),
+            'exports.csv' => array(
+                'pl' => 'CSV',
+            ),
+            'exports.json' => array(
+                'pl' => 'JSON',
+            ),
+            'exports.pdf' => array(
+                'pl' => 'PDF',
+            ),
+            'exports.print' => array(
+                'pl' => 'Podgląd wydruku',
+            ),
         );
     }
 }

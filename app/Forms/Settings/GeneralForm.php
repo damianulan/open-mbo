@@ -11,6 +11,7 @@ use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
 use FormForge\FormBuilder;
 use Illuminate\Http\Request;
+use App\Forms\Traits\SettingsForm;
 
 class GeneralForm extends Form
 {
@@ -30,8 +31,8 @@ class GeneralForm extends Form
                     ->label(__('forms.settings.general.release'))->key(self::settingsKey('general.release')))
             )
             ->addSection(__('forms.settings.general.datas'), fn (FormBuilder $builder) => $builder
-                ->add(FormComponent::select('gender', $model, Dictionary::fromEnum(ExportType::class))
-                    ->label(__('forms.users.gender')))
+                ->add(FormComponent::multiselect('export_types', $model, Dictionary::fromEnum(ExportType::class))
+                    ->label(__('forms.settings.general.export_types'))->key(self::settingsKey('general.export_types')))
             )
             ->addSubmit();
     }

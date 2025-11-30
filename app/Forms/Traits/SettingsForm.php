@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Forms\Settings;
+namespace App\Forms\Traits;
 
 trait SettingsForm
 {

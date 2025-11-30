@@ -42,11 +42,10 @@ class LanguageSeeder extends Seeder
                 $instance = LanguageLine::where('group', $group)->where('key', $key)->first();
 
                 if ($instance) {
-                    LanguageLine::create(array(
-                        'group' => $group,
-                        'key' => $key,
-                        'text' => $value,
-                    ));
+                    $instance->group = $group;
+                    $instance->key = $key;
+                    $instance->text = $value;
+                    $instance->update();
                 } else {
                     LanguageLine::create(array(
                         'group' => $group,

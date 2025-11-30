@@ -39,6 +39,12 @@ class Forms extends Seeder
             'settings.general.general' => array(
                 'pl' => 'Ogólne',
             ),
+            'settings.general.datas' => array(
+                'pl' => 'Zarządzanie danymi w systemie',
+            ),
+            'settings.general.export_types' => array(
+                'pl' => 'Rodzaje eksportu danych dostępne na platformie',
+            ),
             'settings.general.theme' => array(
                 'pl' => 'Szablon',
             ),

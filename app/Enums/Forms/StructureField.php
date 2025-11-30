@@ -2,9 +2,9 @@
 
 namespace App\Enums\Forms;
 
-use Lucent\Support\Enum;
+use Enumerable\LaraEnum;
 
-class StructureField extends Enum
+class StructureField extends LaraEnum
 {
     public const TEXT = 'text';
 

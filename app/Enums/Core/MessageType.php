@@ -2,9 +2,9 @@
 
 namespace App\Enums\Core;
 
-use Lucent\Support\Enum;
+use Enumerable\LaraEnum;
 
-class MessageType extends Enum
+class MessageType extends LaraEnum
 {
     public const SUCCESS = 'success';
 

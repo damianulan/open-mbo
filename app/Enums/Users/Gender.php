@@ -2,9 +2,9 @@
 
 namespace App\Enums\Users;
 
-use Lucent\Support\Enum;
+use Enumerable\LaraEnum;
 
-class Gender extends Enum
+class Gender extends LaraEnum
 {
     public const MALE = 'm';
 

@@ -6,6 +6,7 @@ use FormForge\Base\Form;
 use FormForge\Base\FormComponent;
 use FormForge\FormBuilder;
 use Illuminate\Http\Request;
+use App\Forms\Traits\SettingsForm;
 
 class NotificationsForm extends Form
 {

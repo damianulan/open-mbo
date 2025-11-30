@@ -43,7 +43,6 @@ class LangList extends BaseCommand
             $text = $line->text[$lang] ?? '';
             $this->info($line->group . '.' . $line->key . ' => ' . $text);
         });
-        $this->call('optimize:clear');
     }
 
     public function toFile(Builder $query): void
