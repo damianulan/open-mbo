@@ -28,6 +28,12 @@ return array(
     |
     */
 
+    /**
+     * in megabytes
+     * @see \App\Support\Storage\StorageManager
+     */
+    'storage_max_size' => env('STORAGE_MAX_SIZE', 1024),
+
     'disks' => array(
 
         'local' => array(
