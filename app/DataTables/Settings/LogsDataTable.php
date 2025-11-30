@@ -6,7 +6,7 @@ use App\Models\Vendor\ActivityModel;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Carbon;
 use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Column;
+use App\Support\DataTables\Column;
 
 class LogsDataTable extends BaseLogDataTable
 {
@@ -101,8 +101,7 @@ class LogsDataTable extends BaseLogDataTable
             'causer' => Column::computed('causer')
                 ->title(__('logging.columns.causer'))
                 ->orderable(true)
-                ->searchable(true)
-                ->addClass('firstcol'),
+                ->searchable(true),
             'event' => Column::computed('event')
                 ->title(__('logging.columns.event')),
             'subject' => Column::computed('subject')

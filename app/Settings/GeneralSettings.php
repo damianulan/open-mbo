@@ -2,6 +2,7 @@
 
 namespace App\Settings;
 
+use App\Enums\Core\ExportType;
 use App\Settings\Abstract\BaseSettings;
 
 class GeneralSettings extends BaseSettings
@@ -31,6 +32,8 @@ class GeneralSettings extends BaseSettings
     public string $date_format = 'd.m.Y';
 
     public string $time_format = 'H:i';
+
+    public array $export_types = [ExportType::EXCEL, ExportType::CSV, ExportType::JSON, ExportType::PDF, ExportType::PRINT];
 
     public static function group(): string
     {

@@ -5,6 +5,7 @@ namespace App\Support\DataTables;
 use App\Models\Core\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property int $id
@@ -51,7 +52,7 @@ class SelectedColumns extends Model
 
     public static function findColumn(string $datatable_id)
     {
-        return self::where('user_id', auth()->user()->id)->where('table_id', $datatable_id)->first();
+        return self::where('user_id', Auth::user()->id)->where('table_id', $datatable_id)->first();
     }
 
     public function user()

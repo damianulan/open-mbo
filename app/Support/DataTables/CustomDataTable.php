@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class CustomDataTable extends DataTable
 {
@@ -42,7 +43,7 @@ class CustomDataTable extends DataTable
     public function actions()
     {
         $model = SelectedColumns::findColumn($this->id);
-        $available = $this->availableColumns();
+        $available = $this->getAvailableColumns();
         if ($model) {
             $selected = $model->selected;
             uasort($available, function ($x, $y) use ($selected) {
@@ -58,6 +59,7 @@ class CustomDataTable extends DataTable
             'columns' => $available,
             'selected' => $this->selectedColumns(),
             'hasColumns' => in_array('column_selector', $this->actions),
+            'printable' => in_array('print', $this->actions),
             'hasCsv' => in_array('csv', $this->actions),
             'hasExcel' => in_array('excel', $this->actions),
             'hasJson' => in_array('json', $this->actions),
@@ -173,7 +175,7 @@ class CustomDataTable extends DataTable
         $columns = array();
         $model = SelectedColumns::findColumn($this->id);
         $columns_raw = $model->selected ?? array();
-        $available = $this->availableColumns();
+        $available = $this->getAvailableColumns();
 
         if (empty($columns_raw)) {
             $columns = $this->defaultColumns();
@@ -182,6 +184,11 @@ class CustomDataTable extends DataTable
         }
 
         return $columns;
+    }
+
+    private function getAvailableColumns(): array
+    {
+        return array_filter($this->availableColumns(), fn ($item) => $item->visible !== false && $item->viewable === true);
     }
 
     protected function defaultColumns(): array
@@ -215,10 +222,11 @@ class CustomDataTable extends DataTable
     public function json()
     {
         $collection = $this->getDataForExport();
+        dd($this->getAjaxResponseData());
         $filename = $this->getFilename() . '.json';
-        $fullpath = storage_path('app/public/' . $filename);
-        File::put($fullpath, json_encode($collection, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE));
+        $fullpath = 'docs' . DIRECTORY_SEPARATOR . $filename;
+        Storage::disk('downloads')->put($fullpath, json_encode($collection, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE));
 
-        return response()->download($fullpath, $filename);
+        return Storage::disk('downloads')->download($fullpath, $filename);
     }
 }

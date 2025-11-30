@@ -1,5 +1,10 @@
 <div class="d-flex">
     <div class="ms-auto d-flex gap-2">
+        @if ($printable)
+            <a class="btn btn-primary btn-round" href="{{ route('datatables.print', ['class' => $class]) }}" data-tippy-content="{{ __('globals.datatables.print') }}">
+                <i class="bi bi-printer"></i>
+            </a>
+        @endif
         @if ($hasExcel)
             <a class="btn btn-primary btn-round" href="{{ route('datatables.excel', ['class' => $class]) }}" data-tippy-content="{{ __('globals.datatables.to_excel') }}">
                 <i class="bi bi-filetype-xlsx"></i>

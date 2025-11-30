@@ -7,7 +7,7 @@ use App\Support\DataTables\CustomDataTable;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Carbon;
 use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Column;
+use App\Support\DataTables\Column;
 
 class ObjectiveDataTable extends CustomDataTable
 {
@@ -76,8 +76,7 @@ class ObjectiveDataTable extends CustomDataTable
             'name' => Column::make('name')
                 ->title(__('forms.mbo.objectives.name'))
                 ->searchable(true)
-                ->orderable(true)
-                ->addClass('firstcol'),
+                ->orderable(true),
             'deadline' => Column::make('deadline')
                 ->title(__('forms.mbo.objectives.deadline'))
                 ->orderable(true),
@@ -97,7 +96,7 @@ class ObjectiveDataTable extends CustomDataTable
             'action' => Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->addClass('lastcol action-btns')
+                ->addClass('action-btns')
                 ->title(__('fields.action')),
         );
     }

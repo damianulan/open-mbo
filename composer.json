@@ -26,6 +26,10 @@
         },
         {
             "type": "vcs",
+            "url": "git@github.com:damianulan/php-enumerable.git"
+        },
+        {
+            "type": "vcs",
             "url": "git@github.com:damianulan/laravel-feature-kit.git"
         },
         {
@@ -46,6 +50,7 @@
         "akaunting/laravel-apexcharts": "^3.0",
         "barryvdh/laravel-snappy": "^1.0",
         "damianulan/laravel-feature-kit": "dev-main",
+        "damianulan/php-enumerable": "dev-main",
         "damianulan/laravel-form-forge": "dev-main",
         "damianulan/laravel-lucent": "dev-main",
         "damianulan/laravel-sentinel": "dev-main",

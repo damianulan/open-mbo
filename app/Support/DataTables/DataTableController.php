@@ -50,4 +50,15 @@ class DataTableController
 
         throw new Exception("DataTable class: [{$class}] json() method not found");
     }
+
+    public function print(Request $request, $class)
+    {
+        $dataTable = new $class($request);
+
+        if ($dataTable && $dataTable instanceof CustomDataTable && method_exists($dataTable, 'printPreview')) {
+            return $dataTable->printPreview();
+        }
+
+        throw new Exception("DataTable class: [{$class}] printPreview() method not found");
+    }
 }

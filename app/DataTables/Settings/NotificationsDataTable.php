@@ -6,7 +6,7 @@ use App\Support\DataTables\CustomDataTable;
 use App\Support\Notifications\Models\Notification;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Column;
+use App\Support\DataTables\Column;
 
 class NotificationsDataTable extends CustomDataTable
 {
@@ -69,8 +69,7 @@ class NotificationsDataTable extends CustomDataTable
             'key' => Column::make('key')
                 ->title(__('notifications.table.key'))
                 ->orderable(true)
-                ->searchable(true)
-                ->addClass('firstcol'),
+                ->searchable(true),
             'system' => Column::make('system')
                 ->title(__('notifications.table.system')),
             'email' => Column::make('email')

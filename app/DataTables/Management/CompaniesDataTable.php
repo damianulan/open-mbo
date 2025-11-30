@@ -8,7 +8,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Column;
+use App\Support\DataTables\Column;
 use Yajra\DataTables\Services\DataTable;
 
 class CompaniesDataTable extends DataTable
@@ -106,8 +106,7 @@ class CompaniesDataTable extends DataTable
         return array(
             Column::computed('name')
                 ->title(__('fields.firstname_lastname'))
-                ->sortable(true)
-                ->addClass('firstcol'),
+                ->sortable(true),
             Column::make('email')
                 ->title(__('fields.email')),
             Column::computed('status')
@@ -120,7 +119,7 @@ class CompaniesDataTable extends DataTable
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->addClass('lastcol action-btns')
+                ->addClass('action-btns')
                 ->title(__('fields.action')),
         );
     }

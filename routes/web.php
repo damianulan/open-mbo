@@ -201,6 +201,7 @@ Route::middleware(array('web', 'auth', 'maintenance'))->group(function (): void 
         Route::get('/csv/{class}', array(DataTableController::class, 'toCsv'))->name('csv');
         Route::get('/pdf/{class}', array(DataTableController::class, 'toPdf'))->name('pdf');
         Route::get('/json/{class}', array(DataTableController::class, 'toJson'))->name('json');
+        Route::get('/print/{class}', array(DataTableController::class, 'print'))->name('print');
     });
 
     Route::prefix('ajax')->name('ajax.')->group(function (): void {

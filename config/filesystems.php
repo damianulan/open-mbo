@@ -44,6 +44,22 @@ return array(
             'throw' => false,
         ),
 
+        'uploads' => array(
+            'driver' => 'local',
+            'root' => storage_path('app/uploads'),
+            'url' => env('APP_URL') . '/uploads',
+            'visibility' => 'public',
+            'throw' => false,
+        ),
+
+        'downloads' => array(
+            'driver' => 'local',
+            'root' => storage_path('app/downloads'),
+            'url' => env('APP_URL') . '/downloads',
+            'visibility' => 'public',
+            'throw' => false,
+        ),
+
         's3' => array(
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -71,6 +87,8 @@ return array(
 
     'links' => array(
         public_path('storage') => storage_path('app/public'),
+        public_path('uploads') => storage_path('app/uploads'),
+        public_path('downloads') => storage_path('app/downloads'),
     ),
 
 );

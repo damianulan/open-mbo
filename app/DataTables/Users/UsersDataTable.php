@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Column;
+use App\Support\DataTables\Column;
 
 class UsersDataTable extends CustomDataTable
 {
@@ -16,7 +16,7 @@ class UsersDataTable extends CustomDataTable
 
     protected $orderBy = 'created_at';
 
-    protected array $actions = array('csv', 'excel', 'json', 'column_selector');
+    protected array $actions = array('csv', 'excel', 'json', 'column_selector', 'print');
 
     /**
      * Build the DataTable class.
@@ -26,6 +26,7 @@ class UsersDataTable extends CustomDataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addColumn('fullname', fn ($data) => $data->name)
             ->addColumn('name', fn ($data) => view('components.datatables.username_link', array(
                 'data' => $data,
             )))
@@ -112,7 +113,8 @@ class UsersDataTable extends CustomDataTable
                 ->title(__('fields.firstname_lastname'))
                 ->searchable(true)
                 ->orderable(true)
-                ->addClass('firstcol'),
+                ->exportable(false)
+                ->printable(false),
             'email' => Column::make('email')
                 ->title(__('fields.email')),
             'status' => Column::computed('status')
@@ -130,7 +132,7 @@ class UsersDataTable extends CustomDataTable
             'action' => Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->addClass('lastcol action-btns')
+                ->addClass('action-btns')
                 ->title(__('fields.action')),
         );
     }

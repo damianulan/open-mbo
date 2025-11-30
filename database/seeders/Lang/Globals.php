@@ -111,6 +111,15 @@ class Globals extends Seeder
             'datatables.to_csv' => array(
                 'pl' => 'Eksport do pliku CSV',
             ),
+            'datatables.to_pdf' => array(
+                'pl' => 'Eksport do pliku PDF',
+            ),
+            'datatables.to_json' => array(
+                'pl' => 'Eksport do pliku JSON',
+            ),
+            'datatables.print' => array(
+                'pl' => 'Podgląd wydruku',
+            ),
         );
     }
 }
