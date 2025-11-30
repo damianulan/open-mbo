@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\BrandingController;
 use App\Http\Controllers\Campaigns\CampaignObjectiveController;
 use App\Http\Controllers\Campaigns\CampaignsController;
 use App\Http\Controllers\Campaigns\CampaignUserController;
@@ -87,7 +88,9 @@ Route::middleware(array('web', 'auth', 'maintenance'))->group(function (): void 
             Route::get('/', array(GeneralController::class, 'index'))->name('index');
             Route::post('general/store', array(GeneralController::class, 'storeGeneral'))->name('store');
         });
-
+        Route::prefix('branding')->name('branding.')->group(function (): void {
+            Route::post('store', array(BrandingController::class, 'store'))->name('store');
+        });
         Route::prefix('server')->name('server.')->group(function (): void {
             Route::get('/', array(ServerController::class, 'index'))->name('index');
             Route::post('store/mail', array(ServerController::class, 'storeMail'))->name('mail.store');

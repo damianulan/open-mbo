@@ -48,6 +48,9 @@ class Forms extends Seeder
             'settings.general.theme' => array(
                 'pl' => 'Szablon',
             ),
+            'settings.general.site_logo' => array(
+                'pl' => 'Logo platformy',
+            ),
             'settings.general.lang' => array(
                 'pl' => 'Język aplikacji',
             ),

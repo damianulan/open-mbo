@@ -244,6 +244,7 @@
     "forms.settings.general.general": "Ogólne",
     "forms.settings.general.lang": "Język aplikacji",
     "forms.settings.general.release": "Wersja aplikacji",
+    "forms.settings.general.site_logo": "Logo platformy",
     "forms.settings.general.site_name": "Nazwa witryny",
     "forms.settings.general.theme": "Szablon",
     "forms.settings.mbo.campaigns_bonus": "Bonus dla kampanii [%]",

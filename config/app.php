@@ -3,6 +3,7 @@
 use App\Casts\CheckboxCast;
 use App\Enums\Core\MessageType;
 use App\Exceptions\AppException;
+use App\Helpers\StorageHelper;
 use App\Lib\Theme;
 use App\Models\Core\User;
 use App\Providers\AppServiceProvider;
@@ -327,6 +328,7 @@ return array(
         'AppException' => AppException::class,
 
         'MessageType' => MessageType::class,
+        'StorageHelper' => StorageHelper::class,
     ))->toArray(),
 
 );

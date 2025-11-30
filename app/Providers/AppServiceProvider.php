@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Helpers\StorageHelper;
 use Barryvdh\Debugbar\Facades\Debugbar;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Foundation\AliasLoader;

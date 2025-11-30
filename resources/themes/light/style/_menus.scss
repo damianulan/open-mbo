@@ -152,6 +152,7 @@ html .sidebar-menu {
 }
 
 .brand {
+    width: 100%;
     display: flex;
     align-items: center;
     color: $sidebar-brand-link;
@@ -160,14 +161,10 @@ html .sidebar-menu {
 }
 
 .brand .brand-title {
-    font-weight: 400;
+    font-weight: 800;
     font-family: $font-family-serif;
     letter-spacing: 0.05rem;
     font-size: 1.1rem;
-}
-
-.brand .brand-title .brand-title-2 {
-    font-weight: 800;
 }
 
 .brand .brand-icon {

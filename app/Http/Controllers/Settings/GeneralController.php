@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Settings;
 
+use App\Forms\Settings\BrandingForm;
 use App\Forms\Settings\GeneralForm;
 use App\Jobs\Core\AppUpdateAdhoc;
 use App\Settings\GeneralSettings;
@@ -20,6 +21,7 @@ class GeneralController extends SettingsController
         return view('pages.settings.index', array(
             'model' => $model,
             'form' => GeneralForm::definition($request, $model),
+            'brandingForm' => BrandingForm::definition($request, $model),
             'nav' => $this->nav(),
         ));
     }

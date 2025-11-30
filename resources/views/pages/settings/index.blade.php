@@ -27,7 +27,12 @@
                 </div>
             </div>
             <div class="row">
-                <x-unavailable-page/>
+                <div class="col-md-10 branding-contents">
+                    <div class="row">
+                        {{ $brandingForm->render() }}
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>

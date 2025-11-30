@@ -87,7 +87,7 @@ return array(
 
     'links' => array(
         public_path('storage') => storage_path('app/public'),
-        public_path('uploads') => storage_path('app/uploads'),
+        public_path('storage/uploads') => storage_path('app/uploads'),
         public_path('downloads') => storage_path('app/downloads'),
     ),
 
