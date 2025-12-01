@@ -31,7 +31,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(StorageManager::class);
 
         $this->optimizes(
-            optimize: LangList::class,
             clear: LangList::class,
             key: 'langs-cache',
         );
