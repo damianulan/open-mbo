@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
      |--------------------------------------------------------------------------
@@ -16,10 +16,10 @@ return [
 
     'enabled' => env('DEBUGBAR_ENABLED', false),
     'hide_empty_tabs' => true, // Hide tabs until they have content
-    'except' => [
+    'except' => array(
         'telescope*',
         'horizon*',
-    ],
+    ),
 
     /*
      |--------------------------------------------------------------------------
@@ -37,7 +37,7 @@ return [
      | Specify a callback if you want to limit based on IP or authentication.
      | Leaving it to null will allow localhost only.
      */
-    'storage' => [
+    'storage' => array(
         'enabled' => true,
         'open' => env('DEBUGBAR_OPEN_STORAGE'), // bool/callback.
         'driver' => 'file', // redis, file, pdo, socket, custom
@@ -46,7 +46,7 @@ return [
         'provider' => '', // Instance of StorageInterface for custom driver
         'hostname' => '127.0.0.1', // Hostname to use with the "socket" driver
         'port' => 2304, // Port to use with the "socket" driver
-    ],
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -161,7 +161,7 @@ return [
      |
      */
 
-    'collectors' => [
+    'collectors' => array(
         'phpinfo' => false,  // Php version
         'messages' => true,  // Messages
         'time' => true,  // Time Datalogger
@@ -187,7 +187,7 @@ return [
         'livewire' => true,  // Display Livewire (when available)
         'jobs' => true, // Display dispatched jobs
         'pennant' => false, // Display Pennant feature flags
-    ],
+    ),
 
     /*
      |--------------------------------------------------------------------------
@@ -198,74 +198,74 @@ return [
      |
      */
 
-    'options' => [
-        'time' => [
+    'options' => array(
+        'time' => array(
             'memory_usage' => false,  // Calculated by subtracting memory start and end, it may be inaccurate
-        ],
-        'messages' => [
+        ),
+        'messages' => array(
             'trace' => true,          // Trace the origin of the debug message
             'capture_dumps' => false, // Capture laravel `dump();` as message
-        ],
-        'memory' => [
+        ),
+        'memory' => array(
             'reset_peak' => false,     // run memory_reset_peak_usage before collecting
             'with_baseline' => false,  // Set boot memory usage as memory peak baseline
             'precision' => 0,          // Memory rounding precision
-        ],
-        'auth' => [
+        ),
+        'auth' => array(
             'show_name' => true,   // Also show the users name/email in the debugbar
             'show_guards' => true, // Show the guards that are used
-        ],
-        'db' => [
+        ),
+        'db' => array(
             'with_params' => true,   // Render SQL with the parameters substituted
-            'exclude_paths' => [       // Paths to exclude entirely from the collector
+            'exclude_paths' => array(       // Paths to exclude entirely from the collector
                 //                'vendor/laravel/framework/src/Illuminate/Session', // Exclude sessions queries
-            ],
+            ),
             'backtrace' => true,   // Use a backtrace to find the origin of the query in your files.
-            'backtrace_exclude_paths' => [],   // Paths to exclude from backtrace. (in addition to defaults)
+            'backtrace_exclude_paths' => array(),   // Paths to exclude from backtrace. (in addition to defaults)
             'timeline' => false,  // Add the queries to the timeline
             'duration_background' => true,   // Show shaded background on each query relative to how long it took to execute.
-            'explain' => [                 // Show EXPLAIN output on queries
+            'explain' => array(                 // Show EXPLAIN output on queries
                 'enabled' => false,
-            ],
+            ),
             'hints' => false,   // Show hints for common mistakes
             'show_copy' => true,    // Show copy button next to the query,
             'slow_threshold' => false,   // Only track queries that last longer than this time in ms
             'memory_usage' => false,   // Show queries memory usage
             'soft_limit' => 100,      // After the soft limit, no parameters/backtrace are captured
             'hard_limit' => 500,      // After the hard limit, queries are ignored
-        ],
-        'mail' => [
+        ),
+        'mail' => array(
             'timeline' => true,  // Add mails to the timeline
             'show_body' => true,
-        ],
-        'views' => [
+        ),
+        'views' => array(
             'timeline' => true,    // Add the views to the timeline
             'data' => false,        // True for all data, 'keys' for only names, false for no parameters.
             'group' => 50,          // Group duplicate views. Pass value to auto-group, or true/false to force
-            'exclude_paths' => [    // Add the paths which you don't want to appear in the views
+            'exclude_paths' => array(    // Add the paths which you don't want to appear in the views
                 'vendor/filament',   // Exclude Filament components by default
-            ],
-        ],
-        'route' => [
+            ),
+        ),
+        'route' => array(
             'label' => true,  // Show complete route on bar
-        ],
-        'session' => [
-            'hiddens' => [], // Hides sensitive values using array paths
-        ],
-        'symfony_request' => [
+        ),
+        'session' => array(
+            'hiddens' => array(), // Hides sensitive values using array paths
+        ),
+        'symfony_request' => array(
             'label' => true,  // Show route on bar
-            'hiddens' => [], // Hides sensitive values using array paths, example: request_request.password
-        ],
-        'events' => [
+            'hiddens' => array(), // Hides sensitive values using array paths, example: request_request.password
+        ),
+        'events' => array(
             'data' => false, // Collect events data, listeners
-        ],
-        'logs' => [
+        ),
+        'logs' => array(
             'file' => null,
-        ],
-        'cache' => [
+        ),
+        'cache' => array(
             'values' => true, // Collect cache values
-        ],
-    ],
+        ),
+    ),
 
     /*
      |--------------------------------------------------------------------------
@@ -299,7 +299,7 @@ return [
      |
      | Additional middleware to run on the Debugbar routes
      */
-    'route_middleware' => [],
+    'route_middleware' => array(),
 
     /*
      |--------------------------------------------------------------------------
@@ -330,4 +330,4 @@ return [
      | If you need larger stacktraces, you can increase this number. Setting it to 0 will result in no limit.
      */
     'debug_backtrace_limit' => 100,
-];
+);

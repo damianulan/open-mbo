@@ -2,41 +2,44 @@
 
 namespace App\Support\Notifications\Factories;
 
-use App\Models\Core\User;
-use App\Models\MBO\UserCampaign;
-use App\Notifications\Resources\UserCampaignResource;
-use App\Notifications\Resources\UserResource;
 use App\Support\Notifications\Contracts\NotifiableEvent;
 use App\Support\Notifications\Contracts\NotificationResource;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 use ReflectionClass;
+use ReflectionProperty;
 
 class ResourceFactory
 {
     public static function matchModel(Model $model): ?NotificationResource
     {
-        return match ($model::class) {
-            UserCampaign::class => new UserCampaignResource($model),
-            User::class => new UserResource($model),
-            default => null
+        $reflection = new ReflectionClass($model);
+        $shortname = $reflection->getShortName() . 'Resource';
+        $class = match (get_class($model)) {
+            default => "\\App\\Notifications\\Resources\\{$shortname}",
         };
+        Log::debug("NotificationResource::matchModel class {$class}");
+        if (class_exists($class)) {
+            return new $class($model);
+        }
+
+        return null;
     }
 
     public static function getEventResourceModels($event): array
     {
         $reflection = new ReflectionClass($event);
 
-        $models = [];
+        $models = array();
 
         if ($reflection->implementsInterface(NotifiableEvent::class)) {
-            foreach ($reflection->getProperties() as $property) {
-                $property->setAccessible(true);
+            foreach ($reflection->getProperties(ReflectionProperty::IS_PUBLIC) as $property) {
                 $value = null;
                 if (is_object($event)) {
                     $value = $property->getValue($event);
                 } else {
-                    if (class_exists($property->getType())) {
-                        $class = $property->getType()->__toString();
+                    $class = $property->getType()->__toString();
+                    if (class_exists($class)) {
                         $value = new $class();
                     }
                 }

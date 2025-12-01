@@ -38,7 +38,6 @@
                         <span>{{ $objective->usersCount() }}</span>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

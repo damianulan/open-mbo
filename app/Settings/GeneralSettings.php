@@ -2,35 +2,38 @@
 
 namespace App\Settings;
 
-use Spatie\LaravelSettings\Settings;
+use App\Enums\Core\ExportType;
+use App\Settings\Abstract\BaseSettings;
 
-class GeneralSettings extends Settings
+class GeneralSettings extends BaseSettings
 {
-    public string $site_name;
+    public string $site_name = 'OpenMBO';
 
-    public ?string $site_logo;
+    public ?string $site_logo = null;
 
-    public string $theme;
+    public string $theme = 'default';
 
-    public bool $debug;
+    public bool $debug = true;
 
-    public bool $debugbar;
+    public bool $debugbar = true;
 
-    public bool $maintenance;
+    public bool $maintenance = false;
 
-    public string $locale;
+    public string $locale = 'pl';
 
-    public string $timezone;
+    public string $timezone = 'Europe/Warsaw';
 
-    public int $build;
+    public int $build = 0;
 
-    public string $release;
+    public string $release = 'dev';
 
-    public string $target_release;
+    public string $target_release = 'dev';
 
-    public string $date_format;
+    public string $date_format = 'd.m.Y';
 
-    public string $time_format;
+    public string $time_format = 'H:i';
+
+    public array $export_types = [ExportType::EXCEL, ExportType::CSV, ExportType::JSON, ExportType::PDF, ExportType::PRINT];
 
     public static function group(): string
     {

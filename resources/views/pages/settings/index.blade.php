@@ -7,30 +7,32 @@
     <div class="container settings">
         <div class="section">
             <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <h5 class="section-title">{{ __('pages.settings.general') }}</h5>
+                <div class="col-md-8 col-sm-12">
+                    <h4 class="section-title">{{ __('Ustawienia aplikacji') }}</h4>
                     <hr/>
                 </div>
-                <div class="col-md-8 settings-contents">
+                <div class="col-md-10 settings-contents">
                     <div class="row">
                         {{ $form->render() }}
                     </div>
 
                 </div>
             </div>
-            <div class="row">
-
-            </div>
         </div>
         <div class="section">
             <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <h5 class="section-title">{{ __('pages.settings.branding') }}</h5>
+                <div class="col-md-8 col-sm-12">
+                    <h4 class="section-title">{{ __('pages.settings.branding') }}</h5>
                     <hr/>
                 </div>
             </div>
             <div class="row">
-                <x-unavailable-page/>
+                <div class="col-md-10 branding-contents">
+                    <div class="row">
+                        {{ $brandingForm->render() }}
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>

@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Business\Company;
 use App\Models\Business\Department;
 use App\Models\Business\Location;
-use App\Models\Business\Position;
 use App\Models\Business\TypeOfContract;
 use Database\Factories\Business\PositionFactory;
 use Illuminate\Database\Seeder;
@@ -21,17 +20,20 @@ class BusinessSeeder extends Seeder
             $this->createContract($contract);
         }
 
-        PositionFactory::seedAdminPositions();
-        Position::factory(15)->create();
-        Department::factory(10)->create();
+        PositionFactory::seedPositions(30);
+
         Company::factory(2)->has(Location::factory()->count(fake()->numberBetween(1, 3)), 'locations')->create();
+
+        Company::all()->each(function (Company $company): void {
+            $company->departments()->saveMany(Department::factory(fake()->numberBetween(4, 8))->make());
+        });
     }
 
     private function createContract(string $name): void
     {
-        $contract = new TypeOfContract([
-            'name' => __('faker.type_of_contract.' . $name),
-        ]);
+        $contract = new TypeOfContract(array(
+            'name' => __('fields.type_of_contract.' . $name),
+        ));
         $contract->save();
     }
 }

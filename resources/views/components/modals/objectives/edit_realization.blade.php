@@ -31,6 +31,7 @@ $('#modal_save').on('click', function() {
             });
         },
         function(response) {
+            $.hideOverlay();
             $.error(response.message);
         });
     @endif

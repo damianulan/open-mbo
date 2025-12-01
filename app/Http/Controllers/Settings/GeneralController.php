@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Settings;
 
+use App\Forms\Settings\BrandingForm;
 use App\Forms\Settings\GeneralForm;
 use App\Jobs\Core\AppUpdateAdhoc;
 use App\Settings\GeneralSettings;
@@ -12,27 +13,26 @@ class GeneralController extends SettingsController
 {
     /**
      * Show the application dashboard.
-     *
-     * @return Renderable
      */
-    public function index(Request $request)
+    public function index(Request $request): Renderable
     {
         $model = app(GeneralSettings::class);
 
-        return view('pages.settings.index', [
+        return view('pages.settings.index', array(
             'model' => $model,
             'form' => GeneralForm::definition($request, $model),
+            'brandingForm' => BrandingForm::definition($request, $model),
             'nav' => $this->nav(),
-        ]);
+        ));
     }
 
     public function storeGeneral(Request $request, GeneralSettings $settings)
     {
-        $request->validate([
+        $request->validate(array(
             'site_name' => 'min:3|max:16|required',
             'theme' => 'required',
             'locale' => 'required',
-        ]);
+        ));
         $target_release = settings('general.target_release');
         foreach ($request->all() as $key => $value) {
             $settings->{$key} = $value;

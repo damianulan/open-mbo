@@ -6,7 +6,7 @@ use App\Support\DataTables\CustomDataTable;
 use App\Support\Notifications\Models\Notification;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Column;
+use App\Support\DataTables\Column;
 
 class NotificationsDataTable extends CustomDataTable
 {
@@ -31,14 +31,14 @@ class NotificationsDataTable extends CustomDataTable
             ->addColumn('status', function ($data) {
                 $active = ! $data->email && ! $data->system ? false : true;
 
-                return view('components.datatables.badge', [
+                return view('components.datatables.badge', array(
                     'color' => $active ? 'primary' : 'warning',
                     'text' => $active ? __('globals.active') : __('globals.inactive'),
-                ]);
+                ));
             })
-            ->addColumn('action', fn ($data) => view('pages.settings.notifications.action', [
+            ->addColumn('action', fn ($data) => view('pages.settings.notifications.action', array(
                 'data' => $data,
-            ]));
+            )));
     }
 
     /**
@@ -51,7 +51,7 @@ class NotificationsDataTable extends CustomDataTable
 
     protected function defaultColumns(): array
     {
-        return [
+        return array(
             'key',
             'system',
             'email',
@@ -60,17 +60,16 @@ class NotificationsDataTable extends CustomDataTable
             'conditions',
             'status',
             'action',
-        ];
+        );
     }
 
     protected function availableColumns(): array
     {
-        return [
+        return array(
             'key' => Column::make('key')
                 ->title(__('notifications.table.key'))
                 ->orderable(true)
-                ->searchable(true)
-                ->addClass('firstcol'),
+                ->searchable(true),
             'system' => Column::make('system')
                 ->title(__('notifications.table.system')),
             'email' => Column::make('email')
@@ -86,7 +85,7 @@ class NotificationsDataTable extends CustomDataTable
             'action' => Column::computed('action')
                 ->title(__('notifications.table.action'))
                 ->addClass('lastcol'),
-        ];
+        );
     }
 
     /**

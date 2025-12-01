@@ -23,7 +23,7 @@ class ObjectivesList extends Component
      */
     public function __construct(public Model $model, User $user = new User())
     {
-        if (! ($model instanceof HasObjectives) && ! isset(class_uses_recursive($model)[UserMBO::class])) {
+        if ( ! ($model instanceof HasObjectives) && ! isset(class_uses_recursive($model)[UserMBO::class])) {
             $e = new Exception('Model must implement HasObjectives interface or UserMBO trait.');
             report($e);
             throw $e;

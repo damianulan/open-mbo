@@ -36,14 +36,14 @@ class UserObjectivePolicy
     {
         $campaignCondition = $userObjective->user_campaign() ? $userObjective->user_campaign()->objectivesCanBeEvaluated() : true;
 
-        return ($user->can(PermissionsLib::MBO_OBJECTIVE_EVALUATE) && ! $userObjective->isSelfEvaluated()) && $userObjective->isAfterDeadline() && $campaignCondition;
+        return $user->can(PermissionsLib::MBO_OBJECTIVE_EVALUATE) && $userObjective->isAfterDeadline() && $campaignCondition;
     }
 
     public function self_evaluate(User $user, UserObjective $userObjective): bool
     {
         $campaignCondition = $userObjective->user_campaign() ? $userObjective->user_campaign()->objectivesCanBeSelfEvaluated() : true;
 
-        return $userObjective->user_id === $user->id && $userObjective->isEvaluated() && ! $userObjective->isSelfEvaluated() && $userObjective->isAfterDeadline() && $campaignCondition;
+        return $userObjective->user_id === $user->id && $userObjective->isAfterDeadline() && $campaignCondition;
     }
 
     /**

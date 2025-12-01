@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Settings\GeneralSettings;
 use App\Settings\MailSettings;
 use App\Settings\MBOSettings;
+use App\Settings\UserSettings;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -18,6 +19,8 @@ class ConfigServiceProvider extends ServiceProvider
         $this->app->singleton('settings.general', fn () => app(GeneralSettings::class));
         $this->app->singleton('settings.mail', fn () => app(MailSettings::class));
         $this->app->singleton('settings.mbo', fn () => app(MBOSettings::class));
+        $this->app->singleton('settings.users', fn () => app(UserSettings::class));
+        $this->app->singleton('settings.notifications', fn () => app(NotificationSettings::class));
     }
 
     /**
@@ -30,7 +33,7 @@ class ConfigServiceProvider extends ServiceProvider
 
             $general = app(GeneralSettings::class);
             $mail = app(MailSettings::class);
-            config([
+            config(array(
                 // GENERAL
                 'app.name' => $general->site_name ?? env('APP_NAME', 'OpenMBO'),
                 'app.debug' => $general->debug ?? env('APP_DEBUG', true),
@@ -55,7 +58,7 @@ class ConfigServiceProvider extends ServiceProvider
                 'mail.from.name' => $mail->mail_from_name ?? null,
                 'mailcatchall.enabled' => $mail->mail_catchall_enabled ?? null,
                 'mailcatchall.receiver' => $mail->mail_catchall_receiver ?? null,
-            ]);
+            ));
         }
     }
 }

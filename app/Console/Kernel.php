@@ -5,6 +5,7 @@ namespace App\Console;
 use App\Console\Commands\Core\AppRefresh;
 use App\Console\Commands\Core\AppUpgrade;
 use App\Console\Commands\MBO\MBOVerifyStatusScript;
+use App\Console\Commands\Settings\SettingsMigrate;
 use App\Support\Notifications\NotificationScheduler;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -16,9 +17,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command(MBOVerifyStatusScript::class)->dailyAt('01:01');
+        $schedule->command(MBOVerifyStatusScript::class)->dailyAt('00:30');
 
-        if (true === config('backup.backup.auto')) {
+        if (config('backup.backup.auto')) {
             $schedule->command('backup:run')->daily()->at('01:30');
         }
 
@@ -28,6 +29,7 @@ class Kernel extends ConsoleKernel
 
         if ('development' === config('app.env')) {
 
+            $schedule->command('db:seed --class=NotificationSeeder')->dailyAt('00:02');
             if (env('CRON_APP_REFRESH', false)) {
                 $schedule->command(AppRefresh::class)->daily()->at('00:00');
             }
@@ -39,9 +41,10 @@ class Kernel extends ConsoleKernel
         $schedule->command('auth:clear-resets')->dailyAt('00:01');
         $schedule->command('model:prune')->dailyAt('00:01');
         $schedule->command('model:prune-soft-deletes')->dailyAt('00:01');
+        $schedule->command(SettingsMigrate::class)->dailyAt('00:01');
 
         // NOTIFICATIONS
-        NotificationScheduler::load();
+        NotificationScheduler::load($schedule);
     }
 
     /**

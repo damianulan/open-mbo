@@ -26,72 +26,73 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read int|null $activities_count
  * @property-read User|null $assigner
  * @property-read Model|Eloquent $subject
+ * @property-read mixed $trans
  * @property-read User $user
  *
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints active()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints average(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints avg(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints avgFromCache(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints checkAccess()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints count(string $columns = '*')
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints countFromCache(string $columns = '*')
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints createMany(array $records)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints deleteQuietly()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints drafted()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints firstFromCache($columns = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints flushCache($columns = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints flushQueryCache($columns = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints forceSave(array $attributes = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints getCacheKey($columns = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints getFromCache($columns = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints inactive()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints insert(array $values)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints insertGetId(array $values, $sequence = null)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints insertOrIgnore(array $values)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints max(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints maxFromCache(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints min(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints minFromCache(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints newModelQuery()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\MBO\UserPoints onlyTrashed()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints paginateFromCache(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints prunableSoftDeletes()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints published()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints query()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints remember(int $minutes)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints restore()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints save(array $attributes = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints saveMany($models)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints sum(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints sumFromCache(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints truncate()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints updateOrInsert(array $attributes, $values = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints updateQuietly(array $values)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints whereAssignedBy($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints whereCreatedAt($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints whereDeletedAt($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints whereId($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints wherePoints($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints whereSubjectId($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints whereSubjectType($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints whereUpdatedAt($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\MBO\UserPoints withTrashed(bool $withTrashed = true)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\MBO\UserPoints withoutCache()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\MBO\UserPoints withoutTrashed()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints active()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints average(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints avg(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints avgFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints checkAccess()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints count(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints countFromCache(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints createMany(array $records)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints deleteQuietly()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints drafted()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints firstFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints flushCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints flushQueryCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints forceSave(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints getCacheKey($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints getFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints inactive()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints insert(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints insertGetId(array $values, $sequence = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints insertOrIgnore(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints max(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints maxFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints min(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints minFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints newModelQuery()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPoints onlyTrashed()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints paginateFromCache(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints prunableSoftDeletes()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints published()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints query()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints remember(int $minutes)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints restore()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints save(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints saveMany($models)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints sum(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints sumFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints truncate()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints updateOrInsert(array $attributes, $values = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints updateQuietly(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints whereAssignedBy($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints whereCreatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints whereDeletedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints whereId($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints wherePoints($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints whereSubjectId($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints whereSubjectType($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints whereUpdatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPoints withTrashed(bool $withTrashed = true)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints withoutCache()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPoints withoutTrashed()
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class UserPoints extends BaseModel
 {
-    protected $fillable = [
+    protected $fillable = array(
         'user_id',
         'subject_id',
         'subject_type',
         'points',
         'assigned_by',
-    ];
+    );
 
     public function subject(): MorphTo
     {

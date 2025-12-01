@@ -13,16 +13,16 @@
             <li class="{{ $userObjective ? $userObjective->getStatusColor() : '' }}">
                 <div class="list-grid">
                     <div class="list-content">
-                        <div class="nowrap" data-tippy-content="{{ $objective->name }}">
-                            <i class="bi text-primary {{ $objective->campaign_id ? 'bi-bullseye':'bi-crosshair' }} me-1"></i>
-                            <span>{{ $objective->name }}</span>
+                        <div class="nowrap d-flex gap-2 align-items-center" data-tippy-content="{{ $objective->name }}">
+                            <i class="bi text-primary {{ $objective->campaign_id ? 'bi-bullseye':'bi-crosshair' }}"></i>
+                            <div>{{ $objective->name }}</div>
                         </div>
 
                     </div>
                     <div class="list-actions">
                         @if($userObjective && $userObjective->evaluation)
-                            <div class="list-action">
-                                <span class="">{{ percent_view(float_view($userObjective->evaluation)) }}</span>
+                            <div class="list-action" data-tippy-content="{{ __('forms.mbo.objectives.evaluation') }}">
+                                <span>{{ percent_view($userObjective->evaluation) }}</span>
                             </div>
                         @endif
                         @if($objective->draft)
@@ -30,26 +30,30 @@
                             <x-icon key="feather" />
                         </div>
                         @endif
-                        <div class="list-action" data-tippy-content="{{ __('forms.mbo.objectives.weight') }}: {{ $objective->weight }}">
-                            <x-icon key="minecart-loaded" />
-                            <span>{{ $objective->weight }}</span>
-                        </div>
+                        @feature('objectives.weights')
+                            <div class="list-action" data-tippy-content="{{ __('forms.mbo.objectives.weight') }}: {{ $objective->weight }}">
+                                <x-icon key="minecart-loaded" />
+                                <span>{{ $objective->weight }}</span>
+                            </div>
+                        @endfeature
                         @if($objective->expected)
                         <div class="list-action" data-tippy-content="{{ __('forms.mbo.objectives.expected') }}: {{ $objective->expected }}">
                             <x-icon key="patch-check" />
                             <span>{{ $objective->expected }}</span>
                         </div>
                         @endif
-                        @if($objective->isOverdued())
+                        @if($objective->isOverdued() && (!$userObjective || !$userObjective->isCompleted()))
                             <a class="list-action text-warning" data-tippy-content="{{ __('alerts.objectives.error.overdued', ['term' => $objective->deadline->diffForHumans()]) }}">
                                 <x-icon key="exclamation-diamond-fill" />
                             </a>
                         @else
-                            <a class="list-action" data-tippy-content="{{ __('forms.mbo.objectives.deadline_to', ['term' => $objective->deadline->format(config('app.datetime_format'))]) }}">
-                                <x-icon key="calendar2-week-fill" />
-                            </a>
+                            @if($objective->deadline)
+                                <a class="list-action" data-tippy-content="{{ __('forms.mbo.objectives.deadline_to', ['term' => $objective->deadline->format(config('app.datetime_format'))]) }}">
+                                    <x-icon key="calendar2-week-fill" />
+                                </a>
+                            @endif
                         @endif
-                        <a href="{{ $userObjective ? route('objectives.assignment.show', $userObjective->id):route('objectives.show', $objective->id) }}" class="list-action" data-modelid="{{ $objective->id }}" data-tippy-content="{{ __('buttons.summary') }}">
+                        <a href="{{ $userObjective ? route('objectives.assignment.show', $userObjective->id):route('objectives.show', $objective->id) }}" class="list-action" data-modelid="{{ $objective->id }}" data-tippy-content="{{ __('buttons.preview') }}">
                             <x-icon key="eye-fill" />
                         </a>
                         @if(!$userObjective)

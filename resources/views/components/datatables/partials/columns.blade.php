@@ -1,17 +1,32 @@
 <div class="d-flex">
-    <div class="ms-auto">
+    <div class="ms-auto d-flex gap-2">
+        @if ($printable)
+            <a class="btn btn-primary btn-round" href="{{ route('datatables.print', ['class' => $class]) }}" data-tippy-content="{{ __('globals.datatables.print') }}">
+                <i class="bi bi-printer"></i>
+            </a>
+        @endif
         @if ($hasExcel)
-            <a class="btn btn-primary btn-round me-1" href="{{ route('datatables.excel', ['class' => $class]) }}" data-tippy-content="{{ __('facades.datatables.to_excel') }}">
+            <a class="btn btn-primary btn-round" href="{{ route('datatables.excel', ['class' => $class]) }}" data-tippy-content="{{ __('globals.datatables.to_excel') }}">
                 <i class="bi bi-filetype-xlsx"></i>
             </a>
         @endif
         @if ($hasCsv)
-            <a class="btn btn-primary btn-round me-1" href="{{ route('datatables.excel', ['class' => $class]) }}" data-tippy-content="{{ __('facades.datatables.to_csv') }}">
+            <a class="btn btn-primary btn-round" href="{{ route('datatables.csv', ['class' => $class]) }}" data-tippy-content="{{ __('globals.datatables.to_csv') }}">
                 <i class="bi bi-filetype-csv"></i>
             </a>
         @endif
+        @if ($hasPdf)
+            <a class="btn btn-primary btn-round" href="{{ route('datatables.pdf', ['class' => $class]) }}" data-tippy-content="{{ __('globals.datatables.to_pdf') }}">
+                <i class="bi bi-filetype-pdf"></i>
+            </a>
+        @endif
+        @if ($hasJson)
+            <a class="btn btn-primary btn-round" href="{{ route('datatables.json', ['class' => $class]) }}" data-tippy-content="{{ __('globals.datatables.to_json') }}">
+                <i class="bi bi-filetype-json"></i>
+            </a>
+        @endif
         @if ($hasColumns)
-            <button class="btn btn-primary btn-round" data-bs-toggle="modal" data-bs-target="#columnsModal_{{ $datatable_id }}" data-tippy-content="{{ __('facades.datatables.select_columns') }}">
+            <button class="btn btn-primary btn-round" data-bs-toggle="modal" data-bs-target="#columnsModal_{{ $datatable_id }}" data-tippy-content="{{ __('globals.datatables.select_columns') }}">
                 <i class="bi bi-person-lines-fill"></i>
             </button>
         @endif
@@ -27,7 +42,7 @@
                 @csrf
                 <input type="hidden" name="datatable_id" value="{{ $datatable_id }}"/>
                 <div class="modal-header">
-                    <h1 class="modal-title fs-3" id="columnsModal_{{ $datatable_id }}Label">{{ __('facades.datatables.select_columns') }}</h1>
+                    <h1 class="modal-title fs-3" id="columnsModal_{{ $datatable_id }}Label">{{ __('globals.datatables.select_columns') }}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ __('buttons.close') }}"></button>
                 </div>
                 <div class="modal-body">

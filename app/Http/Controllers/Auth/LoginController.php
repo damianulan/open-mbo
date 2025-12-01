@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Core\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -43,14 +44,13 @@ class LoginController extends Controller
      * The user has been authenticated.
      *
      * @param  mixed  $user
-     * @return mixed
      */
-    final protected function authenticated(Request $request, $user)
+    final protected function authenticated(Request $request, User $user)
     {
         if ($user) {
             activity('auth')
                 ->causedBy($user)
-                ->withProperties(['authenticated' => true])
+                ->withProperties(array('authenticated' => true))
                 ->event('auth_attempt_success')
                 ->log(__('logging.description.auth_attempt_success'));
         }

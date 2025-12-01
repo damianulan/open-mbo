@@ -48,13 +48,13 @@ class UserObjectiveController extends AppController
 
         $header = 'Podsumowanie Celu';
 
-        return view('pages.mbo.objectives.users.show', [
+        return view('pages.mbo.objectives.users.show', array(
             'userObjective' => $userObjective,
             'user' => $userObjective->user,
             'objective' => $userObjective->objective,
             'pagetitle' => $header,
             'isOwner' => $userObjective->user->id === Auth::user()->id,
-        ]);
+        ));
     }
 
     /**
@@ -88,14 +88,14 @@ class UserObjectiveController extends AppController
 
     public function addUsers(Request $request, $id): View
     {
-        $params = [];
+        $params = array();
         if ($id) {
             $objective = Objective::find($id);
             if ($objective) {
-                $params = [
+                $params = array(
                     'id' => $id,
                     'form' => ObjectiveEditUserForm::definition($request, $objective),
-                ];
+                );
             }
         }
 
@@ -104,13 +104,13 @@ class UserObjectiveController extends AppController
 
     public function editRealization(Request $request, $id): View
     {
-        $params = [];
+        $params = array();
         if ($id) {
             $objective = UserObjective::findOrFail($id);
-            $params = [
+            $params = array(
                 'id' => $id,
                 'form' => ObjectiveEditUserRealizationForm::definition($request, $objective),
-            ];
+            );
         }
 
         return view('components.modals.objectives.edit_realization', $params);
@@ -118,9 +118,10 @@ class UserObjectiveController extends AppController
 
     public function updateEvaluation(Request $request, $id, ObjectiveEditUserRealizationForm $form): JsonResponse
     {
+        $response['status'] = 'error';
         try {
             $userObjective = UserObjective::findOrFail($id);
-            if (!$userObjective->canBeEvaluated()) {
+            if ( ! $userObjective->canBeEvaluated()) {
                 throw new NoPermissionException();
             }
 
@@ -135,8 +136,7 @@ class UserObjectiveController extends AppController
                     return response()->json($response);
                 }
                 $errors = $service->getErrors();
-                if (! empty($errors)) {
-                    $response['status'] = 'error';
+                if ( ! empty($errors)) {
                     $response['message'] = $errors[0];
                 }
             } else {

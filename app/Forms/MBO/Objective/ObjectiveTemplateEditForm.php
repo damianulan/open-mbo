@@ -32,11 +32,11 @@ class ObjectiveTemplateEditForm extends Form
 
     public static function validation(Request $request, $model_id = null): array
     {
-        return [
+        return array(
             'category_id' => 'nullable',
             'name' => 'max:50|required',
             'description' => 'max:1000|nullable',
             'draft' => 'boolean',
-        ];
+        );
     }
 }

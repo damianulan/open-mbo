@@ -6,40 +6,38 @@ class ModuleManager
 {
     public static function getModules()
     {
-        return [
-            'users' => [
+        return array(
+            'users' => array(
                 'id' => 'module-users-btn',
                 'icon' => 'person-fill',
-                'title' => 'Użytkownicy',
+                'title' => __('menus.users.index'),
                 'route' => null,
-            ],
-            'mbo' => [
+            ),
+            'mbo' => array(
                 'id' => 'module-mbo-btn',
                 'icon' => 'bullseye',
-                'title' => 'Moduł MBO',
+                'title' => __('forms.settings.mbo.index'),
                 'route' => null,
-            ],
-            'reports' => [
+            ),
+            'reports' => array(
                 'id' => 'module-reports-btn',
                 'icon' => 'bar-chart-steps',
-                'title' => 'Raporty',
+                'title' => __('menus.reports.index'),
                 'route' => null,
-            ],
-            'notifications' => [
+            ),
+            'notifications' => array(
                 'id' => 'module-notifications-btn',
                 'icon' => 'bell-fill',
-                'title' => 'Powiadomienia',
+                'title' => __('menus.settings.notifications.index'),
                 'route' => null,
-            ],
-        ];
+            ),
+        );
     }
 
     /**
      * Checks if given module is exists and is active/enabled.
-     *
-     * @return bool
      */
-    public static function check(string $module)
+    public static function check(string $module): bool
     {
         $modules = array_keys(self::getModules());
         $verified = in_array($module, $modules);

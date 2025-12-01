@@ -11,9 +11,9 @@ use Lucent\Support\Traits\UUID;
 /**
  * @property-read Collection $resources
  *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\NotificationModel newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\NotificationModel newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\NotificationModel query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationModel newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationModel newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationModel query()
  *
  * @mixin \Eloquent
  */

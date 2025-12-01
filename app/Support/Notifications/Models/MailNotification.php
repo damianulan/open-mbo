@@ -16,18 +16,18 @@ use Illuminate\Support\Collection;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\MailNotification newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\MailNotification newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\MailNotification query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\MailNotification whereContents($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\MailNotification whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\MailNotification whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\MailNotification whereNotifiableId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\MailNotification whereNotifiableType($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\MailNotification whereNotificationId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\MailNotification whereResources($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\MailNotification whereSubject($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Support\Notifications\Models\MailNotification whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification whereContents($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification whereNotifiableId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification whereNotifiableType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification whereNotificationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification whereResources($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification whereSubject($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification whereUpdatedAt($value)
  *
  * @mixin \Eloquent
  */
@@ -35,16 +35,16 @@ class MailNotification extends NotificationModel
 {
     protected $table = 'mail_notifications';
 
-    protected $fillable = [
+    protected $fillable = array(
         'notification_id',
         'notifiable_type',
         'notifiable_id',
         'resources',
         'subject',
         'contents',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'created_at' => 'datetime',
-    ];
+    );
 }

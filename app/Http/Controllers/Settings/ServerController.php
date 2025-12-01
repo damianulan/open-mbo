@@ -13,10 +13,8 @@ class ServerController extends SettingsController
 {
     /**
      * Show the application dashboard.
-     *
-     * @return Renderable
      */
-    public function index(Request $request)
+    public function index(Request $request): Renderable
     {
         $git_text = __('globals.no_data');
         if ( ! empty(config('app.head'))) {
@@ -25,21 +23,21 @@ class ServerController extends SettingsController
 
         $model = app(MailSettings::class); // ->safePassword();
 
-        return view('pages.settings.server', [
+        return view('pages.settings.server', array(
             'git_text' => $git_text,
             'mail' => $model,
             'form' => SmtpForm::definition($request, $model),
             'nav' => $this->nav(),
-        ]);
+        ));
     }
 
     public function storeMail(Request $request, MailSettings $settings)
     {
-        $request->validate([
+        $request->validate(array(
             'mail_port' => 'numeric',
             'mail_from_address' => 'email',
             'mail_catchall_receiver' => 'email',
-        ]);
+        ));
         foreach ($request->all() as $key => $value) {
             $settings->{$key} = $value;
         }

@@ -26,29 +26,29 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read Collection $changes
  * @property-read Model|null $subject
  *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel causedBy(\Illuminate\Database\Eloquent\Model $causer)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel forBatch(string $batchUuid)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel forEvent(string $event)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel forSubject(\Illuminate\Database\Eloquent\Model $subject)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel hasBatch()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel inLog(...$logNames)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel logger()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel mine()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel whereBatchUuid($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel whereCauserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel whereCauserType($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel whereEvent($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel whereLogName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel whereProperties($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel whereSubjectId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel whereSubjectType($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Vendor\ActivityModel whereUpdatedAt($value)
+ * @method static Builder<static>|ActivityModel causedBy(\Illuminate\Database\Eloquent\Model $causer)
+ * @method static Builder<static>|ActivityModel forBatch(string $batchUuid)
+ * @method static Builder<static>|ActivityModel forEvent(string $event)
+ * @method static Builder<static>|ActivityModel forSubject(\Illuminate\Database\Eloquent\Model $subject)
+ * @method static Builder<static>|ActivityModel hasBatch()
+ * @method static Builder<static>|ActivityModel inLog(...$logNames)
+ * @method static Builder<static>|ActivityModel logger()
+ * @method static Builder<static>|ActivityModel mine()
+ * @method static Builder<static>|ActivityModel newModelQuery()
+ * @method static Builder<static>|ActivityModel newQuery()
+ * @method static Builder<static>|ActivityModel query()
+ * @method static Builder<static>|ActivityModel whereBatchUuid($value)
+ * @method static Builder<static>|ActivityModel whereCauserId($value)
+ * @method static Builder<static>|ActivityModel whereCauserType($value)
+ * @method static Builder<static>|ActivityModel whereCreatedAt($value)
+ * @method static Builder<static>|ActivityModel whereDescription($value)
+ * @method static Builder<static>|ActivityModel whereEvent($value)
+ * @method static Builder<static>|ActivityModel whereId($value)
+ * @method static Builder<static>|ActivityModel whereLogName($value)
+ * @method static Builder<static>|ActivityModel whereProperties($value)
+ * @method static Builder<static>|ActivityModel whereSubjectId($value)
+ * @method static Builder<static>|ActivityModel whereSubjectType($value)
+ * @method static Builder<static>|ActivityModel whereUpdatedAt($value)
  *
  * @mixin \Eloquent
  */
@@ -56,7 +56,7 @@ class ActivityModel extends Activity
 {
     public function scopeLogger(Builder $query): void
     {
-        $query->whereIn('activity_log.event', ['viewed', 'created', 'updated', 'deleted', 'impersonated', 'auth_attempt_success', 'auth_attempt_fail']);
+        $query->whereIn('activity_log.event', array('viewed', 'created', 'updated', 'deleted', 'impersonated', 'auth_attempt_success', 'auth_attempt_fail'));
     }
 
     public function scopeMine(Builder $query): void

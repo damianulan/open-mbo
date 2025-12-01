@@ -26,70 +26,71 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read int|null $activities_count
  * @property-read Collection<int, Company> $companies
  * @property-read int|null $companies_count
+ * @property-read mixed $trans
  *
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location active()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location average(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location avg(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location avgFromCache(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location checkAccess()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location count(string $columns = '*')
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location countFromCache(string $columns = '*')
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location createMany(array $records)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location deleteQuietly()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location drafted()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location active()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location average(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location avg(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location avgFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location checkAccess()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location count(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location countFromCache(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location createMany(array $records)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location deleteQuietly()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location drafted()
  * @method static \Database\Factories\Business\LocationFactory factory($count = null, $state = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location firstFromCache($columns = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location flushCache($columns = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location flushQueryCache($columns = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location forceSave(array $attributes = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location getCacheKey($columns = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location getFromCache($columns = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location inactive()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location insert(array $values)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location insertGetId(array $values, $sequence = null)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location insertOrIgnore(array $values)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location max(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location maxFromCache(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location min(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location minFromCache(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location newModelQuery()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Business\Location onlyTrashed()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location paginateFromCache(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location prunableSoftDeletes()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location published()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location query()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location remember(int $minutes)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location restore()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location save(array $attributes = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location saveMany($models)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location sum(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location sumFromCache(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location truncate()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location updateOrInsert(array $attributes, $values = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location updateQuietly(array $values)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location whereActive($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location whereAddressLine1($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location whereAddressLine2($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location whereCity($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location whereCountry($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location whereCreatedAt($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location whereDeletedAt($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location whereDescription($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location whereFounded($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location whereId($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location whereName($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location wherePostalCode($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Business\Location withTrashed(bool $withTrashed = true)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\Location withoutCache()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Business\Location withoutTrashed()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location firstFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location flushCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location flushQueryCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location forceSave(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location getCacheKey($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location getFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location inactive()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location insert(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location insertGetId(array $values, $sequence = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location insertOrIgnore(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location max(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location maxFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location min(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location minFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location newModelQuery()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Location onlyTrashed()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location paginateFromCache(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location prunableSoftDeletes()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location published()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location query()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location remember(int $minutes)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location restore()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location save(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location saveMany($models)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location sum(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location sumFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location truncate()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location updateOrInsert(array $attributes, $values = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location updateQuietly(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location whereActive($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location whereAddressLine1($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location whereAddressLine2($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location whereCity($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location whereCountry($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location whereCreatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location whereDeletedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location whereDescription($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location whereFounded($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location whereId($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location whereName($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location wherePostalCode($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Location withTrashed(bool $withTrashed = true)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location withoutCache()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Location withoutTrashed()
  *
  * @mixin \Eloquent
  */
 class Location extends BaseModel
 {
-    protected $fillable = [
+    protected $fillable = array(
         'name',
         'address_line_1',
         'address_line_2',
@@ -98,16 +99,16 @@ class Location extends BaseModel
         'postal_code',
         'description',
         'active',
-    ];
+    );
 
-    protected $dates = [
+    protected $dates = array(
         'created_at',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'created_at' => 'datetime',
         'active' => 'boolean',
-    ];
+    );
 
     public function companies(): BelongsToMany
     {

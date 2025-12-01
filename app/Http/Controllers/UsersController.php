@@ -10,40 +10,33 @@ use App\Models\Core\User;
 use App\Services\Employments\CreateOrUpdate as EmploymentCreateOrUpdate;
 use App\Services\Users\CreateOrUpdate as UserCreateOrUpdate;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class UsersController extends AppController
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return Response
      */
     public function index(UsersDataTable $dataTable)
     {
-        return $dataTable->render('pages.users.index', [
+        return $dataTable->render('pages.users.index', array(
             'table' => $dataTable,
-        ]);
+        ));
     }
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return Response
      */
     public function create(Request $request)
     {
-        return view('pages.users.edit', [
+        return view('pages.users.edit', array(
             'form' => UserEditForm::definition($request),
-            'employments' => [],
-        ]);
+            'employments' => array(),
+        ));
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return Response
      */
     public function store(Request $request, UserEditForm $form)
     {
@@ -75,43 +68,36 @@ class UsersController extends AppController
 
     /**
      * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        $user = User::findOrFail($id);
-
-        return view('pages.users.show', [
+        return view('pages.users.show', array(
             'user' => $user,
-        ]);
+        ));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return Response
      */
     public function edit(Request $request, $id)
     {
         $model = User::findOrFail($id);
 
-        $request->request->add(['user_id' => $id]);
+        $request->request->add(array('user_id' => $id));
 
-        return view('pages.users.edit', [
+        return view('pages.users.edit', array(
             'user' => $model,
             'employments' => $this->getEmploymentFroms($request, $model),
             'form' => UserEditForm::definition($request, $model),
-        ]);
+        ));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  int  $id
-     * @return Response
      */
     public function update(Request $request, $id, UserEditForm $form)
     {
@@ -123,10 +109,10 @@ class UsersController extends AppController
         if ($service->passed()) {
             $user = $service->user;
 
-            return redirect()->route('users.show', $id)->with('success', __('alerts.users.success.edit', ['name' => $user->name]));
+            return redirect()->route('users.show', $id)->with('success', __('alerts.users.success.edit', array('name' => $user->name)));
         }
 
-        return redirect()->back()->with('error', __('alerts.users.error.edit', ['name' => $user->name]));
+        return redirect()->back()->with('error', __('alerts.users.error.edit', array('name' => $user->name)));
     }
 
     public function updateEmployment(Request $request, $id, EmploymentEditForm $form)
@@ -147,17 +133,14 @@ class UsersController extends AppController
      * Delete User instance.
      *
      * @param  int  $id
-     * @return Response
      */
-    public function delete($id)
+    public function delete(User $user)
     {
-        $user = User::findOrFail($id);
-
         if ($user->delete()) {
-            return redirect()->route('users.index')->with('success', __('alerts.users.success.delete', ['name' => $user->name]));
+            return redirect()->route('users.index')->with('success', __('alerts.users.success.delete', array('name' => $user->name)));
         }
 
-        return redirect()->back()->with('error', __('alerts.users.error.delete', ['name' => $user->name]));
+        return redirect()->back()->with('error', __('alerts.users.error.delete', array('name' => $user->name)));
     }
 
     public function deleteEmployment($id)
@@ -173,26 +156,31 @@ class UsersController extends AppController
 
     /**
      * Toggles User blocking if was nat blocked and unlocking otherwise.
-     *
-     * @param  mixed  $id
-     * @return Response
      */
-    public function block($id)
+    public function block(User $user)
     {
-        $user = User::findOrFail($id);
         if ($user) {
             $user->toggleLock();
         }
         if ($user->blocked()) {
-            return redirect()->back()->with('info', __('alerts.users.success.blocked', ['name' => $user->name]));
+            return redirect()->back()->with('info', __('alerts.users.success.blocked', array('name' => $user->name)));
         }
 
-        return redirect()->back()->with('info', __('alerts.users.success.unblocked', ['name' => $user->name]));
+        return redirect()->back()->with('info', __('alerts.users.success.unblocked', array('name' => $user->name)));
     }
 
-    /**
-     * @return void
-     */
+    public function favourite(User $user)
+    {
+        $auth = Auth::user();
+        if ($auth->favourite_users->contains($user)) {
+            $auth->favourite_users()->detach($user->id);
+        } else {
+            $auth->favourite_users()->attach($user->id);
+        }
+
+        return redirect()->back();
+    }
+
     public function impersonate(User $user)
     {
         Auth::user()->impersonate($user);
@@ -200,9 +188,6 @@ class UsersController extends AppController
         return redirect()->back();
     }
 
-    /**
-     * @return void
-     */
     public function impersonateLeave()
     {
         Auth::user()->leaveImpersonation();
@@ -222,7 +207,7 @@ class UsersController extends AppController
                 if ($employment->main) {
                     $langKey = 'forms.employments.header_main';
                 }
-                $employments[__($langKey, ['no' => $i])] = EmploymentEditForm::definition($request, $employment);
+                $employments[__($langKey, array('no' => $i))] = EmploymentEditForm::definition($request, $employment);
             }
         }
 

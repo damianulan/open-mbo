@@ -2,10 +2,14 @@
 
 namespace App\Settings;
 
-use Spatie\LaravelSettings\Settings;
+use App\Settings\Abstract\BaseSettings;
 
-class UserSettings extends Settings
+class UserSettings extends BaseSettings
 {
+    public bool $password_change_firstlogin = true;
+
+    public bool $multiple_employments = true;
+
     public static function group(): string
     {
         return 'users';

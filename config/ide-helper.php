@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -121,9 +121,9 @@ return [
 
     'include_helpers' => true,
 
-    'helper_files' => [
+    'helper_files' => array(
         base_path() . '/vendor/laravel/framework/src/Illuminate/Support/helpers.php',
-    ],
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -138,9 +138,9 @@ return [
     |
     */
 
-    'model_locations' => [
+    'model_locations' => array(
         'app',
-    ],
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -151,9 +151,9 @@ return [
     |
     */
 
-    'ignored_models' => [
+    'ignored_models' => array(
         // App\MyModel::class,
-    ],
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -166,9 +166,9 @@ return [
     |
     */
 
-    'model_hooks' => [
+    'model_hooks' => array(
         // App\Support\IdeHelper\MyModelHook::class
-    ],
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -179,12 +179,12 @@ return [
     |
     */
 
-    'extra' => [
-        'Eloquent' => ['Illuminate\Database\Eloquent\Builder', 'Illuminate\Database\Query\Builder'],
-        'Session' => ['Illuminate\Session\Store'],
-    ],
+    'extra' => array(
+        'Eloquent' => array('Illuminate\Database\Eloquent\Builder', 'Illuminate\Database\Query\Builder'),
+        'Session' => array('Illuminate\Session\Store'),
+    ),
 
-    'magic' => [],
+    'magic' => array(),
 
     /*
     |--------------------------------------------------------------------------
@@ -196,9 +196,9 @@ return [
     |
     */
 
-    'interfaces' => [
+    'interfaces' => array(
         // App\MyInterface::class => App\MyImplementation::class,
-    ],
+    ),
 
     /*
      |--------------------------------------------------------------------------
@@ -234,10 +234,10 @@ return [
     | Cast the given "real type" to the given "type".
     |
     */
-    'type_overrides' => [
+    'type_overrides' => array(
         'integer' => 'int',
         'boolean' => 'bool',
-    ],
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -248,7 +248,7 @@ return [
     | magic methods and properties.
     |
     */
-    'include_class_docblocks' => false,
+    'include_class_docblocks' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -260,7 +260,7 @@ return [
     | or there is an import (use className) of the class.
     |
     */
-    'force_fqn' => true,
+    'force_fqn' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -283,7 +283,7 @@ return [
     | class name of the relationship, e.g. `'relationName' => RelationShipClass::class`.
     |
     */
-    'additional_relation_types' => [],
+    'additional_relation_types' => array(),
 
     /*
     |--------------------------------------------------------------------------
@@ -297,7 +297,7 @@ return [
     | e.g. `'relationName' => 'many'`.
     |
     */
-    'additional_relation_return_types' => [],
+    'additional_relation_return_types' => array(),
 
     /*
     |--------------------------------------------------------------------------
@@ -307,8 +307,8 @@ return [
     | The specified commands should run after migrations are finished running.
     |
     */
-    'post_migrate' => [
+    'post_migrate' => array(
         'ide-helper:models --nowrite',
-    ],
+    ),
 
-];
+);

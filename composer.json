@@ -26,6 +26,14 @@
         },
         {
             "type": "vcs",
+            "url": "git@github.com:damianulan/php-enumerable.git"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:damianulan/laravel-feature-kit.git"
+        },
+        {
+            "type": "vcs",
             "url": "git@github.com:damianulan/laravel-lucent.git"
         },
         {
@@ -41,11 +49,14 @@
         "php": "^8.3.0",
         "akaunting/laravel-apexcharts": "^3.0",
         "barryvdh/laravel-snappy": "^1.0",
+        "damianulan/laravel-feature-kit": "dev-main",
+        "damianulan/php-enumerable": "dev-main",
         "damianulan/laravel-form-forge": "dev-main",
         "damianulan/laravel-lucent": "dev-main",
         "damianulan/laravel-sentinel": "dev-main",
         "damianulan/laraverse": "dev-main",
         "diglactic/laravel-breadcrumbs": "^10.0",
+        "fakerphp/faker": "*",
         "guzzlehttp/guzzle": "^7.2",
         "lab404/laravel-impersonate": "^1.7",
         "laravel/framework": "^11.0",
@@ -66,12 +77,13 @@
         "spatie/laravel-query-builder": "^5.2",
         "spatie/laravel-settings": "^3.1",
         "spatie/laravel-tags": "^4.10",
+        "spatie/laravel-translatable": "^6.11",
+        "spatie/laravel-translation-loader": "^2.8",
         "spatie/shiki-php": "^2.3",
         "tjvb/laravel-mail-catchall": "^4.4",
         "yajra/laravel-datatables": "*",
         "yajra/laravel-datatables-export": "*",
-        "ymigval/laravel-model-cache": "^1.1",
-        "fakerphp/faker": "*"
+        "ymigval/laravel-model-cache": "^1.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.15",
@@ -110,7 +122,8 @@
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "@php artisan ide-helper:generate",
             "@php artisan ide-helper:models -N",
-            "@php artisan ide-helper:meta"
+            "@php artisan ide-helper:meta",
+            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\""
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
@@ -137,7 +150,7 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": false,
+    "prefer-stable": true,
     "require-dependencies": true,
     "require-dev-dependencies": true
 }

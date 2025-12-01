@@ -3,11 +3,10 @@
 namespace App\Factories\Charts;
 
 use Akaunting\Apexcharts\Chart;
-use Illuminate\Database\Eloquent\Model;
-
 use App\Enums\MBO\UserObjectiveStatus;
+use App\Models\Core\User;
 use App\Models\MBO\UserCampaign;
-use App\Models\MBO\Campaign;
+use App\Models\MBO\UserObjective;
 
 class ModelCharts extends ChartsLib
 {
@@ -22,14 +21,14 @@ class ModelCharts extends ChartsLib
         $other = (clone $userObjectives)->whereNotIn('status', UserObjectiveStatus::evaluated())->count();
 
         return $this->getChart()
-            ->setLabels([__('mbo.not_evaluated'), __('mbo.passed'), __('mbo.failed')])
-            ->setColors([
-                'var(--bs-primary-400)',
+            ->setLabels(array(__('mbo.not_evaluated'), __('mbo.passed'), __('mbo.failed')))
+            ->setColors(array(
+                'var(--bs-info)',
                 'var(--bs-passed)',
                 'var(--bs-failed)',
-            ])
+            ))
             ->setHeight('150')
-            ->setDataset('set-1', $this->type, [$other, $passed, $failed]);
+            ->setDataset('set-1', $this->type, array($other, $passed, $failed));
     }
 
     public function userCampaignCompletion(UserCampaign $model): Chart
@@ -38,16 +37,37 @@ class ModelCharts extends ChartsLib
         $this->type = 'donut';
 
         $userObjectives = $model->user_objectives;
-        $completed = (clone $userObjectives)->whereIn('status', UserObjectiveStatus::finished())->count();
-        $other = (clone $userObjectives)->count() - $completed;
+        $totalNotCompleted = 0;
+        $totalCompleted = 0;
+        $userObjectives->each(function (UserObjective $userObjective) use (&$totalCompleted): void {
+            if ($userObjective->isCompleted()) {
+                $totalCompleted += $userObjective->getWeightAttribute();
+            }
+        });
+        $totalNotCompleted = $userObjectives->getTotalWeight() - $totalCompleted;
 
         return $this->getChart()
-            ->setLabels([__('mbo.completed'), __('mbo.uncompleted')])
-            ->setColors([
-                'var(--bs-primary-300)',
+            ->setLabels(array(__('mbo.completed'), __('mbo.uncompleted')))
+            ->setColors(array(
+                'var(--bs-info)',
                 'var(--bs-unstarted)',
-            ])
+            ))
             ->setHeight('150')
-            ->setDataset('set-1', $this->type, [$completed, $other]);
+            ->setDataset('set-1', $this->type, array($totalCompleted, $totalNotCompleted));
+    }
+
+    public function userPointsGrouped(User $model): Chart
+    {
+        $this->title = 'User points grouped';
+        $this->type = 'donut';
+
+        return $this->getChart()
+            ->setLabels(array(__('mbo.completed'), __('mbo.uncompleted')))
+            ->setColors(array(
+                'var(--bs-info)',
+                'var(--bs-unstarted)',
+            ))
+            ->setHeight('150')
+            ->setDataset('set-1', $this->type, array());
     }
 }

@@ -18,11 +18,11 @@ use Illuminate\Support\Facades\Mail;
 
 class NotificationMessage
 {
-    protected array $placeholders = [];
+    protected array $placeholders = array();
 
     protected NotificationContents $contents;
 
-    protected array $resources = [];
+    protected array $resources = array();
 
     protected $email_sent = false;
 
@@ -33,29 +33,22 @@ class NotificationMessage
     public function __construct(
         protected Notification $notification,
         protected Model $notifiable,
-        protected array $resourceModels = []
+        protected array $resourceModels = array()
     ) {
-        try {
-            foreach ($resourceModels as $model) {
-                $resource = ResourceFactory::matchModel($model);
-                $this->addPlaceholders($resource);
-            }
-
-            if (class_uses_trait(Notifiable::class, $notifiable::class)) {
-                $resource = ResourceFactory::matchModel($notifiable);
-                $this->addPlaceholders($resource);
-            } else {
-                throw new ModelTraitNotUsed($notifiable, Notifiable::class);
-            }
-            $this->contents = $this->notification->contents->fill($this->placeholders);
-
-            $this->valid = true;
-        } catch (Exception $th) {
-            report($th);
-            if (config('app.debug')) {
-                throw $th;
-            }
+        foreach ($resourceModels as $model) {
+            $resource = ResourceFactory::matchModel($model);
+            $this->addPlaceholders($resource);
         }
+
+        if (class_uses_trait(Notifiable::class, get_class($this->notifiable))) {
+            $resource = ResourceFactory::matchModel($notifiable);
+            $this->addPlaceholders($resource);
+        } else {
+            throw new ModelTraitNotUsed($notifiable, Notifiable::class);
+        }
+        $this->contents = $this->notification->contents->fill($this->placeholders);
+
+        $this->valid = true;
     }
 
     public function getModels(): array
@@ -89,14 +82,14 @@ class NotificationMessage
                             $result = false;
                         } else {
                             $this->email_sent = true;
-                            $toMail = MailNotification::create([
+                            $toMail = MailNotification::create(array(
                                 'notification_id' => $this->notification->id,
                                 'notifiable_id' => $this->notifiable->id,
-                                'notifiable_type' => $this->notifiable::class,
+                                'notifiable_type' => get_class($this->notifiable),
                                 'resources' => json_encode($this->resources),
                                 'subject' => $this->contents->subject,
                                 'contents' => $this->contents->email_contents,
-                            ]);
+                            ));
                             MailNotificationSent::dispatch($toMail);
                         }
                     }
@@ -121,25 +114,33 @@ class NotificationMessage
 
     protected function toSystem(): array
     {
-        return [
+        return array(
             'notification_id' => $this->notification->id,
             'notifiable_id' => $this->notifiable->id,
-            'notifiable_type' => $this->notifiable::class,
+            'notifiable_type' => get_class($this->notifiable),
             'resources' => json_encode($this->resources),
             'contents' => $this->contents->system_contents,
-        ];
+        );
     }
 
     private function addPlaceholders($resource): void
     {
-        if ($resource && $resource instanceof NotificationResource) {
-            $class = $resource->getModel()::class;
-            $this->resources[$class] = $resource->getKey();
-            foreach ($resource->datas() as $key => $value) {
-                $this->placeholders[$key] = $value;
+        if ( ! is_null($resource) && is_object($resource)) {
+            if ($resource instanceof NotificationResource) {
+                $class = get_class($resource->getModel());
+                $this->resources[$class] = $resource->getKey();
+                foreach ($resource->datas() as $key => $value) {
+                    $this->placeholders[$key] = $value;
+                }
             }
-        } else {
-            throw new Exception('Given notification resource ' . $resource::class . ' is not of type ' . NotificationResource::class);
         }
+        // else {
+        //     if(!is_null($resource)){
+        //         $resource = is_object($resource) ? get_class($resource) : $resource;
+        //         throw new Exception('Given notification resource ' . $resource . ' is not of type ' . NotificationResource::class);
+        //     } else {
+        //         throw new Exception('Given notification resource cannot be null');
+        //     }
+        // }
     }
 }

@@ -55,19 +55,19 @@ class CampaignObjectiveController extends AppController
 
     public function addObjectives(Request $request, $id): View
     {
-        $params = [];
+        $params = array();
         if ($id) {
             $objective = Objective::find($id);
             if ($objective) {
-                $params = [
+                $params = array(
                     'id' => $id,
                     'form' => CampaignEditObjectiveForm::definition($request, $objective),
-                ];
+                );
             }
         } else {
-            $params = [
+            $params = array(
                 'form' => CampaignEditObjectiveForm::definition($request),
-            ];
+            );
         }
 
         return view('components.modals.campaigns.add_objectives', $params);

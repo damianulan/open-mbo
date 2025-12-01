@@ -33,68 +33,69 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read Department|null $department
  * @property-read bool $main
  * @property-read Position|null $position
+ * @property-read mixed $trans
  * @property-read User $user
  *
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment active()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment average(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment avg(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment avgFromCache(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment checkAccess()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment count(string $columns = '*')
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment countFromCache(string $columns = '*')
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment createMany(array $records)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment deleteQuietly()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment drafted()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment firstFromCache($columns = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment flushCache($columns = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment flushQueryCache($columns = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment forceSave(array $attributes = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment getCacheKey($columns = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment getFromCache($columns = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment inactive()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment insert(array $values)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment insertGetId(array $values, $sequence = null)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment insertOrIgnore(array $values)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment max(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment maxFromCache(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment min(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment minFromCache(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment newModelQuery()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Business\UserEmployment onlyTrashed()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment paginateFromCache(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment prunableSoftDeletes()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment published()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment query()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment remember(int $minutes)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment restore()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment save(array $attributes = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment saveMany($models)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment sum(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment sumFromCache(string $column)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment truncate()
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment updateOrInsert(array $attributes, $values = [])
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment updateQuietly(array $values)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment whereCompanyId($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment whereContractId($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment whereCreatedAt($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment whereDeletedAt($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment whereDepartmentId($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment whereEmployment($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment whereId($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment wherePositionId($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment whereRelease($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment whereUpdatedAt($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Business\UserEmployment withTrashed(bool $withTrashed = true)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|\App\Models\Business\UserEmployment withoutCache()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Business\UserEmployment withoutTrashed()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment active()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment average(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment avg(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment avgFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment checkAccess()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment count(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment countFromCache(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment createMany(array $records)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment deleteQuietly()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment drafted()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment firstFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment flushCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment flushQueryCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment forceSave(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment getCacheKey($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment getFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment inactive()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment insert(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment insertGetId(array $values, $sequence = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment insertOrIgnore(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment max(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment maxFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment min(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment minFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment newModelQuery()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment newQuery()
+ * @method static Builder<static>|UserEmployment onlyTrashed()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment paginateFromCache(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment prunableSoftDeletes()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment published()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment query()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment remember(int $minutes)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment restore()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment save(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment saveMany($models)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment sum(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment sumFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment truncate()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment updateOrInsert(array $attributes, $values = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment updateQuietly(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment whereCompanyId($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment whereContractId($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment whereCreatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment whereDeletedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment whereDepartmentId($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment whereEmployment($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment whereId($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment wherePositionId($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment whereRelease($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment whereUpdatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment whereUserId($value)
+ * @method static Builder<static>|UserEmployment withTrashed(bool $withTrashed = true)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment withoutCache()
+ * @method static Builder<static>|UserEmployment withoutTrashed()
  *
  * @mixin \Eloquent
  */
 class UserEmployment extends BaseModel
 {
-    protected $fillable = [
+    protected $fillable = array(
         'user_id',
         'company_id',
         'contract_id',
@@ -103,18 +104,18 @@ class UserEmployment extends BaseModel
 
         'employment',
         'release',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'employment' => 'date',
         'release' => 'date',
-    ];
+    );
 
-    protected $dispatchesEvents = [
+    protected $dispatchesEvents = array(
         'created' => EmploymentCreated::class,
         'updated' => EmploymentUpdated::class,
         'deleted' => EmploymentDeleted::class,
-    ];
+    );
 
     public function user(): BelongsTo
     {

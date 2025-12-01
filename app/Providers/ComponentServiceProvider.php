@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Commentable\Components\CommentComponent;
+use App\Helpers\StorageHelper;
 use App\Livewire\Layout\Notifications;
 use App\Livewire\Layout\Notifications\Item;
 use App\View\Components\Cards\NoteCard;
@@ -57,5 +58,9 @@ class ComponentServiceProvider extends ServiceProvider
         Livewire::component('notification.item', Item::class);
 
         Blade::component('note-card', NoteCard::class);
+
+        Blade::directive('branding', function () {
+            return StorageHelper::getBrandingHtml();
+        });
     }
 }

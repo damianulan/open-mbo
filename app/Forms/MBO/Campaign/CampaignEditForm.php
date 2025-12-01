@@ -17,7 +17,7 @@ class CampaignEditForm extends Form
     {
         $route = route('campaigns.store');
         $method = 'POST';
-        $selected = [];
+        $selected = array();
         $campaign = null;
         if ( ! is_null($model)) {
             $method = 'PUT';
@@ -52,7 +52,7 @@ class CampaignEditForm extends Form
 
     public static function validation(Request $request, $model_id = null): array
     {
-        return [
+        return array(
             'name' => 'max:120|required',
             // 'period' => 'max:10|required|unique:campaigns,period,' . $model_id,
             'period' => 'max:10|required',
@@ -75,7 +75,7 @@ class CampaignEditForm extends Form
 
             'draft' => 'boolean',
             'manual' => 'boolean',
-        ];
+        );
     }
 
     public static function attributes(): array

@@ -15,10 +15,10 @@ class ObjectiveCategoryController extends MBOController
      */
     public function index(ObjectiveCategoriesDataTable $dataTable)
     {
-        return $dataTable->render('pages.mbo.categories.index', [
+        return $dataTable->render('pages.mbo.categories.index', array(
             'table' => $dataTable,
             'nav' => $this->nav(),
-        ]);
+        ));
     }
 
     /**
@@ -26,9 +26,9 @@ class ObjectiveCategoryController extends MBOController
      */
     public function create(Request $request): View
     {
-        return view('pages.mbo.categories.edit', [
+        return view('pages.mbo.categories.edit', array(
             'form' => ObjectiveCategoryEditForm::definition($request),
-        ]);
+        ));
     }
 
     /**
@@ -61,10 +61,10 @@ class ObjectiveCategoryController extends MBOController
     {
         $model = ObjectiveTemplateCategory::findOrFail($id);
 
-        return view('pages.mbo.categories.edit', [
+        return view('pages.mbo.categories.edit', array(
             'objective' => $model,
             'form' => ObjectiveCategoryEditForm::definition($request, $model),
-        ]);
+        ));
     }
 
     /**

@@ -6,6 +6,7 @@ use FormForge\Base\Form;
 use FormForge\Base\FormComponent;
 use FormForge\FormBuilder;
 use Illuminate\Http\Request;
+use App\Forms\Traits\SettingsForm;
 
 class MboForm extends Form
 {
@@ -13,16 +14,22 @@ class MboForm extends Form
 
     protected static ?string $backRoute = 'settings.modules.index';
 
-    protected static array $backParams = ['module' => 'mbo'];
+    protected static array $backParams = array('module' => 'mbo');
 
     public static function definition(Request $request, $model = null): FormBuilder
     {
         return FormBuilder::boot($request, 'post', route('settings.modules.mbo.store'), 'mbo_settings')
             ->class('settings-form')
             ->add(FormComponent::hidden('module', 'mbo'))
-            ->addSection(__('Ogólne'), fn (FormBuilder $builder) => $builder
-                ->add(FormComponent::switch('enabled', $model)->label(__('forms.settings.mbo.enabled'))->info(__('forms.settings.mbo.info.enabled'))->key(self::settingsKey('mbo.enabled')))
-                ->add(FormComponent::switch('objectives_autofail', $model)->label(__('forms.settings.mbo.objectives_autofail'))->info(__('forms.settings.mbo.info.objectives_autofail'))->key(self::settingsKey('mbo.objectives_autofail'))))
+            ->addSection(__('forms.settings.general.general'), fn (FormBuilder $builder) => $builder
+                ->add(FormComponent::switch('enabled', $model)->label(__('forms.settings.mbo.enabled'))->info(__('forms.settings.mbo.info.enabled'))->key(self::settingsKey('mbo.enabled'))))
+            ->addSection(
+                __('mbo.objectives.index'),
+                fn (FormBuilder $builder) => $builder
+                    ->add(FormComponent::switch('objectives_autofail', $model)->label(__('forms.settings.mbo.objectives_autofail'))->info(__('forms.settings.mbo.info.objectives_autofail'))->key(self::settingsKey('mbo.objectives_autofail')))
+                    ->add(FormComponent::switch('objectives_self_final_evaluation', $model)->label(__('forms.settings.mbo.objectives_self_final_evaluation'))->key(self::settingsKey('mbo.objectives_self_final_evaluation')))
+                    ->add(FormComponent::switch('objectives_weights', $model)->label(__('forms.settings.mbo.objectives_weights'))->info(__('forms.settings.mbo.info.objectives_weights_autofail'))->key(self::settingsKey('mbo.objectives_weights')))
+            )
             ->addSection(__('mbo.campaigns_full'), fn (FormBuilder $builder) => $builder
                 ->add(FormComponent::switch('campaigns_enabled', $model)->label(__('forms.settings.mbo.campaigns_enabled'))->info(__('forms.settings.mbo.info.campaigns_enabled'))->key(self::settingsKey('mbo.campaigns_enabled')))
                 ->add(FormComponent::switch('campaigns_ignore_dates', $model)->label(__('forms.settings.mbo.campaigns_ignore_dates'))->info(__('forms.settings.mbo.info.campaigns_ignore_dates'))->key(self::settingsKey('mbo.campaigns_ignore_dates')))
@@ -41,16 +48,18 @@ class MboForm extends Form
 
     public static function validation(Request $request, $model_id = null): array
     {
-        return [
+        return array(
             'enabled' => 'boolean',
             'campaigns_enabled' => 'boolean',
             'campaigns_manual' => 'boolean',
             'objectives_autofail' => 'boolean',
+            'objectives_self_final_evaluation' => 'boolean',
+            'objectives_weights' => 'boolean',
             'rewards' => 'boolean',
             'rewards_proportional' => 'boolean',
             'manipulate_rewards' => 'boolean',
             'failed_rewards' => 'boolean',
             'rewards_currency' => 'required|string|max:3',
-        ];
+        );
     }
 }

@@ -6,7 +6,7 @@ use App\Models\Vendor\ActivityModel;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Carbon;
 use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Column;
+use App\Support\DataTables\Column;
 
 class MyLogsDataTable extends BaseLogDataTable
 {
@@ -23,10 +23,10 @@ class MyLogsDataTable extends BaseLogDataTable
     {
 
         return (new EloquentDataTable($query))
-            ->addColumn('event', fn ($data) => view('components.datatables.badge', [
+            ->addColumn('event', fn ($data) => view('components.datatables.badge', array(
                 'color' => $this->getEventColor($data->event),
                 'text' => __('logging.events.' . $data->event),
-            ]))
+            )))
             ->addColumn('subject', fn ($data) => $this->subjectView($data))
             ->addColumn('subject_type', fn ($data) => $this->subjectTypeView($data))
             ->orderColumn('causer', function ($query, $order): void {
@@ -35,7 +35,7 @@ class MyLogsDataTable extends BaseLogDataTable
             })
             ->filterColumn('causer', function ($query, $keyword): void {
                 $sql = "CONCAT(firstname,'-',lastname)  like ?";
-                $query->whereRaw($sql, ["%{$keyword}%"]);
+                $query->whereRaw($sql, array("%{$keyword}%"));
             })
             ->editColumn('created_at', function ($data) {
                 $formatedDate = Carbon::parse($data->created_at)->format(config('app.datetime_format'));
@@ -57,20 +57,19 @@ class MyLogsDataTable extends BaseLogDataTable
 
     protected function defaultColumns(): array
     {
-        return [
+        return array(
             'event',
             'subject',
             'subject_type',
             'created_at',
-        ];
+        );
     }
 
     protected function availableColumns(): array
     {
-        return [
+        return array(
             'event' => Column::computed('event')
-                ->title(__('logging.columns.event'))
-                ->addClass('firstcol'),
+                ->title(__('logging.columns.event')),
             'subject' => Column::computed('subject')
                 ->title(__('logging.columns.subject')),
             'subject_type' => Column::computed('subject_type')
@@ -80,7 +79,7 @@ class MyLogsDataTable extends BaseLogDataTable
             'created_at' => Column::make('created_at')
                 ->title(__('logging.columns.created_at'))
                 ->addClass('lastcol'),
-        ];
+        );
     }
 
     /**

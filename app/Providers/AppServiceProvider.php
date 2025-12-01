@@ -2,11 +2,14 @@
 
 namespace App\Providers;
 
+use App\Helpers\StorageHelper;
+use App\Support\Storage\StorageManager;
 use Barryvdh\Debugbar\Facades\Debugbar;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use App\Console\Commands\Core\LangList;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +28,12 @@ class AppServiceProvider extends ServiceProvider
 
         $loader = AliasLoader::getInstance();
         $loader->alias('Debugbar', Debugbar::class);
+        $this->app->singleton(StorageManager::class);
+
+        $this->optimizes(
+            clear: LangList::class,
+            key: 'langs-cache',
+        );
     }
 
     /**

@@ -2,9 +2,9 @@
 
 namespace App\Settings;
 
-use Spatie\LaravelSettings\Settings;
+use App\Settings\Abstract\BaseSettings;
 
-class ReportSettings extends Settings
+class ReportSettings extends BaseSettings
 {
     public static function group(): string
     {

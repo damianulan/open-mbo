@@ -11,7 +11,8 @@ use Illuminate\Queue\SerializesModels;
 
 class CampaignUserObjectiveAssigned implements ShouldDispatchAfterCommit
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable;
+    use SerializesModels;
 
     /**
      * Create a new event instance.

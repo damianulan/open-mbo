@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -28,23 +28,45 @@ return [
     |
     */
 
-    'disks' => [
+    /**
+     * in megabytes
+     * @see \App\Support\Storage\StorageManager
+     */
+    'storage_max_size' => env('STORAGE_MAX_SIZE', 1024),
 
-        'local' => [
+    'disks' => array(
+
+        'local' => array(
             'driver' => 'local',
             'root' => storage_path('app'),
             'throw' => false,
-        ],
+        ),
 
-        'public' => [
+        'public' => array(
             'driver' => 'local',
             'root' => storage_path('app/public'),
             'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
             'throw' => false,
-        ],
+        ),
 
-        's3' => [
+        'uploads' => array(
+            'driver' => 'local',
+            'root' => storage_path('app/uploads'),
+            'url' => env('APP_URL') . '/uploads',
+            'visibility' => 'public',
+            'throw' => false,
+        ),
+
+        'downloads' => array(
+            'driver' => 'local',
+            'root' => storage_path('app/downloads'),
+            'url' => env('APP_URL') . '/downloads',
+            'visibility' => 'public',
+            'throw' => false,
+        ),
+
+        's3' => array(
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
@@ -54,9 +76,9 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
-        ],
+        ),
 
-    ],
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -69,8 +91,10 @@ return [
     |
     */
 
-    'links' => [
+    'links' => array(
         public_path('storage') => storage_path('app/public'),
-    ],
+        public_path('storage/uploads') => storage_path('app/uploads'),
+        public_path('downloads') => storage_path('app/downloads'),
+    ),
 
-];
+);

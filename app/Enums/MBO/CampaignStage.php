@@ -2,7 +2,7 @@
 
 namespace App\Enums\MBO;
 
-use Lucent\Support\Enum;
+use Enumerable\LaraEnum;
 
 /**
  * Campaign Stages can be assigned to campaigns and users in campaign.
@@ -10,43 +10,43 @@ use Lucent\Support\Enum;
  * Campaigns while in progress can have multiple SOFT STAGES assigned.
  * User can only have one of any STAGES assigned at a time.
  */
-class CampaignStage extends Enum
+class CampaignStage extends LaraEnum
 {
     // in progress/soft stages - campaign can have multiple of them assigned.
     // if any assigned its generally an IN_PROGESS stage
-    const DEFINITION = 'definition';
+    public const DEFINITION = 'definition';
 
-    const DISPOSITION = 'disposition';
+    public const DISPOSITION = 'disposition';
 
-    const REALIZATION = 'realization';
+    public const REALIZATION = 'realization';
 
-    const EVALUATION = 'evaluation';
+    public const EVALUATION = 'evaluation';
 
-    const SELF_EVALUATION = 'self_evaluation';
+    public const SELF_EVALUATION = 'self_evaluation';
 
     // hard stages
-    const PENDING = 'pending'; // starting point stage
+    public const PENDING = 'pending'; // starting point stage
 
-    const IN_PROGRESS = 'in_progress'; // const when process is in progress
+    public const IN_PROGRESS = 'in_progress'; // const when process is in progress
 
-    const COMPLETED = 'completed'; // const when process is finished in time
+    public const COMPLETED = 'completed'; // const when process is finished in time
 
-    const TERMINATED = 'terminated'; // const when process has been terminated after it has started
+    public const TERMINATED = 'terminated'; // const when process has been terminated after it has started
 
-    const CANCELED = 'canceled'; // const when process has been canceled
+    public const CANCELED = 'canceled'; // const when process has been canceled
 
     /**
      * Pending, In Progress, Completed, Terminated, Canceled
      */
     public static function hardValues(): array
     {
-        return [
+        return array(
             self::PENDING,
             self::IN_PROGRESS,
             self::COMPLETED,
             self::TERMINATED,
             self::CANCELED,
-        ];
+        );
     }
 
     /**
@@ -54,13 +54,13 @@ class CampaignStage extends Enum
      */
     public static function softValues(): array
     {
-        return [
+        return array(
             self::DEFINITION,
             self::DISPOSITION,
             self::REALIZATION,
             self::EVALUATION,
             self::SELF_EVALUATION,
-        ];
+        );
     }
 
     /**
@@ -68,7 +68,7 @@ class CampaignStage extends Enum
      */
     public static function sequences(): array
     {
-        return [
+        return array(
             self::PENDING => 0,
             self::DEFINITION => 1,
             self::DISPOSITION => 2,
@@ -76,7 +76,7 @@ class CampaignStage extends Enum
             self::EVALUATION => 4,
             self::SELF_EVALUATION => 5,
             self::COMPLETED => 6,
-        ];
+        );
     }
 
     /**
@@ -84,13 +84,13 @@ class CampaignStage extends Enum
      */
     public static function hardValuesOrder(): array
     {
-        return [
+        return array(
             self::IN_PROGRESS,
             self::PENDING,
             self::COMPLETED,
             self::TERMINATED,
             self::CANCELED,
-        ];
+        );
     }
 
     public static function getName(string $value): string
@@ -180,7 +180,7 @@ class CampaignStage extends Enum
 
     public static function fromto_labels(): array
     {
-        $arr = [];
+        $arr = array();
         foreach (__('forms.campaigns.stages') as $key => $value) {
             $arr[$key . '_from'] = $value . ' ' . __('forms.from');
             $arr[$key . '_to'] = $value . ' ' . __('forms.to');

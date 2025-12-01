@@ -2,31 +2,31 @@
 
 namespace App\Settings;
 
+use App\Settings\Abstract\BaseSettings;
 use App\Settings\Casts\CryptCast;
-use Spatie\LaravelSettings\Settings;
 
-class MailSettings extends Settings
+class MailSettings extends BaseSettings
 {
     // MAILING
-    public ?string $mail_mailer;
+    public ?string $mail_mailer = 'smtp';
 
-    public ?string $mail_host;
+    public ?string $mail_host = 'mailhog';
 
-    public ?int $mail_port;
+    public ?int $mail_port = 587;
 
-    public ?string $mail_username;
+    public ?string $mail_username = null;
 
-    public ?string $mail_password;
+    public ?string $mail_password = null;
 
-    public ?string $mail_encryption;
+    public ?string $mail_encryption = null;
 
-    public ?string $mail_from_address;
+    public ?string $mail_from_address = 'hello@openmbo.com';
 
-    public ?string $mail_from_name;
+    public ?string $mail_from_name = 'OpenMBO';
 
-    public bool $mail_catchall_enabled;
+    public bool $mail_catchall_enabled = false;
 
-    public ?string $mail_catchall_receiver;
+    public ?string $mail_catchall_receiver = 'openmbo@damianulan.me';
 
     public static function group(): string
     {
@@ -35,9 +35,9 @@ class MailSettings extends Settings
 
     public static function casts(): array
     {
-        return [
+        return array(
             'mail_password' => CryptCast::class,
-        ];
+        );
     }
 
     public function safePassword()

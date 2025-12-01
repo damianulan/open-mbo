@@ -11,41 +11,37 @@ class EventServiceProvider extends ServiceProvider
      *
      * @var array<class-string, array<int, class-string>>
      */
-    protected $listen = [
-        'Illuminate\Auth\Events\Registered' => [
+    protected $listen = array(
+        'Illuminate\Auth\Events\Registered' => array(
             'Illuminate\Auth\Listeners\SendEmailVerificationNotification',
-        ],
-        'Illuminate\Auth\Events\Logout' => [
+        ),
+        'Illuminate\Auth\Events\Logout' => array(
             'App\Listeners\Activity\LogSuccessfulLogout',
-        ],
-        'Illuminate\Auth\Events\Failed' => [
+        ),
+        'Illuminate\Auth\Events\Failed' => array(
             'App\Listeners\Activity\LogAuthFailed',
-        ],
+        ),
 
         // MBO LISTENERS
         // Campaigns
-        'App\Events\MBO\Campaigns\UserCampaignAssigned' => [
+        'App\Events\MBO\Campaigns\UserCampaignAssigned' => array(
             'App\Listeners\MBO\Campaigns\UserAssignObjectives',
-        ],
-        'App\Events\MBO\Campaigns\CampaignUpdated' => [
+        ),
+        'App\Events\MBO\Campaigns\CampaignUpdated' => array(
             'App\Listeners\MBO\Campaigns\UserCampaignStageCheck',
-        ],
-        'App\Events\MBO\Campaigns\CampaignViewed' => [
+        ),
+        'App\Events\MBO\Campaigns\CampaignViewed' => array(
             'App\Listeners\MBO\Campaigns\UserCampaignStageCheck',
-        ],
+        ),
 
         // Objectives
-        'App\Events\MBO\Objectives\ObjectiveUpdated' => [
+        'App\Events\MBO\Objectives\ObjectiveUpdated' => array(
             'App\Listeners\MBO\Objectives\UserObjectiveStatusCheck',
-        ],
-        'App\Events\MBO\Objectives\ObjectiveCreated' => [
+        ),
+        'App\Events\MBO\Objectives\ObjectiveCreated' => array(
             'App\Listeners\MBO\Objectives\UserObjectiveStatusCheck',
-        ],
-
-        'App\Events\MBO\Objectives\UserObjectiveEvaluated' => [
-            'App\Listeners\MBO\Objectives\UserObjectiveEvaluation',
-        ],
-    ];
+        ),
+    );
 
     /**
      * Register any events for your application.
@@ -54,10 +50,8 @@ class EventServiceProvider extends ServiceProvider
 
     /**
      * Determine if events and listeners should be automatically discovered.
-     *
-     * @return bool
      */
-    public function shouldDiscoverEvents()
+    public function shouldDiscoverEvents(): bool
     {
         return false;
     }
