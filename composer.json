@@ -1,7 +1,7 @@
 {
     "name": "damianulan/open-mbo",
     "type": "project",
-    "description": "",
+    "description": "Open source Management By Objectives highly scalable application. Users are able to create, categorize and assign objectives to other users or teams and evaluate their results, run MBO campaigns and assign bonus schemes and final rewards for their achievements. Open MBO also comes with robust reports and immensely adjustable forms for users to be filled in after a campaign or completely independently of it.",
     "keywords": [
         "openmbo",
         "mbo",
