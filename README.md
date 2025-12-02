@@ -9,7 +9,7 @@ The application is designed to support employee appraisal processes and to this 
 
 ### Production
 
-OpenMBO is currently in production. Stable version ETA is December 2025.
+OpenMBO is currently in production. Stable version ETA is July 2026.
 
 ### Licensing
 
