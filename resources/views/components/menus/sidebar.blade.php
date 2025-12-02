@@ -14,6 +14,9 @@
     <div class="sidebar-footer">
         @if(config('app.debug'))
             <div class="menu-release">
+                <a href="{{ url('https://damianulan.me') }}">damianulan © {{ date('Y') }}</a>
+            </div>
+            <div class="menu-release">
                 v. {{ config('app.release') }}
             </div>
         @endif

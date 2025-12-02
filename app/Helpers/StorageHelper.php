@@ -65,7 +65,7 @@ class StorageHelper
                 <img class="w-100" src="$image"/>
                 HTML,
             default => <<<HTML
-                <div class="brand-icon"><i class="bi-layers-half"></i></div>
+                <div class="brand-icon"><i class="bi-bullseye"></i></div>
                 <div class="brand-title">$sitename</div>
                 HTML
         };
