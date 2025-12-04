@@ -2,9 +2,9 @@
 
 namespace App\Support\Notifications\Enums;
 
-use Enumerable\LaraEnum;
+use Enumerable\Laravel\Enum;
 
-class NotificationType extends LaraEnum
+class NotificationType extends Enum
 {
     public const SYSTEM = 'system';
 

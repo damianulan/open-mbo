@@ -2,9 +2,9 @@
 
 namespace App\Enums\Core;
 
-use Enumerable\LaraEnum;
+use Enumerable\Laravel\Enum;
 
-class ExportType extends LaraEnum
+class ExportType extends Enum
 {
     const EXCEL = 'excel';
     const CSV = 'csv';

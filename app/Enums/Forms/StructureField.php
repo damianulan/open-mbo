@@ -2,9 +2,9 @@
 
 namespace App\Enums\Forms;
 
-use Enumerable\LaraEnum;
+use Enumerable\Laravel\Enum;
 
-class StructureField extends LaraEnum
+class StructureField extends Enum
 {
     public const TEXT = 'text';
 

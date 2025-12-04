@@ -90,11 +90,12 @@ class CampaignsController extends AppController
         ));
     }
 
-    public function edit(Request $request, Campaign $campaign): View
+    public function edit(Request $request, Campaign $campaign, CampaignEditForm $form): View
     {
         if ($request->user()->cannot('mbo-campaign-update', $campaign)) {
             unauthorized();
         }
+
 
         return view('pages.mbo.campaigns.edit', array(
             'campaign' => $campaign,

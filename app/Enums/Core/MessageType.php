@@ -2,9 +2,9 @@
 
 namespace App\Enums\Core;
 
-use Enumerable\LaraEnum;
+use Enumerable\Laravel\Enum;
 
-class MessageType extends LaraEnum
+class MessageType extends Enum
 {
     public const SUCCESS = 'success';
 

@@ -2,9 +2,9 @@
 
 namespace App\Enums\Users;
 
-use Enumerable\LaraEnum;
+use Enumerable\Laravel\Enum;
 
-class Gender extends LaraEnum
+class Gender extends Enum
 {
     public const MALE = 'm';
 
