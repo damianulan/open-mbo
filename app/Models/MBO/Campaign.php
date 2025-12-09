@@ -395,12 +395,12 @@ class Campaign extends BaseModel implements HasObjectives
 
     public function dateStart(): string
     {
-        return $this->definition_from;
+        return $this->definition_from ?? '';
     }
 
     public function dateEnd(): string
     {
-        return $this->self_evaluation_to;
+        return $this->self_evaluation_to ?? '';
     }
 
     public function inDates(): bool
