@@ -16,7 +16,7 @@ class UsersForm extends Form
 
     protected static array $backParams = array('module' => 'users');
 
-    public static function definition(Request $request, $model = null): FormBuilder
+    public function definition(): FormBuilder
     {
         return FormBuilder::boot($request, 'post', route('settings.modules.users.store'), 'users_settings')
             ->class('settings-form')
@@ -31,7 +31,7 @@ class UsersForm extends Form
             ->addSubmit();
     }
 
-    public static function validation(Request $request, $model_id = null): array
+    public function validation(): array
     {
         return array(
             'password_change_firstlogin' => 'boolean',

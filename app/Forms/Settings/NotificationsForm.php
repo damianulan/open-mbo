@@ -16,7 +16,7 @@ class NotificationsForm extends Form
 
     protected static array $backParams = array('module' => 'notifications');
 
-    public static function definition(Request $request, $model = null): FormBuilder
+    public function definition(): FormBuilder
     {
         return FormBuilder::boot($request, 'post', route('settings.modules.notifications.store'), 'notifications_settings')
             ->class('settings-form')
@@ -30,7 +30,7 @@ class NotificationsForm extends Form
             ->addSubmit();
     }
 
-    public static function validation(Request $request, $model_id = null): array
+    public function validation(): array
     {
         return array(
             'mail_notifications' => 'boolean',

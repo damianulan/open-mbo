@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class ObjectiveTemplateEditForm extends Form
 {
-    public static function definition(Request $request, $model = null): FormBuilder
+    public function definition(): FormBuilder
     {
         $route = route('templates.store');
         $method = 'POST';
@@ -30,7 +30,7 @@ class ObjectiveTemplateEditForm extends Form
             ->addSubmit();
     }
 
-    public static function validation(Request $request, $model_id = null): array
+    public function validation(): array
     {
         return array(
             'category_id' => 'nullable',

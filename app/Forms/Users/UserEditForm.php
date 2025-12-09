@@ -14,7 +14,7 @@ use Sentinel\Models\Role;
 
 class UserEditForm extends Form
 {
-    public static function definition(Request $request, $model = null): FormBuilder
+    public function definition(): FormBuilder
     {
         $route = route('users.store');
         $method = 'POST';
@@ -41,13 +41,13 @@ class UserEditForm extends Form
                 ->label(__('forms.users.roles')))
             ->add(FormComponent::multiselect('supervisors_ids', $model, Dictionary::fromModel(User::class, 'name', 'allActive', $exclude), 'supervisors', $selected)
                 ->label(__('forms.users.supervisors')))
-            ->onCondition( ! is_null($model), function (FormBuilder $builder): void {
+            ->when( ! is_null($model), function (FormBuilder $builder): void {
                 $builder->addButton(new Button(title: __('buttons.add_employment'), classes: 'btn-outline-primary add-employment'));
             })
             ->addSubmit();
     }
 
-    public static function validation(Request $request, $model = null): array
+    public function validation(): array
     {
         return array(
             'firstname' => 'max:255|required',

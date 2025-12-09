@@ -110,7 +110,8 @@ class CampaignsController extends AppController
         }
         $redirect = null;
         try {
-            $form->validate($request, $id);
+            $form->validate();
+
             $service = CreateOrUpdate::boot(request: $request, campaign: $campaign)->execute();
 
             if ($service->passed()) {

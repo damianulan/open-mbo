@@ -16,7 +16,7 @@ class MboForm extends Form
 
     protected static array $backParams = array('module' => 'mbo');
 
-    public static function definition(Request $request, $model = null): FormBuilder
+    public function definition(): FormBuilder
     {
         return FormBuilder::boot($request, 'post', route('settings.modules.mbo.store'), 'mbo_settings')
             ->class('settings-form')
@@ -46,7 +46,7 @@ class MboForm extends Form
             ->addSubmit();
     }
 
-    public static function validation(Request $request, $model_id = null): array
+    public function validation(): array
     {
         return array(
             'enabled' => 'boolean',

@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 // Ajax form
 class ObjectiveEditUserForm extends Form
 {
-    public static function definition(Request $request, $model = null): FormBuilder
+    public function definition(): FormBuilder
     {
         $route = null;
         $method = 'POST';
@@ -38,7 +38,7 @@ class ObjectiveEditUserForm extends Form
             ->addTitle($title);
     }
 
-    public static function validation(Request $request, $model_id = null): array
+    public function validation(): array
     {
 
         return array();

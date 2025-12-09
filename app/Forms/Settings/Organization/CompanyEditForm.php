@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class CompanyEditForm extends Form
 {
-    public static function definition(Request $request, $model = null): FormBuilder
+    public function definition(): FormBuilder
     {
         $route = route('settings.organization.company.store');
         $method = 'POST';
@@ -28,7 +28,7 @@ class CompanyEditForm extends Form
             ->addSubmit();
     }
 
-    public static function validation(Request $request, $model_id = null): array
+    public function validation(): array
     {
         return array(
             'firstname' => 'max:255|required',

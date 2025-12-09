@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 class ObjectiveEditForm extends Form
 {
     // TODO - dodawanie użytkowników
-    public static function definition(Request $request, $model = null): FormBuilder
+    public function definition(): FormBuilder
     {
         $route = null;
         $method = 'POST';
@@ -38,7 +38,7 @@ class ObjectiveEditForm extends Form
             ->addTitle($title);
     }
 
-    public static function validation(Request $request, $model_id = null): array
+    public function validation(): array
     {
         $builder = Objective::query();
         if ($model_id) {

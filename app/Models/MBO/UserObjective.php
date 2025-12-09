@@ -369,6 +369,7 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
         $query->where('user_objectives.status', UserObjectiveStatus::FAILED);
     }
 
+    // TODO hide campaign drafts
     public function scopeMy(Builder $query, ?User $user = null): void
     {
         if ( ! $user) {

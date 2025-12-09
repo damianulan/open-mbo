@@ -13,7 +13,7 @@ class BrandingForm extends Form
 {
     use SettingsForm;
 
-    public static function definition(Request $request, $model = null): FormBuilder
+    public function definition(): FormBuilder
     {
         return FormBuilder::boot($request, 'post', route('settings.branding.store'), 'branding_settings')
             ->class('settings-form')
@@ -22,7 +22,7 @@ class BrandingForm extends Form
             ->addSubmit();
     }
 
-    public static function validation(Request $request, $model_id = null): array
+    public function validation(): array
     {
         return [
             'site_logo' => [

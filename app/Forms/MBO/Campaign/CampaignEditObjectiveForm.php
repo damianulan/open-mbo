@@ -15,7 +15,7 @@ use Illuminate\Support\Carbon;
 // Ajax form
 class CampaignEditObjectiveForm extends Form
 {
-    public static function definition(Request $request, $model = null): FormBuilder
+    public function definition(): FormBuilder
     {
         $route = null;
         $method = 'POST';
@@ -63,7 +63,7 @@ class CampaignEditObjectiveForm extends Form
             ->addTitle($title);
     }
 
-    public static function validation(Request $request, $model_id = null): array
+    public function validation(): array
     {
         $campaign_id = $request->input('campaign_id') ?? null;
         $builder = Objective::where('campaign_id', $campaign_id);

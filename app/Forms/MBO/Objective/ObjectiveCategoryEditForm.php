@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class ObjectiveCategoryEditForm extends Form
 {
-    public static function definition(Request $request, $model = null): FormBuilder
+    public function definition(): FormBuilder
     {
         $route = route('categories.store');
         $method = 'POST';
@@ -39,7 +39,7 @@ class ObjectiveCategoryEditForm extends Form
             ->addSubmit();
     }
 
-    public static function validation(Request $request, $model_id = null): array
+    public function validation(): array
     {
         return array(
             'name' => 'max:50|required',

@@ -15,7 +15,7 @@ class ObjectiveEditUserRealizationForm extends Form
     /**
      * @param  UserObjective  $model
      */
-    public static function definition(Request $request, $model = null): FormBuilder
+    public function definition(): FormBuilder
     {
         $route = null;
         $method = 'POST';
@@ -34,7 +34,7 @@ class ObjectiveEditUserRealizationForm extends Form
             ->addTitle($title);
     }
 
-    public static function validation(Request $request, $model_id = null): array
+    public function validation(): array
     {
         return array(
             'realization' => 'nullable|numeric',

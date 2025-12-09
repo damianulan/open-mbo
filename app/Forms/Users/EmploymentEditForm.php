@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 class EmploymentEditForm extends Form
 {
-    public static function definition(Request $request, $model = null): FormBuilder
+    public function definition(): FormBuilder
     {
         $route = route('employments.store');
         $method = 'POST';
@@ -40,12 +40,12 @@ class EmploymentEditForm extends Form
             ->add(FormComponent::date('employment', $model)->label(__('forms.employments.employment')))
             ->add(FormComponent::date('release', $model)->label(__('forms.employments.release')))
             ->addSubmit()
-            ->onCondition( ! is_null($model), function (FormBuilder $builder) use ($model): void {
+            ->when( ! is_null($model), function (FormBuilder $builder) use ($model): void {
                 $builder->addButton(new Button(title: __('buttons.delete'), href: route('employments.delete', $model->id), classes: 'btn-danger delete-employment'));
             });
     }
 
-    public static function validation(Request $request, $model = null): array
+    public function validation(): array
     {
         return array(
             'user_id' => 'required',
