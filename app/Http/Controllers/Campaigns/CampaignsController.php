@@ -29,14 +29,14 @@ class CampaignsController extends AppController
         ));
     }
 
-    public function create(Request $request): View
+    public function create(Request $request, CampaignEditForm $form): View
     {
         if ($request->user()->cannot('create', Campaign::class)) {
             unauthorized();
         }
 
         return view('pages.mbo.campaigns.edit', array(
-            'form' => CampaignEditForm::definition($request),
+            'form' => $form->getDefinition(),
         ));
     }
 
@@ -52,8 +52,7 @@ class CampaignsController extends AppController
         }
         $redirect = null;
         try {
-            $request = $form::reformatRequest($request);
-            $form::validate($request);
+            $form->validate($request);
             $service = CreateOrUpdate::boot(request: $request)->execute();
 
             if ($service->passed()) {
@@ -99,7 +98,7 @@ class CampaignsController extends AppController
 
         return view('pages.mbo.campaigns.edit', array(
             'campaign' => $campaign,
-            'form' => CampaignEditForm::definition($request, $campaign),
+            'form' => $form->setModel($campaign)->getDefinition(),
         ));
     }
 
@@ -111,8 +110,7 @@ class CampaignsController extends AppController
         }
         $redirect = null;
         try {
-            $request = $form::reformatRequest($request);
-            $form::validate($request, $id);
+            $form->validate($request, $id);
             $service = CreateOrUpdate::boot(request: $request, campaign: $campaign)->execute();
 
             if ($service->passed()) {
@@ -124,7 +122,7 @@ class CampaignsController extends AppController
             $this->e = $e;
         }
 
-        return $this->returnResponseRedirect($redirect, $service?->getErrors() ?? __('alerts.campaigns.error.edit', array('name' => $campaign->name)));
+        return $this->returnResponseRedirect($redirect, 'error' ?? __('alerts.campaigns.error.edit', array('name' => $campaign->name)));
     }
 
     public function terminate(Request $request, $id)

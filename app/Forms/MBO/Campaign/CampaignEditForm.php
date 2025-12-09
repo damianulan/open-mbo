@@ -13,48 +13,48 @@ use Illuminate\Http\Request;
 
 class CampaignEditForm extends Form
 {
-    public static function definition(Request $request, $model = null): FormBuilder
+    public function definition(): FormBuilder
     {
         $route = route('campaigns.store');
         $method = 'POST';
         $selected = array();
         $campaign = null;
-        if ( ! is_null($model)) {
+        if ( ! is_null($this->model)) {
             $method = 'PUT';
-            $route = route('campaigns.update', $model->id);
-            $campaign = Campaign::find($model->id);
+            $route = route('campaigns.update', $this->model->id);
+            $campaign = Campaign::find($this->model->id);
             $selected = $campaign->coordinators->pluck('id')->toArray();
         }
 
-        return FormBuilder::boot($request, $method, $route, 'campaign_edit')
+        return FormBuilder::boot($method, $route, 'campaign_edit')
             ->class('campaign-create-form')
-            ->add(FormComponent::text('name', $model)->label(__('forms.campaigns.name'))->required())
-            ->add(FormComponent::text('period', $model)->label(__('forms.campaigns.period'))->required()
+            ->add(FormComponent::text('name', $this->model)->label(__('forms.campaigns.name'))->required())
+            ->add(FormComponent::text('period', $this->model)->label(__('forms.campaigns.period'))->required()
                 ->info(__('forms.campaigns.info.period')))
-            ->add(FormComponent::multiselect('user_ids', $model, Dictionary::fromModel(User::class, 'name', 'allActive'), 'users', $selected)->label(__('forms.campaigns.coordinators')))
-            ->add(FormComponent::container('description', $model)->label(__('forms.campaigns.description'))->class('quill-default'))
-            ->add(FormComponent::daterange(CampaignStage::DEFINITION, $model)->label(__('forms.campaigns.stages.' . CampaignStage::DEFINITION))->required()
+            ->add(FormComponent::multiselect('user_ids', $this->model, Dictionary::fromModel(User::class, 'name', 'allActive'), 'users', $selected)->label(__('forms.campaigns.coordinators')))
+            ->add(FormComponent::container('description', $this->model)->label(__('forms.campaigns.description'))->class('quill-default'))
+            ->add(FormComponent::daterange(CampaignStage::DEFINITION, $this->model)->label(__('forms.campaigns.stages.' . CampaignStage::DEFINITION))->required()
                 ->info(__('forms.campaigns.info.' . CampaignStage::DEFINITION)))
-            ->add(FormComponent::daterange(CampaignStage::DISPOSITION, $model)->label(__('forms.campaigns.stages.' . CampaignStage::DISPOSITION))->required()
+            ->add(FormComponent::daterange(CampaignStage::DISPOSITION, $this->model)->label(__('forms.campaigns.stages.' . CampaignStage::DISPOSITION))->required()
                 ->info(__('forms.campaigns.info.' . CampaignStage::DISPOSITION)))
-            ->add(FormComponent::daterange(CampaignStage::REALIZATION, $model)->label(__('forms.campaigns.stages.' . CampaignStage::REALIZATION))->required()
+            ->add(FormComponent::daterange(CampaignStage::REALIZATION, $this->model)->label(__('forms.campaigns.stages.' . CampaignStage::REALIZATION))->required()
                 ->info(__('forms.campaigns.info.' . CampaignStage::REALIZATION)))
-            ->add(FormComponent::daterange(CampaignStage::EVALUATION, $model)->label(__('forms.campaigns.stages.' . CampaignStage::EVALUATION))->required()
+            ->add(FormComponent::daterange(CampaignStage::EVALUATION, $this->model)->label(__('forms.campaigns.stages.' . CampaignStage::EVALUATION))->required()
                 ->info(__('forms.campaigns.info.' . CampaignStage::EVALUATION)))
-            ->add(FormComponent::daterange(CampaignStage::SELF_EVALUATION, $model)->label(__('forms.campaigns.stages.' . CampaignStage::SELF_EVALUATION))->required()
+            ->add(FormComponent::daterange(CampaignStage::SELF_EVALUATION, $this->model)->label(__('forms.campaigns.stages.' . CampaignStage::SELF_EVALUATION))->required()
                 ->info(__('forms.campaigns.info.' . CampaignStage::SELF_EVALUATION)))
-            ->add(FormComponent::switch('draft', $model)->label(__('forms.campaigns.draft'))->default(true)
+            ->add(FormComponent::switch('draft', $this->model)->label(__('forms.campaigns.draft'))->default(true)
                 ->info(__('forms.campaigns.info.draft')))
-            ->add(FormComponent::switch('manual', $model)->label(__('forms.campaigns.manual'))->default(false)
+            ->add(FormComponent::switch('manual', $this->model)->label(__('forms.campaigns.manual'))->default(false)
                 ->condition(fn () => settings('mbo.campaigns_manual'))->info(__('forms.campaigns.info.manual')))
             ->addSubmit();
     }
 
-    public static function validation(Request $request, $model_id = null): array
+    public function validation(): array
     {
         return array(
             'name' => 'max:120|required',
-            // 'period' => 'max:10|required|unique:campaigns,period,' . $model_id,
+            // 'period' => 'max:10|required|unique:campaigns,period,' . $this->model_id,
             'period' => 'max:10|required',
             'description' => 'max:1000|nullable',
 
@@ -78,7 +78,7 @@ class CampaignEditForm extends Form
         );
     }
 
-    public static function attributes(): array
+    public function attributes(): array
     {
         return array_merge(CampaignStage::fromto_labels(), __('forms.campaigns'));
     }
