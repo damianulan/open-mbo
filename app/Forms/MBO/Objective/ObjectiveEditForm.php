@@ -19,30 +19,30 @@ class ObjectiveEditForm extends Form
         $route = null;
         $method = 'POST';
         $title = 'Dodaj nowy cel';
-        if ( ! is_null($model)) {
+        if ( ! is_null($this->model)) {
             $method = 'PUT';
             $title = 'Edytuj cel';
         }
 
-        return FormBuilder::boot($request, $method, $route, 'objective_edit')
+        return FormBuilder::boot($method, $route, 'objective_edit')
             ->class('objective-edit-form')
-            ->add(FormComponent::hidden('id', $model))
-            ->add(FormComponent::select('template_id', $model, Dictionary::fromModel(ObjectiveTemplate::class, 'name'))->required()->label(__('forms.mbo.objectives.template')))
-            ->add(FormComponent::text('name', $model)->label(__('forms.mbo.objectives.name'))->required())
-            ->add(FormComponent::container('description', $model)->label(__('forms.mbo.objectives.description'))->class('quill-default'))
-            ->add(FormComponent::datetime('deadline', $model)->label(__('forms.mbo.objectives.deadline'))->info(__('forms.mbo.objectives.info.deadline')))
-            ->add(FormComponent::decimal('weight', $model)->label(__('forms.mbo.objectives.weight'))->info(__('forms.mbo.objectives.info.weight'))->required())
-            ->add(FormComponent::decimal('expected', $model)->label(__('forms.mbo.objectives.expected'))->info(__('forms.mbo.objectives.info.expected')))
-            ->add(FormComponent::decimal('award', $model)->label(__('forms.mbo.objectives.award'))->info(__('forms.mbo.objectives.info.award')))
-            ->add(FormComponent::switch('draft', $model)->label(__('forms.mbo.objectives.draft'))->info(__('forms.mbo.objectives.info.draft'))->default(false))
+            ->add(FormComponent::hidden('id', $this->model))
+            ->add(FormComponent::select('template_id', $this->model, Dictionary::fromModel(ObjectiveTemplate::class, 'name'))->required()->label(__('forms.mbo.objectives.template')))
+            ->add(FormComponent::text('name', $this->model)->label(__('forms.mbo.objectives.name'))->required())
+            ->add(FormComponent::container('description', $this->model)->label(__('forms.mbo.objectives.description'))->class('quill-default'))
+            ->add(FormComponent::datetime('deadline', $this->model)->label(__('forms.mbo.objectives.deadline'))->info(__('forms.mbo.objectives.info.deadline')))
+            ->add(FormComponent::decimal('weight', $this->model)->label(__('forms.mbo.objectives.weight'))->info(__('forms.mbo.objectives.info.weight'))->required())
+            ->add(FormComponent::decimal('expected', $this->model)->label(__('forms.mbo.objectives.expected'))->info(__('forms.mbo.objectives.info.expected')))
+            ->add(FormComponent::decimal('award', $this->model)->label(__('forms.mbo.objectives.award'))->info(__('forms.mbo.objectives.info.award')))
+            ->add(FormComponent::switch('draft', $this->model)->label(__('forms.mbo.objectives.draft'))->info(__('forms.mbo.objectives.info.draft'))->default(false))
             ->addTitle($title);
     }
 
     public function validation(): array
     {
         $builder = Objective::query();
-        if ($model_id) {
-            $builder->where('id', '!=', $model_id);
+        if ($this->model_id) {
+            $builder->where('id', '!=', $this->model_id);
         }
 
         return array(

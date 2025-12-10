@@ -19,19 +19,19 @@ class GeneralForm extends Form
 
     public function definition(): FormBuilder
     {
-        return FormBuilder::boot($request, 'post', route('settings.general.store'), 'general_settings')
+        return FormBuilder::boot('post', route('settings.general.store'), 'general_settings')
             ->class('settings-form')
             ->addSection(__('forms.settings.general.general'), fn (FormBuilder $builder) => $builder
-                ->add(FormComponent::text('site_name', $model)->label(__('forms.settings.general.site_name'))->key(self::settingsKey('general.site_name')))
-                ->add(FormComponent::select('theme', $model, Dictionary::fromUnassocArray(Theme::getAvailable()->toArray()), app(GeneralSettings::class)->theme)
+                ->add(FormComponent::text('site_name', $this->model)->label(__('forms.settings.general.site_name'))->key(self::settingsKey('general.site_name')))
+                ->add(FormComponent::select('theme', $this->model, Dictionary::fromUnassocArray(Theme::getAvailable()->toArray()), app(GeneralSettings::class)->theme)
                     ->label(__('forms.settings.general.theme'))->noEmpty()->key(self::settingsKey('general.theme')))
-                ->add(FormComponent::select('locale', $model, Dictionary::fromUnassocArray(config('app.available_locales'), 'globals.langs'), app(GeneralSettings::class)->locale)
+                ->add(FormComponent::select('locale', $this->model, Dictionary::fromUnassocArray(config('app.available_locales'), 'globals.langs'), app(GeneralSettings::class)->locale)
                     ->label(__('forms.settings.general.lang'))->noEmpty()->key(self::settingsKey('general.lang')))
-                ->add(FormComponent::select('target_release', $model, Dictionary::fromAssocArray(AppConfig::getReleasesOptions()), app(GeneralSettings::class)->target_release)
+                ->add(FormComponent::select('target_release', $this->model, Dictionary::fromAssocArray(AppConfig::getReleasesOptions()), app(GeneralSettings::class)->target_release)
                     ->label(__('forms.settings.general.release'))->key(self::settingsKey('general.release')))
             )
             ->addSection(__('forms.settings.general.datas'), fn (FormBuilder $builder) => $builder
-                ->add(FormComponent::multiselect('export_types', $model, Dictionary::fromEnum(ExportType::class))
+                ->add(FormComponent::multiselect('export_types', $this->model, Dictionary::fromEnum(ExportType::class))
                     ->label(__('forms.settings.general.export_types'))->key(self::settingsKey('general.export_types')))
             )
             ->addSubmit();

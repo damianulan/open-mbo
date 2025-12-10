@@ -15,9 +15,9 @@ class BrandingForm extends Form
 
     public function definition(): FormBuilder
     {
-        return FormBuilder::boot($request, 'post', route('settings.branding.store'), 'branding_settings')
+        return FormBuilder::boot('post', route('settings.branding.store'), 'branding_settings')
             ->class('settings-form')
-            ->add(FormComponent::file('site_logo', $model)
+            ->add(FormComponent::file('site_logo', $this->model)
                 ->label(__('forms.settings.general.site_logo'))->key(self::settingsKey('general.site_logo')))
             ->addSubmit();
     }

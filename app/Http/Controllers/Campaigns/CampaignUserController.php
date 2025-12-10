@@ -36,7 +36,7 @@ class CampaignUserController extends AppController
         try {
             $campaign = Campaign::findOrFail($id);
 
-            $request = $form::reformatRequest($request);
+
             $response = $form::validateJson($request, $id);
             if ('ok' === $response['status']) {
 

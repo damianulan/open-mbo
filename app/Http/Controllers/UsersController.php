@@ -40,8 +40,8 @@ class UsersController extends AppController
      */
     public function store(Request $request, UserEditForm $form)
     {
-        $request = $form::reformatRequest($request);
-        $form::validate($request);
+
+        $form->validate();
         $service = UserCreateOrUpdate::boot(request: $request)->execute();
 
         if ($service->passed()) {
@@ -55,8 +55,8 @@ class UsersController extends AppController
 
     public function storeEmployment(Request $request, EmploymentEditForm $form)
     {
-        $request = $form::reformatRequest($request);
-        $form::validate($request);
+
+        $form->validate();
         $service = EmploymentCreateOrUpdate::boot(request: $request)->execute();
 
         if ($service->passed()) {
@@ -101,8 +101,8 @@ class UsersController extends AppController
      */
     public function update(Request $request, $id, UserEditForm $form)
     {
-        $request = $form::reformatRequest($request);
-        $form::validate($request);
+
+        $form->validate();
         $user = User::findOrFail($id);
         $service = UserCreateOrUpdate::boot(request: $request, user: $user)->execute();
 
@@ -117,8 +117,8 @@ class UsersController extends AppController
 
     public function updateEmployment(Request $request, $id, EmploymentEditForm $form)
     {
-        $request = $form::reformatRequest($request);
-        $form::validate($request);
+
+        $form->validate();
         $employment = UserEmployment::findOrFail($id);
         $service = EmploymentCreateOrUpdate::boot(request: $request, employment: $employment)->execute();
 

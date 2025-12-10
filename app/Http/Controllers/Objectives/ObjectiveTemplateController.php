@@ -35,7 +35,7 @@ class ObjectiveTemplateController extends MBOController
      */
     public function store(Request $request, ObjectiveTemplateEditForm $form)
     {
-        $request = $form::reformatRequest($request);
+
         $request->validate();
 
         $objective = ObjectiveTemplate::fillFromRequest($request);
@@ -78,7 +78,7 @@ class ObjectiveTemplateController extends MBOController
      */
     public function update(Request $request, $id, ObjectiveTemplateEditForm $form)
     {
-        $request = $form::reformatRequest($request);
+
         $form::validate($request, $id);
         $objective = ObjectiveTemplate::fillFromRequest($request, $id);
         if ($objective->update()) {

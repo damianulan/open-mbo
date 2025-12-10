@@ -17,8 +17,8 @@ class BrandingController extends AppController
 
     public function store(Request $request, GeneralSettings $settings, BrandingForm $form)
     {
-        $request = $form::reformatRequest($request);
-        $form::validate($request);
+
+        $form->validate();
         $tmp = $request->file('site_logo');
         $location = null;
 

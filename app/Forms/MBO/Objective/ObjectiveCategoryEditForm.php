@@ -20,22 +20,22 @@ class ObjectiveCategoryEditForm extends Form
         $category = null;
 
         $shortnameType = 'text';
-        if ( ! is_null($model)) {
+        if ( ! is_null($this->model)) {
             $method = 'PUT';
-            $route = route('categories.update', $model->id);
-            $category = ObjectiveTemplateCategory::find($model->id);
+            $route = route('categories.update', $this->model->id);
+            $category = ObjectiveTemplateCategory::find($this->model->id);
             $selected = $category->coordinators->pluck('id')->toArray();
             if (in_array($category->shortname, ObjectiveTemplateCategory::baseCategories())) {
                 $shortnameType = 'hidden';
             }
         }
 
-        return FormBuilder::boot($request, $method, $route, 'objective_category_edit')
+        return FormBuilder::boot($method, $route, 'objective_category_edit')
             ->class('objective-category-create-form')
-            ->add(FormComponent::text('name', $model)->label(__('forms.mbo.categories.name'))->required())
-            ->add(FormComponent::{$shortnameType}('shortname', $model)->label(__('forms.mbo.categories.shortname')))
-            ->add(FormComponent::container('description', $model)->label(__('forms.mbo.categories.description'))->class('quill-default'))
-            ->add(FormComponent::multiselect('user_ids', $model, Dictionary::fromModel(User::class, 'name', 'allActive'), 'users', $selected)->label(__('forms.mbo.categories.coordinators')))
+            ->add(FormComponent::text('name', $this->model)->label(__('forms.mbo.categories.name'))->required())
+            ->add(FormComponent::{$shortnameType}('shortname', $this->model)->label(__('forms.mbo.categories.shortname')))
+            ->add(FormComponent::container('description', $this->model)->label(__('forms.mbo.categories.description'))->class('quill-default'))
+            ->add(FormComponent::multiselect('user_ids', $this->model, Dictionary::fromModel(User::class, 'name', 'allActive'), 'users', $selected)->label(__('forms.mbo.categories.coordinators')))
             ->addSubmit();
     }
 
@@ -43,7 +43,7 @@ class ObjectiveCategoryEditForm extends Form
     {
         return array(
             'name' => 'max:50|required',
-            'shortname' => 'max:20|required|unique:objective_template_categories,shortname,' . $model_id,
+            'shortname' => 'max:20|required|unique:objective_template_categories,shortname,' . $this->model_id,
             'description' => 'max:1000|nullable',
         );
     }

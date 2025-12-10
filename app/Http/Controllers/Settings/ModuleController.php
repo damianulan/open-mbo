@@ -40,8 +40,8 @@ class ModuleController extends SettingsController
 
     public function storeMbo(Request $request, MboForm $form, MBOSettings $settings)
     {
-        $request = $form::reformatRequest($request);
-        $form::validate($request);
+
+        $form->validate();
         foreach ($request->all() as $key => $value) {
             $settings->{$key} = $value;
         }
@@ -54,8 +54,8 @@ class ModuleController extends SettingsController
 
     public function storeUsers(Request $request, UsersForm $form, UserSettings $settings)
     {
-        $request = $form::reformatRequest($request);
-        $form::validate($request);
+
+        $form->validate();
         foreach ($request->all() as $key => $value) {
             $settings->{$key} = $value;
         }
@@ -68,8 +68,8 @@ class ModuleController extends SettingsController
 
     public function storeNotifications(Request $request, NotificationsForm $form, NotificationSettings $settings)
     {
-        $request = $form::reformatRequest($request);
-        $form::validate($request);
+
+        $form->validate();
         foreach ($request->all() as $key => $value) {
             $settings->{$key} = $value;
         }

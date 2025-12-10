@@ -21,27 +21,27 @@ class UserEditForm extends Form
         $exclude = array();
         $selected = array();
         $profile = null;
-        if ( ! is_null($model)) {
+        if ( ! is_null($this->model)) {
             $method = 'PUT';
-            $route = route('users.update', $model->id);
-            $profile = $model->profile;
+            $route = route('users.update', $this->model->id);
+            $profile = $this->model->profile;
 
-            $selected = $model->supervisors->pluck('id')->toArray();
+            $selected = $this->model->supervisors->pluck('id')->toArray();
         }
 
-        return FormBuilder::boot($request, $method, $route, 'users_edit')
+        return FormBuilder::boot($method, $route, 'users_edit')
             ->class('users-create-form')
             ->add(FormComponent::text('firstname', $profile)->label(__('forms.users.firstname')))
             ->add(FormComponent::text('lastname', $profile)->label(__('forms.users.lastname')))
-            ->add(FormComponent::text('email', $model)->label(__('forms.users.email')))
+            ->add(FormComponent::text('email', $this->model)->label(__('forms.users.email')))
             ->add(FormComponent::select('gender', $profile, Dictionary::fromEnum(Gender::class))
                 ->label(__('forms.users.gender')))
             ->add(FormComponent::birthdate('birthday', $profile)->label(__('forms.users.birthday')))
-            ->add(FormComponent::multiselect('roles_ids', $model, Dictionary::fromAssocArray(Role::getSelectList()), 'roles')
+            ->add(FormComponent::multiselect('roles_ids', $this->model, Dictionary::fromAssocArray(Role::getSelectList()), 'roles')
                 ->label(__('forms.users.roles')))
-            ->add(FormComponent::multiselect('supervisors_ids', $model, Dictionary::fromModel(User::class, 'name', 'allActive', $exclude), 'supervisors', $selected)
+            ->add(FormComponent::multiselect('supervisors_ids', $this->model, Dictionary::fromModel(User::class, 'name', 'allActive', $exclude), 'supervisors', $selected)
                 ->label(__('forms.users.supervisors')))
-            ->when( ! is_null($model), function (FormBuilder $builder): void {
+            ->when( ! is_null($this->model), function (FormBuilder $builder): void {
                 $builder->addButton(new Button(title: __('buttons.add_employment'), classes: 'btn-outline-primary add-employment'));
             })
             ->addSubmit();

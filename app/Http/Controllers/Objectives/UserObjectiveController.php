@@ -66,7 +66,7 @@ class UserObjectiveController extends AppController
     {
         $objective = Objective::findOrFail($id);
 
-        $request = $form::reformatRequest($request);
+
         $response = $form::validateJson($request, $id);
         if ('ok' === $response['status']) {
 
@@ -125,7 +125,7 @@ class UserObjectiveController extends AppController
                 throw new NoPermissionException();
             }
 
-            $request = $form::reformatRequest($request);
+
             $response = $form::validateJson($request, $id);
             if ('ok' === $response['status']) {
 

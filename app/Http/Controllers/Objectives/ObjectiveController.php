@@ -31,8 +31,8 @@ class ObjectiveController extends MBOController
      */
     public function store(Request $request, ObjectiveEditForm $form)
     {
-        $request = $form::reformatRequest($request);
-        $response = $form::validateJson($request);
+
+        $response = $form->validateJson();
         if ('ok' === $response['status']) {
             $objective = Objective::fillFromRequest($request);
 
@@ -69,7 +69,7 @@ class ObjectiveController extends MBOController
 
     public function update(Request $request, $id, ObjectiveEditForm $form)
     {
-        $request = $form::reformatRequest($request);
+
         $response = $form::validateJson($request, $id);
         if ('ok' === $response['status']) {
             $objective = Objective::fillFromRequest($request, $id);

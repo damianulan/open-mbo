@@ -21,8 +21,8 @@ class ObjectiveEditUserForm extends Form
         $selected = array();
         $exclude = array();
 
-        if ($model) {
-            $user_ids = UserObjective::where('objective_id', $model->id)->get()->pluck('user_id');
+        if ($this->model) {
+            $user_ids = UserObjective::where('objective_id', $this->model->id)->get()->pluck('user_id');
 
             if ( ! empty($user_ids)) {
                 foreach ($user_ids as $tid) {
@@ -31,10 +31,10 @@ class ObjectiveEditUserForm extends Form
             }
         }
 
-        return FormBuilder::boot($request, $method, $route, 'objective_add_users')
+        return FormBuilder::boot($method, $route, 'objective_add_users')
             ->class('objective-add-users-form')
-            ->add(FormComponent::hidden('id', $model))
-            ->add(FormComponent::multiselect('user_ids', $model, Dictionary::fromModel(User::class, 'name', 'allActive', $exclude), 'users', $selected)->required()->label(__('forms.mbo.objectives.users.add')))
+            ->add(FormComponent::hidden('id', $this->model))
+            ->add(FormComponent::multiselect('user_ids', $this->model, Dictionary::fromModel(User::class, 'name', 'allActive', $exclude), 'users', $selected)->required()->label(__('forms.mbo.objectives.users.add')))
             ->addTitle($title);
     }
 

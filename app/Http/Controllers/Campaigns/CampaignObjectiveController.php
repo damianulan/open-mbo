@@ -12,8 +12,8 @@ class CampaignObjectiveController extends AppController
 {
     public function store(Request $request, CampaignEditObjectiveForm $form)
     {
-        $request = $form::reformatRequest($request);
-        $response = $form::validateJson($request);
+
+        $response = $form->validateJson();
         if ('ok' === $response['status']) {
             $objective = Objective::fillFromRequest($request);
             if ($objective->save()) {
@@ -28,8 +28,8 @@ class CampaignObjectiveController extends AppController
 
     public function update(Request $request, $id, CampaignEditObjectiveForm $form)
     {
-        $request = $form::reformatRequest($request);
-        $response = $form::validateJson($request, $id);
+
+        $response = $form->validateJson();
         if ('ok' === $response['status']) {
             $objective = Objective::fillFromRequest($request, $id);
 
@@ -53,7 +53,7 @@ class CampaignObjectiveController extends AppController
         return ajax()->error('message', __('alerts.campaigns.error.objective_deleted'));
     }
 
-    public function addObjectives(Request $request, $id): View
+    public function addObjectives(Request $request, $id, CampaignEditObjectiveForm $form): View
     {
         $params = array();
         if ($id) {
@@ -61,12 +61,12 @@ class CampaignObjectiveController extends AppController
             if ($objective) {
                 $params = array(
                     'id' => $id,
-                    'form' => CampaignEditObjectiveForm::definition($request, $objective),
+                    'form' => $form->setModel($objective)->getDefinition(),
                 );
             }
         } else {
             $params = array(
-                'form' => CampaignEditObjectiveForm::definition($request),
+                'form' => $form->getDefinition(),
             );
         }
 

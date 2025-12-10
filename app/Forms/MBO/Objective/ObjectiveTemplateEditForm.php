@@ -15,17 +15,17 @@ class ObjectiveTemplateEditForm extends Form
     {
         $route = route('templates.store');
         $method = 'POST';
-        if ( ! is_null($model)) {
+        if ( ! is_null($this->model)) {
             $method = 'PUT';
-            $route = route('templates.update', $model->id);
+            $route = route('templates.update', $this->model->id);
         }
 
-        return FormBuilder::boot($request, $method, $route, 'campaign_edit')
+        return FormBuilder::boot($method, $route, 'campaign_edit')
             ->class('campaign-create-form')
-            ->add(FormComponent::select('category_id', $model, Dictionary::fromModel(ObjectiveTemplateCategory::class, 'name'))->label(__('forms.mbo.objectives.category')))
-            ->add(FormComponent::text('name', $model)->label(__('forms.mbo.objectives.name'))->required())
-            ->add(FormComponent::container('description', $model)->label(__('forms.mbo.objectives.description'))->class('quill-default'))
-            ->add(FormComponent::switch('draft', $model)->label(__('forms.mbo.objectives.draft'))->default(false)
+            ->add(FormComponent::select('category_id', $this->model, Dictionary::fromModel(ObjectiveTemplateCategory::class, 'name'))->label(__('forms.mbo.objectives.category')))
+            ->add(FormComponent::text('name', $this->model)->label(__('forms.mbo.objectives.name'))->required())
+            ->add(FormComponent::container('description', $this->model)->label(__('forms.mbo.objectives.description'))->class('quill-default'))
+            ->add(FormComponent::switch('draft', $this->model)->label(__('forms.mbo.objectives.draft'))->default(false)
                 ->info(__('forms.mbo.objectives.info.draft')))
             ->addSubmit();
     }

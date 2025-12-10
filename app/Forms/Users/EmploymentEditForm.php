@@ -19,29 +19,29 @@ class EmploymentEditForm extends Form
     {
         $route = route('employments.store');
         $method = 'POST';
-        $user_id = $model->user_id ?? $request->get('user_id');
+        $user_id = $this->model?->user_id ?? $this->user_id;
 
-        if ( ! is_null($model)) {
+        if ( ! is_null($this->model)) {
             $method = 'PUT';
-            $route = route('employments.update', $model->id);
+            $route = route('employments.update', $this->model->id);
         }
 
-        return FormBuilder::boot($request, $method, $route, 'employments_edit')
+        return FormBuilder::boot($method, $route, 'employments_edit')
             ->class('employments-edit-form')
             ->add(FormComponent::hidden('user_id', null, $user_id))
-            ->add(FormComponent::select('company_id', $model, Dictionary::fromModel(Company::class, 'name'))
+            ->add(FormComponent::select('company_id', $this->model, Dictionary::fromModel(Company::class, 'name'))
                 ->label(__('forms.employments.company')))
-            ->add(FormComponent::select('department_id', $model, Dictionary::fromModel(Department::class, 'name'))
+            ->add(FormComponent::select('department_id', $this->model, Dictionary::fromModel(Department::class, 'name'))
                 ->label(__('forms.employments.department')))
-            ->add(FormComponent::select('position_id', $model, Dictionary::fromModel(Position::class, 'name'))
+            ->add(FormComponent::select('position_id', $this->model, Dictionary::fromModel(Position::class, 'name'))
                 ->label(__('forms.employments.position')))
-            ->add(FormComponent::select('contract_id', $model, Dictionary::fromModel(TypeOfContract::class, 'name'))
+            ->add(FormComponent::select('contract_id', $this->model, Dictionary::fromModel(TypeOfContract::class, 'name'))
                 ->label(__('forms.employments.contract')))
-            ->add(FormComponent::date('employment', $model)->label(__('forms.employments.employment')))
-            ->add(FormComponent::date('release', $model)->label(__('forms.employments.release')))
+            ->add(FormComponent::date('employment', $this->model)->label(__('forms.employments.employment')))
+            ->add(FormComponent::date('release', $this->model)->label(__('forms.employments.release')))
             ->addSubmit()
-            ->when( ! is_null($model), function (FormBuilder $builder) use ($model): void {
-                $builder->addButton(new Button(title: __('buttons.delete'), href: route('employments.delete', $model->id), classes: 'btn-danger delete-employment'));
+            ->when( ! is_null($this->model), function (FormBuilder $builder): void {
+                $builder->addButton(new Button(title: __('buttons.delete'), href: route('employments.delete', $this->model->id), classes: 'btn-danger delete-employment'));
             });
     }
 

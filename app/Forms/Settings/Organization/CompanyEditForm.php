@@ -14,17 +14,17 @@ class CompanyEditForm extends Form
         $route = route('settings.organization.company.store');
         $method = 'POST';
 
-        if ( ! is_null($model)) {
+        if ( ! is_null($this->model)) {
             $method = 'PUT';
-            $route = route('settings.organization.company.update', $model->id);
+            $route = route('settings.organization.company.update', $this->model->id);
         }
 
-        return FormBuilder::boot($request, $method, $route, 'companies_edit')
+        return FormBuilder::boot($method, $route, 'companies_edit')
             ->class('companies-create-form')
-            ->add(FormComponent::text('firstname', $model)->label(__('forms.users.firstname')))
-            ->add(FormComponent::text('lastname', $model)->label(__('forms.users.lastname')))
-            ->add(FormComponent::text('email', $model)->label(__('forms.users.email')))
-            ->add(FormComponent::date('birthday', $model)->label(__('forms.users.birthday')))
+            ->add(FormComponent::text('firstname', $this->model)->label(__('forms.users.firstname')))
+            ->add(FormComponent::text('lastname', $this->model)->label(__('forms.users.lastname')))
+            ->add(FormComponent::text('email', $this->model)->label(__('forms.users.email')))
+            ->add(FormComponent::date('birthday', $this->model)->label(__('forms.users.birthday')))
             ->addSubmit();
     }
 
