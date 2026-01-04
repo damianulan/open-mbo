@@ -14,7 +14,7 @@ use Sentinel\Models\Role;
 
 class UserEditForm extends Form
 {
-    public function definition(): FormBuilder
+    public function definition(FormBuilder $builder): FormBuilder
     {
         $route = route('users.store');
         $method = 'POST';
@@ -29,7 +29,9 @@ class UserEditForm extends Form
             $selected = $this->model->supervisors->pluck('id')->toArray();
         }
 
-        return FormBuilder::boot($method, $route, 'users_edit')
+        return $builder->setId(is_null($this->model) ? 'user_create' : 'user_edit')
+            ->setMethod($method)
+            ->setAction($route)
             ->class('users-create-form')
             ->add(FormComponent::text('firstname', $profile)->label(__('forms.users.firstname')))
             ->add(FormComponent::text('lastname', $profile)->label(__('forms.users.lastname')))
@@ -37,9 +39,9 @@ class UserEditForm extends Form
             ->add(FormComponent::select('gender', $profile, Dictionary::fromEnum(Gender::class))
                 ->label(__('forms.users.gender')))
             ->add(FormComponent::birthdate('birthday', $profile)->label(__('forms.users.birthday')))
-            ->add(FormComponent::multiselect('roles_ids', $this->model, Dictionary::fromAssocArray(Role::getSelectList()), 'roles')
+            ->add(FormComponent::multiselect('roles_ids', $this->model->roles, Dictionary::fromAssocArray(Role::getSelectList()))
                 ->label(__('forms.users.roles')))
-            ->add(FormComponent::multiselect('supervisors_ids', $this->model, Dictionary::fromModel(User::class, 'name', 'allActive', $exclude), 'supervisors', $selected)
+            ->add(FormComponent::multiselect('supervisors_ids', $selected, Dictionary::fromModel(User::class, 'name', 'allActive', $exclude))
                 ->label(__('forms.users.supervisors')))
             ->when( ! is_null($this->model), function (FormBuilder $builder): void {
                 $builder->addButton(new Button(title: __('buttons.add_employment'), classes: 'btn-outline-primary add-employment'));

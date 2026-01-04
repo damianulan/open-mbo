@@ -13,9 +13,8 @@ use Illuminate\Http\Request;
 // Ajax form
 class CampaignEditUserForm extends Form
 {
-    public function definition(): FormBuilder
+    public function definition(FormBuilder $builder): FormBuilder
     {
-        $route = null;
         $method = 'POST';
         $title = 'Dodaj użytkowników do kampanii';
         $selected = array();
@@ -37,16 +36,16 @@ class CampaignEditUserForm extends Form
             }
         }
 
-        return FormBuilder::boot($method, $route, 'campaign_add_users')
+        return $builder->setId('campaign_add_users')
+            ->setMethod($method)
             ->class('campaign-add-users-form')
             ->add(FormComponent::hidden('id', $this->model))
-            ->add(FormComponent::multiselect('user_ids', $this->model, Dictionary::fromModel(User::class, 'name', 'allActive', $exclude), 'users', $selected)->required()->label(__('forms.campaigns.users.add')))
-            ->addTitle($title);
+            ->add(FormComponent::multiselect('user_ids', $selected, Dictionary::fromModel(User::class, 'name', 'allActive', $exclude))->required()->label(__('forms.campaigns.users.add')))
+            ->setTitle($title);
     }
 
     public function validation(): array
     {
-
         return array();
     }
 }

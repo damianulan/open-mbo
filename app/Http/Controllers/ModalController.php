@@ -49,6 +49,7 @@ class ModalController extends AppController
                 throw new Exception('Modal target is missing.');
             }
         } catch (Throwable $e) {
+            report($e);
             $this->e = $e;
         }
 

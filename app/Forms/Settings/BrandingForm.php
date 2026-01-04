@@ -13,7 +13,7 @@ class BrandingForm extends Form
 {
     use SettingsForm;
 
-    public function definition(): FormBuilder
+    public function definition(FormBuilder $builder): FormBuilder
     {
         return FormBuilder::boot('post', route('settings.branding.store'), 'branding_settings')
             ->class('settings-form')

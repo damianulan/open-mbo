@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class CompanyEditForm extends Form
 {
-    public function definition(): FormBuilder
+    public function definition(FormBuilder $builder): FormBuilder
     {
         $route = route('settings.organization.company.store');
         $method = 'POST';
@@ -19,7 +19,9 @@ class CompanyEditForm extends Form
             $route = route('settings.organization.company.update', $this->model->id);
         }
 
-        return FormBuilder::boot($method, $route, 'companies_edit')
+        return $builder->setId(is_null($this->model) ? 'company_create' : 'company_edit')
+            ->setMethod($method)
+            ->setAction($route)
             ->class('companies-create-form')
             ->add(FormComponent::text('firstname', $this->model)->label(__('forms.users.firstname')))
             ->add(FormComponent::text('lastname', $this->model)->label(__('forms.users.lastname')))

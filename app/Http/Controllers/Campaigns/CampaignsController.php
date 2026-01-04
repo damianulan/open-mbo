@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Campaigns;
 
-use App\Events\MBO\Campaigns\CampaignViewed;
 use App\Forms\MBO\Campaign\CampaignEditForm;
 use App\Http\Controllers\AppController;
 use App\Models\MBO\Campaign;
@@ -79,7 +78,6 @@ class CampaignsController extends AppController
             unauthorized();
         }
 
-        // CampaignViewed::dispatch($campaign);
         $this->logShow($campaign);
         $header = $campaign->name . ' [' . $campaign->period . ']';
 

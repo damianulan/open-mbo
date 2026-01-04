@@ -13,9 +13,8 @@ use Illuminate\Http\Request;
 // Ajax form
 class ObjectiveEditUserForm extends Form
 {
-    public function definition(): FormBuilder
+    public function definition(FormBuilder $builder): FormBuilder
     {
-        $route = null;
         $method = 'POST';
         $title = 'Dodaj użytkowników do realizacji celu';
         $selected = array();
@@ -31,11 +30,12 @@ class ObjectiveEditUserForm extends Form
             }
         }
 
-        return FormBuilder::boot($method, $route, 'objective_add_users')
+        return $builder->setId('objective_add_users')
+            ->setMethod($method)
             ->class('objective-add-users-form')
             ->add(FormComponent::hidden('id', $this->model))
-            ->add(FormComponent::multiselect('user_ids', $this->model, Dictionary::fromModel(User::class, 'name', 'allActive', $exclude), 'users', $selected)->required()->label(__('forms.mbo.objectives.users.add')))
-            ->addTitle($title);
+            ->add(FormComponent::multiselect('user_ids', $selected, Dictionary::fromModel(User::class, 'name', 'allActive', $exclude))->required()->label(__('forms.mbo.objectives.users.add')))
+            ->setTitle($title);
     }
 
     public function validation(): array

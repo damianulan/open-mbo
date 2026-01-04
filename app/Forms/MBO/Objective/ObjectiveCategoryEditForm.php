@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class ObjectiveCategoryEditForm extends Form
 {
-    public function definition(): FormBuilder
+    public function definition(FormBuilder $builder): FormBuilder
     {
         $route = route('categories.store');
         $method = 'POST';
@@ -30,12 +30,14 @@ class ObjectiveCategoryEditForm extends Form
             }
         }
 
-        return FormBuilder::boot($method, $route, 'objective_category_edit')
+        return $builder->setId(is_null($this->model) ? 'objective_category_create' : 'objective_category_edit')
+            ->setMethod($method)
+            ->setAction($route)
             ->class('objective-category-create-form')
             ->add(FormComponent::text('name', $this->model)->label(__('forms.mbo.categories.name'))->required())
             ->add(FormComponent::{$shortnameType}('shortname', $this->model)->label(__('forms.mbo.categories.shortname')))
             ->add(FormComponent::container('description', $this->model)->label(__('forms.mbo.categories.description'))->class('quill-default'))
-            ->add(FormComponent::multiselect('user_ids', $this->model, Dictionary::fromModel(User::class, 'name', 'allActive'), 'users', $selected)->label(__('forms.mbo.categories.coordinators')))
+            ->add(FormComponent::multiselect('user_ids', $selected, Dictionary::fromModel(User::class, 'name', 'allActive'))->label(__('forms.mbo.categories.coordinators')))
             ->addSubmit();
     }
 

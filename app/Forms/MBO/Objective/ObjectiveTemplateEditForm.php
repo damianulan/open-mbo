@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class ObjectiveTemplateEditForm extends Form
 {
-    public function definition(): FormBuilder
+    public function definition(FormBuilder $builder): FormBuilder
     {
         $route = route('templates.store');
         $method = 'POST';
@@ -20,7 +20,9 @@ class ObjectiveTemplateEditForm extends Form
             $route = route('templates.update', $this->model->id);
         }
 
-        return FormBuilder::boot($method, $route, 'campaign_edit')
+        return $builder->setId(is_null($this->model) ? 'objective_template_create' : 'objective_template_edit')
+            ->setMethod($method)
+            ->setAction($route)
             ->class('campaign-create-form')
             ->add(FormComponent::select('category_id', $this->model, Dictionary::fromModel(ObjectiveTemplateCategory::class, 'name'))->label(__('forms.mbo.objectives.category')))
             ->add(FormComponent::text('name', $this->model)->label(__('forms.mbo.objectives.name'))->required())

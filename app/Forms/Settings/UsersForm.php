@@ -16,7 +16,7 @@ class UsersForm extends Form
 
     protected static array $backParams = array('module' => 'users');
 
-    public function definition(): FormBuilder
+    public function definition(FormBuilder $builder): FormBuilder
     {
         return FormBuilder::boot('post', route('settings.modules.users.store'), 'users_settings')
             ->class('settings-form')

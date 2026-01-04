@@ -16,7 +16,7 @@ class NotificationsForm extends Form
 
     protected static array $backParams = array('module' => 'notifications');
 
-    public function definition(): FormBuilder
+    public function definition(FormBuilder $builder): FormBuilder
     {
         return FormBuilder::boot('post', route('settings.modules.notifications.store'), 'notifications_settings')
             ->class('settings-form')

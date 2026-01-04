@@ -17,7 +17,7 @@ class GeneralForm extends Form
 {
     use SettingsForm;
 
-    public function definition(): FormBuilder
+    public function definition(FormBuilder $builder): FormBuilder
     {
         return FormBuilder::boot('post', route('settings.general.store'), 'general_settings')
             ->class('settings-form')

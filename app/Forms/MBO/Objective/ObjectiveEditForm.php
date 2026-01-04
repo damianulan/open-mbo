@@ -14,9 +14,8 @@ use Illuminate\Http\Request;
 class ObjectiveEditForm extends Form
 {
     // TODO - dodawanie użytkowników
-    public function definition(): FormBuilder
+    public function definition(FormBuilder $builder): FormBuilder
     {
-        $route = null;
         $method = 'POST';
         $title = 'Dodaj nowy cel';
         if ( ! is_null($this->model)) {
@@ -24,7 +23,8 @@ class ObjectiveEditForm extends Form
             $title = 'Edytuj cel';
         }
 
-        return FormBuilder::boot($method, $route, 'objective_edit')
+        return $builder->setId(is_null($this->model) ? 'objective_create' : 'objective_edit')
+            ->setMethod($method)
             ->class('objective-edit-form')
             ->add(FormComponent::hidden('id', $this->model))
             ->add(FormComponent::select('template_id', $this->model, Dictionary::fromModel(ObjectiveTemplate::class, 'name'))->required()->label(__('forms.mbo.objectives.template')))
@@ -35,7 +35,7 @@ class ObjectiveEditForm extends Form
             ->add(FormComponent::decimal('expected', $this->model)->label(__('forms.mbo.objectives.expected'))->info(__('forms.mbo.objectives.info.expected')))
             ->add(FormComponent::decimal('award', $this->model)->label(__('forms.mbo.objectives.award'))->info(__('forms.mbo.objectives.info.award')))
             ->add(FormComponent::switch('draft', $this->model)->label(__('forms.mbo.objectives.draft'))->info(__('forms.mbo.objectives.info.draft'))->default(false))
-            ->addTitle($title);
+            ->setTitle($title);
     }
 
     public function validation(): array

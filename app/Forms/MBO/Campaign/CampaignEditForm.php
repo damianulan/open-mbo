@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 
 class CampaignEditForm extends Form
 {
-    public function definition(): FormBuilder
+    public function definition(FormBuilder $builder): FormBuilder
     {
         $route = route('campaigns.store');
         $method = 'POST';
@@ -26,12 +26,14 @@ class CampaignEditForm extends Form
             $selected = $campaign->coordinators->pluck('id')->toArray();
         }
 
-        return FormBuilder::boot($method, $route, is_null($this->model) ? 'campaign_create' : 'campaign_edit')
+        return $builder->setId(is_null($this->model) ? 'campaign_create' : 'campaign_edit')
+            ->setMethod($method)
+            ->setAction($route)
             ->class('campaign-create-form')
             ->add(FormComponent::text('name', $this->model)->label(__('forms.campaigns.name')))
             ->add(FormComponent::text('period', $this->model)->label(__('forms.campaigns.period'))
                 ->info(__('forms.campaigns.info.period')))
-            ->add(FormComponent::multiselect('user_ids', $this->model, Dictionary::fromModel(User::class, 'name', 'allActive'), 'users', $selected)->label(__('forms.campaigns.coordinators')))
+            ->add(FormComponent::multiselect('user_ids', $selected, Dictionary::fromModel(User::class, 'name', 'allActive'), 'users')->label(__('forms.campaigns.coordinators')))
             ->add(FormComponent::container('description', $this->model)->label(__('forms.campaigns.description'))->class('quill-default'))
             ->add(FormComponent::daterange(CampaignStage::DEFINITION, $this->model)->label(__('forms.campaigns.stages.' . CampaignStage::DEFINITION))
                 ->info(__('forms.campaigns.info.' . CampaignStage::DEFINITION)))

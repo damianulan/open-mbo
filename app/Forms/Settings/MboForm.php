@@ -16,7 +16,7 @@ class MboForm extends Form
 
     protected static array $backParams = array('module' => 'mbo');
 
-    public function definition(): FormBuilder
+    public function definition(FormBuilder $builder): FormBuilder
     {
         return FormBuilder::boot('post', route('settings.modules.mbo.store'), 'mbo_settings')
             ->class('settings-form')

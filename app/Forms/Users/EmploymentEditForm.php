@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 class EmploymentEditForm extends Form
 {
-    public function definition(): FormBuilder
+    public function definition(FormBuilder $builder): FormBuilder
     {
         $route = route('employments.store');
         $method = 'POST';
@@ -26,7 +26,9 @@ class EmploymentEditForm extends Form
             $route = route('employments.update', $this->model->id);
         }
 
-        return FormBuilder::boot($method, $route, 'employments_edit')
+        return $builder->setId(is_null($this->model) ? 'employments_create' : 'employments_edit')
+            ->setMethod($method)
+            ->setAction($route)
             ->class('employments-edit-form')
             ->add(FormComponent::hidden('user_id', null, $user_id))
             ->add(FormComponent::select('company_id', $this->model, Dictionary::fromModel(Company::class, 'name'))

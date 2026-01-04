@@ -53,19 +53,21 @@ class CampaignObjectiveController extends AppController
         return ajax()->error('message', __('alerts.campaigns.error.objective_deleted'));
     }
 
-    public function addObjectives(Request $request, $id, CampaignEditObjectiveForm $form): View
+    public function addObjectives(Request $request, $id): View
     {
         $params = array();
+        $form = null;
         if ($id) {
             $objective = Objective::find($id);
             if ($objective) {
-                $params = array(
-                    'id' => $id,
-                    'form' => $form->setModel($objective)->getDefinition(),
-                );
+                $form = CampaignEditObjectiveForm::bootWithModel($objective);
             }
         } else {
+            $form = CampaignEditObjectiveForm::bootWithAttributes($request->get('datas'));
+        }
+        if($form){
             $params = array(
+                'id' => $id,
                 'form' => $form->getDefinition(),
             );
         }

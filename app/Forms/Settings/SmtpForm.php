@@ -13,7 +13,7 @@ class SmtpForm extends Form
 {
     use SettingsForm;
 
-    public function definition(): FormBuilder
+    public function definition(FormBuilder $builder): FormBuilder
     {
         return FormBuilder::boot('post', route('settings.server.mail.store'), 'mail_settings')
             ->class('settings-form')

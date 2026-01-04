@@ -15,9 +15,8 @@ class ObjectiveEditUserRealizationForm extends Form
     /**
      * @param  UserObjective  $this->model
      */
-    public function definition(): FormBuilder
+    public function definition(FormBuilder $builder): FormBuilder
     {
-        $route = null;
         $method = 'POST';
         $title = 'Modyfikacja realizacji celu';
         $prefix = '';
@@ -25,13 +24,14 @@ class ObjectiveEditUserRealizationForm extends Form
             $prefix = 'self_';
         }
 
-        return FormBuilder::boot($method, $route, 'user_objective_edit_realization')
+        return $builder->setId('user_objective_edit_realization')
+            ->setMethod($method)
             ->class('objective-add-users-form')
             ->add(FormComponent::hidden('id', $this->model))
             ->add(FormComponent::decimal($prefix . 'realization', $this->model)->label(__('forms.mbo.objectives.users.realization'))->info(__('forms.mbo.objectives.users.info.realization')), fn () => $this->model && $this->model->objective->expected ?? false)
             ->add(FormComponent::decimal($prefix . 'evaluation', $this->model)->label(__('forms.mbo.objectives.users.evaluation'))->info(__('forms.mbo.objectives.users.info.evaluation')))
             ->authorize(fn () => $this->model && $this->model->canBeEvaluated())
-            ->addTitle($title);
+            ->setTitle($title);
     }
 
     public function validation(): array
