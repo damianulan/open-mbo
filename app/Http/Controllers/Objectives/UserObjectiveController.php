@@ -38,7 +38,7 @@ class UserObjectiveController extends AppController
     /**
      * Display the specified resource.
      */
-    public function show(Request $request, string $id)
+    public function show(Request $request, $id)
     {
         $userObjective = UserObjective::findOrFail($id);
         if ($request->user()->cannot('view', $userObjective)) {
@@ -60,7 +60,7 @@ class UserObjectiveController extends AppController
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id): void {}
+    public function edit($id): void {}
 
     public function update(Request $request, $id, ObjectiveEditUserForm $form)
     {
@@ -84,7 +84,7 @@ class UserObjectiveController extends AppController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): void {}
+    public function destroy($id): void {}
 
     public function addUsers(Request $request, $id): View
     {
@@ -94,7 +94,7 @@ class UserObjectiveController extends AppController
             if ($objective) {
                 $params = array(
                     'id' => $id,
-                    'form' => ObjectiveEditUserForm::definition($request, $objective),
+                    'form' => ObjectiveEditUserForm::bootWithModel($objective)->getDefinition(),
                 );
             }
         }
@@ -109,7 +109,7 @@ class UserObjectiveController extends AppController
             $objective = UserObjective::findOrFail($id);
             $params = array(
                 'id' => $id,
-                'form' => ObjectiveEditUserRealizationForm::definition($request, $objective),
+                'form' => ObjectiveEditUserRealizationForm::bootWithModel($objective)->getDefinition(),
             );
         }
 
@@ -125,8 +125,7 @@ class UserObjectiveController extends AppController
                 throw new NoPermissionException();
             }
 
-
-            $response = $form::validateJson($request, $id);
+            $response = $form->validateJson();
             if ('ok' === $response['status']) {
 
                 $service = UserRealizationUpdate::boot(request: $request, userObjective: $userObjective)->execute();

@@ -36,8 +36,7 @@ class CampaignUserController extends AppController
         try {
             $campaign = Campaign::findOrFail($id);
 
-
-            $response = $form::validateJson($request, $id);
+            $response = $form->validateJson();
             if ('ok' === $response['status']) {
 
                 $service = BulkAssignUsers::boot(request: $request, campaign: $campaign)->execute();
@@ -100,7 +99,7 @@ class CampaignUserController extends AppController
             if ($campaign) {
                 $params = array(
                     'id' => $id,
-                    'form' => CampaignEditUserForm::definition($request, $campaign),
+                    'form' => CampaignEditUserForm::bootWithModel($campaign)->getDefinition(),
                 );
             }
         }

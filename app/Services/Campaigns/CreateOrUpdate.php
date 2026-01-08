@@ -9,7 +9,7 @@ class CreateOrUpdate extends Service
 {
     public function handle(): Campaign
     {
-        $campaign = Campaign::fillFromRequest($this->request(), $this->campaign->id ?? null);
+        $campaign = Campaign::fillFromRequest($this->campaign->id ?? null);
         $user_ids = $this->request()->input('user_ids');
 
         if ($campaign->save()) {

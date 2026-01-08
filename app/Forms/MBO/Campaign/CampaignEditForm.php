@@ -30,6 +30,7 @@ class CampaignEditForm extends Form
             ->setMethod($method)
             ->setAction($route)
             ->class('campaign-create-form')
+            ->add(FormComponent::hiddenId('id', $this->model))
             ->add(FormComponent::text('name', $this->model)->label(__('forms.campaigns.name')))
             ->add(FormComponent::text('period', $this->model)->label(__('forms.campaigns.period'))
                 ->info(__('forms.campaigns.info.period')))

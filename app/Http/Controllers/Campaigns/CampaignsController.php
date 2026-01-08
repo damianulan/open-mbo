@@ -51,7 +51,7 @@ class CampaignsController extends AppController
         }
         $redirect = null;
         try {
-            $form->validate($request);
+            $form->validate();
             $service = CreateOrUpdate::boot(request: $request)->execute();
 
             if ($service->passed()) {
@@ -92,7 +92,6 @@ class CampaignsController extends AppController
         if ($request->user()->cannot('mbo-campaign-update', $campaign)) {
             unauthorized();
         }
-
 
         return view('pages.mbo.campaigns.edit', array(
             'campaign' => $campaign,

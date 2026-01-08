@@ -26,8 +26,8 @@ class CompanyController extends SettingsController
 
     public function store(Request $request, CompanyEditForm $form)
     {
-        $request->validate($form::validation($request));
-        $company = Company::fillFromRequest($request);
+        $form->validate();
+        $company = Company::fillFromRequest();
 
         if ($company->save()) {
 
@@ -50,7 +50,7 @@ class CompanyController extends SettingsController
     public function update(Request $request, $id, CompanyEditForm $form)
     {
         $request->validate($form::validation($request, $id));
-        $company = Company::fillFromRequest($request, $id);
+        $company = Company::fillFromRequest($id);
 
         if ($company->update()) {
             return redirect()->route('users.show', $id)->with('success', __('alerts.users.success.edit', array('name' => $company->name())));

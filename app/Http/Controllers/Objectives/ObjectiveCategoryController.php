@@ -24,10 +24,10 @@ class ObjectiveCategoryController extends MBOController
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request): View
+    public function create(Request $request, ObjectiveCategoryEditForm $form): View
     {
         return view('pages.mbo.categories.edit', array(
-            'form' => ObjectiveCategoryEditForm::definition($request),
+            'form' => $form->getDefinition(),
         ));
     }
 
@@ -36,8 +36,8 @@ class ObjectiveCategoryController extends MBOController
      */
     public function store(Request $request, ObjectiveCategoryEditForm $form)
     {
-        $request->validate($form::validation($request));
-        $objective = ObjectiveTemplateCategory::fillFromRequest($request);
+        $form->validate();
+        $objective = ObjectiveTemplateCategory::fillFromRequest();
         $user_ids = $request->input('user_ids');
 
         if ($objective->save()) {
@@ -52,18 +52,18 @@ class ObjectiveCategoryController extends MBOController
     /**
      * Display the specified resource.
      */
-    public function show(string $id): void {}
+    public function show($id): void {}
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request, string $id)
+    public function edit(Request $request, $id, ObjectiveCategoryEditForm $form)
     {
         $model = ObjectiveTemplateCategory::findOrFail($id);
 
         return view('pages.mbo.categories.edit', array(
             'objective' => $model,
-            'form' => ObjectiveCategoryEditForm::definition($request, $model),
+            'form' => $form->setModel($model)->getDefinition(),
         ));
     }
 
@@ -74,8 +74,8 @@ class ObjectiveCategoryController extends MBOController
      */
     public function update(Request $request, $id, ObjectiveCategoryEditForm $form)
     {
-        $request->validate($form::validation($request, $id));
-        $objective = ObjectiveTemplateCategory::fillFromRequest($request, $id);
+        $form->validate();
+        $objective = ObjectiveTemplateCategory::fillFromRequest($id);
         $user_ids = $request->input('user_ids');
         if ($objective->update()) {
             $objective->refreshCoordinators($user_ids);
@@ -89,7 +89,7 @@ class ObjectiveCategoryController extends MBOController
     /**
      * Remove the specified resource from storage.
      */
-    public function delete(string $id)
+    public function delete($id)
     {
         $objective = ObjectiveTemplateCategory::findOrFail($id);
         if ($objective->delete()) {

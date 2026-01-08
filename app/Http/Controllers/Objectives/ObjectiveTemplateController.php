@@ -23,10 +23,10 @@ class ObjectiveTemplateController extends MBOController
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create(Request $request, ObjectiveTemplateEditForm $form)
     {
         return view('components.forms.edit', array(
-            'form' => ObjectiveTemplateEditForm::definition($request),
+            'form' => $form->getDefinition(),
         ));
     }
 
@@ -35,10 +35,9 @@ class ObjectiveTemplateController extends MBOController
      */
     public function store(Request $request, ObjectiveTemplateEditForm $form)
     {
+        $form->validate();
 
-        $request->validate();
-
-        $objective = ObjectiveTemplate::fillFromRequest($request);
+        $objective = ObjectiveTemplate::fillFromRequest();
 
         if ($objective->save()) {
             return redirect()->route('templates.index')->with('success', __('alerts.objective_template.success.create'));
@@ -61,13 +60,13 @@ class ObjectiveTemplateController extends MBOController
      *
      * @param  int  $id
      */
-    public function edit(Request $request, $id)
+    public function edit(Request $request, $id, ObjectiveTemplateEditForm $form)
     {
         $model = ObjectiveTemplate::findOrFail($id);
 
         return view('components.forms.edit', array(
             'objective' => $model,
-            'form' => ObjectiveTemplateEditForm::definition($request, $model),
+            'form' => $form->setModel($model)->getDefinition(),
         ));
     }
 
@@ -78,9 +77,8 @@ class ObjectiveTemplateController extends MBOController
      */
     public function update(Request $request, $id, ObjectiveTemplateEditForm $form)
     {
-
-        $form::validate($request, $id);
-        $objective = ObjectiveTemplate::fillFromRequest($request, $id);
+        $form->validate();
+        $objective = ObjectiveTemplate::fillFromRequest($id);
         if ($objective->update()) {
             return redirect()->route('templates.index')->with('success', __('alerts.objective_template.success.edit'));
         }

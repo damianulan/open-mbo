@@ -31,10 +31,9 @@ class ObjectiveController extends MBOController
      */
     public function store(Request $request, ObjectiveEditForm $form)
     {
-
         $response = $form->validateJson();
         if ('ok' === $response['status']) {
-            $objective = Objective::fillFromRequest($request);
+            $objective = Objective::fillFromRequest();
 
             if ($objective->save()) {
                 $response['message'] = __('alerts.objectives.success.objective_added');
@@ -49,7 +48,7 @@ class ObjectiveController extends MBOController
     /**
      * Display the specified resource.
      */
-    public function show(Request $request, string $id)
+    public function show(Request $request, $id)
     {
         $objective = Objective::findOrFail($id);
         $this->logShow($objective);
@@ -65,14 +64,14 @@ class ObjectiveController extends MBOController
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id): void {}
+    public function edit($id): void {}
 
     public function update(Request $request, $id, ObjectiveEditForm $form)
     {
 
-        $response = $form::validateJson($request, $id);
+        $response = $form->validateJson();
         if ('ok' === $response['status']) {
-            $objective = Objective::fillFromRequest($request, $id);
+            $objective = Objective::fillFromRequest($id);
 
             if ($objective->update()) {
                 $response['message'] = __('alerts.objectives.success.objective_updated');
@@ -87,7 +86,7 @@ class ObjectiveController extends MBOController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): void {}
+    public function destroy($id): void {}
 
     public function addObjectives(Request $request, $id): View
     {
@@ -97,12 +96,12 @@ class ObjectiveController extends MBOController
             if ($objective) {
                 $params = array(
                     'id' => $id,
-                    'form' => ObjectiveEditForm::definition($request, $objective),
+                    'form' => ObjectiveEditForm::bootWithModel($objective)->getDefinition(),
                 );
             }
         } else {
             $params = array(
-                'form' => ObjectiveEditForm::definition($request),
+                'form' => ObjectiveEditForm::bootWithAttributes($request->get('datas')),
             );
         }
 

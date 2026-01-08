@@ -11,12 +11,12 @@ final class CreateOrUpdate extends Service
     public function handle(): User
     {
         $id = $this->user->id ?? null;
-        $user = User::fillFromRequest($this->request(), $id);
+        $user = User::fillFromRequest($id);
         $supervisors_ids = $this->request()->input('supervisors_ids') ?? array();
         $roles_ids = $this->request()->input('roles_ids') ?? array();
 
         if ($user->save()) {
-            $profile = UserProfile::fillFromRequest($this->request());
+            $profile = UserProfile::fillFromRequest();
             $profile->user_id = $user->id;
 
             $profile->save();
