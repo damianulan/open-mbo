@@ -180,6 +180,13 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
         return $output;
     }
 
+    protected static function booted(): void
+    {
+        static::addGlobalScope('required_relations', function (Builder $builder): void {
+            $builder->with(['user', 'objective']);
+        });
+    }
+
     public function getWeightAttribute(): float
     {
         return $this->objective->getAttribute('weight');
@@ -252,12 +259,12 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
 
     public function objective(): BelongsTo
     {
-        return $this->belongsTo(Objective::class)->withTrashed();
+        return $this->belongsTo(Objective::class);
     }
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class)->withTrashed();
+        return $this->belongsTo(User::class);
     }
 
     public function evaluator(): BelongsTo

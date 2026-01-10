@@ -86384,6 +86384,7 @@ function swal_alert(text, title) {
   });
 }
 $.confirm = swal_confirm;
+$.alert = swal_alert;
 $.success = function (text) {
   var title_input = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
   var _callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;

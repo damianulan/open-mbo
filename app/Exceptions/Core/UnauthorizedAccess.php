@@ -12,7 +12,8 @@ class UnauthorizedAccess extends HttpException
 
     public function __construct(string $message = '', ?string $permission = null)
     {
-        $this->message = empty($message) ? $message : '<div>' . $message . '</div>';
+        $message = empty($message) ? __('alerts.error.unauthorized_access') : $message;
+        $this->message = '<div>' . $message . '</div>';
         if ($permission) {
             $this->message .= '<div>' . __('gates.permissions.' . $permission) . '</div>';
         }

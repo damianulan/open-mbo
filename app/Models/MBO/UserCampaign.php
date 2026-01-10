@@ -124,14 +124,21 @@ class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
         'deleted' => UserCampaignUnassigned::class,
     );
 
+    protected static function booted(): void
+    {
+        static::addGlobalScope('required_relations', function (Builder $builder): void {
+            $builder->with(['user', 'campaign']);
+        });
+    }
+
     public function user()
     {
-        return $this->belongsTo(User::class)->withTrashed();
+        return $this->belongsTo(User::class);
     }
 
     public function campaign()
     {
-        return $this->belongsTo(Campaign::class)->withTrashed();
+        return $this->belongsTo(Campaign::class);
     }
 
     public function objectives(): HasManyThrough

@@ -60,6 +60,7 @@ Route::middleware(array('web', 'auth', 'maintenance'))->group(function (): void 
         Route::get('{user}/block', array(UsersController::class, 'block'))->name('block');
         Route::get('{user}/favourite', array(UsersController::class, 'favourite'))->name('favourite');
         Route::get('{user}/delete', array(UsersController::class, 'delete'))->name('delete');
+        Route::get('{user}/reset/password', array(UsersController::class, 'resetPassword'))->name('reset_password');
         Route::put('{user}', array(UsersController::class, 'update'))->name('update');
         Route::get('/{user}/impersonate', array(UsersController::class, 'impersonate'))->name('impersonate');
         Route::get('/impersonate/leave', array(UsersController::class, 'impersonateLeave'))->name('impersonate.leave');

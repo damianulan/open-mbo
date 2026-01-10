@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\Users\UsersDataTable;
+use App\Exceptions\Core\UnauthorizedAccess;
 use App\Forms\Users\EmploymentEditForm;
 use App\Forms\Users\UserEditForm;
 use App\Models\Business\UserEmployment;
@@ -27,10 +28,10 @@ class UsersController extends AppController
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create(Request $request, UserEditForm $form)
     {
         return view('pages.users.edit', array(
-            'form' => UserEditForm::definition($request),
+            'form' => $form->getDefinition(),
             'employments' => array(),
         ));
     }
@@ -40,7 +41,6 @@ class UsersController extends AppController
      */
     public function store(Request $request, UserEditForm $form)
     {
-
         $form->validate();
         $service = UserCreateOrUpdate::boot(request: $request)->execute();
 
@@ -90,7 +90,7 @@ class UsersController extends AppController
         return view('pages.users.edit', array(
             'user' => $model,
             'employments' => $this->getEmploymentFroms($request, $model),
-            'form' => UserEditForm::definition($request, $model),
+            'form' => UserEditForm::bootWithModel($model)->getDefinition(),
         ));
     }
 
@@ -195,9 +195,31 @@ class UsersController extends AppController
         return redirect()->back();
     }
 
+    public function resetPassword(User $user)
+    {
+        try {
+            if (true) {
+                $user->generatePassword();
+                $user->force_password_change = 1;
+                if($user->save()){
+                    return redirect()->back()->with('success_alert', $user->password);
+                }
+                return redirect()->back()->with('success', __('alerts.users.success.reset_password'));
+            } else {
+
+                throw new UnauthorizedAccess();
+            }
+        } catch (UnauthorizedAccess $th) {
+            report($th);
+            return redirect()->back()->with('error', $th->getMessage());
+        }
+
+        return redirect()->back()->with('error', __('alerts.users.error.reset_password'));
+    }
+
     private function getEmploymentFroms(Request $request, ?User $model = null): array
     {
-        $employments[__('forms.employments.add')] = EmploymentEditForm::definition($request);
+        $employments[__('forms.employments.add')] = EmploymentEditForm::bootWithAttributes($request->all())->getDefinition();
 
         if ($model) {
             $i = 0;
@@ -207,7 +229,7 @@ class UsersController extends AppController
                 if ($employment->main) {
                     $langKey = 'forms.employments.header_main';
                 }
-                $employments[__($langKey, array('no' => $i))] = EmploymentEditForm::definition($request, $employment);
+                $employments[__($langKey, array('no' => $i))] = EmploymentEditForm::bootWithModel($employment);
             }
         }
 

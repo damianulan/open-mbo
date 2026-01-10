@@ -22,6 +22,7 @@ use App\Support\Notifications\Traits\Notifiable;
 use App\Traits\Favouritable;
 use App\Traits\IsTranslated;
 use App\Traits\UserBusiness;
+use App\Traits\UserHasPreferences;
 use App\Traits\UserMBO;
 use App\Traits\Vendors\Impersonable;
 use App\Traits\Vendors\ModelActivity;
@@ -169,6 +170,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     use UserBusiness;
     use UserMBO;
     use VirginModel;
+    use UserHasPreferences;
 
     protected $fillable = array(
         'email',
@@ -339,11 +341,6 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         return $this->hasOne(UserProfile::class)->withTrashed();
     }
 
-    public function preferences(): HasOne
-    {
-        return $this->hasOne(UserPreference::class);
-    }
-
     public function activity()
     {
         return $this->morphMany(ActivityModel::class, 'causer');
@@ -398,14 +395,8 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
             return $user;
         });
 
-        static::created(function (User $user): void {
-            if (empty($user->preferences)) {
-                $user->preferences()->create();
-            }
-        });
         static::deleting(function (User $user): void {
             $user->profile->delete();
-            $user->preferences->delete();
         });
     }
 
