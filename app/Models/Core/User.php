@@ -336,7 +336,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function profile(): HasOne
     {
-        return $this->hasOne(UserProfile::class);
+        return $this->hasOne(UserProfile::class)->withTrashed();
     }
 
     public function preferences(): HasOne

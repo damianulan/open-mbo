@@ -47,7 +47,7 @@ $('#modal_save').on('click', function() {
 
         });
     @else
-        $.ajaxForm('{{ route('campaigns.objective.store') }}', 'campaign_edit_objective', function(response) {
+        $.ajaxForm('{{ route('campaigns.objective.store') }}', 'campaign_add_objective', function(response) {
             $.success(response.message, null, function() {
                 window.location.reload();
             })

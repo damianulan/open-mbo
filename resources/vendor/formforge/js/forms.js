@@ -1,9 +1,11 @@
 require("chosen-js");
 import flatpickr from "flatpickr";
+import { Polish } from "flatpickr/dist/l10n/pl.js";
 import tippy from "tippy.js";
 
 // build flatpickr objects
 $.buildFlatpickr = function () {
+    flatpickr.localize(Polish);
     const dateTimePickerOptions = {
         allowInput: true,
         altFormat: datetime_format,
@@ -111,25 +113,18 @@ $.buildChosen = function () {
     });
 };
 
-$("input[type=password]").on("focus", function () {
+$('body').on("focus", "input[type=password]", function () {
     $(this).val("");
 });
 
-$('input[data-numeric="decimal"]').on("focusout", function () {
+$('body').on("focusout", 'input[data-numeric="decimal"]', function () {
     var val = $(this).val();
     if (val != "" && !val.includes(".") && !val.includes(",")) {
         $(this).val(val + ".00");
     }
 });
 
-$('input[data-numeric="decimal"]').on("focusout", function () {
-    var val = $(this).val();
-    if (!val.includes(".") && !val.includes(",")) {
-        $(this).val(val + ".00");
-    }
-});
-
-$('input[data-validation="numeric"]').on("keypress", function (evt) {
+$('body').on("keypress", 'input[data-validation="numeric"]', function (evt) {
     $(this).val(
         $(this)
             .val()
@@ -138,8 +133,9 @@ $('input[data-validation="numeric"]').on("keypress", function (evt) {
     if (evt.which == 44) {
         return true;
     }
+    var val = $(this).val() + "";
     if (
-        (evt.which != 46 || $(this).val().indexOf(".") != -1) &&
+        (evt.which != 46 || val.indexOf(".") != -1) &&
         (evt.which < 48 || evt.which > 57)
     ) {
         evt.preventDefault();

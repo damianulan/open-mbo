@@ -180,13 +180,6 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
         return $output;
     }
 
-    public static function creatingUserObjective(UserObjective $model): UserObjective
-    {
-        $model->setStatus();
-
-        return $model;
-    }
-
     public function getWeightAttribute(): float
     {
         return $this->objective->getAttribute('weight');
@@ -463,6 +456,12 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
             return $model;
         });
 
+        static::creating(function (self $model): self {
+            $model->setStatus();
+
+            return $model;
+        });
+
         static::created(function (self $model): void {
             $campaign = $model->objective->campaign ?? null;
             if ($campaign) {
@@ -475,7 +474,7 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
         static::deleted(function (self $model): void {
             $campaign = $model->objective->campaign ?? null;
             if ($campaign) {
-                CampaignUserObjectiveUnassigned::dispatch($model, $model->objective, $campaign);
+                CampaignUserObjectiveUnassigned::dispatch($model->user, $model->objective, $campaign);
             } else {
                 UserObjectiveUnassigned::dispatch($model);
             }

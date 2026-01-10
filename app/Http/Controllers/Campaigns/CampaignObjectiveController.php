@@ -12,7 +12,6 @@ class CampaignObjectiveController extends AppController
 {
     public function store(Request $request, CampaignEditObjectiveForm $form)
     {
-
         $response = $form->validateJson();
         if ('ok' === $response['status']) {
             $objective = Objective::fillFromRequest();

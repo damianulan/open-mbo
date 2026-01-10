@@ -30,7 +30,7 @@ class EmploymentEditForm extends Form
             ->setMethod($method)
             ->setAction($route)
             ->class('employments-edit-form')
-            ->add(FormComponent::hidden('user_id', null, $user_id))
+            ->add(FormComponent::hidden('user_id', $user_id))
             ->add(FormComponent::select('company_id', $this->model, Dictionary::fromModel(Company::class, 'name'))
                 ->label(__('forms.employments.company')))
             ->add(FormComponent::select('department_id', $this->model, Dictionary::fromModel(Department::class, 'name'))

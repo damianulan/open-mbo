@@ -303,11 +303,11 @@ $.ajaxForm = function (
 $.makeErrorsForm = function (form_id, response) {
     if(response.messages && response.messages.length > 0) {
         Object.keys(response.messages).forEach((key) => {
-            var input = $(document)
+            var input = $('body')
                 .find("#" + form_id)
                 .find('[name="' + key + '"]');
             if (!input || input.length == 0) {
-                input = $(document)
+                input = $('body')
                     .find("#" + form_id)
                     .find('[name="' + key + '[]"]');
             }
@@ -315,13 +315,13 @@ $.makeErrorsForm = function (form_id, response) {
                 input.each(function () {
                     var element = $(this);
                     var element_id = element.attr("id");
-                    var is_chosenjs = $(document).find(
+                    var is_chosenjs = $('body').find(
                         "#" + element_id + "_chosen"
                     );
                     element.addClass("is-invalid");
                     response.messages[key].forEach((message) => {
                         var feedback =
-                            '<div class="invalid-feedback">' + message + "</div>";
+                            '<div class="invalid-feedback">' + message + '</div>';
                         element.parent().closest("div").append(feedback);
                     });
                     if (is_chosenjs) {
@@ -334,11 +334,11 @@ $.makeErrorsForm = function (form_id, response) {
 };
 
 $.clearErrorsForm = function (form_id) {
-    $(document)
+    $('body')
         .find("#" + form_id)
         .find(".invalid-feedback")
         .remove();
-    $(document)
+    $('body')
         .find("#" + form_id)
         .find(".is-invalid")
         .removeClass("is-invalid");
@@ -360,8 +360,10 @@ $.getCookie = function (name) {
     var ca = document.cookie.split(";");
     for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
-        while (c.charAt(0) == " ") c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        if(c) {
+            while (c.charAt(0) == " ") c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
     }
     return null;
 };

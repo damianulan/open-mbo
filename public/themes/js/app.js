@@ -19986,6 +19986,88 @@ if (typeof Object.assign !== "function") {
 
 /***/ }),
 
+/***/ "./node_modules/flatpickr/dist/l10n/pl.js":
+/*!************************************************!*\
+  !*** ./node_modules/flatpickr/dist/l10n/pl.js ***!
+  \************************************************/
+/***/ (function(__unused_webpack_module, exports) {
+
+(function (global, factory) {
+   true ? factory(exports) :
+  0;
+}(this, (function (exports) { 'use strict';
+
+  var fp = typeof window !== "undefined" && window.flatpickr !== undefined
+      ? window.flatpickr
+      : {
+          l10ns: {},
+      };
+  var Polish = {
+      weekdays: {
+          shorthand: ["Nd", "Pn", "Wt", "Śr", "Cz", "Pt", "So"],
+          longhand: [
+              "Niedziela",
+              "Poniedziałek",
+              "Wtorek",
+              "Środa",
+              "Czwartek",
+              "Piątek",
+              "Sobota",
+          ],
+      },
+      months: {
+          shorthand: [
+              "Sty",
+              "Lut",
+              "Mar",
+              "Kwi",
+              "Maj",
+              "Cze",
+              "Lip",
+              "Sie",
+              "Wrz",
+              "Paź",
+              "Lis",
+              "Gru",
+          ],
+          longhand: [
+              "Styczeń",
+              "Luty",
+              "Marzec",
+              "Kwiecień",
+              "Maj",
+              "Czerwiec",
+              "Lipiec",
+              "Sierpień",
+              "Wrzesień",
+              "Październik",
+              "Listopad",
+              "Grudzień",
+          ],
+      },
+      rangeSeparator: " do ",
+      weekAbbreviation: "tydz.",
+      scrollTitle: "Przewiń, aby zwiększyć",
+      toggleTitle: "Kliknij, aby przełączyć",
+      firstDayOfWeek: 1,
+      time_24hr: true,
+      ordinal: function () {
+          return ".";
+      },
+  };
+  fp.l10ns.pl = Polish;
+  var pl = fp.l10ns;
+
+  exports.Polish = Polish;
+  exports.default = pl;
+
+  Object.defineProperty(exports, '__esModule', { value: true });
+
+})));
+
+
+/***/ }),
+
 /***/ "./node_modules/ieee754/index.js":
 /*!***************************************!*\
   !*** ./node_modules/ieee754/index.js ***!
@@ -86492,18 +86574,18 @@ $.ajaxForm = function (url, form_id) {
 $.makeErrorsForm = function (form_id, response) {
   if (response.messages && response.messages.length > 0) {
     Object.keys(response.messages).forEach(function (key) {
-      var input = $(document).find("#" + form_id).find('[name="' + key + '"]');
+      var input = $('body').find("#" + form_id).find('[name="' + key + '"]');
       if (!input || input.length == 0) {
-        input = $(document).find("#" + form_id).find('[name="' + key + '[]"]');
+        input = $('body').find("#" + form_id).find('[name="' + key + '[]"]');
       }
       if (input) {
         input.each(function () {
           var element = $(this);
           var element_id = element.attr("id");
-          var is_chosenjs = $(document).find("#" + element_id + "_chosen");
+          var is_chosenjs = $('body').find("#" + element_id + "_chosen");
           element.addClass("is-invalid");
           response.messages[key].forEach(function (message) {
-            var feedback = '<div class="invalid-feedback">' + message + "</div>";
+            var feedback = '<div class="invalid-feedback">' + message + '</div>';
             element.parent().closest("div").append(feedback);
           });
           if (is_chosenjs) {
@@ -86515,8 +86597,8 @@ $.makeErrorsForm = function (form_id, response) {
   }
 };
 $.clearErrorsForm = function (form_id) {
-  $(document).find("#" + form_id).find(".invalid-feedback").remove();
-  $(document).find("#" + form_id).find(".is-invalid").removeClass("is-invalid");
+  $('body').find("#" + form_id).find(".invalid-feedback").remove();
+  $('body').find("#" + form_id).find(".is-invalid").removeClass("is-invalid");
 };
 
 // GLOBAL FUNCTIONS
@@ -86534,8 +86616,10 @@ $.getCookie = function (name) {
   var ca = document.cookie.split(";");
   for (var i = 0; i < ca.length; i++) {
     var c = ca[i];
-    while (c.charAt(0) == " ") c = c.substring(1, c.length);
-    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    if (c) {
+      while (c.charAt(0) == " ") c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
   }
   return null;
 };
@@ -86779,13 +86863,17 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flatpickr__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! flatpickr */ "./node_modules/flatpickr/dist/esm/index.js");
-/* harmony import */ var tippy_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tippy.js */ "./node_modules/tippy.js/dist/tippy.esm.js");
+/* harmony import */ var flatpickr_dist_l10n_pl_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flatpickr/dist/l10n/pl.js */ "./node_modules/flatpickr/dist/l10n/pl.js");
+/* harmony import */ var flatpickr_dist_l10n_pl_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flatpickr_dist_l10n_pl_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var tippy_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tippy.js */ "./node_modules/tippy.js/dist/tippy.esm.js");
 __webpack_require__(/*! chosen-js */ "./node_modules/chosen-js/chosen.jquery.js");
+
 
 
 
 // build flatpickr objects
 $.buildFlatpickr = function () {
+  flatpickr__WEBPACK_IMPORTED_MODULE_0__["default"].localize(flatpickr_dist_l10n_pl_js__WEBPACK_IMPORTED_MODULE_1__.Polish);
   var dateTimePickerOptions = {
     allowInput: true,
     altFormat: datetime_format,
@@ -86874,27 +86962,22 @@ $.buildChosen = function () {
     width: "100%"
   });
 };
-$("input[type=password]").on("focus", function () {
+$('body').on("focus", "input[type=password]", function () {
   $(this).val("");
 });
-$('input[data-numeric="decimal"]').on("focusout", function () {
+$('body').on("focusout", 'input[data-numeric="decimal"]', function () {
   var val = $(this).val();
   if (val != "" && !val.includes(".") && !val.includes(",")) {
     $(this).val(val + ".00");
   }
 });
-$('input[data-numeric="decimal"]').on("focusout", function () {
-  var val = $(this).val();
-  if (!val.includes(".") && !val.includes(",")) {
-    $(this).val(val + ".00");
-  }
-});
-$('input[data-validation="numeric"]').on("keypress", function (evt) {
+$('body').on("keypress", 'input[data-validation="numeric"]', function (evt) {
   $(this).val($(this).val().replace(/[^0-9\.|\,]/g, ""));
   if (evt.which == 44) {
     return true;
   }
-  if ((evt.which != 46 || $(this).val().indexOf(".") != -1) && (evt.which < 48 || evt.which > 57)) {
+  var val = $(this).val() + "";
+  if ((evt.which != 46 || val.indexOf(".") != -1) && (evt.which < 48 || evt.which > 57)) {
     evt.preventDefault();
   }
 });
@@ -86909,7 +86992,7 @@ $.rebuildVendors = function () {
 function buildVendors() {
   $.buildChosen();
   $.buildFlatpickr();
-  (0,tippy_js__WEBPACK_IMPORTED_MODULE_1__["default"])("[data-tippy-content]", {
+  (0,tippy_js__WEBPACK_IMPORTED_MODULE_2__["default"])("[data-tippy-content]", {
     allowHTML: true
   });
 }
