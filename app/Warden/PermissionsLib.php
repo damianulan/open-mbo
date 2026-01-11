@@ -39,7 +39,7 @@ final class PermissionsLib extends PermissionWarden
 
     public const USERS_RESTORE = 'users-restore';
 
-    public const USERS_SUSPEND = 'users-suspend';
+    public const USERS_BLOCK = 'users-block';
 
     public const USERS_PASSWORD_RESET = 'users-password-reset';
 
@@ -98,6 +98,8 @@ final class PermissionsLib extends PermissionWarden
      */
     public const MBO_CAMPAIGN_VIEW = 'mbo-campaign-view';
 
+    public const MBO_CAMPAIGN_PREVIEW = 'mbo-campaign-preview';
+
     public const MBO_CAMPAIGN_CREATE = 'mbo-campaign-create';
 
     public const MBO_CAMPAIGN_UPDATE = 'mbo-campaign-update';
@@ -154,7 +156,7 @@ final class PermissionsLib extends PermissionWarden
             self::USERS_TEAMS => array('admins', 'admin_hr'),
             self::USERS_DELETE => array('admins'),
             self::USERS_RESTORE => array('admins'),
-            self::USERS_SUSPEND => array('admins', 'admin_hr'),
+            self::USERS_BLOCK => array('admins', 'admin_hr'),
             self::USERS_PASSWORD_RESET => array('admins', 'admin_hr', 'supervisor'),
 
             // settings
@@ -189,6 +191,7 @@ final class PermissionsLib extends PermissionWarden
 
             self::MBO_CAMPAIGN_CREATE => array('admins', 'admin_mbo'),
             self::MBO_CAMPAIGN_VIEW => array('admins', 'admin_mbo', 'campaign_coordinator'),
+            self::MBO_CAMPAIGN_PREVIEW => array('admins', 'admin_mbo'),
             self::MBO_CAMPAIGN_UPDATE => array('admins', 'admin_mbo', 'campaign_coordinator'),
             self::MBO_CAMPAIGN_DELETE => array('admins', 'admin_mbo'),
             self::MBO_CAMPAIGN_TERMINATE => array('admins', 'admin_mbo', 'campaign_coordinator'),

@@ -24,11 +24,11 @@ class UsersForm extends Form
             ->class('settings-form')
             ->add(FormComponent::hidden('module', 'users'))
             ->addSection(__('forms.settings.general.auth'), fn (FormBuilder $builder) => $builder
-                ->add(FormComponent::switch('password_change_firstlogin', $this->model)->label(__('forms.settings.users.password_change_firstlogin'))->info(__('forms.settings.users.info.password_change_firstlogin'))->key(self::settingsKey('users.password_change_firstlogin'))))
-            ->addSection(
-                __('forms.employments.index'),
-                fn (FormBuilder $builder) => $builder
-                    ->add(FormComponent::switch('multiple_employments', $this->model)->label(__('forms.settings.users.multiple_employments'))->info(__('forms.settings.users.info.multiple_employments'))->key(self::settingsKey('users.multiple_employments')))
+                ->add(FormComponent::switch('password_change_firstlogin', $this->password_change_firstlogin)->label(__('forms.settings.users.password_change_firstlogin'))->info(__('forms.settings.users.info.password_change_firstlogin'))->key(self::settingsKey('users.password_change_firstlogin')))
+                ->add(FormComponent::switch('force_password_change_reset', $this->force_password_change_reset)->label(__('forms.settings.users.force_password_change_reset'))->info(__('forms.settings.users.info.force_password_change_reset'))->key(self::settingsKey('users.force_password_change_reset')))
+            )
+            ->addSection(__('forms.employments.index'), fn (FormBuilder $builder) => $builder
+                ->add(FormComponent::switch('multiple_employments', $this->multiple_employments)->label(__('forms.settings.users.multiple_employments'))->info(__('forms.settings.users.info.multiple_employments'))->key(self::settingsKey('users.multiple_employments')))
             )
             ->addSubmit();
     }
@@ -37,6 +37,7 @@ class UsersForm extends Form
     {
         return array(
             'password_change_firstlogin' => 'boolean',
+            'force_password_change_reset' => 'boolean',
             'multiple_employments' => 'boolean',
         );
     }

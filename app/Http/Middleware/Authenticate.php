@@ -22,7 +22,8 @@ class Authenticate extends Middleware
     public function handle($request, Closure $next, ...$guards)
     {
         $this->authenticate($request, $guards);
-        $this->ensureEmailIsVerified($request);
+        $this->ensureEmailIsVerified($request); // TODO
+        $this->ensureForcePasswordChange($request);
 
         return $next($request);
     }
@@ -32,12 +33,26 @@ class Authenticate extends Middleware
         return $this->auth->user();
     }
 
+    protected function isFirstLogin(): bool
+    {
+        $user = $this->getUser();
+        return $user?->sessions->isEmpty() ?? false;
+    }
+
     protected function ensureEmailIsVerified(Request $request): bool
     {
         $user = $this->getUser();
         return true;
     }
 
+    protected function ensureForcePasswordChange(Request $request): void
+    {
+        $user = $this->getUser();
+        $config = (config('users.password_change_firstlogin') && $this->isFirstLogin()) || (config('users.force_password_change_reset') && $user->force_password_change);
+        if ($user && $config && ! $user->hasRole('root')) {
+            redirect()->route('password.change');
+        }
+    }
 
     /**
      * Get the path the user should be redirected to when they are not authenticated.

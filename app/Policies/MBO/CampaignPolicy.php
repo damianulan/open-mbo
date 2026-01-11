@@ -29,7 +29,7 @@ class CampaignPolicy
      */
     public function view(User $user, Campaign $campaign): bool
     {
-        return $user->can('mbo-campaign-view');
+        return $user->can('mbo-campaign-view', $campaign);
     }
 
     /**

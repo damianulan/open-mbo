@@ -26,6 +26,7 @@ use App\Traits\UserHasPreferences;
 use App\Traits\UserMBO;
 use App\Traits\Vendors\Impersonable;
 use App\Traits\Vendors\ModelActivity;
+use App\Warden\PermissionsLib;
 use FormForge\Traits\RequestForms;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Builder;
@@ -254,12 +255,12 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function canBeDeleted(): bool
     {
-        return 0 === $this->core || isRoot() ? true : false;
+        return 0 === $this->core;
     }
 
-    public function canBeSuspended(): bool
+    public function canBeBlocked(): bool
     {
-        return 0 === $this->core || isRoot() ? true : false;
+        return 0 === $this->core;
     }
 
     public function getAvatar(): ?string
@@ -331,9 +332,9 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         return ! $this->hasAnyRoles(array('root', 'support')) || isRoot(true);
     }
 
-    public function canImpersonate(): bool
+    public function canImpersonate(?self $user = null): bool
     {
-        return $this->hasPermissionTo('impersonate');
+        return $this->can(PermissionsLib::USERS_IMPERSONATE, $user) && ! $this->isImpersonating();
     }
 
     public function profile(): HasOne

@@ -10,16 +10,19 @@
             <i class="bi-award"></i>
             <span>{{ $user->points }}</span>
         </a>
-        @can('users-impersonate')
+        @if(auth()->user()->canImpersonate($user))
             @if ($user->canBeImpersonated())
                 <a class="icon-btn" href="{{ route('users.impersonate', $user->id) }}" data-tippy-content="{{ __('buttons.impersonate') }}">
                     <i class="bi-person-fill-up"></i>
                 </a>
             @endif
+        @endif
+        @can('edit', $user)
+            <a class="icon-btn" href="{{ route('users.edit', $user->id) }}" class="" data-tippy-content="{{ __('buttons.edit') }}">
+                <i class="bi-pencil-square"></i>
+            </a>
         @endcan
-        <a class="icon-btn" href="{{ route('users.edit', $user->id) }}" class="" data-tippy-content="{{ __('buttons.edit') }}">
-            <i class="bi-pencil-square"></i>
-        </a>
+
         @if(auth()->user()->favourite_users->contains($user))
             <a class="icon-btn" href="{{ route('users.favourite', $user) }}" data-tippy-content="{{ __('buttons.favourites_remove') }}">
                 <i class="bi-star-fill"></i>
@@ -29,22 +32,28 @@
                 <i class="bi-star"></i>
             </a>
         @endif
-        <a class="icon-btn" href="{{ route('users.reset_password', $user) }}" class="" data-tippy-content="{{ __('buttons.reset_password') }}">
-            <i class="bi-key-fill"></i>
-        </a>
-        @if($user->active !== 1)
-            <a class="icon-btn" href="{{ route('users.block', $user->id) }}" class="" data-tippy-content="{{ __('buttons.unblock') }}">
-                <i class="bi-person-fill-check"></i>
+        @can('reset', $user)
+            <a class="icon-btn" href="{{ route('users.reset_password', $user) }}" class="" data-tippy-content="{{ __('buttons.reset_password') }}">
+                <i class="bi-key-fill"></i>
             </a>
-        @else
-        <a class="icon-btn swal-confirm" href="{{ route('users.block', $user->id) }}" data-tippy-content="{{ __('buttons.block') }}" data-swal-text="{{ __('alerts.users.info.block') }}">
-            <i class="bi-person-fill-lock"></i>
-        </a>
-        @endif
+        @endcan
+        @can('block', $user)
+            @if($user->active !== 1)
+                <a class="icon-btn" href="{{ route('users.block', $user->id) }}" class="" data-tippy-content="{{ __('buttons.unblock') }}">
+                    <i class="bi-person-fill-check"></i>
+                </a>
+            @else
+            <a class="icon-btn swal-confirm" href="{{ route('users.block', $user->id) }}" data-tippy-content="{{ __('buttons.block') }}" data-swal-text="{{ __('alerts.users.info.block') }}">
+                <i class="bi-person-fill-lock"></i>
+            </a>
+            @endif
+        @endcan
 
-        <a class="icon-btn swal-confirm" href="{{ route('users.delete', $user->id) }}" data-tippy-content="{{ __('buttons.delete') }}" data-swal-text="{{ __('alerts.users.info.delete') }}">
-            <i class="bi-trash-fill"></i>
-        </a>
+        @can('delete', $user)
+            <a class="icon-btn swal-confirm" href="{{ route('users.delete', $user->id) }}" data-tippy-content="{{ __('buttons.delete') }}" data-swal-text="{{ __('alerts.users.info.delete') }}">
+                <i class="bi-trash-fill"></i>
+            </a>
+        @endcan
     </div>
 </div>
 @if($user->employment)

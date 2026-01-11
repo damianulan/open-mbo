@@ -444,14 +444,20 @@
                     "pl": "Zezwalaj na dodawanie wielu aktywnych zatrudnień dla pojedynczego profilu."
                 },
                 "password_change_firstlogin": {
-                    "pl": "Wymuszaj zmianę hasła po pierwszym logowaniu"
+                    "pl": "Wymuszaj zmianę hasła przy pierwszym logowaniu"
+                },
+                "force_password_change_reset": {
+                    "pl": "Wymuszaj zmianę po resecie hasła w zarządzaniu użytkownikami."
                 }
             },
             "multiple_employments": {
                 "pl": "Wielozatrudnienie"
             },
             "password_change_firstlogin": {
-                "pl": "Wymuszaj zmianę hasła"
+                "pl": "Wymuszaj zmianę hasła po utworzeniu konta"
+            },
+            "force_password_change_reset": {
+                "pl": "Wymuszaj zmianę hasła po resecie hasła"
             }
         }
     },

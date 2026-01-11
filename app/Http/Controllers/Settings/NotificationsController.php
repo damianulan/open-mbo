@@ -12,7 +12,6 @@ class NotificationsController extends SettingsController
      */
     public function index(NotificationsDataTable $dataTable): Renderable
     {
-
         return $dataTable->render('pages.settings.notifications.index', array(
             'table' => $dataTable,
             'nav' => $this->nav(),

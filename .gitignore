@@ -25,3 +25,4 @@ _ide_helper.php
 .phpstorm.meta.php
 error_log
 /docs
+/lang/texts_to_translate.json
