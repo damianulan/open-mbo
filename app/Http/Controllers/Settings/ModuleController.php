@@ -9,6 +9,7 @@ use App\Settings\MBOSettings;
 use App\Settings\NotificationSettings;
 use App\Settings\UserSettings;
 use App\Support\Modules\ModuleManager;
+use App\Warden\PermissionsLib;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 
@@ -19,6 +20,9 @@ class ModuleController extends SettingsController
      */
     public function index(Request $request, ?string $module = null): Renderable
     {
+        if ($request->user()->cannot(PermissionsLib::SETTINGS_MODULES)) {
+            unauthorized();
+        }
         $modules = ModuleManager::getModules();
         if (is_null($module) || ! array_key_exists($module, $modules)) {
             $module = 'users';
