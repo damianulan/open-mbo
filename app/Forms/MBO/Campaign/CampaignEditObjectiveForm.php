@@ -9,38 +9,36 @@ use FormForge\Base\Form;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
 use FormForge\FormBuilder;
-use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
 // Ajax form
 class CampaignEditObjectiveForm extends Form
 {
-    public static function definition(Request $request, $model = null): FormBuilder
+    public function definition(FormBuilder $builder): FormBuilder
     {
-        $route = null;
         $method = 'POST';
         $title = 'Dodaj nowy cel do kampanii';
-        $campaign_id = $request->get('campaign_id') ?? null;
-        $selectedTemplate = [];
+        $campaign_id = $this->campaign_id;
+        $selectedTemplate = null;
 
-        if ( ! is_null($model)) {
+        if ( ! is_null($this->model)) {
             $method = 'PUT';
             $title = 'Edytuj cel w ramach kampanii';
             if ( ! $campaign_id) {
-                $campaign_id = $model->campaign_id;
+                $campaign_id = $this->model->campaign_id;
             }
-            if ($model->template_id) {
-                $selectedTemplate = [$model->template_id];
+            if ($this->model->template_id) {
+                $selectedTemplate = $this->model->template_id ?? null;
             }
         }
         $campaign = Campaign::findOrFail($campaign_id);
 
         $template_ids = Objective::where('campaign_id', $campaign_id)->get()->pluck('template_id');
-        $exclude = [];
+        $exclude = array();
         if ( ! empty($template_ids)) {
             foreach ($template_ids as $tid) {
-                if ( ! in_array($tid, $selectedTemplate)) {
-                    $exclude[] = ['id' => $tid];
+                if ($tid != $selectedTemplate) {
+                    $exclude[] = array('id' => $tid);
                 }
             }
         }
@@ -48,30 +46,33 @@ class CampaignEditObjectiveForm extends Form
         $realization_from = Carbon::parse($campaign->realization_from)->format('Y-m-d');
         $realization_to = Carbon::parse($campaign->realization_to)->format('Y-m-d');
 
-        return FormBuilder::boot($request, $method, $route, 'campaign_edit_objective')
+        return $builder->setId(is_null($this->model) ? 'campaign_add_objective' : 'campaign_edit_objective')
+            ->setMethod($method)
             ->class('campaign-edit-objective-form')
-            ->add(FormComponent::hidden('id', $model))
-            ->add(FormComponent::select('template_id', $model, Dictionary::fromModel(ObjectiveTemplate::class, 'name', 'getAll', $exclude), $selectedTemplate)->required()->label(__('forms.mbo.objectives.template')))
-            ->add(FormComponent::hidden('campaign_id', $model, $campaign_id))
-            ->add(FormComponent::text('name', $model)->label(__('forms.mbo.objectives.name'))->required())
-            ->add(FormComponent::container('description', $model)->label(__('forms.mbo.objectives.description'))->class('quill-default'))
-            ->add(FormComponent::datetime('deadline', $model)->label(__('forms.mbo.objectives.deadline'))->minDate($realization_from)->maxDate($realization_to)->info(__('forms.mbo.objectives.info.deadline')))
-            ->add(FormComponent::decimal('weight', $model)->label(__('forms.mbo.objectives.weight'))->info(__('forms.mbo.objectives.info.weight'))->required())
-            ->add(FormComponent::decimal('expected', $model)->label(__('forms.mbo.objectives.expected'))->info(__('forms.mbo.objectives.info.expected')))
-            ->add(FormComponent::decimal('award', $model)->label(__('forms.mbo.objectives.award'))->info(__('forms.mbo.objectives.info.award')))
-            ->add(FormComponent::switch('draft', $model)->label(__('forms.mbo.objectives.draft'))->info(__('forms.mbo.objectives.info.draft'))->default(false))
-            ->addTitle($title);
+            ->add(FormComponent::hidden('id', $this->model))
+            ->add(FormComponent::hidden('campaign_id', $campaign_id))
+            ->add(FormComponent::select('template_id', $selectedTemplate, Dictionary::fromModel(ObjectiveTemplate::class, 'name', 'getAll', $exclude))->required()->label(__('forms.mbo.objectives.template')))
+            ->add(FormComponent::text('name', $this->model)->label(__('forms.mbo.objectives.name'))->required())
+            ->add(FormComponent::container('description', $this->model)->label(__('forms.mbo.objectives.description'))->class('quill-default'))
+            ->add(FormComponent::datetime('deadline', $this->model)->label(__('forms.mbo.objectives.deadline'))->minDate($realization_from)->maxDate($realization_to)->info(__('forms.mbo.objectives.info.deadline')))
+            ->add(FormComponent::decimal('weight', $this->model)->label(__('forms.mbo.objectives.weight'))->info(__('forms.mbo.objectives.info.weight'))->required())
+            ->add(FormComponent::decimal('expected', $this->model)->label(__('forms.mbo.objectives.expected'))->info(__('forms.mbo.objectives.info.expected')))
+            ->add(FormComponent::decimal('award', $this->model)->label(__('forms.mbo.objectives.award'))->info(__('forms.mbo.objectives.info.award')))
+            ->add(FormComponent::switch('draft', $this->model)->label(__('forms.mbo.objectives.draft'))->info(__('forms.mbo.objectives.info.draft'))->default(false))
+            ->setTitle($title);
     }
 
-    public static function validation(Request $request, $model_id = null): array
+    public function validation(): array
     {
-        $campaign_id = $request->input('campaign_id') ?? null;
-        $builder = Objective::where('campaign_id', $campaign_id);
-        if ($model_id) {
-            $builder->where('id', '!=', $model_id);
+        $campaign_id = $this->campaign_id ?? null;
+        if($campaign_id){
+            $builder = Objective::where('campaign_id', $campaign_id);
+            if ($this->model) {
+                $builder->where('id', '!=', $this->model->id);
+            }
         }
 
-        return [
+        return array(
             'template_id' => 'required',
             'name' => 'max:120|required',
             'deadline' => 'nullable',
@@ -80,6 +81,6 @@ class CampaignEditObjectiveForm extends Form
             'expected' => 'numeric|nullable',
             'award' => 'numeric|nullable',
             'draft' => 'boolean',
-        ];
+        );
     }
 }

@@ -10,7 +10,8 @@ use Illuminate\Queue\SerializesModels;
 
 class UserCampaignUnassigned implements NotifiableEvent
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable;
+    use SerializesModels;
 
     /**
      * Create a new event instance.
@@ -27,5 +28,15 @@ class UserCampaignUnassigned implements NotifiableEvent
     public function notifiable(): Model
     {
         return $this->userCampaign->user;
+    }
+
+    public function checkConditions(): bool
+    {
+        return true;
+    }
+
+    public function notificationDelay(): int
+    {
+        return 0;
     }
 }

@@ -1,0 +1,134 @@
+{
+    "active": {
+        "pl": "Aktywne"
+    },
+    "column": {
+        "pl": "Kolumna"
+    },
+    "columns": {
+        "pl": "Kolumny"
+    },
+    "datatables": {
+        "print": {
+            "pl": "Podgląd wydruku"
+        },
+        "select_columns": {
+            "pl": "Wybierz kolumny do wyświetlenia"
+        },
+        "to_csv": {
+            "pl": "Eksport do pliku CSV"
+        },
+        "to_excel": {
+            "pl": "Eksport do pliku Excel"
+        },
+        "to_json": {
+            "pl": "Eksport do pliku JSON"
+        },
+        "to_pdf": {
+            "pl": "Eksport do pliku PDF"
+        }
+    },
+    "draft": {
+        "pl": "Kopia robocza"
+    },
+    "enter_address": {
+        "pl": "Wprowadź adres"
+    },
+    "exports": {
+        "csv": {
+            "pl": "CSV"
+        },
+        "excel": {
+            "pl": "Excel"
+        },
+        "json": {
+            "pl": "JSON"
+        },
+        "pdf": {
+            "pl": "PDF"
+        },
+        "print": {
+            "pl": "Podgląd wydruku"
+        }
+    },
+    "hello": {
+        "pl": "Cześć"
+    },
+    "inactive": {
+        "pl": "Nieaktywne"
+    },
+    "langs": {
+        "en": {
+            "pl": "Angielski"
+        },
+        "pl": {
+            "pl": "Polski"
+        }
+    },
+    "manual": {
+        "pl": "Tryb ręczny"
+    },
+    "no": {
+        "pl": "Nie"
+    },
+    "no_assigned": {
+        "pl": "Brak przypisanych"
+    },
+    "no_data": {
+        "pl": "Brak danych"
+    },
+    "not_applicable": {
+        "pl": "Nie dotyczy"
+    },
+    "notifications": {
+        "pl": "Powiadomienia"
+    },
+    "page_content_info": {
+        "pl": "Jeśli możesz - stwórz samodzielnie nową zawartość, lub wróć później."
+    },
+    "page_no_content": {
+        "pl": "Brak zawartości strony"
+    },
+    "pnts": {
+        "pl": "pkt"
+    },
+    "privately": {
+        "pl": "Prywatnie"
+    },
+    "search": {
+        "pl": "Szukaj"
+    },
+    "search_no_results": {
+        "pl": "Brak wyników dla wyszukiwanej frazy."
+    },
+    "select_choose": {
+        "pl": "Wybierz..."
+    },
+    "summary": {
+        "pl": "Podsumowanie"
+    },
+    "turned_off_female": {
+        "pl": "Wyłączona"
+    },
+    "turned_off_male": {
+        "pl": "Wyłączony"
+    },
+    "turned_off_other": {
+        "pl": "Wyłączone"
+    },
+    "turned_on_female": {
+        "pl": "Włączona"
+    },
+    "turned_on_male": {
+        "pl": "Włączony"
+    },
+    "turned_on_other": {
+        "pl": "Włączone"
+    },
+    "yes": {
+        "pl": "Tak"
+    },
+    "you": {
+        "pl": "Ty"
+    }
+}

@@ -22,6 +22,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read User $leader
+ * @property-read mixed $trans
  * @property-read Collection<int, User> $users
  * @property-read int|null $users_count
  *
@@ -80,15 +81,15 @@ use Spatie\Activitylog\Models\Activity;
  */
 class Team extends BaseModel
 {
-    protected $fillable = [
+    protected $fillable = array(
         'leader_id',
         'name',
         'description',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'description' => FormattedText::class,
-    ];
+    );
 
     public function users(): BelongsToMany
     {

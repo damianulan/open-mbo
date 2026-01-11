@@ -13,17 +13,16 @@ use Illuminate\Http\Request;
 // Ajax form
 class CampaignEditUserForm extends Form
 {
-    public static function definition(Request $request, $model = null): FormBuilder
+    public function definition(FormBuilder $builder): FormBuilder
     {
-        $route = null;
         $method = 'POST';
         $title = 'Dodaj użytkowników do kampanii';
-        $selected = [];
-        $exclude = [];
+        $selected = array();
+        $exclude = array();
 
-        if ($model) {
-            $user_ids = UserCampaign::where('campaign_id', $model->id)->get()->pluck('user_id');
-            $coordinators = $model->coordinators->pluck('id')->toArray();
+        if ($this->model) {
+            $user_ids = UserCampaign::where('campaign_id', $this->model->id)->get()->pluck('user_id');
+            $coordinators = $this->model->coordinators->pluck('id')->toArray();
 
             if ( ! empty($user_ids)) {
                 foreach ($user_ids as $tid) {
@@ -32,21 +31,21 @@ class CampaignEditUserForm extends Form
             }
             if ( ! empty($coordinators)) {
                 foreach ($coordinators as $tid) {
-                    $exclude[] = ['id' => $tid];
+                    $exclude[] = array('id' => $tid);
                 }
             }
         }
 
-        return FormBuilder::boot($request, $method, $route, 'campaign_add_users')
+        return $builder->setId('campaign_add_users')
+            ->setMethod($method)
             ->class('campaign-add-users-form')
-            ->add(FormComponent::hidden('id', $model))
-            ->add(FormComponent::multiselect('user_ids', $model, Dictionary::fromModel(User::class, 'name', 'allActive', $exclude), 'users', $selected)->required()->label(__('forms.campaigns.users.add')))
-            ->addTitle($title);
+            ->add(FormComponent::hidden('id', $this->model))
+            ->add(FormComponent::multiselect('user_ids', $selected, Dictionary::fromModel(User::class, 'name', 'allActive', $exclude))->required()->label(__('forms.campaigns.users.add')))
+            ->setTitle($title);
     }
 
-    public static function validation(Request $request, $model_id = null): array
+    public function validation(): array
     {
-
-        return [];
+        return array();
     }
 }

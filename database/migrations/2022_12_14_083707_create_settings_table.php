@@ -18,7 +18,7 @@ return new class() extends Migration
 
             $table->timestamps();
 
-            $table->unique(['group', 'name']);
+            $table->unique(array('group', 'name'));
         });
     }
 

@@ -5,11 +5,11 @@ use Yajra\DataTables\CollectionDataTable;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\QueryDataTable;
 
-return [
+return array(
     /*
      * DataTables search options.
      */
-    'search' => [
+    'search' => array(
         /*
          * Smart search will enclose search keyword with wildcard string "%keyword%".
          * SQL: column LIKE "%keyword%"
@@ -38,7 +38,7 @@ return [
          * SQL: column LIKE "keyword%"
          */
         'starts_with' => false,
-    ],
+    ),
 
     /*
      * DataTables internal index id response column name.
@@ -49,24 +49,24 @@ return [
      * List of available builders for DataTables.
      * This is where you can register your custom dataTables builder.
      */
-    'engines' => [
+    'engines' => array(
         'eloquent' => EloquentDataTable::class,
         'query' => QueryDataTable::class,
         'collection' => CollectionDataTable::class,
         'resource' => ApiResourceDataTable::class,
-    ],
+    ),
 
     /*
      * DataTables accepted builder to engine mapping.
      * This is where you can override which engine a builder should use
      * Note, only change this if you know what you are doing!
      */
-    'builders' => [
+    'builders' => array(
         // Illuminate\Database\Eloquent\Relations\Relation::class => 'eloquent',
         // Illuminate\Database\Eloquent\Builder::class            => 'eloquent',
         // Illuminate\Database\Query\Builder::class               => 'query',
         // Illuminate\Support\Collection::class                   => 'collection',
-    ],
+    ),
 
     /*
      * Nulls last sql pattern for PostgreSQL & Oracle.
@@ -86,11 +86,11 @@ return [
     /*
      * Default columns definition of dataTable utility functions.
      */
-    'columns' => [
+    'columns' => array(
         /*
          * List of columns hidden/removed on json response.
          */
-        'excess' => ['rn', 'row_num'],
+        'excess' => array('rn', 'row_num'),
 
         /*
          * List of columns to be escaped. If set to *, all columns are escape.
@@ -102,31 +102,31 @@ return [
          * List of columns that are allowed to display html content.
          * Note: Adding columns to list will make us available to XSS attacks.
          */
-        'raw' => ['action', 'actions'],
+        'raw' => array('action', 'actions'),
 
         /*
          * List of columns are forbidden from being searched/sorted.
          */
-        'blacklist' => ['password', 'remember_token', 'action', 'actions'],
+        'blacklist' => array('password', 'remember_token', 'action', 'actions'),
 
         /*
          * List of columns that are only allowed fo search/sort.
          * If set to *, all columns are allowed.
          */
         'whitelist' => '*',
-    ],
+    ),
 
     /*
      * JsonResponse header and options config.
      */
-    'json' => [
-        'header' => ['Charset', 'utf-8'],
+    'json' => array(
+        'header' => array('Charset', 'utf-8'),
         'options' => JSON_INVALID_UTF8_IGNORE,
-    ],
+    ),
 
     /*
      * Default condition to determine if a parameter is a callback or not.
      * Callbacks needs to start by those terms, or they will be cast to string.
      */
-    'callback' => ['$', '$.', 'function'],
-];
+    'callback' => array('$', '$.', 'function'),
+);

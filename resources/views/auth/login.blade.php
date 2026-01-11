@@ -9,7 +9,7 @@
 
                 <div class="card-body pt-0">
                     @if(config('app.env') !== 'production' && config('app.maintenance') === false)
-                        <div class="alert alert-warning mx-5 px-5 mb-4">
+                        <div class="alert alert-primary mx-5 px-5 mb-4">
                             <div class="text-center">{!! __('auth.login_info') !!}</div>
                             <div class="text-center pt-3">
                                 <div><strong>{{ __('fields.login') }}:</strong> admin@damianulan.me</div>

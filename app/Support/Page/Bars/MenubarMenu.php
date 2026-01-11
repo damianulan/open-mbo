@@ -10,9 +10,9 @@ class MenubarMenu
 
     public Collection $items;
 
-    public $classes = [];
+    public $classes = array();
 
-    public static function boot(string $id, array $items = []): self
+    public static function boot(string $id, array $items = array()): self
     {
         $instance = new self();
         $instance->id = $id;
@@ -54,8 +54,8 @@ class MenubarMenu
 
     public function render()
     {
-        return view('components.menus.menubar', [
+        return view('components.menus.menubar', array(
             'menubar' => $this,
-        ])->render();
+        ))->render();
     }
 }

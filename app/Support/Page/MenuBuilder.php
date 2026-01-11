@@ -10,7 +10,7 @@ class MenuBuilder
 {
     public static function bootSidebar(string $sitename): SidebarMenu
     {
-        $sidebar = SidebarMenu::boot($sitename, [
+        $sidebar = SidebarMenu::boot($sitename, array(
             MenuItem::make('dashboard')
                 ->setTitle(__('menus.dashboard'))
                 ->setIcon('grid-fill')
@@ -44,7 +44,7 @@ class MenuBuilder
                 ->setIcon('gear-fill')
                 ->permission('settings-*')
                 ->setRoute('settings.general.index'),
-        ]);
+        ));
 
         return $sidebar;
     }

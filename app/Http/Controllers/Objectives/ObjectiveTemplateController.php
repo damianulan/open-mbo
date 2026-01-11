@@ -6,46 +6,38 @@ use App\Forms\MBO\Objective\ObjectiveTemplateEditForm;
 use App\Models\MBO\ObjectiveTemplate;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class ObjectiveTemplateController extends MBOController
 {
     /**
      * Show the application dashboard.
-     *
-     * @return Renderable
      */
-    public function index()
+    public function index(): Renderable
     {
-        return view('pages.mbo.index', [
+        return view('pages.mbo.index', array(
             'objectives' => ObjectiveTemplate::paginate(30),
             'nav' => $this->nav(),
-        ]);
+        ));
     }
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return Response
      */
-    public function create(Request $request)
+    public function create(Request $request, ObjectiveTemplateEditForm $form)
     {
-        return view('components.forms.edit', [
-            'form' => ObjectiveTemplateEditForm::definition($request),
-        ]);
+        return view('components.forms.edit', array(
+            'form' => $form->getDefinition(),
+        ));
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return Response
      */
     public function store(Request $request, ObjectiveTemplateEditForm $form)
     {
-        $request = $form::reformatRequest($request);
-        $request->validate();
+        $form->validate();
 
-        $objective = ObjectiveTemplate::fillFromRequest($request);
+        $objective = ObjectiveTemplate::fillFromRequest();
 
         if ($objective->save()) {
             return redirect()->route('templates.index')->with('success', __('alerts.objective_template.success.create'));
@@ -60,37 +52,33 @@ class ObjectiveTemplateController extends MBOController
      * @TODO add view
      *
      * @param  int  $id
-     * @return Response
      */
-    public function show($id) {}
+    public function show($id): void {}
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return Response
      */
-    public function edit(Request $request, $id)
+    public function edit(Request $request, $id, ObjectiveTemplateEditForm $form)
     {
         $model = ObjectiveTemplate::findOrFail($id);
 
-        return view('components.forms.edit', [
+        return view('components.forms.edit', array(
             'objective' => $model,
-            'form' => ObjectiveTemplateEditForm::definition($request, $model),
-        ]);
+            'form' => $form->setModel($model)->getDefinition(),
+        ));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  int  $id
-     * @return Response
      */
     public function update(Request $request, $id, ObjectiveTemplateEditForm $form)
     {
-        $request = $form::reformatRequest($request);
-        $form::validate($request, $id);
-        $objective = ObjectiveTemplate::fillFromRequest($request, $id);
+        $form->validate();
+        $objective = ObjectiveTemplate::fillFromRequest($id);
         if ($objective->update()) {
             return redirect()->route('templates.index')->with('success', __('alerts.objective_template.success.edit'));
         }

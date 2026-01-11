@@ -34,21 +34,21 @@ class ObjectiveTemplateFactory extends Factory
         }
 
         if ($category) {
-            return [
+            return array(
                 'category_id' => $category->id,
                 'name' => trim(fake()->realTextBetween(10, 50), '.'),
                 'description' => fake()->realTextBetween(300, 900),
                 'draft' => 0,
                 'award' => fake()->randomFloat(2, 1, 30),
-            ];
+            );
         }
         throw new Exception('No category found');
     }
 
     public function draft()
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn (array $attributes) => array(
             'draft' => 1,
-        ]);
+        ));
     }
 }

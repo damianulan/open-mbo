@@ -1,0 +1,380 @@
+{
+    "accepted": {
+        "pl": ":attribute musi zostać zaakceptowany."
+    },
+    "accepted_if": {
+        "pl": ":attribute musi zostać zaakceptowany, gdy :other ma wartość :value."
+    },
+    "active_url": {
+        "pl": ":attribute nie jest prawidłowym adresem URL."
+    },
+    "after": {
+        "pl": ":attribute musi być datą późniejszą niż :date."
+    },
+    "after_or_equal": {
+        "pl": ":attribute musi być datą nie wcześniejszą niż :date."
+    },
+    "alpha": {
+        "pl": ":attribute może zawierać tylko litery."
+    },
+    "alpha_dash": {
+        "pl": ":attribute może zawierać tylko litery, cyfry, myślniki i podkreślenia."
+    },
+    "alpha_num": {
+        "pl": ":attribute może zawierać tylko litery i cyfry."
+    },
+    "array": {
+        "pl": ":attribute musi być tablicą."
+    },
+    "ascii": {
+        "pl": ":attribute może zawierać tylko jednobajtowe znaki alfanumeryczne i symbole."
+    },
+    "attributes": {
+        "email": {
+            "pl": "adres email"
+        },
+        "password": {
+            "pl": "hasło"
+        },
+        "site_name": {
+            "pl": "nazwa witryny"
+        }
+    },
+    "before": {
+        "pl": ":attribute musi być datą wcześniejszą niż :date."
+    },
+    "before_or_equal": {
+        "pl": ":attribute musi być datą nie późniejszą niż :date."
+    },
+    "between": {
+        "array": {
+            "pl": ":attribute musi mieć od :min do :max elementów."
+        },
+        "file": {
+            "pl": ":attribute musi mieć od :min do :max kilobajtów."
+        },
+        "numeric": {
+            "pl": ":attribute musi mieć wartość od :min do :max."
+        },
+        "string": {
+            "pl": ":attribute musi mieć od :min do :max znaków."
+        }
+    },
+    "boolean": {
+        "pl": "Pole :attribute musi być prawdą lub fałszem."
+    },
+    "confirmed": {
+        "pl": "Potwierdzenie :attribute nie pasuje."
+    },
+    "current_password": {
+        "pl": "Hasło jest nieprawidłowe."
+    },
+    "custom": {
+        "definition_to": {
+            "after_or_equal": {
+                "pl": "Data końca etapu musi być późniejsza niż data początku."
+            }
+        }
+    },
+    "date": {
+        "pl": ":attribute nie jest prawidłową datą."
+    },
+    "date_equals": {
+        "pl": ":attribute musi być datą równą :date."
+    },
+    "date_format": {
+        "pl": ":attribute nie pasuje do formatu :format."
+    },
+    "decimal": {
+        "pl": ":attribute musi mieć :decimal miejsc dziesiętnych."
+    },
+    "declined": {
+        "pl": ":attribute musi zostać odrzucony."
+    },
+    "declined_if": {
+        "pl": ":attribute musi zostać odrzucony, gdy :other ma wartość :value."
+    },
+    "different": {
+        "pl": ":attribute i :other muszą się różnić."
+    },
+    "digits": {
+        "pl": ":attribute musi składać się z :digits cyfr."
+    },
+    "digits_between": {
+        "pl": ":attribute musi mieć od :min do :max cyfr."
+    },
+    "dimensions": {
+        "pl": ":attribute ma nieprawidłowe wymiary obrazu."
+    },
+    "distinct": {
+        "pl": "Pole :attribute ma zduplikowaną wartość."
+    },
+    "doesnt_end_with": {
+        "pl": ":attribute nie może kończyć się jednym z następujących: :values."
+    },
+    "doesnt_start_with": {
+        "pl": ":attribute nie może zaczynać się od jednego z następujących: :values."
+    },
+    "email": {
+        "pl": ":attribute musi być prawidłowym adresem e-mail."
+    },
+    "ends_with": {
+        "pl": ":attribute musi kończyć się jednym z następujących: :values."
+    },
+    "enum": {
+        "pl": "Wybrany :attribute jest nieprawidłowy."
+    },
+    "exists": {
+        "pl": "Wybrany :attribute jest nieprawidłowy."
+    },
+    "file": {
+        "pl": ":attribute musi być plikiem."
+    },
+    "filled": {
+        "pl": "Pole :attribute musi mieć wartość."
+    },
+    "gt": {
+        "array": {
+            "pl": ":attribute musi mieć więcej niż :value elementów."
+        },
+        "file": {
+            "pl": ":attribute musi być większy niż :value kilobajtów."
+        },
+        "numeric": {
+            "pl": ":attribute musi być większy niż :value."
+        },
+        "string": {
+            "pl": ":attribute musi być dłuższy niż :value znaków."
+        }
+    },
+    "gte": {
+        "array": {
+            "pl": ":attribute musi mieć :value elementów lub więcej."
+        },
+        "file": {
+            "pl": ":attribute musi być większy lub równy :value kilobajtów."
+        },
+        "numeric": {
+            "pl": ":attribute musi być większy lub równy :value."
+        },
+        "string": {
+            "pl": ":attribute musi być dłuższy lub równy :value znaków."
+        }
+    },
+    "image": {
+        "pl": ":attribute musi być obrazem."
+    },
+    "in": {
+        "pl": "Wybrany :attribute jest nieprawidłowy."
+    },
+    "in_array": {
+        "pl": "Pole :attribute nie istnieje w :other."
+    },
+    "integer": {
+        "pl": ":attribute musi być liczbą całkowitą."
+    },
+    "ip": {
+        "pl": ":attribute musi być prawidłowym adresem IP."
+    },
+    "ipv4": {
+        "pl": ":attribute musi być prawidłowym adresem IPv4."
+    },
+    "ipv6": {
+        "pl": ":attribute musi być prawidłowym adresem IPv6."
+    },
+    "json": {
+        "pl": ":attribute musi być prawidłowym ciągiem JSON."
+    },
+    "lowercase": {
+        "pl": ":attribute musi być pisane małymi literami."
+    },
+    "lt": {
+        "array": {
+            "pl": ":attribute musi mieć mniej niż :value elementów."
+        },
+        "file": {
+            "pl": ":attribute musi być mniejszy niż :value kilobajtów."
+        },
+        "numeric": {
+            "pl": ":attribute musi być mniejszy niż :value."
+        },
+        "string": {
+            "pl": ":attribute musi być krótszy niż :value znaków."
+        }
+    },
+    "lte": {
+        "array": {
+            "pl": ":attribute nie może mieć więcej niż :value elementów."
+        },
+        "file": {
+            "pl": ":attribute musi być mniejszy lub równy :value kilobajtów."
+        },
+        "numeric": {
+            "pl": ":attribute musi być mniejszy lub równy :value."
+        },
+        "string": {
+            "pl": ":attribute musi być krótszy lub równy :value znaków."
+        }
+    },
+    "mac_address": {
+        "pl": ":attribute musi być prawidłowym adresem MAC."
+    },
+    "max_digits": {
+        "pl": ":attribute nie może mieć więcej niż :max cyfr."
+    },
+    "max": {
+        "array": {
+            "pl": ":attribute nie może mieć więcej niż :max elementów."
+        },
+        "file": {
+            "pl": ":attribute nie może być większy niż :max kilobajtów."
+        },
+        "numeric": {
+            "pl": ":attribute nie może być większy niż :max."
+        },
+        "string": {
+            "pl": ":attribute nie może być dłuższy niż :max znaków."
+        }
+    },
+    "mimes": {
+        "pl": ":attribute musi być plikiem typu: :values."
+    },
+    "mimetypes": {
+        "pl": ":attribute musi być plikiem typu: :values."
+    },
+    "min_digits": {
+        "pl": ":attribute musi mieć przynajmniej :min cyfr."
+    },
+    "min": {
+        "array": {
+            "pl": ":attribute musi mieć przynajmniej :min elementów."
+        },
+        "file": {
+            "pl": ":attribute musi mieć przynajmniej :min kilobajtów."
+        },
+        "numeric": {
+            "pl": ":attribute musi mieć przynajmniej :min."
+        },
+        "string": {
+            "pl": ":attribute musi mieć przynajmniej :min znaków."
+        }
+    },
+    "multiple_of": {
+        "pl": ":attribute musi być wielokrotnością :value."
+    },
+    "not_in": {
+        "pl": "Wybrany :attribute jest nieprawidłowy."
+    },
+    "not_regex": {
+        "pl": "Format :attribute jest nieprawidłowy."
+    },
+    "numeric": {
+        "pl": ":attribute musi być liczbą."
+    },
+    "password": {
+        "letters": {
+            "pl": ":attribute musi zawierać co najmniej jedną literę."
+        },
+        "mixed": {
+            "pl": ":attribute musi zawierać co najmniej jedną dużą i jedną małą literę."
+        },
+        "numbers": {
+            "pl": ":attribute musi zawierać co najmniej jedną cyfrę."
+        },
+        "symbols": {
+            "pl": ":attribute musi zawierać co najmniej jeden symbol."
+        },
+        "uncompromised": {
+            "pl": "Podany :attribute pojawił się w wycieku danych. Proszę użyć innego :attribute."
+        }
+    },
+    "present": {
+        "pl": "Pole :attribute musi być obecne."
+    },
+    "prohibited": {
+        "pl": "Pole :attribute jest zabronione."
+    },
+    "prohibited_if": {
+        "pl": "Pole :attribute jest zabronione, gdy :other ma wartość :value."
+    },
+    "prohibited_unless": {
+        "pl": "Pole :attribute jest zabronione, chyba że :other znajduje się w :values."
+    },
+    "prohibits": {
+        "pl": "Pole :attribute zabrania obecności :other."
+    },
+    "regex": {
+        "pl": "Format :attribute jest nieprawidłowy."
+    },
+    "required": {
+        "pl": "To pole jest wymagane."
+    },
+    "required_array_keys": {
+        "pl": "Pole :attribute musi zawierać wpisy dla: :values."
+    },
+    "required_if": {
+        "pl": "Pole :attribute jest wymagane, gdy :other ma wartość :value."
+    },
+    "required_if_accepted": {
+        "pl": "Pole :attribute jest wymagane, gdy :other jest zaakceptowane."
+    },
+    "required_unless": {
+        "pl": "Pole :attribute jest wymagane, chyba że :other znajduje się w :values."
+    },
+    "required_with": {
+        "pl": "Pole :attribute jest wymagane, gdy :values jest obecne."
+    },
+    "required_with_all": {
+        "pl": "Pole :attribute jest wymagane, gdy :values są obecne."
+    },
+    "required_without": {
+        "pl": "Pole :attribute jest wymagane, gdy :values nie jest obecne."
+    },
+    "required_without_all": {
+        "pl": "Pole :attribute jest wymagane, gdy żadne z :values nie są obecne."
+    },
+    "same": {
+        "pl": ":attribute i :other muszą się zgadzać."
+    },
+    "size": {
+        "array": {
+            "pl": ":attribute musi zawierać :size elementów."
+        },
+        "file": {
+            "pl": ":attribute musi mieć :size kilobajtów."
+        },
+        "numeric": {
+            "pl": ":attribute musi wynosić :size."
+        },
+        "string": {
+            "pl": ":attribute musi mieć :size znaków."
+        }
+    },
+    "starts_with": {
+        "pl": ":attribute musi zaczynać się jednym z następujących: :values."
+    },
+    "string": {
+        "pl": ":attribute musi być ciągiem znaków."
+    },
+    "timezone": {
+        "pl": ":attribute musi być prawidłową strefą czasową."
+    },
+    "ulid": {
+        "pl": ":attribute musi być prawidłowym ULID."
+    },
+    "unique": {
+        "pl": ":attribute został już wcześniej użyty."
+    },
+    "uploaded": {
+        "pl": "Przesyłanie :attribute nie powiodło się."
+    },
+    "uppercase": {
+        "pl": ":attribute musi być zapisany wielkimi literami."
+    },
+    "url": {
+        "pl": ":attribute musi być prawidłowym adresem URL."
+    },
+    "uuid": {
+        "pl": ":attribute musi być prawidłowym UUID."
+    }
+}

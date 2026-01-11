@@ -38,7 +38,7 @@ class UserObjectiveController extends AppController
     /**
      * Display the specified resource.
      */
-    public function show(Request $request, string $id)
+    public function show(Request $request, $id)
     {
         $userObjective = UserObjective::findOrFail($id);
         if ($request->user()->cannot('view', $userObjective)) {
@@ -48,25 +48,25 @@ class UserObjectiveController extends AppController
 
         $header = 'Podsumowanie Celu';
 
-        return view('pages.mbo.objectives.users.show', [
+        return view('pages.mbo.objectives.users.show', array(
             'userObjective' => $userObjective,
             'user' => $userObjective->user,
             'objective' => $userObjective->objective,
             'pagetitle' => $header,
             'isOwner' => $userObjective->user->id === Auth::user()->id,
-        ]);
+        ));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id): void {}
+    public function edit($id): void {}
 
     public function update(Request $request, $id, ObjectiveEditUserForm $form)
     {
         $objective = Objective::findOrFail($id);
 
-        $request = $form::reformatRequest($request);
+
         $response = $form::validateJson($request, $id);
         if ('ok' === $response['status']) {
 
@@ -84,18 +84,18 @@ class UserObjectiveController extends AppController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): void {}
+    public function destroy($id): void {}
 
     public function addUsers(Request $request, $id): View
     {
-        $params = [];
+        $params = array();
         if ($id) {
             $objective = Objective::find($id);
             if ($objective) {
-                $params = [
+                $params = array(
                     'id' => $id,
-                    'form' => ObjectiveEditUserForm::definition($request, $objective),
-                ];
+                    'form' => ObjectiveEditUserForm::bootWithModel($objective)->getDefinition(),
+                );
             }
         }
 
@@ -104,13 +104,13 @@ class UserObjectiveController extends AppController
 
     public function editRealization(Request $request, $id): View
     {
-        $params = [];
+        $params = array();
         if ($id) {
             $objective = UserObjective::findOrFail($id);
-            $params = [
+            $params = array(
                 'id' => $id,
-                'form' => ObjectiveEditUserRealizationForm::definition($request, $objective),
-            ];
+                'form' => ObjectiveEditUserRealizationForm::bootWithModel($objective)->getDefinition(),
+            );
         }
 
         return view('components.modals.objectives.edit_realization', $params);
@@ -118,14 +118,14 @@ class UserObjectiveController extends AppController
 
     public function updateEvaluation(Request $request, $id, ObjectiveEditUserRealizationForm $form): JsonResponse
     {
+        $response['status'] = 'error';
         try {
             $userObjective = UserObjective::findOrFail($id);
             if ( ! $userObjective->canBeEvaluated()) {
                 throw new NoPermissionException();
             }
 
-            $request = $form::reformatRequest($request);
-            $response = $form::validateJson($request, $id);
+            $response = $form->validateJson();
             if ('ok' === $response['status']) {
 
                 $service = UserRealizationUpdate::boot(request: $request, userObjective: $userObjective)->execute();
@@ -136,7 +136,6 @@ class UserObjectiveController extends AppController
                 }
                 $errors = $service->getErrors();
                 if ( ! empty($errors)) {
-                    $response['status'] = 'error';
                     $response['message'] = $errors[0];
                 }
             } else {

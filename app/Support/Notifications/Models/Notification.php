@@ -49,11 +49,12 @@ use Lucent\Support\Traits\UUID;
  */
 class Notification extends Model
 {
-    use SoftDeletes, UUID;
+    use SoftDeletes;
+    use UUID;
 
     protected $table = 'notifications';
 
-    protected $fillable = [
+    protected $fillable = array(
         'key',
         'contents',
         'system',
@@ -61,21 +62,21 @@ class Notification extends Model
         'event',
         'schedule',
         'conditions',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'contents' => NotificationContents::class,
         'system' => 'boolean',
         'email' => 'boolean',
         'conditions' => 'array',
-    ];
+    );
 
     public static function byKey(string $key): ?self
     {
         return self::where('notifications.key', $key)->first();
     }
 
-    public static function createOrUpdate(string $key, array $attributes = []): self
+    public static function createOrUpdate(string $key, array $attributes = array()): self
     {
         $notification = self::byKey($key);
         if ( ! $notification) {
@@ -109,7 +110,7 @@ class Notification extends Model
     {
         return Attribute::make(
             get: function (): Collection {
-                $models = [];
+                $models = array();
                 if ($this->event) {
                     $models = ResourceFactory::getEventResourceModels($this->event);
                 }

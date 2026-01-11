@@ -17,7 +17,9 @@ use Throwable;
 
 class AppController extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests;
+    use DispatchesJobs;
+    use ValidatesRequests;
 
     protected ?Throwable $e = null;
 
@@ -39,7 +41,7 @@ class AppController extends BaseController
             }
 
             if (empty($description) && $model && $user) {
-                $description = __('logging.description.view', ['model_map' => __('logging.model_mapping.' . $model::class), 'username' => $user->name]);
+                $description = __('logging.description.view', array('model_map' => __('logging.model_mapping.' . $model::class), 'username' => $user->name));
             } else {
                 if (empty($description)) {
                     $description = 'view';
@@ -78,14 +80,14 @@ class AppController extends BaseController
     protected function catchResponseJson(
         Throwable $exception,
         ?string $message = null,
-        array $datas = []
+        array $datas = array()
     ): JsonResponse {
         $message = $this->getExceptionMessage($exception, $message);
 
         return $this->responseJsonError($message, $datas);
     }
 
-    protected function responseJson(bool $success = true, ?string $message = null, array $datas = []): JsonResponse
+    protected function responseJson(bool $success = true, ?string $message = null, array $datas = array()): JsonResponse
     {
         if ($this->e) {
             return $this->catchResponseJson($this->e, $message, $datas);
@@ -94,12 +96,12 @@ class AppController extends BaseController
         return $this->finalResponseJson($success, $message, $datas);
     }
 
-    protected function responseJsonError(?string $message = null, array $datas = []): JsonResponse
+    protected function responseJsonError(?string $message = null, array $datas = array()): JsonResponse
     {
         return $this->finalResponseJson(false, $message, $datas);
     }
 
-    protected function responseJsonSuccess(?string $message = null, array $datas = []): JsonResponse
+    protected function responseJsonSuccess(?string $message = null, array $datas = array()): JsonResponse
     {
         return $this->finalResponseJson(true, $message, $datas);
     }
@@ -123,17 +125,17 @@ class AppController extends BaseController
         return $message;
     }
 
-    private function finalResponseJson(bool $success = true, ?string $message = null, array $datas = []): JsonResponse
+    private function finalResponseJson(bool $success = true, ?string $message = null, array $datas = array()): JsonResponse
     {
         if (empty($message)) {
             $success ? $message = __('alerts.success.operation') : $message = __('alerts.error.operation');
         }
 
         return response()->json(array_merge(
-            [
+            array(
                 'status' => $success ? 'ok' : 'error',
                 'message' => $message,
-            ],
+            ),
             $datas
         ));
     }

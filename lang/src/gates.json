@@ -1,0 +1,42 @@
+{
+    "permissions": {
+        "mbo-administration": {
+            "pl": "Administracja MBO"
+        }
+    },
+    "roles_plural": {
+        "pl": "Role"
+    },
+    "roles": {
+        "admin": {
+            "pl": "Administrator"
+        },
+        "admin_hr": {
+            "pl": "Administrator HR"
+        },
+        "admin_mbo": {
+            "pl": "Administrator MBO"
+        },
+        "campaign_coordinator": {
+            "pl": "Koordynator kampanii MBO"
+        },
+        "employee": {
+            "pl": "Pracownik"
+        },
+        "manager": {
+            "pl": "Menadżer"
+        },
+        "objective_coordinator": {
+            "pl": "Koordynator kategorii celów"
+        },
+        "root": {
+            "pl": "Root"
+        },
+        "supervisor": {
+            "pl": "Przełożony"
+        },
+        "support": {
+            "pl": "Helpdesk"
+        }
+    }
+}

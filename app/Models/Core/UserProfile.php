@@ -47,9 +47,11 @@ use Illuminate\Support\Carbon;
  */
 class UserProfile extends Model
 {
-    use HasFactory, RequestForms, SoftDeletes;
+    use HasFactory;
+    use RequestForms;
+    use SoftDeletes;
 
-    protected $fillable = [
+    protected $fillable = array(
         'user_id',
         'firstname',
         'lastname',
@@ -57,17 +59,17 @@ class UserProfile extends Model
         'birthday',
         'phone',
         'avatar',
-    ];
+    );
 
-    protected $dates = [
+    protected $dates = array(
         'birthday',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'firstname' => Enigma::class,
         'lastname' => Enigma::class,
         'phone' => Enigma::class,
-    ];
+    );
 
     public function user(): BelongsTo
     {

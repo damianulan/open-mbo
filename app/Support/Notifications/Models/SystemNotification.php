@@ -37,7 +37,7 @@ class SystemNotification extends NotificationModel
 {
     protected $table = 'system_notifications';
 
-    protected $fillable = [
+    protected $fillable = array(
         'notification_id',
         'notifiable_type',
         'notifiable_id',
@@ -45,13 +45,13 @@ class SystemNotification extends NotificationModel
         'contents',
         'read_at',
         'notified_at',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'read_at' => 'datetime',
         'notified_at' => 'datetime',
         'created_at' => 'datetime',
-    ];
+    );
 
     public function unread()
     {

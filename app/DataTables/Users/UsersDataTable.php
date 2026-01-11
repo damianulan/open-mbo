@@ -8,13 +8,15 @@ use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Column;
+use App\Support\DataTables\Column;
 
 class UsersDataTable extends CustomDataTable
 {
     protected $id = 'users_table';
 
     protected $orderBy = 'created_at';
+
+    protected array $actions = array('csv', 'excel', 'json', 'column_selector', 'print');
 
     /**
      * Build the DataTable class.
@@ -24,9 +26,10 @@ class UsersDataTable extends CustomDataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('name', fn ($data) => view('components.datatables.username_link', [
+            ->addColumn('fullname', fn ($data) => $data->name)
+            ->addColumn('name', fn ($data) => view('components.datatables.username_link', array(
                 'data' => $data,
-            ]))
+            )))
             ->addColumn('status', function ($data) {
                 $color = 'primary';
                 $text = 'Aktywny';
@@ -35,10 +38,10 @@ class UsersDataTable extends CustomDataTable
                     $text = 'Zablokowany';
                 }
 
-                return view('components.datatables.badge', [
+                return view('components.datatables.badge', array(
                     'color' => $color,
                     'text' => $text,
-                ]);
+                ));
             })
             ->orderColumn('status', function ($query, $order): void {
                 $o = 'asc' === $order ? 'desc' : 'asc';
@@ -50,16 +53,16 @@ class UsersDataTable extends CustomDataTable
                 $query->orderBy('lastname', $order);
             })
             ->addColumn('roles', fn ($data) => $data->getRolesNames()->implode(', '))
-            ->addColumn('action', fn ($data) => view('pages.users.action', [
+            ->addColumn('action', fn ($data) => view('pages.users.action', array(
                 'data' => $data,
-            ]))
+            )))
             ->filterColumn('name', function ($query, $keyword): void {
                 $sql = "CONCAT(firstname,' ',lastname)  like ?";
-                $query->whereRaw($sql, ["%{$keyword}%"]);
+                $query->whereRaw($sql, array("%{$keyword}%"));
             })
             ->filterColumn('position', function ($query, $keyword): void {
                 $sql = 'positions.name like ?';
-                $query->whereRaw($sql, ["%{$keyword}%"]);
+                $query->whereRaw($sql, array("%{$keyword}%"));
             })
             ->editColumn('created_at', function ($data) {
                 $formatedDate = Carbon::parse($data->created_at)->format(config('app.datetime_format'));
@@ -84,14 +87,14 @@ class UsersDataTable extends CustomDataTable
             ->leftJoin('departments', 'departments.id', '=', 'user_employments.department_id')
             ->leftJoin('positions', 'positions.id', '=', 'user_employments.position_id')
             ->select('users.*', 'user_profiles.firstname', 'user_profiles.lastname', 'positions.name as position')
-            ->whereNotIn('users.id', [Auth::user()->id]);
+            ->whereNotIn('users.id', array(Auth::user()->id));
 
         return $query;
     }
 
     protected function defaultColumns(): array
     {
-        return [
+        return array(
             'name',
             'email',
             'status',
@@ -100,17 +103,18 @@ class UsersDataTable extends CustomDataTable
             'position',
             'roles',
             'action',
-        ];
+        );
     }
 
     protected function availableColumns(): array
     {
-        return [
+        return array(
             'name' => Column::computed('name')
                 ->title(__('fields.firstname_lastname'))
                 ->searchable(true)
                 ->orderable(true)
-                ->addClass('firstcol'),
+                ->exportable(false)
+                ->printable(false),
             'email' => Column::make('email')
                 ->title(__('fields.email')),
             'status' => Column::computed('status')
@@ -128,9 +132,9 @@ class UsersDataTable extends CustomDataTable
             'action' => Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->addClass('lastcol action-btns')
+                ->addClass('action-btns')
                 ->title(__('fields.action')),
-        ];
+        );
     }
 
     /**

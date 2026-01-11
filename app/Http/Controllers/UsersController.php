@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\Users\UsersDataTable;
+use App\Exceptions\Core\UnauthorizedAccess;
 use App\Forms\Users\EmploymentEditForm;
 use App\Forms\Users\UserEditForm;
 use App\Models\Business\UserEmployment;
@@ -10,45 +11,37 @@ use App\Models\Core\User;
 use App\Services\Employments\CreateOrUpdate as EmploymentCreateOrUpdate;
 use App\Services\Users\CreateOrUpdate as UserCreateOrUpdate;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class UsersController extends AppController
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return Response
      */
     public function index(UsersDataTable $dataTable)
     {
-        return $dataTable->render('pages.users.index', [
+        return $dataTable->render('pages.users.index', array(
             'table' => $dataTable,
-        ]);
+        ));
     }
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return Response
      */
-    public function create(Request $request)
+    public function create(Request $request, UserEditForm $form)
     {
-        return view('pages.users.edit', [
-            'form' => UserEditForm::definition($request),
-            'employments' => [],
-        ]);
+        return view('pages.users.edit', array(
+            'form' => $form->getDefinition(),
+            'employments' => array(),
+        ));
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return Response
      */
     public function store(Request $request, UserEditForm $form)
     {
-        $request = $form::reformatRequest($request);
-        $form::validate($request);
+        $form->validate();
         $service = UserCreateOrUpdate::boot(request: $request)->execute();
 
         if ($service->passed()) {
@@ -62,8 +55,8 @@ class UsersController extends AppController
 
     public function storeEmployment(Request $request, EmploymentEditForm $form)
     {
-        $request = $form::reformatRequest($request);
-        $form::validate($request);
+
+        $form->validate();
         $service = EmploymentCreateOrUpdate::boot(request: $request)->execute();
 
         if ($service->passed()) {
@@ -75,61 +68,57 @@ class UsersController extends AppController
 
     /**
      * Display the specified resource.
-     *
-     * @return Response
      */
     public function show(User $user)
     {
-        return view('pages.users.show', [
+        return view('pages.users.show', array(
             'user' => $user,
-        ]);
+        ));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return Response
      */
     public function edit(Request $request, $id)
     {
         $model = User::findOrFail($id);
 
-        $request->request->add(['user_id' => $id]);
+        $request->request->add(array('user_id' => $id));
 
-        return view('pages.users.edit', [
+        return view('pages.users.edit', array(
             'user' => $model,
             'employments' => $this->getEmploymentFroms($request, $model),
-            'form' => UserEditForm::definition($request, $model),
-        ]);
+            'form' => UserEditForm::bootWithModel($model)->getDefinition(),
+        ));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  int  $id
-     * @return Response
      */
     public function update(Request $request, $id, UserEditForm $form)
     {
-        $request = $form::reformatRequest($request);
-        $form::validate($request);
+
+        $form->validate();
         $user = User::findOrFail($id);
         $service = UserCreateOrUpdate::boot(request: $request, user: $user)->execute();
 
         if ($service->passed()) {
             $user = $service->user;
 
-            return redirect()->route('users.show', $id)->with('success', __('alerts.users.success.edit', ['name' => $user->name]));
+            return redirect()->route('users.show', $id)->with('success', __('alerts.users.success.edit', array('name' => $user->name)));
         }
 
-        return redirect()->back()->with('error', __('alerts.users.error.edit', ['name' => $user->name]));
+        return redirect()->back()->with('error', __('alerts.users.error.edit', array('name' => $user->name)));
     }
 
     public function updateEmployment(Request $request, $id, EmploymentEditForm $form)
     {
-        $request = $form::reformatRequest($request);
-        $form::validate($request);
+
+        $form->validate();
         $employment = UserEmployment::findOrFail($id);
         $service = EmploymentCreateOrUpdate::boot(request: $request, employment: $employment)->execute();
 
@@ -144,15 +133,14 @@ class UsersController extends AppController
      * Delete User instance.
      *
      * @param  int  $id
-     * @return Response
      */
     public function delete(User $user)
     {
         if ($user->delete()) {
-            return redirect()->route('users.index')->with('success', __('alerts.users.success.delete', ['name' => $user->name]));
+            return redirect()->route('users.index')->with('success', __('alerts.users.success.delete', array('name' => $user->name)));
         }
 
-        return redirect()->back()->with('error', __('alerts.users.error.delete', ['name' => $user->name]));
+        return redirect()->back()->with('error', __('alerts.users.error.delete', array('name' => $user->name)));
     }
 
     public function deleteEmployment($id)
@@ -175,10 +163,10 @@ class UsersController extends AppController
             $user->toggleLock();
         }
         if ($user->blocked()) {
-            return redirect()->back()->with('info', __('alerts.users.success.blocked', ['name' => $user->name]));
+            return redirect()->back()->with('info', __('alerts.users.success.blocked', array('name' => $user->name)));
         }
 
-        return redirect()->back()->with('info', __('alerts.users.success.unblocked', ['name' => $user->name]));
+        return redirect()->back()->with('info', __('alerts.users.success.unblocked', array('name' => $user->name)));
     }
 
     public function favourite(User $user)
@@ -193,9 +181,6 @@ class UsersController extends AppController
         return redirect()->back();
     }
 
-    /**
-     * @return void
-     */
     public function impersonate(User $user)
     {
         Auth::user()->impersonate($user);
@@ -203,9 +188,6 @@ class UsersController extends AppController
         return redirect()->back();
     }
 
-    /**
-     * @return void
-     */
     public function impersonateLeave()
     {
         Auth::user()->leaveImpersonation();
@@ -213,9 +195,31 @@ class UsersController extends AppController
         return redirect()->back();
     }
 
+    public function resetPassword(User $user)
+    {
+        try {
+            if (true) {
+                $user->generatePassword();
+                $user->force_password_change = 1;
+                if($user->save()){
+                    return redirect()->back()->with('success_alert', $user->password);
+                }
+                return redirect()->back()->with('success', __('alerts.users.success.reset_password'));
+            } else {
+
+                throw new UnauthorizedAccess();
+            }
+        } catch (UnauthorizedAccess $th) {
+            report($th);
+            return redirect()->back()->with('error', $th->getMessage());
+        }
+
+        return redirect()->back()->with('error', __('alerts.users.error.reset_password'));
+    }
+
     private function getEmploymentFroms(Request $request, ?User $model = null): array
     {
-        $employments[__('forms.employments.add')] = EmploymentEditForm::definition($request);
+        $employments[__('forms.employments.add')] = EmploymentEditForm::bootWithAttributes($request->all())->getDefinition();
 
         if ($model) {
             $i = 0;
@@ -225,7 +229,7 @@ class UsersController extends AppController
                 if ($employment->main) {
                     $langKey = 'forms.employments.header_main';
                 }
-                $employments[__($langKey, ['no' => $i])] = EmploymentEditForm::definition($request, $employment);
+                $employments[__($langKey, array('no' => $i))] = EmploymentEditForm::bootWithModel($employment);
             }
         }
 

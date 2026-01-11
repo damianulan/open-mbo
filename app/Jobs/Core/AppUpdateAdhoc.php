@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Artisan;
 
 class AppUpdateAdhoc implements ShouldBeUnique, ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
 
     public $timeout = 300;
 

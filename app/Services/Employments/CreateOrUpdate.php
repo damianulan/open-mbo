@@ -10,7 +10,7 @@ final class CreateOrUpdate extends Service
     public function handle(): UserEmployment
     {
         $id = $this->employment->id ?? null;
-        $employment = UserEmployment::fillFromRequest($this->request(), $id);
+        $employment = UserEmployment::fillFromRequest($id);
 
         if ($employment->save()) {
             $this->employment = $employment;

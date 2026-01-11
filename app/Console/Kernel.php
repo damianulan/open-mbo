@@ -5,10 +5,10 @@ namespace App\Console;
 use App\Console\Commands\Core\AppRefresh;
 use App\Console\Commands\Core\AppUpgrade;
 use App\Console\Commands\MBO\MBOVerifyStatusScript;
+use App\Console\Commands\Settings\SettingsMigrate;
 use App\Support\Notifications\NotificationScheduler;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Console\Commands\Settings\SettingsMigrate;
 
 class Kernel extends ConsoleKernel
 {
@@ -29,6 +29,7 @@ class Kernel extends ConsoleKernel
 
         if ('development' === config('app.env')) {
 
+            $schedule->command('db:seed --class=NotificationSeeder')->dailyAt('00:02');
             if (env('CRON_APP_REFRESH', false)) {
                 $schedule->command(AppRefresh::class)->daily()->at('00:00');
             }

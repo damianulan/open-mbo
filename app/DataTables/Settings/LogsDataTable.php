@@ -6,7 +6,7 @@ use App\Models\Vendor\ActivityModel;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Carbon;
 use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Column;
+use App\Support\DataTables\Column;
 
 class LogsDataTable extends BaseLogDataTable
 {
@@ -24,16 +24,16 @@ class LogsDataTable extends BaseLogDataTable
 
         return (new EloquentDataTable($query))
             ->addColumn('causer', fn ($data) => $this->userView($data, 'causer'))
-            ->addColumn('event', fn ($data) => view('components.datatables.badge', [
+            ->addColumn('event', fn ($data) => view('components.datatables.badge', array(
                 'color' => $this->getEventColor($data->event),
                 'text' => __('logging.events.' . $data->event),
-            ]))
+            )))
             ->addColumn('subject', function ($data) {
                 if ($data->subject) {
                     $logEntities = $data->subject->logEntities ?? null;
                     $properties = $data->properties ? $data->properties->first() : null;
                     if ($logEntities) {
-                        $instances = [];
+                        $instances = array();
                         foreach ($logEntities as $key => $entity) {
                             if (isset($properties[$key])) {
                                 if (class_exists($entity)) {
@@ -64,7 +64,7 @@ class LogsDataTable extends BaseLogDataTable
             })
             ->filterColumn('causer', function ($query, $keyword): void {
                 $sql = "CONCAT(firstname,'-',lastname)  like ?";
-                $query->whereRaw($sql, ["%{$keyword}%"]);
+                $query->whereRaw($sql, array("%{$keyword}%"));
             })
             ->editColumn('created_at', function ($data) {
                 $formatedDate = Carbon::parse($data->created_at)->format(config('app.datetime_format'));
@@ -86,23 +86,22 @@ class LogsDataTable extends BaseLogDataTable
 
     protected function defaultColumns(): array
     {
-        return [
+        return array(
             'causer',
             'event',
             'subject',
             'subject_type',
             'created_at',
-        ];
+        );
     }
 
     protected function availableColumns(): array
     {
-        return [
+        return array(
             'causer' => Column::computed('causer')
                 ->title(__('logging.columns.causer'))
                 ->orderable(true)
-                ->searchable(true)
-                ->addClass('firstcol'),
+                ->searchable(true),
             'event' => Column::computed('event')
                 ->title(__('logging.columns.event')),
             'subject' => Column::computed('subject')
@@ -114,7 +113,7 @@ class LogsDataTable extends BaseLogDataTable
             'created_at' => Column::make('created_at')
                 ->title(__('logging.columns.created_at'))
                 ->addClass('lastcol'),
-        ];
+        );
     }
 
     /**

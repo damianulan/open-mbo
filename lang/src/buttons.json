@@ -1,0 +1,143 @@
+{
+    "accept": {
+        "pl": "Akceptuj"
+    },
+    "add": {
+        "pl": "Dodaj"
+    },
+    "add_employment": {
+        "pl": "Dodaj zatrudnienie"
+    },
+    "add_realization": {
+        "pl": "Dodaj realizację celu"
+    },
+    "add_users": {
+        "pl": "Dodaj użytkowników"
+    },
+    "assign": {
+        "pl": "Przypisz"
+    },
+    "block": {
+        "pl": "Zablokuj"
+    },
+    "cancel": {
+        "pl": "Anuluj"
+    },
+    "cancel_campaign": {
+        "pl": "Anuluj kampanię"
+    },
+    "choose_file": {
+        "pl": "Wybierz plik"
+    },
+    "close": {
+        "pl": "Zamknij"
+    },
+    "create": {
+        "pl": "Utwórz"
+    },
+    "create_template": {
+        "pl": "Utwórz szablon"
+    },
+    "delete": {
+        "pl": "Usuń"
+    },
+    "edit": {
+        "pl": "Edytuj"
+    },
+    "edit_realization": {
+        "pl": "Modyfikuj realizację celu"
+    },
+    "enrol_users": {
+        "pl": "Zapisz użytkowników"
+    },
+    "favourite": {
+        "pl": "Ulubione"
+    },
+    "favourites_add": {
+        "pl": "Dodaj do ulubionych"
+    },
+    "favourites_remove": {
+        "pl": "Usuń z ulubionych"
+    },
+    "follow": {
+        "pl": "Obserwuj"
+    },
+    "hide": {
+        "pl": "Ukryj"
+    },
+    "impersonate": {
+        "pl": "Zaloguj jako"
+    },
+    "impersonate_out": {
+        "pl": "Wyloguj się jako"
+    },
+    "like": {
+        "pl": "Polub"
+    },
+    "list_view": {
+        "pl": "Tryb listy"
+    },
+    "ok": {
+        "pl": "Ok"
+    },
+    "ok_understand": {
+        "pl": "Ok, rozumiem"
+    },
+    "preview": {
+        "pl": "Podgląd"
+    },
+    "profile_show": {
+        "pl": "Przeglądaj profil"
+    },
+    "quote": {
+        "pl": "Cytuj"
+    },
+    "redirect_back": {
+        "pl": "Powrót"
+    },
+    "redirect_login": {
+        "pl": "Do strony logowania"
+    },
+    "reject": {
+        "pl": "Odrzuć"
+    },
+    "remove": {
+        "pl": "Usuń"
+    },
+    "reset_password": {
+        "pl": "Resetuj hasło"
+    },
+    "resume_campaign": {
+        "pl": "Wznów kampanię"
+    },
+    "revoke": {
+        "pl": "Odbierz"
+    },
+    "save": {
+        "pl": "Zapisz"
+    },
+    "save_changes": {
+        "pl": "Zapisz zmiany"
+    },
+    "send": {
+        "pl": "Wyślij"
+    },
+    "summary": {
+        "pl": "Podsumowanie"
+    },
+    "suspend": {
+        "pl": "Zawieś"
+    },
+    "terminate_campaign": {
+        "pl": "Zawieś kampanię"
+    },
+    "tile_view": {
+        "pl": "Tryb kafelkowy"
+    },
+    "unblock": {
+        "pl": "Odblokuj"
+    },
+    "unhide": {
+        "pl": "Odkryj"
+    }
+}

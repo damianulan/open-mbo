@@ -37,11 +37,11 @@ class UserProfileFactory extends Factory
                 break;
         }
 
-        return [
+        return array(
             'firstname' => fake()->firstName($gender),
             'lastname' => fake()->lastName($gender),
             'birthday' => fake()->dateTimeBetween('-40 years', '-20years'),
             'gender' => $g,
-        ];
+        );
     }
 }

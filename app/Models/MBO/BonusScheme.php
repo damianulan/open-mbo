@@ -22,6 +22,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property Carbon|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
+ * @property-read mixed $trans
  * @property-read Collection<int, UserBonusScheme> $user_schemes
  * @property-read int|null $user_schemes_count
  * @property-read Collection<int, User> $users
@@ -83,16 +84,16 @@ use Spatie\Activitylog\Models\Activity;
  */
 class BonusScheme extends BaseModel
 {
-    protected $fillable = [
+    protected $fillable = array(
         'name',
         'description',
         'options',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'description' => FormattedText::class,
         'options' => BonusSchemeCast::class,
-    ];
+    );
 
     public function user_schemes(): HasMany
     {

@@ -6,7 +6,7 @@
 <div class="content-card pt-3">
     <div class="content-card-top">
         <div class="content-card-header">
-            {{ __('Zarządzanie ustawieniami modułów') }}
+            {{ __('forms.settings.modules') }}
         </div>
     </div>
     <div class="row">
@@ -21,10 +21,13 @@
         </div>
         <div class="col-xl-9 col-lg-7 col-md-6 col-sm-12">
             <div class="container pt-3" id="module-users" style="display: none;">
-                Ustawienia Użytkownicy
+                {{ $usersForm->render() }}
             </div>
             <div class="container pt-3" id="module-mbo" style="display: none;">
                 {{ $mboForm->render() }}
+            </div>
+            <div class="container pt-3" id="module-notifications" style="display: none;">
+                {{ $notificationsForm->render() }}
             </div>
         </div>
 
@@ -61,6 +64,12 @@
                 $(this).addClass('selected');
             } else {
                 $('#module-mbo').hide();
+            }
+            if(module_id === 'module-notifications-btn'){
+                $('#module-notifications').fadeIn(500);
+                $(this).addClass('selected');
+            } else {
+                $('#module-notifications').hide();
             }
         }
     });

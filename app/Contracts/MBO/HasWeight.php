@@ -4,5 +4,5 @@ namespace App\Contracts\MBO;
 
 interface HasWeight
 {
-    public function getWeightAttribute(): float;
+    public function getWeightAttribute($value): float;
 }

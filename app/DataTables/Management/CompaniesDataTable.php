@@ -8,7 +8,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Column;
+use App\Support\DataTables\Column;
 use Yajra\DataTables\Services\DataTable;
 
 class CompaniesDataTable extends DataTable
@@ -29,10 +29,10 @@ class CompaniesDataTable extends DataTable
                     $text = 'Zablokowany';
                 }
 
-                return view('components.datatables.badge', [
+                return view('components.datatables.badge', array(
                     'color' => $color,
                     'text' => $text,
-                ]);
+                ));
             })
             ->orderColumn('status', function ($query, $order): void {
                 $o = 'asc' === $order ? 'desc' : 'asc';
@@ -43,12 +43,12 @@ class CompaniesDataTable extends DataTable
                 $query->orderBy('firstname', $order);
                 $query->orderBy('lastname', $order);
             })
-            ->addColumn('action', fn ($data) => view('pages.settings.organization.company.action', [
+            ->addColumn('action', fn ($data) => view('pages.settings.organization.company.action', array(
                 'data' => $data,
-            ]))
+            )))
             ->filterColumn('name', function ($query, $keyword): void {
                 $sql = "CONCAT(users.firstname,'-',users.lastname)  like ?";
-                $query->whereRaw($sql, ["%{$keyword}%"]);
+                $query->whereRaw($sql, array("%{$keyword}%"));
             })
             ->editColumn('created_at', function ($data) {
                 $formatedDate = Carbon::parse($data->created_at)->format(config('app.datetime_format'));
@@ -67,7 +67,7 @@ class CompaniesDataTable extends DataTable
      */
     public function query(Company $model): QueryBuilder
     {
-        return $model->with('profile')->whereNotIn('id', [Auth::user()->id]);
+        return $model->with('profile')->whereNotIn('id', array(Auth::user()->id));
     }
 
     /**
@@ -76,21 +76,21 @@ class CompaniesDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->parameters([
-                'language' => [
+            ->parameters(array(
+                'language' => array(
                     'url' => asset('themes/vendors/datatables/pl.json'),
-                ],
+                ),
                 'responsive' => true,
-                'buttons' => [
+                'buttons' => array(
                     'csv',
-                ],
-                'lengthMenu' => [
+                ),
+                'lengthMenu' => array(
                     20,
                     50,
                     100,
                     200,
-                ],
-            ])
+                ),
+            ))
             ->setTableId('companies-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
@@ -103,11 +103,10 @@ class CompaniesDataTable extends DataTable
      */
     public function getColumns(): array
     {
-        return [
+        return array(
             Column::computed('name')
                 ->title(__('fields.firstname_lastname'))
-                ->sortable(true)
-                ->addClass('firstcol'),
+                ->sortable(true),
             Column::make('email')
                 ->title(__('fields.email')),
             Column::computed('status')
@@ -120,9 +119,9 @@ class CompaniesDataTable extends DataTable
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->addClass('lastcol action-btns')
+                ->addClass('action-btns')
                 ->title(__('fields.action')),
-        ];
+        );
     }
 
     /**

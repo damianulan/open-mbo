@@ -13,7 +13,7 @@ class MBOController extends AppController
 
     public function nav(): MenubarMenu
     {
-        return MenuBuilder::bootMenubar('mbo', [
+        return MenuBuilder::bootMenubar('mbo', array(
             MenuItem::make('objectives')
                 ->setTitle(__('menus.objectives.index'))
                 ->setRoute('objectives.index'),
@@ -23,6 +23,6 @@ class MBOController extends AppController
             MenuItem::make('categories')
                 ->setTitle(__('menus.categories.index'))
                 ->setRoute('categories.index'),
-        ]);
+        ));
     }
 }

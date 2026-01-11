@@ -20,6 +20,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read int|null $activities_count
  * @property-read Collection<int, UserEmployment> $employments
  * @property-read int|null $employments_count
+ * @property-read mixed $trans
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position average(string $column)
@@ -76,14 +77,14 @@ use Spatie\Activitylog\Models\Activity;
  */
 class Position extends BaseModel
 {
-    protected $fillable = [
+    protected $fillable = array(
         'name',
         'description',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'description' => FormattedText::class,
-    ];
+    );
 
     public function employments(): HasMany
     {

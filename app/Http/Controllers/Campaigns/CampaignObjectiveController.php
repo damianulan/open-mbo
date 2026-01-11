@@ -12,10 +12,9 @@ class CampaignObjectiveController extends AppController
 {
     public function store(Request $request, CampaignEditObjectiveForm $form)
     {
-        $request = $form::reformatRequest($request);
-        $response = $form::validateJson($request);
+        $response = $form->validateJson();
         if ('ok' === $response['status']) {
-            $objective = Objective::fillFromRequest($request);
+            $objective = Objective::fillFromRequest();
             if ($objective->save()) {
                 $response['message'] = __('alerts.campaigns.success.objective_added');
 
@@ -28,10 +27,10 @@ class CampaignObjectiveController extends AppController
 
     public function update(Request $request, $id, CampaignEditObjectiveForm $form)
     {
-        $request = $form::reformatRequest($request);
-        $response = $form::validateJson($request, $id);
+
+        $response = $form->validateJson();
         if ('ok' === $response['status']) {
-            $objective = Objective::fillFromRequest($request, $id);
+            $objective = Objective::fillFromRequest($id);
 
             if ($objective->update()) {
                 $response['message'] = __('alerts.campaigns.success.objective_added');
@@ -55,19 +54,21 @@ class CampaignObjectiveController extends AppController
 
     public function addObjectives(Request $request, $id): View
     {
-        $params = [];
+        $params = array();
+        $form = null;
         if ($id) {
             $objective = Objective::find($id);
             if ($objective) {
-                $params = [
-                    'id' => $id,
-                    'form' => CampaignEditObjectiveForm::definition($request, $objective),
-                ];
+                $form = CampaignEditObjectiveForm::bootWithModel($objective);
             }
         } else {
-            $params = [
-                'form' => CampaignEditObjectiveForm::definition($request),
-            ];
+            $form = CampaignEditObjectiveForm::bootWithAttributes($request->get('datas'));
+        }
+        if($form){
+            $params = array(
+                'id' => $id,
+                'form' => $form->getDefinition(),
+            );
         }
 
         return view('components.modals.campaigns.add_objectives', $params);

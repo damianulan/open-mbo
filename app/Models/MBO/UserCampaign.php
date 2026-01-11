@@ -18,7 +18,6 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Activity;
-use Illuminate\Support\Facades\Auth;
 
 /**
  * @property string $id
@@ -33,6 +32,8 @@ use Illuminate\Support\Facades\Auth;
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read Campaign $campaign
+ * @property-read mixed $points
+ * @property-read mixed $trans
  * @property-read User $user
  * @property-read Collection<int, UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
@@ -94,42 +95,50 @@ use Illuminate\Support\Facades\Auth;
  *
  * @mixin \Eloquent
  */
-class UserCampaign extends BaseModel implements HasObjectives, AssignsPoints
+class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
 {
-    use CanUserCampaign, HasCharts;
+    use CanUserCampaign;
+    use HasCharts;
 
-    public $logEntities = ['user_id' => User::class, 'campaign_id' => Campaign::class];
+    public $logEntities = array('user_id' => User::class, 'campaign_id' => Campaign::class);
 
     public $timestamps = true;
 
-    protected $fillable = [
+    protected $fillable = array(
         'campaign_id',
         'user_id',
         'stage',
         'manual',
         'active',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'active' => 'boolean',
         'manual' => 'boolean',
         'stage' => CampaignStage::class,
-    ];
+    );
 
-    protected $dispatchesEvents = [
+    protected $dispatchesEvents = array(
         'created' => UserCampaignAssigned::class,
         'updated' => UserCampaignUpdated::class,
         'deleted' => UserCampaignUnassigned::class,
-    ];
+    );
+
+    protected static function booted(): void
+    {
+        static::addGlobalScope('required_relations', function (Builder $builder): void {
+            $builder->with(['user', 'campaign']);
+        });
+    }
 
     public function user()
     {
-        return $this->belongsTo(User::class)->withTrashed();
+        return $this->belongsTo(User::class);
     }
 
     public function campaign()
     {
-        return $this->belongsTo(Campaign::class)->withTrashed();
+        return $this->belongsTo(Campaign::class);
     }
 
     public function objectives(): HasManyThrough
@@ -145,9 +154,9 @@ class UserCampaign extends BaseModel implements HasObjectives, AssignsPoints
     public function points(): Attribute
     {
         return Attribute::make(
-            get: function () {
+            get: function (): void {
                 $collection = new Collection();
-                $this->user_objectives->each(function (UserObjective $userObjective) use (&$collection) {
+                $this->user_objectives->each(function (UserObjective $userObjective) use (&$collection): void {
                     if ($userObjective->points) {
                         $collection->push($userObjective->points);
                     }
@@ -276,7 +285,7 @@ class UserCampaign extends BaseModel implements HasObjectives, AssignsPoints
         $query->where(function (Builder $query): void {
             $query->whereHas('campaign');
             $query->where('active', 1)
-                ->whereNotIn('stage', [CampaignStage::TERMINATED, CampaignStage::CANCELED, CampaignStage::COMPLETED]);
+                ->whereNotIn('stage', array(CampaignStage::TERMINATED, CampaignStage::CANCELED, CampaignStage::COMPLETED));
         });
     }
 

@@ -9,7 +9,9 @@ use Illuminate\Queue\SerializesModels;
 
 class MailNotificationSent
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
 
     public function __construct(public MailNotification $notification) {}
 }

@@ -19,7 +19,7 @@ class BonusSchemeOptions implements Arrayable, Countable, Jsonable, JsonSerializ
 
     public $manipulate_rewards;
 
-    public function __construct(array $attributes = [])
+    public function __construct(array $attributes = array())
     {
         foreach ($this->defaults() as $key => $value) {
             if (isset($attributes[$key])) {
@@ -29,34 +29,34 @@ class BonusSchemeOptions implements Arrayable, Countable, Jsonable, JsonSerializ
         }
     }
 
-    public static function make(array $attributes = []): static
+    public static function make(array $attributes = array()): static
     {
         return new static($attributes);
     }
 
     public static function fake(): static
     {
-        return new static([
+        return new static(array(
             'bonus' => 0.00,
             'rewards_min_evaluation' => fake()->randomFloat(2, 80, 100),
             'failed_rewards' => fake()->numberBetween(0, 1),
-        ]);
+        ));
     }
 
     public function defaults(): array
     {
-        return [
+        return array(
             'reward_modifier' => 1,
             'campaigns_bonus' => settings('mbo.campaigns_bonus'),
             'rewards_min_evaluation' => settings('mbo.rewards_min_evaluation'),
             'failed_rewards' => settings('mbo.failed_rewards'),
             'manipulate_rewards' => settings('mbo.manipulate_rewards'),
-        ];
+        );
     }
 
     public function rules(): array
     {
-        return [];
+        return array();
     }
 
     public function validator(): void {}

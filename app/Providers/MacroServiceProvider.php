@@ -13,17 +13,14 @@ class MacroServiceProvider extends ServiceProvider
     /**
      * Register services.
      */
-    public function register(): void
-    {
-        //
-    }
+    public function register(): void {}
 
     /**
      * Bootstrap services.
      */
     public function boot(): void
     {
-        //dd(app(MBOSettings::class)->save());
+        // dd(app(MBOSettings::class)->save());
         EloquentCollection::macro('getTotalWeight', function (): float {
             $weight = 0;
             $this->each(function (Model $model) use (&$weight): void {
@@ -31,7 +28,20 @@ class MacroServiceProvider extends ServiceProvider
                     $weight += $model->getWeightAttribute();
                 }
             });
+
             return $weight;
+        });
+
+        EloquentCollection::macro('delete', function (): void {
+            $this->each(function (Model $model): void {
+                $model->delete();
+            });
+        });
+
+        EloquentCollection::macro('purge', function (): void {
+            $this->each(function (Model $model): void {
+                $model->forceDelete();
+            });
         });
     }
 }

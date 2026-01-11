@@ -7,7 +7,7 @@ use App\Support\DataTables\CustomDataTable;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Carbon;
 use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Column;
+use App\Support\DataTables\Column;
 
 class ObjectiveDataTable extends CustomDataTable
 {
@@ -26,9 +26,9 @@ class ObjectiveDataTable extends CustomDataTable
     {
         return (new EloquentDataTable($query))
 
-            ->addColumn('action', fn ($data) => view('pages.mbo.objectives.action', [
+            ->addColumn('action', fn ($data) => view('pages.mbo.objectives.action', array(
                 'data' => $data,
-            ]))
+            )))
             ->editColumn('deadline', function ($data) {
                 $formatedDate = Carbon::parse($data->deadline)->format(config('app.date_format'));
 
@@ -58,7 +58,7 @@ class ObjectiveDataTable extends CustomDataTable
 
     protected function defaultColumns(): array
     {
-        return [
+        return array(
             'name',
             'deadline',
             'weight',
@@ -67,17 +67,16 @@ class ObjectiveDataTable extends CustomDataTable
             'created_at',
             'updated_at',
             'action',
-        ];
+        );
     }
 
     protected function availableColumns(): array
     {
-        return [
+        return array(
             'name' => Column::make('name')
                 ->title(__('forms.mbo.objectives.name'))
                 ->searchable(true)
-                ->orderable(true)
-                ->addClass('firstcol'),
+                ->orderable(true),
             'deadline' => Column::make('deadline')
                 ->title(__('forms.mbo.objectives.deadline'))
                 ->orderable(true),
@@ -97,9 +96,9 @@ class ObjectiveDataTable extends CustomDataTable
             'action' => Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->addClass('lastcol action-btns')
+                ->addClass('action-btns')
                 ->title(__('fields.action')),
-        ];
+        );
     }
 
     /**

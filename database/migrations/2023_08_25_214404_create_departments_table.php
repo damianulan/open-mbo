@@ -13,13 +13,13 @@ return new class() extends Migration
     {
         Schema::create('departments', function (Blueprint $table): void {
             $table->uuid('id')->primary();
-            $table->foreignUuid('parent_id')->nullable();
+            $table->foreignUuid('company_id');
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->string('name', 255);
             $table->longText('description')->nullable();
 
             $table->softDeletes();
             $table->timestamps();
-            $table->index('parent_id');
         });
     }
 

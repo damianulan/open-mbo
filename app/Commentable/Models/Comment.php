@@ -83,30 +83,33 @@ use YMigVal\LaravelModelCache\HasCachedQueries;
  */
 class Comment extends Model
 {
-    use HasCachedQueries, MassPrunable, ModelActivity, Searchable;
+    use HasCachedQueries;
+    use MassPrunable;
+    use ModelActivity;
+    use Searchable;
 
     protected $table = 'commentables';
 
-    protected $fillable = [
+    protected $fillable = array(
         'subject_id',
         'subject_type',
         'author_id',
         'author_type',
         'content',
         'private',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'content' => CommentContent::class,
         'private' => 'boolean',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
-    ];
+    );
 
-    protected $dispatchesEvents = [
+    protected $dispatchesEvents = array(
         'created' => CommentAdded::class,
         'deleted' => CommentDeleted::class,
-    ];
+    );
 
     public function subject(): MorphTo
     {

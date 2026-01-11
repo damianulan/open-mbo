@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -68,10 +68,10 @@ return [
     |
     */
 
-    'chunk' => [
+    'chunk' => array(
         'searchable' => 200,
         'unsearchable' => 200,
-    ],
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -112,16 +112,16 @@ return [
     |
     */
 
-    'algolia' => [
+    'algolia' => array(
         'id' => env('ALGOLIA_APP_ID', ''),
         'secret' => env('ALGOLIA_SECRET', ''),
-        'index-settings' => [
+        'index-settings' => array(
             // 'users' => [
             //     'searchableAttributes' => ['id', 'name', 'email'],
             //     'attributesForFaceting'=> ['filterOnly(email)'],
             // ],
-        ],
-    ],
+        ),
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -136,15 +136,15 @@ return [
     |
     */
 
-    'meilisearch' => [
+    'meilisearch' => array(
         'host' => env('MEILISEARCH_HOST', 'http://localhost:7700'),
         'key' => env('MEILISEARCH_KEY'),
-        'index-settings' => [
+        'index-settings' => array(
             // 'users' => [
             //     'filterableAttributes'=> ['id', 'name', 'email'],
             // ],
-        ],
-    ],
+        ),
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -157,30 +157,30 @@ return [
     |
     */
 
-    'typesense' => [
-        'client-settings' => [
+    'typesense' => array(
+        'client-settings' => array(
             'api_key' => env('TYPESENSE_API_KEY', 'xyz'),
-            'nodes' => [
-                [
+            'nodes' => array(
+                array(
                     'host' => env('TYPESENSE_HOST', 'localhost'),
                     'port' => env('TYPESENSE_PORT', '8108'),
                     'path' => env('TYPESENSE_PATH', ''),
                     'protocol' => env('TYPESENSE_PROTOCOL', 'http'),
-                ],
-            ],
-            'nearest_node' => [
+                ),
+            ),
+            'nearest_node' => array(
                 'host' => env('TYPESENSE_HOST', 'localhost'),
                 'port' => env('TYPESENSE_PORT', '8108'),
                 'path' => env('TYPESENSE_PATH', ''),
                 'protocol' => env('TYPESENSE_PROTOCOL', 'http'),
-            ],
+            ),
             'connection_timeout_seconds' => env('TYPESENSE_CONNECTION_TIMEOUT_SECONDS', 2),
             'healthcheck_interval_seconds' => env('TYPESENSE_HEALTHCHECK_INTERVAL_SECONDS', 30),
             'num_retries' => env('TYPESENSE_NUM_RETRIES', 3),
             'retry_interval_seconds' => env('TYPESENSE_RETRY_INTERVAL_SECONDS', 1),
-        ],
+        ),
         // 'max_total_results' => env('TYPESENSE_MAX_TOTAL_RESULTS', 1000),
-        'model-settings' => [
+        'model-settings' => array(
             // User::class => [
             //     'collection-schema' => [
             //         'fields' => [
@@ -203,7 +203,7 @@ return [
             //         'query_by' => 'name'
             //     ],
             // ],
-        ],
-    ],
+        ),
+    ),
 
-];
+);

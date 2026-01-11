@@ -56,7 +56,7 @@ class ActivityModel extends Activity
 {
     public function scopeLogger(Builder $query): void
     {
-        $query->whereIn('activity_log.event', ['viewed', 'created', 'updated', 'deleted', 'impersonated', 'auth_attempt_success', 'auth_attempt_fail']);
+        $query->whereIn('activity_log.event', array('viewed', 'created', 'updated', 'deleted', 'impersonated', 'auth_attempt_success', 'auth_attempt_fail'));
     }
 
     public function scopeMine(Builder $query): void

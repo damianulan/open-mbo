@@ -13,7 +13,7 @@ class SettingsController extends AppController
 
     public function nav(): MenubarMenu
     {
-        return MenuBuilder::bootMenubar('settings', [
+        return MenuBuilder::bootMenubar('settings', array(
             MenuItem::make('general')
                 ->setTitle(__('menus.settings.general.index'))
                 ->permission('settings-general')
@@ -41,6 +41,6 @@ class SettingsController extends AppController
                 ->setTitle(__('menus.settings.logs.index'))
                 ->permission('settings-logs')
                 ->setRoute('settings.logs.index'),
-        ]);
+        ));
     }
 }

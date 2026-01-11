@@ -9,5 +9,7 @@ use Illuminate\Queue\InteractsWithQueue;
 
 class SendNotification implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
 }

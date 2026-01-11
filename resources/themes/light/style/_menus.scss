@@ -138,6 +138,9 @@ html .sidebar-menu {
     bottom: 0;
     left: 0;
     right: 0;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
 }
 
 .sidebar-menu .sidebar-footer .menu-release {
@@ -152,6 +155,7 @@ html .sidebar-menu {
 }
 
 .brand {
+    width: 100%;
     display: flex;
     align-items: center;
     color: $sidebar-brand-link;
@@ -160,14 +164,10 @@ html .sidebar-menu {
 }
 
 .brand .brand-title {
-    font-weight: 400;
+    font-weight: 800;
     font-family: $font-family-serif;
     letter-spacing: 0.05rem;
-    font-size: 1.1rem;
-}
-
-.brand .brand-title .brand-title-2 {
-    font-weight: 800;
+    font-size: 1.25rem;
 }
 
 .brand .brand-icon {
@@ -611,6 +611,10 @@ a.dropdown-toggle {
 
 .icon-btn {
     font-size: 1.5rem;
+}
+
+.icon-btn span {
+    font-weight: bold;
 }
 
 .icon-btn-sm {

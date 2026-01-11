@@ -2,11 +2,11 @@
 
 namespace App\Enums\Forms;
 
-use Lucent\Support\Enum;
+use Enumerable\Laravel\Enum;
 
 class StructureField extends Enum
 {
-    const TEXT = 'text';
+    public const TEXT = 'text';
 
-    const SELECT = 'select';
+    public const SELECT = 'select';
 }

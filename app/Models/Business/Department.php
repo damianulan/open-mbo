@@ -14,7 +14,7 @@ use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property string $id
- * @property string|null $parent_id
+ * @property string $company_id
  * @property string $name
  * @property string|null $description
  * @property Carbon|null $deleted_at
@@ -24,11 +24,12 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read int|null $activities_count
  * @property-read Collection<int, Department> $children
  * @property-read int|null $children_count
+ * @property-read Company $company
  * @property-read Collection<int, UserEmployment> $employments
  * @property-read int|null $employments_count
  * @property-read Collection<int, User> $managers
  * @property-read int|null $managers_count
- * @property-read Department|null $parent
+ * @property-read mixed $trans
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department average(string $column)
@@ -71,12 +72,12 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department truncate()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department updateOrInsert(array $attributes, $values = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department updateQuietly(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department whereCompanyId($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department whereCreatedAt($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department whereDeletedAt($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department whereDescription($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department whereId($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department whereName($value)
- * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department whereParentId($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Department withoutCache()
@@ -86,20 +87,20 @@ use Spatie\Activitylog\Models\Activity;
  */
 class Department extends BaseModel
 {
-    protected $fillable = [
-        'parent_id',
+    protected $fillable = array(
+        'company_id',
         'name',
         'description',
-    ];
+    );
 
     public function children(): HasMany
     {
         return $this->hasMany(self::class, 'parent_id');
     }
 
-    public function parent(): BelongsTo
+    public function company(): BelongsTo
     {
-        return $this->belongsTo(self::class, 'parent_id');
+        return $this->belongsTo(Company::class, 'company_id');
     }
 
     public function managers(): MorphToMany

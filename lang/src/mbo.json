@@ -1,0 +1,202 @@
+{
+    "buttons": {
+        "add_objective": {
+            "pl": "Dodaj cel",
+            "en": "Add objective"
+        }
+    },
+    "campaign": {
+        "pl": "Kampania",
+        "en": "Campaign"
+    },
+    "campaign_coordinators": {
+        "pl": "Koordynatorzy Kampanii",
+        "en": "Campaign coordinators"
+    },
+    "campaigns": {
+        "pl": "Kampanie",
+        "en": "Campaigns"
+    },
+    "campaigns_full": {
+        "pl": "Kampanie pomiarowe",
+        "en": "Campaigns"
+    },
+    "category_admins": {
+        "pl": "Administratorzy Kategorii",
+        "en": "Category administrators"
+    },
+    "completed": {
+        "pl": "Ukończone",
+        "en": "Completed"
+    },
+    "enroled_users": {
+        "pl": "Zapisani Użytkownicy",
+        "en": "Enrolled users"
+    },
+    "entities": {
+        "campaign": {
+            "pl": "Kampania pomiarowa",
+            "en": "Campaign"
+        }
+    },
+    "evaluated": {
+        "pl": "Rozliczone",
+        "en": "Evaluated"
+    },
+    "failed": {
+        "pl": "Niezaliczone",
+        "en": "Failed"
+    },
+    "general_objectives": {
+        "pl": "Cele podstawowe",
+        "en": "General objectives"
+    },
+    "info": {
+        "campaign_related": {
+            "pl": "Cel powiązany z kampanią: :campaign [:period]",
+            "en": "Objective related to campaign: :campaign [:period]"
+        },
+        "campaign_stage_changed": {
+            "pl": "Przesunięto etap zapisu na: :stage",
+            "en": "Switched campaign stage to: :stage"
+        },
+        "manual_off": {
+            "pl": "Przełączono tryb zapisu na automatyczny.",
+            "en": "Switched manual mode to automatic."
+        },
+        "manual_on": {
+            "pl": "Przełączono tryb zapisu na ręczny.",
+            "en": "Switched manual mode to manual."
+        },
+        "no_c_coordinators_added": {
+            "pl": "Nie dodano jeszcze żadnych koordynatorów dla tej kampanii.",
+            "en": "No coordinators have been added yet for this campaign."
+        },
+        "no_category_admins_added": {
+            "pl": "Ta kategoria nie ma swoich administratorów.",
+            "en": "This category has no category administrators."
+        },
+        "no_objectives_added": {
+            "pl": "Nie dodano jeszcze żadnych celów.",
+            "en": "No objectives have been added yet."
+        },
+        "no_users_added": {
+            "pl": "Nie dodano jeszcze żadnych użytkowników.",
+            "en": "No users have been added yet."
+        },
+        "objective_admins": {
+            "pl": "Administratorzy przypisani do kategorii celu, mogą zarządzać podległymi sobie celami",
+            "en": "Category objective administrators, they can manage the objectives of their own category"
+        },
+        "objective_failed_no_users": {
+            "pl": "Nie odnotowano żadnych użytkowników, którzy nie zaliczyli tego celu.",
+            "en": "No users have yet failed this objective."
+        },
+        "objective_not_evaluated_no_users": {
+            "pl": "Żaden użytkownik nie realizuje tego celu.",
+            "en": "No user has yet realized this objective."
+        },
+        "objective_passed_no_users": {
+            "pl": "Żaden z zapisanych użytkowników nie zaliczył jeszcze tego celu.",
+            "en": "No user has yet passed this objective."
+        }
+    },
+    "linked_to_campaigns": {
+        "pl": "Powiązano z kampaniami",
+        "en": "Linked to campaigns"
+    },
+    "not_evaluated": {
+        "pl": "Nierozliczone",
+        "en": "Not evaluated"
+    },
+    "num_participants": {
+        "pl": "Liczba uczestników",
+        "en": "Number of participants"
+    },
+    "objective": {
+        "pl": "Cel",
+        "en": "Objective"
+    },
+    "objective_admins": {
+        "pl": "Administratorzy Celu",
+        "en": "Objective administrators"
+    },
+    "objective_status": {
+        "completed": {
+            "pl": "W rozliczeniu",
+            "en": "Completed"
+        },
+        "failed": {
+            "pl": "Niezaliczony",
+            "en": "Failed"
+        },
+        "interrupted": {
+            "pl": "Przerwany",
+            "en": "Interrupted"
+        },
+        "passed": {
+            "pl": "Zaliczony",
+            "en": "Passed"
+        },
+        "progress": {
+            "pl": "W trakcie",
+            "en": "In progress"
+        },
+        "unstarted": {
+            "pl": "Nierozpoczęty",
+            "en": "Unstarted"
+        }
+    },
+    "objectives": {
+        "fail": {
+            "pl": "Oznacz cel jako niezaliczony",
+            "en": "Fail"
+        },
+        "failed": {
+            "pl": "Niezaliczony",
+            "en": "Failed"
+        },
+        "index": {
+            "pl": "Cele",
+            "en": "Objectives"
+        },
+        "pass": {
+            "pl": "Oznacz cel jako zaliczony",
+            "en": "Pass"
+        },
+        "passed": {
+            "pl": "Zaliczony",
+            "en": "Passed"
+        },
+        "users": {
+            "completed": {
+                "pl": "Podejścia rozliczone",
+                "en": "Completed"
+            },
+            "inprogress": {
+                "pl": "Podejścia nierozliczone",
+                "en": "In progress"
+            }
+        }
+    },
+    "passed": {
+        "pl": "Zaliczone",
+        "en": "Passed"
+    },
+    "progress": {
+        "pl": "W trakcie",
+        "en": "In progress"
+    },
+    "rewards": {
+        "pl": "Punkty nagrody",
+        "en": "Rewards"
+    },
+    "uncompleted": {
+        "pl": "Nieukończone",
+        "en": "Uncompleted"
+    },
+    "unstarted": {
+        "pl": "Nierozpoczęte",
+        "en": "Unstarted"
+    }
+}

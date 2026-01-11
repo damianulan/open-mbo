@@ -4,28 +4,41 @@ namespace Database\Factories\Business;
 
 use App\Models\Business\Position;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Collection;
 
 class PositionFactory extends Factory
 {
-    public static function seedAdminPositions(): void
+    public static function seedPositions(int $num = 10): void
     {
-        $positions = [
+        $dict = self::dict_pl();
+        $required = array(
             'CEO' => 'Chief Executive Officer',
             'CTO' => 'Chief Technology Officer',
             'CFO' => 'Chief Financial Officer',
-        ];
+        );
 
-        foreach ($positions as $name => $description) {
-            Position::create([
+        foreach ($required as $name => $description) {
+            Position::create(array(
                 'name' => $name,
                 'description' => $description,
-            ]);
+            ));
+        }
+
+        for ($i = $num; $i > 0; $i--) {
+            $d = $dict->pull($i);
+
+            Position::create(array(
+                'name' => $d,
+            ));
         }
     }
 
-    public static function dict_pl(): array
+    public static function dict_pl(): Collection
     {
-        return [
+        return Collection::make(array(
+            'CEO',
+            'CTO',
+            'CFO',
             'Asystent biurowy',
             'Asystent administracyjny',
             'Asystent zarządu',
@@ -280,7 +293,7 @@ class PositionFactory extends Factory
             'Rejestrator dokumentów',
             'Operator wprowadzania danych',
             'Weryfikator danych',
-        ];
+        ));
     }
 
     /**
@@ -295,10 +308,10 @@ class PositionFactory extends Factory
             $title = $this->jobTitle();
         }
 
-        return [
+        return array(
             'name' => $title,
             'description' => fake()->realTextBetween(300, 900),
-        ];
+        );
     }
 
     public function jobTitle(): string

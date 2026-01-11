@@ -13,6 +13,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read User|null $approved_by
  * @property-read BonusScheme|null $bonus_scheme
  * @property-read Campaign|null $campaign
+ * @property-read mixed $trans
  * @property-read User|null $user
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment active()
@@ -63,13 +64,13 @@ use Spatie\Activitylog\Models\Activity;
  */
 class UserBonusAssignment extends BaseModel
 {
-    protected $fillable = [
+    protected $fillable = array(
         'user_id',
         'bonus_scheme_id',
         'campaign_id',
         'score',
         'approved_by',
-    ];
+    );
 
     public function user()
     {

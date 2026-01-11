@@ -14,46 +14,48 @@ use Sentinel\Models\Role;
 
 class UserEditForm extends Form
 {
-    public static function definition(Request $request, $model = null): FormBuilder
+    public function definition(FormBuilder $builder): FormBuilder
     {
         $route = route('users.store');
         $method = 'POST';
-        $exclude = [];
-        $selected = [];
+        $exclude = array();
+        $selected = array();
         $profile = null;
-        if ( ! is_null($model)) {
+        if ( ! is_null($this->model)) {
             $method = 'PUT';
-            $route = route('users.update', $model->id);
-            $profile = $model->profile;
+            $route = route('users.update', $this->model->id);
+            $profile = $this->model->profile;
 
-            $selected = $model->supervisors->pluck('id')->toArray();
+            $selected = $this->model->supervisors->pluck('id')->toArray();
         }
 
-        return FormBuilder::boot($request, $method, $route, 'users_edit')
+        return $builder->setId(is_null($this->model) ? 'user_create' : 'user_edit')
+            ->setMethod($method)
+            ->setAction($route)
             ->class('users-create-form')
             ->add(FormComponent::text('firstname', $profile)->label(__('forms.users.firstname')))
             ->add(FormComponent::text('lastname', $profile)->label(__('forms.users.lastname')))
-            ->add(FormComponent::text('email', $model)->label(__('forms.users.email')))
+            ->add(FormComponent::text('email', $this->model)->label(__('forms.users.email')))
             ->add(FormComponent::select('gender', $profile, Dictionary::fromEnum(Gender::class))
                 ->label(__('forms.users.gender')))
             ->add(FormComponent::birthdate('birthday', $profile)->label(__('forms.users.birthday')))
-            ->add(FormComponent::multiselect('roles_ids', $model, Dictionary::fromAssocArray(Role::getSelectList()), 'roles')
+            ->add(FormComponent::multiselect('roles_ids', $this->model->roles, Dictionary::fromAssocArray(Role::getSelectList()))
                 ->label(__('forms.users.roles')))
-            ->add(FormComponent::multiselect('supervisors_ids', $model, Dictionary::fromModel(User::class, 'name', 'allActive', $exclude), 'supervisors', $selected)
+            ->add(FormComponent::multiselect('supervisors_ids', $selected, Dictionary::fromModel(User::class, 'name', 'allActive', $exclude))
                 ->label(__('forms.users.supervisors')))
-            ->onCondition( ! is_null($model), function (FormBuilder $builder): void {
+            ->when( ! is_null($this->model), function (FormBuilder $builder): void {
                 $builder->addButton(new Button(title: __('buttons.add_employment'), classes: 'btn-outline-primary add-employment'));
             })
             ->addSubmit();
     }
 
-    public static function validation(Request $request, $model = null): array
+    public function validation(): array
     {
-        return [
+        return array(
             'firstname' => 'max:255|required',
             'lastname' => 'max:255|required',
             'email' => 'max:255|email|required',
             'birthday' => 'date|nullable',
-        ];
+        );
     }
 }

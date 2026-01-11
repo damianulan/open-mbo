@@ -6,48 +6,48 @@ use Sentinel\Config\Warden\RoleWarden;
 
 final class RolesLib extends RoleWarden
 {
-    const ROOT = 'root';
+    public const ROOT = 'root';
 
-    const HELPDESK = 'support';
+    public const HELPDESK = 'support';
 
-    const ADMIN = 'admin';
+    public const ADMIN = 'admin';
 
-    const ADMIN_MBO = 'admin_mbo';
+    public const ADMIN_MBO = 'admin_mbo';
 
-    const ADMIN_HR = 'admin_hr';
+    public const ADMIN_HR = 'admin_hr';
 
-    const EMPLOYEE = 'employee';
+    public const EMPLOYEE = 'employee';
 
     // non-assignable - context-required
-    const OBJECTIVE_COORDINATOR = 'objective_coordinator';
+    public const OBJECTIVE_COORDINATOR = 'objective_coordinator';
 
-    const CAMPAIGN_COORDINATOR = 'campaign_coordinator';
+    public const CAMPAIGN_COORDINATOR = 'campaign_coordinator';
 
-    const DIRECTOR = 'director';
+    public const DIRECTOR = 'director';
 
-    const MANAGER = 'manager';
+    public const MANAGER = 'manager';
 
-    const TEAM_LEADER = 'team_leader';
+    public const TEAM_LEADER = 'team_leader';
 
-    const SUPERVISOR = 'supervisor';
+    public const SUPERVISOR = 'supervisor';
 
     public static function assignable(): array
     {
-        return [
+        return array(
             self::EMPLOYEE,
             self::ADMIN,
             self::ADMIN_MBO,
             self::ADMIN_HR,
-        ];
+        );
     }
 
     public static function admins(): array
     {
-        return [
+        return array(
             self::ADMIN,
             self::ROOT,
             self::HELPDESK,
-        ];
+        );
     }
 
     public static function labels(): array

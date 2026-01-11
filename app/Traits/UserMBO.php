@@ -8,7 +8,9 @@ use App\Models\MBO\Objective;
 use App\Models\MBO\UserBonusScheme;
 use App\Models\MBO\UserCampaign;
 use App\Models\MBO\UserObjective;
+use App\Models\MBO\UserPoints;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
@@ -31,10 +33,10 @@ trait UserMBO
     public function assignBonusScheme(BonusScheme $scheme): void
     {
         $this->user_bonus_scheme()->delete();
-        $this->user_bonus_scheme()->create([
+        $this->user_bonus_scheme()->create(array(
             'user_id' => $this->id,
             'bonus_scheme_id' => $scheme->id,
-        ]);
+        ));
     }
 
     public function objectives(): HasManyThrough
@@ -50,6 +52,18 @@ trait UserMBO
     public function bonus_scheme(): HasOneThrough
     {
         return $this->hasOneThrough(BonusScheme::class, UserBonusScheme::class, 'user_id', 'id', 'id', 'bonus_scheme_id');
+    }
+
+    public function awards(): HasMany
+    {
+        return $this->hasMany(UserPoints::class, 'user_id');
+    }
+
+    public function points(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->awards->sum('points'),
+        );
     }
 
     public function campaigns(): HasMany
@@ -69,6 +83,6 @@ trait UserMBO
 
     public function isMBOAdmin(): bool
     {
-        return $this->hasAnyRoles(['root', 'support', 'admin', 'admin_mbo']);
+        return $this->hasAnyRoles(array('root', 'support', 'admin', 'admin_mbo'));
     }
 }

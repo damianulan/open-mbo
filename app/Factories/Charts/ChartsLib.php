@@ -10,7 +10,7 @@ abstract class ChartsLib
 
     protected $type;
 
-    public function __construct(private array $options = []) {}
+    public function __construct(private array $options = array()) {}
 
     protected function getChart(): Chart
     {

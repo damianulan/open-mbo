@@ -2,7 +2,7 @@
 
 namespace App\Support\Notifications\Enums;
 
-use Lucent\Support\Enum;
+use Enumerable\Laravel\Enum;
 
 class NotificationType extends Enum
 {

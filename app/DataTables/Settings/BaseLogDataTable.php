@@ -13,10 +13,10 @@ class BaseLogDataTable extends CustomDataTable
         if ($data->subject) {
             $routeName = __('logging.route_mapping.' . $data->subject_type);
             if (Route::has($routeName)) {
-                return view('components.datatables.link', [
+                return view('components.datatables.link', array(
                     'route' => route($routeName, $data->subject_id),
                     'text' => $data->subject->name ?? null,
-                ]);
+                ));
             }
             report(new DataTablesException('Route not found: ' . $routeName));
 

@@ -23,10 +23,13 @@ use Spatie\Activitylog\Models\Activity;
  * @property Carbon|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
+ * @property-read Collection<int, Department> $departments
+ * @property-read int|null $departments_count
  * @property-read Collection<int, UserEmployment> $employments
  * @property-read int|null $employments_count
  * @property-read Collection<int, Location> $locations
  * @property-read int|null $locations_count
+ * @property-read mixed $trans
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company average(string $column)
@@ -87,25 +90,30 @@ use Spatie\Activitylog\Models\Activity;
  */
 class Company extends BaseModel
 {
-    protected $fillable = [
+    protected $fillable = array(
         'name',
         'shortname',
         'description',
         'logo',
         'taxpayerid',
         'founded_at',
-    ];
+    );
 
-    protected $dates = [
+    protected $dates = array(
         'founded_at',
         'created_at',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'description' => FormattedText::class,
         'founded_at' => 'date',
         'created_at' => 'datetime',
-    ];
+    );
+
+    public function departments(): HasMany
+    {
+        return $this->hasMany(Department::class);
+    }
 
     public function employments(): HasMany
     {

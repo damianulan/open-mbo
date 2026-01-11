@@ -3,7 +3,7 @@
 use Illuminate\Database\Eloquent\Relations\MorphPivot;
 use Spatie\Tags\Tag;
 
-return [
+return array(
 
     /*
      * The given function generates a URL friendly "slug" from the tag name property before saving it.
@@ -19,7 +19,7 @@ return [
     /*
      * The name of the table associated with the taggable morph relation.
      */
-    'taggable' => [
+    'taggable' => array(
         'table_name' => 'taggables',
         'morph_name' => 'taggable',
 
@@ -27,5 +27,5 @@ return [
          * The fully qualified class name of the pivot model.
          */
         'class_name' => MorphPivot::class,
-    ],
-];
+    ),
+);

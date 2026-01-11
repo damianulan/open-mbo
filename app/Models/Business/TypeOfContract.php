@@ -19,6 +19,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read int|null $activities_count
  * @property-read Collection<int, UserEmployment> $employments
  * @property-read int|null $employments_count
+ * @property-read mixed $trans
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|TypeOfContract active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|TypeOfContract average(string $column)
@@ -74,18 +75,18 @@ use Spatie\Activitylog\Models\Activity;
  */
 class TypeOfContract extends BaseModel
 {
-    public static $contracts = [
+    public static $contracts = array(
         'uop',
         'uz',
         'b2b',
         'uod',
-    ];
+    );
 
-    protected $fillable = [
+    protected $fillable = array(
         'name',
         'shortname',
         'description',
-    ];
+    );
 
     public static function findByShortname($name): ?self
     {

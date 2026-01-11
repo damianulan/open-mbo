@@ -21,10 +21,11 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Collection;
 use Lucent\Support\Traits\Dispatcher;
 use Spatie\Activitylog\Models\Activity;
+use Spatie\Translatable\HasTranslations;
 
 /**
  * @property string $id
- * @property string $name
+ * @property array<array-key, mixed> $name
  * @property string $period
  * @property mixed|null $description
  * @property string|null $definition_from
@@ -51,6 +52,8 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read int|null $objectives_count
  * @property-read mixed $timeend
  * @property-read mixed $timestart
+ * @property-read mixed $trans
+ * @property-read mixed $translations
  * @property-read EloquentCollection<int, UserCampaign> $user_campaigns
  * @property-read int|null $user_campaigns_count
  * @property-read EloquentCollection<int, UserObjective> $user_objectives
@@ -110,6 +113,10 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereEvaluationFrom($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereEvaluationTo($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereId($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereJsonContainsLocale(string $column, string $locale, ?mixed $value, string $operand = '=')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereJsonContainsLocales(string $column, array $locales, ?mixed $value, string $operand = '=')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereLocale(string $column, string $locale)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereLocales(string $column, array $locales)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereManual($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereName($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereOngoing()
@@ -130,14 +137,17 @@ use Spatie\Activitylog\Models\Activity;
 class Campaign extends BaseModel implements HasObjectives
 {
     use Dispatcher;
+    use HasTranslations;
 
     public $stages;
 
     public $timestamps = true;
 
+    public array $translatable = array('name');
+
     protected $log_name = 'mbo';
 
-    protected $fillable = [
+    protected $fillable = array(
         'name',
         'period',
         'description',
@@ -156,23 +166,23 @@ class Campaign extends BaseModel implements HasObjectives
 
         'draft',
         'manual',
-    ];
+    );
 
-    protected $casts = [
+    protected $casts = array(
         'description' => FormattedText::class,
         'draft' => 'boolean',
         'manual' => 'boolean',
         'stage' => CampaignStage::class,
-    ];
+    );
 
-    protected $defaults = [
+    protected $defaults = array(
         'stage' => CampaignStage::PENDING,
-    ];
+    );
 
-    protected $dispatchesEvents = [
+    protected $dispatchesEvents = array(
         'updated' => CampaignUpdated::class,
         'created' => CampaignCreated::class,
-    ];
+    );
 
     public static function creatingCampaign(Campaign $model)
     {
@@ -211,7 +221,7 @@ class Campaign extends BaseModel implements HasObjectives
     public function refreshCoordinators(?array $user_ids)
     {
         if ( ! $user_ids) {
-            $user_ids = [];
+            $user_ids = array();
         }
 
         $current = $this->coordinators->pluck('id')->toArray();
@@ -238,12 +248,12 @@ class Campaign extends BaseModel implements HasObjectives
     {
         $exists = $this->user_campaigns()->where('user_id', $user_id)->exists();
         if ( ! $exists) {
-            $this->user_campaigns()->create([
+            $this->user_campaigns()->create(array(
                 'user_id' => $user_id,
                 'stage' => $this->setUserStage($user_id),
                 'manual' => $this->manual,
                 'active' => $this->draft ? 0 : 1,
-            ]);
+            ));
         }
 
         return true;
@@ -261,7 +271,7 @@ class Campaign extends BaseModel implements HasObjectives
 
     public function setUserStage($user_id = null)
     {
-        $params = ['manual' => 0, 'active' => 1, 'campaign_id' => $this->id];
+        $params = array('manual' => 0, 'active' => 1, 'campaign_id' => $this->id);
         if ($user_id) {
             $params['user_id'] = $user_id;
         }
@@ -286,7 +296,7 @@ class Campaign extends BaseModel implements HasObjectives
         $stage = CampaignStage::PENDING;
         $now = Carbon::now();
 
-        if ( ! in_array($this->stage, [CampaignStage::TERMINATED, CampaignStage::CANCELED])) {
+        if ( ! in_array($this->stage, array(CampaignStage::TERMINATED, CampaignStage::CANCELED))) {
             foreach (CampaignStage::softValues() as $tmp) {
                 $prop_start = $tmp . '_from';
                 $prop_end = $tmp . '_to';
@@ -385,12 +395,12 @@ class Campaign extends BaseModel implements HasObjectives
 
     public function dateStart(): string
     {
-        return $this->definition_from;
+        return $this->definition_from ?? '';
     }
 
     public function dateEnd(): string
     {
-        return $this->self_evaluation_to;
+        return $this->self_evaluation_to ?? '';
     }
 
     public function inDates(): bool
@@ -543,7 +553,7 @@ class Campaign extends BaseModel implements HasObjectives
     {
         $query->where('draft', 0)
             ->where(function (Builder $q): void {
-                $q->whereIn('stage', [CampaignStage::PENDING, CampaignStage::IN_PROGRESS]);
+                $q->whereIn('stage', array(CampaignStage::PENDING, CampaignStage::IN_PROGRESS));
             });
     }
 
@@ -559,7 +569,7 @@ class Campaign extends BaseModel implements HasObjectives
     public function scopeWhereCompleted(Builder $query): void
     {
         $query->where('draft', 0)
-            ->whereNotIn('stage', [CampaignStage::TERMINATED, CampaignStage::CANCELED])
+            ->whereNotIn('stage', array(CampaignStage::TERMINATED, CampaignStage::CANCELED))
             ->where(function (Builder $q): void {
                 $q->where('stage', CampaignStage::COMPLETED)
                     ->orWhereDate('self_evaluation_to', '<', Carbon::now());

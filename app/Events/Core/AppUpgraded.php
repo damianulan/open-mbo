@@ -7,7 +7,8 @@ use Illuminate\Queue\SerializesModels;
 
 class AppUpgraded
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable;
+    use SerializesModels;
 
     /**
      * Create a new event instance.

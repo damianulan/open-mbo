@@ -16,11 +16,10 @@ class RedirectIfAuthenticated
      *
      * @param  Closure(Request): (Response|RedirectResponse)  $next
      * @param  string|null  ...$guards
-     * @return Response|RedirectResponse
      */
-    public function handle(Request $request, Closure $next, ...$guards)
+    public function handle(Request $request, Closure $next, ...$guards): Response|RedirectResponse
     {
-        $guards = empty($guards) ? [null] : $guards;
+        $guards = empty($guards) ? array(null) : $guards;
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
