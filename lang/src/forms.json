@@ -506,5 +506,23 @@
         "stable": {
             "pl": "Najnowsza stabilna wersja"
         }
+    },
+    "reset_password": {
+        "force": {
+            "title": {
+                "pl": "Zmiana hasła"
+            },
+            "info": {
+                "pl": "Twoje obecne hasło wygasło. Aby kontynuować, musisz ustawić nowe."
+            }
+        },
+        "normal": {
+            "title": {
+                "pl": "Reset hasła"
+            },
+            "info": {
+                "pl": "Wprowadź poniżej nowe hasło."
+            }
+        }
     }
 }

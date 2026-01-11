@@ -22,8 +22,17 @@ class Authenticate extends Middleware
     public function handle($request, Closure $next, ...$guards)
     {
         $this->authenticate($request, $guards);
-        $this->ensureEmailIsVerified($request); // TODO
-        $this->ensureForcePasswordChange($request);
+        $user = $this->auth->user();
+
+        if($user && !$user->isImpersonating()){
+            $this->ensureEmailIsVerified($request); // TODO
+            if(! $this->ensureEmailIsVerified($request)){
+
+            }
+            if ($this->ensureForcePasswordChange($request)) {
+                return redirect()->route('password.change.index');
+            }
+        }
 
         return $next($request);
     }
@@ -45,13 +54,11 @@ class Authenticate extends Middleware
         return true;
     }
 
-    protected function ensureForcePasswordChange(Request $request): void
+    protected function ensureForcePasswordChange(Request $request): bool
     {
         $user = $this->getUser();
-        $config = (config('users.password_change_firstlogin') && $this->isFirstLogin()) || (config('users.force_password_change_reset') && $user->force_password_change);
-        if ($user && $config && ! $user->hasRole('root')) {
-            redirect()->route('password.change');
-        }
+        $config = (settings('users.password_change_firstlogin') && $this->isFirstLogin()) || (settings('users.force_password_change_reset') && $user->force_password_change);
+        return $user && $config && ! $user->hasRole('root');
     }
 
     /**

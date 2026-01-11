@@ -230,10 +230,11 @@ class UsersController extends AppController
             unauthorized();
         }
         try {
-            $user->generatePassword();
+            $password = $user->getNewPassword();
+            $user->generatePassword($password);
             $user->force_password_change = 1;
             if($user->save()){
-                return redirect()->back()->with('success_alert', $user->password);
+                return redirect()->back()->with('success_alert', $password);
             }
             return redirect()->back()->with('success', __('alerts.users.success.reset_password'));
         } catch (UnauthorizedAccess $th) {

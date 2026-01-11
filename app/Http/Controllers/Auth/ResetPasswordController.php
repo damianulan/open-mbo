@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Core\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rules\Password as PasswordRules;
+use App\Rules\Password as PasswordRules;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
+use Illuminate\Auth\Events\PasswordReset;
 
 class ResetPasswordController extends Controller
 {
@@ -25,7 +28,6 @@ class ResetPasswordController extends Controller
 
     use ResetsPasswords;
 
-
     public function showForceResetForm(Request $request)
     {
         return view('auth.passwords.password_change')->with(
@@ -39,7 +41,7 @@ class ResetPasswordController extends Controller
 
         try {
             $request->validate($this->forceRules(), $this->validationErrorMessages());
-            $user = $this->getUser();
+            $user = Auth::user();
             $password = $request->get('password');
             $this->resetPassword($user, $password);
             $response = Password::PASSWORD_RESET;
@@ -60,8 +62,23 @@ class ResetPasswordController extends Controller
     protected function forceRules()
     {
         return [
-            'password' => ['required', 'confirmed', PasswordRules::defaults()],
+            'password' => ['required', 'confirmed', new PasswordRules],
         ];
+    }
+
+
+    protected function resetPassword($user, $password)
+    {
+        $this->setUserPassword($user, $password);
+
+        $user->setRememberToken(Str::random(60));
+        $user->force_password_change = 0;
+
+        $user->save();
+
+        event(new PasswordReset($user));
+
+        $this->guard()->login($user);
     }
 
 

@@ -11,6 +11,9 @@
     "email": {
         "pl": "E-mail"
     },
+    "username": {
+        "pl": "Nazwa użytkownika"
+    },
     "firstname": {
         "pl": "Imię"
     },
@@ -39,6 +42,9 @@
     },
     "password": {
         "pl": "Hasło"
+    },
+    "password_confirm": {
+        "pl": "Powtórz hasło"
     },
     "position": {
         "pl": "Stanowisko"

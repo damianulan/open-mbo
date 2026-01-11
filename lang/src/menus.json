@@ -268,5 +268,13 @@
             "pl": "Profil użytkownika",
             "en": "User profile"
         }
+    },
+    "password": {
+        "change": {
+            "index": {
+                "pl": "Zmiana hasła",
+                "en": "Change password"
+            }
+        }
     }
 }
