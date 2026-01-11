@@ -16,6 +16,7 @@ return new class() extends Migration
             $table->string('group')->index();
             $table->string('key');
             $table->json('text');
+            $table->boolean('editable')->default(0);
             $table->timestamps();
         });
     }

@@ -25,15 +25,23 @@ final class PermissionsLib extends PermissionWarden
 
     public const USERS_VIEW = 'users-view';
 
+    public const USERS_VIEW_DELETED = 'users-view-deleted';
+
     public const USERS_CREATE = 'users-create';
 
     public const USERS_EDIT = 'users-edit';
+
+    public const USERS_EMPLOYMENTS_MANAGE = 'users-employments-manage';
 
     public const USERS_TEAMS = 'users-teams';
 
     public const USERS_DELETE = 'users-delete';
 
     public const USERS_RESTORE = 'users-restore';
+
+    public const USERS_SUSPEND = 'users-suspend';
+
+    public const USERS_PASSWORD_RESET = 'users-password-reset';
 
     // settings
     public const SETTINGS_GENERAL = 'settings-general';
@@ -139,11 +147,15 @@ final class PermissionsLib extends PermissionWarden
             self::USERS_IMPERSONATE => array('admins'),
             self::USERS_LIST => array('admins', 'admin_mbo', 'admin_hr', 'supervisor'), // and probably any other superior roles and team leader @TODO later
             self::USERS_VIEW => array('admins', 'admin_mbo', 'admin_hr', 'supervisor'), // and probably any other superior roles and team leader @TODO later
+            self::USERS_VIEW_DELETED => array('admins'),
+            self::USERS_EMPLOYMENTS_MANAGE => array('admins', 'admin_hr'),
             self::USERS_CREATE => array('admins'),
             self::USERS_EDIT => array('admins', 'admin_hr'), // includes assigning assignable roles (not based on role context)
             self::USERS_TEAMS => array('admins', 'admin_hr'),
             self::USERS_DELETE => array('admins'),
             self::USERS_RESTORE => array('admins'),
+            self::USERS_SUSPEND => array('admins', 'admin_hr'),
+            self::USERS_PASSWORD_RESET => array('admins', 'admin_hr', 'supervisor'),
 
             // settings
             self::SETTINGS_GENERAL => array('admins'),
@@ -162,7 +174,7 @@ final class PermissionsLib extends PermissionWarden
             self::MBO_CATEGORIES => array('admins', 'admin_mbo'),
 
             // reports
-            self::REPORTS_VIEW => array('admins', 'admin_mbo', 'supervisor'), // and probably any other superior roles and team leader @TODO later
+            self::REPORTS_VIEW => array('admins', 'admin_mbo', 'admin_hr', 'supervisor'), // and probably any other superior roles and team leader @TODO later
 
             // mbo
             self::MBO_TEMPLATES_VIEW => array('admins', 'admin_mbo', 'objective_coordinator'),

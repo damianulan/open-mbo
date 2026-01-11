@@ -12,6 +12,17 @@ use Illuminate\Support\Arr;
 
 class LanguageSeeder extends Seeder
 {
+
+    /**
+     * Parts of lang locations is enough
+     *
+     * @var array
+     */
+    private $editables = [
+        'alerts.%',
+        'auth.failed',
+    ];
+
     /**
      * Run the database seeds.
      */
@@ -36,22 +47,37 @@ class LanguageSeeder extends Seeder
 
                 foreach ($lines as $key => $value) {
                     $instance = LanguageLine::where('group', $group)->where('key', $key)->first();
+                    $editable = $this->isEditable($group, $key);
 
                     if ($instance) {
                         $instance->group = $group;
                         $instance->key = $key;
                         $instance->text = $value;
+                        $instance->editable = $editable;
                         $instance->update();
                     } else {
                         LanguageLine::create(array(
                             'group' => $group,
                             'key' => $key,
                             'text' => $value,
+                            'editable' => $editable,
                         ));
                     }
                 }
 
             }
         }
+    }
+
+    private function isEditable(string $group, string $key): bool
+    {
+        $output = false;
+        $str = $group.'.'.$key;
+
+        if(Str::contains($str, $this->editables)) {
+            $output = true;
+        }
+
+        return $output;
     }
 }
