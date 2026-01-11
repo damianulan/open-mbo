@@ -18,7 +18,9 @@ class MboForm extends Form
 
     public function definition(FormBuilder $builder): FormBuilder
     {
-        return FormBuilder::boot('post', route('settings.modules.mbo.store'), 'mbo_settings')
+        return $builder->setId('mbo_settings')
+            ->setMethod('post')
+            ->setAction(route('settings.modules.mbo.store'))
             ->class('settings-form')
             ->add(FormComponent::hidden('module', 'mbo'))
             ->addSection(__('forms.settings.general.general'), fn (FormBuilder $builder) => $builder

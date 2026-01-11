@@ -26,7 +26,7 @@ class ServerController extends SettingsController
         return view('pages.settings.server', array(
             'git_text' => $git_text,
             'mail' => $model,
-            'form' => SmtpForm::definition($request, $model),
+            'form' => SmtpForm::bootWithAttributes($model->toArray())->getDefinition(),
             'nav' => $this->nav(),
         ));
     }

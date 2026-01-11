@@ -31,9 +31,9 @@ class ModuleController extends SettingsController
         return view('pages.settings.modules.index', array(
             'modules' => $modules,
             'mod' => $modules[$module]['id'],
-            'usersForm' => UsersForm::definition($request, $userModel),
-            'mboForm' => MboForm::definition($request, $mboModel),
-            'notificationsForm' => NotificationsForm::definition($request, $notificationModel),
+            'usersForm' => UsersForm::bootWithAttributes($userModel->toArray())->getDefinition(),
+            'mboForm' => MboForm::bootWithAttributes($mboModel->toArray())->getDefinition(),
+            'notificationsForm' => NotificationsForm::bootWithAttributes($notificationModel->toArray())->getDefinition(),
             'nav' => $this->nav(),
         ));
     }

@@ -15,7 +15,9 @@ class SmtpForm extends Form
 
     public function definition(FormBuilder $builder): FormBuilder
     {
-        return FormBuilder::boot('post', route('settings.server.mail.store'), 'mail_settings')
+        return $builder->setId('mail_settings')
+            ->setMethod('post')
+            ->setAction(route('settings.server.mail.store'))
             ->class('settings-form')
             ->add(FormComponent::text('mail_host', $this->model)->label(__('forms.settings.server.mail_host')))
             ->add(FormComponent::text('mail_port', $this->model)->numeric()->label(__('forms.settings.server.mail_port')))

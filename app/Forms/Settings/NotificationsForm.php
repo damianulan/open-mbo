@@ -18,7 +18,9 @@ class NotificationsForm extends Form
 
     public function definition(FormBuilder $builder): FormBuilder
     {
-        return FormBuilder::boot('post', route('settings.modules.notifications.store'), 'notifications_settings')
+        return $builder->setId('notifications_settings')
+            ->setMethod('post')
+            ->setAction(route('settings.modules.notifications.store'))
             ->class('settings-form')
             ->add(FormComponent::hidden('module', 'notifications'))
             ->addSection(

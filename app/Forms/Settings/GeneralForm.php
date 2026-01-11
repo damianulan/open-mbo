@@ -19,7 +19,9 @@ class GeneralForm extends Form
 
     public function definition(FormBuilder $builder): FormBuilder
     {
-        return FormBuilder::boot('post', route('settings.general.store'), 'general_settings')
+        return $builder->setId('general_settings')
+            ->setMethod('post')
+            ->setAction(route('settings.general.store'))
             ->class('settings-form')
             ->addSection(__('forms.settings.general.general'), fn (FormBuilder $builder) => $builder
                 ->add(FormComponent::text('site_name', $this->model)->label(__('forms.settings.general.site_name'))->key(self::settingsKey('general.site_name')))

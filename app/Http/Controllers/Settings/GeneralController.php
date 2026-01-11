@@ -20,8 +20,8 @@ class GeneralController extends SettingsController
 
         return view('pages.settings.index', array(
             'model' => $model,
-            'form' => GeneralForm::definition($request, $model),
-            'brandingForm' => BrandingForm::definition($request, $model),
+            'form' => GeneralForm::bootWithAttributes($model->toArray())->getDefinition(),
+            'brandingForm' => BrandingForm::bootWithAttributes($model->toArray())->getDefinition(),
             'nav' => $this->nav(),
         ));
     }

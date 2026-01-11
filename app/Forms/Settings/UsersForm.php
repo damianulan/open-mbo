@@ -18,7 +18,9 @@ class UsersForm extends Form
 
     public function definition(FormBuilder $builder): FormBuilder
     {
-        return FormBuilder::boot('post', route('settings.modules.users.store'), 'users_settings')
+        return $builder->setId('users_settings')
+            ->setMethod('post')
+            ->setAction(route('settings.modules.users.store'))
             ->class('settings-form')
             ->add(FormComponent::hidden('module', 'users'))
             ->addSection(__('forms.settings.general.general'), fn (FormBuilder $builder) => $builder
