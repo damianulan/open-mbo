@@ -6,6 +6,9 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use ReflectionClass;
 use Spatie\TranslationLoader\LanguageLine;
+use Illuminate\Support\Facades\File;
+use Symfony\Component\Finder\SplFileInfo;
+use Illuminate\Support\Arr;
 
 class LanguageSeeder extends Seeder
 {
@@ -14,45 +17,40 @@ class LanguageSeeder extends Seeder
      */
     public function run(): void
     {
-        $langs = array(
-            '\Database\Seeders\Lang\Alerts',
-            '\Database\Seeders\Lang\Auth',
-            '\Database\Seeders\Lang\Buttons',
-            '\Database\Seeders\Lang\Charts',
-            '\Database\Seeders\Lang\Exceptions',
-            '\Database\Seeders\Lang\Fields',
-            '\Database\Seeders\Lang\MBO',
-            '\Database\Seeders\Lang\Forms',
-            '\Database\Seeders\Lang\Gates',
-            '\Database\Seeders\Lang\Globals',
-            '\Database\Seeders\Lang\Logging',
-            '\Database\Seeders\Lang\Menus',
-            '\Database\Seeders\Lang\Models',
-            '\Database\Seeders\Lang\Notifications',
-            '\Database\Seeders\Lang\Pages',
-            '\Database\Seeders\Lang\Pagination',
-            '\Database\Seeders\Lang\Passwords',
-            '\Database\Seeders\Lang\Validation',
-        );
-        foreach ($langs as $class) {
-            $list = $class::list();
-            $reflection = new ReflectionClass($class);
-            $group = Str::lower($reflection->getShortName());
-            foreach ($list as $key => $value) {
-                $instance = LanguageLine::where('group', $group)->where('key', $key)->first();
+        $files = File::allFiles(base_path('lang/src'));
 
-                if ($instance) {
-                    $instance->group = $group;
-                    $instance->key = $key;
-                    $instance->text = $value;
-                    $instance->update();
-                } else {
-                    LanguageLine::create(array(
-                        'group' => $group,
-                        'key' => $key,
-                        'text' => $value,
-                    ));
+        foreach ($files as $file) {
+            $group = Str::of($file->getFilename())->before('.')->toString();
+            $contents = $file->getContents();
+            if(!empty($contents)) {
+                $contents = json_decode($contents, true);
+
+                $contents = Arr::dot($contents);
+                $lines = [];
+
+                foreach($contents as $key => $value) {
+                    $k = Str::beforeLast($key, '.');
+                    $l = Str::afterLast($key, '.');
+                    $lines[$k][$l] = $value;
                 }
+
+                foreach ($lines as $key => $value) {
+                    $instance = LanguageLine::where('group', $group)->where('key', $key)->first();
+
+                    if ($instance) {
+                        $instance->group = $group;
+                        $instance->key = $key;
+                        $instance->text = $value;
+                        $instance->update();
+                    } else {
+                        LanguageLine::create(array(
+                            'group' => $group,
+                            'key' => $key,
+                            'text' => $value,
+                        ));
+                    }
+                }
+
             }
         }
     }

@@ -1,0 +1,500 @@
+{
+    "campaigns": {
+        "coordinators": {
+            "pl": "Koordynatorzy kampanii"
+        },
+        "date_end": {
+            "pl": "Data zakończenia pomiaru"
+        },
+        "date_start": {
+            "pl": "Data rozpoczęcia pomiaru"
+        },
+        "description": {
+            "pl": "Opis"
+        },
+        "draft": {
+            "pl": "Przechowuj jako wersję roboczą"
+        },
+        "info": {
+            "canceled": {
+                "pl": "Kampania odwołana"
+            },
+            "completed": {
+                "pl": "Ocena zakończona"
+            },
+            "definition": {
+                "pl": "Tworzenie strategii i określanie celów"
+            },
+            "disposition": {
+                "pl": "Dysponowanie celów przez kierowników zespołów"
+            },
+            "draft": {
+                "pl": "Kampania będzie widoczna tylko dla administratorów i nie zostanie uruchomiona automatycznie."
+            },
+            "evaluation": {
+                "pl": "Ewaluacja celów i ocena pracowników przez kierowników"
+            },
+            "in_progress": {
+                "pl": "Kampania w toku"
+            },
+            "manual": {
+                "pl": "Przejście pomiędzy etapami nie będzie uzależnione od dat, a od podjęcia akcji przez administratora. Opcję tą można także włączyć w trakcie trwania kampanii."
+            },
+            "pending": {
+                "pl": "Oczekuje na rozpoczęcie pomiaru"
+            },
+            "period": {
+                "pl": "Wprowadź unikalny reprezentatywny okres pomiaru, np. dla pomiaru co kwartał: 2023 Q3."
+            },
+            "realization": {
+                "pl": "Realizacja celów"
+            },
+            "self_evaluation": {
+                "pl": "Samoocena pracowników"
+            },
+            "terminated": {
+                "pl": "Kampania przerwana"
+            }
+        },
+        "manual": {
+            "pl": "Tryb ręczny"
+        },
+        "name": {
+            "pl": "Nazwa kampanii"
+        },
+        "period": {
+            "pl": "Okres pomiaru"
+        },
+        "stages": {
+            "canceled": {
+                "pl": "Kampania odwołana"
+            },
+            "completed": {
+                "pl": "Ocena zakończona"
+            },
+            "definition": {
+                "pl": "Tworzenie strategii i określanie celów"
+            },
+            "disposition": {
+                "pl": "Dysponowanie celów przez kierowników zespołów"
+            },
+            "evaluation": {
+                "pl": "Ewaluacja celów i ocena pracowników przez kierowników"
+            },
+            "in_progress": {
+                "pl": "Kampania w toku"
+            },
+            "pending": {
+                "pl": "Oczekuje na rozpoczęcie pomiaru"
+            },
+            "realization": {
+                "pl": "Realizacja celów"
+            },
+            "self_evaluation": {
+                "pl": "Samoocena pracowników"
+            },
+            "terminated": {
+                "pl": "Kampania przerwana"
+            }
+        },
+        "users": {
+            "add": {
+                "pl": "Dodaj użytkowników"
+            }
+        }
+    },
+    "employments": {
+        "add": {
+            "pl": "Dodaj nowe zatrudnienie"
+        },
+        "company": {
+            "pl": "Przedsiębiorstwo"
+        },
+        "contract": {
+            "pl": "Typ umowy"
+        },
+        "department": {
+            "pl": "Dział"
+        },
+        "employment": {
+            "pl": "Data zatrudnienia"
+        },
+        "header": {
+            "pl": "Zatrudnienie #:no"
+        },
+        "header_main": {
+            "pl": "Zatrudnienie podstawowe"
+        },
+        "index": {
+            "pl": "Zatrudnienia"
+        },
+        "position": {
+            "pl": "Stanowisko"
+        },
+        "release": {
+            "pl": "Data końca zatrudnienia"
+        }
+    },
+    "from": {
+        "pl": "[OD]"
+    },
+    "generic": {
+        "email": {
+            "pl": "E-mail"
+        },
+        "login": {
+            "pl": "Login"
+        },
+        "password": {
+            "pl": "Hasło"
+        }
+    },
+    "mbo": {
+        "categories": {
+            "coordinators": {
+                "pl": "Koordynatorzy kategorii"
+            },
+            "description": {
+                "pl": "Opis kategorii"
+            },
+            "name": {
+                "pl": "Nazwa kategorii"
+            },
+            "shortname": {
+                "pl": "Unikalny identyfikator kategorii"
+            },
+            "template_count": {
+                "pl": "Powiązane szablony"
+            }
+        },
+        "objectives": {
+            "award": {
+                "pl": "Punkty nagrody"
+            },
+            "category": {
+                "pl": "Kategoria"
+            },
+            "deadline": {
+                "pl": "Termin realizacji"
+            },
+            "deadline_to": {
+                "pl": "Termin realizacji :term"
+            },
+            "description": {
+                "pl": "Opis celu"
+            },
+            "draft": {
+                "pl": "Wersja robocza"
+            },
+            "evaluation": {
+                "pl": "Aktualna realizacja celu"
+            },
+            "expected": {
+                "pl": "Oczekiwany wynik"
+            },
+            "info": {
+                "award": {
+                    "pl": "W razie zaliczenia celu, na konto użytkownika wpadną określone tutaj punkty."
+                },
+                "deadline": {
+                    "pl": "Po upłynięciu tej daty, cel przypisany do użytkownika zostanie automatycznie oznaczony jako zaliczony lub niezaliczony."
+                },
+                "draft": {
+                    "pl": "Cel w wersji roboczej nie zostanie udostępniony do realizacji, jest także wyłączony z raportowania."
+                },
+                "expected": {
+                    "pl": "Określ minimalny wynik potrzebny do zaliczenia celu. W razie nieosiągnięcia wyniku, Administratorzy nadal będą mogli wymusić zaliczenie celu."
+                },
+                "weight": {
+                    "pl": "Określ jaki wagowy udział ma ten cel w całej kampanii."
+                }
+            },
+            "name": {
+                "pl": "Nazwa celu"
+            },
+            "status": {
+                "pl": "Status celu"
+            },
+            "template": {
+                "pl": "Szablon celu"
+            },
+            "type": {
+                "pl": "Typ celu"
+            },
+            "users": {
+                "add": {
+                    "pl": "Dodaj użytkowników"
+                },
+                "evaluation": {
+                    "pl": "Wartość rozliczenia celu [%]"
+                },
+                "info": {
+                    "evaluation": {
+                        "pl": "Wskaż wartość procentową realizacji celu. Jeśli przy tworzeniu celu podano oczekwiany wynik, wartość tego rozliczenia celu zostanie wyliczona automatycznie."
+                    },
+                    "realization": {
+                        "pl": "Wskaż numeryczną wartość realizacji celu. Jeśli przy tworzeniu celu podano oczekwiany wynik, wartość rozliczenia celu zostanie wyliczona automatycznie."
+                    }
+                },
+                "realization": {
+                    "pl": "Obecna realizacja celu"
+                }
+            },
+            "weight": {
+                "pl": "Waga celu"
+            }
+        }
+    },
+    "placeholders": {
+        "choose": {
+            "pl": "Wybierz..."
+        },
+        "choose_birthdate": {
+            "pl": "Wybierz datę"
+        },
+        "choose_date": {
+            "pl": "Wybierz datę"
+        },
+        "choose_daterange_from": {
+            "pl": "Wybierz datę od..."
+        },
+        "choose_daterange_to": {
+            "pl": "Wybierz datę do..."
+        },
+        "choose_datetime": {
+            "pl": "Wybierz datę oraz godzinę"
+        },
+        "choose_time": {
+            "pl": "Wybierz godzinę"
+        }
+    },
+    "settings": {
+        "general": {
+            "datas": {
+                "pl": "Zarządzanie danymi w systemie"
+            },
+            "export_types": {
+                "pl": "Rodzaje eksportu danych dostępne na platformie"
+            },
+            "general": {
+                "pl": "Ogólne"
+            },
+            "lang": {
+                "pl": "Język aplikacji"
+            },
+            "release": {
+                "pl": "Wersja aplikacji"
+            },
+            "site_logo": {
+                "pl": "Logo platformy"
+            },
+            "site_name": {
+                "pl": "Nazwa witryny"
+            },
+            "theme": {
+                "pl": "Szablon"
+            }
+        },
+        "mbo": {
+            "campaigns_bonus": {
+                "pl": "Bonus dla kampanii [%]"
+            },
+            "campaigns_enabled": {
+                "pl": "Kampanie pomiarowe"
+            },
+            "campaigns_ignore_dates": {
+                "pl": "Zezwalaj na akcje po upływie terminu etapu"
+            },
+            "campaigns_manual": {
+                "pl": "Tryb ręczny w kampaniach"
+            },
+            "enabled": {
+                "pl": "Moduł MBO włączony"
+            },
+            "failed_rewards": {
+                "pl": "Przyznawaj punkty nagrody dla niezaliczonych celów"
+            },
+            "index": {
+                "pl": "Moduł MBO"
+            },
+            "info": {
+                "campaigns_bonus": {
+                    "pl": "Przyznawaj dodatkowy bonus do punktów nagrody dla użytkowników, którzy osiągnęli wszystkie cele w kampanii. Wartość procentowa określona w tym polu odnosić się bedzię do sumy punktów nagrody uzyskanych ze wszystkich celów w kampanii."
+                },
+                "campaigns_enabled": {
+                    "pl": "Włącza kampanie pomiarowe"
+                },
+                "campaigns_ignore_dates": {
+                    "pl": "Każdy etap kampanii wymaga wykonania określonych akcji w terminach określonych przez Administratora. Zaznaczenie tej opcji zezwala na wykonywania akcji po upływie tych terminów."
+                },
+                "campaigns_manual": {
+                    "pl": "Włącza tryb ręczny w kampaniach"
+                },
+                "enabled": {
+                    "pl": "Włącza moduł MBO"
+                },
+                "failed_rewards": {
+                    "pl": "Mimo oznaczenia celu jako niezaliczony, przyznaj punkty nagrody proporcjonalnie do wyniku realizacji celu."
+                },
+                "manipulate_rewards": {
+                    "pl": "Administratorzy mają możliwość edycji przeliczonych proporcjonalnie punktów nagrody, po ich rozliczeniu."
+                },
+                "objectives_autofail": {
+                    "pl": "Automatyczne oznaczanie celów określonych terminem wykonania jako niezaliczonych po upływie terminu, jeśli nie wprowadzono wyników realizacji."
+                },
+                "objectives_weights": {
+                    "pl": "Jeśli wagi celów są wyłączone, każdy cel ma domyślnie wagę = 1."
+                },
+                "rewards": {
+                    "pl": "Włącza punkty nagrody"
+                },
+                "rewards_currency": {
+                    "pl": "Waluta przyznawania nagrody"
+                },
+                "rewards_min_evaluation": {
+                    "pl": "Minimalny wynik procentowy potrzebny do otrzymania punktów nagrody. Punkty nagrody będą przeliczane proporcjonalnie powyżej zadeklarowanej wartości. Aby wyłączyć tę funkcję, ustaw wartość na 0."
+                },
+                "rewards_points_exchange": {
+                    "pl": "Stosunek jednego punktu nagrody do jednego punktu w wybranej walucie"
+                },
+                "rewards_proportional": {
+                    "pl": "Przeliczaj punkty nagrody proporcjonalnie do wyniku realizacji celu."
+                }
+            },
+            "manipulate_rewards": {
+                "pl": "Możliwość edycji przeliczonych punktów nagrody"
+            },
+            "objectives_autofail": {
+                "pl": "Automatyczne oznaczanie przedawnionych celów jako niezaliczone"
+            },
+            "objectives_self_final_evaluation": {
+                "pl": "Zezwalaj administratorom na samodzielnie ocenianie swoich celów"
+            },
+            "objectives_weights": {
+                "pl": "Wagi celów"
+            },
+            "rewards": {
+                "pl": "Punkty nagrody"
+            },
+            "rewards_currency": {
+                "pl": "Waluta nagrody"
+            },
+            "rewards_min_evaluation": {
+                "pl": "Minimalny wynik oceny celu"
+            },
+            "rewards_points_exchange": {
+                "pl": "Przeliczanie punktów nagrody"
+            },
+            "rewards_proportional": {
+                "pl": "Przeliczaj punkty nagrody proporcjonalnie do rozliczenia"
+            }
+        },
+        "modules": {
+            "pl": "Zarządanie ustawieniami modułów"
+        },
+        "notifications": {
+            "info": {
+                "mail_notifications": {
+                    "pl": "Wyłączona funkcja oznacza zablokowanie wszelkiej wysyłki powiadomień e-mail, niezależnie od preferencji użytkowników. Nie dotyczy podstawowych funkcjonalności systemu - np. reset hasła, email powitalny itp."
+                },
+                "system_notifications": {
+                    "pl": "Wyłączona funkcja oznacza zablokowanie wszelkiej wysyłki powiadomień w systemie (ikona dzwonka w górnym menu), niezależnie od preferencji użytkowników."
+                }
+            },
+            "mail_notifications": {
+                "pl": "Wysyłanie powiadomień e-mail"
+            },
+            "system_notifications": {
+                "pl": "Wysyłanie powiadomień w systemie"
+            }
+        },
+        "server": {
+            "mail_catchall_enabled": {
+                "pl": "Przekierowywanie wiadomości"
+            },
+            "mail_catchall_receiver": {
+                "pl": "Przekieruj na adres"
+            },
+            "mail_encryption": {
+                "pl": "Metoda szyfrowania"
+            },
+            "mail_from_address": {
+                "pl": "Wysyłaj z adresu"
+            },
+            "mail_from_name": {
+                "pl": "Wysyłaj jako (nazwa)"
+            },
+            "mail_host": {
+                "pl": "Adres serwera"
+            },
+            "mail_port": {
+                "pl": "Port"
+            },
+            "mail_username": {
+                "pl": "Użytkownik"
+            }
+        },
+        "users": {
+            "info": {
+                "multiple_employments": {
+                    "pl": "Zezwalaj na dodawanie wielu aktywnych zatrudnień dla pojedynczego profilu."
+                },
+                "password_change_firstlogin": {
+                    "pl": "Wymuszaj zmianę hasła po pierwszym logowaniu"
+                }
+            },
+            "multiple_employments": {
+                "pl": "Wielozatrudnienie"
+            },
+            "password_change_firstlogin": {
+                "pl": "Wymuszaj zmianę hasła"
+            }
+        }
+    },
+    "to": {
+        "pl": "[DO]"
+    },
+    "users": {
+        "avatar": {
+            "pl": "Zdjęcie profilowe"
+        },
+        "birthday": {
+            "pl": "Data urodzenia"
+        },
+        "email": {
+            "pl": "E-mail"
+        },
+        "firstname": {
+            "pl": "Imię"
+        },
+        "gender": {
+            "pl": "Płeć"
+        },
+        "header": {
+            "pl": "Dane użytkownika"
+        },
+        "lastname": {
+            "pl": "Nazwisko"
+        },
+        "roles": {
+            "pl": "Role systemowe"
+        },
+        "roles_short": {
+            "pl": "Role"
+        },
+        "supervisors": {
+            "pl": "Bezpośredni przełożeni"
+        }
+    },
+    "version": {
+        "dev": {
+            "pl": "Najnowsza wersja deweloperska"
+        },
+        "non-stable": {
+            "pl": "Najnowsza wersja testowa"
+        },
+        "stable": {
+            "pl": "Najnowsza stabilna wersja"
+        }
+    }
+}

@@ -84,6 +84,7 @@ function swal_alert(text, title, _callback = null, icon = null) {
     CustomSwal.fire({
         title: title,
         text: text,
+        input: null,
         icon: icon,
         showCancelButton: false,
     }).then((result) => {
@@ -96,8 +97,6 @@ function swal_alert(text, title, _callback = null, icon = null) {
 }
 
 $.confirm = swal_confirm;
-
-$.alert = swal_alert;
 
 $.success = function (text, title_input = null, _callback = null) {
     var title = alert_success;

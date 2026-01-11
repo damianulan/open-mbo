@@ -14,7 +14,7 @@ class LangList extends BaseCommand
      *
      * @var string
      */
-    protected $signature = 'lang:list {--group=} {--lang=}';
+    protected $signature = 'lang:list {--nofile} {--group=} {--lang=}';
 
     /**
      * The console command description.
@@ -33,7 +33,9 @@ class LangList extends BaseCommand
         $group = $this->option('group') ?? null;
 
         $query = LanguageLine::orderBy('group')->orderBy('key');
-        $this->toFile($query);
+        if(!$this->option('nofile')) {
+            $this->toFile($query);
+        }
         if ($group) {
             $query->where('group', $group);
         }

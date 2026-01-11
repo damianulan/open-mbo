@@ -1,0 +1,313 @@
+{
+    "campaigns": {
+        "error": {
+            "cancel": {
+                "pl": "Kampania nie została pomyślnie anulowana.",
+                "en": "Campaign was not successfully cancelled."
+            },
+            "create": {
+                "pl": "Kampanie nie mogła zostać dodana. Wystąpił błąd."
+            },
+            "edit": {
+                "pl": "Kampania nie została zmodyfikowana. W formularzu wystąpiły błędy."
+            },
+            "objective_added": {
+                "pl": "Wskazany cel został pomyślnie dodany do Kampanii."
+            },
+            "objective_deleted": {
+                "pl": "Cel został pomyślnie usunięty z Kampanii."
+            },
+            "resume": {
+                "pl": "Kampania nie została pomyślnie odwieszona."
+            },
+            "terminate": {
+                "pl": "Kampania nie została pomyślnie zawieszona."
+            },
+            "users_added": {
+                "pl": "Dane nie zostały zaktualizowane. Odśwież stronę i spróbuj ponownie."
+            },
+            "users_deleted": {
+                "pl": "Wystąpił błąd podczas wypisywania użytkownika z Kampanii. Odśwież stronę i spróbuj ponownie."
+            }
+        },
+        "success": {
+            "cancel": {
+                "pl": "Kampania została pomyślnie anulowana."
+            },
+            "create": {
+                "pl": "Kampania została utworzona pomyślnie."
+            },
+            "edit": {
+                "pl": "Kampania została pomyślnie zmodyfikowana."
+            },
+            "objective_added": {
+                "pl": "Wskazany cel został pomyślnie dodany do Kampanii."
+            },
+            "objective_deleted": {
+                "pl": "Cel został pomyślnie usunięty z Kampanii."
+            },
+            "resume": {
+                "pl": "Kampania została pomyślnie odwieszona."
+            },
+            "terminate": {
+                "pl": "Kampania została pomyślnie zawieszona."
+            },
+            "users_added": {
+                "pl": "Uzupełniono stan osobowy Kampanii pomiarowej."
+            },
+            "users_deleted": {
+                "pl": "Użytkownik został wypisany z Kampanii."
+            }
+        }
+    },
+    "datatables": {
+        "save_columns": {
+            "error": {
+                "pl": "Nie można było zapisać nowych danych dotyczących kolumn w tabeli. Wystąpił błąd."
+            },
+            "error_data": {
+                "pl": "Nie wykryto nowych danych dotyczących wyświetlania kolumn w tabeli. Zmiany nie zostały zapisane."
+            }
+        }
+    },
+    "employments": {
+        "error": {
+            "create": {
+                "pl": "Nowe zatrudnienie nie mógło zostać dodane. Wystąpił błąd."
+            },
+            "delete": {
+                "pl": "Zatrudnienie nie mógło zostać usunięte. Wystąpił błąd."
+            },
+            "edit": {
+                "pl": "Zatrudnienie nie mógło zostać zmodyfikowane. Wystąpił błąd."
+            }
+        },
+        "success": {
+            "create": {
+                "pl": "Nowe zatrudnienie zostało pomyślnie dodane."
+            },
+            "delete": {
+                "pl": "Zatrudnienie zostało pomyślnie usunięte."
+            },
+            "edit": {
+                "pl": "Zatrudnienie zostało pomyślnie zmodyfikowane."
+            }
+        }
+    },
+    "error": {
+        "ajax": {
+            "pl": "Wystąpił błąd podczas pobierania danych z serwera, żądanie nie zostało przetworzone. Zweryfikuj swoje połączenie internetowe."
+        },
+        "form": {
+            "pl": "W formularzu wystąpiły błędy. Popraw je i spróbuj ponownie."
+        },
+        "invalid_role": {
+            "pl": "Nie posiadasz odpowiedniej roli systemowej do wykonania tej akcji."
+        },
+        "no_permission": {
+            "pl": "Nie posiadasz odpowiednich uprawnień do wykonania tej akcji."
+        },
+        "operation": {
+            "pl": "Wystąpił błąd podczas wykonywania operacji."
+        }
+    },
+    "info": {
+        "debugging": {
+            "pl": "Uwaga - Debugowanie jest włączone"
+        },
+        "env_development": {
+            "pl": "Aplikacja uruchomiona w trybie deweloperskim. Część funkcjonalności może nie działać zgodnie z oczekiwaniami"
+        },
+        "env_local": {
+            "pl": "Aplikacja działa w trybie lokalnym"
+        },
+        "maintenance": {
+            "pl": "Serwis jest zamknięty dla użytkowników."
+        }
+    },
+    "objective_categories": {
+        "error": {
+            "create": {
+                "pl": "Nowa kategoria MBO nie mógła zostać dodana. Wystąpił błąd."
+            },
+            "delete": {
+                "pl": "Kategoria MBO niestety nie została usunięta. Wystąpił błąd."
+            },
+            "edit": {
+                "pl": "Kategoria MBO nie została zmodyfikowana. Wystąpił błąd."
+            }
+        },
+        "info": {
+            "delete": {
+                "pl": "Usunięcie kategorii będzie nieodwracalne. Razem z nią usunięte zostaną wszystkie powiązane cele."
+            }
+        },
+        "success": {
+            "create": {
+                "pl": "Nowa kategoria MBO została pomyślnie dodana."
+            },
+            "delete": {
+                "pl": "Kategoria MBO została pomyślnie usunięta."
+            },
+            "edit": {
+                "pl": "Kategoria MBO została pomyślnie zmodyfikowana."
+            }
+        }
+    },
+    "objective_template": {
+        "error": {
+            "create": {
+                "pl": "Nowy szablon celu nie mógł zostać dodany. Wystąpił błąd."
+            },
+            "delete": {
+                "pl": "Szablon celu niestety nie został usunięty. Wystąpił błąd."
+            },
+            "edit": {
+                "pl": "Szablon celu nie został zmodyfikowany. Wystąpił błąd."
+            }
+        },
+        "success": {
+            "create": {
+                "pl": "Nowy szablon celu został pomyślnie dodany."
+            },
+            "delete": {
+                "pl": "Szablon celu został pomyślnie usunięty."
+            },
+            "edit": {
+                "pl": "Szablon celu został pomyślnie zmodyfikowany."
+            }
+        }
+    },
+    "objectives": {
+        "error": {
+            "overdued": {
+                "pl": "Termin realizacji tego celu minął :term"
+            },
+            "realization_updated": {
+                "pl": "Dane o realizacji celu nie mogły zostać zaktualizowane. Wystąpił nieoczekiwany błąd."
+            },
+            "users_added": {
+                "pl": "Dane nie zostały zaktualizowane. Odśwież stronę i spróbuj ponownie."
+            }
+        },
+        "info": {
+            "delete": {
+                "pl": "Usunięcie celu będzie nieodwracalne."
+            }
+        },
+        "success": {
+            "realization_updated": {
+                "pl": "Dane o realizacji celu zostały zaktualizowane."
+            },
+            "users_added": {
+                "pl": "Uzupełniono przypisanie użytkowników do celu."
+            }
+        }
+    },
+    "settings": {
+        "error": {
+            "cache_clear": {
+                "pl": "Podczas czyszczenia pamięci podręcznej aplikacji serwer napotkał problemy. Sprawdź uprawnienia serwera."
+            },
+            "general": {
+                "pl": "Ustawienia platformy nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd."
+            },
+            "mail_update": {
+                "pl": "Dane serwera SMTP nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd."
+            },
+            "update": {
+                "pl": "Ustawienia modułu nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd."
+            }
+        },
+        "success": {
+            "cache_clear": {
+                "pl": "Pamięć podręczna aplikacji została pomyślnie wyczyszczona!"
+            },
+            "general": {
+                "pl": "Ustawienia platformy zostały zaktualizowane."
+            },
+            "mail_update": {
+                "pl": "Dane serwera SMTP zostały zaktualizowane. Cache został automatycznie wyczyszczony."
+            },
+            "update": {
+                "pl": "Ustawienia modułu zostały zaktualizowane."
+            }
+        }
+    },
+    "success": {
+        "operation": {
+            "pl": "Operacja zakończona pomyślnie."
+        }
+    },
+    "system": {
+        "unauthorized_module": {
+            "pl": "Moduł, który próbujesz otworzyć został zablokowany przez administratora systemu."
+        }
+    },
+    "user_objectives": {
+        "error": {
+            "set_failed": {
+                "pl": "Nie można oznaczyć celu jako niezaliczony."
+            },
+            "set_passed": {
+                "pl": "Nie można oznaczyć celu jako zaliczony."
+            }
+        },
+        "success": {
+            "set_failed": {
+                "pl": "Cel został oznaczony jako niezaliczony."
+            },
+            "set_passed": {
+                "pl": "Cel został oznaczony jako zaliczony."
+            }
+        }
+    },
+    "users": {
+        "error": {
+            "create": {
+                "pl": "Wystąpił błąd, użytkownik nie mógł być dodany."
+            },
+            "delete": {
+                "pl": "Użytkownik :name nie mógł zostać usunięty z systemu. Podczas operacji wystąpił nieoczekiwany błąd."
+            },
+            "edit": {
+                "pl": "Użytkownik nie mógł zostać zmodyfikowany. Podczas operacji wystąpił nieoczekiwany błąd."
+            }
+        },
+        "info": {
+            "block": {
+                "pl": "Wskutek tej akcji użytkownik utraci dostęp do systemu, a jego przełożeni mogą mieć odebrane niektóre prawa."
+            },
+            "delete": {
+                "pl": "Usunięcie użytkownika będzie nieodwracalne."
+            }
+        },
+        "success": {
+            "blocked": {
+                "pl": "Użytkownik :name został zablokowany. Nie posiada już dostępu do systemu."
+            },
+            "create": {
+                "pl": "Nowy użytkownik został pomyślnie dodany do systemu."
+            },
+            "delete": {
+                "pl": "Użytkownik :name został usunięty z systemu."
+            },
+            "edit": {
+                "pl": "Użytkownik :name został pomyślnie zmodyfikowany."
+            },
+            "unblocked": {
+                "pl": "Użytkownik :name został odblokowany. Może spowrotem logować się do systemu."
+            }
+        },
+        "warning": {
+            "user_is_root": {
+                "pl": "Uwaga, ten użytkownik posiada uprawnienia Roota."
+            }
+        }
+    },
+    "warning": {
+        "operation": {
+            "pl": "Uwaga!"
+        }
+    }
+}

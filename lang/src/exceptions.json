@@ -1,0 +1,6 @@
+{
+    "App\\Exceptions\\MBO\\UnableToSetObjectiveRealization": {
+        "pl": "Czas na wykonanie celu nie został jeszcze osiągnięty. Realizacja celu nie jest możliwa do ustawienia.",
+        "en": "The time for the objective has not yet been reached. The objective cannot be set for realization."
+    }
+}

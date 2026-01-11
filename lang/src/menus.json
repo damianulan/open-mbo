@@ -1,0 +1,272 @@
+{
+    "activity": {
+        "pl": "Aktywność",
+        "en": "Activity"
+    },
+    "admin_panel": {
+        "pl": "Panel administracyjny",
+        "en": "Admin panel"
+    },
+    "campaigns": {
+        "create": {
+            "pl": "Tworzenie nowej kampanii pomiarowej",
+            "en": "Create campaign"
+        },
+        "edit": {
+            "pl": "Edycja kampanii",
+            "en": "Edit campaign"
+        },
+        "index": {
+            "pl": "Kampanie Pomiarowe",
+            "en": "Campaigns"
+        }
+    },
+    "categories": {
+        "create": {
+            "pl": "Tworzenie kategorii MBO",
+            "en": "Create objective category"
+        },
+        "edit": {
+            "pl": "Modyfikacja kategorii MBO",
+            "en": "Edit objective category"
+        },
+        "index": {
+            "pl": "Kategorie celów",
+            "en": "Objective categories"
+        }
+    },
+    "dashboard": {
+        "pl": "Pulpit",
+        "en": "Dashboard"
+    },
+    "edit_profile": {
+        "pl": "Edytuj profil",
+        "en": "Edit profile"
+    },
+    "forgot_password": {
+        "pl": "Przypomnij hasło",
+        "en": "Forgot password"
+    },
+    "impersonated_by": {
+        "pl": ":name podszywa się",
+        "en": ":name impersonated"
+    },
+    "impersonation_leave": {
+        "pl": "Wyloguj się jako",
+        "en": "Logout as"
+    },
+    "info": {
+        "profile": {
+            "logs": {
+                "pl": "Strona przedstawia całą Twoją aktywność, jaka jest mierzona przez system.",
+                "en": "This page displays your entire activity, which is monitored by the system."
+            }
+        }
+    },
+    "login": {
+        "pl": "Zaloguj się",
+        "en": "Login"
+    },
+    "logout": {
+        "pl": "Wyloguj",
+        "en": "Logout"
+    },
+    "mbo": {
+        "index": {
+            "pl": "Zarządzanie celami",
+            "en": "Manage objectives"
+        }
+    },
+    "my_objectives": {
+        "index": {
+            "pl": "Moje cele",
+            "en": "My objectives"
+        }
+    },
+    "my_results": {
+        "pl": "Moje wyniki",
+        "en": "My results"
+    },
+    "notifications": {
+        "index": {
+            "pl": "Powiadomienia",
+            "en": "Notifications"
+        }
+    },
+    "objectives": {
+        "create": {
+            "pl": "Tworzenie celu",
+            "en": "Create objective"
+        },
+        "edit": {
+            "pl": "Modyfikacja celu",
+            "en": "Edit objective"
+        },
+        "index": {
+            "pl": "Cele",
+            "en": "Objectives"
+        }
+    },
+    "preferences": {
+        "pl": "Preferencje",
+        "en": "Preferences"
+    },
+    "profile": {
+        "edit": {
+            "pl": "Edytuj",
+            "en": "Edit"
+        },
+        "index": {
+            "pl": "Profil",
+            "en": "Profile"
+        },
+        "logs": {
+            "pl": "Twoja aktywność",
+            "en": "Your activity"
+        },
+        "personal_data": {
+            "pl": "Dane personalne",
+            "en": "Personal data"
+        },
+        "reset": {
+            "pl": "Reset hasła",
+            "en": "Reset password"
+        },
+        "settings": {
+            "pl": "Ustawienia konta",
+            "en": "Account settings"
+        }
+    },
+    "remember_me": {
+        "pl": "Zapamiętaj mnie",
+        "en": "Remember me"
+    },
+    "reports": {
+        "index": {
+            "pl": "Raporty",
+            "en": "Reports"
+        }
+    },
+    "settings": {
+        "creator": {
+            "index": {
+                "pl": "Kreator struktury",
+                "en": "Creator structure"
+            }
+        },
+        "general": {
+            "index": {
+                "pl": "Główne",
+                "en": "General"
+            }
+        },
+        "help": {
+            "index": {
+                "pl": "Pomoc",
+                "en": "Help"
+            }
+        },
+        "index": {
+            "pl": "Ustawienia",
+            "en": "Settings"
+        },
+        "integrations": {
+            "index": {
+                "pl": "Integracje",
+                "en": "Integrations"
+            }
+        },
+        "logs": {
+            "index": {
+                "pl": "Logi",
+                "en": "Logs"
+            }
+        },
+        "modules": {
+            "index": {
+                "pl": "Moduły",
+                "en": "Modules"
+            }
+        },
+        "notifications": {
+            "index": {
+                "pl": "Powiadomienia",
+                "en": "Notifications"
+            }
+        },
+        "organization": {
+            "companies": {
+                "index": {
+                    "pl": "Przedsiębiorstwa",
+                    "en": "Companies"
+                }
+            },
+            "contracts": {
+                "index": {
+                    "pl": "Typy kontraktów",
+                    "en": "Contract types"
+                }
+            },
+            "departments": {
+                "index": {
+                    "pl": "Działy",
+                    "en": "Departments"
+                }
+            },
+            "index": {
+                "pl": "Struktura organizacyjna",
+                "en": "Organization structure"
+            },
+            "positions": {
+                "index": {
+                    "pl": "Stanowiska",
+                    "en": "Positions"
+                }
+            }
+        },
+        "server": {
+            "index": {
+                "pl": "Serwer",
+                "en": "Server"
+            }
+        },
+        "teams": {
+            "index": {
+                "pl": "Zespoły",
+                "en": "Teams"
+            }
+        }
+    },
+    "templates": {
+        "create": {
+            "pl": "Tworzenie szablonu celu",
+            "en": "Create objective template"
+        },
+        "edit": {
+            "pl": "Modyfikacja szablonu celu",
+            "en": "Edit objective template"
+        },
+        "index": {
+            "pl": "Szablony celów",
+            "en": "Objective templates"
+        }
+    },
+    "users": {
+        "create": {
+            "pl": "Tworzenie użytkownika",
+            "en": "Create user"
+        },
+        "edit": {
+            "pl": "Edycja użytkownika",
+            "en": "Edit user"
+        },
+        "index": {
+            "pl": "Użytkownicy",
+            "en": "Users"
+        },
+        "show": {
+            "pl": "Profil użytkownika",
+            "en": "User profile"
+        }
+    }
+}

@@ -28,12 +28,12 @@
         @if (session($type_swal) )
             @if (is_array(session($type_swal)))
                 @foreach (session($type_swal) as $a)
-                    $.alert('{!! $a !!}', null, null, '{{ $type }}');
+                    $.{{ $type }}('{!! $a !!}');
                 @endforeach
 
             @else
 
-                $.alert('{!! session($type_swal) !!}', null, null, '{{ $type }}');
+                $.{{ $type }}('{!! session($type_swal) !!}');
 
             @endif
         @endif

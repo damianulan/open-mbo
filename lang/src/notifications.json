@@ -1,0 +1,46 @@
+{
+    "app": {
+        "campaign": {
+            "coordinator_assignment": {
+                "pl": "<strong>:username<\/strong> to nowy uczestnik kampanii <i class=\"bi-bullseye\"><\/i> <strong>:campaignname<\/strong>, którą prowadzisz. Dostępne cele zostały automatycznie przypisane."
+            },
+            "user_assigned": {
+                "pl": "Przypisano Cię do kampanii <i class=\"bi-bullseye\"><\/i> <strong>:campaignname<\/strong>."
+            }
+        }
+    },
+    "info": {
+        "empty": {
+            "pl": "Twoja skrzynka powiadomień jest pusta, nie otrzymano jeszcze żadnych wiadomości."
+        },
+        "show_all": {
+            "pl": "Pokaż wszystkie"
+        }
+    },
+    "table": {
+        "action": {
+            "pl": "Akcje"
+        },
+        "conditions": {
+            "pl": "Wskutek spełnienia warunków"
+        },
+        "email": {
+            "pl": "Powiadomienie mailowe"
+        },
+        "event": {
+            "pl": "Wskutek zdarzenia"
+        },
+        "key": {
+            "pl": "Identyfikator"
+        },
+        "schedule": {
+            "pl": "Wysyłka cykliczna"
+        },
+        "status": {
+            "pl": "Status"
+        },
+        "system": {
+            "pl": "Powiadomienie systemowe"
+        }
+    }
+}

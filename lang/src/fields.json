@@ -1,0 +1,78 @@
+{
+    "action": {
+        "pl": "Akcje"
+    },
+    "category": {
+        "pl": "Kategoria"
+    },
+    "created_at": {
+        "pl": "Utworzono"
+    },
+    "email": {
+        "pl": "E-mail"
+    },
+    "firstname": {
+        "pl": "Imię"
+    },
+    "firstname_lastname": {
+        "pl": "Imię i nazwisko"
+    },
+    "gender": {
+        "f": {
+            "pl": "Kobieta"
+        },
+        "m": {
+            "pl": "Mężczyzna"
+        },
+        "o": {
+            "pl": "Inna"
+        }
+    },
+    "lastname": {
+        "pl": "Nazwisko"
+    },
+    "login": {
+        "pl": "Login"
+    },
+    "name": {
+        "pl": "Nazwa"
+    },
+    "password": {
+        "pl": "Hasło"
+    },
+    "position": {
+        "pl": "Stanowisko"
+    },
+    "quote_at": {
+        "pl": "o"
+    },
+    "quote_authored": {
+        "pl": " napisał(a)"
+    },
+    "stage": {
+        "pl": "Etap"
+    },
+    "status": {
+        "pl": "Status"
+    },
+    "title": {
+        "pl": "Tytuł"
+    },
+    "type_of_contract": {
+        "b2b": {
+            "pl": "B2B"
+        },
+        "uod": {
+            "pl": "Umowa o dzieło"
+        },
+        "uop": {
+            "pl": "Umowa o pracę"
+        },
+        "uz": {
+            "pl": "Umowa zlecenie"
+        }
+    },
+    "updated_at": {
+        "pl": "Zaktualizowano"
+    }
+}

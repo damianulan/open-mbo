@@ -105,7 +105,7 @@ $.buildFlatpickr = function () {
 
 // build chosen objects
 $.buildChosen = function () {
-    $("select").chosen({
+    $("select.form-control").chosen({
         disable_search_threshold: 5,
         placeholder_text: choose,
         no_results_text: no_results,

@@ -1,0 +1,122 @@
+{
+    "columns": {
+        "causer": {
+            "pl": "Inicjator"
+        },
+        "created_at": {
+            "pl": "Kiedy"
+        },
+        "description": {
+            "pl": "Opis"
+        },
+        "event": {
+            "pl": "Zdarzenie"
+        },
+        "subject": {
+            "pl": "Odnosi się do"
+        },
+        "subject_type": {
+            "pl": "Odnosi się do typu"
+        }
+    },
+    "description": {
+        "auth_attempt_fail": {
+            "pl": "Zarejestrowano próbę logowania użytkownika zakończoną niepowodzeniem."
+        },
+        "auth_attempt_success": {
+            "pl": "Zarejestrowano pomyślną próbę logowania użytkownika."
+        },
+        "auth_logout": {
+            "pl": "Użytkownik wylogował się z systemu."
+        },
+        "created": {
+            "pl": "Użytkownik :username utworzył nową instancję obiektu: :model_map."
+        },
+        "deleted": {
+            "pl": "Użytkownik :username usunął instancję obiektu: :model_map."
+        },
+        "notification_sent": {
+            "pl": "Użytkownik :username otrzymał powiadomienie: :type"
+        },
+        "updated": {
+            "pl": "Użytkownik :username zmodyfikował instancję obiektu: :model_map."
+        },
+        "view": {
+            "pl": "Użytkownik :username wyświetlił obiekt: :model_map"
+        }
+    },
+    "events": {
+        "auth_attempt_fail": {
+            "pl": "Niepowodzenie logowania"
+        },
+        "auth_attempt_success": {
+            "pl": "Pomyślnie logowanie"
+        },
+        "created": {
+            "pl": "Utworzenie obiektu"
+        },
+        "deleted": {
+            "pl": "Usunięcie obiektu"
+        },
+        "logged_out": {
+            "pl": "Wylogowanie"
+        },
+        "updated": {
+            "pl": "Aktualizacja danych"
+        },
+        "viewed": {
+            "pl": "Wyświetlono"
+        }
+    },
+    "log_name": {
+        "auth": {
+            "pl": "Identyfikacja użytkownika"
+        },
+        "model": {
+            "pl": "Zmiana danych"
+        },
+        "system": {
+            "pl": "System"
+        }
+    },
+    "model_mapping": {
+        "App\\Models\\MBO\\Campaign": {
+            "pl": "Kampania pomiarowa"
+        },
+        "App\\Models\\MBO\\Objective": {
+            "pl": "Cel"
+        },
+        "App\\Models\\MBO\\ObjectiveTemplate": {
+            "pl": "Szablon celu"
+        },
+        "App\\Models\\MBO\\ObjectiveTemplateCategory": {
+            "pl": "Kategoria MBO"
+        },
+        "App\\Models\\MBO\\UserCampaign": {
+            "pl": "Modyfikacja przypisania użytkownika do kampanii"
+        },
+        "App\\Models\\MBO\\UserObjective": {
+            "pl": "Modyfikacja przypisania użytkownika do celu"
+        }
+    },
+    "route_mapping": {
+        "App\\Models\\MBO\\Campaign": {
+            "pl": "campaigns.show"
+        },
+        "App\\Models\\MBO\\Objective": {
+            "pl": "objectives.show"
+        },
+        "App\\Models\\MBO\\ObjectiveTemplate": {
+            "pl": "templates.edit"
+        },
+        "App\\Models\\MBO\\ObjectiveTemplateCategory": {
+            "pl": "management.mbo.categories.edit"
+        },
+        "App\\Models\\MBO\\UserCampaign": {
+            "pl": "campaigns.users.update"
+        },
+        "App\\Models\\MBO\\UserObjective": {
+            "pl": "campaigns.users.update"
+        }
+    }
+}
