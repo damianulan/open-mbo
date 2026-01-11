@@ -279,6 +279,10 @@
             "general": {
                 "pl": "Ogólne"
             },
+            "auth": {
+                "pl": "Identyfikacja użytkownika",
+                "en": "Authentication"
+            },
             "lang": {
                 "pl": "Język aplikacji"
             },

@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Core\User;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Http\Request;
 use Closure;
-use Illuminate\Support\Facades\Auth;
 
 class Authenticate extends Middleware
 {
@@ -22,8 +22,20 @@ class Authenticate extends Middleware
     public function handle($request, Closure $next, ...$guards)
     {
         $this->authenticate($request, $guards);
+        $this->ensureEmailIsVerified($request);
 
         return $next($request);
+    }
+
+    protected function getUser(): ?User
+    {
+        return $this->auth->user();
+    }
+
+    protected function ensureEmailIsVerified(Request $request): bool
+    {
+        $user = $this->getUser();
+        return true;
     }
 
 

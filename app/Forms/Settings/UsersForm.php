@@ -23,7 +23,7 @@ class UsersForm extends Form
             ->setAction(route('settings.modules.users.store'))
             ->class('settings-form')
             ->add(FormComponent::hidden('module', 'users'))
-            ->addSection(__('forms.settings.general.general'), fn (FormBuilder $builder) => $builder
+            ->addSection(__('forms.settings.general.auth'), fn (FormBuilder $builder) => $builder
                 ->add(FormComponent::switch('password_change_firstlogin', $this->model)->label(__('forms.settings.users.password_change_firstlogin'))->info(__('forms.settings.users.info.password_change_firstlogin'))->key(self::settingsKey('users.password_change_firstlogin'))))
             ->addSection(
                 __('forms.employments.index'),
