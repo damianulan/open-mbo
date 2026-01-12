@@ -280,8 +280,8 @@
                 "pl": "Ogólne"
             },
             "auth": {
-                "pl": "Identyfikacja użytkownika",
-                "en": "Authentication"
+                "pl": "Identyfikacja użytkownika i logowanie",
+                "en": "Authentication and Logging in"
             },
             "lang": {
                 "pl": "Język aplikacji"
@@ -448,6 +448,18 @@
                 },
                 "force_password_change_reset": {
                     "pl": "Wymuszaj zmianę po resecie hasła w zarządzaniu użytkownikami."
+                },
+                "password_min_length": {
+                    "pl": "Wymagaj minimalnej długości hasła. Ustaw 0, aby wyłączyć tę funkcję."
+                },
+                "password_min_letters": {
+                    "pl": "Wymagaj minimalnej ilości liter w haśle. Ustaw 0, aby wyłączyć tę funkcję."
+                },
+                "password_min_numbers": {
+                    "pl": "Wymagaj minimalnej ilości cyfr w haśle. Ustaw 0, aby wyłączyć tę funkcję."
+                },
+                "password_min_symbols": {
+                    "pl": "Wymagaj minimalnej ilości znaków specjalnych w haśle. Ustaw 0, aby wyłączyć tę funkcję."
                 }
             },
             "multiple_employments": {
@@ -458,6 +470,18 @@
             },
             "force_password_change_reset": {
                 "pl": "Wymuszaj zmianę hasła po resecie hasła"
+            },
+            "password_min_length": {
+                "pl": "Minimalna długość hasła"
+            },
+            "password_min_letters": {
+                "pl": "Minimalna ilość liter"
+            },
+            "password_min_numbers": {
+                "pl": "Minimalna ilość cyfr"
+            },
+            "password_min_symbols": {
+                "pl": "Minimalna ilość znaków specjalnych"
             }
         }
     },

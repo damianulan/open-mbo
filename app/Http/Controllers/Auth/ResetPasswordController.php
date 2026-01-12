@@ -66,8 +66,16 @@ class ResetPasswordController extends Controller
         ];
     }
 
+    protected function rules()
+    {
+        return [
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => ['required', 'confirmed', new PasswordRules],
+        ];
+    }
 
-    protected function resetPassword($user, $password)
+    protected function resetPassword(User $user, $password)
     {
         $this->setUserPassword($user, $password);
 
