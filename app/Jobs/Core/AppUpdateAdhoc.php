@@ -15,7 +15,7 @@ class AppUpdateAdhoc implements ShouldBeUnique, ShouldQueue
     use InteractsWithQueue;
     use Queueable;
 
-    public $timeout = 300;
+    public $timeout = 1200;
 
     public $tries = 2;
 
@@ -24,6 +24,6 @@ class AppUpdateAdhoc implements ShouldBeUnique, ShouldQueue
      */
     public function handle(): void
     {
-        Artisan::call('app:upgrade --nocomposer');
+        Artisan::call('app:upgrade');
     }
 }
