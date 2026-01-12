@@ -5,34 +5,19 @@
     <div class="row justify-content-center">
         <div class="col-md-8 pt-5">
             <div class="card">
-                <div class="card-header">{{ __('forms.reset_password.normal.title') }}</div>
+                <div class="card-header">{{ __('forms.reset_password.force.title') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
+                    <form method="POST" action="{{ route('password.change.update') }}">
                         @csrf
 
                         <div class="container">
                             <div class="row mb-3">
                                 <div class="col-md-12">
                                     <div class="alert alert-info">
-                                        {{ __('forms.reset_password.normal.info') }}
+                                        {{ __('forms.reset_password.force.info') }}
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <input type="hidden" name="token" value="{{ $token }}">
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('fields.email') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
                         </div>
 

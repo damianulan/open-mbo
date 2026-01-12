@@ -10,6 +10,8 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use App\Console\Commands\Core\LangList;
+use Spatie\LaravelSettings\Models\SettingsProperty;
+use App\Settings\Abstract\SettingsProperty as AppSettingsProperty;
 
 class AppServiceProvider extends ServiceProvider
 {

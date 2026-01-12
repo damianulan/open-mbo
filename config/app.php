@@ -12,7 +12,6 @@ use App\Providers\ConfigServiceProvider;
 use App\Providers\EventServiceProvider;
 use App\Providers\GateServiceProvider;
 use App\Providers\MacroServiceProvider;
-use App\Providers\RolesServiceProvider;
 use App\Providers\RouteServiceProvider;
 use App\Support\Http\ResponseAjax;
 use App\Support\Page\PageBuilder;
@@ -293,7 +292,6 @@ return array(
         RouteServiceProvider::class,
         App\Providers\NotificationServiceProvider::class,
         // App\Providers\TelescopeServiceProvider::class,
-        RolesServiceProvider::class,
         GateServiceProvider::class,
         ConfigServiceProvider::class,
         ImpersonateServiceProvider::class,

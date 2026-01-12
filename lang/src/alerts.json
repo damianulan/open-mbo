@@ -94,6 +94,11 @@
             }
         }
     },
+    "success": {
+        "operation": {
+            "pl": "Operacja zakończona pomyślnie."
+        }
+    },
     "error": {
         "ajax": {
             "pl": "Wystąpił błąd podczas pobierania danych z serwera, żądanie nie zostało przetworzone. Zweryfikuj swoje połączenie internetowe."
@@ -109,6 +114,10 @@
         },
         "operation": {
             "pl": "Wystąpił błąd podczas wykonywania operacji."
+        },
+        "unauthorized_access": {
+            "pl": "Nie masz uprawnień do wykonania tej akcji.",
+            "en": "You do not have permission to perform this action."
         }
     },
     "info": {
@@ -232,11 +241,6 @@
             "update": {
                 "pl": "Ustawienia modułu zostały zaktualizowane."
             }
-        }
-    },
-    "success": {
-        "operation": {
-            "pl": "Operacja zakończona pomyślnie."
         }
     },
     "system": {

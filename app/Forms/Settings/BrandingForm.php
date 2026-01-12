@@ -19,7 +19,7 @@ class BrandingForm extends Form
             ->setMethod('post')
             ->setAction(route('settings.branding.store'))
             ->class('settings-form')
-            ->add(FormComponent::file('site_logo', $this->model)
+            ->add(FormComponent::file('site_logo', $this->site_logo)
                 ->label(__('forms.settings.general.site_logo'))->key(self::settingsKey('general.site_logo')))
             ->addSubmit();
     }

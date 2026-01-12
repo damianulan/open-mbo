@@ -9,6 +9,7 @@ use App\Settings\MBOSettings;
 use App\Settings\NotificationSettings;
 use App\Settings\UserSettings;
 use App\Support\Modules\ModuleManager;
+use App\Warden\PermissionsLib;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 
@@ -19,6 +20,9 @@ class ModuleController extends SettingsController
      */
     public function index(Request $request, ?string $module = null): Renderable
     {
+        if ($request->user()->cannot(PermissionsLib::SETTINGS_MODULES)) {
+            unauthorized();
+        }
         $modules = ModuleManager::getModules();
         if (is_null($module) || ! array_key_exists($module, $modules)) {
             $module = 'users';
@@ -40,9 +44,8 @@ class ModuleController extends SettingsController
 
     public function storeMbo(Request $request, MboForm $form, MBOSettings $settings)
     {
-
         $form->validate();
-        foreach ($request->all() as $key => $value) {
+        foreach ($form->all() as $key => $value) {
             $settings->{$key} = $value;
         }
         if ($settings->save()) {
@@ -54,9 +57,8 @@ class ModuleController extends SettingsController
 
     public function storeUsers(Request $request, UsersForm $form, UserSettings $settings)
     {
-
         $form->validate();
-        foreach ($request->all() as $key => $value) {
+        foreach ($form->all() as $key => $value) {
             $settings->{$key} = $value;
         }
         if ($settings->save()) {
@@ -68,9 +70,8 @@ class ModuleController extends SettingsController
 
     public function storeNotifications(Request $request, NotificationsForm $form, NotificationSettings $settings)
     {
-
         $form->validate();
-        foreach ($request->all() as $key => $value) {
+        foreach ($form->all() as $key => $value) {
             $settings->{$key} = $value;
         }
         if ($settings->save()) {

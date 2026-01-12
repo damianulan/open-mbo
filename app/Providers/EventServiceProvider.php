@@ -21,6 +21,9 @@ class EventServiceProvider extends ServiceProvider
         'Illuminate\Auth\Events\Failed' => array(
             'App\Listeners\Activity\LogAuthFailed',
         ),
+        'Spatie\LaravelSettings\Events\SavingSettings' => array(
+            'App\Listeners\Vendors\SettingsUpdated',
+        ),
 
         // MBO LISTENERS
         // Campaigns

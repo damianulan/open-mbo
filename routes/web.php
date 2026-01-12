@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\BrandingController;
 use App\Http\Controllers\Campaigns\CampaignObjectiveController;
@@ -40,6 +41,11 @@ use Livewire\Livewire;
 
 Route::middleware('web')->group(function (): void {
     Auth::routes();
+});
+
+Route::middleware(['web', 'auth.base'])->group(function (): void {
+    Route::get('/password/change', array(ResetPasswordController::class, 'showForceResetForm'))->name('password.change.index');
+    Route::post('/password/change/update', array(ResetPasswordController::class, 'forceReset'))->name('password.change.update');
 });
 
 Route::middleware(array('web', 'auth', 'maintenance'))->group(function (): void {

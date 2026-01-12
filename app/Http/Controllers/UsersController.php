@@ -18,8 +18,11 @@ class UsersController extends AppController
     /**
      * Display a listing of the resource.
      */
-    public function index(UsersDataTable $dataTable)
+    public function index(Request $request, UsersDataTable $dataTable)
     {
+        if ($request->user()->cannot('viewList', User::class)) {
+            unauthorized();
+        }
         return $dataTable->render('pages.users.index', array(
             'table' => $dataTable,
         ));
@@ -30,6 +33,9 @@ class UsersController extends AppController
      */
     public function create(Request $request, UserEditForm $form)
     {
+        if ($request->user()->cannot('create', User::class)) {
+            unauthorized();
+        }
         return view('pages.users.edit', array(
             'form' => $form->getDefinition(),
             'employments' => array(),
@@ -69,8 +75,11 @@ class UsersController extends AppController
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(Request $request, User $user)
     {
+        if ($request->user()->cannot('view', $user)) {
+            unauthorized();
+        }
         return view('pages.users.show', array(
             'user' => $user,
         ));
@@ -84,12 +93,14 @@ class UsersController extends AppController
     public function edit(Request $request, $id)
     {
         $model = User::findOrFail($id);
-
+        if ($request->user()->cannot('update', $model)) {
+            unauthorized();
+        }
         $request->request->add(array('user_id' => $id));
 
         return view('pages.users.edit', array(
             'user' => $model,
-            'employments' => $this->getEmploymentFroms($request, $model),
+            'employments' => $this->getEmploymentForms($request, $model),
             'form' => UserEditForm::bootWithModel($model)->getDefinition(),
         ));
     }
@@ -101,9 +112,12 @@ class UsersController extends AppController
      */
     public function update(Request $request, $id, UserEditForm $form)
     {
+        $user = User::findOrFail($id);
+        if ($request->user()->cannot('update', $user)) {
+            unauthorized();
+        }
 
         $form->validate();
-        $user = User::findOrFail($id);
         $service = UserCreateOrUpdate::boot(request: $request, user: $user)->execute();
 
         if ($service->passed()) {
@@ -117,9 +131,12 @@ class UsersController extends AppController
 
     public function updateEmployment(Request $request, $id, EmploymentEditForm $form)
     {
+        $employment = UserEmployment::findOrFail($id);
+        if ($request->user()->cannot('employment', $employment->user)) {
+            unauthorized();
+        }
 
         $form->validate();
-        $employment = UserEmployment::findOrFail($id);
         $service = EmploymentCreateOrUpdate::boot(request: $request, employment: $employment)->execute();
 
         if ($service->passed()) {
@@ -134,8 +151,11 @@ class UsersController extends AppController
      *
      * @param  int  $id
      */
-    public function delete(User $user)
+    public function delete(Request $request, User $user)
     {
+        if ($request->user()->cannot('delete', $user)) {
+            unauthorized();
+        }
         if ($user->delete()) {
             return redirect()->route('users.index')->with('success', __('alerts.users.success.delete', array('name' => $user->name)));
         }
@@ -143,9 +163,12 @@ class UsersController extends AppController
         return redirect()->back()->with('error', __('alerts.users.error.delete', array('name' => $user->name)));
     }
 
-    public function deleteEmployment($id)
+    public function deleteEmployment(Request $request, $id)
     {
         $employment = UserEmployment::findOrFail($id);
+        if ($request->user()->cannot('employment', $employment->user)) {
+            unauthorized();
+        }
 
         if ($employment->delete()) {
             return redirect()->back()->with('success', __('alerts.employments.success.delete'));
@@ -157,8 +180,11 @@ class UsersController extends AppController
     /**
      * Toggles User blocking if was nat blocked and unlocking otherwise.
      */
-    public function block(User $user)
+    public function block(Request $request, User $user)
     {
+        if ($request->user()->cannot('delete', $user)) {
+            unauthorized();
+        }
         if ($user) {
             $user->toggleLock();
         }
@@ -169,7 +195,7 @@ class UsersController extends AppController
         return redirect()->back()->with('info', __('alerts.users.success.unblocked', array('name' => $user->name)));
     }
 
-    public function favourite(User $user)
+    public function favourite(Request $request, User $user)
     {
         $auth = Auth::user();
         if ($auth->favourite_users->contains($user)) {
@@ -181,34 +207,36 @@ class UsersController extends AppController
         return redirect()->back();
     }
 
-    public function impersonate(User $user)
+    public function impersonate(Request $request, User $user)
     {
+        if ($request->user()->cannot('impersonate', $user)) {
+            unauthorized();
+        }
         Auth::user()->impersonate($user);
 
         return redirect()->back();
     }
 
-    public function impersonateLeave()
+    public function impersonateLeave(Request $request)
     {
         Auth::user()->leaveImpersonation();
 
         return redirect()->back();
     }
 
-    public function resetPassword(User $user)
+    public function resetPassword(Request $request, User $user)
     {
+        if ($request->user()->cannot('reset', $user)) {
+            unauthorized();
+        }
         try {
-            if (true) {
-                $user->generatePassword();
-                $user->force_password_change = 1;
-                if($user->save()){
-                    return redirect()->back()->with('success_alert', $user->password);
-                }
-                return redirect()->back()->with('success', __('alerts.users.success.reset_password'));
-            } else {
-
-                throw new UnauthorizedAccess();
+            $password = $user->getNewPassword();
+            $user->generatePassword($password);
+            $user->force_password_change = 1;
+            if($user->save()){
+                return redirect()->back()->with('success_alert', $password);
             }
+            return redirect()->back()->with('success', __('alerts.users.success.reset_password'));
         } catch (UnauthorizedAccess $th) {
             report($th);
             return redirect()->back()->with('error', $th->getMessage());
@@ -217,22 +245,25 @@ class UsersController extends AppController
         return redirect()->back()->with('error', __('alerts.users.error.reset_password'));
     }
 
-    private function getEmploymentFroms(Request $request, ?User $model = null): array
+    private function getEmploymentForms(Request $request, ?User $model = null): array
     {
-        $employments[__('forms.employments.add')] = EmploymentEditForm::bootWithAttributes($request->all())->getDefinition();
+        $employments = array();
 
-        if ($model) {
-            $i = 0;
-            foreach ($model->employments as $employment) {
-                $i++;
-                $langKey = 'forms.employments.header';
-                if ($employment->main) {
-                    $langKey = 'forms.employments.header_main';
+        if ($request->user()->can('employments', $model)) {
+            $employments[__('forms.employments.add')] = EmploymentEditForm::bootWithAttributes($request->all())->getDefinition();
+
+            if ($model) {
+                $i = 0;
+                foreach ($model->employments as $employment) {
+                    $i++;
+                    $langKey = 'forms.employments.header';
+                    if ($employment->main) {
+                        $langKey = 'forms.employments.header_main';
+                    }
+                    $employments[__($langKey, array('no' => $i))] = EmploymentEditForm::bootWithModel($employment);
                 }
-                $employments[__($langKey, array('no' => $i))] = EmploymentEditForm::bootWithModel($employment);
             }
         }
-
         return $employments;
     }
 }

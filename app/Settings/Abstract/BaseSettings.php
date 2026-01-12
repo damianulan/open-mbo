@@ -4,6 +4,7 @@ namespace App\Settings\Abstract;
 
 use ReflectionClass;
 use ReflectionProperty;
+use Spatie\LaravelSettings\Exceptions\MissingSettings;
 use Spatie\LaravelSettings\Migrations\SettingsMigrator;
 use Spatie\LaravelSettings\Models\SettingsProperty;
 use Spatie\LaravelSettings\Settings;
@@ -40,5 +41,17 @@ abstract class BaseSettings extends Settings
         }
 
         return $logs;
+    }
+
+    public function save(): self
+    {
+        try {
+            return parent::save();
+        } catch (MissingSettings $e) {
+            self::migrate();
+            return parent::save();
+        }
+
+        return $this;
     }
 }

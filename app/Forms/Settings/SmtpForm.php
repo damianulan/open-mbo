@@ -19,20 +19,20 @@ class SmtpForm extends Form
             ->setMethod('post')
             ->setAction(route('settings.server.mail.store'))
             ->class('settings-form')
-            ->add(FormComponent::text('mail_host', $this->model)->label(__('forms.settings.server.mail_host')))
-            ->add(FormComponent::text('mail_port', $this->model)->numeric()->label(__('forms.settings.server.mail_port')))
-            ->add(FormComponent::text('mail_username', $this->model)->label(__('forms.settings.server.mail_username')))
-            ->add(FormComponent::password('mail_password', $this->model)->label(__('forms.generic.password')))
-            ->add(FormComponent::select('mail_encryption', $this->model, Dictionary::fromAssocArray(array(
+            ->add(FormComponent::text('mail_host', $this->mail_host)->label(__('forms.settings.server.mail_host')))
+            ->add(FormComponent::text('mail_port', $this->mail_port)->numeric()->label(__('forms.settings.server.mail_port')))
+            ->add(FormComponent::text('mail_username', $this->mail_username)->label(__('forms.settings.server.mail_username')))
+            ->add(FormComponent::password('mail_password', $this->mail_username)->label(__('forms.generic.password')))
+            ->add(FormComponent::select('mail_encryption', $this->mail_encryption, Dictionary::fromAssocArray(array(
                 'tls' => 'TLS',
                 'ssl' => 'SSL',
                 'starttls' => 'STARTTLS',
                 'null' => 'PLAIN',
             )))->label(__('forms.settings.server.mail_encryption')))
-            ->add(FormComponent::text('mail_from_address', $this->model)->label(__('forms.settings.server.mail_from_address')))
-            ->add(FormComponent::text('mail_from_name', $this->model)->label(__('forms.settings.server.mail_from_name')))
-            ->add(FormComponent::switch('mail_catchall_enabled', $this->model)->label(__('forms.settings.server.mail_catchall_enabled')))
-            ->add(FormComponent::text('mail_catchall_receiver', $this->model)->label(__('forms.settings.server.mail_catchall_receiver')))
+            ->add(FormComponent::text('mail_from_address', $this->mail_from_address)->label(__('forms.settings.server.mail_from_address')))
+            ->add(FormComponent::text('mail_from_name', $this->mail_from_name)->label(__('forms.settings.server.mail_from_name')))
+            ->add(FormComponent::switch('mail_catchall_enabled', $this->mail_catchall_enabled)->label(__('forms.settings.server.mail_catchall_enabled')))
+            ->add(FormComponent::text('mail_catchall_receiver', $this->mail_catchall_receiver)->label(__('forms.settings.server.mail_catchall_receiver')))
 
             ->addSubmit();
     }

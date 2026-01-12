@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use Illuminate\Auth\Middleware\Authenticate as LaravelAuthenticate;
 use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
 use Illuminate\Auth\Middleware\Authorize;
 use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
@@ -72,6 +73,7 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = array(
         'auth' => Middleware\Authenticate::class,
+        'auth.base' => LaravelAuthenticate::class,
         'auth.basic' => AuthenticateWithBasicAuth::class,
         'auth.session' => AuthenticateSession::class,
         'cache.headers' => SetCacheHeaders::class,
