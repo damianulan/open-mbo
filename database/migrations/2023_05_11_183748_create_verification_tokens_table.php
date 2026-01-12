@@ -13,7 +13,7 @@ return new class() extends Migration
     {
         Schema::create('verification_tokens', function (Blueprint $table): void {
             $table->id();
-            $table->char('user_id');
+            $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('token');
             $table->timestamps();

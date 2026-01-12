@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Carbon;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Spatie\Activitylog\Models\Activity;
 
 /**
@@ -84,6 +85,8 @@ use Spatie\Activitylog\Models\Activity;
  */
 class BonusScheme extends BaseModel
 {
+    use HasUniqueUuid;
+
     protected $fillable = array(
         'name',
         'description',

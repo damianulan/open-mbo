@@ -12,11 +12,12 @@ return new class() extends Migration
     public function up(): void
     {
         Schema::create('objectives', function (Blueprint $table): void {
-            $table->uuid('id')->primary();
-            $table->foreignUuid('template_id')->nullable();
+            $table->id();
+            $table->uuid('uuid')->unique();
+            $table->foreignId('template_id')->nullable();
             // although template is being assigned to a campaign, template can still be deleted, but a connection between objective and campaign (if made) must stand.
             // connection is nullable because objective can be assigned not necessarily by a campaign assignment
-            $table->foreignUuid('campaign_id')->nullable();
+            $table->foreignId('campaign_id')->nullable();
 
             $table->foreign('template_id')->references('id')->on('objective_templates')->nullOnDelete();
             $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');

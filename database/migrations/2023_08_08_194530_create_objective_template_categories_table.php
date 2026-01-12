@@ -12,7 +12,8 @@ return new class() extends Migration
     public function up(): void
     {
         Schema::create('objective_template_categories', function (Blueprint $table): void {
-            $table->uuid('id')->primary();
+            $table->id();
+            $table->uuid('uuid')->unique();
             $table->string('name', 255);
             $table->string('shortname', 64)->nullable();
             $table->longText('description')->nullable();

@@ -12,10 +12,10 @@ return new class() extends Migration
     public function up(): void
     {
         Schema::create('system_notifications', function (Blueprint $table): void {
-            $table->uuid('id')->primary();
-            $table->foreignUuid('notification_id');
+            $table->id();
+            $table->foreignId('notification_id');
             $table->foreign('notification_id')->references('id')->on('notifications')->onDelete('cascade');
-            $table->uuidMorphs('notifiable');
+            $table->morphs('notifiable');
             $table->json('resources')->nullable();
             $table->longText('contents');
 

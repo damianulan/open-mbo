@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Activity;
+use Lucent\Support\Traits\HasUniqueUuid;
 
 /**
  * @property string $id
@@ -99,6 +100,7 @@ class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
 {
     use CanUserCampaign;
     use HasCharts;
+    use HasUniqueUuid;
 
     public $logEntities = array('user_id' => User::class, 'campaign_id' => Campaign::class);
 

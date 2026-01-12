@@ -12,8 +12,8 @@ return new class() extends Migration
     public function up(): void
     {
         Schema::create('users_teams', function (Blueprint $table): void {
-            $table->foreignUuid('user_id');
-            $table->foreignUuid('team_id');
+            $table->foreignId('user_id');
+            $table->foreignId('team_id');
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');

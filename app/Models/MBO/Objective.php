@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Support\Carbon;
-use Lucent\Support\Traits\Dispatcher;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Spatie\Activitylog\Models\Activity;
 
 /**
@@ -111,7 +111,7 @@ use Spatie\Activitylog\Models\Activity;
 class Objective extends BaseModel implements HasDeadline, HasWeight
 {
     use Commentable;
-    use Dispatcher;
+    use HasUniqueUuid;
 
     protected $fillable = array(
         'template_id',

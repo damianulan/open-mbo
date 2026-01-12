@@ -13,7 +13,7 @@ return new class() extends Migration
     {
         Schema::create('user_preferences', function (Blueprint $table): void {
             $table->id();
-            $table->foreignUuid('user_id');
+            $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('lang', 4)->default('auto');
             $table->string('theme', 128);

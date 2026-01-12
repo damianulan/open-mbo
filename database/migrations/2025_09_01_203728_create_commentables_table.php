@@ -13,8 +13,8 @@ return new class() extends Migration
     {
         Schema::create('commentables', function (Blueprint $table): void {
             $table->bigIncrements('id');
-            $table->uuidMorphs('subject');
-            $table->uuidMorphs('author');
+            $table->morphs('subject');
+            $table->morphs('author');
             $table->longText('content');
             $table->boolean('private')->default(false);
             $table->timestamps();

@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Activity;
+use Lucent\Support\Traits\HasUniqueUuid;
 
 /**
  * @property string $id
@@ -95,6 +96,8 @@ use Spatie\Activitylog\Models\Activity;
  */
 class UserEmployment extends BaseModel
 {
+    use HasUniqueUuid;
+
     protected $fillable = array(
         'user_id',
         'company_id',

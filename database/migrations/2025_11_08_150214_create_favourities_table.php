@@ -12,10 +12,10 @@ return new class() extends Migration
     public function up(): void
     {
         Schema::create('favourities', function (Blueprint $table): void {
-            $table->foreignUuid('user_id');
+            $table->foreignId('user_id');
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->uuidMorphs('subject', 'subject');
+            $table->morphs('subject', 'subject');
 
             $table->unique(array('user_id', 'subject_id', 'subject_type'));
         });

@@ -12,9 +12,9 @@ return new class() extends Migration
     public function up(): void
     {
         Schema::create('user_bonus_schemes', function (Blueprint $table): void {
-            $table->uuid('id')->primary();
-            $table->foreignUuid('user_id');
-            $table->foreignUuid('bonus_scheme_id');
+            $table->id();
+            $table->foreignId('user_id');
+            $table->foreignId('bonus_scheme_id');
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('bonus_scheme_id')->references('id')->on('bonus_schemes')->onDelete('cascade');

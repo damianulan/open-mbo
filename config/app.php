@@ -4,6 +4,7 @@ use App\Casts\CheckboxCast;
 use App\Enums\Core\MessageType;
 use App\Exceptions\AppException;
 use App\Helpers\StorageHelper;
+use Lucent\Support\Traits\HasUniqueUuid;
 use App\Lib\Theme;
 use App\Models\Core\User;
 use App\Providers\AppServiceProvider;

@@ -24,7 +24,7 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Lucent\Support\Traits\Dispatcher;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Spatie\Activitylog\Models\Activity;
 
 /**
@@ -125,7 +125,7 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
 {
     use CanUserObjective;
     use Commentable;
-    use Dispatcher;
+    use HasUniqueUuid;
 
     protected $fillable = array(
         'user_id',

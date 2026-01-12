@@ -47,7 +47,7 @@ use Laravel\Sanctum\PersonalAccessToken;
 use Laravel\Scout\Searchable;
 use Lucent\Support\Str\Alphabet;
 use Lucent\Support\Traits\CascadeDeletes;
-use Lucent\Support\Traits\UUID;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Lucent\Support\Traits\VirginModel;
 use Sentinel\Models\Permission;
 use Sentinel\Traits\HasRolesAndPermissions;
@@ -167,7 +167,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     use RequestForms;
     use Searchable;
     use SoftDeletes;
-    use UUID;
+    use HasUniqueUuid;
     use UserBusiness;
     use UserMBO;
     use VirginModel;

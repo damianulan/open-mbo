@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Collection;
-use Lucent\Support\Traits\Dispatcher;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Translatable\HasTranslations;
 
@@ -136,8 +136,8 @@ use Spatie\Translatable\HasTranslations;
 #[ScopedBy(CampaignScope::class)]
 class Campaign extends BaseModel implements HasObjectives
 {
-    use Dispatcher;
     use HasTranslations;
+    use HasUniqueUuid;
 
     public $stages;
 
@@ -184,18 +184,24 @@ class Campaign extends BaseModel implements HasObjectives
         'created' => CampaignCreated::class,
     );
 
-    public static function creatingCampaign(Campaign $model)
+    protected static function boot(): void
     {
-        return self::updatingCampaign($model);
+        parent::boot();
+        static::creating(function (Campaign $model) {
+            return $model->checkManual();
+        });
+        static::updating(function (Campaign $model) {
+            return $model->checkManual();
+        });
     }
 
-    public static function updatingCampaign(Campaign $model)
+    protected function checkManual(): self
     {
         if ( ! settings('mbo.campaigns_manual')) {
-            $model->manual = 0;
+            $this->manual = 0;
         }
 
-        return $model;
+        return $this;
     }
 
     public function user_campaigns(): HasMany

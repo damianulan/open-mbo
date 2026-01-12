@@ -12,12 +12,13 @@ return new class() extends Migration
     public function up(): void
     {
         Schema::create('user_employments', function (Blueprint $table): void {
-            $table->uuid('id')->primary();
-            $table->foreignUuid('user_id');
-            $table->foreignUuid('company_id')->nullable();
-            $table->foreignUuid('contract_id')->nullable();
-            $table->foreignUuid('department_id')->nullable();
-            $table->foreignUuid('position_id')->nullable();
+            $table->id();
+            $table->uuid('uuid')->unique();
+            $table->foreignId('user_id');
+            $table->foreignId('company_id')->nullable();
+            $table->foreignId('contract_id')->nullable();
+            $table->foreignId('department_id')->nullable();
+            $table->foreignId('position_id')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('company_id')->references('id')->on('companies');

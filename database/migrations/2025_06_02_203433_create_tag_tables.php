@@ -22,7 +22,7 @@ return new class() extends Migration
         Schema::create('taggables', function (Blueprint $table): void {
             $table->foreignId('tag_id')->constrained()->cascadeOnDelete();
 
-            $table->uuidMorphs('taggable');
+            $table->morphs('taggable');
 
             $table->unique(array('tag_id', 'taggable_id', 'taggable_type'));
         });

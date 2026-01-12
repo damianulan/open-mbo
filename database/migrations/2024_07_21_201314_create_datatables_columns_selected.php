@@ -12,8 +12,8 @@ return new class() extends Migration
     public function up(): void
     {
         Schema::create('datatables_columns_selected', function (Blueprint $table): void {
-            $table->bigIncrements('id');
-            $table->foreignUuid('user_id');
+            $table->id();
+            $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('table_id', 255);
             $table->json('columns');

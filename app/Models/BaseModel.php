@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Lucent\Support\Traits\Accessible;
 use Lucent\Support\Traits\CascadeDeletes;
 use Lucent\Support\Traits\SoftDeletesPrunable;
-use Lucent\Support\Traits\UUID;
 use Lucent\Support\Traits\VirginModel;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\LaravelPackageTools\Concerns\Package\HasTranslations;
@@ -81,7 +80,6 @@ abstract class BaseModel extends Model
     use RequestForms;
     use SoftDeletes;
     use SoftDeletesPrunable;
-    use UUID;
     use VirginModel;
 
     public function carbonDate(string $prop, string $format = 'Y-m-d')
