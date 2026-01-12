@@ -56,7 +56,7 @@ class AppUpgrade extends Command
             $result = Process::run('git describe --tags --abbrev=0');
             $latestRelease = $result->output();
             if (empty($latestRelease)) {
-                Log::warning('Unable to get latest release tag.' . ' [' . $result->errorOutput() . '] ');
+                $this->warn('Unable to get latest release tag.' . ' [' . $result->errorOutput() . '] ');
                 $latestRelease = 'main';
             }
             $result = Process::run('git tag -l | xargs git tag -d');
@@ -68,7 +68,7 @@ class AppUpgrade extends Command
                 default => $target_release,
             };
 
-            $this->line("Checking to {$git_branch} branch/tag");
+            $this->comment("Checking to {$git_branch} branch/tag");
             if ( ! $local) {
                 $result = Process::run('git reset --hard');
             }
@@ -80,6 +80,7 @@ class AppUpgrade extends Command
             $result = Process::run('git pull');
 
             if ($runComposer) {
+                $this->comment('Running composer...');
                 $composer_exec = env('COMPOSER_EXECUTABLE', 'composer update');
                 $result = Process::timeout(1200)->run($composer_exec);
                 $output = $result->output();
