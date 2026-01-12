@@ -136,7 +136,6 @@ use Spatie\Translatable\HasTranslations;
 #[ScopedBy(CampaignScope::class)]
 class Campaign extends BaseModel implements HasObjectives
 {
-    use Dispatcher;
     use HasTranslations;
 
     public $stages;
@@ -184,18 +183,24 @@ class Campaign extends BaseModel implements HasObjectives
         'created' => CampaignCreated::class,
     );
 
-    public static function creatingCampaign(Campaign $model)
+    protected static function boot(): void
     {
-        return self::updatingCampaign($model);
+        parent::boot();
+        static::creating(function (Campaign $model) {
+            return $model->checkManual();
+        });
+        static::updating(function (Campaign $model) {
+            return $model->checkManual();
+        });
     }
 
-    public static function updatingCampaign(Campaign $model)
+    public function checkManual()
     {
         if ( ! settings('mbo.campaigns_manual')) {
-            $model->manual = 0;
+            $this->manual = 0;
         }
 
-        return $model;
+        return $this;
     }
 
     public function user_campaigns(): HasMany

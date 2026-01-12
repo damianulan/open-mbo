@@ -19,7 +19,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Support\Carbon;
-use Lucent\Support\Traits\Dispatcher;
 use Spatie\Activitylog\Models\Activity;
 
 /**
@@ -111,7 +110,6 @@ use Spatie\Activitylog\Models\Activity;
 class Objective extends BaseModel implements HasDeadline, HasWeight
 {
     use Commentable;
-    use Dispatcher;
 
     protected $fillable = array(
         'template_id',
@@ -139,18 +137,6 @@ class Objective extends BaseModel implements HasDeadline, HasWeight
         'updated' => ObjectiveUpdated::class,
         'created' => ObjectiveCreated::class,
     );
-
-    public static function creatingObjective(Objective $model): self
-    {
-        if ($model->campaign_id && empty($model->deadline)) {
-            $campaign = Campaign::find($model->campaign_id);
-            if ($campaign) {
-                $model->deadline = $campaign->realization_to;
-            }
-        }
-
-        return $model;
-    }
 
     public function getWeightAttribute($value): float
     {
@@ -260,6 +246,16 @@ class Objective extends BaseModel implements HasDeadline, HasWeight
                     }
                 }
             }
+        });
+        static::creating(function ($model) {
+            if ($model->campaign_id && empty($model->deadline)) {
+                $campaign = Campaign::find($model->campaign_id);
+                if ($campaign) {
+                    $model->deadline = $campaign->realization_to;
+                }
+            }
+
+            return $model;
         });
     }
 }
