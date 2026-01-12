@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -17,11 +17,11 @@ return array(
      */
     'default' => env('FORMFORGE_TEMPLATE', 'horizontal'),
 
-    'templates' => array(
-        'horizontal' => array(),
-        '2columns' => array(),
-        'vertical' => array(),
-    ),
+    'templates' => [
+        'horizontal' => [],
+        '2columns' => [],
+        'vertical' => [],
+    ],
 
     /**
      * Declare the default date format, that will be used in date fields.
@@ -33,18 +33,22 @@ return array(
     /**
      * Process uploaded files with reformatRequest method.
      */
-    'handling_files' => env('FORMFORGE_HANDLING_FILES', true),
+    'storage' => [
+        'handling_files' => env('FORMFORGE_HANDLING_FILES', true),
+        'path' => storage_path('app/public/uploads'),
+    ],
 
     /**
      * Dispatches FormForge rendering events.
      */
     'dispatches_events' => false,
 
-
     /**
      * If you need to fill your form request model instance with personstamps,
      * declare columns to fill with Auth::user()->id automatically.
      * Remember to also keep them in your model's $fillable array.
+     *
+     * You can add personstamps to your tables when migrating: `$table->personstamps();`
      */
     'personstamps' => [
         'fields' => [
@@ -52,7 +56,27 @@ return array(
             'updated_by',
             'deleted_by',
         ],
-        'type' => 'bigInteger',
-        'table' => 'users',
+        'type' => 'integer',
+        'table' => 'users', // set null if you don't want to index when calling $table->personstamps() in your migrations
     ],
-);
+
+    'mews_purifier_setting' => array(
+        'HTML.Allowed' => 'h1,h2,h3,h4,h5,h6,b,strong,i,em,u,a[href|title|target],ul,ol,li,p[style|class],br,span[style|class],img[width|height|alt|src],blockquote,pre,code,table,thead,tbody,tr,th,td',
+        'CSS.AllowedProperties' => 'font-weight,font-style,text-decoration,padding-left,color,background-color,text-align',
+        'HTML.Nofollow' => true,
+        'HTML.TargetBlank' => true,
+        'URI.AllowedSchemes' => array(
+            'http' => true,
+            'https' => true,
+            'mailto' => true,
+        ),
+        'Attr.AllowedClasses' => array(
+            'ql-align-center',
+            'ql-align-right',
+            'ql-align-justify',
+            'text-center', // Bootstrap
+            'text-right',
+        ),
+    ),
+
+];
