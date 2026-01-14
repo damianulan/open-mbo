@@ -87168,7 +87168,9 @@ $.buildChosen = function () {
   });
 };
 $('body').on("focus", "input[type=password]", function () {
-  $(this).val("");
+  if ($('body').find("input[type=password]").length === 1) {
+    $(this).val("");
+  }
 });
 $('body').on("focusout", 'input[data-numeric="decimal"]', function () {
   var val = $(this).val();

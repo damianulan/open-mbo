@@ -30,6 +30,7 @@ class UsersForm extends Form
                 ->add(FormComponent::numeric('password_min_letters', $this->password_min_letters)->label(__('forms.settings.users.password_min_letters'))->info(__('forms.settings.users.info.password_min_letters'))->key(self::settingsKey('users.password_min_letters')))
                 ->add(FormComponent::numeric('password_min_numbers', $this->password_min_numbers)->label(__('forms.settings.users.password_min_numbers'))->info(__('forms.settings.users.info.password_min_numbers'))->key(self::settingsKey('users.password_min_numbers')))
                 ->add(FormComponent::numeric('password_min_symbols', $this->password_min_symbols)->label(__('forms.settings.users.password_min_symbols'))->info(__('forms.settings.users.info.password_min_symbols'))->key(self::settingsKey('users.password_min_symbols')))
+                ->add(FormComponent::numeric('password_not_repeat', $this->password_not_repeat)->label(__('forms.settings.users.password_not_repeat'))->info(__('forms.settings.users.info.password_not_repeat'))->key(self::settingsKey('users.password_not_repeat')))
 
             )
             ->addSection(__('forms.employments.index'), fn (FormBuilder $builder) => $builder

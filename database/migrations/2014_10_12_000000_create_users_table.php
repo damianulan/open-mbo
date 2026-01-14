@@ -14,7 +14,8 @@ return new class() extends Migration
         Schema::create('users', function (Blueprint $table): void {
             $table->uuid('id')->primary();
             $table->string('auth')->default('manual');
-            $table->string('email')->unique();
+            $table->string('email')->nullable();
+            $table->string('username')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('core')->default(0)->comment('Core user - comes as default with the application - cannot be deleted');

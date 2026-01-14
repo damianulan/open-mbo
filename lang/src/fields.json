@@ -40,6 +40,9 @@
     "name": {
         "pl": "Nazwa"
     },
+    "old_password": {
+        "pl": "Obecne hasło"
+    },
     "password": {
         "pl": "Hasło"
     },

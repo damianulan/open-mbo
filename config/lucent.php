@@ -21,11 +21,11 @@ return array(
 
         // relation types that should be deleted when model using `CascadeDeletes` trait is deleted
         'cascade_delete_relation_types' => array(
-            'Illuminate\Database\Eloquent\Relations\MorphMany',
-            'Illuminate\Database\Eloquent\Relations\MorphToMany',
-            'Illuminate\Database\Eloquent\Relations\BelongsToMany',
-            'Illuminate\Database\Eloquent\Relations\HasMany',
-            'Illuminate\Database\Eloquent\Relations\HasOne',
+            // 'Illuminate\Database\Eloquent\Relations\MorphMany',
+            // 'Illuminate\Database\Eloquent\Relations\MorphToMany',
+            // 'Illuminate\Database\Eloquent\Relations\BelongsToMany',
+            // 'Illuminate\Database\Eloquent\Relations\HasMany',
+            // 'Illuminate\Database\Eloquent\Relations\HasOne',
         ),
     ),
 

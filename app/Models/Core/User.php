@@ -2,6 +2,7 @@
 
 namespace App\Models\Core;
 
+use App\Casts\Enigma;
 use App\Commentable\Models\Comment;
 use App\Commentable\Support\Commentable;
 use App\Commentable\Support\Commentator;
@@ -32,6 +33,7 @@ use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -175,6 +177,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     protected $fillable = array(
         'email',
+        'username',
         'active',
         'core',
         'force_password_change',
@@ -188,6 +191,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     protected $casts = array(
         'email_verified_at' => 'datetime',
         'created_at' => 'datetime',
+        'email' => Enigma::class,
     );
 
     protected $cascadeDeletes = array(
@@ -195,9 +199,48 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         'preferences',
     );
 
+    protected static function boot(): void
+    {
+        parent::boot();
+        static::creating(function (User $user) {
+            if ( ! isset($user->password) || empty($user->password)) {
+                $user->generatePassword();
+            }
+
+            return $user;
+        });
+
+        static::created(function (User $user) {
+            $user->password_history()->create([
+                'password' => $user->password,
+            ]);
+        });
+
+        static::updated(function (User $user) {
+            if($user->isDirty('password')){
+                $user->password_history()->create([
+                    'password' => $user->password,
+                ]);
+            }
+        });
+    }
+
     public static function findByEmail(string $email): ?User
     {
         return self::where('email', $email)->first();
+    }
+
+    public function validateNewPassword($newpassword): bool
+    {
+        $passwords = $this->password_history->take(settings('users.password_not_repeat', 0));
+
+        foreach ($passwords as $password) {
+            if (Hash::check($newpassword, $password->password)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public function getNewPassword(): string
@@ -365,6 +408,11 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         return $this->morphedByMany(Campaign::class, 'subject', 'favourities');
     }
 
+    public function password_history(): HasMany
+    {
+        return $this->hasMany(UserPasswordHistory::class)->orderByDesc('created_at');
+    }
+
     public function preferredLocale()
     {
         $locale = $this->preferences->lang ?? 'auto';
@@ -392,21 +440,6 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     public function routeShow(): string
     {
         return route('users.show', $this->id);
-    }
-
-    protected static function booted(): void
-    {
-        static::creating(function (User $user) {
-            if ( ! isset($user->password) || empty($user->password)) {
-                $user->generatePassword();
-            }
-
-            return $user;
-        });
-
-        static::deleting(function (User $user): void {
-            $user->profile->delete();
-        });
     }
 
     protected function name(): Attribute
