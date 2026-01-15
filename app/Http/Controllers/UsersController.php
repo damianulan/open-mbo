@@ -77,11 +77,15 @@ class UsersController extends AppController
      */
     public function show(Request $request, User $user)
     {
-        if ($request->user()->cannot('view', $user)) {
+        $view = $request->user()->can('view', $user);
+        $preview = $request->user()->can('preview', $user) && !$view;
+
+        if (!$view && !$preview) {
             unauthorized();
         }
         return view('pages.users.show', array(
             'user' => $user,
+            'isPreview' => $preview,
         ));
     }
 

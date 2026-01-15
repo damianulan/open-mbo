@@ -5,7 +5,7 @@
             $user = $uc->user;
             @endphp
             @if($user)
-                <li>
+                <li class="{{ $user->blocked() ? 'inactive':'' }}">
                     <div class="list-grid">
                         <div class="list-content">
                             <div class="nowrap user" data-tippy-content="{{ $user->name }}">

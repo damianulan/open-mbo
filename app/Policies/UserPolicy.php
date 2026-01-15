@@ -29,6 +29,14 @@ class UserPolicy
     }
 
     /**
+     * Determine whether the user can view the model.
+     */
+    public function preview(User $user, User $model): bool
+    {
+        return $user->can(PermissionsLib::USERS_PREVIEW, $model);
+    }
+
+    /**
      * Determine whether the user can create models.
      */
     public function create(User $user): bool

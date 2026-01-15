@@ -211,9 +211,12 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         });
 
         static::created(function (User $user) {
-            $user->password_history()->create([
-                'password' => $user->password,
-            ]);
+            if ($user->password) {
+                $user->password_history()->create([
+                    'password' => $user->password,
+                ]);
+
+            }
         });
 
         static::updated(function (User $user) {
@@ -271,7 +274,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     public function nameDetails()
     {
         $view = view('components.datatables.username', array('data' => $this));
-        if (Auth::user()->can('view', $this)) {
+        if (Auth::user()->can('preview', $this)) {
             $view = view('components.datatables.username_link', array('data' => $this));
         }
 
@@ -370,6 +373,10 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
                 $color = 'red';
             }
         }
+        if($this->blocked()){
+            $color = 'gray';
+        }
+
         $indicator = '';
         if ( ! $this->itsMe() && $this->isLoggedIn()) {
             $indicator = '<div class="profile-indicator"></div>';

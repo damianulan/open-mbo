@@ -33,7 +33,7 @@ class UsersDataTable extends CustomDataTable
             ->addColumn('status', function ($data) {
                 $color = 'primary';
                 $text = 'Aktywny';
-                if ( $data->suspended_at === null) {
+                if ( $data->suspended_at !== null) {
                     $color = 'dark';
                     $text = 'Zablokowany';
                 }
