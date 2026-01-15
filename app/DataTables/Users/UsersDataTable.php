@@ -33,7 +33,7 @@ class UsersDataTable extends CustomDataTable
             ->addColumn('status', function ($data) {
                 $color = 'primary';
                 $text = 'Aktywny';
-                if ( ! $data->active) {
+                if ( $data->suspended_at === null) {
                     $color = 'dark';
                     $text = 'Zablokowany';
                 }
@@ -45,8 +45,8 @@ class UsersDataTable extends CustomDataTable
             })
             ->orderColumn('status', function ($query, $order): void {
                 $o = 'asc' === $order ? 'desc' : 'asc';
-                $query->orderBy('active', $o);
-                $query->orderBy('active', $o);
+                $query->orderBy('suspended_at', $o);
+                $query->orderBy('suspended_at', $o);
             })
             ->orderColumn('name', function ($query, $order): void {
                 $query->orderBy('firstname', $order);

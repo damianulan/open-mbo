@@ -178,7 +178,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     protected $fillable = array(
         'email',
         'username',
-        'active',
+        'suspended_at',
         'core',
         'force_password_change',
     );
@@ -290,10 +290,10 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function toggleLock(): bool
     {
-        if (1 === $this->active) {
-            $this->active = 0;
+        if (null === $this->suspended_at) {
+            $this->suspended_at = now();
         } else {
-            $this->active = 1;
+            $this->suspended_at = null;
         }
 
         return (bool) ($this->update());
@@ -301,7 +301,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function blocked(): bool
     {
-        return $this->active ? false : true;
+        return $this->suspended_at ? true : false;
     }
 
     public function canBeDeleted(): bool

@@ -38,7 +38,7 @@
             </a>
         @endcan
         @can('block', $user)
-            @if($user->active !== 1)
+            @if($user->suspended_at !== null)
                 <a class="icon-btn" href="{{ route('users.block', $user->id) }}" class="" data-tippy-content="{{ __('buttons.unblock') }}">
                     <i class="bi-person-fill-check"></i>
                 </a>

@@ -21,7 +21,7 @@ return new class() extends Migration
             $table->boolean('core')->default(0)->comment('Core user - comes as default with the application - cannot be deleted');
             $table->boolean('force_password_change')->default(1)->comment('Force user to change password after first login'); // 0 - blocked, 1 - active
             $table->rememberToken();
-            $table->boolean('active')->default(1);
+            $table->timestamp('suspended_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
