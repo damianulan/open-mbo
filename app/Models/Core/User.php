@@ -57,16 +57,18 @@ use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property string $id
- * @property string $email
+ * @property string $auth
+ * @property mixed|null $email
+ * @property string|null $username
  * @property Carbon|null $email_verified_at
  * @property string $password
- * @property int $active
  * @property int $core Core user - comes as default with the application - cannot be deleted
  * @property int $force_password_change Force user to change password after first login
  * @property string|null $remember_token
- * @property Carbon|null $deleted_at
+ * @property string|null $suspended_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, ActivityModel> $activity
@@ -100,11 +102,13 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read mixed $name
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Objective> $objectives
  * @property-read int|null $objectives_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Core\UserPasswordHistory> $password_history
+ * @property-read int|null $password_history_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Permission> $permissions
  * @property-read int|null $permissions_count
  * @property-read mixed $points
- * @property-read UserPreference|null $preferences
- * @property-read UserProfile|null $profile
+ * @property-read \App\Models\Core\UserPreference|null $preferences
+ * @property-read \App\Models\Core\UserProfile|null $profile
  * @property-read Collection $sessions
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $subordinates
  * @property-read int|null $subordinates_count
@@ -122,7 +126,6 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read int|null $user_objectives_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, UserObjective> $user_objectives_active
  * @property-read int|null $user_objectives_active_count
- *
  * @method static Builder<static>|User active()
  * @method static Builder<static>|User drafted()
  * @method static \Database\Factories\Core\UserFactory factory($count = null, $state = [])
@@ -132,7 +135,7 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder<static>|User onlyTrashed()
  * @method static Builder<static>|User published()
  * @method static Builder<static>|User query()
- * @method static Builder<static>|User whereActive($value)
+ * @method static Builder<static>|User whereAuth($value)
  * @method static Builder<static>|User whereCore($value)
  * @method static Builder<static>|User whereCreatedAt($value)
  * @method static Builder<static>|User whereDeletedAt($value)
@@ -144,12 +147,13 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder<static>|User whereLastname(string $value)
  * @method static Builder<static>|User wherePassword($value)
  * @method static Builder<static>|User whereRememberToken($value)
+ * @method static Builder<static>|User whereSuspendedAt($value)
  * @method static Builder<static>|User whereUpdatedAt($value)
+ * @method static Builder<static>|User whereUsername($value)
  * @method static Builder<static>|User withPermission(...$slugs)
  * @method static Builder<static>|User withRole(...$slugs)
  * @method static Builder<static>|User withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|User withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements HasLocalePreference, HasShowRoute
