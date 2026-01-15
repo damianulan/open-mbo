@@ -196,6 +196,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         'email_verified_at' => 'datetime',
         'created_at' => 'datetime',
         'email' => Enigma::class,
+        'username' => Enigma::class,
     );
 
     protected $cascadeDeletes = array(
