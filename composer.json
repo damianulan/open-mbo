@@ -56,7 +56,7 @@
         "barryvdh/laravel-snappy": "^1.0",
         "damianulan/laravel-feature-kit": "dev-main",
         "damianulan/php-enumerable": "dev-main",
-        "damianulan/laravel-form-forge": "dev-pre",
+        "damianulan/laravel-form-forge": "dev-main",
         "damianulan/laravel-lucent": "dev-main",
         "damianulan/laravel-sentinel": "dev-main",
         "damianulan/laraverse": "dev-main",
