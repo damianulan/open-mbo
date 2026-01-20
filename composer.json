@@ -44,6 +44,10 @@
         {
             "type": "vcs",
             "url": "git@github.com:damianulan/laraverse.git"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:damianulan/php-dtos.git"
         }
     ],
     "require": {
@@ -56,6 +60,7 @@
         "damianulan/laravel-lucent": "dev-main",
         "damianulan/laravel-sentinel": "dev-main",
         "damianulan/laraverse": "dev-main",
+        "damianulan/php-dtos": "dev-main",
         "diglactic/laravel-breadcrumbs": "^10.0",
         "fakerphp/faker": "*",
         "guzzlehttp/guzzle": "^7.2",

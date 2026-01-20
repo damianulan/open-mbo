@@ -9,6 +9,7 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use App\Console\Commands\Core\LangList;
+use Lucent\Support\Magellan\MagellanScope;
 
 class AppServiceProvider extends ServiceProvider
 {
