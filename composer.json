@@ -149,7 +149,16 @@
     },
     "config": {
         "optimize-autoloader": true,
-        "preferred-install": "dist",
+        "preferred-install": {
+            "damianulan/laravel-form-forge": "source",
+            "damianulan/laravel-feature-kit": "source",
+            "damianulan/laravel-lucent": "source",
+            "damianulan/php-enumerable": "source",
+            "damianulan/php-dtos": "source",
+            "damianulan/laraverse": "source",
+            "damianulan/laravel-sentinel": "source",
+            "*": "dist"
+        },
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true
