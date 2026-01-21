@@ -43,22 +43,23 @@
 
 @endsection
 @push('scripts')
-<script type="text/javascript">
-    $(document).on('click', '.add-employment', function () {
-        $(document).find('.employment-card:first').show();
-    });
+    <script type="text/javascript">
+        $(document).on('click', '.add-employment', function () {
+            $(document).find('.employment-card:first').show();
+        });
 
-    $(document).on('click', '.delete-employment', function (e) {
-        let link = $(this).attr('href');
-        e.preventDefault();
-        $.confirm(
-            'Czy na pewno zawieścić tą kampanię? Użytkownicy przestaną widzieć cele przypisane w ramach tej kampanii, a administratorzy nie będą mogli dodawać nowych celów.',
-            null,
-            function() {
-                $.overlay('show');
-                window.location.href = link;
-            }
-        );
-    });
-</script>
+        $(document).on('click', '.delete-employment', function (e) {
+            let link = $(this).attr('href');
+            e.preventDefault();
+            $.confirm(
+                'Czy na pewno zawieścić tą kampanię? Użytkownicy przestaną widzieć cele przypisane w ramach tej kampanii, a administratorzy nie będą mogli dodawać nowych celów.',
+                null,
+                function() {
+                    $.overlay('show');
+                    window.location.href = link;
+                }
+            );
+        });
+    </script>
+    {{ $form->scripts() }}
 @endpush

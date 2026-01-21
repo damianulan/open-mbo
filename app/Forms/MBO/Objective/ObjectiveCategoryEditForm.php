@@ -36,7 +36,7 @@ class ObjectiveCategoryEditForm extends Form
             ->class('objective-category-create-form')
             ->add(FormComponent::text('name', $this->model)->label(__('forms.mbo.categories.name'))->required())
             ->add(FormComponent::{$shortnameType}('shortname', $this->model)->label(__('forms.mbo.categories.shortname')))
-            ->add(FormComponent::container('description', $this->model)->label(__('forms.mbo.categories.description'))->class('quill-default'))
+            ->add(FormComponent::container('description', $this->model)->label(__('forms.mbo.categories.description'))->class('quill-default')->purifyValue())
             ->add(FormComponent::multiselect('user_ids', $selected, Dictionary::fromModel(User::class, 'name', 'allActive'))->label(__('forms.mbo.categories.coordinators')))
             ->addSubmit();
     }

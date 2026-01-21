@@ -17,6 +17,7 @@
       </div>
     </div>
 </div>
+{{ $form->scripts() }}
 <script type="text/javascript">
 
 $(document).ready(function() {

@@ -120,5 +120,5 @@
 
 @endsection
 @push('scripts')
-
+    {{ $form->scripts() }}
 @endpush

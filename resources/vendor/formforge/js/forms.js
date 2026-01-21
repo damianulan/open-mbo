@@ -3,6 +3,8 @@ import flatpickr from "flatpickr";
 import { Polish } from "flatpickr/dist/l10n/pl.js";
 import tippy from "tippy.js";
 
+$.formForgeInitialized = true;
+
 // build flatpickr objects
 $.buildFlatpickr = function () {
     flatpickr.localize(Polish);
@@ -105,7 +107,7 @@ $.buildFlatpickr = function () {
 
 // build chosen objects
 $.buildChosen = function () {
-    $("select.formforge-control").chosen({
+    $("select.formforge-control:not(.custom-chosen)").chosen({
         disable_search_threshold: 5,
         placeholder_text: choose,
         no_results_text: no_results,

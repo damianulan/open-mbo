@@ -53,7 +53,7 @@ class CampaignEditObjectiveForm extends Form
             ->add(FormComponent::hidden('campaign_id', $campaign_id))
             ->add(FormComponent::select('template_id', $selectedTemplate, Dictionary::fromModel(ObjectiveTemplate::class, 'name', 'getAll', $exclude))->required()->label(__('forms.mbo.objectives.template')))
             ->add(FormComponent::text('name', $this->model)->label(__('forms.mbo.objectives.name'))->required())
-            ->add(FormComponent::container('description', $this->model)->label(__('forms.mbo.objectives.description'))->class('quill-default'))
+            ->add(FormComponent::container('description', $this->model)->label(__('forms.mbo.objectives.description'))->class('quill-default')->purifyValue())
             ->add(FormComponent::datetime('deadline', $this->model)->label(__('forms.mbo.objectives.deadline'))->minDate($realization_from)->maxDate($realization_to)->info(__('forms.mbo.objectives.info.deadline')))
             ->add(FormComponent::decimal('weight', $this->model)->label(__('forms.mbo.objectives.weight'))->info(__('forms.mbo.objectives.info.weight'))->required())
             ->add(FormComponent::decimal('expected', $this->model)->label(__('forms.mbo.objectives.expected'))->info(__('forms.mbo.objectives.info.expected')))
