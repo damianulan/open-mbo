@@ -20,6 +20,7 @@ use App\Models\Vendor\ActivityModel;
 use App\Support\Notifications\Models\MailNotification;
 use App\Support\Notifications\Models\SystemNotification;
 use App\Support\Notifications\Traits\Notifiable;
+use App\Support\Search\Traits\HasIndex;
 use App\Traits\Favouritable;
 use App\Traits\IsTranslated;
 use App\Traits\UserBusiness;
@@ -59,7 +60,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property string $id
  * @property string $auth
  * @property mixed|null $email
- * @property string|null $username
+ * @property mixed|null $username
  * @property Carbon|null $email_verified_at
  * @property string $password
  * @property int $core Core user - comes as default with the application - cannot be deleted
@@ -95,6 +96,8 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read int|null $favourite_to_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $favourite_users
  * @property-read int|null $favourite_users_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Support\Search\IndexModel> $indexes
+ * @property-read int|null $indexes_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Team> $leader_teams
  * @property-read int|null $leader_teams_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Comment> $my_comments
@@ -178,6 +181,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     use UserMBO;
     use VirginModel;
     use UserHasPreferences;
+    use HasIndex;
 
     protected $fillable = array(
         'email',

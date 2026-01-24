@@ -6,13 +6,11 @@ use App\Support\Notifications\Contracts\NotifiableEvent;
 use App\Support\Notifications\Factories\ResourceFactory;
 use App\Support\Notifications\Models\Notification;
 use App\Support\Notifications\Traits\Notifiable;
-use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Foundation\Queue\Queueable;
 
 class NotifyOnEvent implements ShouldQueue
 {
-    use InteractsWithQueue;
     use Queueable;
 
     public $maxExceptions = 3;

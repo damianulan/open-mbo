@@ -23,7 +23,7 @@ trait UserBusiness
 
     public function employment(): ?HasOne
     {
-        return $this->hasOne(UserEmployment::class)->active();
+        return $this->hasOne(UserEmployment::class)->active()->orderBy('created_at', 'desc');
     }
 
     public function employments(): ?HasMany
