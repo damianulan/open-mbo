@@ -30,16 +30,23 @@ class SearchEngine
 
     public function get(): Collection
     {
-        return $this->canSearch() ? $this->query()->get()->map(fn (IndexModel $index) => $index->result_item) : new Collection();
+        return $this->canSearch() ? $this->query()->get()->map(fn (IndexModel $index) => $index->resource?->resultItem($this->input)) : new Collection();
     }
 
-    public function getPaginator(): LengthAwarePaginator
+    public function getPaginator(int $perPage = 20): LengthAwarePaginator
     {
-        return $this->query()->paginate();
+        $paginator = $this->query()->paginate($perPage);
+        $collection = $paginator->getCollection();
+        return $paginator->setCollection($collection->map(fn (IndexModel $index) => $index->resource?->resultItem($this->input)));
     }
 
     public function count(): int
     {
         return $this->canSearch() ? $this->query()->count() : 0;
+    }
+
+    public function getInput(): string
+    {
+        return $this->input;
     }
 }

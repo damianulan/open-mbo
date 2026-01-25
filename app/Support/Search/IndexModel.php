@@ -95,6 +95,7 @@ class IndexModel extends Model
             ->whereIn('trigram', $trigrams)
             ->groupBy('source_type')
             ->groupBy('source_id')
-            ->havingRaw('COUNT(DISTINCT trigram) >= ?', [count($trigrams)]);
+            ->havingRaw('COUNT(DISTINCT trigram) >= ?', [count($trigrams)])
+            ->orderBy('created_at', 'desc');
     }
 }

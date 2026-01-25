@@ -28,12 +28,12 @@ class CampaignResource extends IndexResource
         );
     }
 
-    public function resultItem(): ResultItem
+    public function resultItem(string $phrase): ResultItem
     {
-        return new ResultItem(array(
+        return (new ResultItem(array(
             'title' => $this->model->name,
             'description' => $this->model->description,
             'link' => route('campaigns.show', $this->model->id),
-        ));
+        )))->setSearchedPhrase($phrase);
     }
 }

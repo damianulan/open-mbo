@@ -18,7 +18,7 @@ abstract class IndexResource
 
     abstract public static function getModelClass(): string;
 
-    abstract public function resultItem(): ResultItem;
+    abstract public function resultItem(string $phrase): ResultItem;
 
     final public function getKey()
     {

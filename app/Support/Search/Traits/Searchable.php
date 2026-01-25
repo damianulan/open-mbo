@@ -7,6 +7,7 @@ use App\Support\Search\IndexModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use App\Support\Search\Jobs\SearchIndexJob;
+use App\Support\Search\Factories\IndexResource;
 
 trait Searchable
 {

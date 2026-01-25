@@ -32,7 +32,6 @@ class IndexModels extends BaseCommand
     {
         $this->logStart();
         try {
-            DB::beginTransaction();
             IndexModel::truncate();
             $scope = new SearchModelScope();
             $classes = $scope->get();
@@ -48,9 +47,7 @@ class IndexModels extends BaseCommand
             }
 
             $this->log('completed', true);
-            DB::commit();
         } catch (Throwable $th) {
-            DB::rollBack();
             $this->log($th->getMessage(), false);
             $this->error($th->getMessage());
             if(config('app.debug')){

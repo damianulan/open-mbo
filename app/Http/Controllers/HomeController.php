@@ -28,9 +28,9 @@ class HomeController extends AppController
     {
         // $input = 'ds.';
         // $engine = new SearchEngine($input);
-        // $models = $engine->get()->map(fn (IndexModel $index) => $index->source->employment);
-        // $resources = $engine->get()->map(fn (IndexModel $index) => ModelResourceFactory::getResource($index->source)?->attributes());
-        // dd($resources);
+        // $results = $engine->get();
+        // $paginator = $engine->getPaginator();
+        // dd($results, $paginator);
 
         $user = Auth::user();
 
