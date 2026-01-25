@@ -4,6 +4,7 @@ namespace App\Support\Search\Resources;
 
 use App\Support\Search\Factories\IndexResource;
 use App\Models\Core\User;
+use App\Support\Search\Dtos\ResultItem;
 
 class UserResource extends IndexResource
 {
@@ -20,13 +21,22 @@ class UserResource extends IndexResource
     public function attributes(): array
     {
         return array(
-            'firstname' => $this->model->firstname(),
-            'lastname' => $this->model->lastname(),
+            'firstname' => $this->model->firstname,
+            'lastname' => $this->model->lastname,
             'email' => $this->model->email,
-            'employment_start_date' => $this->model?->employment?->employment->format('d.m.Y'),
             'position' => $this->model->employment?->position->name,
-            'gender' => $this->model->profile?->gender === 'm' ? 'Mężczyzna' : 'Kobieta',
+            'company' => $this->model->employment?->company->name,
+            'gender' => $this->model->gender === 'm' ? 'Mężczyzna' : 'Kobieta',
         );
+    }
+
+    public function resultItem(): ResultItem
+    {
+        return new ResultItem(array(
+            'title' => $this->model->name,
+            'description' => null,
+            'link' => route('users.show', $this->model->id),
+        ));
     }
 
 }

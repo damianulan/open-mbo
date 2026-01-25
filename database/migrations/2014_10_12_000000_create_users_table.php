@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\Users\Gender;
 
 return new class() extends Migration
 {
@@ -15,9 +16,16 @@ return new class() extends Migration
             $table->uuid('id')->primary();
             $table->string('auth')->default('manual');
             $table->string('email')->nullable();
+            $table->string('firstname');
+            $table->string('lastname');
             $table->string('username')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('gender', array(
+                Gender::MALE,
+                Gender::FEMALE,
+                Gender::OTHER,
+            ))->nullable();
             $table->boolean('core')->default(0)->comment('Core user - comes as default with the application - cannot be deleted');
             $table->boolean('force_password_change')->default(1)->comment('Force user to change password after first login'); // 0 - blocked, 1 - active
             $table->rememberToken();

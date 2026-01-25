@@ -12,7 +12,7 @@ return new class() extends Migration
     public function up(): void
     {
         Schema::create('search_indexes', function (Blueprint $table): void {
-            $table->bigIncrements('id');
+            $table->uuid('id')->primary();
             $table->uuidMorphs('source');
             $table->string('attribute');
             $table->string('trigram');

@@ -83,5 +83,23 @@
     },
     "updated_at": {
         "pl": "Zaktualizowano"
+    },
+
+    "user_status": {
+        "active": {
+            "pl": "Aktywny"
+        },
+        "suspended": {
+            "pl": "Zablokowany"
+        },
+        "deleted": {
+            "pl": "Usunięty"
+        },
+        "unverified": {
+            "pl": "Niezweryfikowany"
+        },
+        "unemployed": {
+            "pl": "Niezatrudniony"
+        }
     }
 }

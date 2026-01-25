@@ -5,7 +5,9 @@ namespace App\Console\Commands\Search;
 use App\Console\BaseCommand;
 use Throwable;
 use App\Support\Search\Discovery\SearchModelScope;
+use App\Support\Search\IndexModel;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class IndexModels extends BaseCommand
 {
@@ -30,6 +32,8 @@ class IndexModels extends BaseCommand
     {
         $this->logStart();
         try {
+            DB::beginTransaction();
+            IndexModel::truncate();
             $scope = new SearchModelScope();
             $classes = $scope->get();
 
@@ -44,7 +48,9 @@ class IndexModels extends BaseCommand
             }
 
             $this->log('completed', true);
+            DB::commit();
         } catch (Throwable $th) {
+            DB::rollBack();
             $this->log($th->getMessage(), false);
             $this->error($th->getMessage());
             if(config('app.debug')){

@@ -10,6 +10,7 @@ use App\Events\MBO\Campaigns\CampaignUpdated;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Models\Scopes\MBO\CampaignScope;
+use App\Support\Search\Traits\Searchable;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Builder;
@@ -19,7 +20,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Collection;
-use Lucent\Support\Traits\Dispatcher;
+use Lucent\Contracts\Models\HasShowRoute;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Translatable\HasTranslations;
 
@@ -48,6 +49,8 @@ use Spatie\Translatable\HasTranslations;
  * @property-read int|null $activities_count
  * @property-read EloquentCollection<int, User> $coordinators
  * @property-read int|null $coordinators_count
+ * @property-read EloquentCollection<int, \App\Support\Search\IndexModel> $indexes
+ * @property-read int|null $indexes_count
  * @property-read EloquentCollection<int, \App\Models\MBO\Objective> $objectives
  * @property-read int|null $objectives_count
  * @property-read mixed $timeend
@@ -132,9 +135,10 @@ use Spatie\Translatable\HasTranslations;
  * @mixin \Eloquent
  */
 #[ScopedBy(CampaignScope::class)]
-class Campaign extends BaseModel implements HasObjectives
+class Campaign extends BaseModel implements HasObjectives, HasShowRoute
 {
     use HasTranslations;
+    use Searchable;
 
     public $stages;
 
@@ -542,6 +546,11 @@ class Campaign extends BaseModel implements HasObjectives
     public function inProgress(): bool
     {
         return CampaignStage::IN_PROGRESS === $this->stage->value();
+    }
+
+    public function routeShow(): string
+    {
+        return route('campaigns.show', $this->id);
     }
 
     /**

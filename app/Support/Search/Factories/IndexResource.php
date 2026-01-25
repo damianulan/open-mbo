@@ -3,6 +3,7 @@
 namespace App\Support\Search\Factories;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Support\Search\Dtos\ResultItem;
 
 abstract class IndexResource
 {
@@ -16,6 +17,8 @@ abstract class IndexResource
     }
 
     abstract public static function getModelClass(): string;
+
+    abstract public function resultItem(): ResultItem;
 
     final public function getKey()
     {

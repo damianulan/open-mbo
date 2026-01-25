@@ -24,8 +24,8 @@ class UserResource extends NotificationResource
     public function datas(): array
     {
         return array(
-            'firstname' => $this->model->firstname(),
-            'lastname' => $this->model->lastname(),
+            'firstname' => $this->model->firstname,
+            'lastname' => $this->model->lastname,
             'email' => $this->model->email,
         );
     }

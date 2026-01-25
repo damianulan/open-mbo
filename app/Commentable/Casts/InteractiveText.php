@@ -107,7 +107,7 @@ class InteractiveText implements CastsAttributes
                             } elseif (self::MODE_NORMAL === $mode) {
                                 $route = self::getUserRoute($user->id);
                                 if ($route) {
-                                    $replaceTo = '<a class="user-mention" href="' . $route . '">' . $user->firstname() . ' ' . $user->lastname() . '</a>';
+                                    $replaceTo = '<a class="user-mention" href="' . $route . '">' . $user->firstname . ' ' . $user->lastname . '</a>';
                                 }
                             }
                         }
@@ -136,7 +136,7 @@ class InteractiveText implements CastsAttributes
                         if ($user) {
                             $route = self::getUserRoute($user->id);
                             if ($route) {
-                                $replaceTo = '<a class="user-mention" href="' . $route . '">' . $user->firstname() . ' ' . $user->lastname() . '</a>';
+                                $replaceTo = '<a class="user-mention" href="' . $route . '">' . $user->firstname . ' ' . $user->lastname . '</a>';
                             }
                         }
                         $value = Str::replace($search, $replaceTo, $value, false);

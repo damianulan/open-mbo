@@ -22,6 +22,24 @@ class ModelResourceFactory
         return null;
     }
 
+    public static function purgeIndexes(Model $model, ?IndexResource $resource = null): void
+    {
+        $class = $model::class;
+        if(is_null($resource)){
+            $resource = self::getResource($model);
+        }
+
+        if(!$resource){
+            throw new \Exception("No resource found for model [{$class}]");
+        }
+
+        if(!$model->exists){
+            throw new \Exception("Model [{$class}] does not exist as a database record");
+        }
+
+        $model->indexes()->delete();
+    }
+
     public static function makeIndexes(Model $model): void
     {
         $class = $model::class;
@@ -36,21 +54,23 @@ class ModelResourceFactory
                 throw new \Exception("Model [{$class}] does not exist as a database record");
             }
 
-            $model->indexes()->delete();
+            self::purgeIndexes($model, $resource);
 
             foreach($resource->attributes() as $attribute => $value){
 
                 if(!empty($value)){
-                    $trigrams = self::getTrigrams($value);
+                    $trigrams = self::getTrigrams(self::normalizeValue($value));
 
                     foreach($trigrams as $trigram){
                         $index = new IndexModel;
                         $index->source_type = $class;
                         $index->source_id = $model->id;
                         $index->attribute = $attribute;
-                        $index->trigram = self::normalizeValue($trigram);
-                        if(!$index->save()){
-                            throw new \Exception("Failed to save index for model [{$class}] [{$model->id}]");
+                        $index->trigram = $trigram;
+                        if(self::validateIndex($index, $model)){
+                            if(!$index->save()){
+                                throw new \Exception("Failed to save index for model [{$class}] [{$model->id}]");
+                            }
                         }
                     }
                 }
@@ -60,6 +80,11 @@ class ModelResourceFactory
             DB::rollBack();
             throw $th;
         }
+    }
+
+    protected static function validateIndex(IndexModel $index, Model $model): bool
+    {
+        return !IndexModel::whereSource($model)->whereTrigram($index->trigram)->exists();
     }
 
     public static function getTrigrams(string $input): array
@@ -82,6 +107,6 @@ class ModelResourceFactory
 
     private static function normalizeValue(string $value): string
     {
-        return Str::lower(trim($value));
+        return Str::lower(trim(strip_tags($value)));
     }
 }

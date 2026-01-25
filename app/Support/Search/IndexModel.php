@@ -4,6 +4,8 @@ namespace App\Support\Search;
 
 use App\Support\Notifications\Factories\ResourceFactory;
 use App\Support\Notifications\NotificationContents;
+use App\Support\Search\Dtos\ResultItem;
+use App\Support\Search\Factories\IndexResource;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
@@ -12,15 +14,17 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use App\Support\Search\Factories\ModelResourceFactory;
-
+use Lucent\Support\Traits\UUID;
 /**
- * @property int $id
+ * @property string $id
  * @property string $source_type
  * @property string $source_id
  * @property string $attribute
  * @property string $trigram
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property-read \App\Support\Search\Factories\IndexResource|null $resource
+ * @property-read \App\Support\Search\Dtos\ResultItem|null $result_item
  * @property-read Model|\Eloquent $source
  * @method static Builder<static>|IndexModel newModelQuery()
  * @method static Builder<static>|IndexModel newQuery()
@@ -38,6 +42,8 @@ use App\Support\Search\Factories\ModelResourceFactory;
  */
 class IndexModel extends Model
 {
+    use UUID;
+
     protected $table = 'search_indexes';
 
     protected $fillable = array(
@@ -52,6 +58,29 @@ class IndexModel extends Model
         return $this->morphTo()->withTrashed();
     }
 
+    protected function resource(): Attribute
+    {
+        return Attribute::make(
+            get: function(): ?IndexResource {
+                return $this->source->getSearchResource();
+            },
+        );
+    }
+
+    protected function resultItem(): Attribute
+    {
+        return Attribute::make(
+            get: function(): ?ResultItem {
+                $resource = $this->source->getSearchResource();
+                if($resource){
+                    return $resource->resultItem();
+                }
+
+                return null;
+            },
+        );
+    }
+
     public function scopeWhereSource(Builder $query, Model $source): void
     {
         $query->where('source_type', $source::class)
@@ -62,6 +91,7 @@ class IndexModel extends Model
     {
         $trigrams = ModelResourceFactory::getTrigrams($input);
         $query->select('source_type', 'source_id')
+            ->whereHas('source')
             ->whereIn('trigram', $trigrams)
             ->groupBy('source_type')
             ->groupBy('source_id')

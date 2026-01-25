@@ -6,6 +6,7 @@ use App\Casts\Enigma;
 use App\Commentable\Models\Comment;
 use App\Commentable\Support\Commentable;
 use App\Commentable\Support\Commentator;
+use App\Enums\Users\UserStatus;
 use Lucent\Contracts\Models\HasShowRoute;
 use App\Models\Business\Team;
 use App\Models\Business\UserEmployment;
@@ -16,11 +17,12 @@ use App\Models\MBO\UserBonusScheme;
 use App\Models\MBO\UserCampaign;
 use App\Models\MBO\UserObjective;
 use App\Models\MBO\UserPoints;
+use App\Models\Scopes\Users\CoreUsersScope;
 use App\Models\Vendor\ActivityModel;
 use App\Support\Notifications\Models\MailNotification;
 use App\Support\Notifications\Models\SystemNotification;
 use App\Support\Notifications\Traits\Notifiable;
-use App\Support\Search\Traits\HasIndex;
+use App\Support\Search\Traits\Searchable;
 use App\Traits\Favouritable;
 use App\Traits\IsTranslated;
 use App\Traits\UserBusiness;
@@ -47,7 +49,6 @@ use Illuminate\Support\Str;
 use Lab404\Impersonate\Models\Impersonate;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Sanctum\PersonalAccessToken;
-use Laravel\Scout\Searchable;
 use Lucent\Support\Str\Alphabet;
 use Lucent\Support\Traits\CascadeDeletes;
 use Lucent\Support\Traits\UUID;
@@ -55,14 +56,18 @@ use Lucent\Support\Traits\VirginModel;
 use Sentinel\Models\Permission;
 use Sentinel\Traits\HasRolesAndPermissions;
 use Spatie\Activitylog\Models\Activity;
+use App\Factories\Users\UserStatusFactory;
 
 /**
  * @property string $id
  * @property string $auth
  * @property mixed|null $email
+ * @property mixed $firstname
+ * @property mixed $lastname
  * @property mixed|null $username
  * @property Carbon|null $email_verified_at
  * @property string $password
+ * @property string|null $gender
  * @property int $core Core user - comes as default with the application - cannot be deleted
  * @property int $force_password_change Force user to change password after first login
  * @property string|null $remember_token
@@ -113,6 +118,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read \App\Models\Core\UserPreference|null $preferences
  * @property-read \App\Models\Core\UserProfile|null $profile
  * @property-read Collection $sessions
+ * @property-read UserStatus $status
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $subordinates
  * @property-read int|null $subordinates_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $supervisors
@@ -144,10 +150,11 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder<static>|User whereDeletedAt($value)
  * @method static Builder<static>|User whereEmail($value)
  * @method static Builder<static>|User whereEmailVerifiedAt($value)
- * @method static Builder<static>|User whereFirstname(string $value)
+ * @method static Builder<static>|User whereFirstname($value)
  * @method static Builder<static>|User whereForcePasswordChange($value)
+ * @method static Builder<static>|User whereGender($value)
  * @method static Builder<static>|User whereId($value)
- * @method static Builder<static>|User whereLastname(string $value)
+ * @method static Builder<static>|User whereLastname($value)
  * @method static Builder<static>|User wherePassword($value)
  * @method static Builder<static>|User whereRememberToken($value)
  * @method static Builder<static>|User whereSuspendedAt($value)
@@ -159,6 +166,7 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder<static>|User withoutTrashed()
  * @mixin \Eloquent
  */
+#[ScopedBy(CoreUsersScope::class)]
 class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 {
     use CascadeDeletes;
@@ -181,10 +189,11 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     use UserMBO;
     use VirginModel;
     use UserHasPreferences;
-    use HasIndex;
 
     protected $fillable = array(
         'email',
+        'firstname',
+        'lastname',
         'username',
         'suspended_at',
         'core',
@@ -200,6 +209,8 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         'email_verified_at' => 'datetime',
         'created_at' => 'datetime',
         'email' => Enigma::class,
+        'firstname' => Enigma::class,
+        'lastname' => Enigma::class,
         'username' => Enigma::class,
     );
 
@@ -290,16 +301,6 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         return $view;
     }
 
-    public function firstname(): string
-    {
-        return $this->profile?->firstname;
-    }
-
-    public function lastname(): string
-    {
-        return $this->profile?->lastname;
-    }
-
     public function toggleLock(): bool
     {
         if (null === $this->suspended_at) {
@@ -360,7 +361,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function getInitials(): string
     {
-        return mb_strtoupper(mb_substr($this->firstname(), 0, 1) . mb_substr($this->lastname(), 0, 1));
+        return mb_strtoupper(mb_substr($this->firstname, 0, 1) . mb_substr($this->lastname, 0, 1));
     }
 
     public function getAvatarView($size = 'lg'): string
@@ -460,10 +461,19 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     protected function name(): Attribute
     {
-        $value = $this->profile?->firstname . ' ' . $this->profile?->lastname;
+        $value = $this->firstname . ' ' . $this->lastname;
 
         return Attribute::make(
             get: fn () => mb_ucfirst($value),
+        );
+    }
+
+    protected function status(): Attribute
+    {
+        return Attribute::make(
+            get: function (): UserStatus {
+                return UserStatusFactory::make($this);
+            }
         );
     }
 

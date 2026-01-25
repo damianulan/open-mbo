@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Scout\Searchable;
 use Spatie\Activitylog\Models\Activity;
 use YMigVal\LaravelModelCache\HasCachedQueries;
 
@@ -84,7 +83,6 @@ class Comment extends Model
     use HasCachedQueries;
     use MassPrunable;
     use ModelActivity;
-    use Searchable;
 
     protected $table = 'commentables';
 
