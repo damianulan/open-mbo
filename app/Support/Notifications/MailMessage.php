@@ -35,9 +35,9 @@ class MailMessage extends Mailable
     {
         return new Content(
             view: 'mail.orders.shipped',
-            with: array(
+            with: [
                 'contents' => $this->email_contents,
-            )
+            ]
         );
     }
 }

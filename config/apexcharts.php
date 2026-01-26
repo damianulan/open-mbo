@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -11,29 +11,29 @@ return array(
     |
     */
 
-    'options' => array(
-        'chart' => array(
+    'options' => [
+        'chart' => [
             'type' => 'line',
             'height' => 300,
             'width' => '100%',
-            'toolbar' => array(
+            'toolbar' => [
                 'show' => false,
-            ),
+            ],
             'stacked' => false,
-            'zoom' => array(
+            'zoom' => [
                 'enabled' => true,
-            ),
+            ],
             'fontFamily' => 'inherit',
             'foreColor' => 'var(--bs-primary)',
-        ),
+        ],
 
-        'plotOptions' => array(
-            'bar' => array(
+        'plotOptions' => [
+            'bar' => [
                 'horizontal' => false,
-            ),
-        ),
+            ],
+        ],
 
-        'colors' => array(
+        'colors' => [
             '#008FFB',
             '#00E396',
             '#feb019',
@@ -47,41 +47,41 @@ return array(
             '#00a9f4',
             '#2ccdc9',
             '#5e72e4',
-        ),
+        ],
 
-        'series' => array(),
+        'series' => [],
 
-        'dataLabels' => array(
+        'dataLabels' => [
             'enabled' => false,
-        ),
+        ],
 
-        'labels' => array(),
+        'labels' => [],
 
-        'legend' => array(
+        'legend' => [
             'fontFamily' => 'inherit',
-        ),
+        ],
 
-        'title' => array(
-            'text' => array(),
-        ),
+        'title' => [
+            'text' => [],
+        ],
 
-        'subtitle' => array(
+        'subtitle' => [
             'show' => false,
             'text' => '',
             'align' => 'left',
-        ),
+        ],
 
-        'xaxis' => array(
-            'categories' => array(),
-        ),
+        'xaxis' => [
+            'categories' => [],
+        ],
 
-        'grid' => array(
+        'grid' => [
             'show' => true,
-        ),
+        ],
 
-        'markers' => array(
+        'markers' => [
             'size' => 4,
-            'colors' => array(
+            'colors' => [
                 '#008FFB',
                 '#00E396',
                 '#feb019',
@@ -95,18 +95,18 @@ return array(
                 '#00a9f4',
                 '#2ccdc9',
                 '#5e72e4',
-            ),
+            ],
             'strokeColors' => '#fff',
             'strokeWidth' => 2,
-            'hover' => array(
+            'hover' => [
                 'size' => 7,
-            ),
-        ),
+            ],
+        ],
 
-        'stroke' => array(
+        'stroke' => [
             'show' => false,
             'width' => 4,
-            'colors' => array(
+            'colors' => [
                 '#008FFB',
                 '#00E396',
                 '#feb019',
@@ -120,8 +120,8 @@ return array(
                 '#00a9f4',
                 '#2ccdc9',
                 '#5e72e4',
-            ),
-        ),
-    ),
+            ],
+        ],
+    ],
 
-);
+];

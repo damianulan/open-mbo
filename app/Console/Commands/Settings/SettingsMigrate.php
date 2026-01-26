@@ -33,20 +33,20 @@ class SettingsMigrate extends BaseCommand
      */
     public function handle(): void
     {
-        $map = array(
+        $map = [
             'GeneralSettings' => GeneralSettings::class,
             'MBOSettings' => MBOSettings::class,
             'MailSettings' => MailSettings::class,
             'NotificationSettings' => NotificationSettings::class,
             'ReportSettings' => ReportSettings::class,
             'UserSettings' => UserSettings::class,
-        );
+        ];
         $classOption = $this->option('class');
 
         try {
             DB::beginTransaction();
             if ($classOption) {
-                $map = array($map[$classOption]);
+                $map = [$map[$classOption]];
             }
 
             foreach ($map as $class) {

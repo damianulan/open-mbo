@@ -14,15 +14,15 @@ class UserObjectiveResource extends NotificationResource
 
     public static function descriptions(): array
     {
-        return array(
+        return [
             'objective_name' => 'Objective name',
-        );
+        ];
     }
 
     public function datas(): array
     {
-        return array(
+        return [
             'objective_name' => $this->model->objective->name,
-        );
+        ];
     }
 }

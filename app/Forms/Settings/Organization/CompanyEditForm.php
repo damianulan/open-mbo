@@ -5,7 +5,6 @@ namespace App\Forms\Settings\Organization;
 use FormForge\Base\Form;
 use FormForge\Base\FormComponent;
 use FormForge\FormBuilder;
-use Illuminate\Http\Request;
 
 class CompanyEditForm extends Form
 {
@@ -32,11 +31,11 @@ class CompanyEditForm extends Form
 
     public function validation(): array
     {
-        return array(
+        return [
             'firstname' => 'max:255|required',
             'lastname' => 'max:255|required',
             'email' => 'max:255|email|required',
             'birthday' => 'date|nullable',
-        );
+        ];
     }
 }

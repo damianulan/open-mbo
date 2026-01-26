@@ -2,11 +2,11 @@
 
 namespace Database\Factories\Core;
 
+use App\Enums\Users\Gender;
 use App\Models\Core\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use App\Enums\Users\Gender;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Core\User>
@@ -44,7 +44,7 @@ class UserFactory extends Factory
         $username = Str::ascii(Str::lower($firstname . '.' . $lastname));
         $email = $username . '@damianulan.me';
 
-        return array(
+        return [
             'firstname' => $firstname,
             'lastname' => $lastname,
             'username' => $username,
@@ -53,7 +53,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => Hash::make(User::getNewPassword()),
             'remember_token' => Str::random(10),
-        );
+        ];
     }
 
     /**
@@ -61,8 +61,8 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => array(
+        return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
-        ));
+        ]);
     }
 }

@@ -81,7 +81,7 @@ trait UserBusiness
         foreach ($supervisor_ids as $id) {
             $supervisor = static::find($id);
             if ($supervisor->exists && ! $this->hasSupervisor($id)) {
-                $this->supervisors()->attach($supervisor, array('model_type' => static::class, 'role_id' => Role::getId('supervisor')));
+                $this->supervisors()->attach($supervisor, ['model_type' => static::class, 'role_id' => Role::getId('supervisor')]);
             }
         }
 
@@ -100,7 +100,7 @@ trait UserBusiness
     public function refreshSupervisors(?array $user_ids)
     {
         if ( ! $user_ids) {
-            $user_ids = array();
+            $user_ids = [];
         }
 
         $current = $this->supervisors->pluck('id')->toArray();

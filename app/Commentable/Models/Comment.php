@@ -29,8 +29,9 @@ use YMigVal\LaravelModelCache\HasCachedQueries;
  * @property Carbon|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read Model|\Eloquent $author
- * @property-read Model|\Eloquent $subject
+ * @property-read Model|Eloquent $author
+ * @property-read Model|Eloquent $subject
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment authoredBy(\Illuminate\Database\Eloquent\Model $author)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment avg(string $column)
@@ -76,6 +77,7 @@ use YMigVal\LaravelModelCache\HasCachedQueries;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment whereSubjectType($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment whereUpdatedAt($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment withoutCache()
+ *
  * @mixin Eloquent
  */
 class Comment extends Model
@@ -86,26 +88,26 @@ class Comment extends Model
 
     protected $table = 'commentables';
 
-    protected $fillable = array(
+    protected $fillable = [
         'subject_id',
         'subject_type',
         'author_id',
         'author_type',
         'content',
         'private',
-    );
+    ];
 
-    protected $casts = array(
+    protected $casts = [
         'content' => CommentContent::class,
         'private' => 'boolean',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
-    );
+    ];
 
-    protected $dispatchesEvents = array(
+    protected $dispatchesEvents = [
         'created' => CommentAdded::class,
         'deleted' => CommentDeleted::class,
-    );
+    ];
 
     public function subject(): MorphTo
     {

@@ -16,6 +16,7 @@ use Illuminate\Support\Collection;
  * @property Carbon|null $notified_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification query()
@@ -29,13 +30,14 @@ use Illuminate\Support\Collection;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification whereReadAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification whereResources($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class SystemNotification extends NotificationModel
 {
     protected $table = 'system_notifications';
 
-    protected $fillable = array(
+    protected $fillable = [
         'notification_id',
         'notifiable_type',
         'notifiable_id',
@@ -43,13 +45,13 @@ class SystemNotification extends NotificationModel
         'contents',
         'read_at',
         'notified_at',
-    );
+    ];
 
-    protected $casts = array(
+    protected $casts = [
         'read_at' => 'datetime',
         'notified_at' => 'datetime',
         'created_at' => 'datetime',
-    );
+    ];
 
     public function unread()
     {

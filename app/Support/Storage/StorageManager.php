@@ -2,8 +2,8 @@
 
 namespace App\Support\Storage;
 
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\File;
 
 class StorageManager
 {
@@ -26,8 +26,8 @@ class StorageManager
     public function __construct()
     {
         $bytesSize = Cache::get('storage.size', 0);
-        if(!$bytesSize){
-            foreach(File::allFiles(storage_path()) as $fileInfo){
+        if ( ! $bytesSize) {
+            foreach (File::allFiles(storage_path()) as $fileInfo) {
                 $bytesSize += $fileInfo->getSize();
             }
             Cache::put('storage.size', $bytesSize, now()->addMinutes(10));

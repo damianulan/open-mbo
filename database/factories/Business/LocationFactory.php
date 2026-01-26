@@ -21,7 +21,7 @@ class LocationFactory extends Factory
         $name = $city . ' - ' . $street;
         $num = fake()->buildingNumber() . '/' . fake()->buildingNumber();
 
-        return array(
+        return [
             'name' => $name,
             'address_line_1' => $street,
             'address_line_2' => $num,
@@ -29,6 +29,6 @@ class LocationFactory extends Factory
             'country' => fake()->country(),
             'postal_code' => fake()->postcode(),
             'active' => true,
-        );
+        ];
     }
 }

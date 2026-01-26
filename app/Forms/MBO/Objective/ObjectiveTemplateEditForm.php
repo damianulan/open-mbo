@@ -7,7 +7,6 @@ use FormForge\Base\Form;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
 use FormForge\FormBuilder;
-use Illuminate\Http\Request;
 
 class ObjectiveTemplateEditForm extends Form
 {
@@ -34,11 +33,11 @@ class ObjectiveTemplateEditForm extends Form
 
     public function validation(): array
     {
-        return array(
+        return [
             'category_id' => 'nullable',
             'name' => 'max:50|required',
             'description' => 'max:1000|nullable',
             'draft' => 'boolean',
-        );
+        ];
     }
 }

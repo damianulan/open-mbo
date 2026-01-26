@@ -18,6 +18,6 @@ class UnauthorizedAccess extends HttpException
             $this->message .= '<div>' . __('gates.permissions.' . $permission) . '</div>';
         }
 
-        parent::__construct($this->code, $this->message, null, array(), $this->code);
+        parent::__construct($this->code, $this->message, null, [], $this->code);
     }
 }

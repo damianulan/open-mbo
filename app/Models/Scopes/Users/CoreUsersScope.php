@@ -14,8 +14,8 @@ class CoreUsersScope implements Scope
      */
     public function apply(Builder $builder, Model $model): void
     {
-        if(Auth::check()){
-            if(Auth::user()->isRoot()){
+        if (Auth::check()) {
+            if (Auth::user()->isRoot()) {
                 $builder->where('core', 0);
             }
         }

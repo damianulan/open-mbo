@@ -34,11 +34,11 @@ class CampaignEditObjectiveForm extends Form
         $campaign = Campaign::findOrFail($campaign_id);
 
         $template_ids = Objective::where('campaign_id', $campaign_id)->get()->pluck('template_id');
-        $exclude = array();
+        $exclude = [];
         if ( ! empty($template_ids)) {
             foreach ($template_ids as $tid) {
-                if ($tid != $selectedTemplate) {
-                    $exclude[] = array('id' => $tid);
+                if ($tid !== $selectedTemplate) {
+                    $exclude[] = ['id' => $tid];
                 }
             }
         }
@@ -65,14 +65,14 @@ class CampaignEditObjectiveForm extends Form
     public function validation(): array
     {
         $campaign_id = $this->campaign_id ?? null;
-        if($campaign_id){
+        if ($campaign_id) {
             $builder = Objective::where('campaign_id', $campaign_id);
             if ($this->model) {
                 $builder->where('id', '!=', $this->model->id);
             }
         }
 
-        return array(
+        return [
             'template_id' => 'required',
             'name' => 'max:120|required',
             'deadline' => 'nullable',
@@ -81,6 +81,6 @@ class CampaignEditObjectiveForm extends Form
             'expected' => 'numeric|nullable',
             'award' => 'numeric|nullable',
             'draft' => 'boolean',
-        );
+        ];
     }
 }

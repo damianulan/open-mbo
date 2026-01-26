@@ -3,16 +3,13 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
-use ReflectionClass;
-use Spatie\TranslationLoader\LanguageLine;
-use Illuminate\Support\Facades\File;
-use Symfony\Component\Finder\SplFileInfo;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+use Spatie\TranslationLoader\LanguageLine;
 
 class LanguageSeeder extends Seeder
 {
-
     /**
      * Parts of lang locations is enough
      *
@@ -33,13 +30,13 @@ class LanguageSeeder extends Seeder
         foreach ($files as $file) {
             $group = Str::of($file->getFilename())->before('.')->toString();
             $contents = $file->getContents();
-            if(!empty($contents)) {
+            if ( ! empty($contents)) {
                 $contents = json_decode($contents, true);
 
                 $contents = Arr::dot($contents);
                 $lines = [];
 
-                foreach($contents as $key => $value) {
+                foreach ($contents as $key => $value) {
                     $k = Str::beforeLast($key, '.');
                     $l = Str::afterLast($key, '.');
                     $lines[$k][$l] = $value;
@@ -56,12 +53,12 @@ class LanguageSeeder extends Seeder
                         $instance->editable = $editable;
                         $instance->update();
                     } else {
-                        LanguageLine::create(array(
+                        LanguageLine::create([
                             'group' => $group,
                             'key' => $key,
                             'text' => $value,
                             'editable' => $editable,
-                        ));
+                        ]);
                     }
                 }
 
@@ -72,9 +69,9 @@ class LanguageSeeder extends Seeder
     private function isEditable(string $group, string $key): bool
     {
         $output = false;
-        $str = $group.'.'.$key;
+        $str = $group . '.' . $key;
 
-        if(Str::contains($str, $this->editables)) {
+        if (Str::contains($str, $this->editables)) {
             $output = true;
         }
 

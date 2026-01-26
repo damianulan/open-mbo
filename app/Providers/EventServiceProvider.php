@@ -13,40 +13,40 @@ class EventServiceProvider extends ServiceProvider
      *
      * @var array<class-string, array<int, class-string>>
      */
-    protected $listen = array(
-        'Illuminate\Auth\Events\Registered' => array(
+    protected $listen = [
+        'Illuminate\Auth\Events\Registered' => [
             'Illuminate\Auth\Listeners\SendEmailVerificationNotification',
-        ),
-        'Illuminate\Auth\Events\Logout' => array(
+        ],
+        'Illuminate\Auth\Events\Logout' => [
             'App\Listeners\Activity\LogSuccessfulLogout',
-        ),
-        'Illuminate\Auth\Events\Failed' => array(
+        ],
+        'Illuminate\Auth\Events\Failed' => [
             'App\Listeners\Activity\LogAuthFailed',
-        ),
-        'Spatie\LaravelSettings\Events\SavingSettings' => array(
+        ],
+        'Spatie\LaravelSettings\Events\SavingSettings' => [
             'App\Listeners\Vendors\SettingsUpdated',
-        ),
+        ],
 
         // MBO LISTENERS
         // Campaigns
-        'App\Events\MBO\Campaigns\UserCampaignAssigned' => array(
+        'App\Events\MBO\Campaigns\UserCampaignAssigned' => [
             'App\Listeners\MBO\Campaigns\UserAssignObjectives',
-        ),
-        'App\Events\MBO\Campaigns\CampaignUpdated' => array(
+        ],
+        'App\Events\MBO\Campaigns\CampaignUpdated' => [
             'App\Listeners\MBO\Campaigns\UserCampaignStageCheck',
-        ),
-        'App\Events\MBO\Campaigns\CampaignViewed' => array(
+        ],
+        'App\Events\MBO\Campaigns\CampaignViewed' => [
             'App\Listeners\MBO\Campaigns\UserCampaignStageCheck',
-        ),
+        ],
 
         // Objectives
-        'App\Events\MBO\Objectives\ObjectiveUpdated' => array(
+        'App\Events\MBO\Objectives\ObjectiveUpdated' => [
             'App\Listeners\MBO\Objectives\UserObjectiveStatusCheck',
-        ),
-        'App\Events\MBO\Objectives\ObjectiveCreated' => array(
+        ],
+        'App\Events\MBO\Objectives\ObjectiveCreated' => [
             'App\Listeners\MBO\Objectives\UserObjectiveStatusCheck',
-        ),
-    );
+        ],
+    ];
 
     /**
      * Register any events for your application.

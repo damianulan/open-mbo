@@ -19,8 +19,8 @@ class UserProfileFactory extends Factory
      */
     public function definition(): array
     {
-        return array(
+        return [
             'birthday' => fake()->dateTimeBetween('-40 years', '-20years'),
-        );
+        ];
     }
 }

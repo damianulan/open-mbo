@@ -14,10 +14,10 @@ class ObjectiveTemplateController extends MBOController
      */
     public function index(): Renderable
     {
-        return view('pages.mbo.index', array(
+        return view('pages.mbo.index', [
             'objectives' => ObjectiveTemplate::paginate(30),
             'nav' => $this->nav(),
-        ));
+        ]);
     }
 
     /**
@@ -25,9 +25,9 @@ class ObjectiveTemplateController extends MBOController
      */
     public function create(Request $request, ObjectiveTemplateEditForm $form)
     {
-        return view('components.forms.edit', array(
+        return view('components.forms.edit', [
             'form' => $form->getDefinition(),
-        ));
+        ]);
     }
 
     /**
@@ -64,10 +64,10 @@ class ObjectiveTemplateController extends MBOController
     {
         $model = ObjectiveTemplate::findOrFail($id);
 
-        return view('components.forms.edit', array(
+        return view('components.forms.edit', [
             'objective' => $model,
             'form' => $form->setModel($model)->getDefinition(),
-        ));
+        ]);
     }
 
     /**

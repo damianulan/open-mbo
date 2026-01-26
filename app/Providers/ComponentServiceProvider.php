@@ -59,8 +59,6 @@ class ComponentServiceProvider extends ServiceProvider
 
         Blade::component('note-card', NoteCard::class);
 
-        Blade::directive('branding', function () {
-            return StorageHelper::getBrandingHtml();
-        });
+        Blade::directive('branding', fn () => StorageHelper::getBrandingHtml());
     }
 }

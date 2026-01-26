@@ -80,7 +80,7 @@ class MBOSeeder extends Seeder
                     $objective = new Objective();
                     $objective->template_id = $template->id;
                     $objective->name = $template->name . "[{$j}]";
-                    $objective->description = '<p>'.fake()->text(fake()->numberBetween(150, 250)).'</p>';
+                    $objective->description = '<p>' . fake()->text(fake()->numberBetween(150, 250)) . '</p>';
                     $objective->weight = fake()->randomFloat(2, 0.1, 1);
                     $objective->expected = fake()->numberBetween(1000, 5500);
                     $objective->award = fake()->randomFloat(2, 1, 100);
@@ -108,13 +108,13 @@ class MBOSeeder extends Seeder
             $datetime = fake()->dateTimeBetween('-3 weeks', '+2 months');
             $now = Carbon::parse($datetime);
             $campaign = new Campaign();
-            $campaign->name = array(
+            $campaign->name = [
                 'pl' => 'Testowa kampania ' . $i,
                 'en' => 'Test campaign ' . $i,
                 'it' => 'Campagna di prova ' . $i,
-            );
+            ];
             $campaign->period = '2025 Q' . fake()->numberBetween(1, 4);
-            $campaign->description = '<p>'.fake()->text(fake()->numberBetween(500, 1000)).'</p>';
+            $campaign->description = '<p>' . fake()->text(fake()->numberBetween(500, 1000)) . '</p>';
             $campaign->definition_from = $now->format('Y-m-d') . ' 00:00:00';
             $campaign->definition_to = $now->addDays(3)->format('Y-m-d') . ' 23:59:59';
             $campaign->disposition_from = $now->addDays(1)->format('Y-m-d') . ' 00:00:00';
@@ -138,7 +138,7 @@ class MBOSeeder extends Seeder
                         $objective->campaign_id = $campaign->id;
                         $objective->template_id = $template->id;
                         $objective->name = $template->name . "[{$j}]";
-                        $objective->description = '<p>'.fake()->text(fake()->numberBetween(150, 250)).'</p>';
+                        $objective->description = '<p>' . fake()->text(fake()->numberBetween(150, 250)) . '</p>';
                         $objective->weight = fake()->randomFloat(2, 0.1, 1);
                         $objective->expected = fake()->numberBetween(1000, 5500);
                         $objective->award = fake()->randomFloat(2, 1, 100);

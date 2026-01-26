@@ -6,32 +6,32 @@ class ModuleManager
 {
     public static function getModules()
     {
-        return array(
-            'users' => array(
+        return [
+            'users' => [
                 'id' => 'module-users-btn',
                 'icon' => 'person-fill',
                 'title' => __('menus.users.index'),
                 'route' => null,
-            ),
-            'mbo' => array(
+            ],
+            'mbo' => [
                 'id' => 'module-mbo-btn',
                 'icon' => 'bullseye',
                 'title' => __('forms.settings.mbo.index'),
                 'route' => null,
-            ),
-            'reports' => array(
+            ],
+            'reports' => [
                 'id' => 'module-reports-btn',
                 'icon' => 'bar-chart-steps',
                 'title' => __('menus.reports.index'),
                 'route' => null,
-            ),
-            'notifications' => array(
+            ],
+            'notifications' => [
                 'id' => 'module-notifications-btn',
                 'icon' => 'bell-fill',
                 'title' => __('menus.settings.notifications.index'),
                 'route' => null,
-            ),
-        );
+            ],
+        ];
     }
 
     /**

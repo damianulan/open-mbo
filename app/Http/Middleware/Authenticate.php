@@ -3,32 +3,31 @@
 namespace App\Http\Middleware;
 
 use App\Models\Core\User;
+use Closure;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Http\Request;
-use Closure;
 
 class Authenticate extends Middleware
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  Request  $request
      * @param  string  ...$guards
-     * @return mixed
      *
-     * @throws \Illuminate\Auth\AuthenticationException
+     * @throws AuthenticationException
      */
-    public function handle($request, Closure $next, ...$guards)
+    public function handle($request, Closure $next, ...$guards): mixed
     {
         $this->authenticate($request, $guards);
         $user = $this->auth->user();
 
-        if($user && !$user->isImpersonating()){
+        if ($user && ! $user->isImpersonating()) {
             if ($this->ensureForcePasswordChange($request)) {
                 return redirect()->route('password.change.index');
             }
-            if(! $this->ensureEmailIsVerified($request)){
+            if ( ! $this->ensureEmailIsVerified($request)) {
 
             }
         }
@@ -44,12 +43,14 @@ class Authenticate extends Middleware
     protected function isFirstLogin(): bool
     {
         $user = $this->getUser();
+
         return $user?->sessions->isEmpty() ?? false;
     }
 
     protected function ensureEmailIsVerified(Request $request): bool
     {
         $user = $this->getUser();
+
         return true;
     }
 
@@ -57,6 +58,7 @@ class Authenticate extends Middleware
     {
         $user = $this->getUser();
         $config = (settings('users.password_change_firstlogin') && $this->isFirstLogin()) || (settings('users.force_password_change_reset') && $user->force_password_change);
+
         return $user && $config && ! $user->hasRole('root');
     }
 

@@ -89,12 +89,12 @@ class LoginController extends Controller
      *
      * @param  mixed  $user
      */
-    final protected function authenticated(Request $request, User $user)
+    final protected function authenticated(Request $request, User $user): void
     {
         if ($user) {
             activity('auth')
                 ->causedBy($user)
-                ->withProperties(array('authenticated' => true))
+                ->withProperties(['authenticated' => true])
                 ->event('auth_attempt_success')
                 ->log(__('logging.description.auth_attempt_success'));
         }

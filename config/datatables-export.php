@@ -2,7 +2,7 @@
 
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -76,7 +76,7 @@ return array(
     | List of valid date formats to be used for auto-detection.
     |
     */
-    'date_formats' => array(
+    'date_formats' => [
         'mm/dd/yyyy',
         NumberFormat::FORMAT_DATE_DATETIME,
         NumberFormat::FORMAT_DATE_YYYYMMDD,
@@ -99,7 +99,7 @@ return array(
         NumberFormat::FORMAT_DATE_XLSX17,
         NumberFormat::FORMAT_DATE_YYYYMMDD2,
         NumberFormat::FORMAT_DATE_YYYYMMDDSLASH,
-    ),
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -109,11 +109,11 @@ return array(
     | List of valid text formats to be used.
     |
     */
-    'text_formats' => array(
+    'text_formats' => [
         '@',
         NumberFormat::FORMAT_GENERAL,
         NumberFormat::FORMAT_TEXT,
-    ),
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -123,7 +123,7 @@ return array(
     | Purge all exported by purge.days old files.
     |
     */
-    'purge' => array(
+    'purge' => [
         'days' => 1,
-    ),
-);
+    ],
+];

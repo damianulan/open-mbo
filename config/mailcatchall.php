@@ -2,7 +2,7 @@
 
 use Illuminate\Mail\Events\MessageSending;
 
-return array(
+return [
 
     /**
      * If we have the mail catchall enabled
@@ -28,4 +28,4 @@ return array(
      * If we add the receivers to html mail
      */
     'add_receivers_to_html' => true,
-);
+];

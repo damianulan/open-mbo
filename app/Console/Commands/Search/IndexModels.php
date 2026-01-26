@@ -3,11 +3,9 @@
 namespace App\Console\Commands\Search;
 
 use App\Console\BaseCommand;
-use Throwable;
 use App\Support\Search\Discovery\SearchModelScope;
 use App\Support\Search\IndexModel;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class IndexModels extends BaseCommand
 {
@@ -50,7 +48,7 @@ class IndexModels extends BaseCommand
         } catch (Throwable $th) {
             $this->log($th->getMessage(), false);
             $this->error($th->getMessage());
-            if(config('app.debug')){
+            if (config('app.debug')) {
                 throw $th;
             }
         }

@@ -44,15 +44,16 @@ use Spatie\Activitylog\Models\Activity;
  * @property Carbon|null $deleted_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\MBO\Campaign|null $campaign
+ * @property-read Campaign|null $campaign
  * @property-read Collection<int, Comment> $comments
  * @property-read int|null $comments_count
  * @property-read User|null $evaluator
  * @property-read float $weight
- * @property-read \App\Models\MBO\Objective $objective
- * @property-read \App\Models\MBO\UserPoints $points
+ * @property-read Objective $objective
+ * @property-read UserPoints $points
  * @property-read mixed $trans
  * @property-read User $user
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective avg(string $column)
@@ -117,6 +118,7 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder<static>|UserObjective withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective withoutCache()
  * @method static Builder<static>|UserObjective withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
@@ -125,7 +127,7 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
     use Commentable;
     use Dispatcher;
 
-    protected $fillable = array(
+    protected $fillable = [
         'user_id',
         'objective_id',
         'status',
@@ -136,15 +138,15 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
         'self_realization',
         'self_evaluation',
         'self_evaluation_at',
-    );
+    ];
 
-    protected $defaults = array(
+    protected $defaults = [
         'status' => UserObjectiveStatus::UNSTARTED,
-    );
+    ];
 
-    protected $casts = array(
+    protected $casts = [
         'evaluated_at' => 'datetime',
-    );
+    ];
 
     public static function assign($user_id, $objective_id): bool
     {
@@ -176,13 +178,6 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
         }
 
         return $output;
-    }
-
-    protected static function booted(): void
-    {
-        static::addGlobalScope('required_relations', function (Builder $builder): void {
-            $builder->with(['user', 'objective']);
-        });
     }
 
     public function getWeightAttribute(): float
@@ -272,9 +267,9 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
 
     public function points(): ?MorphOne
     {
-        return $this->morphOne(UserPoints::class, 'subject')->withDefault(array(
+        return $this->morphOne(UserPoints::class, 'subject')->withDefault([
             'user_id' => $this->user_id,
-        ))->whereUserId($this->user_id);
+        ])->whereUserId($this->user_id);
     }
 
     public function calculatePoints(): float
@@ -318,7 +313,7 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
      */
     public function isCompleted(): bool
     {
-        return in_array($this->status, array(UserObjectiveStatus::COMPLETED, UserObjectiveStatus::PASSED, UserObjectiveStatus::FAILED));
+        return in_array($this->status, [UserObjectiveStatus::COMPLETED, UserObjectiveStatus::PASSED, UserObjectiveStatus::FAILED]);
     }
 
     /**
@@ -435,13 +430,20 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
         }
 
         // TODO do not commit
-        $this->points()->updateOrCreate(array(
+        $this->points()->updateOrCreate([
             'user_id' => $this->user_id,
             'points' => $this->calculatePoints(),
             'assigned_by' => $this->evaluated_by,
-        ));
+        ]);
 
         return $this;
+    }
+
+    protected static function booted(): void
+    {
+        static::addGlobalScope('required_relations', function (Builder $builder): void {
+            $builder->with(['user', 'objective']);
+        });
     }
 
     protected static function boot(): void

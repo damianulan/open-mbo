@@ -4,7 +4,7 @@ use App\Http\Middleware\EncryptCookies;
 use App\Http\Middleware\VerifyCsrfToken;
 use Laravel\Sanctum\Sanctum;
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -35,7 +35,7 @@ return array(
     |
     */
 
-    'guard' => array('web'),
+    'guard' => ['web'],
 
     /*
     |--------------------------------------------------------------------------
@@ -61,9 +61,9 @@ return array(
     |
     */
 
-    'middleware' => array(
+    'middleware' => [
         'verify_csrf_token' => VerifyCsrfToken::class,
         'encrypt_cookies' => EncryptCookies::class,
-    ),
+    ],
 
-);
+];

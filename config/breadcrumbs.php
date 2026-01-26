@@ -3,7 +3,7 @@
 use Diglactic\Breadcrumbs\Generator;
 use Diglactic\Breadcrumbs\Manager;
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -75,4 +75,4 @@ return array(
     // Generator
     'generator-class' => Generator::class,
 
-);
+];

@@ -19,8 +19,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Support\Carbon;
-use Spatie\Activitylog\Models\Activity;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property string $id
@@ -38,14 +38,15 @@ use Illuminate\Support\Facades\Auth;
  * @property Carbon|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\MBO\Campaign|null $campaign
- * @property-read \App\Models\MBO\ObjectiveTemplateCategory|null $category
+ * @property-read Campaign|null $campaign
+ * @property-read ObjectiveTemplateCategory|null $category
  * @property-read Collection<int, Comment> $comments
  * @property-read int|null $comments_count
- * @property-read \App\Models\MBO\ObjectiveTemplate|null $template
+ * @property-read ObjectiveTemplate|null $template
  * @property-read mixed $trans
- * @property-read Collection<int, \App\Models\MBO\UserObjective> $user_objectives
+ * @property-read Collection<int, UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective avg(string $column)
@@ -103,6 +104,7 @@ use Illuminate\Support\Facades\Auth;
  * @method static Builder<static>|Objective withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective withoutCache()
  * @method static Builder<static>|Objective withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 #[ScopedBy(ObjectiveScope::class)]
@@ -110,7 +112,7 @@ class Objective extends BaseModel implements HasDeadline, HasWeight
 {
     use Commentable;
 
-    protected $fillable = array(
+    protected $fillable = [
         'template_id',
         'campaign_id',
         'name',
@@ -120,22 +122,22 @@ class Objective extends BaseModel implements HasDeadline, HasWeight
         'draft',
         'award',
         'expected',
-    );
+    ];
 
-    protected $casts = array(
+    protected $casts = [
         'description' => FormattedText::class,
         'draft' => 'boolean',
         'deadline' => 'datetime',
-    );
+    ];
 
-    protected $cascadeDelete = array(
+    protected $cascadeDelete = [
         'user_objectives',
-    );
+    ];
 
-    protected $dispatchesEvents = array(
+    protected $dispatchesEvents = [
         'updated' => ObjectiveUpdated::class,
         'created' => ObjectiveCreated::class,
-    );
+    ];
 
     public function getWeightAttribute($value): float
     {
