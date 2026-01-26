@@ -219,34 +219,42 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         'preferences',
     );
 
-    protected static function boot(): void
-    {
-        parent::boot();
-        static::creating(function (User $user) {
-            if ( ! isset($user->password) || empty($user->password)) {
-                $user->generatePassword();
-            }
+    // protected static function boot(): void
+    // {
+    //     parent::boot();
+    //     static::creating(function (User $user) {
+    //         if ( ! isset($user->password) || empty($user->password)) {
+    //             $user->generatePassword();
+    //         }
 
-            return $user;
-        });
+    //         return $user;
+    //     });
 
-        static::created(function (User $user) {
-            if ($user->password) {
-                $user->password_history()->create([
-                    'password' => $user->password,
-                ]);
+    //     static::created(function (User $user) {
+    //         if ($user->password) {
+    //             $user->password_history()->create([
+    //                 'password' => $user->password,
+    //             ]);
 
-            }
-        });
+    //         }
+    //     });
 
-        static::updated(function (User $user) {
-            if($user->isDirty('password')){
-                $user->password_history()->create([
-                    'password' => $user->password,
-                ]);
-            }
-        });
-    }
+    //     static::updating(function (User $user) {
+    //         if(!$user->username){
+    //             $user->username = Str::ascii(Str::lower($user->firstname . '.' . $user->lastname));
+    //         }
+
+    //         return $user;
+    //     });
+
+    //     static::updated(function (User $user) {
+    //         if($user->isDirty('password')){
+    //             $user->password_history()->create([
+    //                 'password' => $user->password,
+    //             ]);
+    //         }
+    //     });
+    // }
 
     public static function findByEmail(string $email): ?User
     {
@@ -266,7 +274,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         return true;
     }
 
-    public function getNewPassword(): string
+    public static function getNewPassword(): string
     {
         return Str::random(10);
     }

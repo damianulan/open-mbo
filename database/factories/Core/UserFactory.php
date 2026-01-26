@@ -51,7 +51,7 @@ class UserFactory extends Factory
             'gender' => $g,
             'email' => $email,
             'email_verified_at' => now(),
-            'password' => Hash::make('123456'),
+            'password' => Hash::make(User::getNewPassword()),
             'remember_token' => Str::random(10),
         );
     }

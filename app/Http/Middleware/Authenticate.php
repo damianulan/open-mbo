@@ -25,12 +25,11 @@ class Authenticate extends Middleware
         $user = $this->auth->user();
 
         if($user && !$user->isImpersonating()){
-            $this->ensureEmailIsVerified($request); // TODO
-            if(! $this->ensureEmailIsVerified($request)){
-
-            }
             if ($this->ensureForcePasswordChange($request)) {
                 return redirect()->route('password.change.index');
+            }
+            if(! $this->ensureEmailIsVerified($request)){
+
             }
         }
 
