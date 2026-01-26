@@ -87075,6 +87075,7 @@ __webpack_require__(/*! chosen-js */ "./node_modules/chosen-js/chosen.jquery.js"
 
 
 
+$.formForgeInitialized = true;
 
 // build flatpickr objects
 $.buildFlatpickr = function () {
@@ -87160,7 +87161,7 @@ $.buildFlatpickr = function () {
 
 // build chosen objects
 $.buildChosen = function () {
-  $("select.formforge-control").chosen({
+  $("select.formforge-control:not(.custom-chosen)").chosen({
     disable_search_threshold: 5,
     placeholder_text: choose,
     no_results_text: no_results,
@@ -87168,7 +87169,9 @@ $.buildChosen = function () {
   });
 };
 $('body').on("focus", "input[type=password]", function () {
-  $(this).val("");
+  if ($('body').find("input[type=password]").length === 1) {
+    $(this).val("");
+  }
 });
 $('body').on("focusout", 'input[data-numeric="decimal"]', function () {
   var val = $(this).val();

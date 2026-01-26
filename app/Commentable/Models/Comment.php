@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Scout\Searchable;
 use Spatie\Activitylog\Models\Activity;
 use YMigVal\LaravelModelCache\HasCachedQueries;
 
@@ -30,9 +29,8 @@ use YMigVal\LaravelModelCache\HasCachedQueries;
  * @property Carbon|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read Model|Eloquent $author
- * @property-read Model|Eloquent $subject
- *
+ * @property-read Model|\Eloquent $author
+ * @property-read Model|\Eloquent $subject
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment authoredBy(\Illuminate\Database\Eloquent\Model $author)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment avg(string $column)
@@ -78,7 +76,6 @@ use YMigVal\LaravelModelCache\HasCachedQueries;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment whereSubjectType($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment whereUpdatedAt($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment withoutCache()
- *
  * @mixin Eloquent
  */
 class Comment extends Model
@@ -86,7 +83,6 @@ class Comment extends Model
     use HasCachedQueries;
     use MassPrunable;
     use ModelActivity;
-    use Searchable;
 
     protected $table = 'commentables';
 

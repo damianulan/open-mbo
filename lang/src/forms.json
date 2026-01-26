@@ -460,6 +460,9 @@
                 },
                 "password_min_symbols": {
                     "pl": "Wymagaj minimalnej ilości znaków specjalnych w haśle. Ustaw 0, aby wyłączyć tę funkcję."
+                },
+                "password_not_repeat": {
+                    "pl": "Określ liczbę haseł które nie mogą się powtarzać. Ustaw 0, aby wyłączyć tę funkcję."
                 }
             },
             "multiple_employments": {
@@ -482,6 +485,9 @@
             },
             "password_min_symbols": {
                 "pl": "Minimalna ilość znaków specjalnych"
+            },
+            "password_not_repeat": {
+                "pl": "Zapobiegaj powtarzaniu się haseł"
             }
         }
     },

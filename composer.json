@@ -35,6 +35,10 @@
         },
         {
             "type": "vcs",
+            "url": "git@github.com:damianulan/php-dtos.git"
+        },
+        {
+            "type": "vcs",
             "url": "git@github.com:damianulan/laravel-lucent.git"
         },
         {
@@ -52,7 +56,8 @@
         "barryvdh/laravel-snappy": "^1.0",
         "damianulan/laravel-feature-kit": "dev-main",
         "damianulan/php-enumerable": "dev-main",
-        "damianulan/laravel-form-forge": "dev-pre",
+        "damianulan/laravel-form-forge": "dev-main",
+        "damianulan/php-dtos": "dev-main",
         "damianulan/laravel-lucent": "dev-main",
         "damianulan/laravel-sentinel": "dev-main",
         "damianulan/laraverse": "dev-main",
@@ -144,7 +149,16 @@
     },
     "config": {
         "optimize-autoloader": true,
-        "preferred-install": "dist",
+        "preferred-install": {
+            "damianulan/laravel-form-forge": "source",
+            "damianulan/laravel-feature-kit": "source",
+            "damianulan/laravel-lucent": "source",
+            "damianulan/php-enumerable": "source",
+            "damianulan/php-dtos": "source",
+            "damianulan/laraverse": "source",
+            "damianulan/laravel-sentinel": "source",
+            "*": "dist"
+        },
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true

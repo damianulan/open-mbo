@@ -110,6 +110,15 @@ table.ombo-table tbody tr:hover {
     transition: all 0.2s ease-in-out;
 }
 
+table.ombo-table tbody tr:has(*.inactive) {
+    background-color: $ombo-body-inactive;
+}
+
+table.ombo-table tbody tr:has(*.inactive):hover {
+    background-color: $ombo-body-inactive-hover;
+    transition: all 0.2s ease-in-out;
+}
+
 .ombo-table > :not(caption) > * > * {
     border-bottom-width: 0;
 }

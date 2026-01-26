@@ -5,7 +5,7 @@
 @endcan
 
 @can ('block', $data)
-    @if($data->active !== 1)
+    @if($data->suspended_at !== null)
         <a class="action-btn" href="{{ route('users.block', $data->id) }}" title="{{ __('buttons.unblock') }}">
             <i class="bi bi-person-fill-check"></i>
         </a>

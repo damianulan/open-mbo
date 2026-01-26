@@ -20,6 +20,8 @@ class UserSettings extends BaseSettings
 
     public int $password_min_symbols = 0;
 
+    public int $password_not_repeat = 0;
+
     public bool $multiple_employments = true;
 
     public static function group(): string

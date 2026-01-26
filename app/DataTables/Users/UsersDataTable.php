@@ -9,6 +9,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
 use App\Support\DataTables\Column;
+use App\Enums\Users\UserStatus;
 
 class UsersDataTable extends CustomDataTable
 {
@@ -31,11 +32,29 @@ class UsersDataTable extends CustomDataTable
                 'data' => $data,
             )))
             ->addColumn('status', function ($data) {
-                $color = 'primary';
-                $text = 'Aktywny';
-                if ( ! $data->active) {
-                    $color = 'dark';
-                    $text = 'Zablokowany';
+                $color = null;
+                $text = null;
+                switch ($data->status) {
+                    case UserStatus::SUSPENDED:
+                        $color = 'dark';
+                        $text = $data->status->label;
+                        break;
+                    case UserStatus::DELETED:
+                        $color = 'danger';
+                        $text = $data->status->label;
+                        break;
+                    case UserStatus::UNVERIFIED:
+                        $color = 'warning';
+                        $text = $data->status->label;
+                        break;
+                    case UserStatus::UNEMPLOYED:
+                        $color = 'secondary';
+                        $text = $data->status->label;
+                        break;
+                    default:
+                        $color = 'primary';
+                        $text = $data->status->label;
+                        break;
                 }
 
                 return view('components.datatables.badge', array(
@@ -45,8 +64,8 @@ class UsersDataTable extends CustomDataTable
             })
             ->orderColumn('status', function ($query, $order): void {
                 $o = 'asc' === $order ? 'desc' : 'asc';
-                $query->orderBy('active', $o);
-                $query->orderBy('active', $o);
+                $query->orderBy('suspended_at', $o);
+                $query->orderBy('suspended_at', $o);
             })
             ->orderColumn('name', function ($query, $order): void {
                 $query->orderBy('firstname', $order);
@@ -86,7 +105,7 @@ class UsersDataTable extends CustomDataTable
             ->leftJoin('companies', 'companies.id', '=', 'user_employments.company_id')
             ->leftJoin('departments', 'departments.id', '=', 'user_employments.department_id')
             ->leftJoin('positions', 'positions.id', '=', 'user_employments.position_id')
-            ->select('users.*', 'user_profiles.firstname', 'user_profiles.lastname', 'positions.name as position')
+            ->select('users.*', 'positions.name as position')
             ->whereNotIn('users.id', array(Auth::user()->id));
 
         return $query;

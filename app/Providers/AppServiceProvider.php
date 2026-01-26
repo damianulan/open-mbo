@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Helpers\StorageHelper;
 use App\Support\Storage\StorageManager;
 use Barryvdh\Debugbar\Facades\Debugbar;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
@@ -10,8 +9,7 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use App\Console\Commands\Core\LangList;
-use Spatie\LaravelSettings\Models\SettingsProperty;
-use App\Settings\Abstract\SettingsProperty as AppSettingsProperty;
+use Lucent\Support\Magellan\MagellanScope;
 
 class AppServiceProvider extends ServiceProvider
 {

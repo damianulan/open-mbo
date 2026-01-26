@@ -11,13 +11,13 @@ class Password extends PasswordRule
 {
     public function __construct()
     {
-        $min = settings('users.password_min_length');
+        $min = settings('users.password_min_length', 0) ?? 1;
 
         parent::__construct($min);
 
-        $this->letters = settings('users.password_min_letters');
-        $this->numbers = settings('users.password_min_numbers');
-        $this->symbols = settings('users.password_min_symbols');
+        $this->letters = settings('users.password_min_letters', 0);
+        $this->numbers = settings('users.password_min_numbers', 0);
+        $this->symbols = settings('users.password_min_symbols', 0);
     }
 
     public function passes($attribute, $value)
@@ -43,15 +43,15 @@ class Password extends PasswordRule
                 $validator->addFailure($attribute, 'password.mixed');
             }
 
-            if ($this->letters && ! preg_match_all('/\pL/u', $value, $matches) >= $this->letters) {
+            if ($this->letters && preg_match_all('/\pL/u', $value, $matches) < $this->letters) {
                 $validator->addFailure($attribute, 'password.letters');
             }
 
-            if ($this->symbols && ! preg_match_all('/\p{Z}|\p{S}|\p{P}/u', $value, $matches) >= $this->symbols) {
+            if ($this->symbols && preg_match_all('/\p{Z}|\p{S}|\p{P}/u', $value, $matches) < $this->symbols) {
                 $validator->addFailure($attribute, 'password.symbols');
             }
 
-            if ($this->numbers && ! preg_match_all('/\pN/u', $value, $matches) >= $this->numbers) {
+            if ($this->numbers && preg_match_all('/\pN/u', $value, $matches) < $this->numbers) {
                 $validator->addFailure($attribute, 'password.numbers');
             }
         });

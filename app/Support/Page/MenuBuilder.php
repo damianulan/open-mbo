@@ -5,6 +5,7 @@ namespace App\Support\Page;
 use App\Support\Page\Bars\MenubarMenu;
 use App\Support\Page\Bars\MenuItem;
 use App\Support\Page\Bars\SidebarMenu;
+use App\Warden\PermissionsLib;
 
 class MenuBuilder
 {
@@ -37,6 +38,7 @@ class MenuBuilder
             MenuItem::make('users')
                 ->setTitle(__('menus.users.index'))
                 ->setIcon('person-fill')
+                ->permission(PermissionsLib::USERS_LIST)
                 ->setRoute('users.index'),
 
             MenuItem::make('settings')

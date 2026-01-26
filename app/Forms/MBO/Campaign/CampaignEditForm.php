@@ -35,7 +35,7 @@ class CampaignEditForm extends Form
             ->add(FormComponent::text('period', $this->model)->label(__('forms.campaigns.period'))
                 ->info(__('forms.campaigns.info.period')))
             ->add(FormComponent::multiselect('user_ids', $selected, Dictionary::fromModel(User::class, 'name', 'allActive'), 'users')->label(__('forms.campaigns.coordinators')))
-            ->add(FormComponent::container('description', $this->model)->label(__('forms.campaigns.description'))->class('quill-default'))
+            ->add(FormComponent::container('description', $this->model)->label(__('forms.campaigns.description'))->class('quill-default')->purifyValue())
             ->add(FormComponent::daterange(CampaignStage::DEFINITION, $this->model)->label(__('forms.campaigns.stages.' . CampaignStage::DEFINITION))
                 ->info(__('forms.campaigns.info.' . CampaignStage::DEFINITION)))
             ->add(FormComponent::daterange(CampaignStage::DISPOSITION, $this->model)->label(__('forms.campaigns.stages.' . CampaignStage::DISPOSITION))

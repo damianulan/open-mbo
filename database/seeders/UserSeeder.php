@@ -34,9 +34,7 @@ class UserSeeder extends Seeder
                     $y++;
                     $user = User::factory()
                         ->has(UserProfile::factory()->count(1), 'profile')
-                        ->create(array(
-                            'email' => 'user' . $y . '@damianulan.me',
-                        ));
+                        ->create();
 
                     $position = null;
                     if ($user) {

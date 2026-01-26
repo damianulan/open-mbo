@@ -25,6 +25,9 @@ final class PermissionsLib extends PermissionWarden
 
     public const USERS_VIEW = 'users-view';
 
+    // preview of any user profile but with basic data only
+    public const USERS_PREVIEW = 'users-preview';
+
     public const USERS_VIEW_DELETED = 'users-view-deleted';
 
     public const USERS_CREATE = 'users-create';
@@ -149,6 +152,7 @@ final class PermissionsLib extends PermissionWarden
             self::USERS_IMPERSONATE => array('admins'),
             self::USERS_LIST => array('admins', 'admin_mbo', 'admin_hr', 'supervisor'), // and probably any other superior roles and team leader @TODO later
             self::USERS_VIEW => array('admins', 'admin_mbo', 'admin_hr', 'supervisor'), // and probably any other superior roles and team leader @TODO later
+            self::USERS_PREVIEW => array('*'),
             self::USERS_VIEW_DELETED => array('admins'),
             self::USERS_EMPLOYMENTS_MANAGE => array('admins', 'admin_hr'),
             self::USERS_CREATE => array('admins'),

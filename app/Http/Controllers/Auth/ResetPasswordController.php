@@ -12,9 +12,14 @@ use App\Rules\Password as PasswordRules;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Facades\Hash;
 
 class ResetPasswordController extends Controller
 {
+    const INVALID_OLD_PASSWORD = 'auth.invalid_old_password';
+
+    const PASSWORD_REPEATED = 'auth.password_repeated';
+
     /*
     |--------------------------------------------------------------------------
     | Password Reset Controller
@@ -35,23 +40,109 @@ class ResetPasswordController extends Controller
         );
     }
 
+    public function reset(Request $request)
+    {
+        $request->validate($this->rules(), $this->validationErrorMessages());
+
+        $response = $this->broker()->reset(
+            $this->credentials($request), function ($user, $password) {
+                if($user->validateNewPassword($password)){
+                    $this->resetPassword($user, $password);
+                }
+                return self::PASSWORD_REPEATED;
+            }
+        );
+
+        return $response == Password::PASSWORD_RESET
+                    ? $this->sendResetResponse($request, $response)
+                    : $this->sendResetFailedResponse($request, $response);
+    }
+
+    protected function sendResetFailedResponse(Request $request, $response)
+    {
+        $errors = [];
+
+        if ($request->wantsJson()) {
+            switch ($response) {
+                case self::PASSWORD_REPEATED:
+                    $errors['password'] = [trans($response)];
+                    break;
+                default:
+                    $errors['email'] = [trans($response)];
+                    break;
+            }
+
+            throw ValidationException::withMessages($errors);
+        }
+
+        switch ($response) {
+            case self::PASSWORD_REPEATED:
+                $errors['password'] = trans($response);
+                break;
+            default:
+                $errors['email'] = trans($response);
+                break;
+        }
+
+        return redirect()->back()
+                    ->withInput($request->only('email'))
+                    ->withErrors($errors);
+    }
+
     public function forceReset(Request $request)
     {
-        $response = null;
+        $response = Password::INVALID_USER;
+        $request->validate($this->forceRules(), $this->validationErrorMessages());
 
         try {
-            $request->validate($this->forceRules(), $this->validationErrorMessages());
             $user = Auth::user();
-            $password = $request->get('password');
-            $this->resetPassword($user, $password);
-            $response = Password::PASSWORD_RESET;
+            if(Hash::check($request->get('old_password'), $user->password)) {
+                $password = $request->get('password');
+                if($user->validateNewPassword($password)){
+                    $this->resetPassword($user, $password);
+                    $response = Password::PASSWORD_RESET;
+                } else {
+                    $response = self::PASSWORD_REPEATED;
+                }
+            } else {
+                $response = self::INVALID_OLD_PASSWORD;
+            }
         } catch (\Throwable $th) {
             report($th);
         }
 
         return $response == Password::PASSWORD_RESET
                     ? $this->sendResetResponse($request, $response)
-                    : $this->sendResetFailedResponse($request, $response);
+                    : $this->sendForceResetFailedResponse($request, $response);
+    }
+
+    protected function sendForceResetFailedResponse(Request $request, $response)
+    {
+        $errors = [];
+
+        if ($request->wantsJson()) {
+            switch ($response) {
+                case self::INVALID_OLD_PASSWORD:
+                    $errors['old_password'] = [trans($response)];
+                    break;
+                case self::PASSWORD_REPEATED:
+                    $errors['password'] = [trans($response)];
+                    break;
+            }
+            throw ValidationException::withMessages($errors);
+        }
+
+        switch ($response) {
+            case self::INVALID_OLD_PASSWORD:
+                $errors['old_password'] = trans($response);
+                break;
+            case self::PASSWORD_REPEATED:
+                $errors['password'] = trans($response);
+                break;
+        }
+
+        return redirect()->back()
+                    ->withErrors($errors);
     }
 
     /**

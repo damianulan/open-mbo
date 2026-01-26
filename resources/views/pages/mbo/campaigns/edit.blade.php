@@ -6,7 +6,7 @@
         {{ $form->render() }}
     </div>
 </div>
-
 @endsection
 @push('scripts')
+    {{ $form->scripts() }}
 @endpush

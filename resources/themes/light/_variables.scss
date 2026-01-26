@@ -177,9 +177,9 @@ $ombo-body-failed: rgba($status-failed, 0.15);
 $ombo-body-failed-hover: rgba($status-failed, 0.2);
 $ombo-body-completed: rgba($status-completed, 0.25);
 $ombo-body-completed-hover: rgba($status-completed, 0.35);
-$ombo-body-inactive: rgba($disabled-text, 0.2);
+$ombo-body-inactive: rgba($disabled-text, 0.15);
+$ombo-body-inactive-hover: rgba($disabled-text, 0.2);
 $ombo-body-hover: rgba($primary, 0.15);
-$ombo-body-inactive-hover: rgba($primary, 0.25);
 $ombo-body-gradient: linear-gradient(
     120deg,
     rgba($primary, 0.06) 0%,
