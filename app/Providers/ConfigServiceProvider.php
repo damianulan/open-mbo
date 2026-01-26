@@ -8,6 +8,7 @@ use App\Settings\MBOSettings;
 use App\Settings\UserSettings;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 
 class ConfigServiceProvider extends ServiceProvider
 {
@@ -37,7 +38,7 @@ class ConfigServiceProvider extends ServiceProvider
                 // GENERAL
                 'app.name' => $general->site_name ?? env('APP_NAME', 'OpenMBO'),
                 'app.debug' => $general->debug ?? env('APP_DEBUG', true),
-                'debugbar.enabled' => $general->debugbar ?? env('DEBUGBAR_ENABLED', true),
+                'debugbar.enabled' => ($general->debugbar ?? env('DEBUGBAR_ENABLED', true)) && Auth::check(),
                 'app.timezone' => $general->timezone ?? env('APP_TIMEZONE', 'UTC'),
                 'app.locale' => $general->locale ?? env('APP_LOCALE', 'en'),
                 'app.maintenance' => $general->maintenance ?? null,
