@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Activity;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property string $id
