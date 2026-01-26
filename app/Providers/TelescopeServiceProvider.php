@@ -69,13 +69,13 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
             return;
         }
 
-        Telescope::hideRequestParameters(array('_token'));
+        Telescope::hideRequestParameters(['_token']);
 
-        Telescope::hideRequestHeaders(array(
+        Telescope::hideRequestHeaders([
             'cookie',
             'x-csrf-token',
             'x-xsrf-token',
-        ));
+        ]);
     }
 
     /**
@@ -90,9 +90,9 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
 
     private function filterEvents(IncomingEntry $entry): bool
     {
-        return ! in_array($entry->content['name'], array(
+        return ! in_array($entry->content['name'], [
             SettingsLoaded::class,
             LoadingSettings::class,
-        ));
+        ]);
     }
 }

@@ -2,11 +2,10 @@
 
 namespace App\Forms\Settings;
 
+use App\Forms\Traits\SettingsForm;
 use FormForge\Base\Form;
 use FormForge\Base\FormComponent;
 use FormForge\FormBuilder;
-use Illuminate\Http\Request;
-use App\Forms\Traits\SettingsForm;
 use Illuminate\Validation\Rules\File;
 
 class BrandingForm extends Form
@@ -31,7 +30,7 @@ class BrandingForm extends Form
                 'nullable',
                 'image',
                 File::types(['png', 'jpg', 'jpeg', 'svg'])
-                    ->max('2mb')
+                    ->max('2mb'),
             ],
         ];
     }

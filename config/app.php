@@ -48,7 +48,7 @@ use Yajra\DataTables\DataTablesServiceProvider;
 use Yajra\DataTables\ExportServiceProvider;
 use Yajra\DataTables\HtmlServiceProvider;
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -151,10 +151,10 @@ return array(
 
     'fallback_locale' => 'pl',
 
-    'available_locales' => array(
+    'available_locales' => [
         'pl',
         'en',
-    ),
+    ],
 
     'date_format' => env('DATEFORMAT', 'Y-m-d'),
     'time_format' => env('TIMEFORMAT', 'H:i'),
@@ -225,10 +225,10 @@ return array(
     |
     */
 
-    'maintenance' => array(
+    'maintenance' => [
         'driver' => 'file',
         // 'store'  => 'redis',
-    ),
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -241,7 +241,7 @@ return array(
     |
     */
 
-    'providers' => array(
+    'providers' => [
 
         /*
          * Laravel Framework Service Providers...
@@ -295,7 +295,7 @@ return array(
         GateServiceProvider::class,
         ConfigServiceProvider::class,
         ImpersonateServiceProvider::class,
-    ),
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -308,7 +308,7 @@ return array(
     |
     */
 
-    'aliases' => Facade::defaultAliases()->merge(array(
+    'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'PageBuilder' => PageBuilder::class,
         'Theme' => Theme::class,
@@ -327,6 +327,6 @@ return array(
 
         'MessageType' => MessageType::class,
         'StorageHelper' => StorageHelper::class,
-    ))->toArray(),
+    ])->toArray(),
 
-);
+];

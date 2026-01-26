@@ -11,31 +11,31 @@ class PositionFactory extends Factory
     public static function seedPositions(int $num = 10): void
     {
         $dict = self::dict_pl();
-        $required = array(
+        $required = [
             'CEO' => 'Chief Executive Officer',
             'CTO' => 'Chief Technology Officer',
             'CFO' => 'Chief Financial Officer',
-        );
+        ];
 
         foreach ($required as $name => $description) {
-            Position::create(array(
+            Position::create([
                 'name' => $name,
                 'description' => $description,
-            ));
+            ]);
         }
 
         for ($i = $num; $i > 0; $i--) {
             $d = $dict->pull($i);
 
-            Position::create(array(
+            Position::create([
                 'name' => $d,
-            ));
+            ]);
         }
     }
 
     public static function dict_pl(): Collection
     {
-        return Collection::make(array(
+        return Collection::make([
             'CEO',
             'CTO',
             'CFO',
@@ -293,7 +293,7 @@ class PositionFactory extends Factory
             'Rejestrator dokumentów',
             'Operator wprowadzania danych',
             'Weryfikator danych',
-        ));
+        ]);
     }
 
     /**
@@ -308,10 +308,10 @@ class PositionFactory extends Factory
             $title = $this->jobTitle();
         }
 
-        return array(
+        return [
             'name' => $title,
             'description' => fake()->realTextBetween(300, 900),
-        );
+        ];
     }
 
     public function jobTitle(): string

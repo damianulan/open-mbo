@@ -15,7 +15,7 @@ use TypeError;
 
 class ChartFactory
 {
-    public static function loadForModel(string $name, Model $model, array $options = array()): Chart
+    public static function loadForModel(string $name, Model $model, array $options = []): Chart
     {
         $lib = new ModelCharts($options);
         $reflection = new ReflectionClass($lib);

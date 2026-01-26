@@ -16,7 +16,7 @@ class CreateAdminUserSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = new User(array(
+        $user = new User([
             'email' => 'admin@damianulan.me',
             'password' => Hash::make('123456'),
             'firstname' => 'Site',
@@ -24,15 +24,15 @@ class CreateAdminUserSeeder extends Seeder
             'gender' => Gender::MALE,
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
-        ));
+        ]);
         $user->save();
-        $profile = new UserProfile(array(
+        $profile = new UserProfile([
             'birthday' => fake()->dateTimeBetween('-40 years', '-20years'),
-        ));
+        ]);
         $user->profile()->save($profile);
         $user->assignRoleSlug('admin');
 
-        $user = new User(array(
+        $user = new User([
             'email' => 'kontakt@damianulan.me',
             'password' => Hash::make('12345678'),
             'core' => 1,
@@ -41,15 +41,15 @@ class CreateAdminUserSeeder extends Seeder
             'gender' => Gender::MALE,
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
-        ));
+        ]);
         $user->save();
-        $profile = new UserProfile(array(
+        $profile = new UserProfile([
             'birthday' => fake()->dateTimeBetween('-40 years', '-20years'),
-        ));
+        ]);
         $user->profile()->save($profile);
         $user->assignRoleSlug('root');
 
-        $user = new User(array(
+        $user = new User([
             'email' => 'helpdesk@damianulan.me',
             'password' => Hash::make('123456'),
             'core' => 1,
@@ -58,11 +58,11 @@ class CreateAdminUserSeeder extends Seeder
             'gender' => Gender::MALE,
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
-        ));
+        ]);
         $user->save();
-        $profile = new UserProfile(array(
+        $profile = new UserProfile([
             'birthday' => fake()->dateTimeBetween('-40 years', '-20years'),
-        ));
+        ]);
         $user->profile()->save($profile);
         $user->assignRoleSlug('support');
     }

@@ -11,7 +11,7 @@ class MenuBuilder
 {
     public static function bootSidebar(string $sitename): SidebarMenu
     {
-        $sidebar = SidebarMenu::boot($sitename, array(
+        $sidebar = SidebarMenu::boot($sitename, [
             MenuItem::make('dashboard')
                 ->setTitle(__('menus.dashboard'))
                 ->setIcon('grid-fill')
@@ -46,7 +46,7 @@ class MenuBuilder
                 ->setIcon('gear-fill')
                 ->permission('settings-*')
                 ->setRoute('settings.general.index'),
-        ));
+        ]);
 
         return $sidebar;
     }

@@ -37,6 +37,8 @@ class UserObjectiveController extends AppController
 
     /**
      * Display the specified resource.
+     *
+     * @param  mixed  $id
      */
     public function show(Request $request, $id)
     {
@@ -48,24 +50,25 @@ class UserObjectiveController extends AppController
 
         $header = 'Podsumowanie Celu';
 
-        return view('pages.mbo.objectives.users.show', array(
+        return view('pages.mbo.objectives.users.show', [
             'userObjective' => $userObjective,
             'user' => $userObjective->user,
             'objective' => $userObjective->objective,
             'pagetitle' => $header,
             'isOwner' => $userObjective->user->id === Auth::user()->id,
-        ));
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
+     *
+     * @param  mixed  $id
      */
     public function edit($id): void {}
 
     public function update(Request $request, $id, ObjectiveEditUserForm $form)
     {
         $objective = Objective::findOrFail($id);
-
 
         $response = $form::validateJson($request, $id);
         if ('ok' === $response['status']) {
@@ -83,19 +86,21 @@ class UserObjectiveController extends AppController
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param  mixed  $id
      */
     public function destroy($id): void {}
 
     public function addUsers(Request $request, $id): View
     {
-        $params = array();
+        $params = [];
         if ($id) {
             $objective = Objective::find($id);
             if ($objective) {
-                $params = array(
+                $params = [
                     'id' => $id,
                     'form' => ObjectiveEditUserForm::bootWithModel($objective)->getDefinition(),
-                );
+                ];
             }
         }
 
@@ -104,13 +109,13 @@ class UserObjectiveController extends AppController
 
     public function editRealization(Request $request, $id): View
     {
-        $params = array();
+        $params = [];
         if ($id) {
             $objective = UserObjective::findOrFail($id);
-            $params = array(
+            $params = [
                 'id' => $id,
                 'form' => ObjectiveEditUserRealizationForm::bootWithModel($objective)->getDefinition(),
-            );
+            ];
         }
 
         return view('components.modals.objectives.edit_realization', $params);

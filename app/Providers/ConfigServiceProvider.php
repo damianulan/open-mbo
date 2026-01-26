@@ -33,7 +33,7 @@ class ConfigServiceProvider extends ServiceProvider
 
             $general = app(GeneralSettings::class);
             $mail = app(MailSettings::class);
-            config(array(
+            config([
                 // GENERAL
                 'app.name' => $general->site_name ?? env('APP_NAME', 'OpenMBO'),
                 'app.debug' => $general->debug ?? env('APP_DEBUG', true),
@@ -58,7 +58,7 @@ class ConfigServiceProvider extends ServiceProvider
                 'mail.from.name' => $mail->mail_from_name ?? null,
                 'mailcatchall.enabled' => $mail->mail_catchall_enabled ?? null,
                 'mailcatchall.receiver' => $mail->mail_catchall_receiver ?? null,
-            ));
+            ]);
         }
     }
 }

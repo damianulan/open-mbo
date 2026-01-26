@@ -15,10 +15,10 @@ class ObjectiveCategoryController extends MBOController
      */
     public function index(ObjectiveCategoriesDataTable $dataTable)
     {
-        return $dataTable->render('pages.mbo.categories.index', array(
+        return $dataTable->render('pages.mbo.categories.index', [
             'table' => $dataTable,
             'nav' => $this->nav(),
-        ));
+        ]);
     }
 
     /**
@@ -26,9 +26,9 @@ class ObjectiveCategoryController extends MBOController
      */
     public function create(Request $request, ObjectiveCategoryEditForm $form): View
     {
-        return view('pages.mbo.categories.edit', array(
+        return view('pages.mbo.categories.edit', [
             'form' => $form->getDefinition(),
-        ));
+        ]);
     }
 
     /**
@@ -51,20 +51,24 @@ class ObjectiveCategoryController extends MBOController
 
     /**
      * Display the specified resource.
+     *
+     * @param  mixed  $id
      */
     public function show($id): void {}
 
     /**
      * Show the form for editing the specified resource.
+     *
+     * @param  mixed  $id
      */
     public function edit(Request $request, $id, ObjectiveCategoryEditForm $form)
     {
         $model = ObjectiveTemplateCategory::findOrFail($id);
 
-        return view('pages.mbo.categories.edit', array(
+        return view('pages.mbo.categories.edit', [
             'objective' => $model,
             'form' => $form->setModel($model)->getDefinition(),
-        ));
+        ]);
     }
 
     /**
@@ -88,6 +92,8 @@ class ObjectiveCategoryController extends MBOController
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param  mixed  $id
      */
     public function delete($id)
     {

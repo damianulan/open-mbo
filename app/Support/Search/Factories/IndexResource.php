@@ -2,8 +2,8 @@
 
 namespace App\Support\Search\Factories;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Support\Search\Dtos\ResultItem;
+use Illuminate\Database\Eloquent\Model;
 
 abstract class IndexResource
 {
@@ -11,14 +11,14 @@ abstract class IndexResource
 
     abstract public function attributes(): array;
 
+    abstract public static function getModelClass(): string;
+
+    abstract public function resultItem(string $phrase): ResultItem;
+
     final public function getModel(): Model
     {
         return $this->model;
     }
-
-    abstract public static function getModelClass(): string;
-
-    abstract public function resultItem(string $phrase): ResultItem;
 
     final public function getKey()
     {

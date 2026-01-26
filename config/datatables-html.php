@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     /*
      * DataTables JavaScript global namespace.
      */
@@ -10,10 +10,10 @@ return array(
     /*
      * Default table attributes when generating the table.
      */
-    'table' => array(
+    'table' => [
         'class' => 'table ombo-table',
         'id' => 'dataTableBuilder',
-    ),
+    ],
 
     /*
      * Html builder script template.
@@ -24,4 +24,4 @@ return array(
      * Html builder script template for DataTables Editor integration.
      */
     'editor' => 'datatables::editor',
-);
+];

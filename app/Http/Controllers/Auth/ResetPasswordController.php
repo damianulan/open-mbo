@@ -5,21 +5,18 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Core\User;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\ResetsPasswords;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use App\Rules\Password as PasswordRules;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
-use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Support\Facades\Hash;
+use Throwable;
 
 class ResetPasswordController extends Controller
 {
-    const INVALID_OLD_PASSWORD = 'auth.invalid_old_password';
-
-    const PASSWORD_REPEATED = 'auth.password_repeated';
-
     /*
     |--------------------------------------------------------------------------
     | Password Reset Controller
@@ -33,6 +30,17 @@ class ResetPasswordController extends Controller
 
     use ResetsPasswords;
 
+    const INVALID_OLD_PASSWORD = 'auth.invalid_old_password';
+
+    const PASSWORD_REPEATED = 'auth.password_repeated';
+
+    /**
+     * Where to redirect users after resetting their password.
+     *
+     * @var string
+     */
+    protected $redirectTo = RouteServiceProvider::HOME;
+
     public function showForceResetForm(Request $request)
     {
         return view('auth.passwords.password_change')->with(
@@ -45,17 +53,46 @@ class ResetPasswordController extends Controller
         $request->validate($this->rules(), $this->validationErrorMessages());
 
         $response = $this->broker()->reset(
-            $this->credentials($request), function ($user, $password) {
-                if($user->validateNewPassword($password)){
+            $this->credentials($request),
+            function ($user, $password) {
+                if ($user->validateNewPassword($password)) {
                     $this->resetPassword($user, $password);
                 }
+
                 return self::PASSWORD_REPEATED;
             }
         );
 
-        return $response == Password::PASSWORD_RESET
+        return Password::PASSWORD_RESET === $response
                     ? $this->sendResetResponse($request, $response)
                     : $this->sendResetFailedResponse($request, $response);
+    }
+
+    public function forceReset(Request $request)
+    {
+        $response = Password::INVALID_USER;
+        $request->validate($this->forceRules(), $this->validationErrorMessages());
+
+        try {
+            $user = Auth::user();
+            if (Hash::check($request->get('old_password'), $user->password)) {
+                $password = $request->get('password');
+                if ($user->validateNewPassword($password)) {
+                    $this->resetPassword($user, $password);
+                    $response = Password::PASSWORD_RESET;
+                } else {
+                    $response = self::PASSWORD_REPEATED;
+                }
+            } else {
+                $response = self::INVALID_OLD_PASSWORD;
+            }
+        } catch (Throwable $th) {
+            report($th);
+        }
+
+        return Password::PASSWORD_RESET === $response
+                    ? $this->sendResetResponse($request, $response)
+                    : $this->sendForceResetFailedResponse($request, $response);
     }
 
     protected function sendResetFailedResponse(Request $request, $response)
@@ -85,35 +122,8 @@ class ResetPasswordController extends Controller
         }
 
         return redirect()->back()
-                    ->withInput($request->only('email'))
-                    ->withErrors($errors);
-    }
-
-    public function forceReset(Request $request)
-    {
-        $response = Password::INVALID_USER;
-        $request->validate($this->forceRules(), $this->validationErrorMessages());
-
-        try {
-            $user = Auth::user();
-            if(Hash::check($request->get('old_password'), $user->password)) {
-                $password = $request->get('password');
-                if($user->validateNewPassword($password)){
-                    $this->resetPassword($user, $password);
-                    $response = Password::PASSWORD_RESET;
-                } else {
-                    $response = self::PASSWORD_REPEATED;
-                }
-            } else {
-                $response = self::INVALID_OLD_PASSWORD;
-            }
-        } catch (\Throwable $th) {
-            report($th);
-        }
-
-        return $response == Password::PASSWORD_RESET
-                    ? $this->sendResetResponse($request, $response)
-                    : $this->sendForceResetFailedResponse($request, $response);
+            ->withInput($request->only('email'))
+            ->withErrors($errors);
     }
 
     protected function sendForceResetFailedResponse(Request $request, $response)
@@ -142,18 +152,16 @@ class ResetPasswordController extends Controller
         }
 
         return redirect()->back()
-                    ->withErrors($errors);
+            ->withErrors($errors);
     }
 
     /**
      * Get the password reset validation rules.
-     *
-     * @return array
      */
-    protected function forceRules()
+    protected function forceRules(): array
     {
         return [
-            'password' => ['required', 'confirmed', new PasswordRules],
+            'password' => ['required', 'confirmed', new PasswordRules()],
         ];
     }
 
@@ -162,11 +170,11 @@ class ResetPasswordController extends Controller
         return [
             'token' => 'required',
             'email' => 'required|email',
-            'password' => ['required', 'confirmed', new PasswordRules],
+            'password' => ['required', 'confirmed', new PasswordRules()],
         ];
     }
 
-    protected function resetPassword(User $user, $password)
+    protected function resetPassword(User $user, $password): void
     {
         $this->setUserPassword($user, $password);
 
@@ -179,12 +187,4 @@ class ResetPasswordController extends Controller
 
         $this->guard()->login($user);
     }
-
-
-    /**
-     * Where to redirect users after resetting their password.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
 }

@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Support\Search\IndexModel;
+use App\Support\Search\SearchEngine;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Facades\Auth;
-use App\Support\Search\SearchEngine;
-use App\Support\Search\Factories\ModelResourceFactory;
-use App\Support\Search\Jobs\SearchIndexJob;
 
 class HomeController extends AppController
 {
@@ -34,8 +31,8 @@ class HomeController extends AppController
 
         $user = Auth::user();
 
-        return view('pages.dashboard', array(
+        return view('pages.dashboard', [
             'user' => $user,
-        ));
+        ]);
     }
 }

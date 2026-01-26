@@ -2,11 +2,10 @@
 
 namespace App\Forms\Settings;
 
+use App\Forms\Traits\SettingsForm;
 use FormForge\Base\Form;
 use FormForge\Base\FormComponent;
 use FormForge\FormBuilder;
-use Illuminate\Http\Request;
-use App\Forms\Traits\SettingsForm;
 
 class NotificationsForm extends Form
 {
@@ -14,7 +13,7 @@ class NotificationsForm extends Form
 
     protected static ?string $backRoute = 'settings.modules.index';
 
-    protected static array $backParams = array('module' => 'notifications');
+    protected static array $backParams = ['module' => 'notifications'];
 
     public function definition(FormBuilder $builder): FormBuilder
     {
@@ -34,9 +33,9 @@ class NotificationsForm extends Form
 
     public function validation(): array
     {
-        return array(
+        return [
             'mail_notifications' => 'boolean',
             'system_notifications' => 'boolean',
-        );
+        ];
     }
 }

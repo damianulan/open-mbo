@@ -2,11 +2,10 @@
 
 namespace App\Forms\Settings;
 
+use App\Forms\Traits\SettingsForm;
 use FormForge\Base\Form;
 use FormForge\Base\FormComponent;
 use FormForge\FormBuilder;
-use Illuminate\Http\Request;
-use App\Forms\Traits\SettingsForm;
 
 class MboForm extends Form
 {
@@ -14,7 +13,7 @@ class MboForm extends Form
 
     protected static ?string $backRoute = 'settings.modules.index';
 
-    protected static array $backParams = array('module' => 'mbo');
+    protected static array $backParams = ['module' => 'mbo'];
 
     public function definition(FormBuilder $builder): FormBuilder
     {
@@ -50,7 +49,7 @@ class MboForm extends Form
 
     public function validation(): array
     {
-        return array(
+        return [
             'enabled' => 'boolean',
             'campaigns_enabled' => 'boolean',
             'campaigns_manual' => 'boolean',
@@ -62,6 +61,6 @@ class MboForm extends Form
             'manipulate_rewards' => 'boolean',
             'failed_rewards' => 'boolean',
             'rewards_currency' => 'required|string|max:3',
-        );
+        ];
     }
 }

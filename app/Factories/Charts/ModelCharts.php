@@ -21,14 +21,14 @@ class ModelCharts extends ChartsLib
         $other = (clone $userObjectives)->whereNotIn('status', UserObjectiveStatus::evaluated())->count();
 
         return $this->getChart()
-            ->setLabels(array(__('mbo.not_evaluated'), __('mbo.passed'), __('mbo.failed')))
-            ->setColors(array(
+            ->setLabels([__('mbo.not_evaluated'), __('mbo.passed'), __('mbo.failed')])
+            ->setColors([
                 'var(--bs-info)',
                 'var(--bs-passed)',
                 'var(--bs-failed)',
-            ))
+            ])
             ->setHeight('150')
-            ->setDataset('set-1', $this->type, array($other, $passed, $failed));
+            ->setDataset('set-1', $this->type, [$other, $passed, $failed]);
     }
 
     public function userCampaignCompletion(UserCampaign $model): Chart
@@ -47,13 +47,13 @@ class ModelCharts extends ChartsLib
         $totalNotCompleted = $userObjectives->getTotalWeight() - $totalCompleted;
 
         return $this->getChart()
-            ->setLabels(array(__('mbo.completed'), __('mbo.uncompleted')))
-            ->setColors(array(
+            ->setLabels([__('mbo.completed'), __('mbo.uncompleted')])
+            ->setColors([
                 'var(--bs-info)',
                 'var(--bs-unstarted)',
-            ))
+            ])
             ->setHeight('150')
-            ->setDataset('set-1', $this->type, array($totalCompleted, $totalNotCompleted));
+            ->setDataset('set-1', $this->type, [$totalCompleted, $totalNotCompleted]);
     }
 
     public function userPointsGrouped(User $model): Chart
@@ -62,12 +62,12 @@ class ModelCharts extends ChartsLib
         $this->type = 'donut';
 
         return $this->getChart()
-            ->setLabels(array(__('mbo.completed'), __('mbo.uncompleted')))
-            ->setColors(array(
+            ->setLabels([__('mbo.completed'), __('mbo.uncompleted')])
+            ->setColors([
                 'var(--bs-info)',
                 'var(--bs-unstarted)',
-            ))
+            ])
             ->setHeight('150')
-            ->setDataset('set-1', $this->type, array());
+            ->setDataset('set-1', $this->type, []);
     }
 }

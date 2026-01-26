@@ -23,9 +23,9 @@ class CampaignsController extends AppController
 
         $campaigns = Campaign::orderByStatus()->paginate(30);
 
-        return view('pages.mbo.campaigns.index', array(
+        return view('pages.mbo.campaigns.index', [
             'campaigns' => $campaigns,
-        ));
+        ]);
     }
 
     public function create(Request $request, CampaignEditForm $form): View
@@ -34,9 +34,9 @@ class CampaignsController extends AppController
             unauthorized();
         }
 
-        return view('pages.mbo.campaigns.edit', array(
+        return view('pages.mbo.campaigns.edit', [
             'form' => $form->getDefinition(),
-        ));
+        ]);
     }
 
     /**
@@ -57,7 +57,7 @@ class CampaignsController extends AppController
             if ($service->passed()) {
                 $campaign = $service->campaign;
 
-                $redirect = redirect()->route('campaigns.show', $campaign->id)->with('success', __('alerts.campaigns.success.create', array('name' => $campaign->name)));
+                $redirect = redirect()->route('campaigns.show', $campaign->id)->with('success', __('alerts.campaigns.success.create', ['name' => $campaign->name]));
             }
         } catch (Throwable $e) {
             $this->e = $e;
@@ -81,10 +81,10 @@ class CampaignsController extends AppController
         $this->logShow($campaign);
         $header = $campaign->name . ' [' . $campaign->period . ']';
 
-        return view('pages.mbo.campaigns.show', array(
+        return view('pages.mbo.campaigns.show', [
             'campaign' => $campaign,
             'pagetitle' => $header,
-        ));
+        ]);
     }
 
     public function edit(Request $request, Campaign $campaign, CampaignEditForm $form): View
@@ -93,10 +93,10 @@ class CampaignsController extends AppController
             unauthorized();
         }
 
-        return view('pages.mbo.campaigns.edit', array(
+        return view('pages.mbo.campaigns.edit', [
             'campaign' => $campaign,
             'form' => $form->setModel($campaign)->getDefinition(),
-        ));
+        ]);
     }
 
     public function update(Request $request, $id, CampaignEditForm $form): RedirectResponse
@@ -114,13 +114,13 @@ class CampaignsController extends AppController
             if ($service->passed()) {
                 $campaign = $service->getResult();
 
-                $redirect = redirect()->route('campaigns.show', $id)->with('success', __('alerts.campaigns.success.edit', array('name' => $campaign->name)));
+                $redirect = redirect()->route('campaigns.show', $id)->with('success', __('alerts.campaigns.success.edit', ['name' => $campaign->name]));
             }
         } catch (Throwable $e) {
             $this->e = $e;
         }
 
-        return $this->returnResponseRedirect($redirect, 'error' ?? __('alerts.campaigns.error.edit', array('name' => $campaign->name)));
+        return $this->returnResponseRedirect($redirect, 'error' ?? __('alerts.campaigns.error.edit', ['name' => $campaign->name]));
     }
 
     public function terminate(Request $request, $id)

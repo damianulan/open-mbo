@@ -18,7 +18,7 @@ return new class() extends Migration
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
 
-            $table->primary(array('company_id', 'location_id'));
+            $table->primary(['company_id', 'location_id']);
         });
     }
 

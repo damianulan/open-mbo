@@ -5,9 +5,9 @@ use Spatie\Backup\Tasks\Cleanup\Strategies\DefaultStrategy;
 use Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumAgeInDays;
 use Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumStorageInMegabytes;
 
-return array(
+return [
 
-    'backup' => array(
+    'backup' => [
         /*
          * The name of this application. You can use this name to monitor
          * the backups.
@@ -15,24 +15,24 @@ return array(
         'name' => env('APP_NAME', 'laravel-backup'),
         'auto' => env('BACKUP_AUTO', false),
 
-        'source' => array(
-            'files' => array(
+        'source' => [
+            'files' => [
                 /*
                  * The list of directories and files that will be included in the backup.
                  */
-                'include' => array(
+                'include' => [
                     base_path(),
-                ),
+                ],
 
                 /*
                  * These directories and files will be excluded from the backup.
                  *
                  * Directories used by the backup process will automatically be excluded.
                  */
-                'exclude' => array(
+                'exclude' => [
                     base_path('vendor'),
                     base_path('node_modules'),
-                ),
+                ],
 
                 /*
                  * Determines if symlinks should be followed.
@@ -50,7 +50,7 @@ return array(
                  * Example: base_path()
                  */
                 'relative_path' => null,
-            ),
+            ],
 
             /*
              * The names of the connections to the databases that should be backed up
@@ -82,10 +82,10 @@ return array(
              *
              * For a complete list of available customization options, see https://github.com/spatie/db-dumper
              */
-            'databases' => array(
+            'databases' => [
                 'mysql',
-            ),
-        ),
+            ],
+        ],
 
         /*
          * The database dump can be compressed to decrease disk space usage.
@@ -121,7 +121,7 @@ return array(
          */
         'database_dump_file_extension' => '',
 
-        'destination' => array(
+        'destination' => [
             /*
              * The compression algorithm to be used for creating the zip archive.
              *
@@ -156,10 +156,10 @@ return array(
             /*
              * The disk names on which the backups will be stored.
              */
-            'disks' => array(
+            'disks' => [
                 'local',
-            ),
-        ),
+            ],
+        ],
 
         /*
          * The directory where the temporary files will be stored.
@@ -191,7 +191,7 @@ return array(
          * Set to `0` for none
          */
         'retry_delay' => 0,
-    ),
+    ],
 
     /*
      * You can get notified when specific events occur. Out of the box you can use 'mail' and 'slack'.
@@ -200,15 +200,15 @@ return array(
      * You can also use your own notification classes, just make sure the class is named after one of
      * the `Spatie\Backup\Notifications\Notifications` classes.
      */
-    'notifications' => array(
-        'notifications' => array(
+    'notifications' => [
+        'notifications' => [
             // \Spatie\Backup\Notifications\Notifications\BackupHasFailedNotification::class => ['mail'],
             // \Spatie\Backup\Notifications\Notifications\UnhealthyBackupWasFoundNotification::class => ['mail'],
             // \Spatie\Backup\Notifications\Notifications\CleanupHasFailedNotification::class => ['mail'],
             // \Spatie\Backup\Notifications\Notifications\BackupWasSuccessfulNotification::class => ['mail'],
             // \Spatie\Backup\Notifications\Notifications\HealthyBackupWasFoundNotification::class => ['mail'],
             // \Spatie\Backup\Notifications\Notifications\CleanupWasSuccessfulNotification::class => ['mail'],
-        ),
+        ],
 
         /*
          * Here you can specify the notifiable to which the notifications should be sent. The default
@@ -216,16 +216,16 @@ return array(
          */
         'notifiable' => Notifiable::class,
 
-        'mail' => array(
+        'mail' => [
             'to' => env('MAIL_HOST_ADDRESS', 'hello@example.com'),
 
-            'from' => array(
+            'from' => [
                 'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
                 'name' => env('MAIL_FROM_NAME', 'Example'),
-            ),
-        ),
+            ],
+        ],
 
-        'slack' => array(
+        'slack' => [
             'webhook_url' => '',
 
             /*
@@ -236,9 +236,9 @@ return array(
             'username' => null,
 
             'icon' => null,
-        ),
+        ],
 
-        'discord' => array(
+        'discord' => [
             'webhook_url' => '',
 
             /*
@@ -250,23 +250,23 @@ return array(
              * If this is an empty string, the avatar on the webhook will be used.
              */
             'avatar_url' => '',
-        ),
-    ),
+        ],
+    ],
 
     /*
      * Here you can specify which backups should be monitored.
      * If a backup does not meet the specified requirements the
      * UnHealthyBackupWasFound event will be fired.
      */
-    'monitor_backups' => array(
-        array(
+    'monitor_backups' => [
+        [
             'name' => env('APP_NAME', 'laravel-backup'),
-            'disks' => array('local'),
-            'health_checks' => array(
+            'disks' => ['local'],
+            'health_checks' => [
                 MaximumAgeInDays::class => 1,
                 MaximumStorageInMegabytes::class => 5000,
-            ),
-        ),
+            ],
+        ],
 
         /*
         [
@@ -278,9 +278,9 @@ return array(
             ],
         ],
         */
-    ),
+    ],
 
-    'cleanup' => array(
+    'cleanup' => [
         /*
          * The strategy that will be used to cleanup old backups. The default strategy
          * will keep all backups for a certain amount of days. After that period only
@@ -292,7 +292,7 @@ return array(
          */
         'strategy' => DefaultStrategy::class,
 
-        'default_strategy' => array(
+        'default_strategy' => [
             /*
              * The number of days for which backups must be kept.
              */
@@ -330,7 +330,7 @@ return array(
              * Set null for unlimited size.
              */
             'delete_oldest_backups_when_using_more_megabytes_than' => 5000,
-        ),
+        ],
 
         /*
          * The number of attempts, in case the cleanup command encounters an exception
@@ -342,6 +342,6 @@ return array(
          * Set to `0` for none
          */
         'retry_delay' => 0,
-    ),
+    ],
 
-);
+];

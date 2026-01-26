@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read User $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns query()
@@ -26,6 +27,7 @@ use Illuminate\Support\Facades\Auth;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns whereTableId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns whereUserId($value)
+ *
  * @mixin \Eloquent
  */
 class SelectedColumns extends Model
@@ -36,17 +38,17 @@ class SelectedColumns extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = array(
+    protected $fillable = [
         'user_id',
         'table_id',
         'columns',
         'selected',
-    );
+    ];
 
-    protected $casts = array(
+    protected $casts = [
         'columns' => 'array',
         'selected' => 'array',
-    );
+    ];
 
     public static function findColumn(string $datatable_id)
     {

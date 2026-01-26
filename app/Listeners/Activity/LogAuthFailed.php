@@ -22,7 +22,7 @@ class LogAuthFailed
             if ($user) {
                 activity('auth')
                     ->causedBy($user)
-                    ->withProperties(array('authenticated' => false))
+                    ->withProperties(['authenticated' => false])
                     ->event('auth_attempt_fail')
                     ->log(__('logging.description.auth_attempt_fail'));
             }

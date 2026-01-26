@@ -7,7 +7,7 @@ use App\Commentable\Models\Comment;
 use App\Commentable\Support\Commentable;
 use App\Commentable\Support\Commentator;
 use App\Enums\Users\UserStatus;
-use Lucent\Contracts\Models\HasShowRoute;
+use App\Factories\Users\UserStatusFactory;
 use App\Models\Business\Team;
 use App\Models\Business\UserEmployment;
 use App\Models\MBO\BonusScheme;
@@ -22,6 +22,7 @@ use App\Models\Vendor\ActivityModel;
 use App\Support\Notifications\Models\MailNotification;
 use App\Support\Notifications\Models\SystemNotification;
 use App\Support\Notifications\Traits\Notifiable;
+use App\Support\Search\IndexModel;
 use App\Support\Search\Traits\Searchable;
 use App\Traits\Favouritable;
 use App\Traits\IsTranslated;
@@ -49,6 +50,7 @@ use Illuminate\Support\Str;
 use Lab404\Impersonate\Models\Impersonate;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Sanctum\PersonalAccessToken;
+use Lucent\Contracts\Models\HasShowRoute;
 use Lucent\Support\Str\Alphabet;
 use Lucent\Support\Traits\CascadeDeletes;
 use Lucent\Support\Traits\UUID;
@@ -56,7 +58,6 @@ use Lucent\Support\Traits\VirginModel;
 use Sentinel\Models\Permission;
 use Sentinel\Traits\HasRolesAndPermissions;
 use Spatie\Activitylog\Models\Activity;
-use App\Factories\Users\UserStatusFactory;
 
 /**
  * @property string $id
@@ -101,7 +102,7 @@ use App\Factories\Users\UserStatusFactory;
  * @property-read int|null $favourite_to_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $favourite_users
  * @property-read int|null $favourite_users_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Support\Search\IndexModel> $indexes
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, IndexModel> $indexes
  * @property-read int|null $indexes_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Team> $leader_teams
  * @property-read int|null $leader_teams_count
@@ -110,13 +111,13 @@ use App\Factories\Users\UserStatusFactory;
  * @property-read mixed $name
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Objective> $objectives
  * @property-read int|null $objectives_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Core\UserPasswordHistory> $password_history
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, UserPasswordHistory> $password_history
  * @property-read int|null $password_history_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Permission> $permissions
  * @property-read int|null $permissions_count
  * @property-read mixed $points
- * @property-read \App\Models\Core\UserPreference|null $preferences
- * @property-read \App\Models\Core\UserProfile|null $profile
+ * @property-read UserPreference|null $preferences
+ * @property-read UserProfile|null $profile
  * @property-read Collection $sessions
  * @property-read UserStatus $status
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $subordinates
@@ -135,6 +136,7 @@ use App\Factories\Users\UserStatusFactory;
  * @property-read int|null $user_objectives_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, UserObjective> $user_objectives_active
  * @property-read int|null $user_objectives_active_count
+ *
  * @method static Builder<static>|User active()
  * @method static Builder<static>|User drafted()
  * @method static \Database\Factories\Core\UserFactory factory($count = null, $state = [])
@@ -164,6 +166,7 @@ use App\Factories\Users\UserStatusFactory;
  * @method static Builder<static>|User withRole(...$slugs)
  * @method static Builder<static>|User withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|User withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 #[ScopedBy(CoreUsersScope::class)]
@@ -186,11 +189,11 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     use SoftDeletes;
     use UUID;
     use UserBusiness;
+    use UserHasPreferences;
     use UserMBO;
     use VirginModel;
-    use UserHasPreferences;
 
-    protected $fillable = array(
+    protected $fillable = [
         'email',
         'firstname',
         'lastname',
@@ -198,26 +201,26 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         'suspended_at',
         'core',
         'force_password_change',
-    );
+    ];
 
-    protected $hidden = array(
+    protected $hidden = [
         'password',
         'remember_token',
-    );
+    ];
 
-    protected $casts = array(
+    protected $casts = [
         'email_verified_at' => 'datetime',
         'created_at' => 'datetime',
         'email' => Enigma::class,
         'firstname' => Enigma::class,
         'lastname' => Enigma::class,
         'username' => Enigma::class,
-    );
+    ];
 
-    protected $cascadeDeletes = array(
+    protected $cascadeDeletes = [
         'profile',
         'preferences',
-    );
+    ];
 
     // protected static function boot(): void
     // {
@@ -261,6 +264,11 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         return self::where('email', $email)->first();
     }
 
+    public static function getNewPassword(): string
+    {
+        return Str::random(10);
+    }
+
     public function validateNewPassword($newpassword): bool
     {
         $passwords = $this->password_history->take(settings('users.password_not_repeat', 0));
@@ -274,14 +282,9 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         return true;
     }
 
-    public static function getNewPassword(): string
-    {
-        return Str::random(10);
-    }
-
     public function generatePassword($password = null)
     {
-        if(!$password){
+        if ( ! $password) {
             $password = $this->getNewPassword();
         }
         $this->password = Hash::make($password);
@@ -301,9 +304,9 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function nameDetails()
     {
-        $view = view('components.datatables.username', array('data' => $this));
+        $view = view('components.datatables.username', ['data' => $this]);
         if (Auth::user()->can('preview', $this)) {
-            $view = view('components.datatables.username_link', array('data' => $this));
+            $view = view('components.datatables.username_link', ['data' => $this]);
         }
 
         return $view;
@@ -391,7 +394,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
                 $color = 'red';
             }
         }
-        if($this->blocked()){
+        if ($this->blocked()) {
             $color = 'gray';
         }
 
@@ -405,7 +408,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function canBeImpersonated(): bool
     {
-        return ! $this->hasAnyRoles(array('root', 'support')) || isRoot(true);
+        return ! $this->hasAnyRoles(['root', 'support']) || isRoot(true);
     }
 
     public function canImpersonate(?self $user = null): bool
@@ -451,14 +454,14 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     public function scopeWhereFirstname(Builder $query, string $value): void
     {
         $query->whereHas('profile', function (Builder $query) use ($value): void {
-            $query->whereRaw('LOWER(`firstname`) LIKE ?', array(Str::lower($value)));
+            $query->whereRaw('LOWER(`firstname`) LIKE ?', [Str::lower($value)]);
         });
     }
 
     public function scopeWhereLastname(Builder $query, string $value): void
     {
         $query->whereHas('profile', function (Builder $query) use ($value): void {
-            $query->whereRaw('LOWER(`lastname`) LIKE ?', array(Str::lower($value)));
+            $query->whereRaw('LOWER(`lastname`) LIKE ?', [Str::lower($value)]);
         });
     }
 
@@ -479,9 +482,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     protected function status(): Attribute
     {
         return Attribute::make(
-            get: function (): UserStatus {
-                return UserStatusFactory::make($this);
-            }
+            get: fn (): UserStatus => UserStatusFactory::make($this)
         );
     }
 

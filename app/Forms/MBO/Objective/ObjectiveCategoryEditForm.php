@@ -8,7 +8,6 @@ use FormForge\Base\Form;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
 use FormForge\FormBuilder;
-use Illuminate\Http\Request;
 
 class ObjectiveCategoryEditForm extends Form
 {
@@ -16,7 +15,7 @@ class ObjectiveCategoryEditForm extends Form
     {
         $route = route('categories.store');
         $method = 'POST';
-        $selected = array();
+        $selected = [];
         $category = null;
 
         $shortnameType = 'text';
@@ -43,10 +42,10 @@ class ObjectiveCategoryEditForm extends Form
 
     public function validation(): array
     {
-        return array(
+        return [
             'name' => 'max:50|required',
             'shortname' => 'max:20|required|unique:objective_template_categories,shortname,' . $this->model_id,
             'description' => 'max:1000|nullable',
-        );
+        ];
     }
 }

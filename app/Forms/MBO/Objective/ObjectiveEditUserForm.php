@@ -8,7 +8,6 @@ use FormForge\Base\Form;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
 use FormForge\FormBuilder;
-use Illuminate\Http\Request;
 
 // Ajax form
 class ObjectiveEditUserForm extends Form
@@ -17,8 +16,8 @@ class ObjectiveEditUserForm extends Form
     {
         $method = 'POST';
         $title = 'Dodaj użytkowników do realizacji celu';
-        $selected = array();
-        $exclude = array();
+        $selected = [];
+        $exclude = [];
 
         if ($this->model) {
             $user_ids = UserObjective::where('objective_id', $this->model->id)->get()->pluck('user_id');
@@ -41,6 +40,6 @@ class ObjectiveEditUserForm extends Form
     public function validation(): array
     {
 
-        return array();
+        return [];
     }
 }

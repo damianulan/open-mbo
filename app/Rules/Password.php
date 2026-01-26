@@ -2,10 +2,10 @@
 
 namespace App\Rules;
 
-use Illuminate\Validation\Rules\Password as PasswordRule;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Validation\UncompromisedVerifier;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password as PasswordRule;
 
 class Password extends PasswordRule
 {
@@ -28,14 +28,14 @@ class Password extends PasswordRule
             $this->data,
             [$attribute => [
                 'string',
-                'min:'.$this->min,
-                ...($this->max ? ['max:'.$this->max] : []),
+                'min:' . $this->min,
+                ...($this->max ? ['max:' . $this->max] : []),
                 ...$this->customRules,
             ]],
             $this->validator->customMessages,
             $this->validator->customAttributes
-        )->after(function ($validator) use ($attribute, $value) {
-            if (! is_string($value)) {
+        )->after(function ($validator) use ($attribute, $value): void {
+            if ( ! is_string($value)) {
                 return;
             }
 

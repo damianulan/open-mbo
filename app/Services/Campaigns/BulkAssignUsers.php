@@ -35,12 +35,12 @@ class BulkAssignUsers extends Service
         $result = false;
         $exists = $this->campaign->user_campaigns()->where('user_id', $user_id)->exists();
         if ( ! $exists) {
-            $result = $this->campaign->user_campaigns()->create(array(
+            $result = $this->campaign->user_campaigns()->create([
                 'user_id' => $user_id,
                 'stage' => $this->campaign->setUserStage($user_id),
                 'manual' => $this->campaign->manual,
                 'active' => $this->campaign->draft ? 0 : 1,
-            ));
+            ]);
         }
 
         return $result ? true : false;

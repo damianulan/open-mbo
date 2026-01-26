@@ -21,7 +21,8 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
- * @property-read \App\Models\Core\User $user
+ * @property-read User $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference onlyTrashed()
@@ -39,6 +40,7 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserPreference extends Model
@@ -49,7 +51,7 @@ class UserPreference extends Model
 
     protected $table = 'user_preferences';
 
-    protected $fillable = array(
+    protected $fillable = [
         'user_id',
         'lang',
         'theme',
@@ -57,23 +59,23 @@ class UserPreference extends Model
         'app_notifications',
         'extended_notifications',
         'system_notifications',
-    );
+    ];
 
-    protected $attributes = array(
+    protected $attributes = [
         'lang' => 'auto',
         'theme' => 'auto',
         'mail_notifications' => 1,
         'app_notifications' => 1,
         'extended_notifications' => 1,
         'system_notifications' => 1,
-    );
+    ];
 
-    protected $casts = array(
+    protected $casts = [
         'mail_notifications' => 'boolean',
         'app_notifications' => 'boolean',
         'extended_notifications' => 'boolean',
         'system_notifications' => 'boolean',
-    );
+    ];
 
     public function user(): BelongsTo
     {

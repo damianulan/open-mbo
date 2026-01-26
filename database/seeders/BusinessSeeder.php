@@ -31,9 +31,9 @@ class BusinessSeeder extends Seeder
 
     private function createContract(string $name): void
     {
-        $contract = new TypeOfContract(array(
+        $contract = new TypeOfContract([
             'name' => __('fields.type_of_contract.' . $name),
-        ));
+        ]);
         $contract->save();
     }
 }

@@ -11,20 +11,20 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RouteGate
 {
-    private static $fallbacks = array(
-        'settings.general' => array(
+    private static $fallbacks = [
+        'settings.general' => [
             'settings.server.index',
             'settings.logs.index',
-        ),
-        'settings.server' => array(
+        ],
+        'settings.server' => [
             'settings.general.index',
             'settings.logs.index',
-        ),
-        'settings.logs' => array(
+        ],
+        'settings.logs' => [
             'settings.general.index',
             'settings.server.index',
-        ),
-    );
+        ],
+    ];
 
     /**
      * @param  mixed  $request

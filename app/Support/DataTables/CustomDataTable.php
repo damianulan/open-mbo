@@ -4,11 +4,10 @@ namespace App\Support\DataTables;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Services\DataTable;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 
 class CustomDataTable extends DataTable
 {
@@ -18,7 +17,7 @@ class CustomDataTable extends DataTable
 
     protected $orderByDir = 'desc';
 
-    protected array $actions = array('csv', 'excel', 'column_selector');
+    protected array $actions = ['csv', 'excel', 'column_selector'];
 
     /**
      * Get the dataTable columns definition.
@@ -54,7 +53,7 @@ class CustomDataTable extends DataTable
             });
         }
 
-        $view = view('components.datatables.partials.columns', array(
+        $view = view('components.datatables.partials.columns', [
             'datatable_id' => $this->id,
             'columns' => $available,
             'selected' => $this->selectedColumns(),
@@ -65,7 +64,7 @@ class CustomDataTable extends DataTable
             'hasJson' => in_array('json', $this->actions),
             'hasPdf' => in_array('pdf', $this->actions),
             'class' => static::class,
-        ));
+        ]);
 
         return $view;
     }
@@ -76,21 +75,21 @@ class CustomDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         $builder = $this->builder()
-            ->parameters(array(
-                'language' => array(
+            ->parameters([
+                'language' => [
                     'url' => asset('themes/vendors/datatables/pl.json'),
-                ),
+                ],
                 'responsive' => true,
-                'buttons' => array(
+                'buttons' => [
                     'csv',
-                ),
-                'lengthMenu' => array(
+                ],
+                'lengthMenu' => [
                     20,
                     50,
                     100,
                     200,
-                ),
-            ))
+                ],
+            ])
             ->setTableId($this->id)
             ->columns($this->getColumns())
             ->minifiedAjax()
@@ -106,10 +105,10 @@ class CustomDataTable extends DataTable
 
     public function saveColumns(Request $request)
     {
-        $validator = Validator::make($request->all(), array(
+        $validator = Validator::make($request->all(), [
             'datatable_id' => 'required|string',
             'selected' => 'present|array',
-        ));
+        ]);
 
         if ($validator->passes()) {
             $datatable_id = $request->input('datatable_id');
@@ -138,7 +137,7 @@ class CustomDataTable extends DataTable
      *
      * @phpstan-param view-string|null $view
      */
-    final public function render(?string $view = null, array $data = array(), array $mergeData = array()): mixed
+    final public function render(?string $view = null, array $data = [], array $mergeData = []): mixed
     {
         if ($this->request()->ajax() && $this->request()->wantsJson()) {
             return app()->call($this->ajax(...));
@@ -150,7 +149,7 @@ class CustomDataTable extends DataTable
 
         if (in_array($action, $this->actions) && method_exists($this, $actionMethod)) {
             /** @var callable $callback */
-            $callback = array($this, $actionMethod);
+            $callback = [$this, $actionMethod];
 
             return app()->call($callback);
         }
@@ -162,19 +161,30 @@ class CustomDataTable extends DataTable
     public function userView($data, $relation)
     {
         if ($data->{$relation}) {
-            return view('components.datatables.username_link', array(
+            return view('components.datatables.username_link', [
                 'data' => $data->{$relation},
-            ));
+            ]);
         }
 
         return '';
     }
 
+    public function json()
+    {
+        $collection = $this->getDataForExport();
+        dd($this->getAjaxResponseData());
+        $filename = $this->getFilename() . '.json';
+        $fullpath = 'docs' . DIRECTORY_SEPARATOR . $filename;
+        Storage::disk('downloads')->put($fullpath, json_encode($collection, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
+        return Storage::disk('downloads')->download($fullpath, $filename);
+    }
+
     protected function selectedColumns(): array
     {
-        $columns = array();
+        $columns = [];
         $model = SelectedColumns::findColumn($this->id);
-        $columns_raw = $model->selected ?? array();
+        $columns_raw = $model->selected ?? [];
         $available = $this->getAvailableColumns();
 
         if (empty($columns_raw)) {
@@ -186,19 +196,14 @@ class CustomDataTable extends DataTable
         return $columns;
     }
 
-    private function getAvailableColumns(): array
-    {
-        return array_filter($this->availableColumns(), fn ($item) => $item->visible !== false && $item->viewable === true);
-    }
-
     protected function defaultColumns(): array
     {
-        return array();
+        return [];
     }
 
     protected function availableColumns(): array
     {
-        return array();
+        return [];
     }
 
     protected function getOrderBy(): ?int
@@ -219,14 +224,8 @@ class CustomDataTable extends DataTable
         return $orderBy;
     }
 
-    public function json()
+    private function getAvailableColumns(): array
     {
-        $collection = $this->getDataForExport();
-        dd($this->getAjaxResponseData());
-        $filename = $this->getFilename() . '.json';
-        $fullpath = 'docs' . DIRECTORY_SEPARATOR . $filename;
-        Storage::disk('downloads')->put($fullpath, json_encode($collection, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE));
-
-        return Storage::disk('downloads')->download($fullpath, $filename);
+        return array_filter($this->availableColumns(), fn ($item) => false !== $item->visible && true === $item->viewable);
     }
 }

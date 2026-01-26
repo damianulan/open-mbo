@@ -9,7 +9,6 @@ use FormForge\Base\Form;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
 use FormForge\FormBuilder;
-use Illuminate\Http\Request;
 
 class CampaignEditForm extends Form
 {
@@ -17,7 +16,7 @@ class CampaignEditForm extends Form
     {
         $route = route('campaigns.store');
         $method = 'POST';
-        $selected = array();
+        $selected = [];
         $campaign = null;
         if ( ! is_null($this->model)) {
             $method = 'PUT';
@@ -55,7 +54,7 @@ class CampaignEditForm extends Form
 
     public function validation(): array
     {
-        return array(
+        return [
             'name' => 'max:120|required',
             'period' => 'max:10|required',
             'description' => 'max:1000|nullable',
@@ -77,7 +76,7 @@ class CampaignEditForm extends Form
 
             'draft' => 'boolean',
             'manual' => 'boolean',
-        );
+        ];
     }
 
     public function attributes(): array

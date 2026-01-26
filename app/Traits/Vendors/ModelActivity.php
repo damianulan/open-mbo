@@ -22,9 +22,9 @@ trait ModelActivity
             ->logOnly($this->fillable)
             ->logOnlyDirty()
             ->dontSubmitEmptyLogs()
-            ->setDescriptionForEvent(fn (string $eventName) => __('logging.description.' . $eventName, array(
+            ->setDescriptionForEvent(fn (string $eventName) => __('logging.description.' . $eventName, [
                 'username' => Auth::user()->name,
                 'model_map' => __('logging.model_mapping.' . static::class),
-            )));
+            ]));
     }
 }

@@ -2,7 +2,4 @@
 
 namespace App\Support\Search\Dtos;
 
-class SearchResults
-{
-
-}
+class SearchResults {}

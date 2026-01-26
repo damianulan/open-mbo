@@ -14,19 +14,19 @@ class UserResource extends NotificationResource
 
     public static function descriptions(): array
     {
-        return array(
+        return [
             'firstname' => __('fields.firstname'),
             'lastname' => __('fields.lastname'),
             'email' => __('fields.email'),
-        );
+        ];
     }
 
     public function datas(): array
     {
-        return array(
+        return [
             'firstname' => $this->model->firstname,
             'lastname' => $this->model->lastname,
             'email' => $this->model->email,
-        );
+        ];
     }
 }

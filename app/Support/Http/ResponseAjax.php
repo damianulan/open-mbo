@@ -6,11 +6,11 @@ class ResponseAjax
 {
     public static function ok(string $message)
     {
-        return response()->json(array('status' => 'ok', 'message' => $message));
+        return response()->json(['status' => 'ok', 'message' => $message]);
     }
 
     public static function error(string $message)
     {
-        return response()->json(array('status' => 'error', 'message' => $message));
+        return response()->json(['status' => 'error', 'message' => $message]);
     }
 }

@@ -6,7 +6,6 @@ use App\Models\MBO\UserObjective;
 use FormForge\Base\Form;
 use FormForge\Base\FormComponent;
 use FormForge\FormBuilder;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 // Ajax form
@@ -36,11 +35,11 @@ class ObjectiveEditUserRealizationForm extends Form
 
     public function validation(): array
     {
-        return array(
+        return [
             'realization' => 'nullable|numeric',
             'evaluation' => 'nullable|numeric',
             'self_realization' => 'nullable|numeric',
             'self_evaluation' => 'nullable|numeric',
-        );
+        ];
     }
 }

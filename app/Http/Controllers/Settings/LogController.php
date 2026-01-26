@@ -9,16 +9,16 @@ class LogController extends SettingsController
 {
     public function index(LogsDataTable $dataTable)
     {
-        return $dataTable->render('pages.settings.logs', array(
+        return $dataTable->render('pages.settings.logs', [
             'table' => $dataTable,
             'nav' => $this->nav(),
-        ));
+        ]);
     }
 
     public function myLogs(MyLogsDataTable $dataTable)
     {
-        return $dataTable->render('pages.settings.my_logs', array(
+        return $dataTable->render('pages.settings.my_logs', [
             'table' => $dataTable,
-        ));
+        ]);
     }
 }

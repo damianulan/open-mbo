@@ -30,7 +30,7 @@ class ResourceFactory
     {
         $reflection = new ReflectionClass($event);
 
-        $models = array();
+        $models = [];
 
         if ($reflection->implementsInterface(NotifiableEvent::class)) {
             foreach ($reflection->getProperties(ReflectionProperty::IS_PUBLIC) as $property) {

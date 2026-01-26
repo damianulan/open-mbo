@@ -3,11 +3,11 @@
 namespace App\DataTables\MBO;
 
 use App\Models\MBO\ObjectiveTemplateCategory;
+use App\Support\DataTables\Column;
 use App\Support\DataTables\CustomDataTable;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Carbon;
 use Yajra\DataTables\EloquentDataTable;
-use App\Support\DataTables\Column;
 
 class ObjectiveCategoriesDataTable extends CustomDataTable
 {
@@ -26,9 +26,9 @@ class ObjectiveCategoriesDataTable extends CustomDataTable
     {
         return (new EloquentDataTable($query))
 
-            ->addColumn('action', fn ($data) => view('pages.mbo.categories.action', array(
+            ->addColumn('action', fn ($data) => view('pages.mbo.categories.action', [
                 'data' => $data,
-            )))
+            ]))
             ->addColumn('templates', fn ($data) => $data->objective_templates()->count())
             ->editColumn('created_at', function ($data) {
                 $formatedDate = Carbon::parse($data->created_at)->format(config('app.datetime_format'));
@@ -54,19 +54,19 @@ class ObjectiveCategoriesDataTable extends CustomDataTable
 
     protected function defaultColumns(): array
     {
-        return array(
+        return [
             'name',
             'shortname',
             'templates',
             'created_at',
             'updated_at',
             'action',
-        );
+        ];
     }
 
     protected function availableColumns(): array
     {
-        return array(
+        return [
             'name' => Column::make('name')
                 ->title(__('forms.mbo.categories.name'))
                 ->searchable(true)
@@ -86,7 +86,7 @@ class ObjectiveCategoriesDataTable extends CustomDataTable
                 ->printable(false)
                 ->addClass('action-btns')
                 ->title(__('fields.action')),
-        );
+        ];
     }
 
     /**
