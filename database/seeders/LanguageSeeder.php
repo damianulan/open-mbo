@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Support\Lang\LanguageModel;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
@@ -10,15 +11,6 @@ use Spatie\TranslationLoader\LanguageLine;
 
 class LanguageSeeder extends Seeder
 {
-    /**
-     * Parts of lang locations is enough
-     *
-     * @var array
-     */
-    private $editables = [
-        'alerts.%',
-        'auth.failed',
-    ];
 
     /**
      * Run the database seeds.
@@ -43,21 +35,17 @@ class LanguageSeeder extends Seeder
                 }
 
                 foreach ($lines as $key => $value) {
-                    $instance = LanguageLine::where('group', $group)->where('key', $key)->first();
-                    $editable = $this->isEditable($group, $key);
-
+                    $instance = LanguageModel::where('group', $group)->where('key', $key)->first();
                     if ($instance) {
                         $instance->group = $group;
                         $instance->key = $key;
                         $instance->text = $value;
-                        $instance->editable = $editable;
                         $instance->update();
                     } else {
-                        LanguageLine::create([
+                        LanguageModel::create([
                             'group' => $group,
                             'key' => $key,
-                            'text' => $value,
-                            'editable' => $editable,
+                            'text' => $value
                         ]);
                     }
                 }
@@ -66,15 +54,4 @@ class LanguageSeeder extends Seeder
         }
     }
 
-    private function isEditable(string $group, string $key): bool
-    {
-        $output = false;
-        $str = $group . '.' . $key;
-
-        if (Str::contains($str, $this->editables)) {
-            $output = true;
-        }
-
-        return $output;
-    }
 }

@@ -1,6 +1,6 @@
 <?php
 
-use Spatie\TranslationLoader\LanguageLine;
+use App\Support\Lang\LanguageModel;
 use Spatie\TranslationLoader\TranslationLoaderManager;
 use Spatie\TranslationLoader\TranslationLoaders\Db;
 
@@ -18,7 +18,7 @@ return [
      * This is the model used by the Db Translation loader. You can put any model here
      * that extends Spatie\TranslationLoader\LanguageLine.
      */
-    'model' => LanguageLine::class,
+    'model' => LanguageModel::class,
 
     /*
      * This is the translation manager which overrides the default Laravel `translation.loader`
