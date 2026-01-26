@@ -3,9 +3,7 @@ name: Code Style Fixer
 on:
   push:
     branches:
-      - origin/main
-      - origin/dev
-
+      - main
 jobs:
   lint:
     runs-on: ubuntu-latest
