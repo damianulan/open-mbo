@@ -25,7 +25,7 @@ class Theme
         $directories = new Collection();
         foreach (Finder::create()->in(public_path('themes'))->directories()->depth(0)->sortByName() as $dir) {
             $d = $dir->getFilename();
-            if ( ! in_array($d, array('js', 'vendors', 'images'))) {
+            if ( ! in_array($d, ['js', 'vendors', 'images'])) {
                 $directories->push($d);
             }
         }

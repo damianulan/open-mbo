@@ -33,21 +33,21 @@ final class RolesLib extends RoleWarden
 
     public static function assignable(): array
     {
-        return array(
+        return [
             self::EMPLOYEE,
             self::ADMIN,
             self::ADMIN_MBO,
             self::ADMIN_HR,
-        );
+        ];
     }
 
     public static function admins(): array
     {
-        return array(
+        return [
             self::ADMIN,
             self::ROOT,
             self::HELPDESK,
-        );
+        ];
     }
 
     public static function labels(): array

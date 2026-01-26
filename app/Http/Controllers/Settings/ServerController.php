@@ -23,21 +23,21 @@ class ServerController extends SettingsController
 
         $model = app(MailSettings::class); // ->safePassword();
 
-        return view('pages.settings.server', array(
+        return view('pages.settings.server', [
             'git_text' => $git_text,
             'mail' => $model,
             'form' => SmtpForm::bootWithAttributes($model->toArray())->getDefinition(),
             'nav' => $this->nav(),
-        ));
+        ]);
     }
 
     public function storeMail(Request $request, MailSettings $settings)
     {
-        $request->validate(array(
+        $request->validate([
             'mail_port' => 'numeric',
             'mail_from_address' => 'email',
             'mail_catchall_receiver' => 'email',
-        ));
+        ]);
         foreach ($request->all() as $key => $value) {
             $settings->{$key} = $value;
         }

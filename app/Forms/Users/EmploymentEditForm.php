@@ -11,7 +11,6 @@ use FormForge\Base\FormComponent;
 use FormForge\Components\Button;
 use FormForge\Components\Dictionary;
 use FormForge\FormBuilder;
-use Illuminate\Http\Request;
 
 class EmploymentEditForm extends Form
 {
@@ -49,11 +48,11 @@ class EmploymentEditForm extends Form
 
     public function validation(): array
     {
-        return array(
+        return [
             'user_id' => 'required',
             'company_id' => 'required',
             'employment' => 'date|nullable',
             'release' => 'date|nullable',
-        );
+        ];
     }
 }

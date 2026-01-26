@@ -21,7 +21,8 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $deleted_at
  * @property mixed $nin
  * @property mixed $gender
- * @property-read \App\Models\Core\User $user
+ * @property-read User $user
+ *
  * @method static \Database\Factories\Core\UserProfileFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile newQuery()
@@ -37,6 +38,7 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserProfile extends Model
@@ -45,24 +47,24 @@ class UserProfile extends Model
     use RequestForms;
     use SoftDeletes;
 
-    protected $fillable = array(
+    protected $fillable = [
         'user_id',
         'nin',
         'gender',
         'birthday',
         'phone',
         'avatar',
-    );
+    ];
 
-    protected $dates = array(
+    protected $dates = [
         'birthday',
-    );
+    ];
 
-    protected $casts = array(
+    protected $casts = [
         'nin' => Enigma::class,
         'gender' => Enigma::class,
         'phone' => Enigma::class,
-    );
+    ];
 
     public function user(): BelongsTo
     {

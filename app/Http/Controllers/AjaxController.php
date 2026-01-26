@@ -28,9 +28,9 @@ class AjaxController extends Controller
             $status = 'ok';
         }
 
-        return response()->json(array(
+        return response()->json([
             'status' => $status,
             'instance' => $instance,
-        ));
+        ]);
     }
 }

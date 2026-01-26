@@ -3,13 +3,12 @@
 namespace App\Support\Search;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
 class SearchEngine
 {
-    public function __construct(protected string $input){}
+    public function __construct(protected string $input) {}
 
     public static function boot(string $input): self
     {
@@ -20,7 +19,7 @@ class SearchEngine
 
     public function canSearch(): bool
     {
-        return ! empty($this->input) && strlen($this->input) >= 3;
+        return ! empty($this->input) && mb_strlen($this->input) >= 3;
     }
 
     public function query(): Builder
@@ -37,6 +36,7 @@ class SearchEngine
     {
         $paginator = $this->query()->paginate($perPage);
         $collection = $paginator->getCollection();
+
         return $paginator->setCollection($collection->map(fn (IndexModel $index) => $index->resource?->resultItem($this->input)));
     }
 

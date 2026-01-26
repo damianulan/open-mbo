@@ -62,11 +62,11 @@ class NotificationContents implements CastsAttributes, Jsonable
 
     public function toJson($options = 0)
     {
-        return json_encode(array(
+        return json_encode([
             'system_contents' => $this->system_contents,
             'email_contents' => $this->email_contents,
             'subject' => $this->subject,
-        ));
+        ]);
     }
 
     /**

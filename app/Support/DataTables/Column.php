@@ -8,7 +8,7 @@ class Column extends YarjaColumn
 {
     public function __construct($attributes = [])
     {
-        if(!isset($attributes['viewable'])) {
+        if ( ! isset($attributes['viewable'])) {
             $attributes['viewable'] = true;
         }
 

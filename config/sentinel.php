@@ -4,7 +4,7 @@ use Sentinel\Contexts\System;
 use Sentinel\Models\Permission;
 use Sentinel\Models\Role;
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -32,10 +32,10 @@ return array(
      * If you want to use your own models, you can specify them here.
      * Your custom models must extend Sentinel ones.
      */
-    'models' => array(
+    'models' => [
         'role' => Role::class,
         'permission' => Permission::class,
-    ),
+    ],
 
     /**
      * Here pass role slug that will be assigned with root privileges.
@@ -47,7 +47,7 @@ return array(
      * Sentinel uses cache to store roles and permissions datas in order to speed up
      * roles and permissions loading. You can change cache prefix here and cache driver.
      */
-    'cache' => array(
+    'cache' => [
         /*
          * You may optionally indicate a specific cache driver to use for permission and
          * role caching using any of the `store` drivers listed in the cache.php config
@@ -65,6 +65,6 @@ return array(
          * Cache is automatically cleared when artisan sentinel:run command is executed.
          */
         'expire_after' => 86400,
-    ),
+    ],
 
-);
+];

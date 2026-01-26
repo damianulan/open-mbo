@@ -12,7 +12,7 @@ class DepartmentFactory extends Factory
 {
     public static function dict_pl(): array
     {
-        return array(
+        return [
             'Dział Administracji',
             'Dział Administracji Ogólnej',
             'Dział Administracji Biura',
@@ -210,7 +210,7 @@ class DepartmentFactory extends Factory
             'Dział Kontroli Dokumentów',
             'Dział Digitalizacji',
             'Dział Procesów Administracyjnych',
-        );
+        ];
     }
 
     /**
@@ -225,10 +225,10 @@ class DepartmentFactory extends Factory
             $title = $this->getName();
         }
 
-        return array(
+        return [
             'name' => $title,
             'description' => fake()->realTextBetween(300, 900),
-        );
+        ];
     }
 
     public function getName(): string

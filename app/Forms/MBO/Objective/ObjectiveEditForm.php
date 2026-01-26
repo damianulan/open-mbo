@@ -8,7 +8,6 @@ use FormForge\Base\Form;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
 use FormForge\FormBuilder;
-use Illuminate\Http\Request;
 
 // Ajax form
 class ObjectiveEditForm extends Form
@@ -45,7 +44,7 @@ class ObjectiveEditForm extends Form
             $builder->where('id', '!=', $this->model_id);
         }
 
-        return array(
+        return [
             'template_id' => 'required',
             'name' => 'max:120|required',
             'deadline' => 'nullable',
@@ -54,6 +53,6 @@ class ObjectiveEditForm extends Form
             'expected' => 'numeric|nullable',
             'award' => 'numeric|nullable',
             'draft' => 'boolean',
-        );
+        ];
     }
 }

@@ -8,7 +8,6 @@ use FormForge\Base\Form;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
 use FormForge\FormBuilder;
-use Illuminate\Http\Request;
 
 // Ajax form
 class CampaignEditUserForm extends Form
@@ -17,8 +16,8 @@ class CampaignEditUserForm extends Form
     {
         $method = 'POST';
         $title = 'Dodaj użytkowników do kampanii';
-        $selected = array();
-        $exclude = array();
+        $selected = [];
+        $exclude = [];
 
         if ($this->model) {
             $user_ids = UserCampaign::where('campaign_id', $this->model->id)->get()->pluck('user_id');
@@ -31,7 +30,7 @@ class CampaignEditUserForm extends Form
             }
             if ( ! empty($coordinators)) {
                 foreach ($coordinators as $tid) {
-                    $exclude[] = array('id' => $tid);
+                    $exclude[] = ['id' => $tid];
                 }
             }
         }
@@ -46,6 +45,6 @@ class CampaignEditUserForm extends Form
 
     public function validation(): array
     {
-        return array();
+        return [];
     }
 }

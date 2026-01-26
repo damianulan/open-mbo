@@ -31,12 +31,13 @@ use Spatie\Activitylog\Models\Activity;
  * @property Carbon|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\MBO\Campaign $campaign
+ * @property-read Campaign $campaign
  * @property-read void $points
  * @property-read mixed $trans
  * @property-read User $user
- * @property-read Collection<int, \App\Models\MBO\UserObjective> $user_objectives
+ * @property-read Collection<int, UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign avg(string $column)
@@ -91,6 +92,7 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder<static>|UserCampaign withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign withoutCache()
  * @method static Builder<static>|UserCampaign withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
@@ -98,36 +100,29 @@ class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
     use CanUserCampaign;
     use HasCharts;
 
-    public $logEntities = array('user_id' => User::class, 'campaign_id' => Campaign::class);
+    public $logEntities = ['user_id' => User::class, 'campaign_id' => Campaign::class];
 
     public $timestamps = true;
 
-    protected $fillable = array(
+    protected $fillable = [
         'campaign_id',
         'user_id',
         'stage',
         'manual',
         'active',
-    );
+    ];
 
-    protected $casts = array(
+    protected $casts = [
         'active' => 'boolean',
         'manual' => 'boolean',
         'stage' => CampaignStage::class,
-    );
+    ];
 
-    protected $dispatchesEvents = array(
+    protected $dispatchesEvents = [
         'created' => UserCampaignAssigned::class,
         'updated' => UserCampaignUpdated::class,
         'deleted' => UserCampaignUnassigned::class,
-    );
-
-    protected static function booted(): void
-    {
-        static::addGlobalScope('required_relations', function (Builder $builder): void {
-            $builder->with(['user', 'campaign']);
-        });
-    }
+    ];
 
     public function user()
     {
@@ -283,7 +278,7 @@ class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
         $query->where(function (Builder $query): void {
             $query->whereHas('campaign');
             $query->where('active', 1)
-                ->whereNotIn('stage', array(CampaignStage::TERMINATED, CampaignStage::CANCELED, CampaignStage::COMPLETED));
+                ->whereNotIn('stage', [CampaignStage::TERMINATED, CampaignStage::CANCELED, CampaignStage::COMPLETED]);
         });
     }
 
@@ -292,5 +287,12 @@ class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
         $query->orderByRaw(
             'FIELD(stage, "' . CampaignStage::SELF_EVALUATION . '", "' . CampaignStage::REALIZATION . '", "' . CampaignStage::EVALUATION . '", "' . CampaignStage::DISPOSITION . '", "' . CampaignStage::DEFINITION . '", "' . CampaignStage::IN_PROGRESS . '", "' . CampaignStage::PENDING . '")'
         );
+    }
+
+    protected static function booted(): void
+    {
+        static::addGlobalScope('required_relations', function (Builder $builder): void {
+            $builder->with(['user', 'campaign']);
+        });
     }
 }

@@ -2,14 +2,13 @@
 
 namespace App\Providers;
 
+use App\Console\Commands\Core\LangList;
 use App\Support\Storage\StorageManager;
 use Barryvdh\Debugbar\Facades\Debugbar;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
-use App\Console\Commands\Core\LangList;
-use Lucent\Support\Magellan\MagellanScope;
 
 class AppServiceProvider extends ServiceProvider
 {

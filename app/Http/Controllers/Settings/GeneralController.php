@@ -18,21 +18,21 @@ class GeneralController extends SettingsController
     {
         $model = app(GeneralSettings::class);
 
-        return view('pages.settings.index', array(
+        return view('pages.settings.index', [
             'model' => $model,
             'form' => GeneralForm::bootWithAttributes($model->toArray())->getDefinition(),
             'brandingForm' => BrandingForm::bootWithAttributes($model->toArray())->getDefinition(),
             'nav' => $this->nav(),
-        ));
+        ]);
     }
 
     public function storeGeneral(Request $request, GeneralSettings $settings)
     {
-        $request->validate(array(
+        $request->validate([
             'site_name' => 'min:3|max:16|required',
             'theme' => 'required',
             'locale' => 'required',
-        ));
+        ]);
         $target_release = settings('general.target_release');
         foreach ($request->all() as $key => $value) {
             $settings->{$key} = $value;

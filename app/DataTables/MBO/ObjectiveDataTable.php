@@ -3,11 +3,11 @@
 namespace App\DataTables\MBO;
 
 use App\Models\MBO\Objective;
+use App\Support\DataTables\Column;
 use App\Support\DataTables\CustomDataTable;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Carbon;
 use Yajra\DataTables\EloquentDataTable;
-use App\Support\DataTables\Column;
 
 class ObjectiveDataTable extends CustomDataTable
 {
@@ -26,9 +26,9 @@ class ObjectiveDataTable extends CustomDataTable
     {
         return (new EloquentDataTable($query))
 
-            ->addColumn('action', fn ($data) => view('pages.mbo.objectives.action', array(
+            ->addColumn('action', fn ($data) => view('pages.mbo.objectives.action', [
                 'data' => $data,
-            )))
+            ]))
             ->editColumn('deadline', function ($data) {
                 $formatedDate = Carbon::parse($data->deadline)->format(config('app.date_format'));
 
@@ -58,7 +58,7 @@ class ObjectiveDataTable extends CustomDataTable
 
     protected function defaultColumns(): array
     {
-        return array(
+        return [
             'name',
             'deadline',
             'weight',
@@ -67,12 +67,12 @@ class ObjectiveDataTable extends CustomDataTable
             'created_at',
             'updated_at',
             'action',
-        );
+        ];
     }
 
     protected function availableColumns(): array
     {
-        return array(
+        return [
             'name' => Column::make('name')
                 ->title(__('forms.mbo.objectives.name'))
                 ->searchable(true)
@@ -98,7 +98,7 @@ class ObjectiveDataTable extends CustomDataTable
                 ->printable(false)
                 ->addClass('action-btns')
                 ->title(__('fields.action')),
-        );
+        ];
     }
 
     /**

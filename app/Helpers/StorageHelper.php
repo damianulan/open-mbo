@@ -2,7 +2,6 @@
 
 namespace App\Helpers;
 
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -14,13 +13,14 @@ class StorageHelper
         foreach ($allowed_extensions as $ext) {
             $fullpath = $storagePath . '.' . $ext;
             if (Storage::fileExists($fullpath)) {
-                if($ext === 'svg'){
+                if ('svg' === $ext) {
                     $url = Storage::get($fullpath);
                 }
                 $url = Storage::url($fullpath);
                 break;
             }
         }
+
         return $url;
     }
 
@@ -35,9 +35,10 @@ class StorageHelper
         $url = self::getImageUrl($storagePath, $allowed_extensions);
         if ($url) {
             $output = <<<HTML
-                <img class="w-100" src="$url"/>'
+                <img class="w-100" src="{$url}"/>'
                 HTML;
         }
+
         return $output;
     }
 
@@ -47,11 +48,11 @@ class StorageHelper
         $image = null;
         $type = null;
 
-        if($filepath){
+        if ($filepath) {
             if (Storage::fileExists($filepath)) {
                 $image = Storage::get($filepath);
                 $type = self::isSvg($image) ? 'svg' : 'image';
-                if($type !== 'svg'){
+                if ('svg' !== $type) {
                     $image = Storage::url($filepath);
                 }
             }
@@ -59,20 +60,20 @@ class StorageHelper
         $sitename = sitename();
         $url = url('/');
 
-        $content = match($type){
+        $content = match ($type) {
             'svg' => $image,
             'image' => <<<HTML
-                <img class="w-100" src="$image"/>
+                <img class="w-100" src="{$image}"/>
                 HTML,
             default => <<<HTML
                 <div class="brand-icon"><i class="bi-bullseye"></i></div>
-                <div class="brand-title">$sitename</div>
+                <div class="brand-title">{$sitename}</div>
                 HTML
         };
 
         return <<<HTML
-            <a class="brand" href="$url">
-                $content
+            <a class="brand" href="{$url}">
+                {$content}
             </a>
         HTML;
     }
@@ -81,5 +82,4 @@ class StorageHelper
     {
         return Str::contains($contents, '<svg', true);
     }
-
 }

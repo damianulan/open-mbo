@@ -13,7 +13,7 @@ abstract class BaseSettings extends Settings
 {
     public static function migrate(): array
     {
-        $logs = array();
+        $logs = [];
         $class = static::class;
         $instance = new $class();
         $group = static::group();
@@ -49,6 +49,7 @@ abstract class BaseSettings extends Settings
             return parent::save();
         } catch (MissingSettings $e) {
             self::migrate();
+
             return parent::save();
         }
 

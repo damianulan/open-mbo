@@ -15,10 +15,10 @@ class ObjectiveController extends MBOController
      */
     public function index(ObjectiveDataTable $dataTable)
     {
-        return $dataTable->render('pages.mbo.objectives.index', array(
+        return $dataTable->render('pages.mbo.objectives.index', [
             'table' => $dataTable,
             'nav' => $this->nav(),
-        ));
+        ]);
     }
 
     /**
@@ -47,6 +47,8 @@ class ObjectiveController extends MBOController
 
     /**
      * Display the specified resource.
+     *
+     * @param  mixed  $id
      */
     public function show(Request $request, $id)
     {
@@ -55,14 +57,16 @@ class ObjectiveController extends MBOController
 
         $header = 'Podsumowanie Celu';
 
-        return view('pages.mbo.objectives.show', array(
+        return view('pages.mbo.objectives.show', [
             'objective' => $objective,
             'pagetitle' => $header,
-        ));
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
+     *
+     * @param  mixed  $id
      */
     public function edit($id): void {}
 
@@ -85,24 +89,26 @@ class ObjectiveController extends MBOController
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param  mixed  $id
      */
     public function destroy($id): void {}
 
     public function addObjectives(Request $request, $id): View
     {
-        $params = array();
+        $params = [];
         if ($id) {
             $objective = Objective::find($id);
             if ($objective) {
-                $params = array(
+                $params = [
                     'id' => $id,
                     'form' => ObjectiveEditForm::bootWithModel($objective)->getDefinition(),
-                );
+                ];
             }
         } else {
-            $params = array(
+            $params = [
                 'form' => ObjectiveEditForm::bootWithAttributes($request->get('datas')),
-            );
+            ];
         }
 
         return view('components.modals.objectives.add_objectives', $params);

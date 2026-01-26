@@ -23,9 +23,10 @@ class UsersController extends AppController
         if ($request->user()->cannot('viewList', User::class)) {
             unauthorized();
         }
-        return $dataTable->render('pages.users.index', array(
+
+        return $dataTable->render('pages.users.index', [
             'table' => $dataTable,
-        ));
+        ]);
     }
 
     /**
@@ -36,10 +37,11 @@ class UsersController extends AppController
         if ($request->user()->cannot('create', User::class)) {
             unauthorized();
         }
-        return view('pages.users.edit', array(
+
+        return view('pages.users.edit', [
             'form' => $form->getDefinition(),
-            'employments' => array(),
-        ));
+            'employments' => [],
+        ]);
     }
 
     /**
@@ -78,15 +80,16 @@ class UsersController extends AppController
     public function show(Request $request, User $user)
     {
         $view = $request->user()->can('view', $user);
-        $preview = $request->user()->can('preview', $user) && !$view;
+        $preview = $request->user()->can('preview', $user) && ! $view;
 
-        if (!$view && !$preview) {
+        if ( ! $view && ! $preview) {
             unauthorized();
         }
-        return view('pages.users.show', array(
+
+        return view('pages.users.show', [
             'user' => $user,
             'isPreview' => $preview,
-        ));
+        ]);
     }
 
     /**
@@ -100,13 +103,13 @@ class UsersController extends AppController
         if ($request->user()->cannot('update', $model)) {
             unauthorized();
         }
-        $request->request->add(array('user_id' => $id));
+        $request->request->add(['user_id' => $id]);
 
-        return view('pages.users.edit', array(
+        return view('pages.users.edit', [
             'user' => $model,
             'employments' => $this->getEmploymentForms($request, $model),
             'form' => UserEditForm::bootWithModel($model)->getDefinition(),
-        ));
+        ]);
     }
 
     /**
@@ -127,10 +130,10 @@ class UsersController extends AppController
         if ($service->passed()) {
             $user = $service->user;
 
-            return redirect()->route('users.show', $id)->with('success', __('alerts.users.success.edit', array('name' => $user->name)));
+            return redirect()->route('users.show', $id)->with('success', __('alerts.users.success.edit', ['name' => $user->name]));
         }
 
-        return redirect()->back()->with('error', __('alerts.users.error.edit', array('name' => $user->name)));
+        return redirect()->back()->with('error', __('alerts.users.error.edit', ['name' => $user->name]));
     }
 
     public function updateEmployment(Request $request, $id, EmploymentEditForm $form)
@@ -161,10 +164,10 @@ class UsersController extends AppController
             unauthorized();
         }
         if ($user->delete()) {
-            return redirect()->route('users.index')->with('success', __('alerts.users.success.delete', array('name' => $user->name)));
+            return redirect()->route('users.index')->with('success', __('alerts.users.success.delete', ['name' => $user->name]));
         }
 
-        return redirect()->back()->with('error', __('alerts.users.error.delete', array('name' => $user->name)));
+        return redirect()->back()->with('error', __('alerts.users.error.delete', ['name' => $user->name]));
     }
 
     public function deleteEmployment(Request $request, $id)
@@ -193,10 +196,10 @@ class UsersController extends AppController
             $user->toggleLock();
         }
         if ($user->blocked()) {
-            return redirect()->back()->with('info', __('alerts.users.success.blocked', array('name' => $user->name)));
+            return redirect()->back()->with('info', __('alerts.users.success.blocked', ['name' => $user->name]));
         }
 
-        return redirect()->back()->with('info', __('alerts.users.success.unblocked', array('name' => $user->name)));
+        return redirect()->back()->with('info', __('alerts.users.success.unblocked', ['name' => $user->name]));
     }
 
     public function favourite(Request $request, User $user)
@@ -237,12 +240,14 @@ class UsersController extends AppController
             $password = $user->getNewPassword();
             $user->generatePassword($password);
             $user->force_password_change = 1;
-            if($user->save()){
+            if ($user->save()) {
                 return redirect()->back()->with('success_alert', $password);
             }
+
             return redirect()->back()->with('success', __('alerts.users.success.reset_password'));
         } catch (UnauthorizedAccess $th) {
             report($th);
+
             return redirect()->back()->with('error', $th->getMessage());
         }
 
@@ -251,7 +256,7 @@ class UsersController extends AppController
 
     private function getEmploymentForms(Request $request, ?User $model = null): array
     {
-        $employments = array();
+        $employments = [];
 
         if ($request->user()->can('employments', $model)) {
             $employments[__('forms.employments.add')] = EmploymentEditForm::bootWithAttributes($request->all())->getDefinition();
@@ -264,10 +269,11 @@ class UsersController extends AppController
                     if ($employment->main) {
                         $langKey = 'forms.employments.header_main';
                     }
-                    $employments[__($langKey, array('no' => $i))] = EmploymentEditForm::bootWithModel($employment)->getDefinition();
+                    $employments[__($langKey, ['no' => $i])] = EmploymentEditForm::bootWithModel($employment)->getDefinition();
                 }
             }
         }
+
         return $employments;
     }
 }

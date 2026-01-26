@@ -58,12 +58,12 @@ class UserSeeder extends Seeder
 
                     $isManagement = true;
                     if ( ! $position) {
-                        $position = Position::whereNotIn('name', array('CEO', 'CTO', 'CFO'))->get()->random(1)->first();
+                        $position = Position::whereNotIn('name', ['CEO', 'CTO', 'CFO'])->get()->random(1)->first();
                         $isManagement = false;
                     }
 
                     $chance = fake()->numberBetween(1, 3);
-                    UserEmployment::create(array(
+                    UserEmployment::create([
                         'user_id' => $user->id,
                         'company_id' => $company->id,
                         'contract_id' => TypeOfContract::all()->random(1)->first()->id,
@@ -72,7 +72,7 @@ class UserSeeder extends Seeder
                         'employment' => fake()->dateTimeBetween('-10 years', '-3 months'),
                         'release' => 3 === $chance && ! $isManagement ? fake()->dateTimeBetween('-10 months', '+1 year') : null,
 
-                    ));
+                    ]);
                 }
 
                 $company->departments->each(function (Department $department) use ($company): void {
@@ -87,7 +87,7 @@ class UserSeeder extends Seeder
                             $query->where('company_id', $company->id);
                             $query->where('department_id', $department->id);
                         })->get()->each(function (User $user) use ($supervisor): void {
-                            $user->refreshSupervisors(array($supervisor->id));
+                            $user->refreshSupervisors([$supervisor->id]);
                         });
                     });
                 });

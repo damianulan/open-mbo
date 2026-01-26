@@ -15,6 +15,7 @@ use Illuminate\Support\Collection;
  * @property string $contents
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification query()
@@ -27,22 +28,23 @@ use Illuminate\Support\Collection;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification whereResources($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification whereSubject($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class MailNotification extends NotificationModel
 {
     protected $table = 'mail_notifications';
 
-    protected $fillable = array(
+    protected $fillable = [
         'notification_id',
         'notifiable_type',
         'notifiable_id',
         'resources',
         'subject',
         'contents',
-    );
+    ];
 
-    protected $casts = array(
+    protected $casts = [
         'created_at' => 'datetime',
-    );
+    ];
 }

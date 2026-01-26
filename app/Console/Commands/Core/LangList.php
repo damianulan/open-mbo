@@ -28,12 +28,12 @@ class LangList extends BaseCommand
      */
     public function handle(): void
     {
-        $this->call('db:seed', array('--class' => 'LanguageSeeder'));
+        $this->call('db:seed', ['--class' => 'LanguageSeeder']);
         $lang = $this->option('lang') ?? config('app.locale');
         $group = $this->option('group') ?? null;
 
         $query = LanguageLine::orderBy('group')->orderBy('key');
-        if(!$this->option('nofile')) {
+        if ( ! $this->option('nofile')) {
             $this->toFile($query);
         }
         if ($group) {
@@ -49,7 +49,7 @@ class LangList extends BaseCommand
 
     public function toFile(Builder $query): void
     {
-        $output = array();
+        $output = [];
 
         $query->get()->each(function (LanguageLine $line) use (&$output): void {
             $text = $line->text[config('app.fallback_locale')] ?? '';

@@ -25,6 +25,7 @@ use Lucent\Support\Traits\UUID;
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
  * @property-read Collection $resources
+ *
  * @method static Builder<static>|Notification events()
  * @method static Builder<static>|Notification newModelQuery()
  * @method static Builder<static>|Notification newQuery()
@@ -43,6 +44,7 @@ use Lucent\Support\Traits\UUID;
  * @method static Builder<static>|Notification whereUpdatedAt($value)
  * @method static Builder<static>|Notification withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|Notification withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Notification extends Model
@@ -52,7 +54,7 @@ class Notification extends Model
 
     protected $table = 'notifications';
 
-    protected $fillable = array(
+    protected $fillable = [
         'key',
         'contents',
         'system',
@@ -60,21 +62,21 @@ class Notification extends Model
         'event',
         'schedule',
         'conditions',
-    );
+    ];
 
-    protected $casts = array(
+    protected $casts = [
         'contents' => NotificationContents::class,
         'system' => 'boolean',
         'email' => 'boolean',
         'conditions' => 'array',
-    );
+    ];
 
     public static function byKey(string $key): ?self
     {
         return self::where('notifications.key', $key)->first();
     }
 
-    public static function createOrUpdate(string $key, array $attributes = array()): self
+    public static function createOrUpdate(string $key, array $attributes = []): self
     {
         $notification = self::byKey($key);
         if ( ! $notification) {
@@ -108,7 +110,7 @@ class Notification extends Model
     {
         return Attribute::make(
             get: function (): Collection {
-                $models = array();
+                $models = [];
                 if ($this->event) {
                     $models = ResourceFactory::getEventResourceModels($this->event);
                 }

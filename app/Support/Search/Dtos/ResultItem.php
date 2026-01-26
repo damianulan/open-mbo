@@ -12,14 +12,14 @@ class ResultItem extends LaravelDto implements PreventAccessingMissingAttributes
     protected $fillable = [
         'title',
         'description',
-        'link'
+        'link',
     ];
 
     public function setSearchedPhrase(string $phrase): self
     {
-        foreach($this->attributes as $key => $value){
-            $phraseFound = "<strong>".Str::upper($phrase)."</strong>";
-            $this->$key = Str::replace($phrase, $phraseFound, $value, false);
+        foreach ($this->attributes as $key => $value) {
+            $phraseFound = '<strong>' . Str::upper($phrase) . '</strong>';
+            $this->{$key} = Str::replace($phrase, $phraseFound, $value, false);
         }
 
         return $this;

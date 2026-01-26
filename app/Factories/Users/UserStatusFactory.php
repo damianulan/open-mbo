@@ -11,19 +11,19 @@ class UserStatusFactory
     {
         $status = UserStatus::ACTIVE;
 
-        if(!$user->employment) {
+        if ( ! $user->employment) {
             $status = UserStatus::UNEMPLOYED;
         }
-        if(!$user->email_verified_at){
+        if ( ! $user->email_verified_at) {
             $status = UserStatus::UNVERIFIED;
         }
-        if($user->suspended_at){
+        if ($user->suspended_at) {
             $status = UserStatus::SUSPENDED;
         }
-        if($user->deleted_at){
+        if ($user->deleted_at) {
             $status = UserStatus::DELETED;
         }
+
         return UserStatus::tryFrom($status);
     }
 }
-

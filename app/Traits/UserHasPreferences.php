@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 trait UserHasPreferences
 {
+    public function preferences(): HasOne
+    {
+        return $this->hasOne(UserPreference::class)->withTrashed();
+    }
+
     protected static function bootUserHasPreferences(): void
     {
 
@@ -19,10 +24,5 @@ trait UserHasPreferences
         static::deleting(function ($user): void {
             $user->preferences->delete();
         });
-    }
-
-    public function preferences(): HasOne
-    {
-        return $this->hasOne(UserPreference::class)->withTrashed();
     }
 }

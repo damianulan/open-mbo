@@ -2,11 +2,11 @@
 
 namespace App\DataTables\Settings;
 
+use App\Support\DataTables\Column;
 use App\Support\DataTables\CustomDataTable;
 use App\Support\Notifications\Models\Notification;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
-use App\Support\DataTables\Column;
 
 class NotificationsDataTable extends CustomDataTable
 {
@@ -31,14 +31,14 @@ class NotificationsDataTable extends CustomDataTable
             ->addColumn('status', function ($data) {
                 $active = ! $data->email && ! $data->system ? false : true;
 
-                return view('components.datatables.badge', array(
+                return view('components.datatables.badge', [
                     'color' => $active ? 'primary' : 'warning',
                     'text' => $active ? __('globals.active') : __('globals.inactive'),
-                ));
+                ]);
             })
-            ->addColumn('action', fn ($data) => view('pages.settings.notifications.action', array(
+            ->addColumn('action', fn ($data) => view('pages.settings.notifications.action', [
                 'data' => $data,
-            )));
+            ]));
     }
 
     /**
@@ -51,7 +51,7 @@ class NotificationsDataTable extends CustomDataTable
 
     protected function defaultColumns(): array
     {
-        return array(
+        return [
             'key',
             'system',
             'email',
@@ -60,12 +60,12 @@ class NotificationsDataTable extends CustomDataTable
             'conditions',
             'status',
             'action',
-        );
+        ];
     }
 
     protected function availableColumns(): array
     {
-        return array(
+        return [
             'key' => Column::make('key')
                 ->title(__('notifications.table.key'))
                 ->orderable(true)
@@ -85,7 +85,7 @@ class NotificationsDataTable extends CustomDataTable
             'action' => Column::computed('action')
                 ->title(__('notifications.table.action'))
                 ->addClass('lastcol'),
-        );
+        ];
     }
 
     /**

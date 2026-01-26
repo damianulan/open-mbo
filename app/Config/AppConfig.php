@@ -8,8 +8,8 @@ class AppConfig
 {
     public static function getReleasesOptions(): array
     {
-        $releases = array();
-        $custom = array('stable', 'non-stable', 'dev');
+        $releases = [];
+        $custom = ['stable', 'non-stable', 'dev'];
         $raw = array_merge($custom, Git::getTags());
 
         foreach ($raw as $release) {

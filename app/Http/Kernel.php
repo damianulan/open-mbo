@@ -30,7 +30,7 @@ class Kernel extends HttpKernel
      *
      * @var array<int, class-string|string>
      */
-    protected $middleware = array(
+    protected $middleware = [
         // \App\Http\Middleware\TrustHosts::class,
         Middleware\TrustProxies::class,
         HandleCors::class,
@@ -38,15 +38,15 @@ class Kernel extends HttpKernel
         ValidatePostSize::class,
         Middleware\TrimStrings::class,
         ConvertEmptyStringsToNull::class,
-    );
+    ];
 
     /**
      * The application's route middleware groups.
      *
      * @var array<string, array<int, class-string|string>>
      */
-    protected $middlewareGroups = array(
-        'web' => array(
+    protected $middlewareGroups = [
+        'web' => [
             Middleware\EncryptCookies::class,
             AddQueuedCookiesToResponse::class,
             StartSession::class,
@@ -55,14 +55,14 @@ class Kernel extends HttpKernel
             SubstituteBindings::class,
             Middleware\UserLocale::class,
             // \App\Http\Middleware\MaintenanceMode::class,
-        ),
+        ],
 
-        'api' => array(
+        'api' => [
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             SubstituteBindings::class,
-        ),
-    );
+        ],
+    ];
 
     /**
      * The application's route middleware.
@@ -71,7 +71,7 @@ class Kernel extends HttpKernel
      *
      * @var array<string, class-string|string>
      */
-    protected $routeMiddleware = array(
+    protected $routeMiddleware = [
         'auth' => Middleware\Authenticate::class,
         'auth.base' => LaravelAuthenticate::class,
         'auth.basic' => AuthenticateWithBasicAuth::class,
@@ -88,5 +88,5 @@ class Kernel extends HttpKernel
         'maintenance' => Middleware\MaintenanceMode::class,
         'module' => Middleware\ModulesEnabled::class,
         'route.gate' => Middleware\RouteGate::class,
-    );
+    ];
 }

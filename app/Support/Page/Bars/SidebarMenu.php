@@ -12,9 +12,9 @@ class SidebarMenu
 
     public Collection $items;
 
-    public $classes = array();
+    public $classes = [];
 
-    public static function boot(string $sitename, array $items = array()): self
+    public static function boot(string $sitename, array $items = []): self
     {
         $instance = new self();
         $instance->sitename = $sitename;
@@ -55,8 +55,8 @@ class SidebarMenu
 
     public function render()
     {
-        return view('components.menus.sidebar', array(
+        return view('components.menus.sidebar', [
             'sidebar' => $this,
-        ))->render();
+        ])->render();
     }
 }

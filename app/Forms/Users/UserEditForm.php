@@ -9,7 +9,6 @@ use FormForge\Base\FormComponent;
 use FormForge\Components\Button;
 use FormForge\Components\Dictionary;
 use FormForge\FormBuilder;
-use Illuminate\Http\Request;
 use Sentinel\Models\Role;
 
 class UserEditForm extends Form
@@ -18,8 +17,8 @@ class UserEditForm extends Form
     {
         $route = route('users.store');
         $method = 'POST';
-        $exclude = array();
-        $selected = array();
+        $exclude = [];
+        $selected = [];
         $profile = null;
         if ( ! is_null($this->model)) {
             $method = 'PUT';
@@ -51,11 +50,11 @@ class UserEditForm extends Form
 
     public function validation(): array
     {
-        return array(
+        return [
             'firstname' => 'max:255|required',
             'lastname' => 'max:255|required',
             'email' => 'max:255|email|required',
             'birthday' => 'date|nullable',
-        );
+        ];
     }
 }
