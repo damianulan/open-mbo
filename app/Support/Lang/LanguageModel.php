@@ -7,6 +7,8 @@ use Illuminate\Support\Str;
 
 class LanguageModel extends LanguageLine
 {
+    public $table = 'language_lines';
+
     /**
      * Parts of lang locations is enough
      *
