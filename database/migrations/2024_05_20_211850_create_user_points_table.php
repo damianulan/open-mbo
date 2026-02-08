@@ -15,7 +15,7 @@ return new class() extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->uuidMorphs('subject', 'subject');
+            $table->uuidMorphs('subject');
 
             $table->decimal('points', 8, 2)->nullable();
 

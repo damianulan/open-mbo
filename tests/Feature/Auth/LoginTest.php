@@ -1,12 +1,11 @@
 <?php
 
-namespace {{ namespace }};
+namespace Tests\Feature\Auth;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
+use Tests\DatabaseTestCase;
 
-class {{ class }} extends TestCase
+class LoginTest extends DatabaseTestCase
 {
     /**
      * A basic feature test example.
@@ -15,6 +14,6 @@ class {{ class }} extends TestCase
     {
         $response = $this->get('/');
 
-        $response->assertStatus(200);
+        $response->assertStatus(302);
     }
 }
