@@ -57,5 +57,11 @@ class NotificationSeeder extends Seeder
             'system' => true,
             'email' => false,
         ]);
+
+        Notification::createOrUpdate('PASSWORD_RESET', [
+            'contents' => NotificationContents::email('{% firstname %}, na Twoją prośbę przesyłamy link do resetu hasła. Jeśli nie wykonałeś takiej prośby, zignoruj tę wiadomość.<br/><br/>Link: <a href="{% url %}">{% url %}</a><br/>Ten link wygaśnie za {% count %} minut.', 'Reset hasła'),
+            'system' => false,
+            'email' => true,
+        ]);
     }
 }

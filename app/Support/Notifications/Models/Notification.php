@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Lucent\Support\Traits\UUID;
+use Illuminate\Support\Str;
 
 /**
  * @property string $id
@@ -73,7 +74,7 @@ class Notification extends Model
 
     public static function byKey(string $key): ?self
     {
-        return self::where('notifications.key', $key)->first();
+        return self::where('notifications.key', Str::upper( $key ))->first();
     }
 
     public static function createOrUpdate(string $key, array $attributes = []): self

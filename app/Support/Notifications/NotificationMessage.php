@@ -6,6 +6,7 @@ use App\Support\Notifications\Contracts\NotificationResource;
 use App\Support\Notifications\Events\MailNotificationSent;
 use App\Support\Notifications\Events\SystemNotificationSent;
 use App\Support\Notifications\Exceptions\ModelTraitNotUsed;
+use App\Support\Notifications\Exceptions\NotificationPlaceholderNotRecognized;
 use App\Support\Notifications\Factories\ResourceFactory;
 use App\Support\Notifications\Models\MailNotification;
 use App\Support\Notifications\Models\Notification;
@@ -30,14 +31,29 @@ class NotificationMessage
 
     private bool $valid = false;
 
+    /**
+     * Construct message from parameters
+     *
+     * @param \App\Support\Notifications\Models\Notification $notification
+     * @param \Illuminate\Database\Eloquent\Model            $notifiable
+     * @param array                                          $datas - models to match notification resources or additional placeholder data
+     */
     public function __construct(
         protected Notification $notification,
         protected Model $notifiable,
-        protected array $resourceModels = []
+        protected array $datas = []
     ) {
-        foreach ($resourceModels as $model) {
-            $resource = ResourceFactory::matchModel($model);
-            $this->addPlaceholders($resource);
+        foreach ($datas as $key => $value) {
+            if($value instanceof Model){
+                $resource = ResourceFactory::matchModel($value);
+                $this->addPlaceholders($resource);
+            } else {
+                if(is_object($value) || is_array($value)){
+                    throw new NotificationPlaceholderNotRecognized();
+                }
+
+                $this->addDatas($key, $value);
+            }
         }
 
         if (class_uses_trait(Notifiable::class, get_class($this->notifiable))) {
@@ -51,9 +67,9 @@ class NotificationMessage
         $this->valid = true;
     }
 
-    public function getModels(): array
+    public function getDatas(): array
     {
-        return $this->resourceModels;
+        return $this->datas;
     }
 
     public function send(): bool
@@ -61,7 +77,7 @@ class NotificationMessage
         $result = $this->valid;
         if ($result) {
             try {
-                $mail = $this->notification->mail ? $this->toMail() : null;
+                $mail = $this->notification->email ? $this->toMail() : null;
                 $system = $this->notification->system ? $this->toSystem() : null;
 
                 if ($system && config('notifications.system_notifications')) {
@@ -75,21 +91,20 @@ class NotificationMessage
                 }
 
                 if ($mail && config('notifications.email_notifications')) {
-                    $mailable = $this->toMail();
-                    if ($mailable) {
-                        $mailSent = Mail::to($this->notifiable)->send($mailable);
-                        if ( ! $mailSent) {
-                            $result = false;
-                        } else {
+                    $mailSent = Mail::to($this->notifiable)->send($mail);
+                    if ( ! $mailSent) {
+                        $result = false;
+                    } else {
+                        $toMail = MailNotification::create([
+                            'notification_id' => $this->notification->id,
+                            'notifiable_id' => $this->notifiable->id,
+                            'notifiable_type' => get_class($this->notifiable),
+                            'resources' => json_encode($this->resources),
+                            'subject' => $this->contents->subject,
+                            'contents' => $this->contents->email_contents,
+                        ]);
+                        if($toMail) {
                             $this->email_sent = true;
-                            $toMail = MailNotification::create([
-                                'notification_id' => $this->notification->id,
-                                'notifiable_id' => $this->notifiable->id,
-                                'notifiable_type' => get_class($this->notifiable),
-                                'resources' => json_encode($this->resources),
-                                'subject' => $this->contents->subject,
-                                'contents' => $this->contents->email_contents,
-                            ]);
                             MailNotificationSent::dispatch($toMail);
                         }
                     }
@@ -109,7 +124,7 @@ class NotificationMessage
 
     protected function toMail(): ?Mailable
     {
-        return new MailMessage($this->content);
+        return new MailMessage($this->contents);
     }
 
     protected function toSystem(): array
@@ -142,5 +157,10 @@ class NotificationMessage
         //         throw new Exception('Given notification resource cannot be null');
         //     }
         // }
+    }
+
+    private function addDatas(string $key, $value): void
+    {
+        $this->placeholders[$key] = $value;
     }
 }

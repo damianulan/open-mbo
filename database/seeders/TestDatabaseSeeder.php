@@ -17,7 +17,6 @@ class TestDatabaseSeeder extends Seeder
         $this->call(LanguageSeeder::class);
         Artisan::call(SettingsMigrate::class);
         Artisan::call(AssignRca::class);
-        $this->call(CreateAdminUserSeeder::class);
         $this->call(NotificationSeeder::class);
     }
 }

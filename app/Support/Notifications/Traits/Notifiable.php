@@ -2,6 +2,7 @@
 
 namespace App\Support\Notifications\Traits;
 
+use App\Support\Notifications\Exceptions\NotificationNotFound;
 use App\Support\Notifications\Models\MailNotification;
 use App\Support\Notifications\Models\Notification;
 use App\Support\Notifications\Models\SystemNotification;
@@ -20,8 +21,24 @@ trait Notifiable
         return $this->morphMany(MailNotification::class, 'notifiable');
     }
 
-    public function notify(Notification $notification, array $models = []): bool
+    public function notify(Notification|string $notification, array $datas = []): bool
     {
-        return (new NotificationMessage($notification, $this, $models))->send();
+        try {
+            if(! ($notification instanceof Notification) && is_string($notification)) {
+                $notification = Notification::byKey($notification);
+            }
+
+            if(!$notification || !($notification instanceof Notification)){
+                throw new NotificationNotFound($notification);
+            }
+
+            return (new NotificationMessage($notification, $this, $datas))->send();
+        } catch (\Throwable $th) {
+            report($th);
+            if(config('app.debug')){
+                throw $th;
+            }
+        }
+        return false;
     }
 }

@@ -21,6 +21,7 @@ use App\Http\Controllers\Settings\Organization\CompanyController;
 use App\Http\Controllers\Settings\Organization\OrganizationController;
 use App\Http\Controllers\Settings\ServerController;
 use App\Http\Controllers\UsersController;
+use App\Providers\RouteServiceProvider;
 use App\Support\DataTables\CustomDataTable;
 use App\Support\DataTables\DataTableController;
 use Illuminate\Support\Facades\Auth;
@@ -49,7 +50,7 @@ Route::middleware(['web', 'auth.base'])->group(function (): void {
 });
 
 Route::middleware(['web', 'auth', 'maintenance'])->group(function (): void {
-    Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+    Route::get(RouteServiceProvider::HOME, [HomeController::class, 'index'])->name('dashboard');
     Livewire::setUpdateRoute(fn ($handle) => Route::post('/livewire/update', $handle));
 
     Laraverse::routes();

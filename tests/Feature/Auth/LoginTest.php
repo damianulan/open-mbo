@@ -3,6 +3,9 @@
 namespace Tests\Feature\Auth;
 
 use Tests\DatabaseTestCase;
+use App\Models\Core\User;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Hash;
 
 class LoginTest extends DatabaseTestCase
 {
@@ -11,7 +14,7 @@ class LoginTest extends DatabaseTestCase
      */
     public function test_redirection_if_not_logged_in(): void
     {
-        $response = $this->get('/');
+        $response = $this->get(RouteServiceProvider::HOME);
 
         $response->assertStatus(302);
     }
@@ -22,5 +25,46 @@ class LoginTest extends DatabaseTestCase
 
         $response->assertSuccessful();
         $response->assertViewIs('auth.login');
+    }
+
+    public function test_user_can_login()
+    {
+        $user = User::factory()->create([
+            'password' => Hash::make($password = '123456'),
+        ]);
+
+        $response = $this->from(RouteServiceProvider::LOGIN)->post(RouteServiceProvider::LOGIN, [
+            'email' => $user->email,
+            'password' => $password,
+        ]);
+
+        $response->assertRedirect(RouteServiceProvider::HOME);
+        $this->assertAuthenticatedAs($user);
+    }
+
+    public function test_user_cannot_view_a_login_form_when_authenticated()
+    {
+        $user = User::factory()->make();
+
+        $response = $this->actingAs($user)->get(RouteServiceProvider::LOGIN);
+
+        $response->assertRedirect(RouteServiceProvider::HOME);
+    }
+
+    public function test_remember_me_functionality()
+    {
+        $user = User::factory()->create([
+            'id' => random_int(1, 100),
+            'password' => Hash::make($password = '123456'),
+        ]);
+
+        $response = $this->post(RouteServiceProvider::LOGIN, [
+            'email' => $user->email,
+            'password' => $password,
+            'remember' => 'on',
+        ]);
+
+        $response->assertRedirect(RouteServiceProvider::HOME);
+        $this->assertAuthenticatedAs($user);
     }
 }

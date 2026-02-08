@@ -34,7 +34,7 @@ class MailMessage extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.orders.shipped',
+            view: 'mail.template',
             with: [
                 'contents' => $this->email_contents,
             ]

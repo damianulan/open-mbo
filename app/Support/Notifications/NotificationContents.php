@@ -25,6 +25,31 @@ class NotificationContents implements CastsAttributes, Jsonable
         return $instance;
     }
 
+    public static function system(string $contents): self
+    {
+        return self::boot($contents, null, null);
+    }
+
+    public static function email(string $contents, string $subject): self
+    {
+        return self::boot(null, $contents, $subject);
+    }
+
+    public function setSystemContents(string $contents): self
+    {
+        $this->system_contents = $contents;
+
+        return $this;
+    }
+
+    public function setEmailContents(string $contents, string $subject): self
+    {
+        $this->email_contents = $contents;
+        $this->subject = $subject;
+
+        return $this;
+    }
+
     public function fill(array $placeholders): self
     {
         if ( ! empty($this->system_contents)) {
@@ -62,11 +87,14 @@ class NotificationContents implements CastsAttributes, Jsonable
 
     public function toJson($options = 0)
     {
+        if(!$options){
+            $options = JSON_UNESCAPED_UNICODE;
+        }
         return json_encode([
             'system_contents' => $this->system_contents,
             'email_contents' => $this->email_contents,
             'subject' => $this->subject,
-        ]);
+        ], $options);
     }
 
     /**
