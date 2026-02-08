@@ -302,7 +302,7 @@ return [
      | Additional middleware to run on the Debugbar routes
      */
     'route_middleware' => [
-        Authenticate::class
+        Authenticate::class,
     ],
 
     /*

@@ -7,11 +7,9 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
-use Spatie\TranslationLoader\LanguageLine;
 
 class LanguageSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      */
@@ -45,7 +43,7 @@ class LanguageSeeder extends Seeder
                         LanguageModel::create([
                             'group' => $group,
                             'key' => $key,
-                            'text' => $value
+                            'text' => $value,
                         ]);
                     }
                 }
@@ -53,5 +51,4 @@ class LanguageSeeder extends Seeder
             }
         }
     }
-
 }

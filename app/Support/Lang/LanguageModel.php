@@ -2,8 +2,8 @@
 
 namespace App\Support\Lang;
 
-use Spatie\TranslationLoader\LanguageLine;
 use Illuminate\Support\Str;
+use Spatie\TranslationLoader\LanguageLine;
 
 class LanguageModel extends LanguageLine
 {
@@ -25,11 +25,13 @@ class LanguageModel extends LanguageLine
 
         static::creating(function (self $model): self {
             $model->editable = $model->isEditable();
+
             return $model;
         });
 
         static::creating(function (self $model): self {
             $model->editable = $model->isEditable();
+
             return $model;
         });
     }

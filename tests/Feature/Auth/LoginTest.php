@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Auth;
 
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\DatabaseTestCase;
 
 class LoginTest extends DatabaseTestCase
