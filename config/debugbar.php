@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Auth\Middleware\Authenticate;
+
 return [
 
     /*
@@ -299,7 +301,9 @@ return [
      |
      | Additional middleware to run on the Debugbar routes
      */
-    'route_middleware' => [],
+    'route_middleware' => [
+        Authenticate::class
+    ],
 
     /*
      |--------------------------------------------------------------------------
