@@ -4,7 +4,7 @@ npm-debug.log
 yarn-error.log
 bootstrap/compiled.php
 app/storage/
-
+.phpunit.cache
 public/storage
 public/hot
 /public/mix-manifest.json

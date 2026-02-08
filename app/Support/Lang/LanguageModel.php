@@ -24,12 +24,12 @@ class LanguageModel extends LanguageLine
         parent::boot();
 
         static::creating(function (self $model): self {
-            $model->editable = $this->isEditable();
+            $model->editable = $model->isEditable();
             return $model;
         });
 
         static::creating(function (self $model): self {
-            $model->editable = $this->isEditable();
+            $model->editable = $model->isEditable();
             return $model;
         });
     }

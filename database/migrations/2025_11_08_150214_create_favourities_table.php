@@ -15,7 +15,7 @@ return new class() extends Migration
             $table->foreignUuid('user_id');
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->uuidMorphs('subject', 'subject');
+            $table->uuidMorphs('subject');
 
             $table->unique(['user_id', 'subject_id', 'subject_type']);
         });
