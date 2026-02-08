@@ -8,6 +8,7 @@ use App\Support\Notifications\Models\Notification;
 use App\Support\Notifications\Models\SystemNotification;
 use App\Support\Notifications\NotificationMessage;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Throwable;
 
 trait Notifiable
 {
@@ -24,21 +25,22 @@ trait Notifiable
     public function notify(Notification|string $notification, array $datas = []): bool
     {
         try {
-            if(! ($notification instanceof Notification) && is_string($notification)) {
+            if ( ! ($notification instanceof Notification) && is_string($notification)) {
                 $notification = Notification::byKey($notification);
             }
 
-            if(!$notification || !($notification instanceof Notification)){
+            if ( ! $notification || ! ($notification instanceof Notification)) {
                 throw new NotificationNotFound($notification);
             }
 
             return (new NotificationMessage($notification, $this, $datas))->send();
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             report($th);
-            if(config('app.debug')){
+            if (config('app.debug')) {
                 throw $th;
             }
         }
+
         return false;
     }
 }

@@ -34,9 +34,7 @@ class NotificationMessage
     /**
      * Construct message from parameters
      *
-     * @param \App\Support\Notifications\Models\Notification $notification
-     * @param \Illuminate\Database\Eloquent\Model            $notifiable
-     * @param array                                          $datas - models to match notification resources or additional placeholder data
+     * @param  array  $datas  - models to match notification resources or additional placeholder data
      */
     public function __construct(
         protected Notification $notification,
@@ -44,11 +42,11 @@ class NotificationMessage
         protected array $datas = []
     ) {
         foreach ($datas as $key => $value) {
-            if($value instanceof Model){
+            if ($value instanceof Model) {
                 $resource = ResourceFactory::matchModel($value);
                 $this->addPlaceholders($resource);
             } else {
-                if(is_object($value) || is_array($value)){
+                if (is_object($value) || is_array($value)) {
                     throw new NotificationPlaceholderNotRecognized();
                 }
 
@@ -103,7 +101,7 @@ class NotificationMessage
                             'subject' => $this->contents->subject,
                             'contents' => $this->contents->email_contents,
                         ]);
-                        if($toMail) {
+                        if ($toMail) {
                             $this->email_sent = true;
                             MailNotificationSent::dispatch($toMail);
                         }

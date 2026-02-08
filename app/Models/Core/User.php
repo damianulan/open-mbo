@@ -55,10 +55,10 @@ use Lucent\Support\Str\Alphabet;
 use Lucent\Support\Traits\CascadeDeletes;
 use Lucent\Support\Traits\UUID;
 use Lucent\Support\Traits\VirginModel;
+use SensitiveParameter;
 use Sentinel\Models\Permission;
 use Sentinel\Traits\HasRolesAndPermissions;
 use Spatie\Activitylog\Models\Activity;
-use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
 
 /**
  * @property string $id
@@ -471,6 +471,18 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         return route('users.show', $this->id);
     }
 
+    public function sendPasswordResetNotification(#[SensitiveParameter] $token): void
+    {
+        $this->notify('PASSWORD_RESET', [
+            'token' => $token,
+            'count' => config('auth.passwords.' . config('auth.defaults.passwords') . '.expire'),
+            'url' => url(route('password.reset', [
+                'token' => $token,
+                'email' => $this->email,
+            ], false)),
+        ]);
+    }
+
     protected function name(): Attribute
     {
         $value = $this->firstname . ' ' . $this->lastname;
@@ -492,17 +504,5 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         return Attribute::make(
             get: fn (): Collection => 'database' === config('session.driver') ? DB::table('sessions')->where('user_id', $this->id)->orderByDesc('last_activity')->get() : new Collection(),
         );
-    }
-
-    public function sendPasswordResetNotification(#[\SensitiveParameter] $token)
-    {
-        $this->notify('PASSWORD_RESET', [
-            'token' => $token,
-            'count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire'),
-            'url' => url(route('password.reset', [
-                'token' => $token,
-                'email' => $this->email,
-            ], false)),
-        ]);
     }
 }

@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Auth;
 
-use Tests\DatabaseTestCase;
 use App\Models\Core\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Hash;
+use Tests\DatabaseTestCase;
 
 class LoginTest extends DatabaseTestCase
 {
@@ -27,7 +27,7 @@ class LoginTest extends DatabaseTestCase
         $response->assertViewIs('auth.login');
     }
 
-    public function test_user_can_login()
+    public function test_user_can_login(): void
     {
         $user = User::factory()->create([
             'password' => Hash::make($password = '123456'),
@@ -42,7 +42,7 @@ class LoginTest extends DatabaseTestCase
         $this->assertAuthenticatedAs($user);
     }
 
-    public function test_user_cannot_view_a_login_form_when_authenticated()
+    public function test_user_cannot_view_a_login_form_when_authenticated(): void
     {
         $user = User::factory()->make();
 
@@ -51,7 +51,7 @@ class LoginTest extends DatabaseTestCase
         $response->assertRedirect(RouteServiceProvider::HOME);
     }
 
-    public function test_remember_me_functionality()
+    public function test_remember_me_functionality(): void
     {
         $user = User::factory()->create([
             'id' => random_int(1, 100),

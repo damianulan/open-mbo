@@ -87,9 +87,10 @@ class NotificationContents implements CastsAttributes, Jsonable
 
     public function toJson($options = 0)
     {
-        if(!$options){
+        if ( ! $options) {
             $options = JSON_UNESCAPED_UNICODE;
         }
+
         return json_encode([
             'system_contents' => $this->system_contents,
             'email_contents' => $this->email_contents,
