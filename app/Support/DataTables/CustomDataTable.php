@@ -172,7 +172,6 @@ class CustomDataTable extends DataTable
     public function json()
     {
         $collection = $this->getDataForExport();
-        dd($this->getAjaxResponseData());
         $filename = $this->getFilename() . '.json';
         $fullpath = 'docs' . DIRECTORY_SEPARATOR . $filename;
         Storage::disk('downloads')->put($fullpath, json_encode($collection, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
