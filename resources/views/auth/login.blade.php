@@ -5,7 +5,11 @@
     <div class="row justify-content-center">
         <div class="col-md-8 pt-5">
             <div class="card logincard">
-                <div class="card-header"><span>{{ config('app.name') }}</span></div>
+                <div class="d-flex">
+                    <div class="card-header mx-auto">
+                        @branding
+                    </div>
+                </div>
 
                 <div class="card-body pt-0">
                     @if(config('app.env') !== 'production' && config('app.maintenance') === false)

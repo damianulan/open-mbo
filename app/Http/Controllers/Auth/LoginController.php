@@ -47,7 +47,7 @@ class LoginController extends Controller
 
     public function username()
     {
-        return 'email';
+        return settings('users.auth_identifier');
     }
 
     public function login(Request $request)
@@ -88,16 +88,6 @@ class LoginController extends Controller
             $this->credentials($request),
             $request->boolean('remember')
         );
-    }
-
-    protected function credentials(Request $request)
-    {
-        $params = $request->only($this->username(), 'password');
-
-        // if(isset($params[$this->username()])){
-        //     $params[$this->username()] = Crypt::encryptString($params[$this->username()]);
-        // }
-        return $params;
     }
 
     /**

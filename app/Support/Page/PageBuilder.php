@@ -9,7 +9,7 @@ use Lucent\Support\Dtos\LaravelDto;
 
 class PageBuilder extends LaravelDto
 {
-    public function __construct(?string $pagetitle = null)
+    public function __construct(?string $pagetitle = null, bool $sidebar = true, bool $topbar_header = true)
     {
         $attributes['routename'] = Route::currentRouteName();
 
@@ -22,6 +22,7 @@ class PageBuilder extends LaravelDto
         $attributes['theme'] = current_theme();
         $attributes['locale'] = app(GeneralSettings::class)->locale;
         $attributes['logo'] = app(GeneralSettings::class)->site_logo;
+        $attributes['topbar_header'] = $topbar_header;
 
         if (isset($_COOKIE['menu-collapsed']) && true === (bool) $_COOKIE['menu-collapsed']) {
             $attributes['sidebar_collapsed'] = 'menu-collapsed';
@@ -35,8 +36,11 @@ class PageBuilder extends LaravelDto
             $this->setAttribute('title', $pagetitle);
         }
 
-        $this->setAttribute('sidebar', MenuBuilder::bootSidebar($this->getAttribute('sitename'))
-            ->addClass($this->getAttribute('sidebar_collapsed')));
+        if($sidebar) {
+            $this->setAttribute('sidebar', MenuBuilder::bootSidebar($this->getAttribute('sitename'))
+                ->addClass($this->getAttribute('sidebar_collapsed')));
+
+        }
     }
 
     private function assignPageTitle($routename)

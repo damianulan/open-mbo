@@ -3,7 +3,6 @@
         <div class="d-flex">
           @branding
           <div id="hamburger-close"><i class="bi-x-lg"></i></div>
-
         </div>
     </div>
     <ul class="nav nav-pills flex-column mb-auto">

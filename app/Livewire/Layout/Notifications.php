@@ -11,7 +11,7 @@ class Notifications extends Component
 
     public bool $shown = false;
 
-    protected $notifications;
+    protected $notifications = null;
 
     public function mount(): void
     {
@@ -25,22 +25,24 @@ class Notifications extends Component
 
     public function register(): void
     {
-        $query = Auth::user()->system_notifications();
-        $notifications_count = $query->count();
-        $queryAlert = clone $query;
-        $notificationsAlert = $queryAlert->whereNull('notified_at')->get();
+        if(Auth::check()) {
+            $query = Auth::user()->system_notifications();
+            $notifications_count = $query->count();
+            $queryAlert = clone $query;
+            $notificationsAlert = $queryAlert->whereNull('notified_at')->get();
 
-        $this->notifications = $query->take(15)->get();
+            $this->notifications = $query->take(15)->get();
 
-        if ($notificationsAlert->count()) {
-            foreach ($notificationsAlert as $alert) {
-                $alert->notified_at = now();
-                $alert->updateQuietly();
-                $this->dispatch('new-notification', title: $alert->contents);
+            if ($notificationsAlert->count()) {
+                foreach ($notificationsAlert as $alert) {
+                    $alert->notified_at = now();
+                    $alert->updateQuietly();
+                    $this->dispatch('new-notification', title: $alert->contents);
+                }
             }
-        }
 
-        $this->notifications_count = $notifications_count;
+            $this->notifications_count = $notifications_count;
+        }
     }
 
     public function toggleShown(): void
