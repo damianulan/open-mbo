@@ -182,6 +182,7 @@ use Spatie\Activitylog\Models\Activity;
 #[ScopedBy(CoreUsersScope::class)]
 class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 {
+    use UUID;
     use CascadeDeletes;
     use Commentable;
     use Commentator;
@@ -198,7 +199,6 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     use RequestForms;
     use Searchable;
     use SoftDeletes;
-    use UUID;
     use UserBusiness;
     use UserHasPreferences;
     use UserMBO;

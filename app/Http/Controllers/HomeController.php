@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Support\Search\SearchEngine;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Facades\Auth;
 
