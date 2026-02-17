@@ -12,8 +12,7 @@ use Illuminate\Support\Carbon;
  * @property string $password
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read User $user
- *
+ * @property-read \App\Models\Core\User $user
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPasswordHistory newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPasswordHistory newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPasswordHistory query()
@@ -22,7 +21,6 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPasswordHistory wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPasswordHistory whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPasswordHistory whereUserId($value)
- *
  * @mixin \Eloquent
  */
 class UserPasswordHistory extends Model

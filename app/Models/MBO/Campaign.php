@@ -52,17 +52,16 @@ use Spatie\Translatable\HasTranslations;
  * @property-read int|null $coordinators_count
  * @property-read EloquentCollection<int, IndexModel> $indexes
  * @property-read int|null $indexes_count
- * @property-read EloquentCollection<int, Objective> $objectives
+ * @property-read EloquentCollection<int, \App\Models\MBO\Objective> $objectives
  * @property-read int|null $objectives_count
  * @property-read mixed $timeend
  * @property-read mixed $timestart
  * @property-read mixed $trans
  * @property-read mixed $translations
- * @property-read EloquentCollection<int, UserCampaign> $user_campaigns
+ * @property-read EloquentCollection<int, \App\Models\MBO\UserCampaign> $user_campaigns
  * @property-read int|null $user_campaigns_count
- * @property-read EloquentCollection<int, UserObjective> $user_objectives
+ * @property-read EloquentCollection<int, \App\Models\MBO\UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign avg(string $column)
@@ -134,7 +133,6 @@ use Spatie\Translatable\HasTranslations;
  * @method static Builder<static>|Campaign withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign withoutCache()
  * @method static Builder<static>|Campaign withoutTrashed()
- *
  * @mixin \Eloquent
  */
 #[ScopedBy(CampaignScope::class)]
