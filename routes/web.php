@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Laraverse\Config\Laraverse;
 use Livewire\Livewire;
+use Spatie\Health\Http\Controllers\HealthCheckResultsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,7 +53,7 @@ Route::middleware(['web', 'auth.base'])->group(function (): void {
 Route::middleware(['web', 'auth', 'maintenance'])->group(function (): void {
     Route::get(RouteServiceProvider::HOME, [HomeController::class, 'index'])->name('dashboard');
     Livewire::setUpdateRoute(fn ($handle) => Route::post('/livewire/update', $handle));
-    Route::get('health', Spatie\Health\Http\Controllers\HealthCheckResultsController::class);
+    Route::get('health', HealthCheckResultsController::class);
 
     Laraverse::routes();
 

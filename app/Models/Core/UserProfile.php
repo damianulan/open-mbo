@@ -2,7 +2,6 @@
 
 namespace App\Models\Core;
 
-use App\Casts\Enigma;
 use App\Traits\HasEnigmaAttributes;
 use FormForge\Traits\RequestForms;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,7 +21,8 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $deleted_at
  * @property mixed $nin
  * @property mixed $gender
- * @property-read \App\Models\Core\User $user
+ * @property-read User $user
+ *
  * @method static \Database\Factories\Core\UserProfileFactory factory($count = null, $state = [])
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|UserProfile newModelQuery()
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|UserProfile newQuery()
@@ -39,14 +39,15 @@ use Illuminate\Support\Carbon;
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|UserProfile whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserProfile extends Model
 {
+    use HasEnigmaAttributes;
     use HasFactory;
     use RequestForms;
     use SoftDeletes;
-    use HasEnigmaAttributes;
 
     protected $fillable = [
         'user_id',

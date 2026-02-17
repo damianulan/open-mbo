@@ -2,7 +2,6 @@
 
 namespace App\Models\Core;
 
-use App\Casts\Enigma;
 use App\Commentable\Models\Comment;
 use App\Commentable\Support\Commentable;
 use App\Commentable\Support\Commentator;
@@ -117,13 +116,13 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read mixed $name
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Objective> $objectives
  * @property-read int|null $objectives_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Core\UserPasswordHistory> $password_history
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, UserPasswordHistory> $password_history
  * @property-read int|null $password_history_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Permission> $permissions
  * @property-read int|null $permissions_count
  * @property-read mixed $points
- * @property-read \App\Models\Core\UserPreference|null $preferences
- * @property-read \App\Models\Core\UserProfile|null $profile
+ * @property-read UserPreference|null $preferences
+ * @property-read UserProfile|null $profile
  * @property-read Collection $sessions
  * @property-read UserStatus $status
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $subordinates
@@ -142,6 +141,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read int|null $user_objectives_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, UserObjective> $user_objectives_active
  * @property-read int|null $user_objectives_active_count
+ *
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User active()
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User drafted()
  * @method static \Database\Factories\Core\UserFactory factory($count = null, $state = [])
@@ -176,20 +176,20 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User withRole(...$slugs)
  * @method static Builder<static>|User withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|User withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 #[ScopedBy(CoreUsersScope::class)]
 class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 {
-    use UUID;
     use CascadeDeletes;
     use Commentable;
     use Commentator;
     use Favouritable;
     use HasApiTokens;
+    use HasEnigmaAttributes;
     use HasFactory;
     use HasRolesAndPermissions;
-    use HasEnigmaAttributes;
     use Impersonable;
     use Impersonate;
     use IsTranslated;
@@ -198,6 +198,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     use RequestForms;
     use Searchable;
     use SoftDeletes;
+    use UUID;
     use UserBusiness;
     use UserHasPreferences;
     use UserMBO;

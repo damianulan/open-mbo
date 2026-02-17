@@ -11,6 +11,11 @@ use Illuminate\Support\Str;
 
 class Enigma implements CastsAttributes
 {
+    public static function hashValue($value)
+    {
+        return hash('sha256', Str::lower(mb_trim($value)));
+    }
+
     /**
      * Cast the given value.
      *
@@ -55,10 +60,5 @@ class Enigma implements CastsAttributes
         }
 
         return $value;
-    }
-
-    public static function hashValue($value)
-    {
-        return hash('sha256', Str::lower(mb_trim($value)));
     }
 }
