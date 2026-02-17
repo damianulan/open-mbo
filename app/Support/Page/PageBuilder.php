@@ -36,7 +36,7 @@ class PageBuilder extends LaravelDto
             $this->setAttribute('title', $pagetitle);
         }
 
-        if($sidebar) {
+        if ($sidebar) {
             $this->setAttribute('sidebar', MenuBuilder::bootSidebar($this->getAttribute('sitename'))
                 ->addClass($this->getAttribute('sidebar_collapsed')));
 

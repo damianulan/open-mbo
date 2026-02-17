@@ -25,7 +25,7 @@ class Notifications extends Component
 
     public function register(): void
     {
-        if(Auth::check()) {
+        if (Auth::check()) {
             $query = Auth::user()->system_notifications();
             $notifications_count = $query->count();
             $queryAlert = clone $query;

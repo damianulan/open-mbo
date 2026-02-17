@@ -6,8 +6,8 @@ use App\Enums\Core\AuthIdentifier;
 use App\Forms\Traits\SettingsForm;
 use FormForge\Base\Form;
 use FormForge\Base\FormComponent;
-use FormForge\FormBuilder;
 use FormForge\Components\Dictionary;
+use FormForge\FormBuilder;
 
 class UsersForm extends Form
 {

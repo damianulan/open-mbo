@@ -7,7 +7,6 @@ use App\Models\Core\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
 
 class LoginController extends Controller
 {
