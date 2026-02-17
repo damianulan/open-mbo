@@ -7,6 +7,7 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Contracts\Encryption\EncryptException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Str;
 
 class Enigma implements CastsAttributes
 {
@@ -54,5 +55,10 @@ class Enigma implements CastsAttributes
         }
 
         return $value;
+    }
+
+    public static function hashValue($value)
+    {
+        return hash('sha256', Str::lower(mb_trim($value)));
     }
 }

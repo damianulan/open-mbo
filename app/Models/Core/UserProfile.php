@@ -3,6 +3,7 @@
 namespace App\Models\Core;
 
 use App\Casts\Enigma;
+use App\Traits\HasEnigmaAttributes;
 use FormForge\Traits\RequestForms;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -46,6 +47,7 @@ class UserProfile extends Model
     use HasFactory;
     use RequestForms;
     use SoftDeletes;
+    use HasEnigmaAttributes;
 
     protected $fillable = [
         'user_id',
@@ -60,10 +62,10 @@ class UserProfile extends Model
         'birthday',
     ];
 
-    protected $casts = [
-        'nin' => Enigma::class,
-        'gender' => Enigma::class,
-        'phone' => Enigma::class,
+    protected $encrypted = [
+        'nin',
+        'gender',
+        'phone',
     ];
 
     public function user(): BelongsTo

@@ -15,10 +15,10 @@ return new class() extends Migration
         Schema::create('users', function (Blueprint $table): void {
             $table->uuid('id')->primary();
             $table->string('auth')->default('manual');
-            $table->string('email')->nullable();
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('username')->nullable();
+            $table->encryptable('email');
+            $table->encryptable('firstname');
+            $table->encryptable('lastname');
+            $table->encryptable('username');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('gender', [

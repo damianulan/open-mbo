@@ -7,6 +7,7 @@ use App\Models\Core\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class LoginController extends Controller
 {
@@ -42,6 +43,11 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function username()
+    {
+        return 'email';
     }
 
     public function login(Request $request)
@@ -82,6 +88,15 @@ class LoginController extends Controller
             $this->credentials($request),
             $request->boolean('remember')
         );
+    }
+
+    protected function credentials(Request $request)
+    {
+        $params = $request->only($this->username(), 'password');
+        // if(isset($params[$this->username()])){
+        //     $params[$this->username()] = Crypt::encryptString($params[$this->username()]);
+        // }
+        return $params;
     }
 
     /**

@@ -463,6 +463,9 @@
                 },
                 "password_not_repeat": {
                     "pl": "Określ liczbę haseł które nie mogą się powtarzać. Ustaw 0, aby wyłączyć tę funkcję."
+                },
+                "auth_identifier": {
+                    "pl": "Określ typ identyfikatora użytkownika do wykorzystania podczas logowania."
                 }
             },
             "multiple_employments": {
@@ -488,6 +491,9 @@
             },
             "password_not_repeat": {
                 "pl": "Zapobiegaj powtarzaniu się haseł"
+            },
+            "auth_identifier": {
+                "pl": "Identyfikator uwierzytelniania"
             }
         }
     },
