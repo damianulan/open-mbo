@@ -2,7 +2,6 @@
 
 namespace App\Models\Core;
 
-use App\Casts\Enigma;
 use App\Commentable\Models\Comment;
 use App\Commentable\Support\Commentable;
 use App\Commentable\Support\Commentator;
@@ -174,15 +173,14 @@ use Spatie\Activitylog\Models\Activity;
 #[ScopedBy(CoreUsersScope::class)]
 class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 {
-    use UUID;
     use CascadeDeletes;
     use Commentable;
     use Commentator;
     use Favouritable;
     use HasApiTokens;
+    use HasEnigmaAttributes;
     use HasFactory;
     use HasRolesAndPermissions;
-    use HasEnigmaAttributes;
     use Impersonable;
     use Impersonate;
     use IsTranslated;
@@ -191,6 +189,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     use RequestForms;
     use Searchable;
     use SoftDeletes;
+    use UUID;
     use UserBusiness;
     use UserHasPreferences;
     use UserMBO;

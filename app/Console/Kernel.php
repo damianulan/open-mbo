@@ -9,6 +9,7 @@ use App\Console\Commands\Settings\SettingsMigrate;
 use App\Support\Notifications\NotificationScheduler;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Spatie\Health\Commands\RunHealthChecksCommand;
 
 class Kernel extends ConsoleKernel
 {
@@ -42,8 +43,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('model:prune')->dailyAt('00:01');
         $schedule->command('model:prune-soft-deletes')->dailyAt('00:01');
         $schedule->command(SettingsMigrate::class)->dailyAt('00:01');
-        Schedule::command(\Spatie\Health\Commands\RunHealthChecksCommand::class)->everyHour();
-
+        Schedule::command(RunHealthChecksCommand::class)->everyHour();
 
         // NOTIFICATIONS
         NotificationScheduler::load($schedule);

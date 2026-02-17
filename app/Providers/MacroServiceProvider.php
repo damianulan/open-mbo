@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Contracts\MBO\HasWeight;
-use App\Settings\MBOSettings;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;

@@ -93,6 +93,7 @@ class LoginController extends Controller
     protected function credentials(Request $request)
     {
         $params = $request->only($this->username(), 'password');
+
         // if(isset($params[$this->username()])){
         //     $params[$this->username()] = Crypt::encryptString($params[$this->username()]);
         // }

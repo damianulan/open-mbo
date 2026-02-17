@@ -2,7 +2,6 @@
 
 namespace App\Models\Core;
 
-use App\Casts\Enigma;
 use App\Traits\HasEnigmaAttributes;
 use FormForge\Traits\RequestForms;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -44,10 +43,10 @@ use Illuminate\Support\Carbon;
  */
 class UserProfile extends Model
 {
+    use HasEnigmaAttributes;
     use HasFactory;
     use RequestForms;
     use SoftDeletes;
-    use HasEnigmaAttributes;
 
     protected $fillable = [
         'user_id',

@@ -9,6 +9,7 @@ use App\Models\Core\User;
 use App\Providers\AppServiceProvider;
 use App\Providers\ComponentServiceProvider;
 use App\Providers\ConfigServiceProvider;
+use App\Providers\EnigmaServiceProvider;
 use App\Providers\EventServiceProvider;
 use App\Providers\GateServiceProvider;
 use App\Providers\MacroServiceProvider;
@@ -286,12 +287,12 @@ return [
          */
         AppServiceProvider::class,
         MacroServiceProvider::class,
-        \App\Providers\EnigmaServiceProvider::class,
+        EnigmaServiceProvider::class,
         \App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         EventServiceProvider::class,
         ComponentServiceProvider::class,
-        \App\Providers\RouteServiceProvider::class,
+        RouteServiceProvider::class,
         \App\Providers\NotificationServiceProvider::class,
         // App\Providers\TelescopeServiceProvider::class,
         GateServiceProvider::class,
