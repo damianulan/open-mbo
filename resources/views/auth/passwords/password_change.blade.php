@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8 pt-5">
             <div class="card">
-                <div class="card-header">{{ __('forms.reset_password.force.title') }}</div>
+                <div class="card-header pb-0">
+                    {{ __('forms.reset_password.force.title') }}
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('password.change.update') }}">

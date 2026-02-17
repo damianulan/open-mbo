@@ -68,13 +68,15 @@ class StorageHelper
             default => <<<HTML
                 <div class="brand-icon"><i class="bi-bullseye"></i></div>
                 <div class="brand-title">{$sitename}</div>
-                HTML
+            HTML
         };
 
         return <<<HTML
-            <a class="brand" href="{$url}">
-                {$content}
-            </a>
+            <div class="d-flex">
+                <a class="brand" href="{$url}">
+                    {$content}
+                </a>
+            </div>
         HTML;
     }
 

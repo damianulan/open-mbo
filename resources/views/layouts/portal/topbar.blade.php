@@ -3,17 +3,21 @@
         {{ Breadcrumbs::render(Route::currentRouteName()) }}
     </div>
     <div class="page-top-elements">
-        <div class="togglers">
-            <a class="me-2" id="hamburger-toggle"><i class="bi-list"></i></a>
-            <a class="me-2" id="menu-toggle"><i class="bi-three-dots-vertical"></i></a>
-          </div>
-          <header class="page-heading">
-            <span class="page-title" data-tippy-placement="bottom" data-tippy-content="{{ $page->title }}">{{ $page->title }}</span>
-            @if($page->info)
-                <i class="bi bi-question-circle" data-tippy-placement="bottom" data-tippy-content="{{ $page->info }}"></i>
-            @endif
-          </header>
-          <div class="page-quick-actions">
+        @if($page->sidebar)
+            <div class="togglers">
+                <a class="me-2" id="hamburger-toggle"><i class="bi-list"></i></a>
+                <a class="me-2" id="menu-toggle"><i class="bi-three-dots-vertical"></i></a>
+            </div>
+        @endif
+        @if($page->title && $page->topbar_header)
+            <header class="page-heading">
+                <span class="page-title" data-tippy-placement="bottom" data-tippy-content="{{ $page->title }}">{{ $page->title }}</span>
+                @if($page->info)
+                    <i class="bi bi-question-circle" data-tippy-placement="bottom" data-tippy-content="{{ $page->info }}"></i>
+                @endif
+            </header>
+        @endif
+        <div class="page-quick-actions">
             @if(config('app.maintenance') === true)
                 <div>
                     <a href="javascript:void(0);" data-tippy-placement="bottom" data-tippy-content="{{ __('alerts.info.maintenance') }}">
@@ -42,39 +46,41 @@
                     </a>
                 </div>
             @endif
-              <div>
+            @if(auth()->check())
+                <div>
                 <a href="#" data-tippy-placement="bottom" data-tippy-content="Baza wiedzy">
                     <i class="bi bi-book-fill"></i>
                 </a>
-              </div>
-              <livewire:notifications key="{{ str()->random(15) }}"/>
-              <div class="user-nav dropup"
-              @if(auth()->user()->isImpersonating())
-              data-tippy-placement="left"
-              data-tippy-content="{{ __('menus.impersonated_by', ['name' => auth()->user()->impersonator()->name]) }}"
-              @endif
-              >
-                  <div class="user-actions" data-bs-toggle="dropdown" type="button" aria-expanded="false">
+                </div>
+                <livewire:notifications key="{{ str()->random(15) }}"/>
+                <div class="user-nav dropup"
+                @if(auth()->user()->isImpersonating())
+                data-tippy-placement="left"
+                data-tippy-content="{{ __('menus.impersonated_by', ['name' => auth()->user()->impersonator()->name]) }}"
+                @endif
+                >
+                    <div class="user-actions" data-bs-toggle="dropdown" type="button" aria-expanded="false">
                     {!! auth()->user()->getAvatarView('md') !!}
                     <span class="profile-name{{auth()->user()->isImpersonating() ? ' text-info':''}}">{{ auth()->user()->name }}</span>
-                  </div>
-                  <ul class="dropdown-menu">
+                    </div>
+                    <ul class="dropdown-menu">
                     <li><a href="{{ route('profile.index') }}" class="dropdown-item"><i class="bi-person me-2"></i>{{ __('menus.edit_profile') }}</a></li>
                     <li><a href="{{ route('profile.logs') }}" class="dropdown-item"><i class="bi-activity me-2"></i>{{ __('menus.activity') }}</a></li>
                     <li>
-                      <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                          <i class="bi-person-walking me-2"></i>{{ __('menus.logout') }}
-                      </a>
+                        <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="bi-person-walking me-2"></i>{{ __('menus.logout') }}
+                        </a>
                     </li>
                     @if(auth()->user()->isImpersonating())
                     <li>
-                      <a href="{{ route('users.impersonate.leave') }}" class="dropdown-item"><i class="bi-person-fill-down me-2"></i>{{ __('menus.impersonation_leave') }}</a>
+                        <a href="{{ route('users.impersonate.leave') }}" class="dropdown-item"><i class="bi-person-fill-down me-2"></i>{{ __('menus.impersonation_leave') }}</a>
                     </li>
                     @endif
-                  </ul>
+                    </ul>
                 </div>
                 <form action="{{ route('logout') }}" method="POST" class="d-none" id="logout-form">@csrf</form>
-          </div>
+            @endif
+        </div>
 
     </div>
 
