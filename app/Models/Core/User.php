@@ -65,9 +65,13 @@ use Spatie\Activitylog\Models\Activity;
  * @property string $id
  * @property string $auth
  * @property mixed|null $email
- * @property mixed $firstname
- * @property mixed $lastname
+ * @property string|null $email_hash
+ * @property mixed|null $firstname
+ * @property string|null $firstname_hash
+ * @property mixed|null $lastname
+ * @property string|null $lastname_hash
  * @property mixed|null $username
+ * @property string|null $username_hash
  * @property Carbon|null $email_verified_at
  * @property string $password
  * @property string|null $gender
@@ -113,13 +117,13 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read mixed $name
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Objective> $objectives
  * @property-read int|null $objectives_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, UserPasswordHistory> $password_history
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Core\UserPasswordHistory> $password_history
  * @property-read int|null $password_history_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Permission> $permissions
  * @property-read int|null $permissions_count
  * @property-read mixed $points
- * @property-read UserPreference|null $preferences
- * @property-read UserProfile|null $profile
+ * @property-read \App\Models\Core\UserPreference|null $preferences
+ * @property-read \App\Models\Core\UserProfile|null $profile
  * @property-read Collection $sessions
  * @property-read UserStatus $status
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $subordinates
@@ -138,37 +142,40 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read int|null $user_objectives_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, UserObjective> $user_objectives_active
  * @property-read int|null $user_objectives_active_count
- *
- * @method static Builder<static>|User active()
- * @method static Builder<static>|User drafted()
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User active()
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User drafted()
  * @method static \Database\Factories\Core\UserFactory factory($count = null, $state = [])
- * @method static Builder<static>|User inactive()
- * @method static Builder<static>|User newModelQuery()
- * @method static Builder<static>|User newQuery()
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User inactive()
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User newModelQuery()
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User newQuery()
  * @method static Builder<static>|User onlyTrashed()
- * @method static Builder<static>|User published()
- * @method static Builder<static>|User query()
- * @method static Builder<static>|User whereAuth($value)
- * @method static Builder<static>|User whereCore($value)
- * @method static Builder<static>|User whereCreatedAt($value)
- * @method static Builder<static>|User whereDeletedAt($value)
- * @method static Builder<static>|User whereEmail($value)
- * @method static Builder<static>|User whereEmailVerifiedAt($value)
- * @method static Builder<static>|User whereFirstname($value)
- * @method static Builder<static>|User whereForcePasswordChange($value)
- * @method static Builder<static>|User whereGender($value)
- * @method static Builder<static>|User whereId($value)
- * @method static Builder<static>|User whereLastname($value)
- * @method static Builder<static>|User wherePassword($value)
- * @method static Builder<static>|User whereRememberToken($value)
- * @method static Builder<static>|User whereSuspendedAt($value)
- * @method static Builder<static>|User whereUpdatedAt($value)
- * @method static Builder<static>|User whereUsername($value)
- * @method static Builder<static>|User withPermission(...$slugs)
- * @method static Builder<static>|User withRole(...$slugs)
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User published()
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User query()
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereAuth($value)
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereCore($value)
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereCreatedAt($value)
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereDeletedAt($value)
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereEmail($value)
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereEmailHash($value)
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereEmailVerifiedAt($value)
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereFirstname($value)
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereFirstnameHash($value)
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereForcePasswordChange($value)
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereGender($value)
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereId($value)
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereIn($column, $values, $boolean = 'and', $not = false)
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereLastname($value)
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereLastnameHash($value)
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User wherePassword($value)
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereRememberToken($value)
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereSuspendedAt($value)
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereUpdatedAt($value)
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereUsername($value)
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereUsernameHash($value)
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User withPermission(...$slugs)
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User withRole(...$slugs)
  * @method static Builder<static>|User withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|User withoutTrashed()
- *
  * @mixin \Eloquent
  */
 #[ScopedBy(CoreUsersScope::class)]
