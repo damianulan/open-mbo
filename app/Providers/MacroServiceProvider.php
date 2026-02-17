@@ -20,7 +20,6 @@ class MacroServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // dd(app(MBOSettings::class)->save());
         EloquentCollection::macro('getTotalWeight', function (): float {
             $weight = 0;
             $this->each(function (Model $model) use (&$weight): void {

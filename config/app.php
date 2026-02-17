@@ -147,7 +147,7 @@ return [
 
     'chunk_default' => env('CHUNK_DEFAULT', 250),
 
-    'always_throw' => (bool) env('APP_ALWAYS_THROW', false),
+    'always_throw' => (bool) env('APP_ALWAYS_THROW', env('APP_DEBUG', true)),
 
     'fallback_locale' => 'pl',
 

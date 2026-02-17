@@ -52,6 +52,7 @@ Route::middleware(['web', 'auth.base'])->group(function (): void {
 Route::middleware(['web', 'auth', 'maintenance'])->group(function (): void {
     Route::get(RouteServiceProvider::HOME, [HomeController::class, 'index'])->name('dashboard');
     Livewire::setUpdateRoute(fn ($handle) => Route::post('/livewire/update', $handle));
+    Route::get('health', Spatie\Health\Http\Controllers\HealthCheckResultsController::class);
 
     Laraverse::routes();
 
