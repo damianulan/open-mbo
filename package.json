@@ -27,7 +27,7 @@
         "moment": "^2.29.4",
         "npm": "^11.0.0",
         "postcss": "^8.1.14",
-        "quill": "^2.0.3",
+        "quill": "^2.0.2",
         "resolve-url-loader": "^5.0.0",
         "rtlcss": "^4.0.0",
         "sass": "^1.56.1",
@@ -35,7 +35,9 @@
         "shiki": "^3.8.1",
         "sweetalert2": "^11.6.13",
         "tippy.js": "^6.3.7",
-        "toastify-js": "^1.12.0"
+        "toastify-js": "^1.12.0",
+        "ts-loader": "^9.5.4",
+        "typescript": "^5.9.3"
     },
     "devDependencies": {
         "@fontsource/ibm-plex-sans": "^5.1.0",

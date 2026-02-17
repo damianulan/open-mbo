@@ -14,10 +14,20 @@ const replace_js = {
     },
 };
 
-mix.webpackConfig((webpack) => {
-    return {
-        plugins: [],
-    };
+mix.webpackConfig({
+    module: {
+        rules: [
+            {
+                test: /\.tsx?$/,
+                loader: "ts-loader",
+                options: { appendTsSuffixTo: [/\.vue$/] },
+                exclude: /node_modules/
+            }
+        ]
+    },
+    resolve: {
+      extensions: ["*", ".js", ".jsx", ".vue", ".ts", ".tsx"]
+    }
 });
 
 const scssOptions = {
