@@ -35,6 +35,7 @@ use Illuminate\Pipeline\PipelineServiceProvider;
 use Illuminate\Queue\QueueServiceProvider;
 use Illuminate\Redis\RedisServiceProvider;
 use Illuminate\Session\SessionServiceProvider;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Translation\TranslationServiceProvider;
 use Illuminate\Validation\ValidationServiceProvider;
@@ -285,12 +286,13 @@ return [
          */
         AppServiceProvider::class,
         MacroServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
+        \App\Providers\EnigmaServiceProvider::class,
+        \App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         EventServiceProvider::class,
         ComponentServiceProvider::class,
-        RouteServiceProvider::class,
-        App\Providers\NotificationServiceProvider::class,
+        \App\Providers\RouteServiceProvider::class,
+        \App\Providers\NotificationServiceProvider::class,
         // App\Providers\TelescopeServiceProvider::class,
         GateServiceProvider::class,
         ConfigServiceProvider::class,
