@@ -40,15 +40,15 @@ class AppServiceProvider extends ServiceProvider
             clear: LangList::class,
             key: 'langs-cache',
         );
-        Health::checks([
-            UsedDiskSpaceCheck::new()->dailyAt('02:00'),
-            DatabaseCheck::new()->dailyAt('02:00'),
-            DatabaseSizeCheck::new()->failWhenSizeAboveGb(errorThresholdGb: 5.0)->dailyAt('02:00'),
-            RedisCheck::new()->dailyAt('02:00'),
-            DebugModeCheck::new()->dailyAt('02:00'),
-            ScheduleCheck::new()->dailyAt('02:00'),
+        // Health::checks([
+        //     UsedDiskSpaceCheck::new()->dailyAt('02:00'),
+        //     DatabaseCheck::new()->dailyAt('02:00'),
+        //     DatabaseSizeCheck::new()->failWhenSizeAboveGb(errorThresholdGb: 5.0)->dailyAt('02:00'),
+        //     RedisCheck::new()->dailyAt('02:00'),
+        //     DebugModeCheck::new()->dailyAt('02:00'),
+        //     ScheduleCheck::new()->dailyAt('02:00'),
 
-        ]);
+        // ]);
 
     }
 

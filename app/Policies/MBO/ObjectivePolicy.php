@@ -18,7 +18,6 @@ class ObjectivePolicy
      */
     public function view(User $user, Objective $objective): bool
     {
-        // dd($user->can(PermissionLib::MBO_OBJECTIVE_VIEW, $objective));
         return $user->can(PermissionsLib::MBO_OBJECTIVE_VIEW);
     }
 

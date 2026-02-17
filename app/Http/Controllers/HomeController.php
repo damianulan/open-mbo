@@ -23,12 +23,6 @@ class HomeController extends AppController
      */
     public function index(): Renderable
     {
-        // $input = 'ds.';
-        // $engine = new SearchEngine($input);
-        // $results = $engine->get();
-        // $paginator = $engine->getPaginator();
-        // dd($results, $paginator);
-
         $user = Auth::user();
 
         return view('pages.dashboard', [
