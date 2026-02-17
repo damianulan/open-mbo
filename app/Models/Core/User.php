@@ -25,6 +25,7 @@ use App\Support\Notifications\Traits\Notifiable;
 use App\Support\Search\IndexModel;
 use App\Support\Search\Traits\Searchable;
 use App\Traits\Favouritable;
+use App\Traits\HasEnigmaAttributes;
 use App\Traits\IsTranslated;
 use App\Traits\UserBusiness;
 use App\Traits\UserHasPreferences;
@@ -173,6 +174,7 @@ use Spatie\Activitylog\Models\Activity;
 #[ScopedBy(CoreUsersScope::class)]
 class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 {
+    use UUID;
     use CascadeDeletes;
     use Commentable;
     use Commentator;
@@ -180,6 +182,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     use HasApiTokens;
     use HasFactory;
     use HasRolesAndPermissions;
+    use HasEnigmaAttributes;
     use Impersonable;
     use Impersonate;
     use IsTranslated;
@@ -188,7 +191,6 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     use RequestForms;
     use Searchable;
     use SoftDeletes;
-    use UUID;
     use UserBusiness;
     use UserHasPreferences;
     use UserMBO;
@@ -212,15 +214,18 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     protected $casts = [
         'email_verified_at' => 'datetime',
         'created_at' => 'datetime',
-        'email' => Enigma::class,
-        'firstname' => Enigma::class,
-        'lastname' => Enigma::class,
-        'username' => Enigma::class,
     ];
 
     protected $cascadeDeletes = [
         'profile',
         'preferences',
+    ];
+
+    protected $encrypted = [
+        'email',
+        'firstname',
+        'lastname',
+        'username',
     ];
 
     // protected static function boot(): void

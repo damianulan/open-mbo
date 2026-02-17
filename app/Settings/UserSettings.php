@@ -2,6 +2,7 @@
 
 namespace App\Settings;
 
+use App\Enums\Core\AuthIdentifier;
 use App\Settings\Abstract\BaseSettings;
 
 class UserSettings extends BaseSettings
@@ -23,6 +24,8 @@ class UserSettings extends BaseSettings
     public int $password_not_repeat = 0;
 
     public bool $multiple_employments = true;
+
+    public string $auth_identifier = AuthIdentifier::EMAIL;
 
     public static function group(): string
     {

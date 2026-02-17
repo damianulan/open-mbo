@@ -12,8 +12,8 @@ return [
     */
     'sources' => [
         // slug => path
-        'docs' => 'docs',
-        'formforge' => 'vendor/damianulan/laravel-form-forge/docs',
+        // 'docs' => 'docs',
+        // 'formforge' => 'vendor/damianulan/laravel-form-forge/docs',
     ],
 
 ];
