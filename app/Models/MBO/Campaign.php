@@ -12,6 +12,7 @@ use App\Models\Core\User;
 use App\Models\Scopes\MBO\CampaignScope;
 use App\Support\Search\IndexModel;
 use App\Support\Search\Traits\Searchable;
+use App\Warden\RolesLib;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Builder;
@@ -230,39 +231,14 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
         foreach ($toDelete as $user_id) {
             $user = User::find($user_id);
             if ($user->exists()) {
-                $user->revokeRoleSlug('campaign_coordinator', $this);
+                $user->revokeRoleSlug(RolesLib::CAMPAIGN_COORDINATOR, $this);
             }
         }
         foreach ($toAdd as $user_id) {
             $user = User::find($user_id);
             if ($user->exists()) {
-                $user->assignRoleSlug('campaign_coordinator', $this);
+                $user->assignRoleSlug(RolesLib::CAMPAIGN_COORDINATOR, $this);
             }
-        }
-
-        return true;
-    }
-
-    public function assignUser($user_id)
-    {
-        $exists = $this->user_campaigns()->where('user_id', $user_id)->exists();
-        if ( ! $exists) {
-            $this->user_campaigns()->create([
-                'user_id' => $user_id,
-                'stage' => $this->setUserStage($user_id),
-                'manual' => $this->manual,
-                'active' => $this->draft ? 0 : 1,
-            ]);
-        }
-
-        return true;
-    }
-
-    public function unassignUser($user_id)
-    {
-        $record = $this->user_campaigns()->where('user_id', $user_id)->first();
-        if ($record) {
-            $record->delete();
         }
 
         return true;
@@ -543,6 +519,37 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
     public function routeShow(): string
     {
         return route('campaigns.show', $this->id);
+    }
+
+    public function assignUser($user_id): bool
+    {
+        $result = false;
+        $exists = $this->user_campaigns()->where('user_id', $user_id)->exists();
+        if ( ! $exists) {
+            $user = User::find($user_id);
+            if($user) {
+                $result = $this->user_campaigns()->create([
+                    'user_id' => $user_id,
+                    'stage' => $this->setUserStage($user_id),
+                    'manual' => $this->manual,
+                    'active' => $this->draft ? 0 : 1,
+                ]);
+            }
+
+        }
+
+        return $result ? true : false;
+    }
+
+    public function unassignUser($user_id): bool
+    {
+        $result = false;
+        $record = $this->user_campaigns()->where('user_id', $user_id)->first();
+        if ($record) {
+            $result = $record->delete();
+        }
+
+        return $result ? true : false;
     }
 
     /**

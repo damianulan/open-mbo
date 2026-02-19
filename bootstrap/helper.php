@@ -6,6 +6,8 @@ use App\Models\Core\User;
 use App\Settings\GeneralSettings;
 use App\Support\Http\ResponseAjax;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use App\Models\Core\SettingModel;
 
 function lorem()
 {
@@ -61,16 +63,16 @@ function ajax(): ResponseAjax
 function current_theme(): string
 {
     $theme = app(GeneralSettings::class)->theme;
-    $user = Auth::user();
+    $user = Auth::user() ? Auth::user() : false;
     if ($user) {
-        $userTheme = $user->preferences->theme;
+        $userTheme = $user->preferences?->theme;
         if ($userTheme && $userTheme !== $theme && 'auto' !== $userTheme) {
             $theme = $userTheme;
         }
     }
     $available = Theme::getAvailable();
 
-    if (false === $available->contains($theme)) {
+    if (false === $available->contains($theme) || !$theme) {
         $theme = $available->first();
     }
 
@@ -130,16 +132,33 @@ function settings(string $key, $default = null)
     $setting = null;
 
     if ($group && $key) {
-        $appkey = 'settings.' . mb_strtolower($group);
+        $appkey = 'settings.' . Str::lower($group);
         $class = app($appkey) ?? null;
         $setting = $class ? $class->{$key} : null;
     }
 
-    if (is_null($setting)) {
+    if ($setting === null) {
         $setting = $default;
     }
 
     return $setting;
+}
+
+function set_setting($key, $value): bool
+{
+    $keys = explode('.', $key);
+    $group = $keys[0];
+    $subkey = $keys[1];
+    $setting = null;
+
+    $appkey = 'settings.' . Str::lower($group);
+    $setting = app($appkey) ?? null;
+    if($setting) {
+        $setting->{$subkey} = $value;
+        return $setting->save() ? true : false;
+    }
+
+    return false;
 }
 
 function uploads_path($path = ''): string

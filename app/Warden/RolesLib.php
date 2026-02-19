@@ -45,7 +45,6 @@ final class RolesLib extends RoleWarden
     {
         return [
             self::ADMIN,
-            self::ROOT,
             self::HELPDESK,
         ];
     }

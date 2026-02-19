@@ -13,6 +13,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Throwable;
 
 class AppController extends BaseController
@@ -138,5 +139,15 @@ class AppController extends BaseController
             ],
             $datas
         ));
+    }
+
+    protected function allows($ability, $arguments): bool
+    {
+        return Gate::allows($ability, $arguments);
+    }
+
+    protected function denies($ability, $arguments): bool
+    {
+        return Gate::denies($ability, $arguments);
     }
 }

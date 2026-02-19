@@ -5,10 +5,18 @@ namespace Tests\Feature\Auth;
 use App\Models\Core\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Hash;
-use Tests\DatabaseTestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+use Database\Seeders\TestDatabaseSeeder;
 
-class LoginTest extends DatabaseTestCase
+class LoginTest extends TestCase
 {
+    use RefreshDatabase;
+
+    protected $seeder = TestDatabaseSeeder::class;
+
+    protected $seed = true;
+
     /**
      * A basic feature test example.
      */

@@ -2,11 +2,19 @@
 
 namespace Tests\Feature;
 
-// use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\DatabaseTestCase;
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Database\Seeders\TestDatabaseSeeder;
 
-class ResponseTest extends DatabaseTestCase
+
+class ResponseTest extends TestCase
 {
+    use RefreshDatabase;
+
+    protected $seeder = TestDatabaseSeeder::class;
+
+    protected $seed = true;
+
     /**
      * A basic test example.
      */

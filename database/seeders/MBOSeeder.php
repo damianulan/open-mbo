@@ -10,7 +10,6 @@ use App\Models\MBO\Objective;
 use App\Models\MBO\ObjectiveTemplate;
 use App\Models\MBO\ObjectiveTemplateCategory;
 use App\Models\MBO\UserObjective;
-use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -105,29 +104,14 @@ class MBOSeeder extends Seeder
         $coordinatorUsers = $this->users->random(fake()->numberBetween(10, 20));
 
         for ($i = 1; $i <= 50; $i++) {
-            $datetime = fake()->dateTimeBetween('-3 weeks', '+2 months');
-            $now = Carbon::parse($datetime);
-            $campaign = new Campaign();
-            $campaign->name = [
-                'pl' => 'Testowa kampania ' . $i,
-                'en' => 'Test campaign ' . $i,
-                'it' => 'Campagna di prova ' . $i,
-            ];
-            $campaign->period = '2025 Q' . fake()->numberBetween(1, 4);
-            $campaign->description = '<p>' . fake()->text(fake()->numberBetween(500, 1000)) . '</p>';
-            $campaign->definition_from = $now->format('Y-m-d') . ' 00:00:00';
-            $campaign->definition_to = $now->addDays(3)->format('Y-m-d') . ' 23:59:59';
-            $campaign->disposition_from = $now->addDays(1)->format('Y-m-d') . ' 00:00:00';
-            $campaign->disposition_to = $now->addDays(5)->format('Y-m-d') . ' 23:59:59';
-            $campaign->realization_from = $now->addDays(1)->format('Y-m-d') . ' 00:00:00';
-            $campaign->realization_to = $now->addDays(fake()->numberBetween(1, 15))->format('Y-m-d') . ' 23:59:59';
-            $campaign->evaluation_from = $now->addDays(1)->format('Y-m-d') . ' 00:00:00';
-            $campaign->evaluation_to = $now->addDays(5)->format('Y-m-d') . ' 23:59:59';
-            $campaign->self_evaluation_from = $now->addDays(1)->format('Y-m-d') . ' 00:00:00';
-            $campaign->self_evaluation_to = $now->addDays(5)->format('Y-m-d') . ' 23:59:59';
-            $campaign->draft = 0;
-            $campaign->manual = 0;
-            $campaign->save();
+
+            $campaign = Campaign::factory()->create([
+                'name' => [
+                    'pl' => 'Testowa kampania ' . $i,
+                    'en' => 'Test campaign ' . $i,
+                    'it' => 'Campagna di prova ' . $i,
+                ],
+            ]);
 
             $campaignTemplates = $this->templates->pop(fake()->numberBetween(2, 6));
 

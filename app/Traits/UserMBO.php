@@ -85,4 +85,9 @@ trait UserMBO
     {
         return $this->hasAnyRoles(['root', 'support', 'admin', 'admin_mbo']);
     }
+
+    public function isEnrolledInCampaign(Campaign $campaign): bool
+    {
+        return $this->user_campaigns()->where('campaign_id', $campaign->id)->exists();
+    }
 }

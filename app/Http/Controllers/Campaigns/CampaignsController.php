@@ -46,9 +46,8 @@ class CampaignsController extends AppController
      */
     public function store(Request $request, CampaignEditForm $form): RedirectResponse
     {
-        if ($request->user()->cannot('create', Campaign::class)) {
-            unauthorized();
-        }
+        $this->authorize('create', Campaign::class);
+
         $redirect = null;
         try {
             $form->validate();
@@ -74,9 +73,7 @@ class CampaignsController extends AppController
      */
     public function show(Request $request, Campaign $campaign): View
     {
-        if ($request->user()->cannot('view', $campaign)) {
-            unauthorized();
-        }
+        $this->authorize('view', $campaign);
 
         $this->logShow($campaign);
         $header = $campaign->name . ' [' . $campaign->period . ']';
@@ -89,9 +86,7 @@ class CampaignsController extends AppController
 
     public function edit(Request $request, Campaign $campaign, CampaignEditForm $form): View
     {
-        if ($request->user()->cannot('mbo-campaign-update', $campaign)) {
-            unauthorized();
-        }
+        $this->authorize('update', $campaign);
 
         return view('pages.mbo.campaigns.edit', [
             'campaign' => $campaign,
@@ -102,9 +97,8 @@ class CampaignsController extends AppController
     public function update(Request $request, $id, CampaignEditForm $form): RedirectResponse
     {
         $campaign = Campaign::findOrFail($id);
-        if ($request->user()->cannot('mbo-campaign-update', $campaign)) {
-            unauthorized();
-        }
+        $this->authorize('update', $campaign);
+
         $redirect = null;
         try {
             $form->validate();
@@ -127,8 +121,10 @@ class CampaignsController extends AppController
     {
         $campaign = Campaign::findOrFail($id);
 
-        if ($campaign->terminate()) {
-            return ajax()->ok(__('alerts.campaigns.success.terminate'));
+        if($this->allows('terminate', $campaign)) {
+            if ($campaign->terminate()) {
+                return ajax()->ok(__('alerts.campaigns.success.terminate'));
+            }
         }
 
         return ajax()->error(__('alerts.campaigns.error.terminate'));
