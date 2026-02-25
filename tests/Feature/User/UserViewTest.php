@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\User;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\Traits\HasUserCollection;
-use Tests\TestCase;
 use Database\Seeders\TestDatabaseSeeder;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+use Tests\Traits\HasUserCollection;
 
 class UserViewTest extends TestCase
 {

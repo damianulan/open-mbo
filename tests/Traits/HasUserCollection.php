@@ -3,9 +3,9 @@
 namespace Tests\Traits;
 
 use App\Models\Core\User;
-use Illuminate\Support\Collection;
-use App\Warden\RolesLib;
 use App\Models\Core\UserProfile;
+use App\Warden\RolesLib;
+use Illuminate\Support\Collection;
 
 trait HasUserCollection
 {

@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\MBO\Campaign;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\Traits\HasUserCollection;
-use Tests\TestCase;
 use Database\Seeders\TestDatabaseSeeder;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+use Tests\Traits\HasUserCollection;
 
 class CampaignCreateTest extends TestCase
 {
@@ -28,7 +28,7 @@ class CampaignCreateTest extends TestCase
     public function test_admins_can_show_create_form(): void
     {
         $admin = $this->getAdmin();
-        foreach($this->getMboAdmins() as $admin) {
+        foreach ($this->getMboAdmins() as $admin) {
             $response = $this->actingAs($admin)->get(route('campaigns.create'));
 
             $response->assertStatus(200);

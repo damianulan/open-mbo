@@ -7,7 +7,6 @@ use App\Settings\GeneralSettings;
 use App\Support\Http\ResponseAjax;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use App\Models\Core\SettingModel;
 
 function lorem()
 {
@@ -72,7 +71,7 @@ function current_theme(): string
     }
     $available = Theme::getAvailable();
 
-    if (false === $available->contains($theme) || !$theme) {
+    if (false === $available->contains($theme) || ! $theme) {
         $theme = $available->first();
     }
 
@@ -137,7 +136,7 @@ function settings(string $key, $default = null)
         $setting = $class ? $class->{$key} : null;
     }
 
-    if ($setting === null) {
+    if (null === $setting) {
         $setting = $default;
     }
 
@@ -153,8 +152,9 @@ function set_setting($key, $value): bool
 
     $appkey = 'settings.' . Str::lower($group);
     $setting = app($appkey) ?? null;
-    if($setting) {
+    if ($setting) {
         $setting->{$subkey} = $value;
+
         return $setting->save() ? true : false;
     }
 

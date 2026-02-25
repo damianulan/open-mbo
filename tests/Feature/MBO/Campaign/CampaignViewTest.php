@@ -2,12 +2,12 @@
 
 namespace Tests\Feature\MBO\Campaign;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Warden\RolesLib;
-use Tests\Traits\HasUserCollection;
-use Tests\TestCase;
-use Database\Seeders\TestDatabaseSeeder;
 use App\Models\MBO\Campaign;
+use App\Warden\RolesLib;
+use Database\Seeders\TestDatabaseSeeder;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+use Tests\Traits\HasUserCollection;
 
 class CampaignViewTest extends TestCase
 {
@@ -28,7 +28,7 @@ class CampaignViewTest extends TestCase
     {
         $user = $this->getEmployee();
         $campaign = Campaign::factory()->create([
-            'name' => 'TEST'
+            'name' => 'TEST',
         ])->assignUser($user->id);
         $response = $this->actingAs($user)->get(route('campaigns.show', $campaign));
 
@@ -38,7 +38,7 @@ class CampaignViewTest extends TestCase
     public function test_user_not_enrolled_can_show_campaign(): void
     {
         $campaign = Campaign::factory()->create([
-            'name' => 'TEST'
+            'name' => 'TEST',
         ]);
         $user = $this->getEmployee();
         $response = $this->actingAs($user)->get(route('campaigns.show', $campaign));
@@ -46,11 +46,10 @@ class CampaignViewTest extends TestCase
         $response->assertStatus(404);
     }
 
-
     public function test_coordinator_with_context_can_show_campaign(): void
     {
         $campaign = Campaign::factory()->create([
-            'name' => 'TEST'
+            'name' => 'TEST',
         ]);
         $user = $this->userFactory()->assignRoleSlug(RolesLib::CAMPAIGN_COORDINATOR, $campaign);
         $response = $this->actingAs($user)->get(route('campaigns.show', $campaign));

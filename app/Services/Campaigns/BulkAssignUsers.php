@@ -2,7 +2,6 @@
 
 namespace App\Services\Campaigns;
 
-use App\Models\Core\User;
 use App\Models\MBO\Campaign;
 use App\Models\MBO\UserCampaign;
 use Lucent\Services\Service;
@@ -30,5 +29,4 @@ class BulkAssignUsers extends Service
 
         return $this->campaign;
     }
-
 }

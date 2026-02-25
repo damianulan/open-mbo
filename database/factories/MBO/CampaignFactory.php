@@ -3,8 +3,6 @@
 namespace Database\Factories\MBO;
 
 use App\Models\MBO\Campaign;
-use App\Models\MBO\ObjectiveTemplate;
-use App\Models\MBO\ObjectiveTemplateCategory;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -24,6 +22,7 @@ class CampaignFactory extends Factory
     {
         $datetime = fake()->dateTimeBetween('-3 weeks', '+2 months');
         $now = Carbon::parse($datetime);
+
         return [
             'period' => '2025 Q' . fake()->numberBetween(1, 4),
             'description' => '<p>' . fake()->text(fake()->numberBetween(500, 1000)) . '</p>',

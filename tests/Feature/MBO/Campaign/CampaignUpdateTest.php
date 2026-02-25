@@ -2,16 +2,12 @@
 
 namespace Tests\Feature\MBO\Campaign;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use App\Warden\RolesLib;
-use Database\Factories\MBO\CampaignFactory;
-use Tests\DatabaseTestCase;
-use Tests\Traits\HasUserCollection;
-use DB;
-use Tests\TestCase;
-use Database\Seeders\TestDatabaseSeeder;
 use App\Models\MBO\Campaign;
+use App\Warden\RolesLib;
+use Database\Seeders\TestDatabaseSeeder;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+use Tests\Traits\HasUserCollection;
 
 class CampaignUpdateTest extends TestCase
 {
@@ -31,7 +27,7 @@ class CampaignUpdateTest extends TestCase
     public function test_coordinator_with_context_can_show_edit_form(): void
     {
         $campaign = Campaign::factory()->create([
-            'name' => 'TEST'
+            'name' => 'TEST',
         ]);
         $user = $this->userFactory()->assignRoleSlug(RolesLib::CAMPAIGN_COORDINATOR, $campaign);
         $response = $this->actingAs($user)->get(route('campaigns.edit', $campaign));
@@ -42,12 +38,12 @@ class CampaignUpdateTest extends TestCase
     public function test_coordinator_with_different_context_cannot_show_edit_form(): void
     {
         $campaign = Campaign::factory()->create([
-            'name' => 'TEST'
+            'name' => 'TEST',
         ]);
 
         $user = $this->userFactory()->assignRoleSlug(RolesLib::CAMPAIGN_COORDINATOR, $campaign);
         $campaign = Campaign::factory()->create([
-            'name' => 'TEST2'
+            'name' => 'TEST2',
         ]);
 
         $response = $this->actingAs($user)->get(route('campaigns.edit', $campaign));

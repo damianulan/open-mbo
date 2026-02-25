@@ -527,7 +527,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
         $exists = $this->user_campaigns()->where('user_id', $user_id)->exists();
         if ( ! $exists) {
             $user = User::find($user_id);
-            if($user) {
+            if ($user) {
                 $result = $this->user_campaigns()->create([
                     'user_id' => $user_id,
                     'stage' => $this->setUserStage($user_id),

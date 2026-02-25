@@ -107,6 +107,16 @@ class AppController extends BaseController
         return $this->finalResponseJson(true, $message, $datas);
     }
 
+    protected function allows($ability, $arguments): bool
+    {
+        return Gate::allows($ability, $arguments);
+    }
+
+    protected function denies($ability, $arguments): bool
+    {
+        return Gate::denies($ability, $arguments);
+    }
+
     private function getExceptionMessage(Throwable $exception, ?string $default = null): string
     {
         if ( ! $exception instanceof AppException) {
@@ -139,15 +149,5 @@ class AppController extends BaseController
             ],
             $datas
         ));
-    }
-
-    protected function allows($ability, $arguments): bool
-    {
-        return Gate::allows($ability, $arguments);
-    }
-
-    protected function denies($ability, $arguments): bool
-    {
-        return Gate::denies($ability, $arguments);
     }
 }

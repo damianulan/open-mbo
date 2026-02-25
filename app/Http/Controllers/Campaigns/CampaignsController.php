@@ -121,7 +121,7 @@ class CampaignsController extends AppController
     {
         $campaign = Campaign::findOrFail($id);
 
-        if($this->allows('terminate', $campaign)) {
+        if ($this->allows('terminate', $campaign)) {
             if ($campaign->terminate()) {
                 return ajax()->ok(__('alerts.campaigns.success.terminate'));
             }

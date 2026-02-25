@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use Exception;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
@@ -11,8 +12,8 @@ abstract class TestCase extends BaseTestCase
     public function setSetting(string $key, $value): void
     {
         $result = set_setting($key, $value);
-        if(!$result) {
-            throw new \Exception('Setting not set');
+        if ( ! $result) {
+            throw new Exception('Setting not set');
         }
     }
 
@@ -23,12 +24,14 @@ abstract class TestCase extends BaseTestCase
         $this->assertNotNull($expected, 'The current user is not authenticated.');
 
         $this->assertInstanceOf(
-            get_class($expected), $user,
+            get_class($expected),
+            $user,
             'The currently authenticated user is not who was expected'
         );
 
         $this->assertEquals(
-            $expected->getAuthIdentifier(), $user->getAuthIdentifier(),
+            $expected->getAuthIdentifier(),
+            $user->getAuthIdentifier(),
             'The currently authenticated user is not who was expected'
         );
 
