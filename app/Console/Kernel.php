@@ -43,7 +43,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('model:prune')->dailyAt('00:01');
         $schedule->command('model:prune-soft-deletes')->dailyAt('00:01');
         $schedule->command(SettingsMigrate::class)->dailyAt('00:01');
-        $schedule->command(RunHealthChecksCommand::class)->everyHour();
+        $schedule->command(RunHealthChecksCommand::class)->hourly();
 
         // NOTIFICATIONS
         NotificationScheduler::load($schedule);

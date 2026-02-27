@@ -1,61 +1,83 @@
 {
     "active": {
-        "pl": "Aktywne"
+        "pl": "Aktywne",
+        "en": "Active"
     },
     "column": {
-        "pl": "Kolumna"
+        "pl": "Kolumna",
+        "en": "Column"
     },
     "columns": {
-        "pl": "Kolumny"
+        "pl": "Kolumny",
+        "en": "Columns"
     },
     "datatables": {
         "print": {
-            "pl": "Podgląd wydruku"
+            "pl": "Podgląd wydruku",
+            "en": "Print preview"
         },
         "select_columns": {
-            "pl": "Wybierz kolumny do wyświetlenia"
+            "pl": "Wybierz kolumny do wyświetlenia",
+            "en": "Choose columns to display"
         },
         "to_csv": {
-            "pl": "Eksport do pliku CSV"
+            "pl": "Eksport do pliku CSV",
+            "en": "Export to CSV"
         },
         "to_excel": {
-            "pl": "Eksport do pliku Excel"
+            "pl": "Eksport do pliku Excel",
+            "en": "Export to Excel"
         },
         "to_json": {
-            "pl": "Eksport do pliku JSON"
+            "pl": "Eksport do pliku JSON",
+            "en": "Export to JSON"
         },
         "to_pdf": {
-            "pl": "Eksport do pliku PDF"
+            "pl": "Eksport do pliku PDF",
+            "en": "Export to PDF"
+        },
+        "print_table": {
+            "pl": "Drukuj tabelę",
+            "en": "Print table"
         }
     },
     "draft": {
-        "pl": "Kopia robocza"
+        "pl": "Kopia robocza",
+        "en": "Draft"
     },
     "enter_address": {
-        "pl": "Wprowadź adres"
+        "pl": "Wprowadź adres",
+        "en": "Enter address"
     },
     "exports": {
         "csv": {
-            "pl": "CSV"
+            "pl": "CSV",
+            "en": "CSV format"
         },
         "excel": {
-            "pl": "Excel"
+            "pl": "Excel",
+            "en": "Excel format"
         },
         "json": {
-            "pl": "JSON"
+            "pl": "JSON",
+            "en": "JSON format"
         },
         "pdf": {
-            "pl": "PDF"
+            "pl": "PDF",
+            "en": "PDF format"
         },
         "print": {
-            "pl": "Podgląd wydruku"
+            "pl": "Podgląd wydruku",
+            "en": "Print preview"
         }
     },
     "hello": {
-        "pl": "Cześć"
+        "pl": "Cześć",
+        "en": "Hello"
     },
     "inactive": {
-        "pl": "Nieaktywne"
+        "pl": "Nieaktywne",
+        "en": "Inactive"
     },
     "langs": {
         "en": {
@@ -66,69 +88,137 @@
         }
     },
     "manual": {
-        "pl": "Tryb ręczny"
+        "pl": "Tryb ręczny",
+        "en": "Manual mode"
     },
     "no": {
-        "pl": "Nie"
+        "pl": "Nie",
+        "en": "No"
     },
     "no_assigned": {
-        "pl": "Brak przypisanych"
+        "pl": "Brak przypisanych",
+        "en": "None assigned"
     },
     "no_data": {
-        "pl": "Brak danych"
+        "pl": "Brak danych",
+        "en": "No data"
     },
     "not_applicable": {
-        "pl": "Nie dotyczy"
+        "pl": "Nie dotyczy",
+        "en": "N/A"
     },
     "notifications": {
-        "pl": "Powiadomienia"
+        "pl": "Powiadomienia",
+        "en": "Notifications"
     },
     "page_content_info": {
-        "pl": "Jeśli możesz - stwórz samodzielnie nową zawartość, lub wróć później."
+        "pl": "Jeśli możesz - stwórz samodzielnie nową zawartość, lub wróć później.",
+        "en": "If you can, create new content yourself or come back later."
     },
     "page_no_content": {
-        "pl": "Brak zawartości strony"
+        "pl": "Brak zawartości strony",
+        "en": "No page content"
     },
     "pnts": {
-        "pl": "pkt"
+        "pl": "pkt",
+        "en": "pts"
     },
     "privately": {
-        "pl": "Prywatnie"
+        "pl": "Prywatnie",
+        "en": "Privately"
     },
     "search": {
-        "pl": "Szukaj"
+        "pl": "Szukaj",
+        "en": "Search"
     },
     "search_no_results": {
-        "pl": "Brak wyników dla wyszukiwanej frazy."
+        "pl": "Brak wyników dla wyszukiwanej frazy.",
+        "en": "No results for the searched phrase."
     },
     "select_choose": {
-        "pl": "Wybierz..."
+        "pl": "Wybierz...",
+        "en": "Choose..."
     },
     "summary": {
-        "pl": "Podsumowanie"
+        "pl": "Podsumowanie",
+        "en": "Summary"
     },
     "turned_off_female": {
-        "pl": "Wyłączona"
+        "pl": "Wyłączona",
+        "en": "Disabled"
     },
     "turned_off_male": {
-        "pl": "Wyłączony"
+        "pl": "Wyłączony",
+        "en": "Disabled"
     },
     "turned_off_other": {
-        "pl": "Wyłączone"
+        "pl": "Wyłączone",
+        "en": "Disabled"
     },
     "turned_on_female": {
-        "pl": "Włączona"
+        "pl": "Włączona",
+        "en": "Enabled"
     },
     "turned_on_male": {
-        "pl": "Włączony"
+        "pl": "Włączony",
+        "en": "Enabled"
     },
     "turned_on_other": {
-        "pl": "Włączone"
+        "pl": "Włączone",
+        "en": "Enabled"
     },
     "yes": {
-        "pl": "Tak"
+        "pl": "Tak",
+        "en": "Yes"
     },
     "you": {
-        "pl": "Ty"
+        "pl": "Ty",
+        "en": "You"
+    },
+    "notes": {
+        "pl": "Notatki",
+        "en": "Notes"
+    },
+    "are_you_sure": {
+        "pl": "Na pewno?",
+        "en": "Are you sure?"
+    },
+    "here": {
+        "pl": "tutaj",
+        "en": "here"
+    },
+    "page_temporarily_unavailable": {
+        "pl": "Podstrona chwilowo niedostępna",
+        "en": "Subpage temporarily unavailable"
+    },
+    "page_temporarily_unavailable_info": {
+        "pl": "Ta część aplikacji jeszcze czeka na wytworzenie. Zapraszamy później.",
+        "en": "This part of the application is still under development. Please come back later."
+    },
+    "datatables_export": {
+        "button": {
+            "pl": "Eksportuj",
+            "en": "Export"
+        },
+        "email_notice": {
+            "pl": "Eksport zostanie wysłany na adres :email.",
+            "en": "Export will be emailed to :email."
+        },
+        "in_progress": {
+            "pl": "Trwa eksportowanie... proszę czekać.",
+            "en": "Exporting... please wait."
+        },
+        "done_download": {
+            "pl": "Gotowe. Pobierz plik",
+            "en": "Done. Download file"
+        },
+        "done_downloaded": {
+            "pl": "Gotowe. Plik został pobrany.",
+            "en": "Done. File has been downloaded."
+        },
+        "failed": {
+            "pl": "Eksport nie powiódł się, spróbuj ponownie później.",
+            "en": "Export failed, please try again later."
+        }
     }
 }

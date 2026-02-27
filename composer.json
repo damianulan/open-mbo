@@ -98,6 +98,7 @@
         "barryvdh/laravel-debugbar": "^3.15",
         "barryvdh/laravel-ide-helper": "^3.1",
         "larastan/larastan": "^3.0",
+        "laravel/boost": "^2.2",
         "laravel/pint": "^1.0",
         "laravel/sail": "*",
         "mockery/mockery": "^1.4.4",
@@ -129,6 +130,7 @@
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "@php artisan boost:update --ansi",
             "@php artisan ide-helper:generate",
             "@php artisan ide-helper:models -N",
             "@php artisan ide-helper:meta",

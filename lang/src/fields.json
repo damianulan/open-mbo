@@ -1,105 +1,136 @@
 {
     "action": {
-        "pl": "Akcje"
+        "pl": "Akcje",
+        "en": "Actions"
     },
     "category": {
-        "pl": "Kategoria"
+        "pl": "Kategoria",
+        "en": "Category"
     },
     "created_at": {
-        "pl": "Utworzono"
+        "pl": "Utworzono",
+        "en": "Created"
     },
     "email": {
-        "pl": "E-mail"
+        "pl": "E-mail",
+        "en": "Email"
     },
     "username": {
-        "pl": "Nazwa użytkownika"
+        "pl": "Nazwa użytkownika",
+        "en": "Username"
     },
     "firstname": {
-        "pl": "Imię"
+        "pl": "Imię",
+        "en": "First name"
     },
     "firstname_lastname": {
-        "pl": "Imię i nazwisko"
+        "pl": "Imię i nazwisko",
+        "en": "First and last name"
     },
     "gender": {
         "f": {
-            "pl": "Kobieta"
+            "pl": "Kobieta",
+            "en": "Female"
         },
         "m": {
-            "pl": "Mężczyzna"
+            "pl": "Mężczyzna",
+            "en": "Male"
         },
         "o": {
-            "pl": "Inna"
+            "pl": "Inna",
+            "en": "Other"
         }
     },
     "lastname": {
-        "pl": "Nazwisko"
+        "pl": "Nazwisko",
+        "en": "Last name"
     },
     "login": {
-        "pl": "Login"
+        "pl": "Login",
+        "en": "Login name"
     },
     "name": {
-        "pl": "Nazwa"
+        "pl": "Nazwa",
+        "en": "Name"
     },
     "old_password": {
-        "pl": "Obecne hasło"
+        "pl": "Obecne hasło",
+        "en": "Current password"
     },
     "password": {
-        "pl": "Hasło"
+        "pl": "Hasło",
+        "en": "Password"
     },
     "password_confirm": {
-        "pl": "Powtórz hasło"
+        "pl": "Powtórz hasło",
+        "en": "Repeat password"
     },
     "position": {
-        "pl": "Stanowisko"
+        "pl": "Stanowisko",
+        "en": "Position"
     },
     "quote_at": {
-        "pl": "o"
+        "pl": "o",
+        "en": "at"
     },
     "quote_authored": {
-        "pl": " napisał(a)"
+        "pl": " napisał(a)",
+        "en": " wrote"
     },
     "stage": {
-        "pl": "Etap"
+        "pl": "Etap",
+        "en": "Stage"
     },
     "status": {
-        "pl": "Status"
+        "pl": "Status",
+        "en": "Current status"
     },
     "title": {
-        "pl": "Tytuł"
+        "pl": "Tytuł",
+        "en": "Title"
     },
     "type_of_contract": {
         "b2b": {
-            "pl": "B2B"
+            "pl": "B2B",
+            "en": "B2B contract"
         },
         "uod": {
-            "pl": "Umowa o dzieło"
+            "pl": "Umowa o dzieło",
+            "en": "Contract for specific work"
         },
         "uop": {
-            "pl": "Umowa o pracę"
+            "pl": "Umowa o pracę",
+            "en": "Employment contract"
         },
         "uz": {
-            "pl": "Umowa zlecenie"
+            "pl": "Umowa zlecenie",
+            "en": "Mandate contract"
         }
     },
     "updated_at": {
-        "pl": "Zaktualizowano"
+        "pl": "Zaktualizowano",
+        "en": "Updated"
     },
-
     "user_status": {
         "active": {
-            "pl": "Aktywny"
+            "pl": "Aktywny",
+            "en": "Active"
         },
         "suspended": {
-            "pl": "Zablokowany"
+            "pl": "Zablokowany",
+            "en": "Blocked"
         },
         "deleted": {
-            "pl": "Usunięty"
+            "pl": "Usunięty",
+            "en": "Deleted"
         },
         "unverified": {
-            "pl": "Niezweryfikowany"
+            "pl": "Niezweryfikowany",
+            "en": "Unverified"
         },
         "unemployed": {
-            "pl": "Niezatrudniony"
+            "pl": "Niezatrudniony",
+            "en": "Unemployed"
         }
     }
 }

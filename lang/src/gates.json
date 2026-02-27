@@ -1,42 +1,54 @@
 {
     "permissions": {
         "mbo-administration": {
-            "pl": "Administracja MBO"
+            "pl": "Administracja MBO",
+            "en": "MBO administration"
         }
     },
     "roles_plural": {
-        "pl": "Role"
+        "pl": "Role",
+        "en": "Roles"
     },
     "roles": {
         "admin": {
-            "pl": "Administrator"
+            "pl": "Administrator",
+            "en": "System administrator"
         },
         "admin_hr": {
-            "pl": "Administrator HR"
+            "pl": "Administrator HR",
+            "en": "HR administrator"
         },
         "admin_mbo": {
-            "pl": "Administrator MBO"
+            "pl": "Administrator MBO",
+            "en": "MBO administrator"
         },
         "campaign_coordinator": {
-            "pl": "Koordynator kampanii MBO"
+            "pl": "Koordynator kampanii MBO",
+            "en": "MBO campaign coordinator"
         },
         "employee": {
-            "pl": "Pracownik"
+            "pl": "Pracownik",
+            "en": "Employee"
         },
         "manager": {
-            "pl": "Menadżer"
+            "pl": "Menadżer",
+            "en": "Manager"
         },
         "objective_coordinator": {
-            "pl": "Koordynator kategorii celów"
+            "pl": "Koordynator kategorii celów",
+            "en": "Objective category coordinator"
         },
         "root": {
-            "pl": "Root"
+            "pl": "Root",
+            "en": "Root account"
         },
         "supervisor": {
-            "pl": "Przełożony"
+            "pl": "Przełożony",
+            "en": "Supervisor"
         },
         "support": {
-            "pl": "Helpdesk"
+            "pl": "Helpdesk",
+            "en": "Support desk"
         }
     }
 }

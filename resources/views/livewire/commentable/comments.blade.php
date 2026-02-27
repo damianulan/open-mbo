@@ -9,7 +9,7 @@
                             <div class="commentable-header">
                                 <a class="commentable-author" href="{{ $comment->author->routeShow() }}" target="_blank">{{ $comment->author->name }}</a>
                                 @if($comment->isMine())
-                                    <a class="icon-btn ms-auto" wire:confirm="Na pewno?" wire:click="delete({{ $comment->id }})" data-tippy-content="{{ __('buttons.delete') }}"><i class="bi-trash3-fill"></i></a>
+                                    <a class="icon-btn ms-auto" wire:confirm="{{ __('globals.are_you_sure') }}" wire:click="delete({{ $comment->id }})" data-tippy-content="{{ __('buttons.delete') }}"><i class="bi-trash3-fill"></i></a>
                                 @endif
                                 @if(!$comment->private)
                                     <a class="icon-btn ms-1 commentable-quote" href="javascript:void(0);" data-tippy-content="{{ __('buttons.quote') }}"><i class="bi-quote"></i></a>
