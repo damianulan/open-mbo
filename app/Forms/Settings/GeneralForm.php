@@ -5,7 +5,7 @@ namespace App\Forms\Settings;
 use App\Config\AppConfig;
 use App\Enums\Core\ExportType;
 use App\Forms\Traits\SettingsForm;
-use App\Lib\Theme;
+use App\Support\UI\Theme\Theme;
 use App\Settings\GeneralSettings;
 use FormForge\Base\Form;
 use FormForge\Base\FormComponent;

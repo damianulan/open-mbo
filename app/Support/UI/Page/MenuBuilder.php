@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Support\Page;
+namespace App\Support\UI\Page;
 
-use App\Support\Page\Bars\MenubarMenu;
-use App\Support\Page\Bars\MenuItem;
-use App\Support\Page\Bars\SidebarMenu;
+use App\Support\UI\Page\Navigation\MenubarMenu;
+use App\Support\UI\Page\Navigation\MenuItem;
+use App\Support\UI\Page\Navigation\SidebarMenu;
 use App\Warden\PermissionsLib;
 
 class MenuBuilder

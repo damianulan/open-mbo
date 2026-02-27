@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Lib;
+namespace App\Support\UI\Theme;
 
 use Illuminate\Support\Collection;
 use Symfony\Component\Finder\Finder;

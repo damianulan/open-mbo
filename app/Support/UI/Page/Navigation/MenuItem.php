@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Support\Page\Bars;
+namespace App\Support\UI\Page\Navigation;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;

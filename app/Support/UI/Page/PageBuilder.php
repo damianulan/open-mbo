@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Support\Page;
+namespace App\Support\UI\Page;
 
 use App\Settings\GeneralSettings;
 use Illuminate\Support\Facades\Lang;
