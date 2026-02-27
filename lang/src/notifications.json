@@ -2,45 +2,57 @@
     "app": {
         "campaign": {
             "coordinator_assignment": {
-                "pl": "<strong>:username<\/strong> to nowy uczestnik kampanii <i class=\"bi-bullseye\"><\/i> <strong>:campaignname<\/strong>, którą prowadzisz. Dostępne cele zostały automatycznie przypisane."
+                "pl": "<strong>:username</strong> to nowy uczestnik kampanii <i class=\"bi-bullseye\"></i> <strong>:campaignname</strong>, którą prowadzisz. Dostępne cele zostały automatycznie przypisane.",
+                "en": "<strong>:username</strong> is a new participant in campaign <i class=\"bi-bullseye\"></i> <strong>:campaignname</strong> that you coordinate. Available objectives were assigned automatically."
             },
             "user_assigned": {
-                "pl": "Przypisano Cię do kampanii <i class=\"bi-bullseye\"><\/i> <strong>:campaignname<\/strong>."
+                "pl": "Przypisano Cię do kampanii <i class=\"bi-bullseye\"></i> <strong>:campaignname</strong>.",
+                "en": "You were assigned to campaign <i class=\"bi-bullseye\"></i> <strong>:campaignname</strong>."
             }
         }
     },
     "info": {
         "empty": {
-            "pl": "Twoja skrzynka powiadomień jest pusta, nie otrzymano jeszcze żadnych wiadomości."
+            "pl": "Twoja skrzynka powiadomień jest pusta, nie otrzymano jeszcze żadnych wiadomości.",
+            "en": "Your notifications inbox is empty; no messages have been received yet."
         },
         "show_all": {
-            "pl": "Pokaż wszystkie"
+            "pl": "Pokaż wszystkie",
+            "en": "Show all"
         }
     },
     "table": {
         "action": {
-            "pl": "Akcje"
+            "pl": "Akcje",
+            "en": "Actions"
         },
         "conditions": {
-            "pl": "Wskutek spełnienia warunków"
+            "pl": "Wskutek spełnienia warunków",
+            "en": "Triggered by conditions"
         },
         "email": {
-            "pl": "Powiadomienie mailowe"
+            "pl": "Powiadomienie mailowe",
+            "en": "Email notification"
         },
         "event": {
-            "pl": "Wskutek zdarzenia"
+            "pl": "Wskutek zdarzenia",
+            "en": "Triggered by event"
         },
         "key": {
-            "pl": "Identyfikator"
+            "pl": "Identyfikator",
+            "en": "Identifier"
         },
         "schedule": {
-            "pl": "Wysyłka cykliczna"
+            "pl": "Wysyłka cykliczna",
+            "en": "Scheduled sending"
         },
         "status": {
-            "pl": "Status"
+            "pl": "Status",
+            "en": "Delivery status"
         },
         "system": {
-            "pl": "Powiadomienie systemowe"
+            "pl": "Powiadomienie systemowe",
+            "en": "System notification"
         }
     }
 }

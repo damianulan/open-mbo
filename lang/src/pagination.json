@@ -1,20 +1,26 @@
 {
     "next": {
-        "pl": "Następna &raquo;"
+        "pl": "Następna &raquo;",
+        "en": "Next &raquo;"
     },
     "of": {
-        "pl": "z"
+        "pl": "z",
+        "en": "of"
     },
     "previous": {
-        "pl": "&laquo; Poprzednia"
+        "pl": "&laquo; Poprzednia",
+        "en": "&laquo; Previous"
     },
     "results": {
-        "pl": "wyników"
+        "pl": "wyników",
+        "en": "results"
     },
     "showing": {
-        "pl": "Wyświetlono"
+        "pl": "Wyświetlono",
+        "en": "Showing"
     },
     "to": {
-        "pl": " - "
+        "pl": " - ",
+        "en": " to "
     }
 }

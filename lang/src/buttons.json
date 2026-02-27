@@ -1,143 +1,190 @@
 {
     "accept": {
-        "pl": "Akceptuj"
+        "pl": "Akceptuj",
+        "en": "Accept"
     },
     "add": {
-        "pl": "Dodaj"
+        "pl": "Dodaj",
+        "en": "Add"
     },
     "add_employment": {
-        "pl": "Dodaj zatrudnienie"
+        "pl": "Dodaj zatrudnienie",
+        "en": "Add employment"
     },
     "add_realization": {
-        "pl": "Dodaj realizację celu"
+        "pl": "Dodaj realizację celu",
+        "en": "Add objective realization"
     },
     "add_users": {
-        "pl": "Dodaj użytkowników"
+        "pl": "Dodaj użytkowników",
+        "en": "Add users"
     },
     "assign": {
-        "pl": "Przypisz"
+        "pl": "Przypisz",
+        "en": "Assign"
     },
     "block": {
-        "pl": "Zablokuj"
+        "pl": "Zablokuj",
+        "en": "Block"
     },
     "cancel": {
-        "pl": "Anuluj"
+        "pl": "Anuluj",
+        "en": "Cancel"
     },
     "cancel_campaign": {
-        "pl": "Anuluj kampanię"
+        "pl": "Anuluj kampanię",
+        "en": "Cancel campaign"
     },
     "choose_file": {
-        "pl": "Wybierz plik"
+        "pl": "Wybierz plik",
+        "en": "Choose file"
     },
     "close": {
-        "pl": "Zamknij"
+        "pl": "Zamknij",
+        "en": "Close"
     },
     "create": {
-        "pl": "Utwórz"
+        "pl": "Utwórz",
+        "en": "Create"
     },
     "create_template": {
-        "pl": "Utwórz szablon"
+        "pl": "Utwórz szablon",
+        "en": "Create template"
     },
     "delete": {
-        "pl": "Usuń"
+        "pl": "Usuń",
+        "en": "Delete"
     },
     "edit": {
-        "pl": "Edytuj"
+        "pl": "Edytuj",
+        "en": "Edit"
     },
     "edit_realization": {
-        "pl": "Modyfikuj realizację celu"
+        "pl": "Modyfikuj realizację celu",
+        "en": "Edit objective realization"
     },
     "enrol_users": {
-        "pl": "Zapisz użytkowników"
+        "pl": "Zapisz użytkowników",
+        "en": "Enroll users"
     },
     "favourite": {
-        "pl": "Ulubione"
+        "pl": "Ulubione",
+        "en": "Favorites"
     },
     "favourites_add": {
-        "pl": "Dodaj do ulubionych"
+        "pl": "Dodaj do ulubionych",
+        "en": "Add to favorites"
     },
     "favourites_remove": {
-        "pl": "Usuń z ulubionych"
+        "pl": "Usuń z ulubionych",
+        "en": "Remove from favorites"
     },
     "follow": {
-        "pl": "Obserwuj"
+        "pl": "Obserwuj",
+        "en": "Follow"
     },
     "hide": {
-        "pl": "Ukryj"
+        "pl": "Ukryj",
+        "en": "Hide"
     },
     "impersonate": {
-        "pl": "Zaloguj jako"
+        "pl": "Zaloguj jako",
+        "en": "Impersonate"
     },
     "impersonate_out": {
-        "pl": "Wyloguj się jako"
+        "pl": "Wyloguj się jako",
+        "en": "Log out as"
     },
     "like": {
-        "pl": "Polub"
+        "pl": "Polub",
+        "en": "Like"
     },
     "list_view": {
-        "pl": "Tryb listy"
+        "pl": "Tryb listy",
+        "en": "List view"
     },
     "ok": {
-        "pl": "Ok"
+        "pl": "Ok",
+        "en": "OK"
     },
     "ok_understand": {
-        "pl": "Ok, rozumiem"
+        "pl": "Ok, rozumiem",
+        "en": "OK, I understand"
     },
     "preview": {
-        "pl": "Podgląd"
+        "pl": "Podgląd",
+        "en": "Preview"
     },
     "profile_show": {
-        "pl": "Przeglądaj profil"
+        "pl": "Przeglądaj profil",
+        "en": "View profile"
     },
     "quote": {
-        "pl": "Cytuj"
+        "pl": "Cytuj",
+        "en": "Quote"
     },
     "redirect_back": {
-        "pl": "Powrót"
+        "pl": "Powrót",
+        "en": "Back"
     },
     "redirect_login": {
-        "pl": "Do strony logowania"
+        "pl": "Do strony logowania",
+        "en": "Go to login page"
     },
     "reject": {
-        "pl": "Odrzuć"
+        "pl": "Odrzuć",
+        "en": "Reject"
     },
     "remove": {
-        "pl": "Usuń"
+        "pl": "Usuń",
+        "en": "Delete"
     },
     "reset_password": {
-        "pl": "Resetuj hasło"
+        "pl": "Resetuj hasło",
+        "en": "Reset password"
     },
     "resume_campaign": {
-        "pl": "Wznów kampanię"
+        "pl": "Wznów kampanię",
+        "en": "Resume campaign"
     },
     "revoke": {
-        "pl": "Odbierz"
+        "pl": "Odbierz",
+        "en": "Revoke"
     },
     "save": {
-        "pl": "Zapisz"
+        "pl": "Zapisz",
+        "en": "Save"
     },
     "save_changes": {
-        "pl": "Zapisz zmiany"
+        "pl": "Zapisz zmiany",
+        "en": "Save changes"
     },
     "send": {
-        "pl": "Wyślij"
+        "pl": "Wyślij",
+        "en": "Send"
     },
     "summary": {
-        "pl": "Podsumowanie"
+        "pl": "Podsumowanie",
+        "en": "Summary"
     },
     "suspend": {
-        "pl": "Zawieś"
+        "pl": "Zawieś",
+        "en": "Suspend"
     },
     "terminate_campaign": {
-        "pl": "Zawieś kampanię"
+        "pl": "Zawieś kampanię",
+        "en": "Suspend campaign"
     },
     "tile_view": {
-        "pl": "Tryb kafelkowy"
+        "pl": "Tryb kafelkowy",
+        "en": "Tile view"
     },
     "unblock": {
-        "pl": "Odblokuj"
+        "pl": "Odblokuj",
+        "en": "Unblock"
     },
     "unhide": {
-        "pl": "Odkryj"
+        "pl": "Odkryj",
+        "en": "Unhide"
     }
 }

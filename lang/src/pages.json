@@ -2,7 +2,8 @@
     "errors": {
         "401": {
             "paragraph": {
-                "pl": ""
+                "pl": "",
+                "en": "You are not authorized to access this page."
             },
             "title": {
                 "pl": "Dostęp nieautoryzowany",
@@ -77,11 +78,11 @@
     "settings": {
         "branding": {
             "pl": "Branding",
-            "en": "Branding"
+            "en": "Branding settings"
         },
         "build": {
             "pl": "Build",
-            "en": "Build"
+            "en": "Build version"
         },
         "cache_clear": {
             "pl": "Wyczyść cache",
@@ -105,7 +106,7 @@
         },
         "git_status": {
             "pl": "Git status",
-            "en": "Git status"
+            "en": "Git repository status"
         },
         "info": {
             "pl": "Konfiguracja PHP",
