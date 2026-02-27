@@ -248,6 +248,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+        ConfigServiceProvider::class,
         AuthServiceProvider::class,
         BroadcastServiceProvider::class,
         BusServiceProvider::class,
@@ -271,6 +272,7 @@ return [
         Spatie\TranslationLoader\TranslationServiceProvider::class,
         ValidationServiceProvider::class,
         ViewServiceProvider::class,
+        \App\Providers\TelescopeServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -294,9 +296,7 @@ return [
         ComponentServiceProvider::class,
         RouteServiceProvider::class,
         \App\Providers\NotificationServiceProvider::class,
-        // App\Providers\TelescopeServiceProvider::class,
         GateServiceProvider::class,
-        ConfigServiceProvider::class,
         ImpersonateServiceProvider::class,
     ],
 

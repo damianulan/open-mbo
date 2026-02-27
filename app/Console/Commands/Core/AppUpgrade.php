@@ -38,7 +38,6 @@ class AppUpgrade extends Command
         $runComposer = $this->option('nocomposer') ? false : true;
         $this->line('Checking for updates...');
         try {
-            Log::debug('Upgrade check initialized');
             $newVersionStyle = new OutputFormatterStyle('white', 'yellow', ['bold']);
             $this->output->getFormatter()->setStyle('newversionblock', $newVersionStyle);
             $newVersionStyle = new OutputFormatterStyle('white', 'blue', ['bold']);
@@ -100,7 +99,7 @@ class AppUpgrade extends Command
                 if ($settings->save()) {
                     $this->line("New {$name} version detected: <newversionblock>^{$target_release}</newversionblock>");
                     AppUpgraded::dispatch($target_release);
-                    Log::debug('App upgraded to ' . $target_release);
+                    $this->comment('App upgraded to ' . $target_release);
                 }
             } else {
                 $this->line("Current {$name} version: <versionblock>{$target_release}</versionblock>");
