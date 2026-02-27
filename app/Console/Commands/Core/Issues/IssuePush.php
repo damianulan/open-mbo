@@ -32,38 +32,46 @@ class IssuePush extends Command
      */
     public function handle()
     {
-        $issue = $this->getIssue();
-        $message = $this->argument('message');
-        if(!empty($issue)) {
+        try {
+            $issue = $this->getIssue();
+            $message = $this->argument('message');
+            if(!empty($issue)) {
 
-            $result = Process::run('git fetch --all');
-            $result = Process::run('whoami');
-            $this->line($result->output());
-            $this->info("Opened issue detected: {$issue}");
-            if(!empty($message)){
-                $this->info("Commit message: {$message}");
-            } else {
-                $this->warn("No commit message provided!");
-            }
-
-            $answer = Str::lower($this->ask("Proceed? (y/n)", 'n'));
-            $proceed = $answer === 'y';
-            if($proceed) {
-                $this->comment('Pushing issue ...');
-                if(!empty($message)){
-                    $issue .= ': ' . $message;
-                }
-                $result = Process::run('git add .');
-                $result = Process::run('git commit -m "' . $issue . '"');
-                $result = Process::run('git push');
+                $result = Process::run('git fetch --all');
+                $result = Process::run('whoami');
                 $this->line($result->output());
-            } else {
-                $this->info("Aborted.");
-            }
+                $this->info("Opened issue detected: {$issue}");
+                if(!empty($message)){
+                    $this->info("Commit message: {$message}");
+                    $issue .= ': ' . $message;
+                } else {
+                    $this->warn("No commit message provided!");
+                }
 
-        } else {
-            $this->error('No issue registered.');
+                $answer = Str::lower($this->ask("Proceed? (y/n)", 'n'));
+                $proceed = $answer === 'y';
+                if($proceed) {
+                    if(!$this->validateCommitMessage($issue)) {
+                        throw new \Exception("Commit message was already been pushed: {$issue}");
+                    }
+                    $this->comment('Pushing issue ...');
+                    $result = Process::run('git add .');
+                    $result = Process::run('git commit -m "' . $issue . '"');
+                    $result = Process::run('git push');
+                    $this->line($result->output());
+
+                    $this->registerCommitMessage($issue);
+                } else {
+                    $this->info("Aborted.");
+                }
+
+            } else {
+                $this->error('No issue registered.');
+            }
+        } catch (\Exception $e) {
+            $this->error('An error occurred: '. $e->getMessage());
         }
+
 
         return true;
     }

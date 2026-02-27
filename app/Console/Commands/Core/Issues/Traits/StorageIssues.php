@@ -20,13 +20,39 @@ trait StorageIssues
         return Str::upper(Str::slug($issue));
     }
 
-    private function putIssueConfig(string $issue): string
+    private function getConfigContents(): array
+    {
+        $path = $this->getIssuePath();
+        if(File::exists($path)) {
+            $config = File::get($path);
+            if($config) {
+                return json_decode($config, true);
+            }
+        }
+        return [];
+    }
+
+    public function validateCommitMessage(string $message): bool
+    {
+        $config = $this->getConfigContents();
+        if(isset($config['changelog']) && is_array($config['changelog'])) {
+            if(in_array($message, $config['changelog'])) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public function putIssueConfig(string $issue): string
     {
         $issue = $this->normalizeIssue($issue);
+        if(empty($issue)) {
+            throw new \Exception('Empty issue provided');
+        }
         $path = $this->getIssuePath();
-        $config = [
-            'issue' => $issue
-        ];
+        $config = $this->getConfigContents();
+
         File::put($path, json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
         return $issue;
@@ -34,16 +60,18 @@ trait StorageIssues
 
     public function getIssue(): ?string
     {
-        $path = $this->getIssuePath();
-        if(File::exists($path)) {
-            $config = File::get($path);
-            if($config) {
-                $config = json_decode($config, true);
-                if(isset($config['issue'])) {
-                    return $config['issue'];
-                }
-            }
+        $config = $this->getConfigContents();
+        if(isset($config['issue'])) {
+            return $config['issue'];
         }
         return null;
+    }
+
+    public function registerCommitMessage(string $message): void
+    {
+        $config = $this->getConfigContents();
+        $config['changelog'][] = $message;
+        $config['issue'] = "";
+        File::put($this->getIssuePath(), json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
     }
 }
