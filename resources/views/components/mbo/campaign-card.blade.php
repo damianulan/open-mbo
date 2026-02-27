@@ -9,7 +9,7 @@
                 <div></div>
                 @if($campaign->draft)
                     <div data-tippy-content="{{ __('globals.draft') }}">
-                        <span class="badge bg-secondary">Draft</span>
+                        <span class="badge bg-secondary">{{ __('globals.draft') }}</span>
                     </div>
                 @endif
                 @if($campaign->inProgress())

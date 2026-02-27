@@ -35,6 +35,10 @@
         "to_pdf": {
             "pl": "Eksport do pliku PDF",
             "en": "Export to PDF"
+        },
+        "print_table": {
+            "pl": "Drukuj tabelę",
+            "en": "Print table"
         }
     },
     "draft": {
@@ -170,5 +174,51 @@
     "you": {
         "pl": "Ty",
         "en": "You"
+    },
+    "notes": {
+        "pl": "Notatki",
+        "en": "Notes"
+    },
+    "are_you_sure": {
+        "pl": "Na pewno?",
+        "en": "Are you sure?"
+    },
+    "here": {
+        "pl": "tutaj",
+        "en": "here"
+    },
+    "page_temporarily_unavailable": {
+        "pl": "Podstrona chwilowo niedostępna",
+        "en": "Subpage temporarily unavailable"
+    },
+    "page_temporarily_unavailable_info": {
+        "pl": "Ta część aplikacji jeszcze czeka na wytworzenie. Zapraszamy później.",
+        "en": "This part of the application is still under development. Please come back later."
+    },
+    "datatables_export": {
+        "button": {
+            "pl": "Eksportuj",
+            "en": "Export"
+        },
+        "email_notice": {
+            "pl": "Eksport zostanie wysłany na adres :email.",
+            "en": "Export will be emailed to :email."
+        },
+        "in_progress": {
+            "pl": "Trwa eksportowanie... proszę czekać.",
+            "en": "Exporting... please wait."
+        },
+        "done_download": {
+            "pl": "Gotowe. Pobierz plik",
+            "en": "Done. Download file"
+        },
+        "done_downloaded": {
+            "pl": "Gotowe. Plik został pobrany.",
+            "en": "Done. File has been downloaded."
+        },
+        "failed": {
+            "pl": "Eksport nie powiódł się, spróbuj ponownie później.",
+            "en": "Export failed, please try again later."
+        }
     }
 }

@@ -139,6 +139,14 @@
         "timezone": {
             "pl": "Strefa czasowa",
             "en": "Timezone"
+        },
+        "app": {
+            "pl": "Ustawienia aplikacji",
+            "en": "Application settings"
+        },
+        "smtp_server": {
+            "pl": "Serwer poczty wychodzącej (SMTP)",
+            "en": "Outgoing mail server (SMTP)"
         }
     }
 }

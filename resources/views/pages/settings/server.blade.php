@@ -102,7 +102,7 @@
         <div class="section">
             <div class="row">
                 <div class="col-md-6 col-sm-12">
-                    <h5 class="section-title">{{ __('Serwer poczty wychodzącej (SMTP)') }}</h5>
+                    <h5 class="section-title">{{ __('pages.settings.smtp_server') }}</h5>
                     <hr/>
                 </div>
                 <div class="col-md-8 settings-contents">

@@ -8,7 +8,7 @@
         <div class="section">
             <div class="row">
                 <div class="col-md-8 col-sm-12">
-                    <h4 class="section-title">{{ __('Ustawienia aplikacji') }}</h4>
+                    <h4 class="section-title">{{ __('pages.settings.app') }}</h4>
                     <hr/>
                 </div>
                 <div class="col-md-10 settings-contents">

@@ -22,5 +22,13 @@
     "to": {
         "pl": " - ",
         "en": " to "
+    },
+    "navigation": {
+        "pl": "Nawigacja paginacji",
+        "en": "Pagination navigation"
+    },
+    "go_to_page": {
+        "pl": "Przejdź do strony :page",
+        "en": "Go to page :page"
     }
 }
