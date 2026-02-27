@@ -1,10 +1,10 @@
 <?php
 
 use App\Exceptions\Core\UnauthorizedAccess;
-use App\Support\UI\Theme\Theme;
 use App\Models\Core\User;
 use App\Settings\GeneralSettings;
 use App\Support\Http\ResponseAjax;
+use App\Support\UI\Theme\Theme;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
