@@ -8,6 +8,7 @@ use App\Settings\MBOSettings;
 use App\Settings\UserSettings;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\DB;
 
 class ConfigServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,11 @@ class ConfigServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        try {
+            DB::connection()->getPdo();
+        } catch (\Exception $e) {
+            return;
+        }
         if (Schema::hasTable('settings')) {
             // load settings from database and overwrite existing
 
