@@ -5,13 +5,14 @@ namespace App\Providers;
 use App\Support\Notifications\Contracts\NotifiableEvent;
 use App\Support\Notifications\Jobs\NotifyOnEvent;
 use App\Support\Notifications\Models\Notification;
+use Exception;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use ReflectionClass;
-use Illuminate\Support\Facades\DB;
 
 class NotificationServiceProvider extends ServiceProvider
 {
@@ -66,7 +67,7 @@ class NotificationServiceProvider extends ServiceProvider
     {
         try {
             DB::connection()->getPdo();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return;
         }
         $classes = $this->getNotifiableEventClasses();
