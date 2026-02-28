@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\AppController;
+use App\Support\UI\Page\MenuBuilder;
 use App\Support\UI\Page\Navigation\MenubarMenu;
 use App\Support\UI\Page\Navigation\MenuItem;
-use App\Support\UI\Page\MenuBuilder;
 
 class SettingsController extends AppController
 {

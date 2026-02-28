@@ -4,9 +4,6 @@ namespace App\Console\Commands\Core\Issues;
 
 use App\Console\Commands\Core\Issues\Traits\StorageIssues;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Process;
 
 class IssueOpen extends Command
 {

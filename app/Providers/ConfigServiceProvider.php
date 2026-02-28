@@ -6,9 +6,10 @@ use App\Settings\GeneralSettings;
 use App\Settings\MailSettings;
 use App\Settings\MBOSettings;
 use App\Settings\UserSettings;
+use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\DB;
 
 class ConfigServiceProvider extends ServiceProvider
 {
@@ -31,7 +32,7 @@ class ConfigServiceProvider extends ServiceProvider
     {
         try {
             DB::connection()->getPdo();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return;
         }
         if (Schema::hasTable('settings')) {

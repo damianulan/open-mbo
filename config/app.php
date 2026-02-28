@@ -4,7 +4,6 @@ use App\Casts\CheckboxCast;
 use App\Enums\Core\MessageType;
 use App\Exceptions\AppException;
 use App\Helpers\StorageHelper;
-use App\Support\UI\Theme\Theme;
 use App\Models\Core\User;
 use App\Providers\AppServiceProvider;
 use App\Providers\ComponentServiceProvider;
@@ -14,8 +13,10 @@ use App\Providers\EventServiceProvider;
 use App\Providers\GateServiceProvider;
 use App\Providers\MacroServiceProvider;
 use App\Providers\RouteServiceProvider;
+use App\Providers\TelescopeServiceProvider;
 use App\Support\Http\ResponseAjax;
 use App\Support\UI\Page\PageBuilder;
+use App\Support\UI\Theme\Theme;
 use Barryvdh\Debugbar\ServiceProvider;
 use Illuminate\Auth\AuthServiceProvider;
 use Illuminate\Auth\Passwords\PasswordResetServiceProvider;
@@ -272,7 +273,7 @@ return [
         Spatie\TranslationLoader\TranslationServiceProvider::class,
         ValidationServiceProvider::class,
         ViewServiceProvider::class,
-        \App\Providers\TelescopeServiceProvider::class,
+        TelescopeServiceProvider::class,
 
         /*
          * Package Service Providers...

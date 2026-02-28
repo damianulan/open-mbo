@@ -3,6 +3,7 @@
 namespace App\Console\Commands\Core\Issues;
 
 use App\Console\Commands\Core\Issues\Traits\StorageIssues;
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Str;
@@ -28,29 +29,29 @@ class IssuePush extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         try {
             $issue = $this->getIssue();
             $message = $this->argument('message');
-            if(!empty($issue)) {
+            if ( ! empty($issue)) {
 
                 $result = Process::run('git fetch --all');
                 $result = Process::run('whoami');
                 $this->line($result->output());
                 $this->info("Opened issue detected: {$issue}");
-                if(!empty($message)){
+                if ( ! empty($message)) {
                     $this->info("Commit message: {$message}");
                     $issue .= ': ' . $message;
                 } else {
-                    $this->warn("No commit message provided!");
+                    $this->warn('No commit message provided!');
                 }
 
-                $answer = Str::lower($this->ask("Proceed? (y/n)", 'n'));
-                $proceed = $answer === 'y';
-                if($proceed) {
-                    if(!$this->validateCommitMessage($issue)) {
-                        throw new \Exception("Commit message was already been pushed: {$issue}");
+                $answer = Str::lower($this->ask('Proceed? (y/n)', 'n'));
+                $proceed = 'y' === $answer;
+                if ($proceed) {
+                    if ( ! $this->validateCommitMessage($issue)) {
+                        throw new Exception("Commit message was already been pushed: {$issue}");
                     }
                     $this->comment('Pushing issue ...');
                     $result = Process::run('git add .');
@@ -60,14 +61,14 @@ class IssuePush extends Command
 
                     $this->registerCommitMessage($issue);
                 } else {
-                    $this->info("Aborted.");
+                    $this->info('Aborted.');
                 }
 
             } else {
                 $this->error('No issue registered.');
             }
-        } catch (\Exception $e) {
-            $this->error('An error occurred: '. $e->getMessage());
+        } catch (Exception $e) {
+            $this->error('An error occurred: ' . $e->getMessage());
         }
     }
 }
