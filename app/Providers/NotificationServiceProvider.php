@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use ReflectionClass;
+use Illuminate\Support\Facades\DB;
 
 class NotificationServiceProvider extends ServiceProvider
 {
@@ -63,6 +64,11 @@ class NotificationServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        try {
+            DB::connection()->getPdo();
+        } catch (\Exception $e) {
+            return;
+        }
         $classes = $this->getNotifiableEventClasses();
         $events = [];
         if (Schema::hasTable('notifications')) {
