@@ -6,6 +6,7 @@ $font-family-monospace: 'JetBrains Mono', monospace;
 $font-family-icons: 'bootstrap-icons';
 $font-size-base: 0.8rem;
 $line-height-base: 1.5;
+$prefix: bs-;
 
 // Paths
 $imagesPath: '/themes/light/images';
@@ -55,6 +56,8 @@ $status-interrupted: $secondary;
 
 // Component colors
 $body-bg: $light;
+$body-bg-dark: #285c7f;
+
 $body-wrapper-bg: rgba($primary, 0.06);
 $sidebar-bg: $light;
 $sidebar-brand-link: $primary;
@@ -139,7 +142,7 @@ $badge-font-size: 0.75em;
 $badge-font-weight: 600;
 
 // Cards
-$card-bg: $light;
+$card-bg: var(--#{$prefix}body-bg);
 
 // Typography
 $link-color: $primary;

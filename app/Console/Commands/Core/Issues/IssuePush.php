@@ -42,7 +42,7 @@ class IssuePush extends Command
             if ( ! empty($issue)) {
 
                 $result = Process::run('git fetch --all');
-                $result = Process::run('whoami');
+                $result = Process::run('git status');
                 $this->line($result->output());
                 $this->info("Opened issue detected: {$issue}");
                 if ( ! empty($message)) {
