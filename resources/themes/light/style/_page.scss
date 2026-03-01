@@ -23,7 +23,7 @@ html {
         }
 
         &:active {
-            background: $primary;
+            background: var(--mbo-primary);
         }
     }
 }
@@ -34,7 +34,7 @@ html {
 }
 
 body {
-    background-color: $body-wrapper-bg;
+    background-color: var(--mbo-body-wrapper-bg);
 }
 
 .content {
@@ -130,7 +130,7 @@ body {
     & > .content-card-top {
         display: flex;
         align-items: center;
-        color: $primary;
+        color: var(--mbo-primary);
         flex-wrap: wrap;
 
         & > .content-card-header {
@@ -267,7 +267,7 @@ section.content-wrapper {
     display: inline-block;
     position: relative;
     border: 3px solid;
-    border-color: rgba($primary, 1) rgba($primary, 1) transparent transparent;
+    border-color: rgba(var(--mbo-primary-rgb), 1) rgba(var(--mbo-primary-rgb), 1) transparent transparent;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
     align-self: center;
@@ -284,7 +284,7 @@ section.content-wrapper {
     bottom: 0;
     margin: auto;
     border: 4px solid;
-    border-color: transparent transparent rgba($primary, 0.5) rgba($primary, 0.5);
+    border-color: transparent transparent rgba(var(--mbo-primary-rgb), 0.5) rgba(var(--mbo-primary-rgb), 0.5);
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -295,7 +295,7 @@ section.content-wrapper {
 .mbo-loader::before {
     width: 32px;
     height: 32px;
-    border-color: rgba($primary, 1) rgba($primary, 1) transparent transparent;
+    border-color: rgba(var(--mbo-primary-rgb), 1) rgba(var(--mbo-primary-rgb), 1) transparent transparent;
     animation: rotation 1.5s linear infinite;
 }
 
@@ -328,7 +328,7 @@ section.content-wrapper {
     justify-content: space-around;
     top: 0;
     left: 0;
-    background: rgba($primary, 0.25);
+    background: rgba(var(--mbo-primary-rgb), 0.25);
     opacity: 1;
 
     .mbo-loader {
@@ -338,7 +338,7 @@ section.content-wrapper {
 }
 
 .breadcrumb .breadcrumb-item {
-    color: $primary;
+    color: var(--mbo-primary);
 }
 
 ul.list-style-none {
@@ -377,7 +377,7 @@ ul.list-style-none {
         display: inline-block;
         font-size: 0.8rem;
         padding: 0 1rem;
-        background-color: $light;
+        background-color: var(--mbo-light);
 
         i {
             font-size: 1rem;

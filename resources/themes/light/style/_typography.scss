@@ -1,5 +1,5 @@
 body {
-    color: $paragraph-color;
+    color: var(--mbo-paragraph-color);
 }
 
 .lh-13 {
@@ -65,28 +65,28 @@ textarea {
 }
 
 a {
-    color: $link-color;
+    color: var(--mbo-link-color);
     text-decoration: none;
 
     &:hover {
-        color: $link-color-hover;
+        color: var(--mbo-link-hover-color);
         cursor: pointer !important;
         transition: all 0.2s ease-in-out;
     }
 
     &:active {
-        color: $link-color-active;
+        color: var(--mbo-link-active-color);
     }
 
     &.link-primary {
-        color: $primary;
+        color: var(--mbo-primary);
     }
 
     &.link-muted {
-        color: $link-color-muted;
+        color: var(--mbo-link-muted-color);
 
         &:hover {
-            color: $link-color-muted-hover;
+            color: var(--mbo-link-muted-hover-color);
         }
     }
 }
@@ -108,10 +108,10 @@ i.bi-3 {
 }
 
 .content a i.bi {
-    color: $primary;
+    color: var(--mbo-primary);
 
     &:hover {
-        color: tint($primary, 10%);
+        color: var(--mbo-primary-tint-10);
     }
 }
 
@@ -122,7 +122,7 @@ h4,
 h5,
 h6 {
     font-family: $font-family-serif;
-    color: $primary;
+    color: var(--mbo-primary);
     font-weight: 600;
 }
 
@@ -131,90 +131,90 @@ h6 {
 }
 
 hr {
-    background-color: $primary;
+    background-color: var(--mbo-primary);
     opacity: 0.1;
 }
 
 .text-secondary {
-    color: $secondary !important;
+    color: var(--mbo-secondary) !important;
 }
 
 .text-unstarted {
-    color: $status-unstarted !important;
+    color: var(--mbo-status-unstarted) !important;
 }
 
 .text-progress {
-    color: $status-progress !important;
+    color: var(--mbo-status-progress) !important;
 }
 
 .text-completed {
-    color: $status-completed !important;
+    color: var(--mbo-status-completed) !important;
 }
 
 .text-passed {
-    color: $status-passed !important;
+    color: var(--mbo-status-passed) !important;
 }
 
 .text-failed {
-    color: $status-failed !important;
+    color: var(--mbo-status-failed) !important;
 }
 
 .text-interrupted {
-    color: $status-interrupted !important;
+    color: var(--mbo-status-interrupted) !important;
 }
 
 .bg-unstarted {
-    background-color: $status-unstarted !important;
+    background-color: var(--mbo-status-unstarted) !important;
 }
 
 .bg-progress {
-    background-color: $status-progress !important;
+    background-color: var(--mbo-status-progress) !important;
 }
 
 .bg-completed {
-    background-color: $status-completed !important;
+    background-color: var(--mbo-status-completed) !important;
 }
 
 .bg-passed {
-    background-color: $status-passed !important;
+    background-color: var(--mbo-status-passed) !important;
 }
 
 .bg-failed {
-    background-color: $status-failed !important;
+    background-color: var(--mbo-status-failed) !important;
 }
 
 .bg-interrupted {
-    background-color: $status-interrupted !important;
+    background-color: var(--mbo-status-interrupted) !important;
 }
 
 .badge.badge-unstarted {
-    color: $status-unstarted;
-    background-color: rgba($status-unstarted, 0.2);
+    color: var(--mbo-status-unstarted);
+    background-color: rgba(var(--mbo-status-unstarted-rgb), 0.2);
 }
 
 .badge.badge-progress {
-    color: $status-progress;
-    background-color: rgba($status-progress, 0.2);
+    color: var(--mbo-status-progress);
+    background-color: rgba(var(--mbo-status-progress-rgb), 0.2);
 }
 
 .badge.badge-completed {
-    color: $status-completed;
-    background-color: rgba($status-completed, 0.2);
+    color: var(--mbo-status-completed);
+    background-color: rgba(var(--mbo-status-completed-rgb), 0.2);
 }
 
 .badge.badge-passed {
-    color: $status-passed;
-    background-color: rgba($status-passed, 0.2);
+    color: var(--mbo-status-passed);
+    background-color: rgba(var(--mbo-status-passed-rgb), 0.2);
 }
 
 .badge.badge-failed {
-    color: $status-failed;
-    background-color: rgba($status-failed, 0.2);
+    color: var(--mbo-status-failed);
+    background-color: rgba(var(--mbo-status-failed-rgb), 0.2);
 }
 
 .badge.badge-interrupted {
-    color: $status-interrupted;
-    background-color: rgba($status-interrupted, 0.2);
+    color: var(--mbo-status-interrupted);
+    background-color: rgba(var(--mbo-status-interrupted-rgb), 0.2);
 }
 
 .dashboard-widget-title {
@@ -223,7 +223,7 @@ hr {
 
 .auth .card-header {
     font-family: $font-family-serif;
-    color: $primary;
+    color: var(--mbo-primary);
     font-weight: 600;
     font-size: 1.6rem;
     text-align: center;
@@ -248,6 +248,6 @@ hr {
 }
 
 .text-highlight {
-    color: $primary;
+    color: var(--mbo-primary);
     font-weight: 600;
 }

@@ -65,8 +65,8 @@
 
 .pagination .page-item > .page-link:hover,
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-    background: rgba($primary, 0.2);
-    border: 1px solid rgba($primary, 0.25);
+    background: rgba(var(--mbo-primary-rgb), 0.2);
+    border: 1px solid rgba(var(--mbo-primary-rgb), 0.25);
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.current,
@@ -74,8 +74,8 @@
 .pagination .page-item.active > .page-link,
 .pagination .page-item.active > .page-link:hover {
     color: #fff !important;
-    background: $primary;
-    border: 1px solid $primary;
+    background: var(--mbo-primary);
+    border: 1px solid var(--mbo-primary);
 }
 
 table.ombo-table {
@@ -90,10 +90,10 @@ table.ombo-table {
 
     tbody {
         tr {
-            background-color: rgba($primary, 0.05);
+            background-color: rgba(var(--mbo-primary-rgb), 0.05);
 
             &:hover {
-                background-color: rgba($primary, 0.1);
+                background-color: rgba(var(--mbo-primary-rgb), 0.1);
                 transition: all 0.2s ease-in-out;
             }
 
@@ -255,7 +255,7 @@ ul.ombo-list {
     }
 
     li .list-content span {
-        color: $secondary;
+        color: var(--mbo-secondary);
         white-space: nowrap;
         position: relative;
     }
@@ -274,13 +274,13 @@ ul.ombo-list {
     li .list-actions .list-action {
         text-decoration: none;
         font-size: 1rem;
-        color: $link-color;
+        color: var(--mbo-link-color);
         cursor: pointer;
         white-space: nowrap;
     }
 
     li .list-actions .list-action:hover {
-        color: $link-color-hover;
+        color: var(--mbo-link-hover-color);
         transition: all 0.2s ease-in-out;
     }
 
@@ -336,10 +336,10 @@ ul.ombo-list {
         }
 
         tr.is-dragging {
-            background: rgba($primary, 0.15);
+            background: rgba(var(--mbo-primary-rgb), 0.15);
 
             td {
-                color: rgba($primary, 0.05);
+                color: rgba(var(--mbo-primary-rgb), 0.05);
             }
         }
     }

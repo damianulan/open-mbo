@@ -416,7 +416,7 @@
     background-color: #008a00;
 }
 .ql-editor .ql-bg-blue {
-    background-color: $primary;
+    background-color: var(--mbo-primary);
 }
 .ql-editor .ql-bg-purple {
     background-color: #93f;
@@ -437,7 +437,7 @@
     color: #008a00;
 }
 .ql-editor .ql-color-blue {
-    color: $primary;
+    color: var(--mbo-primary);
 }
 .ql-editor .ql-color-purple {
     color: #93f;
@@ -532,7 +532,7 @@
 .ql-snow .ql-toolbar .ql-picker-item:hover,
 .ql-snow.ql-toolbar .ql-picker-item.ql-selected,
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected {
-    color: $primary;
+    color: var(--mbo-primary);
 }
 .ql-snow.ql-toolbar button:hover .ql-fill,
 .ql-snow .ql-toolbar button:hover .ql-fill,
@@ -562,7 +562,7 @@
 .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
 .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill,
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill {
-    fill: $primary;
+    fill: var(--mbo-primary);
 }
 .ql-snow.ql-toolbar button:hover .ql-stroke,
 .ql-snow .ql-toolbar button:hover .ql-stroke,
@@ -592,7 +592,7 @@
 .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke-miter,
 .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter,
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter {
-    stroke: $primary;
+    stroke: var(--mbo-primary);
 }
 @media (pointer: coarse) {
     .ql-snow.ql-toolbar button:hover:not(.ql-active),
@@ -994,7 +994,7 @@
     background-color: #fff;
     border: 1px solid $input-border-color;
     box-shadow: 0 0 5px #ddd;
-    color: $dark;
+    color: var(--mbo-dark);
     padding: 5px 12px;
     white-space: nowrap;
 
@@ -1068,7 +1068,7 @@
     }
 }
 .ql-snow a {
-    color: $primary;
+    color: var(--mbo-primary);
 }
 .ql-container.ql-snow {
     border: 1px solid $input-border-color;

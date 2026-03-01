@@ -11,38 +11,38 @@
 }
 
 .badge.badge-primary {
-    background-color: rgba($primary, 0.25);
-    color: $primary;
+    background-color: rgba(var(--mbo-primary-rgb), 0.25);
+    color: var(--mbo-primary);
 }
 
 .badge.badge-secondary {
-    background-color: rgba($secondary, 0.25);
-    color: $secondary;
+    background-color: rgba(var(--mbo-secondary-rgb), 0.25);
+    color: var(--mbo-secondary);
 }
 
 .badge.badge-success {
-    background-color: rgba($success, 0.25);
-    color: $success;
+    background-color: rgba(var(--mbo-success-rgb), 0.25);
+    color: var(--mbo-success);
 }
 
 .badge.badge-warning {
-    background-color: rgba($warning, 0.25);
-    color: $warning;
+    background-color: rgba(var(--mbo-warning-rgb), 0.25);
+    color: var(--mbo-warning);
 }
 
 .badge.badge-danger {
-    background-color: rgba($danger, 0.25);
-    color: $danger;
+    background-color: rgba(var(--mbo-danger-rgb), 0.25);
+    color: var(--mbo-danger);
 }
 
 .badge.badge-info {
-    background-color: rgba($info, 0.25);
-    color: $info;
+    background-color: rgba(var(--mbo-info-rgb), 0.25);
+    color: var(--mbo-info);
 }
 
 .badge.badge-dark {
-    background-color: rgba($dark, 0.25);
-    color: $dark;
+    background-color: rgba(var(--mbo-dark-rgb), 0.25);
+    color: var(--mbo-dark);
 }
 
 .badge.badge-rotated {
@@ -65,27 +65,27 @@
 }
 
 .alert.alert-success {
-    background-color: rgba($success, 0.25);
-    border-color: rgba($success, 0.3);
-    color: darken($success, 15%);
+    background-color: rgba(var(--mbo-success-rgb), 0.25);
+    border-color: rgba(var(--mbo-success-rgb), 0.3);
+    color: var(--mbo-success-darken-15);
 }
 
 .alert.alert-danger {
-    background-color: rgba($danger, 0.25);
-    border-color: rgba($danger, 0.3);
-    color: darken($danger, 20%);
+    background-color: rgba(var(--mbo-danger-rgb), 0.25);
+    border-color: rgba(var(--mbo-danger-rgb), 0.3);
+    color: var(--mbo-danger-darken-20);
 }
 
 .alert.alert-warning {
-    background-color: rgba($warning, 0.25);
-    border-color: rgba($warning, 0.3);
-    color: darken($warning, 15%);
+    background-color: rgba(var(--mbo-warning-rgb), 0.25);
+    border-color: rgba(var(--mbo-warning-rgb), 0.3);
+    color: var(--mbo-warning-darken-15);
 }
 
 .alert.alert-info {
-    background-color: rgba($info, 0.25);
-    border-color: rgba($info, 0.3);
-    color: darken($info, 15%);
+    background-color: rgba(var(--mbo-info-rgb), 0.25);
+    border-color: rgba(var(--mbo-info-rgb), 0.3);
+    color: var(--mbo-info-darken-15);
 }
 
 .alert-dismissible .btn-close {
@@ -100,32 +100,32 @@
 .toastify.success * {
     box-shadow:
         0 3px 6px -1px rgba(0, 0, 0, 0.15),
-        0 10px 36px -4px rgba($success, 0.25);
-    background: linear-gradient(90deg, rgba($success, 1) 0%, rgba($success, 0.95) 40%, rgba($success, 0.8) 100%);
+        0 10px 36px -4px rgba(var(--mbo-success-rgb), 0.25);
+    background: linear-gradient(90deg, rgba(var(--mbo-success-rgb), 1) 0%, rgba(var(--mbo-success-rgb), 0.95) 40%, rgba(var(--mbo-success-rgb), 0.8) 100%);
     color: $white;
 }
 .toastify.error,
 .toastify.error * {
     box-shadow:
         0 3px 6px -1px rgba(0, 0, 0, 0.15),
-        0 10px 36px -4px rgba($danger, 0.25);
-    background: linear-gradient(90deg, rgba($danger, 1) 0%, rgba($danger, 0.95) 40%, rgba($danger, 0.8) 100%);
+        0 10px 36px -4px rgba(var(--mbo-danger-rgb), 0.25);
+    background: linear-gradient(90deg, rgba(var(--mbo-danger-rgb), 1) 0%, rgba(var(--mbo-danger-rgb), 0.95) 40%, rgba(var(--mbo-danger-rgb), 0.8) 100%);
     color: $white;
 }
 .toastify.info,
 .toastify.info * {
     box-shadow:
         0 3px 6px -1px rgba(0, 0, 0, 0.15),
-        0 10px 36px -4px rgba($primary, 0.25);
-    background: linear-gradient(90deg, rgba($primary, 1) 0%, rgba($primary, 0.95) 40%, rgba($primary, 0.8) 100%);
+        0 10px 36px -4px rgba(var(--mbo-primary-rgb), 0.25);
+    background: linear-gradient(90deg, rgba(var(--mbo-primary-rgb), 1) 0%, rgba(var(--mbo-primary-rgb), 0.95) 40%, rgba(var(--mbo-primary-rgb), 0.8) 100%);
     color: $white;
 }
 .toastify.warning,
 .toastify.warning * {
     box-shadow:
         0 3px 6px -1px rgba(0, 0, 0, 0.15),
-        0 10px 36px -4px rgba($warning, 0.25);
-    background: linear-gradient(90deg, rgba($warning, 1) 0%, rgba($warning, 0.95) 40%, rgba($warning, 0.8) 100%);
+        0 10px 36px -4px rgba(var(--mbo-warning-rgb), 0.25);
+    background: linear-gradient(90deg, rgba(var(--mbo-warning-rgb), 1) 0%, rgba(var(--mbo-warning-rgb), 0.95) 40%, rgba(var(--mbo-warning-rgb), 0.8) 100%);
     color: $white;
 }
 

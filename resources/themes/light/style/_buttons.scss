@@ -20,11 +20,11 @@
 }
 
 .btn-primary {
-    border: 1px solid $primary;
-    color: $text-btn;
+    border: 1px solid var(--mbo-primary);
+    color: var(--mbo-text-btn);
 
     &:hover {
-        color: $text-btn-hover;
+        color: var(--mbo-text-btn-hover);
     }
 }
 
@@ -32,14 +32,14 @@
 .btn-info,
 .btn-warning,
 .btn-success {
-    color: $text-btn;
+    color: var(--mbo-text-btn);
 }
 
 .btn-danger:hover,
 .btn-info:hover,
 .btn-warning:hover,
 .btn-success:hover {
-    color: $text-btn-hover;
+    color: var(--mbo-text-btn-hover);
 }
 
 .btn-outline-primary:hover,
@@ -47,21 +47,21 @@
 .btn-outline-primary.active,
 .btn-outline-primary:focus,
 .btn-outline-primary:focus-visible {
-    border: 1px solid $primary;
-    color: $text-btn;
-    background-color: $primary;
+    border: 1px solid var(--mbo-primary);
+    color: var(--mbo-text-btn);
+    background-color: var(--mbo-primary);
 }
 
 .btn-secondary {
-    border: 1px solid $secondary;
+    border: 1px solid var(--mbo-secondary);
     color: $white;
-    background-color: $secondary;
-    box-shadow: 4px 9px -4px rgba($secondary, 0.5);
+    background-color: var(--mbo-secondary);
+    box-shadow: 4px 9px -4px rgba(var(--mbo-secondary-rgb), 0.5);
 
     &:hover {
         color: $white;
-        background-color: $secondary;
-        box-shadow: 0 4px 18px 0 rgba($secondary, 0.4);
+        background-color: var(--mbo-secondary);
+        box-shadow: 0 4px 18px 0 rgba(var(--mbo-secondary-rgb), 0.4);
     }
 
     &:focus,
@@ -72,18 +72,18 @@
 }
 
 .btn-outline-secondary {
-    border: 1px solid $secondary;
-    color: $secondary;
+    border: 1px solid var(--mbo-secondary);
+    color: var(--mbo-secondary);
 
     &:hover,
     &:active,
     &.active,
     &:focus,
     &:focus-visible {
-        border: 1px solid $secondary;
-        color: $secondary;
-        background-color: rgba($secondary, 0.15);
-        box-shadow: 0 4px 12px 0 rgba($secondary, 0.1);
+        border: 1px solid var(--mbo-secondary);
+        color: var(--mbo-secondary);
+        background-color: rgba(var(--mbo-secondary-rgb), 0.15);
+        box-shadow: 0 4px 12px 0 rgba(var(--mbo-secondary-rgb), 0.1);
     }
 }
 
@@ -122,10 +122,10 @@ a.action-btn {
 
 a.btn-tile {
     display: flex;
-    color: $primary;
+    color: var(--mbo-primary);
     font-weight: 600;
     font-size: 1.2rem;
-    background-color: rgba($primary, 0.25);
+    background-color: rgba(var(--mbo-primary-rgb), 0.25);
     text-decoration: none;
     align-items: center;
     padding: 0.75rem 1.5rem;
@@ -144,9 +144,9 @@ a.btn-tile {
 
     &.selected,
     &:hover {
-        background: $primary;
-        background: linear-gradient(90deg, rgba($primary, 1) 0%, rgba($primary, 0.75) 70%, rgba($primary, 0.65) 100%);
-        box-shadow: 0 4px 18px 0 rgba($primary, 0.4);
+        background: var(--mbo-primary);
+        background: linear-gradient(90deg, rgba(var(--mbo-primary-rgb), 1) 0%, rgba(var(--mbo-primary-rgb), 0.75) 70%, rgba(var(--mbo-primary-rgb), 0.65) 100%);
+        box-shadow: 0 4px 18px 0 rgba(var(--mbo-primary-rgb), 0.4);
 
         span {
             padding-left: 1.25rem;
@@ -157,7 +157,7 @@ a.btn-tile {
         }
 
         * {
-            color: $button-link-active !important;
+            color: var(--mbo-button-link-active) !important;
         }
     }
 
@@ -182,6 +182,6 @@ a.btn-tile {
 
     &.btn-primary i.bi,
     &.btn-secondary i.bi {
-        color: $body-bg;
+        color: var(--mbo-body-bg);
     }
 }

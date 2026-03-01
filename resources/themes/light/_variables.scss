@@ -1,75 +1,76 @@
 // Typography
-$font-family-sans-serif: 'IBM Plex Sans', 'Helvetica', sans-serif;
-$font-family-base: $font-family-sans-serif;
-$font-family-serif: 'IBM Plex Serif', serif;
-$font-family-monospace: 'JetBrains Mono', monospace;
-$font-family-icons: 'bootstrap-icons';
-$font-size-base: 0.8rem;
-$line-height-base: 1.5;
-$prefix: bs-;
+$font-family-sans-serif: 'IBM Plex Sans', 'Helvetica', sans-serif !default;
+$font-family-base: $font-family-sans-serif !default;
+$font-family-serif: 'IBM Plex Serif', serif !default;
+$font-family-monospace: 'JetBrains Mono', monospace !default;
+$font-family-icons: 'bootstrap-icons' !default;
+$font-size-base: 0.8rem !default;
+$line-height-base: 1.5 !default;
+$prefix: bs- !default;
 
 // Paths
-$imagesPath: '/themes/light/images';
+$imagesPath: '/themes/light/images' !default;
 
 /**
 /* Colors START
 **/
 
 // Collection
-$coolgreen: #d7faf4;
-$columbia: #c5d5ea;
-$indigo: #1b4965;
-$violet: #564d80;
-$lazuli: #22577a;
-$dimm-blue: #7392b7;
-$celadon: #1bdcb8;
-$greenish: #a3aea7;
+$coolgreen: #d7faf4 !default;
+$columbia: #c5d5ea !default;
+$indigo: #1b4965 !default;
+$violet: #564d80 !default;
+$lazuli: #22577a !default;
+$dimm-blue: #7392b7 !default;
+$celadon: #1bdcb8 !default;
+$greenish: #a3aea7 !default;
 
-$red: #d66a6a;
-$orange: #e79a1d;
-$yellow: #ffe16d;
-$green: #4ea881;
-$teal: #66c5c7;
-$cyan: #6cb4d6;
-$blue: #6eabc6;
-$purple: #a173d6;
-$pink: #d66ab2;
-$brown: #b88f75;
+$red: #d66a6a !default;
+$orange: #e79a1d !default;
+$yellow: #ffe16d !default;
+$green: #4ea881 !default;
+$teal: #66c5c7 !default;
+$cyan: #6cb4d6 !default;
+$blue: #6eabc6 !default;
+$purple: #a173d6 !default;
+$pink: #d66ab2 !default;
+$brown: #b88f75 !default;
 
-$danger: $red;
-$warning: #d3622c;
-$success: $green;
-$info: $blue;
+// Bootstrap semantic aliases (override-friendly)
+$danger: $red !default;
+$warning: #d3622c !default;
+$success: $green !default;
+$info: $blue !default;
 
 // Action colors
-$light: #fff;
-$lighttint: tint($primary, 98%);
-$dark: #253e4c;
-$disabled-text: #6c757d;
+$light: #fff !default;
+$lighttint: var(--mbo-lighttint) !default;
+$dark: #253e4c !default;
+$disabled-text: #6c757d !default;
 
-$status-unstarted: shade(#adb5bd, 10%);
-$status-progress: $warning;
-$status-completed: $info;
-$status-passed: $success;
-$status-failed: #e4281f;
-$status-interrupted: $secondary;
+$status-unstarted: shade(#adb5bd, 10%) !default;
+$status-progress: $warning !default;
+$status-completed: $info !default;
+$status-passed: $success !default;
+$status-failed: #e4281f !default;
+$status-interrupted: $secondary !default;
 
 // Component colors
-$body-bg: $light;
-$body-bg-dark: #285c7f;
+$body-bg: $light !default;
+$body-bg-dark: #111 !default;
 
-$body-wrapper-bg: rgba($primary, 0.06);
-$sidebar-bg: $light;
-$sidebar-brand-link: $primary;
-$sidebar-multi-title: tint($dark, 40%);
-$sidebar-usermenu: $dark;
-$page-header-color: $primary;
-$paragraph-color: tint($dark, 20%);
-$text-btn: tint($coolgreen, 20%);
-$text-btn-hover: tint($coolgreen, 40%);
-$btn-active-color: #fff;
-$card-shadow: 5px 5px 12px 0px rgba($primary, 0.1);
-$info-box-color: $info;
+$body-wrapper-bg: var(--mbo-body-wrapper-bg) !default;
+$sidebar-bg: var(--mbo-sidebar-bg) !default;
+$sidebar-brand-link: var(--mbo-sidebar-brand-link) !default;
+$sidebar-multi-title: tint($dark, 40%) !default;
+$sidebar-usermenu: var(--mbo-sidebar-usermenu) !default;
+$page-header-color: var(--mbo-page-header-color) !default;
+$paragraph-color: var(--mbo-paragraph-color) !default;
+$text-btn: var(--mbo-text-btn) !default;
+$text-btn-hover: var(--mbo-text-btn-hover) !default;
+$btn-active-color: #fff !default;
+$card-shadow: var(--mbo-card-shadow) !default;
+$info-box-color: $info !default;
 
 $theme-colors: (
     'primary': $primary,
@@ -113,79 +114,234 @@ $theme-colors: (
     'passed': $status-passed,
     'failed': $status-failed,
     'interrupted': $status-interrupted
-);
+) !default;
 
 /**
 /* Colors END
 **/
 
 // variables
-$menu-expanded-width: 18rem;
-$menu-collapsed-width: 5rem;
-$tooltip-inner-padding-y: 0.3rem;
-$tooltip-inner-padding-x: 0.2rem;
-$tooltip-inner-font-size: 0.8rem;
+$menu-expanded-width: 18rem !default;
+$menu-collapsed-width: 5rem !default;
+$tooltip-inner-padding-y: 0.3rem !default;
+$tooltip-inner-padding-x: 0.2rem !default;
+$tooltip-inner-font-size: 0.8rem !default;
 
-$dropdown-divider-bg: $greenish;
-$dropdown-link-hover-bg: rgba($primary, 0.1);
-$dropdown-link-color: $secondary;
-$dropdown-link-color-hover: $secondary;
-$dropdown-item-padding-x: 0.75rem;
-$dropdown-item-padding-y: 0.25rem;
+$dropdown-divider-bg: var(--mbo-dropdown-divider-bg) !default;
+$dropdown-link-hover-bg: rgba($primary, 0.1) !default;
+$dropdown-link-color: $secondary !default;
+$dropdown-link-color-hover: $secondary !default;
+$dropdown-item-padding-x: 0.75rem !default;
+$dropdown-item-padding-y: 0.25rem !default;
 
-$breadcrumb-font-size: 0.7rem;
-$dropdown-padding-y: 0;
+$breadcrumb-font-size: 0.7rem !default;
+$dropdown-padding-y: 0 !default;
 
-$badge-padding-x: 0.65em;
-$badge-padding-y: 0.5em;
-$badge-font-size: 0.75em;
-$badge-font-weight: 600;
+$badge-padding-x: 0.65em !default;
+$badge-padding-y: 0.5em !default;
+$badge-font-size: 0.75em !default;
+$badge-font-weight: 600 !default;
 
 // Cards
-$card-bg: var(--#{$prefix}body-bg);
+$card-bg: var(--#{$prefix}body-bg) !default;
 
 // Typography
-$link-color: $primary;
-$link-color-hover: tint($primary, 25%);
-$link-color-muted: $dimm-blue;
-$link-color-muted-hover: shade($dimm-blue, 25%);
-$link-color-active: $link-color-hover;
-$link-color-active-hover: tint($primary, 35%);
-$button-link-active: tint($primary, 90%);
-$button-link-active-hover: tint($primary, 80%);
-$nav-link-font-size: 0.85rem;
-$nav-link-font-weight: 400;
+$link-color: $primary !default;
+$link-color-hover: tint($primary, 25%) !default;
+$link-color-muted: $dimm-blue !default;
+$link-color-muted-hover: shade($dimm-blue, 25%) !default;
+$link-color-active: $link-color-hover !default;
+$link-color-active-hover: tint($primary, 35%) !default;
+$button-link-active: tint($primary, 90%) !default;
+$button-link-active-hover: tint($primary, 80%) !default;
+$nav-link-font-size: 0.85rem !default;
+$nav-link-font-weight: 400 !default;
 
 // Navigation
-$nav-tab-bg: $light;
-$nav-tab-color-hover: #000;
+$nav-tab-bg: $light !default;
+$nav-tab-color-hover: #000 !default;
 
 // Forms
-$input-border-color: tint($primary, 10%);
-$input-border-focus-color: tint($primary, 30%);
-$input-color: $secondary;
-$form-switch-width: 3em;
-$check-border-color: rgba($secondary, 0.6);
-$switch-border-color: rgba($secondary, 0.6);
-$border-radius: 0.3rem;
+$input-border-color: var(--mbo-input-border-color) !default;
+$input-border-focus-color: tint($primary, 30%) !default;
+$input-color: $secondary !default;
+$form-switch-width: 3em !default;
+$check-border-color: rgba($secondary, 0.6) !default;
+$switch-border-color: rgba($secondary, 0.6) !default;
+$border-radius: 0.3rem !default;
 
 // Tables
-$table-bg: transparent;
-$ombo-body: rgba($primary, 0.06); //lighten($primary, 60%);
-$ombo-body-passed: rgba($status-passed, 0.15);
-$ombo-body-passed-hover: rgba($status-passed, 0.2);
-$ombo-body-warning: rgba($warning, 0.1);
-$ombo-body-warning-hover: rgba($warning, 0.15);
-$ombo-body-failed: rgba($status-failed, 0.15);
-$ombo-body-failed-hover: rgba($status-failed, 0.2);
-$ombo-body-completed: rgba($status-completed, 0.25);
-$ombo-body-completed-hover: rgba($status-completed, 0.35);
-$ombo-body-inactive: rgba($disabled-text, 0.15);
-$ombo-body-inactive-hover: rgba($disabled-text, 0.2);
-$ombo-body-hover: rgba($primary, 0.15);
-$ombo-body-gradient: linear-gradient(
-    120deg,
-    rgba($primary, 0.06) 0%,
-    rgba($primary, 0.1) 70%,
-    rgba($primary, 0.12) 100%
-);
+$table-bg: transparent !default;
+$ombo-body: var(--mbo-ombo-body) !default; //lighten($primary, 60%);
+$ombo-body-passed: var(--mbo-ombo-body-passed) !default;
+$ombo-body-passed-hover: var(--mbo-ombo-body-passed-hover) !default;
+$ombo-body-warning: var(--mbo-ombo-body-warning) !default;
+$ombo-body-warning-hover: var(--mbo-ombo-body-warning-hover) !default;
+$ombo-body-failed: var(--mbo-ombo-body-failed) !default;
+$ombo-body-failed-hover: var(--mbo-ombo-body-failed-hover) !default;
+$ombo-body-completed: var(--mbo-ombo-body-completed) !default;
+$ombo-body-completed-hover: var(--mbo-ombo-body-completed-hover) !default;
+$ombo-body-inactive: var(--mbo-ombo-body-inactive) !default;
+$ombo-body-inactive-hover: var(--mbo-ombo-body-inactive-hover) !default;
+$ombo-body-hover: var(--mbo-ombo-body-hover) !default;
+$ombo-body-gradient: var(--mbo-ombo-body-gradient) !default;
+
+// Theme-aware CSS variables for runtime theme switching
+:root,
+[data-bs-theme='light'] {
+    --mbo-primary: #{$primary};
+    --mbo-primary-rgb: #{red($primary)}, #{green($primary)}, #{blue($primary)};
+    --mbo-secondary: #{$secondary};
+    --mbo-secondary-rgb: #{red($secondary)}, #{green($secondary)}, #{blue($secondary)};
+    --mbo-success: #{$success};
+    --mbo-success-rgb: #{red($success)}, #{green($success)}, #{blue($success)};
+    --mbo-warning: #{$warning};
+    --mbo-warning-rgb: #{red($warning)}, #{green($warning)}, #{blue($warning)};
+    --mbo-danger: #{$danger};
+    --mbo-danger-rgb: #{red($danger)}, #{green($danger)}, #{blue($danger)};
+    --mbo-info: #{$info};
+    --mbo-info-rgb: #{red($info)}, #{green($info)}, #{blue($info)};
+    --mbo-dark: #{$dark};
+    --mbo-dark-rgb: #{red($dark)}, #{green($dark)}, #{blue($dark)};
+    --mbo-light: #{$light};
+
+    --mbo-body-bg: #{$body-bg};
+    --mbo-body-wrapper-bg: #{rgba($primary, 0.06)};
+    --mbo-sidebar-bg: #{$light};
+    --mbo-sidebar-brand-link: #{$primary};
+    --mbo-sidebar-usermenu: #{$dark};
+    --mbo-page-header-color: #{$primary};
+    --mbo-paragraph-color: #{tint($dark, 20%)};
+
+    --mbo-link-color: #{$link-color};
+    --mbo-link-hover-color: #{$link-color-hover};
+    --mbo-link-active-color: #{$link-color-active};
+    --mbo-link-muted-color: #{$link-color-muted};
+    --mbo-link-muted-hover-color: #{$link-color-muted-hover};
+    --mbo-button-link-active: #{$button-link-active};
+    --mbo-button-link-active-hover: #{$button-link-active-hover};
+    --mbo-text-btn: #{tint($coolgreen, 20%)};
+    --mbo-text-btn-hover: #{tint($coolgreen, 40%)};
+
+    --mbo-disabled-text: #{$disabled-text};
+    --mbo-disabled-text-rgb: #{red($disabled-text)}, #{green($disabled-text)}, #{blue($disabled-text)};
+    --mbo-status-unstarted: #{$status-unstarted};
+    --mbo-status-unstarted-rgb: #{red($status-unstarted)}, #{green($status-unstarted)}, #{blue($status-unstarted)};
+    --mbo-status-progress: #{$status-progress};
+    --mbo-status-progress-rgb: #{red($status-progress)}, #{green($status-progress)}, #{blue($status-progress)};
+    --mbo-status-completed: #{$status-completed};
+    --mbo-status-completed-rgb: #{red($status-completed)}, #{green($status-completed)}, #{blue($status-completed)};
+    --mbo-status-passed: #{$status-passed};
+    --mbo-status-passed-rgb: #{red($status-passed)}, #{green($status-passed)}, #{blue($status-passed)};
+    --mbo-status-failed: #{$status-failed};
+    --mbo-status-failed-rgb: #{red($status-failed)}, #{green($status-failed)}, #{blue($status-failed)};
+    --mbo-status-interrupted: #{$status-interrupted};
+    --mbo-status-interrupted-rgb: #{red($status-interrupted)}, #{green($status-interrupted)}, #{blue($status-interrupted)};
+
+    --mbo-lighttint: #{tint($primary, 98%)};
+    --mbo-card-shadow: #{5px 5px 12px 0px rgba($primary, 0.1)};
+    --mbo-dropdown-divider-bg: #{$greenish};
+    --mbo-input-border-color: #{tint($primary, 10%)};
+
+    --mbo-primary-tint-10: #{tint($primary, 10%)};
+    --mbo-dark-tint-20: #{tint($dark, 20%)};
+    --mbo-dark-lighten-10: #{lighten($dark, 10%)};
+    --mbo-greenish-darken-25: #{darken($greenish, 25%)};
+    --mbo-success-darken-15: #{darken($success, 15%)};
+    --mbo-danger-darken-20: #{darken($danger, 20%)};
+    --mbo-warning-darken-15: #{darken($warning, 15%)};
+    --mbo-info-darken-15: #{darken($info, 15%)};
+
+    --mbo-ombo-body: #{rgba($primary, 0.06)};
+    --mbo-ombo-body-passed: #{rgba($status-passed, 0.15)};
+    --mbo-ombo-body-passed-hover: #{rgba($status-passed, 0.2)};
+    --mbo-ombo-body-warning: #{rgba($warning, 0.1)};
+    --mbo-ombo-body-warning-hover: #{rgba($warning, 0.15)};
+    --mbo-ombo-body-failed: #{rgba($status-failed, 0.15)};
+    --mbo-ombo-body-failed-hover: #{rgba($status-failed, 0.2)};
+    --mbo-ombo-body-completed: #{rgba($status-completed, 0.25)};
+    --mbo-ombo-body-completed-hover: #{rgba($status-completed, 0.35)};
+    --mbo-ombo-body-inactive: #{rgba($disabled-text, 0.15)};
+    --mbo-ombo-body-inactive-hover: #{rgba($disabled-text, 0.2)};
+    --mbo-ombo-body-hover: #{rgba($primary, 0.15)};
+    --mbo-ombo-body-gradient: #{linear-gradient(120deg, rgba($primary, 0.06) 0%, rgba($primary, 0.1) 70%, rgba($primary, 0.12) 100%)};
+}
+
+[data-bs-theme='dark'] {
+    --mbo-primary: var(--#{$prefix}primary);
+    --mbo-primary-rgb: var(--#{$prefix}primary-rgb);
+    --mbo-secondary: var(--#{$prefix}secondary);
+    --mbo-secondary-rgb: var(--#{$prefix}secondary-rgb);
+    --mbo-success: var(--#{$prefix}success);
+    --mbo-success-rgb: var(--#{$prefix}success-rgb);
+    --mbo-warning: var(--#{$prefix}warning);
+    --mbo-warning-rgb: var(--#{$prefix}warning-rgb);
+    --mbo-danger: var(--#{$prefix}danger);
+    --mbo-danger-rgb: var(--#{$prefix}danger-rgb);
+    --mbo-info: var(--#{$prefix}info);
+    --mbo-info-rgb: var(--#{$prefix}info-rgb);
+    --mbo-dark: var(--#{$prefix}body-color);
+    --mbo-dark-rgb: var(--#{$prefix}body-color-rgb);
+    --mbo-light: var(--#{$prefix}body-bg);
+
+    --mbo-body-bg: var(--#{$prefix}body-bg);
+    --mbo-body-wrapper-bg: rgba(var(--mbo-primary-rgb), 0.38);
+    --mbo-sidebar-bg: var(--#{$prefix}body-bg);
+    --mbo-sidebar-brand-link: var(--mbo-primary);
+    --mbo-sidebar-usermenu: var(--#{$prefix}body-color);
+    --mbo-page-header-color: var(--mbo-primary);
+    --mbo-paragraph-color: color-mix(in srgb, var(--#{$prefix}body-color) 80%, white);
+
+    --mbo-link-color: var(--#{$prefix}link-color);
+    --mbo-link-hover-color: var(--#{$prefix}link-hover-color);
+    --mbo-link-active-color: var(--#{$prefix}link-hover-color);
+    --mbo-link-muted-color: color-mix(in srgb, var(--#{$prefix}body-color) 70%, var(--mbo-primary));
+    --mbo-link-muted-hover-color: color-mix(in srgb, var(--#{$prefix}body-color) 85%, var(--mbo-primary));
+    --mbo-button-link-active: color-mix(in srgb, var(--mbo-primary) 25%, white);
+    --mbo-button-link-active-hover: color-mix(in srgb, var(--mbo-primary) 35%, white);
+    --mbo-text-btn: color-mix(in srgb, var(--mbo-primary) 20%, white);
+    --mbo-text-btn-hover: color-mix(in srgb, var(--mbo-primary) 35%, white);
+
+    --mbo-disabled-text: var(--#{$prefix}secondary-color);
+    --mbo-disabled-text-rgb: var(--#{$prefix}secondary-color-rgb);
+    --mbo-status-unstarted: color-mix(in srgb, var(--#{$prefix}secondary-color) 90%, black);
+    --mbo-status-unstarted-rgb: var(--#{$prefix}secondary-color-rgb);
+    --mbo-status-progress: var(--mbo-warning);
+    --mbo-status-progress-rgb: var(--mbo-warning-rgb);
+    --mbo-status-completed: var(--mbo-info);
+    --mbo-status-completed-rgb: var(--mbo-info-rgb);
+    --mbo-status-passed: var(--mbo-success);
+    --mbo-status-passed-rgb: var(--mbo-success-rgb);
+    --mbo-status-failed: var(--mbo-danger);
+    --mbo-status-failed-rgb: var(--mbo-danger-rgb);
+    --mbo-status-interrupted: var(--mbo-secondary);
+    --mbo-status-interrupted-rgb: var(--mbo-secondary-rgb);
+
+    --mbo-lighttint: color-mix(in srgb, var(--mbo-primary) 2%, white);
+    --mbo-card-shadow: 5px 5px 12px 0px rgba(var(--mbo-primary-rgb), 0.15);
+    --mbo-dropdown-divider-bg: color-mix(in srgb, var(--mbo-primary) 35%, var(--#{$prefix}body-bg));
+    --mbo-input-border-color: color-mix(in srgb, var(--mbo-primary) 15%, var(--#{$prefix}border-color));
+
+    --mbo-primary-tint-10: color-mix(in srgb, var(--mbo-primary) 90%, white);
+    --mbo-dark-tint-20: color-mix(in srgb, var(--mbo-dark) 80%, white);
+    --mbo-dark-lighten-10: color-mix(in srgb, var(--mbo-dark) 90%, white);
+    --mbo-greenish-darken-25: color-mix(in srgb, #{$greenish} 75%, black);
+    --mbo-success-darken-15: color-mix(in srgb, var(--mbo-success) 85%, black);
+    --mbo-danger-darken-20: color-mix(in srgb, var(--mbo-danger) 80%, black);
+    --mbo-warning-darken-15: color-mix(in srgb, var(--mbo-warning) 85%, black);
+    --mbo-info-darken-15: color-mix(in srgb, var(--mbo-info) 85%, black);
+
+    --mbo-ombo-body: rgba(var(--mbo-primary-rgb), 0.08);
+    --mbo-ombo-body-passed: rgba(var(--mbo-status-passed-rgb), 0.18);
+    --mbo-ombo-body-passed-hover: rgba(var(--mbo-status-passed-rgb), 0.24);
+    --mbo-ombo-body-warning: rgba(var(--mbo-status-progress-rgb), 0.14);
+    --mbo-ombo-body-warning-hover: rgba(var(--mbo-status-progress-rgb), 0.2);
+    --mbo-ombo-body-failed: rgba(var(--mbo-status-failed-rgb), 0.18);
+    --mbo-ombo-body-failed-hover: rgba(var(--mbo-status-failed-rgb), 0.24);
+    --mbo-ombo-body-completed: rgba(var(--mbo-status-completed-rgb), 0.3);
+    --mbo-ombo-body-completed-hover: rgba(var(--mbo-status-completed-rgb), 0.4);
+    --mbo-ombo-body-inactive: rgba(var(--mbo-disabled-text-rgb), 0.22);
+    --mbo-ombo-body-inactive-hover: rgba(var(--mbo-disabled-text-rgb), 0.28);
+    --mbo-ombo-body-hover: rgba(var(--mbo-primary-rgb), 0.2);
+    --mbo-ombo-body-gradient: linear-gradient(120deg, rgba(var(--mbo-primary-rgb), 0.08) 0%, rgba(var(--mbo-primary-rgb), 0.14) 70%, rgba(var(--mbo-primary-rgb), 0.18) 100%);
+}

@@ -29,7 +29,7 @@ html .sidebar-menu {
 .sidebar-menu {
     z-index: 1031;
     display: table-cell;
-    background-color: $sidebar-bg;
+    background-color: var(--mbo-sidebar-bg);
     box-shadow: 0 0 15px 0 rgb(0 0 0 / 7%);
     transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
@@ -146,7 +146,7 @@ html .sidebar-menu {
 .sidebar-menu .sidebar-footer .menu-release {
     font-size: 0.7rem;
     font-weight: 600;
-    color: $primary;
+    color: var(--mbo-primary);
     text-align: end;
 }
 
@@ -186,7 +186,7 @@ li.nav-item {
     font-size: 0.85rem;
     font-weight: 600;
     text-transform: capitalize;
-    color: $link-color;
+    color: var(--mbo-link-color);
     padding: 0.3rem 1rem;
     margin: 0 0.75rem;
     background-color: transparent;
@@ -202,26 +202,26 @@ li.nav-item {
     display: flex;
     align-items: center;
     font-size: 0.85rem;
-    color: $link-color;
+    color: var(--mbo-link-color);
     padding: 0.3rem 1rem;
     margin: 0 0.75rem;
     text-decoration: none;
 }
 
 .sidebar-menu .nav-pills .nav-link:hover {
-    color: $link-color-hover !important;
+    color: var(--mbo-link-hover-color) !important;
     transition: all 0.3s ease-in-out;
 }
 
 .sidebar-menu .nav-pills .nav-link.active {
     font-weight: 600;
-    color: $button-link-active !important;
-    background: $primary;
-    background: linear-gradient(90deg, rgba($primary, 0.8) 0%, rgba($primary, 0.95) 40%, rgba($primary, 1) 100%);
+    color: var(--mbo-button-link-active) !important;
+    background: var(--mbo-primary);
+    background: linear-gradient(90deg, rgba(var(--mbo-primary-rgb), 0.8) 0%, rgba(var(--mbo-primary-rgb), 0.95) 40%, rgba(var(--mbo-primary-rgb), 1) 100%);
 }
 
 .sidebar-menu .nav-pills .nav-link.active:hover {
-    color: $button-link-active-hover;
+    color: var(--mbo-button-link-active-hover);
 }
 
 .sidebar-menu .nav .nav-item:not(.disabled) a {
@@ -230,7 +230,7 @@ li.nav-item {
 
 .sidebar-menu:not(.menu-collapsed) .nav .nav-item:not(.disabled):hover > a {
     padding-left: 1.5rem;
-    color: $primary;
+    color: var(--mbo-primary);
     transition: padding 0.35s ease 0s !important;
 }
 
@@ -238,7 +238,7 @@ li.nav-item {
     padding: 0 0 0.3rem 0;
     margin: 0 0 1rem 0;
     font-size: 0.85rem;
-    color: tint($dark, 20%);
+    color: var(--mbo-dark-tint-20);
 }
 
 .sidebar-menu .nav .nav-multi.first {
@@ -264,7 +264,7 @@ ul.user-bar {
 .user-actions img,
 .user-details img {
     border-radius: 50%;
-    border: 2px dotted $primary;
+    border: 2px dotted var(--mbo-primary);
 }
 
 .user-status {
@@ -274,7 +274,7 @@ ul.user-bar {
         padding: 1.2rem 2rem;
         margin: 0;
         background-color: transparent;
-        color: $sidebar-usermenu;
+        color: var(--mbo-sidebar-usermenu);
     }
 }
 
@@ -289,7 +289,7 @@ ul.user-bar {
     .user-details {
         line-height: 1.2;
         text-decoration: none;
-        color: $primary;
+        color: var(--mbo-primary);
 
         .user-name {
             font-size: 0.85rem;
@@ -312,7 +312,7 @@ ul.user-bar {
         font-size: 0.75rem;
         font-weight: 600;
         padding: 0 0.5rem;
-        color: $primary;
+        color: var(--mbo-primary);
     }
 }
 
@@ -340,7 +340,7 @@ a.dropdown-toggle {
 
     .page-heading,
     .togglers {
-        color: $page-header-color;
+        color: var(--mbo-page-header-color);
     }
 
     .page-heading {
@@ -389,7 +389,7 @@ a.dropdown-toggle {
         font-weight: 500;
         background: transparent;
         align-items: center;
-        color: lighten($dark, 10%);
+        color: var(--mbo-dark-lighten-10);
         border-radius: 0.25rem;
         white-space: nowrap;
 
@@ -405,14 +405,14 @@ a.dropdown-toggle {
 
         &:hover,
         &:focus {
-            color: $primary;
-            background-color: rgba($primary, 0.15);
+            color: var(--mbo-primary);
+            background-color: rgba(var(--mbo-primary-rgb), 0.15);
         }
 
         &.active {
-            color: $primary;
+            color: var(--mbo-primary);
             font-weight: 600;
-            background-color: rgba($primary, 0.25);
+            background-color: rgba(var(--mbo-primary-rgb), 0.25);
         }
 
         i {
@@ -427,7 +427,7 @@ a.dropdown-toggle {
         padding: 0.35rem;
         flex-wrap: nowrap;
         overflow-y: auto;
-        background-color: $body-bg;
+        background-color: var(--mbo-body-bg);
 
         li.nav-item {
             display: flex;
@@ -441,7 +441,7 @@ a.dropdown-toggle {
 
 .breadcrumb {
     .breadcrumb-item a {
-        color: $primary;
+        color: var(--mbo-primary);
     }
 
     a:hover {
@@ -487,7 +487,7 @@ a.dropdown-toggle {
 
     li.section .section-title:hover,
     ul.subitems .section-item-title:hover {
-        color: $secondary;
+        color: var(--mbo-secondary);
     }
 
     ul.subitems .section-item i {
@@ -499,11 +499,11 @@ a.dropdown-toggle {
     }
 
     ul.subitems .section-item-title.success {
-        color: $success !important;
+        color: var(--mbo-success) !important;
     }
 
     ul.subitems .section-item-title.danger {
-        color: $danger !important;
+        color: var(--mbo-danger) !important;
     }
 
     .menu-options {
@@ -516,7 +516,7 @@ a.dropdown-toggle {
             &:hover {
                 text-decoration: underline;
                 cursor: pointer;
-                color: $secondary;
+                color: var(--mbo-secondary);
             }
         }
     }
@@ -579,7 +579,7 @@ a.dropdown-toggle {
 .dropdown-toggle::after {
     font-family: $font-family-icons;
     content: '\f282';
-    color: $primary;
+    color: var(--mbo-primary);
     border: none;
     vertical-align: middle;
     font-size: 0.7rem;
@@ -605,7 +605,7 @@ a.dropdown-toggle {
     a {
         pointer-events: none;
         transition: unset !important;
-        color: $disabled-text !important;
+        color: var(--mbo-disabled-text) !important;
     }
 }
 
@@ -630,5 +630,5 @@ button.btn.icon-btn,
 button.btn.icon-btn-sm {
     padding: 0;
     background: transparent;
-    color: $primary;
+    color: var(--mbo-primary);
 }

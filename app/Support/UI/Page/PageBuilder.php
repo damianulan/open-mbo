@@ -3,47 +3,65 @@
 namespace App\Support\UI\Page;
 
 use App\Settings\GeneralSettings;
+use App\Support\UI\Page\Navigation\SidebarMenu;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Route;
-use Lucent\Support\Dtos\LaravelDto;
 
-class PageBuilder extends LaravelDto
+class PageBuilder
 {
+    public ?string $routename = null;
+
+    public ?string $info = null;
+
+    public string $sitename = '';
+
+    public string $theme = '';
+
+    public string $locale = '';
+
+    public ?string $logo = null;
+
+    public bool $topbar_header = true;
+
+    public string $sidebar_collapsed = '';
+
+    public string $title = '';
+
+    public ?SidebarMenu $sidebar = null;
+
     public function __construct(?string $pagetitle = null, bool $sidebar = true, bool $topbar_header = true)
     {
-        $attributes['routename'] = Route::currentRouteName();
+        $this->routename = Route::currentRouteName();
 
-        $attributes['info'] = null;
-        if (Lang::hasForLocale('menus.info.' . $attributes['routename'])) {
-            $attributes['info'] = __('menus.info.' . $attributes['routename']);
+        $this->info = null;
+        if (Lang::hasForLocale('menus.info.' . $this->routename)) {
+            $this->info = __('menus.info.' . $this->routename);
         }
 
-        $attributes['sitename'] = app(GeneralSettings::class)->site_name;
-        $attributes['theme'] = current_theme();
-        $attributes['locale'] = app(GeneralSettings::class)->locale;
-        $attributes['logo'] = app(GeneralSettings::class)->site_logo;
-        $attributes['topbar_header'] = $topbar_header;
+        $this->sitename = app(GeneralSettings::class)->site_name;
+        $this->theme = current_theme();
+        $this->locale = app(GeneralSettings::class)->locale;
+        $this->logo = app(GeneralSettings::class)->site_logo;
+        $this->topbar_header = $topbar_header;
 
         if (isset($_COOKIE['menu-collapsed']) && true === (bool) $_COOKIE['menu-collapsed']) {
-            $attributes['sidebar_collapsed'] = 'menu-collapsed';
+            $this->sidebar_collapsed = 'menu-collapsed';
         }
 
-        parent::__construct($attributes);
-
         if (empty($pagetitle)) {
-            $this->setAttribute('title', $this->assignPageTitle($attributes['routename']));
+            $this->title = $this->assignPageTitle($this->routename);
         } else {
-            $this->setAttribute('title', $pagetitle);
+            $this->title = $pagetitle;
         }
 
         if ($sidebar) {
-            $this->setAttribute('sidebar', MenuBuilder::bootSidebar($this->getAttribute('sitename'))
-                ->addClass($this->getAttribute('sidebar_collapsed')));
+            $this->sidebar = MenuBuilder::bootSidebar($this->sitename)
+                ->addClass($this->sidebar_collapsed);
 
         }
     }
 
-    private function assignPageTitle($routename)
+    private function assignPageTitle(?string $routename): string
     {
         return Lang::hasForLocale('menus.' . $routename) ? __('menus.' . $routename) : '';
     }
