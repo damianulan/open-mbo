@@ -6,42 +6,46 @@ body {
     line-height: 1.3 !important;
 }
 
-.tab-pane .header {
-    font-size: 1rem;
-    text-transform: uppercase;
-    font-weight: 700;
-    color: #111;
-    padding-left: 1rem;
-    padding-bottom: 1.3rem;
+.tab-pane {
+    .header {
+        font-size: 1rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: #111;
+        padding-left: 1rem;
+        padding-bottom: 1.3rem;
+    }
 }
 
-.alert a {
-    font-weight: 700;
-    text-decoration: underline;
+.alert {
+    a {
+        font-weight: 700;
+        text-decoration: underline;
+    }
 }
 
-textarea::-webkit-scrollbar {
-    width: 10px;
-}
+textarea {
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
 
-textarea::-webkit-scrollbar-track {
-    background: rgb(179, 177, 177);
-    border-radius: 10px;
-}
+    &::-webkit-scrollbar-track {
+        background: rgb(179, 177, 177);
+        border-radius: 10px;
+    }
 
-textarea::-webkit-scrollbar-thumb {
-    background: rgb(136, 136, 136);
-    border-radius: 10px;
-}
+    &::-webkit-scrollbar-thumb {
+        background: rgb(136, 136, 136);
+        border-radius: 10px;
 
-textarea::-webkit-scrollbar-thumb:hover {
-    background: rgb(100, 100, 100);
-    border-radius: 10px;
-}
+        &:hover {
+            background: rgb(100, 100, 100);
+        }
 
-textarea::-webkit-scrollbar-thumb:active {
-    background: rgb(68, 68, 68);
-    border-radius: 10px;
+        &:active {
+            background: rgb(68, 68, 68);
+        }
+    }
 }
 
 .fw-300 {
@@ -63,28 +67,28 @@ textarea::-webkit-scrollbar-thumb:active {
 a {
     color: $link-color;
     text-decoration: none;
-}
 
-a:hover {
-    color: $link-color-hover;
-    cursor: pointer !important;
-    transition: all 0.2s ease-in-out;
-}
+    &:hover {
+        color: $link-color-hover;
+        cursor: pointer !important;
+        transition: all 0.2s ease-in-out;
+    }
 
-a:active {
-    color: $link-color-active;
-}
+    &:active {
+        color: $link-color-active;
+    }
 
-a.link-primary {
-    color: $primary;
-}
+    &.link-primary {
+        color: $primary;
+    }
 
-a.link-muted {
-    color: $link-color-muted;
-}
+    &.link-muted {
+        color: $link-color-muted;
 
-a.link-muted:hover {
-    color: $link-color-muted-hover;
+        &:hover {
+            color: $link-color-muted-hover;
+        }
+    }
 }
 
 i.bi {
@@ -105,10 +109,10 @@ i.bi-3 {
 
 .content a i.bi {
     color: $primary;
-}
 
-.content a i.bi:hover {
-    color: tint($primary, 10%);
+    &:hover {
+        color: tint($primary, 10%);
+    }
 }
 
 h1,

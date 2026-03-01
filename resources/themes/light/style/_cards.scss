@@ -8,10 +8,10 @@
 
 .card-icons {
     margin-left: 0.5rem;
-}
 
-.card-icons i {
-    font-size: 1rem;
+    i {
+        font-size: 1rem;
+    }
 }
 
 .card-hello {
@@ -24,6 +24,31 @@
     height: 100%;
     box-shadow: none;
     border: 1px solid transparent;
+
+    &.failed {
+        background-color: $ombo-body-failed;
+
+        &:hover {
+            -webkit-box-shadow: inset -5px -15px 75px -28px $ombo-body-failed-hover;
+            -moz-box-shadow: inset -5px -15px 75px -28px $ombo-body-failed-hover;
+            box-shadow: inset -5px -15px 75px -28px $ombo-body-failed-hover;
+        }
+    }
+
+    &.completed {
+        background-color: $ombo-body-passed;
+
+        &:hover {
+            -webkit-box-shadow: inset -5px -15px 75px -28px $ombo-body-passed-hover;
+            -moz-box-shadow: inset -5px -15px 75px -28px $ombo-body-passed-hover;
+            box-shadow: inset -5px -15px 75px -28px $ombo-body-passed-hover;
+        }
+    }
+
+    &.profile-card {
+        background-color: $body-bg;
+        box-shadow: $card-shadow;
+    }
 }
 
 .card-col {
@@ -58,26 +83,6 @@
     }
 }
 
-.card.failed {
-    background-color: $ombo-body-failed;
-}
-
-.card.failed:hover {
-    -webkit-box-shadow: inset -5px -15px 75px -28px $ombo-body-failed-hover;
-    -moz-box-shadow: inset -5px -15px 75px -28px $ombo-body-failed-hover;
-    box-shadow: inset -5px -15px 75px -28px $ombo-body-failed-hover;
-}
-
-.card.completed {
-    background-color: $ombo-body-passed;
-}
-
-.card.completed:hover {
-    -webkit-box-shadow: inset -5px -15px 75px -28px $ombo-body-passed-hover;
-    -moz-box-shadow: inset -5px -15px 75px -28px $ombo-body-passed-hover;
-    box-shadow: inset -5px -15px 75px -28px $ombo-body-passed-hover;
-}
-
 .card-bg .campaign-img {
     display: block;
     width: 100%;
@@ -97,103 +102,120 @@
     display: flex;
     margin-left: auto;
     margin-bottom: $card-title-spacer-y;
+
+    div {
+        display: flex;
+        align-items: center;
+        font-size: 0.75rem;
+        margin-left: 0.35rem;
+
+        i.bi {
+            font-size: 1rem;
+            color: $secondary;
+        }
+    }
 }
 
-.card-badges div {
-    display: flex;
-    align-items: center;
-    font-size: 0.75rem;
-    margin-left: 0.35rem;
+.card-top {
+    .card-title {
+        font-weight: 700;
+        font-family: $font-family-serif;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: $primary;
+        font-size: 1.3rem;
+        white-space: nowrap;
+    }
 }
 
-.card-badges div i.bi {
-    font-size: 1rem;
-    color: $secondary;
+.card-bg {
+    .card-text {
+        max-height: 3em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.5em;
+        margin-bottom: 0.7rem;
+        color: $primary;
+    }
+
+    &.inactive .card-top .card-title {
+        color: darken($greenish, 25%);
+    }
+
+    .details {
+        .element {
+            display: flex;
+            margin-top: 0.5rem;
+
+            .element-title {
+                display: flex;
+                align-items: center;
+                color: $secondary;
+
+                span {
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    line-clamp: 2;
+                    -webkit-line-clamp: 2;
+                    overflow: hidden;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+
+    .progress-bar {
+        display: flex;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        padding-top: 0.5rem;
+
+        .bar-container {
+            width: 100%;
+            height: 0.3em;
+            background-color: rgba($secondary, 0.2);
+        }
+
+        .bar-progress {
+            height: 100%;
+        }
+
+        .bar-container,
+        .bar-progress {
+            border-bottom-right-radius: $card-border-radius;
+            border-bottom-left-radius: $card-border-radius;
+        }
+    }
 }
 
-.card-top .card-title {
-    font-weight: 700;
-    font-family: $font-family-serif;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: $primary;
-    font-size: 1.3rem;
-    white-space: nowrap;
-}
-
-.card-bg.inactive .card-top .card-title {
-    color: darken($greenish, 25%);
-}
-
-.card-bg .card-text {
-    max-height: 3em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 1.5em;
-    margin-bottom: 0.7rem;
-    color: $primary;
-}
-
-.card-bg .details .element,
 .path-card .details .element {
     display: flex;
     margin-top: 0.5rem;
 }
 
-.card-bg .details .element .element-title {
-    display: flex;
-    align-items: center;
-    color: $secondary;
-}
-
-.card-bg .details .element .element-title span {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    line-clamp: 2;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    font-weight: 600;
-}
-
-.card-bg .progress-bar {
-    display: flex;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    padding-top: 0.5rem;
-}
-
-.card-bg .progress-bar .bar-container {
-    width: 100%;
-    height: 0.3em;
-    background-color: rgba($secondary, 0.2);
-}
-
-.card-bg .progress-bar .bar-progress {
-    height: 100%;
-}
-
-.card-bg .progress-bar .bar-container,
-.card-bg .progress-bar .bar-progress {
-    border-bottom-right-radius: $card-border-radius;
-    border-bottom-left-radius: $card-border-radius;
-}
-
-.card.profile-card {
-    background-color: $body-bg;
-    box-shadow: $card-shadow;
-}
-
 .user-header {
     display: flex;
     font-family: $font-family-serif;
-}
 
-.user-header .user-name {
-    font-size: 1.7rem;
-    font-weight: 700;
-    color: $primary;
-    line-height: 1.1;
+    .user-name {
+        font-size: 1.7rem;
+        font-weight: 700;
+        color: $primary;
+        line-height: 1.1;
+    }
+
+    .user-actions {
+        color: $primary;
+        margin-left: auto;
+        font-size: 1.3rem;
+        white-space: nowrap;
+
+        a {
+            margin-left: 0.5rem;
+            text-decoration: none;
+        }
+    }
 }
 
 .user-summary {
@@ -202,27 +224,15 @@
     gap: 0.5rem 1rem;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-}
+    .user-info {
+        display: flex;
+        gap: 0.375rem;
+        align-items: center;
+        color: $secondary;
+        font-size: 0.85rem;
 
-.user-summary .user-info {
-    display: flex;
-    gap: 0.375rem;
-    align-items: center;
-    color: $secondary;
-    font-size: 0.85rem;
-}
-
-.user-summary .user-info i.bi {
-    font-size: 1.1rem;
-}
-
-.user-header .user-actions {
-    color: $primary;
-    margin-left: auto;
-    font-size: 1.3rem;
-    white-space: nowrap;
-}
-.user-header .user-actions a {
-    margin-left: 0.5rem;
-    text-decoration: none;
+        i.bi {
+            font-size: 1.1rem;
+        }
+    }
 }

@@ -1,17 +1,18 @@
 // Snow layout
 .ql-container {
     box-sizing: border-box;
-
     height: 100%;
     margin: 0;
     position: relative;
-}
-.ql-container.ql-disabled .ql-tooltip {
-    visibility: hidden;
-}
-.ql-container:not(.ql-disabled) li[data-list="checked"] > .ql-ui,
-.ql-container:not(.ql-disabled) li[data-list="unchecked"] > .ql-ui {
-    cursor: pointer;
+
+    &.ql-disabled .ql-tooltip {
+        visibility: hidden;
+    }
+
+    &:not(.ql-disabled) li[data-list="checked"] > .ql-ui,
+    &:not(.ql-disabled) li[data-list="unchecked"] > .ql-ui {
+        cursor: pointer;
+    }
 }
 .ql-clipboard {
     left: -100000px;
@@ -19,10 +20,11 @@
     overflow-y: hidden;
     position: absolute;
     top: 50%;
-}
-.ql-clipboard p {
-    margin: 0;
-    padding: 0;
+
+    p {
+        margin: 0;
+        padding: 0;
+    }
 }
 .ql-editor {
     box-sizing: border-box;
@@ -943,10 +945,11 @@
 }
 .ql-code-block-container {
     position: relative;
-}
-.ql-code-block-container .ql-ui {
-    right: 5px;
-    top: 5px;
+
+    .ql-ui {
+        right: 5px;
+        top: 5px;
+    }
 }
 .ql-toolbar.ql-snow {
     border: 1px solid $input-border-color;
@@ -955,29 +958,37 @@
     box-sizing: border-box;
     font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     padding: 8px;
-}
-.ql-toolbar.ql-snow .ql-formats {
-    margin-right: 15px;
-}
-.ql-toolbar.ql-snow .ql-picker-label {
-    border: 1px solid transparent;
-}
-.ql-toolbar.ql-snow .ql-picker-options {
-    border: 1px solid transparent;
-    box-shadow: rgba(0, 0, 0, 0.2) 0 2px 8px;
-}
-.ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-label {
-    border-color: $input-border-color;
-}
-.ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-options {
-    border-color: $input-border-color;
-}
-.ql-toolbar.ql-snow .ql-color-picker .ql-picker-item.ql-selected,
-.ql-toolbar.ql-snow .ql-color-picker .ql-picker-item:hover {
-    border-color: #000;
-}
-.ql-toolbar.ql-snow + .ql-container.ql-snow {
-    border-top: 0;
+
+    .ql-formats {
+        margin-right: 15px;
+    }
+
+    .ql-picker-label {
+        border: 1px solid transparent;
+    }
+
+    .ql-picker-options {
+        border: 1px solid transparent;
+        box-shadow: rgba(0, 0, 0, 0.2) 0 2px 8px;
+    }
+
+    .ql-picker.ql-expanded {
+        .ql-picker-label,
+        .ql-picker-options {
+            border-color: $input-border-color;
+        }
+    }
+
+    .ql-color-picker .ql-picker-item {
+        &.ql-selected,
+        &:hover {
+            border-color: #000;
+        }
+    }
+
+    + .ql-container.ql-snow {
+        border-top: 0;
+    }
 }
 .ql-snow .ql-tooltip {
     background-color: #fff;
@@ -986,61 +997,75 @@
     color: $dark;
     padding: 5px 12px;
     white-space: nowrap;
-}
-.ql-snow .ql-tooltip::before {
-    content: "Visit URL:";
-    line-height: 26px;
-    margin-right: 8px;
-}
-.ql-snow .ql-tooltip input[type="text"] {
-    display: none;
-    border: 1px solid $input-border-color;
-    font-size: 13px;
-    height: 26px;
-    margin: 0;
-    padding: 3px 5px;
-    width: 170px;
-}
-.ql-snow .ql-tooltip a.ql-preview {
-    display: inline-block;
-    max-width: 200px;
-    overflow-x: hidden;
-    text-overflow: ellipsis;
-    vertical-align: top;
-}
-.ql-snow .ql-tooltip a.ql-action::after {
-    border-right: 1px solid $input-border-color;
-    content: "Edit";
-    margin-left: 16px;
-    padding-right: 8px;
-}
-.ql-snow .ql-tooltip a.ql-remove::before {
-    content: "Remove";
-    margin-left: 8px;
-}
-.ql-snow .ql-tooltip a {
-    line-height: 26px;
-}
-.ql-snow .ql-tooltip.ql-editing a.ql-preview,
-.ql-snow .ql-tooltip.ql-editing a.ql-remove {
-    display: none;
-}
-.ql-snow .ql-tooltip.ql-editing input[type="text"] {
-    display: inline-block;
-}
-.ql-snow .ql-tooltip.ql-editing a.ql-action::after {
-    border-right: 0;
-    content: "Save";
-    padding-right: 0;
-}
-.ql-snow .ql-tooltip[data-mode="link"]::before {
-    content: "Enter link:";
-}
-.ql-snow .ql-tooltip[data-mode="formula"]::before {
-    content: "Enter formula:";
-}
-.ql-snow .ql-tooltip[data-mode="video"]::before {
-    content: "Enter video:";
+
+    &::before {
+        content: "Visit URL:";
+        line-height: 26px;
+        margin-right: 8px;
+    }
+
+    input[type="text"] {
+        display: none;
+        border: 1px solid $input-border-color;
+        font-size: 13px;
+        height: 26px;
+        margin: 0;
+        padding: 3px 5px;
+        width: 170px;
+    }
+
+    a {
+        line-height: 26px;
+
+        &.ql-preview {
+            display: inline-block;
+            max-width: 200px;
+            overflow-x: hidden;
+            text-overflow: ellipsis;
+            vertical-align: top;
+        }
+
+        &.ql-action::after {
+            border-right: 1px solid $input-border-color;
+            content: "Edit";
+            margin-left: 16px;
+            padding-right: 8px;
+        }
+
+        &.ql-remove::before {
+            content: "Remove";
+            margin-left: 8px;
+        }
+    }
+
+    &.ql-editing {
+        a.ql-preview,
+        a.ql-remove {
+            display: none;
+        }
+
+        input[type="text"] {
+            display: inline-block;
+        }
+
+        a.ql-action::after {
+            border-right: 0;
+            content: "Save";
+            padding-right: 0;
+        }
+    }
+
+    &[data-mode="link"]::before {
+        content: "Enter link:";
+    }
+
+    &[data-mode="formula"]::before {
+        content: "Enter formula:";
+    }
+
+    &[data-mode="video"]::before {
+        content: "Enter video:";
+    }
 }
 .ql-snow a {
     color: $primary;

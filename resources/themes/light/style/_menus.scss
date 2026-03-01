@@ -1,25 +1,25 @@
-nav::-webkit-scrollbar {
-    width: 8px;
-}
+nav {
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
 
-nav::-webkit-scrollbar-track {
-    background: rgb(179, 177, 177);
-    border-radius: 1px;
-}
+    &::-webkit-scrollbar-track {
+        background: rgb(179, 177, 177);
+        border-radius: 1px;
+    }
 
-nav::-webkit-scrollbar-thumb {
-    background: rgb(136, 136, 136);
-    border-radius: 1px;
-}
+    &::-webkit-scrollbar-thumb {
+        background: rgb(136, 136, 136);
+        border-radius: 1px;
 
-nav::-webkit-scrollbar-thumb:hover {
-    background: rgb(100, 100, 100);
-    border-radius: 1px;
-}
+        &:hover {
+            background: rgb(100, 100, 100);
+        }
 
-nav::-webkit-scrollbar-thumb:active {
-    background: rgb(68, 68, 68);
-    border-radius: 1px;
+        &:active {
+            background: rgb(68, 68, 68);
+        }
+    }
 }
 
 html .sidebar-menu {
@@ -162,17 +162,17 @@ html .sidebar-menu {
     color: $sidebar-brand-link;
     font-size: 1rem;
     text-decoration: none;
-}
 
-.brand .brand-title {
-    font-weight: 800;
-    font-family: $font-family-monospace;
-    letter-spacing: 0.05rem;
-    font-size: 1.25rem;
-}
+    .brand-title {
+        font-weight: 800;
+        font-family: $font-family-monospace;
+        letter-spacing: 0.05rem;
+        font-size: 1.25rem;
+    }
 
-.brand .brand-icon {
-    font-size: 1.8rem;
+    .brand-icon {
+        font-size: 1.8rem;
+    }
 }
 
 li.nav-item {
@@ -261,55 +261,59 @@ ul.user-bar {
     width: 100%;
 }
 
-.user-status .user-nav {
-    display: flex;
-    align-items: center;
-    padding: 1.2rem 2rem;
-    margin: 0;
-    background-color: transparent;
-    color: $sidebar-usermenu;
-}
-
-.user-nav .user-actions {
-    display: flex;
-    position: relative;
-    margin-left: auto;
-    align-items: center;
-}
-
 .user-actions img,
 .user-details img {
     border-radius: 50%;
     border: 2px dotted $primary;
 }
 
-.user-nav .user-details {
-    line-height: 1.2;
-    text-decoration: none;
-    color: $primary;
+.user-status {
+    .user-nav {
+        display: flex;
+        align-items: center;
+        padding: 1.2rem 2rem;
+        margin: 0;
+        background-color: transparent;
+        color: $sidebar-usermenu;
+    }
 }
 
-.user-nav .user-details .user-name {
-    font-size: 0.85rem;
-    font-weight: 600;
-}
+.user-nav {
+    .user-actions {
+        display: flex;
+        position: relative;
+        margin-left: auto;
+        align-items: center;
+    }
 
-.user-nav .user-details .user-email {
-    font-size: 0.7rem;
-    font-weight: 400;
-}
+    .user-details {
+        line-height: 1.2;
+        text-decoration: none;
+        color: $primary;
 
-.user-nav .dropdown-menu a.dropdown-item {
-    padding: 0.35rem 1.2rem;
-}
+        .user-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
 
-.user-nav span.profile-name {
-    width: 100%;
-    text-align: center;
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 0 0.5rem;
-    color: $primary;
+        .user-email {
+            font-size: 0.7rem;
+            font-weight: 400;
+        }
+    }
+
+    .dropdown-menu a.dropdown-item {
+        padding: 0.35rem 1.2rem;
+    }
+
+    span.profile-name {
+        width: 100%;
+        text-align: center;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0 0.5rem;
+        color: $primary;
+    }
 }
 
 @media (max-width: 992px) {
@@ -324,123 +328,125 @@ a.dropdown-toggle {
 
 .page-top {
     padding: 1.5rem 0;
-}
 
-.page-top > .page-top-elements {
-    display: flex;
-    align-items: center;
-}
+    > .page-top-elements {
+        display: flex;
+        align-items: center;
+    }
 
-.page-top .togglers {
-    font-size: 1.6rem;
-}
+    .togglers {
+        font-size: 1.6rem;
+    }
 
-.page-top .page-heading,
-.page-top .togglers {
-    color: $page-header-color;
-}
+    .page-heading,
+    .togglers {
+        color: $page-header-color;
+    }
 
-.page-top .page-heading {
-    white-space: nowrap;
-    display: flex;
-    align-items: baseline;
-    overflow-x: auto;
-}
+    .page-heading {
+        white-space: nowrap;
+        display: flex;
+        align-items: baseline;
+        overflow-x: auto;
 
-.page-top .page-heading i.bi {
-    font-size: 1.2rem;
-    margin-left: 0.75rem;
-}
+        i.bi {
+            font-size: 1.2rem;
+            margin-left: 0.75rem;
+        }
 
-.page-top .page-heading .page-title {
-    font-weight: 700;
-    font-family: $font-family-serif;
-    font-size: 1.8rem;
-}
+        .page-title {
+            font-weight: 700;
+            font-family: $font-family-serif;
+            font-size: 1.8rem;
+        }
+    }
 
-.page-top .page-quick-actions {
-    padding-left: 1rem;
-    margin-left: auto;
-    display: flex;
-    gap: 0.75rem;
-    align-items: center;
-    position: relative;
-}
+    .page-quick-actions {
+        padding-left: 1rem;
+        margin-left: auto;
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+        position: relative;
 
-.page-top .page-quick-actions .notification-dropdown {
-    display: block;
-    white-space: nowrap;
+        .notification-dropdown {
+            display: block;
+            white-space: nowrap;
+        }
+    }
 }
 
 .page-menu {
     padding: 0 0 1.25rem 0;
-}
 
-.page-menu .nav-pills-horizontal .nav-link {
-    display: flex;
-    border: 1px solid transparent;
-    text-transform: capitalize;
-    padding: 0.3rem 0.8rem;
-    margin: 0.25rem 0.35rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-    background: transparent;
-    align-items: center;
-    color: lighten($dark, 10%);
-    border-radius: 0.25rem;
-    white-space: nowrap;
-}
+    .nav-pills-horizontal .nav-link {
+        display: flex;
+        border: 1px solid transparent;
+        text-transform: capitalize;
+        padding: 0.3rem 0.8rem;
+        margin: 0.25rem 0.35rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+        background: transparent;
+        align-items: center;
+        color: lighten($dark, 10%);
+        border-radius: 0.25rem;
+        white-space: nowrap;
 
-.page-menu .nav-pills-horizontal .nav-link .badge {
-    font-size: 0.65rem;
-    margin-left: 0.6rem;
-    position: relative;
-}
+        .badge {
+            font-size: 0.65rem;
+            margin-left: 0.6rem;
+            position: relative;
+        }
 
-.page-menu .nav-pills-horizontal .nav-link:hover {
-    cursor: pointer;
-}
+        &:hover {
+            cursor: pointer;
+        }
 
-.page-menu .nav-pills-horizontal .nav-link:hover,
-.page-menu .nav-pills-horizontal .nav-link:focus {
-    color: $primary;
-    background-color: rgba($primary, 0.15);
-}
+        &:hover,
+        &:focus {
+            color: $primary;
+            background-color: rgba($primary, 0.15);
+        }
 
-.page-menu .nav-pills-horizontal .nav-link.active {
-    color: $primary;
-    font-weight: 600;
-    background-color: rgba($primary, 0.25);
-}
+        &.active {
+            color: $primary;
+            font-weight: 600;
+            background-color: rgba($primary, 0.25);
+        }
 
-.page-menu .nav-pills-horizontal .nav-link i {
-    margin-right: 0.5rem;
-    font-size: 1rem;
-}
+        i {
+            margin-right: 0.5rem;
+            font-size: 1rem;
+        }
+    }
 
-.page-menu ul.nav-pills-horizontal {
-    border: 1px solid transparent;
-    border-radius: 0.35rem;
-    padding: 0.35rem;
-    flex-wrap: nowrap;
-    overflow-y: auto;
-    background-color: $body-bg;
-}
+    ul.nav-pills-horizontal {
+        border: 1px solid transparent;
+        border-radius: 0.35rem;
+        padding: 0.35rem;
+        flex-wrap: nowrap;
+        overflow-y: auto;
+        background-color: $body-bg;
 
-.page-menu ul.nav-pills-horizontal li.nav-item {
-    display: flex;
+        li.nav-item {
+            display: flex;
+        }
+    }
 }
 
 .breadcrumb {
     margin: 0;
 }
 
-.breadcrumb .breadcrumb-item a {
-    color: $primary;
-}
+.breadcrumb {
+    .breadcrumb-item a {
+        color: $primary;
+    }
 
-.breadcrumb a:hover {
-    text-decoration: underline;
+    a:hover {
+        text-decoration: underline;
+    }
 }
 
 .list-menu {
@@ -536,36 +542,38 @@ a.dropdown-toggle {
     }
 }
 
-.notification-dropdown .dropdown-menu {
-    width: 25rem;
-    opacity: 0.9;
-}
+.notification-dropdown {
+    .dropdown-menu {
+        width: 25rem;
+        opacity: 0.9;
 
-.notification-dropdown .dropdown-menu .dropdown-header,
-.notification-dropdown .dropdown-menu .dropdown-footer {
-    padding: 0.3rem 1rem;
-    color: $gray-600;
-}
+        .dropdown-header,
+        .dropdown-footer {
+            padding: 0.3rem 1rem;
+            color: $gray-600;
+        }
 
-.notification-dropdown .dropdown-menu .dropdown-footer {
-    float: right;
-}
+        .dropdown-footer {
+            float: right;
+        }
 
-.notification-dropdown .notification-item .notification-contents {
-    display: flex;
-}
+        li.notification-li {
+            border-top: 1px solid $dropdown-divider-bg;
+        }
+    }
 
-.notification-dropdown .notification-item .notification-contents .notification-text {
-    text-wrap: wrap;
-}
+    .notification-item .notification-contents {
+        display: flex;
 
-.notification-dropdown .notification-item .notification-contents .notification-time {
-    color: $gray-600;
-    text-align: end;
-}
+        .notification-text {
+            text-wrap: wrap;
+        }
 
-.notification-dropdown .dropdown-menu li.notification-li {
-    border-top: 1px solid $dropdown-divider-bg;
+        .notification-time {
+            color: $gray-600;
+            text-align: end;
+        }
+    }
 }
 
 .dropdown-toggle::after {
@@ -592,13 +600,13 @@ a.dropdown-toggle {
 
 .nav .nav-item.disabled {
     transition: none;
-}
 
-.nav .nav-item.disabled *,
-.nav .nav-item.disabled a {
-    pointer-events: none;
-    transition: unset !important;
-    color: $disabled-text !important;
+    *,
+    a {
+        pointer-events: none;
+        transition: unset !important;
+        color: $disabled-text !important;
+    }
 }
 
 .icon-btn,
@@ -608,10 +616,10 @@ a.dropdown-toggle {
 
 .icon-btn {
     font-size: 1.5rem;
-}
 
-.icon-btn span {
-    font-weight: bold;
+    span {
+        font-weight: bold;
+    }
 }
 
 .icon-btn-sm {
