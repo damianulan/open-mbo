@@ -59669,7 +59669,7 @@ exports["default"] = Iterator;
 (module) {
 
 /*!
-* sweetalert2 v11.26.18
+* sweetalert2 v11.26.21
 * Released under the MIT License.
 */
 (function (global, factory) {
@@ -60798,7 +60798,8 @@ exports["default"] = Iterator;
 
   var privateProps = {
     innerParams: new WeakMap(),
-    domCache: new WeakMap()
+    domCache: new WeakMap(),
+    focusedElement: new WeakMap()
   };
 
   /// <reference path="../../../../sweetalert2.d.ts"/>
@@ -62721,6 +62722,11 @@ exports["default"] = Iterator;
     domCache.confirmButton.disabled = false;
     domCache.denyButton.disabled = false;
     domCache.cancelButton.disabled = false;
+    const focusedElement = privateProps.focusedElement.get(this);
+    if (focusedElement instanceof HTMLElement && document.activeElement === document.body) {
+      focusedElement.focus();
+    }
+    privateProps.focusedElement.delete(this);
   }
 
   /**
@@ -62789,6 +62795,11 @@ exports["default"] = Iterator;
    */
   function enableButtons() {
     setButtonsDisabled(this, ['confirmButton', 'denyButton', 'cancelButton'], false);
+    const focusedElement = privateProps.focusedElement.get(this);
+    if (focusedElement instanceof HTMLElement && document.activeElement === document.body) {
+      focusedElement.focus();
+    }
+    privateProps.focusedElement.delete(this);
   }
 
   /**
@@ -62796,6 +62807,7 @@ exports["default"] = Iterator;
    * @this {SweetAlert}
    */
   function disableButtons() {
+    privateProps.focusedElement.set(this, document.activeElement);
     setButtonsDisabled(this, ['confirmButton', 'denyButton', 'cancelButton'], true);
   }
 
@@ -64178,7 +64190,8 @@ exports["default"] = Iterator;
       /**
        * @type {Promise<SweetAlertResult>}
        */
-      _classPrivateFieldInitSpec(this, _promise, /** @type {Promise<SweetAlertResult>} */Promise.resolve({
+      _classPrivateFieldInitSpec(this, _promise, /** @type {Promise<SweetAlertResult>} */
+      Promise.resolve({
         isConfirmed: false,
         isDenied: false,
         isDismissed: true
@@ -64389,8 +64402,8 @@ exports["default"] = Iterator;
     }
     // TODO: this is dumb, remove `allowEnterKey` param in the next major version
     if (!callIfFunction(innerParams.allowEnterKey)) {
-      warnAboutDeprecation('allowEnterKey');
-      blurActiveElement();
+      warnAboutDeprecation('allowEnterKey', 'preConfirm: () => false');
+      domCache.popup.focus();
       return;
     }
     if (focusAutofocus(domCache)) {
@@ -64437,11 +64450,6 @@ exports["default"] = Iterator;
     }
     return false;
   };
-  const blurActiveElement = () => {
-    if (document.activeElement instanceof HTMLElement && typeof document.activeElement.blur === 'function') {
-      document.activeElement.blur();
-    }
-  };
 
   // Assign instance methods from src/instanceMethods/*.js to prototype
   SweetAlert.prototype.disableButtons = disableButtons;
@@ -64481,7 +64489,7 @@ exports["default"] = Iterator;
     };
   });
   SweetAlert.DismissReason = DismissReason;
-  SweetAlert.version = '11.26.18';
+  SweetAlert.version = '11.26.21';
 
   const Swal = SweetAlert;
   // @ts-ignore
@@ -67510,7 +67518,7 @@ __webpack_require__.r(__webpack_exports__);
  * - `http` for Node.js
  * - `xhr` for browsers
  * - `fetch` for fetch API-based requests
- * 
+ *
  * @type {Object<string, Function|Object>}
  */
 const knownAdapters = {
@@ -67518,7 +67526,7 @@ const knownAdapters = {
   xhr: _xhr_js__WEBPACK_IMPORTED_MODULE_2__["default"],
   fetch: {
     get: _fetch_js__WEBPACK_IMPORTED_MODULE_3__.getFetch,
-  }
+  },
 };
 
 // Assign adapter names for easier debugging and identification
@@ -67535,7 +67543,7 @@ _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(knownAdapters, (fn, va
 
 /**
  * Render a rejection reason string for unknown or unsupported adapters
- * 
+ *
  * @param {string} reason
  * @returns {string}
  */
@@ -67543,17 +67551,18 @@ const renderReason = (reason) => `- ${reason}`;
 
 /**
  * Check if the adapter is resolved (function, null, or false)
- * 
+ *
  * @param {Function|null|false} adapter
  * @returns {boolean}
  */
-const isResolvedHandle = (adapter) => _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFunction(adapter) || adapter === null || adapter === false;
+const isResolvedHandle = (adapter) =>
+  _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFunction(adapter) || adapter === null || adapter === false;
 
 /**
  * Get the first suitable adapter from the provided list.
  * Tries each adapter in order until a supported one is found.
  * Throws an AxiosError if no adapter is suitable.
- * 
+ *
  * @param {Array<string|Function>|string|Function} adapters - Adapter(s) by name or function.
  * @param {Object} config - Axios request configuration
  * @throws {AxiosError} If no suitable adapter is available
@@ -67590,14 +67599,17 @@ function getAdapter(adapters, config) {
   }
 
   if (!adapter) {
-    const reasons = Object.entries(rejectedReasons)
-      .map(([id, state]) => `adapter ${id} ` +
+    const reasons = Object.entries(rejectedReasons).map(
+      ([id, state]) =>
+        `adapter ${id} ` +
         (state === false ? 'is not supported by the environment' : 'is not available in the build')
-      );
+    );
 
-    let s = length ?
-      (reasons.length > 1 ? 'since :\n' + reasons.map(renderReason).join('\n') : ' ' + renderReason(reasons[0])) :
-      'as no adapter specified';
+    let s = length
+      ? reasons.length > 1
+        ? 'since :\n' + reasons.map(renderReason).join('\n')
+        : ' ' + renderReason(reasons[0])
+      : 'as no adapter specified';
 
     throw new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_4__["default"](
       `There is no suitable adapter to dispatch the request ` + s,
@@ -67622,7 +67634,7 @@ function getAdapter(adapters, config) {
    * Exposes all known adapters
    * @type {Object<string, Function|Object>}
    */
-  adapters: knownAdapters
+  adapters: knownAdapters,
 });
 
 
@@ -67661,31 +67673,33 @@ __webpack_require__.r(__webpack_exports__);
 
 const DEFAULT_CHUNK_SIZE = 64 * 1024;
 
-const {isFunction} = _utils_js__WEBPACK_IMPORTED_MODULE_1__["default"];
+const { isFunction } = _utils_js__WEBPACK_IMPORTED_MODULE_1__["default"];
 
-const globalFetchAPI = (({Request, Response}) => ({
-  Request, Response
+const globalFetchAPI = (({ Request, Response }) => ({
+  Request,
+  Response,
 }))(_utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].global);
 
-const {
-  ReadableStream, TextEncoder
-} = _utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].global;
-
+const { ReadableStream, TextEncoder } = _utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].global;
 
 const test = (fn, ...args) => {
   try {
     return !!fn(...args);
   } catch (e) {
-    return false
+    return false;
   }
-}
+};
 
 const factory = (env) => {
-  env = _utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].merge.call({
-    skipUndefined: true
-  }, globalFetchAPI, env);
+  env = _utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].merge.call(
+    {
+      skipUndefined: true,
+    },
+    globalFetchAPI,
+    env
+  );
 
-  const {fetch: envFetch, Request, Response} = env;
+  const { fetch: envFetch, Request, Response } = env;
   const isFetchSupported = envFetch ? isFunction(envFetch) : typeof fetch === 'function';
   const isRequestSupported = isFunction(Request);
   const isResponseSupported = isFunction(Response);
@@ -67696,46 +67710,61 @@ const factory = (env) => {
 
   const isReadableStreamSupported = isFetchSupported && isFunction(ReadableStream);
 
-  const encodeText = isFetchSupported && (typeof TextEncoder === 'function' ?
-      ((encoder) => (str) => encoder.encode(str))(new TextEncoder()) :
-      async (str) => new Uint8Array(await new Request(str).arrayBuffer())
-  );
+  const encodeText =
+    isFetchSupported &&
+    (typeof TextEncoder === 'function'
+      ? (
+          (encoder) => (str) =>
+            encoder.encode(str)
+        )(new TextEncoder())
+      : async (str) => new Uint8Array(await new Request(str).arrayBuffer()));
 
-  const supportsRequestStream = isRequestSupported && isReadableStreamSupported && test(() => {
-    let duplexAccessed = false;
+  const supportsRequestStream =
+    isRequestSupported &&
+    isReadableStreamSupported &&
+    test(() => {
+      let duplexAccessed = false;
 
-    const hasContentType = new Request(_platform_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].origin, {
-      body: new ReadableStream(),
-      method: 'POST',
-      get duplex() {
-        duplexAccessed = true;
-        return 'half';
-      },
-    }).headers.has('Content-Type');
+      const hasContentType = new Request(_platform_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].origin, {
+        body: new ReadableStream(),
+        method: 'POST',
+        get duplex() {
+          duplexAccessed = true;
+          return 'half';
+        },
+      }).headers.has('Content-Type');
 
-    return duplexAccessed && !hasContentType;
-  });
+      return duplexAccessed && !hasContentType;
+    });
 
-  const supportsResponseStream = isResponseSupported && isReadableStreamSupported &&
+  const supportsResponseStream =
+    isResponseSupported &&
+    isReadableStreamSupported &&
     test(() => _utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].isReadableStream(new Response('').body));
 
   const resolvers = {
-    stream: supportsResponseStream && ((res) => res.body)
+    stream: supportsResponseStream && ((res) => res.body),
   };
 
-  isFetchSupported && ((() => {
-    ['text', 'arrayBuffer', 'blob', 'formData', 'stream'].forEach(type => {
-      !resolvers[type] && (resolvers[type] = (res, config) => {
-        let method = res && res[type];
+  isFetchSupported &&
+    (() => {
+      ['text', 'arrayBuffer', 'blob', 'formData', 'stream'].forEach((type) => {
+        !resolvers[type] &&
+          (resolvers[type] = (res, config) => {
+            let method = res && res[type];
 
-        if (method) {
-          return method.call(res);
-        }
+            if (method) {
+              return method.call(res);
+            }
 
-        throw new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_2__["default"](`Response type '${type}' is not supported`, _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_2__["default"].ERR_NOT_SUPPORT, config);
-      })
-    });
-  })());
+            throw new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_2__["default"](
+              `Response type '${type}' is not supported`,
+              _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_2__["default"].ERR_NOT_SUPPORT,
+              config
+            );
+          });
+      });
+    })();
 
   const getBodyLength = async (body) => {
     if (body == null) {
@@ -67765,13 +67794,13 @@ const factory = (env) => {
     if (_utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].isString(body)) {
       return (await encodeText(body)).byteLength;
     }
-  }
+  };
 
   const resolveBodyLength = async (headers, body) => {
     const length = _utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].toFiniteNumber(headers.getContentLength());
 
     return length == null ? getBodyLength(body) : length;
-  }
+  };
 
   return async (config) => {
     let {
@@ -67786,38 +67815,47 @@ const factory = (env) => {
       responseType,
       headers,
       withCredentials = 'same-origin',
-      fetchOptions
+      fetchOptions,
     } = (0,_helpers_resolveConfig_js__WEBPACK_IMPORTED_MODULE_7__["default"])(config);
 
     let _fetch = envFetch || fetch;
 
     responseType = responseType ? (responseType + '').toLowerCase() : 'text';
 
-    let composedSignal = (0,_helpers_composeSignals_js__WEBPACK_IMPORTED_MODULE_3__["default"])([signal, cancelToken && cancelToken.toAbortSignal()], timeout);
+    let composedSignal = (0,_helpers_composeSignals_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+      [signal, cancelToken && cancelToken.toAbortSignal()],
+      timeout
+    );
 
     let request = null;
 
-    const unsubscribe = composedSignal && composedSignal.unsubscribe && (() => {
-      composedSignal.unsubscribe();
-    });
+    const unsubscribe =
+      composedSignal &&
+      composedSignal.unsubscribe &&
+      (() => {
+        composedSignal.unsubscribe();
+      });
 
     let requestContentLength;
 
     try {
       if (
-        onUploadProgress && supportsRequestStream && method !== 'get' && method !== 'head' &&
+        onUploadProgress &&
+        supportsRequestStream &&
+        method !== 'get' &&
+        method !== 'head' &&
         (requestContentLength = await resolveBodyLength(headers, data)) !== 0
       ) {
         let _request = new Request(url, {
           method: 'POST',
           body: data,
-          duplex: "half"
+          duplex: 'half',
         });
 
         let contentTypeHeader;
 
         if (_utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].isFormData(data) && (contentTypeHeader = _request.headers.get('content-type'))) {
-          headers.setContentType(contentTypeHeader)
+          headers.setContentType(contentTypeHeader);
         }
 
         if (_request.body) {
@@ -67836,7 +67874,7 @@ const factory = (env) => {
 
       // Cloudflare Workers throws when credentials are defined
       // see https://github.com/cloudflare/workerd/issues/902
-      const isCredentialsSupported = isRequestSupported && "credentials" in Request.prototype;
+      const isCredentialsSupported = isRequestSupported && 'credentials' in Request.prototype;
 
       const resolvedOptions = {
         ...fetchOptions,
@@ -67844,29 +67882,35 @@ const factory = (env) => {
         method: method.toUpperCase(),
         headers: headers.normalize().toJSON(),
         body: data,
-        duplex: "half",
-        credentials: isCredentialsSupported ? withCredentials : undefined
+        duplex: 'half',
+        credentials: isCredentialsSupported ? withCredentials : undefined,
       };
 
       request = isRequestSupported && new Request(url, resolvedOptions);
 
-      let response = await (isRequestSupported ? _fetch(request, fetchOptions) : _fetch(url, resolvedOptions));
+      let response = await (isRequestSupported
+        ? _fetch(request, fetchOptions)
+        : _fetch(url, resolvedOptions));
 
-      const isStreamResponse = supportsResponseStream && (responseType === 'stream' || responseType === 'response');
+      const isStreamResponse =
+        supportsResponseStream && (responseType === 'stream' || responseType === 'response');
 
       if (supportsResponseStream && (onDownloadProgress || (isStreamResponse && unsubscribe))) {
         const options = {};
 
-        ['status', 'statusText', 'headers'].forEach(prop => {
+        ['status', 'statusText', 'headers'].forEach((prop) => {
           options[prop] = response[prop];
         });
 
         const responseContentLength = _utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].toFiniteNumber(response.headers.get('content-length'));
 
-        const [onProgress, flush] = onDownloadProgress && (0,_helpers_progressEventReducer_js__WEBPACK_IMPORTED_MODULE_6__.progressEventDecorator)(
-          responseContentLength,
-          (0,_helpers_progressEventReducer_js__WEBPACK_IMPORTED_MODULE_6__.progressEventReducer)((0,_helpers_progressEventReducer_js__WEBPACK_IMPORTED_MODULE_6__.asyncDecorator)(onDownloadProgress), true)
-        ) || [];
+        const [onProgress, flush] =
+          (onDownloadProgress &&
+            (0,_helpers_progressEventReducer_js__WEBPACK_IMPORTED_MODULE_6__.progressEventDecorator)(
+              responseContentLength,
+              (0,_helpers_progressEventReducer_js__WEBPACK_IMPORTED_MODULE_6__.progressEventReducer)((0,_helpers_progressEventReducer_js__WEBPACK_IMPORTED_MODULE_6__.asyncDecorator)(onDownloadProgress), true)
+            )) ||
+          [];
 
         response = new Response(
           (0,_helpers_trackStream_js__WEBPACK_IMPORTED_MODULE_4__.trackStream)(response.body, DEFAULT_CHUNK_SIZE, onProgress, () => {
@@ -67879,7 +67923,10 @@ const factory = (env) => {
 
       responseType = responseType || 'text';
 
-      let responseData = await resolvers[_utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].findKey(resolvers, responseType) || 'text'](response, config);
+      let responseData = await resolvers[_utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].findKey(resolvers, responseType) || 'text'](
+        response,
+        config
+      );
 
       !isStreamResponse && unsubscribe && unsubscribe();
 
@@ -67890,43 +67937,50 @@ const factory = (env) => {
           status: response.status,
           statusText: response.statusText,
           config,
-          request
-        })
-      })
+          request,
+        });
+      });
     } catch (err) {
       unsubscribe && unsubscribe();
 
       if (err && err.name === 'TypeError' && /Load failed|fetch/i.test(err.message)) {
         throw Object.assign(
-          new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_2__["default"]('Network Error', _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_2__["default"].ERR_NETWORK, config, request, err && err.response),
+          new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_2__["default"](
+            'Network Error',
+            _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_2__["default"].ERR_NETWORK,
+            config,
+            request,
+            err && err.response
+          ),
           {
-            cause: err.cause || err
+            cause: err.cause || err,
           }
-        )
+        );
       }
 
       throw _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_2__["default"].from(err, err && err.code, config, request, err && err.response);
     }
-  }
-}
+  };
+};
 
 const seedCache = new Map();
 
 const getFetch = (config) => {
   let env = (config && config.env) || {};
-  const {fetch, Request, Response} = env;
-  const seeds = [
-    Request, Response, fetch
-  ];
+  const { fetch, Request, Response } = env;
+  const seeds = [Request, Response, fetch];
 
-  let len = seeds.length, i = len,
-    seed, target, map = seedCache;
+  let len = seeds.length,
+    i = len,
+    seed,
+    target,
+    map = seedCache;
 
   while (i--) {
     seed = seeds[i];
     target = map.get(seed);
 
-    target === undefined && map.set(seed, target = (i ? new Map() : factory(env)))
+    target === undefined && map.set(seed, (target = i ? new Map() : factory(env)));
 
     map = target;
   }
@@ -67975,193 +68029,215 @@ __webpack_require__.r(__webpack_exports__);
 
 const isXHRAdapterSupported = typeof XMLHttpRequest !== 'undefined';
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (isXHRAdapterSupported && function (config) {
-  return new Promise(function dispatchXhrRequest(resolve, reject) {
-    const _config = (0,_helpers_resolveConfig_js__WEBPACK_IMPORTED_MODULE_9__["default"])(config);
-    let requestData = _config.data;
-    const requestHeaders = _core_AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_7__["default"].from(_config.headers).normalize();
-    let {responseType, onUploadProgress, onDownloadProgress} = _config;
-    let onCanceled;
-    let uploadThrottled, downloadThrottled;
-    let flushUpload, flushDownload;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (isXHRAdapterSupported &&
+  function (config) {
+    return new Promise(function dispatchXhrRequest(resolve, reject) {
+      const _config = (0,_helpers_resolveConfig_js__WEBPACK_IMPORTED_MODULE_9__["default"])(config);
+      let requestData = _config.data;
+      const requestHeaders = _core_AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_7__["default"].from(_config.headers).normalize();
+      let { responseType, onUploadProgress, onDownloadProgress } = _config;
+      let onCanceled;
+      let uploadThrottled, downloadThrottled;
+      let flushUpload, flushDownload;
 
-    function done() {
-      flushUpload && flushUpload(); // flush events
-      flushDownload && flushDownload(); // flush events
+      function done() {
+        flushUpload && flushUpload(); // flush events
+        flushDownload && flushDownload(); // flush events
 
-      _config.cancelToken && _config.cancelToken.unsubscribe(onCanceled);
+        _config.cancelToken && _config.cancelToken.unsubscribe(onCanceled);
 
-      _config.signal && _config.signal.removeEventListener('abort', onCanceled);
-    }
-
-    let request = new XMLHttpRequest();
-
-    request.open(_config.method.toUpperCase(), _config.url, true);
-
-    // Set the request timeout in MS
-    request.timeout = _config.timeout;
-
-    function onloadend() {
-      if (!request) {
-        return;
-      }
-      // Prepare the response
-      const responseHeaders = _core_AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_7__["default"].from(
-        'getAllResponseHeaders' in request && request.getAllResponseHeaders()
-      );
-      const responseData = !responseType || responseType === 'text' || responseType === 'json' ?
-        request.responseText : request.response;
-      const response = {
-        data: responseData,
-        status: request.status,
-        statusText: request.statusText,
-        headers: responseHeaders,
-        config,
-        request
-      };
-
-      (0,_core_settle_js__WEBPACK_IMPORTED_MODULE_1__["default"])(function _resolve(value) {
-        resolve(value);
-        done();
-      }, function _reject(err) {
-        reject(err);
-        done();
-      }, response);
-
-      // Clean up request
-      request = null;
-    }
-
-    if ('onloadend' in request) {
-      // Use onloadend if available
-      request.onloadend = onloadend;
-    } else {
-      // Listen for ready state to emulate onloadend
-      request.onreadystatechange = function handleLoad() {
-        if (!request || request.readyState !== 4) {
-          return;
-        }
-
-        // The request errored out and we didn't get a response, this will be
-        // handled by onerror instead
-        // With one exception: request that using file: protocol, most browsers
-        // will return status as 0 even though it's a successful request
-        if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
-          return;
-        }
-        // readystate handler is calling before onerror or ontimeout handlers,
-        // so we should call onloadend on the next 'tick'
-        setTimeout(onloadend);
-      };
-    }
-
-    // Handle browser request cancellation (as opposed to a manual cancellation)
-    request.onabort = function handleAbort() {
-      if (!request) {
-        return;
+        _config.signal && _config.signal.removeEventListener('abort', onCanceled);
       }
 
-      reject(new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"]('Request aborted', _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"].ECONNABORTED, config, request));
+      let request = new XMLHttpRequest();
 
-      // Clean up request
-      request = null;
-    };
+      request.open(_config.method.toUpperCase(), _config.url, true);
 
-    // Handle low level network errors
-  request.onerror = function handleError(event) {
-       // Browsers deliver a ProgressEvent in XHR onerror
-       // (message may be empty; when present, surface it)
-       // See https://developer.mozilla.org/docs/Web/API/XMLHttpRequest/error_event
-       const msg = event && event.message ? event.message : 'Network Error';
-       const err = new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"](msg, _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"].ERR_NETWORK, config, request);
-       // attach the underlying event for consumers who want details
-       err.event = event || null;
-       reject(err);
-       request = null;
-    };
-    
-    // Handle timeout
-    request.ontimeout = function handleTimeout() {
-      let timeoutErrorMessage = _config.timeout ? 'timeout of ' + _config.timeout + 'ms exceeded' : 'timeout exceeded';
-      const transitional = _config.transitional || _defaults_transitional_js__WEBPACK_IMPORTED_MODULE_2__["default"];
-      if (_config.timeoutErrorMessage) {
-        timeoutErrorMessage = _config.timeoutErrorMessage;
-      }
-      reject(new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"](
-        timeoutErrorMessage,
-        transitional.clarifyTimeoutError ? _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"].ETIMEDOUT : _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"].ECONNABORTED,
-        config,
-        request));
+      // Set the request timeout in MS
+      request.timeout = _config.timeout;
 
-      // Clean up request
-      request = null;
-    };
-
-    // Remove Content-Type if data is undefined
-    requestData === undefined && requestHeaders.setContentType(null);
-
-    // Add headers to the request
-    if ('setRequestHeader' in request) {
-      _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(requestHeaders.toJSON(), function setRequestHeader(val, key) {
-        request.setRequestHeader(key, val);
-      });
-    }
-
-    // Add withCredentials to request if needed
-    if (!_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isUndefined(_config.withCredentials)) {
-      request.withCredentials = !!_config.withCredentials;
-    }
-
-    // Add responseType to request if needed
-    if (responseType && responseType !== 'json') {
-      request.responseType = _config.responseType;
-    }
-
-    // Handle progress if needed
-    if (onDownloadProgress) {
-      ([downloadThrottled, flushDownload] = (0,_helpers_progressEventReducer_js__WEBPACK_IMPORTED_MODULE_8__.progressEventReducer)(onDownloadProgress, true));
-      request.addEventListener('progress', downloadThrottled);
-    }
-
-    // Not all browsers support upload events
-    if (onUploadProgress && request.upload) {
-      ([uploadThrottled, flushUpload] = (0,_helpers_progressEventReducer_js__WEBPACK_IMPORTED_MODULE_8__.progressEventReducer)(onUploadProgress));
-
-      request.upload.addEventListener('progress', uploadThrottled);
-
-      request.upload.addEventListener('loadend', flushUpload);
-    }
-
-    if (_config.cancelToken || _config.signal) {
-      // Handle cancellation
-      // eslint-disable-next-line func-names
-      onCanceled = cancel => {
+      function onloadend() {
         if (!request) {
           return;
         }
-        reject(!cancel || cancel.type ? new _cancel_CanceledError_js__WEBPACK_IMPORTED_MODULE_4__["default"](null, config, request) : cancel);
-        request.abort();
+        // Prepare the response
+        const responseHeaders = _core_AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_7__["default"].from(
+          'getAllResponseHeaders' in request && request.getAllResponseHeaders()
+        );
+        const responseData =
+          !responseType || responseType === 'text' || responseType === 'json'
+            ? request.responseText
+            : request.response;
+        const response = {
+          data: responseData,
+          status: request.status,
+          statusText: request.statusText,
+          headers: responseHeaders,
+          config,
+          request,
+        };
+
+        (0,_core_settle_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+          function _resolve(value) {
+            resolve(value);
+            done();
+          },
+          function _reject(err) {
+            reject(err);
+            done();
+          },
+          response
+        );
+
+        // Clean up request
+        request = null;
+      }
+
+      if ('onloadend' in request) {
+        // Use onloadend if available
+        request.onloadend = onloadend;
+      } else {
+        // Listen for ready state to emulate onloadend
+        request.onreadystatechange = function handleLoad() {
+          if (!request || request.readyState !== 4) {
+            return;
+          }
+
+          // The request errored out and we didn't get a response, this will be
+          // handled by onerror instead
+          // With one exception: request that using file: protocol, most browsers
+          // will return status as 0 even though it's a successful request
+          if (
+            request.status === 0 &&
+            !(request.responseURL && request.responseURL.indexOf('file:') === 0)
+          ) {
+            return;
+          }
+          // readystate handler is calling before onerror or ontimeout handlers,
+          // so we should call onloadend on the next 'tick'
+          setTimeout(onloadend);
+        };
+      }
+
+      // Handle browser request cancellation (as opposed to a manual cancellation)
+      request.onabort = function handleAbort() {
+        if (!request) {
+          return;
+        }
+
+        reject(new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"]('Request aborted', _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"].ECONNABORTED, config, request));
+
+        // Clean up request
         request = null;
       };
 
-      _config.cancelToken && _config.cancelToken.subscribe(onCanceled);
-      if (_config.signal) {
-        _config.signal.aborted ? onCanceled() : _config.signal.addEventListener('abort', onCanceled);
+      // Handle low level network errors
+      request.onerror = function handleError(event) {
+        // Browsers deliver a ProgressEvent in XHR onerror
+        // (message may be empty; when present, surface it)
+        // See https://developer.mozilla.org/docs/Web/API/XMLHttpRequest/error_event
+        const msg = event && event.message ? event.message : 'Network Error';
+        const err = new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"](msg, _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"].ERR_NETWORK, config, request);
+        // attach the underlying event for consumers who want details
+        err.event = event || null;
+        reject(err);
+        request = null;
+      };
+
+      // Handle timeout
+      request.ontimeout = function handleTimeout() {
+        let timeoutErrorMessage = _config.timeout
+          ? 'timeout of ' + _config.timeout + 'ms exceeded'
+          : 'timeout exceeded';
+        const transitional = _config.transitional || _defaults_transitional_js__WEBPACK_IMPORTED_MODULE_2__["default"];
+        if (_config.timeoutErrorMessage) {
+          timeoutErrorMessage = _config.timeoutErrorMessage;
+        }
+        reject(
+          new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"](
+            timeoutErrorMessage,
+            transitional.clarifyTimeoutError ? _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"].ETIMEDOUT : _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"].ECONNABORTED,
+            config,
+            request
+          )
+        );
+
+        // Clean up request
+        request = null;
+      };
+
+      // Remove Content-Type if data is undefined
+      requestData === undefined && requestHeaders.setContentType(null);
+
+      // Add headers to the request
+      if ('setRequestHeader' in request) {
+        _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(requestHeaders.toJSON(), function setRequestHeader(val, key) {
+          request.setRequestHeader(key, val);
+        });
       }
-    }
 
-    const protocol = (0,_helpers_parseProtocol_js__WEBPACK_IMPORTED_MODULE_5__["default"])(_config.url);
+      // Add withCredentials to request if needed
+      if (!_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isUndefined(_config.withCredentials)) {
+        request.withCredentials = !!_config.withCredentials;
+      }
 
-    if (protocol && _platform_index_js__WEBPACK_IMPORTED_MODULE_6__["default"].protocols.indexOf(protocol) === -1) {
-      reject(new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"]('Unsupported protocol ' + protocol + ':', _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"].ERR_BAD_REQUEST, config));
-      return;
-    }
+      // Add responseType to request if needed
+      if (responseType && responseType !== 'json') {
+        request.responseType = _config.responseType;
+      }
 
+      // Handle progress if needed
+      if (onDownloadProgress) {
+        [downloadThrottled, flushDownload] = (0,_helpers_progressEventReducer_js__WEBPACK_IMPORTED_MODULE_8__.progressEventReducer)(onDownloadProgress, true);
+        request.addEventListener('progress', downloadThrottled);
+      }
 
-    // Send the request
-    request.send(requestData || null);
+      // Not all browsers support upload events
+      if (onUploadProgress && request.upload) {
+        [uploadThrottled, flushUpload] = (0,_helpers_progressEventReducer_js__WEBPACK_IMPORTED_MODULE_8__.progressEventReducer)(onUploadProgress);
+
+        request.upload.addEventListener('progress', uploadThrottled);
+
+        request.upload.addEventListener('loadend', flushUpload);
+      }
+
+      if (_config.cancelToken || _config.signal) {
+        // Handle cancellation
+        // eslint-disable-next-line func-names
+        onCanceled = (cancel) => {
+          if (!request) {
+            return;
+          }
+          reject(!cancel || cancel.type ? new _cancel_CanceledError_js__WEBPACK_IMPORTED_MODULE_4__["default"](null, config, request) : cancel);
+          request.abort();
+          request = null;
+        };
+
+        _config.cancelToken && _config.cancelToken.subscribe(onCanceled);
+        if (_config.signal) {
+          _config.signal.aborted
+            ? onCanceled()
+            : _config.signal.addEventListener('abort', onCanceled);
+        }
+      }
+
+      const protocol = (0,_helpers_parseProtocol_js__WEBPACK_IMPORTED_MODULE_5__["default"])(_config.url);
+
+      if (protocol && _platform_index_js__WEBPACK_IMPORTED_MODULE_6__["default"].protocols.indexOf(protocol) === -1) {
+        reject(
+          new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"](
+            'Unsupported protocol ' + protocol + ':',
+            _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_3__["default"].ERR_BAD_REQUEST,
+            config
+          )
+        );
+        return;
+      }
+
+      // Send the request
+      request.send(requestData || null);
+    });
   });
-});
 
 
 /***/ },
@@ -68226,10 +68302,10 @@ function createInstance(defaultConfig) {
   const instance = (0,_helpers_bind_js__WEBPACK_IMPORTED_MODULE_1__["default"])(_core_Axios_js__WEBPACK_IMPORTED_MODULE_2__["default"].prototype.request, context);
 
   // Copy axios.prototype to instance
-  _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].extend(instance, _core_Axios_js__WEBPACK_IMPORTED_MODULE_2__["default"].prototype, context, {allOwnKeys: true});
+  _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].extend(instance, _core_Axios_js__WEBPACK_IMPORTED_MODULE_2__["default"].prototype, context, { allOwnKeys: true });
 
   // Copy context to instance
-  _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].extend(instance, context, null, {allOwnKeys: true});
+  _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].extend(instance, context, null, { allOwnKeys: true });
 
   // Factory for creating new instances
   instance.create = function create(instanceConfig) {
@@ -68273,7 +68349,7 @@ axios.mergeConfig = _core_mergeConfig_js__WEBPACK_IMPORTED_MODULE_3__["default"]
 
 axios.AxiosHeaders = _core_AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_14__["default"];
 
-axios.formToJSON = thing => (0,_helpers_formDataToJSON_js__WEBPACK_IMPORTED_MODULE_5__["default"])(_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isHTMLForm(thing) ? new FormData(thing) : thing);
+axios.formToJSON = (thing) => (0,_helpers_formDataToJSON_js__WEBPACK_IMPORTED_MODULE_5__["default"])(_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isHTMLForm(thing) ? new FormData(thing) : thing);
 
 axios.getAdapter = _adapters_adapters_js__WEBPACK_IMPORTED_MODULE_15__["default"].getAdapter;
 
@@ -68325,7 +68401,7 @@ class CancelToken {
     const token = this;
 
     // eslint-disable-next-line func-names
-    this.promise.then(cancel => {
+    this.promise.then((cancel) => {
       if (!token._listeners) return;
 
       let i = token._listeners.length;
@@ -68337,10 +68413,10 @@ class CancelToken {
     });
 
     // eslint-disable-next-line func-names
-    this.promise.then = onfulfilled => {
+    this.promise.then = (onfulfilled) => {
       let _resolve;
       // eslint-disable-next-line func-names
-      const promise = new Promise(resolve => {
+      const promise = new Promise((resolve) => {
         token.subscribe(resolve);
         _resolve = resolve;
       }).then(onfulfilled);
@@ -68428,7 +68504,7 @@ class CancelToken {
     });
     return {
       token,
-      cancel
+      cancel,
     };
   }
 }
@@ -68542,7 +68618,7 @@ class Axios {
     this.defaults = instanceConfig || {};
     this.interceptors = {
       request: new _InterceptorManager_js__WEBPACK_IMPORTED_MODULE_2__["default"](),
-      response: new _InterceptorManager_js__WEBPACK_IMPORTED_MODULE_2__["default"]()
+      response: new _InterceptorManager_js__WEBPACK_IMPORTED_MODULE_2__["default"](),
     };
   }
 
@@ -68570,7 +68646,7 @@ class Axios {
             err.stack = stack;
             // match without the 2 top stack lines
           } else if (stack && !String(err.stack).endsWith(stack.replace(/^.+\n.+\n/, ''))) {
-            err.stack += '\n' + stack
+            err.stack += '\n' + stack;
           }
         } catch (e) {
           // ignore the case where "stack" is an un-writable property
@@ -68593,27 +68669,35 @@ class Axios {
 
     config = (0,_mergeConfig_js__WEBPACK_IMPORTED_MODULE_4__["default"])(this.defaults, config);
 
-    const {transitional, paramsSerializer, headers} = config;
+    const { transitional, paramsSerializer, headers } = config;
 
     if (transitional !== undefined) {
-      _helpers_validator_js__WEBPACK_IMPORTED_MODULE_6__["default"].assertOptions(transitional, {
-        silentJSONParsing: validators.transitional(validators.boolean),
-        forcedJSONParsing: validators.transitional(validators.boolean),
-        clarifyTimeoutError: validators.transitional(validators.boolean),
-        legacyInterceptorReqResOrdering: validators.transitional(validators.boolean)
-      }, false);
+      _helpers_validator_js__WEBPACK_IMPORTED_MODULE_6__["default"].assertOptions(
+        transitional,
+        {
+          silentJSONParsing: validators.transitional(validators.boolean),
+          forcedJSONParsing: validators.transitional(validators.boolean),
+          clarifyTimeoutError: validators.transitional(validators.boolean),
+          legacyInterceptorReqResOrdering: validators.transitional(validators.boolean),
+        },
+        false
+      );
     }
 
     if (paramsSerializer != null) {
       if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFunction(paramsSerializer)) {
         config.paramsSerializer = {
-          serialize: paramsSerializer
-        }
+          serialize: paramsSerializer,
+        };
       } else {
-        _helpers_validator_js__WEBPACK_IMPORTED_MODULE_6__["default"].assertOptions(paramsSerializer, {
-          encode: validators.function,
-          serialize: validators.function
-        }, true);
+        _helpers_validator_js__WEBPACK_IMPORTED_MODULE_6__["default"].assertOptions(
+          paramsSerializer,
+          {
+            encode: validators.function,
+            serialize: validators.function,
+          },
+          true
+        );
       }
     }
 
@@ -68626,26 +68710,25 @@ class Axios {
       config.allowAbsoluteUrls = true;
     }
 
-    _helpers_validator_js__WEBPACK_IMPORTED_MODULE_6__["default"].assertOptions(config, {
-      baseUrl: validators.spelling('baseURL'),
-      withXsrfToken: validators.spelling('withXSRFToken')
-    }, true);
+    _helpers_validator_js__WEBPACK_IMPORTED_MODULE_6__["default"].assertOptions(
+      config,
+      {
+        baseUrl: validators.spelling('baseURL'),
+        withXsrfToken: validators.spelling('withXSRFToken'),
+      },
+      true
+    );
 
     // Set config.method
     config.method = (config.method || this.defaults.method || 'get').toLowerCase();
 
     // Flatten headers
-    let contextHeaders = headers && _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].merge(
-      headers.common,
-      headers[config.method]
-    );
+    let contextHeaders = headers && _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].merge(headers.common, headers[config.method]);
 
-    headers && _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(
-      ['delete', 'get', 'head', 'post', 'put', 'patch', 'common'],
-      (method) => {
+    headers &&
+      _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(['delete', 'get', 'head', 'post', 'put', 'patch', 'common'], (method) => {
         delete headers[method];
-      }
-    );
+      });
 
     config.headers = _AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_7__["default"].concat(contextHeaders, headers);
 
@@ -68660,7 +68743,8 @@ class Axios {
       synchronousRequestInterceptors = synchronousRequestInterceptors && interceptor.synchronous;
 
       const transitional = config.transitional || _defaults_transitional_js__WEBPACK_IMPORTED_MODULE_8__["default"];
-      const legacyInterceptorReqResOrdering = transitional && transitional.legacyInterceptorReqResOrdering;
+      const legacyInterceptorReqResOrdering =
+        transitional && transitional.legacyInterceptorReqResOrdering;
 
       if (legacyInterceptorReqResOrdering) {
         requestInterceptorChain.unshift(interceptor.fulfilled, interceptor.rejected);
@@ -68734,12 +68818,14 @@ class Axios {
 // Provide aliases for supported request methods
 _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(['delete', 'get', 'head', 'options'], function forEachMethodNoData(method) {
   /*eslint func-names:0*/
-  Axios.prototype[method] = function(url, config) {
-    return this.request((0,_mergeConfig_js__WEBPACK_IMPORTED_MODULE_4__["default"])(config || {}, {
-      method,
-      url,
-      data: (config || {}).data
-    }));
+  Axios.prototype[method] = function (url, config) {
+    return this.request(
+      (0,_mergeConfig_js__WEBPACK_IMPORTED_MODULE_4__["default"])(config || {}, {
+        method,
+        url,
+        data: (config || {}).data,
+      })
+    );
   };
 });
 
@@ -68748,14 +68834,18 @@ _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(['post', 'put', 'patch
 
   function generateHTTPMethod(isForm) {
     return function httpMethod(url, data, config) {
-      return this.request((0,_mergeConfig_js__WEBPACK_IMPORTED_MODULE_4__["default"])(config || {}, {
-        method,
-        headers: isForm ? {
-          'Content-Type': 'multipart/form-data'
-        } : {},
-        url,
-        data
-      }));
+      return this.request(
+        (0,_mergeConfig_js__WEBPACK_IMPORTED_MODULE_4__["default"])(config || {}, {
+          method,
+          headers: isForm
+            ? {
+                'Content-Type': 'multipart/form-data',
+              }
+            : {},
+          url,
+          data,
+        })
+      );
     };
   }
 
@@ -68786,13 +68876,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class AxiosError extends Error {
-    static from(error, code, config, request, response, customProps) {
-        const axiosError = new AxiosError(error.message, code || error.code, config, request, response);
-        axiosError.cause = error;
-        axiosError.name = error.name;
-        customProps && Object.assign(axiosError, customProps);
-        return axiosError;
+  static from(error, code, config, request, response, customProps) {
+    const axiosError = new AxiosError(error.message, code || error.code, config, request, response);
+    axiosError.cause = error;
+    axiosError.name = error.name;
+
+    // Preserve status from the original error if not already set from response
+    if (error.status != null && axiosError.status == null) {
+      axiosError.status = error.status;
     }
+
+    customProps && Object.assign(axiosError, customProps);
+    return axiosError;
+  }
 
     /**
      * Create an Error with the specified message, config, error code, request and response.
@@ -68806,37 +68902,48 @@ class AxiosError extends Error {
      * @returns {Error} The created error.
      */
     constructor(message, code, config, request, response) {
-        super(message);
-        this.name = 'AxiosError';
-        this.isAxiosError = true;
-        code && (this.code = code);
-        config && (this.config = config);
-        request && (this.request = request);
-        if (response) {
-            this.response = response;
-            this.status = response.status;
-        }
+      super(message);
+      
+      // Make message enumerable to maintain backward compatibility
+      // The native Error constructor sets message as non-enumerable,
+      // but axios < v1.13.3 had it as enumerable
+      Object.defineProperty(this, 'message', {
+          value: message,
+          enumerable: true,
+          writable: true,
+          configurable: true
+      });
+      
+      this.name = 'AxiosError';
+      this.isAxiosError = true;
+      code && (this.code = code);
+      config && (this.config = config);
+      request && (this.request = request);
+      if (response) {
+          this.response = response;
+          this.status = response.status;
+      }
     }
 
-    toJSON() {
-        return {
-            // Standard
-            message: this.message,
-            name: this.name,
-            // Microsoft
-            description: this.description,
-            number: this.number,
-            // Mozilla
-            fileName: this.fileName,
-            lineNumber: this.lineNumber,
-            columnNumber: this.columnNumber,
-            stack: this.stack,
-            // Axios
-            config: _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].toJSONObject(this.config),
-            code: this.code,
-            status: this.status,
-        };
-    }
+  toJSON() {
+    return {
+      // Standard
+      message: this.message,
+      name: this.name,
+      // Microsoft
+      description: this.description,
+      number: this.number,
+      // Mozilla
+      fileName: this.fileName,
+      lineNumber: this.lineNumber,
+      columnNumber: this.columnNumber,
+      stack: this.stack,
+      // Axios
+      config: _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].toJSONObject(this.config),
+      code: this.code,
+      status: this.status,
+    };
+  }
 }
 
 // This can be changed to static properties as soon as the parser options in .eslint.cjs are updated.
@@ -68925,8 +69032,10 @@ function matchHeaderValue(context, value, header, filter, isHeaderNameFilter) {
 }
 
 function formatHeader(header) {
-  return header.trim()
-    .toLowerCase().replace(/([a-z\d])(\w*)/g, (w, char, str) => {
+  return header
+    .trim()
+    .toLowerCase()
+    .replace(/([a-z\d])(\w*)/g, (w, char, str) => {
       return char.toUpperCase() + str;
     });
 }
@@ -68934,12 +69043,12 @@ function formatHeader(header) {
 function buildAccessors(obj, header) {
   const accessorName = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].toCamelCase(' ' + header);
 
-  ['get', 'set', 'has'].forEach(methodName => {
+  ['get', 'set', 'has'].forEach((methodName) => {
     Object.defineProperty(obj, methodName + accessorName, {
-      value: function(arg1, arg2, arg3) {
+      value: function (arg1, arg2, arg3) {
         return this[methodName].call(this, header, arg1, arg2, arg3);
       },
-      configurable: true
+      configurable: true,
     });
   });
 }
@@ -68961,7 +69070,12 @@ class AxiosHeaders {
 
       const key = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].findKey(self, lHeader);
 
-      if(!key || self[key] === undefined || _rewrite === true || (_rewrite === undefined && self[key] !== false)) {
+      if (
+        !key ||
+        self[key] === undefined ||
+        _rewrite === true ||
+        (_rewrite === undefined && self[key] !== false)
+      ) {
         self[key || _header] = normalizeValue(_value);
       }
     }
@@ -68970,21 +69084,26 @@ class AxiosHeaders {
       _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(headers, (_value, _header) => setHeader(_value, _header, _rewrite));
 
     if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isPlainObject(header) || header instanceof this.constructor) {
-      setHeaders(header, valueOrRewrite)
-    } else if(_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isString(header) && (header = header.trim()) && !isValidHeaderName(header)) {
+      setHeaders(header, valueOrRewrite);
+    } else if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isString(header) && (header = header.trim()) && !isValidHeaderName(header)) {
       setHeaders((0,_helpers_parseHeaders_js__WEBPACK_IMPORTED_MODULE_1__["default"])(header), valueOrRewrite);
     } else if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isObject(header) && _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isIterable(header)) {
-      let obj = {}, dest, key;
+      let obj = {},
+        dest,
+        key;
       for (const entry of header) {
         if (!_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isArray(entry)) {
           throw TypeError('Object iterator must return a key-value pair');
         }
 
-        obj[key = entry[0]] = (dest = obj[key]) ?
-          (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isArray(dest) ? [...dest, entry[1]] : [dest, entry[1]]) : entry[1];
+        obj[(key = entry[0])] = (dest = obj[key])
+          ? _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isArray(dest)
+            ? [...dest, entry[1]]
+            : [dest, entry[1]]
+          : entry[1];
       }
 
-      setHeaders(obj, valueOrRewrite)
+      setHeaders(obj, valueOrRewrite);
     } else {
       header != null && setHeader(valueOrRewrite, header, rewrite);
     }
@@ -69028,7 +69147,11 @@ class AxiosHeaders {
     if (header) {
       const key = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].findKey(this, header);
 
-      return !!(key && this[key] !== undefined && (!matcher || matchHeaderValue(this, this[key], key, matcher)));
+      return !!(
+        key &&
+        this[key] !== undefined &&
+        (!matcher || matchHeaderValue(this, this[key], key, matcher))
+      );
     }
 
     return false;
@@ -69068,7 +69191,7 @@ class AxiosHeaders {
 
     while (i--) {
       const key = keys[i];
-      if(!matcher || matchHeaderValue(this, this[key], key, matcher, true)) {
+      if (!matcher || matchHeaderValue(this, this[key], key, matcher, true)) {
         delete this[key];
         deleted = true;
       }
@@ -69112,7 +69235,9 @@ class AxiosHeaders {
     const obj = Object.create(null);
 
     _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(this, (value, header) => {
-      value != null && value !== false && (obj[header] = asStrings && _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isArray(value) ? value.join(', ') : value);
+      value != null &&
+        value !== false &&
+        (obj[header] = asStrings && _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isArray(value) ? value.join(', ') : value);
     });
 
     return obj;
@@ -69123,11 +69248,13 @@ class AxiosHeaders {
   }
 
   toString() {
-    return Object.entries(this.toJSON()).map(([header, value]) => header + ': ' + value).join('\n');
+    return Object.entries(this.toJSON())
+      .map(([header, value]) => header + ': ' + value)
+      .join('\n');
   }
 
   getSetCookie() {
-    return this.get("set-cookie") || [];
+    return this.get('set-cookie') || [];
   }
 
   get [Symbol.toStringTag]() {
@@ -69147,9 +69274,12 @@ class AxiosHeaders {
   }
 
   static accessor(header) {
-    const internals = this[$internals] = (this[$internals] = {
-      accessors: {}
-    });
+    const internals =
+      (this[$internals] =
+      this[$internals] =
+        {
+          accessors: {},
+        });
 
     const accessors = internals.accessors;
     const prototype = this.prototype;
@@ -69169,17 +69299,24 @@ class AxiosHeaders {
   }
 }
 
-AxiosHeaders.accessor(['Content-Type', 'Content-Length', 'Accept', 'Accept-Encoding', 'User-Agent', 'Authorization']);
+AxiosHeaders.accessor([
+  'Content-Type',
+  'Content-Length',
+  'Accept',
+  'Accept-Encoding',
+  'User-Agent',
+  'Authorization',
+]);
 
 // reserved names hotfix
-_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].reduceDescriptors(AxiosHeaders.prototype, ({value}, key) => {
+_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].reduceDescriptors(AxiosHeaders.prototype, ({ value }, key) => {
   let mapped = key[0].toUpperCase() + key.slice(1); // map `set` => `Set`
   return {
     get: () => value,
     set(headerValue) {
       this[mapped] = headerValue;
-    }
-  }
+    },
+  };
 });
 
 _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].freezeMethods(AxiosHeaders);
@@ -69224,7 +69361,7 @@ class InterceptorManager {
       fulfilled,
       rejected,
       synchronous: options ? options.synchronous : false,
-      runWhen: options ? options.runWhen : null
+      runWhen: options ? options.runWhen : null,
     });
     return this.handlers.length - 1;
   }
@@ -69372,10 +69509,7 @@ function dispatchRequest(config) {
   config.headers = _core_AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_4__["default"].from(config.headers);
 
   // Transform request data
-  config.data = _transformData_js__WEBPACK_IMPORTED_MODULE_0__["default"].call(
-    config,
-    config.transformRequest
-  );
+  config.data = _transformData_js__WEBPACK_IMPORTED_MODULE_0__["default"].call(config, config.transformRequest);
 
   if (['post', 'put', 'patch'].indexOf(config.method) !== -1) {
     config.headers.setContentType('application/x-www-form-urlencoded', false);
@@ -69383,36 +69517,35 @@ function dispatchRequest(config) {
 
   const adapter = _adapters_adapters_js__WEBPACK_IMPORTED_MODULE_5__["default"].getAdapter(config.adapter || _defaults_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].adapter, config);
 
-  return adapter(config).then(function onAdapterResolution(response) {
-    throwIfCancellationRequested(config);
-
-    // Transform response data
-    response.data = _transformData_js__WEBPACK_IMPORTED_MODULE_0__["default"].call(
-      config,
-      config.transformResponse,
-      response
-    );
-
-    response.headers = _core_AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_4__["default"].from(response.headers);
-
-    return response;
-  }, function onAdapterRejection(reason) {
-    if (!(0,_cancel_isCancel_js__WEBPACK_IMPORTED_MODULE_1__["default"])(reason)) {
+  return adapter(config).then(
+    function onAdapterResolution(response) {
       throwIfCancellationRequested(config);
 
       // Transform response data
-      if (reason && reason.response) {
-        reason.response.data = _transformData_js__WEBPACK_IMPORTED_MODULE_0__["default"].call(
-          config,
-          config.transformResponse,
-          reason.response
-        );
-        reason.response.headers = _core_AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_4__["default"].from(reason.response.headers);
-      }
-    }
+      response.data = _transformData_js__WEBPACK_IMPORTED_MODULE_0__["default"].call(config, config.transformResponse, response);
 
-    return Promise.reject(reason);
-  });
+      response.headers = _core_AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_4__["default"].from(response.headers);
+
+      return response;
+    },
+    function onAdapterRejection(reason) {
+      if (!(0,_cancel_isCancel_js__WEBPACK_IMPORTED_MODULE_1__["default"])(reason)) {
+        throwIfCancellationRequested(config);
+
+        // Transform response data
+        if (reason && reason.response) {
+          reason.response.data = _transformData_js__WEBPACK_IMPORTED_MODULE_0__["default"].call(
+            config,
+            config.transformResponse,
+            reason.response
+          );
+          reason.response.headers = _core_AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_4__["default"].from(reason.response.headers);
+        }
+      }
+
+      return Promise.reject(reason);
+    }
+  );
 }
 
 
@@ -69436,8 +69569,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const headersToObject = (thing) =>
-  thing instanceof _AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_1__["default"] ? { ...thing } : thing;
+const headersToObject = (thing) => (thing instanceof _AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_1__["default"] ? { ...thing } : thing);
 
 /**
  * Config-specific merge-function which creates a new config-object
@@ -69530,23 +69662,12 @@ function mergeConfig(config1, config2) {
       mergeDeepProperties(headersToObject(a), headersToObject(b), prop, true),
   };
 
-  _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(
-    Object.keys({ ...config1, ...config2 }),
-    function computeConfigValue(prop) {
-      if (
-        prop === "__proto__" ||
-        prop === "constructor" ||
-        prop === "prototype"
-      )
-        return;
-      const merge = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].hasOwnProp(mergeMap, prop)
-        ? mergeMap[prop]
-        : mergeDeepProperties;
-      const configValue = merge(config1[prop], config2[prop], prop);
-      (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isUndefined(configValue) && merge !== mergeDirectKeys) ||
-        (config[prop] = configValue);
-    },
-  );
+  _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(Object.keys({ ...config1, ...config2 }), function computeConfigValue(prop) {
+    if (prop === '__proto__' || prop === 'constructor' || prop === 'prototype') return;
+    const merge = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].hasOwnProp(mergeMap, prop) ? mergeMap[prop] : mergeDeepProperties;
+    const configValue = merge(config1[prop], config2[prop], prop);
+    (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isUndefined(configValue) && merge !== mergeDirectKeys) || (config[prop] = configValue);
+  });
 
   return config;
 }
@@ -69584,13 +69705,17 @@ function settle(resolve, reject, response) {
   if (!response.status || !validateStatus || validateStatus(response.status)) {
     resolve(response);
   } else {
-    reject(new _AxiosError_js__WEBPACK_IMPORTED_MODULE_0__["default"](
-      'Request failed with status code ' + response.status,
-      [_AxiosError_js__WEBPACK_IMPORTED_MODULE_0__["default"].ERR_BAD_REQUEST, _AxiosError_js__WEBPACK_IMPORTED_MODULE_0__["default"].ERR_BAD_RESPONSE][Math.floor(response.status / 100) - 4],
-      response.config,
-      response.request,
-      response
-    ));
+    reject(
+      new _AxiosError_js__WEBPACK_IMPORTED_MODULE_0__["default"](
+        'Request failed with status code ' + response.status,
+        [_AxiosError_js__WEBPACK_IMPORTED_MODULE_0__["default"].ERR_BAD_REQUEST, _AxiosError_js__WEBPACK_IMPORTED_MODULE_0__["default"].ERR_BAD_RESPONSE][
+          Math.floor(response.status / 100) - 4
+        ],
+        response.config,
+        response.request,
+        response
+      )
+    );
   }
 }
 
@@ -69697,96 +69822,107 @@ function stringifySafely(rawValue, parser, encoder) {
 }
 
 const defaults = {
-
   transitional: _transitional_js__WEBPACK_IMPORTED_MODULE_2__["default"],
 
   adapter: ['xhr', 'http', 'fetch'],
 
-  transformRequest: [function transformRequest(data, headers) {
-    const contentType = headers.getContentType() || '';
-    const hasJSONContentType = contentType.indexOf('application/json') > -1;
-    const isObjectPayload = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isObject(data);
+  transformRequest: [
+    function transformRequest(data, headers) {
+      const contentType = headers.getContentType() || '';
+      const hasJSONContentType = contentType.indexOf('application/json') > -1;
+      const isObjectPayload = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isObject(data);
 
-    if (isObjectPayload && _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isHTMLForm(data)) {
-      data = new FormData(data);
-    }
-
-    const isFormData = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFormData(data);
-
-    if (isFormData) {
-      return hasJSONContentType ? JSON.stringify((0,_helpers_formDataToJSON_js__WEBPACK_IMPORTED_MODULE_6__["default"])(data)) : data;
-    }
-
-    if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isArrayBuffer(data) ||
-      _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isBuffer(data) ||
-      _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isStream(data) ||
-      _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFile(data) ||
-      _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isBlob(data) ||
-      _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isReadableStream(data)
-    ) {
-      return data;
-    }
-    if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isArrayBufferView(data)) {
-      return data.buffer;
-    }
-    if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isURLSearchParams(data)) {
-      headers.setContentType('application/x-www-form-urlencoded;charset=utf-8', false);
-      return data.toString();
-    }
-
-    let isFileList;
-
-    if (isObjectPayload) {
-      if (contentType.indexOf('application/x-www-form-urlencoded') > -1) {
-        return (0,_helpers_toURLEncodedForm_js__WEBPACK_IMPORTED_MODULE_4__["default"])(data, this.formSerializer).toString();
+      if (isObjectPayload && _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isHTMLForm(data)) {
+        data = new FormData(data);
       }
 
-      if ((isFileList = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFileList(data)) || contentType.indexOf('multipart/form-data') > -1) {
-        const _FormData = this.env && this.env.FormData;
+      const isFormData = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFormData(data);
 
-        return (0,_helpers_toFormData_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-          isFileList ? {'files[]': data} : data,
-          _FormData && new _FormData(),
-          this.formSerializer
-        );
+      if (isFormData) {
+        return hasJSONContentType ? JSON.stringify((0,_helpers_formDataToJSON_js__WEBPACK_IMPORTED_MODULE_6__["default"])(data)) : data;
       }
-    }
 
-    if (isObjectPayload || hasJSONContentType ) {
-      headers.setContentType('application/json', false);
-      return stringifySafely(data);
-    }
+      if (
+        _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isArrayBuffer(data) ||
+        _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isBuffer(data) ||
+        _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isStream(data) ||
+        _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFile(data) ||
+        _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isBlob(data) ||
+        _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isReadableStream(data)
+      ) {
+        return data;
+      }
+      if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isArrayBufferView(data)) {
+        return data.buffer;
+      }
+      if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isURLSearchParams(data)) {
+        headers.setContentType('application/x-www-form-urlencoded;charset=utf-8', false);
+        return data.toString();
+      }
 
-    return data;
-  }],
+      let isFileList;
 
-  transformResponse: [function transformResponse(data) {
-    const transitional = this.transitional || defaults.transitional;
-    const forcedJSONParsing = transitional && transitional.forcedJSONParsing;
-    const JSONRequested = this.responseType === 'json';
+      if (isObjectPayload) {
+        if (contentType.indexOf('application/x-www-form-urlencoded') > -1) {
+          return (0,_helpers_toURLEncodedForm_js__WEBPACK_IMPORTED_MODULE_4__["default"])(data, this.formSerializer).toString();
+        }
 
-    if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isResponse(data) || _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isReadableStream(data)) {
-      return data;
-    }
+        if (
+          (isFileList = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFileList(data)) ||
+          contentType.indexOf('multipart/form-data') > -1
+        ) {
+          const _FormData = this.env && this.env.FormData;
 
-    if (data && _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isString(data) && ((forcedJSONParsing && !this.responseType) || JSONRequested)) {
-      const silentJSONParsing = transitional && transitional.silentJSONParsing;
-      const strictJSONParsing = !silentJSONParsing && JSONRequested;
-
-      try {
-        return JSON.parse(data, this.parseReviver);
-      } catch (e) {
-        if (strictJSONParsing) {
-          if (e.name === 'SyntaxError') {
-            throw _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"].from(e, _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"].ERR_BAD_RESPONSE, this, null, this.response);
-          }
-          throw e;
+          return (0,_helpers_toFormData_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+            isFileList ? { 'files[]': data } : data,
+            _FormData && new _FormData(),
+            this.formSerializer
+          );
         }
       }
-    }
 
-    return data;
-  }],
+      if (isObjectPayload || hasJSONContentType) {
+        headers.setContentType('application/json', false);
+        return stringifySafely(data);
+      }
+
+      return data;
+    },
+  ],
+
+  transformResponse: [
+    function transformResponse(data) {
+      const transitional = this.transitional || defaults.transitional;
+      const forcedJSONParsing = transitional && transitional.forcedJSONParsing;
+      const JSONRequested = this.responseType === 'json';
+
+      if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isResponse(data) || _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isReadableStream(data)) {
+        return data;
+      }
+
+      if (
+        data &&
+        _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isString(data) &&
+        ((forcedJSONParsing && !this.responseType) || JSONRequested)
+      ) {
+        const silentJSONParsing = transitional && transitional.silentJSONParsing;
+        const strictJSONParsing = !silentJSONParsing && JSONRequested;
+
+        try {
+          return JSON.parse(data, this.parseReviver);
+        } catch (e) {
+          if (strictJSONParsing) {
+            if (e.name === 'SyntaxError') {
+              throw _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"].from(e, _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"].ERR_BAD_RESPONSE, this, null, this.response);
+            }
+            throw e;
+          }
+        }
+      }
+
+      return data;
+    },
+  ],
 
   /**
    * A timeout in milliseconds to abort a request. If set to 0 (default) a
@@ -69802,7 +69938,7 @@ const defaults = {
 
   env: {
     FormData: _platform_index_js__WEBPACK_IMPORTED_MODULE_5__["default"].classes.FormData,
-    Blob: _platform_index_js__WEBPACK_IMPORTED_MODULE_5__["default"].classes.Blob
+    Blob: _platform_index_js__WEBPACK_IMPORTED_MODULE_5__["default"].classes.Blob,
   },
 
   validateStatus: function validateStatus(status) {
@@ -69811,10 +69947,10 @@ const defaults = {
 
   headers: {
     common: {
-      'Accept': 'application/json, text/plain, */*',
-      'Content-Type': undefined
-    }
-  }
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': undefined,
+    },
+  },
 };
 
 _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(['delete', 'get', 'head', 'post', 'put', 'patch'], (method) => {
@@ -69843,7 +69979,7 @@ __webpack_require__.r(__webpack_exports__);
   silentJSONParsing: true,
   forcedJSONParsing: true,
   clarifyTimeoutError: false,
-  legacyInterceptorReqResOrdering: true
+  legacyInterceptorReqResOrdering: true,
 });
 
 
@@ -69860,7 +69996,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   VERSION: () => (/* binding */ VERSION)
 /* harmony export */ });
-const VERSION = "1.13.5";
+const VERSION = "1.13.6";
 
 /***/ },
 
@@ -69896,7 +70032,7 @@ function encode(str) {
     ')': '%29',
     '~': '%7E',
     '%20': '+',
-    '%00': '\x00'
+    '%00': '\x00',
   };
   return encodeURIComponent(str).replace(/[!'()~]|%20|%00/g, function replacer(match) {
     return charMap[match];
@@ -69924,13 +70060,17 @@ prototype.append = function append(name, value) {
 };
 
 prototype.toString = function toString(encoder) {
-  const _encode = encoder ? function(value) {
-    return encoder.call(this, value, encode);
-  } : encode;
+  const _encode = encoder
+    ? function (value) {
+        return encoder.call(this, value, encode);
+      }
+    : encode;
 
-  return this._pairs.map(function each(pair) {
-    return _encode(pair[0]) + '=' + _encode(pair[1]);
-  }, '').join('&');
+  return this._pairs
+    .map(function each(pair) {
+      return _encode(pair[0]) + '=' + _encode(pair[1]);
+    }, '')
+    .join('&');
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AxiosURLSearchParams);
@@ -70086,11 +70226,11 @@ __webpack_require__.r(__webpack_exports__);
  * @returns {string} The encoded value.
  */
 function encode(val) {
-  return encodeURIComponent(val).
-    replace(/%3A/gi, ':').
-    replace(/%24/g, '$').
-    replace(/%2C/gi, ',').
-    replace(/%20/g, '+');
+  return encodeURIComponent(val)
+    .replace(/%3A/gi, ':')
+    .replace(/%24/g, '$')
+    .replace(/%2C/gi, ',')
+    .replace(/%20/g, '+');
 }
 
 /**
@@ -70107,11 +70247,13 @@ function buildURL(url, params, options) {
     return url;
   }
 
-  const _encode = options && options.encode || encode;
+  const _encode = (options && options.encode) || encode;
 
-  const _options = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFunction(options) ? {
-    serialize: options
-  } : options;
+  const _options = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFunction(options)
+    ? {
+        serialize: options,
+      }
+    : options;
 
   const serializeFn = _options && _options.serialize;
 
@@ -70120,13 +70262,13 @@ function buildURL(url, params, options) {
   if (serializeFn) {
     serializedParams = serializeFn(params, _options);
   } else {
-    serializedParams = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isURLSearchParams(params) ?
-      params.toString() :
-      new _helpers_AxiosURLSearchParams_js__WEBPACK_IMPORTED_MODULE_1__["default"](params, _options).toString(_encode);
+    serializedParams = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isURLSearchParams(params)
+      ? params.toString()
+      : new _helpers_AxiosURLSearchParams_js__WEBPACK_IMPORTED_MODULE_1__["default"](params, _options).toString(_encode);
   }
 
   if (serializedParams) {
-    const hashmarkIndex = url.indexOf("#");
+    const hashmarkIndex = url.indexOf('#');
 
     if (hashmarkIndex !== -1) {
       url = url.slice(0, hashmarkIndex);
@@ -70189,7 +70331,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const composeSignals = (signals, timeout) => {
-  const {length} = (signals = signals ? signals.filter(Boolean) : []);
+  const { length } = (signals = signals ? signals.filter(Boolean) : []);
 
   if (timeout || length) {
     let controller = new AbortController();
@@ -70201,35 +70343,43 @@ const composeSignals = (signals, timeout) => {
         aborted = true;
         unsubscribe();
         const err = reason instanceof Error ? reason : this.reason;
-        controller.abort(err instanceof _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"] ? err : new _cancel_CanceledError_js__WEBPACK_IMPORTED_MODULE_0__["default"](err instanceof Error ? err.message : err));
+        controller.abort(
+          err instanceof _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"]
+            ? err
+            : new _cancel_CanceledError_js__WEBPACK_IMPORTED_MODULE_0__["default"](err instanceof Error ? err.message : err)
+        );
       }
-    }
+    };
 
-    let timer = timeout && setTimeout(() => {
-      timer = null;
-      onabort(new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"](`timeout of ${timeout}ms exceeded`, _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"].ETIMEDOUT))
-    }, timeout)
+    let timer =
+      timeout &&
+      setTimeout(() => {
+        timer = null;
+        onabort(new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"](`timeout of ${timeout}ms exceeded`, _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"].ETIMEDOUT));
+      }, timeout);
 
     const unsubscribe = () => {
       if (signals) {
         timer && clearTimeout(timer);
         timer = null;
-        signals.forEach(signal => {
-          signal.unsubscribe ? signal.unsubscribe(onabort) : signal.removeEventListener('abort', onabort);
+        signals.forEach((signal) => {
+          signal.unsubscribe
+            ? signal.unsubscribe(onabort)
+            : signal.removeEventListener('abort', onabort);
         });
         signals = null;
       }
-    }
+    };
 
     signals.forEach((signal) => signal.addEventListener('abort', onabort));
 
-    const {signal} = controller;
+    const { signal } = controller;
 
     signal.unsubscribe = () => _utils_js__WEBPACK_IMPORTED_MODULE_2__["default"].asap(unsubscribe);
 
     return signal;
   }
-}
+};
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (composeSignals);
 
@@ -70252,56 +70402,51 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_platform_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].hasStandardBrowserEnv ?
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_platform_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].hasStandardBrowserEnv
+  ? // Standard browser envs support document.cookie
+    {
+      write(name, value, expires, path, domain, secure, sameSite) {
+        if (typeof document === 'undefined') return;
 
-  // Standard browser envs support document.cookie
-  {
-    write(name, value, expires, path, domain, secure, sameSite) {
-      if (typeof document === 'undefined') return;
+        const cookie = [`${name}=${encodeURIComponent(value)}`];
 
-      const cookie = [`${name}=${encodeURIComponent(value)}`];
+        if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isNumber(expires)) {
+          cookie.push(`expires=${new Date(expires).toUTCString()}`);
+        }
+        if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isString(path)) {
+          cookie.push(`path=${path}`);
+        }
+        if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isString(domain)) {
+          cookie.push(`domain=${domain}`);
+        }
+        if (secure === true) {
+          cookie.push('secure');
+        }
+        if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isString(sameSite)) {
+          cookie.push(`SameSite=${sameSite}`);
+        }
 
-      if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isNumber(expires)) {
-        cookie.push(`expires=${new Date(expires).toUTCString()}`);
-      }
-      if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isString(path)) {
-        cookie.push(`path=${path}`);
-      }
-      if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isString(domain)) {
-        cookie.push(`domain=${domain}`);
-      }
-      if (secure === true) {
-        cookie.push('secure');
-      }
-      if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isString(sameSite)) {
-        cookie.push(`SameSite=${sameSite}`);
-      }
+        document.cookie = cookie.join('; ');
+      },
 
-      document.cookie = cookie.join('; ');
-    },
+      read(name) {
+        if (typeof document === 'undefined') return null;
+        const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+        return match ? decodeURIComponent(match[1]) : null;
+      },
 
-    read(name) {
-      if (typeof document === 'undefined') return null;
-      const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
-      return match ? decodeURIComponent(match[1]) : null;
-    },
-
-    remove(name) {
-      this.write(name, '', Date.now() - 86400000, '/');
+      remove(name) {
+        this.write(name, '', Date.now() - 86400000, '/');
+      },
     }
-  }
-
-  :
-
-  // Non-standard browser env (web workers, react-native) lack needed support.
-  {
-    write() {},
-    read() {
-      return null;
-    },
-    remove() {}
-  });
-
+  : // Non-standard browser env (web workers, react-native) lack needed support.
+    {
+      write() {},
+      read() {
+        return null;
+      },
+      remove() {},
+    });
 
 
 /***/ },
@@ -70334,7 +70479,7 @@ function parsePropPath(name) {
   // foo.x.y.z
   // foo-x-y-z
   // foo x y z
-  return _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].matchAll(/\w+|\[(\w*)]/g, name).map(match => {
+  return _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].matchAll(/\w+|\[(\w*)]/g, name).map((match) => {
     return match[0] === '[]' ? '' : match[1] || match[0];
   });
 }
@@ -70449,7 +70594,6 @@ function isAbsoluteURL(url) {
 }
 
 
-
 /***/ },
 
 /***/ "./node_modules/axios/lib/helpers/isAxiosError.js"
@@ -70476,7 +70620,7 @@ __webpack_require__.r(__webpack_exports__);
  * @returns {boolean} True if the payload is an error thrown by Axios, otherwise false
  */
 function isAxiosError(payload) {
-  return _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isObject(payload) && (payload.isAxiosError === true);
+  return _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isObject(payload) && payload.isAxiosError === true;
 }
 
 
@@ -70496,18 +70640,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _platform_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../platform/index.js */ "./node_modules/axios/lib/platform/index.js");
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_platform_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].hasStandardBrowserEnv ? ((origin, isMSIE) => (url) => {
-  url = new URL(url, _platform_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].origin);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_platform_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].hasStandardBrowserEnv
+  ? ((origin, isMSIE) => (url) => {
+      url = new URL(url, _platform_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].origin);
 
-  return (
-    origin.protocol === url.protocol &&
-    origin.host === url.host &&
-    (isMSIE || origin.port === url.port)
-  );
-})(
-  new URL(_platform_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].origin),
-  _platform_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].navigator && /(msie|trident)/i.test(_platform_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].navigator.userAgent)
-) : () => true);
+      return (
+        origin.protocol === url.protocol &&
+        origin.host === url.host &&
+        (isMSIE || origin.port === url.port)
+      );
+    })(
+      new URL(_platform_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].origin),
+      _platform_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].navigator && /(msie|trident)/i.test(_platform_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].navigator.userAgent)
+    )
+  : () => true);
 
 
 /***/ },
@@ -70548,10 +70694,23 @@ __webpack_require__.r(__webpack_exports__);
 // RawAxiosHeaders whose duplicates are ignored by node
 // c.f. https://nodejs.org/api/http.html#http_message_headers
 const ignoreDuplicateOf = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].toObjectSet([
-  'age', 'authorization', 'content-length', 'content-type', 'etag',
-  'expires', 'from', 'host', 'if-modified-since', 'if-unmodified-since',
-  'last-modified', 'location', 'max-forwards', 'proxy-authorization',
-  'referer', 'retry-after', 'user-agent'
+  'age',
+  'authorization',
+  'content-length',
+  'content-type',
+  'etag',
+  'expires',
+  'from',
+  'host',
+  'if-modified-since',
+  'if-unmodified-since',
+  'last-modified',
+  'location',
+  'max-forwards',
+  'proxy-authorization',
+  'referer',
+  'retry-after',
+  'user-agent',
 ]);
 
 /**
@@ -70568,31 +70727,32 @@ const ignoreDuplicateOf = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].toOb
  *
  * @returns {Object} Headers parsed into an object
  */
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (rawHeaders => {
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((rawHeaders) => {
   const parsed = {};
   let key;
   let val;
   let i;
 
-  rawHeaders && rawHeaders.split('\n').forEach(function parser(line) {
-    i = line.indexOf(':');
-    key = line.substring(0, i).trim().toLowerCase();
-    val = line.substring(i + 1).trim();
+  rawHeaders &&
+    rawHeaders.split('\n').forEach(function parser(line) {
+      i = line.indexOf(':');
+      key = line.substring(0, i).trim().toLowerCase();
+      val = line.substring(i + 1).trim();
 
-    if (!key || (parsed[key] && ignoreDuplicateOf[key])) {
-      return;
-    }
-
-    if (key === 'set-cookie') {
-      if (parsed[key]) {
-        parsed[key].push(val);
-      } else {
-        parsed[key] = [val];
+      if (!key || (parsed[key] && ignoreDuplicateOf[key])) {
+        return;
       }
-    } else {
-      parsed[key] = parsed[key] ? parsed[key] + ', ' + val : val;
-    }
-  });
+
+      if (key === 'set-cookie') {
+        if (parsed[key]) {
+          parsed[key].push(val);
+        } else {
+          parsed[key] = [val];
+        }
+      } else {
+        parsed[key] = parsed[key] ? parsed[key] + ', ' + val : val;
+      }
+    });
 
   return parsed;
 });
@@ -70615,7 +70775,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function parseProtocol(url) {
   const match = /^([-+\w]{1,25})(:?\/\/|:)/.exec(url);
-  return match && match[1] || '';
+  return (match && match[1]) || '';
 }
 
 
@@ -70645,7 +70805,7 @@ const progressEventReducer = (listener, isDownloadStream, freq = 3) => {
   let bytesNotified = 0;
   const _speedometer = (0,_speedometer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(50, 250);
 
-  return (0,_throttle_js__WEBPACK_IMPORTED_MODULE_1__["default"])(e => {
+  return (0,_throttle_js__WEBPACK_IMPORTED_MODULE_1__["default"])((e) => {
     const loaded = e.loaded;
     const total = e.lengthComputable ? e.total : undefined;
     const progressBytes = loaded - bytesNotified;
@@ -70657,30 +70817,37 @@ const progressEventReducer = (listener, isDownloadStream, freq = 3) => {
     const data = {
       loaded,
       total,
-      progress: total ? (loaded / total) : undefined,
+      progress: total ? loaded / total : undefined,
       bytes: progressBytes,
       rate: rate ? rate : undefined,
       estimated: rate && total && inRange ? (total - loaded) / rate : undefined,
       event: e,
       lengthComputable: total != null,
-      [isDownloadStream ? 'download' : 'upload']: true
+      [isDownloadStream ? 'download' : 'upload']: true,
     };
 
     listener(data);
   }, freq);
-}
+};
 
 const progressEventDecorator = (total, throttled) => {
   const lengthComputable = total != null;
 
-  return [(loaded) => throttled[0]({
-    lengthComputable,
-    total,
-    loaded
-  }), throttled[1]];
-}
+  return [
+    (loaded) =>
+      throttled[0]({
+        lengthComputable,
+        total,
+        loaded,
+      }),
+    throttled[1],
+  ];
+};
 
-const asyncDecorator = (fn) => (...args) => _utils_js__WEBPACK_IMPORTED_MODULE_2__["default"].asap(() => fn(...args));
+const asyncDecorator =
+  (fn) =>
+  (...args) =>
+    _utils_js__WEBPACK_IMPORTED_MODULE_2__["default"].asap(() => fn(...args));
 
 
 /***/ },
@@ -70720,12 +70887,22 @@ __webpack_require__.r(__webpack_exports__);
 
   newConfig.headers = headers = _core_AxiosHeaders_js__WEBPACK_IMPORTED_MODULE_6__["default"].from(headers);
 
-  newConfig.url = (0,_buildURL_js__WEBPACK_IMPORTED_MODULE_7__["default"])((0,_core_buildFullPath_js__WEBPACK_IMPORTED_MODULE_4__["default"])(newConfig.baseURL, newConfig.url, newConfig.allowAbsoluteUrls), config.params, config.paramsSerializer);
+  newConfig.url = (0,_buildURL_js__WEBPACK_IMPORTED_MODULE_7__["default"])(
+    (0,_core_buildFullPath_js__WEBPACK_IMPORTED_MODULE_4__["default"])(newConfig.baseURL, newConfig.url, newConfig.allowAbsoluteUrls),
+    config.params,
+    config.paramsSerializer
+  );
 
   // HTTP basic authentication
   if (auth) {
-    headers.set('Authorization', 'Basic ' +
-      btoa((auth.username || '') + ':' + (auth.password ? unescape(encodeURIComponent(auth.password)) : ''))
+    headers.set(
+      'Authorization',
+      'Basic ' +
+        btoa(
+          (auth.username || '') +
+            ':' +
+            (auth.password ? unescape(encodeURIComponent(auth.password)) : '')
+        )
     );
   }
 
@@ -70743,7 +70920,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     }
-  }  
+  }
 
   // Add xsrf header
   // This is only done if running in a standard browser environment.
@@ -70764,7 +70941,6 @@ __webpack_require__.r(__webpack_exports__);
 
   return newConfig;
 });
-
 
 
 /***/ },
@@ -70830,7 +71006,7 @@ function speedometer(samplesCount, min) {
 
     const passed = startedAt && now - startedAt;
 
-    return passed ? Math.round(bytesCount * 1000 / passed) : undefined;
+    return passed ? Math.round((bytesCount * 1000) / passed) : undefined;
   };
 }
 
@@ -70913,23 +71089,23 @@ function throttle(fn, freq) {
       timer = null;
     }
     fn(...args);
-  }
+  };
 
   const throttled = (...args) => {
     const now = Date.now();
     const passed = now - timestamp;
-    if ( passed >= threshold) {
+    if (passed >= threshold) {
       invoke(args, now);
     } else {
       lastArgs = args;
       if (!timer) {
         timer = setTimeout(() => {
           timer = null;
-          invoke(lastArgs)
+          invoke(lastArgs);
         }, threshold - passed);
       }
     }
-  }
+  };
 
   const flush = () => lastArgs && invoke(lastArgs);
 
@@ -70996,11 +71172,14 @@ function removeBrackets(key) {
  */
 function renderKey(path, key, dots) {
   if (!path) return key;
-  return path.concat(key).map(function each(token, i) {
-    // eslint-disable-next-line no-param-reassign
-    token = removeBrackets(token);
-    return !dots && i ? '[' + token + ']' : token;
-  }).join(dots ? '.' : '');
+  return path
+    .concat(key)
+    .map(function each(token, i) {
+      // eslint-disable-next-line no-param-reassign
+      token = removeBrackets(token);
+      return !dots && i ? '[' + token + ']' : token;
+    })
+    .join(dots ? '.' : '');
 }
 
 /**
@@ -71050,21 +71229,26 @@ function toFormData(obj, formData, options) {
   formData = formData || new (_platform_node_classes_FormData_js__WEBPACK_IMPORTED_MODULE_2__["default"] || FormData)();
 
   // eslint-disable-next-line no-param-reassign
-  options = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].toFlatObject(options, {
-    metaTokens: true,
-    dots: false,
-    indexes: false
-  }, false, function defined(option, source) {
-    // eslint-disable-next-line no-eq-null,eqeqeq
-    return !_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isUndefined(source[option]);
-  });
+  options = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].toFlatObject(
+    options,
+    {
+      metaTokens: true,
+      dots: false,
+      indexes: false,
+    },
+    false,
+    function defined(option, source) {
+      // eslint-disable-next-line no-eq-null,eqeqeq
+      return !_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isUndefined(source[option]);
+    }
+  );
 
   const metaTokens = options.metaTokens;
   // eslint-disable-next-line no-use-before-define
   const visitor = options.visitor || defaultVisitor;
   const dots = options.dots;
   const indexes = options.indexes;
-  const _Blob = options.Blob || typeof Blob !== 'undefined' && Blob;
+  const _Blob = options.Blob || (typeof Blob !== 'undefined' && Blob);
   const useBlob = _Blob && _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isSpecCompliantForm(formData);
 
   if (!_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFunction(visitor)) {
@@ -71106,6 +71290,11 @@ function toFormData(obj, formData, options) {
   function defaultVisitor(value, key, path) {
     let arr = value;
 
+    if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isReactNative(formData) && _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isReactNativeBlob(value)) {
+      formData.append(renderKey(path, key, dots), convertValue(value));
+      return false;
+    }
+
     if (value && !path && typeof value === 'object') {
       if (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].endsWith(key, '{}')) {
         // eslint-disable-next-line no-param-reassign
@@ -71114,17 +71303,22 @@ function toFormData(obj, formData, options) {
         value = JSON.stringify(value);
       } else if (
         (_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isArray(value) && isFlatArray(value)) ||
-        ((_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFileList(value) || _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].endsWith(key, '[]')) && (arr = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].toArray(value))
-        )) {
+        ((_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFileList(value) || _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].endsWith(key, '[]')) && (arr = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].toArray(value)))
+      ) {
         // eslint-disable-next-line no-param-reassign
         key = removeBrackets(key);
 
         arr.forEach(function each(el, index) {
-          !(_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isUndefined(el) || el === null) && formData.append(
-            // eslint-disable-next-line no-nested-ternary
-            indexes === true ? renderKey([key], index, dots) : (indexes === null ? key : key + '[]'),
-            convertValue(el)
-          );
+          !(_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isUndefined(el) || el === null) &&
+            formData.append(
+              // eslint-disable-next-line no-nested-ternary
+              indexes === true
+                ? renderKey([key], index, dots)
+                : indexes === null
+                  ? key
+                  : key + '[]',
+              convertValue(el)
+            );
         });
         return false;
       }
@@ -71144,7 +71338,7 @@ function toFormData(obj, formData, options) {
   const exposedHelpers = Object.assign(predicates, {
     defaultVisitor,
     convertValue,
-    isVisitable
+    isVisitable,
   });
 
   function build(value, path) {
@@ -71157,9 +71351,9 @@ function toFormData(obj, formData, options) {
     stack.push(value);
 
     _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].forEach(value, function each(el, key) {
-      const result = !(_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isUndefined(el) || el === null) && visitor.call(
-        formData, el, _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isString(key) ? key.trim() : key, path, exposedHelpers
-      );
+      const result =
+        !(_utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isUndefined(el) || el === null) &&
+        visitor.call(formData, el, _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isString(key) ? key.trim() : key, path, exposedHelpers);
 
       if (result === true) {
         build(el, path ? path.concat(key) : [key]);
@@ -71205,7 +71399,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function toURLEncodedForm(data, options) {
   return (0,_toFormData_js__WEBPACK_IMPORTED_MODULE_1__["default"])(data, new _platform_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].classes.URLSearchParams(), {
-    visitor: function(value, key, path, helpers) {
+    visitor: function (value, key, path, helpers) {
       if (_platform_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].isNode && _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isBuffer(value)) {
         this.append(key, value.toString('base64'));
         return false;
@@ -71213,7 +71407,7 @@ function toURLEncodedForm(data, options) {
 
       return helpers.defaultVisitor.apply(this, arguments);
     },
-    ...options
+    ...options,
   });
 }
 
@@ -71233,7 +71427,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   streamChunk: () => (/* binding */ streamChunk),
 /* harmony export */   trackStream: () => (/* binding */ trackStream)
 /* harmony export */ });
-
 const streamChunk = function* (chunk, chunkSize) {
   let len = chunk.byteLength;
 
@@ -71250,13 +71443,13 @@ const streamChunk = function* (chunk, chunkSize) {
     yield chunk.slice(pos, end);
     pos = end;
   }
-}
+};
 
 const readBytes = async function* (iterable, chunkSize) {
   for await (const chunk of readStream(iterable)) {
     yield* streamChunk(chunk, chunkSize);
   }
-}
+};
 
 const readStream = async function* (stream) {
   if (stream[Symbol.asyncIterator]) {
@@ -71267,7 +71460,7 @@ const readStream = async function* (stream) {
   const reader = stream.getReader();
   try {
     for (;;) {
-      const {done, value} = await reader.read();
+      const { done, value } = await reader.read();
       if (done) {
         break;
       }
@@ -71276,7 +71469,7 @@ const readStream = async function* (stream) {
   } finally {
     await reader.cancel();
   }
-}
+};
 
 const trackStream = (stream, chunkSize, onProgress, onFinish) => {
   const iterator = readBytes(stream, chunkSize);
@@ -71288,38 +71481,41 @@ const trackStream = (stream, chunkSize, onProgress, onFinish) => {
       done = true;
       onFinish && onFinish(e);
     }
-  }
+  };
 
-  return new ReadableStream({
-    async pull(controller) {
-      try {
-        const {done, value} = await iterator.next();
+  return new ReadableStream(
+    {
+      async pull(controller) {
+        try {
+          const { done, value } = await iterator.next();
 
-        if (done) {
-         _onFinish();
-          controller.close();
-          return;
+          if (done) {
+            _onFinish();
+            controller.close();
+            return;
+          }
+
+          let len = value.byteLength;
+          if (onProgress) {
+            let loadedBytes = (bytes += len);
+            onProgress(loadedBytes);
+          }
+          controller.enqueue(new Uint8Array(value));
+        } catch (err) {
+          _onFinish(err);
+          throw err;
         }
-
-        let len = value.byteLength;
-        if (onProgress) {
-          let loadedBytes = bytes += len;
-          onProgress(loadedBytes);
-        }
-        controller.enqueue(new Uint8Array(value));
-      } catch (err) {
-        _onFinish(err);
-        throw err;
-      }
+      },
+      cancel(reason) {
+        _onFinish(reason);
+        return iterator.return();
+      },
     },
-    cancel(reason) {
-      _onFinish(reason);
-      return iterator.return();
+    {
+      highWaterMark: 2,
     }
-  }, {
-    highWaterMark: 2
-  })
-}
+  );
+};
 
 
 /***/ },
@@ -71364,7 +71560,15 @@ const deprecatedWarnings = {};
  */
 validators.transitional = function transitional(validator, version, message) {
   function formatMessage(opt, desc) {
-    return '[Axios v' + _env_data_js__WEBPACK_IMPORTED_MODULE_0__.VERSION + '] Transitional option \'' + opt + '\'' + desc + (message ? '. ' + message : '');
+    return (
+      '[Axios v' +
+      _env_data_js__WEBPACK_IMPORTED_MODULE_0__.VERSION +
+      "] Transitional option '" +
+      opt +
+      "'" +
+      desc +
+      (message ? '. ' + message : '')
+    );
   }
 
   // eslint-disable-next-line func-names
@@ -71396,7 +71600,7 @@ validators.spelling = function spelling(correctSpelling) {
     // eslint-disable-next-line no-console
     console.warn(`${opt} is likely a misspelling of ${correctSpelling}`);
     return true;
-  }
+  };
 };
 
 /**
@@ -71422,7 +71626,10 @@ function assertOptions(options, schema, allowUnknown) {
       const value = options[opt];
       const result = value === undefined || validator(value, opt, options);
       if (result !== true) {
-        throw new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"]('option ' + opt + ' must be ' + result, _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"].ERR_BAD_OPTION_VALUE);
+        throw new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"](
+          'option ' + opt + ' must be ' + result,
+          _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_1__["default"].ERR_BAD_OPTION_VALUE
+        );
       }
       continue;
     }
@@ -71434,7 +71641,7 @@ function assertOptions(options, schema, allowUnknown) {
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   assertOptions,
-  validators
+  validators,
 });
 
 
@@ -71519,9 +71726,9 @@ __webpack_require__.r(__webpack_exports__);
   classes: {
     URLSearchParams: _classes_URLSearchParams_js__WEBPACK_IMPORTED_MODULE_0__["default"],
     FormData: _classes_FormData_js__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Blob: _classes_Blob_js__WEBPACK_IMPORTED_MODULE_2__["default"]
+    Blob: _classes_Blob_js__WEBPACK_IMPORTED_MODULE_2__["default"],
   },
-  protocols: ['http', 'https', 'file', 'blob', 'url', 'data']
+  protocols: ['http', 'https', 'file', 'blob', 'url', 'data'],
 });
 
 
@@ -71544,7 +71751,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 const hasBrowserEnv = typeof window !== 'undefined' && typeof document !== 'undefined';
 
-const _navigator = typeof navigator === 'object' && navigator || undefined;
+const _navigator = (typeof navigator === 'object' && navigator) || undefined;
 
 /**
  * Determine if we're running in a standard browser environment
@@ -71563,7 +71770,8 @@ const _navigator = typeof navigator === 'object' && navigator || undefined;
  *
  * @returns {boolean}
  */
-const hasStandardBrowserEnv = hasBrowserEnv &&
+const hasStandardBrowserEnv =
+  hasBrowserEnv &&
   (!_navigator || ['ReactNative', 'NativeScript', 'NS'].indexOf(_navigator.product) < 0);
 
 /**
@@ -71584,7 +71792,7 @@ const hasStandardBrowserWebWorkerEnv = (() => {
   );
 })();
 
-const origin = hasBrowserEnv && window.location.href || 'http://localhost';
+const origin = (hasBrowserEnv && window.location.href) || 'http://localhost';
 
 
 
@@ -71609,7 +71817,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   ..._common_utils_js__WEBPACK_IMPORTED_MODULE_1__,
-  ..._node_index_js__WEBPACK_IMPORTED_MODULE_0__["default"]
+  ..._node_index_js__WEBPACK_IMPORTED_MODULE_0__["default"],
 });
 
 
@@ -71666,7 +71874,7 @@ const { isArray } = Array;
  *
  * @returns {boolean} True if the value is undefined, otherwise false
  */
-const isUndefined = typeOfTest("undefined");
+const isUndefined = typeOfTest('undefined');
 
 /**
  * Determine if a value is a Buffer
@@ -71693,7 +71901,7 @@ function isBuffer(val) {
  *
  * @returns {boolean} True if value is an ArrayBuffer, otherwise false
  */
-const isArrayBuffer = kindOfTest("ArrayBuffer");
+const isArrayBuffer = kindOfTest('ArrayBuffer');
 
 /**
  * Determine if a value is a view on an ArrayBuffer
@@ -71704,7 +71912,7 @@ const isArrayBuffer = kindOfTest("ArrayBuffer");
  */
 function isArrayBufferView(val) {
   let result;
-  if (typeof ArrayBuffer !== "undefined" && ArrayBuffer.isView) {
+  if (typeof ArrayBuffer !== 'undefined' && ArrayBuffer.isView) {
     result = ArrayBuffer.isView(val);
   } else {
     result = val && val.buffer && isArrayBuffer(val.buffer);
@@ -71719,7 +71927,7 @@ function isArrayBufferView(val) {
  *
  * @returns {boolean} True if value is a String, otherwise false
  */
-const isString = typeOfTest("string");
+const isString = typeOfTest('string');
 
 /**
  * Determine if a value is a Function
@@ -71727,7 +71935,7 @@ const isString = typeOfTest("string");
  * @param {*} val The value to test
  * @returns {boolean} True if value is a Function, otherwise false
  */
-const isFunction = typeOfTest("function");
+const isFunction = typeOfTest('function');
 
 /**
  * Determine if a value is a Number
@@ -71736,7 +71944,7 @@ const isFunction = typeOfTest("function");
  *
  * @returns {boolean} True if value is a Number, otherwise false
  */
-const isNumber = typeOfTest("number");
+const isNumber = typeOfTest('number');
 
 /**
  * Determine if a value is an Object
@@ -71745,7 +71953,7 @@ const isNumber = typeOfTest("number");
  *
  * @returns {boolean} True if value is an Object, otherwise false
  */
-const isObject = (thing) => thing !== null && typeof thing === "object";
+const isObject = (thing) => thing !== null && typeof thing === 'object';
 
 /**
  * Determine if a value is a Boolean
@@ -71763,7 +71971,7 @@ const isBoolean = (thing) => thing === true || thing === false;
  * @returns {boolean} True if value is a plain Object, otherwise false
  */
 const isPlainObject = (val) => {
-  if (kindOf(val) !== "object") {
+  if (kindOf(val) !== 'object') {
     return false;
   }
 
@@ -71791,10 +71999,7 @@ const isEmptyObject = (val) => {
   }
 
   try {
-    return (
-      Object.keys(val).length === 0 &&
-      Object.getPrototypeOf(val) === Object.prototype
-    );
+    return Object.keys(val).length === 0 && Object.getPrototypeOf(val) === Object.prototype;
   } catch (e) {
     // Fallback for any other objects that might cause RangeError with Object.keys()
     return false;
@@ -71808,7 +72013,7 @@ const isEmptyObject = (val) => {
  *
  * @returns {boolean} True if value is a Date, otherwise false
  */
-const isDate = kindOfTest("Date");
+const isDate = kindOfTest('Date');
 
 /**
  * Determine if a value is a File
@@ -71817,7 +72022,32 @@ const isDate = kindOfTest("Date");
  *
  * @returns {boolean} True if value is a File, otherwise false
  */
-const isFile = kindOfTest("File");
+const isFile = kindOfTest('File');
+
+/**
+ * Determine if a value is a React Native Blob
+ * React Native "blob": an object with a `uri` attribute. Optionally, it can
+ * also have a `name` and `type` attribute to specify filename and content type
+ *
+ * @see https://github.com/facebook/react-native/blob/26684cf3adf4094eb6c405d345a75bf8c7c0bf88/Libraries/Network/FormData.js#L68-L71
+ * 
+ * @param {*} value The value to test
+ * 
+ * @returns {boolean} True if value is a React Native Blob, otherwise false
+ */
+const isReactNativeBlob = (value) => {
+  return !!(value && typeof value.uri !== 'undefined');
+}
+
+/**
+ * Determine if environment is React Native
+ * ReactNative `FormData` has a non-standard `getParts()` method
+ * 
+ * @param {*} formData The formData to test
+ * 
+ * @returns {boolean} True if environment is React Native, otherwise false
+ */
+const isReactNative = (formData) => formData && typeof formData.getParts !== 'undefined';
 
 /**
  * Determine if a value is a Blob
@@ -71826,7 +72056,7 @@ const isFile = kindOfTest("File");
  *
  * @returns {boolean} True if value is a Blob, otherwise false
  */
-const isBlob = kindOfTest("Blob");
+const isBlob = kindOfTest('Blob');
 
 /**
  * Determine if a value is a FileList
@@ -71835,7 +72065,7 @@ const isBlob = kindOfTest("Blob");
  *
  * @returns {boolean} True if value is a File, otherwise false
  */
-const isFileList = kindOfTest("FileList");
+const isFileList = kindOfTest('FileList');
 
 /**
  * Determine if a value is a Stream
@@ -71853,17 +72083,27 @@ const isStream = (val) => isObject(val) && isFunction(val.pipe);
  *
  * @returns {boolean} True if value is an FormData, otherwise false
  */
+function getGlobal() {
+  if (typeof globalThis !== 'undefined') return globalThis;
+  if (typeof self !== 'undefined') return self;
+  if (typeof window !== 'undefined') return window;
+  if (typeof __webpack_require__.g !== 'undefined') return __webpack_require__.g;
+  return {};
+}
+
+const G = getGlobal();
+const FormDataCtor = typeof G.FormData !== 'undefined' ? G.FormData : undefined;
+
 const isFormData = (thing) => {
   let kind;
-  return (
-    thing &&
-    ((typeof FormData === "function" && thing instanceof FormData) ||
-      (isFunction(thing.append) &&
-        ((kind = kindOf(thing)) === "formdata" ||
-          // detect form-data instance
-          (kind === "object" &&
-            isFunction(thing.toString) &&
-            thing.toString() === "[object FormData]"))))
+  return thing && (
+    (FormDataCtor && thing instanceof FormDataCtor) || (
+      isFunction(thing.append) && (
+        (kind = kindOf(thing)) === 'formdata' ||
+        // detect form-data instance
+        (kind === 'object' && isFunction(thing.toString) && thing.toString() === '[object FormData]')
+      )
+    )
   );
 };
 
@@ -71874,13 +72114,13 @@ const isFormData = (thing) => {
  *
  * @returns {boolean} True if value is a URLSearchParams object, otherwise false
  */
-const isURLSearchParams = kindOfTest("URLSearchParams");
+const isURLSearchParams = kindOfTest('URLSearchParams');
 
 const [isReadableStream, isRequest, isResponse, isHeaders] = [
-  "ReadableStream",
-  "Request",
-  "Response",
-  "Headers",
+  'ReadableStream',
+  'Request',
+  'Response',
+  'Headers',
 ].map(kindOfTest);
 
 /**
@@ -71890,9 +72130,9 @@ const [isReadableStream, isRequest, isResponse, isHeaders] = [
  *
  * @returns {String} The String freed of excess whitespace
  */
-const trim = (str) =>
-  str.trim ? str.trim() : str.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "");
-
+const trim = (str) => {
+  return str.trim ? str.trim() : str.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+};
 /**
  * Iterate over an Array or an Object invoking a function for each item.
  *
@@ -71911,7 +72151,7 @@ const trim = (str) =>
  */
 function forEach(obj, fn, { allOwnKeys = false } = {}) {
   // Don't bother if no value provided
-  if (obj === null || typeof obj === "undefined") {
+  if (obj === null || typeof obj === 'undefined') {
     return;
   }
 
@@ -71919,7 +72159,7 @@ function forEach(obj, fn, { allOwnKeys = false } = {}) {
   let l;
 
   // Force an array if not already something iterable
-  if (typeof obj !== "object") {
+  if (typeof obj !== 'object') {
     /*eslint no-param-reassign:0*/
     obj = [obj];
   }
@@ -71936,9 +72176,7 @@ function forEach(obj, fn, { allOwnKeys = false } = {}) {
     }
 
     // Iterate over object keys
-    const keys = allOwnKeys
-      ? Object.getOwnPropertyNames(obj)
-      : Object.keys(obj);
+    const keys = allOwnKeys ? Object.getOwnPropertyNames(obj) : Object.keys(obj);
     const len = keys.length;
     let key;
 
@@ -71949,6 +72187,14 @@ function forEach(obj, fn, { allOwnKeys = false } = {}) {
   }
 }
 
+/**
+ * Finds a key in an object, case-insensitive, returning the actual key name.
+ * Returns null if the object is a Buffer or if no match is found.
+ *
+ * @param {Object} obj - The object to search.
+ * @param {string} key - The key to find (case-insensitive).
+ * @returns {?string} The actual key name if found, otherwise null.
+ */
 function findKey(obj, key) {
   if (isBuffer(obj)) {
     return null;
@@ -71969,16 +72215,11 @@ function findKey(obj, key) {
 
 const _global = (() => {
   /*eslint no-undef:0*/
-  if (typeof globalThis !== "undefined") return globalThis;
-  return typeof self !== "undefined"
-    ? self
-    : typeof window !== "undefined"
-      ? window
-      : __webpack_require__.g;
+  if (typeof globalThis !== 'undefined') return globalThis;
+  return typeof self !== 'undefined' ? self : typeof window !== 'undefined' ? window : __webpack_require__.g;
 })();
 
-const isContextDefined = (context) =>
-  !isUndefined(context) && context !== _global;
+const isContextDefined = (context) => !isUndefined(context) && context !== _global;
 
 /**
  * Accepts varargs expecting each argument to be an object, then
@@ -72003,7 +72244,7 @@ function merge(/* obj1, obj2, obj3, ... */) {
   const result = {};
   const assignValue = (val, key) => {
     // Skip dangerous property names to prevent prototype pollution
-    if (key === "__proto__" || key === "constructor" || key === "prototype") {
+    if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
       return;
     }
 
@@ -72056,7 +72297,7 @@ const extend = (a, b, thisArg, { allOwnKeys } = {}) => {
         });
       }
     },
-    { allOwnKeys },
+    { allOwnKeys }
   );
   return a;
 };
@@ -72085,17 +72326,14 @@ const stripBOM = (content) => {
  * @returns {void}
  */
 const inherits = (constructor, superConstructor, props, descriptors) => {
-  constructor.prototype = Object.create(
-    superConstructor.prototype,
-    descriptors,
-  );
-  Object.defineProperty(constructor.prototype, "constructor", {
+  constructor.prototype = Object.create(superConstructor.prototype, descriptors);
+  Object.defineProperty(constructor.prototype, 'constructor', {
     value: constructor,
     writable: true,
     enumerable: false,
     configurable: true,
   });
-  Object.defineProperty(constructor, "super", {
+  Object.defineProperty(constructor, 'super', {
     value: superConstructor.prototype,
   });
   props && Object.assign(constructor.prototype, props);
@@ -72125,20 +72363,13 @@ const toFlatObject = (sourceObj, destObj, filter, propFilter) => {
     i = props.length;
     while (i-- > 0) {
       prop = props[i];
-      if (
-        (!propFilter || propFilter(prop, sourceObj, destObj)) &&
-        !merged[prop]
-      ) {
+      if ((!propFilter || propFilter(prop, sourceObj, destObj)) && !merged[prop]) {
         destObj[prop] = sourceObj[prop];
         merged[prop] = true;
       }
     }
     sourceObj = filter !== false && getPrototypeOf(sourceObj);
-  } while (
-    sourceObj &&
-    (!filter || filter(sourceObj, destObj)) &&
-    sourceObj !== Object.prototype
-  );
+  } while (sourceObj && (!filter || filter(sourceObj, destObj)) && sourceObj !== Object.prototype);
 
   return destObj;
 };
@@ -72195,7 +72426,7 @@ const isTypedArray = ((TypedArray) => {
   return (thing) => {
     return TypedArray && thing instanceof TypedArray;
   };
-})(typeof Uint8Array !== "undefined" && getPrototypeOf(Uint8Array));
+})(typeof Uint8Array !== 'undefined' && getPrototypeOf(Uint8Array));
 
 /**
  * For each entry in the object, call the function with the key and value.
@@ -72238,14 +72469,12 @@ const matchAll = (regExp, str) => {
 };
 
 /* Checking if the kindOfTest function returns true when passed an HTMLFormElement. */
-const isHTMLForm = kindOfTest("HTMLFormElement");
+const isHTMLForm = kindOfTest('HTMLFormElement');
 
 const toCamelCase = (str) => {
-  return str
-    .toLowerCase()
-    .replace(/[-_\s]([a-z\d])(\w*)/g, function replacer(m, p1, p2) {
-      return p1.toUpperCase() + p2;
-    });
+  return str.toLowerCase().replace(/[-_\s]([a-z\d])(\w*)/g, function replacer(m, p1, p2) {
+    return p1.toUpperCase() + p2;
+  });
 };
 
 /* Creating a function that will check if an object has a property. */
@@ -72262,7 +72491,7 @@ const hasOwnProperty = (
  *
  * @returns {boolean} True if value is a RegExp object, otherwise false
  */
-const isRegExp = kindOfTest("RegExp");
+const isRegExp = kindOfTest('RegExp');
 
 const reduceDescriptors = (obj, reducer) => {
   const descriptors = Object.getOwnPropertyDescriptors(obj);
@@ -72286,10 +72515,7 @@ const reduceDescriptors = (obj, reducer) => {
 const freezeMethods = (obj) => {
   reduceDescriptors(obj, (descriptor, name) => {
     // skip restricted props in strict mode
-    if (
-      isFunction(obj) &&
-      ["arguments", "caller", "callee"].indexOf(name) !== -1
-    ) {
+    if (isFunction(obj) && ['arguments', 'caller', 'callee'].indexOf(name) !== -1) {
       return false;
     }
 
@@ -72299,7 +72525,7 @@ const freezeMethods = (obj) => {
 
     descriptor.enumerable = false;
 
-    if ("writable" in descriptor) {
+    if ('writable' in descriptor) {
       descriptor.writable = false;
       return;
     }
@@ -72312,6 +72538,14 @@ const freezeMethods = (obj) => {
   });
 };
 
+/**
+ * Converts an array or a delimited string into an object set with values as keys and true as values.
+ * Useful for fast membership checks.
+ *
+ * @param {Array|string} arrayOrString - The array or string to convert.
+ * @param {string} delimiter - The delimiter to use if input is a string.
+ * @returns {Object} An object with keys from the array or string, values set to true.
+ */
 const toObjectSet = (arrayOrString, delimiter) => {
   const obj = {};
 
@@ -72321,9 +72555,7 @@ const toObjectSet = (arrayOrString, delimiter) => {
     });
   };
 
-  isArray(arrayOrString)
-    ? define(arrayOrString)
-    : define(String(arrayOrString).split(delimiter));
+  isArray(arrayOrString) ? define(arrayOrString) : define(String(arrayOrString).split(delimiter));
 
   return obj;
 };
@@ -72331,9 +72563,7 @@ const toObjectSet = (arrayOrString, delimiter) => {
 const noop = () => {};
 
 const toFiniteNumber = (value, defaultValue) => {
-  return value != null && Number.isFinite((value = +value))
-    ? value
-    : defaultValue;
+  return value != null && Number.isFinite((value = +value)) ? value : defaultValue;
 };
 
 /**
@@ -72347,11 +72577,17 @@ function isSpecCompliantForm(thing) {
   return !!(
     thing &&
     isFunction(thing.append) &&
-    thing[toStringTag] === "FormData" &&
+    thing[toStringTag] === 'FormData' &&
     thing[iterator]
   );
 }
 
+/**
+ * Recursively converts an object to a JSON-compatible object, handling circular references and Buffers.
+ *
+ * @param {Object} obj - The object to convert.
+ * @returns {Object} The JSON-compatible object.
+ */
 const toJSONObject = (obj) => {
   const stack = new Array(10);
 
@@ -72366,7 +72602,7 @@ const toJSONObject = (obj) => {
         return source;
       }
 
-      if (!("toJSON" in source)) {
+      if (!('toJSON' in source)) {
         stack[i] = source;
         const target = isArray(source) ? [] : {};
 
@@ -72387,8 +72623,20 @@ const toJSONObject = (obj) => {
   return visit(obj, 0);
 };
 
-const isAsyncFn = kindOfTest("AsyncFunction");
+/**
+ * Determines if a value is an async function.
+ *
+ * @param {*} thing - The value to test.
+ * @returns {boolean} True if value is an async function, otherwise false.
+ */
+const isAsyncFn = kindOfTest('AsyncFunction');
 
+/**
+ * Determines if a value is thenable (has then and catch methods).
+ *
+ * @param {*} thing - The value to test.
+ * @returns {boolean} True if value is thenable, otherwise false.
+ */
 const isThenable = (thing) =>
   thing &&
   (isObject(thing) || isFunction(thing)) &&
@@ -72398,6 +72646,14 @@ const isThenable = (thing) =>
 // original code
 // https://github.com/DigitalBrainJS/AxiosPromise/blob/16deab13710ec09779922131f3fa5954320f83ab/lib/utils.js#L11-L34
 
+/**
+ * Provides a cross-platform setImmediate implementation.
+ * Uses native setImmediate if available, otherwise falls back to postMessage or setTimeout.
+ *
+ * @param {boolean} setImmediateSupported - Whether setImmediate is supported.
+ * @param {boolean} postMessageSupported - Whether postMessage is supported.
+ * @returns {Function} A function to schedule a callback asynchronously.
+ */
 const _setImmediate = ((setImmediateSupported, postMessageSupported) => {
   if (setImmediateSupported) {
     return setImmediate;
@@ -72406,27 +72662,33 @@ const _setImmediate = ((setImmediateSupported, postMessageSupported) => {
   return postMessageSupported
     ? ((token, callbacks) => {
         _global.addEventListener(
-          "message",
+          'message',
           ({ source, data }) => {
             if (source === _global && data === token) {
               callbacks.length && callbacks.shift()();
             }
           },
-          false,
+          false
         );
 
         return (cb) => {
           callbacks.push(cb);
-          _global.postMessage(token, "*");
+          _global.postMessage(token, '*');
         };
       })(`axios@${Math.random()}`, [])
     : (cb) => setTimeout(cb);
-})(typeof setImmediate === "function", isFunction(_global.postMessage));
+})(typeof setImmediate === 'function', isFunction(_global.postMessage));
 
+/**
+ * Schedules a microtask or asynchronous callback as soon as possible.
+ * Uses queueMicrotask if available, otherwise falls back to process.nextTick or _setImmediate.
+ *
+ * @type {Function}
+ */
 const asap =
-  typeof queueMicrotask !== "undefined"
+  typeof queueMicrotask !== 'undefined'
     ? queueMicrotask.bind(_global)
-    : (typeof process !== "undefined" && process.nextTick) || _setImmediate;
+    : (typeof process !== 'undefined' && process.nextTick) || _setImmediate;
 
 // *********************
 
@@ -72451,6 +72713,8 @@ const isIterable = (thing) => thing != null && isFunction(thing[iterator]);
   isUndefined,
   isDate,
   isFile,
+  isReactNativeBlob,
+  isReactNative,
   isBlob,
   isRegExp,
   isFunction,
@@ -80553,18 +80817,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var parchment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! parchment */ "./node_modules/parchment/dist/parchment.js");
 
 class Text extends parchment__WEBPACK_IMPORTED_MODULE_0__.TextBlot {}
+
+// https://lodash.com/docs#escape
+const entityMap = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&#39;'
+};
 function escapeText(text) {
-  return text.replace(/[&<>"']/g, s => {
-    // https://lodash.com/docs#escape
-    const entityMap = {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#39;'
-    };
-    return entityMap[s];
-  });
+  return text.replace(/[&<>"']/g, s => entityMap[s]);
 }
 
 //# sourceMappingURL=text.js.map
@@ -81023,7 +81286,8 @@ function convertHTML(blot, index, length) {
     return blot.html(index, length);
   }
   if (blot instanceof _blots_text_js__WEBPACK_IMPORTED_MODULE_8__["default"]) {
-    return (0,_blots_text_js__WEBPACK_IMPORTED_MODULE_8__.escapeText)(blot.value().slice(index, index + length));
+    const escapedText = (0,_blots_text_js__WEBPACK_IMPORTED_MODULE_8__.escapeText)(blot.value().slice(index, index + length));
+    return escapedText.replaceAll(' ', '&nbsp;');
   }
   if (blot instanceof parchment__WEBPACK_IMPORTED_MODULE_3__.ParentBlot) {
     // TODO fix API
@@ -81377,7 +81641,7 @@ class Quill {
   };
   static events = _emitter_js__WEBPACK_IMPORTED_MODULE_4__["default"].events;
   static sources = _emitter_js__WEBPACK_IMPORTED_MODULE_4__["default"].sources;
-  static version =  false ? 0 : "2.0.2";
+  static version =  false ? 0 : "2.0.3";
   static imports = {
     delta: quill_delta__WEBPACK_IMPORTED_MODULE_2__,
     parchment: parchment__WEBPACK_IMPORTED_MODULE_1__,
@@ -83980,18 +84244,20 @@ function matchText(node, delta, scroll) {
     if (text.trim().length === 0 && text.includes('\n') && !isBetweenInlineElements(node, scroll)) {
       return delta;
     }
-    const replacer = (collapse, match) => {
-      const replaced = match.replace(/[^\u00a0]/g, ''); // \u00a0 is nbsp;
-      return replaced.length < 1 && collapse ? ' ' : replaced;
-    };
-    text = text.replace(/\r\n/g, ' ').replace(/\n/g, ' ');
-    text = text.replace(/\s\s+/g, replacer.bind(replacer, true)); // collapse whitespace
+    // convert all non-nbsp whitespace into regular space
+    text = text.replace(/[^\S\u00a0]/g, ' ');
+    // collapse consecutive spaces into one
+    text = text.replace(/ {2,}/g, ' ');
     if (node.previousSibling == null && node.parentElement != null && isLine(node.parentElement, scroll) || node.previousSibling instanceof Element && isLine(node.previousSibling, scroll)) {
-      text = text.replace(/^\s+/, replacer.bind(replacer, false));
+      // block structure means we don't need leading space
+      text = text.replace(/^ /, '');
     }
     if (node.nextSibling == null && node.parentElement != null && isLine(node.parentElement, scroll) || node.nextSibling instanceof Element && isLine(node.nextSibling, scroll)) {
-      text = text.replace(/\s+$/, replacer.bind(replacer, false));
+      // block structure means we don't need trailing space
+      text = text.replace(/ $/, '');
     }
+    // done removing whitespace and can normalize all to regular space
+    text = text.replaceAll('\u00a0', ' ');
   }
   return delta.insert(text);
 }
@@ -86196,7 +86462,11 @@ Uploader.DEFAULTS = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   AttributeMap: () => (/* reexport safe */ _core_js__WEBPACK_IMPORTED_MODULE_0__.AttributeMap),
+/* harmony export */   Delta: () => (/* reexport safe */ _core_js__WEBPACK_IMPORTED_MODULE_0__.Delta),
 /* harmony export */   Module: () => (/* reexport safe */ _core_js__WEBPACK_IMPORTED_MODULE_0__.Module),
+/* harmony export */   Op: () => (/* reexport safe */ _core_js__WEBPACK_IMPORTED_MODULE_0__.Op),
+/* harmony export */   OpIterator: () => (/* reexport safe */ _core_js__WEBPACK_IMPORTED_MODULE_0__.OpIterator),
 /* harmony export */   Parchment: () => (/* reexport safe */ _core_js__WEBPACK_IMPORTED_MODULE_0__.Parchment),
 /* harmony export */   Range: () => (/* reexport safe */ _core_js__WEBPACK_IMPORTED_MODULE_0__.Range),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -86311,7 +86581,6 @@ _core_js__WEBPACK_IMPORTED_MODULE_0__["default"].register({
   'ui/color-picker': _ui_color_picker_js__WEBPACK_IMPORTED_MODULE_26__["default"],
   'ui/tooltip': _ui_tooltip_js__WEBPACK_IMPORTED_MODULE_28__["default"]
 }, true);
-
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_core_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
 //# sourceMappingURL=quill.js.map
@@ -87320,12 +87589,6 @@ class Tooltip {
 /******/ 		if (cachedModule !== undefined) {
 /******/ 			return cachedModule.exports;
 /******/ 		}
-/******/ 		// Check if module exists (development only)
-/******/ 		if (__webpack_modules__[moduleId] === undefined) {
-/******/ 			var e = new Error("Cannot find module '" + moduleId + "'");
-/******/ 			e.code = 'MODULE_NOT_FOUND';
-/******/ 			throw e;
-/******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = __webpack_module_cache__[moduleId] = {
 /******/ 			id: moduleId,
@@ -87334,6 +87597,12 @@ class Tooltip {
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
+/******/ 		if (!(moduleId in __webpack_modules__)) {
+/******/ 			delete __webpack_module_cache__[moduleId];
+/******/ 			var e = new Error("Cannot find module '" + moduleId + "'");
+/******/ 			e.code = 'MODULE_NOT_FOUND';
+/******/ 			throw e;
+/******/ 		}
 /******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 /******/ 	
 /******/ 		// Flag the module as loaded
