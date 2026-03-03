@@ -2,6 +2,8 @@
 
 namespace App\Http;
 
+use App\Support\UI\Page\Middleware\PageMiddleware;
+use App\Support\UI\Page\Navigation\Middleware\NavigationMiddleware;
 use Illuminate\Auth\Middleware\Authenticate as LaravelAuthenticate;
 use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
 use Illuminate\Auth\Middleware\Authorize;
@@ -54,6 +56,7 @@ class Kernel extends HttpKernel
             Middleware\VerifyCsrfToken::class,
             SubstituteBindings::class,
             Middleware\UserLocale::class,
+            PageMiddleware::class,
             // \App\Http\Middleware\MaintenanceMode::class,
         ],
 
@@ -88,5 +91,6 @@ class Kernel extends HttpKernel
         'maintenance' => Middleware\MaintenanceMode::class,
         'module' => Middleware\ModulesEnabled::class,
         'route.gate' => Middleware\RouteGate::class,
+        'navigation' => NavigationMiddleware::class,
     ];
 }

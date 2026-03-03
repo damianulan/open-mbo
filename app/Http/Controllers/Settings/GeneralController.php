@@ -17,12 +17,12 @@ class GeneralController extends SettingsController
     public function index(Request $request): Renderable
     {
         $model = app(GeneralSettings::class);
+        $this->addPageNav();
 
         return view('pages.settings.index', [
             'model' => $model,
             'form' => GeneralForm::bootWithAttributes($model->toArray())->getDefinition(),
             'brandingForm' => BrandingForm::bootWithAttributes($model->toArray())->getDefinition(),
-            'nav' => $this->nav(),
         ]);
     }
 

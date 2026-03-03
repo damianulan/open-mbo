@@ -1,7 +1,6 @@
 @extends('layouts.portal.master')
 @section('content')
 
-{!! $nav->render() !!}
 <div class="icon-btn-nav">
     <div class="panel-left">
         <a class="icon-btn add-objective" href="javascript:void(0);" data-tippy-content="{{ __('mbo.buttons.add_objective') }}">

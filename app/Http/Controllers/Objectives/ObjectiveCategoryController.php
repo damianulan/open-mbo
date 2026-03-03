@@ -15,9 +15,10 @@ class ObjectiveCategoryController extends MBOController
      */
     public function index(ObjectiveCategoriesDataTable $dataTable)
     {
+        $this->addPageNav();
+
         return $dataTable->render('pages.mbo.categories.index', [
             'table' => $dataTable,
-            'nav' => $this->nav(),
         ]);
     }
 

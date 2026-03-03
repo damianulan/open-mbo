@@ -11,59 +11,72 @@ use Illuminate\Support\Str;
 
 class CreateAdminUserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        $user = new User([
-            'email' => 'admin@damianulan.me',
-            'password' => Hash::make('123456'),
-            'firstname' => 'Site',
-            'lastname' => 'Admin',
-            'gender' => Gender::MALE,
-            'email_verified_at' => now(),
-            'remember_token' => Str::random(10),
-        ]);
-        $user->save();
-        $profile = new UserProfile([
-            'birthday' => fake()->dateTimeBetween('-40 years', '-20years'),
-        ]);
-        $user->profile()->save($profile);
-        $user->assignRoleSlug('admin');
+        $this->upsertAdminUser(
+            email: 'admin@damianulan.me',
+            password: '123456',
+            firstname: 'Site',
+            lastname: 'Admin',
+            role: 'admin',
+        );
 
-        $user = new User([
-            'email' => 'kontakt@damianulan.me',
-            'password' => Hash::make('12345678'),
-            'core' => 1,
-            'firstname' => 'Damian',
-            'lastname' => 'Ułan',
-            'gender' => Gender::MALE,
-            'email_verified_at' => now(),
-            'remember_token' => Str::random(10),
-        ]);
-        $user->save();
-        $profile = new UserProfile([
-            'birthday' => fake()->dateTimeBetween('-40 years', '-20years'),
-        ]);
-        $user->profile()->save($profile);
-        $user->assignRoleSlug('root');
+        $this->upsertAdminUser(
+            email: 'kontakt@damianulan.me',
+            password: '12345678',
+            firstname: 'Damian',
+            lastname: 'Ułan',
+            role: 'root',
+            core: true,
+        );
 
-        $user = new User([
-            'email' => 'helpdesk@damianulan.me',
-            'password' => Hash::make('123456'),
-            'core' => 1,
-            'firstname' => 'Admin',
-            'lastname' => 'Helpdesk',
-            'gender' => Gender::MALE,
-            'email_verified_at' => now(),
-            'remember_token' => Str::random(10),
-        ]);
+        $this->upsertAdminUser(
+            email: 'helpdesk@damianulan.me',
+            password: '123456',
+            firstname: 'Admin',
+            lastname: 'Helpdesk',
+            role: 'support',
+            core: true,
+        );
+    }
+
+    private function upsertAdminUser(
+        string $email,
+        string $password,
+        string $firstname,
+        string $lastname,
+        string $role,
+        bool $core = false,
+    ): void {
+        $user = User::query()->where('email', $email)->first();
+
+        if (is_null($user)) {
+            $user = new User([
+                'email' => $email,
+                'password' => Hash::make($password),
+                'firstname' => $firstname,
+                'lastname' => $lastname,
+                'gender' => Gender::MALE,
+                'core' => $core ? 1 : 0,
+                'email_verified_at' => now(),
+                'remember_token' => Str::random(10),
+            ]);
+        } else {
+            $user->password = Hash::make($password);
+            $user->firstname = $firstname;
+            $user->lastname = $lastname;
+            $user->gender = Gender::MALE;
+            $user->core = $core ? 1 : 0;
+            $user->email_verified_at = now();
+            $user->remember_token = Str::random(10);
+        }
+
         $user->save();
-        $profile = new UserProfile([
-            'birthday' => fake()->dateTimeBetween('-40 years', '-20years'),
-        ]);
+
+        $profile = $user->profile ?? new UserProfile();
+        $profile->birthday ??= fake()->dateTimeBetween('-40 years', '-20years');
         $user->profile()->save($profile);
-        $user->assignRoleSlug('support');
+
+        $user->assignRoleSlug($role);
     }
 }

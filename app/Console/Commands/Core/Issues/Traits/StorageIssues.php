@@ -31,6 +31,8 @@ trait StorageIssues
         $path = $this->getIssuePath();
         $config = $this->getConfigContents();
 
+        $config['issue'] = $issue;
+
         File::put($path, json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
         return $issue;
@@ -46,11 +48,13 @@ trait StorageIssues
         return null;
     }
 
-    public function registerCommitMessage(string $message): void
+    public function registerCommitMessage(string $message, bool $close = false): void
     {
         $config = $this->getConfigContents();
         $config['changelog'][] = $message;
-        $config['issue'] = '';
+        if($close) {
+            $config['issue'] = '';
+        }
         File::put($this->getIssuePath(), json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
     }
 
@@ -61,7 +65,7 @@ trait StorageIssues
 
     private function normalizeIssue(string $issue): string
     {
-        return Str::upper(Str::slug($issue));
+        return $issue;
     }
 
     private function getConfigContents(): array

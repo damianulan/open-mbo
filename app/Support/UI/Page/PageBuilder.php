@@ -3,48 +3,96 @@
 namespace App\Support\UI\Page;
 
 use App\Settings\GeneralSettings;
+use App\Support\UI\Page\Contracts\PageContract;
+use App\Support\UI\Page\Navigation\Contracts\NavigationContract;
+use App\Support\UI\Theme\Theme;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Route;
-use Lucent\Support\Dtos\LaravelDto;
+use Illuminate\Support\Facades\Session;
 
-class PageBuilder extends LaravelDto
+class PageBuilder implements PageContract
 {
-    public function __construct(?string $pagetitle = null, bool $sidebar = true, bool $topbar_header = true)
+    public ?string $routename = null;
+
+    public ?string $info = null;
+
+    public string $sitename = '';
+
+    public Theme $theme;
+
+    public string $locale = '';
+
+    public ?string $logo = null;
+
+    public string $title = '';
+
+    public function __construct()
     {
-        $attributes['routename'] = Route::currentRouteName();
+        $this->routename = Route::currentRouteName();
 
-        $attributes['info'] = null;
-        if (Lang::hasForLocale('menus.info.' . $attributes['routename'])) {
-            $attributes['info'] = __('menus.info.' . $attributes['routename']);
-        }
+        $this->sitename = app(GeneralSettings::class)->site_name;
+        $this->theme = app(Theme::class);
+        $this->locale = app(GeneralSettings::class)->locale ?? config('app.fallback_locale');
+        $this->logo = app(GeneralSettings::class)->site_logo;
 
-        $attributes['sitename'] = app(GeneralSettings::class)->site_name;
-        $attributes['theme'] = current_theme();
-        $attributes['locale'] = app(GeneralSettings::class)->locale;
-        $attributes['logo'] = app(GeneralSettings::class)->site_logo;
-        $attributes['topbar_header'] = $topbar_header;
-
-        if (isset($_COOKIE['menu-collapsed']) && true === (bool) $_COOKIE['menu-collapsed']) {
-            $attributes['sidebar_collapsed'] = 'menu-collapsed';
-        }
-
-        parent::__construct($attributes);
-
-        if (empty($pagetitle)) {
-            $this->setAttribute('title', $this->assignPageTitle($attributes['routename']));
-        } else {
-            $this->setAttribute('title', $pagetitle);
-        }
-
-        if ($sidebar) {
-            $this->setAttribute('sidebar', MenuBuilder::bootSidebar($this->getAttribute('sitename'))
-                ->addClass($this->getAttribute('sidebar_collapsed')));
-
-        }
+        $this->assignPageTitle($this->routename);
     }
 
-    private function assignPageTitle($routename)
+    public function getNavigation(): ?NavigationContract
     {
-        return Lang::hasForLocale('menus.' . $routename) ? __('menus.' . $routename) : '';
+        try {
+            $contract = app(NavigationContract::class);
+            return $contract;
+        } catch (\Throwable $th) {
+
+        }
+        return null;
+    }
+
+    public function getSiteTitle(): string
+    {
+        return $this->sitename . ' - ' . $this->getPageTitle();
+    }
+
+    public function getThemeName(): string
+    {
+        return $this->theme?->current ?: '';
+    }
+
+    public function getThemePath(): string
+    {
+        return asset('themes/' . $this->getThemeName() . '/app.min.css');
+    }
+
+    public function getFaviconPath(): string
+    {
+        return asset('images/resources/favicon.ico');
+    }
+
+    public function getMainContentClasses(): string
+    {
+        $classes = [];
+        if ($this->getNavigation()?->hasSidebar()) {
+            $classes[] = 'content';
+            if ($this->getNavigation()?->isSidebarCollapsed()) {
+                $classes[] = 'collapsed';
+            }
+
+        }
+
+        return implode(' ', $classes);
+    }
+
+    public function getPageTitle(): string
+    {
+        return Session::pull('pagetitle', $this->title);
+    }
+
+    private function assignPageTitle(?string $routename): void
+    {
+        $this->title = Lang::hasForLocale('menus.' . $routename) ? __('menus.' . $routename) : '';
+        if (Lang::hasForLocale('menus.info.' . $this->routename)) {
+            $this->info = __('menus.info.' . $this->routename);
+        }
     }
 }

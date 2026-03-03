@@ -15,9 +15,10 @@ class ObjectiveController extends MBOController
      */
     public function index(ObjectiveDataTable $dataTable)
     {
+        $this->addPageNav();
+
         return $dataTable->render('pages.mbo.objectives.index', [
             'table' => $dataTable,
-            'nav' => $this->nav(),
         ]);
     }
 

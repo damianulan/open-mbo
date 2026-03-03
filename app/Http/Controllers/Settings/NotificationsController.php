@@ -13,9 +13,10 @@ class NotificationsController extends SettingsController
      */
     public function index(NotificationsDataTable $dataTable): Renderable|JsonResponse
     {
+        $this->addPageNav();
+
         return $dataTable->render('pages.settings.notifications.index', [
             'table' => $dataTable,
-            'nav' => $this->nav(),
         ]);
     }
 }

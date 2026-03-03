@@ -3,17 +3,13 @@
 namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\AppController;
-use App\Support\UI\Page\MenuBuilder;
-use App\Support\UI\Page\Navigation\MenubarMenu;
 use App\Support\UI\Page\Navigation\MenuItem;
 
 class SettingsController extends AppController
 {
-    protected MenubarMenu $nav;
-
-    public function nav(): MenubarMenu
+    public function addPageNav(): void
     {
-        return MenuBuilder::bootMenubar('settings', [
+        $this->setPageNav('settings', [
             MenuItem::make('general')
                 ->setTitle(__('menus.settings.general.index'))
                 ->permission('settings-general')

@@ -8,12 +8,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $page->sitename . ' - ' . $page->title }}</title>
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/resources/favicon.ico') }}">
+    <title>{{ $page->getSiteTitle() }}</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ $page->getFaviconPath() }}">
 
     <!-- Theme -->
     @livewireStyles
-    <link rel="stylesheet" type="text/css" href="{{ asset('themes/'.$page->theme.'/app.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ $page->getThemePath() }}">
     @stack('styles')
     <script src="{{asset('themes/vendors/jquery.min.js')}}"></script>
     @include('layouts.portal.script_variables')

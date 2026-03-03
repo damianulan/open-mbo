@@ -12,15 +12,17 @@ class CompanyController extends SettingsController
 {
     public function index(CompaniesDataTable $dataTable)
     {
-        return $dataTable->render('pages.settings.organization.company.index', [
-            'nav' => $this->nav(),
-        ]);
+        $this->addPageNav();
+
+        return $dataTable->render('pages.settings.organization.company.index');
     }
 
-    public function create(Request $request)
+    public function create(Request $request, CompanyEditForm $form)
     {
+        $this->addPageNav();
+
         return view('pages.settings.organization.company.edit', [
-            'form' => CompanyEditForm::definition($request),
+            'form' => $form->getDefinition(),
         ]);
     }
 
@@ -30,43 +32,42 @@ class CompanyController extends SettingsController
         $company = Company::fillFromRequest();
 
         if ($company->save()) {
-
-            return redirect()->route('users.show', $company->id)->with('success', __('alerts.users.success.create'));
+            return redirect()->route('settings.organization.company.index')->with('success', __('alerts.success.operation'));
         }
 
-        return redirect()->back()->with('error', __('alerts.users.error.create'));
+        return redirect()->back()->with('error', __('alerts.error.operation'));
     }
 
-    public function edit(Request $request, $id)
+    public function edit(Request $request, $id, CompanyEditForm $form)
     {
+        $this->addPageNav();
         $model = Company::findOrFail($id);
 
-        return view('pages.users.edit', [
-            'user' => $model,
-            'form' => CompanyEditForm::definition($request, $model),
+        return view('pages.settings.organization.company.edit', [
+            'company' => $model,
+            'form' => $form->setModel($model)->getDefinition(),
         ]);
     }
 
     public function update(Request $request, $id, CompanyEditForm $form)
     {
-        $request->validate($form::validation($request, $id));
+        $model = Company::findOrFail($id);
+        $form->validate();
         $company = Company::fillFromRequest($id);
 
         if ($company->update()) {
-            return redirect()->route('users.show', $id)->with('success', __('alerts.users.success.edit', ['name' => $company->name()]));
+            return redirect()->route('settings.organization.company.index')->with('success', __('alerts.success.operation'));
         }
 
-        return redirect()->back()->with('error', __('alerts.users.error.edit', ['name' => $company->name()]));
+        return redirect()->back()->with('error', __('alerts.error.operation'));
     }
 
-    public function delete($id)
+    public function delete(Request $request, Company $company)
     {
-        $company = Company::findOrFail($id);
-
         if ($company->delete()) {
-            return redirect()->route('users.index')->with('success', __('alerts.users.success.delete', ['name' => $company->name()]));
+            return redirect()->route('settings.organization.company.index')->with('success', __('alerts.success.operation'));
         }
 
-        return redirect()->back()->with('error', __('alerts.users.error.delete', ['name' => $company->name()]));
+        return redirect()->back()->with('error', __('alerts.error.operation'));
     }
 }

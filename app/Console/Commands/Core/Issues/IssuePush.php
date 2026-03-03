@@ -31,13 +31,18 @@ class IssuePush extends Command
      */
     public function handle(): void
     {
+        $this->pushChanges();
+    }
+
+    public function pushChanges(bool $close = false): void
+    {
         try {
             $issue = $this->getIssue();
             $message = $this->argument('message');
             if ( ! empty($issue)) {
 
                 $result = Process::run('git fetch --all');
-                $result = Process::run('whoami');
+                $result = Process::run('git status');
                 $this->line($result->output());
                 $this->info("Opened issue detected: {$issue}");
                 if ( ! empty($message)) {
@@ -59,7 +64,7 @@ class IssuePush extends Command
                     $result = Process::run('git push');
                     $this->line($result->output());
 
-                    $this->registerCommitMessage($issue);
+                    $this->registerCommitMessage($issue, $close);
                 } else {
                     $this->info('Aborted.');
                 }
