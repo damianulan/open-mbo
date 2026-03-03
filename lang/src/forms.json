@@ -2,730 +2,960 @@
     "campaigns": {
         "coordinators": {
             "pl": "Koordynatorzy kampanii",
-            "en": "Koordynatorzy campaign"
+            "en": "Koordynatorzy campaign",
+            "it": "Koordynatorzy campaign"
         },
         "date_end": {
             "pl": "Data zakończenia pomiaru",
-            "en": "Measurement end date"
+            "en": "Measurement end date",
+            "it": "Measurement end date"
         },
         "date_start": {
             "pl": "Data rozpoczęcia pomiaru",
-            "en": "Measurement start date"
+            "en": "Measurement start date",
+            "it": "Measurement start date"
         },
         "description": {
             "pl": "Opis",
-            "en": "Description"
+            "en": "Description",
+            "it": "Descrizione"
         },
         "draft": {
             "pl": "Przechowuj jako wersję roboczą",
-            "en": "Save as draft"
+            "en": "Save as draft",
+            "it": "Save as draft"
         },
         "info": {
             "canceled": {
                 "pl": "Kampania odwołana",
-                "en": "Campaign canceled"
+                "en": "Campaign canceled",
+                "it": "Campagna annullato"
             },
             "completed": {
                 "pl": "Ocena zakończona",
-                "en": "Evaluation completed"
+                "en": "Evaluation completed",
+                "it": "Evaluation completed"
             },
             "definition": {
                 "pl": "Tworzenie strategii i określanie celów",
-                "en": "Strategy definition and objective planning"
+                "en": "Strategy definition and objective planning",
+                "it": "Strategy definition and obiettivo planning"
             },
             "disposition": {
                 "pl": "Dysponowanie celów przez kierowników zespołów",
-                "en": "Objective allocation by team managers"
+                "en": "Objective allocation by team managers",
+                "it": "Obiettivo allocation by team managers"
             },
             "draft": {
                 "pl": "Kampania będzie widoczna tylko dla administratorów i nie zostanie uruchomiona automatycznie.",
-                "en": "The campaign will be visible only to administrators and will not start automatically."
+                "en": "The campaign will be visible only to administrators and will not start automatically.",
+                "it": "La campagna will be visible only to administrators and will not start automatically."
             },
             "evaluation": {
                 "pl": "Ewaluacja celów i ocena pracowników przez kierowników",
-                "en": "Objective evaluation and employee assessment by managers"
+                "en": "Objective evaluation and employee assessment by managers",
+                "it": "Obiettivo evaluation and employee assessment by managers"
             },
             "in_progress": {
                 "pl": "Kampania w toku",
-                "en": "Campaign w toku"
+                "en": "Campaign w toku",
+                "it": "Campagna w toku"
             },
             "manual": {
                 "pl": "Przejście pomiędzy etapami nie będzie uzależnione od dat, a od podjęcia akcji przez administratora. Opcję tą można także włączyć w trakcie trwania kampanii.",
-                "en": "Transition between stages will not depend on dates, but on an administrator action. This option can also be enabled during an active campaign."
+                "en": "Transition between stages will not depend on dates, but on an administrator action. This option can also be enabled during an active campaign.",
+                "it": "Transition tra stages will not depend on dates, but on an administrator action. This option can also be enabled during an active campaign."
             },
             "pending": {
                 "pl": "Oczekuje na rozpoczęcie pomiaru",
-                "en": "Pending measurement start"
+                "en": "Pending measurement start",
+                "it": "Pending measurement start"
             },
             "period": {
                 "pl": "Wprowadź unikalny reprezentatywny okres pomiaru, np. dla pomiaru co kwartał: 2023 Q3.",
-                "en": "Enter a unique representative measurement period, e.g. for quarterly measurement: 2023 Q3."
+                "en": "Enter a unique representative measurement period, e.g. for quarterly measurement: 2023 Q3.",
+                "it": "Enter a unique representative measurement period, e.g. for quarterly measurement: 2023 Q3."
             },
             "realization": {
                 "pl": "Realizacja celów",
-                "en": "Realizacja objectives"
+                "en": "Realizacja objectives",
+                "it": "Realizacja objectives"
             },
             "self_evaluation": {
                 "pl": "Samoocena pracowników",
-                "en": "Employee self-evaluation"
+                "en": "Employee self-evaluation",
+                "it": "Employee self-evaluation"
             },
             "terminated": {
                 "pl": "Kampania przerwana",
-                "en": "Campaign przerwana"
+                "en": "Campaign przerwana",
+                "it": "Campagna przerwana"
             }
         },
         "manual": {
             "pl": "Tryb ręczny",
-            "en": "Manual mode"
+            "en": "Manual mode",
+            "it": "Modalità manuale"
         },
         "name": {
             "pl": "Nazwa kampanii",
-            "en": "Nazwa campaign"
+            "en": "Nazwa campaign",
+            "it": "Nazwa campaign"
         },
         "period": {
             "pl": "Okres pomiaru",
-            "en": "Measurement period"
+            "en": "Measurement period",
+            "it": "Measurement period"
         },
         "stages": {
             "canceled": {
                 "pl": "Kampania odwołana",
-                "en": "Campaign canceled"
+                "en": "Campaign canceled",
+                "it": "Campagna annullato"
             },
             "completed": {
                 "pl": "Ocena zakończona",
-                "en": "Evaluation completed"
+                "en": "Evaluation completed",
+                "it": "Evaluation completed"
             },
             "definition": {
                 "pl": "Tworzenie strategii i określanie celów",
-                "en": "Strategy definition and objective planning"
+                "en": "Strategy definition and objective planning",
+                "it": "Strategy definition and obiettivo planning"
             },
             "disposition": {
                 "pl": "Dysponowanie celów przez kierowników zespołów",
-                "en": "Objective allocation by team managers"
+                "en": "Objective allocation by team managers",
+                "it": "Obiettivo allocation by team managers"
             },
             "evaluation": {
                 "pl": "Ewaluacja celów i ocena pracowników przez kierowników",
-                "en": "Objective evaluation and employee assessment by managers"
+                "en": "Objective evaluation and employee assessment by managers",
+                "it": "Obiettivo evaluation and employee assessment by managers"
             },
             "in_progress": {
                 "pl": "Kampania w toku",
-                "en": "Campaign w toku"
+                "en": "Campaign w toku",
+                "it": "Campagna w toku"
             },
             "pending": {
                 "pl": "Oczekuje na rozpoczęcie pomiaru",
-                "en": "Pending measurement start"
+                "en": "Pending measurement start",
+                "it": "Pending measurement start"
             },
             "realization": {
                 "pl": "Realizacja celów",
-                "en": "Realizacja objectives"
+                "en": "Realizacja objectives",
+                "it": "Realizacja objectives"
             },
             "self_evaluation": {
                 "pl": "Samoocena pracowników",
-                "en": "Employee self-evaluation"
+                "en": "Employee self-evaluation",
+                "it": "Employee self-evaluation"
             },
             "terminated": {
                 "pl": "Kampania przerwana",
-                "en": "Campaign przerwana"
+                "en": "Campaign przerwana",
+                "it": "Campagna przerwana"
             }
         },
         "users": {
             "add": {
                 "pl": "Dodaj użytkowników",
-                "en": "Add users"
+                "en": "Add users",
+                "it": "Aggiungi utenti"
             }
+        }
+    },
+    "companies": {
+        "name": {
+            "pl": "Nazwa przedsiębiorstwa",
+            "en": "Company name",
+            "it": "Nome azienda"
+        },
+        "shortname": {
+            "pl": "Skrócona nazwa",
+            "en": "Short name",
+            "it": "Nome breve"
+        },
+        "taxpayerid": {
+            "pl": "NIP / identyfikator podatkowy",
+            "en": "Taxpayer ID",
+            "it": "ID fiscale"
+        },
+        "founded_at": {
+            "pl": "Data założenia",
+            "en": "Founded at",
+            "it": "Data di fondazione"
+        },
+        "description": {
+            "pl": "Opis przedsiębiorstwa",
+            "en": "Company description",
+            "it": "Descrizione azienda"
         }
     },
     "employments": {
         "add": {
             "pl": "Dodaj nowe zatrudnienie",
-            "en": "Add new employment"
+            "en": "Add new employment",
+            "it": "Add new employment"
         },
         "company": {
             "pl": "Przedsiębiorstwo",
-            "en": "Company"
+            "en": "Company",
+            "it": "Company"
         },
         "contract": {
             "pl": "Typ umowy",
-            "en": "Contract type"
+            "en": "Contract type",
+            "it": "Contract type"
         },
         "department": {
             "pl": "Dział",
-            "en": "Department"
+            "en": "Department",
+            "it": "Department"
         },
         "employment": {
             "pl": "Data zatrudnienia",
-            "en": "Employment date"
+            "en": "Employment date",
+            "it": "Employment date"
         },
         "header": {
             "pl": "Zatrudnienie #:no",
-            "en": "Employment #:no"
+            "en": "Employment #:no",
+            "it": "Employment #:no"
         },
         "header_main": {
             "pl": "Zatrudnienie podstawowe",
-            "en": "Primary employment"
+            "en": "Primary employment",
+            "it": "Primary employment"
         },
         "index": {
             "pl": "Zatrudnienia",
-            "en": "Employments"
+            "en": "Employments",
+            "it": "Employments"
         },
         "position": {
             "pl": "Stanowisko",
-            "en": "Position"
+            "en": "Position",
+            "it": "Posizione"
         },
         "release": {
             "pl": "Data końca zatrudnienia",
-            "en": "Employment end date"
+            "en": "Employment end date",
+            "it": "Employment end date"
         }
     },
     "from": {
         "pl": "[OD]",
-        "en": "[FROM]"
+        "en": "[FROM]",
+        "it": "[FROM]"
     },
     "generic": {
         "email": {
             "pl": "E-mail",
-            "en": "Email"
+            "en": "Email",
+            "it": "Email"
         },
         "login": {
             "pl": "Login",
-            "en": "Login name"
+            "en": "Login name",
+            "it": "Nome di accesso"
         },
         "password": {
             "pl": "Hasło",
-            "en": "Password"
+            "en": "Password",
+            "it": "Password"
         }
     },
     "mbo": {
         "categories": {
             "coordinators": {
                 "pl": "Koordynatorzy kategorii",
-                "en": "Category coordinators"
+                "en": "Category coordinators",
+                "it": "Category coordinators"
             },
             "description": {
                 "pl": "Opis kategorii",
-                "en": "Description kategorii"
+                "en": "Description kategorii",
+                "it": "Description kategorii"
             },
             "name": {
                 "pl": "Nazwa kategorii",
-                "en": "Category name"
+                "en": "Category name",
+                "it": "Category name"
             },
             "shortname": {
                 "pl": "Unikalny identyfikator kategorii",
-                "en": "Unique category identifier"
+                "en": "Unique category identifier",
+                "it": "Unique category identifier"
             },
             "template_count": {
                 "pl": "Powiązane szablony",
-                "en": "Linked templates"
+                "en": "Linked templates",
+                "it": "Linked templates"
             }
         },
         "objectives": {
             "award": {
                 "pl": "Punkty nagrody",
-                "en": "Reward points"
+                "en": "Reward points",
+                "it": "Reward points"
             },
             "category": {
                 "pl": "Kategoria",
-                "en": "Category"
+                "en": "Category",
+                "it": "Categoria"
             },
             "deadline": {
                 "pl": "Termin realizacji",
-                "en": "Deadline"
+                "en": "Deadline",
+                "it": "Deadline"
             },
             "deadline_to": {
                 "pl": "Termin realizacji :term",
-                "en": "Deadline :term"
+                "en": "Deadline :term",
+                "it": "Deadline :term"
             },
             "description": {
                 "pl": "Opis celu",
-                "en": "Description objective"
+                "en": "Description objective",
+                "it": "Description objective"
             },
             "draft": {
                 "pl": "Wersja robocza",
-                "en": "Draft version"
+                "en": "Draft version",
+                "it": "Draft version"
             },
             "evaluation": {
                 "pl": "Aktualna realizacja celu",
-                "en": "Aktualna realizacja objective"
+                "en": "Aktualna realizacja objective",
+                "it": "Aktualna realizacja objective"
             },
             "expected": {
                 "pl": "Oczekiwany wynik",
-                "en": "Expected result"
+                "en": "Expected result",
+                "it": "Expected result"
             },
             "info": {
                 "award": {
                     "pl": "W razie zaliczenia celu, na konto użytkownika wpadną określone tutaj punkty.",
-                    "en": "If the objective is passed, the points specified here will be credited to the user account."
+                    "en": "If the objective is passed, the points specified here will be credited to the user account.",
+                    "it": "If il obiettivo is passed, il points specified here will be credited to il utente account."
                 },
                 "deadline": {
                     "pl": "Po upłynięciu tej daty, cel przypisany do użytkownika zostanie automatycznie oznaczony jako zaliczony lub niezaliczony.",
-                    "en": "After this date, an objective assigned to a user will be automatically marked as passed or failed."
+                    "en": "After this date, an objective assigned to a user will be automatically marked as passed or failed.",
+                    "it": "After this date, an obiettivo assigned to a utente will be automatically marked as passed or fallito."
                 },
                 "draft": {
                     "pl": "Cel w wersji roboczej nie zostanie udostępniony do realizacji, jest także wyłączony z raportowania.",
-                    "en": "An objective in draft version will not be available for completion and is excluded from reporting."
+                    "en": "An objective in draft version will not be available for completion and is excluded from reporting.",
+                    "it": "An obiettivo in draft version will not be available for completion and is excluded from reporting."
                 },
                 "expected": {
                     "pl": "Określ minimalny wynik potrzebny do zaliczenia celu. W razie nieosiągnięcia wyniku, Administratorzy nadal będą mogli wymusić zaliczenie celu.",
-                    "en": "Specify the minimum result required to pass the objective. If this result is not achieved, administrators will still be able to force a pass."
+                    "en": "Specify the minimum result required to pass the objective. If this result is not achieved, administrators will still be able to force a pass.",
+                    "it": "Specify il minimum result obbligatorio to pass il objective. If this result is not achieved, administrators will still be able to force a pass."
                 },
                 "weight": {
                     "pl": "Określ jaki wagowy udział ma ten cel w całej kampanii.",
-                    "en": "Specify the weighted share of this objective in the entire campaign."
+                    "en": "Specify the weighted share of this objective in the entire campaign.",
+                    "it": "Specify il weighted share of this obiettivo in il entire campaign."
                 }
             },
             "name": {
                 "pl": "Nazwa celu",
-                "en": "Nazwa objective"
+                "en": "Nazwa objective",
+                "it": "Nazwa objective"
             },
             "status": {
                 "pl": "Status celu",
-                "en": "Status objective"
+                "en": "Status objective",
+                "it": "Status objective"
             },
             "template": {
                 "pl": "Szablon celu",
-                "en": "Objective template"
+                "en": "Objective template",
+                "it": "Obiettivo template"
             },
             "type": {
                 "pl": "Typ celu",
-                "en": "Typ objective"
+                "en": "Typ objective",
+                "it": "Typ objective"
             },
             "users": {
                 "add": {
                     "pl": "Dodaj użytkowników",
-                    "en": "Add users"
+                    "en": "Add users",
+                    "it": "Aggiungi utenti"
                 },
                 "evaluation": {
                     "pl": "Wartość rozliczenia celu [%]",
-                    "en": "Objective settlement value [%]"
+                    "en": "Objective settlement value [%]",
+                    "it": "Obiettivo settlement value [%]"
                 },
                 "info": {
                     "evaluation": {
                         "pl": "Wskaż wartość procentową realizacji celu. Jeśli przy tworzeniu celu podano oczekwiany wynik, wartość tego rozliczenia celu zostanie wyliczona automatycznie.",
-                        "en": "Provide the percentage value of objective completion. If an expected result was provided when creating the objective, this settlement value will be calculated automatically."
+                        "en": "Provide the percentage value of objective completion. If an expected result was provided when creating the objective, this settlement value will be calculated automatically.",
+                        "it": "Provide il percentage value of obiettivo completion. If an expected result was provided when creating il objective, this settlement value will be calculated automatically."
                     },
                     "realization": {
                         "pl": "Wskaż numeryczną wartość realizacji celu. Jeśli przy tworzeniu celu podano oczekwiany wynik, wartość rozliczenia celu zostanie wyliczona automatycznie.",
-                        "en": "Provide the numeric value of objective completion. If an expected result was provided when creating the objective, this settlement value will be calculated automatically."
+                        "en": "Provide the numeric value of objective completion. If an expected result was provided when creating the objective, this settlement value will be calculated automatically.",
+                        "it": "Provide il numeric value of obiettivo completion. If an expected result was provided when creating il objective, this settlement value will be calculated automatically."
                     }
                 },
                 "realization": {
                     "pl": "Obecna realizacja celu",
-                    "en": "Obecna realizacja objective"
+                    "en": "Obecna realizacja objective",
+                    "it": "Obecna realizacja objective"
                 }
             },
             "weight": {
                 "pl": "Waga celu",
-                "en": "Waga objective"
+                "en": "Waga objective",
+                "it": "Waga objective"
             }
         }
     },
     "placeholders": {
         "choose": {
             "pl": "Wybierz...",
-            "en": "Choose..."
+            "en": "Choose...",
+            "it": "Scegli..."
         },
         "choose_birthdate": {
             "pl": "Wybierz datę",
-            "en": "Choose date"
+            "en": "Choose date",
+            "it": "Choose date"
         },
         "choose_date": {
             "pl": "Wybierz datę",
-            "en": "Choose date"
+            "en": "Choose date",
+            "it": "Choose date"
         },
         "choose_daterange_from": {
             "pl": "Wybierz datę od...",
-            "en": "Choose date from..."
+            "en": "Choose date from...",
+            "it": "Choose date from..."
         },
         "choose_daterange_to": {
             "pl": "Wybierz datę do...",
-            "en": "Choose date to..."
+            "en": "Choose date to...",
+            "it": "Choose date to..."
         },
         "choose_datetime": {
             "pl": "Wybierz datę oraz godzinę",
-            "en": "Choose date and time"
+            "en": "Choose date and time",
+            "it": "Choose date and time"
         },
         "choose_time": {
             "pl": "Wybierz godzinę",
-            "en": "Choose time"
+            "en": "Choose time",
+            "it": "Choose time"
         }
     },
     "settings": {
         "general": {
             "datas": {
                 "pl": "Zarządzanie danymi w systemie",
-                "en": "System data management"
+                "en": "System data management",
+                "it": "System data management"
             },
             "export_types": {
                 "pl": "Rodzaje eksportu danych dostępne na platformie",
-                "en": "Data export types available on the platform"
+                "en": "Data export types available on the platform",
+                "it": "Data export types available on il platform"
             },
             "general": {
                 "pl": "Ogólne",
-                "en": "General"
+                "en": "General",
+                "it": "Generali"
             },
             "auth": {
                 "pl": "Identyfikacja użytkownika i logowanie",
-                "en": "Authentication and Logging in"
+                "en": "Authentication and Logging in",
+                "it": "Authentication and Logging in"
             },
             "lang": {
                 "pl": "Język aplikacji",
-                "en": "Application language"
+                "en": "Application language",
+                "it": "Application language"
             },
             "release": {
                 "pl": "Wersja aplikacji",
-                "en": "Application version"
+                "en": "Application version",
+                "it": "Application version"
             },
             "site_logo": {
                 "pl": "Logo platformy",
-                "en": "Platform logo"
+                "en": "Platform logo",
+                "it": "Platmodulo logo"
             },
             "site_name": {
                 "pl": "Nazwa witryny",
-                "en": "Site name"
+                "en": "Site name",
+                "it": "Site name"
             },
             "theme": {
                 "pl": "Szablon",
-                "en": "Theme"
+                "en": "Theme",
+                "it": "Theme"
             }
         },
         "mbo": {
             "campaigns_bonus": {
                 "pl": "Bonus dla kampanii [%]",
-                "en": "Bonus dla campaign [%]"
+                "en": "Bonus dla campaign [%]",
+                "it": "Bonus dla campagna [%]"
             },
             "campaigns_enabled": {
                 "pl": "Kampanie pomiarowe",
-                "en": "Measurement campaigns"
+                "en": "Measurement campaigns",
+                "it": "Measurement campaigns"
             },
             "campaigns_ignore_dates": {
                 "pl": "Zezwalaj na akcje po upływie terminu etapu",
-                "en": "Allow actions after stage deadline"
+                "en": "Allow actions after stage deadline",
+                "it": "Allow actions dopo stage deadline"
             },
             "campaigns_manual": {
                 "pl": "Tryb ręczny w kampaniach",
-                "en": "Manual mode in campaigns"
+                "en": "Manual mode in campaigns",
+                "it": "Manual mode in campaigns"
             },
             "enabled": {
                 "pl": "Moduł MBO włączony",
-                "en": "MBO module enabled"
+                "en": "MBO module enabled",
+                "it": "MBO modulo enabled"
             },
             "failed_rewards": {
                 "pl": "Przyznawaj punkty nagrody dla niezaliczonych celów",
-                "en": "Grant reward points for objectives marked as failed"
+                "en": "Grant reward points for objectives marked as failed",
+                "it": "Grant reward points for obiettivi marked as fallito"
             },
             "index": {
                 "pl": "Moduł MBO",
-                "en": "MBO module"
+                "en": "MBO module",
+                "it": "MBO module"
             },
             "info": {
                 "campaigns_bonus": {
                     "pl": "Przyznawaj dodatkowy bonus do punktów nagrody dla użytkowników, którzy osiągnęli wszystkie cele w kampanii. Wartość procentowa określona w tym polu odnosić się bedzię do sumy punktów nagrody uzyskanych ze wszystkich celów w kampanii.",
-                    "en": "Grant an additional reward-point bonus to users who achieved all objectives in the campaign. The percentage value set here applies to the total reward points earned from all objectives in the campaign."
+                    "en": "Grant an additional reward-point bonus to users who achieved all objectives in the campaign. The percentage value set here applies to the total reward points earned from all objectives in the campaign.",
+                    "it": "Grant an additional reward-point bonus to utenti who achieved all obiettivi in il campaign. Il percentage value set here applies to il total reward points earned from all obiettivi in il campaign."
                 },
                 "campaigns_enabled": {
                     "pl": "Włącza kampanie pomiarowe",
-                    "en": "Enables measurement campaigns"
+                    "en": "Enables measurement campaigns",
+                    "it": "Enables measurement campaigns"
                 },
                 "campaigns_ignore_dates": {
                     "pl": "Każdy etap kampanii wymaga wykonania określonych akcji w terminach określonych przez Administratora. Zaznaczenie tej opcji zezwala na wykonywania akcji po upływie tych terminów.",
-                    "en": "Each campaign stage requires specific actions within deadlines set by the administrator. Enabling this option allows actions after those deadlines."
+                    "en": "Each campaign stage requires specific actions within deadlines set by the administrator. Enabling this option allows actions after those deadlines.",
+                    "it": "Each campagna stage requires specific actions within deadlines set by il administrator. Enabling this option allows actions dopo those deadlines."
                 },
                 "campaigns_manual": {
                     "pl": "Włącza tryb ręczny w kampaniach",
-                    "en": "Enables manual mode in campaigns"
+                    "en": "Enables manual mode in campaigns",
+                    "it": "Enables manual mode in campaigns"
                 },
                 "enabled": {
                     "pl": "Włącza moduł MBO",
-                    "en": "Enables the MBO module"
+                    "en": "Enables the MBO module",
+                    "it": "Enables il MBO module"
                 },
                 "failed_rewards": {
                     "pl": "Mimo oznaczenia celu jako niezaliczony, przyznaj punkty nagrody proporcjonalnie do wyniku realizacji celu.",
-                    "en": "Even if an objective is marked as failed, grant reward points proportionally to the completion result."
+                    "en": "Even if an objective is marked as failed, grant reward points proportionally to the completion result.",
+                    "it": "Even if an obiettivo is marked as fallito, grant reward points proportionally to il completion result."
                 },
                 "manipulate_rewards": {
                     "pl": "Administratorzy mają możliwość edycji przeliczonych proporcjonalnie punktów nagrody, po ich rozliczeniu.",
-                    "en": "Administrators can edit proportionally calculated reward points after settlement."
+                    "en": "Administrators can edit proportionally calculated reward points after settlement.",
+                    "it": "Administrators can edit proportionally calculated reward points dopo settlement."
                 },
                 "objectives_autofail": {
                     "pl": "Automatyczne oznaczanie celów określonych terminem wykonania jako niezaliczonych po upływie terminu, jeśli nie wprowadzono wyników realizacji.",
-                    "en": "Automatically mark deadline-based objectives as failed after the deadline if no completion results were entered."
+                    "en": "Automatically mark deadline-based objectives as failed after the deadline if no completion results were entered.",
+                    "it": "Automatically mark deadline-based obiettivi as fallito dopo il deadline if no completion risultati were entered."
                 },
                 "objectives_weights": {
                     "pl": "Jeśli wagi celów są wyłączone, każdy cel ma domyślnie wagę = 1.",
-                    "en": "If objective weights are disabled, each objective has a default weight of 1."
+                    "en": "If objective weights are disabled, each objective has a default weight of 1.",
+                    "it": "If obiettivo weights are disabled, each obiettivo has a default weight of 1."
                 },
                 "rewards": {
                     "pl": "Włącza punkty nagrody",
-                    "en": "Enables reward points"
+                    "en": "Enables reward points",
+                    "it": "Enables reward points"
                 },
                 "rewards_currency": {
                     "pl": "Waluta przyznawania nagrody",
-                    "en": "Reward granting currency"
+                    "en": "Reward granting currency",
+                    "it": "Reward granting currency"
                 },
                 "rewards_min_evaluation": {
                     "pl": "Minimalny wynik procentowy potrzebny do otrzymania punktów nagrody. Punkty nagrody będą przeliczane proporcjonalnie powyżej zadeklarowanej wartości. Aby wyłączyć tę funkcję, ustaw wartość na 0.",
-                    "en": "Minimum percentage result required to receive reward points. Reward points are calculated proportionally above the declared value. Set to 0 to disable this feature."
+                    "en": "Minimum percentage result required to receive reward points. Reward points are calculated proportionally above the declared value. Set to 0 to disable this feature.",
+                    "it": "Minimum percentage result obbligatorio to receive reward points. Reward points are calculated proportionally above il declared value. Set to 0 to disable this feature."
                 },
                 "rewards_points_exchange": {
                     "pl": "Stosunek jednego punktu nagrody do jednego punktu w wybranej walucie",
-                    "en": "Ratio of one reward point to one unit of the selected currency"
+                    "en": "Ratio of one reward point to one unit of the selected currency",
+                    "it": "Ratio of one reward point to one unit of il selected currency"
                 },
                 "rewards_proportional": {
                     "pl": "Przeliczaj punkty nagrody proporcjonalnie do wyniku realizacji celu.",
-                    "en": "Calculate reward points proportionally to the objective completion result."
+                    "en": "Calculate reward points proportionally to the objective completion result.",
+                    "it": "Calculate reward points proportionally to il obiettivo completion result."
                 }
             },
             "manipulate_rewards": {
                 "pl": "Możliwość edycji przeliczonych punktów nagrody",
-                "en": "Ability to edit calculated reward points"
+                "en": "Ability to edit calculated reward points",
+                "it": "Ability to edit calculated reward points"
             },
             "objectives_autofail": {
                 "pl": "Automatyczne oznaczanie przedawnionych celów jako niezaliczone",
-                "en": "Automatically mark overdue objectives as failed"
+                "en": "Automatically mark overdue objectives as failed",
+                "it": "Automatically mark overdue obiettivi as fallito"
             },
             "objectives_self_final_evaluation": {
                 "pl": "Zezwalaj administratorom na samodzielnie ocenianie swoich celów",
-                "en": "Allow administrators to evaluate their own objectives"
+                "en": "Allow administrators to evaluate their own objectives",
+                "it": "Allow administrators to evaluate their own objectives"
             },
             "objectives_weights": {
                 "pl": "Wagi celów",
-                "en": "Wagi objectives"
+                "en": "Wagi objectives",
+                "it": "Wagi objectives"
             },
             "rewards": {
                 "pl": "Punkty nagrody",
-                "en": "Reward points"
+                "en": "Reward points",
+                "it": "Reward points"
             },
             "rewards_currency": {
                 "pl": "Waluta nagrody",
-                "en": "Reward currency"
+                "en": "Reward currency",
+                "it": "Reward currency"
             },
             "rewards_min_evaluation": {
                 "pl": "Minimalny wynik oceny celu",
-                "en": "Minimalny wynik oceny objective"
+                "en": "Minimalny wynik oceny objective",
+                "it": "Minimalny wynik oceny objective"
             },
             "rewards_points_exchange": {
                 "pl": "Przeliczanie punktów nagrody",
-                "en": "Reward points conversion"
+                "en": "Reward points conversion",
+                "it": "Reward points conversion"
             },
             "rewards_proportional": {
                 "pl": "Przeliczaj punkty nagrody proporcjonalnie do rozliczenia",
-                "en": "Calculate reward points proportionally to settlement"
+                "en": "Calculate reward points proportionally to settlement",
+                "it": "Calculate reward points proportionally to settlement"
             }
         },
         "modules": {
             "pl": "Zarządanie ustawieniami modułów",
-            "en": "Module settings management"
+            "en": "Module settings management",
+            "it": "Module impostazioni management"
         },
         "notifications": {
             "info": {
                 "mail_notifications": {
                     "pl": "Wyłączona funkcja oznacza zablokowanie wszelkiej wysyłki powiadomień e-mail, niezależnie od preferencji użytkowników. Nie dotyczy podstawowych funkcjonalności systemu - np. reset hasła, email powitalny itp.",
-                    "en": "When disabled, all email notification sending is blocked regardless of user preferences. This does not apply to core system features such as password reset or welcome email."
+                    "en": "When disabled, all email notification sending is blocked regardless of user preferences. This does not apply to core system features such as password reset or welcome email.",
+                    "it": "When disabled, all email notification sending is blocked regardless of utente preferences. This does not apply to core system features such as password reset or welcome email."
                 },
                 "system_notifications": {
                     "pl": "Wyłączona funkcja oznacza zablokowanie wszelkiej wysyłki powiadomień w systemie (ikona dzwonka w górnym menu), niezależnie od preferencji użytkowników.",
-                    "en": "When disabled, all in-system notifications (bell icon in the top menu) are blocked regardless of user preferences."
+                    "en": "When disabled, all in-system notifications (bell icon in the top menu) are blocked regardless of user preferences.",
+                    "it": "When disabled, all in-system notifications (bell icon in il top menu) are blocked regardless of utente preferences."
                 }
             },
             "mail_notifications": {
                 "pl": "Wysyłanie powiadomień e-mail",
-                "en": "Sending email notifications"
+                "en": "Sending email notifications",
+                "it": "Sending email notifications"
             },
             "system_notifications": {
                 "pl": "Wysyłanie powiadomień w systemie",
-                "en": "Sending system notifications"
+                "en": "Sending system notifications",
+                "it": "Sending system notifications"
             }
         },
         "server": {
             "mail_catchall_enabled": {
                 "pl": "Przekierowywanie wiadomości",
-                "en": "Message forwarding"
+                "en": "Message forwarding",
+                "it": "Message forwarding"
             },
             "mail_catchall_receiver": {
                 "pl": "Przekieruj na adres",
-                "en": "Forward to address"
+                "en": "Forward to address",
+                "it": "Forward to address"
             },
             "mail_encryption": {
                 "pl": "Metoda szyfrowania",
-                "en": "Encryption method"
+                "en": "Encryption method",
+                "it": "Encryption method"
             },
             "mail_from_address": {
                 "pl": "Wysyłaj z adresu",
-                "en": "Send from address"
+                "en": "Send from address",
+                "it": "Send from address"
             },
             "mail_from_name": {
                 "pl": "Wysyłaj jako (nazwa)",
-                "en": "Send as (name)"
+                "en": "Send as (name)",
+                "it": "Send as (name)"
             },
             "mail_host": {
                 "pl": "Adres serwera",
-                "en": "Server address"
+                "en": "Server address",
+                "it": "Server address"
             },
             "mail_port": {
                 "pl": "Port",
-                "en": "SMTP port"
+                "en": "SMTP port",
+                "it": "SMTP port"
             },
             "mail_username": {
                 "pl": "Użytkownik",
-                "en": "User"
+                "en": "User",
+                "it": "Utente"
             }
         },
         "users": {
             "info": {
                 "multiple_employments": {
                     "pl": "Zezwalaj na dodawanie wielu aktywnych zatrudnień dla pojedynczego profilu.",
-                    "en": "Allow adding multiple active employments for a single profile."
+                    "en": "Allow adding multiple active employments for a single profile.",
+                    "it": "Allow adding multiple active employments for a single profile."
                 },
                 "password_change_firstlogin": {
                     "pl": "Wymuszaj zmianę hasła przy pierwszym logowaniu",
-                    "en": "Force password change at first login"
+                    "en": "Force password change at first login",
+                    "it": "Force password change at first login"
                 },
                 "force_password_change_reset": {
                     "pl": "Wymuszaj zmianę po resecie hasła w zarządzaniu użytkownikami.",
-                    "en": "Force password change after a password reset in user management."
+                    "en": "Force password change after a password reset in user management.",
+                    "it": "Force password change dopo a password reset in utente management."
                 },
                 "password_min_length": {
                     "pl": "Wymagaj minimalnej długości hasła. Ustaw 0, aby wyłączyć tę funkcję.",
-                    "en": "Require a minimum password length. Set 0 to disable this feature."
+                    "en": "Require a minimum password length. Set 0 to disable this feature.",
+                    "it": "Require a minimum password length. Set 0 to disable this feature."
                 },
                 "password_min_letters": {
                     "pl": "Wymagaj minimalnej ilości liter w haśle. Ustaw 0, aby wyłączyć tę funkcję.",
-                    "en": "Require a minimum number of letters in password. Set 0 to disable this feature."
+                    "en": "Require a minimum number of letters in password. Set 0 to disable this feature.",
+                    "it": "Require a minimum number of letters in password. Set 0 to disable this feature."
                 },
                 "password_min_numbers": {
                     "pl": "Wymagaj minimalnej ilości cyfr w haśle. Ustaw 0, aby wyłączyć tę funkcję.",
-                    "en": "Require a minimum number of digits in password. Set 0 to disable this feature."
+                    "en": "Require a minimum number of digits in password. Set 0 to disable this feature.",
+                    "it": "Require a minimum number of digits in password. Set 0 to disable this feature."
                 },
                 "password_min_symbols": {
                     "pl": "Wymagaj minimalnej ilości znaków specjalnych w haśle. Ustaw 0, aby wyłączyć tę funkcję.",
-                    "en": "Require a minimum number of special characters in password. Set 0 to disable this feature."
+                    "en": "Require a minimum number of special characters in password. Set 0 to disable this feature.",
+                    "it": "Require a minimum number of special characters in password. Set 0 to disable this feature."
                 },
                 "password_not_repeat": {
                     "pl": "Określ liczbę haseł które nie mogą się powtarzać. Ustaw 0, aby wyłączyć tę funkcję.",
-                    "en": "Specify the number of passwords that cannot be repeated. Set 0 to disable this feature."
+                    "en": "Specify the number of passwords that cannot be repeated. Set 0 to disable this feature.",
+                    "it": "Specify il number of passwords that non può be repeated. Set 0 to disable this feature."
                 },
                 "auth_identifier": {
                     "pl": "Określ typ identyfikatora użytkownika do wykorzystania podczas logowania.",
-                    "en": "Specify the type of user identifier to be used during login."
+                    "en": "Specify the type of user identifier to be used during login.",
+                    "it": "Specify il type of utente identifier to be used during login."
                 }
             },
             "multiple_employments": {
                 "pl": "Wielozatrudnienie",
-                "en": "Multiple employments"
+                "en": "Multiple employments",
+                "it": "Multiple employments"
             },
             "password_change_firstlogin": {
                 "pl": "Wymuszaj zmianę hasła po utworzeniu konta",
-                "en": "Force password change after account creation"
+                "en": "Force password change after account creation",
+                "it": "Force password change dopo account creation"
             },
             "force_password_change_reset": {
                 "pl": "Wymuszaj zmianę hasła po resecie hasła",
-                "en": "Force password change after password reset"
+                "en": "Force password change after password reset",
+                "it": "Force password change dopo password reset"
             },
             "password_min_length": {
                 "pl": "Minimalna długość hasła",
-                "en": "Minimum password length"
+                "en": "Minimum password length",
+                "it": "Minimum password length"
             },
             "password_min_letters": {
                 "pl": "Minimalna ilość liter",
-                "en": "Minimum number of letters"
+                "en": "Minimum number of letters",
+                "it": "Minimum number of letters"
             },
             "password_min_numbers": {
                 "pl": "Minimalna ilość cyfr",
-                "en": "Minimum number of digits"
+                "en": "Minimum number of digits",
+                "it": "Minimum number of digits"
             },
             "password_min_symbols": {
                 "pl": "Minimalna ilość znaków specjalnych",
-                "en": "Minimum number of special characters"
+                "en": "Minimum number of special characters",
+                "it": "Minimum number of special characters"
             },
             "password_not_repeat": {
                 "pl": "Zapobiegaj powtarzaniu się haseł",
-                "en": "Prevent password reuse"
+                "en": "Prevent password reuse",
+                "it": "Prevent password reuse"
             },
             "auth_identifier": {
                 "pl": "Identyfikator uwierzytelniania",
-                "en": "Authentication identifier"
+                "en": "Authentication identifier",
+                "it": "Authentication identifier"
             }
         }
     },
     "to": {
         "pl": "[DO]",
-        "en": "[TO]"
+        "en": "[TO]",
+        "it": "[TO]"
+    },
+    "profile": {
+        "preferences": {
+            "lang": {
+                "pl": "Język interfejsu",
+                "en": "Interface language",
+                "it": "Lingua dell'interfaccia"
+            },
+            "theme": {
+                "pl": "Motyw",
+                "en": "Theme",
+                "it": "Tema"
+            },
+            "mail_notifications": {
+                "pl": "Powiadomienia e-mail",
+                "en": "Email notifications",
+                "it": "Notifiche email"
+            },
+            "app_notifications": {
+                "pl": "Powiadomienia w aplikacji",
+                "en": "In-app notifications",
+                "it": "Notifiche nell'app"
+            },
+            "extended_notifications": {
+                "pl": "Rozszerzone powiadomienia",
+                "en": "Extended notifications",
+                "it": "Notifiche estese"
+            },
+            "system_notifications": {
+                "pl": "Powiadomienia systemowe",
+                "en": "System notifications",
+                "it": "Notifiche di sistema"
+            }
+        }
     },
     "users": {
         "avatar": {
             "pl": "Zdjęcie profilowe",
-            "en": "Profile photo"
+            "en": "Profile photo",
+            "it": "Profile photo"
         },
         "birthday": {
             "pl": "Data urodzenia",
-            "en": "Date of birth"
+            "en": "Date of birth",
+            "it": "Date of birth"
         },
         "email": {
             "pl": "E-mail",
-            "en": "Email"
+            "en": "Email",
+            "it": "Email"
         },
         "firstname": {
             "pl": "Imię",
-            "en": "First name"
+            "en": "First name",
+            "it": "Nome"
         },
         "gender": {
             "pl": "Płeć",
-            "en": "Gender"
+            "en": "Gender",
+            "it": "Gender"
         },
         "header": {
             "pl": "Dane użytkownika",
-            "en": "Dane user"
+            "en": "Dane user",
+            "it": "Dane user"
         },
         "lastname": {
             "pl": "Nazwisko",
-            "en": "Last name"
+            "en": "Last name",
+            "it": "Cognome"
         },
         "roles": {
             "pl": "Role systemowe",
-            "en": "System roles"
+            "en": "System roles",
+            "it": "System roles"
         },
         "roles_short": {
             "pl": "Role",
-            "en": "Roles"
+            "en": "Roles",
+            "it": "Ruoli"
         },
         "supervisors": {
             "pl": "Bezpośredni przełożeni",
-            "en": "Direct supervisors"
+            "en": "Direct supervisors",
+            "it": "Direct supervisors"
         }
     },
     "version": {
         "dev": {
             "pl": "Najnowsza wersja deweloperska",
-            "en": "Latest development version"
+            "en": "Latest development version",
+            "it": "Latest development version"
         },
         "non-stable": {
             "pl": "Najnowsza wersja testowa",
-            "en": "Latest test version"
+            "en": "Latest test version",
+            "it": "Latest test version"
         },
         "stable": {
             "pl": "Najnowsza stabilna wersja",
-            "en": "Latest stable version"
+            "en": "Latest stable version",
+            "it": "Latest stable version"
         }
     },
     "reset_password": {
         "force": {
             "title": {
                 "pl": "Zmiana hasła",
-                "en": "Change password"
+                "en": "Change password",
+                "it": "Change password"
             },
             "info": {
                 "pl": "Twoje obecne hasło wygasło. Aby kontynuować, musisz ustawić nowe.",
-                "en": "Your current password has expired. To continue, you must set a new one."
+                "en": "Your current password has expired. To continue, you must set a new one.",
+                "it": "Your current password has expired. To continue, you deve set a new one."
             }
         },
         "normal": {
             "title": {
                 "pl": "Reset hasła",
-                "en": "Reset password"
+                "en": "Reset password",
+                "it": "Reimposta password"
             },
             "info": {
                 "pl": "Wprowadź poniżej nowe hasło.",
-                "en": "Enter a new password below."
+                "en": "Enter a new password below.",
+                "it": "Enter a new password below."
             }
         }
     }

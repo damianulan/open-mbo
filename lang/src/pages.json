@@ -3,150 +3,183 @@
         "401": {
             "paragraph": {
                 "pl": "",
-                "en": "You are not authorized to access this page."
+                "en": "You are not authorized to access this page.",
+                "it": "Non sei autorizzato ad accedere a questa pagina."
             },
             "title": {
                 "pl": "Dostęp nieautoryzowany",
-                "en": "Unauthorized access"
+                "en": "Unauthorized access",
+                "it": "Accesso non autorizzato"
             }
         },
         "403": {
             "paragraph": {
                 "pl": "Nie posiadasz wystarczających uprawnień niezbędnych do wyświetlania tej strony. Jeśli to błąd, skontaktuj się z administratorem systemu.",
-                "en": "You do not have the necessary permissions to display this page. If this is an error, please contact the system administrator."
+                "en": "You do not have the necessary permissions to display this page. If this is an error, please contact the system administrator.",
+                "it": "Non disponi dei permessi necessari per visualizzare questa pagina. Se si tratta di un errore, contatta l’amministratore di sistema."
             },
             "title": {
                 "pl": "Odmowa dostępu",
-                "en": "Access denied"
+                "en": "Access denied",
+                "it": "Accesso negato"
             }
         },
         "404": {
             "paragraph": {
                 "pl": "Nie udało się odnaleźć żądanej strony.",
-                "en": "The page you are looking for could not be found."
+                "en": "The page you are looking for could not be found.",
+                "it": "La pagina che stai cercando non è stata trovata."
             },
             "title": {
                 "pl": "Nie znaleziono strony, lub jest ona tymczasowo niedostępna",
-                "en": "Page not found, or it is temporarily unavailable"
+                "en": "Page not found, or it is temporarily unavailable",
+                "it": "Pagina non trovata, o temporaneamente non disponibile"
             }
         },
         "419": {
             "paragraph": {
                 "pl": "Twój sekretny klucz jest nieprawidłowy, bądź wygasła twoja sesja. Zaloguj się jeszcze raz i spróbuj ponownie.",
-                "en": "Your secret key is invalid or your session has expired. Please log in again and try again."
+                "en": "Your secret key is invalid or your session has expired. Please log in again and try again.",
+                "it": "La tua chiave segreta non è valida o la sessione è scaduta. Accedi di nuovo e riprova."
             },
             "title": {
                 "pl": "Sesja wygasła",
-                "en": "Session expired"
+                "en": "Session expired",
+                "it": "Sessione scaduta"
             }
         },
         "500": {
             "paragraph": {
                 "pl": "Serwer nie był w stanie przetworzyć żądania. Zarejestrowaliśmy ten incydent i przeanalizujemy źródło błędu. Dziękujemy.",
-                "en": "The server was unable to process the request. We have registered this incident and are analyzing the source of the error. Thank you."
+                "en": "The server was unable to process the request. We have registered this incident and are analyzing the source of the error. Thank you.",
+                "it": "Il server non è riuscito a elaborare la richiesta. Abbiamo registrato questo incidente e stiamo analizzando la causa dell’errore. Grazie."
             },
             "title": {
                 "pl": "Wewnętrzny błąd serwera",
-                "en": "Internal server error"
+                "en": "Internal server error",
+                "it": "Errore interno del server"
             }
         },
         "503": {
             "paragraph": {
                 "pl": "Przepraszamy, usługa chwilowo niedostępna. Trwają prace konserwacyjne, spróbuj ponownie później. Zostaniesz automatycznie wylogowany.",
-                "en": "Sorry, the service is temporarily unavailable. There are ongoing consultancy work, please try again later. You will be automatically logged out."
+                "en": "Sorry, the service is temporarily unavailable. There are ongoing consultancy work, please try again later. You will be automatically logged out.",
+                "it": "Spiacenti, il servizio è temporaneamente non disponibile. Sono in corso attività di manutenzione, riprova più tardi. Verrai disconnesso automaticamente."
             },
             "title": {
                 "pl": "Usługa niedostępna",
-                "en": "Service unavailable"
+                "en": "Service unavailable",
+                "it": "Servizio non disponibile"
             }
         },
         "common": {
             "pl": "To chyba nie strona, której szukasz...",
-            "en": "This is not the page you are looking for..."
+            "en": "This is not the page you are looking for...",
+            "it": "Questa non è la pagina che stai cercando..."
         }
     },
     "home": {
         "my_campaigns": {
             "pl": "Moje kampanie",
-            "en": "My campaigns"
+            "en": "My campaigns",
+            "it": "Le mie campagne"
         },
         "my_objectives": {
             "pl": "Moje cele",
-            "en": "My objectives"
+            "en": "My objectives",
+            "it": "I miei obiettivi"
         }
     },
     "settings": {
         "branding": {
             "pl": "Branding",
-            "en": "Branding settings"
+            "en": "Branding settings",
+            "it": "Impostazioni branding"
         },
         "build": {
             "pl": "Build",
-            "en": "Build version"
+            "en": "Build version",
+            "it": "Versione build"
         },
         "cache_clear": {
             "pl": "Wyczyść cache",
-            "en": "Clear cache"
+            "en": "Clear cache",
+            "it": "Svuota cache"
         },
         "debugbar": {
             "pl": "Pasek debugowania",
-            "en": "DebugBar"
+            "en": "DebugBar",
+            "it": "DebugBar"
         },
         "debugging": {
             "pl": "Tryb debugowania",
-            "en": "Debug mode"
+            "en": "Debug mode",
+            "it": "Modalità debug"
         },
         "environment": {
             "pl": "Środowisko",
-            "en": "Environment"
+            "en": "Environment",
+            "it": "Ambiente"
         },
         "general": {
             "pl": "Ogólne",
-            "en": "General"
+            "en": "General",
+            "it": "Generali"
         },
         "git_status": {
             "pl": "Git status",
-            "en": "Git repository status"
+            "en": "Git repository status",
+            "it": "Stato repository Git"
         },
         "info": {
             "pl": "Konfiguracja PHP",
-            "en": "PHP info"
+            "en": "PHP info",
+            "it": "Informazioni PHP"
         },
         "modules": {
             "pl": "Zarządzanie modułami platformy",
-            "en": "Manage platform modules"
+            "en": "Manage platform modules",
+            "it": "Gestisci moduli piattaforma"
         },
         "phpinfo": {
             "pl": "PHP Info",
-            "en": "PHP info"
+            "en": "PHP info",
+            "it": "Informazioni PHP"
         },
         "phpversion": {
             "pl": "Wersja PHP",
-            "en": "PHP version"
+            "en": "PHP version",
+            "it": "Versione PHP"
         },
         "release": {
             "pl": "Wersja",
-            "en": "Release"
+            "en": "Release",
+            "it": "Rilascio"
         },
         "server_info": {
             "pl": "Informacje o serwerze",
-            "en": "Server info"
+            "en": "Server info",
+            "it": "Informazioni server"
         },
         "telescope": {
             "pl": "Teleskop",
-            "en": "Telescope"
+            "en": "Telescope",
+            "it": "Telescope"
         },
         "timezone": {
             "pl": "Strefa czasowa",
-            "en": "Timezone"
+            "en": "Timezone",
+            "it": "Fuso orario"
         },
         "app": {
             "pl": "Ustawienia aplikacji",
-            "en": "Application settings"
+            "en": "Application settings",
+            "it": "Impostazioni dell'applicazione"
         },
         "smtp_server": {
             "pl": "Serwer poczty wychodzącej (SMTP)",
-            "en": "Outgoing mail server (SMTP)"
+            "en": "Outgoing mail server (SMTP)",
+            "it": "Server di posta in uscita (SMTP)"
         }
     }
 }

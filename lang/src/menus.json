@@ -1,279 +1,334 @@
 {
     "activity": {
         "pl": "Aktywność",
-        "en": "Activity"
+        "en": "Activity",
+        "it": "Attività"
     },
     "admin_panel": {
         "pl": "Panel administracyjny",
-        "en": "Admin panel"
+        "en": "Admin panel",
+        "it": "Pannello amministratore"
     },
     "campaigns": {
         "create": {
             "pl": "Tworzenie nowej kampanii pomiarowej",
-            "en": "Create campaign"
+            "en": "Create campaign",
+            "it": "Crea campagna"
         },
         "edit": {
             "pl": "Edycja kampanii",
-            "en": "Edit campaign"
+            "en": "Edit campaign",
+            "it": "Modifica campagna"
         },
         "index": {
             "pl": "Kampanie Pomiarowe",
-            "en": "Campaigns"
+            "en": "Campaigns",
+            "it": "Campagne"
         }
     },
     "categories": {
         "create": {
             "pl": "Tworzenie kategorii MBO",
-            "en": "Create objective category"
+            "en": "Create objective category",
+            "it": "Crea categoria obiettivo"
         },
         "edit": {
             "pl": "Modyfikacja kategorii MBO",
-            "en": "Edit objective category"
+            "en": "Edit objective category",
+            "it": "Modifica categoria obiettivo"
         },
         "index": {
             "pl": "Kategorie celów",
-            "en": "Objective categories"
+            "en": "Objective categories",
+            "it": "Categorie obiettivi"
         }
     },
     "dashboard": {
         "pl": "Pulpit",
-        "en": "Dashboard"
+        "en": "Dashboard",
+        "it": "Dashboard"
     },
     "edit_profile": {
         "pl": "Edytuj profil",
-        "en": "Edit profile"
+        "en": "Edit profile",
+        "it": "Edit profile"
     },
     "forgot_password": {
         "pl": "Przypomnij hasło",
-        "en": "Forgot password"
+        "en": "Forgot password",
+        "it": "Password dimenticata"
     },
     "impersonated_by": {
         "pl": ":name podszywa się",
-        "en": ":name impersonated"
+        "en": ":name impersonated",
+        "it": ":name impersonated"
     },
     "impersonation_leave": {
         "pl": "Wyloguj się jako",
-        "en": "Logout as"
+        "en": "Logout as",
+        "it": "Logout as"
     },
     "info": {
         "profile": {
             "logs": {
                 "pl": "Strona przedstawia całą Twoją aktywność, jaka jest mierzona przez system.",
-                "en": "This page displays your entire activity, which is monitored by the system."
+                "en": "This page displays your entire activity, which is monitored by the system.",
+                "it": "This pagina displays your entire activity, which is monitored by il system."
             }
         }
     },
     "login": {
         "pl": "Zaloguj się",
-        "en": "Login"
+        "en": "Login",
+        "it": "Accesso"
     },
     "logout": {
         "pl": "Wyloguj",
-        "en": "Logout"
+        "en": "Logout",
+        "it": "Uscita"
     },
     "mbo": {
         "index": {
             "pl": "Zarządzanie celami",
-            "en": "Manage objectives"
+            "en": "Manage objectives",
+            "it": "Manage objectives"
         }
     },
     "my_objectives": {
         "index": {
             "pl": "Moje cele",
-            "en": "My objectives"
+            "en": "My objectives",
+            "it": "I miei obiettivi"
         }
     },
     "my_results": {
         "pl": "Moje wyniki",
-        "en": "My results"
+        "en": "My results",
+        "it": "My risultati"
     },
     "notifications": {
         "index": {
             "pl": "Powiadomienia",
-            "en": "Notifications"
+            "en": "Notifications",
+            "it": "Notifiche"
         }
     },
     "objectives": {
         "create": {
             "pl": "Tworzenie celu",
-            "en": "Create objective"
+            "en": "Create objective",
+            "it": "Crea obiettivo"
         },
         "edit": {
             "pl": "Modyfikacja celu",
-            "en": "Edit objective"
+            "en": "Edit objective",
+            "it": "Modifica obiettivo"
         },
         "index": {
             "pl": "Cele",
-            "en": "Objectives"
+            "en": "Objectives",
+            "it": "Obiettivi"
         }
     },
     "preferences": {
         "pl": "Preferencje",
-        "en": "Preferences"
+        "en": "Preferences",
+        "it": "Preferences"
     },
     "profile": {
         "edit": {
             "pl": "Edytuj",
-            "en": "Edit"
+            "en": "Edit",
+            "it": "Modifica"
         },
         "index": {
             "pl": "Profil",
-            "en": "Profile"
+            "en": "Profile",
+            "it": "Profilo"
         },
         "logs": {
             "pl": "Twoja aktywność",
-            "en": "Your activity"
+            "en": "Your activity",
+            "it": "Your activity"
         },
         "personal_data": {
             "pl": "Dane personalne",
-            "en": "Personal data"
+            "en": "Personal data",
+            "it": "Personal data"
         },
         "reset": {
             "pl": "Reset hasła",
-            "en": "Reset password"
+            "en": "Reset password",
+            "it": "Reimposta password"
         },
         "settings": {
             "pl": "Ustawienia konta",
-            "en": "Account settings"
+            "en": "Account settings",
+            "it": "Account settings"
         }
     },
     "remember_me": {
         "pl": "Zapamiętaj mnie",
-        "en": "Remember me"
+        "en": "Remember me",
+        "it": "Remember me"
     },
     "reports": {
         "index": {
             "pl": "Raporty",
-            "en": "Reports"
+            "en": "Reports",
+            "it": "Reports"
         }
     },
     "settings": {
         "creator": {
             "index": {
                 "pl": "Kreator struktury",
-                "en": "Creator structure"
+                "en": "Creator structure",
+                "it": "Creator structure"
             }
         },
         "general": {
             "index": {
                 "pl": "Główne",
-                "en": "General"
+                "en": "General",
+                "it": "Generali"
             }
         },
         "help": {
             "index": {
                 "pl": "Pomoc",
-                "en": "Help"
+                "en": "Help",
+                "it": "Help"
             }
         },
         "index": {
             "pl": "Ustawienia",
-            "en": "Settings"
+            "en": "Settings",
+            "it": "Impostazioni"
         },
         "integrations": {
             "index": {
                 "pl": "Integracje",
-                "en": "Integrations"
+                "en": "Integrations",
+                "it": "Integrations"
             }
         },
         "logs": {
             "index": {
                 "pl": "Logi",
-                "en": "Logs"
+                "en": "Logs",
+                "it": "Log"
             }
         },
         "modules": {
             "index": {
                 "pl": "Moduły",
-                "en": "Modules"
+                "en": "Modules",
+                "it": "Moduli"
             }
         },
         "notifications": {
             "index": {
                 "pl": "Powiadomienia",
-                "en": "Notifications"
+                "en": "Notifications",
+                "it": "Notifiche"
             }
         },
         "organization": {
             "companies": {
                 "index": {
                     "pl": "Przedsiębiorstwa",
-                    "en": "Companies"
+                    "en": "Companies",
+                    "it": "Companies"
                 }
             },
             "contracts": {
                 "index": {
                     "pl": "Typy kontraktów",
-                    "en": "Contract types"
+                    "en": "Contract types",
+                    "it": "Contract types"
                 }
             },
             "departments": {
                 "index": {
                     "pl": "Działy",
-                    "en": "Departments"
+                    "en": "Departments",
+                    "it": "Departments"
                 }
             },
             "index": {
                 "pl": "Struktura organizacyjna",
-                "en": "Organization structure"
+                "en": "Organization structure",
+                "it": "Organization structure"
             },
             "positions": {
                 "index": {
                     "pl": "Stanowiska",
-                    "en": "Positions"
+                    "en": "Positions",
+                    "it": "Positions"
                 }
             }
         },
         "server": {
             "index": {
                 "pl": "Serwer",
-                "en": "Server"
+                "en": "Server",
+                "it": "Server"
             }
         },
         "teams": {
             "index": {
                 "pl": "Zespoły",
-                "en": "Teams"
+                "en": "Teams",
+                "it": "Teams"
             }
         }
     },
     "templates": {
         "create": {
             "pl": "Tworzenie szablonu celu",
-            "en": "Create objective template"
+            "en": "Create objective template",
+            "it": "Crea modello obiettivo"
         },
         "edit": {
             "pl": "Modyfikacja szablonu celu",
-            "en": "Edit objective template"
+            "en": "Edit objective template",
+            "it": "Modifica modello obiettivo"
         },
         "index": {
             "pl": "Szablony celów",
-            "en": "Objective templates"
+            "en": "Objective templates",
+            "it": "Modelli obiettivi"
         }
     },
     "users": {
         "create": {
             "pl": "Tworzenie użytkownika",
-            "en": "Create user"
+            "en": "Create user",
+            "it": "Create user"
         },
         "edit": {
             "pl": "Edycja użytkownika",
-            "en": "Edit user"
+            "en": "Edit user",
+            "it": "Edit user"
         },
         "index": {
             "pl": "Użytkownicy",
-            "en": "Users"
+            "en": "Users",
+            "it": "Utenti"
         },
         "show": {
             "pl": "Profil użytkownika",
-            "en": "User profile"
+            "en": "User profile",
+            "it": "Utente profile"
         }
     },
     "password": {
         "change": {
             "index": {
                 "pl": "Zmiana hasła",
-                "en": "Change password"
+                "en": "Change password",
+                "it": "Change password"
             }
         }
     }

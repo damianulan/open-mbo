@@ -13,9 +13,9 @@ use App\Providers\EventServiceProvider;
 use App\Providers\GateServiceProvider;
 use App\Providers\MacroServiceProvider;
 use App\Providers\RouteServiceProvider;
-use App\Providers\TelescopeServiceProvider;
 use App\Support\Http\ResponseAjax;
 use App\Support\UI\Page\PageBuilder;
+use App\Support\UI\Page\PageServiceProvider;
 use App\Support\UI\Theme\Theme;
 use Barryvdh\Debugbar\ServiceProvider;
 use Illuminate\Auth\AuthServiceProvider;
@@ -157,6 +157,7 @@ return [
     'available_locales' => [
         'pl',
         'en',
+        'it',
     ],
 
     'date_format' => env('DATEFORMAT', 'Y-m-d'),
@@ -273,7 +274,6 @@ return [
         Spatie\TranslationLoader\TranslationServiceProvider::class,
         ValidationServiceProvider::class,
         ViewServiceProvider::class,
-        TelescopeServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -299,6 +299,7 @@ return [
         \App\Providers\NotificationServiceProvider::class,
         GateServiceProvider::class,
         ImpersonateServiceProvider::class,
+        PageServiceProvider::class,
     ],
 
     /*
