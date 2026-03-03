@@ -31,11 +31,13 @@ function sitename(): string
 /**
  * Returns currently logged user instance or empty instance of User model.
  * Do not call in class constructors.
+ *
+ * @param  null|mixed  $user_id
  */
-function user(?string $user_id = null): User
+function user($user_id = null): ?User
 {
-    $user = new User();
-    if (is_null($user_id)) {
+    $user = null;
+    if (is_null($user_id) || ( ! is_string($user_id) && ! is_int($user_id))) {
         if (Auth::check()) {
             $user = Auth::user();
         }
