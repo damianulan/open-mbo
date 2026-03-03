@@ -9,6 +9,7 @@ use App\Support\UI\Theme\Theme;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
+use Throwable;
 
 class PageBuilder implements PageContract
 {
@@ -42,10 +43,12 @@ class PageBuilder implements PageContract
     {
         try {
             $contract = app(NavigationContract::class);
+
             return $contract;
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
 
         }
+
         return null;
     }
 

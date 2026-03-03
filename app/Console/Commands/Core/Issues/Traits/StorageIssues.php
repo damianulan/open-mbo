@@ -4,7 +4,6 @@ namespace App\Console\Commands\Core\Issues\Traits;
 
 use Exception;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
 
 trait StorageIssues
 {
@@ -52,7 +51,7 @@ trait StorageIssues
     {
         $config = $this->getConfigContents();
         $config['changelog'][] = $message;
-        if($close) {
+        if ($close) {
             $config['issue'] = '';
         }
         File::put($this->getIssuePath(), json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
