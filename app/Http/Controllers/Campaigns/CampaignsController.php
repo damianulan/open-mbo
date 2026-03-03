@@ -49,6 +49,7 @@ class CampaignsController extends AppController
         $this->authorize('create', Campaign::class);
 
         $redirect = null;
+        $service = null;
         try {
             $form->validate();
             $service = CreateOrUpdate::boot(request: $request)->execute();
@@ -62,7 +63,10 @@ class CampaignsController extends AppController
             $this->e = $e;
         }
 
-        return $this->returnResponseRedirect($redirect, $service->getErrors() ?? __('alerts.campaigns.error.create'));
+        $errors = $service?->getErrors();
+        $message = is_array($errors) ? implode(' | ', $errors) : $errors;
+
+        return $this->returnResponseRedirect($redirect, $message ?? __('alerts.campaigns.error.create'));
     }
 
     /**
@@ -76,11 +80,10 @@ class CampaignsController extends AppController
         $this->authorize('view', $campaign);
 
         $this->logShow($campaign);
-        $header = $campaign->name . ' [' . $campaign->period . ']';
+        $this->setPagetitle($campaign->name . ' [' . $campaign->period . ']');
 
         return view('pages.mbo.campaigns.show', [
             'campaign' => $campaign,
-            'pagetitle' => $header,
         ]);
     }
 
@@ -100,6 +103,7 @@ class CampaignsController extends AppController
         $this->authorize('update', $campaign);
 
         $redirect = null;
+        $service = null;
         try {
             $form->validate();
 
@@ -114,7 +118,10 @@ class CampaignsController extends AppController
             $this->e = $e;
         }
 
-        return $this->returnResponseRedirect($redirect, 'error' ?? __('alerts.campaigns.error.edit', ['name' => $campaign->name]));
+        $errors = $service?->getErrors();
+        $message = is_array($errors) ? implode(' | ', $errors) : $errors;
+
+        return $this->returnResponseRedirect($redirect, $message ?? __('alerts.campaigns.error.edit', ['name' => $campaign->name]));
     }
 
     public function terminate(Request $request, $id)

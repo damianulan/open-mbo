@@ -14,9 +14,10 @@ class ObjectiveTemplateController extends MBOController
      */
     public function index(): Renderable
     {
+        $this->addPageNav();
+
         return view('pages.mbo.index', [
             'objectives' => ObjectiveTemplate::paginate(30),
-            'nav' => $this->nav(),
         ]);
     }
 

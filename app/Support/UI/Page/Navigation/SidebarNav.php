@@ -2,27 +2,30 @@
 
 namespace App\Support\UI\Page\Navigation;
 
+use App\Support\UI\Page\Navigation\Contracts\NavbarContract;
+use App\Support\UI\Page\Navigation\Traits\HasNavItems;
 use Illuminate\Support\Collection;
 
-class MenubarMenu
+class SidebarNav implements NavbarContract
 {
-    public $id;
+    use HasNavItems;
 
-    public Collection $items;
+    public $id = 'sidebar';
+
+    public $sitename;
 
     public $classes = [];
 
-    public static function boot(string $id, array $items = []): self
+    public static function boot(string $sitename, array $items = []): self
     {
         $instance = new self();
-        $instance->id = $id;
+        $instance->sitename = $sitename;
         $instance->items = new Collection();
 
         if ( ! empty($items)) {
             foreach ($items as $item) {
                 if ($item instanceof MenuItem) {
                     if ($item->id && $item->isVisible()) {
-                        $item->useStrictRoutes();
                         $item->generateParentRoute();
                         $instance->items->push($item);
                     }
@@ -42,20 +45,15 @@ class MenubarMenu
         return $this;
     }
 
-    public function isNotEmpty(): bool
+    public function isCollapsed(): bool
     {
-        return $this->items && $this->items->isNotEmpty();
+        return isset($_COOKIE['menu-collapsed']) && true === (bool) $_COOKIE['menu-collapsed'];
     }
 
-    public function isEmpty(): bool
+    public function render(): string
     {
-        return ! $this->items || $this->items->isEmpty();
-    }
-
-    public function render()
-    {
-        return view('components.menus.menubar', [
-            'menubar' => $this,
+        return view('components.menus.sidebar', [
+            'sidebar' => $this,
         ])->render();
     }
 }

@@ -1,8 +1,6 @@
 @extends('layouts.portal.master')
 @section('content')
 
-{!! $nav->render() !!}
-
 <div class="content-card pt-3">
 
     <div class="row">

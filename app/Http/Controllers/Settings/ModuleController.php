@@ -23,6 +23,8 @@ class ModuleController extends SettingsController
         if ($request->user()->cannot(PermissionsLib::SETTINGS_MODULES)) {
             unauthorized();
         }
+        $this->addPageNav();
+
         $modules = ModuleManager::getModules();
         if (is_null($module) || ! array_key_exists($module, $modules)) {
             $module = 'users';
@@ -38,7 +40,6 @@ class ModuleController extends SettingsController
             'usersForm' => UsersForm::bootWithAttributes($userModel->toArray())->getDefinition(),
             'mboForm' => MboForm::bootWithAttributes($mboModel->toArray())->getDefinition(),
             'notificationsForm' => NotificationsForm::bootWithAttributes($notificationModel->toArray())->getDefinition(),
-            'nav' => $this->nav(),
         ]);
     }
 

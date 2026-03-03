@@ -5,23 +5,15 @@ namespace App\Http\Controllers;
 use App\Enums\Core\MessageType;
 use App\Exceptions\AppException;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Throwable;
 
-class AppController extends BaseController
+class AppController extends Controller
 {
-    use AuthorizesRequests;
-    use DispatchesJobs;
-    use ValidatesRequests;
-
     protected ?Throwable $e = null;
 
     protected function logShow(?Model $model = null): void

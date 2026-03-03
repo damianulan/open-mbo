@@ -3,17 +3,13 @@
 namespace App\Http\Controllers\Objectives;
 
 use App\Http\Controllers\AppController;
-use App\Support\UI\Page\MenuBuilder;
-use App\Support\UI\Page\Navigation\MenubarMenu;
 use App\Support\UI\Page\Navigation\MenuItem;
 
 class MBOController extends AppController
 {
-    protected MenubarMenu $nav;
-
-    public function nav(): MenubarMenu
+    protected function addPageNav(): void
     {
-        return MenuBuilder::bootMenubar('mbo', [
+        $this->setPageNav('mbo', [
             MenuItem::make('objectives')
                 ->setTitle(__('menus.objectives.index'))
                 ->setRoute('objectives.index'),

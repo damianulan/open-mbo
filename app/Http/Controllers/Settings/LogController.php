@@ -9,9 +9,10 @@ class LogController extends SettingsController
 {
     public function index(LogsDataTable $dataTable)
     {
+        $this->addPageNav();
+
         return $dataTable->render('pages.settings.logs', [
             'table' => $dataTable,
-            'nav' => $this->nav(),
         ]);
     }
 

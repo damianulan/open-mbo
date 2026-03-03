@@ -3,11 +3,14 @@
 namespace App\Support\UI\Page;
 
 use App\Settings\GeneralSettings;
-use App\Support\UI\Page\Navigation\SidebarMenu;
+use App\Support\UI\Page\Contracts\PageContract;
+use App\Support\UI\Page\Navigation\Contracts\NavigationContract;
+use App\Support\UI\Theme\Theme;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
-class PageBuilder
+class PageBuilder implements PageContract
 {
     public ?string $routename = null;
 
@@ -15,54 +18,81 @@ class PageBuilder
 
     public string $sitename = '';
 
-    public string $theme = '';
+    public Theme $theme;
 
     public string $locale = '';
 
     public ?string $logo = null;
 
-    public bool $topbar_header = true;
-
-    public string $sidebar_collapsed = '';
-
     public string $title = '';
 
-    public ?SidebarMenu $sidebar = null;
-
-    public function __construct(?string $pagetitle = null, bool $sidebar = true, bool $topbar_header = true)
+    public function __construct()
     {
         $this->routename = Route::currentRouteName();
 
-        $this->info = null;
+        $this->sitename = app(GeneralSettings::class)->site_name;
+        $this->theme = app(Theme::class);
+        $this->locale = app(GeneralSettings::class)->locale ?? config('app.fallback_locale');
+        $this->logo = app(GeneralSettings::class)->site_logo;
+
+        $this->assignPageTitle($this->routename);
+    }
+
+    public function getNavigation(): ?NavigationContract
+    {
+        try {
+            $contract = app(NavigationContract::class);
+            return $contract;
+        } catch (\Throwable $th) {
+
+        }
+        return null;
+    }
+
+    public function getSiteTitle(): string
+    {
+        return $this->sitename . ' - ' . $this->getPageTitle();
+    }
+
+    public function getThemeName(): string
+    {
+        return $this->theme?->current ?: '';
+    }
+
+    public function getThemePath(): string
+    {
+        return asset('themes/' . $this->getThemeName() . '/app.min.css');
+    }
+
+    public function getFaviconPath(): string
+    {
+        return asset('images/resources/favicon.ico');
+    }
+
+    public function getMainContentClasses(): string
+    {
+        $classes = [];
+        if ($this->getNavigation()?->hasSidebar()) {
+            $classes[] = 'content';
+            if ($this->getNavigation()?->isSidebarCollapsed()) {
+                $classes[] = 'collapsed';
+            }
+
+        }
+
+        return implode(' ', $classes);
+    }
+
+    public function getPageTitle(): string
+    {
+        return Session::pull('pagetitle', $this->title);
+    }
+
+    private function assignPageTitle(?string $routename): void
+    {
+        $this->title = Lang::hasForLocale('menus.' . $routename) ? __('menus.' . $routename) : '';
         if (Lang::hasForLocale('menus.info.' . $this->routename)) {
             $this->info = __('menus.info.' . $this->routename);
         }
-
-        $this->sitename = app(GeneralSettings::class)->site_name;
-        $this->theme = current_theme();
-        $this->locale = app(GeneralSettings::class)->locale;
-        $this->logo = app(GeneralSettings::class)->site_logo;
-        $this->topbar_header = $topbar_header;
-
-        if (isset($_COOKIE['menu-collapsed']) && true === (bool) $_COOKIE['menu-collapsed']) {
-            $this->sidebar_collapsed = 'menu-collapsed';
-        }
-
-        if (empty($pagetitle)) {
-            $this->title = $this->assignPageTitle($this->routename);
-        } else {
-            $this->title = $pagetitle;
-        }
-
-        if ($sidebar) {
-            $this->sidebar = MenuBuilder::bootSidebar($this->sitename)
-                ->addClass($this->sidebar_collapsed);
-
-        }
-    }
-
-    private function assignPageTitle(?string $routename): string
-    {
-        return Lang::hasForLocale('menus.' . $routename) ? __('menus.' . $routename) : '';
     }
 }

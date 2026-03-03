@@ -50,7 +50,7 @@ Route::middleware(['web', 'auth.base'])->group(function (): void {
     Route::post('/password/change/update', [ResetPasswordController::class, 'forceReset'])->name('password.change.update');
 });
 
-Route::middleware(['web', 'auth', 'maintenance'])->group(function (): void {
+Route::middleware(['web', 'auth', 'maintenance', 'navigation'])->group(function (): void {
     Route::get(RouteServiceProvider::HOME, [HomeController::class, 'index'])->name('dashboard');
     Livewire::setUpdateRoute(fn ($handle) => Route::post('/livewire/update', $handle));
     Route::get('health', HealthCheckResultsController::class);
@@ -83,6 +83,9 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function (): void {
 
     Route::prefix('profile')->name('profile.')->group(function (): void {
         Route::get('/', [ProfileController::class, 'index'])->name('index');
+        Route::post('/', [ProfileController::class, 'update'])->name('update');
+        Route::get('/preferences', [ProfileController::class, 'preferences'])->name('preferences');
+        Route::post('/preferences', [ProfileController::class, 'updatePreferences'])->name('preferences.update');
         Route::get('/activity', [LogController::class, 'myLogs'])->name('logs');
     });
 
@@ -132,6 +135,7 @@ Route::middleware(['web', 'auth', 'maintenance'])->group(function (): void {
                 Route::get('create', [CompanyController::class, 'create'])->name('create');
                 Route::get('edit/{company}', [CompanyController::class, 'edit'])->name('edit');
                 Route::put('{company}', [CompanyController::class, 'update'])->name('update');
+                Route::get('delete/{company}', [CompanyController::class, 'delete'])->name('delete');
             });
         });
     });

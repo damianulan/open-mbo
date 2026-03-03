@@ -2,28 +2,18 @@
     <div class="page-menu">
         <ul class="nav nav-pills-horizontal">
             <li class="nav-item">
-                <a class="nav-link active">
+                <a class="nav-link {{ request()->routeIs('profile.index') ? 'active' : '' }}" href="{{ route('profile.index') }}">
                     {{ __('menus.profile.edit') }}
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link">
-                    {{ __('menus.profile.reset') }}
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link">
-                    {{ __('menus.profile.personal_data') }}
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link">
-                    {{ __('menus.profile.settings') }}
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link">
+                <a class="nav-link {{ request()->routeIs('profile.preferences') ? 'active' : '' }}" href="{{ route('profile.preferences') }}">
                     {{ __('menus.preferences') }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('profile.logs') ? 'active' : '' }}" href="{{ route('profile.logs') }}">
+                    {{ __('menus.profile.logs') }}
                 </a>
             </li>
         </ul>
