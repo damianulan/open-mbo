@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Builder as HtmlBuilder;
 
 class TeamsDataTable extends DataTableService
 {
-    public function DataTableBuilder(QueryBuilder $query): DataTableBuilder
+    public function DataTable(QueryBuilder $query): DataTableBuilder
     {
         return (new DataTableBuilder($query))
             ->addColumn('leaders', function (Team $team): string {

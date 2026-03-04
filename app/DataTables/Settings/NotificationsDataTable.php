@@ -19,7 +19,7 @@ class NotificationsDataTable extends DataTableService
      *
      * @param  QueryBuilder  $query  Results from query() method.
      */
-    public function DataTableBuilder(QueryBuilder $query): DataTableBuilder
+    public function DataTable(QueryBuilder $query): DataTableBuilder
     {
 
         return (new DataTableBuilder($query))
