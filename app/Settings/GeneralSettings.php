@@ -13,7 +13,7 @@ class GeneralSettings extends BaseSettings
 
     public string $theme = 'default';
 
-    public bool $debug = false;
+    public bool $debug = true;
 
     public bool $debugbar = false;
 

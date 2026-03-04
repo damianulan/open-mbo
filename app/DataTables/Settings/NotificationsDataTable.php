@@ -3,12 +3,12 @@
 namespace App\DataTables\Settings;
 
 use App\Support\DataTables\Column;
-use App\Support\DataTables\CustomDataTable;
+use App\Support\DataTables\Services\DataTableService;
 use App\Support\Notifications\Models\Notification;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Yajra\DataTables\EloquentDataTable;
+use App\Support\DataTables\DataTableBuilder;
 
-class NotificationsDataTable extends CustomDataTable
+class NotificationsDataTable extends DataTableService
 {
     protected $id = 'notifications_table';
 
@@ -19,10 +19,10 @@ class NotificationsDataTable extends CustomDataTable
      *
      * @param  QueryBuilder  $query  Results from query() method.
      */
-    public function dataTable(QueryBuilder $query): EloquentDataTable
+    public function DataTableBuilder(QueryBuilder $query): DataTableBuilder
     {
 
-        return (new EloquentDataTable($query))
+        return (new DataTableBuilder($query))
             ->editColumn('system', fn ($data) => $data->system ? __('globals.yes') : __('globals.no'))
             ->editColumn('email', fn ($data) => $data->email ? __('globals.yes') : __('globals.no'))
             ->editColumn('event', fn ($data) => $data->event ? __('globals.yes') : __('globals.no'))

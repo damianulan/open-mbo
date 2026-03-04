@@ -5,13 +5,13 @@ namespace App\DataTables\Users;
 use App\Enums\Users\UserStatus;
 use App\Models\Core\User;
 use App\Support\DataTables\Column;
-use App\Support\DataTables\CustomDataTable;
+use App\Support\DataTables\Services\DataTableService;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Yajra\DataTables\EloquentDataTable;
+use App\Support\DataTables\DataTableBuilder;
 
-class UsersDataTable extends CustomDataTable
+class UsersDataTable extends DataTableService
 {
     protected $id = 'users_table';
 
@@ -24,9 +24,9 @@ class UsersDataTable extends CustomDataTable
      *
      * @param  QueryBuilder  $query  Results from query() method.
      */
-    public function dataTable(QueryBuilder $query): EloquentDataTable
+    public function DataTableBuilder(QueryBuilder $query): DataTableBuilder
     {
-        return (new EloquentDataTable($query))
+        return (new DataTableBuilder($query))
             ->addColumn('fullname', fn ($data) => $data->name)
             ->addColumn('name', fn ($data) => view('components.datatables.username_link', [
                 'data' => $data,

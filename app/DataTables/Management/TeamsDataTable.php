@@ -4,17 +4,17 @@ namespace App\DataTables\Management;
 
 use App\Models\Business\Team;
 use App\Support\DataTables\Column;
+use App\Support\DataTables\Services\DataTableService;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Carbon;
-use Yajra\DataTables\EloquentDataTable;
+use App\Support\DataTables\DataTableBuilder;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Services\DataTable;
 
-class TeamsDataTable extends DataTable
+class TeamsDataTable extends DataTableService
 {
-    public function dataTable(QueryBuilder $query): EloquentDataTable
+    public function DataTableBuilder(QueryBuilder $query): DataTableBuilder
     {
-        return (new EloquentDataTable($query))
+        return (new DataTableBuilder($query))
             ->addColumn('leaders', function (Team $team): string {
                 $leaders = $team->leaders->pluck('name')->implode(', ');
 

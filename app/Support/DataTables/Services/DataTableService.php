@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Support\DataTables;
+namespace App\Support\DataTables\Services;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Services\DataTable;
 
-class CustomDataTable extends DataTable
+class DataTableService extends DataTable
 {
     protected $id = null;
 

@@ -23,8 +23,8 @@ use App\Http\Controllers\Settings\Organization\TeamController;
 use App\Http\Controllers\Settings\ServerController;
 use App\Http\Controllers\UsersController;
 use App\Providers\RouteServiceProvider;
-use App\Support\DataTables\CustomDataTable;
-use App\Support\DataTables\DataTableController;
+use App\Support\DataTables\Services\DataTableService;
+use App\Support\DataTables\Repositories\DataTableRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Laraverse\Config\Laraverse;
@@ -222,12 +222,12 @@ Route::middleware(['web', 'auth', 'maintenance', 'navigation'])->group(function 
     });
 
     Route::prefix('datatables')->name('datatables.')->group(function (): void {
-        Route::post('/save_columns', [CustomDataTable::class, 'saveColumns'])->name('save_columns');
-        Route::get('/excel/{class}', [DataTableController::class, 'toExcel'])->name('excel');
-        Route::get('/csv/{class}', [DataTableController::class, 'toCsv'])->name('csv');
-        Route::get('/pdf/{class}', [DataTableController::class, 'toPdf'])->name('pdf');
-        Route::get('/json/{class}', [DataTableController::class, 'toJson'])->name('json');
-        Route::get('/print/{class}', [DataTableController::class, 'print'])->name('print');
+        Route::post('/save_columns', [DataTableService::class, 'saveColumns'])->name('save_columns');
+        Route::get('/excel/{class}', [DataTableRepository::class, 'toExcel'])->name('excel');
+        Route::get('/csv/{class}', [DataTableRepository::class, 'toCsv'])->name('csv');
+        Route::get('/pdf/{class}', [DataTableRepository::class, 'toPdf'])->name('pdf');
+        Route::get('/json/{class}', [DataTableRepository::class, 'toJson'])->name('json');
+        Route::get('/print/{class}', [DataTableRepository::class, 'print'])->name('print');
     });
 
     Route::prefix('ajax')->name('ajax.')->group(function (): void {

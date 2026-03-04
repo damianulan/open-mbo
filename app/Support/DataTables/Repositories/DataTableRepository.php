@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Support\DataTables;
+namespace App\Support\DataTables\Repositories;
 
 use Exception;
 use Illuminate\Http\Request;
 
-class DataTableController
+class DataTableRepository
 {
     public function toExcel(Request $request, $class)
     {

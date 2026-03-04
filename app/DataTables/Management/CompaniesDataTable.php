@@ -4,23 +4,23 @@ namespace App\DataTables\Management;
 
 use App\Models\Business\Company;
 use App\Support\DataTables\Column;
+use App\Support\DataTables\Services\DataTableService;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Yajra\DataTables\EloquentDataTable;
+use App\Support\DataTables\DataTableBuilder;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Services\DataTable;
 
-class CompaniesDataTable extends DataTable
+class CompaniesDataTable extends DataTableService
 {
     /**
      * Build the DataTable class.
      *
      * @param  QueryBuilder  $query  Results from query() method.
      */
-    public function dataTable(QueryBuilder $query): EloquentDataTable
+    public function DataTableBuilder(QueryBuilder $query): DataTableBuilder
     {
-        return (new EloquentDataTable($query))
+        return (new DataTableBuilder($query))
             ->addColumn('status', function ($data) {
                 $color = 'primary';
                 $text = 'Aktywny';

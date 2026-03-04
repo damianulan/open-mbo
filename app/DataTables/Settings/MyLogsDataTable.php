@@ -6,7 +6,7 @@ use App\Models\Vendor\ActivityModel;
 use App\Support\DataTables\Column;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Carbon;
-use Yajra\DataTables\EloquentDataTable;
+use App\Support\DataTables\DataTableBuilder;
 
 class MyLogsDataTable extends BaseLogDataTable
 {
@@ -19,10 +19,10 @@ class MyLogsDataTable extends BaseLogDataTable
      *
      * @param  QueryBuilder  $query  Results from query() method.
      */
-    public function dataTable(QueryBuilder $query): EloquentDataTable
+    public function DataTableBuilder(QueryBuilder $query): DataTableBuilder
     {
 
-        return (new EloquentDataTable($query))
+        return (new DataTableBuilder($query))
             ->addColumn('event', fn ($data) => view('components.datatables.badge', [
                 'color' => $this->getEventColor($data->event),
                 'text' => __('logging.events.' . $data->event),
