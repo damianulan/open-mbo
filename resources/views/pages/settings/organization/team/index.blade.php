@@ -3,11 +3,8 @@
 
 <div class="icon-btn-nav">
     <div class="panel-left">
-        <a class="icon-btn" href="{{ route('users.create') }}" data-tippy-content="{{ __('buttons.add') }}">
+        <a class="icon-btn" href="{{ route('settings.organization.team.create') }}" data-tippy-content="{{ __('buttons.add') }}">
             <i class="bi-plus-circle-fill"></i>
-        </a>
-        <a class="icon-btn" href="{{ route('settings.organization.team.index') }}" data-tippy-content="{{ __('menus.settings.teams.index') }}">
-            <i class="bi-people-fill"></i>
         </a>
     </div>
 </div>
@@ -15,13 +12,11 @@
     <div class="row">
         <div class="col-md-12">
             <div class="table-container row">
-                {{ $table->actions() }}
                 {{ $dataTable->table() }}
             </div>
         </div>
     </div>
 </div>
-
 
 @endsection
 @push('scripts')

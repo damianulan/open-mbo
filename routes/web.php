@@ -19,6 +19,7 @@ use App\Http\Controllers\Settings\ModuleController;
 use App\Http\Controllers\Settings\NotificationsController;
 use App\Http\Controllers\Settings\Organization\CompanyController;
 use App\Http\Controllers\Settings\Organization\OrganizationController;
+use App\Http\Controllers\Settings\Organization\TeamController;
 use App\Http\Controllers\Settings\ServerController;
 use App\Http\Controllers\UsersController;
 use App\Providers\RouteServiceProvider;
@@ -136,6 +137,14 @@ Route::middleware(['web', 'auth', 'maintenance', 'navigation'])->group(function 
                 Route::get('edit/{company}', [CompanyController::class, 'edit'])->name('edit');
                 Route::put('{company}', [CompanyController::class, 'update'])->name('update');
                 Route::get('delete/{company}', [CompanyController::class, 'delete'])->name('delete');
+            });
+            Route::prefix('team')->name('team.')->middleware('route.gate:users-teams')->group(function (): void {
+                Route::get('/', [TeamController::class, 'index'])->name('index');
+                Route::post('/', [TeamController::class, 'store'])->name('store');
+                Route::get('create', [TeamController::class, 'create'])->name('create');
+                Route::get('edit/{team}', [TeamController::class, 'edit'])->name('edit');
+                Route::put('{team}', [TeamController::class, 'update'])->name('update');
+                Route::get('delete/{team}', [TeamController::class, 'delete'])->name('delete');
             });
         });
     });

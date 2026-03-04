@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\AppController;
+use App\Support\UI\Page\Navigation\Contracts\HasPageNavigation;
 use App\Support\UI\Page\Navigation\MenuItem;
 
 class SettingsController extends AppController
 {
+    use HasPageNavigation;
+
     public function addPageNav(): void
     {
         $this->setPageNav('settings', [
