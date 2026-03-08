@@ -2,12 +2,15 @@
 
 namespace App\Console\Commands\Core;
 
+use App\Console\Commands\Core\Issues\Traits\StorageIssues;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class AddChangelogNotes extends Command
 {
+    use StorageIssues;
+
     protected $signature = 'changelog:add
                             {version : The version number (e.g. 1.2.0)}
                             {count? : Optional number of last commits}';
@@ -110,7 +113,7 @@ class AddChangelogNotes extends Command
     {
         $output = [];
         foreach ($commits as $commit) {
-            $wordCount = count(array_filter(explode(' ', $commit), fn ($word) => strlen($word) > 0 && !in_array($word, ['fix', 'fix:', 'fixes', 'fixes:', 'fixing', 'fixing:', '-'])));
+            $wordCount = count(array_filter(explode(' ', $commit), fn ($word) => Str::length($word) > 0 && Str::startsWith($word, array_map(fn($type) => "{$type}(", $this->typeMap)) && !in_array($word, ['fix', 'fix:', 'fixes', 'fixes:', 'fixing', 'fixing:', '-'])));
             if ($wordCount > 1) {
                 $key = Str::slug($commit);
                 $output[$key] = $commit;
@@ -118,6 +121,6 @@ class AddChangelogNotes extends Command
 
         }
 
-        return $output;
+        return array_values($output);
     }
 }

@@ -14,7 +14,7 @@ class IssueOpen extends Command
      *
      * @var string
      */
-    protected $signature = 'issue:open {issue}';
+    protected $signature = 'issue:open';
 
     /**
      * The console command description.
@@ -28,7 +28,14 @@ class IssueOpen extends Command
      */
     public function handle()
     {
-        $issue = $this->putIssueConfig($this->argument('issue'));
+        $id = $this->ask("What is the issue ID?");
+        $issue = $this->ask("What is the issue title?");
+        $type = $this->ask("What is the issue type? (bug / feature)");
+        $this->info("Issue ID: {$id}");
+        $this->info("Issue title: {$issue}");
+        $this->info("Issue type: {$type}");
+
+        $issue = $this->putIssueConfig($id, $issue, $type);
         $this->info("Issue registered: {$issue}");
 
         return true;
