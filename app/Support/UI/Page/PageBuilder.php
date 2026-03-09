@@ -62,6 +62,11 @@ class PageBuilder implements PageContract
         return $this->theme?->current ?: '';
     }
 
+    public function getThemeMode(): string
+    {
+        return $this->theme?->mode ?: 'light';
+    }
+
     public function getThemePath(): string
     {
         return asset('themes/' . $this->getThemeName() . '/app.min.css');
