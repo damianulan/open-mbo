@@ -64,7 +64,7 @@ class IssuePush extends Command
                     $result = Process::run('git push');
                     $this->line($result->output());
 
-                    $this->registerCommitMessage($issue, $close);
+                    //$this->registerCommitMessage($issue, $close);
                 } else {
                     $this->info('Aborted.');
                 }

@@ -11,7 +11,7 @@ class AddChangelogNotes extends Command
 {
     use StorageIssues;
 
-    protected $signature = 'changelog:add
+    protected $signature = 'changelog:publish
                             {version : The version number (e.g. 1.2.0)}
                             {count? : Optional number of last commits}';
 
