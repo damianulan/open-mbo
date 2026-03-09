@@ -18,10 +18,10 @@ return [
     /*
      * Html builder script template.
      */
-    'script' => 'datatables::script',
+    'script' => 'vendor.datatables.script',
 
     /*
      * Html builder script template for DataTables Editor integration.
      */
-    'editor' => 'datatables::editor',
+    'editor' => 'vendor.datatables.editor',
 ];

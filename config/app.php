@@ -13,6 +13,7 @@ use App\Providers\EventServiceProvider;
 use App\Providers\GateServiceProvider;
 use App\Providers\MacroServiceProvider;
 use App\Providers\RouteServiceProvider;
+use App\Support\Filters\Providers\FiltersServiceProvider;
 use App\Support\Http\ResponseAjax;
 use App\Support\UI\Page\PageBuilder;
 use App\Support\UI\Page\PageServiceProvider;
@@ -300,6 +301,7 @@ return [
         GateServiceProvider::class,
         ImpersonateServiceProvider::class,
         PageServiceProvider::class,
+        FiltersServiceProvider::class,
     ],
 
     /*

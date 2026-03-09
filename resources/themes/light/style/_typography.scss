@@ -107,7 +107,7 @@ i.bi-3 {
     font-size: 1.1rem;
 }
 
-.content a i.bi {
+.content a:not(.btn-primary) i.bi {
     color: var(--mbo-primary);
 
     &:hover {
