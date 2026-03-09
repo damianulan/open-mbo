@@ -122,7 +122,7 @@ $.warning = function (text, title_input = null, _callback = null) {
 
     swal_alert(text, title, _callback, "warning");
 };
-$.notice = function (text, title_input = null, _callback = null) {
+$.info = function (text, title_input = null, _callback = null) {
     var title = alert_success;
     if (title_input) {
         title = title_input;

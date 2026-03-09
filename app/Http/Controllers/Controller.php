@@ -18,6 +18,6 @@ class Controller extends BaseController
 
     protected function setPagetitle(string $title): void
     {
-        Session::flash('pagetitle', $title);
+        app('page')->setPagetitle($title);
     }
 }
