@@ -4,14 +4,19 @@ namespace App\DataTables\Management;
 
 use App\Models\Business\Team;
 use App\Support\DataTables\Column;
+use App\Support\DataTables\DataTableBuilder;
 use App\Support\DataTables\Services\DataTableService;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Carbon;
-use App\Support\DataTables\DataTableBuilder;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
 
 class TeamsDataTable extends DataTableService
 {
+    protected $id = 'teams_table';
+
+    protected $orderBy = 'created_at';
+
+    protected $orderByDir = 'desc';
+
     public function DataTable(QueryBuilder $query): DataTableBuilder
     {
         return (new DataTableBuilder($query))
@@ -35,45 +40,31 @@ class TeamsDataTable extends DataTableService
             ->withCount('users');
     }
 
-    public function html(): HtmlBuilder
-    {
-        return $this->builder()
-            ->parameters([
-                'language' => [
-                    'url' => asset('themes/vendors/datatables/pl.json'),
-                ],
-                'responsive' => true,
-                'buttons' => [
-                    'csv',
-                ],
-                'lengthMenu' => [
-                    20,
-                    50,
-                    100,
-                    200,
-                ],
-            ])
-            ->setTableId('teams-table')
-            ->columns($this->getColumns())
-            ->minifiedAjax()
-            ->processing(true)
-            ->orderBy(0);
-    }
-
-    public function getColumns(): array
+    protected function defaultColumns(): array
     {
         return [
-            Column::make('name')
+            'name',
+            'leaders',
+            'users_count',
+            'created_at',
+            'action',
+        ];
+    }
+
+    protected function availableColumns(): array
+    {
+        return [
+            'name' => Column::make('name')
                 ->title(__('forms.teams.name')),
-            Column::computed('leaders')
+            'leaders' => Column::computed('leaders')
                 ->title(__('forms.teams.leaders')),
-            Column::computed('users_count')
+            'users_count' => Column::computed('users_count')
                 ->title(__('forms.teams.users_count')),
-            Column::make('created_at')
+            'created_at' => Column::make('created_at')
                 ->title(__('fields.created_at')),
-            Column::make('updated_at')
+            'updated_at' => Column::make('updated_at')
                 ->title(__('fields.updated_at')),
-            Column::computed('action')
+            'action' => Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
                 ->addClass('action-btns')

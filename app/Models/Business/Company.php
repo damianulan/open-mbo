@@ -95,7 +95,7 @@ class Company extends BaseModel
         'shortname',
         'description',
         'logo',
-        'taxpayerid',
+        'taxpayerid', // NIP
         'founded_at',
     ];
 

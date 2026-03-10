@@ -15,7 +15,9 @@ class TeamController extends SettingsController
     {
         $this->addPageNav();
 
-        return $dataTable->render('pages.settings.organization.team.index');
+        return $dataTable->render('pages.settings.organization.team.index', [
+            'table' => $dataTable,
+        ]);
     }
 
     public function create(Request $request, TeamEditForm $form)

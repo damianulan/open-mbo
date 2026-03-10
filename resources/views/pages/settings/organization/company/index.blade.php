@@ -12,6 +12,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="table-container row">
+                {{ $table->actions() }}
                 {{ $dataTable->table() }}
             </div>
         </div>
