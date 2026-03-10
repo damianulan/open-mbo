@@ -6,9 +6,13 @@
     "herd_mcp": false,
     "mcp": true,
     "nightwatch_mcp": false,
+    "packages": [
+        "spatie/boost-spatie-guidelines"
+    ],
     "sail": false,
     "skills": [
         "livewire-development",
-        "pest-testing"
+        "pest-testing",
+        "spatie-laravel-php-standards"
     ]
 }
