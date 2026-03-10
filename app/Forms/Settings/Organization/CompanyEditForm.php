@@ -26,7 +26,7 @@ class CompanyEditForm extends Form
             ->add(FormComponent::text('shortname', $this->model)->label(__('forms.companies.shortname')))
             ->add(FormComponent::text('taxpayerid', $this->model)->label(__('forms.companies.taxpayerid')))
             ->add(FormComponent::date('founded_at', $this->model)->label(__('forms.companies.founded_at')))
-            ->add(FormComponent::textarea('description', $this->model)->label(__('forms.companies.description')))
+            ->add(FormComponent::container('description', $this->model)->label(__('forms.companies.description'))->class('quill-default')->purifyValue())
             ->addSubmit();
     }
 
@@ -46,7 +46,7 @@ class CompanyEditForm extends Form
             'shortname' => 'required|max:128|unique:companies,shortname,' . $companyId . ',id',
             'taxpayerid' => 'nullable|max:255',
             'founded_at' => 'nullable|date',
-            'description' => 'nullable|string',
+            'description' => 'max:1000|nullable',
         ];
     }
 }

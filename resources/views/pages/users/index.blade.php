@@ -6,7 +6,7 @@
         <a class="icon-btn" href="{{ route('users.create') }}" data-tippy-content="{{ __('buttons.add') }}">
             <i class="bi-plus-circle-fill"></i>
         </a>
-        <a class="icon-btn" href="{{ route('settings.organization.team.index') }}" data-tippy-content="{{ __('menus.settings.teams.index') }}">
+        <a class="icon-btn" href="{{ route('settings.organization.team.index') }}" data-tippy-content="{{ __('menus.settings.organization.team.index') }}">
             <i class="bi-people-fill"></i>
         </a>
     </div>

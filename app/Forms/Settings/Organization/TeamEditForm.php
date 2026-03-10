@@ -37,7 +37,7 @@ class TeamEditForm extends Form
                 ->label(__('forms.teams.leaders')))
             ->add(FormComponent::multiselect('users_ids', $selectedUsers, Dictionary::fromModel(User::class, 'name', 'allActive'))
                 ->label(__('forms.teams.users')))
-            ->add(FormComponent::textarea('description', $this->model)->label(__('forms.teams.description')))
+            ->add(FormComponent::container('description', $this->model)->label(__('forms.teams.description'))->class('quill-default')->purifyValue())
             ->addSubmit();
     }
 
@@ -58,7 +58,7 @@ class TeamEditForm extends Form
             'leaders_ids.*' => 'uuid|exists:users,id',
             'users_ids' => 'nullable|array',
             'users_ids.*' => 'uuid|exists:users,id',
-            'description' => 'nullable|string',
+            'description' => 'max:1000|nullable',
         ];
     }
 }

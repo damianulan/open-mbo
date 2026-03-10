@@ -14,7 +14,7 @@
             <x-tile-button title="{{ __('menus.settings.organization.positions.index') }}" link="#" icon="person-badge-fill"/>
         </div>
         <div class="col-xl-4 col-md-6 col-sm-12 pt-4">
-            <x-tile-button title="{{ __('menus.settings.teams.index') }}" link="{{ route('settings.organization.team.index') }}" icon="people-fill"/>
+            <x-tile-button title="{{ __('menus.settings.organization.team.index') }}" link="{{ route('settings.organization.team.index') }}" icon="people-fill"/>
         </div>
         <div class="col-xl-4 col-md-6 col-sm-12 pt-4">
             <x-tile-button title="{{ __('menus.settings.organization.contracts.index') }}" link="#" icon="clipboard2-fill"/>
