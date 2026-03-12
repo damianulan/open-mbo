@@ -95,6 +95,24 @@
       }
     }
   },
+  "companies": {
+    "info": {
+      "delete": {
+        "pl": "Usunięcie przedsiębiorstwa będzie nieodwracalne.",
+        "en": "Deleting the company is irreversible.",
+        "it": "Deleting the company is irreversible."
+      }
+    }
+  },
+  "contracts": {
+    "info": {
+      "delete": {
+        "pl": "Usunięcie typu kontraktu będzie nieodwracalne.",
+        "en": "Deleting the contract type is irreversible.",
+        "it": "Deleting the contract type is irreversible."
+      }
+    }
+  },
   "datatables": {
     "save_columns": {
       "error": {
@@ -106,6 +124,15 @@
         "pl": "Nie wykryto nowych danych dotyczących wyświetlania kolumn w tabeli. Zmiany nie zostały zapisane.",
         "en": "No new table column display settings were detected. Changes were not saved.",
         "it": "Non sono state rilevate nuove impostazioni di visualizzazione delle colonne della tabella. Le modifiche non sono state salvate."
+      }
+    }
+  },
+  "departments": {
+    "info": {
+      "delete": {
+        "pl": "Usunięcie działu będzie nieodwracalne.",
+        "en": "Deleting the department is irreversible.",
+        "it": "Deleting the department is irreversible."
       }
     }
   },
@@ -246,6 +273,15 @@
         "pl": "Kategoria MBO została pomyślnie zmodyfikowana.",
         "en": "The MBO category was modified successfully.",
         "it": "La categoria MBO è stata modificata con successo."
+      }
+    }
+  },
+  "positions": {
+    "info": {
+      "delete": {
+        "pl": "Usunięcie stanowiska będzie nieodwracalne.",
+        "en": "Deleting the position is irreversible.",
+        "it": "Deleting the position is irreversible."
       }
     }
   },

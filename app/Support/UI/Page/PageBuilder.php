@@ -8,7 +8,6 @@ use App\Support\UI\Page\Navigation\Contracts\NavigationContract;
 use App\Support\UI\Theme\Theme;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
 use Throwable;
 
 class PageBuilder implements PageContract
@@ -99,6 +98,7 @@ class PageBuilder implements PageContract
     public function setPagetitle(string $title): self
     {
         $this->title = $title;
+
         return $this;
     }
 

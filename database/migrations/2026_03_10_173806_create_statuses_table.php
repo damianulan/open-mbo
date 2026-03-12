@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateStatusesTable extends Migration
 {
-    public function up()
+    public function up(): void
     {
-        Schema::create('statuses', function (Blueprint $table) {
+        Schema::create('statuses', function (Blueprint $table): void {
             $table->increments('id');
             $table->string('name');
             $table->text('reason')->nullable();
@@ -17,7 +17,7 @@ class CreateStatusesTable extends Migration
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('statuses');
     }

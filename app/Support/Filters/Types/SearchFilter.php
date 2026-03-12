@@ -20,23 +20,13 @@ class SearchFilter extends BaseFilter implements FilterContract, FilterSearchTyp
 
     public function __construct(?string $key = null, string $label = '', ?callable $queryCallback = null, $value = null)
     {
-        if($key === null) {
+        if (null === $key) {
             $this->setDefaultKey();
         }
 
         $this->loadLabel($label);
         $this->loadValue($value);
         $this->queryCallback = $queryCallback;
-    }
-
-    private function loadValue($value): void
-    {
-        $this->value = $value === null ? Request::input('filters.'.$this->key, null) : $value;
-    }
-
-    private function loadLabel($label): void
-    {
-        $this->label = empty($label) ? $this->label() : $label;
     }
 
     public function getValue(): ?string
@@ -46,11 +36,12 @@ class SearchFilter extends BaseFilter implements FilterContract, FilterSearchTyp
 
     public function getQuery(Builder $query): Builder
     {
-        if($this->queryCallback) {
+        if ($this->queryCallback) {
             $callback = $this->queryCallback;
             $query = $callback($query);
         }
-        return $this->getValue() === null ? $query : $this->query($query);
+
+        return null === $this->getValue() ? $query : $this->query($query);
     }
 
     public function query(Builder $query): Builder
@@ -66,5 +57,15 @@ class SearchFilter extends BaseFilter implements FilterContract, FilterSearchTyp
     public function getLabel(): string
     {
         return $this->label;
+    }
+
+    private function loadValue($value): void
+    {
+        $this->value = null === $value ? Request::input('filters.' . $this->key, null) : $value;
+    }
+
+    private function loadLabel($label): void
+    {
+        $this->label = empty($label) ? $this->label() : $label;
     }
 }

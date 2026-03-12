@@ -3,10 +3,10 @@
 namespace App\DataTables\Settings;
 
 use App\Support\DataTables\Column;
+use App\Support\DataTables\DataTableBuilder;
 use App\Support\DataTables\Services\DataTableService;
 use App\Support\Notifications\Models\Notification;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use App\Support\DataTables\DataTableBuilder;
 
 class NotificationsDataTable extends DataTableService
 {

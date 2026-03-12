@@ -28,9 +28,9 @@ class IssueOpen extends Command
      */
     public function handle()
     {
-        $id = $this->ask("What is the issue ID?");
-        $issue = $this->ask("What is the issue title?");
-        $type = $this->ask("What is the issue type? (bug / feature)");
+        $id = $this->ask('What is the issue ID?');
+        $issue = $this->ask('What is the issue title?');
+        $type = $this->ask('What is the issue type? (bug / feature)');
         $this->info("Issue ID: {$id}");
         $this->info("Issue title: {$issue}");
         $this->info("Issue type: {$type}");

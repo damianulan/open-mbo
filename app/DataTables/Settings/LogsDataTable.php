@@ -4,9 +4,9 @@ namespace App\DataTables\Settings;
 
 use App\Models\Vendor\ActivityModel;
 use App\Support\DataTables\Column;
+use App\Support\DataTables\DataTableBuilder;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Carbon;
-use App\Support\DataTables\DataTableBuilder;
 
 class LogsDataTable extends BaseLogDataTable
 {

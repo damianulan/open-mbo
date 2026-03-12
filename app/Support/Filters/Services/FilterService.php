@@ -5,10 +5,14 @@ namespace App\Support\Filters\Services;
 use App\Support\Filters\Contracts\FilterContract;
 use App\Support\Filters\Factories\FilterFinderFactory;
 use App\Support\Filters\Factories\FilterFormFactory;
+use ArrayIterator;
+use Countable;
 use FormForge\Base\Form;
 use FormForge\FormBuilder;
+use IteratorAggregate;
+use Traversable;
 
-class FilterService implements \Countable, \IteratorAggregate, \Traversable
+class FilterService implements Countable, IteratorAggregate, Traversable
 {
     private array $items = [];
 
@@ -31,11 +35,6 @@ class FilterService implements \Countable, \IteratorAggregate, \Traversable
         return $this->items;
     }
 
-    protected function buildForm(): Form
-    {
-        return FilterFormFactory::make($this);
-    }
-
     public function getFormDefinition(): FormBuilder
     {
         return $this->buildForm()->getDefinition();
@@ -51,9 +50,9 @@ class FilterService implements \Countable, \IteratorAggregate, \Traversable
         return ! $this->isEmpty();
     }
 
-    public function getIterator(): \Traversable
+    public function getIterator(): Traversable
     {
-        return new \ArrayIterator($this->items);
+        return new ArrayIterator($this->items);
     }
 
     public function count(): int
@@ -61,4 +60,8 @@ class FilterService implements \Countable, \IteratorAggregate, \Traversable
         return count($this->items);
     }
 
+    protected function buildForm(): Form
+    {
+        return FilterFormFactory::make($this);
+    }
 }

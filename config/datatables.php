@@ -2,7 +2,6 @@
 
 use Yajra\DataTables\ApiResourceDataTable;
 use Yajra\DataTables\CollectionDataTable;
-use App\Support\DataTables\DataTableBuilder;
 use Yajra\DataTables\QueryDataTable;
 
 return [

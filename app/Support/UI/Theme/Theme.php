@@ -11,9 +11,9 @@ class Theme
 
     public $available;
 
-    protected $images_path;
-
     public $mode;
+
+    protected $images_path;
 
     public function __construct()
     {

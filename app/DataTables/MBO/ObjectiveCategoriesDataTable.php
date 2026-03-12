@@ -4,10 +4,10 @@ namespace App\DataTables\MBO;
 
 use App\Models\MBO\ObjectiveTemplateCategory;
 use App\Support\DataTables\Column;
+use App\Support\DataTables\DataTableBuilder;
 use App\Support\DataTables\Services\DataTableService;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Carbon;
-use App\Support\DataTables\DataTableBuilder;
 
 class ObjectiveCategoriesDataTable extends DataTableService
 {
