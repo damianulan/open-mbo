@@ -5,7 +5,9 @@ namespace App\Providers;
 use App\Support\Notifications\Contracts\NotifiableEvent;
 use App\Support\Notifications\Jobs\NotifyOnEvent;
 use App\Support\Notifications\Models\Notification;
+use Exception;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
@@ -63,6 +65,11 @@ class NotificationServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        try {
+            DB::connection()->getPdo();
+        } catch (Exception $e) {
+            return;
+        }
         $classes = $this->getNotifiableEventClasses();
         $events = [];
         if (Schema::hasTable('notifications')) {

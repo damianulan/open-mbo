@@ -2,53 +2,65 @@
     "permissions": {
         "mbo-administration": {
             "pl": "Administracja MBO",
-            "en": "MBO administration"
+            "en": "MBO administration",
+            "it": "Amministrazione MBO"
         }
     },
     "roles_plural": {
         "pl": "Role",
-        "en": "Roles"
+        "en": "Roles",
+        "it": "Ruoli"
     },
     "roles": {
         "admin": {
             "pl": "Administrator",
-            "en": "System administrator"
+            "en": "System administrator",
+            "it": "Amministratore di sistema"
         },
         "admin_hr": {
             "pl": "Administrator HR",
-            "en": "HR administrator"
+            "en": "HR administrator",
+            "it": "Amministratore HR"
         },
         "admin_mbo": {
             "pl": "Administrator MBO",
-            "en": "MBO administrator"
+            "en": "MBO administrator",
+            "it": "Amministratore MBO"
         },
         "campaign_coordinator": {
             "pl": "Koordynator kampanii MBO",
-            "en": "MBO campaign coordinator"
+            "en": "MBO campaign coordinator",
+            "it": "Coordinatore campagne MBO"
         },
         "employee": {
             "pl": "Pracownik",
-            "en": "Employee"
+            "en": "Employee",
+            "it": "Dipendente"
         },
         "manager": {
             "pl": "Menadżer",
-            "en": "Manager"
+            "en": "Manager",
+            "it": "Manager"
         },
         "objective_coordinator": {
             "pl": "Koordynator kategorii celów",
-            "en": "Objective category coordinator"
+            "en": "Objective category coordinator",
+            "it": "Coordinatore categoria obiettivi"
         },
         "root": {
             "pl": "Root",
-            "en": "Root account"
+            "en": "Root account",
+            "it": "Account root"
         },
         "supervisor": {
             "pl": "Przełożony",
-            "en": "Supervisor"
+            "en": "Supervisor",
+            "it": "Supervisore"
         },
         "support": {
             "pl": "Helpdesk",
-            "en": "Support desk"
+            "en": "Support desk",
+            "it": "Supporto tecnico"
         }
     }
 }

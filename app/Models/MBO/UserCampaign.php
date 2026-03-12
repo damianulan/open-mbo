@@ -286,9 +286,22 @@ class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
 
     public function scopeOrderForUser(Builder $query): void
     {
-        $query->orderByRaw(
-            'FIELD(stage, "' . CampaignStage::SELF_EVALUATION . '", "' . CampaignStage::REALIZATION . '", "' . CampaignStage::EVALUATION . '", "' . CampaignStage::DISPOSITION . '", "' . CampaignStage::DEFINITION . '", "' . CampaignStage::IN_PROGRESS . '", "' . CampaignStage::PENDING . '")'
-        );
+        $stages = [
+            CampaignStage::SELF_EVALUATION,
+            CampaignStage::REALIZATION,
+            CampaignStage::EVALUATION,
+            CampaignStage::DISPOSITION,
+            CampaignStage::DEFINITION,
+            CampaignStage::IN_PROGRESS,
+            CampaignStage::PENDING,
+        ];
+
+        $caseParts = [];
+        foreach ($stages as $index => $stage) {
+            $caseParts[] = "WHEN '{$stage}' THEN {$index}";
+        }
+
+        $query->orderByRaw('CASE stage ' . implode(' ', $caseParts) . ' ELSE 100 END');
     }
 
     protected static function booted(): void

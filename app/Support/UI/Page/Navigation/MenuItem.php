@@ -2,7 +2,6 @@
 
 namespace App\Support\UI\Page\Navigation;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 class MenuItem
@@ -186,7 +185,7 @@ class MenuItem
         $this->visible = false;
         foreach ($slug as $s) {
             if ( ! $this->blockVisibility) {
-                if (user()->hasPermissionTo($s)) {
+                if (user()?->hasPermissionTo($s)) {
                     $this->visible = true;
                 } else {
                     $this->visible = false;
@@ -208,7 +207,7 @@ class MenuItem
         if ( ! is_array($slug)) {
             $slug = [$slug];
         }
-        if ( ! Auth::user()->hasAnyRoles($slug)) {
+        if ( ! user()?->hasAnyRoles($slug)) {
             $this->visible = false;
         }
 

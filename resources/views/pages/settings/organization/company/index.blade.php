@@ -1,8 +1,6 @@
 @extends('layouts.portal.master')
 @section('content')
 
-{!! $nav->render() !!}
-
 <div class="icon-btn-nav">
     <div class="panel-left">
         <a class="icon-btn" href="{{ route('settings.organization.company.create') }}" data-tippy-content="{{ __('buttons.add') }}">
@@ -14,6 +12,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="table-container row">
+                {{ $table->actions() }}
                 {{ $dataTable->table() }}
             </div>
         </div>

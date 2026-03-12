@@ -4,12 +4,12 @@ namespace App\DataTables\MBO;
 
 use App\Models\MBO\Objective;
 use App\Support\DataTables\Column;
-use App\Support\DataTables\CustomDataTable;
+use App\Support\DataTables\Services\DataTableService;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Carbon;
-use Yajra\DataTables\EloquentDataTable;
+use App\Support\DataTables\DataTableBuilder;
 
-class ObjectiveDataTable extends CustomDataTable
+class ObjectiveDataTable extends DataTableService
 {
     protected $id = 'objective_table';
 
@@ -22,9 +22,9 @@ class ObjectiveDataTable extends CustomDataTable
      *
      * @param  QueryBuilder  $query  Results from query() method.
      */
-    public function dataTable(QueryBuilder $query): EloquentDataTable
+    public function DataTable(QueryBuilder $query): DataTableBuilder
     {
-        return (new EloquentDataTable($query))
+        return (new DataTableBuilder($query))
 
             ->addColumn('action', fn ($data) => view('pages.mbo.objectives.action', [
                 'data' => $data,

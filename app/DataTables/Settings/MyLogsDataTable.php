@@ -6,7 +6,7 @@ use App\Models\Vendor\ActivityModel;
 use App\Support\DataTables\Column;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Carbon;
-use Yajra\DataTables\EloquentDataTable;
+use App\Support\DataTables\DataTableBuilder;
 
 class MyLogsDataTable extends BaseLogDataTable
 {
@@ -19,10 +19,10 @@ class MyLogsDataTable extends BaseLogDataTable
      *
      * @param  QueryBuilder  $query  Results from query() method.
      */
-    public function dataTable(QueryBuilder $query): EloquentDataTable
+    public function DataTable(QueryBuilder $query): DataTableBuilder
     {
 
-        return (new EloquentDataTable($query))
+        return (new DataTableBuilder($query))
             ->addColumn('event', fn ($data) => view('components.datatables.badge', [
                 'color' => $this->getEventColor($data->event),
                 'text' => __('logging.events.' . $data->event),
@@ -30,11 +30,11 @@ class MyLogsDataTable extends BaseLogDataTable
             ->addColumn('subject', fn ($data) => $this->subjectView($data))
             ->addColumn('subject_type', fn ($data) => $this->subjectTypeView($data))
             ->orderColumn('causer', function ($query, $order): void {
-                $query->orderBy('firstname', $order);
-                $query->orderBy('lastname', $order);
+                $query->orderBy('users.firstname', $order);
+                $query->orderBy('users.lastname', $order);
             })
             ->filterColumn('causer', function ($query, $keyword): void {
-                $sql = "CONCAT(firstname,'-',lastname)  like ?";
+                $sql = "CONCAT(users.firstname,'-',users.lastname) like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->editColumn('created_at', function ($data) {
@@ -50,8 +50,7 @@ class MyLogsDataTable extends BaseLogDataTable
     public function query(ActivityModel $model): QueryBuilder
     {
         return $model->join('users', 'users.id', '=', 'activity_log.causer_id')
-            ->join('user_profiles', 'user_profiles.user_id', '=', 'users.id')
-            ->select('activity_log.*', 'user_profiles.firstname', 'user_profiles.lastname')
+            ->select('activity_log.*', 'users.firstname', 'users.lastname')
             ->logger()->mine();
     }
 

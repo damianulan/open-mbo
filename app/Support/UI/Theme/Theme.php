@@ -13,11 +13,14 @@ class Theme
 
     protected $images_path;
 
+    public $mode;
+
     public function __construct()
     {
         $this->available = self::getAvailable();
         $this->current = current_theme();
         $this->images_path = 'themes/' . $this->current . '/images/';
+        $this->mode = settings('general.theme_mode', 'light');
     }
 
     public static function getAvailable(): Collection
@@ -31,6 +34,14 @@ class Theme
         }
 
         return $directories;
+    }
+
+    public static function getModes(): array
+    {
+        return [
+            'light' => 'Light',
+            'dark' => 'Dark',
+        ];
     }
 
     public static function imagePath()

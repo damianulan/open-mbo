@@ -39,7 +39,7 @@ trait Searchable
     protected static function bootSearchable(): void
     {
         static::created(function (Model $model): void {
-            SearchIndexJob::dispatch($model);
+            SearchIndexJob::dispatch($model)->delay(30);
         });
 
         static::updated(function (Model $model): void {
@@ -56,7 +56,7 @@ trait Searchable
         });
 
         static::restored(function (Model $model): void {
-            SearchIndexJob::dispatch($model);
+            SearchIndexJob::dispatch($model)->delay(30);
         });
     }
 }

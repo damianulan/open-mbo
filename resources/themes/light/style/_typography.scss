@@ -1,47 +1,51 @@
 body {
-    color: $paragraph-color;
+    color: var(--mbo-paragraph-color);
 }
 
 .lh-13 {
     line-height: 1.3 !important;
 }
 
-.tab-pane .header {
-    font-size: 1rem;
-    text-transform: uppercase;
-    font-weight: 700;
-    color: #111;
-    padding-left: 1rem;
-    padding-bottom: 1.3rem;
+.tab-pane {
+    .header {
+        font-size: 1rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: #111;
+        padding-left: 1rem;
+        padding-bottom: 1.3rem;
+    }
 }
 
-.alert a {
-    font-weight: 700;
-    text-decoration: underline;
+.alert {
+    a {
+        font-weight: 700;
+        text-decoration: underline;
+    }
 }
 
-textarea::-webkit-scrollbar {
-    width: 10px;
-}
+textarea {
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
 
-textarea::-webkit-scrollbar-track {
-    background: rgb(179, 177, 177);
-    border-radius: 10px;
-}
+    &::-webkit-scrollbar-track {
+        background: rgb(179, 177, 177);
+        border-radius: 10px;
+    }
 
-textarea::-webkit-scrollbar-thumb {
-    background: rgb(136, 136, 136);
-    border-radius: 10px;
-}
+    &::-webkit-scrollbar-thumb {
+        background: rgb(136, 136, 136);
+        border-radius: 10px;
 
-textarea::-webkit-scrollbar-thumb:hover {
-    background: rgb(100, 100, 100);
-    border-radius: 10px;
-}
+        &:hover {
+            background: rgb(100, 100, 100);
+        }
 
-textarea::-webkit-scrollbar-thumb:active {
-    background: rgb(68, 68, 68);
-    border-radius: 10px;
+        &:active {
+            background: rgb(68, 68, 68);
+        }
+    }
 }
 
 .fw-300 {
@@ -61,30 +65,30 @@ textarea::-webkit-scrollbar-thumb:active {
 }
 
 a {
-    color: $link-color;
+    color: var(--mbo-link-color);
     text-decoration: none;
-}
 
-a:hover {
-    color: $link-color-hover;
-    cursor: pointer !important;
-    transition: all 0.2s ease-in-out;
-}
+    &:hover {
+        color: var(--mbo-link-hover-color);
+        cursor: pointer !important;
+        transition: all 0.2s ease-in-out;
+    }
 
-a:active {
-    color: $link-color-active;
-}
+    &:active {
+        color: var(--mbo-link-active-color);
+    }
 
-a.link-primary {
-    color: $primary;
-}
+    &.link-primary {
+        color: var(--mbo-primary);
+    }
 
-a.link-muted {
-    color: $link-color-muted;
-}
+    &.link-muted {
+        color: var(--mbo-link-muted-color);
 
-a.link-muted:hover {
-    color: $link-color-muted-hover;
+        &:hover {
+            color: var(--mbo-link-muted-hover-color);
+        }
+    }
 }
 
 i.bi {
@@ -103,12 +107,12 @@ i.bi-3 {
     font-size: 1.1rem;
 }
 
-.content a i.bi {
-    color: $primary;
-}
+.content a:not(.btn-primary) i.bi {
+    color: var(--mbo-primary);
 
-.content a i.bi:hover {
-    color: tint($primary, 10%);
+    &:hover {
+        color: var(--mbo-primary-tint-10);
+    }
 }
 
 h1,
@@ -118,7 +122,7 @@ h4,
 h5,
 h6 {
     font-family: $font-family-serif;
-    color: $primary;
+    color: var(--mbo-primary);
     font-weight: 600;
 }
 
@@ -127,90 +131,90 @@ h6 {
 }
 
 hr {
-    background-color: $primary;
+    background-color: var(--mbo-primary);
     opacity: 0.1;
 }
 
 .text-secondary {
-    color: $secondary !important;
+    color: var(--mbo-secondary) !important;
 }
 
 .text-unstarted {
-    color: $status-unstarted !important;
+    color: var(--mbo-status-unstarted) !important;
 }
 
 .text-progress {
-    color: $status-progress !important;
+    color: var(--mbo-status-progress) !important;
 }
 
 .text-completed {
-    color: $status-completed !important;
+    color: var(--mbo-status-completed) !important;
 }
 
 .text-passed {
-    color: $status-passed !important;
+    color: var(--mbo-status-passed) !important;
 }
 
 .text-failed {
-    color: $status-failed !important;
+    color: var(--mbo-status-failed) !important;
 }
 
 .text-interrupted {
-    color: $status-interrupted !important;
+    color: var(--mbo-status-interrupted) !important;
 }
 
 .bg-unstarted {
-    background-color: $status-unstarted !important;
+    background-color: var(--mbo-status-unstarted) !important;
 }
 
 .bg-progress {
-    background-color: $status-progress !important;
+    background-color: var(--mbo-status-progress) !important;
 }
 
 .bg-completed {
-    background-color: $status-completed !important;
+    background-color: var(--mbo-status-completed) !important;
 }
 
 .bg-passed {
-    background-color: $status-passed !important;
+    background-color: var(--mbo-status-passed) !important;
 }
 
 .bg-failed {
-    background-color: $status-failed !important;
+    background-color: var(--mbo-status-failed) !important;
 }
 
 .bg-interrupted {
-    background-color: $status-interrupted !important;
+    background-color: var(--mbo-status-interrupted) !important;
 }
 
 .badge.badge-unstarted {
-    color: $status-unstarted;
-    background-color: rgba($status-unstarted, 0.2);
+    color: var(--mbo-status-unstarted);
+    background-color: rgba(var(--mbo-status-unstarted-rgb), 0.2);
 }
 
 .badge.badge-progress {
-    color: $status-progress;
-    background-color: rgba($status-progress, 0.2);
+    color: var(--mbo-status-progress);
+    background-color: rgba(var(--mbo-status-progress-rgb), 0.2);
 }
 
 .badge.badge-completed {
-    color: $status-completed;
-    background-color: rgba($status-completed, 0.2);
+    color: var(--mbo-status-completed);
+    background-color: rgba(var(--mbo-status-completed-rgb), 0.2);
 }
 
 .badge.badge-passed {
-    color: $status-passed;
-    background-color: rgba($status-passed, 0.2);
+    color: var(--mbo-status-passed);
+    background-color: rgba(var(--mbo-status-passed-rgb), 0.2);
 }
 
 .badge.badge-failed {
-    color: $status-failed;
-    background-color: rgba($status-failed, 0.2);
+    color: var(--mbo-status-failed);
+    background-color: rgba(var(--mbo-status-failed-rgb), 0.2);
 }
 
 .badge.badge-interrupted {
-    color: $status-interrupted;
-    background-color: rgba($status-interrupted, 0.2);
+    color: var(--mbo-status-interrupted);
+    background-color: rgba(var(--mbo-status-interrupted-rgb), 0.2);
 }
 
 .dashboard-widget-title {
@@ -219,7 +223,7 @@ hr {
 
 .auth .card-header {
     font-family: $font-family-serif;
-    color: $primary;
+    color: var(--mbo-primary);
     font-weight: 600;
     font-size: 1.6rem;
     text-align: center;
@@ -244,6 +248,6 @@ hr {
 }
 
 .text-highlight {
-    color: $primary;
+    color: var(--mbo-primary);
     font-weight: 600;
 }

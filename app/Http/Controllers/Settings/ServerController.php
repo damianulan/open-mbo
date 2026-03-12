@@ -20,6 +20,7 @@ class ServerController extends SettingsController
         if ( ! empty(config('app.head'))) {
             $git_text = 'On branch <strong>' . config('app.head') . '</strong>';
         }
+        $this->addPageNav();
 
         $model = app(MailSettings::class); // ->safePassword();
 
@@ -27,7 +28,6 @@ class ServerController extends SettingsController
             'git_text' => $git_text,
             'mail' => $model,
             'form' => SmtpForm::bootWithAttributes($model->toArray())->getDefinition(),
-            'nav' => $this->nav(),
         ]);
     }
 

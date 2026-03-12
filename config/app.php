@@ -13,6 +13,7 @@ use App\Providers\EventServiceProvider;
 use App\Providers\GateServiceProvider;
 use App\Providers\MacroServiceProvider;
 use App\Providers\RouteServiceProvider;
+use App\Support\Filters\Providers\FiltersServiceProvider;
 use App\Support\Http\ResponseAjax;
 use App\Support\UI\Page\PageBuilder;
 use App\Support\UI\Theme\Theme;
@@ -156,6 +157,7 @@ return [
     'available_locales' => [
         'pl',
         'en',
+        'it',
     ],
 
     'date_format' => env('DATEFORMAT', 'Y-m-d'),
@@ -248,6 +250,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+        ConfigServiceProvider::class,
         AuthServiceProvider::class,
         BroadcastServiceProvider::class,
         BusServiceProvider::class,
@@ -294,10 +297,9 @@ return [
         ComponentServiceProvider::class,
         RouteServiceProvider::class,
         \App\Providers\NotificationServiceProvider::class,
-        // App\Providers\TelescopeServiceProvider::class,
         GateServiceProvider::class,
-        ConfigServiceProvider::class,
         ImpersonateServiceProvider::class,
+        FiltersServiceProvider::class,
     ],
 
     /*

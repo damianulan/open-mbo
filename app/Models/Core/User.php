@@ -46,6 +46,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Lab404\Impersonate\Models\Impersonate;
 use Laravel\Sanctum\HasApiTokens;
@@ -354,8 +355,19 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function getAvatar(): ?string
     {
-        if ($this->profile->avatar) {
-            return asset($this->profile->avatar);
+        $avatar = $this->profile?->avatar;
+        if ($avatar) {
+            if (Str::startsWith($avatar, ['http://', 'https://'])) {
+                return $avatar;
+            }
+
+            $relativePath = Str::of($avatar)
+                ->replaceStart('storage/uploads/', '')
+                ->replaceStart('uploads/', '')
+                ->ltrim('/')
+                ->toString();
+
+            return Storage::disk('uploads')->url($relativePath);
         }
 
         return null;
@@ -415,6 +427,13 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         $indicator = '';
         if ( ! $this->itsMe() && $this->isLoggedIn()) {
             $indicator = '<div class="profile-indicator"></div>';
+        }
+
+        $avatar = $this->getAvatar();
+        if ($avatar) {
+            $avatar_url = "url('" . $avatar . "')";
+
+            return '<div class="profile-img-' . $size . '" style="background-image:' . $avatar_url . ';background-size: cover;">' . $indicator . '</div>';
         }
 
         return '<div class="profile-img-' . $size . '" style="background-color: var(--bs-' . $color . ');"><div>' . $initials . '</div>' . $indicator . '</div>';

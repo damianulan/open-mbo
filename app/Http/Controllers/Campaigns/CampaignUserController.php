@@ -19,6 +19,8 @@ class CampaignUserController extends AppController
             unauthorized();
         }
 
+        $userCampaign->loadMissing('user_objectives');
+
         $this->logShow($userCampaign);
         $header = $userCampaign->campaign->name . ' [' . $userCampaign->campaign->period . ']';
 

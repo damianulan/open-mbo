@@ -1,35 +1,50 @@
 #!/bin/sh
 
-echo "Waiting for database..."
+set -e
 
-# wait for mysql
-while ! php -r "
-try {
-    new PDO('mysql:host=' . getenv('DB_HOST') . ';dbname=' . getenv('DB_DATABASE'),
-    getenv('DB_USERNAME'), getenv('DB_PASSWORD'));
-    exit(0);
-} catch (Exception \$e) {
-    exit(1);
-}
-"; do
-  sleep 2
-done
-
-echo "Database ready"
-
-# generate key if missing
 if [ ! -f ".env" ]; then
     cp .docker/php/.env.example .env
 fi
 
-php artisan key:generate --force
+if [ -f ".env" ] && ! grep -q "^APP_KEY=base64:" .env; then
+    php artisan key:generate --force
+fi
 
-# run migrations
-php artisan migrate --force
+if [ "${DB_CONNECTION:-mysql}" = "mysql" ]; then
+    echo "Waiting for database..."
 
-# cache config/routes (optional but recommended)
-php artisan config:cache
-php artisan route:cache
+    while ! php -r "
+    try {
+        new PDO('mysql:host=' . getenv('DB_HOST') . ';dbname=' . getenv('DB_DATABASE'),
+        getenv('DB_USERNAME'), getenv('DB_PASSWORD'));
+        exit(0);
+    } catch (Exception \$e) {
+        exit(1);
+    }
+    "; do
+      sleep 2
+    done
+
+    echo "Database ready"
+fi
+
+if [ ! -f "vendor/autoload.php" ]; then
+    composer install --no-interaction --prefer-dist
+fi
+
+php artisan storage:link || true
+
+chown -R www-data:www-data storage bootstrap/cache || true
+
+if [ "${RUN_MIGRATIONS:-0}" = "1" ]; then
+    php artisan migrate --force
+fi
+
+if [ "${RUN_OPTIMIZE:-0}" = "1" ]; then
+    php artisan config:cache
+    php artisan route:cache
+    php artisan view:cache
+fi
 
 # run container main command
 exec "$@"

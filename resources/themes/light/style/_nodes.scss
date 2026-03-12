@@ -3,16 +3,16 @@
     align-items: center;
     text-decoration: none !important;
     background-color: transparent;
-    color: $link-color;
+    color: var(--mbo-link-color);
 }
 
 .user-banner:hover {
-    color: $link-color-hover;
+    color: var(--mbo-link-hover-color);
     transition: all 0.2s ease-in-out;
 }
 
 .user-banner:hover .profile-img {
-    border-color: $link-color-hover;
+    border-color: var(--mbo-link-hover-color);
 }
 
 .profile-img {
@@ -24,8 +24,8 @@
         .profile-indicator {
             position: absolute;
             border-radius: 50%;
-            border: 1px solid $primary;
-            background-color: $success;
+            border: 1px solid var(--mbo-primary);
+            background-color: var(--mbo-success);
             bottom: 0;
             right: 0;
         }
@@ -74,7 +74,7 @@ div.profile-img {
     &-md,
     &-sm,
     &-xs {
-        background-color: $primary;
+        background-color: var(--mbo-primary);
         display: flex;
         position: relative;
         text-decoration: none !important;

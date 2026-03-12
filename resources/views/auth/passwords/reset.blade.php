@@ -1,4 +1,4 @@
-@extends('auth.master')
+@extends('layouts.portal.master')
 
 @section('content')
 <div class="container pt-5 auth">

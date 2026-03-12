@@ -1,33 +1,31 @@
-.table-container::-webkit-scrollbar {
-    width: 3px;
-}
-
-.table-container::-webkit-scrollbar-track {
-    background: rgb(179, 177, 177);
-    border-radius: 2px;
-}
-
-.table-container::-webkit-scrollbar-thumb {
-    background: rgb(136, 136, 136);
-    border-radius: 2px;
-}
-
-.table-container::-webkit-scrollbar-thumb:hover {
-    background: rgb(100, 100, 100);
-    border-radius: 2px;
-}
-
-.table-container::-webkit-scrollbar-thumb:active {
-    background: rgb(68, 68, 68);
-    border-radius: 2px;
-}
-
 .table-container {
     width: 100%;
     height: 100%;
     overflow-x: auto;
     overflow-y: hidden;
     margin: 0.5rem 0;
+
+    &::-webkit-scrollbar {
+        width: 3px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: rgb(179, 177, 177);
+        border-radius: 2px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgb(136, 136, 136);
+        border-radius: 2px;
+
+        &:hover {
+            background: rgb(100, 100, 100);
+        }
+
+        &:active {
+            background: rgb(68, 68, 68);
+        }
+    }
 }
 
 .settings-table {
@@ -35,16 +33,16 @@
     border-collapse: separate !important;
     border-spacing: 0 1.1rem;
     width: 100%;
-}
 
-.settings-table th {
-    width: 12rem;
-    font-weight: 700;
-    font-size: 0.9rem;
-}
+    th {
+        width: 12rem;
+        font-weight: 700;
+        font-size: 0.9rem;
+    }
 
-.settings-table td {
-    padding-left: 1rem;
+    td {
+        padding-left: 1rem;
+    }
 }
 
 .ombo-table tbody {
@@ -53,6 +51,7 @@
 
 .dataTables_paginate a {
     text-decoration: none !important;
+    padding: 0 0.5rem;
 }
 
 .pagination .page-item > .page-link,
@@ -66,8 +65,8 @@
 
 .pagination .page-item > .page-link:hover,
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-    background: rgba($primary, 0.2);
-    border: 1px solid rgba($primary, 0.25);
+    background: rgba(var(--mbo-primary-rgb), 0.2);
+    border: 1px solid rgba(var(--mbo-primary-rgb), 0.25);
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.current,
@@ -75,78 +74,98 @@
 .pagination .page-item.active > .page-link,
 .pagination .page-item.active > .page-link:hover {
     color: #fff !important;
-    background: $primary;
-    border: 1px solid $primary;
-}
-
-.ombo-table .action-btns {
-    display: flex;
-    gap: 0.375rem;
-    text-align: center;
-    white-space: nowrap;
-}
-
-.ombo-table .action-btns a {
-    text-decoration: none;
+    background: var(--mbo-primary);
+    border: 1px solid var(--mbo-primary);
 }
 
 table.ombo-table {
     border-collapse: separate !important;
     border-spacing: 0 0.5rem;
-}
 
-table.ombo-table td,
-table.ombo-table th {
-    padding: 0.75rem;
-    vertical-align: middle;
-}
+    td,
+    th {
+        padding: 0.75rem;
+        vertical-align: middle;
+    }
 
-table.ombo-table tbody tr {
-    background-color: rgba($primary, 0.05);
-}
+    tbody {
+        tr {
+            background-color: rgba(var(--mbo-primary-rgb), 0.05);
 
-table.ombo-table tbody tr:hover {
-    background-color: rgba($primary, 0.1);
-    transition: all 0.2s ease-in-out;
-}
+            &:hover {
+                background-color: rgba(var(--mbo-primary-rgb), 0.1);
+                transition: all 0.2s ease-in-out;
+            }
 
-table.ombo-table tbody tr:has(*.inactive) {
-    background-color: $ombo-body-inactive;
-}
+            &:has(*.inactive) {
+                background-color: $ombo-body-inactive;
 
-table.ombo-table tbody tr:has(*.inactive):hover {
-    background-color: $ombo-body-inactive-hover;
-    transition: all 0.2s ease-in-out;
+                &:hover {
+                    background-color: $ombo-body-inactive-hover;
+                    transition: all 0.2s ease-in-out;
+                }
+            }
+        }
+    }
 }
 
 .ombo-table > :not(caption) > * > * {
     border-bottom-width: 0;
 }
 
-.ombo-table .user-details,
+.ombo-table {
+    .action-btns {
+        display: flex;
+        gap: 0.375rem;
+        text-align: center;
+        white-space: nowrap;
+
+        a {
+            text-decoration: none;
+        }
+    }
+
+    .user-details {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+
+        img {
+            width: 1.55rem;
+            margin-right: 0.5rem;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    }
+
+    td {
+        &.firstcol {
+            border-top-left-radius: 0.35rem;
+            border-bottom-left-radius: 0.35rem;
+        }
+
+        &.lastcol {
+            border-top-right-radius: 0.35rem;
+            border-bottom-right-radius: 0.35rem;
+        }
+    }
+}
+
 .user > .user-details {
     display: flex;
     gap: 0.5rem;
     align-items: center;
-}
-.ombo-table .user-details img,
-.user > .user-details img {
-    width: 1.55rem;
-    margin-right: 0.5rem;
-}
 
-.ombo-table .user-details a,
-.user > .user-details a {
-    text-decoration: none;
-}
+    img {
+        width: 1.55rem;
+        margin-right: 0.5rem;
+    }
 
-.ombo-table td.firstcol {
-    border-top-left-radius: 0.35rem;
-    border-bottom-left-radius: 0.35rem;
-}
-.ombo-table td.lastcol {
-    border-top-right-radius: 0.35rem;
-    border-bottom-right-radius: 0.35rem;
+    a {
+        text-decoration: none;
+    }
 }
 
 ul.ombo-list {
@@ -176,47 +195,47 @@ ul.ombo-list {
 
     li.passed {
         background-color: $ombo-body-passed;
-    }
 
-    li.passed:hover {
-        background-color: $ombo-body-passed-hover;
-        transition: all 0.2s ease-in-out;
+        &:hover {
+            background-color: $ombo-body-passed-hover;
+            transition: all 0.2s ease-in-out;
+        }
     }
 
     li.failed {
         background-color: $ombo-body-failed;
-    }
 
-    li.failed:hover {
-        background-color: $ombo-body-failed-hover;
-        transition: all 0.2s ease-in-out;
+        &:hover {
+            background-color: $ombo-body-failed-hover;
+            transition: all 0.2s ease-in-out;
+        }
     }
 
     li.warning {
         background-color: $ombo-body-warning;
-    }
 
-    li.warning:hover {
-        background-color: $ombo-body-warning-hover;
-        transition: all 0.2s ease-in-out;
+        &:hover {
+            background-color: $ombo-body-warning-hover;
+            transition: all 0.2s ease-in-out;
+        }
     }
 
     li.completed {
         background-color: $ombo-body-completed;
-    }
 
-    li.completed:hover {
-        background-color: $ombo-body-completed-hover;
-        transition: all 0.2s ease-in-out;
+        &:hover {
+            background-color: $ombo-body-completed-hover;
+            transition: all 0.2s ease-in-out;
+        }
     }
 
     li.inactive {
         background-color: $ombo-body-inactive;
-    }
 
-    li.inactive:hover {
-        background-color: $ombo-body-inactive-hover;
-        transition: all 0.2s ease-in-out;
+        &:hover {
+            background-color: $ombo-body-inactive-hover;
+            transition: all 0.2s ease-in-out;
+        }
     }
 
     li .list-grid {
@@ -236,7 +255,7 @@ ul.ombo-list {
     }
 
     li .list-content span {
-        color: $secondary;
+        color: var(--mbo-secondary);
         white-space: nowrap;
         position: relative;
     }
@@ -255,13 +274,13 @@ ul.ombo-list {
     li .list-actions .list-action {
         text-decoration: none;
         font-size: 1rem;
-        color: $link-color;
+        color: var(--mbo-link-color);
         cursor: pointer;
         white-space: nowrap;
     }
 
     li .list-actions .list-action:hover {
-        color: $link-color-hover;
+        color: var(--mbo-link-hover-color);
         transition: all 0.2s ease-in-out;
     }
 
@@ -275,10 +294,6 @@ ul.ombo-list {
             display: none;
         }
     }
-}
-
-.dataTables_paginate a {
-    padding: 0 0.5rem;
 }
 
 .draggable-table {
@@ -321,10 +336,10 @@ ul.ombo-list {
         }
 
         tr.is-dragging {
-            background: rgba($primary, 0.15);
+            background: rgba(var(--mbo-primary-rgb), 0.15);
 
             td {
-                color: rgba($primary, 0.05);
+                color: rgba(var(--mbo-primary-rgb), 0.05);
             }
         }
     }

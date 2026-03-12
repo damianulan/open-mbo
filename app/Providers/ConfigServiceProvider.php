@@ -6,6 +6,8 @@ use App\Settings\GeneralSettings;
 use App\Settings\MailSettings;
 use App\Settings\MBOSettings;
 use App\Settings\UserSettings;
+use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -28,6 +30,11 @@ class ConfigServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        try {
+            DB::connection()->getPdo();
+        } catch (Exception $e) {
+            return;
+        }
         if (Schema::hasTable('settings')) {
             // load settings from database and overwrite existing
 

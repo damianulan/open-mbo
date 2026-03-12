@@ -6,7 +6,7 @@
         </div>
     </div>
     <ul class="nav nav-pills flex-column mb-auto">
-        @foreach($sidebar->items as $sidebarItem)
+        @foreach($sidebar->getItems() as $sidebarItem)
             {!! $sidebarItem->render() !!}
         @endforeach
     </ul>

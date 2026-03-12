@@ -4,18 +4,12 @@ namespace App\Providers;
 
 use App\Console\Commands\Core\LangList;
 use App\Support\Storage\StorageManager;
+use App\Support\UI\Theme\Theme;
 use Barryvdh\Debugbar\Facades\Debugbar;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
-use Spatie\Health\Checks\Checks\DatabaseCheck;
-use Spatie\Health\Checks\Checks\DatabaseSizeCheck;
-use Spatie\Health\Checks\Checks\DebugModeCheck;
-use Spatie\Health\Checks\Checks\RedisCheck;
-use Spatie\Health\Checks\Checks\ScheduleCheck;
-use Spatie\Health\Checks\Checks\UsedDiskSpaceCheck;
-use Spatie\Health\Facades\Health;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
             $this->app->register(IdeHelperServiceProvider::class);
         }
 
+        $this->app->singleton(Theme::class);
         $loader = AliasLoader::getInstance();
         $loader->alias('Debugbar', Debugbar::class);
         $this->app->singleton(StorageManager::class);

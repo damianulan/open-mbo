@@ -2,11 +2,17 @@
 @section('content')
 
 <div class="icon-btn-nav">
+    <div class="panel-right">
+        @if(auth()->user()->id !== $user->id)
+            <x-user-banner :user="$user" />
+        @endif
+    </div>
     <div class="panel-left">
     </div>
 </div>
 <div class="content-card page-card">
     <div class="content-card-body">
+        <x-user-campaign-summary :userCampaign="$userCampaign" />
         @include('components.mbo.campaign-summary')
         <div class="row">
             <div class="col-lg-6 col-md-12 pt-3">

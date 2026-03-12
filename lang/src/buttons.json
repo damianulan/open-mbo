@@ -1,190 +1,247 @@
 {
     "accept": {
         "pl": "Akceptuj",
-        "en": "Accept"
+        "en": "Accept",
+        "it": "Accetta"
     },
     "add": {
         "pl": "Dodaj",
-        "en": "Add"
+        "en": "Add",
+        "it": "Aggiungi"
     },
     "add_employment": {
         "pl": "Dodaj zatrudnienie",
-        "en": "Add employment"
+        "en": "Add employment",
+        "it": "Aggiungi impiego"
     },
     "add_realization": {
         "pl": "Dodaj realizację celu",
-        "en": "Add objective realization"
+        "en": "Add objective realization",
+        "it": "Aggiungi avanzamento dell'obiettivo"
     },
     "add_users": {
         "pl": "Dodaj użytkowników",
-        "en": "Add users"
+        "en": "Add users",
+        "it": "Aggiungi utenti"
     },
     "assign": {
         "pl": "Przypisz",
-        "en": "Assign"
+        "en": "Assign",
+        "it": "Assegna"
     },
     "block": {
         "pl": "Zablokuj",
-        "en": "Block"
+        "en": "Block",
+        "it": "Blocca"
     },
     "cancel": {
         "pl": "Anuluj",
-        "en": "Cancel"
+        "en": "Cancel",
+        "it": "Annulla"
     },
     "cancel_campaign": {
         "pl": "Anuluj kampanię",
-        "en": "Cancel campaign"
+        "en": "Cancel campaign",
+        "it": "Annulla campagna"
     },
     "choose_file": {
         "pl": "Wybierz plik",
-        "en": "Choose file"
+        "en": "Choose file",
+        "it": "Scegli file"
     },
     "close": {
         "pl": "Zamknij",
-        "en": "Close"
+        "en": "Close",
+        "it": "Chiudi"
     },
     "create": {
         "pl": "Utwórz",
-        "en": "Create"
+        "en": "Create",
+        "it": "Crea"
     },
     "create_template": {
         "pl": "Utwórz szablon",
-        "en": "Create template"
+        "en": "Create template",
+        "it": "Crea modello"
     },
     "delete": {
         "pl": "Usuń",
-        "en": "Delete"
+        "en": "Delete",
+        "it": "Elimina"
     },
     "edit": {
         "pl": "Edytuj",
-        "en": "Edit"
+        "en": "Edit",
+        "it": "Modifica"
     },
     "edit_realization": {
         "pl": "Modyfikuj realizację celu",
-        "en": "Edit objective realization"
+        "en": "Edit objective realization",
+        "it": "Modifica avanzamento dell'obiettivo"
     },
     "enrol_users": {
         "pl": "Zapisz użytkowników",
-        "en": "Enroll users"
+        "en": "Enroll users",
+        "it": "Iscrivi utenti"
     },
     "favourite": {
         "pl": "Ulubione",
-        "en": "Favorites"
+        "en": "Favorites",
+        "it": "Preferiti"
     },
     "favourites_add": {
         "pl": "Dodaj do ulubionych",
-        "en": "Add to favorites"
+        "en": "Add to favorites",
+        "it": "Aggiungi ai preferiti"
     },
     "favourites_remove": {
         "pl": "Usuń z ulubionych",
-        "en": "Remove from favorites"
+        "en": "Remove from favorites",
+        "it": "Rimuovi dai preferiti"
     },
     "follow": {
         "pl": "Obserwuj",
-        "en": "Follow"
+        "en": "Follow",
+        "it": "Segui"
     },
     "hide": {
         "pl": "Ukryj",
-        "en": "Hide"
+        "en": "Hide",
+        "it": "Nascondi"
     },
     "impersonate": {
         "pl": "Zaloguj jako",
-        "en": "Impersonate"
+        "en": "Impersonate",
+        "it": "Impersona"
     },
     "impersonate_out": {
         "pl": "Wyloguj się jako",
-        "en": "Log out as"
+        "en": "Log out as",
+        "it": "Esci come"
     },
     "like": {
         "pl": "Polub",
-        "en": "Like"
+        "en": "Like",
+        "it": "Mi piace"
     },
     "list_view": {
         "pl": "Tryb listy",
-        "en": "List view"
+        "en": "List view",
+        "it": "Vista elenco"
     },
     "ok": {
         "pl": "Ok",
-        "en": "OK"
+        "en": "OK",
+        "it": "OK"
     },
     "ok_understand": {
         "pl": "Ok, rozumiem",
-        "en": "OK, I understand"
+        "en": "OK, I understand",
+        "it": "OK, ho capito"
     },
     "preview": {
         "pl": "Podgląd",
-        "en": "Preview"
+        "en": "Preview",
+        "it": "Anteprima"
     },
     "profile_show": {
         "pl": "Przeglądaj profil",
-        "en": "View profile"
+        "en": "View profile",
+        "it": "Visualizza profilo"
     },
     "quote": {
         "pl": "Cytuj",
-        "en": "Quote"
+        "en": "Quote",
+        "it": "Cita"
     },
     "redirect_back": {
         "pl": "Powrót",
-        "en": "Back"
+        "en": "Back",
+        "it": "Indietro"
     },
     "redirect_login": {
         "pl": "Do strony logowania",
-        "en": "Go to login page"
+        "en": "Go to login page",
+        "it": "Vai alla pagina di accesso"
     },
     "reject": {
         "pl": "Odrzuć",
-        "en": "Reject"
+        "en": "Reject",
+        "it": "Rifiuta"
     },
     "remove": {
         "pl": "Usuń",
-        "en": "Delete"
+        "en": "Delete",
+        "it": "Elimina"
+    },
+    "filter": {
+        "pl": "Filtruj",
+        "en": "Filter",
+        "it": "Filtra"
+    },
+    "reset": {
+        "pl": "Resetuj",
+        "en": "Reset",
+        "it": "Reset"
     },
     "reset_password": {
         "pl": "Resetuj hasło",
-        "en": "Reset password"
+        "en": "Reset password",
+        "it": "Reimposta password"
     },
     "resume_campaign": {
         "pl": "Wznów kampanię",
-        "en": "Resume campaign"
+        "en": "Resume campaign",
+        "it": "Riprendi campagna"
     },
     "revoke": {
         "pl": "Odbierz",
-        "en": "Revoke"
+        "en": "Revoke",
+        "it": "Revoca"
     },
     "save": {
         "pl": "Zapisz",
-        "en": "Save"
+        "en": "Save",
+        "it": "Salva"
     },
     "save_changes": {
         "pl": "Zapisz zmiany",
-        "en": "Save changes"
+        "en": "Save changes",
+        "it": "Salva modifiche"
     },
     "send": {
         "pl": "Wyślij",
-        "en": "Send"
+        "en": "Send",
+        "it": "Invia"
     },
     "summary": {
         "pl": "Podsumowanie",
-        "en": "Summary"
+        "en": "Summary",
+        "it": "Riepilogo"
     },
     "suspend": {
         "pl": "Zawieś",
-        "en": "Suspend"
+        "en": "Suspend",
+        "it": "Sospendi"
     },
     "terminate_campaign": {
         "pl": "Zawieś kampanię",
-        "en": "Suspend campaign"
+        "en": "Suspend campaign",
+        "it": "Sospendi campagna"
     },
     "tile_view": {
         "pl": "Tryb kafelkowy",
-        "en": "Tile view"
+        "en": "Tile view",
+        "it": "Vista a riquadri"
     },
     "unblock": {
         "pl": "Odblokuj",
-        "en": "Unblock"
+        "en": "Unblock",
+        "it": "Sblocca"
     },
     "unhide": {
         "pl": "Odkryj",
-        "en": "Unhide"
+        "en": "Unhide",
+        "it": "Mostra"
     }
 }
