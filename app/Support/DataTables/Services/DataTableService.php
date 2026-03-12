@@ -2,15 +2,15 @@
 
 namespace App\Support\DataTables\Services;
 
+use App\Support\DataTables\SelectedColumns;
+use App\Support\Filters\Services\FilterService;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Services\DataTable;
-use App\Support\DataTables\SelectedColumns;
-use App\Support\Filters\Services\FilterService;
-use Illuminate\Contracts\Support\Renderable;
 
 class DataTableService extends DataTable
 {
@@ -32,11 +32,6 @@ class DataTableService extends DataTable
         $this->filterService = $filters ?? new FilterService();
     }
 
-    protected function buildFilters(): ?FilterService
-    {
-        return null;
-    }
-
     public function getFilterService(): FilterService
     {
         return $this->filterService;
@@ -49,7 +44,7 @@ class DataTableService extends DataTable
 
     public function renderFilters(): ?Renderable
     {
-        if($this->getFilters()){
+        if ($this->getFilters()) {
             return view('components.datatables.partials.filters', [
                 'id' => $this->id,
                 'form' => $this->getFilterService()->getFormDefinition(),
@@ -118,18 +113,18 @@ class DataTableService extends DataTable
             ->parameters([
                 'paging' => true,
                 'language' => [
-                    'url' => asset('themes/vendors/datatables/'.app()->currentLocale().'.json'),
+                    'url' => asset('themes/vendors/datatables/' . app()->currentLocale() . '.json'),
                 ],
                 'responsive' => true,
                 'buttons' => [
-                    'csv', 'reload'
+                    'csv', 'reload',
                 ],
                 'lengthMenu' => [
                     20,
                     50,
                     100,
                     200,
-                    500
+                    500,
                 ],
                 'info' => false,
                 'searching' => false,
@@ -222,6 +217,11 @@ class DataTableService extends DataTable
         Storage::disk('downloads')->put($fullpath, json_encode($collection, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
         return Storage::disk('downloads')->download($fullpath, $filename);
+    }
+
+    protected function buildFilters(): ?FilterService
+    {
+        return null;
     }
 
     protected function selectedColumns(): array

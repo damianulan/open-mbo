@@ -3,7 +3,9 @@
 namespace App\Support\Filters\Factories;
 
 use App\Support\Filters\Contracts\FilterContract;
+use App\Support\Filters\Contracts\Types\FilterSearchType;
 use App\Support\Filters\Services\FilterService;
+use Exception;
 use FormForge\Base\Form;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Button;
@@ -19,13 +21,6 @@ class FilterFormFactory extends Form
         return (new static())->boot()->setService($service)->setDefinition();
     }
 
-    protected function setService(FilterService $service): static
-    {
-        $this->service = $service;
-
-        return $this;
-    }
-
     public function definition(FormBuilder $builder): FormBuilder
     {
         $builder->setMethod('POST')
@@ -35,7 +30,7 @@ class FilterFormFactory extends Form
             $builder->add($this->getComponent($item));
         }
 
-        //$builder->addButton(new Button(__('buttons.filter'), 'submit', null, 'btn-primary filter-btn'));
+        // $builder->addButton(new Button(__('buttons.filter'), 'submit', null, 'btn-primary filter-btn'));
 
         return $builder;
     }
@@ -43,12 +38,12 @@ class FilterFormFactory extends Form
     public function getComponent(FilterContract $filter): ForgeComponent
     {
         switch ($filter) {
-            case $filter instanceof \App\Support\Filters\Contracts\Types\FilterSearchType:
+            case $filter instanceof FilterSearchType:
                 $component = FormComponent::text($filter->getKey())->label($filter->getLabel())->col(4);
                 break;
 
             default:
-                throw new \Exception('Invalid filter type');
+                throw new Exception('Invalid filter type');
                 break;
         }
 
@@ -58,5 +53,12 @@ class FilterFormFactory extends Form
     public function validation(): array
     {
         return [];
+    }
+
+    protected function setService(FilterService $service): static
+    {
+        $this->service = $service;
+
+        return $this;
     }
 }

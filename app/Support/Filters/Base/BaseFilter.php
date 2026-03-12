@@ -3,13 +3,14 @@
 namespace App\Support\Filters\Base;
 
 use App\Support\Filters\Helpers\FilterStringableHelper;
-use Illuminate\Support\Str;
 
 abstract class BaseFilter
 {
     use FilterStringableHelper;
 
     protected $key;
+
+    abstract public function getLabel(): string;
 
     public function getKey(): string
     {
@@ -20,6 +21,4 @@ abstract class BaseFilter
     {
         $this->key = $this->namespaceToFilterName(static::class);
     }
-
-    abstract public function getLabel(): string;
 }

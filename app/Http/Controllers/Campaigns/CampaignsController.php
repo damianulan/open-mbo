@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
+use Throwable;
 
 class CampaignsController extends AppController
 {
@@ -58,7 +59,7 @@ class CampaignsController extends AppController
 
                 $redirect = redirect()->route('campaigns.show', $campaign->id)->with('success', __('alerts.campaigns.success.create', ['name' => $campaign->name]));
             }
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->e = $e;
         }
 
@@ -113,7 +114,7 @@ class CampaignsController extends AppController
 
                 $redirect = redirect()->route('campaigns.show', $id)->with('info_alert', __('alerts.campaigns.success.edit', ['name' => $campaign->name]));
             }
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->e = $e;
         }
 

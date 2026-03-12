@@ -6,12 +6,12 @@ use App\Enums\Users\UserStatus;
 use App\Filters\Users\FullnameFilter;
 use App\Models\Core\User;
 use App\Support\DataTables\Column;
+use App\Support\DataTables\DataTableBuilder;
 use App\Support\DataTables\Services\DataTableService;
+use App\Support\Filters\Services\FilterService;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use App\Support\DataTables\DataTableBuilder;
-use App\Support\Filters\Services\FilterService;
 
 class UsersDataTable extends DataTableService
 {
@@ -98,13 +98,6 @@ class UsersDataTable extends DataTableService
             ->registerFilters($this->getFilterService());
     }
 
-    protected function buildFilters(): ?FilterService
-    {
-        return new FilterService([
-            new FullnameFilter(),
-        ]);
-    }
-
     /**
      * Get the query source of dataTable.
      */
@@ -119,6 +112,13 @@ class UsersDataTable extends DataTableService
             ->whereNotIn('users.id', [Auth::user()->id]);
 
         return $query;
+    }
+
+    protected function buildFilters(): ?FilterService
+    {
+        return new FilterService([
+            new FullnameFilter(),
+        ]);
     }
 
     protected function defaultColumns(): array

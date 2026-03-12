@@ -31,7 +31,7 @@ trait StorageIssues
     {
         $type = $this->typeMap[Str::lower($type)];
         $id = Str::ltrim($id, '#');
-        $message = "$type(#{$id}): $issue";
+        $message = "{$type}(#{$id}): {$issue}";
 
         $path = $this->getIssuePath();
         $config = $this->getConfigContents();

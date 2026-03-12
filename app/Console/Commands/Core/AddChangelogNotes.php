@@ -20,14 +20,15 @@ class AddChangelogNotes extends Command
     public function handle(): int
     {
         $version = $this->argument('version');
-        $count   = $this->argument('count');
+        $count = $this->argument('count');
 
         $commits = $count
-            ? $this->getLastNCommits((int)$count)
+            ? $this->getLastNCommits((int) $count)
             : $this->getCommitsSinceLastTag();
 
         if (empty($commits)) {
             $this->error('No commits found.');
+
             return Command::FAILURE;
         }
 
@@ -36,13 +37,13 @@ class AddChangelogNotes extends Command
         $date = now()->format('Y-m-d');
         $markdown = $this->buildMarkdown($version, $date, $commits);
 
-        if (!File::exists($changelogPath)) {
+        if ( ! File::exists($changelogPath)) {
             File::put($changelogPath, "# Changelog\n\n");
         }
 
         // Insert at top (after title)
         $existing = File::get($changelogPath);
-        $updated  = preg_replace(
+        $updated = preg_replace(
             '/# Changelog\s*/',
             "# Changelog\n\n" . $markdown,
             $existing,
@@ -77,9 +78,10 @@ class AddChangelogNotes extends Command
         // Get latest tag
         exec('git describe --tags --abbrev=0', $tagOutput, $tagResult);
 
-        if ($tagResult !== 0 || empty($tagOutput)) {
+        if (0 !== $tagResult || empty($tagOutput)) {
             // No tag found → fallback to all commits
             exec('git log --pretty=format:"%s" --no-merges', $output);
+
             return $output;
         }
 
@@ -97,7 +99,7 @@ class AddChangelogNotes extends Command
 
     protected function buildMarkdown(string $version, string $date, array $commits): string
     {
-        $output  = "## [{$version}] - {$date}\n\n";
+        $output = "## [{$version}] - {$date}\n\n";
         $output .= "### Changes\n\n";
 
         foreach ($commits as $commit) {
@@ -113,7 +115,7 @@ class AddChangelogNotes extends Command
     {
         $output = [];
         foreach ($commits as $commit) {
-            $wordCount = count(array_filter(explode(' ', $commit), fn ($word) => Str::length($word) > 0 && Str::startsWith($word, array_map(fn($type) => "{$type}(", $this->typeMap)) && !in_array($word, ['fix', 'fix:', 'fixes', 'fixes:', 'fixing', 'fixing:', '-'])));
+            $wordCount = count(array_filter(explode(' ', $commit), fn ($word) => Str::length($word) > 0 && Str::startsWith($word, array_map(fn ($type) => "{$type}(", $this->typeMap)) && ! in_array($word, ['fix', 'fix:', 'fixes', 'fixes:', 'fixing', 'fixing:', '-'])));
             if ($wordCount > 1) {
                 $key = Str::slug($commit);
                 $output[$key] = $commit;
