@@ -19,7 +19,10 @@ use App\Http\Controllers\Settings\LogController;
 use App\Http\Controllers\Settings\ModuleController;
 use App\Http\Controllers\Settings\NotificationsController;
 use App\Http\Controllers\Settings\Organization\CompanyController;
+use App\Http\Controllers\Settings\Organization\ContractTypeController;
+use App\Http\Controllers\Settings\Organization\DepartmentController;
 use App\Http\Controllers\Settings\Organization\OrganizationController;
+use App\Http\Controllers\Settings\Organization\PositionController;
 use App\Http\Controllers\Settings\Organization\TeamController;
 use App\Http\Controllers\Settings\ServerController;
 use App\Http\Controllers\UsersController;
@@ -143,6 +146,22 @@ Route::middleware(['web', 'auth', 'maintenance', 'navigation'])->group(function 
                 Route::put('{company}', [CompanyController::class, 'update'])->name('update');
                 Route::get('delete/{company}', [CompanyController::class, 'delete'])->name('delete');
             });
+            Route::prefix('departments')->name('departments.')->group(function (): void {
+                Route::get('/', [DepartmentController::class, 'index'])->name('index');
+                Route::post('/', [DepartmentController::class, 'store'])->name('store');
+                Route::get('create', [DepartmentController::class, 'create'])->name('create');
+                Route::get('edit/{department}', [DepartmentController::class, 'edit'])->name('edit');
+                Route::put('{department}', [DepartmentController::class, 'update'])->name('update');
+                Route::get('delete/{department}', [DepartmentController::class, 'delete'])->name('delete');
+            });
+            Route::prefix('positions')->name('positions.')->group(function (): void {
+                Route::get('/', [PositionController::class, 'index'])->name('index');
+                Route::post('/', [PositionController::class, 'store'])->name('store');
+                Route::get('create', [PositionController::class, 'create'])->name('create');
+                Route::get('edit/{position}', [PositionController::class, 'edit'])->name('edit');
+                Route::put('{position}', [PositionController::class, 'update'])->name('update');
+                Route::get('delete/{position}', [PositionController::class, 'delete'])->name('delete');
+            });
             Route::prefix('team')->name('team.')->middleware('route.gate:users-teams')->group(function (): void {
                 Route::get('/', [TeamController::class, 'index'])->name('index');
                 Route::post('/', [TeamController::class, 'store'])->name('store');
@@ -150,6 +169,14 @@ Route::middleware(['web', 'auth', 'maintenance', 'navigation'])->group(function 
                 Route::get('edit/{team}', [TeamController::class, 'edit'])->name('edit');
                 Route::put('{team}', [TeamController::class, 'update'])->name('update');
                 Route::get('delete/{team}', [TeamController::class, 'delete'])->name('delete');
+            });
+            Route::prefix('contracts')->name('contracts.')->group(function (): void {
+                Route::get('/', [ContractTypeController::class, 'index'])->name('index');
+                Route::post('/', [ContractTypeController::class, 'store'])->name('store');
+                Route::get('create', [ContractTypeController::class, 'create'])->name('create');
+                Route::get('edit/{contract}', [ContractTypeController::class, 'edit'])->name('edit');
+                Route::put('{contract}', [ContractTypeController::class, 'update'])->name('update');
+                Route::get('delete/{contract}', [ContractTypeController::class, 'delete'])->name('delete');
             });
         });
     });

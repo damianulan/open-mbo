@@ -194,6 +194,35 @@
       "it": "Descrizione azienda"
     }
   },
+  "contracts": {
+    "name": {
+      "pl": "Nazwa kontraktu",
+      "en": "Contract name",
+      "it": "Nome contratto"
+    },
+    "description": {
+      "pl": "Opis kontraktu",
+      "en": "Contract description",
+      "it": "Descrizione contratto"
+    }
+  },
+  "departments": {
+    "company": {
+      "pl": "Przedsiębiorstwo",
+      "en": "Company",
+      "it": "Company"
+    },
+    "name": {
+      "pl": "Nazwa działu",
+      "en": "Department name",
+      "it": "Nome reparto"
+    },
+    "description": {
+      "pl": "Opis działu",
+      "en": "Department description",
+      "it": "Descrizione reparto"
+    }
+  },
   "employments": {
     "add": {
       "pl": "Dodaj nowe zatrudnienie",
@@ -266,6 +295,18 @@
       "pl": "Hasło",
       "en": "Password",
       "it": "Password"
+    }
+  },
+  "positions": {
+    "name": {
+      "pl": "Nazwa stanowiska",
+      "en": "Position name",
+      "it": "Nome posizione"
+    },
+    "description": {
+      "pl": "Opis stanowiska",
+      "en": "Position description",
+      "it": "Descrizione posizione"
     }
   },
   "mbo": {
