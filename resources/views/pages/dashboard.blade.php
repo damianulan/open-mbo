@@ -10,7 +10,7 @@
 
 <div class="row">
     @if(auth()->user()->campaigns_ongoing->count())
-        <div class="col-lg-12">
+        <div class="col-lg-12 mb-4">
             <div class="content-card content-card-sm">
                 <div class="content-card-top">
                     <div class="content-card-header">
@@ -27,7 +27,7 @@
             </div>
         </div>
     @endif
-    <div class="col-lg-6 col-sm-12">
+    <div class="col-lg-6 col-sm-12 mb-4">
         <div class="content-card content-card-sm">
             <div class="content-card-top">
                 <div class="content-card-header">
