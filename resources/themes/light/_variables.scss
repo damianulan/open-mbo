@@ -268,6 +268,21 @@ $ombo-body-gradient: var(--mbo-ombo-body-gradient) !default;
 }
 
 [data-bs-theme='dark'] {
+    // Bootstrap variable overrides for a softer, modern dark theme (avoid harsh high-contrast defaults)
+    --#{$prefix}body-bg: #0f1218;
+    --#{$prefix}body-bg-rgb: 15, 18, 24;
+    --#{$prefix}body-color: #d7dee8;
+    --#{$prefix}body-color-rgb: 215, 222, 232;
+    --#{$prefix}secondary-color: #a9b4c2;
+    --#{$prefix}secondary-color-rgb: 169, 180, 194;
+    --#{$prefix}tertiary-bg: #151a23;
+    --#{$prefix}tertiary-bg-rgb: 21, 26, 35;
+    --#{$prefix}border-color: rgba(255, 255, 255, 0.1);
+    --#{$prefix}border-color-translucent: rgba(255, 255, 255, 0.08);
+    --#{$prefix}card-bg: var(--#{$prefix}tertiary-bg);
+    --#{$prefix}dropdown-bg: var(--#{$prefix}tertiary-bg);
+    --#{$prefix}modal-bg: var(--#{$prefix}tertiary-bg);
+
     --mbo-primary: var(--#{$prefix}primary);
     --mbo-primary-rgb: var(--#{$prefix}primary-rgb);
     --mbo-secondary: var(--#{$prefix}secondary);
@@ -285,22 +300,22 @@ $ombo-body-gradient: var(--mbo-ombo-body-gradient) !default;
     --mbo-light: var(--#{$prefix}body-bg);
 
     --mbo-body-bg: var(--#{$prefix}body-bg);
-    --mbo-body-wrapper-bg: rgba(var(--mbo-primary-rgb), 0.38);
-    --mbo-sidebar-bg: var(--#{$prefix}body-bg);
+    --mbo-body-wrapper-bg: color-mix(in srgb, var(--#{$prefix}body-bg) 94%, var(--mbo-primary));
+    --mbo-sidebar-bg: var(--#{$prefix}tertiary-bg);
     --mbo-sidebar-brand-link: var(--mbo-primary);
     --mbo-sidebar-usermenu: var(--#{$prefix}body-color);
     --mbo-page-header-color: var(--mbo-primary);
-    --mbo-paragraph-color: color-mix(in srgb, var(--#{$prefix}body-color) 80%, white);
+    --mbo-paragraph-color: color-mix(in srgb, var(--#{$prefix}body-color) 88%, var(--#{$prefix}secondary-color));
 
     --mbo-link-color: var(--#{$prefix}link-color);
     --mbo-link-hover-color: var(--#{$prefix}link-hover-color);
     --mbo-link-active-color: var(--#{$prefix}link-hover-color);
     --mbo-link-muted-color: color-mix(in srgb, var(--#{$prefix}body-color) 70%, var(--mbo-primary));
     --mbo-link-muted-hover-color: color-mix(in srgb, var(--#{$prefix}body-color) 85%, var(--mbo-primary));
-    --mbo-button-link-active: color-mix(in srgb, var(--mbo-primary) 25%, white);
-    --mbo-button-link-active-hover: color-mix(in srgb, var(--mbo-primary) 35%, white);
-    --mbo-text-btn: color-mix(in srgb, var(--mbo-primary) 20%, white);
-    --mbo-text-btn-hover: color-mix(in srgb, var(--mbo-primary) 35%, white);
+    --mbo-button-link-active: color-mix(in srgb, var(--mbo-primary) 18%, var(--#{$prefix}body-color));
+    --mbo-button-link-active-hover: color-mix(in srgb, var(--mbo-primary) 26%, var(--#{$prefix}body-color));
+    --mbo-text-btn: color-mix(in srgb, var(--mbo-primary) 28%, var(--#{$prefix}body-color));
+    --mbo-text-btn-hover: color-mix(in srgb, var(--mbo-primary) 42%, var(--#{$prefix}body-color));
 
     --mbo-disabled-text: var(--#{$prefix}secondary-color);
     --mbo-disabled-text-rgb: var(--#{$prefix}secondary-color-rgb);
@@ -317,12 +332,12 @@ $ombo-body-gradient: var(--mbo-ombo-body-gradient) !default;
     --mbo-status-interrupted: var(--mbo-secondary);
     --mbo-status-interrupted-rgb: var(--mbo-secondary-rgb);
 
-    --mbo-lighttint: color-mix(in srgb, var(--mbo-primary) 2%, white);
-    --mbo-card-shadow: 5px 5px 12px 0px rgba(var(--mbo-primary-rgb), 0.15);
-    --mbo-dropdown-divider-bg: color-mix(in srgb, var(--mbo-primary) 35%, var(--#{$prefix}body-bg));
-    --mbo-input-border-color: color-mix(in srgb, var(--mbo-primary) 15%, var(--#{$prefix}border-color));
+    --mbo-lighttint: color-mix(in srgb, var(--#{$prefix}tertiary-bg) 92%, white);
+    --mbo-card-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+    --mbo-dropdown-divider-bg: var(--#{$prefix}border-color-translucent);
+    --mbo-input-border-color: color-mix(in srgb, var(--mbo-primary) 22%, var(--#{$prefix}border-color));
 
-    --mbo-primary-tint-10: color-mix(in srgb, var(--mbo-primary) 90%, white);
+    --mbo-primary-tint-10: color-mix(in srgb, var(--mbo-primary) 70%, var(--#{$prefix}body-color));
     --mbo-dark-tint-20: color-mix(in srgb, var(--mbo-dark) 80%, white);
     --mbo-dark-lighten-10: color-mix(in srgb, var(--mbo-dark) 90%, white);
     --mbo-greenish-darken-25: color-mix(in srgb, #{$greenish} 75%, black);

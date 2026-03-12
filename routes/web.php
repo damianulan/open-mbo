@@ -8,6 +8,7 @@ use App\Http\Controllers\Campaigns\CampaignsController;
 use App\Http\Controllers\Campaigns\CampaignUserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ModalController;
+use App\Http\Controllers\MyObjectivesController;
 use App\Http\Controllers\Objectives\ObjectiveCategoryController;
 use App\Http\Controllers\Objectives\ObjectiveController;
 use App\Http\Controllers\Objectives\ObjectiveTemplateController;
@@ -23,8 +24,8 @@ use App\Http\Controllers\Settings\Organization\TeamController;
 use App\Http\Controllers\Settings\ServerController;
 use App\Http\Controllers\UsersController;
 use App\Providers\RouteServiceProvider;
-use App\Support\DataTables\Services\DataTableService;
 use App\Support\DataTables\Repositories\DataTableRepository;
+use App\Support\DataTables\Services\DataTableService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Laraverse\Config\Laraverse;
@@ -88,6 +89,10 @@ Route::middleware(['web', 'auth', 'maintenance', 'navigation'])->group(function 
         Route::get('/preferences', [ProfileController::class, 'preferences'])->name('preferences');
         Route::post('/preferences', [ProfileController::class, 'updatePreferences'])->name('preferences.update');
         Route::get('/activity', [LogController::class, 'myLogs'])->name('logs');
+    });
+
+    Route::prefix('my-objectives')->name('my-objectives.')->group(function (): void {
+        Route::get('/', [MyObjectivesController::class, 'index'])->name('index');
     });
 
     /**

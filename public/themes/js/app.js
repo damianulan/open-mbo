@@ -193,7 +193,7 @@ $.warning = function (text) {
   }
   swal_alert(text, title, _callback, "warning");
 };
-$.notice = function (text) {
+$.info = function (text) {
   var title_input = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
   var _callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
   var title = alert_success;

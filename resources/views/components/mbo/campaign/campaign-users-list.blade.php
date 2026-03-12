@@ -16,7 +16,7 @@
                             <div class="list-action" data-tippy-content="{{ $uc->stageDescription() }}">
                                 <i class="{{ $uc->stageIcon() }}"></i>
                             </div>
-                            <a href="" class="list-action" data-modelid="{{ $uc->id }}" data-tippy-content="{{ __('buttons.summary') }}">
+                            <a href="{{ route('campaigns.users.show', $uc) }}" class="list-action user-campaign" data-modelid="{{ $uc->id }}" data-tippy-content="{{ __('buttons.summary') }}">
                                 <i class="bi-eye-fill"></i>
                             </a>
                             @can('manual', $uc->campaign)

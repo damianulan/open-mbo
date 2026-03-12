@@ -5,7 +5,7 @@
 
     <div class="row">
         <div class="col-xl-4 col-md-6 col-sm-12 pt-4">
-            <x-tile-button title="{{ __('menus.settings.organization.companies.index') }}" link="{{ route('settings.organization.company.index') }}" icon="building-fill-gear"/>
+            <x-tile-button title="{{ __('menus.settings.organization.company.index') }}" link="{{ route('settings.organization.company.index') }}" icon="building-fill-gear"/>
         </div>
         <div class="col-xl-4 col-md-6 col-sm-12 pt-4">
             <x-tile-button title="{{ __('menus.settings.organization.departments.index') }}" link="#" icon="diagram-3-fill"/>
