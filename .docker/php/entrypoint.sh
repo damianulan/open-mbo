@@ -36,15 +36,6 @@ php artisan storage:link || true
 
 chown -R www-data:www-data storage bootstrap/cache || true
 
-if [ "${RUN_MIGRATIONS:-0}" = "1" ]; then
-    php artisan migrate --force
-fi
-
-if [ "${RUN_OPTIMIZE:-0}" = "1" ]; then
-    php artisan config:cache
-    php artisan route:cache
-    php artisan view:cache
-fi
 
 # run container main command
 exec "$@"

@@ -4,7 +4,7 @@ This project includes a Docker Compose setup for running Open MBO with:
 
 - PHP-FPM `8.4` (application container)
 - Nginx (serves HTTP)
-- MySQL (`mysql:latest`)
+- MySQL (`mysql:8.4`)
 - Redis (`redis:latest`) for Laravel cache + queue
 - Queue worker container (`php artisan queue:work`)
 
@@ -77,3 +77,4 @@ However, it depends on upstream images and package compatibility:
 
 - If `php:8.4-fpm` is not available on your machine/registry, the build will fail (pin to `8.3`).
 - `mysql:latest` can introduce breaking changes across major releases; if you hit issues, pin a specific MySQL version.
+  - This repo pins `mysql:8.4` because `mysql:latest` may jump major versions and fail to start against an existing data volume.
