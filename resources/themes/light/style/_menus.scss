@@ -22,6 +22,24 @@ nav {
     }
 }
 
+html[data-bs-theme='dark'] nav {
+    &::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.06);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.18);
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.24);
+        }
+
+        &:active {
+            background: rgba(var(--mbo-primary-rgb), 0.6);
+        }
+    }
+}
+
 html .sidebar-menu {
     height: 100%;
 }

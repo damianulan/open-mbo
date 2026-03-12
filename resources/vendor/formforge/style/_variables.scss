@@ -10,12 +10,12 @@ $prefix: "formforge-";
 $bs-prefix: "bs-";
 
 // body
-$white: #fff !default;
-$dark: #111 !default;
-$primary: #91c499 !default;
-$secondary: #808f85 !default;
-$body-bg: $white !default;
-$body-color: $dark !default;
+$white: var(--#{$bs-prefix}body-bg) !default;
+$dark: var(--#{$bs-prefix}body-color) !default;
+$primary: var(--mbo-primary) !default;
+$secondary: var(--#{$bs-prefix}secondary-color) !default;
+$body-bg: var(--#{$bs-prefix}body-bg) !default;
+$body-color: var(--#{$bs-prefix}body-color) !default;
 $danger: #e74c3c !default;
 $success: #2ecc71 !default;
 $info: #3498db !default;
@@ -23,21 +23,21 @@ $warning: #f39c12 !default;
 $gray-600: null !default;
 
 // forms
-$input-search-label-color: $dark !default;
+$input-search-label-color: $body-color !default;
 $input-background: $body-bg !default;
-$input-border-color: tint($primary, 10%) !default;
-$input-border-color-focus: tint($primary, 30%) !default;
+$input-border-color: var(--mbo-input-border-color) !default;
+$input-border-color-focus: color-mix(in srgb, var(--mbo-primary) 55%, var(--#{$bs-prefix}border-color)) !default;
 $input-border-radius: var(--#{$bs-prefix}border-radius) !default;
-$input-box-shadow-focus: 0 3px 10px -1px rgb(0 0 0 / 10%) !default;
+$input-box-shadow-focus: 0 0 0 0.25rem rgba(var(--mbo-primary-rgb), 0.2) !default;
 $input-padding: 0.5rem 0.7rem !default;
-$input-color: $secondary !default;
+$input-color: $body-color !default;
 $input-line-height: 1.25 !default;
 
-$check-border-color: $primary !default;
-$check-background: $white !default;
+$check-border-color: var(--mbo-input-border-color) !default;
+$check-background: $body-bg !default;
 $check-checked-background: $primary !default;
-$switch-border-color: $primary !default;
-$switch-background: $white !default;
+$switch-border-color: var(--mbo-input-border-color) !default;
+$switch-background: $body-bg !default;
 $switch-checked-background: $primary !default;
 
 $chosen-search-padding: 4px 5px 4px 20px !default;

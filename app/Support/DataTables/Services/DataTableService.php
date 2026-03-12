@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Support\DataTables;
+namespace App\Support\DataTables\Services;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -8,8 +8,11 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Services\DataTable;
+use App\Support\DataTables\SelectedColumns;
+use App\Support\Filters\Services\FilterService;
+use Illuminate\Contracts\Support\Renderable;
 
-class CustomDataTable extends DataTable
+class DataTableService extends DataTable
 {
     protected $id = null;
 
@@ -18,6 +21,43 @@ class CustomDataTable extends DataTable
     protected $orderByDir = 'desc';
 
     protected array $actions = ['csv', 'excel', 'column_selector'];
+
+    private FilterService $filterService;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $filters = $this->buildFilters();
+        $this->filterService = $filters ?? new FilterService();
+    }
+
+    protected function buildFilters(): ?FilterService
+    {
+        return null;
+    }
+
+    public function getFilterService(): FilterService
+    {
+        return $this->filterService;
+    }
+
+    public function getFilters(): array
+    {
+        return $this->filterService->getItems();
+    }
+
+    public function renderFilters(): ?Renderable
+    {
+        if($this->getFilters()){
+            return view('components.datatables.partials.filters', [
+                'id' => $this->id,
+                'form' => $this->getFilterService()->getFormDefinition(),
+            ]);
+        }
+
+        return null;
+    }
 
     /**
      * Get the dataTable columns definition.
@@ -76,23 +116,28 @@ class CustomDataTable extends DataTable
     {
         $builder = $this->builder()
             ->parameters([
+                'paging' => true,
                 'language' => [
-                    'url' => asset('themes/vendors/datatables/pl.json'),
+                    'url' => asset('themes/vendors/datatables/'.app()->currentLocale().'.json'),
                 ],
                 'responsive' => true,
                 'buttons' => [
-                    'csv',
+                    'csv', 'reload'
                 ],
                 'lengthMenu' => [
                     20,
                     50,
                     100,
                     200,
+                    500
                 ],
+                'info' => false,
+                'searching' => false,
+                'searchDelay' => 500,
             ])
             ->setTableId($this->id)
             ->columns($this->getColumns())
-            ->minifiedAjax()
+            ->minifiedAjax('')
             ->processing(true);
 
         $orderBy = $this->getOrderBy();

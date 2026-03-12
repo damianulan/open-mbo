@@ -28,6 +28,8 @@ class GeneralForm extends Form
                     ->add(FormComponent::text('site_name', $this->site_name)->label(__('forms.settings.general.site_name'))->key(self::settingsKey('general.site_name')))
                     ->add(FormComponent::select('theme', $this->theme, Dictionary::fromUnassocArray(Theme::getAvailable()->toArray()), app(GeneralSettings::class)->theme)
                         ->label(__('forms.settings.general.theme'))->noEmpty()->key(self::settingsKey('general.theme')))
+                    ->add(FormComponent::select('theme_mode', $this->theme_mode, Dictionary::fromAssocArray(Theme::getModes()), app(GeneralSettings::class)->theme_mode)
+                        ->label(__('forms.settings.general.theme_mode'))->noEmpty()->key(self::settingsKey('general.theme_mode')))
                     ->add(FormComponent::select('locale', $this->locale, Dictionary::fromUnassocArray(config('app.available_locales'), 'globals.langs'), app(GeneralSettings::class)->locale)
                         ->label(__('forms.settings.general.lang'))->noEmpty()->key(self::settingsKey('general.lang')))
                     ->add(FormComponent::select('target_release', $this->target_release, Dictionary::fromAssocArray(AppConfig::getReleasesOptions()), app(GeneralSettings::class)->target_release)

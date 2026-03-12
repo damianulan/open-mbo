@@ -14,7 +14,9 @@ class CompanyController extends SettingsController
     {
         $this->addPageNav();
 
-        return $dataTable->render('pages.settings.organization.company.index');
+        return $dataTable->render('pages.settings.organization.company.index', [
+            'table' => $dataTable,
+        ]);
     }
 
     public function create(Request $request, CompanyEditForm $form)

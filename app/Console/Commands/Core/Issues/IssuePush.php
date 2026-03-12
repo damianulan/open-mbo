@@ -59,12 +59,9 @@ class IssuePush extends Command
                         throw new Exception("Commit message was already been pushed: {$issue}");
                     }
                     $this->comment('Pushing issue ...');
-                    $result = Process::run('git add .');
                     $result = Process::run('git commit -m "' . $issue . '"');
                     $result = Process::run('git push');
                     $this->line($result->output());
-
-                    $this->registerCommitMessage($issue, $close);
                 } else {
                     $this->info('Aborted.');
                 }

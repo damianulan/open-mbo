@@ -6,6 +6,7 @@ use App\Commentable\Components\CommentComponent;
 use App\Helpers\StorageHelper;
 use App\Livewire\Layout\Notifications;
 use App\Livewire\Layout\Notifications\Item;
+use App\Livewire\Notifications\Index as NotificationsIndex;
 use App\View\Components\Cards\NoteCard;
 use App\View\Components\Layout\IconComponent;
 use App\View\Components\Layout\TileButton;
@@ -13,6 +14,7 @@ use App\View\Components\MBO\Campaign\CampaignCard;
 use App\View\Components\MBO\Campaign\CampaignUsersList;
 use App\View\Components\MBO\Campaign\CardProgressBar;
 use App\View\Components\MBO\Campaign\MyCampaignsSummary;
+use App\View\Components\MBO\Campaign\UserCampaignSummary;
 use App\View\Components\MBO\Objectives\ObjectivesList;
 use App\View\Components\MBO\Objectives\ObjectiveSummary;
 use App\View\Components\MBO\Objectives\ObjectiveUsersList;
@@ -44,6 +46,7 @@ class ComponentServiceProvider extends ServiceProvider
         Blade::component('campaign-card', CampaignCard::class);
         Blade::component('my-campaigns-summary', MyCampaignsSummary::class);
         Blade::component('campaign-users-list', CampaignUsersList::class);
+        Blade::component('user-campaign-summary', UserCampaignSummary::class);
 
         Blade::component('objectives-list', ObjectivesList::class);
         Blade::component('objective-users-list', ObjectiveUsersList::class);
@@ -56,6 +59,7 @@ class ComponentServiceProvider extends ServiceProvider
         Livewire::component('commentable', CommentComponent::class);
         Livewire::component('notifications', Notifications::class);
         Livewire::component('notification.item', Item::class);
+        Livewire::component('notifications.index', NotificationsIndex::class);
 
         Blade::component('note-card', NoteCard::class);
 

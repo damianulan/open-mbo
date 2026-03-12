@@ -62,6 +62,11 @@ class PageBuilder implements PageContract
         return $this->theme?->current ?: '';
     }
 
+    public function getThemeMode(): string
+    {
+        return $this->theme?->mode ?: 'light';
+    }
+
     public function getThemePath(): string
     {
         return asset('themes/' . $this->getThemeName() . '/app.min.css');
@@ -88,7 +93,13 @@ class PageBuilder implements PageContract
 
     public function getPageTitle(): string
     {
-        return Session::pull('pagetitle', $this->title);
+        return $this->title;
+    }
+
+    public function setPagetitle(string $title): self
+    {
+        $this->title = $title;
+        return $this;
     }
 
     private function assignPageTitle(?string $routename): void

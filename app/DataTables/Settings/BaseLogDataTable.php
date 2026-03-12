@@ -3,10 +3,10 @@
 namespace App\DataTables\Settings;
 
 use App\Exceptions\Core\DataTablesException;
-use App\Support\DataTables\CustomDataTable;
+use App\Support\DataTables\Services\DataTableService;
 use Illuminate\Support\Facades\Route;
 
-class BaseLogDataTable extends CustomDataTable
+class BaseLogDataTable extends DataTableService
 {
     public function subjectView($data)
     {

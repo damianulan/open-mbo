@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Support\DataTables;
+namespace App\Support\DataTables\Repositories;
 
+use App\Support\DataTables\Services\DataTableService;
 use Exception;
 use Illuminate\Http\Request;
 
-class DataTableController
+class DataTableRepository
 {
     public function toExcel(Request $request, $class)
     {
         $dataTable = new $class($request);
 
-        if ($dataTable && $dataTable instanceof CustomDataTable && method_exists($dataTable, 'excel')) {
+        if ($dataTable && $dataTable instanceof DataTableService && method_exists($dataTable, 'excel')) {
             return $dataTable->excel();
         }
 
@@ -22,7 +23,7 @@ class DataTableController
     {
         $dataTable = new $class($request);
 
-        if ($dataTable && $dataTable instanceof CustomDataTable && method_exists($dataTable, 'csv')) {
+        if ($dataTable && $dataTable instanceof DataTableService && method_exists($dataTable, 'csv')) {
             return $dataTable->csv();
         }
 
@@ -33,7 +34,7 @@ class DataTableController
     {
         $dataTable = new $class($request);
 
-        if ($dataTable && $dataTable instanceof CustomDataTable && method_exists($dataTable, 'snappyPdf')) {
+        if ($dataTable && $dataTable instanceof DataTableService && method_exists($dataTable, 'snappyPdf')) {
             return $dataTable->snappyPdf();
         }
 
@@ -44,7 +45,7 @@ class DataTableController
     {
         $dataTable = new $class($request);
 
-        if ($dataTable && $dataTable instanceof CustomDataTable && method_exists($dataTable, 'json')) {
+        if ($dataTable && $dataTable instanceof DataTableService && method_exists($dataTable, 'json')) {
             return $dataTable->json();
         }
 
@@ -55,7 +56,7 @@ class DataTableController
     {
         $dataTable = new $class($request);
 
-        if ($dataTable && $dataTable instanceof CustomDataTable && method_exists($dataTable, 'printPreview')) {
+        if ($dataTable && $dataTable instanceof DataTableService && method_exists($dataTable, 'printPreview')) {
             return $dataTable->printPreview();
         }
 

@@ -88,6 +88,11 @@
             "pl": "Moje cele",
             "en": "My objectives",
             "it": "I miei obiettivi"
+        },
+        "my_points": {
+            "pl": "Moje punkty",
+            "en": "My points",
+            "it": "I miei punti"
         }
     },
     "settings": {

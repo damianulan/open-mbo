@@ -8,6 +8,7 @@ use App\Http\Controllers\Campaigns\CampaignsController;
 use App\Http\Controllers\Campaigns\CampaignUserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ModalController;
+use App\Http\Controllers\MyObjectivesController;
 use App\Http\Controllers\Objectives\ObjectiveCategoryController;
 use App\Http\Controllers\Objectives\ObjectiveController;
 use App\Http\Controllers\Objectives\ObjectiveTemplateController;
@@ -19,11 +20,12 @@ use App\Http\Controllers\Settings\ModuleController;
 use App\Http\Controllers\Settings\NotificationsController;
 use App\Http\Controllers\Settings\Organization\CompanyController;
 use App\Http\Controllers\Settings\Organization\OrganizationController;
+use App\Http\Controllers\Settings\Organization\TeamController;
 use App\Http\Controllers\Settings\ServerController;
 use App\Http\Controllers\UsersController;
 use App\Providers\RouteServiceProvider;
-use App\Support\DataTables\CustomDataTable;
-use App\Support\DataTables\DataTableController;
+use App\Support\DataTables\Repositories\DataTableRepository;
+use App\Support\DataTables\Services\DataTableService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Laraverse\Config\Laraverse;
@@ -89,6 +91,10 @@ Route::middleware(['web', 'auth', 'maintenance', 'navigation'])->group(function 
         Route::get('/activity', [LogController::class, 'myLogs'])->name('logs');
     });
 
+    Route::prefix('my-objectives')->name('my-objectives.')->group(function (): void {
+        Route::get('/', [MyObjectivesController::class, 'index'])->name('index');
+    });
+
     /**
      * Users END
      */
@@ -136,6 +142,14 @@ Route::middleware(['web', 'auth', 'maintenance', 'navigation'])->group(function 
                 Route::get('edit/{company}', [CompanyController::class, 'edit'])->name('edit');
                 Route::put('{company}', [CompanyController::class, 'update'])->name('update');
                 Route::get('delete/{company}', [CompanyController::class, 'delete'])->name('delete');
+            });
+            Route::prefix('team')->name('team.')->middleware('route.gate:users-teams')->group(function (): void {
+                Route::get('/', [TeamController::class, 'index'])->name('index');
+                Route::post('/', [TeamController::class, 'store'])->name('store');
+                Route::get('create', [TeamController::class, 'create'])->name('create');
+                Route::get('edit/{team}', [TeamController::class, 'edit'])->name('edit');
+                Route::put('{team}', [TeamController::class, 'update'])->name('update');
+                Route::get('delete/{team}', [TeamController::class, 'delete'])->name('delete');
             });
         });
     });
@@ -213,12 +227,12 @@ Route::middleware(['web', 'auth', 'maintenance', 'navigation'])->group(function 
     });
 
     Route::prefix('datatables')->name('datatables.')->group(function (): void {
-        Route::post('/save_columns', [CustomDataTable::class, 'saveColumns'])->name('save_columns');
-        Route::get('/excel/{class}', [DataTableController::class, 'toExcel'])->name('excel');
-        Route::get('/csv/{class}', [DataTableController::class, 'toCsv'])->name('csv');
-        Route::get('/pdf/{class}', [DataTableController::class, 'toPdf'])->name('pdf');
-        Route::get('/json/{class}', [DataTableController::class, 'toJson'])->name('json');
-        Route::get('/print/{class}', [DataTableController::class, 'print'])->name('print');
+        Route::post('/save_columns', [DataTableService::class, 'saveColumns'])->name('save_columns');
+        Route::get('/excel/{class}', [DataTableRepository::class, 'toExcel'])->name('excel');
+        Route::get('/csv/{class}', [DataTableRepository::class, 'toCsv'])->name('csv');
+        Route::get('/pdf/{class}', [DataTableRepository::class, 'toPdf'])->name('pdf');
+        Route::get('/json/{class}', [DataTableRepository::class, 'toJson'])->name('json');
+        Route::get('/print/{class}', [DataTableRepository::class, 'print'])->name('print');
     });
 
     Route::prefix('ajax')->name('ajax.')->group(function (): void {

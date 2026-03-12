@@ -2,12 +2,18 @@
 
 namespace App\Console\Commands\Core\Issues\Traits;
 
-use Exception;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 trait StorageIssues
 {
     protected const PATH = 'issues/config.json';
+
+    protected $typeMap = [
+        'feature' => 'feature',
+        'bug' => 'fix',
+        'refactor' => 'refactor',
+    ];
 
     public function validateCommitMessage(string $message): bool
     {
@@ -21,16 +27,16 @@ trait StorageIssues
         return true;
     }
 
-    public function putIssueConfig(string $issue): string
+    public function putIssueConfig(int $id, string $issue, string $type): string
     {
-        $issue = $this->normalizeIssue($issue);
-        if (empty($issue)) {
-            throw new Exception('Empty issue provided');
-        }
+        $type = $this->typeMap[Str::lower($type)];
+        $id = Str::ltrim($id, '#');
+        $message = "$type(#{$id}): $issue";
+
         $path = $this->getIssuePath();
         $config = $this->getConfigContents();
 
-        $config['issue'] = $issue;
+        $config['issue'] = $message;
 
         File::put($path, json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
@@ -60,11 +66,6 @@ trait StorageIssues
     protected function getIssuePath(): string
     {
         return storage_path(self::PATH);
-    }
-
-    private function normalizeIssue(string $issue): string
-    {
-        return $issue;
     }
 
     private function getConfigContents(): array

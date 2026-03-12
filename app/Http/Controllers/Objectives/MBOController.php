@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Objectives;
 
 use App\Http\Controllers\AppController;
+use App\Support\UI\Page\Navigation\Contracts\HasPageNavigation;
 use App\Support\UI\Page\Navigation\MenuItem;
 
 class MBOController extends AppController
 {
+    use HasPageNavigation;
+
     protected function addPageNav(): void
     {
         $this->setPageNav('mbo', [

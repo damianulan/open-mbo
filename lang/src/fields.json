@@ -14,6 +14,21 @@
         "en": "Created",
         "it": "Creato"
     },
+    "current": {
+        "pl": "Aktualne",
+        "en": "Current",
+        "it": "Attuale"
+    },
+    "points": {
+        "pl": "Punkty",
+        "en": "Points",
+        "it": "Punti"
+    },
+    "subject": {
+        "pl": "Źródło",
+        "en": "Source",
+        "it": "Fonte"
+    },
     "email": {
         "pl": "E-mail",
         "en": "Email",

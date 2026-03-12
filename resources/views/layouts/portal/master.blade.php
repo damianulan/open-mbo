@@ -10,7 +10,7 @@
             <section class="page-wrapper">
                 {!! $page->getNavigation()?->renderTopbar() !!}
                 <section class="content-wrapper">
-                    {!! app('page')->getNavigation()?->renderPageNav() !!}
+                    {!! $page->getNavigation()?->renderPageNav() !!}
                     @yield('content')
                 </section>
             </section>

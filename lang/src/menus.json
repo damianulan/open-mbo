@@ -235,11 +235,38 @@
             }
         },
         "organization": {
-            "companies": {
+            "company": {
                 "index": {
                     "pl": "Przedsiębiorstwa",
                     "en": "Companies",
                     "it": "Companies"
+                },
+                "create": {
+                    "pl": "Tworzenie nowego przedsiębiorstwa",
+                    "en": "Create company",
+                    "it": "Create company"
+                },
+                "edit": {
+                    "pl": "Edycja przedsiębiorstwa",
+                    "en": "Edit company",
+                    "it": "Edit company"
+                }
+            },
+            "team": {
+                "index": {
+                    "pl": "Zespoły",
+                    "en": "Teams",
+                    "it": "Teams"
+                },
+                "create": {
+                    "pl": "Tworzenie nowego zespołu",
+                    "en": "Create team",
+                    "it": "Create team"
+                },
+                "edit": {
+                    "pl": "Edycja zespołu",
+                    "en": "Edit team",
+                    "it": "Edit team"
                 }
             },
             "contracts": {
@@ -274,13 +301,6 @@
                 "pl": "Serwer",
                 "en": "Server",
                 "it": "Server"
-            }
-        },
-        "teams": {
-            "index": {
-                "pl": "Zespoły",
-                "en": "Teams",
-                "it": "Teams"
             }
         }
     },

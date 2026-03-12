@@ -5,15 +5,18 @@ namespace App\Models\Business;
 use App\Casts\FormattedText;
 use App\Models\BaseModel;
 use App\Models\Core\User;
+use App\Warden\RolesLib;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Carbon;
+use Sentinel\Models\Role;
 use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property string $id
- * @property string $leader_id
+ * @property string|null $leader_id
  * @property string $name
  * @property mixed|null $description
  * @property Carbon|null $deleted_at
@@ -99,5 +102,67 @@ class Team extends BaseModel
     public function leader(): BelongsTo
     {
         return $this->belongsTo(User::class, 'leader_id');
+    }
+
+    public function leaders(): MorphToMany
+    {
+        return $this->morphToMany(User::class, 'context', 'has_roles', null, 'model_id')
+            ->where('role_id', Role::getId(RolesLib::TEAM_LEADER));
+    }
+
+    public function refreshUsers(?array $usersIds): bool
+    {
+        if (is_null($usersIds)) {
+            $usersIds = [];
+        }
+
+        $this->users()->sync($usersIds);
+
+        return true;
+    }
+
+    public function refreshLeaderRoles(?array $leaderIds): bool
+    {
+        if (is_null($leaderIds)) {
+            $leaderIds = [];
+        }
+
+        $current = $this->leaders->pluck('id')->toArray();
+        $toDelete = array_filter($current, fn ($value) => ! in_array($value, $leaderIds));
+        $toAdd = array_filter($leaderIds, fn ($value) => ! in_array($value, $current));
+
+        foreach ($toDelete as $leaderId) {
+            $leader = User::find($leaderId);
+            if ($leader?->exists) {
+                $leader->revokeRoleSlug(RolesLib::TEAM_LEADER, $this);
+            }
+        }
+
+        foreach ($toAdd as $leaderId) {
+            $leader = User::find($leaderId);
+            if ($leader?->exists) {
+                $leader->assignRoleSlug(RolesLib::TEAM_LEADER, $this);
+            }
+        }
+
+        return true;
+    }
+
+    public function revokeLeadersRoles(): bool
+    {
+        foreach ($this->leaders as $leader) {
+            $leader->revokeRoleSlug(RolesLib::TEAM_LEADER, $this);
+        }
+
+        return true;
+    }
+
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        static::deleting(function (Team $team): void {
+            $team->revokeLeadersRoles();
+        });
     }
 }

@@ -13,9 +13,9 @@ use App\Providers\EventServiceProvider;
 use App\Providers\GateServiceProvider;
 use App\Providers\MacroServiceProvider;
 use App\Providers\RouteServiceProvider;
+use App\Support\Filters\Providers\FiltersServiceProvider;
 use App\Support\Http\ResponseAjax;
 use App\Support\UI\Page\PageBuilder;
-use App\Support\UI\Page\PageServiceProvider;
 use App\Support\UI\Theme\Theme;
 use Barryvdh\Debugbar\ServiceProvider;
 use Illuminate\Auth\AuthServiceProvider;
@@ -299,7 +299,7 @@ return [
         \App\Providers\NotificationServiceProvider::class,
         GateServiceProvider::class,
         ImpersonateServiceProvider::class,
-        PageServiceProvider::class,
+        FiltersServiceProvider::class,
     ],
 
     /*
