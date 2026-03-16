@@ -8,7 +8,7 @@ use App\Http\Controllers\Campaigns\CampaignsController;
 use App\Http\Controllers\Campaigns\CampaignUserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ModalController;
-use App\Http\Controllers\MyObjectivesController;
+use App\Http\Controllers\Objectives\MyObjectivesController;
 use App\Http\Controllers\Objectives\ObjectiveCategoryController;
 use App\Http\Controllers\Objectives\ObjectiveController;
 use App\Http\Controllers\Objectives\ObjectiveTemplateController;

@@ -70,7 +70,7 @@ class UserObjectiveController extends AppController
     {
         $objective = Objective::findOrFail($id);
 
-        $response = $form::validateJson($request, $id);
+        $response = $form->validateJson($request, $id);
         if ('ok' === $response['status']) {
 
             $service = BulkAssignUsers::boot(request: $request, objective: $objective)->execute();

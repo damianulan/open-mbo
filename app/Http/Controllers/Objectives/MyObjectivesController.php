@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Objectives;
 
 use App\Enums\MBO\UserObjectiveStatus;
 use App\Models\MBO\UserCampaign;
@@ -8,14 +8,16 @@ use App\Models\MBO\UserObjective;
 use App\Models\MBO\UserPoints;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
+use App\Http\Controllers\AppController;
+use Illuminate\Contracts\Support\Renderable;
 
 class MyObjectivesController extends AppController
 {
-    public function index(Request $request): View
+    public function index(Request $request): Renderable
     {
         $user = $request->user();
 
+        $this->setPagetitle(__('menus.my_objectives.index'));
         $inactiveStatuses = UserObjectiveStatus::inactive();
 
         $userObjectives = UserObjective::query()
