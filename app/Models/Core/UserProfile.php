@@ -14,15 +14,12 @@ use Illuminate\Support\Carbon;
  * @property int $id
  * @property string $user_id
  * @property string|null $birthday
- * @property mixed|null $phone
+ * @property string|null $phone
  * @property string|null $avatar
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
- * @property mixed $nin
- * @property mixed $gender
- * @property-read User $user
- *
+ * @property-read \App\Models\Core\User $user
  * @method static \Database\Factories\Core\UserProfileFactory factory($count = null, $state = [])
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|UserProfile newModelQuery()
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|UserProfile newQuery()
@@ -39,7 +36,6 @@ use Illuminate\Support\Carbon;
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|UserProfile whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class UserProfile extends Model

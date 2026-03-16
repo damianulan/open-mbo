@@ -24,11 +24,12 @@ use Spatie\Activitylog\Models\Activity;
  * @property Carbon|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read User $leader
+ * @property-read User|null $leader
+ * @property-read Collection<int, User> $leaders
+ * @property-read int|null $leaders_count
  * @property-read mixed $trans
  * @property-read Collection<int, User> $users
  * @property-read int|null $users_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team avg(string $column)
@@ -39,6 +40,7 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team createMany(array $records)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team deleteQuietly()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team drafted()
+ * @method static \Database\Factories\Business\TeamFactory factory($count = null, $state = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team firstFromCache($columns = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team flushCache($columns = [])
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team flushQueryCache($columns = [])
@@ -79,7 +81,6 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Team extends BaseModel
