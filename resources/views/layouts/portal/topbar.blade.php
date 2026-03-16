@@ -65,7 +65,7 @@
                     </div>
                     <ul class="dropdown-menu">
                         <li><a href="{{ route('profile.index') }}" class="dropdown-item"><i class="bi-person me-2"></i>{{ __('menus.edit_profile') }}</a></li>
-                        <li><a href="{{ route('profile.logs') }}" class="dropdown-item"><i class="bi-activity me-2"></i>{{ __('menus.activity') }}</a></li>
+                        <li><a href="{{ route('activity.index') }}" class="dropdown-item"><i class="bi-activity me-2"></i>{{ __('menus.activity') }}</a></li>
                         <li>
                             <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="bi-person-walking me-2"></i>{{ __('menus.logout') }}

@@ -89,9 +89,15 @@ Route::middleware(['web', 'auth', 'maintenance', 'navigation'])->group(function 
     Route::prefix('profile')->name('profile.')->group(function (): void {
         Route::get('/', [ProfileController::class, 'index'])->name('index');
         Route::post('/', [ProfileController::class, 'update'])->name('update');
-        Route::get('/preferences', [ProfileController::class, 'preferences'])->name('preferences');
-        Route::post('/preferences', [ProfileController::class, 'updatePreferences'])->name('preferences.update');
-        Route::get('/activity', [LogController::class, 'myLogs'])->name('logs');
+    });
+
+    Route::prefix('preferences')->name('preferences.')->group(function (): void {
+        Route::get('/', [ProfileController::class, 'preferences'])->name('index');
+        Route::post('/', [ProfileController::class, 'updatePreferences'])->name('update');
+    });
+
+    Route::prefix('activity')->name('activity.')->group(function (): void {
+        Route::get('/', [ProfileController::class, 'myLogs'])->name('index');
     });
 
     Route::prefix('my-objectives')->name('my-objectives.')->group(function (): void {

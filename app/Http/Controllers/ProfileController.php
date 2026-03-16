@@ -6,14 +6,22 @@ use App\Forms\Users\ProfileEditForm;
 use App\Forms\Users\ProfilePreferencesForm;
 use App\Models\Core\UserPreference;
 use App\Models\Core\UserProfile;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Support\UI\Page\Navigation\Contracts\HasPageNavigation;
+use App\Support\UI\Page\Navigation\MenuItem;
+use App\DataTables\Settings\MyLogsDataTable;
 
 class ProfileController extends AppController
 {
-    public function index(Request $request, ProfileEditForm $form)
+    use HasPageNavigation;
+
+    public function index(Request $request, ProfileEditForm $form): Renderable
     {
+        $this->addPageNav();
+
         return view('pages.profile.index', [
             'form' => $form->setModel($request->user())->getDefinition(),
         ]);
@@ -51,6 +59,9 @@ class ProfileController extends AppController
 
     public function preferences(Request $request, ProfilePreferencesForm $form)
     {
+        $this->addPageNav();
+        $this->setPagetitle(__('menus.preferences'));
+
         return view('pages.profile.preferences', [
             'form' => $form->setModel($request->user())->getDefinition(),
         ]);
@@ -83,9 +94,34 @@ class ProfileController extends AppController
         $preferences->system_notifications = $request->boolean('system_notifications');
 
         if ($preferences->save()) {
-            return redirect()->route('profile.preferences')->with('success', __('alerts.success.operation'));
+            return redirect()->route('preferences.index')->with('success', __('alerts.success.operation'));
         }
 
-        return redirect()->route('profile.preferences')->with('error', __('alerts.error.operation'));
+        return redirect()->route('preferences.index')->with('error', __('alerts.error.operation'));
+    }
+
+    public function myLogs(MyLogsDataTable $dataTable)
+    {
+        $this->addPageNav();
+        $this->setPagetitle(__('menus.activity'));
+
+        return $dataTable->render('pages.profile.my_logs', [
+            'table' => $dataTable,
+        ]);
+    }
+
+    public function addPageNav(): void
+    {
+        $this->setPageNav('profile', [
+            MenuItem::make('edit')
+                ->setTitle(__('menus.profile.edit'))
+                ->setRoute('profile.index'),
+            MenuItem::make('preferences')
+                ->setTitle(__('menus.preferences'))
+                ->setRoute('preferences.index'),
+            MenuItem::make('activity')
+                ->setTitle(__('menus.profile.logs'))
+                ->setRoute('activity.index'),
+        ]);
     }
 }
