@@ -2,28 +2,31 @@
 
 namespace App\Enums\Users;
 
-use Enumerable\Laravel\Enum;
+use App\Support\Concerns\EnumHasValues;
 
-class UserStatus extends Enum
+enum UserStatus: string
 {
-    public const ACTIVE = 'active';
+    use EnumHasValues;
 
-    public const SUSPENDED = 'suspended';
+    case ACTIVE = 'active';
 
-    public const DELETED = 'deleted';
+    case SUSPENDED = 'suspended';
 
-    public const UNVERIFIED = 'unverified';
+    case DELETED = 'deleted';
 
-    public const UNEMPLOYED = 'unemployed';
+    case UNVERIFIED = 'unverified';
 
-    public static function labels(): array
+    case UNEMPLOYED = 'unemployed';
+
+    public function label(): ?string
     {
-        return [
-            self::ACTIVE => __('fields.user_status.' . self::ACTIVE),
-            self::SUSPENDED => __('fields.user_status.' . self::SUSPENDED),
-            self::DELETED => __('fields.user_status.' . self::DELETED),
-            self::UNVERIFIED => __('fields.user_status.' . self::UNVERIFIED),
-            self::UNEMPLOYED => __('fields.user_status.' . self::UNEMPLOYED),
-        ];
+        return match ($this) {
+            self::ACTIVE => __('fields.user_status.' . self::ACTIVE->value),
+            self::SUSPENDED => __('fields.user_status.' . self::SUSPENDED->value),
+            self::DELETED => __('fields.user_status.' . self::DELETED->value),
+            self::UNVERIFIED => __('fields.user_status.' . self::UNVERIFIED->value),
+            self::UNEMPLOYED => __('fields.user_status.' . self::UNEMPLOYED->value),
+            default => null,
+        };
     }
 }

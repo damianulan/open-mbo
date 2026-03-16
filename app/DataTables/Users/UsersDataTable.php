@@ -39,25 +39,21 @@ class UsersDataTable extends DataTableService
                 switch ($data->status) {
                     case UserStatus::SUSPENDED:
                         $color = 'dark';
-                        $text = $data->status->label;
                         break;
                     case UserStatus::DELETED:
                         $color = 'danger';
-                        $text = $data->status->label;
                         break;
                     case UserStatus::UNVERIFIED:
                         $color = 'warning';
-                        $text = $data->status->label;
                         break;
                     case UserStatus::UNEMPLOYED:
                         $color = 'secondary';
-                        $text = $data->status->label;
                         break;
                     default:
                         $color = 'primary';
-                        $text = $data->status->label;
                         break;
                 }
+                $text = $data->status->label();
 
                 return view('components.datatables.badge', [
                     'color' => $color,
