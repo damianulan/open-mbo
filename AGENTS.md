@@ -252,11 +252,9 @@ protected function isAccessible(User $user, ?string $path = null): bool
 
 ## Pest
 
-- This project uses Pest for testing. Create tests: `php artisan make:test --pest {name}`.
+- This project uses PHPUnit for testing. Create tests: `php artisan make:test --unit {name}`.
 - Run tests: `php artisan test --compact` or filter: `php artisan test --compact --filter=testName`.
 - Do NOT delete tests without approval.
-- CRITICAL: ALWAYS use `search-docs` tool for version-specific Pest documentation and updated code examples.
-- IMPORTANT: Activate `pest-testing` every time you're working with a Pest or testing-related task.
 
 === spatie/boost-spatie-guidelines rules ===
 

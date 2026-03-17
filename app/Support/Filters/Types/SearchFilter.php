@@ -61,7 +61,8 @@ class SearchFilter extends BaseFilter implements FilterContract, FilterSearchTyp
 
     private function loadValue($value): void
     {
-        $this->value = null === $value ? Request::input('filters.' . $this->key, null) : $value;
+        $request = Request::has($this->key) ? Request::input($this->key, null) : Request::input('filters.' . $this->key, null);
+        $this->value = null === $value ? $request : $value;
     }
 
     private function loadLabel($label): void

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Campaigns;
 
+use App\Filters\MBO\CampaignNameFilter;
 use App\Forms\MBO\Campaign\CampaignEditForm;
 use App\Http\Controllers\AppController;
 use App\Models\MBO\Campaign;
 use App\Services\Campaigns\CreateOrUpdate;
+use App\Support\Filters\Services\FilterService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -21,10 +23,14 @@ class CampaignsController extends AppController
         }
         $this->logView('Wyświetlono listę kampanii pomiarowych');
 
-        $campaigns = Campaign::orderByStatus()->paginate(30);
+        $filterService = new FilterService([
+            new CampaignNameFilter(),
+        ]);
+        $campaigns = Campaign::orderByStatus()->registerFilters($filterService)->paginate(30);
 
         return view('pages.mbo.campaigns.index', [
             'campaigns' => $campaigns,
+            'filters' => $filterService->getForm(),
         ]);
     }
 

@@ -23,7 +23,7 @@ class FilterFormFactory extends Form
 
     public function definition(FormBuilder $builder): FormBuilder
     {
-        $builder->setMethod('POST')
+        $builder->setMethod('GET')
             ->setTemplate('grid');
 
         foreach ($this->service->getItems() as $item) {
@@ -39,7 +39,7 @@ class FilterFormFactory extends Form
     {
         switch ($filter) {
             case $filter instanceof FilterSearchType:
-                $component = FormComponent::text($filter->getKey())->label($filter->getLabel())->col(4);
+                $component = FormComponent::text($filter->getKey(), $filter->getValue())->label($filter->getLabel())->col(4);
                 break;
 
             default:
