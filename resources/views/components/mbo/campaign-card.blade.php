@@ -59,13 +59,13 @@
                 <div class="element">
                     <div class="element-title" data-tippy-content="{{ __('mbo.num_participants') }}">
                         <i class="bi bi-people-fill me-2"></i>
-                        <span>{{ $campaign->user_campaigns()->count() }}</span>
+                        <span>{{ $campaign->user_campaigns_count ?? $campaign->user_campaigns()->count() }}</span>
                     </div>
                 </div>
                 <div class="element">
                     <div class="element-title" data-tippy-content="{{ __('mbo.general_objectives') }}">
                         <i class="bi bi-crosshair me-2"></i>
-                        <span>{{ $campaign->objectives()->count() }}</span>
+                        <span>{{ $campaign->objectives_count ?? $campaign->objectives()->count() }}</span>
                     </div>
                 </div>
             </div>

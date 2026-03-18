@@ -1,7 +1,9 @@
 <nav id="topbar" class="page-top">
-    <div class="ms-2">
-        {{ $breadcrumbs }}
-    </div>
+    @if($breadcrumbs)
+        <div class="ms-2">
+            {!! $breadcrumbs !!}
+        </div>
+    @endif
     <div class="page-top-elements">
         @if($page->getNavigation()->hasSidebar())
             <div class="togglers">

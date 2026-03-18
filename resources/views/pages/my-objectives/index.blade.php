@@ -1,187 +1,217 @@
 @extends('layouts.portal.master')
 @section('content')
+<div class="d-flex flex-column gap-3">
+    <section>
+        <h2 class="text-serif mb-1">{{ __('globals.hello') }}, {{ $user->firstname }}</h2>
+        <p class="text-muted mb-0">{{ __('menus.my_objectives.index') }}</p>
+    </section>
 
-<div>
-    <div class="row">
-        <div class="col-md-12">
-            <h2 class="text-serif">{{ __('globals.hello') }}, {{ auth()->user()->firstname }}</h2>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-lg-8">
-        <div class="content-card content-card-sm">
-            <div class="content-card-top">
-                <div class="content-card-header">
-                    <i class="bi-clipboard-check-fill me-2"></i>
-                    <div>{{ __('pages.home.my_objectives') }}</div>
-                </div>
-                <div class="content-card-icons ms-auto">
-                    <i class="minimize"></i>
+    <section class="row g-3">
+        <div class="col-6 col-xl-3">
+            <div class="content-card content-card-sm h-100">
+                <div class="content-card-body">
+                    <div class="text-muted small">{{ __('pages.home.my_objectives') }}</div>
+                    <div class="fs-3 fw-bold">{{ $userObjectives->count() }}</div>
                 </div>
             </div>
-            <div class="content-card-body">
-                @if($objectiveStatusCounts->count())
-                    <div class="d-flex flex-wrap gap-2 mb-3">
-                        @foreach($objectiveStatusCounts as $status => $count)
-                            <span class="badge badge-{{ $status }}">{{ __('mbo.objective_status.' . $status) }}: {{ $count }}</span>
-                        @endforeach
-                    </div>
-                @endif
+        </div>
+        <div class="col-6 col-xl-3">
+            <div class="content-card content-card-sm h-100">
+                <div class="content-card-body">
+                    <div class="text-muted small">{{ __('fields.current') }}</div>
+                    <div class="fs-3 fw-bold">{{ $activeObjectivesCount }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-xl-3">
+            <div class="content-card content-card-sm h-100">
+                <div class="content-card-body">
+                    <div class="text-muted small">{{ __('forms.campaigns.info.completed') }}</div>
+                    <div class="fs-3 fw-bold">{{ $completedObjectivesCount }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-xl-3">
+            <div class="content-card content-card-sm h-100">
+                <div class="content-card-body">
+                    <div class="text-muted small">{{ __('pages.home.my_points') }}</div>
+                    <div class="fs-3 fw-bold text-highlight">{{ float_view($totalPoints) }}{{ __('globals.pnts') }}</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                @if($userObjectives->count())
-                    <ul class="ombo-list">
-                        @foreach($userObjectives as $userObjective)
-                            @php
-                                $objective = $userObjective->getRelation('objective');
-                                $statusColor = $objective ? $userObjective->getStatusColor() : '';
-                            @endphp
-                            <li class="{{ $statusColor }}">
-                                <div class="list-grid">
-                                    <div class="list-content">
-                                        <div class="nowrap d-flex gap-2 align-items-center" data-tippy-content="{{ $objective?->name ?? '-' }}">
-                                            <i class="bi text-primary {{ $objective?->campaign_id ? 'bi-bullseye':'bi-crosshair' }}"></i>
-                                            <div>{{ $objective?->name ?? '-' }}</div>
-                                            <div class="ms-auto">
+    <section class="row g-3 align-items-start">
+        <div class="col-12 col-xl-8">
+            <div class="content-card content-card-sm">
+                <div class="content-card-top">
+                    <div class="content-card-header">
+                        <i class="bi-clipboard-check-fill me-2"></i>
+                        <div>{{ __('pages.home.my_objectives') }}</div>
+                    </div>
+                </div>
+                <div class="content-card-body">
+                    @if($objectiveStatusCounts->count())
+                        <div class="d-flex flex-wrap gap-2 mb-3">
+                            @foreach($objectiveStatusCounts as $status => $count)
+                                <span class="badge badge-{{ $status }}">{{ __('mbo.objective_status.' . $status) }}: {{ $count }}</span>
+                            @endforeach
+                        </div>
+                    @endif
+
+                    @if($userObjectives->isEmpty())
+                        <p class="text-primary mb-0">{{ __('mbo.info.no_objectives_added') }}</p>
+                    @else
+                        <div class="d-grid gap-3">
+                            @foreach($userObjectives as $userObjective)
+                                @php
+                                    $objective = $userObjective->getRelation('objective');
+                                    $campaign = $objective?->campaign;
+                                    $gainedPoints = (float) ($userObjective->gained_points ?? 0);
+                                @endphp
+
+                                <article class="border rounded-3 p-3 h-100">
+                                    <div class="d-flex flex-column flex-md-row gap-3 align-items-start">
+                                        <div class="flex-grow-1 min-w-0">
+                                            <div class="d-flex flex-wrap gap-2 align-items-center mb-2">
+                                                <i class="bi text-primary {{ $objective?->campaign_id ? 'bi-bullseye' : 'bi-crosshair' }}"></i>
+                                                <a href="{{ route('objectives.assignment.show', $userObjective->id) }}" class="fw-semibold text-reset text-decoration-none">
+                                                    {{ $objective?->name ?? '-' }}
+                                                </a>
                                                 <span class="badge badge-{{ $userObjective->status }}">{{ $userObjective->getStatusLabel() }}</span>
                                             </div>
+
+                                            @if($objective?->description)
+                                                <div class="text-muted small mb-3">
+                                                    {{ str(strip_tags($objective->description))->squish()->limit(180) }}
+                                                </div>
+                                            @endif
+
+                                            <div class="d-flex flex-wrap gap-2">
+                                                @if($objective?->category)
+                                                    <span class="badge bg-secondary">{{ $objective->category->name }}</span>
+                                                @endif
+
+                                                @if($campaign)
+                                                    <span class="badge bg-light text-dark border">{{ $campaign->name }}{{ $campaign->period ? ' · ' . $campaign->period : '' }}</span>
+                                                @endif
+
+                                                @if($userObjective->evaluation)
+                                                    <span class="badge bg-light text-dark border">
+                                                        {{ __('forms.mbo.objectives.evaluation') }}: {{ percent_view($userObjective->evaluation) }}
+                                                    </span>
+                                                @endif
+
+                                                @if($objective?->award)
+                                                    <span class="badge bg-light text-dark border">
+                                                        {{ __('forms.mbo.objectives.award') }}: {{ float_view($gainedPoints) }} / {{ float_view($objective->award) }}{{ __('globals.pnts') }}
+                                                    </span>
+                                                @endif
+
+                                                @if($objective?->deadline)
+                                                    <span class="badge {{ $objective->isOverdued() && ! $userObjective->isCompleted() ? 'bg-warning text-dark' : 'bg-light text-dark border' }}">
+                                                        {{ $objective->deadline->format(config('app.datetime_format')) }}
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="w-100 d-grid d-md-block">
+                                            <a href="{{ route('objectives.assignment.show', $userObjective->id) }}" class="btn btn-outline-primary btn-sm">
+                                                <i class="bi bi-eye-fill me-1"></i>{{ __('buttons.preview') }}
+                                            </a>
                                         </div>
                                     </div>
-                                    <div class="list-actions">
-                                        @if($userObjective->evaluation)
-                                            <div class="list-action" data-tippy-content="{{ __('forms.mbo.objectives.evaluation') }}">
-                                                <span>{{ percent_view($userObjective->evaluation) }}</span>
-                                            </div>
-                                        @endif
-                                        @if($objective?->award)
-                                            <div class="list-action" data-tippy-content="{{ __('forms.mbo.objectives.award') }}">
-                                                <x-icon key="award" />
-                                                <span>{{ float_view($userObjective->points?->points ?? 0) }} / {{ float_view($objective->award) }}{{ __('globals.pnts') }}</span>
-                                            </div>
-                                        @endif
-                                        @if($objective?->deadline)
-                                            <div class="list-action" data-tippy-content="{{ __('forms.mbo.objectives.deadline_to', ['term' => $objective->deadline->format(config('app.datetime_format'))]) }}">
-                                                <x-icon key="calendar2-week-fill" />
-                                            </div>
-                                        @endif
-                                        <a href="{{ route('objectives.assignment.show', $userObjective->id) }}" class="list-action" data-tippy-content="{{ __('buttons.preview') }}">
-                                            <x-icon key="eye-fill" />
-                                        </a>
+                                </article>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-xl-4">
+            <div class="content-card content-card-sm">
+                <div class="content-card-top">
+                    <div class="content-card-header">
+                        <i class="bi-award-fill me-2"></i>
+                        <div>{{ __('pages.home.my_points') }}</div>
+                    </div>
+                </div>
+                <div class="content-card-body">
+                    <div class="border rounded-3 p-3 mb-3">
+                        <div class="text-muted small">{{ __('fields.points') }}</div>
+                        <div class="fs-3 fw-bold text-highlight">{{ float_view($totalPoints) }}{{ __('globals.pnts') }}</div>
+                    </div>
+
+                    @if($recentPoints->isEmpty())
+                        <div class="text-muted">{{ __('globals.no_data') }}</div>
+                    @else
+                        <div class="d-grid gap-2">
+                            @foreach($recentPoints as $points)
+                                @php
+                                    $subjectLabel = class_basename($points->subject_type);
+                                    $subjectUrl = null;
+
+                                    if ($points->subject instanceof \App\Models\MBO\UserObjective) {
+                                        $subjectLabel = $points->subject->objective?->name ?? $subjectLabel;
+                                        $subjectUrl = route('objectives.assignment.show', $points->subject->id);
+                                    }
+
+                                    if ($points->subject instanceof \App\Models\MBO\UserCampaign) {
+                                        $subjectLabel = $points->subject->campaign?->name ?? $subjectLabel;
+                                        $subjectUrl = route('campaigns.users.show', $points->subject->id);
+                                    }
+                                @endphp
+
+                                <div class="border rounded-3 p-3">
+                                    <div class="d-flex justify-content-between gap-3 align-items-start">
+                                        <div class="min-w-0">
+                                            <div class="text-muted small mb-1">{{ $points->created_at?->format(config('app.datetime_format')) ?? '-' }}</div>
+                                            @if($subjectUrl)
+                                                <a href="{{ $subjectUrl }}" class="fw-semibold text-reset text-decoration-none">{{ $subjectLabel }}</a>
+                                            @else
+                                                <div class="fw-semibold">{{ $subjectLabel }}</div>
+                                            @endif
+                                        </div>
+                                        <span class="badge bg-success">+{{ float_view($points->points ?? 0) }}{{ __('globals.pnts') }}</span>
                                     </div>
                                 </div>
-                            </li>
-                        @endforeach
-                    </ul>
-                @else
-                    <div><p class="text-primary">{{ __('mbo.info.no_objectives_added') }}</p></div>
-                @endif
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="col-lg-4 col-sm-12">
-        <div class="content-card content-card-sm">
-            <div class="content-card-top">
-                <div class="content-card-header">
-                    <i class="bi-award-fill me-2"></i>
-                    <div>{{ __('pages.home.my_points') }}</div>
-                </div>
-                <div class="content-card-icons ms-auto">
-                    <i class="minimize"></i>
-                </div>
-            </div>
-            <div class="content-card-body">
-                <div class="d-flex align-items-center gap-2 mb-3">
-                    <div class="text-secondary">{{ __('fields.points') }}:</div>
-                    <div class="text-highlight fw-bold fs-4">{{ float_view($totalPoints) }}{{ __('globals.pnts') }}</div>
-                </div>
-
-                @if($recentPoints->count())
-                    <div class="table-responsive">
-                        <table class="table table-sm table-striped align-middle">
-                            <thead>
-                                <tr>
-                                    <th>{{ __('fields.created_at') }}</th>
-                                    <th>{{ __('fields.points') }}</th>
-                                    <th>{{ __('fields.subject') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($recentPoints as $points)
-                                    @php
-                                        $subjectLabel = class_basename($points->subject_type);
-                                        $subjectUrl = null;
-
-                                        if ($points->subject instanceof \App\Models\MBO\UserObjective) {
-                                            $subjectLabel = $points->subject->objective?->name ?? $subjectLabel;
-                                            $subjectUrl = route('objectives.assignment.show', $points->subject->id);
-                                        }
-
-                                        if ($points->subject instanceof \App\Models\MBO\UserCampaign) {
-                                            $subjectLabel = $points->subject->campaign?->name ?? $subjectLabel;
-                                            $subjectUrl = route('campaigns.users.show', $points->subject->id);
-                                        }
-                                    @endphp
-                                    <tr>
-                                        <td>{{ $points->created_at?->format(config('app.datetime_format')) ?? '-' }}</td>
-                                        <td>{{ float_view($points->points ?? 0) }}{{ __('globals.pnts') }}</td>
-                                        <td>
-                                            @if($subjectUrl)
-                                                <a href="{{ $subjectUrl }}">{{ $subjectLabel }}</a>
-                                            @else
-                                                {{ $subjectLabel }}
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                @else
-                    <div class="text-muted">{{ __('globals.no_data') }}</div>
-                @endif
+    <section class="content-card content-card-sm">
+        <div class="content-card-top">
+            <div class="content-card-header">
+                <i class="bi-bullseye me-2"></i>
+                <div>{{ __('pages.home.my_campaigns') }}</div>
             </div>
         </div>
-    </div>
+        <div class="content-card-body">
+            @if($userCampaigns->isEmpty())
+                <div class="text-muted">{{ __('globals.no_data') }}</div>
+            @else
+                <div class="row g-3">
+                    @foreach($userCampaigns as $userCampaign)
+                        @php
+                            $campaign = $userCampaign->getRelation('campaign');
+                        @endphp
+                        <div class="col-12 col-md-6 col-xl-4">
+                            @if($campaign)
+                                <x-campaign-card :campaign="$campaign" :userCampaign="$userCampaign" />
+                            @else
+                                <div class="text-muted">{{ __('globals.not_applicable') }}</div>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+        </div>
+    </section>
 </div>
-
-<div class="row mt-3">
-    <div class="col-12">
-        <div class="content-card content-card-sm">
-            <div class="content-card-top">
-                <div class="content-card-header">
-                    <i class="bi-bullseye me-2"></i>
-                    <div>{{ __('pages.home.my_campaigns') }}</div>
-                </div>
-                <div class="content-card-icons ms-auto">
-                    <i class="minimize"></i>
-                </div>
-            </div>
-            <div class="content-card-body">
-                @if($userCampaigns->count())
-                    <div class="row g-3">
-                        @foreach($userCampaigns as $userCampaign)
-                            @php
-                                $campaign = $userCampaign->getRelation('campaign');
-                            @endphp
-                            <div class="col-xl-4 col-md-6 col-sm-12">
-                                @if($campaign)
-                                    <x-campaign-card :campaign="$campaign" :userCampaign="$userCampaign" />
-                                @else
-                                    <div class="text-muted">{{ __('globals.not_applicable') }}</div>
-                                @endif
-                            </div>
-                        @endforeach
-                    </div>
-                @else
-                    <div class="text-muted">{{ __('globals.no_data') }}</div>
-                @endif
-            </div>
-        </div>
-    </div>
-</div>
-
 @endsection
-@push('scripts')
-@endpush

@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Objectives;
 
 use App\Enums\MBO\UserObjectiveStatus;
+use App\Http\Controllers\AppController;
 use App\Models\MBO\UserCampaign;
 use App\Models\MBO\UserObjective;
 use App\Models\MBO\UserPoints;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Http\Request;
-use App\Http\Controllers\AppController;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\Request;
 
 class MyObjectivesController extends AppController
 {
@@ -24,10 +23,8 @@ class MyObjectivesController extends AppController
             ->my($user)
             ->join('objectives', 'objectives.id', '=', 'user_objectives.objective_id')
             ->where('objectives.draft', 0)
-            ->with([
-                'points',
-            ])
             ->select('user_objectives.*')
+            ->withSum('pointEntries as gained_points', 'points')
             ->orderByRaw(
                 "CASE WHEN user_objectives.status IN ('" . implode("','", $inactiveStatuses) . "') THEN 1 ELSE 0 END ASC",
             )
@@ -38,7 +35,10 @@ class MyObjectivesController extends AppController
 
         $userObjectives->load([
             'objective' => function ($query): void {
-                $query->withoutGlobalScopes()->with(['campaign', 'category']);
+                $query->withoutGlobalScopes()->with([
+                    'campaign' => fn ($campaignQuery) => $campaignQuery->withoutGlobalScopes(),
+                    'category',
+                ]);
             },
         ]);
 
@@ -48,7 +48,10 @@ class MyObjectivesController extends AppController
 
         $userCampaigns->load([
             'campaign' => function ($query): void {
-                $query->withoutGlobalScopes();
+                $query->withoutGlobalScopes()->withCount([
+                    'user_campaigns',
+                    'objectives',
+                ]);
             },
         ]);
 
@@ -58,16 +61,26 @@ class MyObjectivesController extends AppController
 
         $recentPoints = UserPoints::query()
             ->whereUserId($user->id)
-            ->with(['assigner'])
-            ->with(['subject' => function (MorphTo $morphTo): void {
-                $morphTo->morphWith([
-                    UserObjective::class => ['objective'],
-                    UserCampaign::class => ['campaign'],
-                ]);
-            }])
+            ->with([
+                'assigner',
+                'subject',
+            ])
             ->latest()
             ->limit(10)
             ->get();
+
+        $recentPoints->loadMorph('subject', [
+            UserObjective::class => [
+                'objective' => fn ($query) => $query->withoutGlobalScopes(),
+            ],
+            UserCampaign::class => [
+                'campaign' => fn ($query) => $query->withoutGlobalScopes(),
+            ],
+        ]);
+
+        $completedObjectivesCount = $userObjectives
+            ->filter(fn (UserObjective $userObjective) => $userObjective->isCompleted())
+            ->count();
 
         return view('pages.my-objectives.index', [
             'user' => $user,
@@ -76,6 +89,8 @@ class MyObjectivesController extends AppController
             'totalPoints' => $totalPoints,
             'recentPoints' => $recentPoints,
             'objectiveStatusCounts' => $userObjectives->countBy('status'),
+            'completedObjectivesCount' => $completedObjectivesCount,
+            'activeObjectivesCount' => $userObjectives->count() - $completedObjectivesCount,
         ]);
     }
 }

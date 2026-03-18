@@ -10,14 +10,14 @@
         <li><div class="dropdown-header">{{ __('globals.notifications') }}</div></li>
         @if($this->notifications && $this->notifications->count())
             @foreach ($this->notifications as $notification)
-                <livewire:notification.item :notification="$notification" wire:key="notification_{{ str()->random(15) }}"/>
+                <livewire:notification.item :notification="$notification" wire:key="notification_{{ $notification->id }}"/>
             @endforeach
         @else
             <li>
                 <div class="dropdown-header" style="white-space: normal;"><strong>{{ __('notifications.info.empty') }}</strong></div>
             </li>
         @endif
-        <li class="notification-li"><div class="dropdown-footer"><a href="#" class="link-muted">{{ __('notifications.info.show_all') }}</a></div></li>
+        <li class="notification-li"><div class="dropdown-footer"><a href="{{ route('notifications.index') }}" class="link-muted">{{ __('notifications.info.show_all') }}</a></div></li>
     </ul>
 </div>
 @push('custom-scripts')

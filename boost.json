@@ -11,6 +11,7 @@
     ],
     "sail": false,
     "skills": [
+        "scout-development",
         "livewire-development",
         "pest-testing",
         "spatie-laravel-php-standards"

@@ -19,6 +19,21 @@
             "en": "Your notifications inbox is empty; no messages have been received yet.",
             "it": "La tua casella notifiche è vuota; non sono ancora stati ricevuti messaggi."
         },
+        "new": {
+            "pl": "nowe",
+            "en": "new",
+            "it": "nuova"
+        },
+        "preview": {
+            "pl": "Podgląd powiadomienia",
+            "en": "Notification preview",
+            "it": "Anteprima notifica"
+        },
+        "preview_empty": {
+            "pl": "Wybierz powiadomienie z listy, aby zobaczyć pełną treść.",
+            "en": "Select a notification from the list to see the full content.",
+            "it": "Seleziona una notifica dall'elenco per vedere il contenuto completo."
+        },
         "show_all": {
             "pl": "Pokaż wszystkie",
             "en": "Show all",

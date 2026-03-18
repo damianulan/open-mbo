@@ -26,6 +26,7 @@ use App\Http\Controllers\Settings\Organization\PositionController;
 use App\Http\Controllers\Settings\Organization\TeamController;
 use App\Http\Controllers\Settings\ServerController;
 use App\Http\Controllers\UsersController;
+use App\Livewire\Notifications\Index as UserNotificationsIndex;
 use App\Providers\RouteServiceProvider;
 use App\Support\DataTables\Repositories\DataTableRepository;
 use App\Support\DataTables\Services\DataTableService;
@@ -96,6 +97,8 @@ Route::middleware(['web', 'auth', 'maintenance', 'navigation'])->group(function 
         Route::post('/', [ProfileController::class, 'updatePreferences'])->name('update');
     });
 
+    Route::get('notifications', UserNotificationsIndex::class)->name('notifications.index');
+
     Route::prefix('activity')->name('activity.')->group(function (): void {
         Route::get('/', [ProfileController::class, 'myLogs'])->name('index');
     });
@@ -134,6 +137,11 @@ Route::middleware(['web', 'auth', 'maintenance', 'navigation'])->group(function 
         });
         Route::prefix('notifications')->name('notifications.')->middleware('route.gate:settings-notifications')->group(function (): void {
             Route::get('/', [NotificationsController::class, 'index'])->name('index');
+            Route::post('/', [NotificationsController::class, 'store'])->name('store');
+            Route::get('create', [NotificationsController::class, 'create'])->name('create');
+            Route::get('edit/{notification}', [NotificationsController::class, 'edit'])->name('edit');
+            Route::put('{notification}', [NotificationsController::class, 'update'])->name('update');
+            Route::get('delete/{notification}', [NotificationsController::class, 'delete'])->name('delete');
         });
         Route::prefix('modules')->name('modules.')->middleware('route.gate:settings-modules')->group(function (): void {
             Route::get('/{module?}', [ModuleController::class, 'index'])->name('index');

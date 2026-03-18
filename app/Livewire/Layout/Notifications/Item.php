@@ -2,25 +2,23 @@
 
 namespace App\Livewire\Layout\Notifications;
 
+use App\Support\Notifications\Models\SystemNotification;
+use Illuminate\View\View;
 use Livewire\Component;
 
 class Item extends Component
 {
-    public $notification;
+    public SystemNotification $notification;
 
-    public $message;
+    public ?string $message = null;
 
-    public function mount($notification): void
+    public function mount(SystemNotification $notification): void
     {
         $this->notification = $notification;
-        $message = $this->notification->contents ?? null;
-        if ($message) {
-            $message = strip_tags($message, '<strong><i>');
-        }
-        $this->message = $message;
+        $this->message = $this->notification->renderedContents();
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.layout.notifications.item');
     }

@@ -28,19 +28,61 @@ $shouldRegisterBreadcrumb = static function (string $routeName) use ($ignoredRou
     return true;
 };
 
-$registeredRouteNames = $namedRoutes
+$registeredRoutes = $namedRoutes
+    ->filter(function ($route, string $routeName) use ($shouldRegisterBreadcrumb): bool {
+        if ( ! $shouldRegisterBreadcrumb($routeName)) {
+            return false;
+        }
+
+        return in_array('GET', $route->methods(), true) || in_array('HEAD', $route->methods(), true);
+    });
+
+$registeredRouteNames = $registeredRoutes
     ->keys()
-    ->filter(fn (string $routeName): bool => $shouldRegisterBreadcrumb($routeName))
     ->values();
 
-$routeParameterCounts = $namedRoutes
+$routeParameterCounts = $registeredRoutes
     ->mapWithKeys(static fn ($route, string $routeName): array => [$routeName => count($route->parameterNames())]);
 
-$hasMenuTranslation = static fn (string $routeName): bool => Lang::hasForLocale('menus.' . $routeName);
+$routeKeyAliases = static function (string $routeName): array {
+    $aliases = [$routeName];
+    $normalizedRouteName = str_replace('-', '_', $routeName);
 
-$routeLabel = static function (string $routeName) use ($hasMenuTranslation): string {
-    if ($hasMenuTranslation($routeName)) {
-        return __('menus.' . $routeName);
+    if ($normalizedRouteName !== $routeName) {
+        $aliases[] = $normalizedRouteName;
+    }
+
+    return array_values(array_unique($aliases));
+};
+
+$resolveTranslation = static function (array $translationKeys): ?string {
+    foreach (array_unique($translationKeys) as $translationKey) {
+        if (Lang::hasForLocale($translationKey)) {
+            return __($translationKey);
+        }
+    }
+
+    return null;
+};
+
+$fallbackLabel = static function (string $routeName): string {
+    $segments = explode('.', $routeName);
+    $lastSegment = end($segments);
+
+    return Str::of(str_replace(['-', '_'], ' ', $lastSegment))
+        ->title()
+        ->toString();
+};
+
+$routeLabel = static function (string $routeName) use ($resolveTranslation, $routeKeyAliases, $fallbackLabel): string {
+    $translation = $resolveTranslation(
+        collect($routeKeyAliases($routeName))
+            ->map(static fn (string $routeKey): string => 'menus.' . $routeKey)
+            ->all()
+    );
+
+    if (null !== $translation) {
+        return $translation;
     }
 
     $segments = explode('.', $routeName);
@@ -76,10 +118,24 @@ $routeLabel = static function (string $routeName) use ($hasMenuTranslation): str
         return $verbs[$lastSegment][$locale] ?? $fallbackLabel;
     }
 
-    return Str::of($lastSegment)
-        ->replace('_', ' ')
-        ->title()
-        ->toString();
+    return $fallbackLabel($routeName);
+};
+
+$aliasLabel = static function (string $routeAlias) use ($resolveTranslation, $routeKeyAliases, $fallbackLabel): string {
+    $translation = $resolveTranslation(
+        collect($routeKeyAliases($routeAlias))
+            ->flatMap(static fn (string $routeKey): array => [
+                'menus.' . $routeKey . '.index',
+                'menus.' . $routeKey,
+            ])
+            ->all()
+    );
+
+    if (null !== $translation) {
+        return $translation;
+    }
+
+    return $fallbackLabel($routeAlias);
 };
 
 $routeUrl = static function (string $routeName): ?string {
@@ -108,31 +164,21 @@ $routeUrl = static function (string $routeName): ?string {
     }
 };
 
-$resolveParent = static function (string $routeName) use ($registeredRouteNames, $routeParameterCounts): ?string {
-    if ('dashboard' === $routeName) {
-        return null;
-    }
-
+$routeAliases = static function (string $routeName): array {
     $parts = explode('.', $routeName);
-    $lastPart = end($parts);
-    $parentCandidates = [];
+    $parts = array_slice($parts, 0, -1);
 
-    if ('index' !== $lastPart && count($parts) > 1) {
-        $base = implode('.', array_slice($parts, 0, -1));
-        $parentCandidates[] = $base . '.index';
+    $aliases = [];
+
+    for ($length = 1; $length <= count($parts); $length++) {
+        $aliases[] = implode('.', array_slice($parts, 0, $length));
     }
 
-    for ($length = count($parts) - 1; $length >= 1; $length--) {
-        $parentCandidates[] = implode('.', array_slice($parts, 0, $length)) . '.index';
-    }
+    return $aliases;
+};
 
-    $parentCandidates[] = 'dashboard';
-
-    foreach (array_unique($parentCandidates) as $candidate) {
-        if ($candidate === $routeName) {
-            continue;
-        }
-
+$resolveAliasRouteName = static function (string $routeAlias) use ($registeredRouteNames, $routeParameterCounts): ?string {
+    foreach ([$routeAlias . '.index', $routeAlias] as $candidate) {
         if ( ! $registeredRouteNames->contains($candidate)) {
             continue;
         }
@@ -147,25 +193,47 @@ $resolveParent = static function (string $routeName) use ($registeredRouteNames,
     return null;
 };
 
-foreach ($registeredRouteNames as $routeName) {
-    $parentRouteName = $resolveParent($routeName);
+$breadcrumbItems = static function (string $routeName) use (
+    $aliasLabel,
+    $resolveAliasRouteName,
+    $routeAliases,
+    $routeLabel,
+    $routeUrl
+): array {
+    $aliases = $routeAliases($routeName);
+    $items = [];
+    $isIndexRoute = str_ends_with($routeName, '.index');
 
-    if (null === $parentRouteName) {
-        continue;
+    foreach ($aliases as $index => $routeAlias) {
+        $resolvedRouteName = $resolveAliasRouteName($routeAlias);
+        $isCurrentItem = $isIndexRoute && $index === array_key_last($aliases);
+
+        $items[] = [
+            'title' => $aliasLabel($routeAlias),
+            'url' => $isCurrentItem || null === $resolvedRouteName ? null : $routeUrl($resolvedRouteName),
+        ];
     }
 
-    Breadcrumbs::for($routeName, function (BreadcrumbTrail $trail) use ($routeName, $parentRouteName, $routeLabel, $routeUrl): void {
-        $trail->parent($parentRouteName);
+    if ([] === $items || ! $isIndexRoute) {
+        $items[] = [
+            'title' => $routeLabel($routeName),
+            'url' => null,
+        ];
+    }
 
-        $label = $routeLabel($routeName);
-        $url = $routeUrl($routeName);
+    return $items;
+};
 
-        if (null !== $url) {
-            $trail->push($label, $url);
+foreach ($registeredRouteNames as $routeName) {
+    Breadcrumbs::for($routeName, function (BreadcrumbTrail $trail) use ($breadcrumbItems, $routeName): void {
+        foreach ($breadcrumbItems($routeName) as $item) {
+            if (null !== $item['url']) {
+                $trail->push($item['title'], $item['url']);
 
-            return;
+                continue;
+            }
+
+            $trail->push($item['title']);
         }
-
-        $trail->push($label);
     });
 }

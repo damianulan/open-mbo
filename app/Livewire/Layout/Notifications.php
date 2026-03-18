@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Layout;
 
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 use Livewire\Component;
 
 class Notifications extends Component
@@ -26,12 +28,17 @@ class Notifications extends Component
     public function register(): void
     {
         if (Auth::check()) {
-            $query = Auth::user()->system_notifications();
-            $notifications_count = $query->count();
-            $queryAlert = clone $query;
-            $notificationsAlert = $queryAlert->whereNull('notified_at')->get();
+            $query = $this->notificationsQuery();
+            $notificationsCount = (clone $query)
+                ->whereNull('read_at')
+                ->count();
+            $notificationsAlert = (clone $query)
+                ->whereNull('notified_at')
+                ->get();
 
-            $this->notifications = $query->take(15)->get();
+            $this->notifications = (clone $query)
+                ->take(15)
+                ->get();
 
             if ($notificationsAlert->count()) {
                 foreach ($notificationsAlert as $alert) {
@@ -41,7 +48,7 @@ class Notifications extends Component
                 }
             }
 
-            $this->notifications_count = $notifications_count;
+            $this->notifications_count = $notificationsCount;
         }
     }
 
@@ -50,8 +57,15 @@ class Notifications extends Component
         $this->shown = ! $this->shown;
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.layout.notifications');
+    }
+
+    protected function notificationsQuery(): MorphMany
+    {
+        return Auth::user()
+            ->system_notifications()
+            ->latest('created_at');
     }
 }
