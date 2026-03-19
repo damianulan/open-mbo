@@ -302,6 +302,7 @@ return [
      | Additional middleware to run on the Debugbar routes
      */
     'route_middleware' => [
+        'web',
         Authenticate::class,
     ],
 

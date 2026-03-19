@@ -3,7 +3,6 @@
 <div class="d-flex flex-column gap-3">
     <section>
         <h2 class="text-serif mb-1">{{ __('globals.hello') }}, {{ $user->firstname }}</h2>
-        <p class="text-muted mb-0">{{ __('menus.my_objectives.index') }}</p>
     </section>
 
     <section class="row g-3">
@@ -199,7 +198,7 @@
                 <div class="row g-3">
                     @foreach($userCampaigns as $userCampaign)
                         @php
-                            $campaign = $userCampaign->getRelation('campaign');
+                            $campaign = $userCampaign->campaign;
                         @endphp
                         <div class="col-12 col-md-6 col-xl-4">
                             @if($campaign)
