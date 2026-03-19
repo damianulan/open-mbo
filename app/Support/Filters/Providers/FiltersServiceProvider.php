@@ -29,7 +29,7 @@ class FiltersServiceProvider extends ServiceProvider
         });
 
         Builder::macro('registerFilters', function (FilterService $service) {
-            foreach($service->getItems() as $filter) {
+            foreach ($service->getItems() as $filter) {
                 $this->filter($filter);
             }
 

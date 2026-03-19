@@ -14,6 +14,6 @@ class CampaignNameFilter extends SearchFilter
 
     public function query(Builder $query): Builder
     {
-        return $query->where("name", 'like', "%{$this->getValue()}%");
+        return $query->where('name', 'like', "%{$this->getValue()}%");
     }
 }

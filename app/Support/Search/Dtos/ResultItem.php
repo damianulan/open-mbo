@@ -2,10 +2,11 @@
 
 namespace App\Support\Search\Dtos;
 
+use DTOs\Dto;
 use DTOs\Workshop\PreventAccessingMissingAttributes;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Str;
-use DTOs\Dto;
+
 class ResultItem extends Dto implements PreventAccessingMissingAttributes
 {
     protected $fillable = [

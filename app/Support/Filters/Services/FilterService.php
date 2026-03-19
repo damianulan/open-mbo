@@ -9,9 +9,9 @@ use ArrayIterator;
 use Countable;
 use FormForge\Base\Form;
 use FormForge\FormBuilder;
+use Illuminate\Contracts\Support\Renderable;
 use IteratorAggregate;
 use Traversable;
-use Illuminate\Contracts\Support\Renderable;
 
 class FilterService implements Countable, IteratorAggregate, Traversable
 {
@@ -61,11 +61,6 @@ class FilterService implements Countable, IteratorAggregate, Traversable
         return count($this->items);
     }
 
-    protected function buildForm(): Form
-    {
-        return FilterFormFactory::make($this);
-    }
-
     public function getForm(): ?Renderable
     {
         if ($this->isFilled()) {
@@ -75,5 +70,10 @@ class FilterService implements Countable, IteratorAggregate, Traversable
         }
 
         return null;
+    }
+
+    protected function buildForm(): Form
+    {
+        return FilterFormFactory::make($this);
     }
 }
