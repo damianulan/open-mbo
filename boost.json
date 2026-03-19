@@ -14,6 +14,9 @@
         "scout-development",
         "livewire-development",
         "pest-testing",
-        "spatie-laravel-php-standards"
+        "spatie-laravel-php-standards",
+        "eloquent-best-practices",
+        "laravel-specialist",
+        "php-pro"
     ]
 }
