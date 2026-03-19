@@ -56,7 +56,7 @@ class CreateAdminUserSeeder extends Seeder
                 'password' => Hash::make($password),
                 'firstname' => $firstname,
                 'lastname' => $lastname,
-                'gender' => Gender::MALE,
+                'gender' => Gender::MALE->value,
                 'core' => $core ? 1 : 0,
                 'email_verified_at' => now(),
                 'remember_token' => Str::random(10),
@@ -65,7 +65,7 @@ class CreateAdminUserSeeder extends Seeder
             $user->password = Hash::make($password);
             $user->firstname = $firstname;
             $user->lastname = $lastname;
-            $user->gender = Gender::MALE;
+            $user->gender = Gender::MALE->value;
             $user->core = $core ? 1 : 0;
             $user->email_verified_at = now();
             $user->remember_token = Str::random(10);

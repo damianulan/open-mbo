@@ -2,47 +2,19 @@
 
 namespace App\Livewire\Layout;
 
-use Illuminate\Support\Facades\Auth;
+use App\Livewire\Concerns\InteractsWithSystemNotifications;
+use Illuminate\View\View;
 use Livewire\Component;
 
 class Notifications extends Component
 {
-    public int $notifications_count = 0;
+    use InteractsWithSystemNotifications;
 
     public bool $shown = false;
 
-    protected $notifications = null;
-
-    public function mount(): void
-    {
-        $this->register();
-    }
-
     public function boot(): void
     {
-        $this->register();
-    }
-
-    public function register(): void
-    {
-        if (Auth::check()) {
-            $query = Auth::user()->system_notifications();
-            $notifications_count = $query->count();
-            $queryAlert = clone $query;
-            $notificationsAlert = $queryAlert->whereNull('notified_at')->get();
-
-            $this->notifications = $query->take(15)->get();
-
-            if ($notificationsAlert->count()) {
-                foreach ($notificationsAlert as $alert) {
-                    $alert->notified_at = now();
-                    $alert->updateQuietly();
-                    $this->dispatch('new-notification', title: $alert->contents);
-                }
-            }
-
-            $this->notifications_count = $notifications_count;
-        }
+        $this->dispatchPendingNotifications();
     }
 
     public function toggleShown(): void
@@ -50,8 +22,23 @@ class Notifications extends Component
         $this->shown = ! $this->shown;
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.layout.notifications');
+    }
+
+    protected function dispatchPendingNotifications(): void
+    {
+        $notifications = $this->notificationsQuery()
+            ->whereNull('notified_at')
+            ->get();
+
+        foreach ($notifications as $notification) {
+            $notification->forceFill([
+                'notified_at' => now(),
+            ])->saveQuietly();
+
+            $this->dispatch('new-notification', title: $notification->contents);
+        }
     }
 }

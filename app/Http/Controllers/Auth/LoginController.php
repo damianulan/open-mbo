@@ -25,14 +25,12 @@ class LoginController extends Controller
 
     /**
      * Where to redirect users after login.
-     *
-     * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected string $redirectTo = RouteServiceProvider::HOME;
 
-    protected $maxAttempts = 3;
+    protected int $maxAttempts = 3;
 
-    protected $decayMinutes = 5;
+    protected int $decayMinutes = 5;
 
     /**
      * Create a new controller instance.
@@ -42,10 +40,9 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-        parent::__construct();
     }
 
-    public function username()
+    public function username(): string
     {
         return settings('users.auth_identifier');
     }
@@ -82,7 +79,7 @@ class LoginController extends Controller
         return $this->sendFailedLoginResponse($request);
     }
 
-    protected function attemptLogin(Request $request)
+    protected function attemptLogin(Request $request): bool
     {
         return $this->guard()->attempt(
             $this->credentials($request),

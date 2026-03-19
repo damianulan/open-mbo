@@ -16,8 +16,8 @@ class ModelCharts extends ChartsLib
         $this->type = 'donut';
 
         $userObjectives = $model->user_objectives;
-        $passed = (clone $userObjectives)->where('status', UserObjectiveStatus::PASSED)->count();
-        $failed = (clone $userObjectives)->where('status', UserObjectiveStatus::FAILED)->count();
+        $passed = (clone $userObjectives)->where('status', UserObjectiveStatus::PASSED->value)->count();
+        $failed = (clone $userObjectives)->where('status', UserObjectiveStatus::FAILED->value)->count();
         $other = (clone $userObjectives)->whereNotIn('status', UserObjectiveStatus::evaluated())->count();
 
         return $this->getChart()
@@ -37,14 +37,15 @@ class ModelCharts extends ChartsLib
         $this->type = 'donut';
 
         $userObjectives = $model->user_objectives;
-        $totalNotCompleted = 0;
-        $totalCompleted = 0;
-        $userObjectives->each(function (UserObjective $userObjective) use (&$totalCompleted): void {
-            if ($userObjective->isCompleted()) {
-                $totalCompleted += $userObjective->getWeightAttribute();
-            }
-        });
-        $totalNotCompleted = $userObjectives->getTotalWeight() - $totalCompleted;
+        $totalWeight = (float) $userObjectives->sum(
+            fn (UserObjective $userObjective): float => $userObjective->weight
+        );
+
+        $totalCompleted = (float) $userObjectives
+            ->filter(fn (UserObjective $userObjective): bool => $userObjective->isCompleted())
+            ->sum(fn (UserObjective $userObjective): float => $userObjective->weight);
+
+        $totalNotCompleted = max(0, $totalWeight - $totalCompleted);
 
         return $this->getChart()
             ->setLabels([__('mbo.completed'), __('mbo.uncompleted')])

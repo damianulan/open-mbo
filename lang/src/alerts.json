@@ -285,6 +285,15 @@
       }
     }
   },
+  "notifications": {
+    "info": {
+      "delete": {
+        "pl": "Usunięcie powiadomienia będzie nieodwracalne.",
+        "en": "Deleting the notification is irreversible.",
+        "it": "Deleting the notification is irreversible."
+      }
+    }
+  },
   "objective_template": {
     "error": {
       "create": {

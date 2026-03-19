@@ -25,7 +25,7 @@ class UserSettings extends BaseSettings
 
     public bool $multiple_employments = true;
 
-    public string $auth_identifier = AuthIdentifier::EMAIL;
+    public string $auth_identifier = AuthIdentifier::EMAIL->value;
 
     public static function group(): string
     {

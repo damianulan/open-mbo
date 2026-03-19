@@ -5,7 +5,6 @@ namespace App\Config;
 use App\Enums\Core\EnvironmentType;
 use Exception;
 use Illuminate\Support\Facades\Config;
-use InvalidArgumentException;
 use Stringable;
 
 class Environment implements Stringable
@@ -14,11 +13,8 @@ class Environment implements Stringable
 
     public function __construct()
     {
-        try {
-            $this->type = EnvironmentType::tryFrom(Config::get('app.env'));
-        } catch (InvalidArgumentException $e) {
-            throw new Exception('Invalid environment type set in env file.');
-        }
+        $this->type = EnvironmentType::tryFrom(Config::get('app.env'))
+            ?? throw new Exception('Invalid environment type set in env file.');
     }
 
     public static function __callStatic(string $name, array $arguments)

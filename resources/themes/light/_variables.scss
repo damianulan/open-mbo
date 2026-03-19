@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // Typography
 $font-family-sans-serif: 'IBM Plex Sans', 'Helvetica', sans-serif !default;
 $font-family-base: $font-family-sans-serif !default;
@@ -190,19 +192,19 @@ $ombo-body-gradient: var(--mbo-ombo-body-gradient) !default;
 :root,
 [data-bs-theme='light'] {
     --mbo-primary: #{$primary};
-    --mbo-primary-rgb: #{red($primary)}, #{green($primary)}, #{blue($primary)};
+    --mbo-primary-rgb: #{rgb-channels($primary)};
     --mbo-secondary: #{$secondary};
-    --mbo-secondary-rgb: #{red($secondary)}, #{green($secondary)}, #{blue($secondary)};
+    --mbo-secondary-rgb: #{rgb-channels($secondary)};
     --mbo-success: #{$success};
-    --mbo-success-rgb: #{red($success)}, #{green($success)}, #{blue($success)};
+    --mbo-success-rgb: #{rgb-channels($success)};
     --mbo-warning: #{$warning};
-    --mbo-warning-rgb: #{red($warning)}, #{green($warning)}, #{blue($warning)};
+    --mbo-warning-rgb: #{rgb-channels($warning)};
     --mbo-danger: #{$danger};
-    --mbo-danger-rgb: #{red($danger)}, #{green($danger)}, #{blue($danger)};
+    --mbo-danger-rgb: #{rgb-channels($danger)};
     --mbo-info: #{$info};
-    --mbo-info-rgb: #{red($info)}, #{green($info)}, #{blue($info)};
+    --mbo-info-rgb: #{rgb-channels($info)};
     --mbo-dark: #{$dark};
-    --mbo-dark-rgb: #{red($dark)}, #{green($dark)}, #{blue($dark)};
+    --mbo-dark-rgb: #{rgb-channels($dark)};
     --mbo-light: #{$light};
 
     --mbo-body-bg: #{$body-bg};
@@ -224,19 +226,19 @@ $ombo-body-gradient: var(--mbo-ombo-body-gradient) !default;
     --mbo-text-btn-hover: #{tint($coolgreen, 40%)};
 
     --mbo-disabled-text: #{$disabled-text};
-    --mbo-disabled-text-rgb: #{red($disabled-text)}, #{green($disabled-text)}, #{blue($disabled-text)};
+    --mbo-disabled-text-rgb: #{rgb-channels($disabled-text)};
     --mbo-status-unstarted: #{$status-unstarted};
-    --mbo-status-unstarted-rgb: #{red($status-unstarted)}, #{green($status-unstarted)}, #{blue($status-unstarted)};
+    --mbo-status-unstarted-rgb: #{rgb-channels($status-unstarted)};
     --mbo-status-progress: #{$status-progress};
-    --mbo-status-progress-rgb: #{red($status-progress)}, #{green($status-progress)}, #{blue($status-progress)};
+    --mbo-status-progress-rgb: #{rgb-channels($status-progress)};
     --mbo-status-completed: #{$status-completed};
-    --mbo-status-completed-rgb: #{red($status-completed)}, #{green($status-completed)}, #{blue($status-completed)};
+    --mbo-status-completed-rgb: #{rgb-channels($status-completed)};
     --mbo-status-passed: #{$status-passed};
-    --mbo-status-passed-rgb: #{red($status-passed)}, #{green($status-passed)}, #{blue($status-passed)};
+    --mbo-status-passed-rgb: #{rgb-channels($status-passed)};
     --mbo-status-failed: #{$status-failed};
-    --mbo-status-failed-rgb: #{red($status-failed)}, #{green($status-failed)}, #{blue($status-failed)};
+    --mbo-status-failed-rgb: #{rgb-channels($status-failed)};
     --mbo-status-interrupted: #{$status-interrupted};
-    --mbo-status-interrupted-rgb: #{red($status-interrupted)}, #{green($status-interrupted)}, #{blue($status-interrupted)};
+    --mbo-status-interrupted-rgb: #{rgb-channels($status-interrupted)};
 
     --mbo-lighttint: #{tint($primary, 98%)};
     --mbo-card-shadow: #{5px 5px 12px 0px rgba($primary, 0.1)};
@@ -245,12 +247,12 @@ $ombo-body-gradient: var(--mbo-ombo-body-gradient) !default;
 
     --mbo-primary-tint-10: #{tint($primary, 10%)};
     --mbo-dark-tint-20: #{tint($dark, 20%)};
-    --mbo-dark-lighten-10: #{lighten($dark, 10%)};
-    --mbo-greenish-darken-25: #{darken($greenish, 25%)};
-    --mbo-success-darken-15: #{darken($success, 15%)};
-    --mbo-danger-darken-20: #{darken($danger, 20%)};
-    --mbo-warning-darken-15: #{darken($warning, 15%)};
-    --mbo-info-darken-15: #{darken($info, 15%)};
+    --mbo-dark-lighten-10: #{color.adjust($dark, $lightness: 10%)};
+    --mbo-greenish-darken-25: #{color.adjust($greenish, $lightness: -25%)};
+    --mbo-success-darken-15: #{color.adjust($success, $lightness: -15%)};
+    --mbo-danger-darken-20: #{color.adjust($danger, $lightness: -20%)};
+    --mbo-warning-darken-15: #{color.adjust($warning, $lightness: -15%)};
+    --mbo-info-darken-15: #{color.adjust($info, $lightness: -15%)};
 
     --mbo-ombo-body: #{rgba($primary, 0.06)};
     --mbo-ombo-body-passed: #{rgba($status-passed, 0.15)};

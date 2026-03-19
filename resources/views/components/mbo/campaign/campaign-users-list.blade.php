@@ -22,7 +22,7 @@
                             @can('manual', $uc->campaign)
                                 @settings('mbo.campaigns_manual')
                                     @if($uc->isManual())
-                                        @if(in_array($uc->stage, array_keys(\App\Enums\MBO\CampaignStage::sequences())))
+                                        @if(in_array($uc->stage->value, array_keys(\App\Enums\MBO\CampaignStage::sequences()), true))
                                             <a href="{{ route('campaigns.users.prev_stage', $uc->id) }}" class="list-action" data-ucid="{{ $uc->id }}" data-tippy-content="Przesuń do poprzedniego etapu">
                                                 <i class="bi-caret-left-fill"></i>
                                             </a>

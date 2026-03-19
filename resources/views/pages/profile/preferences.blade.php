@@ -1,8 +1,6 @@
 @extends('layouts.portal.master')
 @section('content')
 
-@include('pages.profile.nav')
-
 <div class="content-card">
     <div class="content-card-top">
         <div class="content-card-header">

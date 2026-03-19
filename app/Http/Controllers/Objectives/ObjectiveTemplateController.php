@@ -4,15 +4,15 @@ namespace App\Http\Controllers\Objectives;
 
 use App\Forms\MBO\Objective\ObjectiveTemplateEditForm;
 use App\Models\MBO\ObjectiveTemplate;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class ObjectiveTemplateController extends MBOController
 {
     /**
      * Show the application dashboard.
      */
-    public function index(): Renderable
+    public function index(): View
     {
         $this->addPageNav();
 
@@ -24,7 +24,7 @@ class ObjectiveTemplateController extends MBOController
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request, ObjectiveTemplateEditForm $form)
+    public function create(ObjectiveTemplateEditForm $form): View
     {
         return view('components.forms.edit', [
             'form' => $form->getDefinition(),
@@ -34,7 +34,7 @@ class ObjectiveTemplateController extends MBOController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, ObjectiveTemplateEditForm $form)
+    public function store(ObjectiveTemplateEditForm $form): RedirectResponse
     {
         $form->validate();
 
@@ -61,13 +61,11 @@ class ObjectiveTemplateController extends MBOController
      *
      * @param  int  $id
      */
-    public function edit(Request $request, $id, ObjectiveTemplateEditForm $form)
+    public function edit(ObjectiveTemplate $objective, ObjectiveTemplateEditForm $form): View
     {
-        $model = ObjectiveTemplate::findOrFail($id);
-
         return view('components.forms.edit', [
-            'objective' => $model,
-            'form' => $form->setModel($model)->getDefinition(),
+            'objective' => $objective,
+            'form' => $form->setModel($objective)->getDefinition(),
         ]);
     }
 
@@ -76,10 +74,12 @@ class ObjectiveTemplateController extends MBOController
      *
      * @param  int  $id
      */
-    public function update(Request $request, $id, ObjectiveTemplateEditForm $form)
+    public function update(ObjectiveTemplate $objective, ObjectiveTemplateEditForm $form): RedirectResponse
     {
         $form->validate();
-        $objective = ObjectiveTemplate::fillFromRequest($id);
+
+        $objective = ObjectiveTemplate::fillFromRequest($objective->getKey());
+
         if ($objective->update()) {
             return redirect()->route('templates.index')->with('success', __('alerts.objective_template.success.edit'));
         }
@@ -87,9 +87,8 @@ class ObjectiveTemplateController extends MBOController
         return redirect()->back()->with('error', __('alerts.error.operation'));
     }
 
-    public function delete($id)
+    public function delete(ObjectiveTemplate $objective): RedirectResponse
     {
-        $objective = ObjectiveTemplate::findOrFail($id);
         if ($objective->delete()) {
             return redirect()->route('templates.index')->with('success', __('alerts.objective_template.success.delete'));
         }

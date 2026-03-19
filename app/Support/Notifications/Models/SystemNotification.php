@@ -4,6 +4,7 @@ namespace App\Support\Notifications\Models;
 
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 /**
  * @property string $id
@@ -16,7 +17,6 @@ use Illuminate\Support\Collection;
  * @property Carbon|null $notified_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification query()
@@ -30,7 +30,6 @@ use Illuminate\Support\Collection;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification whereReadAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification whereResources($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification whereUpdatedAt($value)
- *
  * @mixin \Eloquent
  */
 class SystemNotification extends NotificationModel
@@ -53,8 +52,31 @@ class SystemNotification extends NotificationModel
         'created_at' => 'datetime',
     ];
 
-    public function unread()
+    public function unread(): bool
     {
         return is_null($this->read_at);
+    }
+
+    public function markAsRead(): void
+    {
+        if ( ! $this->unread()) {
+            return;
+        }
+
+        $this->forceFill([
+            'read_at' => now(),
+        ])->saveQuietly();
+    }
+
+    public function preview(int $limit = 150): string
+    {
+        return (string) Str::of(strip_tags($this->contents ?? ''))
+            ->squish()
+            ->limit($limit, preserveWords: true);
+    }
+
+    public function renderedContents(): string
+    {
+        return strip_tags($this->contents ?? '', '<strong><i><br>');
     }
 }

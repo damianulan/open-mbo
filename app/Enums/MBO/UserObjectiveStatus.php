@@ -2,36 +2,38 @@
 
 namespace App\Enums\MBO;
 
-use Enumerable\Laravel\Enum;
+use App\Support\Concerns\EnumHasValues;
 
-class UserObjectiveStatus extends Enum
+enum UserObjectiveStatus: string
 {
-    public const UNSTARTED = 'unstarted';
+    use EnumHasValues;
+
+    case UNSTARTED = 'unstarted';
 
     /**
      * Objective in progress - can be marked as completed when deadline is not set and adding eveluation is possible
      */
-    public const PROGRESS = 'progress';
+    case PROGRESS = 'progress';
 
     /**
      * Evaluation is in progress
      */
-    public const COMPLETED = 'completed';
+    case COMPLETED = 'completed';
 
     /**
      * Objective marked as passed
      */
-    public const PASSED = 'passed';
+    case PASSED = 'passed';
 
     /**
      * Objective marked as failed
      */
-    public const FAILED = 'failed';
+    case FAILED = 'failed';
 
     /**
      * Objective interrupted - when involved in interrupted campaign or inactive campaign assignment
      */
-    public const INTERRUPTED = 'interrupted';
+    case INTERRUPTED = 'interrupted';
 
     /**
      * Frozen values are not editable by most system processes that automatically change status..
@@ -40,9 +42,9 @@ class UserObjectiveStatus extends Enum
     public static function frozen(): array
     {
         return [
-            self::PASSED,
-            self::FAILED,
-            self::INTERRUPTED,
+            self::PASSED->value,
+            self::FAILED->value,
+            self::INTERRUPTED->value,
         ];
     }
 
@@ -52,8 +54,8 @@ class UserObjectiveStatus extends Enum
     public static function evaluated(): array
     {
         return [
-            self::PASSED,
-            self::FAILED,
+            self::PASSED->value,
+            self::FAILED->value,
         ];
     }
 
@@ -63,9 +65,9 @@ class UserObjectiveStatus extends Enum
     public static function finished(): array
     {
         return [
-            self::COMPLETED,
-            self::PASSED,
-            self::FAILED,
+            self::COMPLETED->value,
+            self::PASSED->value,
+            self::FAILED->value,
         ];
     }
 
@@ -75,22 +77,15 @@ class UserObjectiveStatus extends Enum
     public static function inactive(): array
     {
         return [
-            self::COMPLETED,
-            self::PASSED,
-            self::FAILED,
-            self::INTERRUPTED,
+            self::COMPLETED->value,
+            self::PASSED->value,
+            self::FAILED->value,
+            self::INTERRUPTED->value,
         ];
     }
 
-    public static function labels(): array
+    public function label(): string
     {
-        return [
-            self::UNSTARTED => __('mbo.objective_status.unstarted'),
-            self::PROGRESS => __('mbo.objective_status.progress'),
-            self::COMPLETED => __('mbo.objective_status.completed'),
-            self::PASSED => __('mbo.objective_status.passed'),
-            self::FAILED => __('mbo.objective_status.failed'),
-            self::INTERRUPTED => __('mbo.objective_status.interrupted'),
-        ];
+        return __('mbo.objective_status.' . $this->value);
     }
 }

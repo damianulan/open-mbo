@@ -24,6 +24,6 @@ class UserStatusFactory
             $status = UserStatus::DELETED;
         }
 
-        return UserStatus::tryFrom($status);
+        return $status;
     }
 }

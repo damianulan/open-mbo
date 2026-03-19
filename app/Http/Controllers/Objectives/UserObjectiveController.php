@@ -13,7 +13,9 @@ use App\Services\Objectives\UserRealizationUpdate;
 use AppException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Throwable;
@@ -40,15 +42,17 @@ class UserObjectiveController extends AppController
      *
      * @param  mixed  $id
      */
-    public function show(Request $request, $id)
+    public function show(Request $request, int|string $id): View
     {
         $userObjective = UserObjective::findOrFail($id);
+
         if ($request->user()->cannot('view', $userObjective)) {
             unauthorized();
         }
         $this->logShow($userObjective);
 
         $header = 'Podsumowanie Celu';
+        $this->setPagetitle($header);
 
         return view('pages.mbo.objectives.users.show', [
             'userObjective' => $userObjective,
@@ -66,14 +70,13 @@ class UserObjectiveController extends AppController
      */
     public function edit($id): void {}
 
-    public function update(Request $request, $id, ObjectiveEditUserForm $form)
+    public function update(Request $request, Objective $objective, ObjectiveEditUserForm $form): JsonResponse
     {
-        $objective = Objective::findOrFail($id);
+        $response = $form->validateJson($request, $objective->getKey());
 
-        $response = $form::validateJson($request, $id);
         if ('ok' === $response['status']) {
-
             $service = BulkAssignUsers::boot(request: $request, objective: $objective)->execute();
+
             if ($service->passed()) {
                 $response['message'] = __('alerts.objectives.success.users_added');
 
@@ -91,11 +94,13 @@ class UserObjectiveController extends AppController
      */
     public function destroy($id): void {}
 
-    public function addUsers(Request $request, $id): View
+    public function addUsers(Request $request, int|string|null $id): View
     {
         $params = [];
+
         if ($id) {
             $objective = Objective::find($id);
+
             if ($objective) {
                 $params = [
                     'id' => $id,
@@ -107,9 +112,10 @@ class UserObjectiveController extends AppController
         return view('components.modals.objectives.add_users', $params);
     }
 
-    public function editRealization(Request $request, $id): View
+    public function editRealization(Request $request, int|string|null $id): View
     {
         $params = [];
+
         if ($id) {
             $objective = UserObjective::findOrFail($id);
             $params = [
@@ -123,23 +129,28 @@ class UserObjectiveController extends AppController
 
     public function updateEvaluation(Request $request, $id, ObjectiveEditUserRealizationForm $form): JsonResponse
     {
-        $response['status'] = 'error';
+        $response = ['status' => 'error'];
+
         try {
             $userObjective = UserObjective::findOrFail($id);
+
             if ( ! $userObjective->canBeEvaluated()) {
                 throw new NoPermissionException();
             }
 
             $response = $form->validateJson();
-            if ('ok' === $response['status']) {
 
+            if ('ok' === $response['status']) {
                 $service = UserRealizationUpdate::boot(request: $request, userObjective: $userObjective)->execute();
+
                 if ($service->passed()) {
                     $response['message'] = __('alerts.objectives.success.realization_updated');
 
                     return response()->json($response);
                 }
+
                 $errors = $service->getErrors();
+
                 if ( ! empty($errors)) {
                     $response['message'] = $errors[0];
                 }
@@ -156,20 +167,19 @@ class UserObjectiveController extends AppController
         return response()->json($response);
     }
 
-    public function pass(Request $request, $id)
+    public function pass(int|string $id): RedirectResponse|UrlGenerator
     {
         try {
-            $userObjective = UserObjective::findOrFail($id);
+            DB::transaction(function () use ($id): void {
+                $userObjective = UserObjective::findOrFail($id);
 
-            DB::beginTransaction();
-            if ($userObjective->canBePassed()) {
+                if ( ! $userObjective->canBePassed()) {
+                    throw new AppException(__('alerts.user_objectives.error.set_passed'));
+                }
+
                 $userObjective->setPassed()->update();
-            } else {
-                throw new AppException(__('alerts.user_objectives.error.set_passed'));
-            }
-            DB::commit();
+            });
         } catch (Throwable $th) {
-            DB::rollBack();
             $this->e = $th;
         }
 
@@ -178,20 +188,19 @@ class UserObjectiveController extends AppController
         return $this->returnResponseRedirect($redirect);
     }
 
-    public function fail(Request $request, $id)
+    public function fail(int|string $id): RedirectResponse|UrlGenerator
     {
         try {
-            $userObjective = UserObjective::findOrFail($id);
+            DB::transaction(function () use ($id): void {
+                $userObjective = UserObjective::findOrFail($id);
 
-            DB::beginTransaction();
-            if ($userObjective->canBeFailed()) {
+                if ( ! $userObjective->canBeFailed()) {
+                    throw new AppException(__('alerts.user_objectives.error.set_failed'));
+                }
+
                 $userObjective->setFailed()->update();
-            } else {
-                throw new AppException(__('alerts.user_objectives.error.set_failed'));
-            }
-            DB::commit();
+            });
         } catch (Throwable $th) {
-            DB::rollBack();
             $this->e = $th;
         }
 

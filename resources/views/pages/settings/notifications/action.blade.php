@@ -1,7 +1,7 @@
-<a class="action-btn" href="" title="{{ __('buttons.edit') }}">
+<a class="action-btn" href="{{ route('settings.notifications.edit', $data->id) }}" title="{{ __('buttons.edit') }}">
     <i class="bi bi-pencil-square"></i>
 </a>
 
-<a class="action-btn swal-confirm" href="" title="{{ __('buttons.delete') }}" data-swal-text="{{ __('alerts.users.info.delete') }}">
+<a class="action-btn swal-confirm" href="{{ route('settings.notifications.delete', $data->id) }}" title="{{ __('buttons.delete') }}" data-swal-text="{{ __('alerts.notifications.info.delete') }}">
     <i class="bi bi-trash-fill"></i>
 </a>

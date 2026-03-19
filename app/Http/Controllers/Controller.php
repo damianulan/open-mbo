@@ -13,8 +13,6 @@ class Controller extends BaseController
     use DispatchesJobs;
     use ValidatesRequests;
 
-    public function __construct() {}
-
     protected function setPagetitle(string $title): void
     {
         app('page')->setPagetitle($title);

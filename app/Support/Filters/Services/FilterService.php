@@ -11,6 +11,7 @@ use FormForge\Base\Form;
 use FormForge\FormBuilder;
 use IteratorAggregate;
 use Traversable;
+use Illuminate\Contracts\Support\Renderable;
 
 class FilterService implements Countable, IteratorAggregate, Traversable
 {
@@ -63,5 +64,16 @@ class FilterService implements Countable, IteratorAggregate, Traversable
     protected function buildForm(): Form
     {
         return FilterFormFactory::make($this);
+    }
+
+    public function getForm(): ?Renderable
+    {
+        if ($this->isFilled()) {
+            return view('components.filters.form', [
+                'form' => $this->getFormDefinition(),
+            ]);
+        }
+
+        return null;
     }
 }

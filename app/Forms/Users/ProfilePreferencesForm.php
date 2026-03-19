@@ -19,7 +19,7 @@ class ProfilePreferencesForm extends Form
 
         return $builder->setId('profile_preferences')
             ->setMethod('POST')
-            ->setAction(route('profile.preferences.update'))
+            ->setAction(route('preferences.update'))
             ->class('profile-preferences-form')
             ->add(FormComponent::select('lang', $preferences, Dictionary::fromUnassocArray($availableLocales, 'globals.langs'))
                 ->label(__('forms.profile.preferences.lang'))->noEmpty())

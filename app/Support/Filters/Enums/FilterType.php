@@ -2,13 +2,15 @@
 
 namespace App\Support\Filters\Enums;
 
-use Enumerable\Laravel\Enum;
+use App\Support\Concerns\EnumHasValues;
 
-class FilterType extends Enum
+enum FilterType: string
 {
-    const SEARCH = 'search';
+    use EnumHasValues;
 
-    const SELECT = 'select';
+    case SEARCH = 'search';
 
-    const MULTISELECT = 'multiselect';
+    case SELECT = 'select';
+
+    case MULTISELECT = 'multiselect';
 }

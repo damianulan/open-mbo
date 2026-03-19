@@ -9,7 +9,7 @@
                     <h4 class="section-title">{{ __('pages.settings.app') }}</h4>
                     <hr/>
                 </div>
-                <div class="col-md-10 settings-contents">
+                <div class="col-md-10">
                     <div class="row">
                         {{ $form->render() }}
                     </div>
@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-10 branding-contents">
+                <div class="col-md-10">
                     <div class="row">
                         {{ $brandingForm->render() }}
                     </div>

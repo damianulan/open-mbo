@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Objectives;
 use App\DataTables\MBO\ObjectiveDataTable;
 use App\Forms\MBO\Objective\ObjectiveEditForm;
 use App\Models\MBO\Objective;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ObjectiveController extends MBOController
@@ -13,7 +15,7 @@ class ObjectiveController extends MBOController
     /**
      * Display a listing of the resource.
      */
-    public function index(ObjectiveDataTable $dataTable)
+    public function index(ObjectiveDataTable $dataTable): Renderable|JsonResponse
     {
         $this->addPageNav();
 
@@ -30,9 +32,10 @@ class ObjectiveController extends MBOController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, ObjectiveEditForm $form)
+    public function store(ObjectiveEditForm $form): JsonResponse
     {
         $response = $form->validateJson();
+
         if ('ok' === $response['status']) {
             $objective = Objective::fillFromRequest();
 
@@ -51,12 +54,13 @@ class ObjectiveController extends MBOController
      *
      * @param  mixed  $id
      */
-    public function show(Request $request, $id)
+    public function show(int|string $id): View
     {
         $objective = Objective::findOrFail($id);
         $this->logShow($objective);
 
         $header = 'Podsumowanie Celu';
+        $this->setPagetitle($header);
 
         return view('pages.mbo.objectives.show', [
             'objective' => $objective,
@@ -71,12 +75,12 @@ class ObjectiveController extends MBOController
      */
     public function edit($id): void {}
 
-    public function update(Request $request, $id, ObjectiveEditForm $form)
+    public function update(Objective $objective, ObjectiveEditForm $form): JsonResponse
     {
-
         $response = $form->validateJson();
+
         if ('ok' === $response['status']) {
-            $objective = Objective::fillFromRequest($id);
+            $objective = Objective::fillFromRequest($objective->getKey());
 
             if ($objective->update()) {
                 $response['message'] = __('alerts.objectives.success.objective_updated');
@@ -95,11 +99,13 @@ class ObjectiveController extends MBOController
      */
     public function destroy($id): void {}
 
-    public function addObjectives(Request $request, $id): View
+    public function addObjectives(Request $request, int|string|null $id): View
     {
         $params = [];
+
         if ($id) {
             $objective = Objective::find($id);
+
             if ($objective) {
                 $params = [
                     'id' => $id,
@@ -108,7 +114,7 @@ class ObjectiveController extends MBOController
             }
         } else {
             $params = [
-                'form' => ObjectiveEditForm::bootWithAttributes($request->get('datas')),
+                'form' => ObjectiveEditForm::bootWithAttributes($request->input('datas')),
             ];
         }
 

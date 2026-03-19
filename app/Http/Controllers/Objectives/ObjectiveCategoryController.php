@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Objectives;
 use App\DataTables\MBO\ObjectiveCategoriesDataTable;
 use App\Forms\MBO\Objective\ObjectiveCategoryEditForm;
 use App\Models\MBO\ObjectiveTemplateCategory;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -13,7 +16,7 @@ class ObjectiveCategoryController extends MBOController
     /**
      * Display a listing of the resource.
      */
-    public function index(ObjectiveCategoriesDataTable $dataTable)
+    public function index(ObjectiveCategoriesDataTable $dataTable): Renderable|JsonResponse
     {
         $this->addPageNav();
 
@@ -25,7 +28,7 @@ class ObjectiveCategoryController extends MBOController
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request, ObjectiveCategoryEditForm $form): View
+    public function create(ObjectiveCategoryEditForm $form): View
     {
         return view('pages.mbo.categories.edit', [
             'form' => $form->getDefinition(),
@@ -35,14 +38,14 @@ class ObjectiveCategoryController extends MBOController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, ObjectiveCategoryEditForm $form)
+    public function store(Request $request, ObjectiveCategoryEditForm $form): RedirectResponse
     {
         $form->validate();
         $objective = ObjectiveTemplateCategory::fillFromRequest();
-        $user_ids = $request->input('user_ids');
+        $userIds = $request->input('user_ids');
 
         if ($objective->save()) {
-            $objective->refreshCoordinators($user_ids);
+            $objective->refreshCoordinators($userIds);
 
             return redirect()->route('categories.index')->with('success', __('alerts.objective_categories.success.create'));
         }
@@ -62,13 +65,11 @@ class ObjectiveCategoryController extends MBOController
      *
      * @param  mixed  $id
      */
-    public function edit(Request $request, $id, ObjectiveCategoryEditForm $form)
+    public function edit(ObjectiveTemplateCategory $objective, ObjectiveCategoryEditForm $form): View
     {
-        $model = ObjectiveTemplateCategory::findOrFail($id);
-
         return view('pages.mbo.categories.edit', [
-            'objective' => $model,
-            'form' => $form->setModel($model)->getDefinition(),
+            'objective' => $objective,
+            'form' => $form->setModel($objective)->getDefinition(),
         ]);
     }
 
@@ -77,13 +78,14 @@ class ObjectiveCategoryController extends MBOController
      *
      * @param  mixed  $id
      */
-    public function update(Request $request, $id, ObjectiveCategoryEditForm $form)
+    public function update(Request $request, ObjectiveTemplateCategory $objective, ObjectiveCategoryEditForm $form): RedirectResponse
     {
         $form->validate();
-        $objective = ObjectiveTemplateCategory::fillFromRequest($id);
-        $user_ids = $request->input('user_ids');
+        $objective = ObjectiveTemplateCategory::fillFromRequest($objective->getKey());
+        $userIds = $request->input('user_ids');
+
         if ($objective->update()) {
-            $objective->refreshCoordinators($user_ids);
+            $objective->refreshCoordinators($userIds);
 
             return redirect()->route('categories.index')->with('success', __('alerts.objective_categories.success.edit'));
         }
@@ -96,9 +98,8 @@ class ObjectiveCategoryController extends MBOController
      *
      * @param  mixed  $id
      */
-    public function delete($id)
+    public function delete(ObjectiveTemplateCategory $objective): RedirectResponse
     {
-        $objective = ObjectiveTemplateCategory::findOrFail($id);
         if ($objective->delete()) {
             return redirect()->route('templates.index')->with('success', __('alerts.objective_categories.success.delete'));
         }

@@ -6,11 +6,14 @@ use App\DataTables\Management\ContractTypesDataTable;
 use App\Forms\Settings\Organization\ContractTypeEditForm;
 use App\Http\Controllers\Settings\SettingsController;
 use App\Models\Business\TypeOfContract;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class ContractTypeController extends SettingsController
 {
-    public function index(ContractTypesDataTable $dataTable)
+    public function index(ContractTypesDataTable $dataTable): Renderable|JsonResponse
     {
         $this->addPageNav();
 
@@ -19,7 +22,7 @@ class ContractTypeController extends SettingsController
         ]);
     }
 
-    public function create(Request $request, ContractTypeEditForm $form)
+    public function create(ContractTypeEditForm $form): View
     {
         $this->addPageNav();
 
@@ -28,7 +31,7 @@ class ContractTypeController extends SettingsController
         ]);
     }
 
-    public function store(Request $request, ContractTypeEditForm $form)
+    public function store(ContractTypeEditForm $form): RedirectResponse
     {
         $form->validate();
         $contractType = TypeOfContract::fillFromRequest();
@@ -40,22 +43,20 @@ class ContractTypeController extends SettingsController
         return redirect()->back()->with('error', __('alerts.error.operation'));
     }
 
-    public function edit(Request $request, $id, ContractTypeEditForm $form)
+    public function edit(TypeOfContract $contract, ContractTypeEditForm $form): View
     {
         $this->addPageNav();
-        $contractType = TypeOfContract::findOrFail($id);
 
         return view('pages.settings.organization.contracts.edit', [
-            'contract' => $contractType,
-            'form' => $form->setModel($contractType)->getDefinition(),
+            'contract' => $contract,
+            'form' => $form->setModel($contract)->getDefinition(),
         ]);
     }
 
-    public function update(Request $request, $id, ContractTypeEditForm $form)
+    public function update(TypeOfContract $contract, ContractTypeEditForm $form): RedirectResponse
     {
-        $contractType = TypeOfContract::findOrFail($id);
         $form->validate();
-        $contractType = TypeOfContract::fillFromRequest($id);
+        $contractType = TypeOfContract::fillFromRequest($contract->getKey());
 
         if ($contractType->update()) {
             return redirect()->route('settings.organization.contracts.index')->with('success', __('alerts.success.operation'));
@@ -64,7 +65,7 @@ class ContractTypeController extends SettingsController
         return redirect()->back()->with('error', __('alerts.error.operation'));
     }
 
-    public function delete(Request $request, TypeOfContract $contract)
+    public function delete(TypeOfContract $contract): RedirectResponse
     {
         if ($contract->delete()) {
             return redirect()->route('settings.organization.contracts.index')->with('success', __('alerts.success.operation'));

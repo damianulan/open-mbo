@@ -6,15 +6,16 @@ use App\Forms\Settings\BrandingForm;
 use App\Forms\Settings\GeneralForm;
 use App\Jobs\Core\AppUpdateAdhoc;
 use App\Settings\GeneralSettings;
-use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class GeneralController extends SettingsController
 {
     /**
      * Show the application dashboard.
      */
-    public function index(Request $request): Renderable
+    public function index(): View
     {
         $model = app(GeneralSettings::class);
         $this->addPageNav();
@@ -26,19 +27,22 @@ class GeneralController extends SettingsController
         ]);
     }
 
-    public function storeGeneral(Request $request, GeneralSettings $settings)
+    public function storeGeneral(Request $request, GeneralSettings $settings): RedirectResponse
     {
         $request->validate([
             'site_name' => 'min:3|max:16|required',
             'theme' => 'required',
             'locale' => 'required',
         ]);
-        $target_release = settings('general.target_release');
+
+        $targetRelease = settings('general.target_release');
+
         foreach ($request->all() as $key => $value) {
             $settings->{$key} = $value;
         }
+
         if ($settings->save()) {
-            if ($settings->target_release !== $target_release) {
+            if ($settings->target_release !== $targetRelease) {
                 AppUpdateAdhoc::dispatch();
             }
 

@@ -12,7 +12,7 @@ return [
     */
     'sources' => [
         // slug => path
-        // 'docs' => 'docs',
+        'catalog' => 'docs/catalog',
         // 'formforge' => 'vendor/damianulan/laravel-form-forge/docs',
     ],
 

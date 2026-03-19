@@ -91,7 +91,7 @@ class CampaignPolicy
         return $user->can('mbo-campaign-delete', $campaign) ? Response::allow() : Response::deny();
     }
 
-    private function checkStage(Campaign $campaign, string $stage): Response
+    private function checkStage(Campaign $campaign, CampaignStage|string $stage): Response
     {
         return $campaign->isStageActive($stage) || settings('mbo.campaigns_ignore_dates') ? Response::allow() : Response::deny();
     }

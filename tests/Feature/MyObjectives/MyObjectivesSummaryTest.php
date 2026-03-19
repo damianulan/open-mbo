@@ -64,7 +64,7 @@ class MyObjectivesSummaryTest extends TestCase
         $userObjective = UserObjective::query()->create([
             'user_id' => $user->id,
             'objective_id' => $objective->id,
-            'status' => UserObjectiveStatus::PROGRESS,
+            'status' => UserObjectiveStatus::PROGRESS->value,
             'evaluation' => 50,
         ]);
 
@@ -82,5 +82,6 @@ class MyObjectivesSummaryTest extends TestCase
         $response->assertSee('My Objective');
         $response->assertSee('My Campaign');
         $response->assertSee((string) $userCampaign->id);
+        $response->assertSee(float_view(5.0) . ' / ' . float_view(10.0) . __('globals.pnts'));
     }
 }

@@ -2,11 +2,13 @@
 
 namespace App\Support\Notifications\Enums;
 
-use Enumerable\Laravel\Enum;
+use App\Support\Concerns\EnumHasValues;
 
-class NotificationType extends Enum
+enum NotificationType: string
 {
-    public const SYSTEM = 'system';
+    use EnumHasValues;
 
-    public const MAIL = 'mail';
+    case SYSTEM = 'system';
+
+    case MAIL = 'mail';
 }

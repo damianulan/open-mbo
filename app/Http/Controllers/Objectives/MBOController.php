@@ -10,7 +10,7 @@ class MBOController extends AppController
 {
     use HasPageNavigation;
 
-    protected function addPageNav(): void
+    public function addPageNav(): void
     {
         $this->setPageNav('mbo', [
             MenuItem::make('objectives')

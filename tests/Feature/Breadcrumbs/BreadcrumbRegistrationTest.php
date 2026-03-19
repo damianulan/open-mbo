@@ -3,6 +3,7 @@
 namespace Tests\Feature\Breadcrumbs;
 
 use Diglactic\Breadcrumbs\Breadcrumbs;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Route;
 use Tests\TestCase;
 
@@ -83,5 +84,48 @@ class BreadcrumbRegistrationTest extends TestCase
             ->values();
 
         $this->assertSame([], $missingBreadcrumbs->all(), 'Missing breadcrumbs for routes: ' . $missingBreadcrumbs->implode(', '));
+    }
+
+    public function test_generates_a_nested_breadcrumb_trail_from_route_aliases(): void
+    {
+        Lang::shouldReceive('hasForLocale')->andReturnFalse();
+
+        $breadcrumbs = Breadcrumbs::generate('settings.organization.company.index');
+
+        $this->assertSame(
+            [
+                ['title' => 'Settings', 'url' => null],
+                ['title' => 'Organization', 'url' => route('settings.organization.index')],
+                ['title' => 'Company', 'url' => null],
+            ],
+            $breadcrumbs
+                ->map(static fn (object $breadcrumb): array => [
+                    'title' => $breadcrumb->title,
+                    'url' => $breadcrumb->url,
+                ])
+                ->all()
+        );
+    }
+
+    public function test_resolves_translation_aliases_for_hyphenated_route_names(): void
+    {
+        Lang::shouldReceive('hasForLocale')
+            ->andReturnUsing(static fn (string $key, ...$arguments): bool => 'menus.my_objectives.index' === $key);
+        Lang::shouldReceive('get')
+            ->andReturnUsing(static fn (string $key, ...$arguments): string => 'menus.my_objectives.index' === $key ? 'My objectives' : $key);
+
+        $breadcrumbs = Breadcrumbs::generate('my-objectives.index');
+
+        $this->assertSame(
+            [
+                ['title' => 'My objectives', 'url' => null],
+            ],
+            $breadcrumbs
+                ->map(static fn (object $breadcrumb): array => [
+                    'title' => $breadcrumb->title,
+                    'url' => $breadcrumb->url,
+                ])
+                ->all()
+        );
     }
 }

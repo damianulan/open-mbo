@@ -2,13 +2,15 @@
 
 namespace App\Support\UI\Page\Navigation\Enums;
 
-use Enumerable\Laravel\Enum;
+use App\Support\Concerns\EnumHasValues;
 
-class NavigationType extends Enum
+enum NavigationType: string
 {
-    const SIDEBAR = 'sidebar';
+    use EnumHasValues;
 
-    const PageNav = 'page';
+    case SIDEBAR = 'sidebar';
 
-    const TOPBAR = 'topbar';
+    case PAGE = 'page';
+
+    case TOPBAR = 'topbar';
 }

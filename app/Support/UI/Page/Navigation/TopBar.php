@@ -9,11 +9,17 @@ use Illuminate\Support\Facades\Route;
 
 class TopBar implements NavbarContract
 {
-    protected $breadcrumbs;
+    protected ?string $breadcrumbs = null;
 
     public function __construct()
     {
-        $this->breadcrumbs = Breadcrumbs::render(Route::currentRouteName());
+        $breadcrumbs = Breadcrumbs::generate(Route::currentRouteName());
+
+        if ($breadcrumbs->count() <= 1) {
+            return;
+        }
+
+        $this->breadcrumbs = view(config('breadcrumbs.view'), compact('breadcrumbs'))->render();
     }
 
     public function render(): string

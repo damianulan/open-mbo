@@ -7,6 +7,11 @@
 The project involves the creation of a web application in PHP/Javascript technology using the Laravel 11 framework.
 The application is designed to support employee appraisal processes and to this end it is optimized for the possibility of introducing a management model that is compatible with both Management By Objectives (MBO) and Objective Key Results (OKR) methodologies. The platform makes it possible to combine these methodologies, use them separately and freely develop your own model. The application is tailored to the needs of an extended organizational structure of a small/medium enterprise.
 
+### Documentation
+
+End-user documentation is available in [docs/README.md](docs/README.md).
+It explains the main application areas, role-based access, and what users can do inside the platform.
+
 ### Production
 
 OpenMBO is currently in production. Stable version ETA is July 2026.

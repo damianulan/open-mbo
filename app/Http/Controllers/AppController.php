@@ -53,7 +53,7 @@ class AppController extends Controller
         if (is_null($defaultRedirect)) {
             $defaultRedirect = redirect()->back();
             if ( ! is_null($errorMessage)) {
-                $defaultRedirect->with(MessageType::ERROR, $errorMessage);
+                $defaultRedirect->with(MessageType::ERROR->value, $errorMessage);
             }
         }
 
@@ -67,7 +67,7 @@ class AppController extends Controller
     ): RedirectResponse|UrlGenerator {
         $message = $this->getExceptionMessage($exception, $message);
 
-        return $redirect ?? redirect()->back()->with(MessageType::ERROR, $message);
+        return $redirect ?? redirect()->back()->with(MessageType::ERROR->value, $message);
     }
 
     protected function catchResponseJson(
@@ -99,12 +99,12 @@ class AppController extends Controller
         return $this->finalResponseJson(true, $message, $datas);
     }
 
-    protected function allows($ability, $arguments): bool
+    protected function allows(mixed $ability, mixed $arguments): bool
     {
         return Gate::allows($ability, $arguments);
     }
 
-    protected function denies($ability, $arguments): bool
+    protected function denies(mixed $ability, mixed $arguments): bool
     {
         return Gate::denies($ability, $arguments);
     }

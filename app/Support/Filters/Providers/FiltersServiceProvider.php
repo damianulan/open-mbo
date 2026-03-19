@@ -4,6 +4,7 @@ namespace App\Support\Filters\Providers;
 
 use App\Support\Filters\Contracts\FilterContract;
 use App\Support\Filters\Factories\FilterFinderFactory;
+use App\Support\Filters\Services\FilterService;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\ServiceProvider;
 use Yajra\DataTables\Html\Builder as DataTableBuilder;
@@ -25,6 +26,14 @@ class FiltersServiceProvider extends ServiceProvider
             if ($this instanceof Builder) {
                 return $filter->getQuery($this);
             }
+        });
+
+        Builder::macro('registerFilters', function (FilterService $service) {
+            foreach($service->getItems() as $filter) {
+                $this->filter($filter);
+            }
+
+            return $this;
         });
 
         // DataTableBuilder::macro

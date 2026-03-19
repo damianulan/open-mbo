@@ -38,7 +38,7 @@ class GeneralForm extends Form
             ->addSection(
                 __('forms.settings.general.datas'),
                 fn (FormBuilder $builder) => $builder
-                    ->add(FormComponent::multiselect('export_types', $this->export_types, Dictionary::fromEnum(ExportType::class))
+                    ->add(FormComponent::multiselect('export_types', $this->export_types, Dictionary::fromAssocArray(ExportType::labels()))
                         ->label(__('forms.settings.general.export_types'))->key(self::settingsKey('general.export_types')))
             )
             ->addSubmit();

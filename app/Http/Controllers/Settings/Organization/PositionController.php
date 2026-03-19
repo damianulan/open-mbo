@@ -6,11 +6,14 @@ use App\DataTables\Management\PositionsDataTable;
 use App\Forms\Settings\Organization\PositionEditForm;
 use App\Http\Controllers\Settings\SettingsController;
 use App\Models\Business\Position;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class PositionController extends SettingsController
 {
-    public function index(PositionsDataTable $dataTable)
+    public function index(PositionsDataTable $dataTable): Renderable|JsonResponse
     {
         $this->addPageNav();
 
@@ -19,7 +22,7 @@ class PositionController extends SettingsController
         ]);
     }
 
-    public function create(Request $request, PositionEditForm $form)
+    public function create(PositionEditForm $form): View
     {
         $this->addPageNav();
 
@@ -28,7 +31,7 @@ class PositionController extends SettingsController
         ]);
     }
 
-    public function store(Request $request, PositionEditForm $form)
+    public function store(PositionEditForm $form): RedirectResponse
     {
         $form->validate();
         $position = Position::fillFromRequest();
@@ -40,10 +43,9 @@ class PositionController extends SettingsController
         return redirect()->back()->with('error', __('alerts.error.operation'));
     }
 
-    public function edit(Request $request, $id, PositionEditForm $form)
+    public function edit(Position $position, PositionEditForm $form): View
     {
         $this->addPageNav();
-        $position = Position::findOrFail($id);
 
         return view('pages.settings.organization.positions.edit', [
             'position' => $position,
@@ -51,11 +53,10 @@ class PositionController extends SettingsController
         ]);
     }
 
-    public function update(Request $request, $id, PositionEditForm $form)
+    public function update(Position $position, PositionEditForm $form): RedirectResponse
     {
-        $position = Position::findOrFail($id);
         $form->validate();
-        $position = Position::fillFromRequest($id);
+        $position = Position::fillFromRequest($position->getKey());
 
         if ($position->update()) {
             return redirect()->route('settings.organization.positions.index')->with('success', __('alerts.success.operation'));
@@ -64,7 +65,7 @@ class PositionController extends SettingsController
         return redirect()->back()->with('error', __('alerts.error.operation'));
     }
 
-    public function delete(Request $request, Position $position)
+    public function delete(Position $position): RedirectResponse
     {
         if ($position->delete()) {
             return redirect()->route('settings.organization.positions.index')->with('success', __('alerts.success.operation'));
