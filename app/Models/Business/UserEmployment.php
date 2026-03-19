@@ -34,7 +34,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read bool $main
  * @property-read \App\Models\Business\Position|null $position
  * @property-read mixed $trans
- * @property-read User $user
+ * @property-read User|null $user
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment avg(string $column)
@@ -159,7 +159,7 @@ class UserEmployment extends BaseModel
     protected function main(): Attribute
     {
         return Attribute::make(
-            get: fn (): bool => $this->id === UserEmployment::where('user_id', $this->user_id)->active()->first()->id,
+            get: fn (): bool => $this->id === UserEmployment::where('user_id', $this->user_id)->active()->first()?->id,
         );
     }
 }

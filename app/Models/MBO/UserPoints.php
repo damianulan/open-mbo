@@ -27,7 +27,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read User|null $assigner
  * @property-read Model|\Eloquent $subject
  * @property-read mixed $trans
- * @property-read User $user
+ * @property-read User|null $user
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints avg(string $column)

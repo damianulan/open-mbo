@@ -21,7 +21,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
- * @property-read \App\Models\Core\User $user
+ * @property-read \App\Models\Core\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference onlyTrashed()

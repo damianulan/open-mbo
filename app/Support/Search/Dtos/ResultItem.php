@@ -5,9 +5,8 @@ namespace App\Support\Search\Dtos;
 use DTOs\Workshop\PreventAccessingMissingAttributes;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Str;
-use Lucent\Support\Dtos\LaravelDto;
-
-class ResultItem extends LaravelDto implements PreventAccessingMissingAttributes
+use DTOs\Dto;
+class ResultItem extends Dto implements PreventAccessingMissingAttributes
 {
     protected $fillable = [
         'title',

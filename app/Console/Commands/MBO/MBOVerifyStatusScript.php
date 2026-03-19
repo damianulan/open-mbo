@@ -3,6 +3,7 @@
 namespace App\Console\Commands\MBO;
 
 use App\Console\BaseCommand;
+use App\Enums\MBO\CampaignStage;
 use App\Models\MBO\Campaign;
 use App\Models\MBO\UserObjective;
 use Illuminate\Database\Eloquent\Collection;
@@ -47,10 +48,14 @@ class MBOVerifyStatusScript extends BaseCommand
             $this->line('Updating campaigns status ...');
             Campaign::whereActive()->whereManual(0)->chunk(config('app.chunk_default'), function (Collection $campaigns) use ($echo): void {
                 foreach ($campaigns as $campaign) {
+                    /** @var Campaign $campaign */
                     $campaign->setStageAuto();
                     if ($campaign->isDirty('stage')) {
                         if ($echo) {
-                            $this->line('Updating campaign status for: ' . $campaign->name . ' - ' . $campaign->getOriginal('stage') . ' => ' . $campaign->stage);
+                            $originalStage = CampaignStage::getName($campaign->getOriginal('stage'));
+                            $currentStage = CampaignStage::getName($campaign->stage);
+
+                            $this->line("Updating campaign status for: {$campaign->name} - {$originalStage} => {$currentStage}");
                         }
                         $campaign->updateQuietly();
                     }
@@ -61,6 +66,7 @@ class MBOVerifyStatusScript extends BaseCommand
             $this->line('Updating objectives status ...');
             UserObjective::whereNotEvaluated()->whereHas('objective')->chunk(config('app.chunk_default'), function (Collection $objectives) use ($echo): void {
                 foreach ($objectives as $objective) {
+                    /** @var UserObjective $objective */
                     $objective->setStatus();
                     if ($objective->isDirty('status')) {
                         if ($echo) {
@@ -73,7 +79,7 @@ class MBOVerifyStatusScript extends BaseCommand
             DB::commit();
         } catch (Throwable $th) {
             DB::rollBack();
-            $this->error($th->getMessage());
+            throw $th;
         }
 
         return true;

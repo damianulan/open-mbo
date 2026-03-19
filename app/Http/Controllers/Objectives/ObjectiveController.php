@@ -60,6 +60,7 @@ class ObjectiveController extends MBOController
         $this->logShow($objective);
 
         $header = 'Podsumowanie Celu';
+        $this->setPagetitle($header);
 
         return view('pages.mbo.objectives.show', [
             'objective' => $objective,
@@ -113,7 +114,7 @@ class ObjectiveController extends MBOController
             }
         } else {
             $params = [
-                'form' => ObjectiveEditForm::bootWithAttributes($request->get('datas')),
+                'form' => ObjectiveEditForm::bootWithAttributes($request->input('datas')),
             ];
         }
 

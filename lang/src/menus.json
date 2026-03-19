@@ -232,6 +232,16 @@
                 "pl": "Powiadomienia",
                 "en": "Notifications",
                 "it": "Notifiche"
+            },
+            "create": {
+                "pl": "Tworzenie powiadomienia",
+                "en": "Create notification",
+                "it": "Crea notifica"
+            },
+            "edit": {
+                "pl": "Edycja powiadomienia",
+                "en": "Edit notification",
+                "it": "Modifica notifica"
             }
         },
         "organization": {

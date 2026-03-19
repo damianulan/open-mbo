@@ -29,13 +29,13 @@ class CampaignUserController extends AppController
 
         $this->logShow($userCampaign);
         $header = "{$userCampaign->campaign->name} [{$userCampaign->campaign->period}]";
+        $this->setPagetitle($header);
 
         return view('pages.mbo.campaigns.user', [
             'campaign' => $userCampaign->campaign,
             'userCampaign' => $userCampaign,
             'user' => $userCampaign->user,
             'chartCompletion' => $userCampaign->chart('user_campaign_completion'),
-            'pagetitle' => $header,
         ]);
     }
 

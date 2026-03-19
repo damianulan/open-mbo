@@ -24,7 +24,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read int|null $activities_count
  * @property-read Collection<int, Department> $children
  * @property-read int|null $children_count
- * @property-read \App\Models\Business\Company $company
+ * @property-read \App\Models\Business\Company|null $company
  * @property-read Collection<int, \App\Models\Business\UserEmployment> $employments
  * @property-read int|null $employments_count
  * @property-read Collection<int, User> $managers

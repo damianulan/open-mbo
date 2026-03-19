@@ -75,8 +75,8 @@ class ResetPasswordController extends Controller
 
         try {
             $user = Auth::user();
-            if (Hash::check($request->get('old_password'), $user->password)) {
-                $password = $request->get('password');
+            if (Hash::check($request->input('old_password'), $user->password)) {
+                $password = $request->input('password');
                 if ($user->validateNewPassword($password)) {
                     $this->resetPassword($user, $password);
                     $response = Password::PASSWORD_RESET;

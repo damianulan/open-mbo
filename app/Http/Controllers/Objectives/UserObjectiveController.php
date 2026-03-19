@@ -52,6 +52,7 @@ class UserObjectiveController extends AppController
         $this->logShow($userObjective);
 
         $header = 'Podsumowanie Celu';
+        $this->setPagetitle($header);
 
         return view('pages.mbo.objectives.users.show', [
             'userObjective' => $userObjective,

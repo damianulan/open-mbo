@@ -68,7 +68,7 @@ class CampaignObjectiveController extends AppController
                 $form = CampaignEditObjectiveForm::bootWithModel($objective);
             }
         } else {
-            $form = CampaignEditObjectiveForm::bootWithAttributes($request->get('datas'));
+            $form = CampaignEditObjectiveForm::bootWithAttributes($request->input('datas'));
         }
         if ($form) {
             $params = [
