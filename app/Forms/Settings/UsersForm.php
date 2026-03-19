@@ -27,7 +27,7 @@ class UsersForm extends Form
             ->addSection(
                 __('forms.settings.general.auth'),
                 fn (FormBuilder $builder) => $builder
-                    ->add(FormComponent::select('auth_identifier', $this->auth_identifier, Dictionary::fromEnum(AuthIdentifier::class))
+                    ->add(FormComponent::select('auth_identifier', $this->auth_identifier, Dictionary::fromAssocArray(AuthIdentifier::labels()))
                         ->label(__('forms.settings.users.auth_identifier'))->info(__('forms.settings.users.info.auth_identifier'))->noEmpty()->key(self::settingsKey('users.auth_identifier')))
                     ->add(FormComponent::switch('password_change_firstlogin', $this->password_change_firstlogin)->label(__('forms.settings.users.password_change_firstlogin'))->info(__('forms.settings.users.info.password_change_firstlogin'))->key(self::settingsKey('users.password_change_firstlogin')))
                     ->add(FormComponent::switch('force_password_change_reset', $this->force_password_change_reset)->label(__('forms.settings.users.force_password_change_reset'))->info(__('forms.settings.users.info.force_password_change_reset'))->key(self::settingsKey('users.force_password_change_reset')))

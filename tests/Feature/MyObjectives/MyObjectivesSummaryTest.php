@@ -64,7 +64,7 @@ class MyObjectivesSummaryTest extends TestCase
         $userObjective = UserObjective::query()->create([
             'user_id' => $user->id,
             'objective_id' => $objective->id,
-            'status' => UserObjectiveStatus::PROGRESS,
+            'status' => UserObjectiveStatus::PROGRESS->value,
             'evaluation' => 50,
         ]);
 

@@ -2,30 +2,28 @@
 
 namespace App\Enums\Users;
 
-use Enumerable\Laravel\Enum;
+use App\Support\Concerns\EnumHasValues;
 
-class Gender extends Enum
+enum Gender: string
 {
-    public const MALE = 'm';
+    use EnumHasValues;
 
-    public const FEMALE = 'f';
+    case MALE = 'm';
 
-    public const OTHER = 'o';
+    case FEMALE = 'f';
+
+    case OTHER = 'o';
 
     public static function conservative(): array
     {
         return [
-            self::MALE,
-            self::FEMALE,
+            self::MALE->value,
+            self::FEMALE->value,
         ];
     }
 
-    public static function labels(): array
+    public function label(): string
     {
-        return [
-            self::MALE => __('fields.gender.' . self::MALE),
-            self::FEMALE => __('fields.gender.' . self::FEMALE),
-            self::OTHER => __('fields.gender.' . self::OTHER),
-        ];
+        return __('fields.gender.' . $this->value);
     }
 }

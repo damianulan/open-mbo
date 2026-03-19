@@ -15,7 +15,7 @@ class Item extends Component
     public function mount(SystemNotification $notification): void
     {
         $this->notification = $notification;
-        $this->message = $this->notification->renderedContents();
+        $this->message = $notification->renderedContents();
     }
 
     public function render(): View

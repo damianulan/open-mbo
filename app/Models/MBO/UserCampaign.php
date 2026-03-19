@@ -31,14 +31,15 @@ use Spatie\Activitylog\Models\Activity;
  * @property Carbon|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\MBO\Campaign $campaign
- * @property-read Collection<int, \App\Models\MBO\Objective> $objectives
+ * @property-read Campaign $campaign
+ * @property-read Collection<int, Objective> $objectives
  * @property-read int|null $objectives_count
  * @property-read void $points
  * @property-read mixed $trans
  * @property-read User $user
- * @property-read Collection<int, \App\Models\MBO\UserObjective> $user_objectives
+ * @property-read Collection<int, UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign avg(string $column)
@@ -93,6 +94,7 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder<static>|UserCampaign withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign withoutCache()
  * @method static Builder<static>|UserCampaign withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
@@ -172,20 +174,20 @@ class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
 
     public function stageDescription(): string
     {
-        return __('forms.campaigns.stages.' . $this->stage->value());
+        return __('forms.campaigns.stages.' . $this->stage->value);
     }
 
     public function stageIcon(): string
     {
-        $status = CampaignStage::stageIcon($this->stage->value());
+        $status = CampaignStage::stageIcon($this->stage);
 
         return $status;
     }
 
     public function terminate(): bool
     {
-        if (CampaignStage::TERMINATED !== $this->stage->value()) {
-            $this->stage = CampaignStage::tryFrom(CampaignStage::TERMINATED);
+        if (CampaignStage::TERMINATED !== $this->stage) {
+            $this->stage = CampaignStage::TERMINATED;
 
             return $this->update();
         }
@@ -195,15 +197,15 @@ class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
 
     public function resume(): bool
     {
-        $this->stage = CampaignStage::tryFrom(CampaignStage::IN_PROGRESS);
+        $this->stage = CampaignStage::IN_PROGRESS;
 
         return $this->update();
     }
 
     public function cancel(): bool
     {
-        if (CampaignStage::CANCELED !== $this->stage->value()) {
-            $this->stage = CampaignStage::tryFrom(CampaignStage::CANCELED);
+        if (CampaignStage::CANCELED !== $this->stage) {
+            $this->stage = CampaignStage::CANCELED;
 
             return $this->update();
         }
@@ -214,7 +216,7 @@ class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
     public function nextStage(): bool
     {
         $stages = CampaignStage::sequences();
-        $current = $stages[$this->stage];
+        $current = $stages[$this->stage->value];
         $next_count = $current + 1;
         if ($next_count >= count($stages)) {
             $next_count = count($stages) - 1;
@@ -229,7 +231,7 @@ class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
     public function previousStage(): bool
     {
         $stages = CampaignStage::sequences();
-        $current = $stages[$this->stage];
+        $current = $stages[$this->stage->value];
         $prev_count = $current - 1;
         if ($prev_count <= 0) {
             $prev_count = 0;
@@ -278,7 +280,7 @@ class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
         $query->where(function (Builder $query): void {
             $query->whereHas('campaign');
             $query->where('active', 1)
-                ->whereNotIn('stage', [CampaignStage::TERMINATED, CampaignStage::CANCELED, CampaignStage::COMPLETED]);
+                ->whereNotIn('stage', [CampaignStage::TERMINATED->value, CampaignStage::CANCELED->value, CampaignStage::COMPLETED->value]);
         });
     }
 
@@ -296,7 +298,7 @@ class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
 
         $caseParts = [];
         foreach ($stages as $index => $stage) {
-            $caseParts[] = "WHEN '{$stage}' THEN {$index}";
+            $caseParts[] = "WHEN '{$stage->value}' THEN {$index}";
         }
 
         $query->orderByRaw('CASE stage ' . implode(' ', $caseParts) . ' ELSE 100 END');

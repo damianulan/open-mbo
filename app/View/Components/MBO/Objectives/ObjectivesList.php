@@ -29,10 +29,19 @@ class ObjectivesList extends Component
             throw $e;
         }
 
-        $this->objectives = $model->objectives;
+        $relations = ['objectives'];
+
         if ($user && $user->exists) {
             $this->user = $user;
+
+            $relations['objectives.user_objectives'] = fn ($query) => $query
+                ->where('user_id', $user->id)
+                ->with('objective');
         }
+
+        $model->loadMissing($relations);
+
+        $this->objectives = $model->objectives;
     }
 
     /**

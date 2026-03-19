@@ -1,8 +1,8 @@
 <div>
     <div class="commentable" wire:poll.10000ms>
-        @if($this->subject->comments)
-            @foreach($this->subject->comments as $comment)
-                <div class="comment{{ $comment->isMine() ? ' my-comment' : '' }}" wire:key="{{ str()->random(50) }}">
+        @if($this->comments->isNotEmpty())
+            @foreach($this->comments as $comment)
+                <div class="comment{{ $comment->isMine() ? ' my-comment' : '' }}" wire:key="comment-{{ $comment->id }}">
                     <div class="comment-group" wire:transition.opacity.duration.1000ms >
                         <a href="{{ $comment->author->routeShow() }}" target="_blank" class="commentable-avatar" data-tippy-content="{{ $comment->author->name }}">{!! $comment->author->getAvatarView('sm') !!}</a>
                         <div class="commentable-item">

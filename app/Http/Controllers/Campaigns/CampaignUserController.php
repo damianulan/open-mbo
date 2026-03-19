@@ -21,10 +21,14 @@ class CampaignUserController extends AppController
             unauthorized();
         }
 
-        $userCampaign->loadMissing('user_objectives');
+        $userCampaign->loadMissing([
+            'campaign.coordinators.profile',
+            'user.profile',
+            'user_objectives.objective',
+        ]);
 
         $this->logShow($userCampaign);
-        $header = $userCampaign->campaign->name . ' [' . $userCampaign->campaign->period . ']';
+        $header = "{$userCampaign->campaign->name} [{$userCampaign->campaign->period}]";
 
         return view('pages.mbo.campaigns.user', [
             'campaign' => $userCampaign->campaign,

@@ -2,17 +2,19 @@
 
 namespace App\Enums\Core;
 
-use Enumerable\Laravel\Enum;
+use App\Support\Concerns\EnumHasValues;
 
-class EnvironmentType extends Enum
+enum EnvironmentType: string
 {
-    const LOCAL = 'local';
+    use EnumHasValues;
 
-    const DEVELOPMENT = 'development';
+    case LOCAL = 'local';
 
-    const TESTING = 'testing';
+    case DEVELOPMENT = 'development';
 
-    const STAGING = 'staging';
+    case TESTING = 'testing';
 
-    const PRODUCTION = 'production';
+    case STAGING = 'staging';
+
+    case PRODUCTION = 'production';
 }

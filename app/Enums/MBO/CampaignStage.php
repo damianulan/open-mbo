@@ -2,7 +2,7 @@
 
 namespace App\Enums\MBO;
 
-use Enumerable\Laravel\Enum;
+use App\Support\Concerns\EnumHasValues;
 
 /**
  * Campaign Stages can be assigned to campaigns and users in campaign.
@@ -10,30 +10,32 @@ use Enumerable\Laravel\Enum;
  * Campaigns while in progress can have multiple SOFT STAGES assigned.
  * User can only have one of any STAGES assigned at a time.
  */
-class CampaignStage extends Enum
+enum CampaignStage: string
 {
+    use EnumHasValues;
+
     // in progress/soft stages - campaign can have multiple of them assigned.
     // if any assigned its generally an IN_PROGESS stage
-    public const DEFINITION = 'definition';
+    case DEFINITION = 'definition';
 
-    public const DISPOSITION = 'disposition';
+    case DISPOSITION = 'disposition';
 
-    public const REALIZATION = 'realization';
+    case REALIZATION = 'realization';
 
-    public const EVALUATION = 'evaluation';
+    case EVALUATION = 'evaluation';
 
-    public const SELF_EVALUATION = 'self_evaluation';
+    case SELF_EVALUATION = 'self_evaluation';
 
     // hard stages
-    public const PENDING = 'pending'; // starting point stage
+    case PENDING = 'pending'; // starting point stage
 
-    public const IN_PROGRESS = 'in_progress'; // const when process is in progress
+    case IN_PROGRESS = 'in_progress'; // const when process is in progress
 
-    public const COMPLETED = 'completed'; // const when process is finished in time
+    case COMPLETED = 'completed'; // const when process is finished in time
 
-    public const TERMINATED = 'terminated'; // const when process has been terminated after it has started
+    case TERMINATED = 'terminated'; // const when process has been terminated after it has started
 
-    public const CANCELED = 'canceled'; // const when process has been canceled
+    case CANCELED = 'canceled'; // const when process has been canceled
 
     /**
      * Pending, In Progress, Completed, Terminated, Canceled
@@ -41,11 +43,11 @@ class CampaignStage extends Enum
     public static function hardValues(): array
     {
         return [
-            self::PENDING,
-            self::IN_PROGRESS,
-            self::COMPLETED,
-            self::TERMINATED,
-            self::CANCELED,
+            self::PENDING->value,
+            self::IN_PROGRESS->value,
+            self::COMPLETED->value,
+            self::TERMINATED->value,
+            self::CANCELED->value,
         ];
     }
 
@@ -55,11 +57,11 @@ class CampaignStage extends Enum
     public static function softValues(): array
     {
         return [
-            self::DEFINITION,
-            self::DISPOSITION,
-            self::REALIZATION,
-            self::EVALUATION,
-            self::SELF_EVALUATION,
+            self::DEFINITION->value,
+            self::DISPOSITION->value,
+            self::REALIZATION->value,
+            self::EVALUATION->value,
+            self::SELF_EVALUATION->value,
         ];
     }
 
@@ -69,13 +71,13 @@ class CampaignStage extends Enum
     public static function sequences(): array
     {
         return [
-            self::PENDING => 0,
-            self::DEFINITION => 1,
-            self::DISPOSITION => 2,
-            self::REALIZATION => 3,
-            self::EVALUATION => 4,
-            self::SELF_EVALUATION => 5,
-            self::COMPLETED => 6,
+            self::PENDING->value => 0,
+            self::DEFINITION->value => 1,
+            self::DISPOSITION->value => 2,
+            self::REALIZATION->value => 3,
+            self::EVALUATION->value => 4,
+            self::SELF_EVALUATION->value => 5,
+            self::COMPLETED->value => 6,
         ];
     }
 
@@ -85,67 +87,51 @@ class CampaignStage extends Enum
     public static function hardValuesOrder(): array
     {
         return [
-            self::IN_PROGRESS,
-            self::PENDING,
-            self::COMPLETED,
-            self::TERMINATED,
-            self::CANCELED,
+            self::IN_PROGRESS->value,
+            self::PENDING->value,
+            self::COMPLETED->value,
+            self::TERMINATED->value,
+            self::CANCELED->value,
         ];
     }
 
-    public static function getName(string $value): string
+    public static function getName(self|string $value): string
     {
-        return self::labels()[$value] ?? $value;
+        $stage = self::resolve($value);
+
+        return $stage?->label() ?? (is_string($value) ? $value : $value->value);
     }
 
-    public static function getInfo(string $value): string
+    public static function getInfo(self|string $value): string
     {
-        return __('forms.campaigns.info.' . $value);
+        $stage = self::resolve($value);
+
+        return $stage?->info() ?? __('forms.campaigns.info.' . (is_string($value) ? $value : $value->value));
     }
 
-    public static function getBySequence(int $sequence)
+    public static function getBySequence(int $sequence): ?string
     {
         $stages = self::sequences();
+
         foreach ($stages as $key => $value) {
             if ($value === $sequence) {
                 return $key;
             }
         }
+
+        return null;
     }
 
-    public static function stageIcon($stage)
+    public static function stageIcon(self|string $stage): string
     {
-        $status = null;
-        switch ($stage) {
-            case CampaignStage::PENDING:
-                $status = 'bi-hourglass';
-                break;
-
-            case CampaignStage::DEFINITION:
-            case CampaignStage::DISPOSITION:
-                $status = 'bi-hourglass-top';
-                break;
-
-            case CampaignStage::REALIZATION:
-            case CampaignStage::EVALUATION:
-            case CampaignStage::SELF_EVALUATION:
-                $status = 'bi-hourglass-split';
-                break;
-
-            case CampaignStage::TERMINATED:
-                $status = 'bi-pause-circle-fill';
-                break;
-
-            case CampaignStage::CANCELED:
-                $status = 'bi-x-circle-fill';
-                break;
-
-            default:
-                $status = 'bi-hourglass-bottom';
-                break;
-        }
-
-        return $status;
+        return match (self::resolve($stage)) {
+            self::PENDING => 'bi-hourglass',
+            self::DEFINITION, self::DISPOSITION => 'bi-hourglass-top',
+            self::REALIZATION, self::EVALUATION, self::SELF_EVALUATION => 'bi-hourglass-split',
+            self::TERMINATED => 'bi-pause-circle-fill',
+            self::CANCELED => 'bi-x-circle-fill',
+            default => 'bi-hourglass-bottom',
+        };
     }
 
     /**
@@ -155,37 +141,58 @@ class CampaignStage extends Enum
      * @param  string|null  $status  - UserObjective status
      * @return string $status
      */
-    public static function mapObjectiveStatus(string $stage, ?string $status): ?string
+    public static function mapObjectiveStatus(self|string $stage, ?string $status): ?string
     {
+        $stage = self::resolve($stage);
+        if (is_null($stage)) {
+            return $status;
+        }
+
         $sequences = self::sequences();
         $frozen = UserObjectiveStatus::evaluated();
+        $stageValue = $stage->value;
 
-        if (array_key_exists($stage, $sequences) && ! in_array($status, $frozen)) {
-            if (self::REALIZATION === $stage || self::IN_PROGRESS === $stage) {
-                $status = UserObjectiveStatus::PROGRESS;
-            } elseif ($sequences[$stage] < $sequences[self::REALIZATION]) {
-                $status = UserObjectiveStatus::UNSTARTED;
-            } elseif ($sequences[$stage] > $sequences[self::REALIZATION]) {
-                $status = UserObjectiveStatus::COMPLETED;
+        if (array_key_exists($stageValue, $sequences) && ! in_array($status, $frozen, true)) {
+            if (in_array($stage, [self::REALIZATION, self::IN_PROGRESS], true)) {
+                $status = UserObjectiveStatus::PROGRESS->value;
+            } elseif ($sequences[$stageValue] < $sequences[self::REALIZATION->value]) {
+                $status = UserObjectiveStatus::UNSTARTED->value;
+            } elseif ($sequences[$stageValue] > $sequences[self::REALIZATION->value]) {
+                $status = UserObjectiveStatus::COMPLETED->value;
             }
         }
 
         return $status;
     }
 
-    public static function labels(): array
-    {
-        return __('forms.campaigns.stages');
-    }
-
     public static function fromto_labels(): array
     {
         $arr = [];
-        foreach (__('forms.campaigns.stages') as $key => $value) {
+
+        foreach (self::labels() as $key => $value) {
             $arr[$key . '_from'] = $value . ' ' . __('forms.from');
             $arr[$key . '_to'] = $value . ' ' . __('forms.to');
         }
 
         return $arr;
+    }
+
+    public function label(): string
+    {
+        return __('forms.campaigns.stages.' . $this->value);
+    }
+
+    public function info(): string
+    {
+        return __('forms.campaigns.info.' . $this->value);
+    }
+
+    private static function resolve(self|string $stage): ?self
+    {
+        if ($stage instanceof self) {
+            return $stage;
+        }
+
+        return self::tryFrom($stage);
     }
 }

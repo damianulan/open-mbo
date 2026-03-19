@@ -55,7 +55,7 @@ class UserCampaignSummary extends Component
     private function statusCounts(Collection $userObjectives): array
     {
         return $userObjectives
-            ->groupBy('status')
+            ->groupBy(fn ($userObjective) => $userObjective->status)
             ->map(fn (Collection $items): int => $items->count())
             ->all();
     }

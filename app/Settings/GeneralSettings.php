@@ -35,7 +35,7 @@ class GeneralSettings extends BaseSettings
 
     public string $time_format = 'H:i';
 
-    public array $export_types = [ExportType::EXCEL, ExportType::CSV, ExportType::JSON, ExportType::PDF, ExportType::PRINT];
+    public array $export_types = [ExportType::EXCEL->value, ExportType::CSV->value, ExportType::JSON->value, ExportType::PDF->value, ExportType::PRINT->value];
 
     public static function group(): string
     {

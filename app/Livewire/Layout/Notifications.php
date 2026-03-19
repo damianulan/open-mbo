@@ -2,54 +2,19 @@
 
 namespace App\Livewire\Layout;
 
-use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Support\Facades\Auth;
+use App\Livewire\Concerns\InteractsWithSystemNotifications;
 use Illuminate\View\View;
 use Livewire\Component;
 
 class Notifications extends Component
 {
-    public int $notifications_count = 0;
+    use InteractsWithSystemNotifications;
 
     public bool $shown = false;
 
-    protected $notifications = null;
-
-    public function mount(): void
-    {
-        $this->register();
-    }
-
     public function boot(): void
     {
-        $this->register();
-    }
-
-    public function register(): void
-    {
-        if (Auth::check()) {
-            $query = $this->notificationsQuery();
-            $notificationsCount = (clone $query)
-                ->whereNull('read_at')
-                ->count();
-            $notificationsAlert = (clone $query)
-                ->whereNull('notified_at')
-                ->get();
-
-            $this->notifications = (clone $query)
-                ->take(15)
-                ->get();
-
-            if ($notificationsAlert->count()) {
-                foreach ($notificationsAlert as $alert) {
-                    $alert->notified_at = now();
-                    $alert->updateQuietly();
-                    $this->dispatch('new-notification', title: $alert->contents);
-                }
-            }
-
-            $this->notifications_count = $notificationsCount;
-        }
+        $this->dispatchPendingNotifications();
     }
 
     public function toggleShown(): void
@@ -62,10 +27,18 @@ class Notifications extends Component
         return view('livewire.layout.notifications');
     }
 
-    protected function notificationsQuery(): MorphMany
+    protected function dispatchPendingNotifications(): void
     {
-        return Auth::user()
-            ->system_notifications()
-            ->latest('created_at');
+        $notifications = $this->notificationsQuery()
+            ->whereNull('notified_at')
+            ->get();
+
+        foreach ($notifications as $notification) {
+            $notification->forceFill([
+                'notified_at' => now(),
+            ])->saveQuietly();
+
+            $this->dispatch('new-notification', title: $notification->contents);
+        }
     }
 }

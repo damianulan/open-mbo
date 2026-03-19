@@ -53,16 +53,17 @@ use Spatie\Translatable\HasTranslations;
  * @property-read int|null $coordinators_count
  * @property-read EloquentCollection<int, IndexModel> $indexes
  * @property-read int|null $indexes_count
- * @property-read EloquentCollection<int, \App\Models\MBO\Objective> $objectives
+ * @property-read EloquentCollection<int, Objective> $objectives
  * @property-read int|null $objectives_count
  * @property-read mixed $timeend
  * @property-read mixed $timestart
  * @property-read mixed $trans
  * @property-read mixed $translations
- * @property-read EloquentCollection<int, \App\Models\MBO\UserCampaign> $user_campaigns
+ * @property-read EloquentCollection<int, UserCampaign> $user_campaigns
  * @property-read int|null $user_campaigns_count
- * @property-read EloquentCollection<int, \App\Models\MBO\UserObjective> $user_objectives
+ * @property-read EloquentCollection<int, UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign avg(string $column)
@@ -135,6 +136,7 @@ use Spatie\Translatable\HasTranslations;
  * @method static Builder<static>|Campaign withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign withoutCache()
  * @method static Builder<static>|Campaign withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 #[ScopedBy(CampaignScope::class)]
@@ -180,7 +182,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
     ];
 
     protected $defaults = [
-        'stage' => CampaignStage::PENDING,
+        'stage' => CampaignStage::PENDING->value,
     ];
 
     protected $dispatchesEvents = [
@@ -252,7 +254,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
 
         $stage = $this->getCurrentStages()->first();
         if (is_null($stage)) {
-            $stage = CampaignStage::PENDING;
+            $stage = CampaignStage::PENDING->value;
         }
 
         UserCampaign::where($params)->where('stage', '!=', $stage)->chunk(config('app.chunk_default'), function (EloquentCollection $collection) use ($stage): void {
@@ -267,10 +269,10 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
 
     public function setStageAuto()
     {
-        $stage = CampaignStage::PENDING;
+        $stage = CampaignStage::PENDING->value;
         $now = Carbon::now();
 
-        if ( ! in_array($this->stage, [CampaignStage::TERMINATED, CampaignStage::CANCELED])) {
+        if ( ! in_array($this->stage, [CampaignStage::TERMINATED, CampaignStage::CANCELED], true)) {
             foreach (CampaignStage::softValues() as $tmp) {
                 $prop_start = $tmp . '_from';
                 $prop_end = $tmp . '_to';
@@ -278,7 +280,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
                 $end = Carbon::parse($this->{$prop_end});
 
                 if ($now->between($start, $end)) {
-                    $stage = CampaignStage::IN_PROGRESS;
+                    $stage = CampaignStage::IN_PROGRESS->value;
                     break;
                 }
             }
@@ -286,7 +288,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
             $end = $this->timeend;
 
             if ($end->isPast()) {
-                $stage = CampaignStage::COMPLETED;
+                $stage = CampaignStage::COMPLETED->value;
             }
 
             $this->stage = $stage;
@@ -300,7 +302,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
         $stages = new Collection();
         $now = Carbon::now();
 
-        if (CampaignStage::IN_PROGRESS === (string) $this->stage) {
+        if (CampaignStage::IN_PROGRESS === $this->stage) {
             $softStage = null;
             foreach (CampaignStage::softValues() as $tmp) {
                 $prop_start = $tmp . '_from';
@@ -315,18 +317,18 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
             }
 
             if (is_null($softStage)) {
-                $stages->push($this->stage);
+                $stages->push($this->stage->value);
             }
         } else {
-            $stages->push($this->stage);
+            $stages->push($this->stage->value);
         }
 
         return $stages;
     }
 
-    public function isStageActive(string $stage)
+    public function isStageActive(CampaignStage|string $stage)
     {
-        return $this->getCurrentStages()->contains($stage);
+        return $this->getCurrentStages()->contains($stage instanceof CampaignStage ? $stage->value : $stage);
     }
 
     public function open(): bool
@@ -420,17 +422,17 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
         return CampaignStage::softValues();
     }
 
-    public function getStageIcon(string $stage): ?string
+    public function getStageIcon(CampaignStage|string $stage): ?string
     {
         return CampaignStage::stageIcon($stage);
     }
 
-    public function getStageName(string $stage): ?string
+    public function getStageName(CampaignStage|string $stage): ?string
     {
         return CampaignStage::getName($stage);
     }
 
-    public function getStageInfo(string $stage): ?string
+    public function getStageInfo(CampaignStage|string $stage): ?string
     {
         return CampaignStage::getInfo($stage);
     }
@@ -443,7 +445,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
     public function cancel(): bool
     {
         if (CampaignStage::CANCELED !== $this->stage) {
-            $this->stage = CampaignStage::tryFrom(CampaignStage::CANCELED);
+            $this->stage = CampaignStage::CANCELED;
 
             foreach ($this->user_campaigns as $userCampaign) {
                 $userCampaign->cancel();
@@ -458,7 +460,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
     public function terminate(): bool
     {
         if (CampaignStage::TERMINATED !== $this->stage) {
-            $this->stage = CampaignStage::tryFrom(CampaignStage::TERMINATED);
+            $this->stage = CampaignStage::TERMINATED;
 
             foreach ($this->user_campaigns as $userCampaign) {
                 $userCampaign->terminate();
@@ -472,8 +474,8 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
 
     public function resume(): bool
     {
-        if (CampaignStage::TERMINATED === $this->stage->value()) {
-            $this->stage = CampaignStage::tryFrom(CampaignStage::IN_PROGRESS);
+        if (CampaignStage::TERMINATED === $this->stage) {
+            $this->stage = CampaignStage::IN_PROGRESS;
 
             foreach ($this->user_campaigns as $userCampaign) {
                 $userCampaign->resume();
@@ -487,22 +489,22 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
 
     public function terminated(): bool
     {
-        return CampaignStage::TERMINATED === $this->stage->value();
+        return CampaignStage::TERMINATED === $this->stage;
     }
 
     public function canceled(): bool
     {
-        return CampaignStage::CANCELED === $this->stage->value();
+        return CampaignStage::CANCELED === $this->stage;
     }
 
     public function completed(): bool
     {
-        return CampaignStage::COMPLETED === $this->stage->value();
+        return CampaignStage::COMPLETED === $this->stage;
     }
 
     public function pending(): bool
     {
-        return CampaignStage::PENDING === $this->stage->value();
+        return CampaignStage::PENDING === $this->stage;
     }
 
     public function isActive(): bool
@@ -512,7 +514,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
 
     public function inProgress(): bool
     {
-        return CampaignStage::IN_PROGRESS === $this->stage->value();
+        return CampaignStage::IN_PROGRESS === $this->stage;
     }
 
     public function routeShow(): string
@@ -563,7 +565,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
     {
         $query->where('draft', 0)
             ->where(function (Builder $q): void {
-                $q->whereIn('stage', [CampaignStage::PENDING, CampaignStage::IN_PROGRESS]);
+                $q->whereIn('stage', [CampaignStage::PENDING->value, CampaignStage::IN_PROGRESS->value]);
             });
     }
 
@@ -571,7 +573,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
     {
         $query->where('draft', 0)
             ->where(function (Builder $q): void {
-                $q->where('stage', CampaignStage::IN_PROGRESS)
+                $q->where('stage', CampaignStage::IN_PROGRESS->value)
                     ->orWhereDate('self_evaluation_to', '>', Carbon::now());
             });
     }
@@ -579,20 +581,20 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
     public function scopeWhereCompleted(Builder $query): void
     {
         $query->where('draft', 0)
-            ->whereNotIn('stage', [CampaignStage::TERMINATED, CampaignStage::CANCELED])
+            ->whereNotIn('stage', [CampaignStage::TERMINATED->value, CampaignStage::CANCELED->value])
             ->where(function (Builder $q): void {
-                $q->where('stage', CampaignStage::COMPLETED)
+                $q->where('stage', CampaignStage::COMPLETED->value)
                     ->orWhereDate('self_evaluation_to', '<', Carbon::now());
             });
     }
 
     public function scopeOrderByStatus(Builder $query): void
     {
-        $in_progess = CampaignStage::IN_PROGRESS;
-        $pending = CampaignStage::PENDING;
-        $completed = CampaignStage::COMPLETED;
-        $terminated = CampaignStage::TERMINATED;
-        $canceled = CampaignStage::CANCELED;
+        $in_progess = CampaignStage::IN_PROGRESS->value;
+        $pending = CampaignStage::PENDING->value;
+        $completed = CampaignStage::COMPLETED->value;
+        $terminated = CampaignStage::TERMINATED->value;
+        $canceled = CampaignStage::CANCELED->value;
         $orderBy = "FIELD(stage, '{$in_progess}', '{$pending}', '{$completed}', '{$terminated}', '{$canceled}')";
         $query->orderByRaw($orderBy);
     }

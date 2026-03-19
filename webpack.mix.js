@@ -32,6 +32,8 @@ mix.webpackConfig({
 
 const scssOptions = {
     outputStyle: "compressed",
+    quietDeps: true,
+    silenceDeprecations: ["import", "legacy-js-api"],
 };
 
 // misc

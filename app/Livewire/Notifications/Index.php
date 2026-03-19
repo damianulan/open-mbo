@@ -2,14 +2,18 @@
 
 namespace App\Livewire\Notifications;
 
+use App\Livewire\Concerns\InteractsWithSystemNotifications;
 use App\Support\Notifications\Models\SystemNotification;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Livewire\Attributes\Computed;
+use Livewire\Attributes\Locked;
 use Livewire\Component;
 
 class Index extends Component
 {
+    use InteractsWithSystemNotifications;
+
+    #[Locked]
     public ?string $selectedNotificationId = null;
 
     public function mount(): void
@@ -25,7 +29,7 @@ class Index extends Component
 
     public function showNotification(string $notificationId): void
     {
-        $notification = $this->notificationsQuery()->find($notificationId);
+        $notification = $this->findNotification($notificationId);
 
         if ( ! $notification instanceof SystemNotification) {
             return;
@@ -38,24 +42,18 @@ class Index extends Component
     public function render(): View
     {
         return view('livewire.notifications.index', [
-            'notifications' => $this->notificationsQuery()->get(),
-            'selectedNotification' => $this->selectedNotification(),
+            'notifications' => $this->allNotifications,
+            'selectedNotification' => $this->selectedNotification,
         ])->extends('layouts.portal.master')->section('content');
     }
 
-    protected function notificationsQuery(): MorphMany
-    {
-        return Auth::user()
-            ->system_notifications()
-            ->latest('created_at');
-    }
-
-    protected function selectedNotification(): ?SystemNotification
+    #[Computed]
+    public function selectedNotification(): ?SystemNotification
     {
         if ( ! $this->selectedNotificationId) {
             return null;
         }
 
-        return $this->notificationsQuery()->find($this->selectedNotificationId);
+        return $this->findNotification($this->selectedNotificationId);
     }
 }

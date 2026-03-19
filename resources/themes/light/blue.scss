@@ -1,6 +1,8 @@
+@use "sass:color";
+
 // Theme palette
 $theme-primary: #285c7f !default;
-$theme-secondary: darken($theme-primary, 10%) !default;
+$theme-secondary: color.adjust($theme-primary, $lightness: -10%) !default;
 
 // Bootstrap semantic colors
 $primary: $theme-primary !default;

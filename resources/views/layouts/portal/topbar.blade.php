@@ -54,7 +54,7 @@
                         <i class="bi bi-book-fill"></i>
                     </a>
                 </div>
-                <livewire:notifications key="{{ str()->random(15) }}"/>
+                <livewire:notifications key="notifications-{{ auth()->id() }}"/>
                 <div class="user-nav dropup"
                     @if(auth()->user()->isImpersonating())
                         data-tippy-placement="left"
