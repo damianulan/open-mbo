@@ -2,23 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\Settings\MyLogsDataTable;
 use App\Forms\Users\ProfileEditForm;
 use App\Forms\Users\ProfilePreferencesForm;
 use App\Models\Core\UserPreference;
 use App\Models\Core\UserProfile;
+use App\Support\UI\Page\Navigation\Contracts\HasPageNavigation;
+use App\Support\UI\Page\Navigation\MenuItem;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\Support\UI\Page\Navigation\Contracts\HasPageNavigation;
-use App\Support\UI\Page\Navigation\MenuItem;
-use App\DataTables\Settings\MyLogsDataTable;
+use Illuminate\View\View;
 
 class ProfileController extends AppController
 {
     use HasPageNavigation;
 
-    public function index(Request $request, ProfileEditForm $form): Renderable
+    public function index(Request $request, ProfileEditForm $form): View
     {
         $this->addPageNav();
 
@@ -30,6 +32,7 @@ class ProfileController extends AppController
     public function update(Request $request, ProfileEditForm $form): RedirectResponse
     {
         $user = $request->user();
+
         $form->validate();
 
         $user->firstname = $request->input('firstname');
@@ -41,6 +44,7 @@ class ProfileController extends AppController
         $profile->birthday = $request->input('birthday');
 
         $avatar = $request->file('avatar');
+
         if ($avatar) {
             $filename = 'avatar_' . $user->id . '.' . $avatar->getClientOriginalExtension();
             $location = Storage::disk('uploads')->putFileAs('avatars', $avatar, $filename);
@@ -57,7 +61,7 @@ class ProfileController extends AppController
         return redirect()->route('profile.index')->with('error', __('alerts.error.operation'));
     }
 
-    public function preferences(Request $request, ProfilePreferencesForm $form)
+    public function preferences(Request $request, ProfilePreferencesForm $form): View
     {
         $this->addPageNav();
         $this->setPagetitle(__('menus.preferences'));
@@ -70,19 +74,13 @@ class ProfileController extends AppController
     public function updatePreferences(Request $request, ProfilePreferencesForm $form): RedirectResponse
     {
         $form->validate();
+
         $user = $request->user();
-        $preferences = UserPreference::query()
-            ->withTrashed()
-            ->where('user_id', $user->id)
-            ->latest('id')
-            ->first();
+        $preferences = UserPreference::query()->withTrashed()->firstOrNew([
+            'user_id' => $user->id,
+        ]);
 
-        if (is_null($preferences)) {
-            $preferences = new UserPreference();
-            $preferences->user_id = $user->id;
-        }
-
-        if ($preferences->trashed()) {
+        if ($preferences->exists && $preferences->trashed()) {
             $preferences->restore();
         }
 
@@ -100,7 +98,7 @@ class ProfileController extends AppController
         return redirect()->route('preferences.index')->with('error', __('alerts.error.operation'));
     }
 
-    public function myLogs(MyLogsDataTable $dataTable)
+    public function myLogs(MyLogsDataTable $dataTable): Renderable|JsonResponse
     {
         $this->addPageNav();
         $this->setPagetitle(__('menus.activity'));

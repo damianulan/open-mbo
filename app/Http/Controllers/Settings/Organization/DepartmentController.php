@@ -6,11 +6,14 @@ use App\DataTables\Management\DepartmentsDataTable;
 use App\Forms\Settings\Organization\DepartmentEditForm;
 use App\Http\Controllers\Settings\SettingsController;
 use App\Models\Business\Department;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class DepartmentController extends SettingsController
 {
-    public function index(DepartmentsDataTable $dataTable)
+    public function index(DepartmentsDataTable $dataTable): Renderable|JsonResponse
     {
         $this->addPageNav();
 
@@ -19,7 +22,7 @@ class DepartmentController extends SettingsController
         ]);
     }
 
-    public function create(Request $request, DepartmentEditForm $form)
+    public function create(DepartmentEditForm $form): View
     {
         $this->addPageNav();
 
@@ -28,7 +31,7 @@ class DepartmentController extends SettingsController
         ]);
     }
 
-    public function store(Request $request, DepartmentEditForm $form)
+    public function store(DepartmentEditForm $form): RedirectResponse
     {
         $form->validate();
         $department = Department::fillFromRequest();
@@ -40,10 +43,9 @@ class DepartmentController extends SettingsController
         return redirect()->back()->with('error', __('alerts.error.operation'));
     }
 
-    public function edit(Request $request, $id, DepartmentEditForm $form)
+    public function edit(Department $department, DepartmentEditForm $form): View
     {
         $this->addPageNav();
-        $department = Department::findOrFail($id);
 
         return view('pages.settings.organization.departments.edit', [
             'department' => $department,
@@ -51,11 +53,10 @@ class DepartmentController extends SettingsController
         ]);
     }
 
-    public function update(Request $request, $id, DepartmentEditForm $form)
+    public function update(Department $department, DepartmentEditForm $form): RedirectResponse
     {
-        $department = Department::findOrFail($id);
         $form->validate();
-        $department = Department::fillFromRequest($id);
+        $department = Department::fillFromRequest($department->getKey());
 
         if ($department->update()) {
             return redirect()->route('settings.organization.departments.index')->with('success', __('alerts.success.operation'));
@@ -64,7 +65,7 @@ class DepartmentController extends SettingsController
         return redirect()->back()->with('error', __('alerts.error.operation'));
     }
 
-    public function delete(Request $request, Department $department)
+    public function delete(Department $department): RedirectResponse
     {
         if ($department->delete()) {
             return redirect()->route('settings.organization.departments.index')->with('success', __('alerts.success.operation'));

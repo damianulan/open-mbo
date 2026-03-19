@@ -11,6 +11,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 use JsonException;
 
 class NotificationsController extends SettingsController
@@ -24,7 +25,7 @@ class NotificationsController extends SettingsController
         ]);
     }
 
-    public function create(Request $request, NotificationEditForm $form): Renderable
+    public function create(NotificationEditForm $form): View
     {
         $this->addPageNav();
 
@@ -46,7 +47,7 @@ class NotificationsController extends SettingsController
         return redirect()->back()->with('error', __('alerts.error.operation'));
     }
 
-    public function edit(Request $request, Notification $notification, NotificationEditForm $form): Renderable
+    public function edit(Notification $notification, NotificationEditForm $form): View
     {
         $this->addPageNav();
 
@@ -68,7 +69,7 @@ class NotificationsController extends SettingsController
         return redirect()->back()->with('error', __('alerts.error.operation'));
     }
 
-    public function delete(Request $request, Notification $notification): RedirectResponse
+    public function delete(Notification $notification): RedirectResponse
     {
         if ($notification->delete()) {
             return redirect()->route('settings.notifications.index')->with('success', __('alerts.success.operation'));

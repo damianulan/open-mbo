@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Settings\Organization;
 
 use App\Http\Controllers\Settings\SettingsController;
+use Illuminate\View\View;
 
 class OrganizationController extends SettingsController
 {
-    public function index()
+    public function index(): View
     {
         $this->addPageNav();
 

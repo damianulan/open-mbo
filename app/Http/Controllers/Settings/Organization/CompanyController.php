@@ -6,11 +6,14 @@ use App\DataTables\Management\CompaniesDataTable;
 use App\Forms\Settings\Organization\CompanyEditForm;
 use App\Http\Controllers\Settings\SettingsController;
 use App\Models\Business\Company;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class CompanyController extends SettingsController
 {
-    public function index(CompaniesDataTable $dataTable)
+    public function index(CompaniesDataTable $dataTable): Renderable|JsonResponse
     {
         $this->addPageNav();
 
@@ -19,7 +22,7 @@ class CompanyController extends SettingsController
         ]);
     }
 
-    public function create(Request $request, CompanyEditForm $form)
+    public function create(CompanyEditForm $form): View
     {
         $this->addPageNav();
 
@@ -28,7 +31,7 @@ class CompanyController extends SettingsController
         ]);
     }
 
-    public function store(Request $request, CompanyEditForm $form)
+    public function store(CompanyEditForm $form): RedirectResponse
     {
         $form->validate();
         $company = Company::fillFromRequest();
@@ -40,22 +43,20 @@ class CompanyController extends SettingsController
         return redirect()->back()->with('error', __('alerts.error.operation'));
     }
 
-    public function edit(Request $request, $id, CompanyEditForm $form)
+    public function edit(Company $company, CompanyEditForm $form): View
     {
         $this->addPageNav();
-        $model = Company::findOrFail($id);
 
         return view('pages.settings.organization.company.edit', [
-            'company' => $model,
-            'form' => $form->setModel($model)->getDefinition(),
+            'company' => $company,
+            'form' => $form->setModel($company)->getDefinition(),
         ]);
     }
 
-    public function update(Request $request, $id, CompanyEditForm $form)
+    public function update(Company $company, CompanyEditForm $form): RedirectResponse
     {
-        $model = Company::findOrFail($id);
         $form->validate();
-        $company = Company::fillFromRequest($id);
+        $company = Company::fillFromRequest($company->getKey());
 
         if ($company->update()) {
             return redirect()->route('settings.organization.company.index')->with('success', __('alerts.success.operation'));
@@ -64,7 +65,7 @@ class CompanyController extends SettingsController
         return redirect()->back()->with('error', __('alerts.error.operation'));
     }
 
-    public function delete(Request $request, Company $company)
+    public function delete(Company $company): RedirectResponse
     {
         if ($company->delete()) {
             return redirect()->route('settings.organization.company.index')->with('success', __('alerts.success.operation'));

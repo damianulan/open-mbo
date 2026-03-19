@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 
 class HomeController extends AppController
 {
     /**
      * Show the application dashboard.
      */
-    public function index(): Renderable
+    public function index(Request $request): View
     {
-        $user = Auth::user();
-
         return view('pages.dashboard', [
-            'user' => $user,
+            'user' => $request->user(),
         ]);
     }
 }

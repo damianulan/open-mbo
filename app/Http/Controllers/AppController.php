@@ -99,12 +99,12 @@ class AppController extends Controller
         return $this->finalResponseJson(true, $message, $datas);
     }
 
-    protected function allows($ability, $arguments): bool
+    protected function allows(mixed $ability, mixed $arguments): bool
     {
         return Gate::allows($ability, $arguments);
     }
 
-    protected function denies($ability, $arguments): bool
+    protected function denies(mixed $ability, mixed $arguments): bool
     {
         return Gate::denies($ability, $arguments);
     }

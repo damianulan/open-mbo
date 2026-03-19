@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 use Throwable;
 
 class ResetPasswordController extends Controller
@@ -30,22 +32,20 @@ class ResetPasswordController extends Controller
 
     use ResetsPasswords;
 
-    const INVALID_OLD_PASSWORD = 'auth.invalid_old_password';
+    protected const INVALID_OLD_PASSWORD = 'auth.invalid_old_password';
 
-    const PASSWORD_REPEATED = 'auth.password_repeated';
+    protected const PASSWORD_REPEATED = 'auth.password_repeated';
 
     /**
      * Where to redirect users after resetting their password.
-     *
-     * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected string $redirectTo = RouteServiceProvider::HOME;
 
-    public function showForceResetForm(Request $request)
+    public function showForceResetForm(): View
     {
-        return view('auth.passwords.password_change')->with(
-            ['user' => Auth::user()]
-        );
+        return view('auth.passwords.password_change', [
+            'user' => Auth::user(),
+        ]);
     }
 
     public function reset(Request $request)
@@ -95,7 +95,7 @@ class ResetPasswordController extends Controller
                     : $this->sendForceResetFailedResponse($request, $response);
     }
 
-    protected function sendResetFailedResponse(Request $request, $response)
+    protected function sendResetFailedResponse(Request $request, string $response)
     {
         $errors = [];
 
@@ -165,7 +165,7 @@ class ResetPasswordController extends Controller
         ];
     }
 
-    protected function rules()
+    protected function rules(): array
     {
         return [
             'token' => 'required',
@@ -174,7 +174,7 @@ class ResetPasswordController extends Controller
         ];
     }
 
-    protected function resetPassword(User $user, $password): void
+    protected function resetPassword(User $user, string $password): void
     {
         $this->setUserPassword($user, $password);
 
