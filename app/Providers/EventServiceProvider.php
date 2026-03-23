@@ -46,6 +46,18 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\MBO\Objectives\ObjectiveCreated' => [
             'App\Listeners\MBO\Objectives\UserObjectiveStatusCheck',
         ],
+
+        // BUSINESS
+        'App\Events\Core\User\EmploymentCreated' => [
+            'App\Listeners\Business\UserEmploymentSaved',
+        ],
+        'App\Events\Core\User\EmploymentUpdated' => [
+            'App\Listeners\Business\UserEmploymentSaved',
+        ],
+        'App\Events\Core\User\EmploymentDeleted' => [
+            'App\Listeners\Business\UserEmploymentSaved',
+        ],
+
     ];
 
     /**

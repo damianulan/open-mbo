@@ -6,7 +6,6 @@ use App\Commentable\Models\Comment;
 use App\Commentable\Support\Commentable;
 use App\Commentable\Support\Commentator;
 use App\Enums\Users\UserStatus;
-use App\Factories\Users\UserStatusFactory;
 use App\Models\Business\Team;
 use App\Models\Business\UserEmployment;
 use App\Models\MBO\BonusScheme;
@@ -60,6 +59,8 @@ use SensitiveParameter;
 use Sentinel\Models\Permission;
 use Sentinel\Traits\HasRolesAndPermissions;
 use Spatie\Activitylog\Models\Activity;
+use Spatie\ModelStatus\HasStatuses;
+use Spatie\ModelStatus\Status;
 
 /**
  * @property string $id
@@ -117,15 +118,16 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read mixed $name
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Objective> $objectives
  * @property-read int|null $objectives_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Core\UserPasswordHistory> $password_history
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, UserPasswordHistory> $password_history
  * @property-read int|null $password_history_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Permission> $permissions
  * @property-read int|null $permissions_count
  * @property-read mixed $points
- * @property-read \App\Models\Core\UserPreference|null $preferences
- * @property-read \App\Models\Core\UserProfile|null $profile
+ * @property-read UserPreference|null $preferences
+ * @property-read UserProfile|null $profile
  * @property-read Collection $sessions
- * @property-read UserStatus $status
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Status> $statuses
+ * @property-read int|null $statuses_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $subordinates
  * @property-read int|null $subordinates_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $supervisors
@@ -142,13 +144,16 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read int|null $user_objectives_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, UserObjective> $user_objectives_active
  * @property-read int|null $user_objectives_active_count
+ *
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User active()
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User currentStatus(...$names)
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User drafted()
  * @method static \Database\Factories\Core\UserFactory factory($count = null, $state = [])
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User inactive()
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User newModelQuery()
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User newQuery()
  * @method static Builder<static>|User onlyTrashed()
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User otherCurrentStatus(...$names)
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User published()
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User query()
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereAuth($value)
@@ -176,6 +181,7 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User withRole(...$slugs)
  * @method static Builder<static>|User withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|User withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 #[ScopedBy(CoreUsersScope::class)]
@@ -202,6 +208,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     use UserHasPreferences;
     use UserMBO;
     use VirginModel;
+    use HasStatuses;
 
     protected $fillable = [
         'email',
@@ -243,6 +250,11 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     public static function getNewPassword(): string
     {
         return Str::random(10);
+    }
+
+    public function statusEnumClass(): ?string
+    {
+        return UserStatus::class;
     }
 
     public function validateNewPassword($newpassword): bool
@@ -482,13 +494,6 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
         return Attribute::make(
             get: fn () => mb_ucfirst($value),
-        );
-    }
-
-    protected function status(): Attribute
-    {
-        return Attribute::make(
-            get: fn (): UserStatus => UserStatusFactory::make($this)
         );
     }
 

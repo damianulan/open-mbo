@@ -31,4 +31,3 @@ error_log
 !/docs/catalog/**
 /lang/texts_to_translate.json
 .codex
-.agents

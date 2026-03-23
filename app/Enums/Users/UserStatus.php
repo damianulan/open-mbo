@@ -22,4 +22,15 @@ enum UserStatus: string
     {
         return __('fields.user_status.' . $this->value);
     }
+
+    public function color(): string
+    {
+        return match ($this) {
+            self::SUSPENDED => 'dark',
+            self::DELETED => 'danger',
+            self::UNVERIFIED => 'warning',
+            self::UNEMPLOYED => 'secondary',
+            default => 'primary',
+        };
+    }
 }

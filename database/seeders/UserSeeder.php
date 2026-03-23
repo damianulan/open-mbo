@@ -73,7 +73,7 @@ class UserSeeder extends Seeder
                     }
 
                     $chance = fake()->numberBetween(1, 3);
-                    UserEmployment::create([
+                    new UserEmployment([
                         'user_id' => $user->id,
                         'company_id' => $company->id,
                         'contract_id' => $contracts->random()->id,
@@ -81,7 +81,7 @@ class UserSeeder extends Seeder
                         'department_id' => $company->departments->random()->id,
                         'employment' => fake()->dateTimeBetween('-10 years', '-3 months'),
                         'release' => 3 === $chance && ! $isManagement ? fake()->dateTimeBetween('-10 months', '+1 year') : null,
-                    ]);
+                    ])->save();
                 }
 
                 $company->departments->each(function (Department $department) use ($company): void {

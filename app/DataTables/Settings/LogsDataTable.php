@@ -2,6 +2,7 @@
 
 namespace App\DataTables\Settings;
 
+use App\Models\Core\User;
 use App\Models\Vendor\ActivityModel;
 use App\Support\DataTables\Column;
 use App\Support\DataTables\DataTableBuilder;
@@ -54,12 +55,23 @@ class LogsDataTable extends BaseLogDataTable
             })
             ->addColumn('subject_type', fn ($data) => $this->subjectTypeView($data))
             ->orderColumn('causer', function ($query, $order): void {
-                $query->orderBy('users.firstname', $order);
-                $query->orderBy('users.lastname', $order);
+                $query->orderBy(
+                    User::query()->select('firstname')
+                        ->whereColumn('users.id', 'activity_log.causer_id')
+                        ->limit(1),
+                    $order
+                );
+                $query->orderBy(
+                    User::query()->select('lastname')
+                        ->whereColumn('users.id', 'activity_log.causer_id')
+                        ->limit(1),
+                    $order
+                );
             })
             ->filterColumn('causer', function ($query, $keyword): void {
-                $sql = "CONCAT(users.firstname,'-',users.lastname) like ?";
-                $query->whereRaw($sql, ["%{$keyword}%"]);
+                $query->whereHasMorph('causer', [User::class], function (QueryBuilder $query) use ($keyword): void {
+                    $query->whereRaw("CONCAT(firstname,'-',lastname) like ?", ["%{$keyword}%"]);
+                });
             })
             ->editColumn('created_at', function ($data) {
                 $formatedDate = Carbon::parse($data->created_at)->format(config('app.datetime_format'));
@@ -73,8 +85,8 @@ class LogsDataTable extends BaseLogDataTable
      */
     public function query(ActivityModel $model): QueryBuilder
     {
-        return $model->join('users', 'users.id', '=', 'activity_log.causer_id')
-            ->select('activity_log.*', 'users.firstname', 'users.lastname')
+        return $model->newQuery()
+            ->with(['causer', 'subject'])
             ->logger();
     }
 

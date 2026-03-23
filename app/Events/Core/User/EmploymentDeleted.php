@@ -3,11 +3,10 @@
 namespace App\Events\Core\User;
 
 use App\Models\Business\UserEmployment;
-use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class EmploymentDeleted implements ShouldDispatchAfterCommit
+class EmploymentDeleted
 {
     use Dispatchable;
     use SerializesModels;
