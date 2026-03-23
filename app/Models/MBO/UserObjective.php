@@ -44,18 +44,17 @@ use Spatie\Activitylog\Models\Activity;
  * @property Carbon|null $deleted_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read Campaign|null $campaign
+ * @property-read \App\Models\MBO\Campaign|null $campaign
  * @property-read Collection<int, Comment> $comments
  * @property-read int|null $comments_count
  * @property-read User|null $evaluator
  * @property-read float $weight
- * @property-read Objective|null $objective
- * @property-read Collection<int, UserPoints> $pointEntries
+ * @property-read \App\Models\MBO\Objective|null $objective
+ * @property-read Collection<int, \App\Models\MBO\UserPoints> $pointEntries
  * @property-read int|null $point_entries_count
- * @property-read UserPoints $points
+ * @property-read \App\Models\MBO\UserPoints $points
  * @property-read mixed $trans
  * @property-read User|null $user
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective avg(string $column)
@@ -120,7 +119,6 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder<static>|UserObjective withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective withoutCache()
  * @method static Builder<static>|UserObjective withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
@@ -297,8 +295,12 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
 
     public function user_campaign(): ?UserCampaign
     {
+        if ($this->campaign?->relationLoaded('user_campaigns')) {
+            return $this->campaign->user_campaigns->firstWhere('user_id', $this->user_id);
+        }
+
         if ($this->campaign) {
-            return $this->campaign?->user_campaigns()->where('user_id', $this->user_id)->first();
+            return $this->campaign->user_campaigns()->where('user_id', $this->user_id)->first();
         }
 
         return null;

@@ -90,6 +90,8 @@ Route::middleware(['web', 'auth', 'maintenance', 'navigation'])->group(function 
     Route::prefix('profile')->name('profile.')->group(function (): void {
         Route::get('/', [ProfileController::class, 'index'])->name('index');
         Route::post('/', [ProfileController::class, 'update'])->name('update');
+        Route::get('preferences', [ProfileController::class, 'preferences'])->name('preferences');
+        Route::post('preferences', [ProfileController::class, 'updatePreferences'])->name('preferences.update');
     });
 
     Route::prefix('preferences')->name('preferences.')->group(function (): void {

@@ -53,17 +53,16 @@ use Spatie\Translatable\HasTranslations;
  * @property-read int|null $coordinators_count
  * @property-read EloquentCollection<int, IndexModel> $indexes
  * @property-read int|null $indexes_count
- * @property-read EloquentCollection<int, Objective> $objectives
+ * @property-read EloquentCollection<int, \App\Models\MBO\Objective> $objectives
  * @property-read int|null $objectives_count
  * @property-read mixed $timeend
  * @property-read mixed $timestart
  * @property-read mixed $trans
  * @property-read mixed $translations
- * @property-read EloquentCollection<int, UserCampaign> $user_campaigns
+ * @property-read EloquentCollection<int, \App\Models\MBO\UserCampaign> $user_campaigns
  * @property-read int|null $user_campaigns_count
- * @property-read EloquentCollection<int, UserObjective> $user_objectives
+ * @property-read EloquentCollection<int, \App\Models\MBO\UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign avg(string $column)
@@ -136,7 +135,6 @@ use Spatie\Translatable\HasTranslations;
  * @method static Builder<static>|Campaign withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign withoutCache()
  * @method static Builder<static>|Campaign withoutTrashed()
- *
  * @mixin \Eloquent
  */
 #[ScopedBy(CampaignScope::class)]
@@ -181,8 +179,8 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
         'stage' => CampaignStage::class,
     ];
 
-    protected $defaults = [
-        'stage' => CampaignStage::PENDING,
+    protected $attributes = [
+        'stage' => 'pending',
     ];
 
     protected $dispatchesEvents = [
@@ -226,18 +224,22 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
         }
 
         $current = $this->coordinators->pluck('id')->toArray();
-        $toDelete = array_filter($current, fn ($value) => ! in_array($value, $user_ids));
-        $toAdd = array_filter($user_ids, fn ($value) => ! in_array($value, $current));
+        $toDelete = array_values(array_diff($current, $user_ids));
+        $toAdd = array_values(array_diff($user_ids, $current));
+        $users = User::query()
+            ->whereIn('id', array_merge($toDelete, $toAdd))
+            ->get()
+            ->keyBy('id');
 
         foreach ($toDelete as $user_id) {
-            $user = User::find($user_id);
-            if ($user->exists()) {
+            $user = $users->get($user_id);
+            if ($user) {
                 $user->revokeRoleSlug(RolesLib::CAMPAIGN_COORDINATOR, $this);
             }
         }
         foreach ($toAdd as $user_id) {
-            $user = User::find($user_id);
-            if ($user->exists()) {
+            $user = $users->get($user_id);
+            if ($user) {
                 $user->assignRoleSlug(RolesLib::CAMPAIGN_COORDINATOR, $this);
             }
         }
@@ -301,8 +303,9 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
     {
         $stages = new Collection();
         $now = Carbon::now();
+        $stage = $this->stage ?? CampaignStage::PENDING;
 
-        if (CampaignStage::IN_PROGRESS === $this->stage) {
+        if (CampaignStage::IN_PROGRESS === $stage) {
             $softStage = null;
             foreach (CampaignStage::softValues() as $tmp) {
                 $prop_start = $tmp . '_from';
@@ -317,10 +320,10 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
             }
 
             if (is_null($softStage)) {
-                $stages->push($this->stage->value);
+                $stages->push($stage->value);
             }
         } else {
-            $stages->push($this->stage->value);
+            $stages->push($stage->value);
         }
 
         return $stages;

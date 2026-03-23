@@ -92,10 +92,10 @@ class ProfileController extends AppController
         $preferences->system_notifications = $request->boolean('system_notifications');
 
         if ($preferences->save()) {
-            return redirect()->route('preferences.index')->with('success', __('alerts.success.operation'));
+            return redirect()->route('profile.preferences')->with('success', __('alerts.success.operation'));
         }
 
-        return redirect()->route('preferences.index')->with('error', __('alerts.error.operation'));
+        return redirect()->route('profile.preferences')->with('error', __('alerts.error.operation'));
     }
 
     public function myLogs(MyLogsDataTable $dataTable): Renderable|JsonResponse

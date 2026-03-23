@@ -24,10 +24,9 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read int|null $activities_count
  * @property-read Collection<int, User> $coordinators
  * @property-read int|null $coordinators_count
- * @property-read Collection<int, ObjectiveTemplate> $objective_templates
+ * @property-read Collection<int, \App\Models\MBO\ObjectiveTemplate> $objective_templates
  * @property-read int|null $objective_templates_count
  * @property-read mixed $trans
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory avg(string $column)
@@ -79,7 +78,6 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory withoutTrashed()
- *
  * @mixin \Eloquent
  */
 #[ScopedBy(ObjectiveTemplateCategoryScope::class)]
@@ -129,18 +127,22 @@ class ObjectiveTemplateCategory extends BaseModel
         }
 
         $current = $this->coordinators->pluck('id')->toArray();
-        $toDelete = array_filter($current, fn ($value) => ! in_array($value, $user_ids));
-        $toAdd = array_filter($user_ids, fn ($value) => ! in_array($value, $current));
+        $toDelete = array_values(array_diff($current, $user_ids));
+        $toAdd = array_values(array_diff($user_ids, $current));
+        $users = User::query()
+            ->whereIn('id', array_merge($toDelete, $toAdd))
+            ->get()
+            ->keyBy('id');
 
         foreach ($toDelete as $user_id) {
-            $user = User::find($user_id);
-            if ($user->exists()) {
+            $user = $users->get($user_id);
+            if ($user) {
                 $user->revokeRoleSlug('objective_coordinator', $this);
             }
         }
         foreach ($toAdd as $user_id) {
-            $user = User::find($user_id);
-            if ($user->exists()) {
+            $user = $users->get($user_id);
+            if ($user) {
                 $user->assignRoleSlug('objective_coordinator', $this);
             }
         }

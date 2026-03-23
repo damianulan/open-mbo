@@ -31,15 +31,14 @@ use Spatie\Activitylog\Models\Activity;
  * @property Carbon|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read Campaign|null $campaign
- * @property-read Collection<int, Objective> $objectives
+ * @property-read \App\Models\MBO\Campaign|null $campaign
+ * @property-read Collection<int, \App\Models\MBO\Objective> $objectives
  * @property-read int|null $objectives_count
- * @property-read void $points
+ * @property-read Collection $points
  * @property-read mixed $trans
  * @property-read User|null $user
- * @property-read Collection<int, UserObjective> $user_objectives
+ * @property-read Collection<int, \App\Models\MBO\UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign avg(string $column)
@@ -94,7 +93,6 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder<static>|UserCampaign withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign withoutCache()
  * @method static Builder<static>|UserCampaign withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
@@ -149,14 +147,16 @@ class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
     public function points(): Attribute
     {
         return Attribute::make(
-            get: function (): void {
-                $collection = new Collection();
-                $this->user_objectives->each(function (UserObjective $userObjective) use (&$collection): void {
-                    if ($userObjective->points) {
-                        $collection->push($userObjective->points);
-                    }
-                });
-            }
+            get: function (): Collection {
+                $userObjectives = $this->relationLoaded('user_objectives')
+                    ? $this->user_objectives
+                    : $this->user_objectives()->with('points')->get();
+
+                return $userObjectives
+                    ->pluck('points')
+                    ->filter()
+                    ->values();
+            },
         );
     }
 
@@ -261,18 +261,11 @@ class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
      */
     public function mapObjectiveStatus(): void
     {
-        $objectives = $this->objectives();
-        if ($objectives->count()) {
-            foreach ($objectives as $objective) {
-                $assignments = $objective->user_objectives()->whereUserId($this->user_id)->get();
-
-                if ($assignments->count()) {
-                    foreach ($assignments as $assignment) {
-                        $assignment->setStatus()->update();
-                    }
-                }
+        $this->user_objectives()->chunk(config('app.chunk_default'), function (Collection $assignments): void {
+            foreach ($assignments as $assignment) {
+                $assignment->setStatus()->update();
             }
-        }
+        });
     }
 
     public function scopeOngoing(Builder $query): void

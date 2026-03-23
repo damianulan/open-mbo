@@ -141,7 +141,7 @@ return [
      | in the Messages tab.
      |
      */
-    'error_handler' => false,
+    'error_handler' => true,
 
     /*
      |--------------------------------------------------------------------------
@@ -166,7 +166,7 @@ return [
     'collectors' => [
         'phpinfo' => false,  // Php version
         'messages' => true,  // Messages
-        'time' => true,  // Time Datalogger
+        'time' => false,  // Time Datalogger
         'memory' => true,  // Memory usage
         'exceptions' => true,  // Exception displayer
         'log' => true,  // Logs from Monolog (merged in messages if enabled)
@@ -175,7 +175,7 @@ return [
         'route' => true,  // Current route information
         'auth' => true, // Display Laravel authentication status
         'gate' => true,  // Display Laravel Gate checks
-        'session' => false,  // Display session data
+        'session' => true,  // Display session data
         'symfony_request' => true,  // Only one can be enabled..
         'mail' => true,  // Catch mail messages
         'laravel' => true, // Laravel version and environment
@@ -184,10 +184,10 @@ return [
         'logs' => true, // Add the latest log messages
         'files' => false, // Show the included files
         'config' => false, // Display config settings
-        'cache' => false, // Display cache events
+        'cache' => true, // Display cache events
         'models' => true,  // Display models
         'livewire' => true,  // Display Livewire (when available)
-        'jobs' => true, // Display dispatched jobs
+        'jobs' => false, // Display dispatched jobs
         'pennant' => false, // Display Pennant feature flags
     ],
 

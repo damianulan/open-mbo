@@ -30,7 +30,6 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read mixed $trans
  * @property-read Collection<int, User> $users
  * @property-read int|null $users_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team avg(string $column)
@@ -82,7 +81,6 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Team extends BaseModel
@@ -131,19 +129,23 @@ class Team extends BaseModel
         }
 
         $current = $this->leaders->pluck('id')->toArray();
-        $toDelete = array_filter($current, fn ($value) => ! in_array($value, $leaderIds));
-        $toAdd = array_filter($leaderIds, fn ($value) => ! in_array($value, $current));
+        $toDelete = array_values(array_diff($current, $leaderIds));
+        $toAdd = array_values(array_diff($leaderIds, $current));
+        $leaders = User::query()
+            ->whereIn('id', array_merge($toDelete, $toAdd))
+            ->get()
+            ->keyBy('id');
 
         foreach ($toDelete as $leaderId) {
-            $leader = User::find($leaderId);
-            if ($leader?->exists) {
+            $leader = $leaders->get($leaderId);
+            if ($leader) {
                 $leader->revokeRoleSlug(RolesLib::TEAM_LEADER, $this);
             }
         }
 
         foreach ($toAdd as $leaderId) {
-            $leader = User::find($leaderId);
-            if ($leader?->exists) {
+            $leader = $leaders->get($leaderId);
+            if ($leader) {
                 $leader->assignRoleSlug(RolesLib::TEAM_LEADER, $this);
             }
         }

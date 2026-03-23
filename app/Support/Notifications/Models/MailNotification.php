@@ -15,7 +15,6 @@ use Illuminate\Support\Collection;
  * @property string $contents
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification query()
@@ -28,7 +27,6 @@ use Illuminate\Support\Collection;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification whereResources($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification whereSubject($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification whereUpdatedAt($value)
- *
  * @mixin \Eloquent
  */
 class MailNotification extends NotificationModel

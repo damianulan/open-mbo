@@ -3,11 +3,24 @@
 namespace Tests;
 
 use Exception;
+use Illuminate\Support\Facades\File;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        File::ensureDirectoryExists(storage_path('framework/cache/data'));
+
+        config([
+            'cache.default' => 'array',
+            'model-cache.cache_store' => 'array',
+        ]);
+    }
 
     public function setSetting(string $key, $value): void
     {

@@ -28,14 +28,13 @@ use Spatie\Activitylog\Models\Activity;
  * @property Carbon|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read Company|null $company
- * @property-read TypeOfContract|null $contract
- * @property-read Department|null $department
+ * @property-read \App\Models\Business\Company|null $company
+ * @property-read \App\Models\Business\TypeOfContract|null $contract
+ * @property-read \App\Models\Business\Department|null $department
  * @property-read bool $main
- * @property-read Position|null $position
+ * @property-read \App\Models\Business\Position|null $position
  * @property-read mixed $trans
  * @property-read User|null $user
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment avg(string $column)
@@ -90,11 +89,12 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder<static>|UserEmployment withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment withoutCache()
  * @method static Builder<static>|UserEmployment withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class UserEmployment extends BaseModel
 {
+    protected static array $mainEmploymentIds = [];
+
     protected $fillable = [
         'user_id',
         'company_id',
@@ -161,7 +161,24 @@ class UserEmployment extends BaseModel
     protected function main(): Attribute
     {
         return Attribute::make(
-            get: fn (): bool => $this->id === UserEmployment::where('user_id', $this->user_id)->active()->first()?->id,
+            get: function (): bool {
+                if (array_key_exists($this->user_id, self::$mainEmploymentIds)) {
+                    return self::$mainEmploymentIds[$this->user_id] === $this->id;
+                }
+
+                if ($this->relationLoaded('user') && $this->user?->relationLoaded('employment')) {
+                    $employment = $this->user->employment;
+
+                    return $employment?->is($this) ?? false;
+                }
+
+                self::$mainEmploymentIds[$this->user_id] = static::query()
+                    ->where('user_id', $this->user_id)
+                    ->active()
+                    ->value('id');
+
+                return self::$mainEmploymentIds[$this->user_id] === $this->id;
+            },
         );
     }
 }
