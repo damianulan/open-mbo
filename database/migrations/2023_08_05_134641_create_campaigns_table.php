@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\MBO\CampaignStage;
+use App\Enums\Mbo\CampaignStage;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

@@ -2,14 +2,14 @@
 
 namespace Tests\Feature\MyObjectives;
 
-use App\Enums\MBO\CampaignStage;
-use App\Enums\MBO\UserObjectiveStatus;
+use App\Enums\Mbo\CampaignStage;
+use App\Enums\Mbo\UserObjectiveStatus;
 use App\Models\Core\User;
-use App\Models\MBO\Campaign;
-use App\Models\MBO\Objective;
-use App\Models\MBO\UserCampaign;
-use App\Models\MBO\UserObjective;
-use App\Models\MBO\UserPoints;
+use App\Models\Mbo\Campaign;
+use App\Models\Mbo\Objective;
+use App\Models\Mbo\UserCampaign;
+use App\Models\Mbo\UserObjective;
+use App\Models\Mbo\UserPoints;
 use Database\Seeders\TestDatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;

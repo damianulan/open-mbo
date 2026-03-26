@@ -3,7 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\Core\AppUpgrade;
-use App\Console\Commands\MBO\MBOVerifyStatusScript;
+use App\Console\Commands\Mbo\MBOVerifyStatusScript;
 use App\Console\Commands\Settings\SettingsMigrate;
 use App\Support\Notifications\NotificationScheduler;
 use Illuminate\Console\Scheduling\Schedule;

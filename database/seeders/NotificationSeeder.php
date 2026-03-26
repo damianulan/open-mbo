@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Events\MBO\Campaigns\UserCampaignAssigned;
-use App\Events\MBO\Campaigns\UserCampaignUnassigned;
-use App\Events\MBO\Objectives\UserObjectiveAssigned;
-use App\Events\MBO\Objectives\UserObjectiveFailed;
-use App\Events\MBO\Objectives\UserObjectivePassed;
-use App\Events\MBO\Objectives\UserObjectiveUnassigned;
+use App\Events\Mbo\Campaigns\UserCampaignAssigned;
+use App\Events\Mbo\Campaigns\UserCampaignUnassigned;
+use App\Events\Mbo\Objectives\UserObjectiveAssigned;
+use App\Events\Mbo\Objectives\UserObjectiveFailed;
+use App\Events\Mbo\Objectives\UserObjectivePassed;
+use App\Events\Mbo\Objectives\UserObjectiveUnassigned;
 use App\Support\Notifications\Models\Notification;
 use App\Support\Notifications\NotificationContents;
 use Illuminate\Database\Seeder;

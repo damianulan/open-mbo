@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Objectives;
 
 use App\Exceptions\Core\NoPermissionException;
-use App\Forms\MBO\Objective\ObjectiveEditUserForm;
-use App\Forms\MBO\Objective\ObjectiveEditUserRealizationForm;
+use App\Forms\Mbo\Objective\ObjectiveEditUserForm;
+use App\Forms\Mbo\Objective\ObjectiveEditUserRealizationForm;
 use App\Http\Controllers\AppController;
-use App\Models\MBO\Objective;
-use App\Models\MBO\UserObjective;
+use App\Models\Mbo\Objective;
+use App\Models\Mbo\UserObjective;
 use App\Services\Objectives\BulkAssignUsers;
 use App\Services\Objectives\UserRealizationUpdate;
 use AppException;

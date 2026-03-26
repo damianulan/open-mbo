@@ -5,7 +5,7 @@ namespace App\Console\Commands\Settings;
 use App\Console\BaseCommand;
 use App\Settings\GeneralSettings;
 use App\Settings\MailSettings;
-use App\Settings\MBOSettings;
+use App\Settings\MboSettings;
 use App\Settings\NotificationSettings;
 use App\Settings\ReportSettings;
 use App\Settings\UserSettings;
@@ -35,7 +35,7 @@ class SettingsMigrate extends BaseCommand
     {
         $map = [
             'GeneralSettings' => GeneralSettings::class,
-            'MBOSettings' => MBOSettings::class,
+            'MboSettings' => MboSettings::class,
             'MailSettings' => MailSettings::class,
             'NotificationSettings' => NotificationSettings::class,
             'ReportSettings' => ReportSettings::class,

@@ -2,39 +2,35 @@
 
 namespace App\Http\Controllers\Campaigns;
 
-use App\Filters\MBO\CampaignNameFilter;
-use App\Forms\MBO\Campaign\CampaignEditForm;
+use App\Filters\Collections\CampaignsListFilters;
+use App\Forms\Mbo\Campaign\CampaignEditForm;
 use App\Http\Controllers\AppController;
-use App\Models\MBO\Campaign;
+use App\Models\Mbo\Campaign;
 use App\Services\Campaigns\CreateOrUpdate;
-use App\Support\Filters\Services\FilterService;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 use Throwable;
 
 class CampaignsController extends AppController
 {
-    public function index(Request $request): View
+    public function index(Request $request, CampaignsListFilters $filters): Renderable
     {
         if ($request->user()->cannot('viewAny', Campaign::class)) {
             unauthorized();
         }
         $this->logView('Wyświetlono listę kampanii pomiarowych');
 
-        $filterService = new FilterService([
-            new CampaignNameFilter(),
-        ]);
-        $campaigns = Campaign::orderByStatus()->registerFilters($filterService)->paginate(30);
+        $campaigns = Campaign::orderByStatus()->registerFilters($filters)->paginate(30);
 
         return view('pages.mbo.campaigns.index', [
             'campaigns' => $campaigns,
-            'filters' => $filterService->getForm(),
+            'filters' => $filters->getForm(),
         ]);
     }
 
-    public function create(Request $request, CampaignEditForm $form): View
+    public function create(Request $request, CampaignEditForm $form): Renderable
     {
         if ($request->user()->cannot('create', Campaign::class)) {
             unauthorized();
@@ -75,7 +71,7 @@ class CampaignsController extends AppController
     /**
      * Display the specified resource.
      */
-    public function show(Campaign $campaign): View
+    public function show(Campaign $campaign): Renderable
     {
         $this->authorize('view', $campaign);
 
@@ -87,7 +83,7 @@ class CampaignsController extends AppController
         ]);
     }
 
-    public function edit(Campaign $campaign, CampaignEditForm $form): View
+    public function edit(Campaign $campaign, CampaignEditForm $form): Renderable
     {
         $this->authorize('update', $campaign);
 

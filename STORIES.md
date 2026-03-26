@@ -1,7 +1,7 @@
 # Campaign Model User Stories
 
 ## Scope
-These stories describe the current business and functional logic implemented around `App\Models\MBO\Campaign` and tightly coupled flows (`UserCampaign`, campaign forms/controllers, policies, listeners, and objective assignment behavior).
+These stories describe the current business and functional logic implemented around `App\Models\Mbo\Campaign` and tightly coupled flows (`UserCampaign`, campaign forms/controllers, policies, listeners, and objective assignment behavior).
 
 ## Domain Summary
 - A Campaign has:

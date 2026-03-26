@@ -6,12 +6,12 @@
     $subjectLabel = class_basename($points->subject_type);
     $subjectUrl = null;
 
-    if ($points->subject instanceof \App\Models\MBO\UserObjective) {
+    if ($points->subject instanceof \App\Models\Mbo\UserObjective) {
         $subjectLabel = $points->subject->objective?->name ?? $subjectLabel;
         $subjectUrl = route('objectives.assignment.show', $points->subject->id);
     }
 
-    if ($points->subject instanceof \App\Models\MBO\UserCampaign) {
+    if ($points->subject instanceof \App\Models\Mbo\UserCampaign) {
         $subjectLabel = $points->subject->campaign?->name ?? $subjectLabel;
         $subjectUrl = route('campaigns.users.show', $points->subject->id);
     }

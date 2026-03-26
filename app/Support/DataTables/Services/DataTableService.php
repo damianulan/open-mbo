@@ -3,7 +3,6 @@
 namespace App\Support\DataTables\Services;
 
 use App\Support\DataTables\SelectedColumns;
-use App\Support\Filters\Services\FilterService;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Services\DataTable;
+use App\Support\Filters\Contracts\FilterCollection;
 
 class DataTableService extends DataTable
 {
@@ -22,17 +22,17 @@ class DataTableService extends DataTable
 
     protected array $actions = ['csv', 'excel', 'column_selector'];
 
-    private FilterService $filterService;
+    private FilterCollection $filterService;
 
     public function __construct()
     {
         parent::__construct();
 
         $filters = $this->buildFilters();
-        $this->filterService = $filters ?? new FilterService();
+        $this->filterService = $filters ?? new FilterCollection();
     }
 
-    public function getFilterService(): FilterService
+    public function getFilterService(): FilterCollection
     {
         return $this->filterService;
     }
@@ -214,12 +214,16 @@ class DataTableService extends DataTable
         $collection = $this->getDataForExport();
         $filename = $this->getFilename() . '.json';
         $fullpath = 'docs' . DIRECTORY_SEPARATOR . $filename;
-        Storage::disk('downloads')->put($fullpath, json_encode($collection, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        $disk = Storage::disk('downloads');
+        if(!$disk) {
+            throw new \Exception('Disk not found');
+        }
+        $disk->put($fullpath, json_encode($collection, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
-        return Storage::disk('downloads')->download($fullpath, $filename);
+        return $disk->download($fullpath, $filename);
     }
 
-    protected function buildFilters(): ?FilterService
+    protected function buildFilters(): ?FilterCollection
     {
         return null;
     }

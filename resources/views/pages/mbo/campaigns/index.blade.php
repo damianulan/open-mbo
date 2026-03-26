@@ -3,7 +3,6 @@
 
 @include('pages.mbo.campaigns.nav')
 
-@if (count($campaigns))
 <div class="content-card page-card">
 
     <div class="content-card-body">
@@ -32,10 +31,6 @@
     </div>
 
 </div>
-@else
-<x-nocontent-page/>
-@endif
-
 
 @endsection
 @push('scripts')

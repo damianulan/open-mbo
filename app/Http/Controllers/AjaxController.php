@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MBO\ObjectiveTemplate;
+use App\Models\Mbo\ObjectiveTemplate;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

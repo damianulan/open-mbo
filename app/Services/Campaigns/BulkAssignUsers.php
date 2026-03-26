@@ -2,8 +2,8 @@
 
 namespace App\Services\Campaigns;
 
-use App\Models\MBO\Campaign;
-use App\Models\MBO\UserCampaign;
+use App\Models\Mbo\Campaign;
+use App\Models\Mbo\UserCampaign;
 use Lucent\Services\Service;
 
 class BulkAssignUsers extends Service

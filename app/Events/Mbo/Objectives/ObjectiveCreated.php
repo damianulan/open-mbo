@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Events\Mbo\Objectives;
+
+use App\Models\Mbo\Objective;
+use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
+
+class ObjectiveCreated implements ShouldDispatchAfterCommit
+{
+    use Dispatchable;
+    use SerializesModels;
+
+    /**
+     * Create a new event instance.
+     */
+    public function __construct(
+        public Objective $objective
+    ) {}
+}

@@ -2,29 +2,34 @@
 
 namespace App\Support\Filters\Services;
 
+use App\Support\Filters\Contracts\FilterCollection;
 use App\Support\Filters\Contracts\FilterContract;
 use App\Support\Filters\Factories\FilterFinderFactory;
 use App\Support\Filters\Factories\FilterFormFactory;
 use ArrayIterator;
-use Countable;
 use FormForge\Base\Form;
 use FormForge\FormBuilder;
 use Illuminate\Contracts\Support\Renderable;
-use IteratorAggregate;
 use Traversable;
 
-class FilterService implements Countable, IteratorAggregate, Traversable
+class FilterService implements FilterCollection
 {
-    private array $items = [];
+    protected array $items = [];
 
     public function __construct($items = [])
     {
+        foreach ($this->items as $key => $item) {
+            unset($this->items[$key]);
+            $this->push($item);
+        }
         foreach ($items as $item) {
             $this->push($item);
         }
+
+        $this->items = array_values($this->items);
     }
 
-    public function push(string|FilterContract $filter): self
+    public function push(string|FilterContract $filter): static
     {
         $this->items[] = FilterFinderFactory::make($filter);
 

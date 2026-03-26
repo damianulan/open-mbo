@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Objectives;
 
-use App\Forms\MBO\Objective\ObjectiveTemplateEditForm;
-use App\Models\MBO\ObjectiveTemplate;
+use App\Forms\Mbo\Objective\ObjectiveTemplateEditForm;
+use App\Models\Mbo\ObjectiveTemplate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 

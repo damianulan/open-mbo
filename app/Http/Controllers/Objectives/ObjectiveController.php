@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Objectives;
 
-use App\DataTables\MBO\ObjectiveDataTable;
-use App\Forms\MBO\Objective\ObjectiveEditForm;
-use App\Models\MBO\Objective;
+use App\DataTables\Mbo\ObjectiveDataTable;
+use App\Forms\Mbo\Objective\ObjectiveEditForm;
+use App\Models\Mbo\Objective;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;

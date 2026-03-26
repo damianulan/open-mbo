@@ -28,14 +28,15 @@ class FiltersServiceProvider extends ServiceProvider
             }
         });
 
-        Builder::macro('registerFilters', function (FilterService $service) {
+        Builder::macro('registerFilters', function (array|FilterService $service) {
+            if(is_array($service)) {
+                $service = new FilterService($service);
+            }
             foreach ($service->getItems() as $filter) {
                 $this->filter($filter);
             }
 
             return $this;
         });
-
-        // DataTableBuilder::macro
     }
 }

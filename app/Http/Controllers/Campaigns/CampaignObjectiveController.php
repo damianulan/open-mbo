@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Campaigns;
 
-use App\Forms\MBO\Campaign\CampaignEditObjectiveForm;
+use App\Forms\Mbo\Campaign\CampaignEditObjectiveForm;
 use App\Http\Controllers\AppController;
-use App\Models\MBO\Objective;
+use App\Models\Mbo\Objective;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

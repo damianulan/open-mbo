@@ -12,9 +12,11 @@ use App\Providers\EnigmaServiceProvider;
 use App\Providers\EventServiceProvider;
 use App\Providers\GateServiceProvider;
 use App\Providers\MacroServiceProvider;
+use App\Providers\RepositoryServiceProvider;
 use App\Providers\RouteServiceProvider;
 use App\Support\Filters\Providers\FiltersServiceProvider;
 use App\Support\Http\ResponseAjax;
+use App\Support\Search\SearchServiceProvider;
 use App\Support\UI\Page\PageBuilder;
 use App\Support\UI\Theme\Theme;
 use Barryvdh\Debugbar\ServiceProvider;
@@ -39,7 +41,6 @@ use Illuminate\Redis\RedisServiceProvider;
 use Illuminate\Session\SessionServiceProvider;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Facade;
-use Illuminate\Translation\TranslationServiceProvider;
 use Illuminate\Validation\ValidationServiceProvider;
 use Illuminate\View\ViewServiceProvider;
 use Lab404\Impersonate\ImpersonateServiceProvider;
@@ -299,7 +300,9 @@ return [
         \App\Providers\NotificationServiceProvider::class,
         GateServiceProvider::class,
         ImpersonateServiceProvider::class,
+        SearchServiceProvider::class,
         FiltersServiceProvider::class,
+        RepositoryServiceProvider::class,
     ],
 
     /*
