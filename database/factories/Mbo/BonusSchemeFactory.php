@@ -18,7 +18,7 @@ class BonusSchemeFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => trim(fake()->realTextBetween(10, 50), '.'),
+            'name' => mb_trim(fake()->realTextBetween(10, 50), '.'),
             'description' => fake()->realTextBetween(300, 500),
             'options' => BonusSchemeOptions::fake(),
         ];

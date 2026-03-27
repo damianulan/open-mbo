@@ -47,6 +47,7 @@ use Lab404\Impersonate\ImpersonateServiceProvider;
 use Lucent\Console\Git;
 use Mews\Purifier\Facades\Purifier;
 use Mews\Purifier\PurifierServiceProvider;
+use Spatie\TranslationLoader\TranslationServiceProvider;
 use Yajra\DataTables\ButtonsServiceProvider;
 use Yajra\DataTables\DataTablesServiceProvider;
 use Yajra\DataTables\ExportServiceProvider;
@@ -272,7 +273,7 @@ return [
         PasswordResetServiceProvider::class,
         SessionServiceProvider::class,
         // TranslationServiceProvider::class,
-        Spatie\TranslationLoader\TranslationServiceProvider::class,
+        TranslationServiceProvider::class,
         ValidationServiceProvider::class,
         ViewServiceProvider::class,
 

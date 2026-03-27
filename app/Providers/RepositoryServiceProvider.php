@@ -2,10 +2,8 @@
 
 namespace App\Providers;
 
-use App\Filters\Mbo\CampaignNameFilter;
 use App\Support\Filters\Contracts\FilterCollection;
 use App\Support\Filters\Services\FilterService;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -21,10 +19,7 @@ class RepositoryServiceProvider extends ServiceProvider
     /**
      * Bootstrap services.
      */
-    public function boot(): void
-    {
-
-    }
+    public function boot(): void {}
 
     private function registerFilterServices(): void
     {

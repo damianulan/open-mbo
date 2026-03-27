@@ -13,6 +13,7 @@ use Illuminate\Support\Carbon;
  * @property string $payload
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SettingModel newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SettingModel newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SettingModel query()
@@ -23,6 +24,7 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SettingModel whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SettingModel wherePayload($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SettingModel whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class SettingModel extends Model

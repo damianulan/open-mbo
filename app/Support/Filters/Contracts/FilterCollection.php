@@ -2,11 +2,11 @@
 
 namespace App\Support\Filters\Contracts;
 
-use App\Support\Filters\Contracts\FilterContract;
+use Countable;
 use FormForge\FormBuilder;
 use Illuminate\Contracts\Support\Renderable;
 
-interface FilterCollection extends \Countable, \IteratorAggregate, \Traversable
+interface FilterCollection extends Countable, \IteratorAggregate, \Traversable
 {
     public function __construct($items = []);
 

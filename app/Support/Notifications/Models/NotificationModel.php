@@ -10,9 +10,11 @@ use Lucent\Support\Traits\UUID;
 
 /**
  * @property-read Collection $resources
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationModel newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationModel newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|NotificationModel query()
+ *
  * @mixin \Eloquent
  */
 class NotificationModel extends Model

@@ -7,7 +7,6 @@ use App\Support\Filters\Factories\FilterFinderFactory;
 use App\Support\Filters\Services\FilterService;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\ServiceProvider;
-use Yajra\DataTables\Html\Builder as DataTableBuilder;
 
 class FiltersServiceProvider extends ServiceProvider
 {
@@ -29,7 +28,7 @@ class FiltersServiceProvider extends ServiceProvider
         });
 
         Builder::macro('registerFilters', function (array|FilterService $service) {
-            if(is_array($service)) {
+            if (is_array($service)) {
                 $service = new FilterService($service);
             }
             foreach ($service->getItems() as $filter) {
