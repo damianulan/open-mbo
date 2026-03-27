@@ -192,13 +192,13 @@ class AddChangelogNotes extends Command
         foreach ($commits as $commit) {
             $commit = mb_trim($commit);
 
-            if ($commit === '' || ! preg_match('/[[:alpha:]]{2,}/u', $commit)) {
+            if ('' === $commit || ! preg_match('/[[:alpha:]]{2,}/u', $commit)) {
                 continue;
             }
 
             $key = Str::slug($commit);
 
-            if ($key === '') {
+            if ('' === $key) {
                 continue;
             }
 

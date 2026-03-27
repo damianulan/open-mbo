@@ -7,11 +7,11 @@ use App\Support\Storage\StorageManager;
 use App\Support\UI\Theme\Theme;
 use Barryvdh\Debugbar\Facades\Debugbar;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
+use Carbon\CarbonImmutable;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Pagination\Paginator;
-use Illuminate\Support\ServiceProvider;
-use Carbon\CarbonImmutable; 
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {

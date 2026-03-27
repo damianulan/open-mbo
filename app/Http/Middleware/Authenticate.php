@@ -59,7 +59,7 @@ class Authenticate extends Middleware
         $user = $this->getUser();
         $config = (settings('users.password_change_firstlogin') && $this->isFirstLogin()) || (settings('users.force_password_change_reset') && $user->force_password_change);
 
-        return $user && $config && ! $user->hasRole('root') && !$user->isCore();
+        return $user && $config && ! $user->hasRole('root') && ! $user->isCore();
     }
 
     /**
