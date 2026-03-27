@@ -3,6 +3,9 @@
 namespace App\Support\DataTables\Services;
 
 use App\Support\DataTables\SelectedColumns;
+use App\Support\Filters\Contracts\FilterCollection;
+use App\Support\Filters\Services\FilterService;
+use Exception;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,8 +13,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Services\DataTable;
-use App\Support\Filters\Contracts\FilterCollection;
-use App\Support\Filters\Services\FilterService;
 
 class DataTableService extends DataTable
 {
@@ -216,8 +217,8 @@ class DataTableService extends DataTable
         $filename = $this->getFilename() . '.json';
         $fullpath = 'docs' . DIRECTORY_SEPARATOR . $filename;
         $disk = Storage::disk('downloads');
-        if(!$disk) {
-            throw new \Exception('Disk not found');
+        if ( ! $disk) {
+            throw new Exception('Disk not found');
         }
         $disk->put($fullpath, json_encode($collection, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 

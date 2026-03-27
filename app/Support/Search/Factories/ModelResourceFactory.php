@@ -86,7 +86,7 @@ class ModelResourceFactory
 
     public static function getTrigrams(string $input): array
     {
-        $input = Str::lower(trim($input));
+        $input = Str::lower(mb_trim($input));
         $length = Str::length($input);
 
         if ($length < 3) {
@@ -109,6 +109,6 @@ class ModelResourceFactory
 
     private static function normalizeValue(string $value): string
     {
-        return Str::lower(trim(strip_tags($value)));
+        return Str::lower(mb_trim(strip_tags($value)));
     }
 }
