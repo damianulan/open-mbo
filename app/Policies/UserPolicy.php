@@ -13,6 +13,7 @@ class UserPolicy
      */
     public function viewAny(User $user): Response
     {
+        dd($user->can(PermissionsLib::USERS_VIEW), $user->id);
         return $user->can(PermissionsLib::USERS_VIEW) ? Response::allow() : Response::deny();
     }
 
