@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
  * @property array<array-key, mixed> $selected
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read User $user
+ * @property-read User|null $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns newQuery()

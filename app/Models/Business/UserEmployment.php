@@ -34,7 +34,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read bool $main
  * @property-read Position|null $position
  * @property-read mixed $trans
- * @property-read User $user
+ * @property-read User|null $user
  *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment average(string $column)
@@ -95,6 +95,8 @@ use Spatie\Activitylog\Models\Activity;
  */
 class UserEmployment extends BaseModel
 {
+    protected static array $mainEmploymentIds = [];
+
     protected $fillable = [
         'user_id',
         'company_id',
@@ -161,7 +163,24 @@ class UserEmployment extends BaseModel
     protected function main(): Attribute
     {
         return Attribute::make(
-            get: fn (): bool => $this->id === UserEmployment::where('user_id', $this->user_id)->active()->first()->id,
+            get: function (): bool {
+                if (array_key_exists($this->user_id, self::$mainEmploymentIds)) {
+                    return self::$mainEmploymentIds[$this->user_id] === $this->id;
+                }
+
+                if ($this->relationLoaded('user') && $this->user?->relationLoaded('employment')) {
+                    $employment = $this->user->employment;
+
+                    return $employment?->is($this) ?? false;
+                }
+
+                self::$mainEmploymentIds[$this->user_id] = static::query()
+                    ->where('user_id', $this->user_id)
+                    ->active()
+                    ->value('id');
+
+                return self::$mainEmploymentIds[$this->user_id] === $this->id;
+            },
         );
     }
 }

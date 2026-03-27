@@ -2,11 +2,13 @@
 
 namespace App\Enums\Forms;
 
-use Enumerable\Laravel\Enum;
+use App\Support\Concerns\EnumHasValues;
 
-class StructureField extends Enum
+enum StructureField: string
 {
-    public const TEXT = 'text';
+    use EnumHasValues;
 
-    public const SELECT = 'select';
+    case TEXT = 'text';
+
+    case SELECT = 'select';
 }

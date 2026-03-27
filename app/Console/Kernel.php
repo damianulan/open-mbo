@@ -2,9 +2,8 @@
 
 namespace App\Console;
 
-use App\Console\Commands\Core\AppRefresh;
 use App\Console\Commands\Core\AppUpgrade;
-use App\Console\Commands\MBO\MBOVerifyStatusScript;
+use App\Console\Commands\Mbo\MBOVerifyStatusScript;
 use App\Console\Commands\Settings\SettingsMigrate;
 use App\Support\Notifications\NotificationScheduler;
 use Illuminate\Console\Scheduling\Schedule;
@@ -29,11 +28,7 @@ class Kernel extends ConsoleKernel
         }
 
         if ('development' === config('app.env')) {
-
             $schedule->command('db:seed --class=NotificationSeeder')->dailyAt('00:02');
-            if (env('CRON_APP_REFRESH', false)) {
-                $schedule->command(AppRefresh::class)->daily()->at('00:00');
-            }
         }
 
         // LARAVEL COMMANDS
@@ -43,7 +38,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('model:prune')->dailyAt('00:01');
         $schedule->command('model:prune-soft-deletes')->dailyAt('00:01');
         $schedule->command(SettingsMigrate::class)->dailyAt('00:01');
-        $schedule->command(RunHealthChecksCommand::class)->everyHour();
+        //$schedule->command(RunHealthChecksCommand::class)->hourly();
 
         // NOTIFICATIONS
         NotificationScheduler::load($schedule);

@@ -1,105 +1,183 @@
 {
     "action": {
-        "pl": "Akcje"
+        "pl": "Akcje",
+        "en": "Actions",
+        "it": "Azioni"
     },
     "category": {
-        "pl": "Kategoria"
+        "pl": "Kategoria",
+        "en": "Category",
+        "it": "Categoria"
     },
     "created_at": {
-        "pl": "Utworzono"
+        "pl": "Utworzono",
+        "en": "Created",
+        "it": "Creato"
+    },
+    "current": {
+        "pl": "Aktualne",
+        "en": "Current",
+        "it": "Attuale"
+    },
+    "points": {
+        "pl": "Punkty",
+        "en": "Points",
+        "it": "Punti"
+    },
+    "subject": {
+        "pl": "Źródło",
+        "en": "Source",
+        "it": "Fonte"
     },
     "email": {
-        "pl": "E-mail"
+        "pl": "E-mail",
+        "en": "Email",
+        "it": "Email"
     },
     "username": {
-        "pl": "Nazwa użytkownika"
+        "pl": "Nazwa użytkownika",
+        "en": "Username",
+        "it": "Nome utente"
     },
     "firstname": {
-        "pl": "Imię"
+        "pl": "Imię",
+        "en": "First name",
+        "it": "Nome"
     },
     "firstname_lastname": {
-        "pl": "Imię i nazwisko"
+        "pl": "Imię i nazwisko",
+        "en": "First and last name",
+        "it": "Nome e cognome"
     },
     "gender": {
         "f": {
-            "pl": "Kobieta"
+            "pl": "Kobieta",
+            "en": "Female",
+            "it": "Donna"
         },
         "m": {
-            "pl": "Mężczyzna"
+            "pl": "Mężczyzna",
+            "en": "Male",
+            "it": "Uomo"
         },
         "o": {
-            "pl": "Inna"
+            "pl": "Inna",
+            "en": "Other",
+            "it": "Altro"
         }
     },
     "lastname": {
-        "pl": "Nazwisko"
+        "pl": "Nazwisko",
+        "en": "Last name",
+        "it": "Cognome"
     },
     "login": {
-        "pl": "Login"
+        "pl": "Login",
+        "en": "Login name",
+        "it": "Nome di accesso"
     },
     "name": {
-        "pl": "Nazwa"
+        "pl": "Nazwa",
+        "en": "Name",
+        "it": "Nome"
     },
     "old_password": {
-        "pl": "Obecne hasło"
+        "pl": "Obecne hasło",
+        "en": "Current password",
+        "it": "Password attuale"
     },
     "password": {
-        "pl": "Hasło"
+        "pl": "Hasło",
+        "en": "Password",
+        "it": "Password"
     },
     "password_confirm": {
-        "pl": "Powtórz hasło"
+        "pl": "Powtórz hasło",
+        "en": "Repeat password",
+        "it": "Repeat password"
     },
     "position": {
-        "pl": "Stanowisko"
+        "pl": "Stanowisko",
+        "en": "Position",
+        "it": "Posizione"
     },
     "quote_at": {
-        "pl": "o"
+        "pl": "o",
+        "en": "at",
+        "it": "at"
     },
     "quote_authored": {
-        "pl": " napisał(a)"
+        "pl": " napisał(a)",
+        "en": " wrote",
+        "it": " wrote"
     },
     "stage": {
-        "pl": "Etap"
+        "pl": "Etap",
+        "en": "Stage",
+        "it": "Fase"
     },
     "status": {
-        "pl": "Status"
+        "pl": "Status",
+        "en": "Current status",
+        "it": "Current status"
     },
     "title": {
-        "pl": "Tytuł"
+        "pl": "Tytuł",
+        "en": "Title",
+        "it": "Titolo"
     },
     "type_of_contract": {
         "b2b": {
-            "pl": "B2B"
+            "pl": "B2B",
+            "en": "B2B contract",
+            "it": "B2B contract"
         },
         "uod": {
-            "pl": "Umowa o dzieło"
+            "pl": "Umowa o dzieło",
+            "en": "Contract for specific work",
+            "it": "Contract for specific work"
         },
         "uop": {
-            "pl": "Umowa o pracę"
+            "pl": "Umowa o pracę",
+            "en": "Employment contract",
+            "it": "Employment contract"
         },
         "uz": {
-            "pl": "Umowa zlecenie"
+            "pl": "Umowa zlecenie",
+            "en": "Mandate contract",
+            "it": "Mandate contract"
         }
     },
     "updated_at": {
-        "pl": "Zaktualizowano"
+        "pl": "Zaktualizowano",
+        "en": "Updated",
+        "it": "Aggiornato"
     },
-
     "user_status": {
         "active": {
-            "pl": "Aktywny"
+            "pl": "Aktywny",
+            "en": "Active",
+            "it": "Attivo"
         },
         "suspended": {
-            "pl": "Zablokowany"
+            "pl": "Zablokowany",
+            "en": "Blocked",
+            "it": "Blocked"
         },
         "deleted": {
-            "pl": "Usunięty"
+            "pl": "Usunięty",
+            "en": "Deleted",
+            "it": "Deleted"
         },
         "unverified": {
-            "pl": "Niezweryfikowany"
+            "pl": "Niezweryfikowany",
+            "en": "Unverified",
+            "it": "Unverified"
         },
         "unemployed": {
-            "pl": "Niezatrudniony"
+            "pl": "Niezatrudniony",
+            "en": "Unemployed",
+            "it": "Unemployed"
         }
     }
 }

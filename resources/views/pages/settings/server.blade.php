@@ -1,8 +1,6 @@
 @extends('layouts.portal.master')
 @section('content')
 
-{!! $nav->render() !!}
-
 <div class="content-card">
     <div class="container settings">
         <div class="section">
@@ -11,7 +9,7 @@
                     <h5 class="section-title">{{ __('pages.settings.server_info') }}</h5>
                     <hr/>
                 </div>
-                <div class="col-md-8 settings-contents">
+                <div class="col-md-8">
                     <table class="settings-table">
                         <tr>
                             <th>
@@ -75,14 +73,6 @@
                         </tr>
                         <tr>
                             <th>
-                                {{ __('pages.settings.build') }}:
-                            </th>
-                            <td>
-                                {{ config('app.build') }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
                                 {{ __('pages.settings.release') }}:
                             </th>
                             <td>
@@ -102,10 +92,10 @@
         <div class="section">
             <div class="row">
                 <div class="col-md-6 col-sm-12">
-                    <h5 class="section-title">{{ __('Serwer poczty wychodzącej (SMTP)') }}</h5>
+                    <h5 class="section-title">{{ __('pages.settings.smtp_server') }}</h5>
                     <hr/>
                 </div>
-                <div class="col-md-8 settings-contents">
+                <div class="col-md-8">
                     <div class="row">
                         {{ $form->render() }}
                     </div>

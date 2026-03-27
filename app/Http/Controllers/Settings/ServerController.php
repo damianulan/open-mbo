@@ -5,42 +5,48 @@ namespace App\Http\Controllers\Settings;
 use App\Forms\Settings\SmtpForm;
 use App\Settings\GeneralSettings;
 use App\Settings\MailSettings;
-use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\View\View;
 
 class ServerController extends SettingsController
 {
     /**
      * Show the application dashboard.
      */
-    public function index(Request $request): Renderable
+    public function index(): View
     {
-        $git_text = __('globals.no_data');
+        $gitText = __('globals.no_data');
+
         if ( ! empty(config('app.head'))) {
-            $git_text = 'On branch <strong>' . config('app.head') . '</strong>';
+            $gitText = 'On branch <strong>' . config('app.head') . '</strong>';
         }
 
-        $model = app(MailSettings::class); // ->safePassword();
+        $this->addPageNav();
+
+        $model = app(MailSettings::class);
 
         return view('pages.settings.server', [
-            'git_text' => $git_text,
+            'git_text' => $gitText,
             'mail' => $model,
             'form' => SmtpForm::bootWithAttributes($model->toArray())->getDefinition(),
-            'nav' => $this->nav(),
         ]);
     }
 
-    public function storeMail(Request $request, MailSettings $settings)
+    public function storeMail(Request $request, MailSettings $settings): RedirectResponse
     {
         $request->validate([
             'mail_port' => 'numeric',
             'mail_from_address' => 'email',
             'mail_catchall_receiver' => 'email',
         ]);
+
         foreach ($request->all() as $key => $value) {
             $settings->{$key} = $value;
         }
+
         if ($settings->save()) {
             return redirect()->back()->with('success', __('alerts.settings.success.mail_update'));
         }
@@ -48,7 +54,7 @@ class ServerController extends SettingsController
         return redirect()->back()->with('error', __('alerts.settings.error.mail_update'));
     }
 
-    public function cache()
+    public function cache(): RedirectResponse
     {
         $command = Artisan::call('optimize:clear');
 
@@ -56,35 +62,26 @@ class ServerController extends SettingsController
             return redirect()->back()->with('success', __('alerts.settings.success.cache_clear'));
         }
 
-        $msg = __('alerts.settings.error.cache_clear');
+        $message = __('alerts.settings.error.cache_clear');
+
         if (config('app.debug')) {
-            $msg .= '<br/>' . str_replace("\n", '<br/>', Artisan::output());
+            $message .= '<br/>' . str_replace("\n", '<br/>', Artisan::output());
         }
 
-        return redirect()->back()->with('error', $msg);
+        return redirect()->back()->with('error', $message);
     }
 
-    public function debugging(Request $request, GeneralSettings $settings)
+    public function debugging(Request $request, GeneralSettings $settings): JsonResponse
     {
-        $response = false;
-        $check = filter_var($request->input('check'), FILTER_VALIDATE_BOOLEAN);
-        $settings->debug = $check;
-        if ($settings->save()) {
-            $response = true;
-        }
+        $settings->debug = $request->boolean('check');
 
-        return response()->json($response);
+        return response()->json($settings->save());
     }
 
-    public function debugbar(Request $request, GeneralSettings $settings)
+    public function debugbar(Request $request, GeneralSettings $settings): JsonResponse
     {
-        $response = false;
-        $check = filter_var($request->input('check'), FILTER_VALIDATE_BOOLEAN);
-        $settings->debugbar = $check;
-        if ($settings->save()) {
-            $response = true;
-        }
+        $settings->debugbar = $request->boolean('check');
 
-        return response()->json($response);
+        return response()->json($settings->save());
     }
 }

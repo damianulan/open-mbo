@@ -1,19 +1,16 @@
 @php
-    if(!isset($pagetitle)){
-        $pagetitle = null;
-    }
-    $page = new PageBuilder($pagetitle);
+    $page = app('page');
 @endphp
 @include('layouts.portal.header')
 <body>
     <div id="app">
-        @if($page->sidebar)
-            {!! $page->sidebar->render() !!}
-        @endif
-        <main id="main-content" class="content {{ $page->sidebar_collapsed }}">
+
+        {!! $page->getNavigation()?->renderSidebar() !!}
+        <main id="main-content" class="{{ $page->getMainContentClasses() }}">
             <section class="page-wrapper">
-                @include('layouts.portal.topbar')
+                {!! $page->getNavigation()?->renderTopbar() !!}
                 <section class="content-wrapper">
+                    {!! $page->getNavigation()?->renderPageNav() !!}
                     @yield('content')
                 </section>
             </section>

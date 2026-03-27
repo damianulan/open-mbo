@@ -4,7 +4,6 @@ use App\Casts\CheckboxCast;
 use App\Enums\Core\MessageType;
 use App\Exceptions\AppException;
 use App\Helpers\StorageHelper;
-use App\Lib\Theme;
 use App\Models\Core\User;
 use App\Providers\AppServiceProvider;
 use App\Providers\ComponentServiceProvider;
@@ -13,9 +12,13 @@ use App\Providers\EnigmaServiceProvider;
 use App\Providers\EventServiceProvider;
 use App\Providers\GateServiceProvider;
 use App\Providers\MacroServiceProvider;
+use App\Providers\RepositoryServiceProvider;
 use App\Providers\RouteServiceProvider;
+use App\Support\Filters\Providers\FiltersServiceProvider;
 use App\Support\Http\ResponseAjax;
-use App\Support\Page\PageBuilder;
+use App\Support\Search\SearchServiceProvider;
+use App\Support\UI\Page\PageBuilder;
+use App\Support\UI\Theme\Theme;
 use Barryvdh\Debugbar\ServiceProvider;
 use Illuminate\Auth\AuthServiceProvider;
 use Illuminate\Auth\Passwords\PasswordResetServiceProvider;
@@ -38,13 +41,13 @@ use Illuminate\Redis\RedisServiceProvider;
 use Illuminate\Session\SessionServiceProvider;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Facade;
-use Illuminate\Translation\TranslationServiceProvider;
 use Illuminate\Validation\ValidationServiceProvider;
 use Illuminate\View\ViewServiceProvider;
 use Lab404\Impersonate\ImpersonateServiceProvider;
 use Lucent\Console\Git;
 use Mews\Purifier\Facades\Purifier;
 use Mews\Purifier\PurifierServiceProvider;
+use Spatie\TranslationLoader\TranslationServiceProvider;
 use Yajra\DataTables\ButtonsServiceProvider;
 use Yajra\DataTables\DataTablesServiceProvider;
 use Yajra\DataTables\ExportServiceProvider;
@@ -156,6 +159,7 @@ return [
     'available_locales' => [
         'pl',
         'en',
+        'it',
     ],
 
     'date_format' => env('DATEFORMAT', 'Y-m-d'),
@@ -248,6 +252,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+        ConfigServiceProvider::class,
         AuthServiceProvider::class,
         BroadcastServiceProvider::class,
         BusServiceProvider::class,
@@ -268,7 +273,7 @@ return [
         PasswordResetServiceProvider::class,
         SessionServiceProvider::class,
         // TranslationServiceProvider::class,
-        Spatie\TranslationLoader\TranslationServiceProvider::class,
+        TranslationServiceProvider::class,
         ValidationServiceProvider::class,
         ViewServiceProvider::class,
 
@@ -294,10 +299,11 @@ return [
         ComponentServiceProvider::class,
         RouteServiceProvider::class,
         \App\Providers\NotificationServiceProvider::class,
-        // App\Providers\TelescopeServiceProvider::class,
         GateServiceProvider::class,
-        ConfigServiceProvider::class,
         ImpersonateServiceProvider::class,
+        SearchServiceProvider::class,
+        FiltersServiceProvider::class,
+        RepositoryServiceProvider::class,
     ],
 
     /*

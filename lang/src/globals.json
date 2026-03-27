@@ -1,134 +1,290 @@
 {
     "active": {
-        "pl": "Aktywne"
+        "pl": "Aktywne",
+        "en": "Active",
+        "it": "Attivo"
     },
     "column": {
-        "pl": "Kolumna"
+        "pl": "Kolumna",
+        "en": "Column",
+        "it": "Colonna"
     },
     "columns": {
-        "pl": "Kolumny"
+        "pl": "Kolumny",
+        "en": "Columns",
+        "it": "Colonne"
     },
     "datatables": {
         "print": {
-            "pl": "Podgląd wydruku"
+            "pl": "Podgląd wydruku",
+            "en": "Print preview",
+            "it": "Anteprima di stampa"
         },
         "select_columns": {
-            "pl": "Wybierz kolumny do wyświetlenia"
+            "pl": "Wybierz kolumny do wyświetlenia",
+            "en": "Choose columns to display",
+            "it": "Scegli le colonne da visualizzare"
         },
         "to_csv": {
-            "pl": "Eksport do pliku CSV"
+            "pl": "Eksport do pliku CSV",
+            "en": "Export to CSV",
+            "it": "Esporta in CSV"
         },
         "to_excel": {
-            "pl": "Eksport do pliku Excel"
+            "pl": "Eksport do pliku Excel",
+            "en": "Export to Excel",
+            "it": "Esporta in Excel"
         },
         "to_json": {
-            "pl": "Eksport do pliku JSON"
+            "pl": "Eksport do pliku JSON",
+            "en": "Export to JSON",
+            "it": "Esporta in JSON"
         },
         "to_pdf": {
-            "pl": "Eksport do pliku PDF"
+            "pl": "Eksport do pliku PDF",
+            "en": "Export to PDF",
+            "it": "Esporta in PDF"
+        },
+        "print_table": {
+            "pl": "Drukuj tabelę",
+            "en": "Print table",
+            "it": "Stampa tabella"
         }
     },
     "draft": {
-        "pl": "Kopia robocza"
+        "pl": "Kopia robocza",
+        "en": "Draft",
+        "it": "Bozza"
     },
     "enter_address": {
-        "pl": "Wprowadź adres"
+        "pl": "Wprowadź adres",
+        "en": "Enter address",
+        "it": "Inserisci indirizzo"
     },
     "exports": {
         "csv": {
-            "pl": "CSV"
+            "pl": "CSV",
+            "en": "CSV format",
+            "it": "Formato CSV"
         },
         "excel": {
-            "pl": "Excel"
+            "pl": "Excel",
+            "en": "Excel format",
+            "it": "Formato Excel"
         },
         "json": {
-            "pl": "JSON"
+            "pl": "JSON",
+            "en": "JSON format",
+            "it": "Formato JSON"
         },
         "pdf": {
-            "pl": "PDF"
+            "pl": "PDF",
+            "en": "PDF format",
+            "it": "Formato PDF"
         },
         "print": {
-            "pl": "Podgląd wydruku"
+            "pl": "Podgląd wydruku",
+            "en": "Print preview",
+            "it": "Anteprima di stampa"
         }
     },
     "hello": {
-        "pl": "Cześć"
+        "pl": "Cześć",
+        "en": "Hello",
+        "it": "Ciao"
     },
     "inactive": {
-        "pl": "Nieaktywne"
+        "pl": "Nieaktywne",
+        "en": "Inactive",
+        "it": "Inattivo"
     },
     "langs": {
+        "auto": {
+            "pl": "Domyślny",
+            "en": "Default",
+            "it": "Predefinito"
+        },
         "en": {
-            "pl": "Angielski"
+            "pl": "Angielski",
+            "en": "English",
+            "it": "Inglese"
         },
         "pl": {
-            "pl": "Polski"
+            "pl": "Polski",
+            "en": "Polish",
+            "it": "Polacco"
+        },
+        "it": {
+            "pl": "Włoski",
+            "en": "Italian",
+            "it": "Italiano"
         }
     },
     "manual": {
-        "pl": "Tryb ręczny"
+        "pl": "Tryb ręczny",
+        "en": "Manual mode",
+        "it": "Modalità manuale"
     },
     "no": {
-        "pl": "Nie"
+        "pl": "Nie",
+        "en": "No",
+        "it": "No"
     },
     "no_assigned": {
-        "pl": "Brak przypisanych"
+        "pl": "Brak przypisanych",
+        "en": "None assigned",
+        "it": "Nessuno assegnato"
     },
     "no_data": {
-        "pl": "Brak danych"
+        "pl": "Brak danych",
+        "en": "No data",
+        "it": "Nessun dato"
     },
     "not_applicable": {
-        "pl": "Nie dotyczy"
+        "pl": "Nie dotyczy",
+        "en": "N/A",
+        "it": "N/D"
     },
     "notifications": {
-        "pl": "Powiadomienia"
+        "pl": "Powiadomienia",
+        "en": "Notifications",
+        "it": "Notifiche"
     },
     "page_content_info": {
-        "pl": "Jeśli możesz - stwórz samodzielnie nową zawartość, lub wróć później."
+        "pl": "Jeśli możesz - stwórz samodzielnie nową zawartość, lub wróć później.",
+        "en": "If you can, create new content yourself or come back later.",
+        "it": "Se puoi, crea tu stesso un nuovo contenuto o torna più tardi."
     },
     "page_no_content": {
-        "pl": "Brak zawartości strony"
+        "pl": "Brak zawartości strony",
+        "en": "No page content",
+        "it": "Nessun contenuto della pagina"
     },
     "pnts": {
-        "pl": "pkt"
+        "pl": "pkt",
+        "en": "pts",
+        "it": "pt"
     },
     "privately": {
-        "pl": "Prywatnie"
+        "pl": "Prywatnie",
+        "en": "Privately",
+        "it": "Privatamente"
     },
     "search": {
-        "pl": "Szukaj"
+        "pl": "Szukaj",
+        "en": "Search",
+        "it": "Cerca"
     },
     "search_no_results": {
-        "pl": "Brak wyników dla wyszukiwanej frazy."
+        "pl": "Brak wyników dla wyszukiwanej frazy.",
+        "en": "No results for the searched phrase.",
+        "it": "Nessun risultato per la frase cercata."
     },
     "select_choose": {
-        "pl": "Wybierz..."
+        "pl": "Wybierz...",
+        "en": "Choose...",
+        "it": "Scegli..."
     },
     "summary": {
-        "pl": "Podsumowanie"
+        "pl": "Podsumowanie",
+        "en": "Summary",
+        "it": "Riepilogo"
     },
     "turned_off_female": {
-        "pl": "Wyłączona"
+        "pl": "Wyłączona",
+        "en": "Disabled",
+        "it": "Disabled"
     },
     "turned_off_male": {
-        "pl": "Wyłączony"
+        "pl": "Wyłączony",
+        "en": "Disabled",
+        "it": "Disabled"
     },
     "turned_off_other": {
-        "pl": "Wyłączone"
+        "pl": "Wyłączone",
+        "en": "Disabled",
+        "it": "Disabled"
     },
     "turned_on_female": {
-        "pl": "Włączona"
+        "pl": "Włączona",
+        "en": "Enabled",
+        "it": "Enabled"
     },
     "turned_on_male": {
-        "pl": "Włączony"
+        "pl": "Włączony",
+        "en": "Enabled",
+        "it": "Enabled"
     },
     "turned_on_other": {
-        "pl": "Włączone"
+        "pl": "Włączone",
+        "en": "Enabled",
+        "it": "Enabled"
     },
     "yes": {
-        "pl": "Tak"
+        "pl": "Tak",
+        "en": "Yes",
+        "it": "Sì"
     },
     "you": {
-        "pl": "Ty"
+        "pl": "Ty",
+        "en": "You",
+        "it": "Tu"
+    },
+    "notes": {
+        "pl": "Notatki",
+        "en": "Notes",
+        "it": "Note"
+    },
+    "are_you_sure": {
+        "pl": "Na pewno?",
+        "en": "Are you sure?",
+        "it": "Sei sicuro?"
+    },
+    "here": {
+        "pl": "tutaj",
+        "en": "here",
+        "it": "qui"
+    },
+    "page_temporarily_unavailable": {
+        "pl": "Podstrona chwilowo niedostępna",
+        "en": "Subpage temporarily unavailable",
+        "it": "Sottopagina temporaneamente non disponibile"
+    },
+    "page_temporarily_unavailable_info": {
+        "pl": "Ta część aplikacji jeszcze czeka na wytworzenie. Zapraszamy później.",
+        "en": "This part of the application is still under development. Please come back later.",
+        "it": "Questa parte dell'applicazione è ancora in sviluppo. Torna più tardi."
+    },
+    "datatables_export": {
+        "button": {
+            "pl": "Eksportuj",
+            "en": "Export",
+            "it": "Esporta"
+        },
+        "email_notice": {
+            "pl": "Eksport zostanie wysłany na adres :email.",
+            "en": "Export will be emailed to :email.",
+            "it": "L'esportazione sarà inviata via email a :email."
+        },
+        "in_progress": {
+            "pl": "Trwa eksportowanie... proszę czekać.",
+            "en": "Exporting... please wait.",
+            "it": "Esportazione in corso... attendi."
+        },
+        "done_download": {
+            "pl": "Gotowe. Pobierz plik",
+            "en": "Done. Download file",
+            "it": "Fatto. Scarica file"
+        },
+        "done_downloaded": {
+            "pl": "Gotowe. Plik został pobrany.",
+            "en": "Done. File has been downloaded.",
+            "it": "Fatto. Il file è stato scaricato."
+        },
+        "failed": {
+            "pl": "Eksport nie powiódł się, spróbuj ponownie później.",
+            "en": "Export failed, please try again later.",
+            "it": "L'esportazione non è riuscita, riprova più tardi."
+        }
     }
 }

@@ -1,8 +1,12 @@
 {
     "user_campaign_completion": {
-        "pl": "Wagowa realizacja celów"
+        "pl": "Wagowa realizacja celów",
+        "en": "Weighted objective completion",
+        "it": "Completamento ponderato degli obiettivi"
     },
     "user_campaign_evaluation": {
-        "pl": "Podsumowanie rozliczenia celów"
+        "pl": "Podsumowanie rozliczenia celów",
+        "en": "Objective evaluation summary",
+        "it": "Riepilogo valutazione obiettivi"
     }
 }

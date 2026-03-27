@@ -6,16 +6,15 @@ use App\Commentable\Models\Comment;
 use App\Commentable\Support\Commentable;
 use App\Commentable\Support\Commentator;
 use App\Enums\Users\UserStatus;
-use App\Factories\Users\UserStatusFactory;
 use App\Models\Business\Team;
 use App\Models\Business\UserEmployment;
-use App\Models\MBO\BonusScheme;
-use App\Models\MBO\Campaign;
-use App\Models\MBO\Objective;
-use App\Models\MBO\UserBonusScheme;
-use App\Models\MBO\UserCampaign;
-use App\Models\MBO\UserObjective;
-use App\Models\MBO\UserPoints;
+use App\Models\Mbo\BonusScheme;
+use App\Models\Mbo\Campaign;
+use App\Models\Mbo\Objective;
+use App\Models\Mbo\UserBonusScheme;
+use App\Models\Mbo\UserCampaign;
+use App\Models\Mbo\UserObjective;
+use App\Models\Mbo\UserPoints;
 use App\Models\Scopes\Users\CoreUsersScope;
 use App\Models\Vendor\ActivityModel;
 use App\Support\Notifications\Models\MailNotification;
@@ -46,6 +45,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Lab404\Impersonate\Models\Impersonate;
 use Laravel\Sanctum\HasApiTokens;
@@ -59,17 +59,19 @@ use SensitiveParameter;
 use Sentinel\Models\Permission;
 use Sentinel\Traits\HasRolesAndPermissions;
 use Spatie\Activitylog\Models\Activity;
+use Spatie\ModelStatus\HasStatuses;
+use Spatie\ModelStatus\Status;
 
 /**
  * @property string $id
  * @property string $auth
- * @property mixed|null $email
+ * @property string|null $email
  * @property string|null $email_hash
- * @property mixed|null $firstname
+ * @property string|null $firstname
  * @property string|null $firstname_hash
- * @property mixed|null $lastname
+ * @property string|null $lastname
  * @property string|null $lastname_hash
- * @property mixed|null $username
+ * @property string|null $username
  * @property string|null $username_hash
  * @property Carbon|null $email_verified_at
  * @property string $password
@@ -124,7 +126,8 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read UserPreference|null $preferences
  * @property-read UserProfile|null $profile
  * @property-read Collection $sessions
- * @property-read UserStatus $status
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Status> $statuses
+ * @property-read int|null $statuses_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $subordinates
  * @property-read int|null $subordinates_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $supervisors
@@ -143,12 +146,14 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read int|null $user_objectives_active_count
  *
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User active()
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User currentStatus(...$names)
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User drafted()
  * @method static \Database\Factories\Core\UserFactory factory($count = null, $state = [])
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User inactive()
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User newModelQuery()
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User newQuery()
  * @method static Builder<static>|User onlyTrashed()
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User otherCurrentStatus(...$names)
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User published()
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User query()
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereAuth($value)
@@ -203,6 +208,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     use UserHasPreferences;
     use UserMBO;
     use VirginModel;
+    use HasStatuses;
 
     protected $fillable = [
         'email',
@@ -236,43 +242,6 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         'username',
     ];
 
-    // protected static function boot(): void
-    // {
-    //     parent::boot();
-    //     static::creating(function (User $user) {
-    //         if ( ! isset($user->password) || empty($user->password)) {
-    //             $user->generatePassword();
-    //         }
-
-    //         return $user;
-    //     });
-
-    //     static::created(function (User $user) {
-    //         if ($user->password) {
-    //             $user->password_history()->create([
-    //                 'password' => $user->password,
-    //             ]);
-
-    //         }
-    //     });
-
-    //     static::updating(function (User $user) {
-    //         if(!$user->username){
-    //             $user->username = Str::ascii(Str::lower($user->firstname . '.' . $user->lastname));
-    //         }
-
-    //         return $user;
-    //     });
-
-    //     static::updated(function (User $user) {
-    //         if($user->isDirty('password')){
-    //             $user->password_history()->create([
-    //                 'password' => $user->password,
-    //             ]);
-    //         }
-    //     });
-    // }
-
     public static function findByEmail(string $email): ?User
     {
         return self::where('email', $email)->first();
@@ -281,6 +250,11 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     public static function getNewPassword(): string
     {
         return Str::random(10);
+    }
+
+    public function statusEnumClass(): ?string
+    {
+        return UserStatus::class;
     }
 
     public function validateNewPassword($newpassword): bool
@@ -344,18 +318,34 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function canBeDeleted(): bool
     {
-        return 0 === $this->core;
+        return $this->isCore();
     }
 
     public function canBeBlocked(): bool
     {
-        return 0 === $this->core;
+        return $this->isCore();
+    }
+
+    public function isCore(): bool
+    {
+        return 1 === $this->core;
     }
 
     public function getAvatar(): ?string
     {
-        if ($this->profile->avatar) {
-            return asset($this->profile->avatar);
+        $avatar = $this->profile?->avatar;
+        if ($avatar) {
+            if (Str::startsWith($avatar, ['http://', 'https://'])) {
+                return $avatar;
+            }
+
+            $relativePath = Str::of($avatar)
+                ->replaceStart('storage/uploads/', '')
+                ->replaceStart('uploads/', '')
+                ->ltrim('/')
+                ->toString();
+
+            return Storage::disk('uploads')->url($relativePath);
         }
 
         return null;
@@ -415,6 +405,13 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         $indicator = '';
         if ( ! $this->itsMe() && $this->isLoggedIn()) {
             $indicator = '<div class="profile-indicator"></div>';
+        }
+
+        $avatar = $this->getAvatar();
+        if ($avatar) {
+            $avatar_url = "url('" . $avatar . "')";
+
+            return '<div class="profile-img-' . $size . '" style="background-image:' . $avatar_url . ';background-size: cover;">' . $indicator . '</div>';
         }
 
         return '<div class="profile-img-' . $size . '" style="background-color: var(--bs-' . $color . ');"><div>' . $initials . '</div>' . $indicator . '</div>';
@@ -502,13 +499,6 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
         return Attribute::make(
             get: fn () => mb_ucfirst($value),
-        );
-    }
-
-    protected function status(): Attribute
-    {
-        return Attribute::make(
-            get: fn (): UserStatus => UserStatusFactory::make($this)
         );
     }
 

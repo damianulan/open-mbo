@@ -51,7 +51,7 @@ class CommentContent implements CastsAttributes
     {
         $value = str_replace('<p><br></p>', '', $value);
         $value = str_replace('<p></p>', '', $value);
-        $value = trim($value);
+        $value = mb_trim($value);
         $value = self::commentQuotation($value);
         $value = InteractiveText::setInteractive($value, $model);
 

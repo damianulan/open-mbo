@@ -10,15 +10,18 @@ use App\Models\Business\UserEmployment;
 use App\Models\Core\User;
 use App\Services\Employments\CreateOrUpdate as EmploymentCreateOrUpdate;
 use App\Services\Users\CreateOrUpdate as UserCreateOrUpdate;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class UsersController extends AppController
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request, UsersDataTable $dataTable)
+    public function index(Request $request, UsersDataTable $dataTable): Renderable|JsonResponse
     {
         if ($request->user()->cannot('viewList', User::class)) {
             unauthorized();
@@ -32,7 +35,7 @@ class UsersController extends AppController
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request, UserEditForm $form)
+    public function create(Request $request, UserEditForm $form): View
     {
         if ($request->user()->cannot('create', User::class)) {
             unauthorized();
@@ -47,7 +50,7 @@ class UsersController extends AppController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, UserEditForm $form)
+    public function store(Request $request, UserEditForm $form): RedirectResponse
     {
         $form->validate();
         $service = UserCreateOrUpdate::boot(request: $request)->execute();
@@ -61,9 +64,8 @@ class UsersController extends AppController
         return redirect()->back()->with('error', __('alerts.users.error.create'));
     }
 
-    public function storeEmployment(Request $request, EmploymentEditForm $form)
+    public function storeEmployment(Request $request, EmploymentEditForm $form): RedirectResponse
     {
-
         $form->validate();
         $service = EmploymentCreateOrUpdate::boot(request: $request)->execute();
 
@@ -77,7 +79,7 @@ class UsersController extends AppController
     /**
      * Display the specified resource.
      */
-    public function show(Request $request, User $user)
+    public function show(Request $request, User $user): View
     {
         $view = $request->user()->can('view', $user);
         $preview = $request->user()->can('preview', $user) && ! $view;
@@ -94,32 +96,27 @@ class UsersController extends AppController
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
      */
-    public function edit(Request $request, $id)
+    public function edit(Request $request, User $user): View
     {
-        $model = User::findOrFail($id);
-        if ($request->user()->cannot('update', $model)) {
+        if ($request->user()->cannot('update', $user)) {
             unauthorized();
         }
-        $request->request->add(['user_id' => $id]);
+
+        $request->request->add(['user_id' => $user->getKey()]);
 
         return view('pages.users.edit', [
-            'user' => $model,
-            'employments' => $this->getEmploymentForms($request, $model),
-            'form' => UserEditForm::bootWithModel($model)->getDefinition(),
+            'user' => $user,
+            'employments' => $this->getEmploymentForms($request, $user),
+            'form' => UserEditForm::bootWithModel($user)->getDefinition(),
         ]);
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  int  $id
      */
-    public function update(Request $request, $id, UserEditForm $form)
+    public function update(Request $request, User $user, UserEditForm $form): RedirectResponse
     {
-        $user = User::findOrFail($id);
         if ($request->user()->cannot('update', $user)) {
             unauthorized();
         }
@@ -130,15 +127,16 @@ class UsersController extends AppController
         if ($service->passed()) {
             $user = $service->user;
 
-            return redirect()->route('users.show', $id)->with('success', __('alerts.users.success.edit', ['name' => $user->name]));
+            return redirect()->route('users.show', $user)->with('success', __('alerts.users.success.edit', ['name' => $user->name]));
         }
 
         return redirect()->back()->with('error', __('alerts.users.error.edit', ['name' => $user->name]));
     }
 
-    public function updateEmployment(Request $request, $id, EmploymentEditForm $form)
+    public function updateEmployment(Request $request, int|string $id, EmploymentEditForm $form): RedirectResponse
     {
         $employment = UserEmployment::findOrFail($id);
+
         if ($request->user()->cannot('employment', $employment->user)) {
             unauthorized();
         }
@@ -155,14 +153,13 @@ class UsersController extends AppController
 
     /**
      * Delete User instance.
-     *
-     * @param  int  $id
      */
-    public function delete(Request $request, User $user)
+    public function delete(Request $request, User $user): RedirectResponse
     {
         if ($request->user()->cannot('delete', $user)) {
             unauthorized();
         }
+
         if ($user->delete()) {
             return redirect()->route('users.index')->with('success', __('alerts.users.success.delete', ['name' => $user->name]));
         }
@@ -170,9 +167,10 @@ class UsersController extends AppController
         return redirect()->back()->with('error', __('alerts.users.error.delete', ['name' => $user->name]));
     }
 
-    public function deleteEmployment(Request $request, $id)
+    public function deleteEmployment(Request $request, int|string $id): RedirectResponse
     {
         $employment = UserEmployment::findOrFail($id);
+
         if ($request->user()->cannot('employment', $employment->user)) {
             unauthorized();
         }
@@ -187,14 +185,14 @@ class UsersController extends AppController
     /**
      * Toggles User blocking if was nat blocked and unlocking otherwise.
      */
-    public function block(Request $request, User $user)
+    public function block(Request $request, User $user): RedirectResponse
     {
         if ($request->user()->cannot('delete', $user)) {
             unauthorized();
         }
-        if ($user) {
-            $user->toggleLock();
-        }
+
+        $user->toggleLock();
+
         if ($user->blocked()) {
             return redirect()->back()->with('info', __('alerts.users.success.blocked', ['name' => $user->name]));
         }
@@ -202,44 +200,48 @@ class UsersController extends AppController
         return redirect()->back()->with('info', __('alerts.users.success.unblocked', ['name' => $user->name]));
     }
 
-    public function favourite(Request $request, User $user)
+    public function favourite(Request $request, User $user): RedirectResponse
     {
-        $auth = Auth::user();
-        if ($auth->favourite_users->contains($user)) {
-            $auth->favourite_users()->detach($user->id);
+        $authUser = $request->user();
+
+        if ($authUser->favourite_users->contains($user)) {
+            $authUser->favourite_users()->detach($user->id);
         } else {
-            $auth->favourite_users()->attach($user->id);
+            $authUser->favourite_users()->attach($user->id);
         }
 
         return redirect()->back();
     }
 
-    public function impersonate(Request $request, User $user)
+    public function impersonate(Request $request, User $user): RedirectResponse
     {
         if ($request->user()->cannot('impersonate', $user)) {
             unauthorized();
         }
-        Auth::user()->impersonate($user);
+
+        $request->user()->impersonate($user);
 
         return redirect()->back();
     }
 
-    public function impersonateLeave(Request $request)
+    public function impersonateLeave(Request $request): RedirectResponse
     {
-        Auth::user()->leaveImpersonation();
+        $request->user()->leaveImpersonation();
 
         return redirect()->back();
     }
 
-    public function resetPassword(Request $request, User $user)
+    public function resetPassword(Request $request, User $user): RedirectResponse
     {
         if ($request->user()->cannot('reset', $user)) {
             unauthorized();
         }
+
         try {
             $password = $user->getNewPassword();
             $user->generatePassword($password);
             $user->force_password_change = 1;
+
             if ($user->save()) {
                 return redirect()->back()->with('success_alert', $password);
             }
@@ -263,12 +265,15 @@ class UsersController extends AppController
 
             if ($model) {
                 $i = 0;
+
                 foreach ($model->employments as $employment) {
                     $i++;
                     $langKey = 'forms.employments.header';
+
                     if ($employment->main) {
                         $langKey = 'forms.employments.header_main';
                     }
+
                     $employments[__($langKey, ['no' => $i])] = EmploymentEditForm::bootWithModel($employment)->getDefinition();
                 }
             }

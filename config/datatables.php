@@ -2,7 +2,6 @@
 
 use Yajra\DataTables\ApiResourceDataTable;
 use Yajra\DataTables\CollectionDataTable;
-use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\QueryDataTable;
 
 return [
@@ -50,7 +49,7 @@ return [
      * This is where you can register your custom dataTables builder.
      */
     'engines' => [
-        'eloquent' => EloquentDataTable::class,
+        'eloquent' => DataTable::class,
         'query' => QueryDataTable::class,
         'collection' => CollectionDataTable::class,
         'resource' => ApiResourceDataTable::class,

@@ -1,380 +1,616 @@
 {
     "accepted": {
-        "pl": ":attribute musi zostać zaakceptowany."
+        "pl": ":attribute musi zostać zaakceptowany.",
+        "en": "The :attribute field must be accepted.",
+        "it": "Il campo :attribute deve essere accettato."
     },
     "accepted_if": {
-        "pl": ":attribute musi zostać zaakceptowany, gdy :other ma wartość :value."
+        "pl": ":attribute musi zostać zaakceptowany, gdy :other ma wartość :value.",
+        "en": "The :attribute field must be accepted when :other is :value.",
+        "it": "Il campo :attribute deve essere accettato quando :other è :value."
     },
     "active_url": {
-        "pl": ":attribute nie jest prawidłowym adresem URL."
+        "pl": ":attribute nie jest prawidłowym adresem URL.",
+        "en": "The :attribute field must be a valid URL.",
+        "it": "Il campo :attribute deve essere un URL valido."
     },
     "after": {
-        "pl": ":attribute musi być datą późniejszą niż :date."
+        "pl": ":attribute musi być datą późniejszą niż :date.",
+        "en": "The :attribute field must be a date after :date.",
+        "it": "Il campo :attribute deve essere una data successiva a :date."
     },
     "after_or_equal": {
-        "pl": ":attribute musi być datą nie wcześniejszą niż :date."
+        "pl": ":attribute musi być datą nie wcześniejszą niż :date.",
+        "en": "The :attribute field must be a date after or equal to :date.",
+        "it": "Il campo :attribute deve essere una data successiva o uguale a :date."
     },
     "alpha": {
-        "pl": ":attribute może zawierać tylko litery."
+        "pl": ":attribute może zawierać tylko litery.",
+        "en": "The :attribute field must only contain letters.",
+        "it": "Il campo :attribute deve contenere solo lettere."
     },
     "alpha_dash": {
-        "pl": ":attribute może zawierać tylko litery, cyfry, myślniki i podkreślenia."
+        "pl": ":attribute może zawierać tylko litery, cyfry, myślniki i podkreślenia.",
+        "en": "The :attribute field must only contain letters, numbers, dashes, and underscores.",
+        "it": "Il campo :attribute deve contenere solo lettere, numeri, trattini e underscore."
     },
     "alpha_num": {
-        "pl": ":attribute może zawierać tylko litery i cyfry."
+        "pl": ":attribute może zawierać tylko litery i cyfry.",
+        "en": "The :attribute field must only contain letters and numbers.",
+        "it": "Il campo :attribute deve contenere solo lettere e numeri."
     },
     "array": {
-        "pl": ":attribute musi być tablicą."
+        "pl": ":attribute musi być tablicą.",
+        "en": "The :attribute field must be an array.",
+        "it": "Il campo :attribute deve essere un array."
     },
     "ascii": {
-        "pl": ":attribute może zawierać tylko jednobajtowe znaki alfanumeryczne i symbole."
+        "pl": ":attribute może zawierać tylko jednobajtowe znaki alfanumeryczne i symbole.",
+        "en": "The :attribute field must only contain single-byte alphanumeric characters and symbols.",
+        "it": "Il :attribute field deve only contain single-byte alphanumeric characters and symbols."
     },
     "attributes": {
         "email": {
-            "pl": "adres email"
+            "pl": "adres email",
+            "en": "email address",
+            "it": "email address"
         },
         "password": {
-            "pl": "hasło"
+            "pl": "hasło",
+            "en": "password",
+            "it": "password"
         },
         "site_name": {
-            "pl": "nazwa witryny"
+            "pl": "nazwa witryny",
+            "en": "site name",
+            "it": "site name"
         }
     },
     "before": {
-        "pl": ":attribute musi być datą wcześniejszą niż :date."
+        "pl": ":attribute musi być datą wcześniejszą niż :date.",
+        "en": "The :attribute field must be a date before :date.",
+        "it": "Il campo :attribute deve essere una data precedente a :date."
     },
     "before_or_equal": {
-        "pl": ":attribute musi być datą nie późniejszą niż :date."
+        "pl": ":attribute musi być datą nie późniejszą niż :date.",
+        "en": "The :attribute field must be a date before or equal to :date.",
+        "it": "Il campo :attribute deve essere una data precedente o uguale a :date."
     },
     "between": {
         "array": {
-            "pl": ":attribute musi mieć od :min do :max elementów."
+            "pl": ":attribute musi mieć od :min do :max elementów.",
+            "en": "The :attribute field must have between :min and :max items.",
+            "it": "Il :attribute field deve have tra :min and :max items."
         },
         "file": {
-            "pl": ":attribute musi mieć od :min do :max kilobajtów."
+            "pl": ":attribute musi mieć od :min do :max kilobajtów.",
+            "en": "The :attribute field must be between :min and :max kilobytes.",
+            "it": "Il :attribute field deve essere tra :min and :max kilobytes."
         },
         "numeric": {
-            "pl": ":attribute musi mieć wartość od :min do :max."
+            "pl": ":attribute musi mieć wartość od :min do :max.",
+            "en": "The :attribute field must be between :min and :max.",
+            "it": "Il :attribute field deve essere tra :min and :max."
         },
         "string": {
-            "pl": ":attribute musi mieć od :min do :max znaków."
+            "pl": ":attribute musi mieć od :min do :max znaków.",
+            "en": "The :attribute field must be between :min and :max characters.",
+            "it": "Il campo :attribute deve contenere tra :min e :max caratteri."
         }
     },
     "boolean": {
-        "pl": "Pole :attribute musi być prawdą lub fałszem."
+        "pl": "Pole :attribute musi być prawdą lub fałszem.",
+        "en": "The :attribute field must be true or false.",
+        "it": "Il campo :attribute deve essere vero o falso."
     },
     "confirmed": {
-        "pl": "Potwierdzenie :attribute nie pasuje."
+        "pl": "Potwierdzenie :attribute nie pasuje.",
+        "en": "The :attribute field confirmation does not match.",
+        "it": "Il :attribute field confirmation does not match."
     },
     "current_password": {
-        "pl": "Hasło jest nieprawidłowe."
+        "pl": "Hasło jest nieprawidłowe.",
+        "en": "The password is incorrect.",
+        "it": "Il password is incorrect."
     },
     "custom": {
         "definition_to": {
             "after_or_equal": {
-                "pl": "Data końca etapu musi być późniejsza niż data początku."
+                "pl": "Data końca etapu musi być późniejsza niż data początku.",
+                "en": "The stage end date must be later than the start date.",
+                "it": "Il stage end date deve essere later than il start date."
             }
         }
     },
     "date": {
-        "pl": ":attribute nie jest prawidłową datą."
+        "pl": ":attribute nie jest prawidłową datą.",
+        "en": "The :attribute field must be a valid date.",
+        "it": "Il campo :attribute deve essere una data valida."
     },
     "date_equals": {
-        "pl": ":attribute musi być datą równą :date."
+        "pl": ":attribute musi być datą równą :date.",
+        "en": "The :attribute field must be a date equal to :date.",
+        "it": "Il :attribute field deve essere a date equal to :date."
     },
     "date_format": {
-        "pl": ":attribute nie pasuje do formatu :format."
+        "pl": ":attribute nie pasuje do formatu :format.",
+        "en": "The :attribute field must match the format :format.",
+        "it": "Il :attribute field deve match il format :format."
     },
     "decimal": {
-        "pl": ":attribute musi mieć :decimal miejsc dziesiętnych."
+        "pl": ":attribute musi mieć :decimal miejsc dziesiętnych.",
+        "en": "The :attribute field must have :decimal decimal places.",
+        "it": "Il :attribute field deve have :decimal decimal places."
     },
     "declined": {
-        "pl": ":attribute musi zostać odrzucony."
+        "pl": ":attribute musi zostać odrzucony.",
+        "en": "The :attribute field must be declined.",
+        "it": "Il :attribute field deve essere declined."
     },
     "declined_if": {
-        "pl": ":attribute musi zostać odrzucony, gdy :other ma wartość :value."
+        "pl": ":attribute musi zostać odrzucony, gdy :other ma wartość :value.",
+        "en": "The :attribute field must be declined when :other is :value.",
+        "it": "Il :attribute field deve essere declined when :other is :value."
     },
     "different": {
-        "pl": ":attribute i :other muszą się różnić."
+        "pl": ":attribute i :other muszą się różnić.",
+        "en": "The :attribute field and :other must be different.",
+        "it": "Il :attribute field and :other deve essere different."
     },
     "digits": {
-        "pl": ":attribute musi składać się z :digits cyfr."
+        "pl": ":attribute musi składać się z :digits cyfr.",
+        "en": "The :attribute field must be :digits digits.",
+        "it": "Il :attribute field deve essere :digits digits."
     },
     "digits_between": {
-        "pl": ":attribute musi mieć od :min do :max cyfr."
+        "pl": ":attribute musi mieć od :min do :max cyfr.",
+        "en": "The :attribute field must be between :min and :max digits.",
+        "it": "Il :attribute field deve essere tra :min and :max digits."
     },
     "dimensions": {
-        "pl": ":attribute ma nieprawidłowe wymiary obrazu."
+        "pl": ":attribute ma nieprawidłowe wymiary obrazu.",
+        "en": "The :attribute field has invalid image dimensions.",
+        "it": "Il :attribute field has non valido image dimensions."
     },
     "distinct": {
-        "pl": "Pole :attribute ma zduplikowaną wartość."
+        "pl": "Pole :attribute ma zduplikowaną wartość.",
+        "en": "The :attribute field has a duplicate value.",
+        "it": "Il :attribute field has a duplicate value."
     },
     "doesnt_end_with": {
-        "pl": ":attribute nie może kończyć się jednym z następujących: :values."
+        "pl": ":attribute nie może kończyć się jednym z następujących: :values.",
+        "en": "The :attribute field must not end with one of the following: :values.",
+        "it": "Il :attribute field deve not end with one of il following: :values."
     },
     "doesnt_start_with": {
-        "pl": ":attribute nie może zaczynać się od jednego z następujących: :values."
+        "pl": ":attribute nie może zaczynać się od jednego z następujących: :values.",
+        "en": "The :attribute field must not start with one of the following: :values.",
+        "it": "Il :attribute field deve not start with one of il following: :values."
     },
     "email": {
-        "pl": ":attribute musi być prawidłowym adresem e-mail."
+        "pl": ":attribute musi być prawidłowym adresem e-mail.",
+        "en": "The :attribute field must be a valid email address.",
+        "it": "Il :attribute field deve essere a valid email address."
     },
     "ends_with": {
-        "pl": ":attribute musi kończyć się jednym z następujących: :values."
+        "pl": ":attribute musi kończyć się jednym z następujących: :values.",
+        "en": "The :attribute field must end with one of the following: :values.",
+        "it": "Il :attribute field deve end with one of il following: :values."
     },
     "enum": {
-        "pl": "Wybrany :attribute jest nieprawidłowy."
+        "pl": "Wybrany :attribute jest nieprawidłowy.",
+        "en": "The selected :attribute is invalid.",
+        "it": "Il selected :attribute is non valido."
     },
     "exists": {
-        "pl": "Wybrany :attribute jest nieprawidłowy."
+        "pl": "Wybrany :attribute jest nieprawidłowy.",
+        "en": "The selected :attribute is invalid.",
+        "it": "Il selected :attribute is non valido."
     },
     "file": {
-        "pl": ":attribute musi być plikiem."
+        "pl": ":attribute musi być plikiem.",
+        "en": "The :attribute field must be a file.",
+        "it": "Il :attribute field deve essere a file."
     },
     "filled": {
-        "pl": "Pole :attribute musi mieć wartość."
+        "pl": "Pole :attribute musi mieć wartość.",
+        "en": "The :attribute field must have a value.",
+        "it": "Il :attribute field deve have a value."
     },
     "gt": {
         "array": {
-            "pl": ":attribute musi mieć więcej niż :value elementów."
+            "pl": ":attribute musi mieć więcej niż :value elementów.",
+            "en": "The :attribute field must have more than :value items.",
+            "it": "Il :attribute field deve have more than :value items."
         },
         "file": {
-            "pl": ":attribute musi być większy niż :value kilobajtów."
+            "pl": ":attribute musi być większy niż :value kilobajtów.",
+            "en": "The :attribute field must be greater than :value kilobytes.",
+            "it": "Il :attribute field deve essere greater than :value kilobytes."
         },
         "numeric": {
-            "pl": ":attribute musi być większy niż :value."
+            "pl": ":attribute musi być większy niż :value.",
+            "en": "The :attribute field must be greater than :value.",
+            "it": "Il :attribute field deve essere greater than :value."
         },
         "string": {
-            "pl": ":attribute musi być dłuższy niż :value znaków."
+            "pl": ":attribute musi być dłuższy niż :value znaków.",
+            "en": "The :attribute field must be greater than :value characters.",
+            "it": "Il :attribute field deve essere greater than :value characters."
         }
     },
     "gte": {
         "array": {
-            "pl": ":attribute musi mieć :value elementów lub więcej."
+            "pl": ":attribute musi mieć :value elementów lub więcej.",
+            "en": "The :attribute field must have :value items or more.",
+            "it": "Il :attribute field deve have :value items or more."
         },
         "file": {
-            "pl": ":attribute musi być większy lub równy :value kilobajtów."
+            "pl": ":attribute musi być większy lub równy :value kilobajtów.",
+            "en": "The :attribute field must be greater than or equal to :value kilobytes.",
+            "it": "Il :attribute field deve essere greater than or equal to :value kilobytes."
         },
         "numeric": {
-            "pl": ":attribute musi być większy lub równy :value."
+            "pl": ":attribute musi być większy lub równy :value.",
+            "en": "The :attribute field must be greater than or equal to :value.",
+            "it": "Il :attribute field deve essere greater than or equal to :value."
         },
         "string": {
-            "pl": ":attribute musi być dłuższy lub równy :value znaków."
+            "pl": ":attribute musi być dłuższy lub równy :value znaków.",
+            "en": "The :attribute field must be greater than or equal to :value characters.",
+            "it": "Il :attribute field deve essere greater than or equal to :value characters."
         }
     },
     "image": {
-        "pl": ":attribute musi być obrazem."
+        "pl": ":attribute musi być obrazem.",
+        "en": "The :attribute field must be an image.",
+        "it": "Il :attribute field deve essere an image."
     },
     "in": {
-        "pl": "Wybrany :attribute jest nieprawidłowy."
+        "pl": "Wybrany :attribute jest nieprawidłowy.",
+        "en": "The selected :attribute is invalid.",
+        "it": "Il selected :attribute is non valido."
     },
     "in_array": {
-        "pl": "Pole :attribute nie istnieje w :other."
+        "pl": "Pole :attribute nie istnieje w :other.",
+        "en": "The :attribute field must exist in :other.",
+        "it": "Il :attribute field deve exist in :other."
     },
     "integer": {
-        "pl": ":attribute musi być liczbą całkowitą."
+        "pl": ":attribute musi być liczbą całkowitą.",
+        "en": "The :attribute field must be an integer.",
+        "it": "Il campo :attribute deve essere un intero."
     },
     "ip": {
-        "pl": ":attribute musi być prawidłowym adresem IP."
+        "pl": ":attribute musi być prawidłowym adresem IP.",
+        "en": "The :attribute field must be a valid IP address.",
+        "it": "Il :attribute field deve essere a valid IP address."
     },
     "ipv4": {
-        "pl": ":attribute musi być prawidłowym adresem IPv4."
+        "pl": ":attribute musi być prawidłowym adresem IPv4.",
+        "en": "The :attribute field must be a valid IPv4 address.",
+        "it": "Il :attribute field deve essere a valid IPv4 address."
     },
     "ipv6": {
-        "pl": ":attribute musi być prawidłowym adresem IPv6."
+        "pl": ":attribute musi być prawidłowym adresem IPv6.",
+        "en": "The :attribute field must be a valid IPv6 address.",
+        "it": "Il :attribute field deve essere a valid IPv6 address."
     },
     "json": {
-        "pl": ":attribute musi być prawidłowym ciągiem JSON."
+        "pl": ":attribute musi być prawidłowym ciągiem JSON.",
+        "en": "The :attribute field must be a valid JSON string.",
+        "it": "Il :attribute field deve essere a valid JSON string."
     },
     "lowercase": {
-        "pl": ":attribute musi być pisane małymi literami."
+        "pl": ":attribute musi być pisane małymi literami.",
+        "en": "The :attribute field must be lowercase.",
+        "it": "Il :attribute field deve essere lowercase."
     },
     "lt": {
         "array": {
-            "pl": ":attribute musi mieć mniej niż :value elementów."
+            "pl": ":attribute musi mieć mniej niż :value elementów.",
+            "en": "The :attribute field must have less than :value items.",
+            "it": "Il :attribute field deve have less than :value items."
         },
         "file": {
-            "pl": ":attribute musi być mniejszy niż :value kilobajtów."
+            "pl": ":attribute musi być mniejszy niż :value kilobajtów.",
+            "en": "The :attribute field must be less than :value kilobytes.",
+            "it": "Il :attribute field deve essere less than :value kilobytes."
         },
         "numeric": {
-            "pl": ":attribute musi być mniejszy niż :value."
+            "pl": ":attribute musi być mniejszy niż :value.",
+            "en": "The :attribute field must be less than :value.",
+            "it": "Il :attribute field deve essere less than :value."
         },
         "string": {
-            "pl": ":attribute musi być krótszy niż :value znaków."
+            "pl": ":attribute musi być krótszy niż :value znaków.",
+            "en": "The :attribute field must be less than :value characters.",
+            "it": "Il :attribute field deve essere less than :value characters."
         }
     },
     "lte": {
         "array": {
-            "pl": ":attribute nie może mieć więcej niż :value elementów."
+            "pl": ":attribute nie może mieć więcej niż :value elementów.",
+            "en": "The :attribute field must not have more than :value items.",
+            "it": "Il :attribute field deve not have more than :value items."
         },
         "file": {
-            "pl": ":attribute musi być mniejszy lub równy :value kilobajtów."
+            "pl": ":attribute musi być mniejszy lub równy :value kilobajtów.",
+            "en": "The :attribute field must be less than or equal to :value kilobytes.",
+            "it": "Il :attribute field deve essere less than or equal to :value kilobytes."
         },
         "numeric": {
-            "pl": ":attribute musi być mniejszy lub równy :value."
+            "pl": ":attribute musi być mniejszy lub równy :value.",
+            "en": "The :attribute field must be less than or equal to :value.",
+            "it": "Il :attribute field deve essere less than or equal to :value."
         },
         "string": {
-            "pl": ":attribute musi być krótszy lub równy :value znaków."
+            "pl": ":attribute musi być krótszy lub równy :value znaków.",
+            "en": "The :attribute field must be less than or equal to :value characters.",
+            "it": "Il :attribute field deve essere less than or equal to :value characters."
         }
     },
     "mac_address": {
-        "pl": ":attribute musi być prawidłowym adresem MAC."
+        "pl": ":attribute musi być prawidłowym adresem MAC.",
+        "en": "The :attribute field must be a valid MAC address.",
+        "it": "Il :attribute field deve essere a valid MAC address."
     },
     "max_digits": {
-        "pl": ":attribute nie może mieć więcej niż :max cyfr."
+        "pl": ":attribute nie może mieć więcej niż :max cyfr.",
+        "en": "The :attribute field must not have more than :max digits.",
+        "it": "Il :attribute field deve not have more than :max digits."
     },
     "max": {
         "array": {
-            "pl": ":attribute nie może mieć więcej niż :max elementów."
+            "pl": ":attribute nie może mieć więcej niż :max elementów.",
+            "en": "The :attribute field must not have more than :max items.",
+            "it": "Il :attribute field deve not have more than :max items."
         },
         "file": {
-            "pl": ":attribute nie może być większy niż :max kilobajtów."
+            "pl": ":attribute nie może być większy niż :max kilobajtów.",
+            "en": "The :attribute field must not be greater than :max kilobytes.",
+            "it": "Il :attribute field deve not be greater than :max kilobytes."
         },
         "numeric": {
-            "pl": ":attribute nie może być większy niż :max."
+            "pl": ":attribute nie może być większy niż :max.",
+            "en": "The :attribute field must not be greater than :max.",
+            "it": "Il :attribute field deve not be greater than :max."
         },
         "string": {
-            "pl": ":attribute nie może być dłuższy niż :max znaków."
+            "pl": ":attribute nie może być dłuższy niż :max znaków.",
+            "en": "The :attribute field must not be greater than :max characters.",
+            "it": "Il :attribute field deve not be greater than :max characters."
         }
     },
     "mimes": {
-        "pl": ":attribute musi być plikiem typu: :values."
+        "pl": ":attribute musi być plikiem typu: :values.",
+        "en": "The :attribute field must be a file of type: :values.",
+        "it": "Il :attribute field deve essere a file of type: :values."
     },
     "mimetypes": {
-        "pl": ":attribute musi być plikiem typu: :values."
+        "pl": ":attribute musi być plikiem typu: :values.",
+        "en": "The :attribute field must be a file of type: :values.",
+        "it": "Il :attribute field deve essere a file of type: :values."
     },
     "min_digits": {
-        "pl": ":attribute musi mieć przynajmniej :min cyfr."
+        "pl": ":attribute musi mieć przynajmniej :min cyfr.",
+        "en": "The :attribute field must have at least :min digits.",
+        "it": "Il :attribute field deve have at least :min digits."
     },
     "min": {
         "array": {
-            "pl": ":attribute musi mieć przynajmniej :min elementów."
+            "pl": ":attribute musi mieć przynajmniej :min elementów.",
+            "en": "The :attribute field must have at least :min items.",
+            "it": "Il :attribute field deve have at least :min items."
         },
         "file": {
-            "pl": ":attribute musi mieć przynajmniej :min kilobajtów."
+            "pl": ":attribute musi mieć przynajmniej :min kilobajtów.",
+            "en": "The :attribute field must be at least :min kilobytes.",
+            "it": "Il :attribute field deve essere at least :min kilobytes."
         },
         "numeric": {
-            "pl": ":attribute musi mieć przynajmniej :min."
+            "pl": ":attribute musi mieć przynajmniej :min.",
+            "en": "The :attribute field must be at least :min.",
+            "it": "Il :attribute field deve essere at least :min."
         },
         "string": {
-            "pl": ":attribute musi mieć przynajmniej :min znaków."
+            "pl": ":attribute musi mieć przynajmniej :min znaków.",
+            "en": "The :attribute field must be at least :min characters.",
+            "it": "Il campo :attribute deve contenere almeno :min caratteri."
         }
     },
     "multiple_of": {
-        "pl": ":attribute musi być wielokrotnością :value."
+        "pl": ":attribute musi być wielokrotnością :value.",
+        "en": "The :attribute field must be a multiple of :value.",
+        "it": "Il :attribute field deve essere a multiple of :value."
     },
     "not_in": {
-        "pl": "Wybrany :attribute jest nieprawidłowy."
+        "pl": "Wybrany :attribute jest nieprawidłowy.",
+        "en": "The selected :attribute is invalid.",
+        "it": "Il selected :attribute is non valido."
     },
     "not_regex": {
-        "pl": "Format :attribute jest nieprawidłowy."
+        "pl": "Format :attribute jest nieprawidłowy.",
+        "en": "The :attribute field format is invalid.",
+        "it": "Il :attribute field format is non valido."
     },
     "numeric": {
-        "pl": ":attribute musi być liczbą."
+        "pl": ":attribute musi być liczbą.",
+        "en": "The :attribute field must be a number.",
+        "it": "Il campo :attribute deve essere un numero."
     },
     "password": {
         "letters": {
-            "pl": ":attribute musi zawierać co najmniej jedną literę."
+            "pl": ":attribute musi zawierać co najmniej jedną literę.",
+            "en": "The :attribute field must contain at least one letter.",
+            "it": "Il :attribute field deve contain at least one letter."
         },
         "mixed": {
-            "pl": ":attribute musi zawierać co najmniej jedną dużą i jedną małą literę."
+            "pl": ":attribute musi zawierać co najmniej jedną dużą i jedną małą literę.",
+            "en": "The :attribute field must contain at least one uppercase and one lowercase letter.",
+            "it": "Il :attribute field deve contain at least one uppercase and one lowercase letter."
         },
         "numbers": {
-            "pl": ":attribute musi zawierać co najmniej jedną cyfrę."
+            "pl": ":attribute musi zawierać co najmniej jedną cyfrę.",
+            "en": "The :attribute field must contain at least one number.",
+            "it": "Il :attribute field deve contain at least one number."
         },
         "symbols": {
-            "pl": ":attribute musi zawierać co najmniej jeden symbol."
+            "pl": ":attribute musi zawierać co najmniej jeden symbol.",
+            "en": "The :attribute field must contain at least one symbol.",
+            "it": "Il :attribute field deve contain at least one symbol."
         },
         "uncompromised": {
-            "pl": "Podany :attribute pojawił się w wycieku danych. Proszę użyć innego :attribute."
+            "pl": "Podany :attribute pojawił się w wycieku danych. Proszę użyć innego :attribute.",
+            "en": "The given :attribute has appeared in a data leak. Please choose a different :attribute.",
+            "it": "Il given :attribute has appeared in a data leak. Please choose a different :attribute."
         }
     },
     "present": {
-        "pl": "Pole :attribute musi być obecne."
+        "pl": "Pole :attribute musi być obecne.",
+        "en": "The :attribute field must be present.",
+        "it": "Il :attribute field deve essere present."
     },
     "prohibited": {
-        "pl": "Pole :attribute jest zabronione."
+        "pl": "Pole :attribute jest zabronione.",
+        "en": "The :attribute field is prohibited.",
+        "it": "Il campo :attribute è vietato."
     },
     "prohibited_if": {
-        "pl": "Pole :attribute jest zabronione, gdy :other ma wartość :value."
+        "pl": "Pole :attribute jest zabronione, gdy :other ma wartość :value.",
+        "en": "The :attribute field is prohibited when :other is :value.",
+        "it": "Il :attribute field is prohibited when :other is :value."
     },
     "prohibited_unless": {
-        "pl": "Pole :attribute jest zabronione, chyba że :other znajduje się w :values."
+        "pl": "Pole :attribute jest zabronione, chyba że :other znajduje się w :values.",
+        "en": "The :attribute field is prohibited unless :other is in :values.",
+        "it": "Il :attribute field is prohibited unless :other is in :values."
     },
     "prohibits": {
-        "pl": "Pole :attribute zabrania obecności :other."
+        "pl": "Pole :attribute zabrania obecności :other.",
+        "en": "The :attribute field prohibits :other from being present.",
+        "it": "Il :attribute field prohibits :other from being present."
     },
     "regex": {
-        "pl": "Format :attribute jest nieprawidłowy."
+        "pl": "Format :attribute jest nieprawidłowy.",
+        "en": "The :attribute field format is invalid.",
+        "it": "Il :attribute field format is non valido."
     },
     "required": {
-        "pl": "To pole jest wymagane."
+        "pl": "To pole jest wymagane.",
+        "en": "The :attribute field is required.",
+        "it": "Il campo :attribute è obbligatorio."
     },
     "required_array_keys": {
-        "pl": "Pole :attribute musi zawierać wpisy dla: :values."
+        "pl": "Pole :attribute musi zawierać wpisy dla: :values.",
+        "en": "The :attribute field must contain entries for: :values.",
+        "it": "Il :attribute field deve contain entries for: :values."
     },
     "required_if": {
-        "pl": "Pole :attribute jest wymagane, gdy :other ma wartość :value."
+        "pl": "Pole :attribute jest wymagane, gdy :other ma wartość :value.",
+        "en": "The :attribute field is required when :other is :value.",
+        "it": "Il :attribute field is obbligatorio when :other is :value."
     },
     "required_if_accepted": {
-        "pl": "Pole :attribute jest wymagane, gdy :other jest zaakceptowane."
+        "pl": "Pole :attribute jest wymagane, gdy :other jest zaakceptowane.",
+        "en": "The :attribute field is required when :other is accepted.",
+        "it": "Il :attribute field is obbligatorio when :other is accepted."
     },
     "required_unless": {
-        "pl": "Pole :attribute jest wymagane, chyba że :other znajduje się w :values."
+        "pl": "Pole :attribute jest wymagane, chyba że :other znajduje się w :values.",
+        "en": "The :attribute field is required unless :other is in :values.",
+        "it": "Il :attribute field is obbligatorio unless :other is in :values."
     },
     "required_with": {
-        "pl": "Pole :attribute jest wymagane, gdy :values jest obecne."
+        "pl": "Pole :attribute jest wymagane, gdy :values jest obecne.",
+        "en": "The :attribute field is required when :values is present.",
+        "it": "Il :attribute field is obbligatorio when :values is present."
     },
     "required_with_all": {
-        "pl": "Pole :attribute jest wymagane, gdy :values są obecne."
+        "pl": "Pole :attribute jest wymagane, gdy :values są obecne.",
+        "en": "The :attribute field is required when :values are present.",
+        "it": "Il :attribute field is obbligatorio when :values are present."
     },
     "required_without": {
-        "pl": "Pole :attribute jest wymagane, gdy :values nie jest obecne."
+        "pl": "Pole :attribute jest wymagane, gdy :values nie jest obecne.",
+        "en": "The :attribute field is required when :values is not present.",
+        "it": "Il :attribute field is obbligatorio when :values is not present."
     },
     "required_without_all": {
-        "pl": "Pole :attribute jest wymagane, gdy żadne z :values nie są obecne."
+        "pl": "Pole :attribute jest wymagane, gdy żadne z :values nie są obecne.",
+        "en": "The :attribute field is required when none of :values are present.",
+        "it": "Il :attribute field is obbligatorio when none of :values are present."
     },
     "same": {
-        "pl": ":attribute i :other muszą się zgadzać."
+        "pl": ":attribute i :other muszą się zgadzać.",
+        "en": "The :attribute field must match :other.",
+        "it": "Il campo :attribute deve corrispondere a :other."
     },
     "size": {
         "array": {
-            "pl": ":attribute musi zawierać :size elementów."
+            "pl": ":attribute musi zawierać :size elementów.",
+            "en": "The :attribute field must contain :size items.",
+            "it": "Il :attribute field deve contain :size items."
         },
         "file": {
-            "pl": ":attribute musi mieć :size kilobajtów."
+            "pl": ":attribute musi mieć :size kilobajtów.",
+            "en": "The :attribute field must be :size kilobytes.",
+            "it": "Il :attribute field deve essere :size kilobytes."
         },
         "numeric": {
-            "pl": ":attribute musi wynosić :size."
+            "pl": ":attribute musi wynosić :size.",
+            "en": "The :attribute field must be :size.",
+            "it": "Il :attribute field deve essere :size."
         },
         "string": {
-            "pl": ":attribute musi mieć :size znaków."
+            "pl": ":attribute musi mieć :size znaków.",
+            "en": "The :attribute field must be :size characters.",
+            "it": "Il :attribute field deve essere :size characters."
         }
     },
     "starts_with": {
-        "pl": ":attribute musi zaczynać się jednym z następujących: :values."
+        "pl": ":attribute musi zaczynać się jednym z następujących: :values.",
+        "en": "The :attribute field must start with one of the following: :values.",
+        "it": "Il :attribute field deve start with one of il following: :values."
     },
     "string": {
-        "pl": ":attribute musi być ciągiem znaków."
+        "pl": ":attribute musi być ciągiem znaków.",
+        "en": "The :attribute field must be a string.",
+        "it": "Il campo :attribute deve essere una stringa."
     },
     "timezone": {
-        "pl": ":attribute musi być prawidłową strefą czasową."
+        "pl": ":attribute musi być prawidłową strefą czasową.",
+        "en": "The :attribute field must be a valid timezone.",
+        "it": "Il :attribute field deve essere a valid timezone."
     },
     "ulid": {
-        "pl": ":attribute musi być prawidłowym ULID."
+        "pl": ":attribute musi być prawidłowym ULID.",
+        "en": "The :attribute field must be a valid ULID.",
+        "it": "Il :attribute field deve essere a valid ULID."
     },
     "unique": {
-        "pl": ":attribute został już wcześniej użyty."
+        "pl": ":attribute został już wcześniej użyty.",
+        "en": "The :attribute has already been taken.",
+        "it": "Il :attribute has already been taken."
     },
     "uploaded": {
-        "pl": "Przesyłanie :attribute nie powiodło się."
+        "pl": "Przesyłanie :attribute nie powiodło się.",
+        "en": "The :attribute failed to upload.",
+        "it": "Il :attribute fallito to upload."
     },
     "uppercase": {
-        "pl": ":attribute musi być zapisany wielkimi literami."
+        "pl": ":attribute musi być zapisany wielkimi literami.",
+        "en": "The :attribute field must be uppercase.",
+        "it": "Il :attribute field deve essere uppercase."
     },
     "url": {
-        "pl": ":attribute musi być prawidłowym adresem URL."
+        "pl": ":attribute musi być prawidłowym adresem URL.",
+        "en": "The :attribute field must be a valid URL.",
+        "it": "Il campo :attribute deve essere un URL valido."
     },
     "uuid": {
-        "pl": ":attribute musi być prawidłowym UUID."
+        "pl": ":attribute musi być prawidłowym UUID.",
+        "en": "The :attribute field must be a valid UUID.",
+        "it": "Il :attribute field deve essere a valid UUID."
     }
 }

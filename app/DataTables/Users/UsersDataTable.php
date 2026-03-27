@@ -3,15 +3,19 @@
 namespace App\DataTables\Users;
 
 use App\Enums\Users\UserStatus;
+use App\Filters\Collections\UsersTableFilters;
+use App\Models\Business\Position;
+use App\Models\Business\UserEmployment;
 use App\Models\Core\User;
 use App\Support\DataTables\Column;
-use App\Support\DataTables\CustomDataTable;
+use App\Support\DataTables\DataTableBuilder;
+use App\Support\DataTables\Services\DataTableService;
+use App\Support\Filters\Contracts\FilterCollection;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Yajra\DataTables\EloquentDataTable;
 
-class UsersDataTable extends CustomDataTable
+class UsersDataTable extends DataTableService
 {
     protected $id = 'users_table';
 
@@ -24,38 +28,18 @@ class UsersDataTable extends CustomDataTable
      *
      * @param  QueryBuilder  $query  Results from query() method.
      */
-    public function dataTable(QueryBuilder $query): EloquentDataTable
+    public function DataTable(QueryBuilder $query): DataTableBuilder
     {
-        return (new EloquentDataTable($query))
+        return (new DataTableBuilder($query))
             ->addColumn('fullname', fn ($data) => $data->name)
             ->addColumn('name', fn ($data) => view('components.datatables.username_link', [
                 'data' => $data,
             ]))
             ->addColumn('status', function ($data) {
-                $color = null;
-                $text = null;
-                switch ($data->status) {
-                    case UserStatus::SUSPENDED:
-                        $color = 'dark';
-                        $text = $data->status->label;
-                        break;
-                    case UserStatus::DELETED:
-                        $color = 'danger';
-                        $text = $data->status->label;
-                        break;
-                    case UserStatus::UNVERIFIED:
-                        $color = 'warning';
-                        $text = $data->status->label;
-                        break;
-                    case UserStatus::UNEMPLOYED:
-                        $color = 'secondary';
-                        $text = $data->status->label;
-                        break;
-                    default:
-                        $color = 'primary';
-                        $text = $data->status->label;
-                        break;
-                }
+                /** @var UserStatus $status */
+                $status = $data->statusEnum();
+                $text = $status->label();
+                $color = $status->color();
 
                 return view('components.datatables.badge', [
                     'color' => $color,
@@ -71,6 +55,9 @@ class UsersDataTable extends CustomDataTable
                 $query->orderBy('firstname', $order);
                 $query->orderBy('lastname', $order);
             })
+            ->orderColumn('position', function ($query, $order): void {
+                $query->orderBy($this->positionNameSubquery(), $order);
+            })
             ->addColumn('roles', fn ($data) => $data->getRolesNames()->implode(', '))
             ->addColumn('action', fn ($data) => view('pages.users.action', [
                 'data' => $data,
@@ -80,8 +67,9 @@ class UsersDataTable extends CustomDataTable
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->filterColumn('position', function ($query, $keyword): void {
-                $sql = 'positions.name like ?';
-                $query->whereRaw($sql, ["%{$keyword}%"]);
+                $query->whereHas('employment.position', function (QueryBuilder $query) use ($keyword): void {
+                    $query->where('name', 'like', "%{$keyword}%");
+                });
             })
             ->editColumn('created_at', function ($data) {
                 $formatedDate = Carbon::parse($data->created_at)->format(config('app.datetime_format'));
@@ -92,7 +80,8 @@ class UsersDataTable extends CustomDataTable
                 $formatedDate = Carbon::parse($data->created_at)->format(config('app.datetime_format'));
 
                 return $formatedDate;
-            });
+            })
+            ->registerFilters($this->getFilterService());
     }
 
     /**
@@ -100,15 +89,17 @@ class UsersDataTable extends CustomDataTable
      */
     public function query(User $model): QueryBuilder
     {
-        $query = $model->leftJoin('user_profiles', 'user_profiles.user_id', '=', 'users.id')
-            ->leftJoin('user_employments', 'user_employments.user_id', '=', 'users.id')
-            ->leftJoin('companies', 'companies.id', '=', 'user_employments.company_id')
-            ->leftJoin('departments', 'departments.id', '=', 'user_employments.department_id')
-            ->leftJoin('positions', 'positions.id', '=', 'user_employments.position_id')
-            ->select('users.*', 'positions.name as position')
+        return $model->newQuery()
+            ->with(['employment.position'])
+            ->addSelect([
+                'position' => $this->positionNameSubquery(),
+            ])
             ->whereNotIn('users.id', [Auth::user()->id]);
+    }
 
-        return $query;
+    protected function buildFilters(): ?FilterCollection
+    {
+        return app()->make(UsersTableFilters::class);
     }
 
     protected function defaultColumns(): array
@@ -136,7 +127,7 @@ class UsersDataTable extends CustomDataTable
                 ->printable(false),
             'email' => Column::make('email')
                 ->title(__('fields.email')),
-            'status' => Column::computed('status')
+            'status' => Column::make('status')
                 ->title(__('fields.status'))
                 ->orderable(true),
             'created_at' => Column::make('created_at')
@@ -162,5 +153,17 @@ class UsersDataTable extends CustomDataTable
     protected function filename(): string
     {
         return 'Users_' . date('YmdHis');
+    }
+
+    private function positionNameSubquery(): QueryBuilder
+    {
+        return Position::query()
+            ->select('name')
+            ->where('positions.id', '=', UserEmployment::query()
+                ->select('position_id')
+                ->whereColumn('user_employments.user_id', 'users.id')
+                ->active()
+                ->limit(1))
+            ->limit(1);
     }
 }

@@ -16,27 +16,27 @@
                 x-ref="exportBtn"
                 :disabled="$wire.exporting"
                 class="{{ $class }}"
-        >Export
+        >{{ __('globals.datatables_export.button') }}
         </button>
     </form>
 
     @if($exporting && $emailTo)
-        <div class="d-inline">Export will be emailed to {{ $emailTo }}.</div>
+        <div class="d-inline">{{ __('globals.datatables_export.email_notice', ['email' => $emailTo]) }}</div>
     @endif
 
     @if($exporting && !$exportFinished)
-        <div class="d-inline" wire:poll="updateExportProgress">Exporting...please wait.</div>
+        <div class="d-inline" wire:poll="updateExportProgress">{{ __('globals.datatables_export.in_progress') }}</div>
     @endif
 
     @if($exportFinished && !$exportFailed && !$autoDownload)
-        <span>Done. Download file <a href="#" class="text-primary" wire:click.prevent="downloadExport">here</a></span>
+        <span>{{ __('globals.datatables_export.done_download') }} <a href="#" class="text-primary" wire:click.prevent="downloadExport">{{ __('globals.here') }}</a></span>
     @endif
 
     @if($exportFinished && !$exportFailed && $autoDownload && $downloaded)
-        <span>Done. File has been downloaded.</span>
+        <span>{{ __('globals.datatables_export.done_downloaded') }}</span>
     @endif
 
     @if($exportFailed)
-        <span>Export failed, please try again later.</span>
+        <span>{{ __('globals.datatables_export.failed') }}</span>
     @endif
 </div>

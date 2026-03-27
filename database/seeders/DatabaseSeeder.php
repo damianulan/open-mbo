@@ -2,27 +2,24 @@
 
 namespace Database\Seeders;
 
-use App\Console\Commands\Settings\SettingsMigrate;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
-use Sentinel\Console\Commands\AssignRca;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        Artisan::call(SettingsMigrate::class);
-        $this->call(LanguageSeeder::class);
-        Artisan::call(AssignRca::class);
-        $this->call(NotificationSeeder::class);
-
-        $this->call(CreateAdminUserSeeder::class);
-        $this->call(BusinessSeeder::class);
-        $this->call(UserSeeder::class);
-
-        $this->call(MBOSeeder::class);
+        Artisan::call('settings:migrate', ['--no-interaction' => true]);
+        $this->call([
+            LanguageSeeder::class,
+            NotificationSeeder::class,
+        ]);
+        Artisan::call('sentinel:run', ['--no-interaction' => true]);
+        $this->call([
+            CreateAdminUserSeeder::class,
+            BusinessSeeder::class,
+            UserSeeder::class,
+            MboSeeder::class,
+        ]);
     }
 }

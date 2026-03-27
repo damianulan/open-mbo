@@ -2,8 +2,8 @@
 
 namespace App\Services\Objectives;
 
-use App\Models\MBO\Objective;
-use App\Models\MBO\UserObjective;
+use App\Models\Mbo\Objective;
+use App\Models\Mbo\UserObjective;
 use Lucent\Services\Service;
 
 class BulkAssignUsers extends Service

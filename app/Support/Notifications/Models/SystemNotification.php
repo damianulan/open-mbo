@@ -4,6 +4,7 @@ namespace App\Support\Notifications\Models;
 
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 /**
  * @property string $id
@@ -53,8 +54,31 @@ class SystemNotification extends NotificationModel
         'created_at' => 'datetime',
     ];
 
-    public function unread()
+    public function unread(): bool
     {
         return is_null($this->read_at);
+    }
+
+    public function markAsRead(): void
+    {
+        if ( ! $this->unread()) {
+            return;
+        }
+
+        $this->forceFill([
+            'read_at' => now(),
+        ])->saveQuietly();
+    }
+
+    public function preview(int $limit = 150): string
+    {
+        return (string) Str::of(strip_tags($this->contents ?? ''))
+            ->squish()
+            ->limit($limit, preserveWords: true);
+    }
+
+    public function renderedContents(): string
+    {
+        return strip_tags($this->contents ?? '', '<strong><i><br>');
     }
 }

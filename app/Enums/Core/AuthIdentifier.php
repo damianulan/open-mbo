@@ -2,19 +2,21 @@
 
 namespace App\Enums\Core;
 
-use Enumerable\Laravel\Enum;
+use App\Support\Concerns\EnumHasValues;
 
-class AuthIdentifier extends Enum
+enum AuthIdentifier: string
 {
-    const EMAIL = 'email';
+    use EnumHasValues;
 
-    const USERNAME = 'username';
+    case EMAIL = 'email';
 
-    public static function labels(): array
+    case USERNAME = 'username';
+
+    public function label(): string
     {
-        return [
+        return match ($this) {
             self::EMAIL => __('fields.email'),
             self::USERNAME => __('fields.username'),
-        ];
+        };
     }
 }

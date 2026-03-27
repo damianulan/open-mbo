@@ -2,11 +2,12 @@
 
 namespace App\DataTables\Settings;
 
+use App\Models\Core\User;
 use App\Models\Vendor\ActivityModel;
 use App\Support\DataTables\Column;
+use App\Support\DataTables\DataTableBuilder;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Carbon;
-use Yajra\DataTables\EloquentDataTable;
 
 class MyLogsDataTable extends BaseLogDataTable
 {
@@ -19,10 +20,10 @@ class MyLogsDataTable extends BaseLogDataTable
      *
      * @param  QueryBuilder  $query  Results from query() method.
      */
-    public function dataTable(QueryBuilder $query): EloquentDataTable
+    public function DataTable(QueryBuilder $query): DataTableBuilder
     {
 
-        return (new EloquentDataTable($query))
+        return (new DataTableBuilder($query))
             ->addColumn('event', fn ($data) => view('components.datatables.badge', [
                 'color' => $this->getEventColor($data->event),
                 'text' => __('logging.events.' . $data->event),
@@ -30,12 +31,23 @@ class MyLogsDataTable extends BaseLogDataTable
             ->addColumn('subject', fn ($data) => $this->subjectView($data))
             ->addColumn('subject_type', fn ($data) => $this->subjectTypeView($data))
             ->orderColumn('causer', function ($query, $order): void {
-                $query->orderBy('firstname', $order);
-                $query->orderBy('lastname', $order);
+                $query->orderBy(
+                    User::query()->select('firstname')
+                        ->whereColumn('users.id', 'activity_log.causer_id')
+                        ->limit(1),
+                    $order
+                );
+                $query->orderBy(
+                    User::query()->select('lastname')
+                        ->whereColumn('users.id', 'activity_log.causer_id')
+                        ->limit(1),
+                    $order
+                );
             })
             ->filterColumn('causer', function ($query, $keyword): void {
-                $sql = "CONCAT(firstname,'-',lastname)  like ?";
-                $query->whereRaw($sql, ["%{$keyword}%"]);
+                $query->whereHasMorph('causer', [User::class], function (QueryBuilder $query) use ($keyword): void {
+                    $query->whereRaw("CONCAT(firstname,'-',lastname) like ?", ["%{$keyword}%"]);
+                });
             })
             ->editColumn('created_at', function ($data) {
                 $formatedDate = Carbon::parse($data->created_at)->format(config('app.datetime_format'));
@@ -49,10 +61,10 @@ class MyLogsDataTable extends BaseLogDataTable
      */
     public function query(ActivityModel $model): QueryBuilder
     {
-        return $model->join('users', 'users.id', '=', 'activity_log.causer_id')
-            ->join('user_profiles', 'user_profiles.user_id', '=', 'users.id')
-            ->select('activity_log.*', 'user_profiles.firstname', 'user_profiles.lastname')
-            ->logger()->mine();
+        return $model->newQuery()
+            ->with(['causer', 'subject'])
+            ->logger()
+            ->mine();
     }
 
     protected function defaultColumns(): array

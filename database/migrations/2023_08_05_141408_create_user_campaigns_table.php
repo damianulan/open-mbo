@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\MBO\CampaignStage;
+use App\Enums\Mbo\CampaignStage;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +16,7 @@ return new class() extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('campaign_id');
             $table->foreignUuid('user_id');
-            $table->enum('stage', CampaignStage::values())->default(CampaignStage::PENDING)->index()->comment('User current campaign stage');
+            $table->enum('stage', CampaignStage::values())->default(CampaignStage::PENDING->value)->index()->comment('User current campaign stage');
 
             $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

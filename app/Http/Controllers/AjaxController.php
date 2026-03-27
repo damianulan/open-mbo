@@ -2,34 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MBO\ObjectiveTemplate;
+use App\Models\Mbo\ObjectiveTemplate;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class AjaxController extends Controller
 {
-    public function getModelInstance(Request $request)
+    public function getModelInstance(Request $request): JsonResponse
     {
-        $model = $request->input('model') ?? null;
-        $id = $request->input('id') ?? null;
-        $status = 'error';
-        $instance = null;
-
-        switch ($model) {
-            case 'objective_template':
-                $instance = ObjectiveTemplate::find($id);
-                break;
-
-            default:
-                // code...
-                break;
-        }
-
-        if ($instance) {
-            $status = 'ok';
-        }
+        $instance = match ($request->input('model')) {
+            'objective_template' => ObjectiveTemplate::find($request->input('id')),
+            default => null,
+        };
 
         return response()->json([
-            'status' => $status,
+            'status' => $instance ? 'ok' : 'error',
             'instance' => $instance,
         ]);
     }

@@ -38,6 +38,6 @@ class IconComponent extends Component
             $this->classes = ' ' . $this->classes;
         }
 
-        return '<i class="bi-' . $this->key . ' ' . trim($this->classes) . '"></i>';
+        return '<i class="bi-' . $this->key . ' ' . mb_trim($this->classes) . '"></i>';
     }
 }

@@ -9,21 +9,19 @@ class UserStatusFactory
 {
     public static function make(User $user): UserStatus
     {
-        $status = UserStatus::ACTIVE;
+        return match (true) {
+            null !== $user->deleted_at => UserStatus::DELETED,
+            null !== $user->suspended_at => UserStatus::SUSPENDED,
+            null === $user->email_verified_at => UserStatus::UNVERIFIED,
+            ! self::hasEmployment($user) => UserStatus::UNEMPLOYED,
+            default => UserStatus::ACTIVE,
+        };
+    }
 
-        if ( ! $user->employment) {
-            $status = UserStatus::UNEMPLOYED;
-        }
-        if ( ! $user->email_verified_at) {
-            $status = UserStatus::UNVERIFIED;
-        }
-        if ($user->suspended_at) {
-            $status = UserStatus::SUSPENDED;
-        }
-        if ($user->deleted_at) {
-            $status = UserStatus::DELETED;
-        }
+    private static function hasEmployment(User $user): bool
+    {
+        $user->load('employment');
 
-        return UserStatus::tryFrom($status);
+        return null !== $user->getRelation('employment');
     }
 }

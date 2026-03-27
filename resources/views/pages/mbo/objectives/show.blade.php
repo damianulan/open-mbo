@@ -69,11 +69,11 @@
             </div>
             <div class="content-card-body row">
                 <div class="col-md-6">
-                    <h5>Zaliczone</h5>
+                    <h5>{{ __('mbo.passed') }}</h5>
                     <div><x-objective-users-list :objective="$objective" :status="'passed'" /></div>
                 </div>
                 <div class="col-md-6">
-                    <h5>Niezaliczone</h5>
+                    <h5>{{ __('mbo.failed') }}</h5>
                     <div><x-objective-users-list :objective="$objective" :status="'failed'"  /></div>
                 </div>
             </div>

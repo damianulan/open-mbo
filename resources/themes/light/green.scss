@@ -1,8 +1,12 @@
-// Primaries
-$primary: #1c676c;
-//$primary: #135737;
+@use "sass:color";
 
-// Secondaries
-$secondary: darken($primary, 10%);
+// Theme palette
+$theme-primary: #1c676c !default;
+//$theme-primary: #135737;
+$theme-secondary: color.adjust($theme-primary, $lightness: -10%) !default;
+
+// Bootstrap semantic colors
+$primary: $theme-primary !default;
+$secondary: $theme-secondary !default;
 
 @import "app";

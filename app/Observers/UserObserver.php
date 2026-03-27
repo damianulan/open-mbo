@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Factories\Users\UserStatusFactory;
 use App\Models\Core\User;
 use Illuminate\Support\Str;
 
@@ -29,6 +30,7 @@ class UserObserver
                 'password' => $user->password,
             ]);
         }
+        $this->setStatusAuto($user);
     }
 
     public function updating(User $user): User
@@ -46,20 +48,32 @@ class UserObserver
                 'password' => $user->password,
             ]);
         }
+        $this->setStatusAuto($user);
     }
 
     /**
      * Handle the User "deleted" event.
      */
-    public function deleted(User $user): void {}
+    public function deleted(User $user): void
+    {
+        $this->setStatusAuto($user);
+    }
 
     /**
      * Handle the User "restored" event.
      */
-    public function restored(User $user): void {}
+    public function restored(User $user): void
+    {
+        $this->setStatusAuto($user);
+    }
 
     /**
      * Handle the User "force deleted" event.
      */
     public function forceDeleted(User $user): void {}
+
+    private function setStatusAuto(User $user): void
+    {
+        $user->setStatus(UserStatusFactory::make($user), 'auto');
+    }
 }

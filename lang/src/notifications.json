@@ -2,45 +2,84 @@
     "app": {
         "campaign": {
             "coordinator_assignment": {
-                "pl": "<strong>:username<\/strong> to nowy uczestnik kampanii <i class=\"bi-bullseye\"><\/i> <strong>:campaignname<\/strong>, którą prowadzisz. Dostępne cele zostały automatycznie przypisane."
+                "pl": "<strong>:username</strong> to nowy uczestnik kampanii <i class=\"bi-bullseye\"></i> <strong>:campaignname</strong>, którą prowadzisz. Dostępne cele zostały automatycznie przypisane.",
+                "en": "<strong>:username</strong> is a new participant in campaign <i class=\"bi-bullseye\"></i> <strong>:campaignname</strong> that you coordinate. Available objectives were assigned automatically.",
+                "it": "<strong>:username</strong> is a new participant in campagna <i class=\"bi-bullseye\"></i> <strong>:campaignname</strong> that you coordinate. Available obiettivi were assigned automatically."
             },
             "user_assigned": {
-                "pl": "Przypisano Cię do kampanii <i class=\"bi-bullseye\"><\/i> <strong>:campaignname<\/strong>."
+                "pl": "Przypisano Cię do kampanii <i class=\"bi-bullseye\"></i> <strong>:campaignname</strong>.",
+                "en": "You were assigned to campaign <i class=\"bi-bullseye\"></i> <strong>:campaignname</strong>.",
+                "it": "You were assigned to campagna <i class=\"bi-bullseye\"></i> <strong>:campaignname</strong>."
             }
         }
     },
     "info": {
         "empty": {
-            "pl": "Twoja skrzynka powiadomień jest pusta, nie otrzymano jeszcze żadnych wiadomości."
+            "pl": "Twoja skrzynka powiadomień jest pusta, nie otrzymano jeszcze żadnych wiadomości.",
+            "en": "Your notifications inbox is empty; no messages have been received yet.",
+            "it": "La tua casella notifiche è vuota; non sono ancora stati ricevuti messaggi."
+        },
+        "new": {
+            "pl": "nowe",
+            "en": "new",
+            "it": "nuova"
+        },
+        "preview": {
+            "pl": "Podgląd powiadomienia",
+            "en": "Notification preview",
+            "it": "Anteprima notifica"
+        },
+        "preview_empty": {
+            "pl": "Wybierz powiadomienie z listy, aby zobaczyć pełną treść.",
+            "en": "Select a notification from the list to see the full content.",
+            "it": "Seleziona una notifica dall'elenco per vedere il contenuto completo."
         },
         "show_all": {
-            "pl": "Pokaż wszystkie"
+            "pl": "Pokaż wszystkie",
+            "en": "Show all",
+            "it": "Mostra tutto"
         }
     },
     "table": {
         "action": {
-            "pl": "Akcje"
+            "pl": "Akcje",
+            "en": "Actions",
+            "it": "Azioni"
         },
         "conditions": {
-            "pl": "Wskutek spełnienia warunków"
+            "pl": "Wskutek spełnienia warunków",
+            "en": "Triggered by conditions",
+            "it": "Attivato da condizioni"
         },
         "email": {
-            "pl": "Powiadomienie mailowe"
+            "pl": "Powiadomienie mailowe",
+            "en": "Email notification",
+            "it": "Notifica email"
         },
         "event": {
-            "pl": "Wskutek zdarzenia"
+            "pl": "Wskutek zdarzenia",
+            "en": "Triggered by event",
+            "it": "Attivato da evento"
         },
         "key": {
-            "pl": "Identyfikator"
+            "pl": "Identyfikator",
+            "en": "Identifier",
+            "it": "Identificatore"
         },
         "schedule": {
-            "pl": "Wysyłka cykliczna"
+            "pl": "Wysyłka cykliczna",
+            "en": "Scheduled sending",
+            "it": "Invio pianificato"
         },
         "status": {
-            "pl": "Status"
+            "pl": "Status",
+            "en": "Delivery status",
+            "it": "Stato consegna"
         },
         "system": {
-            "pl": "Powiadomienie systemowe"
+            "pl": "Powiadomienie systemowe",
+            "en": "System notification",
+            "it": "Notifica di sistema"
         }
     }
 }

@@ -1,317 +1,531 @@
 {
-    "campaigns": {
-        "error": {
-            "cancel": {
-                "pl": "Kampania nie została pomyślnie anulowana.",
-                "en": "Campaign was not successfully cancelled."
-            },
-            "create": {
-                "pl": "Kampanie nie mogła zostać dodana. Wystąpił błąd."
-            },
-            "edit": {
-                "pl": "Kampania nie została zmodyfikowana. W formularzu wystąpiły błędy."
-            },
-            "objective_added": {
-                "pl": "Wskazany cel został pomyślnie dodany do Kampanii."
-            },
-            "objective_deleted": {
-                "pl": "Cel został pomyślnie usunięty z Kampanii."
-            },
-            "resume": {
-                "pl": "Kampania nie została pomyślnie odwieszona."
-            },
-            "terminate": {
-                "pl": "Kampania nie została pomyślnie zawieszona."
-            },
-            "users_added": {
-                "pl": "Dane nie zostały zaktualizowane. Odśwież stronę i spróbuj ponownie."
-            },
-            "users_deleted": {
-                "pl": "Wystąpił błąd podczas wypisywania użytkownika z Kampanii. Odśwież stronę i spróbuj ponownie."
-            }
-        },
-        "success": {
-            "cancel": {
-                "pl": "Kampania została pomyślnie anulowana."
-            },
-            "create": {
-                "pl": "Kampania została utworzona pomyślnie."
-            },
-            "edit": {
-                "pl": "Kampania została pomyślnie zmodyfikowana."
-            },
-            "objective_added": {
-                "pl": "Wskazany cel został pomyślnie dodany do Kampanii."
-            },
-            "objective_deleted": {
-                "pl": "Cel został pomyślnie usunięty z Kampanii."
-            },
-            "resume": {
-                "pl": "Kampania została pomyślnie odwieszona."
-            },
-            "terminate": {
-                "pl": "Kampania została pomyślnie zawieszona."
-            },
-            "users_added": {
-                "pl": "Uzupełniono stan osobowy Kampanii pomiarowej."
-            },
-            "users_deleted": {
-                "pl": "Użytkownik został wypisany z Kampanii."
-            }
-        }
-    },
-    "datatables": {
-        "save_columns": {
-            "error": {
-                "pl": "Nie można było zapisać nowych danych dotyczących kolumn w tabeli. Wystąpił błąd."
-            },
-            "error_data": {
-                "pl": "Nie wykryto nowych danych dotyczących wyświetlania kolumn w tabeli. Zmiany nie zostały zapisane."
-            }
-        }
-    },
-    "employments": {
-        "error": {
-            "create": {
-                "pl": "Nowe zatrudnienie nie mógło zostać dodane. Wystąpił błąd."
-            },
-            "delete": {
-                "pl": "Zatrudnienie nie mógło zostać usunięte. Wystąpił błąd."
-            },
-            "edit": {
-                "pl": "Zatrudnienie nie mógło zostać zmodyfikowane. Wystąpił błąd."
-            }
-        },
-        "success": {
-            "create": {
-                "pl": "Nowe zatrudnienie zostało pomyślnie dodane."
-            },
-            "delete": {
-                "pl": "Zatrudnienie zostało pomyślnie usunięte."
-            },
-            "edit": {
-                "pl": "Zatrudnienie zostało pomyślnie zmodyfikowane."
-            }
-        }
+  "campaigns": {
+    "error": {
+      "cancel": {
+        "pl": "Kampania nie została pomyślnie anulowana.",
+        "en": "Campaign was not successfully cancelled.",
+        "it": "La campagna non è stata annullata correttamente."
+      },
+      "create": {
+        "pl": "Kampanie nie mogła zostać dodana. Wystąpił błąd.",
+        "en": "The campaign could not be added. An error occurred.",
+        "it": "La campagna non è stata aggiunta. Si è verificato un errore."
+      },
+      "edit": {
+        "pl": "Kampania nie została zmodyfikowana. W formularzu wystąpiły błędy.",
+        "en": "The campaign was not modified. There are errors in the form.",
+        "it": "La campagna non è stata modificata. Ci sono errori nel modulo."
+      },
+      "objective_added": {
+        "pl": "Wskazany cel został pomyślnie dodany do Kampanii.",
+        "en": "The selected objective was successfully added to the campaign.",
+        "it": "L’obiettivo selezionato è stato aggiunto con successo alla campagna."
+      },
+      "objective_deleted": {
+        "pl": "Cel został pomyślnie usunięty z Kampanii.",
+        "en": "The objective was successfully removed from the campaign.",
+        "it": "L’obiettivo è stato rimosso con successo dalla campagna."
+      },
+      "resume": {
+        "pl": "Kampania nie została pomyślnie odwieszona.",
+        "en": "The campaign was not successfully resumed.",
+        "it": "La campagna non è stata ripresa correttamente."
+      },
+      "terminate": {
+        "pl": "Kampania nie została pomyślnie zawieszona.",
+        "en": "The campaign was not successfully suspended.",
+        "it": "La campagna non è stata sospesa correttamente."
+      },
+      "users_added": {
+        "pl": "Dane nie zostały zaktualizowane. Odśwież stronę i spróbuj ponownie.",
+        "en": "Data was not updated. Refresh the page and try again.",
+        "it": "I dati non sono stati aggiornati. Aggiorna la pagina e riprova."
+      },
+      "users_deleted": {
+        "pl": "Wystąpił błąd podczas wypisywania użytkownika z Kampanii. Odśwież stronę i spróbuj ponownie.",
+        "en": "An error occurred while removing the user from the campaign. Refresh the page and try again.",
+        "it": "Si è verificato un errore durante la rimozione dell’utente dalla campagna. Aggiorna la pagina e riprova."
+      }
     },
     "success": {
-        "operation": {
-            "pl": "Operacja zakończona pomyślnie."
-        }
-    },
+      "cancel": {
+        "pl": "Kampania została pomyślnie anulowana.",
+        "en": "The campaign was successfully canceled.",
+        "it": "La campagna was con successo annullato."
+      },
+      "create": {
+        "pl": "Kampania została utworzona pomyślnie.",
+        "en": "The campaign was created successfully.",
+        "it": "La campagna was creato con successo."
+      },
+      "edit": {
+        "pl": "Kampania została pomyślnie zmodyfikowana.",
+        "en": "The campaign was modified successfully.",
+        "it": "La campagna was modificato con successo."
+      },
+      "objective_added": {
+        "pl": "Wskazany cel został pomyślnie dodany do Kampanii.",
+        "en": "The selected objective was successfully added to the campaign.",
+        "it": "L’obiettivo selezionato è stato aggiunto con successo alla campagna."
+      },
+      "objective_deleted": {
+        "pl": "Cel został pomyślnie usunięty z Kampanii.",
+        "en": "The objective was successfully removed from the campaign.",
+        "it": "L’obiettivo è stato rimosso con successo dalla campagna."
+      },
+      "resume": {
+        "pl": "Kampania została pomyślnie odwieszona.",
+        "en": "The campaign was successfully resumed.",
+        "it": "La campagna was con successo ripreso."
+      },
+      "terminate": {
+        "pl": "Kampania została pomyślnie zawieszona.",
+        "en": "The campaign was successfully suspended.",
+        "it": "La campagna was con successo sospeso."
+      },
+      "users_added": {
+        "pl": "Uzupełniono stan osobowy Kampanii pomiarowej.",
+        "en": "Campaign staffing has been updated.",
+        "it": "La composizione della campagna è stata aggiornata."
+      },
+      "users_deleted": {
+        "pl": "Użytkownik został wypisany z Kampanii.",
+        "en": "The user was removed from the campaign.",
+        "it": "L’utente è stato rimosso dalla campagna."
+      }
+    }
+  },
+  "companies": {
+    "info": {
+      "delete": {
+        "pl": "Usunięcie przedsiębiorstwa będzie nieodwracalne.",
+        "en": "Deleting the company is irreversible.",
+        "it": "Deleting the company is irreversible."
+      }
+    }
+  },
+  "contracts": {
+    "info": {
+      "delete": {
+        "pl": "Usunięcie typu kontraktu będzie nieodwracalne.",
+        "en": "Deleting the contract type is irreversible.",
+        "it": "Deleting the contract type is irreversible."
+      }
+    }
+  },
+  "datatables": {
+    "save_columns": {
+      "error": {
+        "pl": "Nie można było zapisać nowych danych dotyczących kolumn w tabeli. Wystąpił błąd.",
+        "en": "Could not save new table column settings. An error occurred.",
+        "it": "Impossibile salvare le nuove impostazioni delle colonne della tabella. Si è verificato un errore."
+      },
+      "error_data": {
+        "pl": "Nie wykryto nowych danych dotyczących wyświetlania kolumn w tabeli. Zmiany nie zostały zapisane.",
+        "en": "No new table column display settings were detected. Changes were not saved.",
+        "it": "Non sono state rilevate nuove impostazioni di visualizzazione delle colonne della tabella. Le modifiche non sono state salvate."
+      }
+    }
+  },
+  "departments": {
+    "info": {
+      "delete": {
+        "pl": "Usunięcie działu będzie nieodwracalne.",
+        "en": "Deleting the department is irreversible.",
+        "it": "Deleting the department is irreversible."
+      }
+    }
+  },
+  "employments": {
     "error": {
-        "ajax": {
-            "pl": "Wystąpił błąd podczas pobierania danych z serwera, żądanie nie zostało przetworzone. Zweryfikuj swoje połączenie internetowe."
-        },
-        "form": {
-            "pl": "W formularzu wystąpiły błędy. Popraw je i spróbuj ponownie."
-        },
-        "invalid_role": {
-            "pl": "Nie posiadasz odpowiedniej roli systemowej do wykonania tej akcji."
-        },
-        "no_permission": {
-            "pl": "Nie posiadasz odpowiednich uprawnień do wykonania tej akcji."
-        },
-        "operation": {
-            "pl": "Wystąpił błąd podczas wykonywania operacji."
-        },
-        "unauthorized_access": {
-            "pl": "Nie masz uprawnień do wykonania tej akcji.",
-            "en": "You do not have permission to perform this action."
-        }
+      "create": {
+        "pl": "Nowe zatrudnienie nie mógło zostać dodane. Wystąpił błąd.",
+        "en": "The new employment record could not be added. An error occurred.",
+        "it": "Il nuovo record di impiego non è stato aggiunto. Si è verificato un errore."
+      },
+      "delete": {
+        "pl": "Zatrudnienie nie mógło zostać usunięte. Wystąpił błąd.",
+        "en": "The employment record could not be deleted. An error occurred.",
+        "it": "Il record di impiego non è stato eliminato. Si è verificato un errore."
+      },
+      "edit": {
+        "pl": "Zatrudnienie nie mógło zostać zmodyfikowane. Wystąpił błąd.",
+        "en": "The employment record could not be modified. An error occurred.",
+        "it": "Il record di impiego non è stato modificato. Si è verificato un errore."
+      }
+    },
+    "success": {
+      "create": {
+        "pl": "Nowe zatrudnienie zostało pomyślnie dodane.",
+        "en": "The new employment record was added successfully.",
+        "it": "Il nuovo record di impiego è stato aggiunto con successo."
+      },
+      "delete": {
+        "pl": "Zatrudnienie zostało pomyślnie usunięte.",
+        "en": "The employment record was deleted successfully.",
+        "it": "Il record di impiego è stato eliminato con successo."
+      },
+      "edit": {
+        "pl": "Zatrudnienie zostało pomyślnie zmodyfikowane.",
+        "en": "The employment record was modified successfully.",
+        "it": "Il record di impiego è stato modificato con successo."
+      }
+    }
+  },
+  "success": {
+    "operation": {
+      "pl": "Operacja zakończona pomyślnie.",
+      "en": "Operation completed successfully.",
+      "it": "Operazione completata con successo."
+    }
+  },
+  "error": {
+    "ajax": {
+      "pl": "Wystąpił błąd podczas pobierania danych z serwera, żądanie nie zostało przetworzone. Zweryfikuj swoje połączenie internetowe.",
+      "en": "An error occurred while downloading data from the server, and the request was not processed. Check your internet connection.",
+      "it": "Si è verificato un errore durante il download dei dati dal server e la richiesta non è stata elaborata. Verifica la tua connessione Internet."
+    },
+    "form": {
+      "pl": "W formularzu wystąpiły błędy. Popraw je i spróbuj ponownie.",
+      "en": "There are errors in the form. Correct them and try again.",
+      "it": "Ci sono errori nel modulo. Correggili e riprova."
+    },
+    "invalid_role": {
+      "pl": "Nie posiadasz odpowiedniej roli systemowej do wykonania tej akcji.",
+      "en": "You do not have the required system role to perform this action.",
+      "it": "Non hai il ruolo di sistema richiesto per eseguire questa azione."
+    },
+    "no_permission": {
+      "pl": "Nie posiadasz odpowiednich uprawnień do wykonania tej akcji.",
+      "en": "You do not have sufficient permissions to perform this action.",
+      "it": "Non hai autorizzazioni sufficienti per eseguire questa azione."
+    },
+    "operation": {
+      "pl": "Wystąpił błąd podczas wykonywania operacji.",
+      "en": "An error occurred while performing the operation.",
+      "it": "An errore occurred while performing il operation."
+    },
+    "unauthorized_access": {
+      "pl": "Nie masz uprawnień do wykonania tej akcji.",
+      "en": "You do not have permission to perform this action.",
+      "it": "Non hai il permesso di eseguire questa azione."
+    }
+  },
+  "info": {
+    "debugging": {
+      "pl": "Uwaga - Debugowanie jest włączone",
+      "en": "Warning - Debug mode is enabled",
+      "it": "Attenzione - La modalità debug è attiva"
+    },
+    "env_development": {
+      "pl": "Aplikacja uruchomiona w trybie deweloperskim. Część funkcjonalności może nie działać zgodnie z oczekiwaniami",
+      "en": "The application is running in development mode. Some functionality may not work as expected.",
+      "it": "L’applicazione è in esecuzione in modalità sviluppo. Alcune funzionalità potrebbero non funzionare come previsto."
+    },
+    "env_local": {
+      "pl": "Aplikacja działa w trybie lokalnym",
+      "en": "The application is running in local mode",
+      "it": "L’applicazione è in esecuzione in modalità locale"
+    },
+    "maintenance": {
+      "pl": "Serwis jest zamknięty dla użytkowników.",
+      "en": "The service is closed for users.",
+      "it": "Il servizio è chiuso per gli utenti."
+    }
+  },
+  "objective_categories": {
+    "error": {
+      "create": {
+        "pl": "Nowa kategoria MBO nie mógła zostać dodana. Wystąpił błąd.",
+        "en": "The new MBO category could not be added. An error occurred.",
+        "it": "La nuova categoria MBO non è stata aggiunta. Si è verificato un errore."
+      },
+      "delete": {
+        "pl": "Kategoria MBO niestety nie została usunięta. Wystąpił błąd.",
+        "en": "The MBO category could not be deleted. An error occurred.",
+        "it": "La categoria MBO non è stata eliminata. Si è verificato un errore."
+      },
+      "edit": {
+        "pl": "Kategoria MBO nie została zmodyfikowana. Wystąpił błąd.",
+        "en": "The MBO category was not modified. An error occurred.",
+        "it": "Il MBO category was not modificato. An errore occurred."
+      }
     },
     "info": {
-        "debugging": {
-            "pl": "Uwaga - Debugowanie jest włączone"
-        },
-        "env_development": {
-            "pl": "Aplikacja uruchomiona w trybie deweloperskim. Część funkcjonalności może nie działać zgodnie z oczekiwaniami"
-        },
-        "env_local": {
-            "pl": "Aplikacja działa w trybie lokalnym"
-        },
-        "maintenance": {
-            "pl": "Serwis jest zamknięty dla użytkowników."
-        }
+      "delete": {
+        "pl": "Usunięcie kategorii będzie nieodwracalne. Razem z nią usunięte zostaną wszystkie powiązane cele.",
+        "en": "Deleting the category is irreversible. All related objectives will also be deleted.",
+        "it": "Deleting il category is irreversible. All related obiettivi will also be eliminato."
+      }
     },
-    "objective_categories": {
-        "error": {
-            "create": {
-                "pl": "Nowa kategoria MBO nie mógła zostać dodana. Wystąpił błąd."
-            },
-            "delete": {
-                "pl": "Kategoria MBO niestety nie została usunięta. Wystąpił błąd."
-            },
-            "edit": {
-                "pl": "Kategoria MBO nie została zmodyfikowana. Wystąpił błąd."
-            }
-        },
-        "info": {
-            "delete": {
-                "pl": "Usunięcie kategorii będzie nieodwracalne. Razem z nią usunięte zostaną wszystkie powiązane cele."
-            }
-        },
-        "success": {
-            "create": {
-                "pl": "Nowa kategoria MBO została pomyślnie dodana."
-            },
-            "delete": {
-                "pl": "Kategoria MBO została pomyślnie usunięta."
-            },
-            "edit": {
-                "pl": "Kategoria MBO została pomyślnie zmodyfikowana."
-            }
-        }
+    "success": {
+      "create": {
+        "pl": "Nowa kategoria MBO została pomyślnie dodana.",
+        "en": "The new MBO category was added successfully.",
+        "it": "Il new MBO category was aggiunto con successo."
+      },
+      "delete": {
+        "pl": "Kategoria MBO została pomyślnie usunięta.",
+        "en": "The MBO category was deleted successfully.",
+        "it": "La categoria MBO è stata eliminata con successo."
+      },
+      "edit": {
+        "pl": "Kategoria MBO została pomyślnie zmodyfikowana.",
+        "en": "The MBO category was modified successfully.",
+        "it": "La categoria MBO è stata modificata con successo."
+      }
+    }
+  },
+  "positions": {
+    "info": {
+      "delete": {
+        "pl": "Usunięcie stanowiska będzie nieodwracalne.",
+        "en": "Deleting the position is irreversible.",
+        "it": "Deleting the position is irreversible."
+      }
+    }
+  },
+  "notifications": {
+    "info": {
+      "delete": {
+        "pl": "Usunięcie powiadomienia będzie nieodwracalne.",
+        "en": "Deleting the notification is irreversible.",
+        "it": "Deleting the notification is irreversible."
+      }
+    }
+  },
+  "objective_template": {
+    "error": {
+      "create": {
+        "pl": "Nowy szablon celu nie mógł zostać dodany. Wystąpił błąd.",
+        "en": "The new objective template could not be added. An error occurred.",
+        "it": "Il new obiettivo template non è stato possibile be aggiunto. An errore occurred."
+      },
+      "delete": {
+        "pl": "Szablon celu niestety nie został usunięty. Wystąpił błąd.",
+        "en": "The objective template could not be deleted. An error occurred.",
+        "it": "Il modello obiettivo non è stato eliminato. Si è verificato un errore."
+      },
+      "edit": {
+        "pl": "Szablon celu nie został zmodyfikowany. Wystąpił błąd.",
+        "en": "The objective template was not modified. An error occurred.",
+        "it": "Il obiettivo template was not modificato. An errore occurred."
+      }
     },
-    "objective_template": {
-        "error": {
-            "create": {
-                "pl": "Nowy szablon celu nie mógł zostać dodany. Wystąpił błąd."
-            },
-            "delete": {
-                "pl": "Szablon celu niestety nie został usunięty. Wystąpił błąd."
-            },
-            "edit": {
-                "pl": "Szablon celu nie został zmodyfikowany. Wystąpił błąd."
-            }
-        },
-        "success": {
-            "create": {
-                "pl": "Nowy szablon celu został pomyślnie dodany."
-            },
-            "delete": {
-                "pl": "Szablon celu został pomyślnie usunięty."
-            },
-            "edit": {
-                "pl": "Szablon celu został pomyślnie zmodyfikowany."
-            }
-        }
+    "success": {
+      "create": {
+        "pl": "Nowy szablon celu został pomyślnie dodany.",
+        "en": "The new objective template was added successfully.",
+        "it": "Il new obiettivo template was aggiunto con successo."
+      },
+      "delete": {
+        "pl": "Szablon celu został pomyślnie usunięty.",
+        "en": "The objective template was deleted successfully.",
+        "it": "Il modello obiettivo è stato eliminato con successo."
+      },
+      "edit": {
+        "pl": "Szablon celu został pomyślnie zmodyfikowany.",
+        "en": "The objective template was modified successfully.",
+        "it": "Il modello obiettivo è stato modificato con successo."
+      }
+    }
+  },
+  "objectives": {
+    "error": {
+      "overdued": {
+        "pl": "Termin realizacji tego celu minął :term",
+        "en": "The deadline for this objective has passed :term",
+        "it": "Il deadline for this obiettivo has passed :term"
+      },
+      "realization_updated": {
+        "pl": "Dane o realizacji celu nie mogły zostać zaktualizowane. Wystąpił nieoczekiwany błąd.",
+        "en": "Objective progress data could not be updated. An unexpected error occurred.",
+        "it": "I dati di avanzamento dell’obiettivo non sono stati aggiornati. Si è verificato un errore imprevisto."
+      },
+      "users_added": {
+        "pl": "Dane nie zostały zaktualizowane. Odśwież stronę i spróbuj ponownie.",
+        "en": "Data was not updated. Refresh the page and try again.",
+        "it": "I dati non sono stati aggiornati. Aggiorna la pagina e riprova."
+      }
     },
-    "objectives": {
-        "error": {
-            "overdued": {
-                "pl": "Termin realizacji tego celu minął :term"
-            },
-            "realization_updated": {
-                "pl": "Dane o realizacji celu nie mogły zostać zaktualizowane. Wystąpił nieoczekiwany błąd."
-            },
-            "users_added": {
-                "pl": "Dane nie zostały zaktualizowane. Odśwież stronę i spróbuj ponownie."
-            }
-        },
-        "info": {
-            "delete": {
-                "pl": "Usunięcie celu będzie nieodwracalne."
-            }
-        },
-        "success": {
-            "realization_updated": {
-                "pl": "Dane o realizacji celu zostały zaktualizowane."
-            },
-            "users_added": {
-                "pl": "Uzupełniono przypisanie użytkowników do celu."
-            }
-        }
+    "info": {
+      "delete": {
+        "pl": "Usunięcie celu będzie nieodwracalne.",
+        "en": "Deleting the objective is irreversible.",
+        "it": "Deleting il obiettivo is irreversible."
+      }
     },
-    "settings": {
-        "error": {
-            "cache_clear": {
-                "pl": "Podczas czyszczenia pamięci podręcznej aplikacji serwer napotkał problemy. Sprawdź uprawnienia serwera."
-            },
-            "general": {
-                "pl": "Ustawienia platformy nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd."
-            },
-            "mail_update": {
-                "pl": "Dane serwera SMTP nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd."
-            },
-            "update": {
-                "pl": "Ustawienia modułu nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd."
-            }
-        },
-        "success": {
-            "cache_clear": {
-                "pl": "Pamięć podręczna aplikacji została pomyślnie wyczyszczona!"
-            },
-            "general": {
-                "pl": "Ustawienia platformy zostały zaktualizowane."
-            },
-            "mail_update": {
-                "pl": "Dane serwera SMTP zostały zaktualizowane. Cache został automatycznie wyczyszczony."
-            },
-            "update": {
-                "pl": "Ustawienia modułu zostały zaktualizowane."
-            }
-        }
+    "success": {
+      "realization_updated": {
+        "pl": "Dane o realizacji celu zostały zaktualizowane.",
+        "en": "Objective progress data has been updated.",
+        "it": "Obiettivo progress data has been aggiornato."
+      },
+      "users_added": {
+        "pl": "Uzupełniono przypisanie użytkowników do celu.",
+        "en": "User assignments to the objective have been updated.",
+        "it": "Utente assignments to il obiettivo have been aggiornato."
+      }
+    }
+  },
+  "settings": {
+    "error": {
+      "cache_clear": {
+        "pl": "Podczas czyszczenia pamięci podręcznej aplikacji serwer napotkał problemy. Sprawdź uprawnienia serwera.",
+        "en": "The server encountered problems while clearing the application cache. Check server permissions.",
+        "it": "Il server encountered problems while clearing il application cache. Check server permessi."
+      },
+      "general": {
+        "pl": "Ustawienia platformy nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd.",
+        "en": "Platform settings could not be updated. A critical error occurred.",
+        "it": "Platmodulo impostazioni non è stato possibile be aggiornato. A critical errore occurred."
+      },
+      "mail_update": {
+        "pl": "Dane serwera SMTP nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd.",
+        "en": "SMTP server data could not be updated. A critical error occurred.",
+        "it": "SMTP server data non è stato possibile be aggiornato. A critical errore occurred."
+      },
+      "update": {
+        "pl": "Ustawienia modułu nie mogły zostać zaktualizowane. Wystąpił krytyczny błąd.",
+        "en": "Module settings could not be updated. A critical error occurred.",
+        "it": "Module impostazioni non è stato possibile be aggiornato. A critical errore occurred."
+      }
     },
-    "system": {
-        "unauthorized_module": {
-            "pl": "Moduł, który próbujesz otworzyć został zablokowany przez administratora systemu."
-        }
+    "success": {
+      "cache_clear": {
+        "pl": "Pamięć podręczna aplikacji została pomyślnie wyczyszczona!",
+        "en": "The application cache was cleared successfully!",
+        "it": "Il application cache was cleared con successo!"
+      },
+      "general": {
+        "pl": "Ustawienia platformy zostały zaktualizowane.",
+        "en": "Platform settings have been updated.",
+        "it": "Le impostazioni della piattaforma sono state aggiornate."
+      },
+      "mail_update": {
+        "pl": "Dane serwera SMTP zostały zaktualizowane. Cache został automatycznie wyczyszczony.",
+        "en": "SMTP server data has been updated. Cache was cleared automatically.",
+        "it": "SMTP server data has been aggiornato. Cache was cleared automatically."
+      },
+      "update": {
+        "pl": "Ustawienia modułu zostały zaktualizowane.",
+        "en": "Module settings have been updated.",
+        "it": "Module impostazioni have been aggiornato."
+      }
+    }
+  },
+  "system": {
+    "unauthorized_module": {
+      "pl": "Moduł, który próbujesz otworzyć został zablokowany przez administratora systemu.",
+      "en": "The module you are trying to open has been blocked by the system administrator.",
+      "it": "Il modulo you are trying to open has been blocked by il system administrator."
+    }
+  },
+  "user_objectives": {
+    "error": {
+      "set_failed": {
+        "pl": "Nie można oznaczyć celu jako niezaliczony.",
+        "en": "The objective cannot be marked as failed.",
+        "it": "Il obiettivo non può be marked as fallito."
+      },
+      "set_passed": {
+        "pl": "Nie można oznaczyć celu jako zaliczony.",
+        "en": "The objective cannot be marked as passed.",
+        "it": "Il obiettivo non può be marked as passed."
+      }
     },
-    "user_objectives": {
-        "error": {
-            "set_failed": {
-                "pl": "Nie można oznaczyć celu jako niezaliczony."
-            },
-            "set_passed": {
-                "pl": "Nie można oznaczyć celu jako zaliczony."
-            }
-        },
-        "success": {
-            "set_failed": {
-                "pl": "Cel został oznaczony jako niezaliczony."
-            },
-            "set_passed": {
-                "pl": "Cel został oznaczony jako zaliczony."
-            }
-        }
+    "success": {
+      "set_failed": {
+        "pl": "Cel został oznaczony jako niezaliczony.",
+        "en": "The objective has been marked as failed.",
+        "it": "Il obiettivo has been marked as fallito."
+      },
+      "set_passed": {
+        "pl": "Cel został oznaczony jako zaliczony.",
+        "en": "The objective has been marked as passed.",
+        "it": "Il obiettivo has been marked as passed."
+      }
+    }
+  },
+  "users": {
+    "error": {
+      "create": {
+        "pl": "Wystąpił błąd, użytkownik nie mógł być dodany.",
+        "en": "An error occurred, the user could not be added.",
+        "it": "An errore occurred, il utente non è stato possibile be aggiunto."
+      },
+      "delete": {
+        "pl": "Użytkownik :name nie mógł zostać usunięty z systemu. Podczas operacji wystąpił nieoczekiwany błąd.",
+        "en": "User :name could not be removed from the system. An unexpected error occurred during the operation.",
+        "it": "Utente :name non è stato possibile be rimosso from il system. An unexpected errore occurred during il operation."
+      },
+      "edit": {
+        "pl": "Użytkownik nie mógł zostać zmodyfikowany. Podczas operacji wystąpił nieoczekiwany błąd.",
+        "en": "The user could not be modified. An unexpected error occurred during the operation.",
+        "it": "Il utente non è stato possibile be modificato. An unexpected errore occurred during il operation."
+      }
     },
-    "users": {
-        "error": {
-            "create": {
-                "pl": "Wystąpił błąd, użytkownik nie mógł być dodany."
-            },
-            "delete": {
-                "pl": "Użytkownik :name nie mógł zostać usunięty z systemu. Podczas operacji wystąpił nieoczekiwany błąd."
-            },
-            "edit": {
-                "pl": "Użytkownik nie mógł zostać zmodyfikowany. Podczas operacji wystąpił nieoczekiwany błąd."
-            }
-        },
-        "info": {
-            "block": {
-                "pl": "Wskutek tej akcji użytkownik utraci dostęp do systemu, a jego przełożeni mogą mieć odebrane niektóre prawa."
-            },
-            "delete": {
-                "pl": "Usunięcie użytkownika będzie nieodwracalne."
-            }
-        },
-        "success": {
-            "blocked": {
-                "pl": "Użytkownik :name został zablokowany. Nie posiada już dostępu do systemu."
-            },
-            "create": {
-                "pl": "Nowy użytkownik został pomyślnie dodany do systemu."
-            },
-            "delete": {
-                "pl": "Użytkownik :name został usunięty z systemu."
-            },
-            "edit": {
-                "pl": "Użytkownik :name został pomyślnie zmodyfikowany."
-            },
-            "unblocked": {
-                "pl": "Użytkownik :name został odblokowany. Może spowrotem logować się do systemu."
-            }
-        },
-        "warning": {
-            "user_is_root": {
-                "pl": "Uwaga, ten użytkownik posiada uprawnienia Roota."
-            }
-        }
+    "info": {
+      "block": {
+        "pl": "Wskutek tej akcji użytkownik utraci dostęp do systemu, a jego przełożeni mogą mieć odebrane niektóre prawa.",
+        "en": "As a result of this action, the user will lose access to the system, and their supervisors may lose some privileges.",
+        "it": "As a result of this action, il utente will lose access to il system, and their supervisors may lose some privileges."
+      },
+      "delete": {
+        "pl": "Usunięcie użytkownika będzie nieodwracalne.",
+        "en": "Deleting the user is irreversible.",
+        "it": "Deleting il utente is irreversible."
+      }
+    },
+    "success": {
+      "blocked": {
+        "pl": "Użytkownik :name został zablokowany. Nie posiada już dostępu do systemu.",
+        "en": "User :name has been blocked. They no longer have access to the system.",
+        "it": "Utente :name has been blocked. They no longer have access to il system."
+      },
+      "create": {
+        "pl": "Nowy użytkownik został pomyślnie dodany do systemu.",
+        "en": "A new user has been added to the system successfully.",
+        "it": "A new utente has been aggiunto to il system con successo."
+      },
+      "delete": {
+        "pl": "Użytkownik :name został usunięty z systemu.",
+        "en": "User :name has been removed from the system.",
+        "it": "L’utente :name è stato rimosso dal sistema."
+      },
+      "edit": {
+        "pl": "Użytkownik :name został pomyślnie zmodyfikowany.",
+        "en": "User :name has been modified successfully.",
+        "it": "Utente :name has been modificato con successo."
+      },
+      "unblocked": {
+        "pl": "Użytkownik :name został odblokowany. Może spowrotem logować się do systemu.",
+        "en": "User :name has been unblocked. They can log in to the system again.",
+        "it": "Utente :name has been unblocked. They can log in to il system again."
+      }
     },
     "warning": {
-        "operation": {
-            "pl": "Uwaga!"
-        }
+      "user_is_root": {
+        "pl": "Uwaga, ten użytkownik posiada uprawnienia Roota.",
+        "en": "Warning, this user has Root privileges.",
+        "it": "Warning, this utente has Root privileges."
+      }
     }
+  },
+  "warning": {
+    "operation": {
+      "pl": "Uwaga!",
+      "en": "Warning!",
+      "it": "Attenzione!"
+    }
+  },
+  "teams": {
+    "info": {
+      "delete": {
+        "pl": "Usunięcie zespołu będzie nieodwracalne.",
+        "en": "Deleting the team is irreversible.",
+        "it": "Deleting the team is irreversible."
+      }
+    }
+  }
 }

@@ -12,4 +12,9 @@ class Controller extends BaseController
     use AuthorizesRequests;
     use DispatchesJobs;
     use ValidatesRequests;
+
+    protected function setPagetitle(string $title): void
+    {
+        app('page')->setPagetitle($title);
+    }
 }

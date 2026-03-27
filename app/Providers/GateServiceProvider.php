@@ -3,12 +3,12 @@
 namespace App\Providers;
 
 use App\Models\Core\User;
-use App\Models\MBO\Campaign;
-use App\Models\MBO\Objective;
-use App\Models\MBO\UserObjective;
-use App\Policies\MBO\CampaignPolicy;
-use App\Policies\MBO\ObjectivePolicy;
-use App\Policies\MBO\UserObjectivePolicy;
+use App\Models\Mbo\Campaign;
+use App\Models\Mbo\Objective;
+use App\Models\Mbo\UserObjective;
+use App\Policies\Mbo\CampaignPolicy;
+use App\Policies\Mbo\ObjectivePolicy;
+use App\Policies\Mbo\UserObjectivePolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;

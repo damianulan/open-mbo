@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Campaigns;
 
-use App\Forms\MBO\Campaign\CampaignEditUserForm;
+use App\Forms\Mbo\Campaign\CampaignEditUserForm;
 use App\Http\Controllers\AppController;
-use App\Models\MBO\Campaign;
-use App\Models\MBO\UserCampaign;
+use App\Models\Mbo\Campaign;
+use App\Models\Mbo\UserCampaign;
 use App\Services\Campaigns\BulkAssignUsers;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Throwable;
 
@@ -19,27 +21,34 @@ class CampaignUserController extends AppController
             unauthorized();
         }
 
+        $userCampaign->loadMissing([
+            'campaign.coordinators.profile',
+            'user.profile',
+            'user_objectives.objective',
+        ]);
+
         $this->logShow($userCampaign);
-        $header = $userCampaign->campaign->name . ' [' . $userCampaign->campaign->period . ']';
+        $header = "{$userCampaign->campaign->name} [{$userCampaign->campaign->period}]";
+        $this->setPagetitle($header);
 
         return view('pages.mbo.campaigns.user', [
             'campaign' => $userCampaign->campaign,
             'userCampaign' => $userCampaign,
             'user' => $userCampaign->user,
             'chartCompletion' => $userCampaign->chart('user_campaign_completion'),
-            'pagetitle' => $header,
         ]);
     }
 
-    public function update(Request $request, $id, CampaignEditUserForm $form)
+    public function update(Request $request, Campaign $campaign, CampaignEditUserForm $form): JsonResponse
     {
+        $response = ['status' => 'error'];
+
         try {
-            $campaign = Campaign::findOrFail($id);
-
             $response = $form->validateJson();
-            if ('ok' === $response['status']) {
 
+            if ('ok' === $response['status']) {
                 $service = BulkAssignUsers::boot(request: $request, campaign: $campaign)->execute();
+
                 if ($service->passed()) {
                     $response['message'] = __('alerts.campaigns.success.users_added');
                 }
@@ -48,54 +57,58 @@ class CampaignUserController extends AppController
             $this->e = $th;
         }
 
-        return $response;
+        return response()->json($response);
     }
 
-    public function toggleManual(Request $request, $id)
+    public function toggleManual(int|string $id): RedirectResponse
     {
-        $uc = UserCampaign::findOrFail($id);
-        $uc->toggleManual();
+        $userCampaign = UserCampaign::findOrFail($id);
+        $userCampaign->toggleManual();
         $message = __('mbo.info.manual_off');
-        if ($uc->manual) {
+
+        if ($userCampaign->manual) {
             $message = __('mbo.info.manual_on');
         }
 
         return redirect()->back()->with('success', $message);
     }
 
-    public function moveStageUp(Request $request, $id)
+    public function moveStageUp(int|string $id): RedirectResponse
     {
-        $uc = UserCampaign::findOrFail($id);
-        $uc->nextStage();
-        $message = __('mbo.info.campaign_stage_changed', ['stage' => $uc->stageDescription()]);
+        $userCampaign = UserCampaign::findOrFail($id);
+        $userCampaign->nextStage();
+        $message = __('mbo.info.campaign_stage_changed', ['stage' => $userCampaign->stageDescription()]);
 
         return redirect()->back()->with('success', $message);
     }
 
-    public function moveStageDown(Request $request, $id)
+    public function moveStageDown(int|string $id): RedirectResponse
     {
-        $uc = UserCampaign::findOrFail($id);
-        $uc->previousStage();
-        $message = __('mbo.info.campaign_stage_changed', ['stage' => $uc->stageDescription()]);
+        $userCampaign = UserCampaign::findOrFail($id);
+        $userCampaign->previousStage();
+        $message = __('mbo.info.campaign_stage_changed', ['stage' => $userCampaign->stageDescription()]);
 
         return redirect()->back()->with('success', $message);
     }
 
-    public function delete(Request $request, $id)
+    public function delete(int|string $id): JsonResponse
     {
-        $uc = UserCampaign::findOrFail($id);
-        if ($uc->delete()) {
+        $userCampaign = UserCampaign::findOrFail($id);
+
+        if ($userCampaign->delete()) {
             return ajax()->ok(__('alerts.campaigns.success.users_deleted'));
         }
 
         return ajax()->error(__('alerts.campaigns.error.users_deleted'));
     }
 
-    public function addUsers(Request $request, $id): View
+    public function addUsers(Request $request, int|string|null $id): View
     {
         $params = [];
+
         if ($id) {
             $campaign = Campaign::find($id);
+
             if ($campaign) {
                 $params = [
                     'id' => $id,

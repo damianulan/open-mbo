@@ -1,122 +1,194 @@
 {
     "columns": {
         "causer": {
-            "pl": "Inicjator"
+            "pl": "Inicjator",
+            "en": "Initiator",
+            "it": "Autore"
         },
         "created_at": {
-            "pl": "Kiedy"
+            "pl": "Kiedy",
+            "en": "When",
+            "it": "Quando"
         },
         "description": {
-            "pl": "Opis"
+            "pl": "Opis",
+            "en": "Description",
+            "it": "Descrizione"
         },
         "event": {
-            "pl": "Zdarzenie"
+            "pl": "Zdarzenie",
+            "en": "Event",
+            "it": "Evento"
         },
         "subject": {
-            "pl": "Odnosi się do"
+            "pl": "Odnosi się do",
+            "en": "Refers to",
+            "it": "Riferito a"
         },
         "subject_type": {
-            "pl": "Odnosi się do typu"
+            "pl": "Odnosi się do typu",
+            "en": "Refers to type",
+            "it": "Tipo di riferimento"
         }
     },
     "description": {
         "auth_attempt_fail": {
-            "pl": "Zarejestrowano próbę logowania użytkownika zakończoną niepowodzeniem."
+            "pl": "Zarejestrowano próbę logowania użytkownika zakończoną niepowodzeniem.",
+            "en": "A failed user login attempt was recorded.",
+            "it": "A fallito utente login attempt was recorded."
         },
         "auth_attempt_success": {
-            "pl": "Zarejestrowano pomyślną próbę logowania użytkownika."
+            "pl": "Zarejestrowano pomyślną próbę logowania użytkownika.",
+            "en": "A successful user login attempt was recorded.",
+            "it": "A riuscito utente login attempt was recorded."
         },
         "auth_logout": {
-            "pl": "Użytkownik wylogował się z systemu."
+            "pl": "Użytkownik wylogował się z systemu.",
+            "en": "The user logged out of the system.",
+            "it": "Il utente logged out of il system."
         },
         "created": {
-            "pl": "Użytkownik :username utworzył nową instancję obiektu: :model_map."
+            "pl": "Użytkownik :username utworzył nową instancję obiektu: :model_map.",
+            "en": "User :username created a new object instance: :model_map.",
+            "it": "Utente :username creato a new object instance: :model_map."
         },
         "deleted": {
-            "pl": "Użytkownik :username usunął instancję obiektu: :model_map."
+            "pl": "Użytkownik :username usunął instancję obiektu: :model_map.",
+            "en": "User :username deleted an object instance: :model_map.",
+            "it": "Utente :username eliminato an object instance: :model_map."
         },
         "notification_sent": {
-            "pl": "Użytkownik :username otrzymał powiadomienie: :type"
+            "pl": "Użytkownik :username otrzymał powiadomienie: :type",
+            "en": "User :username received notification: :type",
+            "it": "Utente :username received notification: :type"
         },
         "updated": {
-            "pl": "Użytkownik :username zmodyfikował instancję obiektu: :model_map."
+            "pl": "Użytkownik :username zmodyfikował instancję obiektu: :model_map.",
+            "en": "User :username modified an object instance: :model_map.",
+            "it": "Utente :username modificato an object instance: :model_map."
         },
         "view": {
-            "pl": "Użytkownik :username wyświetlił obiekt: :model_map"
+            "pl": "Użytkownik :username wyświetlił obiekt: :model_map",
+            "en": "User :username viewed object: :model_map",
+            "it": "Utente :username viewed object: :model_map"
         }
     },
     "events": {
         "auth_attempt_fail": {
-            "pl": "Niepowodzenie logowania"
+            "pl": "Niepowodzenie logowania",
+            "en": "Login failure",
+            "it": "Accesso fallito"
         },
         "auth_attempt_success": {
-            "pl": "Pomyślnie logowanie"
+            "pl": "Pomyślnie logowanie",
+            "en": "Successful login",
+            "it": "Successful login"
         },
         "created": {
-            "pl": "Utworzenie obiektu"
+            "pl": "Utworzenie obiektu",
+            "en": "Object created",
+            "it": "Object creato"
         },
         "deleted": {
-            "pl": "Usunięcie obiektu"
+            "pl": "Usunięcie obiektu",
+            "en": "Object deleted",
+            "it": "Object eliminato"
         },
         "logged_out": {
-            "pl": "Wylogowanie"
+            "pl": "Wylogowanie",
+            "en": "Logout",
+            "it": "Uscita"
         },
         "updated": {
-            "pl": "Aktualizacja danych"
+            "pl": "Aktualizacja danych",
+            "en": "Data update",
+            "it": "Data update"
         },
         "viewed": {
-            "pl": "Wyświetlono"
+            "pl": "Wyświetlono",
+            "en": "Showing",
+            "it": "Visualizzazione"
         }
     },
     "log_name": {
         "auth": {
-            "pl": "Identyfikacja użytkownika"
+            "pl": "Identyfikacja użytkownika",
+            "en": "User authentication",
+            "it": "Utente authentication"
         },
         "model": {
-            "pl": "Zmiana danych"
+            "pl": "Zmiana danych",
+            "en": "Data change",
+            "it": "Data change"
         },
         "system": {
-            "pl": "System"
+            "pl": "System",
+            "en": "System logs",
+            "it": "System logs"
         }
     },
     "model_mapping": {
         "App\\Models\\MBO\\Campaign": {
-            "pl": "Kampania pomiarowa"
+            "pl": "Kampania pomiarowa",
+            "en": "Measurement campaign",
+            "it": "Measurement campaign"
         },
         "App\\Models\\MBO\\Objective": {
-            "pl": "Cel"
+            "pl": "Cel",
+            "en": "Objective",
+            "it": "Obiettivo"
         },
         "App\\Models\\MBO\\ObjectiveTemplate": {
-            "pl": "Szablon celu"
+            "pl": "Szablon celu",
+            "en": "Objective template",
+            "it": "Obiettivo template"
         },
         "App\\Models\\MBO\\ObjectiveTemplateCategory": {
-            "pl": "Kategoria MBO"
+            "pl": "Kategoria MBO",
+            "en": "MBO category",
+            "it": "MBO category"
         },
         "App\\Models\\MBO\\UserCampaign": {
-            "pl": "Modyfikacja przypisania użytkownika do kampanii"
+            "pl": "Modyfikacja przypisania użytkownika do kampanii",
+            "en": "Modification of user assignment to campaign",
+            "it": "Modification of utente assignment to campaign"
         },
         "App\\Models\\MBO\\UserObjective": {
-            "pl": "Modyfikacja przypisania użytkownika do celu"
+            "pl": "Modyfikacja przypisania użytkownika do celu",
+            "en": "Modification of user assignment to objective",
+            "it": "Modification of utente assignment to objective"
         }
     },
     "route_mapping": {
         "App\\Models\\MBO\\Campaign": {
-            "pl": "campaigns.show"
+            "pl": "campaigns.show",
+            "en": "campaigns.show route",
+            "it": "campaigns.show route"
         },
         "App\\Models\\MBO\\Objective": {
-            "pl": "objectives.show"
+            "pl": "objectives.show",
+            "en": "objectives.show route",
+            "it": "objectives.show route"
         },
         "App\\Models\\MBO\\ObjectiveTemplate": {
-            "pl": "templates.edit"
+            "pl": "templates.edit",
+            "en": "templates.edit route",
+            "it": "templates.edit route"
         },
         "App\\Models\\MBO\\ObjectiveTemplateCategory": {
-            "pl": "management.mbo.categories.edit"
+            "pl": "management.mbo.categories.edit",
+            "en": "management.mbo.categories.edit route",
+            "it": "management.mbo.categories.edit route"
         },
         "App\\Models\\MBO\\UserCampaign": {
-            "pl": "campaigns.users.update"
+            "pl": "campaigns.users.update",
+            "en": "campaigns.users.update route",
+            "it": "campaigns.users.update route"
         },
         "App\\Models\\MBO\\UserObjective": {
-            "pl": "campaigns.users.update"
+            "pl": "campaigns.users.update",
+            "en": "campaigns.users.update route (objective)",
+            "it": "campaigns.users.update route (objective)"
         }
     }
 }

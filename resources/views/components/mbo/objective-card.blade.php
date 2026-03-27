@@ -8,8 +8,8 @@
             <div class="card-badges">
                 <div></div>
                 @if($objective->draft)
-                    <div data-tippy-content="Kopia robocza">
-                        <span class="badge bg-warning">{{ __('Draft') }}</span>
+                    <div data-tippy-content="{{ __('globals.draft') }}">
+                        <span class="badge bg-warning">{{ __('globals.draft') }}</span>
                     </div>
                 @endif
                 @if($objective->category)

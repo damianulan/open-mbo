@@ -6,7 +6,7 @@
         </div>
     </div>
     <ul class="nav nav-pills flex-column mb-auto">
-        @foreach($sidebar->items as $sidebarItem)
+        @foreach($sidebar->getItems() as $sidebarItem)
             {!! $sidebarItem->render() !!}
         @endforeach
     </ul>
@@ -15,9 +15,9 @@
             <div class="menu-release">
                 <a href="{{ url('https://damianulan.me') }}">damianulan © {{ date('Y') }}</a>
             </div>
-            <div class="menu-release">
-                v. {{ config('app.release') }}
-            </div>
         @endif
+        <div class="menu-release">
+            v. {{ config('app.release') }}
+        </div>
     </div>
   </nav>

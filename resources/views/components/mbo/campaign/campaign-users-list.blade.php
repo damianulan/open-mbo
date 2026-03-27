@@ -16,13 +16,13 @@
                             <div class="list-action" data-tippy-content="{{ $uc->stageDescription() }}">
                                 <i class="{{ $uc->stageIcon() }}"></i>
                             </div>
-                            <a href="" class="list-action" data-modelid="{{ $uc->id }}" data-tippy-content="{{ __('buttons.summary') }}">
+                            <a href="{{ route('campaigns.users.show', $uc) }}" class="list-action user-campaign" data-modelid="{{ $uc->id }}" data-tippy-content="{{ __('buttons.summary') }}">
                                 <i class="bi-eye-fill"></i>
                             </a>
                             @can('manual', $uc->campaign)
                                 @settings('mbo.campaigns_manual')
                                     @if($uc->isManual())
-                                        @if(in_array($uc->stage, array_keys(\App\Enums\MBO\CampaignStage::sequences())))
+                                        @if(in_array($uc->stage->value, array_keys(\App\Enums\Mbo\CampaignStage::sequences()), true))
                                             <a href="{{ route('campaigns.users.prev_stage', $uc->id) }}" class="list-action" data-ucid="{{ $uc->id }}" data-tippy-content="Przesuń do poprzedniego etapu">
                                                 <i class="bi-caret-left-fill"></i>
                                             </a>

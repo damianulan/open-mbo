@@ -38,7 +38,6 @@ class AppUpgrade extends Command
         $runComposer = $this->option('nocomposer') ? false : true;
         $this->line('Checking for updates...');
         try {
-            Log::debug('Upgrade check initialized');
             $newVersionStyle = new OutputFormatterStyle('white', 'yellow', ['bold']);
             $this->output->getFormatter()->setStyle('newversionblock', $newVersionStyle);
             $newVersionStyle = new OutputFormatterStyle('white', 'blue', ['bold']);
@@ -52,6 +51,7 @@ class AppUpgrade extends Command
 
             $this->line("Version preference detected: <versionblock>{$target_release}</versionblock>");
             $result = Process::run('git fetch --all');
+            $result = Process::run('git fetch --tags');
 
             $result = Process::run('git describe --tags --abbrev=0');
             $latestRelease = $result->output();
@@ -59,11 +59,12 @@ class AppUpgrade extends Command
                 $this->warn('Unable to get latest release tag.' . ' [' . $result->errorOutput() . '] ');
                 $latestRelease = 'main';
             }
+
             $result = Process::run('git tag -l | xargs git tag -d');
 
             $git_branch = match ($target_release) {
-                'stable' => 'main',
-                'non-stable' => $latestRelease,
+                'stable' => $latestRelease,
+                'non-stable' => 'staging',
                 'dev' => 'dev',
                 default => $target_release,
             };
@@ -71,8 +72,11 @@ class AppUpgrade extends Command
             $this->comment("Checking to {$git_branch} branch/tag");
             if ( ! $local) {
                 $result = Process::run('git reset --hard');
+                $result = Process::run("git switch --detach {$git_branch}");
+            } else {
+                $result = Process::run("git checkout {$git_branch}");
             }
-            $result = Process::run("git checkout {$git_branch}");
+
             $output = $result->output();
             if ( ! $result->successful()) {
                 throw new Exception("Unable to switch to branch/tag: {$git_branch} " . $result->errorOutput());
@@ -100,7 +104,7 @@ class AppUpgrade extends Command
                 if ($settings->save()) {
                     $this->line("New {$name} version detected: <newversionblock>^{$target_release}</newversionblock>");
                     AppUpgraded::dispatch($target_release);
-                    Log::debug('App upgraded to ' . $target_release);
+                    $this->comment('App upgraded to ' . $target_release);
                 }
             } else {
                 $this->line("Current {$name} version: <versionblock>{$target_release}</versionblock>");

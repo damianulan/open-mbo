@@ -1,7 +1,7 @@
-@if($menubar->isNotEmpty())
+@if($menubar->hasItems())
 <nav id="{{ $menubar->id }}" class="page-menu {{ implode(' ', $menubar->classes) }}">
     <ul class="nav nav-pills-horizontal">
-        @foreach($menubar->items as $menuItem)
+        @foreach($menubar->getItems() as $menuItem)
             {!! $menuItem->render() !!}
         @endforeach
     </ul>

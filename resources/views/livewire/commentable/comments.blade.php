@@ -1,15 +1,15 @@
 <div>
     <div class="commentable" wire:poll.10000ms>
-        @if($this->subject->comments)
-            @foreach($this->subject->comments as $comment)
-                <div class="comment{{ $comment->isMine() ? ' my-comment' : '' }}" wire:key="{{ str()->random(50) }}">
+        @if($this->comments->isNotEmpty())
+            @foreach($this->comments as $comment)
+                <div class="comment{{ $comment->isMine() ? ' my-comment' : '' }}" wire:key="comment-{{ $comment->id }}">
                     <div class="comment-group" wire:transition.opacity.duration.1000ms >
                         <a href="{{ $comment->author->routeShow() }}" target="_blank" class="commentable-avatar" data-tippy-content="{{ $comment->author->name }}">{!! $comment->author->getAvatarView('sm') !!}</a>
                         <div class="commentable-item">
                             <div class="commentable-header">
                                 <a class="commentable-author" href="{{ $comment->author->routeShow() }}" target="_blank">{{ $comment->author->name }}</a>
                                 @if($comment->isMine())
-                                    <a class="icon-btn ms-auto" wire:confirm="Na pewno?" wire:click="delete({{ $comment->id }})" data-tippy-content="{{ __('buttons.delete') }}"><i class="bi-trash3-fill"></i></a>
+                                    <a class="icon-btn ms-auto" wire:confirm="{{ __('globals.are_you_sure') }}" wire:click="delete({{ $comment->id }})" data-tippy-content="{{ __('buttons.delete') }}"><i class="bi-trash3-fill"></i></a>
                                 @endif
                                 @if(!$comment->private)
                                     <a class="icon-btn ms-1 commentable-quote" href="javascript:void(0);" data-tippy-content="{{ __('buttons.quote') }}"><i class="bi-quote"></i></a>

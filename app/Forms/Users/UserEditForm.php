@@ -35,7 +35,7 @@ class UserEditForm extends Form
             ->add(FormComponent::text('firstname', $this->model)->label(__('forms.users.firstname')))
             ->add(FormComponent::text('lastname', $this->model)->label(__('forms.users.lastname')))
             ->add(FormComponent::text('email', $this->model)->label(__('forms.users.email')))
-            ->add(FormComponent::select('gender', $profile, Dictionary::fromEnum(Gender::class))
+            ->add(FormComponent::select('gender', $profile, Dictionary::fromAssocArray(Gender::labels()))
                 ->label(__('forms.users.gender')))
             ->add(FormComponent::birthdate('birthday', $profile)->label(__('forms.users.birthday')))
             ->add(FormComponent::multiselect('roles_ids', $this->model?->roles, Dictionary::fromAssocArray(Role::getSelectList()))

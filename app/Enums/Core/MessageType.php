@@ -2,15 +2,17 @@
 
 namespace App\Enums\Core;
 
-use Enumerable\Laravel\Enum;
+use App\Support\Concerns\EnumHasValues;
 
-class MessageType extends Enum
+enum MessageType: string
 {
-    public const SUCCESS = 'success';
+    use EnumHasValues;
 
-    public const ERROR = 'error';
+    case SUCCESS = 'success';
 
-    public const WARNING = 'warning';
+    case ERROR = 'error';
 
-    public const INFO = 'info';
+    case WARNING = 'warning';
+
+    case INFO = 'info';
 }

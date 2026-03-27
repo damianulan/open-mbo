@@ -30,7 +30,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
 
     protected function entryLocal(IncomingEntry $entry): bool
     {
-        return ! ($entry->isEvent() && ! $this->filterEvents($entry));
+        return ( ! ($entry->isEvent() && ! $this->filterEvents($entry))) || (EntryType::JOB === $entry->type && $entry->isFailedJob());
     }
 
     protected function entryDevelopment(IncomingEntry $entry): bool
@@ -48,7 +48,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
             $entry->isEvent() ||
             $entry->hasMonitoredTag() ||
             $entry->isGate() ||
-            EntryType::JOB === $entry->type;
+            $entry->isFailedJob();
     }
 
     protected function entryProduction(IncomingEntry $entry): bool

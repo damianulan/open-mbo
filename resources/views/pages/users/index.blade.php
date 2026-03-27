@@ -6,7 +6,7 @@
         <a class="icon-btn" href="{{ route('users.create') }}" data-tippy-content="{{ __('buttons.add') }}">
             <i class="bi-plus-circle-fill"></i>
         </a>
-        <a class="icon-btn" href="#" data-tippy-content="Zespoły">
+        <a class="icon-btn" href="{{ route('settings.organization.team.index') }}" data-tippy-content="{{ __('menus.settings.organization.team.index') }}">
             <i class="bi-people-fill"></i>
         </a>
     </div>
@@ -16,6 +16,7 @@
         <div class="col-md-12">
             <div class="table-container row">
                 {{ $table->actions() }}
+                {{ $table->renderFilters() }}
                 {{ $dataTable->table() }}
             </div>
         </div>

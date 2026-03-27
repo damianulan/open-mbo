@@ -3,11 +3,10 @@
 namespace App\Events\Core\User;
 
 use App\Models\Business\UserEmployment;
-use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class EmploymentUpdated implements ShouldDispatchAfterCommit
+class EmploymentUpdated
 {
     use Dispatchable;
     use SerializesModels;

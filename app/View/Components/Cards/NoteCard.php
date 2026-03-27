@@ -15,7 +15,7 @@ class NoteCard extends Component
     public function __construct(public Model $subject, public ?string $title = null, public bool $minimized = false)
     {
         if (is_null($this->title)) {
-            $this->title = __('Notatki');
+            $this->title = __('globals.notes');
         }
     }
 

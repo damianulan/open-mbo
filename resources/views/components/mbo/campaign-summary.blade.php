@@ -1,4 +1,7 @@
 <div>
+    @php
+        $coordinators = $campaign->coordinators;
+    @endphp
     <div class="row">
         <div class="col-md-12">
             {!! $campaign->description !!}
@@ -15,17 +18,14 @@
                     @php
                         $start_prop = $stage . '_from';
                         $end_prop = $stage . '_to';
-                        $current = false;
-                        if(in_array($stage, $currentStages->toArray())){
-                            $current = true;
-                        }
+                        $current = $currentStages->contains($stage);
                     @endphp
                     <tr class="{{ $current ? 'text-success':'text-primary' }} fw-bold p-1" data-tippy-content="{{ $campaign->getStageInfo($stage) }}">
                         <td class="px-1 align-content-center">
                             <i class="{{ $campaign->getStageIcon($stage) }} fs-5"></i>
                         </td>
                         <td class="px-1 align-content-baseline">
-                            {{ $campaign->carbonDate($start_prop) }} - {{ $campaign->carbonDate($end_prop) }}
+                            {{ $campaign->$start_prop?->format('Y-m-d') }} - {{ $campaign->$end_prop?->format('Y-m-d') }}
                         </td>
                         <td class="px-1 align-content-baseline">
                             {{ $campaign->getStageName($stage) }}
@@ -41,9 +41,9 @@
                     <i class="bi-person-fill-gear fs-4 me-2"></i>
                     <div class="fw-bold">{{ __('mbo.campaign_coordinators') }}:</div>
                 </div>
-                @if($campaign->coordinators()->count())
+                @if($coordinators->isNotEmpty())
                     <ul class="list-style-none">
-                        @foreach($campaign->coordinators as $coordinator)
+                        @foreach($coordinators as $coordinator)
                             <li class="user">{!! $coordinator->nameDetails() !!}</li>
                         @endforeach
 

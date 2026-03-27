@@ -1,17 +1,15 @@
 @extends('layouts.portal.master')
 @section('content')
 
-{!! $nav->render() !!}
-
 <div class="content-card">
     <div class="container settings">
         <div class="section">
             <div class="row">
                 <div class="col-md-8 col-sm-12">
-                    <h4 class="section-title">{{ __('Ustawienia aplikacji') }}</h4>
+                    <h4 class="section-title">{{ __('pages.settings.app') }}</h4>
                     <hr/>
                 </div>
-                <div class="col-md-10 settings-contents">
+                <div class="col-md-10">
                     <div class="row">
                         {{ $form->render() }}
                     </div>
@@ -27,7 +25,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-10 branding-contents">
+                <div class="col-md-10">
                     <div class="row">
                         {{ $brandingForm->render() }}
                     </div>

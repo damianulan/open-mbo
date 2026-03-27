@@ -68,15 +68,20 @@ $chosen-sprite-retina: url("chosen-sprite@2x.png") !default;
     .chosen-default {
         color: $gray-600;
     }
-    .chosen-single span {
-        display: block;
-        overflow: hidden;
-        margin-right: 26px;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+    .chosen-single {
+        span {
+            display: block;
+            overflow: hidden;
+            margin-right: 26px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
     }
-    .chosen-single-with-deselect span {
-        margin-right: 38px;
+
+    .chosen-single-with-deselect {
+        span {
+            margin-right: 38px;
+        }
     }
 
     &.chosen-disabled .chosen-single abbr:hover {
@@ -386,8 +391,10 @@ $chosen-sprite-retina: url("chosen-sprite@2x.png") !default;
     padding: 0.1rem 0.65rem;
 }
 
-.dataTables_wrapper input[type="search"] {
-    padding: 0.2rem 0.65rem;
+.dataTables_wrapper {
+    input[type="search"] {
+        padding: 0.2rem 0.65rem;
+    }
 }
 
 /* @end */

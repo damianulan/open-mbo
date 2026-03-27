@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Settings\GeneralSettings;
 use App\Settings\MailSettings;
-use App\Settings\MBOSettings;
+use App\Settings\MboSettings;
 use App\Settings\UserSettings;
+use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -18,7 +20,7 @@ class ConfigServiceProvider extends ServiceProvider
     {
         $this->app->singleton('settings.general', fn () => app(GeneralSettings::class));
         $this->app->singleton('settings.mail', fn () => app(MailSettings::class));
-        $this->app->singleton('settings.mbo', fn () => app(MBOSettings::class));
+        $this->app->singleton('settings.mbo', fn () => app(MboSettings::class));
         $this->app->singleton('settings.users', fn () => app(UserSettings::class));
         $this->app->singleton('settings.notifications', fn () => app(NotificationSettings::class));
     }
@@ -28,6 +30,11 @@ class ConfigServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        try {
+            DB::connection()->getPdo();
+        } catch (Exception $e) {
+            return;
+        }
         if (Schema::hasTable('settings')) {
             // load settings from database and overwrite existing
 
@@ -41,7 +48,6 @@ class ConfigServiceProvider extends ServiceProvider
                 'app.timezone' => $general->timezone ?? env('APP_TIMEZONE', 'UTC'),
                 'app.locale' => $general->locale ?? env('APP_LOCALE', 'en'),
                 'app.maintenance' => $general->maintenance ?? null,
-                'app.build' => $general->build ?? null,
                 'app.release' => $general->release ?? null,
                 'app.date_format' => $general->date_format ?? null,
                 'app.time_format' => $general->time_format ?? null,

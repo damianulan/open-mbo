@@ -1,0 +1,22 @@
+{
+    "agents": [
+        "codex"
+    ],
+    "guidelines": true,
+    "herd_mcp": false,
+    "mcp": true,
+    "nightwatch_mcp": false,
+    "packages": [
+        "spatie/boost-spatie-guidelines"
+    ],
+    "sail": false,
+    "skills": [
+        "scout-development",
+        "livewire-development",
+        "pest-testing",
+        "spatie-laravel-php-standards",
+        "eloquent-best-practices",
+        "laravel-specialist",
+        "php-pro"
+    ]
+}

@@ -2,7 +2,8 @@
 
 namespace App\Support\Search\Resources;
 
-use App\Models\MBO\Campaign;
+use App\Enums\Mbo\CampaignStage;
+use App\Models\Mbo\Campaign;
 use App\Support\Search\Dtos\ResultItem;
 use App\Support\Search\Factories\IndexResource;
 
@@ -24,7 +25,7 @@ class CampaignResource extends IndexResource
             'name' => $this->model->name,
             'description' => $this->model->description,
             'period' => $this->model->period,
-            'stage' => $this->model->stage->label,
+            'stage' => $this->model->getStageName($this->model->stage ?? CampaignStage::PENDING),
         ];
     }
 

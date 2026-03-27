@@ -61,8 +61,10 @@ $('#modal_save').on('click', function() {
 });
 
 $('input[data-numeric="decimal"]').on('focusout', function() {
-    var val = $(this).val();
-    if(val != '' && !val.includes('.') && !val.includes(',')){
+    var rawValue = $(this).val();
+    var val = typeof rawValue === 'string' ? rawValue : '';
+
+    if(val !== '' && !val.includes('.') && !val.includes(',')){
         $(this).val(val + '.00');
     }
 });

@@ -1,11 +1,17 @@
 {
     "App\\Models\\Core\\User": {
-        "pl": "Użytkownik"
+        "pl": "Użytkownik",
+        "en": "User",
+        "it": "Utente"
     },
     "App\\Models\\MBO\\Campaign": {
-        "pl": "Kampania MBO"
+        "pl": "Kampania MBO",
+        "en": "MBO campaign",
+        "it": "Campagna MBO"
     },
     "App\\Models\\MBO\\Objective": {
-        "pl": "Cel"
+        "pl": "Cel",
+        "en": "Objective",
+        "it": "Obiettivo"
     }
 }

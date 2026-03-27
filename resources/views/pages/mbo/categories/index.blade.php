@@ -1,7 +1,6 @@
 @extends('layouts.portal.master')
 @section('content')
 
-{!! $nav->render() !!}
 <div class="icon-btn-nav">
     <div class="panel-left">
         <a class="icon-btn" href="{{ route('categories.create') }}" data-tippy-content="{{ __('buttons.add') }}">

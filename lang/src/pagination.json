@@ -1,20 +1,42 @@
 {
     "next": {
-        "pl": "Następna &raquo;"
+        "pl": "Następna &raquo;",
+        "en": "Next &raquo;",
+        "it": "Successivo &raquo;"
     },
     "of": {
-        "pl": "z"
+        "pl": "z",
+        "en": "of",
+        "it": "di"
     },
     "previous": {
-        "pl": "&laquo; Poprzednia"
+        "pl": "&laquo; Poprzednia",
+        "en": "&laquo; Previous",
+        "it": "&laquo; Precedente"
     },
     "results": {
-        "pl": "wyników"
+        "pl": "wyników",
+        "en": "results",
+        "it": "risultati"
     },
     "showing": {
-        "pl": "Wyświetlono"
+        "pl": "Wyświetlono",
+        "en": "Showing",
+        "it": "Visualizzazione"
     },
     "to": {
-        "pl": " - "
+        "pl": " - ",
+        "en": " to ",
+        "it": " a "
+    },
+    "navigation": {
+        "pl": "Nawigacja paginacji",
+        "en": "Pagination navigation",
+        "it": "Navigazione paginazione"
+    },
+    "go_to_page": {
+        "pl": "Przejdź do strony :page",
+        "en": "Go to page :page",
+        "it": "Vai alla pagina :page"
     }
 }

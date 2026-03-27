@@ -12,7 +12,7 @@ use Illuminate\Support\Carbon;
  * @property string $password
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read User $user
+ * @property-read User|null $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPasswordHistory newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPasswordHistory newQuery()

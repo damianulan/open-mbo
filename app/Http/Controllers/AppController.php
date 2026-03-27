@@ -5,23 +5,15 @@ namespace App\Http\Controllers;
 use App\Enums\Core\MessageType;
 use App\Exceptions\AppException;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Throwable;
 
-class AppController extends BaseController
+class AppController extends Controller
 {
-    use AuthorizesRequests;
-    use DispatchesJobs;
-    use ValidatesRequests;
-
     protected ?Throwable $e = null;
 
     protected function logShow(?Model $model = null): void
@@ -61,7 +53,7 @@ class AppController extends BaseController
         if (is_null($defaultRedirect)) {
             $defaultRedirect = redirect()->back();
             if ( ! is_null($errorMessage)) {
-                $defaultRedirect->with(MessageType::ERROR, $errorMessage);
+                $defaultRedirect->with(MessageType::ERROR->value, $errorMessage);
             }
         }
 
@@ -75,7 +67,7 @@ class AppController extends BaseController
     ): RedirectResponse|UrlGenerator {
         $message = $this->getExceptionMessage($exception, $message);
 
-        return $redirect ?? redirect()->back()->with(MessageType::ERROR, $message);
+        return $redirect ?? redirect()->back()->with(MessageType::ERROR->value, $message);
     }
 
     protected function catchResponseJson(
@@ -107,12 +99,12 @@ class AppController extends BaseController
         return $this->finalResponseJson(true, $message, $datas);
     }
 
-    protected function allows($ability, $arguments): bool
+    protected function allows(mixed $ability, mixed $arguments): bool
     {
         return Gate::allows($ability, $arguments);
     }
 
-    protected function denies($ability, $arguments): bool
+    protected function denies(mixed $ability, mixed $arguments): bool
     {
         return Gate::denies($ability, $arguments);
     }

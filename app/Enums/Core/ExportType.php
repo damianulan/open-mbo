@@ -2,28 +2,24 @@
 
 namespace App\Enums\Core;
 
-use Enumerable\Laravel\Enum;
+use App\Support\Concerns\EnumHasValues;
 
-class ExportType extends Enum
+enum ExportType: string
 {
-    const EXCEL = 'excel';
+    use EnumHasValues;
 
-    const CSV = 'csv';
+    case EXCEL = 'excel';
 
-    const JSON = 'json';
+    case CSV = 'csv';
 
-    const PDF = 'pdf';
+    case JSON = 'json';
 
-    const PRINT = 'print';
+    case PDF = 'pdf';
 
-    public static function labels(): array
+    case PRINT = 'print';
+
+    public function label(): string
     {
-        return [
-            self::EXCEL => __('globals.exports.excel'),
-            self::CSV => __('globals.exports.csv'),
-            self::JSON => __('globals.exports.json'),
-            self::PDF => __('globals.exports.pdf'),
-            self::PRINT => __('globals.exports.print'),
-        ];
+        return __('globals.exports.' . $this->value);
     }
 }

@@ -1,0 +1,638 @@
+<?php
+
+namespace App\Models\Mbo;
+
+use App\Casts\FormattedText;
+use App\Contracts\Mbo\HasObjectives;
+use App\Enums\Mbo\CampaignStage;
+use App\Events\Mbo\Campaigns\CampaignCreated;
+use App\Events\Mbo\Campaigns\CampaignUpdated;
+use App\Models\BaseModel;
+use App\Models\Core\User;
+use App\Models\Scopes\Mbo\CampaignScope;
+use App\Support\Search\IndexModel;
+use App\Support\Search\Traits\Searchable;
+use App\Warden\RolesLib;
+use Carbon\Carbon;
+use Carbon\CarbonImmutable;
+use Illuminate\Database\Eloquent\Attributes\ScopedBy;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Support\Collection;
+use Lucent\Contracts\Models\HasShowRoute;
+use Spatie\Activitylog\Models\Activity;
+use Spatie\Translatable\HasTranslations;
+
+/**
+ * @property string $id
+ * @property array<array-key, mixed> $name
+ * @property string $period
+ * @property mixed|null $description
+ * @property string|null $definition_from
+ * @property string|null $definition_to
+ * @property string|null $disposition_from
+ * @property string|null $disposition_to
+ * @property string|null $realization_from
+ * @property string|null $realization_to
+ * @property string|null $evaluation_from
+ * @property string|null $evaluation_to
+ * @property string|null $self_evaluation_from
+ * @property string|null $self_evaluation_to
+ * @property CampaignStage $stage Campaign current status whether in progress, pending, completed, terminated or canceled
+ * @property bool $draft Visible to admins only and is not automatically published.
+ * @property bool $manual Will not be automatically moved between stages.
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read EloquentCollection<int, Activity> $activities
+ * @property-read int|null $activities_count
+ * @property-read EloquentCollection<int, User> $coordinators
+ * @property-read int|null $coordinators_count
+ * @property-read EloquentCollection<int, IndexModel> $indexes
+ * @property-read int|null $indexes_count
+ * @property-read EloquentCollection<int, Objective> $objectives
+ * @property-read int|null $objectives_count
+ * @property-read mixed $timeend
+ * @property-read mixed $timestart
+ * @property-read mixed $trans
+ * @property-read mixed $translations
+ * @property-read EloquentCollection<int, UserCampaign> $user_campaigns
+ * @property-read int|null $user_campaigns_count
+ * @property-read EloquentCollection<int, UserObjective> $user_objectives
+ * @property-read int|null $user_objectives_count
+ *
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign active()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign average(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign avg(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign avgFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign checkAccess()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign count(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign countFromCache(string $columns = '*')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign createMany(array $records)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign deleteQuietly()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign drafted()
+ * @method static \Database\Factories\Mbo\CampaignFactory factory($count = null, $state = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign firstFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign flushCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign flushQueryCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign forceSave(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign getCacheKey($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign getFromCache($columns = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign inactive()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign insert(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign insertGetId(array $values, $sequence = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign insertOrIgnore(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign max(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign maxFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign min(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign minFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign newModelQuery()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign newQuery()
+ * @method static Builder<static>|Campaign onlyTrashed()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign orderByStatus()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign paginateFromCache(?int $perPage = null, ?int $columns = [], ?int $pageName = 'page', ?int $page = null)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign prunableSoftDeletes()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign published()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign query()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign remember(int $minutes)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign restore()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign save(array $attributes = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign saveMany($models)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign sum(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign sumFromCache(string $column)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign truncate()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign updateOrInsert(array $attributes, $values = [])
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign updateQuietly(array $values)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereActive()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereCompleted()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereCreatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereDefinitionFrom($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereDefinitionTo($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereDeletedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereDescription($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereDispositionFrom($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereDispositionTo($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereDraft($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereEvaluationFrom($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereEvaluationTo($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereId($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereJsonContainsLocale(string $column, string $locale, ?mixed $value, string $operand = '=')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereJsonContainsLocales(string $column, array $locales, ?mixed $value, string $operand = '=')
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereLocale(string $column, string $locale)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereLocales(string $column, array $locales)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereManual($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereName($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereOngoing()
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign wherePeriod($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereRealizationFrom($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereRealizationTo($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereSelfEvaluationFrom($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereSelfEvaluationTo($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereStage($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereUpdatedAt($value)
+ * @method static Builder<static>|Campaign withTrashed(bool $withTrashed = true)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign withoutCache()
+ * @method static Builder<static>|Campaign withoutTrashed()
+ *
+ * @mixin \Eloquent
+ */
+#[ScopedBy(CampaignScope::class)]
+class Campaign extends BaseModel implements HasObjectives, HasShowRoute
+{
+    use HasTranslations;
+    use Searchable;
+
+    public $stages;
+
+    public $timestamps = true;
+
+    public array $translatable = ['name'];
+
+    protected $log_name = 'mbo';
+
+    protected $fillable = [
+        'name',
+        'period',
+        'description',
+
+        'definition_from',
+        'definition_to',
+        'disposition_from',
+        'disposition_to',
+        'realization_from',
+        'realization_to',
+        'evaluation_from',
+        'evaluation_to',
+        'self_evaluation_from',
+        'self_evaluation_to',
+        'stage', // current overall CampaignStage
+
+        'draft',
+        'manual',
+    ];
+
+    protected $casts = [
+        'description' => FormattedText::class,
+        'draft' => 'boolean',
+        'manual' => 'boolean',
+        'stage' => CampaignStage::class,
+        'definition_from' => 'date',
+        'definition_to' => 'date',
+        'disposition_from' => 'date',
+        'disposition_to' => 'date',
+        'realization_from' => 'date',
+        'realization_to' => 'date',
+        'evaluation_from' => 'date',
+        'evaluation_to' => 'date',
+        'self_evaluation_from' => 'date',
+        'self_evaluation_to' => 'date',
+    ];
+
+    protected $attributes = [
+        'stage' => 'pending',
+    ];
+
+    protected $dispatchesEvents = [
+        'updated' => CampaignUpdated::class,
+        'created' => CampaignCreated::class,
+    ];
+
+    public function checkManual()
+    {
+        if ( ! settings('mbo.campaigns_manual')) {
+            $this->manual = 0;
+        }
+
+        return $this;
+    }
+
+    public function user_campaigns(): HasMany
+    {
+        return $this->hasMany(UserCampaign::class);
+    }
+
+    public function objectives(): HasMany
+    {
+        return $this->hasMany(Objective::class);
+    }
+
+    public function user_objectives(): HasManyThrough
+    {
+        return $this->hasManyThrough(UserObjective::class, Objective::class, 'campaign_id', 'objective_id', 'id', 'id');
+    }
+
+    public function coordinators(): MorphToMany
+    {
+        return $this->morphToMany(User::class, 'context', 'has_roles', null, 'model_id');
+    }
+
+    public function refreshCoordinators(?array $user_ids)
+    {
+        if ( ! $user_ids) {
+            $user_ids = [];
+        }
+
+        $current = $this->coordinators->pluck('id')->toArray();
+        $toDelete = array_values(array_diff($current, $user_ids));
+        $toAdd = array_values(array_diff($user_ids, $current));
+        $users = User::query()
+            ->whereIn('id', array_merge($toDelete, $toAdd))
+            ->get()
+            ->keyBy('id');
+
+        foreach ($toDelete as $user_id) {
+            $user = $users->get($user_id);
+            if ($user) {
+                $user->revokeRoleSlug(RolesLib::CAMPAIGN_COORDINATOR, $this);
+            }
+        }
+        foreach ($toAdd as $user_id) {
+            $user = $users->get($user_id);
+            if ($user) {
+                $user->assignRoleSlug(RolesLib::CAMPAIGN_COORDINATOR, $this);
+            }
+        }
+
+        return true;
+    }
+
+    public function setUserStage($user_id = null)
+    {
+        $params = ['manual' => 0, 'active' => 1, 'campaign_id' => $this->id];
+        if ($user_id) {
+            $params['user_id'] = $user_id;
+        }
+
+        $stage = $this->getCurrentStages()->first();
+        if (is_null($stage)) {
+            $stage = CampaignStage::PENDING->value;
+        }
+
+        UserCampaign::where($params)->where('stage', '!=', $stage)->chunk(config('app.chunk_default'), function (EloquentCollection $collection) use ($stage): void {
+            foreach ($collection as $uc) {
+                $uc->stage = $stage;
+                $uc->update();
+            }
+        });
+
+        return $stage;
+    }
+
+    public function setStageAuto()
+    {
+        $stage = CampaignStage::PENDING->value;
+        $now = Carbon::now();
+
+        if ( ! in_array($this->stage, [CampaignStage::TERMINATED, CampaignStage::CANCELED], true)) {
+            foreach (CampaignStage::softValues() as $tmp) {
+                $prop_start = $tmp . '_from';
+                $prop_end = $tmp . '_to';
+                $start = $this->{$prop_start};
+                $end = $this->{$prop_end};
+
+                if ($now->between($start, $end)) {
+                    $stage = CampaignStage::IN_PROGRESS->value;
+                    break;
+                }
+            }
+
+            $end = $this->timeend;
+
+            if ($end->isPast()) {
+                $stage = CampaignStage::COMPLETED->value;
+            }
+
+            $this->stage = $stage;
+        }
+
+        return $this;
+    }
+
+    public function getCurrentStages(): Collection
+    {
+        $stages = new Collection();
+        $now = Carbon::now();
+        $stage = $this->stage ?? CampaignStage::PENDING;
+
+        if (CampaignStage::IN_PROGRESS === $stage) {
+            $softStage = null;
+            foreach (CampaignStage::softValues() as $tmp) {
+                $prop_start = $tmp . '_from';
+                $prop_end = $tmp . '_to';
+                $start = Carbon::parse($this->{$prop_start});
+                $end = Carbon::parse($this->{$prop_end});
+
+                if ($now->between($start, $end)) {
+                    $softStage = $tmp;
+                    $stages->push($tmp);
+                }
+            }
+
+            if (is_null($softStage)) {
+                $stages->push($stage->value);
+            }
+        } else {
+            $stages->push($stage->value);
+        }
+
+        return $stages;
+    }
+
+    public function isStageActive(CampaignStage|string $stage)
+    {
+        return $this->getCurrentStages()->contains($stage instanceof CampaignStage ? $stage->value : $stage);
+    }
+
+    public function open(): bool
+    {
+        $now = Carbon::now();
+        $start = Carbon::parse($this->dateStart());
+        $end = Carbon::parse($this->dateEnd());
+
+        return $now->between($start, $end) && ! $this->draft;
+    }
+
+    public function finished(): bool
+    {
+        if ($this->manual) {
+            // TODO return true if all objectives are completed
+            return false;
+        }
+
+        $now = Carbon::now();
+        $end = Carbon::parse($this->dateEnd());
+
+        return $now->greaterThan($end) && ! $this->manual;
+    }
+
+    public function getProgress(): int
+    {
+        $now = Carbon::now();
+        $start = Carbon::parse($this->dateStart());
+        $end = Carbon::parse($this->dateEnd());
+        if ($now >= $start) {
+            $fullDiff = $start->diffInDays($end, false);
+            $diff = abs($now->diffInDays($start));
+            $progress = round(($diff / $fullDiff) * 100);
+        } else {
+            $progress = 0;
+        }
+
+        return $progress;
+    }
+
+    public function dateStart(): ?CarbonImmutable
+    {
+        return $this->definition_from;
+    }
+
+    public function dateEnd(): ?CarbonImmutable
+    {
+        return $this->self_evaluation_to;
+    }
+
+    public function inDates(): bool
+    {
+        $result = false;
+        $start = $this->dateStart();
+        $end = $this->dateEnd();
+        $now = now();
+        if ($start && $end) {
+            if ( ! $start instanceof Carbon) {
+                $start = Carbon::parse($start);
+            }
+            if ( ! $end instanceof Carbon) {
+                $end = Carbon::parse($end);
+            }
+
+            if ($now->between($start, $end)) {
+                $result = 1;
+            } else {
+                $result = 0;
+            }
+        }
+
+        return $result;
+    }
+
+    public function dateStartView(): string
+    {
+        $start = Carbon::parse($this->dateStart());
+
+        return $start->format(config('app.date_format'));
+    }
+
+    public function dateEndView(): string
+    {
+        $end = Carbon::parse($this->dateEnd());
+
+        return $end->format(config('app.date_format'));
+    }
+
+    public function getSoftStages(): array
+    {
+        return CampaignStage::softValues();
+    }
+
+    public function getStageIcon(CampaignStage|string $stage): ?string
+    {
+        return CampaignStage::stageIcon($stage);
+    }
+
+    public function getStageName(CampaignStage|string $stage): ?string
+    {
+        return CampaignStage::getName($stage);
+    }
+
+    public function getStageInfo(CampaignStage|string $stage): ?string
+    {
+        return CampaignStage::getInfo($stage);
+    }
+
+    public function isDraft(): bool
+    {
+        return $this->draft;
+    }
+
+    public function cancel(): bool
+    {
+        if (CampaignStage::CANCELED !== $this->stage) {
+            $this->stage = CampaignStage::CANCELED;
+
+            foreach ($this->user_campaigns as $userCampaign) {
+                $userCampaign->cancel();
+            }
+
+            return $this->update();
+        }
+
+        return false;
+    }
+
+    public function terminate(): bool
+    {
+        if (CampaignStage::TERMINATED !== $this->stage) {
+            $this->stage = CampaignStage::TERMINATED;
+
+            foreach ($this->user_campaigns as $userCampaign) {
+                $userCampaign->terminate();
+            }
+
+            return $this->update();
+        }
+
+        return false;
+    }
+
+    public function resume(): bool
+    {
+        if (CampaignStage::TERMINATED === $this->stage) {
+            $this->stage = CampaignStage::IN_PROGRESS;
+
+            foreach ($this->user_campaigns as $userCampaign) {
+                $userCampaign->resume();
+            }
+
+            return $this->update();
+        }
+
+        return false;
+    }
+
+    public function terminated(): bool
+    {
+        return CampaignStage::TERMINATED === $this->stage;
+    }
+
+    public function canceled(): bool
+    {
+        return CampaignStage::CANCELED === $this->stage;
+    }
+
+    public function completed(): bool
+    {
+        return CampaignStage::COMPLETED === $this->stage;
+    }
+
+    public function pending(): bool
+    {
+        return CampaignStage::PENDING === $this->stage;
+    }
+
+    public function isActive(): bool
+    {
+        return ! $this->isDraft() && ! $this->terminated() && ! $this->canceled() && ! $this->completed();
+    }
+
+    public function inProgress(): bool
+    {
+        return CampaignStage::IN_PROGRESS === $this->stage;
+    }
+
+    public function routeShow(): string
+    {
+        return route('campaigns.show', $this->id);
+    }
+
+    public function assignUser($user_id): bool
+    {
+        $result = false;
+        $exists = $this->user_campaigns()->where('user_id', $user_id)->exists();
+        if ( ! $exists) {
+            $user = User::find($user_id);
+            if ($user) {
+                $result = $this->user_campaigns()->create([
+                    'user_id' => $user_id,
+                    'stage' => $this->setUserStage($user_id),
+                    'manual' => $this->manual,
+                    'active' => $this->draft ? 0 : 1,
+                ]);
+            }
+
+        }
+
+        return $result ? true : false;
+    }
+
+    public function unassignUser($user_id): bool
+    {
+        $result = false;
+        $record = $this->user_campaigns()->where('user_id', $user_id)->first();
+        if ($record) {
+            $result = $record->delete();
+        }
+
+        return $result ? true : false;
+    }
+
+    /**
+     * LOCAL SCOPES
+     */
+    public function scopeWhereManual(Builder $query, int $manual): void
+    {
+        $query->where('manual', $manual);
+    }
+
+    public function scopeWhereActive(Builder $query): void
+    {
+        $query->where('draft', 0)
+            ->where(function (Builder $q): void {
+                $q->whereIn('stage', [CampaignStage::PENDING->value, CampaignStage::IN_PROGRESS->value]);
+            });
+    }
+
+    public function scopeWhereOngoing(Builder $query): void
+    {
+        $query->where('draft', 0)
+            ->where(function (Builder $q): void {
+                $q->where('stage', CampaignStage::IN_PROGRESS->value)
+                    ->orWhereDate('self_evaluation_to', '>', Carbon::now());
+            });
+    }
+
+    public function scopeWhereCompleted(Builder $query): void
+    {
+        $query->where('draft', 0)
+            ->whereNotIn('stage', [CampaignStage::TERMINATED->value, CampaignStage::CANCELED->value])
+            ->where(function (Builder $q): void {
+                $q->where('stage', CampaignStage::COMPLETED->value)
+                    ->orWhereDate('self_evaluation_to', '<', Carbon::now());
+            });
+    }
+
+    public function scopeOrderByStatus(Builder $query): void
+    {
+        $in_progess = CampaignStage::IN_PROGRESS->value;
+        $pending = CampaignStage::PENDING->value;
+        $completed = CampaignStage::COMPLETED->value;
+        $terminated = CampaignStage::TERMINATED->value;
+        $canceled = CampaignStage::CANCELED->value;
+        $orderBy = "FIELD(stage, '{$in_progess}', '{$pending}', '{$completed}', '{$terminated}', '{$canceled}')";
+        $query->orderByRaw($orderBy);
+    }
+
+    protected static function boot(): void
+    {
+        parent::boot();
+        static::creating(fn (Campaign $model) => $model->checkManual());
+        static::updating(fn (Campaign $model) => $model->checkManual());
+    }
+
+    protected function timestart(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => Carbon::parse($this->definition_from),
+        );
+    }
+
+    protected function timeend(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => Carbon::parse($this->self_evaluation_to),
+        );
+    }
+}

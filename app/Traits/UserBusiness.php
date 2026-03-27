@@ -26,12 +26,12 @@ trait UserBusiness
         return $this->hasOne(UserEmployment::class)->active()->orderBy('created_at', 'desc');
     }
 
-    public function employments(): ?HasMany
+    public function employments(): HasMany
     {
         return $this->hasMany(UserEmployment::class);
     }
 
-    public function employments_active(): ?HasMany
+    public function employments_active(): HasMany
     {
         return $this->hasMany(UserEmployment::class)->active();
     }

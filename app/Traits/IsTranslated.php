@@ -3,10 +3,10 @@
 namespace App\Traits;
 
 use App\Models\Core\User;
-use App\Models\MBO\Campaign;
-use App\Models\MBO\Objective;
-use App\Models\MBO\UserCampaign;
-use App\Models\MBO\UserObjective;
+use App\Models\Mbo\Campaign;
+use App\Models\Mbo\Objective;
+use App\Models\Mbo\UserCampaign;
+use App\Models\Mbo\UserObjective;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
 trait IsTranslated
