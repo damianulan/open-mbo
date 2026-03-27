@@ -2,13 +2,13 @@
 
 namespace App\Traits;
 
-use App\Models\MBO\BonusScheme;
-use App\Models\MBO\Campaign;
-use App\Models\MBO\Objective;
-use App\Models\MBO\UserBonusScheme;
-use App\Models\MBO\UserCampaign;
-use App\Models\MBO\UserObjective;
-use App\Models\MBO\UserPoints;
+use App\Models\Mbo\BonusScheme;
+use App\Models\Mbo\Campaign;
+use App\Models\Mbo\Objective;
+use App\Models\Mbo\UserBonusScheme;
+use App\Models\Mbo\UserCampaign;
+use App\Models\Mbo\UserObjective;
+use App\Models\Mbo\UserPoints;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

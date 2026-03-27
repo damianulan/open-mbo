@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Objectives;
 
-use App\Enums\MBO\UserObjectiveStatus;
+use App\Enums\Mbo\UserObjectiveStatus;
 use App\Http\Controllers\AppController;
-use App\Models\MBO\UserCampaign;
-use App\Models\MBO\UserObjective;
-use App\Models\MBO\UserPoints;
+use App\Models\Mbo\UserCampaign;
+use App\Models\Mbo\UserObjective;
+use App\Models\Mbo\UserPoints;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 

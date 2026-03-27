@@ -40,7 +40,7 @@
             </div>
 
             <div class="ms-auto d-flex gap-2 flex-wrap">
-                @foreach(\App\Enums\MBO\UserObjectiveStatus::labels() as $status => $label)
+                @foreach(\App\Enums\Mbo\UserObjectiveStatus::labels() as $status => $label)
                     @php
                         $count = $objectiveStatusCounts[$status] ?? 0;
                     @endphp

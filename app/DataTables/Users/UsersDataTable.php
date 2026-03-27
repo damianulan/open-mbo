@@ -3,14 +3,14 @@
 namespace App\DataTables\Users;
 
 use App\Enums\Users\UserStatus;
-use App\Filters\Users\FullnameFilter;
+use App\Filters\Collections\UsersTableFilters;
 use App\Models\Business\Position;
 use App\Models\Business\UserEmployment;
 use App\Models\Core\User;
 use App\Support\DataTables\Column;
 use App\Support\DataTables\DataTableBuilder;
 use App\Support\DataTables\Services\DataTableService;
-use App\Support\Filters\Services\FilterService;
+use App\Support\Filters\Contracts\FilterCollection;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -97,11 +97,9 @@ class UsersDataTable extends DataTableService
             ->whereNotIn('users.id', [Auth::user()->id]);
     }
 
-    protected function buildFilters(): ?FilterService
+    protected function buildFilters(): ?FilterCollection
     {
-        return new FilterService([
-            new FullnameFilter(),
-        ]);
+        return app()->make(UsersTableFilters::class);
     }
 
     protected function defaultColumns(): array

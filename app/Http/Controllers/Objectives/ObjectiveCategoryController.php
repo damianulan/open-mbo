@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Objectives;
 
-use App\DataTables\MBO\ObjectiveCategoriesDataTable;
-use App\Forms\MBO\Objective\ObjectiveCategoryEditForm;
-use App\Models\MBO\ObjectiveTemplateCategory;
+use App\DataTables\Mbo\ObjectiveCategoriesDataTable;
+use App\Forms\Mbo\Objective\ObjectiveCategoryEditForm;
+use App\Models\Mbo\ObjectiveTemplateCategory;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;

@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use App\Settings\GeneralSettings;
 use App\Settings\MailSettings;
-use App\Settings\MBOSettings;
+use App\Settings\MboSettings;
 use App\Settings\UserSettings;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +20,7 @@ class ConfigServiceProvider extends ServiceProvider
     {
         $this->app->singleton('settings.general', fn () => app(GeneralSettings::class));
         $this->app->singleton('settings.mail', fn () => app(MailSettings::class));
-        $this->app->singleton('settings.mbo', fn () => app(MBOSettings::class));
+        $this->app->singleton('settings.mbo', fn () => app(MboSettings::class));
         $this->app->singleton('settings.users', fn () => app(UserSettings::class));
         $this->app->singleton('settings.notifications', fn () => app(NotificationSettings::class));
     }

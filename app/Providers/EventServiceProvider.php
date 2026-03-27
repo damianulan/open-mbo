@@ -29,22 +29,22 @@ class EventServiceProvider extends ServiceProvider
 
         // MBO LISTENERS
         // Campaigns
-        'App\Events\MBO\Campaigns\UserCampaignAssigned' => [
-            'App\Listeners\MBO\Campaigns\UserAssignObjectives',
+        'App\Events\Mbo\Campaigns\UserCampaignAssigned' => [
+            'App\Listeners\Mbo\Campaigns\UserAssignObjectives',
         ],
-        'App\Events\MBO\Campaigns\CampaignUpdated' => [
-            'App\Listeners\MBO\Campaigns\UserCampaignStageCheck',
+        'App\Events\Mbo\Campaigns\CampaignUpdated' => [
+            'App\Listeners\Mbo\Campaigns\UserCampaignStageCheck',
         ],
-        'App\Events\MBO\Campaigns\CampaignViewed' => [
-            'App\Listeners\MBO\Campaigns\UserCampaignStageCheck',
+        'App\Events\Mbo\Campaigns\CampaignViewed' => [
+            'App\Listeners\Mbo\Campaigns\UserCampaignStageCheck',
         ],
 
         // Objectives
-        'App\Events\MBO\Objectives\ObjectiveUpdated' => [
-            'App\Listeners\MBO\Objectives\UserObjectiveStatusCheck',
+        'App\Events\Mbo\Objectives\ObjectiveUpdated' => [
+            'App\Listeners\Mbo\Objectives\UserObjectiveStatusCheck',
         ],
-        'App\Events\MBO\Objectives\ObjectiveCreated' => [
-            'App\Listeners\MBO\Objectives\UserObjectiveStatusCheck',
+        'App\Events\Mbo\Objectives\ObjectiveCreated' => [
+            'App\Listeners\Mbo\Objectives\UserObjectiveStatusCheck',
         ],
 
         // BUSINESS

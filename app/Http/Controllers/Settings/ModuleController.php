@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Settings;
 use App\Forms\Settings\MboForm;
 use App\Forms\Settings\NotificationsForm;
 use App\Forms\Settings\UsersForm;
-use App\Settings\MBOSettings;
+use App\Settings\MboSettings;
 use App\Settings\NotificationSettings;
 use App\Settings\UserSettings;
 use App\Support\Modules\ModuleManager;
@@ -34,7 +34,7 @@ class ModuleController extends SettingsController
         }
 
         $userModel = app(UserSettings::class);
-        $mboModel = app(MBOSettings::class);
+        $mboModel = app(MboSettings::class);
         $notificationModel = app(NotificationSettings::class);
 
         return view('pages.settings.modules.index', [
@@ -46,7 +46,7 @@ class ModuleController extends SettingsController
         ]);
     }
 
-    public function storeMbo(Request $request, MboForm $form, MBOSettings $settings): RedirectResponse
+    public function storeMbo(Request $request, MboForm $form, MboSettings $settings): RedirectResponse
     {
         $form->validate();
 

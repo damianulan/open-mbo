@@ -2,8 +2,8 @@
 
 namespace App\Support\Search\Resources;
 
-use App\Enums\MBO\CampaignStage;
-use App\Models\MBO\Campaign;
+use App\Enums\Mbo\CampaignStage;
+use App\Models\Mbo\Campaign;
 use App\Support\Search\Dtos\ResultItem;
 use App\Support\Search\Factories\IndexResource;
 

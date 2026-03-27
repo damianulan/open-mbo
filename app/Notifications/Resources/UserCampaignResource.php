@@ -2,7 +2,7 @@
 
 namespace App\Notifications\Resources;
 
-use App\Models\MBO\UserCampaign;
+use App\Models\Mbo\UserCampaign;
 use App\Support\Notifications\Contracts\NotificationResource;
 
 class UserCampaignResource extends NotificationResource

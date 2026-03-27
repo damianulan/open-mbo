@@ -2,7 +2,7 @@
 
 namespace App\Services\Campaigns;
 
-use App\Models\MBO\Campaign;
+use App\Models\Mbo\Campaign;
 use Lucent\Services\Service;
 
 class CreateOrUpdate extends Service

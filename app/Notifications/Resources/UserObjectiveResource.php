@@ -2,7 +2,7 @@
 
 namespace App\Notifications\Resources;
 
-use App\Models\MBO\UserObjective;
+use App\Models\Mbo\UserObjective;
 use App\Support\Notifications\Contracts\NotificationResource;
 
 class UserObjectiveResource extends NotificationResource

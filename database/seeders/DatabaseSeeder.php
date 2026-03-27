@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             CreateAdminUserSeeder::class,
             BusinessSeeder::class,
             UserSeeder::class,
-            MBOSeeder::class,
+            MboSeeder::class,
         ]);
     }
 }

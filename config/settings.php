@@ -2,7 +2,7 @@
 
 use App\Settings\GeneralSettings;
 use App\Settings\MailSettings;
-use App\Settings\MBOSettings;
+use App\Settings\MboSettings;
 use App\Settings\NotificationSettings;
 use App\Settings\ReportSettings;
 use App\Settings\UserSettings;
@@ -21,7 +21,7 @@ return [
     'settings' => [
         GeneralSettings::class,
         MailSettings::class,
-        MBOSettings::class,
+        MboSettings::class,
         UserSettings::class,
         ReportSettings::class,
         NotificationSettings::class,

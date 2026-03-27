@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Campaigns;
 
-use App\Forms\MBO\Campaign\CampaignEditUserForm;
+use App\Forms\Mbo\Campaign\CampaignEditUserForm;
 use App\Http\Controllers\AppController;
-use App\Models\MBO\Campaign;
-use App\Models\MBO\UserCampaign;
+use App\Models\Mbo\Campaign;
+use App\Models\Mbo\UserCampaign;
 use App\Services\Campaigns\BulkAssignUsers;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
