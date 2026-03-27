@@ -29,16 +29,6 @@ jobs:
           tools: composer:v2
           extensions: bcmath, ctype, curl, dom, exif, fileinfo, gd, intl, mbstring, pdo_sqlite, sqlite3, zip
 
-      - name: Start SSH agent for private Composer repositories
-        uses: webfactory/ssh-agent@v0.9.1
-        with:
-          ssh-private-key: ${{ secrets.COMPOSER_SSH_PRIVATE_KEY }}
-
-      - name: Trust GitHub SSH host key
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-
       - name: Cache Composer dependencies
         uses: actions/cache@v4
         with:
