@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Services\DataTable;
 use App\Support\Filters\Contracts\FilterCollection;
+use App\Support\Filters\Services\FilterService;
 
 class DataTableService extends DataTable
 {
@@ -29,7 +30,7 @@ class DataTableService extends DataTable
         parent::__construct();
 
         $filters = $this->buildFilters();
-        $this->filterService = $filters ?? new FilterCollection();
+        $this->filterService = $filters ?? new FilterService();
     }
 
     public function getFilterService(): FilterCollection
