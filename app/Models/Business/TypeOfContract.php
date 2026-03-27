@@ -73,14 +73,14 @@ use Spatie\Activitylog\Models\Activity;
  */
 class TypeOfContract extends BaseModel
 {
-    public static $contracts = [
+    public static array $contracts = [
         'uop',
         'uz',
         'b2b',
         'uod',
     ];
 
-    protected $fillable = [
+    protected array $fillable = [
         'name',
         'shortname',
         'description',

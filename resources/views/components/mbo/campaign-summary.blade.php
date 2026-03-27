@@ -25,7 +25,7 @@
                             <i class="{{ $campaign->getStageIcon($stage) }} fs-5"></i>
                         </td>
                         <td class="px-1 align-content-baseline">
-                            {{ $campaign->carbonDate($start_prop) }} - {{ $campaign->carbonDate($end_prop) }}
+                            {{ $campaign->$start_prop?->format('Y-m-d') }} - {{ $campaign->$end_prop?->format('Y-m-d') }}
                         </td>
                         <td class="px-1 align-content-baseline">
                             {{ $campaign->getStageName($stage) }}

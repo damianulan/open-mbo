@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Traits\IsTranslated;
 use App\Traits\Vendors\ModelActivity;
-use Carbon\Carbon;
 use FormForge\Traits\RequestForms;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -83,15 +82,4 @@ abstract class BaseModel extends Model
     use SoftDeletesPrunable;
     use UUID;
     use VirginModel;
-
-    public function carbonDate(string $prop, string $format = 'Y-m-d')
-    {
-        $date = $this->{$prop};
-        $date_carbon = null;
-        if ($date) {
-            $date_carbon = Carbon::parse($date)->format($format);
-        }
-
-        return $date_carbon;
-    }
 }

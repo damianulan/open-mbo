@@ -14,6 +14,7 @@ use App\Support\Search\IndexModel;
 use App\Support\Search\Traits\Searchable;
 use App\Warden\RolesLib;
 use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -177,6 +178,16 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
         'draft' => 'boolean',
         'manual' => 'boolean',
         'stage' => CampaignStage::class,
+        'definition_from' => 'date',
+        'definition_to' => 'date',
+        'disposition_from' => 'date',
+        'disposition_to' => 'date',
+        'realization_from' => 'date',
+        'realization_to' => 'date',
+        'evaluation_from' => 'date',
+        'evaluation_to' => 'date',
+        'self_evaluation_from' => 'date',
+        'self_evaluation_to' => 'date',
     ];
 
     protected $attributes = [
@@ -278,8 +289,8 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
             foreach (CampaignStage::softValues() as $tmp) {
                 $prop_start = $tmp . '_from';
                 $prop_end = $tmp . '_to';
-                $start = Carbon::parse($this->{$prop_start});
-                $end = Carbon::parse($this->{$prop_end});
+                $start = $this->{$prop_start};
+                $end = $this->{$prop_end};
 
                 if ($now->between($start, $end)) {
                     $stage = CampaignStage::IN_PROGRESS->value;
@@ -372,14 +383,14 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
         return $progress;
     }
 
-    public function dateStart(): string
+    public function dateStart(): ?CarbonImmutable
     {
-        return $this->definition_from ?? '';
+        return $this->definition_from;
     }
 
-    public function dateEnd(): string
+    public function dateEnd(): ?CarbonImmutable
     {
-        return $this->self_evaluation_to ?? '';
+        return $this->self_evaluation_to;
     }
 
     public function inDates(): bool
