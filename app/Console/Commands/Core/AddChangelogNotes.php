@@ -12,15 +12,21 @@ class AddChangelogNotes extends Command
     use StorageIssues;
 
     protected $signature = 'changelog:publish
-                            {version : The version number (e.g. 1.2.0)}
+                            {version? : Optional version number (e.g. 1.2.0)}
                             {count? : Optional number of last commits}';
 
     protected $description = 'Append git commits to CHANGELOG.md under a given version';
 
     public function handle(): int
     {
-        $version = $this->argument('version');
+        $version = $this->resolveVersion($this->argument('version'));
         $count = $this->argument('count');
+
+        if (null === $version) {
+            $this->error('Unable to detect the next version automatically. Provide a version argument explicitly.');
+
+            return Command::FAILURE;
+        }
 
         $commits = $count
             ? $this->getLastNCommits((int) $count)
@@ -38,14 +44,18 @@ class AddChangelogNotes extends Command
         $markdown = $this->buildMarkdown($version, $date, $commits);
 
         if ( ! File::exists($changelogPath)) {
-            File::put($changelogPath, "# Changelog\n\n");
+            File::put($changelogPath, '# Changelog
+
+');
         }
 
         // Insert at top (after title)
         $existing = File::get($changelogPath);
         $updated = preg_replace(
             '/# Changelog\s*/',
-            "# Changelog\n\n" . $markdown,
+            '# Changelog
+
+' . $markdown,
             $existing,
             1
         );
@@ -85,7 +95,7 @@ class AddChangelogNotes extends Command
             return $output;
         }
 
-        $lastTag = trim($tagOutput[0]);
+        $lastTag = mb_trim($tagOutput[0]);
 
         $command = sprintf(
             'git log %s..HEAD --pretty=format:"%%s" --no-merges',
@@ -97,16 +107,80 @@ class AddChangelogNotes extends Command
         return $this->processCommits($output);
     }
 
-    protected function buildMarkdown(string $version, string $date, array $commits): string
+    protected function resolveVersion(?string $version): ?string
     {
-        $output = "## [{$version}] - {$date}\n\n";
-        $output .= "### Changes\n\n";
-
-        foreach ($commits as $commit) {
-            $output .= "- {$commit}\n";
+        if (null !== $version && '' !== $version) {
+            return $version;
         }
 
-        $output .= "\n";
+        return $this->detectNextVersion();
+    }
+
+    protected function detectNextVersion(): ?string
+    {
+        $currentVersion = $this->getLatestVersionFromChangelog()
+            ?? $this->getLatestVersionFromGitTag();
+
+        if (null === $currentVersion) {
+            return null;
+        }
+
+        return $this->incrementPatchVersion($currentVersion);
+    }
+
+    protected function getLatestVersionFromChangelog(): ?string
+    {
+        $changelogPath = base_path('CHANGELOG.md');
+
+        if ( ! File::exists($changelogPath)) {
+            return null;
+        }
+
+        preg_match_all('/^##\s+\[?v?(\d+\.\d+\.\d+)\]?/m', File::get($changelogPath), $matches);
+
+        return $matches[1][0] ?? null;
+    }
+
+    protected function getLatestVersionFromGitTag(): ?string
+    {
+        exec('git tag --sort=-v:refname', $tagOutput, $tagResult);
+
+        if (0 !== $tagResult || empty($tagOutput)) {
+            return null;
+        }
+
+        foreach ($tagOutput as $tag) {
+            if (preg_match('/^v?(\d+\.\d+\.\d+)$/', mb_trim($tag), $matches)) {
+                return $matches[1];
+            }
+        }
+
+        return null;
+    }
+
+    protected function incrementPatchVersion(string $version): string
+    {
+        [$major, $minor, $patch] = array_map('intval', explode('.', $version));
+
+        return sprintf('%d.%d.%d', $major, $minor, $patch + 1);
+    }
+
+    protected function buildMarkdown(string $version, string $date, array $commits): string
+    {
+        $output = "## [{$version}] - {$date}
+
+";
+        $output .= '### Changes
+
+';
+
+        foreach ($commits as $commit) {
+            $output .= "- {$commit}
+";
+        }
+
+        $output .= '
+';
 
         return $output;
     }

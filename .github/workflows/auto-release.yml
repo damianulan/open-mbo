@@ -1,0 +1,96 @@
+name: Auto Release
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+
+permissions:
+  contents: write
+
+concurrency:
+  group: auto-release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: ['8.4']
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+
+      - name: Fetch tags
+        run: git fetch --force --tags
+
+      - name: Determine next version
+        id: version
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          latest_tag="$(git tag --list '[0-9]*.[0-9]*.[0-9]*' --sort=-version:refname | head -n 1)"
+
+          if [ -z "${latest_tag}" ]; then
+            latest_tag="0.0.0"
+          fi
+
+          IFS='.' read -r major minor patch <<< "${latest_tag}"
+
+          branch="${GITHUB_REF_NAME}"
+
+          case "${branch}" in
+            staging)
+              next_version="${major}.${minor}.$((patch + 1))"
+              ;;
+            main)
+              next_version="${major}.$((minor + 1)).0"
+              ;;
+            *)
+              echo "Unsupported branch: ${branch}" >&2
+              exit 1
+              ;;
+          esac
+
+          echo "latest_tag=${latest_tag}" >> "${GITHUB_OUTPUT}"
+          echo "next_version=${next_version}" >> "${GITHUB_OUTPUT}"
+
+      - name: Create tag and release
+        uses: actions/github-script@v7
+        env:
+          NEXT_VERSION: ${{ steps.version.outputs.next_version }}
+          LATEST_TAG: ${{ steps.version.outputs.latest_tag }}
+        with:
+          script: |
+            const tag = process.env.NEXT_VERSION;
+            const previousTag = process.env.LATEST_TAG;
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            await github.rest.git.createRef({
+              owner,
+              repo,
+              ref: `refs/tags/${tag}`,
+              sha: context.sha,
+            });
+
+            await github.rest.repos.createRelease({
+              owner,
+              repo,
+              tag_name: tag,
+              target_commitish: context.sha,
+              name: tag,
+              generate_release_notes: true,
+              ...(previousTag !== '0.0.0' ? { previous_tag_name: previousTag } : {}),
+            });
