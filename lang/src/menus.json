@@ -82,6 +82,11 @@
         "en": "Login",
         "it": "Accesso"
     },
+    "login_as_admin": {
+        "pl": "Zaloguj się jako testowy administrator",
+        "en": "Login as test admin",
+        "it": "Login as test admin"
+    },
     "logout": {
         "pl": "Wyloguj",
         "en": "Logout",

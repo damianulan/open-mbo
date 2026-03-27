@@ -51,6 +51,7 @@ class AppUpgrade extends Command
 
             $this->line("Version preference detected: <versionblock>{$target_release}</versionblock>");
             $result = Process::run('git fetch --all');
+            $result = Process::run('git fetch --tags');
 
             $result = Process::run('git describe --tags --abbrev=0');
             $latestRelease = $result->output();
@@ -58,11 +59,12 @@ class AppUpgrade extends Command
                 $this->warn('Unable to get latest release tag.' . ' [' . $result->errorOutput() . '] ');
                 $latestRelease = 'main';
             }
+
             $result = Process::run('git tag -l | xargs git tag -d');
 
             $git_branch = match ($target_release) {
-                'stable' => 'main',
-                'non-stable' => $latestRelease,
+                'stable' => $latestRelease,
+                'non-stable' => 'staging',
                 'dev' => 'dev',
                 default => $target_release,
             };
@@ -70,8 +72,11 @@ class AppUpgrade extends Command
             $this->comment("Checking to {$git_branch} branch/tag");
             if ( ! $local) {
                 $result = Process::run('git reset --hard');
+                $result = Process::run("git switch --detach {$git_branch}");
+            } else {
+                $result = Process::run("git checkout {$git_branch}");
             }
-            $result = Process::run("git checkout {$git_branch}");
+
             $output = $result->output();
             if ( ! $result->successful()) {
                 throw new Exception("Unable to switch to branch/tag: {$git_branch} " . $result->errorOutput());

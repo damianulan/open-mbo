@@ -19,6 +19,7 @@ class CreateAdminUserSeeder extends Seeder
             firstname: 'Site',
             lastname: 'Admin',
             role: 'admin',
+            core: true
         );
 
         $this->upsertAdminUser(

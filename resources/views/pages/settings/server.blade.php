@@ -73,14 +73,6 @@
                         </tr>
                         <tr>
                             <th>
-                                {{ __('pages.settings.build') }}:
-                            </th>
-                            <td>
-                                {{ config('app.build') }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
                                 {{ __('pages.settings.release') }}:
                             </th>
                             <td>

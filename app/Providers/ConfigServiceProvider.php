@@ -48,7 +48,6 @@ class ConfigServiceProvider extends ServiceProvider
                 'app.timezone' => $general->timezone ?? env('APP_TIMEZONE', 'UTC'),
                 'app.locale' => $general->locale ?? env('APP_LOCALE', 'en'),
                 'app.maintenance' => $general->maintenance ?? null,
-                'app.build' => $general->build ?? null,
                 'app.release' => $general->release ?? null,
                 'app.date_format' => $general->date_format ?? null,
                 'app.time_format' => $general->time_format ?? null,

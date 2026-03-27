@@ -188,13 +188,21 @@ class AddChangelogNotes extends Command
     protected function processCommits(array $commits): array
     {
         $output = [];
+
         foreach ($commits as $commit) {
-            $wordCount = count(array_filter(explode(' ', $commit), fn ($word) => Str::length($word) > 0 && Str::startsWith($word, array_map(fn ($type) => "{$type}(", $this->typeMap)) && ! in_array($word, ['fix', 'fix:', 'fixes', 'fixes:', 'fixing', 'fixing:', '-'])));
-            if ($wordCount > 1) {
-                $key = Str::slug($commit);
-                $output[$key] = $commit;
+            $commit = mb_trim($commit);
+
+            if ($commit === '' || ! preg_match('/[[:alpha:]]{2,}/u', $commit)) {
+                continue;
             }
 
+            $key = Str::slug($commit);
+
+            if ($key === '') {
+                continue;
+            }
+
+            $output[$key] = $commit;
         }
 
         return array_values($output);

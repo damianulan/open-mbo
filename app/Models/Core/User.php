@@ -318,12 +318,17 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function canBeDeleted(): bool
     {
-        return 0 === $this->core;
+        return $this->isCore();
     }
 
     public function canBeBlocked(): bool
     {
-        return 0 === $this->core;
+        return $this->isCore();
+    }
+
+    public function isCore(): bool
+    {
+        return 1 === $this->core;
     }
 
     public function getAvatar(): ?string
