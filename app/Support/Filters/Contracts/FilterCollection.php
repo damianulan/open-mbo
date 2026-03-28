@@ -7,7 +7,7 @@ use FormForge\FormBuilder;
 use Illuminate\Contracts\Support\Renderable;
 use IteratorAggregate;
 
-interface FilterCollection extends \IteratorAggregate, \Traversable, Countable
+interface FilterCollection extends \Traversable, Countable, IteratorAggregate
 {
     public function __construct($items = []);
 
