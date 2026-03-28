@@ -31,7 +31,7 @@ class DataTableService extends DataTable
         parent::__construct();
 
         $filters = $this->buildFilters();
-        $this->filterService = $filters ?? new FilterService;
+        $this->filterService = $filters ?? app()->make(FilterCollection::class);
     }
 
     public function getFilterService(): FilterCollection
