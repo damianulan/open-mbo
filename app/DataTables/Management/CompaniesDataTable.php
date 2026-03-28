@@ -18,9 +18,7 @@ class CompaniesDataTable extends DataTableService
     protected $orderByDir = 'asc';
 
     /**
-     * Build the DataTable class.
-     *
-     * @param  QueryBuilder  $query  Results from query() method.
+     * @param QueryBuilder $query Results from query() method.
      */
     public function DataTable(QueryBuilder $query): DataTableBuilder
     {
@@ -31,7 +29,7 @@ class CompaniesDataTable extends DataTableService
             ->editColumn('shortname', fn (Company $company): string => $company->shortname ?: '-')
             ->editColumn('taxpayerid', fn (Company $company): string => $company->taxpayerid ?: '-')
             ->editColumn('founded_at', function (Company $company): string {
-                if ( ! $company->founded_at) {
+                if (! $company->founded_at) {
                     return '-';
                 }
 
@@ -41,9 +39,6 @@ class CompaniesDataTable extends DataTableService
             ->editColumn('updated_at', fn (Company $company): string => Carbon::parse($company->updated_at)->format(config('app.datetime_format')));
     }
 
-    /**
-     * Get the query source of dataTable.
-     */
     public function query(Company $model): QueryBuilder
     {
         return $model->newQuery();
@@ -92,9 +87,6 @@ class CompaniesDataTable extends DataTableService
         ];
     }
 
-    /**
-     * Get the filename for export.
-     */
     protected function filename(): string
     {
         return 'Companies_' . date('YmdHis');

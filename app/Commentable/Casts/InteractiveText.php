@@ -20,7 +20,7 @@ class InteractiveText implements CastsAttributes
 
     public static function interactiveOutput(?string $value): ?string
     {
-        if ( ! empty($value)) {
+        if (! empty($value)) {
             $value = self::interactiveMentions($value, self::MODE_NORMAL);
         }
 
@@ -29,7 +29,7 @@ class InteractiveText implements CastsAttributes
 
     public static function getInteractive(?string $value): ?string
     {
-        if ( ! empty($value)) {
+        if (! empty($value)) {
             $value = self::interactiveMentions($value, self::MODE_GET);
         }
 
@@ -38,7 +38,7 @@ class InteractiveText implements CastsAttributes
 
     public static function setInteractive(?string $value, Model $model): ?string
     {
-        if ( ! empty($value)) {
+        if (! empty($value)) {
             $value = self::interactiveMentions($value, self::MODE_SET, $model);
         }
 
@@ -46,9 +46,7 @@ class InteractiveText implements CastsAttributes
     }
 
     /**
-     * Cast the given value.
-     *
-     * @param  array<string, mixed>  $attributes
+     * @param array<string, mixed> $attributes
      */
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
@@ -56,9 +54,7 @@ class InteractiveText implements CastsAttributes
     }
 
     /**
-     * Prepare the given value for storage.
-     *
-     * @param  array<string, mixed>  $attributes
+     * @param array<string, mixed> $attributes
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
@@ -90,7 +86,7 @@ class InteractiveText implements CastsAttributes
         $sendEvent = false;
         $pattern = '/@([\p{L}\p{M}]+)\s+([\p{L}\p{M}]+)/u';
 
-        if (self::MODE_SET === $mode || self::MODE_NORMAL === $mode) {
+        if ($mode === self::MODE_SET || $mode === self::MODE_NORMAL) {
             if (preg_match_all($pattern, $value, $matches, PREG_SET_ORDER)) {
                 foreach ($matches as $match) {
                     $replaceTo = null;
@@ -101,10 +97,10 @@ class InteractiveText implements CastsAttributes
                         $user = User::whereFirstname($firstname)->whereLastname($lastname)->first();
                         if ($user) {
                             $search = Str::lower("@{$firstname} {$lastname}");
-                            if (self::MODE_SET === $mode) {
+                            if ($mode === self::MODE_SET) {
                                 $replaceTo = self::generateTag('mention', $user->id);
                                 $sendEvent = true;
-                            } elseif (self::MODE_NORMAL === $mode) {
+                            } elseif ($mode === self::MODE_NORMAL) {
                                 $route = self::getUserRoute($user->id);
                                 if ($route) {
                                     $replaceTo = '<a class="user-mention" href="' . $route . '">' . $user->firstname . ' ' . $user->lastname . '</a>';
@@ -114,7 +110,7 @@ class InteractiveText implements CastsAttributes
                     }
                     if ($replaceTo && $search) {
                         if ($model) {
-                            if (self::MODE_SET === $mode) {
+                            if ($mode === self::MODE_SET) {
                             }
                         }
                         $value = Str::replace($search, $replaceTo, $value, false);
@@ -122,7 +118,7 @@ class InteractiveText implements CastsAttributes
                 }
             }
         }
-        if (self::MODE_GET === $mode) {
+        if ($mode === self::MODE_GET) {
             $pattern = self::tagPattern('mention');
 
             if (preg_match_all($pattern, $value, $matches, PREG_SET_ORDER)) {

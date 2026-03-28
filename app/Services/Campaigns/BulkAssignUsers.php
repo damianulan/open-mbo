@@ -15,7 +15,7 @@ class BulkAssignUsers extends Service
 
         if ($this->request()->input('user_ids')) {
             foreach ($this->request()->input('user_ids') as $user_id) {
-                if ( ! $current_ids->has($user_id)) {
+                if (! $current_ids->has($user_id)) {
                     $this->campaign->assignUser($user_id);
                 } else {
                     $current_ids->forget($user_id);

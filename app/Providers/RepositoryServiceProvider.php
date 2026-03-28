@@ -8,17 +8,11 @@ use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     */
     public function register(): void
     {
         $this->registerFilterServices();
     }
 
-    /**
-     * Bootstrap services.
-     */
     public function boot(): void {}
 
     private function registerFilterServices(): void

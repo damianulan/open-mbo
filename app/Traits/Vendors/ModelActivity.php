@@ -12,7 +12,7 @@ trait ModelActivity
 
     public function getActivitylogOptions(): LogOptions
     {
-        if ( ! Auth::check()) {
+        if (! Auth::check()) {
             return LogOptions::defaults();
         }
         $log_name = $this->log_name ?? 'model';

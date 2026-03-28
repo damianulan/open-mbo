@@ -20,7 +20,7 @@ class EmploymentEditForm extends Form
         $method = 'POST';
         $user_id = $this->model?->user_id ?? $this->user_id;
 
-        if ( ! is_null($this->model)) {
+        if (! is_null($this->model)) {
             $method = 'PUT';
             $route = route('employments.update', $this->model->id);
         }
@@ -41,7 +41,7 @@ class EmploymentEditForm extends Form
             ->add(FormComponent::date('employment', $this->model)->label(__('forms.employments.employment')))
             ->add(FormComponent::date('release', $this->model)->label(__('forms.employments.release')))
             ->addSubmit()
-            ->when( ! is_null($this->model), function (FormBuilder $builder): void {
+            ->when(! is_null($this->model), function (FormBuilder $builder): void {
                 $builder->addButton(new Button(title: __('buttons.delete'), href: route('employments.delete', $this->model->id), classes: 'btn-danger delete-employment'));
             });
     }

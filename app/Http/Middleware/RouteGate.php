@@ -27,9 +27,6 @@ class RouteGate
     ];
 
     /**
-     * @param  mixed  $request
-     * @param  mixed  $permission
-     * @param  mixed  $context
      * @return void
      */
     public function handle($request, Closure $next, $permission, $context = null): Response

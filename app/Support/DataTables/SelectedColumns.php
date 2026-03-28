@@ -3,8 +3,8 @@
 namespace App\Support\DataTables;
 
 use App\Models\Core\User;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Auth;
  * @property string $table_id
  * @property array<array-key, mixed> $columns
  * @property array<array-key, mixed> $selected
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
  * @property-read User|null $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns newModelQuery()

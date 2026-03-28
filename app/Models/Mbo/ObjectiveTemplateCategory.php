@@ -6,9 +6,9 @@ use App\Casts\FormattedText;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Models\Scopes\Mbo\ObjectiveTemplateCategoryScope;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Activity;
 
 /**
@@ -17,9 +17,9 @@ use Spatie\Activitylog\Models\Activity;
  * @property string|null $shortname
  * @property mixed|null $description
  * @property string|null $icon
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property Carbon|null $deleted_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
+ * @property CarbonImmutable|null $deleted_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read Collection<int, User> $coordinators
@@ -124,7 +124,7 @@ class ObjectiveTemplateCategory extends BaseModel
 
     public function refreshCoordinators(?array $user_ids): void
     {
-        if ( ! $user_ids) {
+        if (! $user_ids) {
             $user_ids = [];
         }
 

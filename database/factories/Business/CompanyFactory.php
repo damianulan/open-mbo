@@ -2,16 +2,15 @@
 
 namespace Database\Factories\Business;
 
+use App\Models\Business\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Business\Company>
+ * @extends Factory<Company>
  */
 class CompanyFactory extends Factory
 {
     /**
-     * Define the model's default state.
-     *
      * @return array<string, mixed>
      */
     public function definition(): array

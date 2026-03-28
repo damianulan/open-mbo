@@ -7,20 +7,17 @@ use App\Support\Storage\StorageManager;
 use App\Support\UI\Theme\Theme;
 use Barryvdh\Debugbar\Facades\Debugbar;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
+use Carbon\CarbonImmutable;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Pagination\Paginator;
-use Illuminate\Support\ServiceProvider;
-use Carbon\CarbonImmutable; 
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
-        if ( ! $this->app->environment('production')) {
+        if (! $this->app->environment('production')) {
             $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
             $this->app->register(TelescopeServiceProvider::class);
         }
@@ -37,21 +34,8 @@ class AppServiceProvider extends ServiceProvider
             clear: LangList::class,
             key: 'langs-cache',
         );
-        // Health::checks([
-        //     UsedDiskSpaceCheck::new()->dailyAt('02:00'),
-        //     DatabaseCheck::new()->dailyAt('02:00'),
-        //     DatabaseSizeCheck::new()->failWhenSizeAboveGb(errorThresholdGb: 5.0)->dailyAt('02:00'),
-        //     RedisCheck::new()->dailyAt('02:00'),
-        //     DebugModeCheck::new()->dailyAt('02:00'),
-        //     ScheduleCheck::new()->dailyAt('02:00'),
-
-        // ]);
-
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
         Date::use(CarbonImmutable::class);

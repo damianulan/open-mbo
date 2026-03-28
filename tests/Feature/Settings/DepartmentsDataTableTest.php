@@ -9,7 +9,7 @@ class DepartmentsDataTableTest extends TestCase
 {
     public function test_departments_datatable_columns_match_department_attributes(): void
     {
-        $dataTable = new class() extends DepartmentsDataTable
+        $dataTable = new class extends DepartmentsDataTable
         {
             public function exposedDefaultColumns(): array
             {

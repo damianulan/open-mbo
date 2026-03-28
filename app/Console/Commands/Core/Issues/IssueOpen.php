@@ -10,22 +10,15 @@ class IssueOpen extends Command
     use StorageIssues;
 
     /**
-     * The name and signature of the console command.
-     *
      * @var string
      */
     protected $signature = 'issue:open';
 
     /**
-     * The console command description.
-     *
      * @var string
      */
     protected $description = 'Upgrading app with git repository';
 
-    /**
-     * Execute the console command.
-     */
     public function handle()
     {
         $id = $this->ask('What is the issue ID?');

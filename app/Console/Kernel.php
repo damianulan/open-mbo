@@ -8,13 +8,9 @@ use App\Console\Commands\Settings\SettingsMigrate;
 use App\Support\Notifications\NotificationScheduler;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use Spatie\Health\Commands\RunHealthChecksCommand;
 
 class Kernel extends ConsoleKernel
 {
-    /**
-     * Define the application's command schedule.
-     */
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command(MBOVerifyStatusScript::class)->dailyAt('00:30');
@@ -27,26 +23,19 @@ class Kernel extends ConsoleKernel
             $schedule->command(AppUpgrade::class)->everyOddHour();
         }
 
-        if ('development' === config('app.env')) {
+        if (config('app.env') === 'development') {
             $schedule->command('db:seed --class=NotificationSeeder')->dailyAt('00:02');
         }
 
-        // LARAVEL COMMANDS
         $schedule->command('telescope:prune')->dailyAt('00:01');
         $schedule->command('activitylog:clean')->dailyAt('00:01');
         $schedule->command('auth:clear-resets')->dailyAt('00:01');
         $schedule->command('model:prune')->dailyAt('00:01');
         $schedule->command('model:prune-soft-deletes')->dailyAt('00:01');
         $schedule->command(SettingsMigrate::class)->dailyAt('00:01');
-        //$schedule->command(RunHealthChecksCommand::class)->hourly();
-
-        // NOTIFICATIONS
         NotificationScheduler::load($schedule);
     }
 
-    /**
-     * Register the commands for the application.
-     */
     protected function commands(): void
     {
         $this->load(__DIR__ . '/Commands');

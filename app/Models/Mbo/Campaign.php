@@ -32,22 +32,22 @@ use Spatie\Translatable\HasTranslations;
  * @property array<array-key, mixed> $name
  * @property string $period
  * @property mixed|null $description
- * @property string|null $definition_from
- * @property string|null $definition_to
- * @property string|null $disposition_from
- * @property string|null $disposition_to
- * @property string|null $realization_from
- * @property string|null $realization_to
- * @property string|null $evaluation_from
- * @property string|null $evaluation_to
- * @property string|null $self_evaluation_from
- * @property string|null $self_evaluation_to
+ * @property CarbonImmutable|null $definition_from
+ * @property CarbonImmutable|null $definition_to
+ * @property CarbonImmutable|null $disposition_from
+ * @property CarbonImmutable|null $disposition_to
+ * @property CarbonImmutable|null $realization_from
+ * @property CarbonImmutable|null $realization_to
+ * @property CarbonImmutable|null $evaluation_from
+ * @property CarbonImmutable|null $evaluation_to
+ * @property CarbonImmutable|null $self_evaluation_from
+ * @property CarbonImmutable|null $self_evaluation_to
  * @property CampaignStage $stage Campaign current status whether in progress, pending, completed, terminated or canceled
  * @property bool $draft Visible to admins only and is not automatically published.
  * @property bool $manual Will not be automatically moved between stages.
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
+ * @property CarbonImmutable|null $deleted_at
  * @property-read EloquentCollection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read EloquentCollection<int, User> $coordinators
@@ -169,8 +169,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
         'evaluation_to',
         'self_evaluation_from',
         'self_evaluation_to',
-        'stage', // current overall CampaignStage
-
+        'stage',
         'draft',
         'manual',
     ];
@@ -203,7 +202,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
 
     public function checkManual()
     {
-        if ( ! settings('mbo.campaigns_manual')) {
+        if (! settings('mbo.campaigns_manual')) {
             $this->manual = 0;
         }
 
@@ -232,7 +231,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
 
     public function refreshCoordinators(?array $user_ids)
     {
-        if ( ! $user_ids) {
+        if (! $user_ids) {
             $user_ids = [];
         }
 
@@ -287,7 +286,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
         $stage = CampaignStage::PENDING->value;
         $now = Carbon::now();
 
-        if ( ! in_array($this->stage, [CampaignStage::TERMINATED, CampaignStage::CANCELED], true)) {
+        if (! in_array($this->stage, [CampaignStage::TERMINATED, CampaignStage::CANCELED], true)) {
             foreach (CampaignStage::softValues() as $tmp) {
                 $prop_start = $tmp . '_from';
                 $prop_end = $tmp . '_to';
@@ -314,11 +313,11 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
 
     public function getCurrentStages(): Collection
     {
-        $stages = new Collection();
+        $stages = new Collection;
         $now = Carbon::now();
         $stage = $this->stage ?? CampaignStage::PENDING;
 
-        if (CampaignStage::IN_PROGRESS === $stage) {
+        if ($stage === CampaignStage::IN_PROGRESS) {
             $softStage = null;
             foreach (CampaignStage::softValues() as $tmp) {
                 $prop_start = $tmp . '_from';
@@ -359,7 +358,6 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
     public function finished(): bool
     {
         if ($this->manual) {
-            // TODO return true if all objectives are completed
             return false;
         }
 
@@ -402,10 +400,10 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
         $end = $this->dateEnd();
         $now = now();
         if ($start && $end) {
-            if ( ! $start instanceof Carbon) {
+            if (! $start instanceof Carbon) {
                 $start = Carbon::parse($start);
             }
-            if ( ! $end instanceof Carbon) {
+            if (! $end instanceof Carbon) {
                 $end = Carbon::parse($end);
             }
 
@@ -460,7 +458,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
 
     public function cancel(): bool
     {
-        if (CampaignStage::CANCELED !== $this->stage) {
+        if ($this->stage !== CampaignStage::CANCELED) {
             $this->stage = CampaignStage::CANCELED;
 
             foreach ($this->user_campaigns as $userCampaign) {
@@ -475,7 +473,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
 
     public function terminate(): bool
     {
-        if (CampaignStage::TERMINATED !== $this->stage) {
+        if ($this->stage !== CampaignStage::TERMINATED) {
             $this->stage = CampaignStage::TERMINATED;
 
             foreach ($this->user_campaigns as $userCampaign) {
@@ -490,7 +488,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
 
     public function resume(): bool
     {
-        if (CampaignStage::TERMINATED === $this->stage) {
+        if ($this->stage === CampaignStage::TERMINATED) {
             $this->stage = CampaignStage::IN_PROGRESS;
 
             foreach ($this->user_campaigns as $userCampaign) {
@@ -505,22 +503,22 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
 
     public function terminated(): bool
     {
-        return CampaignStage::TERMINATED === $this->stage;
+        return $this->stage === CampaignStage::TERMINATED;
     }
 
     public function canceled(): bool
     {
-        return CampaignStage::CANCELED === $this->stage;
+        return $this->stage === CampaignStage::CANCELED;
     }
 
     public function completed(): bool
     {
-        return CampaignStage::COMPLETED === $this->stage;
+        return $this->stage === CampaignStage::COMPLETED;
     }
 
     public function pending(): bool
     {
-        return CampaignStage::PENDING === $this->stage;
+        return $this->stage === CampaignStage::PENDING;
     }
 
     public function isActive(): bool
@@ -530,7 +528,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
 
     public function inProgress(): bool
     {
-        return CampaignStage::IN_PROGRESS === $this->stage;
+        return $this->stage === CampaignStage::IN_PROGRESS;
     }
 
     public function routeShow(): string
@@ -542,7 +540,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
     {
         $result = false;
         $exists = $this->user_campaigns()->where('user_id', $user_id)->exists();
-        if ( ! $exists) {
+        if (! $exists) {
             $user = User::find($user_id);
             if ($user) {
                 $result = $this->user_campaigns()->create([
@@ -569,9 +567,6 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
         return $result ? true : false;
     }
 
-    /**
-     * LOCAL SCOPES
-     */
     public function scopeWhereManual(Builder $query, int $manual): void
     {
         $query->where('manual', $manual);

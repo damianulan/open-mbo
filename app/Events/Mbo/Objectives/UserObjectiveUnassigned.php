@@ -14,9 +14,6 @@ class UserObjectiveUnassigned implements NotifiableEvent, ShouldDispatchAfterCom
     use Dispatchable;
     use SerializesModels;
 
-    /**
-     * Create a new event instance.
-     */
     public function __construct(
         public UserObjective $userObjective,
     ) {}

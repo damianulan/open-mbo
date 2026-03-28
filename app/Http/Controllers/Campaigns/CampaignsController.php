@@ -41,15 +41,13 @@ class CampaignsController extends AppController
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request, CampaignEditForm $form): RedirectResponse
     {
         $this->authorize('create', Campaign::class);
 
         $redirect = null;
         $service = null;
+
         try {
             $form->validate();
             $service = CreateOrUpdate::boot(request: $request)->execute();
@@ -68,9 +66,6 @@ class CampaignsController extends AppController
         return $this->returnResponseRedirect($redirect, $message ?? __('alerts.campaigns.error.create'));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Campaign $campaign): Renderable
     {
         $this->authorize('view', $campaign);
@@ -99,6 +94,7 @@ class CampaignsController extends AppController
 
         $redirect = null;
         $service = null;
+
         try {
             $form->validate();
 

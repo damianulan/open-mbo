@@ -40,7 +40,7 @@ class ResourceFactory
                 } else {
                     $class = $property->getType()->__toString();
                     if (class_exists($class)) {
-                        $value = new $class();
+                        $value = new $class;
                     }
                 }
 

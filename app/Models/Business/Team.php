@@ -6,11 +6,11 @@ use App\Casts\FormattedText;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Warden\RolesLib;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Illuminate\Support\Carbon;
 use Sentinel\Models\Role;
 use Spatie\Activitylog\Models\Activity;
 
@@ -19,9 +19,9 @@ use Spatie\Activitylog\Models\Activity;
  * @property string|null $leader_id
  * @property string $name
  * @property mixed|null $description
- * @property Carbon|null $deleted_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property CarbonImmutable|null $deleted_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read User|null $leader

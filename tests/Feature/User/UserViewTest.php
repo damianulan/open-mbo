@@ -9,7 +9,7 @@ use Tests\Traits\HasUserCollection;
 
 class UserViewTest extends TestCase
 {
-    use RefreshDatabase, HasUserCollection;
+    use HasUserCollection, RefreshDatabase;
 
     protected $seeder = TestDatabaseSeeder::class;
 
@@ -22,9 +22,6 @@ class UserViewTest extends TestCase
         $this->fillUsers();
     }
 
-    /**
-     * A basic feature test example.
-     */
     public function test_user_can_view_another_user(): void
     {
         $user = $this->userFactory();

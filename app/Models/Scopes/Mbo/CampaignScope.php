@@ -13,9 +13,6 @@ use Sentinel\Models\Role;
 
 class CampaignScope implements Scope
 {
-    /**
-     * Apply the scope to a given Eloquent query builder.
-     */
     public function apply(Builder $builder, Model $model): void
     {
         $builder->orderBy('campaigns.definition_from');

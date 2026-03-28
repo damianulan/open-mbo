@@ -24,9 +24,7 @@ class UsersDataTable extends DataTableService
     protected array $actions = ['csv', 'excel', 'json', 'column_selector', 'print'];
 
     /**
-     * Build the DataTable class.
-     *
-     * @param  QueryBuilder  $query  Results from query() method.
+     * @param QueryBuilder $query Results from query() method.
      */
     public function DataTable(QueryBuilder $query): DataTableBuilder
     {
@@ -47,7 +45,7 @@ class UsersDataTable extends DataTableService
                 ]);
             })
             ->orderColumn('status', function ($query, $order): void {
-                $o = 'asc' === $order ? 'desc' : 'asc';
+                $o = $order === 'asc' ? 'desc' : 'asc';
                 $query->orderBy('suspended_at', $o);
                 $query->orderBy('suspended_at', $o);
             })
@@ -84,9 +82,6 @@ class UsersDataTable extends DataTableService
             ->registerFilters($this->getFilterService());
     }
 
-    /**
-     * Get the query source of dataTable.
-     */
     public function query(User $model): QueryBuilder
     {
         return $model->newQuery()
@@ -147,9 +142,6 @@ class UsersDataTable extends DataTableService
         ];
     }
 
-    /**
-     * Get the filename for export.
-     */
     protected function filename(): string
     {
         return 'Users_' . date('YmdHis');

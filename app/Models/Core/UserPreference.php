@@ -2,12 +2,12 @@
 
 namespace App\Models\Core;
 
+use Carbon\CarbonImmutable;
 use FormForge\Traits\RequestForms;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
@@ -18,9 +18,9 @@ use Illuminate\Support\Carbon;
  * @property bool $app_notifications
  * @property bool $extended_notifications
  * @property bool $system_notifications
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property Carbon|null $deleted_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
+ * @property CarbonImmutable|null $deleted_at
  * @property-read User|null $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPreference newModelQuery()

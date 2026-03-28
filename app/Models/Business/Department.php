@@ -4,11 +4,11 @@ namespace App\Models\Business;
 
 use App\Models\BaseModel;
 use App\Models\Core\User;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Illuminate\Support\Carbon;
 use Sentinel\Models\Role;
 use Spatie\Activitylog\Models\Activity;
 
@@ -17,9 +17,9 @@ use Spatie\Activitylog\Models\Activity;
  * @property string $company_id
  * @property string $name
  * @property string|null $description
- * @property Carbon|null $deleted_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property CarbonImmutable|null $deleted_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read Collection<int, Department> $children

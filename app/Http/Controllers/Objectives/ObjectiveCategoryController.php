@@ -13,9 +13,6 @@ use Illuminate\View\View;
 
 class ObjectiveCategoryController extends MBOController
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(ObjectiveCategoriesDataTable $dataTable): Renderable|JsonResponse
     {
         $this->addPageNav();
@@ -25,9 +22,6 @@ class ObjectiveCategoryController extends MBOController
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create(ObjectiveCategoryEditForm $form): View
     {
         return view('pages.mbo.categories.edit', [
@@ -35,9 +29,6 @@ class ObjectiveCategoryController extends MBOController
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request, ObjectiveCategoryEditForm $form): RedirectResponse
     {
         $form->validate();
@@ -53,18 +44,8 @@ class ObjectiveCategoryController extends MBOController
         return redirect()->back()->with('error', __('alerts.error.operation'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  mixed  $id
-     */
     public function show($id): void {}
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  mixed  $id
-     */
     public function edit(ObjectiveTemplateCategory $objective, ObjectiveCategoryEditForm $form): View
     {
         return view('pages.mbo.categories.edit', [
@@ -73,11 +54,6 @@ class ObjectiveCategoryController extends MBOController
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  mixed  $id
-     */
     public function update(Request $request, ObjectiveTemplateCategory $objective, ObjectiveCategoryEditForm $form): RedirectResponse
     {
         $form->validate();
@@ -93,11 +69,6 @@ class ObjectiveCategoryController extends MBOController
         return redirect()->back()->with('error', __('alerts.error.operation'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  mixed  $id
-     */
     public function delete(ObjectiveTemplateCategory $objective): RedirectResponse
     {
         if ($objective->delete()) {

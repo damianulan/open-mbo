@@ -11,7 +11,7 @@ class PageMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        app()->instance('page', new PageBuilder());
+        app()->instance('page', new PageBuilder);
 
         return $next($request);
     }

@@ -19,7 +19,7 @@ class CreateAdminUserSeeder extends Seeder
             firstname: 'Site',
             lastname: 'Admin',
             role: 'admin',
-            core: true
+            core: true,
         );
 
         $this->upsertAdminUser(
@@ -74,7 +74,7 @@ class CreateAdminUserSeeder extends Seeder
 
         $user->save();
 
-        $profile = $user->profile ?? new UserProfile();
+        $profile = $user->profile ?? new UserProfile;
         $profile->birthday ??= fake()->dateTimeBetween('-40 years', '-20years');
         $user->profile()->save($profile);
 

@@ -13,9 +13,6 @@ use Illuminate\Support\ServiceProvider;
 
 class ConfigServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     */
     public function register(): void
     {
         $this->app->singleton('settings.general', fn () => app(GeneralSettings::class));
@@ -25,9 +22,6 @@ class ConfigServiceProvider extends ServiceProvider
         $this->app->singleton('settings.notifications', fn () => app(NotificationSettings::class));
     }
 
-    /**
-     * Bootstrap services.
-     */
     public function boot(): void
     {
         try {
@@ -36,12 +30,9 @@ class ConfigServiceProvider extends ServiceProvider
             return;
         }
         if (Schema::hasTable('settings')) {
-            // load settings from database and overwrite existing
-
             $general = app(GeneralSettings::class);
             $mail = app(MailSettings::class);
             config([
-                // GENERAL
                 'app.name' => $general->site_name ?? env('APP_NAME', 'OpenMBO'),
                 'app.debug' => $general->debug ?? env('APP_DEBUG', true),
                 'debugbar.enabled' => $general->debugbar ?? env('DEBUGBAR_ENABLED', true),
@@ -53,7 +44,6 @@ class ConfigServiceProvider extends ServiceProvider
                 'app.time_format' => $general->time_format ?? null,
                 'app.datetime_format' => $general->date_format && $general->time_format ? $general->date_format . ' ' . $general->time_format : null,
 
-                // SERVER
                 'mail.default' => $mail->mail_mailer ?? null,
                 'mail.mailers.smtp.host' => $mail->mail_host ?? null,
                 'mail.mailers.smtp.port' => $mail->mail_port ?? null,

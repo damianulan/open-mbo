@@ -40,7 +40,7 @@ class BreadcrumbRegistrationTest extends TestCase
             ->mapWithKeys(static fn ($route, string $routeName): array => [$routeName => count($route->parameterNames())]);
 
         $resolveParent = static function (string $routeName) use ($eligibleRouteNames, $routeParameterCounts): ?string {
-            if ('dashboard' === $routeName) {
+            if ($routeName === 'dashboard') {
                 return null;
             }
 
@@ -48,7 +48,7 @@ class BreadcrumbRegistrationTest extends TestCase
             $lastPart = end($parts);
             $parentCandidates = [];
 
-            if ('index' !== $lastPart && count($parts) > 1) {
+            if ($lastPart !== 'index' && count($parts) > 1) {
                 $base = implode('.', array_slice($parts, 0, -1));
                 $parentCandidates[] = $base . '.index';
             }
@@ -64,7 +64,7 @@ class BreadcrumbRegistrationTest extends TestCase
                     continue;
                 }
 
-                if ( ! $eligibleRouteNames->contains($candidate)) {
+                if (! $eligibleRouteNames->contains($candidate)) {
                     continue;
                 }
 
@@ -79,7 +79,7 @@ class BreadcrumbRegistrationTest extends TestCase
         };
 
         $missingBreadcrumbs = $eligibleRouteNames
-            ->filter(fn (string $routeName): bool => null !== $resolveParent($routeName))
+            ->filter(fn (string $routeName): bool => $resolveParent($routeName) !== null)
             ->reject(fn (string $routeName): bool => Breadcrumbs::exists($routeName))
             ->values();
 
@@ -103,16 +103,16 @@ class BreadcrumbRegistrationTest extends TestCase
                     'title' => $breadcrumb->title,
                     'url' => $breadcrumb->url,
                 ])
-                ->all()
+                ->all(),
         );
     }
 
     public function test_resolves_translation_aliases_for_hyphenated_route_names(): void
     {
         Lang::shouldReceive('hasForLocale')
-            ->andReturnUsing(static fn (string $key, ...$arguments): bool => 'menus.my_objectives.index' === $key);
+            ->andReturnUsing(static fn (string $key, ...$arguments): bool => $key === 'menus.my_objectives.index');
         Lang::shouldReceive('get')
-            ->andReturnUsing(static fn (string $key, ...$arguments): string => 'menus.my_objectives.index' === $key ? 'My objectives' : $key);
+            ->andReturnUsing(static fn (string $key, ...$arguments): string => $key === 'menus.my_objectives.index' ? 'My objectives' : $key);
 
         $breadcrumbs = Breadcrumbs::generate('my-objectives.index');
 
@@ -125,7 +125,7 @@ class BreadcrumbRegistrationTest extends TestCase
                     'title' => $breadcrumb->title,
                     'url' => $breadcrumb->url,
                 ])
-                ->all()
+                ->all(),
         );
     }
 }

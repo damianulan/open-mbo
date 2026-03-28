@@ -15,7 +15,7 @@ class CampaignObjectiveController extends AppController
     {
         $response = $form->validateJson();
 
-        if ('ok' === $response['status']) {
+        if ($response['status'] === 'ok') {
             $objective = Objective::fillFromRequest();
 
             if ($objective->save()) {
@@ -32,7 +32,7 @@ class CampaignObjectiveController extends AppController
     {
         $response = $form->validateJson();
 
-        if ('ok' === $response['status']) {
+        if ($response['status'] === 'ok') {
             $objective = Objective::fillFromRequest($objective->getKey());
 
             if ($objective->update()) {

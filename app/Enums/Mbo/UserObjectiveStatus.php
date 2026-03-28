@@ -10,35 +10,16 @@ enum UserObjectiveStatus: string
 
     case UNSTARTED = 'unstarted';
 
-    /**
-     * Objective in progress - can be marked as completed when deadline is not set and adding eveluation is possible
-     */
     case PROGRESS = 'progress';
 
-    /**
-     * Evaluation is in progress
-     */
     case COMPLETED = 'completed';
 
-    /**
-     * Objective marked as passed
-     */
     case PASSED = 'passed';
 
-    /**
-     * Objective marked as failed
-     */
     case FAILED = 'failed';
 
-    /**
-     * Objective interrupted - when involved in interrupted campaign or inactive campaign assignment
-     */
     case INTERRUPTED = 'interrupted';
 
-    /**
-     * Frozen values are not editable by most system processes that automatically change status..
-     * Passed, Failed, Interrupted
-     */
     public static function frozen(): array
     {
         return [
@@ -48,9 +29,6 @@ enum UserObjectiveStatus: string
         ];
     }
 
-    /**
-     * Passed, Failed
-     */
     public static function evaluated(): array
     {
         return [
@@ -59,9 +37,6 @@ enum UserObjectiveStatus: string
         ];
     }
 
-    /**
-     * Completed, Passed, Failed
-     */
     public static function finished(): array
     {
         return [
@@ -71,9 +46,6 @@ enum UserObjectiveStatus: string
         ];
     }
 
-    /**
-     * Completed, Passed, Failed, Interrupted
-     */
     public static function inactive(): array
     {
         return [

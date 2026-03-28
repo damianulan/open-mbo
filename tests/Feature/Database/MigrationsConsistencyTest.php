@@ -15,11 +15,11 @@ class MigrationsConsistencyTest extends TestCase
         foreach ($files as $file) {
             $contents = file_get_contents($file);
 
-            if (false === $contents) {
+            if ($contents === false) {
                 $this->fail('Unable to read migration file: ' . $file);
             }
 
-            if ( ! Str::contains($contents, 'public function down(): void')) {
+            if (! Str::contains($contents, 'public function down(): void')) {
                 $missingDown[] = basename($file);
             }
         }
@@ -35,7 +35,7 @@ class MigrationsConsistencyTest extends TestCase
         foreach ($files as $file) {
             $contents = file_get_contents($file);
 
-            if (false === $contents) {
+            if ($contents === false) {
                 $this->fail('Unable to read migration file: ' . $file);
             }
 
@@ -45,7 +45,7 @@ class MigrationsConsistencyTest extends TestCase
             $createdTables = $createMatches[1] ?? [];
             $droppedTables = $dropMatches[1] ?? [];
 
-            if ([] === $createdTables || [] === $droppedTables) {
+            if ($createdTables === [] || $droppedTables === []) {
                 continue;
             }
 

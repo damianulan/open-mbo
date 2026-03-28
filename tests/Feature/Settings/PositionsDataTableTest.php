@@ -9,7 +9,7 @@ class PositionsDataTableTest extends TestCase
 {
     public function test_positions_datatable_columns_match_position_attributes(): void
     {
-        $dataTable = new class() extends PositionsDataTable
+        $dataTable = new class extends PositionsDataTable
         {
             public function exposedDefaultColumns(): array
             {

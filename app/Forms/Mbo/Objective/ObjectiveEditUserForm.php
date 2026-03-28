@@ -9,7 +9,6 @@ use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
 use FormForge\FormBuilder;
 
-// Ajax form
 class ObjectiveEditUserForm extends Form
 {
     public function definition(FormBuilder $builder): FormBuilder
@@ -22,7 +21,7 @@ class ObjectiveEditUserForm extends Form
         if ($this->model) {
             $user_ids = UserObjective::where('objective_id', $this->model->id)->get()->pluck('user_id');
 
-            if ( ! empty($user_ids)) {
+            if (! empty($user_ids)) {
                 foreach ($user_ids as $tid) {
                     $selected[] = $tid;
                 }

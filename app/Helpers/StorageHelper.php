@@ -13,7 +13,7 @@ class StorageHelper
         foreach ($allowed_extensions as $ext) {
             $fullpath = $storagePath . '.' . $ext;
             if (Storage::fileExists($fullpath)) {
-                if ('svg' === $ext) {
+                if ($ext === 'svg') {
                     $url = Storage::get($fullpath);
                 }
                 $url = Storage::url($fullpath);
@@ -52,7 +52,7 @@ class StorageHelper
             if (Storage::fileExists($filepath)) {
                 $image = Storage::get($filepath);
                 $type = self::isSvg($image) ? 'svg' : 'image';
-                if ('svg' !== $type) {
+                if ($type !== 'svg') {
                     $image = Storage::url($filepath);
                 }
             }

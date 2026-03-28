@@ -10,14 +10,12 @@ use Symfony\Component\HttpFoundation\Response;
 class ModulesEnabled
 {
     /**
-     * Handle an incoming request.
-     *
-     * @param  Closure(Request): (Response)  $next
+     * @param Closure(Request): (Response) $next
      */
     public function handle(Request $request, Closure $next, string $module): Response
     {
         $verified = ModuleManager::check($module);
-        if ( ! $verified) {
+        if (! $verified) {
             unauthorized(__('alerts.system.unauthorized_module'));
         }
 

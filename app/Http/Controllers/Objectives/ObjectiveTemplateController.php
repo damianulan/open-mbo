@@ -9,9 +9,6 @@ use Illuminate\View\View;
 
 class ObjectiveTemplateController extends MBOController
 {
-    /**
-     * Show the application dashboard.
-     */
     public function index(): View
     {
         $this->addPageNav();
@@ -21,9 +18,6 @@ class ObjectiveTemplateController extends MBOController
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create(ObjectiveTemplateEditForm $form): View
     {
         return view('components.forms.edit', [
@@ -31,9 +25,6 @@ class ObjectiveTemplateController extends MBOController
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(ObjectiveTemplateEditForm $form): RedirectResponse
     {
         $form->validate();
@@ -48,19 +39,12 @@ class ObjectiveTemplateController extends MBOController
     }
 
     /**
-     * Display the specified resource.
-     *
      * @TODO add view
      *
-     * @param  int  $id
+     * @param int $id
      */
     public function show($id): void {}
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     */
     public function edit(ObjectiveTemplate $objective, ObjectiveTemplateEditForm $form): View
     {
         return view('components.forms.edit', [
@@ -69,11 +53,6 @@ class ObjectiveTemplateController extends MBOController
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     */
     public function update(ObjectiveTemplate $objective, ObjectiveTemplateEditForm $form): RedirectResponse
     {
         $form->validate();

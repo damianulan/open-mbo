@@ -3,18 +3,18 @@
 namespace App\Models\Business;
 
 use App\Models\BaseModel;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property string $id
  * @property string $name
  * @property string|null $description
- * @property Carbon|null $deleted_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property CarbonImmutable|null $deleted_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read Collection<int, UserEmployment> $employments
@@ -82,7 +82,7 @@ class TypeOfContract extends BaseModel
         'uod',
     ];
 
-    protected array $fillable = [
+    protected $fillable = [
         'name',
         'shortname',
         'description',

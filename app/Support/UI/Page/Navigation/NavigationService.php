@@ -53,8 +53,6 @@ class NavigationService implements NavigationContract
         return $this->hasTopbar() ? $this->topbar->render() : '';
     }
 
-    // PAGENAV
-
     public function hasPageNav(): bool
     {
         return Context::has('pagenav');
@@ -82,7 +80,7 @@ class NavigationService implements NavigationContract
 
     private function buildSidebar(): void
     {
-        if ( ! $this->validateSidebar()) {
+        if (! $this->validateSidebar()) {
             return;
         }
         $this->sidebar = SidebarNav::boot($this->sitename, [
@@ -105,10 +103,6 @@ class NavigationService implements NavigationContract
                 ->setIcon('crosshair')
                 ->setRoute('objectives.index')
                 ->permission('mbo-*'),
-            // MenuItem::make('reports')
-            //     ->setTitle(__('menus.reports.index'))
-            //     ->setIcon('bar-chart-steps')
-            //     ->setRoute('reports.index'),
             MenuItem::make('users')
                 ->setTitle(__('menus.users.index'))
                 ->setIcon('person-fill')
@@ -125,10 +119,10 @@ class NavigationService implements NavigationContract
 
     private function buildTopbar(): void
     {
-        if ( ! $this->validateTopbar()) {
+        if (! $this->validateTopbar()) {
             return;
         }
 
-        $this->topbar = new TopBar();
+        $this->topbar = new TopBar;
     }
 }

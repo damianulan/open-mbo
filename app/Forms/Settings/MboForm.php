@@ -29,7 +29,7 @@ class MboForm extends Form
                 fn (FormBuilder $builder) => $builder
                     ->add(FormComponent::switch('objectives_autofail', $this->objectives_autofail)->label(__('forms.settings.mbo.objectives_autofail'))->info(__('forms.settings.mbo.info.objectives_autofail'))->key(self::settingsKey('mbo.objectives_autofail')))
                     ->add(FormComponent::switch('objectives_self_final_evaluation', $this->objectives_self_final_evaluation)->label(__('forms.settings.mbo.objectives_self_final_evaluation'))->key(self::settingsKey('mbo.objectives_self_final_evaluation')))
-                    ->add(FormComponent::switch('objectives_weights', $this->objectives_weights)->label(__('forms.settings.mbo.objectives_weights'))->info(__('forms.settings.mbo.info.objectives_weights_autofail'))->key(self::settingsKey('mbo.objectives_weights')))
+                    ->add(FormComponent::switch('objectives_weights', $this->objectives_weights)->label(__('forms.settings.mbo.objectives_weights'))->info(__('forms.settings.mbo.info.objectives_weights_autofail'))->key(self::settingsKey('mbo.objectives_weights'))),
             )
             ->addSection(__('mbo.campaigns_full'), fn (FormBuilder $builder) => $builder
                 ->add(FormComponent::switch('campaigns_enabled', $this->campaigns_enabled)->label(__('forms.settings.mbo.campaigns_enabled'))->info(__('forms.settings.mbo.info.campaigns_enabled'))->key(self::settingsKey('mbo.campaigns_enabled')))

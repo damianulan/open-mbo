@@ -18,7 +18,7 @@ class BusinessSeeder extends Seeder
             $this->createContract($contract);
         }
 
-        if (0 === Position::query()->count()) {
+        if (Position::query()->count() === 0) {
             PositionFactory::seedPositions(30);
         }
 
@@ -29,7 +29,7 @@ class BusinessSeeder extends Seeder
         }
 
         Company::all()->each(function (Company $company): void {
-            if (0 === $company->departments()->count()) {
+            if ($company->departments()->count() === 0) {
                 $company->departments()->saveMany(Department::factory(fake()->numberBetween(4, 8))->make());
             }
         });

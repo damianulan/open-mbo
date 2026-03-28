@@ -36,17 +36,6 @@ use Laraverse\Config\Laraverse;
 use Livewire\Livewire;
 use Spatie\Health\Http\Controllers\HealthCheckResultsController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::middleware('web')->group(function (): void {
     Auth::routes();
 });
@@ -63,9 +52,6 @@ Route::middleware(['web', 'auth', 'maintenance', 'navigation'])->group(function 
 
     Laraverse::routes();
 
-    /**
-     * Users START
-     */
     Route::prefix('users')->name('users.')->group(function (): void {
         Route::get('/', [UsersController::class, 'index'])->name('index');
         Route::post('/', [UsersController::class, 'store'])->name('store');
@@ -109,13 +95,6 @@ Route::middleware(['web', 'auth', 'maintenance', 'navigation'])->group(function 
         Route::get('/', [MyObjectivesController::class, 'index'])->name('index');
     });
 
-    /**
-     * Users END
-     */
-
-    /**
-     * Settings START
-     */
     Route::prefix('settings')->name('settings.')->group(function (): void {
         Route::prefix('general')->name('general.')->group(function (): void {
             Route::get('/', [GeneralController::class, 'index'])->name('index');
@@ -197,9 +176,6 @@ Route::middleware(['web', 'auth', 'maintenance', 'navigation'])->group(function 
         });
     });
 
-    /**
-     * Management START
-     */
     Route::prefix('mbo')->middleware('module:mbo')->group(function (): void {
         Route::prefix('templates')->name('templates.')->group(function (): void {
             Route::get('/', [ObjectiveTemplateController::class, 'index'])->name('index');
@@ -282,7 +258,4 @@ Route::middleware(['web', 'auth', 'maintenance', 'navigation'])->group(function 
         Route::get('/get_model_instance', [AjaxController::class, 'getModelInstance'])->name('get_model_instance');
     });
 
-    // Route::fallback(function () {
-    //     return redirect()->route('dashboard')->with('error', 'Nie znaleziono strony');
-    // })->name('fallback');
 });

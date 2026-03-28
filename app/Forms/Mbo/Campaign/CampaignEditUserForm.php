@@ -9,7 +9,6 @@ use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
 use FormForge\FormBuilder;
 
-// Ajax form
 class CampaignEditUserForm extends Form
 {
     public function definition(FormBuilder $builder): FormBuilder
@@ -23,12 +22,12 @@ class CampaignEditUserForm extends Form
             $user_ids = UserCampaign::where('campaign_id', $this->model->id)->get()->pluck('user_id');
             $coordinators = $this->model->coordinators->pluck('id')->toArray();
 
-            if ( ! empty($user_ids)) {
+            if (! empty($user_ids)) {
                 foreach ($user_ids as $tid) {
                     $selected[] = $tid;
                 }
             }
-            if ( ! empty($coordinators)) {
+            if (! empty($coordinators)) {
                 foreach ($coordinators as $tid) {
                     $exclude[] = ['id' => $tid];
                 }

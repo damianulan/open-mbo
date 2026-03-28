@@ -10,8 +10,8 @@ use Tests\Traits\HasUserCollection;
 
 class UsersControllerTest extends TestCase
 {
-    use RefreshDatabase;
     use HasUserCollection;
+    use RefreshDatabase;
 
     protected $seeder = TestDatabaseSeeder::class;
 

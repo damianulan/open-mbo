@@ -22,25 +22,14 @@ use Throwable;
 
 class UserObjectiveController extends AppController
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(): void {}
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create(): void {}
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request): void {}
 
     /**
-     * Display the specified resource.
-     *
-     * @param  mixed  $id
+     * @param mixed $id
      */
     public function show(Request $request, int|string $id): View
     {
@@ -63,18 +52,13 @@ class UserObjectiveController extends AppController
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  mixed  $id
-     */
     public function edit($id): void {}
 
     public function update(Request $request, Objective $objective, ObjectiveEditUserForm $form): JsonResponse
     {
         $response = $form->validateJson($request, $objective->getKey());
 
-        if ('ok' === $response['status']) {
+        if ($response['status'] === 'ok') {
             $service = BulkAssignUsers::boot(request: $request, objective: $objective)->execute();
 
             if ($service->passed()) {
@@ -87,11 +71,6 @@ class UserObjectiveController extends AppController
         return response()->json($response);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  mixed  $id
-     */
     public function destroy($id): void {}
 
     public function addUsers(Request $request, int|string|null $id): View
@@ -134,13 +113,13 @@ class UserObjectiveController extends AppController
         try {
             $userObjective = UserObjective::findOrFail($id);
 
-            if ( ! $userObjective->canBeEvaluated()) {
-                throw new NoPermissionException();
+            if (! $userObjective->canBeEvaluated()) {
+                throw new NoPermissionException;
             }
 
             $response = $form->validateJson();
 
-            if ('ok' === $response['status']) {
+            if ($response['status'] === 'ok') {
                 $service = UserRealizationUpdate::boot(request: $request, userObjective: $userObjective)->execute();
 
                 if ($service->passed()) {
@@ -151,7 +130,7 @@ class UserObjectiveController extends AppController
 
                 $errors = $service->getErrors();
 
-                if ( ! empty($errors)) {
+                if (! empty($errors)) {
                     $response['message'] = $errors[0];
                 }
             } else {
@@ -173,7 +152,7 @@ class UserObjectiveController extends AppController
             DB::transaction(function () use ($id): void {
                 $userObjective = UserObjective::findOrFail($id);
 
-                if ( ! $userObjective->canBePassed()) {
+                if (! $userObjective->canBePassed()) {
                     throw new AppException(__('alerts.user_objectives.error.set_passed'));
                 }
 
@@ -194,7 +173,7 @@ class UserObjectiveController extends AppController
             DB::transaction(function () use ($id): void {
                 $userObjective = UserObjective::findOrFail($id);
 
-                if ( ! $userObjective->canBeFailed()) {
+                if (! $userObjective->canBeFailed()) {
                     throw new AppException(__('alerts.user_objectives.error.set_failed'));
                 }
 

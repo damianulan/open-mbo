@@ -1,0 +1,65 @@
+name: Line Length Check
+
+on:
+  pull_request:
+    branches:
+      - dev
+      - staging
+
+jobs:
+  check-line-length:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fail on lines over 120 characters
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+
+          max_length=120
+          has_errors=0
+
+          mapfile -t files < <(git diff --name-only --diff-filter=AM "$BASE_SHA" "$HEAD_SHA")
+
+          if [ "${#files[@]}" -eq 0 ]; then
+            echo "No added or modified files to check."
+            exit 0
+          fi
+
+          for file in "${files[@]}"; do
+            if [ ! -f "$file" ]; then
+              continue
+            fi
+
+            if ! grep -Iq . "$file"; then
+              continue
+            fi
+
+            while IFS=: read -r line_number line_length; do
+              [ -n "$line_number" ] || continue
+
+              echo "::error file=$file,line=$line_number::Line exceeds ${max_length} characters (${line_length})."
+              printf '%s:%s exceeds %s characters (%s)\n' "$file" "$line_number" "$max_length" "$line_length"
+              has_errors=1
+            done < <(
+              awk -v max_length="$max_length" '
+                length($0) > max_length {
+                  printf "%d:%d\n", NR, length($0)
+                }
+              ' "$file"
+            )
+          done
+
+          if [ "$has_errors" -ne 0 ]; then
+            echo "Line length check failed."
+            exit 1
+          fi
+
+          echo "Line length check passed."

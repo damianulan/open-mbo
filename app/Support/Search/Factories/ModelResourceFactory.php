@@ -14,7 +14,7 @@ class ModelResourceFactory
 {
     public static function getResource(Model $model): ?IndexResource
     {
-        $resources = (new SearchResourceScope())->get();
+        $resources = (new SearchResourceScope)->get();
         foreach ($resources as $resource) {
             if ($resource::getModelClass() === $model::class) {
                 return new $resource($model);
@@ -31,11 +31,11 @@ class ModelResourceFactory
             $resource = self::getResource($model);
         }
 
-        if ( ! $resource) {
+        if (! $resource) {
             throw new Exception("No resource found for model [{$class}]");
         }
 
-        if ( ! $model->exists) {
+        if (! $model->exists) {
             throw new Exception("Model [{$class}] does not exist as a database record");
         }
 
@@ -46,13 +46,14 @@ class ModelResourceFactory
     {
         $class = $model::class;
         $resource = self::getResource($model);
+
         try {
             DB::beginTransaction();
-            if ( ! $resource) {
+            if (! $resource) {
                 throw new Exception("No resource found for model [{$class}]");
             }
 
-            if ( ! $model->exists) {
+            if (! $model->exists) {
                 throw new Exception("Model [{$class}] does not exist as a database record");
             }
 
@@ -60,17 +61,17 @@ class ModelResourceFactory
 
             foreach ($resource->attributes() as $attribute => $value) {
 
-                if ( ! empty($value)) {
+                if (! empty($value)) {
                     $trigrams = self::getTrigrams(self::normalizeValue($value));
 
                     foreach ($trigrams as $trigram) {
-                        $index = new IndexModel();
+                        $index = new IndexModel;
                         $index->source_type = $class;
                         $index->source_id = $model->id;
                         $index->attribute = $attribute;
                         $index->trigram = $trigram;
                         if (self::validateIndex($index, $model)) {
-                            if ( ! $index->save()) {
+                            if (! $index->save()) {
                                 throw new Exception("Failed to save index for model [{$class}] [{$model->id}]");
                             }
                         }
@@ -80,6 +81,7 @@ class ModelResourceFactory
             DB::commit();
         } catch (Throwable $th) {
             DB::rollBack();
+
             throw $th;
         }
     }

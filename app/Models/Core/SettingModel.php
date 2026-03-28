@@ -2,8 +2,8 @@
 
 namespace App\Models\Core;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
@@ -11,8 +11,8 @@ use Illuminate\Support\Carbon;
  * @property string $name
  * @property bool $locked
  * @property string $payload
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SettingModel newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SettingModel newQuery()

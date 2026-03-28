@@ -18,7 +18,7 @@ class CampaignEditForm extends Form
         $method = 'POST';
         $selected = [];
         $campaign = null;
-        if ( ! is_null($this->model)) {
+        if (! is_null($this->model)) {
             $method = 'PUT';
             $route = route('campaigns.update', $this->model->id);
             $campaign = Campaign::find($this->model->id);

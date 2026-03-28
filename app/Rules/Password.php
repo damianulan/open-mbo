@@ -33,9 +33,9 @@ class Password extends PasswordRule
                 ...$this->customRules,
             ]],
             $this->validator->customMessages,
-            $this->validator->customAttributes
+            $this->validator->customAttributes,
         )->after(function ($validator) use ($attribute, $value): void {
-            if ( ! is_string($value)) {
+            if (! is_string($value)) {
                 return;
             }
 

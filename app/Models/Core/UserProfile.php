@@ -3,12 +3,12 @@
 namespace App\Models\Core;
 
 use App\Traits\HasEnigmaAttributes;
+use Carbon\CarbonImmutable;
 use FormForge\Traits\RequestForms;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
@@ -16,9 +16,9 @@ use Illuminate\Support\Carbon;
  * @property string|null $birthday
  * @property string|null $phone
  * @property string|null $avatar
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property Carbon|null $deleted_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
+ * @property CarbonImmutable|null $deleted_at
  * @property-read User|null $user
  *
  * @method static \Database\Factories\Core\UserProfileFactory factory($count = null, $state = [])

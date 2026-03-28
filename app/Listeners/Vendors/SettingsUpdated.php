@@ -13,9 +13,6 @@ class SettingsUpdated implements ShouldQueueAfterCommit
 
     public int $timeout = 180;
 
-    /**
-     * Handle the event.
-     */
     public function handle(SavingSettings $event): void
     {
         $settings = $event->settings;
@@ -25,14 +22,14 @@ class SettingsUpdated implements ShouldQueueAfterCommit
             $original = $originalValues->toArray();
             $dirty = array_filter($properties->toArray(), function (mixed $value, mixed $key) use ($original) {
                 $old = $original[$key] ?? null;
-                if (null === $old) {
+                if ($old === null) {
                     return false;
                 }
 
                 return $old !== $value;
             }, ARRAY_FILTER_USE_BOTH);
 
-            if ( ! empty($dirty)) {
+            if (! empty($dirty)) {
                 $this->processChanges($dirty, $original);
             }
         }

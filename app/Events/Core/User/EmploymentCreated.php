@@ -11,10 +11,7 @@ class EmploymentCreated
     use Dispatchable;
     use SerializesModels;
 
-    /**
-     * Create a new event instance.
-     */
     public function __construct(
-        public UserEmployment $employment
+        public UserEmployment $employment,
     ) {}
 }

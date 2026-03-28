@@ -14,11 +14,8 @@ class UserObjectiveAssigned implements NotifiableEvent, ShouldDispatchAfterCommi
     use Dispatchable;
     use SerializesModels;
 
-    /**
-     * Create a new event instance.
-     */
     public function __construct(
-        public UserObjective $userObjective
+        public UserObjective $userObjective,
     ) {}
 
     public static function description(): string

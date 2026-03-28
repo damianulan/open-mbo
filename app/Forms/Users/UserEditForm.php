@@ -20,7 +20,7 @@ class UserEditForm extends Form
         $exclude = [];
         $selected = [];
         $profile = null;
-        if ( ! is_null($this->model)) {
+        if (! is_null($this->model)) {
             $method = 'PUT';
             $route = route('users.update', $this->model->id);
             $profile = $this->model->profile;
@@ -42,7 +42,7 @@ class UserEditForm extends Form
                 ->label(__('forms.users.roles')))
             ->add(FormComponent::multiselect('supervisors_ids', $selected, Dictionary::fromModel(User::class, 'name', 'allActive', $exclude))
                 ->label(__('forms.users.supervisors')))
-            ->when( ! is_null($this->model), function (FormBuilder $builder): void {
+            ->when(! is_null($this->model), function (FormBuilder $builder): void {
                 $builder->addButton(new Button(title: __('buttons.add_employment'), classes: 'btn-outline-primary add-employment'));
             })
             ->addSubmit();

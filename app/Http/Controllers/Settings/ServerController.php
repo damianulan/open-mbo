@@ -13,14 +13,11 @@ use Illuminate\View\View;
 
 class ServerController extends SettingsController
 {
-    /**
-     * Show the application dashboard.
-     */
     public function index(): View
     {
         $gitText = __('globals.no_data');
 
-        if ( ! empty(config('app.head'))) {
+        if (! empty(config('app.head'))) {
             $gitText = 'On branch <strong>' . config('app.head') . '</strong>';
         }
 
@@ -58,7 +55,7 @@ class ServerController extends SettingsController
     {
         $command = Artisan::call('optimize:clear');
 
-        if (0 === $command) {
+        if ($command === 0) {
             return redirect()->back()->with('success', __('alerts.settings.success.cache_clear'));
         }
 

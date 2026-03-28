@@ -8,20 +8,14 @@ use Illuminate\View\Component;
 
 class IconComponent extends Component
 {
-    /**
-     * Create a new component instance.
-     */
     public function __construct(
         public string $key,
         public int $ml = 0,
         public int $mr = 0,
         public string $classes = '',
-        public bool $bi = false
+        public bool $bi = false,
     ) {}
 
-    /**
-     * Get the view / contents that represent the component.
-     */
     public function render(): View|Closure|string
     {
         if ($this->bi) {
@@ -34,7 +28,7 @@ class IconComponent extends Component
             $this->classes .= ' me-' . $this->mr;
         }
 
-        if ( ! empty($this->classes)) {
+        if (! empty($this->classes)) {
             $this->classes = ' ' . $this->classes;
         }
 

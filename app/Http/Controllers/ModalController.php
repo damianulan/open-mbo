@@ -41,19 +41,19 @@ class ModalController extends AppController
 
         $partials = explode('@', $target);
 
-        if (2 !== count($partials)) {
+        if (count($partials) !== 2) {
             throw new Exception('Modal target must be in format "controller@method".');
         }
 
         [$controller, $method] = $partials;
 
-        if ( ! class_exists($controller)) {
+        if (! class_exists($controller)) {
             throw new Exception('Modal controller could not be resolved.');
         }
 
         $datas = $request->input('datas', []);
 
-        if (is_array($datas) && [] !== $datas) {
+        if (is_array($datas) && $datas !== []) {
             $request->request->add($datas);
         }
 
@@ -62,7 +62,7 @@ class ModalController extends AppController
             id: $datas['id'] ?? null,
         );
 
-        if ( ! $view instanceof View) {
+        if (! $view instanceof View) {
             throw new Exception('Modal method must return a Illuminate\View\View instance.');
         }
 

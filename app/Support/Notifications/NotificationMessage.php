@@ -32,14 +32,12 @@ class NotificationMessage
     private bool $valid = false;
 
     /**
-     * Construct message from parameters
-     *
-     * @param  array  $datas  - models to match notification resources or additional placeholder data
+     * @param array $datas - models to match notification resources or additional placeholder data
      */
     public function __construct(
         protected Notification $notification,
         protected Model $notifiable,
-        protected array $datas = []
+        protected array $datas = [],
     ) {
         foreach ($datas as $key => $value) {
             if ($value instanceof Model) {
@@ -47,7 +45,7 @@ class NotificationMessage
                 $this->addPlaceholders($resource);
             } else {
                 if (is_object($value) || is_array($value)) {
-                    throw new NotificationPlaceholderNotRecognized();
+                    throw new NotificationPlaceholderNotRecognized;
                 }
 
                 $this->addDatas($key, $value);
@@ -90,7 +88,7 @@ class NotificationMessage
 
                 if ($mail && config('notifications.email_notifications')) {
                     $mailSent = Mail::to($this->notifiable)->send($mail);
-                    if ( ! $mailSent) {
+                    if (! $mailSent) {
                         $result = false;
                     } else {
                         $toMail = MailNotification::create([
@@ -138,7 +136,7 @@ class NotificationMessage
 
     private function addPlaceholders($resource): void
     {
-        if ( ! is_null($resource) && is_object($resource)) {
+        if (! is_null($resource) && is_object($resource)) {
             if ($resource instanceof NotificationResource) {
                 $class = get_class($resource->getModel());
                 $this->resources[$class] = $resource->getKey();
@@ -147,14 +145,6 @@ class NotificationMessage
                 }
             }
         }
-        // else {
-        //     if(!is_null($resource)){
-        //         $resource = is_object($resource) ? get_class($resource) : $resource;
-        //         throw new Exception('Given notification resource ' . $resource . ' is not of type ' . NotificationResource::class);
-        //     } else {
-        //         throw new Exception('Given notification resource cannot be null');
-        //     }
-        // }
     }
 
     private function addDatas(string $key, $value): void

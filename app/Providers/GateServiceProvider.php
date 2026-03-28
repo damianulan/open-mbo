@@ -15,14 +15,8 @@ use Illuminate\Support\ServiceProvider;
 
 class GateServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     */
     public function register(): void {}
 
-    /**
-     * Bootstrap services.
-     */
     public function boot(): void
     {
         Gate::policy(Campaign::class, CampaignPolicy::class);

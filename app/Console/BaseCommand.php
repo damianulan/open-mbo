@@ -28,7 +28,7 @@ class BaseCommand extends Command
             $duration = "{$seconds}. {$milliseconds}";
         }
 
-        if ( ! empty($duration)) {
+        if (! empty($duration)) {
             $properties['duration'] = $duration;
         }
 

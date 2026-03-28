@@ -29,7 +29,7 @@ class SearchEngine
 
     public function get(): Collection
     {
-        return $this->canSearch() ? $this->query()->get()->map(fn (IndexModel $index) => $index->resource?->resultItem($this->input)) : new Collection();
+        return $this->canSearch() ? $this->query()->get()->map(fn (IndexModel $index) => $index->resource?->resultItem($this->input)) : new Collection;
     }
 
     public function getPaginator(int $perPage = 20): LengthAwarePaginator

@@ -6,26 +6,18 @@ use Sentinel\Config\Warden\PermissionWarden;
 
 final class PermissionsLib extends PermissionWarden
 {
-    // core
     public const string TELESCOPE_VIEW = 'telescope-view';
 
     public const string MAINTENANCE = 'maintenance';
 
-    // global
-
-    /**
-     * When retrieving models, ignore contextual assignments.
-     */
     public const string MBO_ADMINISTRATION = 'mbo-administration';
 
-    // users
     public const string USERS_IMPERSONATE = 'users-impersonate';
 
     public const string USERS_LIST = 'users-list';
 
     public const string USERS_VIEW = 'users-view';
 
-    // preview of any user profile but with basic data only
     public const string USERS_PREVIEW = 'users-preview';
 
     public const string USERS_VIEW_DELETED = 'users-view-deleted';
@@ -46,7 +38,6 @@ final class PermissionsLib extends PermissionWarden
 
     public const string USERS_PASSWORD_RESET = 'users-password-reset';
 
-    // settings
     public const string SETTINGS_GENERAL = 'settings-general';
 
     public const string SETTINGS_MODULES = 'settings-modules';
@@ -67,19 +58,12 @@ final class PermissionsLib extends PermissionWarden
 
     public const string SETTINGS_REPORTS = 'settings-reports';
 
-    // management
     public const string MBO_TEMPLATES = 'mbo-templates';
 
     public const string MBO_CATEGORIES = 'mbo-categories';
 
-    // reports
     public const string REPORTS_VIEW = 'reports-view';
 
-    // mbo
-
-    /**
-     * viewing always all objective templates
-     */
     public const string MBO_TEMPLATES_VIEW = 'mbo-templates-view';
 
     public const string MBO_TEMPLATES_CREATE = 'mbo-templates-create';
@@ -96,9 +80,6 @@ final class PermissionsLib extends PermissionWarden
 
     public const string MBO_CATEGORIES_DELETE = 'mbo-categories-delete';
 
-    /**
-     * Viewing always all campaigns
-     */
     public const string MBO_CAMPAIGN_VIEW = 'mbo-campaign-view';
 
     public const string MBO_CAMPAIGN_PREVIEW = 'mbo-campaign-preview';
@@ -144,11 +125,8 @@ final class PermissionsLib extends PermissionWarden
     public static function assignable(): array
     {
         return [
-            // global
-
             self::MBO_ADMINISTRATION => ['admins', 'admin_mbo'],
 
-            // users
             self::USERS_IMPERSONATE => ['admins'],
             self::USERS_LIST => ['admins', 'admin_mbo', 'admin_hr', 'supervisor'], // and probably any other superior roles and team leader @TODO later
             self::USERS_VIEW => ['admins', 'admin_mbo', 'admin_hr', 'supervisor'], // and probably any other superior roles and team leader @TODO later
@@ -156,33 +134,29 @@ final class PermissionsLib extends PermissionWarden
             self::USERS_VIEW_DELETED => ['admins'],
             self::USERS_EMPLOYMENTS_MANAGE => ['admins', 'admin_hr'],
             self::USERS_CREATE => ['admins'],
-            self::USERS_EDIT => ['admins', 'admin_hr'], // includes assigning assignable roles (not based on role context)
+            self::USERS_EDIT => ['admins', 'admin_hr'],
             self::USERS_TEAMS => ['admins', 'admin_hr'],
             self::USERS_DELETE => ['admins'],
             self::USERS_RESTORE => ['admins'],
             self::USERS_BLOCK => ['admins', 'admin_hr'],
             self::USERS_PASSWORD_RESET => ['admins', 'admin_hr', 'supervisor'],
 
-            // settings
             self::SETTINGS_GENERAL => ['admins'],
             self::SETTINGS_MODULES => ['admins'],
             self::SETTINGS_INTEGRATIONS => ['admins'],
             self::SETTINGS_SERVER => ['admins'],
             self::SETTINGS_LOGS => ['admins'],
             self::SETTINGS_USERS => ['admins', 'admin_hr'],
-            self::SETTINGS_ROLES => ['admins'], // role/permission manipulations
+            self::SETTINGS_ROLES => ['admins'],
             self::SETTINGS_ORGANIZATION => ['admins'],
             self::SETTINGS_NOTIFICATIONS => ['admins'],
             self::SETTINGS_REPORTS => ['admins'],
 
-            // management
             self::MBO_TEMPLATES => ['admins', 'admin_mbo', 'objective_coordinator'],
             self::MBO_CATEGORIES => ['admins', 'admin_mbo'],
 
-            // reports
             self::REPORTS_VIEW => ['admins', 'admin_mbo', 'admin_hr', 'supervisor'], // and probably any other superior roles and team leader @TODO later
 
-            // mbo
             self::MBO_TEMPLATES_VIEW => ['admins', 'admin_mbo', 'objective_coordinator'],
             self::MBO_TEMPLATES_CREATE => ['admins', 'admin_mbo', 'objective_coordinator'],
             self::MBO_TEMPLATES_UPDATE => ['admins', 'admin_mbo', 'objective_coordinator'],
@@ -199,8 +173,8 @@ final class PermissionsLib extends PermissionWarden
             self::MBO_CAMPAIGN_UPDATE => ['admins', 'admin_mbo', 'campaign_coordinator'],
             self::MBO_CAMPAIGN_DELETE => ['admins', 'admin_mbo'],
             self::MBO_CAMPAIGN_TERMINATE => ['admins', 'admin_mbo', 'campaign_coordinator'],
-            self::MBO_CAMPAIGN_CANCEL => ['admins', 'admin_mbo'], // operation is not reversible -- keep it strict
-            self::MBO_CAMPAIGN_MANAGE_OBJECTIVES => ['admins', 'admin_mbo', 'campaign_coordinator'], // adding/removing users and objectives to/from campaign.
+            self::MBO_CAMPAIGN_CANCEL => ['admins', 'admin_mbo'],
+            self::MBO_CAMPAIGN_MANAGE_OBJECTIVES => ['admins', 'admin_mbo', 'campaign_coordinator'],
             self::MBO_CAMPAIGN_MANAGE_USERS => ['admins', 'admin_mbo', 'campaign_coordinator'],
             self::MBO_CAMPAIGN_MANAGE_MANUAL => ['admins', 'admin_mbo', 'campaign_coordinator'],
 

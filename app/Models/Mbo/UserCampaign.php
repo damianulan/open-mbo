@@ -12,11 +12,11 @@ use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Traits\Guards\Mbo\CanUserCampaign;
 use App\Traits\HasCharts;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Activity;
 
 /**
@@ -26,9 +26,9 @@ use Spatie\Activitylog\Models\Activity;
  * @property CampaignStage $stage User current campaign stage
  * @property bool $manual User will not be automatically moved between stages.
  * @property bool $active Is visible to users.
- * @property Carbon|null $deleted_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property CarbonImmutable|null $deleted_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read Campaign|null $campaign
@@ -188,7 +188,7 @@ class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
 
     public function terminate(): bool
     {
-        if (CampaignStage::TERMINATED !== $this->stage) {
+        if ($this->stage !== CampaignStage::TERMINATED) {
             $this->stage = CampaignStage::TERMINATED;
 
             return $this->update();
@@ -206,7 +206,7 @@ class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
 
     public function cancel(): bool
     {
-        if (CampaignStage::CANCELED !== $this->stage) {
+        if ($this->stage !== CampaignStage::CANCELED) {
             $this->stage = CampaignStage::CANCELED;
 
             return $this->update();
@@ -258,9 +258,6 @@ class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
         return $this->manual || $this->campaign?->manual;
     }
 
-    /**
-     * Sets users' objectives statuses based on campaign stage changes.
-     */
     public function mapObjectiveStatus(): void
     {
         $this->user_objectives()->chunk(config('app.chunk_default'), function (Collection $assignments): void {

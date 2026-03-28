@@ -2,9 +2,9 @@
 
 namespace App\Models\Vendor;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Activitylog\Models\Activity;
@@ -20,8 +20,8 @@ use Spatie\Activitylog\Models\Activity;
  * @property string|null $causer_id
  * @property Collection<array-key, mixed>|null $properties
  * @property string|null $batch_uuid
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
  * @property-read Model|null $causer
  * @property-read Collection $changes
  * @property-read Model|null $subject

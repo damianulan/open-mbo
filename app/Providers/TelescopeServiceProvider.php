@@ -12,13 +12,8 @@ use Spatie\LaravelSettings\Events\SettingsLoaded;
 
 class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
-        // Telescope::night();
-
         $this->hideSensitiveRequestDetails();
 
         Telescope::filter(function (IncomingEntry $entry) {
@@ -30,7 +25,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
 
     protected function entryLocal(IncomingEntry $entry): bool
     {
-        return ( ! ($entry->isEvent() && ! $this->filterEvents($entry))) || (EntryType::JOB === $entry->type && $entry->isFailedJob());
+        return (! ($entry->isEvent() && ! $this->filterEvents($entry))) || ($entry->type === EntryType::JOB && $entry->isFailedJob());
     }
 
     protected function entryDevelopment(IncomingEntry $entry): bool
@@ -60,9 +55,6 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
             $entry->hasMonitoredTag();
     }
 
-    /**
-     * Prevent sensitive request details from being logged by Telescope.
-     */
     protected function hideSensitiveRequestDetails(): void
     {
         if ($this->app->environment('local')) {
@@ -78,11 +70,6 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
         ]);
     }
 
-    /**
-     * Register the Telescope gate.
-     *
-     * This gate determines who can access Telescope in non-local environments.
-     */
     protected function gate(): void
     {
         Gate::define('viewTelescope', fn ($user) => $user->can('telescope-view'));

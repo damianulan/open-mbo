@@ -15,7 +15,7 @@ class DepartmentEditForm extends Form
         $route = route('settings.organization.departments.store');
         $method = 'POST';
 
-        if ( ! is_null($this->model)) {
+        if (! is_null($this->model)) {
             $method = 'PUT';
             $route = route('settings.organization.departments.update', $this->model->id);
         }

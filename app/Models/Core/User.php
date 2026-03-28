@@ -31,6 +31,7 @@ use App\Traits\UserMBO;
 use App\Traits\Vendors\Impersonable;
 use App\Traits\Vendors\ModelActivity;
 use App\Warden\PermissionsLib;
+use Carbon\CarbonImmutable;
 use FormForge\Traits\RequestForms;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Builder;
@@ -40,7 +41,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -73,16 +73,16 @@ use Spatie\ModelStatus\Status;
  * @property string|null $lastname_hash
  * @property string|null $username
  * @property string|null $username_hash
- * @property Carbon|null $email_verified_at
+ * @property CarbonImmutable|null $email_verified_at
  * @property string $password
  * @property string|null $gender
  * @property int $core Core user - comes as default with the application - cannot be deleted
  * @property int $force_password_change Force user to change password after first login
  * @property string|null $remember_token
  * @property string|null $suspended_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property Carbon|null $deleted_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
+ * @property CarbonImmutable|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, ActivityModel> $activity
@@ -187,7 +187,6 @@ use Spatie\ModelStatus\Status;
 #[ScopedBy(CoreUsersScope::class)]
 class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 {
-    use UUID;
     use CascadeDeletes;
     use Commentable;
     use Commentator;
@@ -196,6 +195,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     use HasEnigmaAttributes;
     use HasFactory;
     use HasRolesAndPermissions;
+    use HasStatuses;
     use Impersonable;
     use Impersonate;
     use IsTranslated;
@@ -207,8 +207,8 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     use UserBusiness;
     use UserHasPreferences;
     use UserMBO;
+    use UUID;
     use VirginModel;
-    use HasStatuses;
 
     protected $fillable = [
         'email',
@@ -272,7 +272,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function generatePassword($password = null)
     {
-        if ( ! $password) {
+        if (! $password) {
             $password = $this->getNewPassword();
         }
         $this->password = Hash::make($password);
@@ -302,7 +302,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function toggleLock(): bool
     {
-        if (null === $this->suspended_at) {
+        if ($this->suspended_at === null) {
             $this->suspended_at = now();
         } else {
             $this->suspended_at = null;
@@ -328,7 +328,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function isCore(): bool
     {
-        return 1 === $this->core;
+        return $this->core === 1;
     }
 
     public function getAvatar(): ?string
@@ -385,7 +385,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         $letterNum = Alphabet::getAlphabetPosition($initials);
 
         $color = 'primary';
-        if ( ! $this->isAdmin()) {
+        if (! $this->isAdmin()) {
             if ($letterNum < 4) {
                 $color = 'orange';
             } elseif ($letterNum < 8) {
@@ -403,7 +403,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         }
 
         $indicator = '';
-        if ( ! $this->itsMe() && $this->isLoggedIn()) {
+        if (! $this->itsMe() && $this->isLoggedIn()) {
             $indicator = '<div class="profile-indicator"></div>';
         }
 
@@ -455,7 +455,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     public function preferredLocale()
     {
         $locale = $this->preferences->lang ?? 'auto';
-        if ('auto' === $locale) {
+        if ($locale === 'auto') {
             $locale = app()->getLocale();
         }
 
@@ -505,7 +505,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     protected function sessions(): Attribute
     {
         return Attribute::make(
-            get: fn (): Collection => 'database' === config('session.driver') ? DB::table('sessions')->where('user_id', $this->id)->orderByDesc('last_activity')->get() : new Collection(),
+            get: fn (): Collection => config('session.driver') === 'database' ? DB::table('sessions')->where('user_id', $this->id)->orderByDesc('last_activity')->get() : new Collection,
         );
     }
 }

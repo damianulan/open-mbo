@@ -10,19 +10,16 @@ class UserObserver
 {
     public function creating(User $user): User
     {
-        if ( ! isset($user->password) || empty($user->password)) {
+        if (! isset($user->password) || empty($user->password)) {
             $user->generatePassword();
         }
-        if ( ! $user->username) {
+        if (! $user->username) {
             $user->username = Str::ascii(Str::lower($user->firstname . '.' . $user->lastname));
         }
 
         return $user;
     }
 
-    /**
-     * Handle the User "created" event.
-     */
     public function created(User $user): void
     {
         if ($user->password) {
@@ -38,9 +35,6 @@ class UserObserver
         return $user;
     }
 
-    /**
-     * Handle the User "updated" event.
-     */
     public function updated(User $user): void
     {
         if ($user->isDirty('password')) {
@@ -51,25 +45,16 @@ class UserObserver
         $this->setStatusAuto($user);
     }
 
-    /**
-     * Handle the User "deleted" event.
-     */
     public function deleted(User $user): void
     {
         $this->setStatusAuto($user);
     }
 
-    /**
-     * Handle the User "restored" event.
-     */
     public function restored(User $user): void
     {
         $this->setStatusAuto($user);
     }
 
-    /**
-     * Handle the User "force deleted" event.
-     */
     public function forceDeleted(User $user): void {}
 
     private function setStatusAuto(User $user): void

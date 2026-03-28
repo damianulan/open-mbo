@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\Auth;
  */
 trait CanUserObjective
 {
-    /**
-     * Check whether campaign can be evaluated whether by a superior user or by the user himself.
-     */
     public function canBeEvaluated(): bool
     {
         return Auth::user()->can('evaluate', $this) || Auth::user()->can('self_evaluate', $this);

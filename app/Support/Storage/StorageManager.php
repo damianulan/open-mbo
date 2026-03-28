@@ -8,15 +8,11 @@ use Illuminate\Support\Facades\File;
 class StorageManager
 {
     /**
-     * in megabytes
-     *
      * @var float
      */
     public $currentSize = 0;
 
     /**
-     * max size of a storage
-     *
      * @var float
      */
     public $maxSize;
@@ -26,7 +22,7 @@ class StorageManager
     public function __construct()
     {
         $bytesSize = Cache::get('storage.size', 0);
-        if ( ! $bytesSize) {
+        if (! $bytesSize) {
             foreach (File::allFiles(storage_path()) as $fileInfo) {
                 $bytesSize += $fileInfo->getSize();
             }

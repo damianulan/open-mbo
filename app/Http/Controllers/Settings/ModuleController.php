@@ -16,9 +16,6 @@ use Illuminate\View\View;
 
 class ModuleController extends SettingsController
 {
-    /**
-     * Show the application dashboard.
-     */
     public function index(Request $request, ?string $module = null): View
     {
         if ($request->user()->cannot(PermissionsLib::SETTINGS_MODULES)) {

@@ -7,10 +7,10 @@ use App\Contracts\Mbo\HasObjectives;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Models\Scopes\Mbo\ObjectiveTemplateScope;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Activity;
 
 /**
@@ -20,9 +20,9 @@ use Spatie\Activitylog\Models\Activity;
  * @property mixed|null $description
  * @property numeric|null $award Max points to be awarded for objective completion
  * @property bool $draft
- * @property Carbon|null $deleted_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property CarbonImmutable|null $deleted_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read ObjectiveTemplateCategory|null $category
@@ -153,7 +153,7 @@ class ObjectiveTemplate extends BaseModel implements HasObjectives
 
     public function assign(User $user): bool
     {
-        $objective = new Objective();
+        $objective = new Objective;
         $objective->template_id = $this->id;
         $objective->user_id = $user->id;
         $objective->name = $this->name;

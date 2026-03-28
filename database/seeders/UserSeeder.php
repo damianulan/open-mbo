@@ -67,7 +67,7 @@ class UserSeeder extends Seeder
                     }
 
                     $isManagement = true;
-                    if ( ! $position) {
+                    if (! $position) {
                         $position = $employeePositions->random();
                         $isManagement = false;
                     }
@@ -80,7 +80,7 @@ class UserSeeder extends Seeder
                         'position_id' => $position->id,
                         'department_id' => $company->departments->random()->id,
                         'employment' => fake()->dateTimeBetween('-10 years', '-3 months'),
-                        'release' => 3 === $chance && ! $isManagement ? fake()->dateTimeBetween('-10 months', '+1 year') : null,
+                        'release' => $chance === 3 && ! $isManagement ? fake()->dateTimeBetween('-10 months', '+1 year') : null,
                     ])->save();
                 }
 
@@ -105,6 +105,7 @@ class UserSeeder extends Seeder
             DB::commit();
         } catch (Throwable $th) {
             DB::rollBack();
+
             throw $th;
         }
     }

@@ -9,9 +9,6 @@ use Illuminate\View\Component;
 
 class NoteCard extends Component
 {
-    /**
-     * Create a new component instance.
-     */
     public function __construct(public Model $subject, public ?string $title = null, public bool $minimized = false)
     {
         if (is_null($this->title)) {
@@ -19,9 +16,6 @@ class NoteCard extends Component
         }
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
     public function render(): View|Closure|string
     {
         return view('components.cards.note-card');

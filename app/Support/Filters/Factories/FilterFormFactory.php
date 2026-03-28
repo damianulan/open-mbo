@@ -8,7 +8,6 @@ use App\Support\Filters\Services\FilterService;
 use Exception;
 use FormForge\Base\Form;
 use FormForge\Base\FormComponent;
-use FormForge\Components\Button;
 use FormForge\Components\ForgeComponent;
 use FormForge\FormBuilder;
 
@@ -18,7 +17,7 @@ class FilterFormFactory extends Form
 
     public static function make(FilterService $service): static
     {
-        return (new static())->boot()->setService($service)->setDefinition();
+        return (new static)->boot()->setService($service)->setDefinition();
     }
 
     public function definition(FormBuilder $builder): FormBuilder
@@ -29,8 +28,6 @@ class FilterFormFactory extends Form
         foreach ($this->service->getItems() as $item) {
             $builder->add($this->getComponent($item));
         }
-
-        // $builder->addButton(new Button(__('buttons.filter'), 'submit', null, 'btn-primary filter-btn'));
 
         return $builder;
     }

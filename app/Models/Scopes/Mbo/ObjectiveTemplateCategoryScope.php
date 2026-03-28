@@ -13,9 +13,6 @@ use Sentinel\Models\Role;
 
 class ObjectiveTemplateCategoryScope implements Scope
 {
-    /**
-     * Apply the scope to a given Eloquent query builder.
-     */
     public function apply(Builder $builder, Model $model): void
     {
         if (Auth::check()) {

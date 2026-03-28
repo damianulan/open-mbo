@@ -34,21 +34,18 @@ class ModuleManager
         ];
     }
 
-    /**
-     * Checks if given module is exists and is active/enabled.
-     */
     public static function check(string $module): bool
     {
         $modules = array_keys(self::getModules());
         $verified = in_array($module, $modules);
         $result = true;
-        if ( ! $verified) {
+        if (! $verified) {
             $result = false;
         }
 
         switch ($module) {
             case 'mbo':
-                if ( ! settings('mbo.enabled')) {
+                if (! settings('mbo.enabled')) {
                     $result = false;
                 }
                 break;

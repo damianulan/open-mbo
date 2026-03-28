@@ -10,17 +10,15 @@ use Symfony\Component\HttpFoundation\Response;
 class MaintenanceMode
 {
     /**
-     * Handle an incoming request.
-     *
-     * @param  Closure(Request): (Response)  $next
+     * @param Closure(Request): (Response) $next
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $maintenance = true === config('app.maintenance');
+        $maintenance = config('app.maintenance') === true;
         $user = Auth::user();
         if ($maintenance) {
             if ($user && Auth::check()) {
-                if ( ! $user->can('maintenance')) {
+                if (! $user->can('maintenance')) {
                     Auth::logout();
                     abort(503);
                 }

@@ -8,23 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class CheckboxCast implements CastsAttributes
 {
     /**
-     * Cast the given value.
-     *
-     * @param  array<string, mixed>  $attributes
+     * @param array<string, mixed> $attributes
      */
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        return (bool) (1 === $value);
+        return (bool) ($value === 1);
     }
 
     /**
-     * Prepare the given value for storage.
-     *
-     * @param  array<string, mixed>  $attributes
+     * @param array<string, mixed> $attributes
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        if ('on' === $value || true === $value || 1 === $value) {
+        if ($value === 'on' || $value === true || $value === 1) {
             return 1;
         }
 

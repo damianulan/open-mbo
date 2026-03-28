@@ -12,7 +12,7 @@ class BulkAssignUsers extends Service
     {
         $exists = $this->objective->user_objectives()->where('user_id', $user_id)->exists();
         $result = false;
-        if ( ! $exists) {
+        if (! $exists) {
             $result = $this->objective->user_objectives()->create([
                 'user_id' => $user_id,
             ]);
@@ -33,8 +33,6 @@ class BulkAssignUsers extends Service
     }
 
     /**
-     * Handle the service main logic.
-     *
      * @return mixed
      */
     protected function handle(): Objective
@@ -44,7 +42,7 @@ class BulkAssignUsers extends Service
 
         if ($this->request()->input('user_ids')) {
             foreach ($this->request()->input('user_ids') as $user_id) {
-                if ( ! $current_ids->has($user_id)) {
+                if (! $current_ids->has($user_id)) {
                     $this->assignUser($user_id);
                 } else {
                     $current_ids->forget($user_id);

@@ -11,10 +11,8 @@ use Illuminate\Http\Request;
 class Authenticate extends Middleware
 {
     /**
-     * Handle an incoming request.
-     *
-     * @param  Request  $request
-     * @param  string  ...$guards
+     * @param Request $request
+     * @param string ...$guards
      *
      * @throws AuthenticationException
      */
@@ -27,7 +25,7 @@ class Authenticate extends Middleware
             if ($this->ensureForcePasswordChange($request)) {
                 return redirect()->route('password.change.index');
             }
-            if ( ! $this->ensureEmailIsVerified($request)) {
+            if (! $this->ensureEmailIsVerified($request)) {
 
             }
         }
@@ -59,17 +57,15 @@ class Authenticate extends Middleware
         $user = $this->getUser();
         $config = (settings('users.password_change_firstlogin') && $this->isFirstLogin()) || (settings('users.force_password_change_reset') && $user->force_password_change);
 
-        return $user && $config && ! $user->hasRole('root') && !$user->isCore();
+        return $user && $config && ! $user->hasRole('root') && ! $user->isCore();
     }
 
     /**
-     * Get the path the user should be redirected to when they are not authenticated.
-     *
-     * @param  Request  $request
+     * @param Request $request
      */
     protected function redirectTo($request): ?string
     {
-        if ( ! $request->expectsJson()) {
+        if (! $request->expectsJson()) {
             return route('login');
         }
 

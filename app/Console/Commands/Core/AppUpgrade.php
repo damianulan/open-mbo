@@ -16,36 +16,30 @@ use Throwable;
 class AppUpgrade extends Command
 {
     /**
-     * The name and signature of the console command.
-     *
      * @var string
      */
     protected $signature = 'app:upgrade {--nocomposer}';
 
     /**
-     * The console command description.
-     *
      * @var string
      */
     protected $description = 'Upgrading app with git repository';
 
-    /**
-     * Execute the console command.
-     */
     public function handle()
     {
-        $local = 'local' === config('app.env');
+        $local = config('app.env') === 'local';
         $runComposer = $this->option('nocomposer') ? false : true;
         $this->line('Checking for updates...');
+
         try {
             $newVersionStyle = new OutputFormatterStyle('white', 'yellow', ['bold']);
             $this->output->getFormatter()->setStyle('newversionblock', $newVersionStyle);
             $newVersionStyle = new OutputFormatterStyle('white', 'blue', ['bold']);
             $this->output->getFormatter()->setStyle('versionblock', $newVersionStyle);
-            if ( ! Schema::hasTable('settings')) {
+            if (! Schema::hasTable('settings')) {
                 throw new Exception('Settings table is not created!');
             }
-            $settings = new GeneralSettings();
+            $settings = new GeneralSettings;
             $name = config('app.name');
             $target_release = $settings->target_release ?? 'stable';
 
@@ -70,7 +64,7 @@ class AppUpgrade extends Command
             };
 
             $this->comment("Checking to {$git_branch} branch/tag");
-            if ( ! $local) {
+            if (! $local) {
                 $result = Process::run('git reset --hard');
                 $result = Process::run("git switch --detach {$git_branch}");
             } else {
@@ -78,7 +72,7 @@ class AppUpgrade extends Command
             }
 
             $output = $result->output();
-            if ( ! $result->successful()) {
+            if (! $result->successful()) {
                 throw new Exception("Unable to switch to branch/tag: {$git_branch} " . $result->errorOutput());
             }
             $result = Process::run('git pull');
@@ -89,7 +83,7 @@ class AppUpgrade extends Command
                 $result = Process::timeout(1200)->run($composer_exec);
                 $output = $result->output();
 
-                if ( ! $result->successful()) {
+                if (! $result->successful()) {
                     throw new Exception('Composer update failed: ' . $output);
                 }
                 $this->line('Composer finished successfully');

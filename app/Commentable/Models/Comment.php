@@ -6,13 +6,13 @@ use App\Commentable\Casts\CommentContent;
 use App\Commentable\Events\CommentAdded;
 use App\Commentable\Events\CommentDeleted;
 use App\Traits\Vendors\ModelActivity;
+use Carbon\CarbonImmutable;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Activitylog\Models\Activity;
 use YMigVal\LaravelModelCache\HasCachedQueries;
@@ -25,8 +25,8 @@ use YMigVal\LaravelModelCache\HasCachedQueries;
  * @property string $author_id
  * @property mixed $content
  * @property bool $private
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read Model|Eloquent $author

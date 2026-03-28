@@ -18,9 +18,7 @@ class ObjectiveDataTable extends DataTableService
     protected $orderByDir = 'desc';
 
     /**
-     * Build the DataTable class.
-     *
-     * @param  QueryBuilder  $query  Results from query() method.
+     * @param QueryBuilder $query Results from query() method.
      */
     public function DataTable(QueryBuilder $query): DataTableBuilder
     {
@@ -46,9 +44,6 @@ class ObjectiveDataTable extends DataTableService
             });
     }
 
-    /**
-     * Get the query source of dataTable.
-     */
     public function query(Objective $model): QueryBuilder
     {
         $query = $model->query();
@@ -101,9 +96,6 @@ class ObjectiveDataTable extends DataTableService
         ];
     }
 
-    /**
-     * Get the filename for export.
-     */
     protected function filename(): string
     {
         return 'Objectives_' . date('YmdHis');

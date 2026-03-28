@@ -17,7 +17,7 @@ class TeamEditForm extends Form
         $selectedUsers = [];
         $selectedLeaders = [];
 
-        if ( ! is_null($this->model)) {
+        if (! is_null($this->model)) {
             $method = 'PUT';
             $route = route('settings.organization.team.update', $this->model->id);
             $selectedUsers = $this->model->users->pluck('id')->toArray();

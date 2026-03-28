@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Business\Team>
+ * @extends Factory<Team>
  */
 class TeamFactory extends Factory
 {
@@ -31,8 +31,6 @@ class TeamFactory extends Factory
     }
 
     /**
-     * Define the model's default state.
-     *
      * @return array<string, mixed>
      */
     public function definition(): array
@@ -55,7 +53,7 @@ class TeamFactory extends Factory
 
     public function getName(): string
     {
-        if ('pl_PL' === config('app.faker_locale')) {
+        if (config('app.faker_locale') === 'pl_PL') {
             $dict = self::dict_pl();
 
             return $dict[fake()->numberBetween(0, count($dict) - 1)];

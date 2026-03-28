@@ -46,7 +46,7 @@ class CampaignUserController extends AppController
         try {
             $response = $form->validateJson();
 
-            if ('ok' === $response['status']) {
+            if ($response['status'] === 'ok') {
                 $service = BulkAssignUsers::boot(request: $request, campaign: $campaign)->execute();
 
                 if ($service->passed()) {

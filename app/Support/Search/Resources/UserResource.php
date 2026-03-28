@@ -26,7 +26,7 @@ class UserResource extends IndexResource
             'email' => $this->model->email,
             'position' => $this->model->employment?->position->name,
             'company' => $this->model->employment?->company->name,
-            'gender' => 'm' === $this->model->gender ? 'Mężczyzna' : 'Kobieta',
+            'gender' => $this->model->gender === 'm' ? 'Mężczyzna' : 'Kobieta',
         ];
     }
 

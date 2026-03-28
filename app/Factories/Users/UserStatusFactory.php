@@ -10,9 +10,9 @@ class UserStatusFactory
     public static function make(User $user): UserStatus
     {
         return match (true) {
-            null !== $user->deleted_at => UserStatus::DELETED,
-            null !== $user->suspended_at => UserStatus::SUSPENDED,
-            null === $user->email_verified_at => UserStatus::UNVERIFIED,
+            $user->deleted_at !== null => UserStatus::DELETED,
+            $user->suspended_at !== null => UserStatus::SUSPENDED,
+            $user->email_verified_at === null => UserStatus::UNVERIFIED,
             ! self::hasEmployment($user) => UserStatus::UNEMPLOYED,
             default => UserStatus::ACTIVE,
         };
@@ -22,6 +22,6 @@ class UserStatusFactory
     {
         $user->load('employment');
 
-        return null !== $user->getRelation('employment');
+        return $user->getRelation('employment') !== null;
     }
 }

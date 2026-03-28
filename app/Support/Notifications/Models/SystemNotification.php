@@ -2,7 +2,7 @@
 
 namespace App\Support\Notifications\Models;
 
-use Illuminate\Support\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
@@ -13,10 +13,10 @@ use Illuminate\Support\Str;
  * @property string $notifiable_id
  * @property Collection $resources
  * @property string $contents
- * @property Carbon|null $read_at
- * @property Carbon|null $notified_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property CarbonImmutable|null $read_at
+ * @property CarbonImmutable|null $notified_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification newQuery()
@@ -61,7 +61,7 @@ class SystemNotification extends NotificationModel
 
     public function markAsRead(): void
     {
-        if ( ! $this->unread()) {
+        if (! $this->unread()) {
             return;
         }
 

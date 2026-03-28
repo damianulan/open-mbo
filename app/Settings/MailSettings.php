@@ -7,7 +7,6 @@ use App\Settings\Casts\CryptCast;
 
 class MailSettings extends BaseSettings
 {
-    // MAILING
     public ?string $mail_mailer = 'smtp';
 
     public ?string $mail_host = 'mailhog';
@@ -42,7 +41,7 @@ class MailSettings extends BaseSettings
 
     public function safePassword()
     {
-        if ( ! empty($this->mail_password)) {
+        if (! empty($this->mail_password)) {
             $this->mail_password = 'PassProtection123@';
         }
 

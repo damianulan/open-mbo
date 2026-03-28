@@ -2,7 +2,7 @@
 
 namespace App\Support\Notifications\Models;
 
-use Illuminate\Support\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Collection;
 
 /**
@@ -13,8 +13,8 @@ use Illuminate\Support\Collection;
  * @property Collection $resources
  * @property string $subject
  * @property string $contents
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification newQuery()

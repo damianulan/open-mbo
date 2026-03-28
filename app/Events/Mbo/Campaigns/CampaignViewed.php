@@ -11,10 +11,7 @@ class CampaignViewed
     use Dispatchable;
     use SerializesModels;
 
-    /**
-     * Create a new event instance.
-     */
     public function __construct(
-        public Campaign $campaign
+        public Campaign $campaign,
     ) {}
 }

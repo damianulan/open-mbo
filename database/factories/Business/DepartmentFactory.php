@@ -2,11 +2,12 @@
 
 namespace Database\Factories\Business;
 
+use App\Models\Business\Company;
 use App\Models\Business\Department;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Business\Company>
+ * @extends Factory<Company>
  */
 class DepartmentFactory extends Factory
 {
@@ -214,8 +215,6 @@ class DepartmentFactory extends Factory
     }
 
     /**
-     * Define the model's default state.
-     *
      * @return array<string, mixed>
      */
     public function definition(): array
@@ -234,7 +233,7 @@ class DepartmentFactory extends Factory
     public function getName(): string
     {
         $output = null;
-        if ('pl_PL' === config('app.faker_locale')) {
+        if (config('app.faker_locale') === 'pl_PL') {
             $dict = self::dict_pl();
             $output = $dict[fake()->numberBetween(0, count($dict) - 1)];
         }

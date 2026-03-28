@@ -5,12 +5,12 @@ namespace App\Support\Search;
 use App\Support\Search\Dtos\ResultItem;
 use App\Support\Search\Factories\IndexResource;
 use App\Support\Search\Factories\ModelResourceFactory;
+use Carbon\CarbonImmutable;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Support\Carbon;
 use Lucent\Support\Traits\UUID;
 
 /**
@@ -19,8 +19,8 @@ use Lucent\Support\Traits\UUID;
  * @property string $source_id
  * @property string $attribute
  * @property string $trigram
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
  * @property-read IndexResource|null $resource
  * @property-read ResultItem|null $result_item
  * @property-read Model|Eloquent $source

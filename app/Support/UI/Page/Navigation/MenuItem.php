@@ -28,7 +28,7 @@ class MenuItem
 
     public static function make(string $id): self
     {
-        $instance = new self();
+        $instance = new self;
         $instance->id = $id;
 
         return $instance;
@@ -56,7 +56,7 @@ class MenuItem
     {
         if ($this->route) {
             if ($this->routeDirectiveStrict) {
-                if (false !== mb_strrpos($this->route, '.')) {
+                if (mb_strrpos($this->route, '.') !== false) {
                     $this->parentRoute = mb_substr($this->route, 0, mb_strrpos($this->route, '.')) . '.*';
                 } else {
                     $this->parentRoute = $this->route;
@@ -155,17 +155,14 @@ class MenuItem
     }
 
     /**
-     * Use this method to check if given setting allows to view menu element.
-     * Setting should represent a boolean value.
-     *
-     * @param  array  $setting
+     * @param array $setting
      */
     public function settings(...$setting): self
     {
         foreach ($setting as $s) {
             $set = (bool) settings($s) ?? false;
-            if ( ! $set) {
-                if ( ! $this->blockVisibility) {
+            if (! $set) {
+                if (! $this->blockVisibility) {
                     $this->visible = false;
                     $this->blockVisibility = true;
                 }
@@ -176,15 +173,13 @@ class MenuItem
     }
 
     /**
-     * User is required to be assigned to ANY of the given permissions, in order to view menu element.
-     *
-     * @param  array  $slug
+     * @param array $slug
      */
     public function permission(...$slug): self
     {
         $this->visible = false;
         foreach ($slug as $s) {
-            if ( ! $this->blockVisibility) {
+            if (! $this->blockVisibility) {
                 if (user()?->hasPermissionTo($s)) {
                     $this->visible = true;
                 } else {
@@ -198,16 +193,14 @@ class MenuItem
     }
 
     /**
-     * User is required to be assigned to at least one of the given roles, in order to view menu element.
-     *
-     * @param  array  $slug
+     * @param array $slug
      */
     public function role(...$slug): self
     {
-        if ( ! is_array($slug)) {
+        if (! is_array($slug)) {
             $slug = [$slug];
         }
-        if ( ! user()?->hasAnyRoles($slug)) {
+        if (! user()?->hasAnyRoles($slug)) {
             $this->visible = false;
         }
 

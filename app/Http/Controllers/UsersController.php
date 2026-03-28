@@ -18,9 +18,6 @@ use Illuminate\View\View;
 
 class UsersController extends AppController
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request, UsersDataTable $dataTable): Renderable|JsonResponse
     {
         if ($request->user()->cannot('viewList', User::class)) {
@@ -32,9 +29,6 @@ class UsersController extends AppController
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create(Request $request, UserEditForm $form): View
     {
         if ($request->user()->cannot('create', User::class)) {
@@ -47,9 +41,6 @@ class UsersController extends AppController
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request, UserEditForm $form): RedirectResponse
     {
         $form->validate();
@@ -76,15 +67,12 @@ class UsersController extends AppController
         return redirect()->back()->with('error', __('alerts.employments.error.create'));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Request $request, User $user): View
     {
         $view = $request->user()->can('view', $user);
         $preview = $request->user()->can('preview', $user) && ! $view;
 
-        if ( ! $view && ! $preview) {
+        if (! $view && ! $preview) {
             unauthorized();
         }
 
@@ -94,9 +82,6 @@ class UsersController extends AppController
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Request $request, User $user): View
     {
         if ($request->user()->cannot('update', $user)) {
@@ -112,9 +97,6 @@ class UsersController extends AppController
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, User $user, UserEditForm $form): RedirectResponse
     {
         if ($request->user()->cannot('update', $user)) {
@@ -151,9 +133,6 @@ class UsersController extends AppController
         return redirect()->back()->with('error', __('alerts.employments.error.edit'));
     }
 
-    /**
-     * Delete User instance.
-     */
     public function delete(Request $request, User $user): RedirectResponse
     {
         if ($request->user()->cannot('delete', $user)) {
@@ -182,9 +161,6 @@ class UsersController extends AppController
         return redirect()->back()->with('error', __('alerts.employments.error.delete'));
     }
 
-    /**
-     * Toggles User blocking if was nat blocked and unlocking otherwise.
-     */
     public function block(Request $request, User $user): RedirectResponse
     {
         if ($request->user()->cannot('delete', $user)) {

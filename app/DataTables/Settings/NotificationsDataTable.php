@@ -15,9 +15,7 @@ class NotificationsDataTable extends DataTableService
     protected $orderBy = 'created_at';
 
     /**
-     * Build the DataTable class.
-     *
-     * @param  QueryBuilder  $query  Results from query() method.
+     * @param QueryBuilder $query Results from query() method.
      */
     public function DataTable(QueryBuilder $query): DataTableBuilder
     {
@@ -41,9 +39,6 @@ class NotificationsDataTable extends DataTableService
             ]));
     }
 
-    /**
-     * Get the query source of dataTable.
-     */
     public function query(Notification $model): QueryBuilder
     {
         return $model->query();
@@ -88,9 +83,6 @@ class NotificationsDataTable extends DataTableService
         ];
     }
 
-    /**
-     * Get the filename for export.
-     */
     protected function filename(): string
     {
         return 'Notifications_' . date('YmdHis');

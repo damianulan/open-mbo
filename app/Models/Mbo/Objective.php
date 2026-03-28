@@ -12,13 +12,13 @@ use App\Events\Mbo\Objectives\ObjectiveUpdated;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Models\Scopes\Mbo\ObjectiveScope;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Activitylog\Models\Activity;
 
@@ -28,14 +28,14 @@ use Spatie\Activitylog\Models\Activity;
  * @property string|null $campaign_id
  * @property string $name
  * @property mixed|null $description
- * @property Carbon|null $deadline Deadline for objective completion, to which realization should be approved, otherwise it turns out red.
+ * @property CarbonImmutable|null $deadline Deadline for objective completion, to which realization should be approved, otherwise it turns out red.
  * @property float $weight Corresponds to the importance of the objective, the higher the weight, the more important it is.
  * @property numeric|null $award Max points to be awarded for objective completion
  * @property numeric|null $expected Expected numerical value of objective realization, that corresponds to 100% evaluation
  * @property bool $draft Is not visible to realization - only previewable to admins
- * @property Carbon|null $deleted_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property CarbonImmutable|null $deleted_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read Campaign|null $campaign
@@ -141,7 +141,7 @@ class Objective extends BaseModel implements HasDeadline, HasWeight
 
     public function getWeightAttribute($value): float
     {
-        if ( ! settings('mbo.objectives_weights')) {
+        if (! settings('mbo.objectives_weights')) {
             return 1;
         }
 
@@ -164,9 +164,6 @@ class Objective extends BaseModel implements HasDeadline, HasWeight
         return is_null($this->deadline) || ($this->deadline && $this->deadline->isPast());
     }
 
-    /**
-     * Is deadline is briefly upcoming.
-     */
     public function isDeadlineUpcoming(int $days = 3): bool
     {
         if ($this->deadline) {
@@ -215,7 +212,7 @@ class Objective extends BaseModel implements HasDeadline, HasWeight
 
     public function user_objective(?User $user = null): ?UserObjective
     {
-        if ( ! $user) {
+        if (! $user) {
             $user = Auth::user();
         }
 
@@ -229,7 +226,7 @@ class Objective extends BaseModel implements HasDeadline, HasWeight
 
     public function scopeWhereAssigned(Builder $query, ?User $user = null): void
     {
-        if ( ! $user) {
+        if (! $user) {
             $user = Auth::user();
         }
         $query->whereHas('user_objectives', function (Builder $q) use ($user): void {

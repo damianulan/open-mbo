@@ -11,9 +11,6 @@ use Illuminate\View\Component;
 
 class UserCampaignSummary extends Component
 {
-    /**
-     * Create a new component instance.
-     */
     public int $objectivesCount = 0;
 
     public int $objectivesFinishedCount = 0;
@@ -41,9 +38,6 @@ class UserCampaignSummary extends Component
             ->count();
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
     public function render(): View|Closure|string
     {
         return view('components.mbo.campaign.user-campaign-summary');

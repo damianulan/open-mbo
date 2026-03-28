@@ -3,19 +3,18 @@
 namespace Database\Factories\Mbo;
 
 use App\Models\Mbo\Campaign;
+use App\Models\Mbo\ObjectiveTemplate;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Mbo\ObjectiveTemplate>
+ * @extends Factory<ObjectiveTemplate>
  */
 class CampaignFactory extends Factory
 {
     protected $model = Campaign::class;
 
     /**
-     * Define the model's default state.
-     *
      * @return array<string, mixed>
      */
     public function definition(): array

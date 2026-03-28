@@ -22,7 +22,7 @@ class AddChangelogNotes extends Command
         $version = $this->resolveVersion($this->argument('version'));
         $count = $this->argument('count');
 
-        if (null === $version) {
+        if ($version === null) {
             $this->error('Unable to detect the next version automatically. Provide a version argument explicitly.');
 
             return Command::FAILURE;
@@ -43,13 +43,12 @@ class AddChangelogNotes extends Command
         $date = now()->format('Y-m-d');
         $markdown = $this->buildMarkdown($version, $date, $commits);
 
-        if ( ! File::exists($changelogPath)) {
+        if (! File::exists($changelogPath)) {
             File::put($changelogPath, '# Changelog
 
 ');
         }
 
-        // Insert at top (after title)
         $existing = File::get($changelogPath);
         $updated = preg_replace(
             '/# Changelog\s*/',
@@ -57,7 +56,7 @@ class AddChangelogNotes extends Command
 
 ' . $markdown,
             $existing,
-            1
+            1,
         );
 
         File::put($changelogPath, $updated);
@@ -75,7 +74,7 @@ class AddChangelogNotes extends Command
 
         $command = sprintf(
             'git log -n %d --pretty=format:"%%s" --no-merges',
-            $count
+            $count,
         );
 
         exec($command, $output);
@@ -85,11 +84,9 @@ class AddChangelogNotes extends Command
 
     protected function getCommitsSinceLastTag(): array
     {
-        // Get latest tag
         exec('git describe --tags --abbrev=0', $tagOutput, $tagResult);
 
-        if (0 !== $tagResult || empty($tagOutput)) {
-            // No tag found → fallback to all commits
+        if ($tagResult !== 0 || empty($tagOutput)) {
             exec('git log --pretty=format:"%s" --no-merges', $output);
 
             return $output;
@@ -99,7 +96,7 @@ class AddChangelogNotes extends Command
 
         $command = sprintf(
             'git log %s..HEAD --pretty=format:"%%s" --no-merges',
-            $lastTag
+            $lastTag,
         );
 
         exec($command, $output);
@@ -109,7 +106,7 @@ class AddChangelogNotes extends Command
 
     protected function resolveVersion(?string $version): ?string
     {
-        if (null !== $version && '' !== $version) {
+        if ($version !== null && $version !== '') {
             return $version;
         }
 
@@ -121,7 +118,7 @@ class AddChangelogNotes extends Command
         $currentVersion = $this->getLatestVersionFromChangelog()
             ?? $this->getLatestVersionFromGitTag();
 
-        if (null === $currentVersion) {
+        if ($currentVersion === null) {
             return null;
         }
 
@@ -132,7 +129,7 @@ class AddChangelogNotes extends Command
     {
         $changelogPath = base_path('CHANGELOG.md');
 
-        if ( ! File::exists($changelogPath)) {
+        if (! File::exists($changelogPath)) {
             return null;
         }
 
@@ -145,7 +142,7 @@ class AddChangelogNotes extends Command
     {
         exec('git tag --sort=-v:refname', $tagOutput, $tagResult);
 
-        if (0 !== $tagResult || empty($tagOutput)) {
+        if ($tagResult !== 0 || empty($tagOutput)) {
             return null;
         }
 

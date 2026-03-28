@@ -4,14 +4,12 @@ namespace App\Factories\Charts;
 
 use Akaunting\Apexcharts\Chart;
 use App\Factories\Charts\Exceptions\ChartNotFound;
-use App\Factories\Charts\Exceptions\IncorrectModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use ReflectionClass;
 use ReflectionMethod;
 use Throwable;
-use TypeError;
 
 class ChartFactory
 {
@@ -27,7 +25,7 @@ class ChartFactory
                 ->map(fn ($method) => $method->getName())
                 ->first();
 
-            if ( ! $method) {
+            if (! $method) {
                 throw new ChartNotFound($name);
             }
 
@@ -35,11 +33,8 @@ class ChartFactory
 
             return $chart;
         } catch (Throwable $th) {
-            // if ($th instanceof TypeError) {
-            //     $th = new IncorrectModel($name, $model);
-            // }
-
             report($th);
+
             throw $th;
         }
     }

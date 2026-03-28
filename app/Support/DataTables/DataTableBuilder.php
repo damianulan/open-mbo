@@ -15,7 +15,7 @@ class DataTableBuilder extends EloquentDataTable
     public function __construct(Model|EloquentBuilder $model)
     {
         parent::__construct($model);
-        $this->filterService = new FilterService();
+        $this->filterService = new FilterService;
     }
 
     public function registerFilters(FilterService $service): self

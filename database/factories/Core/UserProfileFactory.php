@@ -3,18 +3,17 @@
 namespace Database\Factories\Core;
 
 use App\Models\Core\UserProfile;
+use App\Models\Model;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ * @extends Factory<Model>
  */
 class UserProfileFactory extends Factory
 {
     protected $model = UserProfile::class;
 
     /**
-     * Define the model's default state.
-     *
      * @return array<string, mixed>
      */
     public function definition(): array

@@ -16,7 +16,7 @@ abstract class ChartsLib
     {
         $this->resolveOptions();
 
-        return (new Chart())
+        return (new Chart)
             ->setType($this->type)
             ->setTitle($this->title);
     }

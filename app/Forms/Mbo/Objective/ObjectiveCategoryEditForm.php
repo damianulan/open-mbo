@@ -19,7 +19,7 @@ class ObjectiveCategoryEditForm extends Form
         $category = null;
 
         $shortnameType = 'text';
-        if ( ! is_null($this->model)) {
+        if (! is_null($this->model)) {
             $method = 'PUT';
             $route = route('categories.update', $this->model->id);
             $category = ObjectiveTemplateCategory::find($this->model->id);

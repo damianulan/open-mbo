@@ -2,16 +2,16 @@
 
 namespace App\Models\Core;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
  * @property string $user_id
  * @property string $password
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
  * @property-read User|null $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPasswordHistory newModelQuery()

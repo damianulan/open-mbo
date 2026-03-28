@@ -9,7 +9,7 @@ class ContractTypesDataTableTest extends TestCase
 {
     public function test_contract_types_datatable_columns_match_type_of_contract_attributes(): void
     {
-        $dataTable = new class() extends ContractTypesDataTable
+        $dataTable = new class extends ContractTypesDataTable
         {
             public function exposedDefaultColumns(): array
             {

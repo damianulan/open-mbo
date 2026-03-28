@@ -13,11 +13,8 @@ class UserCampaignAssigned implements NotifiableEvent
     use Dispatchable;
     use SerializesModels;
 
-    /**
-     * Create a new event instance.
-     */
     public function __construct(
-        public UserCampaign $userCampaign
+        public UserCampaign $userCampaign,
     ) {}
 
     public static function description(): string

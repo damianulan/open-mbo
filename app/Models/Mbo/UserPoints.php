@@ -4,12 +4,12 @@ namespace App\Models\Mbo;
 
 use App\Models\BaseModel;
 use App\Models\Core\User;
+use Carbon\CarbonImmutable;
 use Eloquent;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Activity;
 
 /**
@@ -19,9 +19,9 @@ use Spatie\Activitylog\Models\Activity;
  * @property string $subject_id
  * @property numeric|null $points
  * @property string|null $assigned_by
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property Carbon|null $deleted_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
+ * @property CarbonImmutable|null $deleted_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read User|null $assigner

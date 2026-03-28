@@ -26,14 +26,8 @@ use Livewire\Livewire;
 
 class ComponentServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     */
     public function register(): void {}
 
-    /**
-     * Bootstrap services.
-     */
     public function boot(): void
     {
         Blade::if('settings', fn ($key) => settings($key));
@@ -41,7 +35,6 @@ class ComponentServiceProvider extends ServiceProvider
         Blade::component('icon', IconComponent::class);
         Blade::component('tile-button', TileButton::class);
 
-        // MBO components
         Blade::component('card-progressbar', CardProgressBar::class);
         Blade::component('campaign-card', CampaignCard::class);
         Blade::component('my-campaigns-summary', MyCampaignsSummary::class);
@@ -52,7 +45,6 @@ class ComponentServiceProvider extends ServiceProvider
         Blade::component('objective-users-list', ObjectiveUsersList::class);
         Blade::component('objective-summary', ObjectiveSummary::class);
 
-        // Users
         Blade::component('user-details-card', UserDetailsCard::class);
         Blade::component('user-banner', UserBanner::class);
 
