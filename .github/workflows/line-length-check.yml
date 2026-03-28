@@ -1,11 +1,9 @@
 name: Line Length Check
 
 on:
-  push:
-    branches:
-      - dev
   pull_request:
     branches:
+      - dev
       - staging
 
 jobs:
@@ -14,21 +12,27 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Fail on lines over 120 characters
         env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          BASE_REF: ${{ github.base_ref }}
         run: |
           set -euo pipefail
 
           max_length=120
           has_errors=0
 
-          mapfile -t files < <(git diff --name-only --diff-filter=AM "$BASE_SHA" "$HEAD_SHA")
+          if [ -z "$BASE_REF" ]; then
+            echo "BASE_REF is empty; this workflow only supports pull_request events."
+            exit 1
+          fi
+
+          git fetch --no-tags --depth=1 origin "$BASE_REF"
+
+          mapfile -t files < <(git diff --name-only --diff-filter=AM "origin/$BASE_REF...HEAD")
 
           if [ "${#files[@]}" -eq 0 ]; then
             echo "No added or modified files to check."
