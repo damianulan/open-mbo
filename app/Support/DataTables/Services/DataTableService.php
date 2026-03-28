@@ -4,7 +4,6 @@ namespace App\Support\DataTables\Services;
 
 use App\Support\DataTables\SelectedColumns;
 use App\Support\Filters\Contracts\FilterCollection;
-use App\Support\Filters\Services\FilterService;
 use Exception;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
