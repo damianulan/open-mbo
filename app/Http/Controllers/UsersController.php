@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Repositories\UserRepositoryContract;
 use App\DataTables\Users\UsersDataTable;
 use App\Exceptions\Core\UnauthorizedAccess;
 use App\Forms\Users\EmploymentEditForm;
@@ -67,7 +68,7 @@ class UsersController extends AppController
         return redirect()->back()->with('error', __('alerts.employments.error.create'));
     }
 
-    public function show(Request $request, User $user): View
+    public function show(Request $request, User $user, UserRepositoryContract $userRepository): View
     {
         $view = $request->user()->can('view', $user);
         $preview = $request->user()->can('preview', $user) && ! $view;
@@ -76,17 +77,22 @@ class UsersController extends AppController
             unauthorized();
         }
 
+        $user = $userRepository->loadForShow($user);
+        $request->user()->loadMissing('favourite_users');
+
         return view('pages.users.show', [
             'user' => $user,
             'isPreview' => $preview,
         ]);
     }
 
-    public function edit(Request $request, User $user): View
+    public function edit(Request $request, User $user, UserRepositoryContract $userRepository): View
     {
         if ($request->user()->cannot('update', $user)) {
             unauthorized();
         }
+
+        $user = $userRepository->loadForEdit($user);
 
         $request->request->add(['user_id' => $user->getKey()]);
 
@@ -117,7 +123,7 @@ class UsersController extends AppController
 
     public function updateEmployment(Request $request, int|string $id, EmploymentEditForm $form): RedirectResponse
     {
-        $employment = UserEmployment::findOrFail($id);
+        $employment = UserEmployment::query()->with('user')->findOrFail($id);
 
         if ($request->user()->cannot('employment', $employment->user)) {
             unauthorized();
@@ -148,7 +154,7 @@ class UsersController extends AppController
 
     public function deleteEmployment(Request $request, int|string $id): RedirectResponse
     {
-        $employment = UserEmployment::findOrFail($id);
+        $employment = UserEmployment::query()->with('user')->findOrFail($id);
 
         if ($request->user()->cannot('employment', $employment->user)) {
             unauthorized();

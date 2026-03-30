@@ -14,6 +14,7 @@ class ObjectiveEditUserRealizationForm extends Form
         $method = 'POST';
         $title = 'Modyfikacja realizacji celu';
         $prefix = '';
+        $this->model?->loadMissing('objective');
         if ($this->model && Auth::user()->id === $this->model->user_id) {
             $prefix = 'self_';
         }

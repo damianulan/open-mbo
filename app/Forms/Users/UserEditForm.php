@@ -2,6 +2,7 @@
 
 namespace App\Forms\Users;
 
+use App\Contracts\Repositories\UserRepositoryContract;
 use App\Enums\Users\Gender;
 use App\Models\Core\User;
 use FormForge\Base\Form;
@@ -23,6 +24,7 @@ class UserEditForm extends Form
         if (! is_null($this->model)) {
             $method = 'PUT';
             $route = route('users.update', $this->model->id);
+            app(UserRepositoryContract::class)->loadForEdit($this->model);
             $profile = $this->model->profile;
 
             $selected = $this->model->supervisors->pluck('id')->toArray();

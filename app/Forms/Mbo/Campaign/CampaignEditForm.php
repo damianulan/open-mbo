@@ -4,7 +4,6 @@ namespace App\Forms\Mbo\Campaign;
 
 use App\Enums\Mbo\CampaignStage;
 use App\Models\Core\User;
-use App\Models\Mbo\Campaign;
 use FormForge\Base\Form;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
@@ -21,7 +20,7 @@ class CampaignEditForm extends Form
         if (! is_null($this->model)) {
             $method = 'PUT';
             $route = route('campaigns.update', $this->model->id);
-            $campaign = Campaign::find($this->model->id);
+            $campaign = $this->model->loadMissing('coordinators');
             $selected = $campaign->coordinators->pluck('id')->toArray();
         }
 

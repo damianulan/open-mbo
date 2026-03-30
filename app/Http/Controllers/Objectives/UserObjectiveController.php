@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Objectives;
 
+use App\Contracts\Repositories\ObjectiveRepositoryContract;
+use App\Contracts\Repositories\UserObjectiveRepositoryContract;
 use App\Exceptions\Core\NoPermissionException;
 use App\Forms\Mbo\Objective\ObjectiveEditUserForm;
 use App\Forms\Mbo\Objective\ObjectiveEditUserRealizationForm;
 use App\Http\Controllers\AppController;
 use App\Models\Mbo\Objective;
-use App\Models\Mbo\UserObjective;
 use App\Services\Objectives\BulkAssignUsers;
 use App\Services\Objectives\UserRealizationUpdate;
 use AppException;
@@ -31,9 +32,9 @@ class UserObjectiveController extends AppController
     /**
      * @param mixed $id
      */
-    public function show(Request $request, int|string $id): View
+    public function show(Request $request, int|string $id, UserObjectiveRepositoryContract $userObjectiveRepository): View
     {
-        $userObjective = UserObjective::findOrFail($id);
+        $userObjective = $userObjectiveRepository->findForShow($id);
 
         if ($request->user()->cannot('view', $userObjective)) {
             unauthorized();
@@ -73,12 +74,12 @@ class UserObjectiveController extends AppController
 
     public function destroy($id): void {}
 
-    public function addUsers(Request $request, int|string|null $id): View
+    public function addUsers(Request $request, int|string|null $id, ObjectiveRepositoryContract $objectiveRepository): View
     {
         $params = [];
 
         if ($id) {
-            $objective = Objective::find($id);
+            $objective = $objectiveRepository->find($id);
 
             if ($objective) {
                 $params = [
@@ -91,12 +92,12 @@ class UserObjectiveController extends AppController
         return view('components.modals.objectives.add_users', $params);
     }
 
-    public function editRealization(Request $request, int|string|null $id): View
+    public function editRealization(Request $request, int|string|null $id, UserObjectiveRepositoryContract $userObjectiveRepository): View
     {
         $params = [];
 
         if ($id) {
-            $objective = UserObjective::findOrFail($id);
+            $objective = $userObjectiveRepository->findOrFail($id, ['objective']);
             $params = [
                 'id' => $id,
                 'form' => ObjectiveEditUserRealizationForm::bootWithModel($objective)->getDefinition(),
@@ -106,12 +107,12 @@ class UserObjectiveController extends AppController
         return view('components.modals.objectives.edit_realization', $params);
     }
 
-    public function updateEvaluation(Request $request, $id, ObjectiveEditUserRealizationForm $form): JsonResponse
+    public function updateEvaluation(Request $request, $id, ObjectiveEditUserRealizationForm $form, UserObjectiveRepositoryContract $userObjectiveRepository): JsonResponse
     {
         $response = ['status' => 'error'];
 
         try {
-            $userObjective = UserObjective::findOrFail($id);
+            $userObjective = $userObjectiveRepository->findOrFail($id, ['objective']);
 
             if (! $userObjective->canBeEvaluated()) {
                 throw new NoPermissionException;
@@ -146,11 +147,11 @@ class UserObjectiveController extends AppController
         return response()->json($response);
     }
 
-    public function pass(int|string $id): RedirectResponse|UrlGenerator
+    public function pass(int|string $id, UserObjectiveRepositoryContract $userObjectiveRepository): RedirectResponse|UrlGenerator
     {
         try {
-            DB::transaction(function () use ($id): void {
-                $userObjective = UserObjective::findOrFail($id);
+            DB::transaction(function () use ($id, $userObjectiveRepository): void {
+                $userObjective = $userObjectiveRepository->findOrFail($id, ['objective.campaign']);
 
                 if (! $userObjective->canBePassed()) {
                     throw new AppException(__('alerts.user_objectives.error.set_passed'));
@@ -167,11 +168,11 @@ class UserObjectiveController extends AppController
         return $this->returnResponseRedirect($redirect);
     }
 
-    public function fail(int|string $id): RedirectResponse|UrlGenerator
+    public function fail(int|string $id, UserObjectiveRepositoryContract $userObjectiveRepository): RedirectResponse|UrlGenerator
     {
         try {
-            DB::transaction(function () use ($id): void {
-                $userObjective = UserObjective::findOrFail($id);
+            DB::transaction(function () use ($id, $userObjectiveRepository): void {
+                $userObjective = $userObjectiveRepository->findOrFail($id, ['objective.campaign']);
 
                 if (! $userObjective->canBeFailed()) {
                     throw new AppException(__('alerts.user_objectives.error.set_failed'));

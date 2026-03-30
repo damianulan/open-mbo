@@ -21,6 +21,16 @@ class Authenticate extends Middleware
         $this->authenticate($request, $guards);
         $user = $this->auth->user();
 
+        if ($user) {
+            $user->loadMissing([
+                'profile',
+                'preferences',
+                'roles',
+                'favourite_users',
+                'campaigns_ongoing.campaign',
+            ]);
+        }
+
         if ($user && ! $user->isImpersonating()) {
             if ($this->ensureForcePasswordChange($request)) {
                 return redirect()->route('password.change.index');

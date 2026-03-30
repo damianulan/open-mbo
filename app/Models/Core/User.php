@@ -292,6 +292,11 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function nameDetails()
     {
+        $this->loadMissing([
+            'profile',
+            'roles',
+        ]);
+
         $view = view('components.datatables.username', ['data' => $this]);
         if (Auth::user()->can('preview', $this)) {
             $view = view('components.datatables.username_link', ['data' => $this]);
@@ -333,6 +338,8 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function getAvatar(): ?string
     {
+        $this->loadMissing('profile');
+
         $avatar = $this->profile?->avatar;
         if ($avatar) {
             if (Str::startsWith($avatar, ['http://', 'https://'])) {
@@ -381,6 +388,11 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function getAvatarView($size = 'lg'): string
     {
+        $this->loadMissing([
+            'profile',
+            'roles',
+        ]);
+
         $initials = $this->getInitials();
         $letterNum = Alphabet::getAlphabetPosition($initials);
 

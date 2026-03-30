@@ -14,7 +14,12 @@ class ObjectiveTemplateController extends MBOController
         $this->addPageNav();
 
         return view('pages.mbo.index', [
-            'objectives' => ObjectiveTemplate::paginate(30),
+            'objectives' => ObjectiveTemplate::query()
+                ->with([
+                    'category',
+                    'objectives' => fn ($query) => $query->withCount('user_objectives'),
+                ])
+                ->paginate(30),
         ]);
     }
 

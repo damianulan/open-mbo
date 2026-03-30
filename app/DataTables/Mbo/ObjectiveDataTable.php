@@ -2,6 +2,7 @@
 
 namespace App\DataTables\Mbo;
 
+use App\Contracts\Repositories\ObjectiveRepositoryContract;
 use App\Models\Mbo\Objective;
 use App\Support\DataTables\Column;
 use App\Support\DataTables\DataTableBuilder;
@@ -11,6 +12,12 @@ use Illuminate\Support\Carbon;
 
 class ObjectiveDataTable extends DataTableService
 {
+    public function __construct(
+        private readonly ObjectiveRepositoryContract $objectiveRepository,
+    ) {
+        parent::__construct();
+    }
+
     protected $id = 'objective_table';
 
     protected $orderBy = 'deadline';
@@ -46,7 +53,7 @@ class ObjectiveDataTable extends DataTableService
 
     public function query(Objective $model): QueryBuilder
     {
-        $query = $model->query();
+        $query = $this->objectiveRepository->queryForDataTable();
 
         return $query;
     }

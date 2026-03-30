@@ -30,9 +30,11 @@ class CampaignEditObjectiveForm extends Form
                 $selectedTemplate = $this->model->template_id ?? null;
             }
         }
-        $campaign = Campaign::findOrFail($campaign_id);
+        $campaign = Campaign::query()->findOrFail($campaign_id);
 
-        $template_ids = Objective::where('campaign_id', $campaign_id)->get()->pluck('template_id');
+        $template_ids = Objective::query()
+            ->where('campaign_id', $campaign_id)
+            ->pluck('template_id');
         $exclude = [];
         if (! empty($template_ids)) {
             foreach ($template_ids as $tid) {

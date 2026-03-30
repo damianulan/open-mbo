@@ -20,6 +20,11 @@ class UserResource extends IndexResource
 
     public function attributes(): array
     {
+        $this->model->loadMissing([
+            'employment.position',
+            'employment.company',
+        ]);
+
         return [
             'firstname' => $this->model->firstname,
             'lastname' => $this->model->lastname,

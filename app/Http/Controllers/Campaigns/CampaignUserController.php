@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Campaigns;
 
+use App\Contracts\Repositories\CampaignRepositoryContract;
+use App\Contracts\Repositories\UserCampaignRepositoryContract;
 use App\Forms\Mbo\Campaign\CampaignEditUserForm;
 use App\Http\Controllers\AppController;
 use App\Models\Mbo\Campaign;
@@ -15,17 +17,13 @@ use Throwable;
 
 class CampaignUserController extends AppController
 {
-    public function show(Request $request, UserCampaign $userCampaign): View
+    public function show(Request $request, UserCampaign $userCampaign, UserCampaignRepositoryContract $userCampaignRepository): View
     {
         if ($request->user()->cannot('view', $userCampaign)) {
             unauthorized();
         }
 
-        $userCampaign->loadMissing([
-            'campaign.coordinators.profile',
-            'user.profile',
-            'user_objectives.objective',
-        ]);
+        $userCampaign = $userCampaignRepository->findForShow($userCampaign->id);
 
         $this->logShow($userCampaign);
         $header = "{$userCampaign->campaign->name} [{$userCampaign->campaign->period}]";
@@ -60,9 +58,9 @@ class CampaignUserController extends AppController
         return response()->json($response);
     }
 
-    public function toggleManual(int|string $id): RedirectResponse
+    public function toggleManual(int|string $id, UserCampaignRepositoryContract $userCampaignRepository): RedirectResponse
     {
-        $userCampaign = UserCampaign::findOrFail($id);
+        $userCampaign = $userCampaignRepository->findOrFail($id, ['campaign']);
         $userCampaign->toggleManual();
         $message = __('mbo.info.manual_off');
 
@@ -73,27 +71,27 @@ class CampaignUserController extends AppController
         return redirect()->back()->with('success', $message);
     }
 
-    public function moveStageUp(int|string $id): RedirectResponse
+    public function moveStageUp(int|string $id, UserCampaignRepositoryContract $userCampaignRepository): RedirectResponse
     {
-        $userCampaign = UserCampaign::findOrFail($id);
+        $userCampaign = $userCampaignRepository->findOrFail($id, ['campaign']);
         $userCampaign->nextStage();
         $message = __('mbo.info.campaign_stage_changed', ['stage' => $userCampaign->stageDescription()]);
 
         return redirect()->back()->with('success', $message);
     }
 
-    public function moveStageDown(int|string $id): RedirectResponse
+    public function moveStageDown(int|string $id, UserCampaignRepositoryContract $userCampaignRepository): RedirectResponse
     {
-        $userCampaign = UserCampaign::findOrFail($id);
+        $userCampaign = $userCampaignRepository->findOrFail($id, ['campaign']);
         $userCampaign->previousStage();
         $message = __('mbo.info.campaign_stage_changed', ['stage' => $userCampaign->stageDescription()]);
 
         return redirect()->back()->with('success', $message);
     }
 
-    public function delete(int|string $id): JsonResponse
+    public function delete(int|string $id, UserCampaignRepositoryContract $userCampaignRepository): JsonResponse
     {
-        $userCampaign = UserCampaign::findOrFail($id);
+        $userCampaign = $userCampaignRepository->findOrFail($id);
 
         if ($userCampaign->delete()) {
             return ajax()->ok(__('alerts.campaigns.success.users_deleted'));
@@ -102,12 +100,12 @@ class CampaignUserController extends AppController
         return ajax()->error(__('alerts.campaigns.error.users_deleted'));
     }
 
-    public function addUsers(Request $request, int|string|null $id): View
+    public function addUsers(Request $request, int|string|null $id, CampaignRepositoryContract $campaignRepository): View
     {
         $params = [];
 
         if ($id) {
-            $campaign = Campaign::find($id);
+            $campaign = $campaignRepository->find($id);
 
             if ($campaign) {
                 $params = [

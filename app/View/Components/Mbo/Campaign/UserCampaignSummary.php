@@ -24,6 +24,13 @@ class UserCampaignSummary extends Component
 
     public function __construct(public UserCampaign $userCampaign)
     {
+        $this->userCampaign->loadMissing([
+            'campaign',
+            'user.profile',
+            'user_objectives.objective',
+            'user_objectives.points',
+        ]);
+
         $userObjectives = $this->userCampaign->user_objectives;
 
         $this->objectivesCount = $userObjectives->count();

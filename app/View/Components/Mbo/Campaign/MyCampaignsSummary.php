@@ -22,6 +22,11 @@ class MyCampaignsSummary extends Component
         }
 
         $this->user = $user;
+        $this->user->loadMissing([
+            'campaigns.campaign' => fn ($query) => $query->withCount(['user_campaigns', 'objectives']),
+            'campaigns.user_objectives.objective',
+            'campaigns.user_objectives.points',
+        ]);
         $this->userCampaigns = $user->campaigns;
     }
 

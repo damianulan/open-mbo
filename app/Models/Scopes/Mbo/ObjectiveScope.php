@@ -9,7 +9,6 @@ use App\Warden\RolesLib;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
-use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Facades\Auth;
 use Sentinel\Models\Role;
 use Throwable;
@@ -34,15 +33,11 @@ class ObjectiveScope implements Scope
                         $hasAny = $category_ids->count() || $campaign_ids->count();
 
                         if ($hasAny) {
-                            $builder->join('objective_templates', function (JoinClause $join): void {
-                                $join->on('objectives.template_id', '=', 'objective_templates.id');
-                            })
-                                ->where(function (Builder $q) use ($category_ids, $campaign_ids): void {
-                                    $q->whereIn('objective_templates.category_id', $category_ids)
-                                        ->orWhereIn('objectives.campaign_id', $campaign_ids);
-                                });
-
-                            $builder->select('objectives.*');
+                            $builder->where(function (Builder $query) use ($category_ids, $campaign_ids): void {
+                                $query->whereHas('template', function (Builder $templateQuery) use ($category_ids): void {
+                                    $templateQuery->whereIn('category_id', $category_ids);
+                                })->orWhereIn('objectives.campaign_id', $campaign_ids);
+                            });
                         } else {
                             $builder->whereRaw('1=0');
                         }

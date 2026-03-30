@@ -2,8 +2,8 @@
 
 namespace App\Forms\Mbo\Objective;
 
+use App\Contracts\Repositories\UserObjectiveRepositoryContract;
 use App\Models\Core\User;
-use App\Models\Mbo\UserObjective;
 use FormForge\Base\Form;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
@@ -19,7 +19,8 @@ class ObjectiveEditUserForm extends Form
         $exclude = [];
 
         if ($this->model) {
-            $user_ids = UserObjective::where('objective_id', $this->model->id)->get()->pluck('user_id');
+            $user_ids = app(UserObjectiveRepositoryContract::class)
+                ->getAssignedUserIdsForObjective($this->model->id);
 
             if (! empty($user_ids)) {
                 foreach ($user_ids as $tid) {

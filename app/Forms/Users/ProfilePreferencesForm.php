@@ -13,6 +13,7 @@ class ProfilePreferencesForm extends Form
 {
     public function definition(FormBuilder $builder): FormBuilder
     {
+        $this->model?->loadMissing('preferences');
         $preferences = $this->model?->preferences;
         $availableThemes = array_merge(['auto'], Theme::getAvailable()->toArray());
         $availableLocales = array_values(array_unique(array_merge(['auto'], config('app.available_locales', []))));

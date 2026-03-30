@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Campaigns;
 
+use App\Contracts\Repositories\CampaignRepositoryContract;
 use App\Filters\Collections\CampaignsListFilters;
 use App\Forms\Mbo\Campaign\CampaignEditForm;
 use App\Http\Controllers\AppController;
@@ -15,14 +16,14 @@ use Throwable;
 
 class CampaignsController extends AppController
 {
-    public function index(Request $request, CampaignsListFilters $filters): Renderable
+    public function index(Request $request, CampaignsListFilters $filters, CampaignRepositoryContract $campaignRepository): Renderable
     {
         if ($request->user()->cannot('viewAny', Campaign::class)) {
             unauthorized();
         }
         $this->logView('Wyświetlono listę kampanii pomiarowych');
 
-        $campaigns = Campaign::orderByStatus()->registerFilters($filters)->paginate(30);
+        $campaigns = $campaignRepository->paginateForIndex($filters);
 
         return view('pages.mbo.campaigns.index', [
             'campaigns' => $campaigns,
@@ -66,9 +67,10 @@ class CampaignsController extends AppController
         return $this->returnResponseRedirect($redirect, $message ?? __('alerts.campaigns.error.create'));
     }
 
-    public function show(Campaign $campaign): Renderable
+    public function show(Campaign $campaign, CampaignRepositoryContract $campaignRepository): Renderable
     {
         $this->authorize('view', $campaign);
+        $campaign = $campaignRepository->loadForShow($campaign);
 
         $this->logShow($campaign);
         $this->setPagetitle("{$campaign->name} [{$campaign->period}]");
@@ -114,9 +116,9 @@ class CampaignsController extends AppController
         return $this->returnResponseRedirect($redirect, $message ?? __('alerts.campaigns.error.edit', ['name' => $campaign->name]));
     }
 
-    public function terminate(int|string $id): JsonResponse
+    public function terminate(int|string $id, CampaignRepositoryContract $campaignRepository): JsonResponse
     {
-        $campaign = Campaign::findOrFail($id);
+        $campaign = $campaignRepository->findOrFail($id);
 
         if ($this->allows('terminate', $campaign)) {
             if ($campaign->terminate()) {
@@ -127,9 +129,9 @@ class CampaignsController extends AppController
         return ajax()->error(__('alerts.campaigns.error.terminate'));
     }
 
-    public function resume(int|string $id): JsonResponse
+    public function resume(int|string $id, CampaignRepositoryContract $campaignRepository): JsonResponse
     {
-        $campaign = Campaign::findOrFail($id);
+        $campaign = $campaignRepository->findOrFail($id);
 
         if ($campaign->resume()) {
             return ajax()->ok(__('alerts.campaigns.success.resume'));
@@ -138,9 +140,9 @@ class CampaignsController extends AppController
         return ajax()->error(__('alerts.campaigns.error.resume'));
     }
 
-    public function cancel(int|string $id): JsonResponse
+    public function cancel(int|string $id, CampaignRepositoryContract $campaignRepository): JsonResponse
     {
-        $campaign = Campaign::findOrFail($id);
+        $campaign = $campaignRepository->findOrFail($id, ['user_campaigns']);
 
         if ($campaign->cancel()) {
             foreach ($campaign->user_campaigns as $uc) {

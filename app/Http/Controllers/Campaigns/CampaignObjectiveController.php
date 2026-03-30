@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Campaigns;
 
+use App\Contracts\Repositories\ObjectiveRepositoryContract;
 use App\Forms\Mbo\Campaign\CampaignEditObjectiveForm;
 use App\Http\Controllers\AppController;
 use App\Models\Mbo\Objective;
@@ -45,9 +46,9 @@ class CampaignObjectiveController extends AppController
         return response()->json($response);
     }
 
-    public function delete(int|string $id): JsonResponse
+    public function delete(int|string $id, ObjectiveRepositoryContract $objectiveRepository): JsonResponse
     {
-        $objective = Objective::findOrFail($id);
+        $objective = $objectiveRepository->findOrFail($id);
 
         if ($objective->delete()) {
             return ajax()->ok('message', __('alerts.campaigns.success.objective_deleted'));
@@ -56,13 +57,13 @@ class CampaignObjectiveController extends AppController
         return ajax()->error('message', __('alerts.campaigns.error.objective_deleted'));
     }
 
-    public function addObjectives(Request $request, int|string|null $id): View
+    public function addObjectives(Request $request, int|string|null $id, ObjectiveRepositoryContract $objectiveRepository): View
     {
         $params = [];
         $form = null;
 
         if ($id) {
-            $objective = Objective::find($id);
+            $objective = $objectiveRepository->find($id);
 
             if ($objective) {
                 $form = CampaignEditObjectiveForm::bootWithModel($objective);

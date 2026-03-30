@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Objectives;
 
+use App\Contracts\Repositories\ObjectiveRepositoryContract;
 use App\DataTables\Mbo\ObjectiveDataTable;
 use App\Forms\Mbo\Objective\ObjectiveEditForm;
 use App\Models\Mbo\Objective;
@@ -43,9 +44,9 @@ class ObjectiveController extends MBOController
     /**
      * @param mixed $id
      */
-    public function show(int|string $id): View
+    public function show(int|string $id, ObjectiveRepositoryContract $objectiveRepository): View
     {
-        $objective = Objective::findOrFail($id);
+        $objective = $objectiveRepository->findForShow($id);
         $this->logShow($objective);
 
         $header = 'Podsumowanie Celu';
@@ -78,12 +79,15 @@ class ObjectiveController extends MBOController
 
     public function destroy($id): void {}
 
-    public function addObjectives(Request $request, int|string|null $id): View
+    public function addObjectives(Request $request, int|string|null $id, ObjectiveRepositoryContract $objectiveRepository): View
     {
         $params = [];
 
         if ($id) {
-            $objective = Objective::find($id);
+            $objective = $objectiveRepository->find($id, [
+                'campaign',
+                'template',
+            ]);
 
             if ($objective) {
                 $params = [

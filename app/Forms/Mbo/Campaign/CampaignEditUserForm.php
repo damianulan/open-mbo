@@ -2,8 +2,8 @@
 
 namespace App\Forms\Mbo\Campaign;
 
+use App\Contracts\Repositories\UserCampaignRepositoryContract;
 use App\Models\Core\User;
-use App\Models\Mbo\UserCampaign;
 use FormForge\Base\Form;
 use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
@@ -19,7 +19,9 @@ class CampaignEditUserForm extends Form
         $exclude = [];
 
         if ($this->model) {
-            $user_ids = UserCampaign::where('campaign_id', $this->model->id)->get()->pluck('user_id');
+            $this->model->loadMissing('coordinators');
+            $user_ids = app(UserCampaignRepositoryContract::class)
+                ->getAssignedUserIdsForCampaign($this->model->id);
             $coordinators = $this->model->coordinators->pluck('id')->toArray();
 
             if (! empty($user_ids)) {

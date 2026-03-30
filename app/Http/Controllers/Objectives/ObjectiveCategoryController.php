@@ -44,8 +44,6 @@ class ObjectiveCategoryController extends MBOController
         return redirect()->back()->with('error', __('alerts.error.operation'));
     }
 
-    public function show($id): void {}
-
     public function edit(ObjectiveTemplateCategory $objective, ObjectiveCategoryEditForm $form): View
     {
         return view('pages.mbo.categories.edit', [

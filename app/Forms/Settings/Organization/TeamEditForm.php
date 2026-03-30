@@ -20,6 +20,7 @@ class TeamEditForm extends Form
         if (! is_null($this->model)) {
             $method = 'PUT';
             $route = route('settings.organization.team.update', $this->model->id);
+            $this->model->loadMissing(['users', 'leaders']);
             $selectedUsers = $this->model->users->pluck('id')->toArray();
             $selectedLeaders = $this->model->leaders->pluck('id')->toArray();
 

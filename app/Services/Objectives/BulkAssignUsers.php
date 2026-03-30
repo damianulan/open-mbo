@@ -2,8 +2,8 @@
 
 namespace App\Services\Objectives;
 
+use App\Contracts\Repositories\UserObjectiveRepositoryContract;
 use App\Models\Mbo\Objective;
-use App\Models\Mbo\UserObjective;
 use Lucent\Services\Service;
 
 class BulkAssignUsers extends Service
@@ -37,7 +37,8 @@ class BulkAssignUsers extends Service
      */
     protected function handle(): Objective
     {
-        $current = UserObjective::where('objective_id', $this->objective->id)->get();
+        $current = app(UserObjectiveRepositoryContract::class)
+            ->getAssignmentsForObjective($this->objective->id);
         $current_ids = $current->pluck('user_id')->flip();
 
         if ($this->request()->input('user_ids')) {

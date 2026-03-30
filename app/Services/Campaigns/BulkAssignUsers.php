@@ -2,15 +2,16 @@
 
 namespace App\Services\Campaigns;
 
+use App\Contracts\Repositories\UserCampaignRepositoryContract;
 use App\Models\Mbo\Campaign;
-use App\Models\Mbo\UserCampaign;
 use Lucent\Services\Service;
 
 class BulkAssignUsers extends Service
 {
     public function handle(): Campaign
     {
-        $current = UserCampaign::where('campaign_id', $this->campaign->id)->get();
+        $current = app(UserCampaignRepositoryContract::class)
+            ->getAssignmentsForCampaign($this->campaign->id);
         $current_ids = $current->pluck('user_id')->flip();
 
         if ($this->request()->input('user_ids')) {

@@ -4,6 +4,10 @@
 
 @php
     $objective = $userObjective->getRelation('objective');
+    $objective?->loadMissing([
+        'campaign',
+        'category',
+    ]);
     $campaign = $objective?->campaign;
     $gainedPoints = (float) ($userObjective->gained_points ?? 0);
     $showWarningDeadline = $objective?->isOverdued() && ! $userObjective->isCompleted();
