@@ -23,9 +23,9 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\Activitylog\Models\Activity;
 
 /**
- * @property string $id
- * @property string|null $template_id
- * @property string|null $campaign_id
+ * @property int $id
+ * @property int|null $template_id
+ * @property int|null $campaign_id
  * @property string $name
  * @property mixed|null $description
  * @property CarbonImmutable|null $deadline Deadline for objective completion, to which realization should be approved, otherwise it turns out red.
@@ -38,15 +38,14 @@ use Spatie\Activitylog\Models\Activity;
  * @property CarbonImmutable|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read Campaign|null $campaign
- * @property-read ObjectiveTemplateCategory|null $category
+ * @property-read \App\Models\Mbo\Campaign|null $campaign
+ * @property-read \App\Models\Mbo\ObjectiveTemplateCategory|null $category
  * @property-read Collection<int, Comment> $comments
  * @property-read int|null $comments_count
- * @property-read ObjectiveTemplate|null $template
+ * @property-read \App\Models\Mbo\ObjectiveTemplate|null $template
  * @property-read mixed $trans
- * @property-read Collection<int, UserObjective> $user_objectives
+ * @property-read Collection<int, \App\Models\Mbo\UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective avg(string $column)
@@ -104,7 +103,6 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder<static>|Objective withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective withoutCache()
  * @method static Builder<static>|Objective withoutTrashed()
- *
  * @mixin \Eloquent
  */
 #[ScopedBy(ObjectiveScope::class)]

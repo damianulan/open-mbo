@@ -13,7 +13,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 /**
- * @property string $id
+ * @property int $id
  * @property string $key
  * @property mixed|null $contents
  * @property bool $system
@@ -25,7 +25,6 @@ use Illuminate\Support\Str;
  * @property CarbonImmutable|null $updated_at
  * @property CarbonImmutable|null $deleted_at
  * @property-read Collection $resources
- *
  * @method static Builder<static>|Notification events()
  * @method static Builder<static>|Notification newModelQuery()
  * @method static Builder<static>|Notification newQuery()
@@ -44,7 +43,6 @@ use Illuminate\Support\Str;
  * @method static Builder<static>|Notification whereUpdatedAt($value)
  * @method static Builder<static>|Notification withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|Notification withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Notification extends Model

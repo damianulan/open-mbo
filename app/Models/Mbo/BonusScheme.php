@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Spatie\Activitylog\Models\Activity;
 
 /**
- * @property string $id
+ * @property int $id
  * @property string $name
  * @property mixed|null $description
  * @property mixed $options
@@ -23,11 +23,10 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
  * @property-read mixed $trans
- * @property-read Collection<int, UserBonusScheme> $user_schemes
+ * @property-read Collection<int, \App\Models\Mbo\UserBonusScheme> $user_schemes
  * @property-read int|null $user_schemes_count
  * @property-read Collection<int, User> $users
  * @property-read int|null $users_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme avg(string $column)
@@ -79,7 +78,6 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BonusScheme withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusScheme withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class BonusScheme extends BaseModel

@@ -28,14 +28,14 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\Activitylog\Models\Activity;
 
 /**
- * @property string $id
- * @property string $user_id
- * @property string $objective_id
+ * @property int $id
+ * @property int $user_id
+ * @property int $objective_id
  * @property string $status objective status
  * @property numeric|null $realization Numerical value of the realization of the objective - in relation to the expected value in objective
  * @property numeric|null $evaluation Percentage evaluation of the objective - if realization is set, evaluation is calculated automatically
  * @property CarbonImmutable|null $evaluated_at Time when most recent evaluation was made
- * @property string|null $evaluated_by Time when most recent evaluator has made any changes
+ * @property int|null $evaluated_by Time when most recent evaluator has made any changes
  * @property numeric|null $self_realization Numerical value of the realization of the objective - in relation to the expected value in objective
  * @property numeric|null $self_evaluation Percentage evaluation of the objective - if realization is set, evaluation is calculated automatically
  * @property string|null $self_evaluated_at Time when most recent self evaluation was made
@@ -44,18 +44,17 @@ use Spatie\Activitylog\Models\Activity;
  * @property CarbonImmutable|null $deleted_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read Campaign|null $campaign
+ * @property-read \App\Models\Mbo\Campaign|null $campaign
  * @property-read Collection<int, Comment> $comments
  * @property-read int|null $comments_count
  * @property-read User|null $evaluator
  * @property-read float $weight
- * @property-read Objective|null $objective
- * @property-read Collection<int, UserPoints> $pointEntries
+ * @property-read \App\Models\Mbo\Objective|null $objective
+ * @property-read Collection<int, \App\Models\Mbo\UserPoints> $pointEntries
  * @property-read int|null $point_entries_count
- * @property-read UserPoints $points
+ * @property-read \App\Models\Mbo\UserPoints $points
  * @property-read mixed $trans
  * @property-read User|null $user
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective avg(string $column)
@@ -120,7 +119,6 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder<static>|UserObjective withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserObjective withoutCache()
  * @method static Builder<static>|UserObjective withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class UserObjective extends BaseModel implements AssignsPoints, HasDeadline

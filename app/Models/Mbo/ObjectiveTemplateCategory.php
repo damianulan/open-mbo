@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Spatie\Activitylog\Models\Activity;
 
 /**
- * @property string $id
+ * @property int $id
  * @property string $name
  * @property string|null $shortname
  * @property mixed|null $description
@@ -24,10 +24,9 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read int|null $activities_count
  * @property-read Collection<int, User> $coordinators
  * @property-read int|null $coordinators_count
- * @property-read Collection<int, ObjectiveTemplate> $objective_templates
+ * @property-read Collection<int, \App\Models\Mbo\ObjectiveTemplate> $objective_templates
  * @property-read int|null $objective_templates_count
  * @property-read mixed $trans
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory avg(string $column)
@@ -79,7 +78,6 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory withoutTrashed()
- *
  * @mixin \Eloquent
  */
 #[ScopedBy(ObjectiveTemplateCategoryScope::class)]

@@ -14,8 +14,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Activitylog\Models\Activity;
 
 /**
- * @property string $id
- * @property string|null $category_id
+ * @property int $id
+ * @property int|null $category_id
  * @property string $name
  * @property mixed|null $description
  * @property numeric|null $award Max points to be awarded for objective completion
@@ -25,11 +25,10 @@ use Spatie\Activitylog\Models\Activity;
  * @property CarbonImmutable|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read ObjectiveTemplateCategory|null $category
- * @property-read Collection<int, Objective> $objectives
+ * @property-read \App\Models\Mbo\ObjectiveTemplateCategory|null $category
+ * @property-read Collection<int, \App\Models\Mbo\Objective> $objectives
  * @property-read int|null $objectives_count
  * @property-read mixed $trans
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate avg(string $column)
@@ -83,7 +82,6 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withoutTrashed()
- *
  * @mixin \Eloquent
  */
 #[ScopedBy(ObjectiveTemplateScope::class)]

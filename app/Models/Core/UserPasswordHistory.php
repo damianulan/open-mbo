@@ -8,12 +8,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int $id
- * @property string $user_id
+ * @property int $user_id
  * @property string $password
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
- * @property-read User|null $user
- *
+ * @property-read \App\Models\Core\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPasswordHistory newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPasswordHistory newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPasswordHistory query()
@@ -22,7 +21,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPasswordHistory wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPasswordHistory whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPasswordHistory whereUserId($value)
- *
  * @mixin \Eloquent
  */
 class UserPasswordHistory extends Model
