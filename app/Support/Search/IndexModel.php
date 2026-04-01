@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Lucent\Support\Traits\UUID;
 
 /**
  * @property string $id
@@ -42,8 +41,6 @@ use Lucent\Support\Traits\UUID;
  */
 class IndexModel extends Model
 {
-    use UUID;
-
     protected $table = 'search_indexes';
 
     protected $fillable = [

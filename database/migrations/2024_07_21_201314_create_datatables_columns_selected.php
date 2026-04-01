@@ -10,8 +10,7 @@ return new class extends Migration
     {
         Schema::create('datatables_columns_selected', function (Blueprint $table): void {
             $table->bigIncrements('id');
-            $table->foreignUuid('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('table_id', 255);
             $table->json('columns');
             $table->json('selected');

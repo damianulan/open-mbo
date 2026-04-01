@@ -53,7 +53,6 @@ use Laravel\Sanctum\PersonalAccessToken;
 use Lucent\Contracts\Models\HasShowRoute;
 use Lucent\Support\Str\Alphabet;
 use Lucent\Support\Traits\CascadeDeletes;
-use Lucent\Support\Traits\UUID;
 use Lucent\Support\Traits\VirginModel;
 use SensitiveParameter;
 use Sentinel\Models\Permission;
@@ -207,7 +206,6 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     use UserBusiness;
     use UserHasPreferences;
     use UserMBO;
-    use UUID;
     use VirginModel;
 
     protected $fillable = [
@@ -323,12 +321,12 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function canBeDeleted(): bool
     {
-        return $this->isCore();
+        return ! $this->isCore();
     }
 
     public function canBeBlocked(): bool
     {
-        return $this->isCore();
+        return ! $this->isCore();
     }
 
     public function isCore(): bool

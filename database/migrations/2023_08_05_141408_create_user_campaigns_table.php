@@ -10,13 +10,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_campaigns', function (Blueprint $table): void {
-            $table->uuid('id')->primary();
-            $table->foreignUuid('campaign_id');
-            $table->foreignUuid('user_id');
+            $table->id();
+            $table->foreignId('campaign_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->enum('stage', CampaignStage::values())->default(CampaignStage::PENDING->value)->index()->comment('User current campaign stage');
-
-            $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->boolean('manual')->default(0)->comment('User will not be automatically moved between stages.');
             $table->boolean('active')->default(1)->comment('Is visible to users.');

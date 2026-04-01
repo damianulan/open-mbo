@@ -10,8 +10,7 @@ return new class extends Migration
     {
         Schema::create('user_profiles', function (Blueprint $table): void {
             $table->id();
-            $table->foreignUuid('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->date('birthday')->nullable();
             $table->string('phone')->nullable();
             $table->string('avatar')->nullable();

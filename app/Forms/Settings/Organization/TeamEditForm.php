@@ -56,9 +56,9 @@ class TeamEditForm extends Form
         return [
             'name' => 'required|max:255|unique:teams,name,' . $teamId . ',id',
             'leaders_ids' => 'required|array|min:1',
-            'leaders_ids.*' => 'uuid|exists:users,id',
+            'leaders_ids.*' => 'integer|exists:users,id',
             'users_ids' => 'nullable|array',
-            'users_ids.*' => 'uuid|exists:users,id',
+            'users_ids.*' => 'integer|exists:users,id',
             'description' => 'max:1000|nullable',
         ];
     }

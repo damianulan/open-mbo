@@ -6,7 +6,6 @@ use App\Support\Notifications\Factories\ResourceFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use Lucent\Support\Traits\UUID;
 
 /**
  * @property-read Collection $resources
@@ -19,8 +18,6 @@ use Lucent\Support\Traits\UUID;
  */
 class NotificationModel extends Model
 {
-    use UUID;
-
     protected function fillContent(string $content): string
     {
         return $content;

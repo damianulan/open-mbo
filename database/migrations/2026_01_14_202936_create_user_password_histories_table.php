@@ -10,8 +10,7 @@ return new class extends Migration
     {
         Schema::create('user_password_history', function (Blueprint $table): void {
             $table->id();
-            $table->foreignUuid('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('password');
             $table->timestamps();
         });

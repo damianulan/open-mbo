@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Lucent\Support\Traits\UUID;
 
 /**
  * @property string $id
@@ -51,7 +50,6 @@ use Lucent\Support\Traits\UUID;
 class Notification extends Model
 {
     use SoftDeletes;
-    use UUID;
 
     protected $table = 'notifications';
 
