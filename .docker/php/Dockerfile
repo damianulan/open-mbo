@@ -40,8 +40,6 @@ WORKDIR /var/www
 COPY .docker/php/php.ini /usr/local/etc/php/php.ini
 COPY .docker/php/entrypoint.sh /usr/local/bin/entrypoint.sh
 
-RUN git config --global --add safe.directory /var/www
-
 ENTRYPOINT ["entrypoint.sh"]
 
 CMD ["php-fpm"]
