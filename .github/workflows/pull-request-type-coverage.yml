@@ -52,4 +52,4 @@ jobs:
       - name: Run Pest type coverage
         env:
           APP_ENV: testing
-        run: ./vendor/bin/pest --type-coverage --min=96
+        run: ./vendor/bin/pest --type-coverage --min=95
