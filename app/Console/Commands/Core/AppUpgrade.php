@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands\Core;
 
+use App\Console\Commands\Core\Abstract\DeploymentCommand;
 use App\Events\Core\AppUpgraded;
 use App\Settings\GeneralSettings;
 use Exception;
-use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Process;
@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Schema;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Throwable;
 
-class AppUpgrade extends Command
+class AppUpgrade extends DeploymentCommand
 {
     /**
      * @var string
@@ -41,7 +41,7 @@ class AppUpgrade extends Command
             }
             $settings = new GeneralSettings;
             $name = config('app.name');
-            $target_release = $settings->target_release ?? 'stable';
+            $target_release = $settings->target_release ?? $this->matchEnvRelease();
 
             $this->line("Version preference detected: <versionblock>{$target_release}</versionblock>");
             $result = Process::run('git fetch --all');
@@ -115,4 +115,5 @@ class AppUpgrade extends Command
 
         return true;
     }
+
 }
