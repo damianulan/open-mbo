@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('objective_template_categories', function (Blueprint $table): void {
             $table->id();
+            $table->uuid('uuid')->unique()->index();
             $table->string('name', 255);
             $table->string('shortname', 64)->nullable();
             $table->longText('description')->nullable();

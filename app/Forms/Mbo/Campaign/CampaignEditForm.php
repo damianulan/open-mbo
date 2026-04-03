@@ -19,7 +19,7 @@ class CampaignEditForm extends Form
         $campaign = null;
         if (! is_null($this->model)) {
             $method = 'PUT';
-            $route = route('campaigns.update', $this->model->id);
+            $route = route('campaigns.update', $this->model);
             $campaign = $this->model->loadMissing('coordinators');
             $selected = $campaign->coordinators->pluck('id')->toArray();
         }

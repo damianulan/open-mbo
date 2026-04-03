@@ -11,6 +11,7 @@ use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Spatie\Activitylog\Models\Activity;
 
 /**
@@ -25,10 +26,11 @@ use Spatie\Activitylog\Models\Activity;
  * @property CarbonImmutable|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\Mbo\ObjectiveTemplateCategory|null $category
- * @property-read Collection<int, \App\Models\Mbo\Objective> $objectives
+ * @property-read ObjectiveTemplateCategory|null $category
+ * @property-read Collection<int, Objective> $objectives
  * @property-read int|null $objectives_count
  * @property-read mixed $trans
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate avg(string $column)
@@ -82,12 +84,16 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 #[ScopedBy(ObjectiveTemplateScope::class)]
 class ObjectiveTemplate extends BaseModel implements HasObjectives
 {
+    use HasUniqueUuid;
+
     protected $fillable = [
+        'uuid',
         'category_id',
         'name',
         'description',

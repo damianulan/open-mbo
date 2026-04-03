@@ -10,7 +10,7 @@ use Illuminate\View\Component;
 
 class CampaignCard extends Component
 {
-    public function __construct(public Campaign $campaign, public UserCampaign $userCampaign = new UserCampaign) {}
+    public function __construct(public Campaign $campaign, public ?UserCampaign $userCampaign = null) {}
 
     public function render(): View|Closure|string
     {

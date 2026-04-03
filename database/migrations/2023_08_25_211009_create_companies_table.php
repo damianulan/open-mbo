@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table): void {
             $table->id();
+            $table->uuid('uuid')->unique()->index();
 
             $table->string('name', 255)->unique();
             $table->string('shortname', 128)->unique();

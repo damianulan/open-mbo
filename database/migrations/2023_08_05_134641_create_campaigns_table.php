@@ -11,6 +11,7 @@ return new class extends Migration
     {
         Schema::create('campaigns', function (Blueprint $table): void {
             $table->id();
+            $table->uuid('uuid')->unique()->index();
             $table->string('name');
             $table->string('period');
             $table->longText('description')->nullable();

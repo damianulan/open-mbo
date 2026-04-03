@@ -11,6 +11,7 @@ return new class extends Migration
     {
         Schema::create('user_campaigns', function (Blueprint $table): void {
             $table->id();
+            $table->uuid('uuid')->unique()->index();
             $table->foreignId('campaign_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->enum('stage', CampaignStage::values())->default(CampaignStage::PENDING->value)->index()->comment('User current campaign stage');

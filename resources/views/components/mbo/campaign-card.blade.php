@@ -1,5 +1,9 @@
+@php
 
-<a class="card card-url card-bg" href="{{ $userCampaign && $userCampaign->exists ? route('campaigns.users.show', $userCampaign->id) : route('campaigns.show', $campaign->id) }}">
+    $campaignUrl = $userCampaign ? route('campaigns.users.show', ['userCampaign' => $userCampaign]) : route('campaigns.show', ['campaign' => $campaign]);
+@endphp
+
+<a class="card card-url card-bg" href="{{ $campaignUrl }}">
     <div class="card-body">
         <div class="card-top">
             <div class="card-title" data-tippy-content="{{ $campaign->name }}">

@@ -18,7 +18,7 @@
         <div class="flex-grow-1 min-w-0">
             <div class="d-flex flex-wrap gap-2 align-items-center mb-2">
                 <i class="bi text-primary {{ $objective?->campaign_id ? 'bi-bullseye' : 'bi-crosshair' }}"></i>
-                <a href="{{ route('objectives.assignment.show', $userObjective->id) }}" class="fw-semibold text-reset text-decoration-none">
+                <a href="{{ route('objectives.assignment.show', $userObjective) }}" class="fw-semibold text-reset text-decoration-none">
                     {{ $objective?->name ?? '-' }}
                 </a>
                 <span class="badge badge-{{ $userObjective->status }}">{{ $userObjective->getStatusLabel() }}</span>
@@ -60,7 +60,7 @@
         </div>
 
         <div class="w-100 d-grid d-md-block">
-            <a href="{{ route('objectives.assignment.show', $userObjective->id) }}" class="btn btn-outline-primary btn-sm">
+            <a href="{{ route('objectives.assignment.show', $userObjective) }}" class="btn btn-outline-primary btn-sm">
                 <i class="bi bi-eye-fill me-1"></i>{{ __('buttons.preview') }}
             </a>
         </div>

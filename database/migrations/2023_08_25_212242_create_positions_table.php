@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('positions', function (Blueprint $table): void {
             $table->id();
+            $table->uuid('uuid')->unique()->index();
 
             $table->string('name');
             $table->longText('description')->nullable();

@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('objectives', function (Blueprint $table): void {
             $table->id();
+            $table->uuid('uuid')->unique()->index();
             $table->foreignId('template_id')->nullable()->constrained('objective_templates')->nullOnDelete();
             $table->foreignId('campaign_id')->nullable()->constrained('campaigns')->cascadeOnDelete();
 

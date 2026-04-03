@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('locations', function (Blueprint $table): void {
             $table->id();
+            $table->uuid('uuid')->unique()->index();
 
             $table->string('name', 255);
             $table->string('address_line_1', 255)->nullable();

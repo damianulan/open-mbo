@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('type_of_contracts', function (Blueprint $table): void {
             $table->id();
+            $table->uuid('uuid')->unique()->index();
 
             $table->string('name', 255)->unique();
             $table->longText('description')->nullable();

@@ -38,7 +38,7 @@ class CampaignUpdateTest extends TestCase
             'name' => 'TEST',
         ]);
         $user = $this->userFactory()->assignRoleSlug(RolesLib::CAMPAIGN_COORDINATOR, $campaign);
-        $response = $this->actingAs($user)->get(route('campaigns.edit', $campaign));
+        $response = $this->actingAs($user)->get(route('campaigns.edit', ['campaign' => $campaign->uuid]));
 
         $response->assertStatus(200);
     }
@@ -54,7 +54,7 @@ class CampaignUpdateTest extends TestCase
             'name' => 'TEST2',
         ]);
 
-        $response = $this->actingAs($user)->get(route('campaigns.edit', $campaign));
+        $response = $this->actingAs($user)->get(route('campaigns.edit', ['campaign' => $campaign->uuid]));
 
         $response->assertStatus(404);
     }
@@ -71,9 +71,9 @@ class CampaignUpdateTest extends TestCase
             'name' => 'Updated Campaign',
         ]);
 
-        $response = $this->actingAs($user)->put(route('campaigns.update', $campaign), $payload);
+        $response = $this->actingAs($user)->put(route('campaigns.update', ['campaign' => $campaign->uuid]), $payload);
 
-        $response->assertRedirect(route('campaigns.show', $campaign));
+        $response->assertRedirect(route('campaigns.show', ['campaign' => $campaign->uuid]));
         $this->assertDatabaseHas('campaigns', [
             'id' => $campaign->id,
             'period' => 'UPD2026A',
@@ -87,7 +87,7 @@ class CampaignUpdateTest extends TestCase
         $user = $this->userFactory()->assignRoleSlug(RolesLib::CAMPAIGN_COORDINATOR, $contextCampaign);
         $payload = $this->validPayload(['period' => 'UPD2026B']);
 
-        $response = $this->actingAs($user)->put(route('campaigns.update', $targetCampaign), $payload);
+        $response = $this->actingAs($user)->put(route('campaigns.update', ['campaign' => $targetCampaign->uuid]), $payload);
 
         $response->assertStatus(404);
     }
@@ -103,10 +103,10 @@ class CampaignUpdateTest extends TestCase
         ]);
 
         $response = $this->actingAs($user)
-            ->from(route('campaigns.edit', $campaign))
-            ->put(route('campaigns.update', $campaign), $payload);
+            ->from(route('campaigns.edit', ['campaign' => $campaign->uuid]))
+            ->put(route('campaigns.update', ['campaign' => $campaign->uuid]), $payload);
 
-        $response->assertRedirect(route('campaigns.edit', $campaign));
+        $response->assertRedirect(route('campaigns.edit', ['campaign' => $campaign->uuid]));
         $response->assertSessionHasErrors(['period']);
     }
 

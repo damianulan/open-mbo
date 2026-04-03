@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Sentinel\Models\Role;
 use Spatie\Activitylog\Models\Activity;
 
@@ -30,6 +31,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read mixed $trans
  * @property-read Collection<int, User> $users
  * @property-read int|null $users_count
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team avg(string $column)
@@ -81,10 +83,13 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Team extends BaseModel
 {
+    use HasUniqueUuid;
+
     protected $fillable = [
         'leader_id',
         'name',

@@ -1,4 +1,4 @@
-<a class="user-banner" href="{{ route('users.show', $user->id) }}">
+<a class="user-banner" href="{{ route('users.show', ['user' => $user->uuid]) }}">
     <div class="profile-picture">
         {!! $user->getAvatarView() !!}
     </div>

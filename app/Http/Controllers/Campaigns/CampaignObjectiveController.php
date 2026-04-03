@@ -46,9 +46,9 @@ class CampaignObjectiveController extends AppController
         return response()->json($response);
     }
 
-    public function delete(int|string $id, ObjectiveRepositoryContract $objectiveRepository): JsonResponse
+    public function delete(Objective $objective, ObjectiveRepositoryContract $objectiveRepository): JsonResponse
     {
-        $objective = $objectiveRepository->findOrFail($id);
+        $objective = $objectiveRepository->findOrFail($objective->getKey());
 
         if ($objective->delete()) {
             return ajax()->ok('message', __('alerts.campaigns.success.objective_deleted'));
@@ -73,7 +73,7 @@ class CampaignObjectiveController extends AppController
         }
         if ($form) {
             $params = [
-                'id' => $id,
+                'id' => $objective ?? null,
                 'form' => $form->getDefinition(),
             ];
         }

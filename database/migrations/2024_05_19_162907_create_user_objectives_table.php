@@ -11,6 +11,7 @@ return new class extends Migration
     {
         Schema::create('user_objectives', function (Blueprint $table): void {
             $table->id();
+            $table->uuid('uuid')->unique()->index();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('objective_id')->constrained('objectives')->cascadeOnDelete();
 

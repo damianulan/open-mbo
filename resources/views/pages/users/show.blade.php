@@ -13,45 +13,45 @@
             </a>
             @if(auth()->user()->canImpersonate($user))
                 @if ($user->canBeImpersonated())
-                    <a class="icon-btn" href="{{ route('users.impersonate', $user->id) }}" data-tippy-content="{{ __('buttons.impersonate') }}">
+                    <a class="icon-btn" href="{{ route('users.impersonate', ['user' => $user->uuid]) }}" data-tippy-content="{{ __('buttons.impersonate') }}">
                         <i class="bi-person-fill-up"></i>
                     </a>
                 @endif
             @endif
             @can('edit', $user)
-                <a class="icon-btn" href="{{ route('users.edit', $user->id) }}" class="" data-tippy-content="{{ __('buttons.edit') }}">
+                <a class="icon-btn" href="{{ route('users.edit', ['user' => $user->uuid]) }}" class="" data-tippy-content="{{ __('buttons.edit') }}">
                     <i class="bi-pencil-square"></i>
                 </a>
             @endcan
 
             @if(auth()->user()->favourite_users->contains($user))
-                <a class="icon-btn" href="{{ route('users.favourite', $user) }}" data-tippy-content="{{ __('buttons.favourites_remove') }}">
+                <a class="icon-btn" href="{{ route('users.favourite', ['user' => $user->uuid]) }}" data-tippy-content="{{ __('buttons.favourites_remove') }}">
                     <i class="bi-star-fill"></i>
                 </a>
             @else
-                <a class="icon-btn" href="{{ route('users.favourite', $user) }}" data-tippy-content="{{ __('buttons.favourites_add') }}">
+                <a class="icon-btn" href="{{ route('users.favourite', ['user' => $user->uuid]) }}" data-tippy-content="{{ __('buttons.favourites_add') }}">
                     <i class="bi-star"></i>
                 </a>
             @endif
             @can('reset', $user)
-                <a class="icon-btn" href="{{ route('users.reset_password', $user) }}" class="" data-tippy-content="{{ __('buttons.reset_password') }}">
+                <a class="icon-btn" href="{{ route('users.reset_password', ['user' => $user->uuid]) }}" class="" data-tippy-content="{{ __('buttons.reset_password') }}">
                     <i class="bi-key-fill"></i>
                 </a>
             @endcan
             @can('block', $user)
                 @if($user->suspended_at !== null)
-                    <a class="icon-btn" href="{{ route('users.block', $user->id) }}" class="" data-tippy-content="{{ __('buttons.unblock') }}">
+                    <a class="icon-btn" href="{{ route('users.block', ['user' => $user->uuid]) }}" class="" data-tippy-content="{{ __('buttons.unblock') }}">
                         <i class="bi-person-fill-check"></i>
                     </a>
                 @else
-                <a class="icon-btn swal-confirm" href="{{ route('users.block', $user->id) }}" data-tippy-content="{{ __('buttons.block') }}" data-swal-text="{{ __('alerts.users.info.block') }}">
+                <a class="icon-btn swal-confirm" href="{{ route('users.block', ['user' => $user->uuid]) }}" data-tippy-content="{{ __('buttons.block') }}" data-swal-text="{{ __('alerts.users.info.block') }}">
                     <i class="bi-person-fill-lock"></i>
                 </a>
                 @endif
             @endcan
 
             @can('delete', $user)
-                <a class="icon-btn swal-confirm" href="{{ route('users.delete', $user->id) }}" data-tippy-content="{{ __('buttons.delete') }}" data-swal-text="{{ __('alerts.users.info.delete') }}">
+                <a class="icon-btn swal-confirm" href="{{ route('users.delete', ['user' => $user->uuid]) }}" data-tippy-content="{{ __('buttons.delete') }}" data-swal-text="{{ __('alerts.users.info.delete') }}">
                     <i class="bi-trash-fill"></i>
                 </a>
             @endcan

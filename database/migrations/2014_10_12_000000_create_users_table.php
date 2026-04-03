@@ -11,6 +11,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table): void {
             $table->id();
+            $table->uuid('uuid')->unique()->index();
             $table->string('auth')->default('manual');
             $table->encryptable('email');
             $table->encryptable('firstname');

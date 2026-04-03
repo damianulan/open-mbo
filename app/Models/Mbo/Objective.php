@@ -20,10 +20,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Support\Facades\Auth;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property int $id
+ * @property string $uuid
  * @property int|null $template_id
  * @property int|null $campaign_id
  * @property string $name
@@ -38,14 +40,15 @@ use Spatie\Activitylog\Models\Activity;
  * @property CarbonImmutable|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\Mbo\Campaign|null $campaign
- * @property-read \App\Models\Mbo\ObjectiveTemplateCategory|null $category
+ * @property-read Campaign|null $campaign
+ * @property-read ObjectiveTemplateCategory|null $category
  * @property-read Collection<int, Comment> $comments
  * @property-read int|null $comments_count
- * @property-read \App\Models\Mbo\ObjectiveTemplate|null $template
+ * @property-read ObjectiveTemplate|null $template
  * @property-read mixed $trans
- * @property-read Collection<int, \App\Models\Mbo\UserObjective> $user_objectives
+ * @property-read Collection<int, UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective avg(string $column)
@@ -99,18 +102,22 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective whereName($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective whereTemplateId($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective whereUpdatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective whereUuid($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective whereWeight($value)
  * @method static Builder<static>|Objective withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective withoutCache()
  * @method static Builder<static>|Objective withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 #[ScopedBy(ObjectiveScope::class)]
 class Objective extends BaseModel implements HasDeadline, HasWeight
 {
     use Commentable;
+    use HasUniqueUuid;
 
     protected $fillable = [
+        'uuid',
         'template_id',
         'campaign_id',
         'name',
@@ -136,6 +143,11 @@ class Objective extends BaseModel implements HasDeadline, HasWeight
         'updated' => ObjectiveUpdated::class,
         'created' => ObjectiveCreated::class,
     ];
+
+    public function getRouteKeyName(): string
+    {
+        return 'uuid';
+    }
 
     public function getWeightAttribute($value): float
     {

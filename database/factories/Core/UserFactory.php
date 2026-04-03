@@ -43,6 +43,7 @@ class UserFactory extends Factory
         $email = $username . '@damianulan.me';
 
         return [
+            'uuid' => (string) Str::uuid(),
             'firstname' => $firstname,
             'lastname' => $lastname,
             'username' => $username,

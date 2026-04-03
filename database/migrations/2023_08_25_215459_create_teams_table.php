@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('teams', function (Blueprint $table): void {
             $table->id();
+            $table->uuid('uuid')->unique()->index();
             $table->foreignId('leader_id')->nullable()->constrained('users')->nullOnDelete();
 
             $table->string('name');

@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Spatie\Activitylog\Models\Activity;
 
 /**
@@ -31,14 +32,15 @@ use Spatie\Activitylog\Models\Activity;
  * @property CarbonImmutable|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\Mbo\Campaign|null $campaign
- * @property-read Collection<int, \App\Models\Mbo\Objective> $objectives
+ * @property-read Campaign|null $campaign
+ * @property-read Collection<int, Objective> $objectives
  * @property-read int|null $objectives_count
  * @property-read Collection $points
  * @property-read mixed $trans
  * @property-read User|null $user
- * @property-read Collection<int, \App\Models\Mbo\UserObjective> $user_objectives
+ * @property-read Collection<int, UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign avg(string $column)
@@ -93,18 +95,21 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder<static>|UserCampaign withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign withoutCache()
  * @method static Builder<static>|UserCampaign withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
 {
     use CanUserCampaign;
     use HasCharts;
+    use HasUniqueUuid;
 
     public $logEntities = ['user_id' => User::class, 'campaign_id' => Campaign::class];
 
     public $timestamps = true;
 
     protected $fillable = [
+        'uuid',
         'campaign_id',
         'user_id',
         'stage',

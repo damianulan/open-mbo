@@ -53,6 +53,7 @@ use Laravel\Sanctum\PersonalAccessToken;
 use Lucent\Contracts\Models\HasShowRoute;
 use Lucent\Support\Str\Alphabet;
 use Lucent\Support\Traits\CascadeDeletes;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Lucent\Support\Traits\VirginModel;
 use SensitiveParameter;
 use Sentinel\Models\Permission;
@@ -117,13 +118,13 @@ use Spatie\ModelStatus\Status;
  * @property-read mixed $name
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Objective> $objectives
  * @property-read int|null $objectives_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Core\UserPasswordHistory> $password_history
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, UserPasswordHistory> $password_history
  * @property-read int|null $password_history_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Permission> $permissions
  * @property-read int|null $permissions_count
  * @property-read mixed $points
- * @property-read \App\Models\Core\UserPreference|null $preferences
- * @property-read \App\Models\Core\UserProfile|null $profile
+ * @property-read UserPreference|null $preferences
+ * @property-read UserProfile|null $profile
  * @property-read Collection $sessions
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Status> $statuses
  * @property-read int|null $statuses_count
@@ -143,6 +144,7 @@ use Spatie\ModelStatus\Status;
  * @property-read int|null $user_objectives_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, UserObjective> $user_objectives_active
  * @property-read int|null $user_objectives_active_count
+ *
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User active()
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User currentStatus(...$names)
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User drafted()
@@ -179,11 +181,13 @@ use Spatie\ModelStatus\Status;
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User withRole(...$slugs)
  * @method static Builder<static>|User withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|User withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 #[ScopedBy(CoreUsersScope::class)]
 class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 {
+    use HasUniqueUuid;
     use CascadeDeletes;
     use Commentable;
     use Commentator;
@@ -280,7 +284,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     {
         $link = '<span>' . $this->name . '</span>';
         if (Auth::user()->can('view', $this)) {
-            $link = '<a href="' . route('users.show', $this->id) . '" class="text-primary">' . $this->name . '</a>';
+            $link = '<a href="' . route('users.show', ['user' => $this->uuid]) . '" class="text-primary">' . $this->name . '</a>';
         }
 
         return $link;
@@ -486,7 +490,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function routeShow(): string
     {
-        return route('users.show', $this->id);
+        return route('users.show', ['user' => $this->uuid]);
     }
 
     public function sendPasswordResetNotification(#[SensitiveParameter] $token): void

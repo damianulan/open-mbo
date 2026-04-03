@@ -6,6 +6,7 @@ use App\Models\BaseModel;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Spatie\Activitylog\Models\Activity;
 
 /**
@@ -24,9 +25,10 @@ use Spatie\Activitylog\Models\Activity;
  * @property CarbonImmutable|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read Collection<int, \App\Models\Business\Company> $companies
+ * @property-read Collection<int, Company> $companies
  * @property-read int|null $companies_count
  * @property-read mixed $trans
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location avg(string $column)
@@ -84,10 +86,13 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Location extends BaseModel
 {
+    use HasUniqueUuid;
+
     protected $fillable = [
         'name',
         'address_line_1',

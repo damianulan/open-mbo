@@ -55,13 +55,13 @@ class ContractTypeControllerTest extends TestCase
         ]);
 
         $response = $this->actingAs($user)
-            ->from(route('settings.organization.contracts.edit', $firstContract->id))
-            ->put(route('settings.organization.contracts.update', $firstContract->id), [
+            ->from(route('settings.organization.contracts.edit', $firstContract))
+            ->put(route('settings.organization.contracts.update', $firstContract), [
                 'name' => $secondContract->name,
                 'description' => $firstContract->description,
             ]);
 
-        $response->assertRedirect(route('settings.organization.contracts.edit', $firstContract->id));
+        $response->assertRedirect(route('settings.organization.contracts.edit', $firstContract));
         $response->assertSessionHasErrors(['name']);
     }
 }

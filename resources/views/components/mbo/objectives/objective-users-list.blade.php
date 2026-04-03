@@ -15,11 +15,11 @@
                         </div>
                         <div class="list-actions">
                             <div class="list-action tippy-info" data-tippy-content="{{ $ua->getStatusLabel() }}"><x-icon key="circle-fill" classes="text-{{ $ua->status }}" /></div>
-                            <a href="{{ route('objectives.assignment.show', $ua->id) }}" class="list-action" data-tippy-content="{{ __('buttons.summary') }}">
+                            <a href="{{ route('objectives.assignment.show', $ua) }}" class="list-action" data-tippy-content="{{ __('buttons.summary') }}">
                                 <x-icon key="eye-fill" />
                             </a>
                             @if($ua->campaign)
-                                <a href="{{ route('campaigns.show', $ua->campaign->id) }}" class="list-action" data-tippy-content="{{ $ua->campaign->name }}">
+                                <a href="{{ route('campaigns.show', ['campaign' => $ua->campaign->uuid]) }}" class="list-action" data-tippy-content="{{ $ua->campaign->name }}">
                                     <x-icon key="bullseye" />
                                 </a>
                             @endif

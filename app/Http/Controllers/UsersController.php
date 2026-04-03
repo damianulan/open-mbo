@@ -50,7 +50,7 @@ class UsersController extends AppController
         if ($service->passed()) {
             $user = $service->user;
 
-            return redirect()->route('users.show', $user->id)->with('success', __('alerts.users.success.create'));
+            return redirect()->route('users.show', ['user' => $user->uuid])->with('success', __('alerts.users.success.create'));
         }
 
         return redirect()->back()->with('error', __('alerts.users.error.create'));
@@ -115,7 +115,7 @@ class UsersController extends AppController
         if ($service->passed()) {
             $user = $service->user;
 
-            return redirect()->route('users.show', $user)->with('success', __('alerts.users.success.edit', ['name' => $user->name]));
+            return redirect()->route('users.show', ['user' => $user->uuid])->with('success', __('alerts.users.success.edit', ['name' => $user->name]));
         }
 
         return redirect()->back()->with('error', __('alerts.users.error.edit', ['name' => $user->name]));

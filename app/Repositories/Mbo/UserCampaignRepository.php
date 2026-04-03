@@ -44,7 +44,9 @@ class UserCampaignRepository implements UserCampaignRepositoryContract
     {
         return $this->findOrFail($id, [
             'campaign.coordinators.profile',
+            'campaign.coordinators.roles',
             'user.profile',
+            'user.roles',
             'user_objectives.objective',
         ]);
     }

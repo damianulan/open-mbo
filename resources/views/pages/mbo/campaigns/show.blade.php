@@ -4,7 +4,7 @@
 <div class="icon-btn-nav">
     <div class="panel-left">
         @can('update', $campaign)
-            <a class="icon-btn" href="{{ route('campaigns.edit', $campaign->id) }}" data-tippy-content="{{ __('buttons.edit') }}"><i class="bi-pencil-fill"></i></a>
+            <a class="icon-btn" href="{{ route('campaigns.edit', ['campaign' => $campaign->uuid]) }}" data-tippy-content="{{ __('buttons.edit') }}"><i class="bi-pencil-fill"></i></a>
         @endcan
         @can('objectives', $campaign)
             <a href="javascript:void(0);" class="icon-btn add-objective" data-tippy-content="{{ __('mbo.buttons.add_objective') }}"><i class="bi-crosshair"></i></a>
@@ -14,14 +14,14 @@
         @endcan
         @can('terminate', $campaign)
             @if ($campaign->terminated())
-                <a href="javascript:void(0);" class="icon-btn toggle-resume" data-tippy-content="{{ __('buttons.resume_campaign') }}" data-url="{{ route('campaigns.resume', [$campaign->id]) }}"><i class="bi-play-fill"></i></a>
+                <a href="javascript:void(0);" class="icon-btn toggle-resume" data-tippy-content="{{ __('buttons.resume_campaign') }}" data-url="{{ route('campaigns.resume', ['campaign' => $campaign->uuid]) }}"><i class="bi-play-fill"></i></a>
             @else
-                <a href="javascript:void(0);" class="icon-btn toggle-terminate" data-tippy-content="{{ __('buttons.terminate_campaign') }}" data-url="{{ route('campaigns.terminate', [$campaign->id]) }}"><i class="bi-pause-fill"></i></a>
+                <a href="javascript:void(0);" class="icon-btn toggle-terminate" data-tippy-content="{{ __('buttons.terminate_campaign') }}" data-url="{{ route('campaigns.terminate', ['campaign' => $campaign->uuid]) }}"><i class="bi-pause-fill"></i></a>
             @endif
         @endcan
         @can('cancel', $campaign)
             @if (!$campaign->canceled())
-                <a href="javascript:void(0);" class="icon-btn toggle-cancel" data-tippy-content="{{ __('buttons.cancel_campaign') }}" data-url="{{ route('campaigns.cancel', [$campaign->id]) }}"><i class="bi-x-circle"></i></a>
+                <a href="javascript:void(0);" class="icon-btn toggle-cancel" data-tippy-content="{{ __('buttons.cancel_campaign') }}" data-url="{{ route('campaigns.cancel', ['campaign' => $campaign->uuid]) }}"><i class="bi-x-circle"></i></a>
             @endif
         @endcan
     </div>

@@ -8,6 +8,7 @@ use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Spatie\Activitylog\Models\Activity;
 
 /**
@@ -23,13 +24,14 @@ use Spatie\Activitylog\Models\Activity;
  * @property CarbonImmutable|null $updated_at
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- * @property-read Collection<int, \App\Models\Business\Department> $departments
+ * @property-read Collection<int, Department> $departments
  * @property-read int|null $departments_count
- * @property-read Collection<int, \App\Models\Business\UserEmployment> $employments
+ * @property-read Collection<int, UserEmployment> $employments
  * @property-read int|null $employments_count
- * @property-read Collection<int, \App\Models\Business\Location> $locations
+ * @property-read Collection<int, Location> $locations
  * @property-read int|null $locations_count
  * @property-read mixed $trans
+ *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company avg(string $column)
@@ -84,10 +86,13 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Company withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Company extends BaseModel
 {
+    use HasUniqueUuid;
+
     protected $fillable = [
         'name',
         'shortname',

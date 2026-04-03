@@ -16,25 +16,25 @@
                             <div class="list-action" data-tippy-content="{{ $uc->stageDescription() }}">
                                 <i class="{{ $uc->stageIcon() }}"></i>
                             </div>
-                            <a href="{{ route('campaigns.users.show', $uc) }}" class="list-action user-campaign" data-modelid="{{ $uc->id }}" data-tippy-content="{{ __('buttons.summary') }}">
+                            <a href="{{ route('campaigns.users.show', ['userCampaign' => $uc->uuid]) }}" class="list-action user-campaign" data-modelid="{{ $uc->id }}" data-tippy-content="{{ __('buttons.summary') }}">
                                 <i class="bi-eye-fill"></i>
                             </a>
                             @can('manual', $uc->campaign)
                                 @settings('mbo.campaigns_manual')
                                     @if($uc->isManual())
                                         @if(in_array($uc->stage->value, array_keys(\App\Enums\Mbo\CampaignStage::sequences()), true))
-                                            <a href="{{ route('campaigns.users.prev_stage', $uc->id) }}" class="list-action" data-ucid="{{ $uc->id }}" data-tippy-content="Przesuń do poprzedniego etapu">
+                                            <a href="{{ route('campaigns.users.prev_stage', ['userCampaign' => $uc->uuid]) }}" class="list-action" data-ucid="{{ $uc->id }}" data-tippy-content="Przesuń do poprzedniego etapu">
                                                 <i class="bi-caret-left-fill"></i>
                                             </a>
-                                            <a href="{{ route('campaigns.users.next_stage', $uc->id) }}" class="list-action" data-ucid="{{ $uc->id }}" data-tippy-content="Przesuń do następnego etapu">
+                                            <a href="{{ route('campaigns.users.next_stage', ['userCampaign' => $uc->uuid]) }}" class="list-action" data-ucid="{{ $uc->id }}" data-tippy-content="Przesuń do następnego etapu">
                                                 <i class="bi-caret-right-fill"></i>
                                             </a>
                                         @endif
-                                        <a href="{{ route('campaigns.users.toggle_manual', $uc->id) }}" class="list-action" data-ucid="{{ $uc->id }}" data-tippy-content="Wyłącz tryb ręczny">
+                                        <a href="{{ route('campaigns.users.toggle_manual', ['userCampaign' => $uc->uuid]) }}" class="list-action" data-ucid="{{ $uc->id }}" data-tippy-content="Wyłącz tryb ręczny">
                                             <i class="bi-hand-index-thumb-fill"></i>
                                         </a>
                                     @else
-                                        <a href="{{ route('campaigns.users.toggle_manual', $uc->id) }}" class="list-action" data-ucid="{{ $uc->id }}" data-tippy-content="Włącz tryb ręczny">
+                                        <a href="{{ route('campaigns.users.toggle_manual', ['userCampaign' => $uc->uuid]) }}" class="list-action" data-ucid="{{ $uc->id }}" data-tippy-content="Włącz tryb ręczny">
                                             <i class="bi-hand-index-thumb"></i>
                                         </a>
                                     @endif
@@ -42,7 +42,7 @@
                             @endcan
 
                             @can('users', $uc->campaign)
-                                <a class="user-delete" href="javascript:void(0);" class="list-action" data-tippy-content="Wypisz użytkownika" data-url="{{ route('campaigns.users.delete', $uc->id) }}">
+                                <a class="user-delete" href="javascript:void(0);" class="list-action" data-tippy-content="Wypisz użytkownika" data-url="{{ route('campaigns.users.delete', ['userCampaign' => $uc->uuid]) }}">
                                     <i class="bi-x-lg"></i>
                                 </a>
                             @endcan
