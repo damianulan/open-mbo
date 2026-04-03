@@ -12,17 +12,17 @@ use Illuminate\Support\Carbon;
 
 class ObjectiveDataTable extends DataTableService
 {
-    public function __construct(
-        private readonly ObjectiveRepositoryContract $objectiveRepository,
-    ) {
-        parent::__construct();
-    }
-
     protected $id = 'objective_table';
 
     protected $orderBy = 'deadline';
 
     protected $orderByDir = 'desc';
+
+    public function __construct(
+        private readonly ObjectiveRepositoryContract $objectiveRepository,
+    ) {
+        parent::__construct();
+    }
 
     /**
      * @param QueryBuilder $query Results from query() method.

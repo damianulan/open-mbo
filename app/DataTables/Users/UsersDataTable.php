@@ -16,17 +16,17 @@ use Illuminate\Support\Facades\Auth;
 
 class UsersDataTable extends DataTableService
 {
-    public function __construct(
-        private readonly UserRepositoryContract $userRepository,
-    ) {
-        parent::__construct();
-    }
-
     protected $id = 'users_table';
 
     protected $orderBy = 'created_at';
 
     protected array $actions = ['csv', 'excel', 'json', 'column_selector', 'print'];
+
+    public function __construct(
+        private readonly UserRepositoryContract $userRepository,
+    ) {
+        parent::__construct();
+    }
 
     /**
      * @param QueryBuilder $query Results from query() method.

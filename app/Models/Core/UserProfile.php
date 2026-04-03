@@ -19,7 +19,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
  * @property CarbonImmutable|null $deleted_at
- * @property-read \App\Models\Core\User|null $user
+ * @property-read User|null $user
+ *
  * @method static \Database\Factories\Core\UserProfileFactory factory($count = null, $state = [])
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|UserProfile newModelQuery()
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|UserProfile newQuery()
@@ -36,6 +37,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|UserProfile whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserProfile withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserProfile extends Model

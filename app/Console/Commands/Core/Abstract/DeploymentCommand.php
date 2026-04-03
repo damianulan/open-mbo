@@ -8,7 +8,7 @@ abstract class DeploymentCommand extends Command
 {
     protected function matchEnvRelease(): string
     {
-        return match(config('app.env')) {
+        return match (config('app.env')) {
             'staging' => 'non-stable',
             'development' => 'dev',
             'local' => 'dev',

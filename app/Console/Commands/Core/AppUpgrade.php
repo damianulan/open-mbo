@@ -115,5 +115,4 @@ class AppUpgrade extends DeploymentCommand
 
         return true;
     }
-
 }

@@ -14,6 +14,7 @@ use Spatie\TranslationLoader\LanguageLine;
  * @property int $editable
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LanguageModel newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LanguageModel newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LanguageModel query()
@@ -24,6 +25,7 @@ use Spatie\TranslationLoader\LanguageLine;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LanguageModel whereKey($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LanguageModel whereText($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LanguageModel whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class LanguageModel extends LanguageLine

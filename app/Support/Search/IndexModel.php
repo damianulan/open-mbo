@@ -20,9 +20,10 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @property string $trigram
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
- * @property-read \App\Support\Search\Factories\IndexResource|null $resource
- * @property-read \App\Support\Search\Dtos\ResultItem|null $result_item
- * @property-read Model|\Eloquent $source
+ * @property-read IndexResource|null $resource
+ * @property-read ResultItem|null $result_item
+ * @property-read Model|Eloquent $source
+ *
  * @method static Builder<static>|IndexModel newModelQuery()
  * @method static Builder<static>|IndexModel newQuery()
  * @method static Builder<static>|IndexModel query()
@@ -35,6 +36,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @method static Builder<static>|IndexModel whereSourceType($value)
  * @method static Builder<static>|IndexModel whereTrigram($value)
  * @method static Builder<static>|IndexModel whereUpdatedAt($value)
+ *
  * @mixin Eloquent
  */
 class IndexModel extends Model

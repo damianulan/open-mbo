@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Lucent\Support\Traits\Accessible;
 use Lucent\Support\Traits\CascadeDeletes;
-use Lucent\Support\Traits\HasUniqueUuid;
 use Lucent\Support\Traits\SoftDeletesPrunable;
 use Lucent\Support\Traits\VirginModel;
 use Spatie\Activitylog\Models\Activity;
