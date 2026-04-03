@@ -3,6 +3,7 @@ FROM php:8.4-fpm
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
+    nano \
     curl \
     zip \
     unzip \
@@ -38,6 +39,8 @@ WORKDIR /var/www
 
 COPY .docker/php/php.ini /usr/local/etc/php/php.ini
 COPY .docker/php/entrypoint.sh /usr/local/bin/entrypoint.sh
+
+RUN git config --global --add safe.directory /var/www
 
 ENTRYPOINT ["entrypoint.sh"]
 
