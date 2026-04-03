@@ -187,6 +187,7 @@ use Spatie\ModelStatus\Status;
 #[ScopedBy(CoreUsersScope::class)]
 class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 {
+    use HasUniqueUuid;
     use CascadeDeletes;
     use Commentable;
     use Commentator;
@@ -196,7 +197,6 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     use HasFactory;
     use HasRolesAndPermissions;
     use HasStatuses;
-    use HasUniqueUuid;
     use Impersonable;
     use Impersonate;
     use IsTranslated;
