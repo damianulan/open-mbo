@@ -17,12 +17,13 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Spatie\Activitylog\Models\Activity;
 
 /**
- * @property string $id
- * @property string $campaign_id
- * @property string $user_id
+ * @property int $id
+ * @property int $campaign_id
+ * @property int $user_id
  * @property CampaignStage $stage User current campaign stage
  * @property bool $manual User will not be automatically moved between stages.
  * @property bool $active Is visible to users.
@@ -101,12 +102,14 @@ class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
 {
     use CanUserCampaign;
     use HasCharts;
+    use HasUniqueUuid;
 
     public $logEntities = ['user_id' => User::class, 'campaign_id' => Campaign::class];
 
     public $timestamps = true;
 
     protected $fillable = [
+        'uuid',
         'campaign_id',
         'user_id',
         'stage',

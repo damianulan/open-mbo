@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('has_permissions', function (Blueprint $table): void {
-            $table->uuidMorphs('model');
+            $table->morphs('model');
             $table->foreignId('permission_id');
             $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
 

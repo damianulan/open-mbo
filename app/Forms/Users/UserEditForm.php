@@ -23,7 +23,7 @@ class UserEditForm extends Form
         $profile = null;
         if (! is_null($this->model)) {
             $method = 'PUT';
-            $route = route('users.update', $this->model->id);
+            $route = route('users.update', ['user' => $this->model->uuid]);
             app(UserRepositoryContract::class)->loadForEdit($this->model);
             $profile = $this->model->profile;
 

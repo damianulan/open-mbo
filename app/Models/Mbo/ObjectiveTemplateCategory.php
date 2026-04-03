@@ -9,10 +9,11 @@ use App\Models\Scopes\Mbo\ObjectiveTemplateCategoryScope;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Collection;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Spatie\Activitylog\Models\Activity;
 
 /**
- * @property string $id
+ * @property int $id
  * @property string $name
  * @property string|null $shortname
  * @property mixed|null $description
@@ -85,6 +86,8 @@ use Spatie\Activitylog\Models\Activity;
 #[ScopedBy(ObjectiveTemplateCategoryScope::class)]
 class ObjectiveTemplateCategory extends BaseModel
 {
+    use HasUniqueUuid;
+
     protected $table = 'objective_template_categories';
 
     protected $fillable = [

@@ -11,10 +11,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Lucent\Support\Traits\UUID;
 
 /**
- * @property string $id
+ * @property int $id
  * @property string $key
  * @property mixed|null $contents
  * @property bool $system
@@ -26,7 +25,6 @@ use Lucent\Support\Traits\UUID;
  * @property CarbonImmutable|null $updated_at
  * @property CarbonImmutable|null $deleted_at
  * @property-read Collection $resources
- *
  * @method static Builder<static>|Notification events()
  * @method static Builder<static>|Notification newModelQuery()
  * @method static Builder<static>|Notification newQuery()
@@ -45,13 +43,11 @@ use Lucent\Support\Traits\UUID;
  * @method static Builder<static>|Notification whereUpdatedAt($value)
  * @method static Builder<static>|Notification withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|Notification withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Notification extends Model
 {
     use SoftDeletes;
-    use UUID;
 
     protected $table = 'notifications';
 

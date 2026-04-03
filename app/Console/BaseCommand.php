@@ -7,9 +7,9 @@ use Illuminate\Support\Carbon;
 
 class BaseCommand extends Command
 {
-    private $start = null;
+    private ?Carbon $start = null;
 
-    private $end = null;
+    private ?Carbon $end = null;
 
     protected function log($message, $success = true): void
     {

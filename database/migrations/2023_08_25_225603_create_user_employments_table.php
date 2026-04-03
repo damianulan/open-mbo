@@ -9,18 +9,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_employments', function (Blueprint $table): void {
-            $table->uuid('id')->primary();
-            $table->foreignUuid('user_id');
-            $table->foreignUuid('company_id')->nullable();
-            $table->foreignUuid('contract_id')->nullable();
-            $table->foreignUuid('department_id')->nullable();
-            $table->foreignUuid('position_id')->nullable();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('company_id')->references('id')->on('companies');
-            $table->foreign('contract_id')->references('id')->on('type_of_contracts');
-            $table->foreign('department_id')->references('id')->on('departments');
-            $table->foreign('position_id')->references('id')->on('positions');
+            $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+            $table->foreignId('contract_id')->nullable()->constrained('type_of_contracts');
+            $table->foreignId('department_id')->nullable()->constrained('departments');
+            $table->foreignId('position_id')->nullable()->constrained('positions');
 
             $table->date('employment')->nullable()->comment('Date of employment');
             $table->date('release')->nullable()->comment('Date of employee release (end of employment)');

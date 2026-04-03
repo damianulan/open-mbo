@@ -6,10 +6,11 @@ use App\Models\BaseModel;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Spatie\Activitylog\Models\Activity;
 
 /**
- * @property string $id
+ * @property int $id
  * @property string $name
  * @property string|null $description
  * @property CarbonImmutable|null $deleted_at
@@ -75,6 +76,8 @@ use Spatie\Activitylog\Models\Activity;
  */
 class TypeOfContract extends BaseModel
 {
+    use HasUniqueUuid;
+
     public static array $contracts = [
         'uop',
         'uz',

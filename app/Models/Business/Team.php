@@ -11,12 +11,13 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Sentinel\Models\Role;
 use Spatie\Activitylog\Models\Activity;
 
 /**
- * @property string $id
- * @property string|null $leader_id
+ * @property int $id
+ * @property int|null $leader_id
  * @property string $name
  * @property mixed|null $description
  * @property CarbonImmutable|null $deleted_at
@@ -87,6 +88,8 @@ use Spatie\Activitylog\Models\Activity;
  */
 class Team extends BaseModel
 {
+    use HasUniqueUuid;
+
     protected $fillable = [
         'leader_id',
         'name',

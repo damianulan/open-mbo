@@ -9,9 +9,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('objective_templates', function (Blueprint $table): void {
-            $table->uuid('id')->primary();
-            $table->foreignUuid('category_id')->nullable();
-            $table->foreign('category_id')->references('id')->on('objective_template_categories')->onDelete('cascade');
+            $table->id();
+            $table->uuid('uuid')->unique()->index();
+            $table->foreignId('category_id')->nullable()->constrained('objective_template_categories')->cascadeOnDelete();
 
             $table->string('name');
             $table->longText('description')->nullable();

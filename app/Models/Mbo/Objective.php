@@ -20,12 +20,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Support\Facades\Auth;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Spatie\Activitylog\Models\Activity;
 
 /**
- * @property string $id
- * @property string|null $template_id
- * @property string|null $campaign_id
+ * @property int $id
+ * @property string $uuid
+ * @property int|null $template_id
+ * @property int|null $campaign_id
  * @property string $name
  * @property mixed|null $description
  * @property CarbonImmutable|null $deadline Deadline for objective completion, to which realization should be approved, otherwise it turns out red.
@@ -100,6 +102,7 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective whereName($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective whereTemplateId($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective whereUpdatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective whereUuid($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective whereWeight($value)
  * @method static Builder<static>|Objective withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective withoutCache()
@@ -111,8 +114,10 @@ use Spatie\Activitylog\Models\Activity;
 class Objective extends BaseModel implements HasDeadline, HasWeight
 {
     use Commentable;
+    use HasUniqueUuid;
 
     protected $fillable = [
+        'uuid',
         'template_id',
         'campaign_id',
         'name',
@@ -138,6 +143,11 @@ class Objective extends BaseModel implements HasDeadline, HasWeight
         'updated' => ObjectiveUpdated::class,
         'created' => ObjectiveCreated::class,
     ];
+
+    public function getRouteKeyName(): string
+    {
+        return 'uuid';
+    }
 
     public function getWeightAttribute($value): float
     {

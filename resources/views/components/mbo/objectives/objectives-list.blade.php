@@ -53,7 +53,7 @@
                                 </a>
                             @endif
                         @endif
-                        <a href="{{ $userObjective ? route('objectives.assignment.show', $userObjective->id):route('objectives.show', $objective->id) }}" class="list-action" data-modelid="{{ $objective->id }}" data-tippy-content="{{ __('buttons.preview') }}">
+                        <a href="{{ $userObjective ? route('objectives.assignment.show', $userObjective) : route('objectives.show', $objective) }}" class="list-action" data-modelid="{{ $objective->id }}" data-tippy-content="{{ __('buttons.preview') }}">
                             <x-icon key="eye-fill" />
                         </a>
                         @if(!$userObjective)
@@ -61,7 +61,7 @@
                                 <x-icon key="pencil-fill" />
                             </a>
                             @if(!$user || $user->id !== auth()->user()->id)
-                                <a href="javascript:void(0);" data-url="{{ route('campaigns.objective.delete', $objective->id) }}" class="list-action delete-objective" data-tippy-content="{{ __('buttons.delete') }}">
+                                <a href="javascript:void(0);" data-url="{{ route('campaigns.objective.delete', $objective) }}" class="list-action delete-objective" data-tippy-content="{{ __('buttons.delete') }}">
                                     <x-icon key="x-lg" />
                                 </a>
                             @endif

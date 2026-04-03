@@ -11,20 +11,18 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Lucent\Support\Traits\UUID;
 
 /**
- * @property string $id
+ * @property int $id
  * @property string $source_type
- * @property string $source_id
+ * @property int $source_id
  * @property string $attribute
  * @property string $trigram
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
- * @property-read IndexResource|null $resource
- * @property-read ResultItem|null $result_item
- * @property-read Model|Eloquent $source
- *
+ * @property-read \App\Support\Search\Factories\IndexResource|null $resource
+ * @property-read \App\Support\Search\Dtos\ResultItem|null $result_item
+ * @property-read Model|\Eloquent $source
  * @method static Builder<static>|IndexModel newModelQuery()
  * @method static Builder<static>|IndexModel newQuery()
  * @method static Builder<static>|IndexModel query()
@@ -37,13 +35,10 @@ use Lucent\Support\Traits\UUID;
  * @method static Builder<static>|IndexModel whereSourceType($value)
  * @method static Builder<static>|IndexModel whereTrigram($value)
  * @method static Builder<static>|IndexModel whereUpdatedAt($value)
- *
  * @mixin Eloquent
  */
 class IndexModel extends Model
 {
-    use UUID;
-
     protected $table = 'search_indexes';
 
     protected $fillable = [

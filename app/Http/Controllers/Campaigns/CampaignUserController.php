@@ -58,9 +58,9 @@ class CampaignUserController extends AppController
         return response()->json($response);
     }
 
-    public function toggleManual(int|string $id, UserCampaignRepositoryContract $userCampaignRepository): RedirectResponse
+    public function toggleManual(UserCampaign $userCampaign, UserCampaignRepositoryContract $userCampaignRepository): RedirectResponse
     {
-        $userCampaign = $userCampaignRepository->findOrFail($id, ['campaign']);
+        $userCampaign = $userCampaignRepository->findOrFail($userCampaign->getKey(), ['campaign']);
         $userCampaign->toggleManual();
         $message = __('mbo.info.manual_off');
 
@@ -71,27 +71,27 @@ class CampaignUserController extends AppController
         return redirect()->back()->with('success', $message);
     }
 
-    public function moveStageUp(int|string $id, UserCampaignRepositoryContract $userCampaignRepository): RedirectResponse
+    public function moveStageUp(UserCampaign $userCampaign, UserCampaignRepositoryContract $userCampaignRepository): RedirectResponse
     {
-        $userCampaign = $userCampaignRepository->findOrFail($id, ['campaign']);
+        $userCampaign = $userCampaignRepository->findOrFail($userCampaign->getKey(), ['campaign']);
         $userCampaign->nextStage();
         $message = __('mbo.info.campaign_stage_changed', ['stage' => $userCampaign->stageDescription()]);
 
         return redirect()->back()->with('success', $message);
     }
 
-    public function moveStageDown(int|string $id, UserCampaignRepositoryContract $userCampaignRepository): RedirectResponse
+    public function moveStageDown(UserCampaign $userCampaign, UserCampaignRepositoryContract $userCampaignRepository): RedirectResponse
     {
-        $userCampaign = $userCampaignRepository->findOrFail($id, ['campaign']);
+        $userCampaign = $userCampaignRepository->findOrFail($userCampaign->getKey(), ['campaign']);
         $userCampaign->previousStage();
         $message = __('mbo.info.campaign_stage_changed', ['stage' => $userCampaign->stageDescription()]);
 
         return redirect()->back()->with('success', $message);
     }
 
-    public function delete(int|string $id, UserCampaignRepositoryContract $userCampaignRepository): JsonResponse
+    public function delete(UserCampaign $userCampaign, UserCampaignRepositoryContract $userCampaignRepository): JsonResponse
     {
-        $userCampaign = $userCampaignRepository->findOrFail($id);
+        $userCampaign = $userCampaignRepository->findOrFail($userCampaign->getKey());
 
         if ($userCampaign->delete()) {
             return ajax()->ok(__('alerts.campaigns.success.users_deleted'));
@@ -109,7 +109,7 @@ class CampaignUserController extends AppController
 
             if ($campaign) {
                 $params = [
-                    'id' => $id,
+                    'id' => $campaign,
                     'form' => CampaignEditUserForm::bootWithModel($campaign)->getDefinition(),
                 ];
             }

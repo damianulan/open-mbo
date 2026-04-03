@@ -12,7 +12,7 @@ class EnigmaBuilder extends Builder
      * @param null|mixed $operator
      * @param null|mixed $value
      */
-    public function where($column, $operator = null, $value = null, $boolean = 'and')
+    public function where($column, $operator = null, $value = null, $boolean = 'and'): Builder
     {
         if (config('app.enigma_models')) {
 
@@ -33,7 +33,7 @@ class EnigmaBuilder extends Builder
         return parent::where($column, $operator, $value, $boolean);
     }
 
-    public function whereIn($column, $values, $boolean = 'and', $not = false)
+    public function whereIn($column, $values, $boolean = 'and', $not = false): Builder
     {
         if (config('app.enigma_models')) {
             if ($values instanceof Arrayable) {

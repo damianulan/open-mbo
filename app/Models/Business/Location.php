@@ -6,10 +6,11 @@ use App\Models\BaseModel;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Spatie\Activitylog\Models\Activity;
 
 /**
- * @property string $id
+ * @property int $id
  * @property string $name
  * @property string|null $address_line_1
  * @property string|null $address_line_2
@@ -90,6 +91,8 @@ use Spatie\Activitylog\Models\Activity;
  */
 class Location extends BaseModel
 {
+    use HasUniqueUuid;
+
     protected $fillable = [
         'name',
         'address_line_1',

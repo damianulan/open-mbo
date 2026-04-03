@@ -11,11 +11,12 @@ use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Spatie\Activitylog\Models\Activity;
 
 /**
- * @property string $id
- * @property string|null $category_id
+ * @property int $id
+ * @property int|null $category_id
  * @property string $name
  * @property mixed|null $description
  * @property numeric|null $award Max points to be awarded for objective completion
@@ -89,7 +90,10 @@ use Spatie\Activitylog\Models\Activity;
 #[ScopedBy(ObjectiveTemplateScope::class)]
 class ObjectiveTemplate extends BaseModel implements HasObjectives
 {
+    use HasUniqueUuid;
+
     protected $fillable = [
+        'uuid',
         'category_id',
         'name',
         'description',

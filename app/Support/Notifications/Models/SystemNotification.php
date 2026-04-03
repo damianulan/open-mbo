@@ -7,17 +7,16 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 /**
- * @property string $id
- * @property string $notification_id
+ * @property int $id
+ * @property int $notification_id
  * @property string $notifiable_type
- * @property string $notifiable_id
+ * @property int $notifiable_id
  * @property Collection $resources
  * @property string $contents
  * @property CarbonImmutable|null $read_at
  * @property CarbonImmutable|null $notified_at
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification query()
@@ -31,7 +30,6 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification whereReadAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification whereResources($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SystemNotification whereUpdatedAt($value)
- *
  * @mixin \Eloquent
  */
 class SystemNotification extends NotificationModel

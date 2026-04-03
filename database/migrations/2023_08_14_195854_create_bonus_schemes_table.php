@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bonus_schemes', function (Blueprint $table): void {
-            $table->uuid('id')->primary();
+            $table->id();
             $table->string('name');
             $table->longText('description')->nullable();
 

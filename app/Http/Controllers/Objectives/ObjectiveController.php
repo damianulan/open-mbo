@@ -41,12 +41,9 @@ class ObjectiveController extends MBOController
         return response()->json($response);
     }
 
-    /**
-     * @param mixed $id
-     */
-    public function show(int|string $id, ObjectiveRepositoryContract $objectiveRepository): View
+    public function show(Objective $objective, ObjectiveRepositoryContract $objectiveRepository): View
     {
-        $objective = $objectiveRepository->findForShow($id);
+        $objective = $objectiveRepository->findForShow($objective->getKey());
         $this->logShow($objective);
 
         $header = 'Podsumowanie Celu';
@@ -91,7 +88,7 @@ class ObjectiveController extends MBOController
 
             if ($objective) {
                 $params = [
-                    'id' => $id,
+                    'id' => $objective,
                     'form' => ObjectiveEditForm::bootWithModel($objective)->getDefinition(),
                 ];
             }

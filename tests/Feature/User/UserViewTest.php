@@ -22,11 +22,11 @@ class UserViewTest extends TestCase
         $this->fillUsers();
     }
 
-    public function test_user_can_view_another_user(): void
+    public function test_admin_can_view_another_user(): void
     {
-        $user = $this->userFactory();
+        $user = $this->getAdmin();
         $anotherUser = $this->userFactory();
-        $response = $this->actingAs($user)->get(route('users.show', $anotherUser));
+        $response = $this->actingAs($user)->get(route('users.show', ['user' => $anotherUser->uuid]));
 
         $response->assertStatus(200);
     }

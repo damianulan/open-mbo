@@ -22,7 +22,10 @@ class CampaignRepository implements CampaignRepositoryContract
     {
         $campaign->loadMissing([
             'coordinators.profile',
+            'coordinators.roles',
+            'user_campaigns.campaign',
             'user_campaigns.user.profile',
+            'user_campaigns.user.roles',
             'objectives.category',
         ]);
 

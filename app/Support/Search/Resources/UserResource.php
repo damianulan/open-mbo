@@ -40,7 +40,7 @@ class UserResource extends IndexResource
         return (new ResultItem([
             'title' => $this->model->name,
             'description' => null,
-            'link' => route('users.show', $this->model->id),
+            'link' => route('users.show', ['user' => $this->model->uuid]),
         ]))->setSearchedPhrase($phrase);
     }
 }

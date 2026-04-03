@@ -9,11 +9,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users_teams', function (Blueprint $table): void {
-            $table->foreignUuid('user_id');
-            $table->foreignUuid('team_id');
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('team_id')->constrained('teams')->cascadeOnDelete();
 
             $table->primary(['user_id', 'team_id']);
         });

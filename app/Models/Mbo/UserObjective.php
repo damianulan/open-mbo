@@ -25,17 +25,18 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Facades\Auth;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Spatie\Activitylog\Models\Activity;
 
 /**
- * @property string $id
- * @property string $user_id
- * @property string $objective_id
+ * @property int $id
+ * @property int $user_id
+ * @property int $objective_id
  * @property string $status objective status
  * @property numeric|null $realization Numerical value of the realization of the objective - in relation to the expected value in objective
  * @property numeric|null $evaluation Percentage evaluation of the objective - if realization is set, evaluation is calculated automatically
  * @property CarbonImmutable|null $evaluated_at Time when most recent evaluation was made
- * @property string|null $evaluated_by Time when most recent evaluator has made any changes
+ * @property int|null $evaluated_by Time when most recent evaluator has made any changes
  * @property numeric|null $self_realization Numerical value of the realization of the objective - in relation to the expected value in objective
  * @property numeric|null $self_evaluation Percentage evaluation of the objective - if realization is set, evaluation is calculated automatically
  * @property string|null $self_evaluated_at Time when most recent self evaluation was made
@@ -127,8 +128,10 @@ class UserObjective extends BaseModel implements AssignsPoints, HasDeadline
 {
     use CanUserObjective;
     use Commentable;
+    use HasUniqueUuid;
 
     protected $fillable = [
+        'uuid',
         'user_id',
         'objective_id',
         'status',

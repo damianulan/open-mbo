@@ -24,11 +24,12 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Collection;
 use Lucent\Contracts\Models\HasShowRoute;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Translatable\HasTranslations;
 
 /**
- * @property string $id
+ * @property int $id
  * @property array<array-key, mixed> $name
  * @property string $period
  * @property mixed|null $description
@@ -144,6 +145,7 @@ use Spatie\Translatable\HasTranslations;
 class Campaign extends BaseModel implements HasObjectives, HasShowRoute
 {
     use HasTranslations;
+    use HasUniqueUuid;
     use Searchable;
 
     public $stages;
@@ -155,6 +157,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
     protected $log_name = 'mbo';
 
     protected $fillable = [
+        'uuid',
         'name',
         'period',
         'description',
@@ -533,7 +536,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
 
     public function routeShow(): string
     {
-        return route('campaigns.show', $this->id);
+        return route('campaigns.show', ['campaign' => $this->uuid]);
     }
 
     public function assignUser($user_id): bool

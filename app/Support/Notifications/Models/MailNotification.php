@@ -6,16 +6,15 @@ use Carbon\CarbonImmutable;
 use Illuminate\Support\Collection;
 
 /**
- * @property string $id
- * @property string $notification_id
+ * @property int $id
+ * @property int $notification_id
  * @property string $notifiable_type
- * @property string $notifiable_id
+ * @property int $notifiable_id
  * @property Collection $resources
  * @property string $subject
  * @property string $contents
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification query()
@@ -28,7 +27,6 @@ use Illuminate\Support\Collection;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification whereResources($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification whereSubject($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MailNotification whereUpdatedAt($value)
- *
  * @mixin \Eloquent
  */
 class MailNotification extends NotificationModel

@@ -63,6 +63,7 @@
         "guzzlehttp/guzzle": "^7.2",
         "lab404/laravel-impersonate": "^1.7",
         "laravel/framework": "^12.0",
+        "laravel/horizon": "^5.45",
         "laravel/sanctum": "^4.0",
         "laravel/scout": "^10.19",
         "laravel/telescope": "^5.0",
@@ -90,7 +91,8 @@
         "tjvb/laravel-mail-catchall": "^4.4",
         "yajra/laravel-datatables": "*",
         "yajra/laravel-datatables-export": "*",
-        "ymigval/laravel-model-cache": "^1.1"
+        "ymigval/laravel-model-cache": "^1.1",
+        "wikimedia/composer-merge-plugin": "^2.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.15",
@@ -162,7 +164,8 @@
         },
         "sort-packages": true,
         "allow-plugins": {
-            "pestphp/pest-plugin": true
+            "pestphp/pest-plugin": true,
+            "wikimedia/composer-merge-plugin": true
         }
     },
     "minimum-stability": "stable",

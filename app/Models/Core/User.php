@@ -53,7 +53,7 @@ use Laravel\Sanctum\PersonalAccessToken;
 use Lucent\Contracts\Models\HasShowRoute;
 use Lucent\Support\Str\Alphabet;
 use Lucent\Support\Traits\CascadeDeletes;
-use Lucent\Support\Traits\UUID;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Lucent\Support\Traits\VirginModel;
 use SensitiveParameter;
 use Sentinel\Models\Permission;
@@ -63,7 +63,7 @@ use Spatie\ModelStatus\HasStatuses;
 use Spatie\ModelStatus\Status;
 
 /**
- * @property string $id
+ * @property int $id
  * @property string $auth
  * @property string|null $email
  * @property string|null $email_hash
@@ -187,6 +187,7 @@ use Spatie\ModelStatus\Status;
 #[ScopedBy(CoreUsersScope::class)]
 class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 {
+    use HasUniqueUuid;
     use CascadeDeletes;
     use Commentable;
     use Commentator;
@@ -207,7 +208,6 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     use UserBusiness;
     use UserHasPreferences;
     use UserMBO;
-    use UUID;
     use VirginModel;
 
     protected $fillable = [
@@ -284,7 +284,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     {
         $link = '<span>' . $this->name . '</span>';
         if (Auth::user()->can('view', $this)) {
-            $link = '<a href="' . route('users.show', $this->id) . '" class="text-primary">' . $this->name . '</a>';
+            $link = '<a href="' . route('users.show', ['user' => $this->uuid]) . '" class="text-primary">' . $this->name . '</a>';
         }
 
         return $link;
@@ -323,12 +323,12 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function canBeDeleted(): bool
     {
-        return $this->isCore();
+        return ! $this->isCore();
     }
 
     public function canBeBlocked(): bool
     {
-        return $this->isCore();
+        return ! $this->isCore();
     }
 
     public function isCore(): bool
@@ -490,7 +490,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function routeShow(): string
     {
-        return route('users.show', $this->id);
+        return route('users.show', ['user' => $this->uuid]);
     }
 
     public function sendPasswordResetNotification(#[SensitiveParameter] $token): void

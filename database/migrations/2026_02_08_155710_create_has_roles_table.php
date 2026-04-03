@@ -9,10 +9,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('has_roles', function (Blueprint $table): void {
-            $table->uuidMorphs('model');
+            $table->morphs('model');
             $table->foreignId('role_id');
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
-            $table->uuidMorphs('context');
+            $table->morphs('context');
 
             $table->primary(['model_type', 'model_id', 'role_id', 'context_type', 'context_id']);
         });

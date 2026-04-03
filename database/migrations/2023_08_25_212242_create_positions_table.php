@@ -9,7 +9,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('positions', function (Blueprint $table): void {
-            $table->uuid('id')->primary();
+            $table->id();
+            $table->uuid('uuid')->unique()->index();
 
             $table->string('name');
             $table->longText('description')->nullable();

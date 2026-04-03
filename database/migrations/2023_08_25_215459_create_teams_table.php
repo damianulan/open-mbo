@@ -9,9 +9,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('teams', function (Blueprint $table): void {
-            $table->uuid('id')->primary();
-            $table->foreignUuid('leader_id')->nullable();
-            $table->foreign('leader_id')->references('id')->on('users')->nullOnDelete();
+            $table->id();
+            $table->uuid('uuid')->unique()->index();
+            $table->foreignId('leader_id')->nullable()->constrained('users')->nullOnDelete();
 
             $table->string('name');
             $table->longText('description')->nullable();

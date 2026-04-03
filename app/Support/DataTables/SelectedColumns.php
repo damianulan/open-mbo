@@ -9,14 +9,13 @@ use Illuminate\Support\Facades\Auth;
 
 /**
  * @property int $id
- * @property string $user_id
+ * @property int $user_id
  * @property string $table_id
  * @property array<array-key, mixed> $columns
  * @property array<array-key, mixed> $selected
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
  * @property-read User|null $user
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns query()
@@ -27,7 +26,6 @@ use Illuminate\Support\Facades\Auth;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns whereTableId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SelectedColumns whereUserId($value)
- *
  * @mixin \Eloquent
  */
 class SelectedColumns extends Model

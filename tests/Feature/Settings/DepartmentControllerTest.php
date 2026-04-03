@@ -71,7 +71,7 @@ class DepartmentControllerTest extends TestCase
             'name' => 'HR',
         ]);
 
-        $response = $this->actingAs($user)->put(route('settings.organization.departments.update', $department->id), [
+        $response = $this->actingAs($user)->put(route('settings.organization.departments.update', $department), [
             'company_id' => $company->id,
             'name' => 'People Operations',
             'description' => $department->description,

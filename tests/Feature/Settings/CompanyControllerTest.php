@@ -62,8 +62,8 @@ class CompanyControllerTest extends TestCase
         ]);
 
         $response = $this->actingAs($user)
-            ->from(route('settings.organization.company.edit', $firstCompany->id))
-            ->put(route('settings.organization.company.update', $firstCompany->id), [
+            ->from(route('settings.organization.company.edit', $firstCompany))
+            ->put(route('settings.organization.company.update', $firstCompany), [
                 'name' => $secondCompany->name,
                 'shortname' => $secondCompany->shortname,
                 'taxpayerid' => $firstCompany->taxpayerid,
@@ -71,7 +71,7 @@ class CompanyControllerTest extends TestCase
                 'description' => $firstCompany->description,
             ]);
 
-        $response->assertRedirect(route('settings.organization.company.edit', $firstCompany->id));
+        $response->assertRedirect(route('settings.organization.company.edit', $firstCompany));
         $response->assertSessionHasErrors(['name', 'shortname']);
     }
 }

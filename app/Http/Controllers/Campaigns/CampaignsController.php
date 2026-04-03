@@ -56,7 +56,7 @@ class CampaignsController extends AppController
             if ($service->passed()) {
                 $campaign = $service->campaign;
 
-                $redirect = redirect()->route('campaigns.show', $campaign->id)->with('success', __('alerts.campaigns.success.create', ['name' => $campaign->name]));
+                $redirect = redirect()->route('campaigns.show', ['campaign' => $campaign->uuid])->with('success', __('alerts.campaigns.success.create', ['name' => $campaign->name]));
             }
         } catch (Throwable $e) {
             $this->e = $e;
@@ -105,7 +105,7 @@ class CampaignsController extends AppController
             if ($service->passed()) {
                 $campaign = $service->getResult();
 
-                $redirect = redirect()->route('campaigns.show', $campaign)->with('info_alert', __('alerts.campaigns.success.edit', ['name' => $campaign->name]));
+                $redirect = redirect()->route('campaigns.show', ['campaign' => $campaign->uuid])->with('info_alert', __('alerts.campaigns.success.edit', ['name' => $campaign->name]));
             }
         } catch (Throwable $e) {
             $this->e = $e;
@@ -116,10 +116,8 @@ class CampaignsController extends AppController
         return $this->returnResponseRedirect($redirect, $message ?? __('alerts.campaigns.error.edit', ['name' => $campaign->name]));
     }
 
-    public function terminate(int|string $id, CampaignRepositoryContract $campaignRepository): JsonResponse
+    public function terminate(Campaign $campaign): JsonResponse
     {
-        $campaign = $campaignRepository->findOrFail($id);
-
         if ($this->allows('terminate', $campaign)) {
             if ($campaign->terminate()) {
                 return ajax()->ok(__('alerts.campaigns.success.terminate'));
@@ -129,10 +127,8 @@ class CampaignsController extends AppController
         return ajax()->error(__('alerts.campaigns.error.terminate'));
     }
 
-    public function resume(int|string $id, CampaignRepositoryContract $campaignRepository): JsonResponse
+    public function resume(Campaign $campaign): JsonResponse
     {
-        $campaign = $campaignRepository->findOrFail($id);
-
         if ($campaign->resume()) {
             return ajax()->ok(__('alerts.campaigns.success.resume'));
         }
@@ -140,9 +136,9 @@ class CampaignsController extends AppController
         return ajax()->error(__('alerts.campaigns.error.resume'));
     }
 
-    public function cancel(int|string $id, CampaignRepositoryContract $campaignRepository): JsonResponse
+    public function cancel(Campaign $campaign, CampaignRepositoryContract $campaignRepository): JsonResponse
     {
-        $campaign = $campaignRepository->findOrFail($id, ['user_campaigns']);
+        $campaign = $campaignRepository->findOrFail($campaign->getKey(), ['user_campaigns']);
 
         if ($campaign->cancel()) {
             foreach ($campaign->user_campaigns as $uc) {

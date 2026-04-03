@@ -9,7 +9,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('locations', function (Blueprint $table): void {
-            $table->uuid('id')->primary();
+            $table->id();
+            $table->uuid('uuid')->unique()->index();
 
             $table->string('name', 255);
             $table->string('address_line_1', 255)->nullable();

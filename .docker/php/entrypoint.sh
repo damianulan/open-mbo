@@ -36,6 +36,7 @@ php artisan storage:link || true
 
 chown -R www-data:www-data storage bootstrap/cache || true
 
+git config --global --add safe.directory /var/www || true
 
 # run container main command
 exec "$@"

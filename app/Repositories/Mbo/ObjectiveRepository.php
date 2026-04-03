@@ -35,6 +35,7 @@ class ObjectiveRepository implements ObjectiveRepositoryContract
             'campaign',
             'category',
             'template.category.coordinators.profile',
+            'template.category.coordinators.roles',
         ]);
     }
 }

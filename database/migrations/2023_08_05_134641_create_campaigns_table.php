@@ -10,7 +10,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('campaigns', function (Blueprint $table): void {
-            $table->uuid('id')->primary();
+            $table->id();
+            $table->uuid('uuid')->unique()->index();
             $table->string('name');
             $table->string('period');
             $table->longText('description')->nullable();
