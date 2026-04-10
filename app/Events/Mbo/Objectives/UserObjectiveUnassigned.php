@@ -16,7 +16,8 @@ class UserObjectiveUnassigned implements NotifiableEvent, ShouldDispatchAfterCom
 
     public function __construct(
         public UserObjective $userObjective,
-    ) {}
+    ) {
+    }
 
     public static function description(): string
     {

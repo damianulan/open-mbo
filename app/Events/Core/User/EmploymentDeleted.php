@@ -13,5 +13,6 @@ class EmploymentDeleted
 
     public function __construct(
         public UserEmployment $employment,
-    ) {}
+    ) {
+    }
 }

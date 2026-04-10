@@ -28,7 +28,6 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read Model|Eloquent $subject
  * @property-read mixed $trans
  * @property-read User|null $user
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints avg(string $column)
@@ -81,7 +80,6 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPoints withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPoints withoutTrashed()
- *
  * @mixin Eloquent
  */
 class UserPoints extends BaseModel

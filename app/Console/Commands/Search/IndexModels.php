@@ -25,7 +25,7 @@ class IndexModels extends BaseCommand
 
         try {
             IndexModel::truncate();
-            $scope = new SearchModelScope;
+            $scope = new SearchModelScope();
             $classes = $scope->get();
 
             foreach ($classes as $class) {

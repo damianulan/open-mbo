@@ -14,5 +14,6 @@ class ObjectiveCreated implements ShouldDispatchAfterCommit
 
     public function __construct(
         public Objective $objective,
-    ) {}
+    ) {
+    }
 }

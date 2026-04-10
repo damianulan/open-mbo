@@ -16,7 +16,9 @@ class SearchIndexJob implements ShouldQueue
 
     public $tries = 3;
 
-    public function __construct(protected Model|Collection $input) {}
+    public function __construct(protected Model|Collection $input)
+    {
+    }
 
     public function handle(): void
     {

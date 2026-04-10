@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 /**
  * @var UserObjective $this
- *
  * @author Damian Ułan <damian.ulan@protonmail.com>
  */
 trait CanUserObjective

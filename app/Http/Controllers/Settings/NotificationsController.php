@@ -38,7 +38,7 @@ class NotificationsController extends SettingsController
     {
         $form->validate();
 
-        $notification = $this->fillNotification(new Notification, $request);
+        $notification = $this->fillNotification(new Notification(), $request);
 
         if ($notification->save()) {
             return redirect()->route('settings.notifications.index')->with('success', __('alerts.success.operation'));

@@ -45,7 +45,7 @@ class NotificationMessage
                 $this->addPlaceholders($resource);
             } else {
                 if (is_object($value) || is_array($value)) {
-                    throw new NotificationPlaceholderNotRecognized;
+                    throw new NotificationPlaceholderNotRecognized();
                 }
 
                 $this->addDatas($key, $value);

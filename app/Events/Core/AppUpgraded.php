@@ -10,5 +10,7 @@ class AppUpgraded
     use Dispatchable;
     use SerializesModels;
 
-    public function __construct(public string $release) {}
+    public function __construct(public string $release)
+    {
+    }
 }

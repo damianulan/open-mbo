@@ -13,5 +13,7 @@ class SystemNotificationSent
     use InteractsWithSockets;
     use SerializesModels;
 
-    public function __construct(public SystemNotification $notification) {}
+    public function __construct(public SystemNotification $notification)
+    {
+    }
 }

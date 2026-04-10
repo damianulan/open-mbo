@@ -14,5 +14,6 @@ class CommentAdded implements ShouldDispatchAfterCommit
 
     public function __construct(
         public Comment $comment,
-    ) {}
+    ) {
+    }
 }

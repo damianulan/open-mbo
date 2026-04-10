@@ -16,5 +16,6 @@ class UserMentioned
         public User $user,
         public Model $context,
         public User $mentionedBy,
-    ) {}
+    ) {
+    }
 }

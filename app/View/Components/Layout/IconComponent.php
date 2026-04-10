@@ -14,7 +14,8 @@ class IconComponent extends Component
         public int $mr = 0,
         public string $classes = '',
         public bool $bi = false,
-    ) {}
+    ) {
+    }
 
     public function render(): View|Closure|string
     {

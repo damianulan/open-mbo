@@ -16,9 +16,9 @@ class PageNav implements NavbarContract
 
     public static function boot(string $id, array $items = []): self
     {
-        $instance = new self;
+        $instance = new self();
         $instance->id = $id;
-        $instance->items = new Collection;
+        $instance->items = new Collection();
 
         if (! empty($items)) {
             foreach ($items as $item) {

@@ -17,7 +17,7 @@ class NotificationContents implements CastsAttributes, Jsonable
 
     public static function boot(?string $system_contents = null, ?string $email_contents = null, ?string $subject = null): self
     {
-        $instance = new self;
+        $instance = new self();
         $instance->system_contents = $system_contents;
         $instance->email_contents = $email_contents;
         $instance->subject = $subject;

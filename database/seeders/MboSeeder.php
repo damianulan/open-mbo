@@ -29,17 +29,17 @@ class MboSeeder extends Seeder
 
         try {
             DB::beginTransaction();
-            $category = new ObjectiveTemplateCategory;
+            $category = new ObjectiveTemplateCategory();
             $category->name = 'Cele Globalne';
             $category->shortname = 'global';
             $category->save();
 
-            $category = new ObjectiveTemplateCategory;
+            $category = new ObjectiveTemplateCategory();
             $category->name = 'Cele Kontrolne';
             $category->shortname = 'audit';
             $category->save();
 
-            $category = new ObjectiveTemplateCategory;
+            $category = new ObjectiveTemplateCategory();
             $category->name = 'Cele Indywidualne';
             $category->shortname = 'individual';
             $category->save();
@@ -83,7 +83,7 @@ class MboSeeder extends Seeder
         foreach ($templates as $template) {
             if ($template && isset($template->id)) {
                 for ($j = 1; $j <= fake()->numberBetween(1, 3); $j++) {
-                    $objective = new Objective;
+                    $objective = new Objective();
                     $objective->template_id = $template->id;
                     $objective->name = $template->name . "[{$j}]";
                     $objective->description = '<p>' . fake()->text(fake()->numberBetween(150, 250)) . '</p>';
@@ -128,7 +128,7 @@ class MboSeeder extends Seeder
             foreach ($campaignTemplates as $template) {
                 if ($template && isset($template->id) && $campaign) {
                     for ($j = 1; $j <= fake()->numberBetween(1, 3); $j++) {
-                        $objective = new Objective;
+                        $objective = new Objective();
                         $objective->campaign_id = $campaign->id;
                         $objective->template_id = $template->id;
                         $objective->name = $template->name . "[{$j}]";

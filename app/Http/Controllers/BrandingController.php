@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\Storage;
 
 class BrandingController extends AppController
 {
-    public function form(): void {}
+    public function form(): void
+    {
+    }
 
     public function store(Request $request, GeneralSettings $settings, BrandingForm $form): RedirectResponse
     {

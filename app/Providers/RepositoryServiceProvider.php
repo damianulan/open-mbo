@@ -24,7 +24,9 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->registerRepositories();
     }
 
-    public function boot(): void {}
+    public function boot(): void
+    {
+    }
 
     private function registerRepositories(): void
     {

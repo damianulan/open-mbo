@@ -13,7 +13,7 @@ trait HasUserCollection
 
     protected function fillUsers(): void
     {
-        $this->users = new Collection;
+        $this->users = new Collection();
         $this->users->put('admin', $this->userFactory()->assignRoleSlug(RolesLib::ADMIN));
         $this->users->put('admin_hr', $this->userFactory()->assignRoleSlug(RolesLib::ADMIN_HR));
         $this->users->put('admin_mbo', $this->userFactory()->assignRoleSlug(RolesLib::ADMIN_MBO));

@@ -13,7 +13,9 @@ class UserObjectiveStatusCheck implements ShouldQueueAfterCommit
 
     public $timeout = 180;
 
-    public function __construct() {}
+    public function __construct()
+    {
+    }
 
     public function handle(ObjectiveCreated|ObjectiveUpdated $event): void
     {

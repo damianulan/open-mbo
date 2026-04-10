@@ -35,5 +35,7 @@ class SettingsUpdated implements ShouldQueueAfterCommit
         }
     }
 
-    protected function processChanges(array $dirty, array $original): void {}
+    protected function processChanges(array $dirty, array $original): void
+    {
+    }
 }

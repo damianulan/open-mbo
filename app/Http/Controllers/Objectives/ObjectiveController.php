@@ -22,7 +22,9 @@ class ObjectiveController extends MBOController
         ]);
     }
 
-    public function create(): void {}
+    public function create(): void
+    {
+    }
 
     public function store(ObjectiveEditForm $form): JsonResponse
     {
@@ -55,7 +57,9 @@ class ObjectiveController extends MBOController
         ]);
     }
 
-    public function edit($id): void {}
+    public function edit($id): void
+    {
+    }
 
     public function update(Objective $objective, ObjectiveEditForm $form): JsonResponse
     {
@@ -74,7 +78,9 @@ class ObjectiveController extends MBOController
         return response()->json($response);
     }
 
-    public function destroy($id): void {}
+    public function destroy($id): void
+    {
+    }
 
     public function addObjectives(Request $request, int|string|null $id, ObjectiveRepositoryContract $objectiveRepository): View
     {

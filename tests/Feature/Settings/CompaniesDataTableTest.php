@@ -9,8 +9,7 @@ class CompaniesDataTableTest extends TestCase
 {
     public function test_companies_datatable_columns_match_company_attributes(): void
     {
-        $dataTable = new class extends CompaniesDataTable
-        {
+        $dataTable = new class () extends CompaniesDataTable {
             public function exposedDefaultColumns(): array
             {
                 return $this->defaultColumns();

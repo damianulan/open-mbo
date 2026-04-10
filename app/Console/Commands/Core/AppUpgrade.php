@@ -39,7 +39,7 @@ class AppUpgrade extends DeploymentCommand
             if (! Schema::hasTable('settings')) {
                 throw new Exception('Settings table is not created!');
             }
-            $settings = new GeneralSettings;
+            $settings = new GeneralSettings();
             $name = config('app.name');
             $target_release = $settings->target_release ?? $this->matchEnvRelease();
 

@@ -30,7 +30,6 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read Collection<int, Objective> $objectives
  * @property-read int|null $objectives_count
  * @property-read mixed $trans
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate avg(string $column)
@@ -84,7 +83,6 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplate withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplate withoutTrashed()
- *
  * @mixin \Eloquent
  */
 #[ScopedBy(ObjectiveTemplateScope::class)]
@@ -157,7 +155,7 @@ class ObjectiveTemplate extends BaseModel implements HasObjectives
 
     public function assign(User $user): bool
     {
-        $objective = new Objective;
+        $objective = new Objective();
         $objective->template_id = $this->id;
         $objective->user_id = $user->id;
         $objective->name = $this->name;

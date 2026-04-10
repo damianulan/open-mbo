@@ -145,7 +145,7 @@ class ResetPasswordController extends Controller
     protected function forceRules(): array
     {
         return [
-            'password' => ['required', 'confirmed', new PasswordRules],
+            'password' => ['required', 'confirmed', new PasswordRules()],
         ];
     }
 
@@ -154,7 +154,7 @@ class ResetPasswordController extends Controller
         return [
             'token' => 'required',
             'email' => 'required|email',
-            'password' => ['required', 'confirmed', new PasswordRules],
+            'password' => ['required', 'confirmed', new PasswordRules()],
         ];
     }
 

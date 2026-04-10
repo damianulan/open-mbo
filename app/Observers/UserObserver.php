@@ -55,7 +55,9 @@ class UserObserver
         $this->setStatusAuto($user);
     }
 
-    public function forceDeleted(User $user): void {}
+    public function forceDeleted(User $user): void
+    {
+    }
 
     private function setStatusAuto(User $user): void
     {

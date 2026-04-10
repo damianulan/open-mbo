@@ -13,7 +13,6 @@ class Authenticate extends Middleware
     /**
      * @param Request $request
      * @param string ...$guards
-     *
      * @throws AuthenticationException
      */
     public function handle($request, Closure $next, ...$guards): mixed

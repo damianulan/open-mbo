@@ -16,7 +16,8 @@ class UserObjectiveAssigned implements NotifiableEvent, ShouldDispatchAfterCommi
 
     public function __construct(
         public UserObjective $userObjective,
-    ) {}
+    ) {
+    }
 
     public static function description(): string
     {

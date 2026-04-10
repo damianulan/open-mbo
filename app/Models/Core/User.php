@@ -144,7 +144,6 @@ use Spatie\ModelStatus\Status;
  * @property-read int|null $user_objectives_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, UserObjective> $user_objectives_active
  * @property-read int|null $user_objectives_active_count
- *
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User active()
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User currentStatus(...$names)
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User drafted()
@@ -181,7 +180,6 @@ use Spatie\ModelStatus\Status;
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User withRole(...$slugs)
  * @method static Builder<static>|User withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|User withoutTrashed()
- *
  * @mixin \Eloquent
  */
 #[ScopedBy(CoreUsersScope::class)]
@@ -517,7 +515,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     protected function sessions(): Attribute
     {
         return Attribute::make(
-            get: fn (): Collection => config('session.driver') === 'database' ? DB::table('sessions')->where('user_id', $this->id)->orderByDesc('last_activity')->get() : new Collection,
+            get: fn (): Collection => config('session.driver') === 'database' ? DB::table('sessions')->where('user_id', $this->id)->orderByDesc('last_activity')->get() : new Collection(),
         );
     }
 }

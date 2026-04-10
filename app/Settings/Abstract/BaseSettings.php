@@ -15,7 +15,7 @@ abstract class BaseSettings extends Settings
     {
         $logs = [];
         $class = static::class;
-        $instance = new $class;
+        $instance = new $class();
         $group = static::group();
         $reflection = new ReflectionClass(static::class);
         $properties = $reflection->getProperties(ReflectionProperty::IS_PUBLIC);

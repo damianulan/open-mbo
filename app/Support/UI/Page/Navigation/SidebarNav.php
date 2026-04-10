@@ -18,9 +18,9 @@ class SidebarNav implements NavbarContract
 
     public static function boot(string $sitename, array $items = []): self
     {
-        $instance = new self;
+        $instance = new self();
         $instance->sitename = $sitename;
-        $instance->items = new Collection;
+        $instance->items = new Collection();
 
         if (! empty($items)) {
             foreach ($items as $item) {

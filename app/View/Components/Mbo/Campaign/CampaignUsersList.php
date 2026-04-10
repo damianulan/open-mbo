@@ -8,7 +8,9 @@ use Illuminate\View\Component;
 
 class CampaignUsersList extends Component
 {
-    public function __construct(public $userCampaigns) {}
+    public function __construct(public $userCampaigns)
+    {
+    }
 
     public function render(): View|Closure|string
     {

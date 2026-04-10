@@ -18,5 +18,6 @@ class CampaignUserObjectiveUnassigned implements ShouldDispatchAfterCommit
         public User $user,
         public Objective $objective,
         public Campaign $campaign,
-    ) {}
+    ) {
+    }
 }

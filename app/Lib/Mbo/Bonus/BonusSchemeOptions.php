@@ -59,7 +59,9 @@ class BonusSchemeOptions implements Arrayable, Countable, Jsonable, JsonSerializ
         return [];
     }
 
-    public function validator(): void {}
+    public function validator(): void
+    {
+    }
 
     public function count(): int
     {

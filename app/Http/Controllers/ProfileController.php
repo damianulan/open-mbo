@@ -39,7 +39,7 @@ class ProfileController extends AppController
         $user->lastname = $request->input('lastname');
         $user->email = $request->input('email');
 
-        $profile = $user->profile ?? new UserProfile;
+        $profile = $user->profile ?? new UserProfile();
         $profile->user_id = $user->id;
         $profile->birthday = $request->input('birthday');
 

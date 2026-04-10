@@ -14,7 +14,8 @@ use Tests\Traits\HasUserCollection;
 
 class CampaignUpdateTest extends TestCase
 {
-    use HasUserCollection, RefreshDatabase;
+    use HasUserCollection;
+    use RefreshDatabase;
 
     protected $seeder = TestDatabaseSeeder::class;
 

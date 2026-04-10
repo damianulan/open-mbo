@@ -13,5 +13,6 @@ class EmploymentCreated
 
     public function __construct(
         public UserEmployment $employment,
-    ) {}
+    ) {
+    }
 }

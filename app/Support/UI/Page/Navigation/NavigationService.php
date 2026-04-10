@@ -123,6 +123,6 @@ class NavigationService implements NavigationContract
             return;
         }
 
-        $this->topbar = new TopBar;
+        $this->topbar = new TopBar();
     }
 }

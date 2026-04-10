@@ -20,7 +20,7 @@ class Maintenance extends Command
     public function handle(): void
     {
         $type = $this->argument('arg');
-        $settings = new GeneralSettings;
+        $settings = new GeneralSettings();
 
         switch ($type) {
             case 'up':

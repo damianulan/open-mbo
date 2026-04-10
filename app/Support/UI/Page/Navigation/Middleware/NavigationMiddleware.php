@@ -12,7 +12,7 @@ class NavigationMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        app()->instance(NavigationContract::class, new NavigationService);
+        app()->instance(NavigationContract::class, new NavigationService());
 
         return $next($request);
     }

@@ -15,7 +15,9 @@ class UserAssignObjectives implements ShouldQueue
 
     public $timeout = 300;
 
-    public function __construct() {}
+    public function __construct()
+    {
+    }
 
     public function handle(UserCampaignAssigned $event): void
     {

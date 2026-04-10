@@ -17,7 +17,7 @@ class FilterFormFactory extends Form
 
     public static function make(FilterService $service): static
     {
-        return (new static)->boot()->setService($service)->setDefinition();
+        return (new static())->boot()->setService($service)->setDefinition();
     }
 
     public function definition(FormBuilder $builder): FormBuilder

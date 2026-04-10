@@ -15,7 +15,8 @@ class UserCampaignAssigned implements NotifiableEvent
 
     public function __construct(
         public UserCampaign $userCampaign,
-    ) {}
+    ) {
+    }
 
     public static function description(): string
     {

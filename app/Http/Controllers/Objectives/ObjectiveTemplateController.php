@@ -45,10 +45,11 @@ class ObjectiveTemplateController extends MBOController
 
     /**
      * @TODO add view
-     *
      * @param int $id
      */
-    public function show($id): void {}
+    public function show($id): void
+    {
+    }
 
     public function edit(ObjectiveTemplate $objective, ObjectiveTemplateEditForm $form): View
     {

@@ -24,11 +24,17 @@ use Throwable;
 
 class UserObjectiveController extends AppController
 {
-    public function index(): void {}
+    public function index(): void
+    {
+    }
 
-    public function create(): void {}
+    public function create(): void
+    {
+    }
 
-    public function store(Request $request): void {}
+    public function store(Request $request): void
+    {
+    }
 
     public function show(Request $request, UserObjective $userObjective, UserObjectiveRepositoryContract $userObjectiveRepository): View
     {
@@ -51,7 +57,9 @@ class UserObjectiveController extends AppController
         ]);
     }
 
-    public function edit($id): void {}
+    public function edit($id): void
+    {
+    }
 
     public function update(Request $request, Objective $objective, ObjectiveEditUserForm $form): JsonResponse
     {
@@ -70,7 +78,9 @@ class UserObjectiveController extends AppController
         return response()->json($response);
     }
 
-    public function destroy($id): void {}
+    public function destroy($id): void
+    {
+    }
 
     public function addUsers(Request $request, int|string|null $id, ObjectiveRepositoryContract $objectiveRepository): View
     {
@@ -113,7 +123,7 @@ class UserObjectiveController extends AppController
             $userObjective = $userObjectiveRepository->findOrFail($userObjective->getKey(), ['objective']);
 
             if (! $userObjective->canBeEvaluated()) {
-                throw new NoPermissionException;
+                throw new NoPermissionException();
             }
 
             $response = $form->validateJson();

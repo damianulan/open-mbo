@@ -14,5 +14,6 @@ class CampaignCreated implements ShouldDispatchAfterCommit
 
     public function __construct(
         public Campaign $campaign,
-    ) {}
+    ) {
+    }
 }

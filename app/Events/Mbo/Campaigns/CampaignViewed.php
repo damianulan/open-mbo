@@ -13,5 +13,6 @@ class CampaignViewed
 
     public function __construct(
         public Campaign $campaign,
-    ) {}
+    ) {
+    }
 }

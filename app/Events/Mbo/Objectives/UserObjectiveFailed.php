@@ -16,7 +16,8 @@ class UserObjectiveFailed implements NotifiableEvent, ShouldDispatchAfterCommit
 
     public function __construct(
         public UserObjective $userObjective,
-    ) {}
+    ) {
+    }
 
     public static function description(): string
     {

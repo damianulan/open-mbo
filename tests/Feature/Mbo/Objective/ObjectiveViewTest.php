@@ -12,7 +12,8 @@ use Tests\Traits\HasUserCollection;
 
 class ObjectiveViewTest extends TestCase
 {
-    use HasUserCollection, RefreshDatabase;
+    use HasUserCollection;
+    use RefreshDatabase;
 
     protected $seeder = TestDatabaseSeeder::class;
 

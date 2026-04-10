@@ -14,7 +14,7 @@ class ModelResourceFactory
 {
     public static function getResource(Model $model): ?IndexResource
     {
-        $resources = (new SearchResourceScope)->get();
+        $resources = (new SearchResourceScope())->get();
         foreach ($resources as $resource) {
             if ($resource::getModelClass() === $model::class) {
                 return new $resource($model);
@@ -65,7 +65,7 @@ class ModelResourceFactory
                     $trigrams = self::getTrigrams(self::normalizeValue($value));
 
                     foreach ($trigrams as $trigram) {
-                        $index = new IndexModel;
+                        $index = new IndexModel();
                         $index->source_type = $class;
                         $index->source_id = $model->id;
                         $index->attribute = $attribute;

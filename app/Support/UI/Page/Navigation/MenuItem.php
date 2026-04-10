@@ -28,7 +28,7 @@ class MenuItem
 
     public static function make(string $id): self
     {
-        $instance = new self;
+        $instance = new self();
         $instance->id = $id;
 
         return $instance;

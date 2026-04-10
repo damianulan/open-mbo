@@ -22,7 +22,6 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read Collection<int, UserEmployment> $employments
  * @property-read int|null $employments_count
  * @property-read mixed $trans
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position avg(string $column)
@@ -73,7 +72,6 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Position withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Position withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Position withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Position extends BaseModel

@@ -15,7 +15,9 @@ class UserEmploymentSaved implements ShouldQueue
 {
     use InteractsWithQueue;
 
-    public function __construct() {}
+    public function __construct()
+    {
+    }
 
     public function handle(EmploymentCreated|EmploymentUpdated|EmploymentDeleted $event): void
     {

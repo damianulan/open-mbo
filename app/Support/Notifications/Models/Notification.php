@@ -25,7 +25,6 @@ use Illuminate\Support\Str;
  * @property CarbonImmutable|null $updated_at
  * @property CarbonImmutable|null $deleted_at
  * @property-read Collection $resources
- *
  * @method static Builder<static>|Notification events()
  * @method static Builder<static>|Notification newModelQuery()
  * @method static Builder<static>|Notification newQuery()
@@ -44,7 +43,6 @@ use Illuminate\Support\Str;
  * @method static Builder<static>|Notification whereUpdatedAt($value)
  * @method static Builder<static>|Notification withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|Notification withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Notification extends Model
@@ -79,7 +77,7 @@ class Notification extends Model
     {
         $notification = self::byKey($key);
         if (! $notification) {
-            $notification = new self;
+            $notification = new self();
             $attributes['key'] = $key;
         }
         $notification->fill($attributes);
@@ -114,7 +112,7 @@ class Notification extends Model
                     $models = ResourceFactory::getEventResourceModels($this->event);
                 }
                 if ($notifiable = config('auth.providers.users.model')) {
-                    $models[$notifiable] = new $notifiable;
+                    $models[$notifiable] = new $notifiable();
                 }
                 $resources = array_map(fn ($model) => ResourceFactory::matchModel($model), $models);
                 $resources = array_filter($resources, fn ($item) => ! is_null($item));

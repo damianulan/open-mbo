@@ -54,7 +54,9 @@ class NotificationServiceProvider extends ServiceProvider
         return $classes;
     }
 
-    public function register(): void {}
+    public function register(): void
+    {
+    }
 
     public function boot(): void
     {

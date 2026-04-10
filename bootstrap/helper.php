@@ -52,7 +52,7 @@ function isRoot(bool $strict = false): bool
 
 function ajax(): ResponseAjax
 {
-    return new ResponseAjax;
+    return new ResponseAjax();
 }
 
 function current_theme(): string

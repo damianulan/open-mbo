@@ -150,7 +150,7 @@ class DataTableService extends DataTable
             $columns = $request->input('columns');
             $selected = $request->input('selected');
 
-            $sc = SelectedColumns::findColumn($datatable_id) ?? new SelectedColumns;
+            $sc = SelectedColumns::findColumn($datatable_id) ?? new SelectedColumns();
             $sc->user_id = Auth::user()->id;
             $sc->table_id = $datatable_id;
             $sc->columns = $columns;
