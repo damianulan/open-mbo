@@ -39,7 +39,6 @@ class ObjectiveEditUserForm extends Form
 
     public function validation(): array
     {
-
         return [];
     }
 }

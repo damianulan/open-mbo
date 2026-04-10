@@ -78,7 +78,7 @@ class UsersController extends AppController
         }
 
         $user = $userRepository->loadForShow($user);
-        $request->user()->loadMissing('favourite_users');
+        $request->user()->loadMissing('favouriteUsers');
 
         return view('pages.users.show', [
             'user' => $user,
@@ -186,10 +186,10 @@ class UsersController extends AppController
     {
         $authUser = $request->user();
 
-        if ($authUser->favourite_users->contains($user)) {
-            $authUser->favourite_users()->detach($user->id);
+        if ($authUser->favouriteUsers->contains($user)) {
+            $authUser->favouriteUsers()->detach($user->id);
         } else {
-            $authUser->favourite_users()->attach($user->id);
+            $authUser->favouriteUsers()->attach($user->id);
         }
 
         return redirect()->back();

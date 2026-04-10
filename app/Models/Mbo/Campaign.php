@@ -30,6 +30,7 @@ use Spatie\Translatable\HasTranslations;
 
 /**
  * @property int $id
+ * @property string $uuid
  * @property array<array-key, mixed> $name
  * @property string $period
  * @property mixed|null $description
@@ -49,21 +50,21 @@ use Spatie\Translatable\HasTranslations;
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
  * @property CarbonImmutable|null $deleted_at
- * @property-read EloquentCollection<int, Activity> $activities
- * @property-read int|null $activities_count
+ * @property-read EloquentCollection<int, Activity> $activitiesAsSubject
+ * @property-read int|null $activities_as_subject_count
  * @property-read EloquentCollection<int, User> $coordinators
  * @property-read int|null $coordinators_count
  * @property-read EloquentCollection<int, IndexModel> $indexes
  * @property-read int|null $indexes_count
- * @property-read EloquentCollection<int, Objective> $objectives
+ * @property-read EloquentCollection<int, \App\Models\Mbo\Objective> $objectives
  * @property-read int|null $objectives_count
  * @property-read mixed $timeend
  * @property-read mixed $timestart
  * @property-read mixed $trans
  * @property-read mixed $translations
- * @property-read EloquentCollection<int, UserCampaign> $user_campaigns
+ * @property-read EloquentCollection<int, \App\Models\Mbo\UserCampaign> $user_campaigns
  * @property-read int|null $user_campaigns_count
- * @property-read EloquentCollection<int, UserObjective> $user_objectives
+ * @property-read EloquentCollection<int, \App\Models\Mbo\UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign average(string $column)
@@ -134,6 +135,7 @@ use Spatie\Translatable\HasTranslations;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereSelfEvaluationTo($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereStage($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereUpdatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereUuid($value)
  * @method static Builder<static>|Campaign withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign withoutCache()
  * @method static Builder<static>|Campaign withoutTrashed()
@@ -551,7 +553,6 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
                     'active' => $this->draft ? 0 : 1,
                 ]);
             }
-
         }
 
         return $result ? true : false;

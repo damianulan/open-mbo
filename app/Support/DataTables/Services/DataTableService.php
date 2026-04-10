@@ -161,7 +161,6 @@ class DataTableService extends DataTable
             }
 
             return redirect()->back()->with('error', __('alerts.datatables.save_columns.error'));
-
         }
 
         return redirect()->back()->with('error', __('alerts.datatables.save_columns.error_data'));

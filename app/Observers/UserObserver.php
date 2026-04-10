@@ -23,7 +23,7 @@ class UserObserver
     public function created(User $user): void
     {
         if ($user->password) {
-            $user->password_history()->create([
+            $user->passwordHistory()->create([
                 'password' => $user->password,
             ]);
         }
@@ -38,7 +38,7 @@ class UserObserver
     public function updated(User $user): void
     {
         if ($user->isDirty('password')) {
-            $user->password_history()->create([
+            $user->passwordHistory()->create([
                 'password' => $user->password,
             ]);
         }

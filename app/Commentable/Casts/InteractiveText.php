@@ -123,7 +123,6 @@ class InteractiveText implements CastsAttributes
 
             if (preg_match_all($pattern, $value, $matches, PREG_SET_ORDER)) {
                 foreach ($matches as $match) {
-
                     $search = $match[0] ?? null;
                     $id = $match[1] ?? null;
                     if ($id && $search) {

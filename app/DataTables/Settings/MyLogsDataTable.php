@@ -20,7 +20,6 @@ class MyLogsDataTable extends BaseLogDataTable
      */
     public function DataTable(QueryBuilder $query): DataTableBuilder
     {
-
         return (new DataTableBuilder($query))
             ->addColumn('event', fn ($data) => view('components.datatables.badge', [
                 'color' => $this->getEventColor($data->event),

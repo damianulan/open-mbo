@@ -49,7 +49,6 @@ class ModuleManager
                     $result = false;
                 }
                 break;
-
             default:
                 $result = true;
                 break;

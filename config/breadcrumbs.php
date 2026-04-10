@@ -4,7 +4,6 @@ use Diglactic\Breadcrumbs\Generator;
 use Diglactic\Breadcrumbs\Manager;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | View Name
@@ -74,5 +73,4 @@ return [
 
     // Generator
     'generator-class' => Generator::class,
-
 ];

@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Lucent Configuration file v1.0
@@ -12,7 +11,6 @@ return [
 */
 
     'models' => [
-
         // days to prune after soft deleted records on models that use `SoftDeletes` and `Lucent\Support\Traits\SoftDeletesPrunable` traits
         'prune_soft_deletes_days' => env('PRUNE_SOFT_DELETES_DAYS', 365),
 
@@ -49,5 +47,4 @@ return [
             'text-right',
         ],
     ],
-
 ];

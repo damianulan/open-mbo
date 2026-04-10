@@ -37,7 +37,6 @@ class DataTableBuilder extends EloquentDataTable
     {
         $this->applyFilters();
         parent::filterRecords();
-
     }
 
     protected function applyFilters(): void
@@ -47,6 +46,5 @@ class DataTableBuilder extends EloquentDataTable
                 $query->filter($filter);
             }
         });
-
     }
 }

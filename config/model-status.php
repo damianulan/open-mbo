@@ -3,7 +3,6 @@
 use Spatie\ModelStatus\Status;
 
 return [
-
     /*
      * The class name of the status model that holds all statuses.
      *

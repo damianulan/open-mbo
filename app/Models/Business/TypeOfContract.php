@@ -11,14 +11,15 @@ use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property int $id
+ * @property string $uuid
  * @property string $name
  * @property string|null $description
  * @property CarbonImmutable|null $deleted_at
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
- * @property-read Collection<int, Activity> $activities
- * @property-read int|null $activities_count
- * @property-read Collection<int, UserEmployment> $employments
+ * @property-read Collection<int, Activity> $activitiesAsSubject
+ * @property-read int|null $activities_as_subject_count
+ * @property-read Collection<int, \App\Models\Business\UserEmployment> $employments
  * @property-read int|null $employments_count
  * @property-read mixed $trans
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|TypeOfContract active()
@@ -67,6 +68,7 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|TypeOfContract whereId($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|TypeOfContract whereName($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|TypeOfContract whereUpdatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|TypeOfContract whereUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|TypeOfContract withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract withoutTrashed()

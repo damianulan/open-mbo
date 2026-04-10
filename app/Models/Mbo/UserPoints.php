@@ -22,10 +22,10 @@ use Spatie\Activitylog\Models\Activity;
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
  * @property CarbonImmutable|null $deleted_at
- * @property-read Collection<int, Activity> $activities
- * @property-read int|null $activities_count
+ * @property-read Collection<int, Activity> $activitiesAsSubject
+ * @property-read int|null $activities_as_subject_count
  * @property-read User|null $assigner
- * @property-read Model|Eloquent $subject
+ * @property-read Model|\Eloquent $subject
  * @property-read mixed $trans
  * @property-read User|null $user
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserPoints active()

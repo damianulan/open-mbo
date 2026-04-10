@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Collection;
 use Spatie\Activitylog\Models\Activity;
 
 /**
- * @property-read Collection<int, Activity> $activities
- * @property-read int|null $activities_count
+ * @property-read Collection<int, Activity> $activitiesAsSubject
+ * @property-read int|null $activities_as_subject_count
  * @property-read User|null $approved_by
- * @property-read BonusScheme|null $bonus_scheme
- * @property-read Campaign|null $campaign
+ * @property-read \App\Models\Mbo\BonusScheme|null $bonus_scheme
+ * @property-read \App\Models\Mbo\Campaign|null $campaign
  * @property-read mixed $trans
  * @property-read User|null $user
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserBonusAssignment active()

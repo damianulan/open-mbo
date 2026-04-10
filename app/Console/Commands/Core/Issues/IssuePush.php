@@ -54,8 +54,6 @@ class IssuePush extends Command
                     $result = Process::run('git commit -m "' . $issue . '"');
                     $result = Process::run('git push --set-upstream origin ' . $this->getBranchName());
                     $this->line($result->output());
-                    $result = Process::run('git checkout dev');
-                    $this->line($result->output());
                 } else {
                     $this->info('Aborted.');
                 }

@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Filename
@@ -311,5 +310,4 @@ return [
     'post_migrate' => [
         'ide-helper:models --nowrite',
     ],
-
 ];

@@ -13,7 +13,6 @@ class BaseCommand extends Command
 
     protected function log($message, $success = true): void
     {
-
         $this->end = Carbon::now();
         $duration = null;
 

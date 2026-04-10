@@ -3,7 +3,6 @@
 use App\Support\Storage\StorageManager;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Filesystem Disk
@@ -38,7 +37,6 @@ return [
     'storage_max_size' => env('STORAGE_MAX_SIZE', 1024),
 
     'disks' => [
-
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
@@ -80,7 +78,6 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
         ],
-
     ],
 
     /*
@@ -99,5 +96,4 @@ return [
         public_path('uploads') => storage_path('app/uploads'),
         public_path('downloads') => storage_path('app/downloads'),
     ],
-
 ];

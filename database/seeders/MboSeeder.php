@@ -114,7 +114,6 @@ class MboSeeder extends Seeder
         $coordinatorUsers = $this->users->random($coordinatorCount);
 
         for ($i = 1; $i <= 50; $i++) {
-
             $campaign = Campaign::factory()->create([
                 'name' => [
                     'pl' => 'Testowa kampania ' . $i,

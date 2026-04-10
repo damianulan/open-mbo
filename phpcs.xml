@@ -4,6 +4,15 @@
 
     <!-- Use an existing standard -->
     <rule ref="PSR12"/>
+    <rule ref="Squiz.ControlStructures.ControlSignature">
+        <exclude name="Squiz.ControlStructures.ControlSignature.NewlineAfterOpenBrace"/>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.ScopeClosingBrace">
+        <exclude name="Squiz.WhiteSpace.ScopeClosingBrace.ContentBefore"/>
+    </rule>
+    <rule ref="PEAR.WhiteSpace.ScopeClosingBrace">
+        <exclude name="PEAR.WhiteSpace.ScopeClosingBrace.Line"/>
+    </rule>
 
     <!-- Exclude directories -->
     <exclude-pattern>vendor/*</exclude-pattern>

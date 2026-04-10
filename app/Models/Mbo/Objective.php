@@ -38,15 +38,15 @@ use Spatie\Activitylog\Models\Activity;
  * @property CarbonImmutable|null $deleted_at
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
- * @property-read Collection<int, Activity> $activities
- * @property-read int|null $activities_count
- * @property-read Campaign|null $campaign
- * @property-read ObjectiveTemplateCategory|null $category
+ * @property-read Collection<int, Activity> $activitiesAsSubject
+ * @property-read int|null $activities_as_subject_count
+ * @property-read \App\Models\Mbo\Campaign|null $campaign
+ * @property-read \App\Models\Mbo\ObjectiveTemplateCategory|null $category
  * @property-read Collection<int, Comment> $comments
  * @property-read int|null $comments_count
- * @property-read ObjectiveTemplate|null $template
+ * @property-read \App\Models\Mbo\ObjectiveTemplate|null $template
  * @property-read mixed $trans
- * @property-read Collection<int, UserObjective> $user_objectives
+ * @property-read Collection<int, \App\Models\Mbo\UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective average(string $column)

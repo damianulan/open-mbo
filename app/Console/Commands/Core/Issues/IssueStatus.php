@@ -26,7 +26,6 @@ class IssueStatus extends Command
         try {
             $issue = $this->getIssue();
             if (! empty($issue)) {
-
                 $result = Process::run('git fetch --all');
                 $result = Process::run('git status');
                 $this->line($result->output());

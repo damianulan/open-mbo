@@ -12,14 +12,12 @@ class Handler extends ExceptionHandler
      * @var array<class-string<Throwable>, LogLevel::*>
      */
     protected $levels = [
-
     ];
 
     /**
      * @var array<int, class-string<Throwable>>
      */
     protected $dontReport = [
-
     ];
 
     /**

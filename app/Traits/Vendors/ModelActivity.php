@@ -3,8 +3,8 @@
 namespace App\Traits\Vendors;
 
 use Illuminate\Support\Facades\Auth;
-use Spatie\Activitylog\LogOptions;
-use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\Models\Concerns\LogsActivity;
+use Spatie\Activitylog\Support\LogOptions;
 
 trait ModelActivity
 {
@@ -21,7 +21,7 @@ trait ModelActivity
             ->useLogName($log_name)
             ->logOnly($this->fillable)
             ->logOnlyDirty()
-            ->dontSubmitEmptyLogs()
+            ->dontLogEmptyChanges()
             ->setDescriptionForEvent(fn (string $eventName) => __('logging.description.' . $eventName, [
                 'username' => Auth::user()->name,
                 'model_map' => __('logging.model_mapping.' . static::class),

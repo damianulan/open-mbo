@@ -60,7 +60,6 @@ class ModelResourceFactory
             self::purgeIndexes($model, $resource);
 
             foreach ($resource->attributes() as $attribute => $value) {
-
                 if (! empty($value)) {
                     $trigrams = self::getTrigrams(self::normalizeValue($value));
 

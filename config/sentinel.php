@@ -5,7 +5,6 @@ use Sentinel\Models\Permission;
 use Sentinel\Models\Role;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Sentinel Configuration file v1.0
@@ -60,5 +59,4 @@ return [
          */
         'expire_after' => 86400,
     ],
-
 ];

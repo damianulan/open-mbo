@@ -20,7 +20,6 @@ class LogsDataTable extends BaseLogDataTable
      */
     public function DataTable(QueryBuilder $query): DataTableBuilder
     {
-
         return (new DataTableBuilder($query))
             ->addColumn('causer', fn ($data) => $this->userView($data, 'causer'))
             ->addColumn('event', fn ($data) => view('components.datatables.badge', [
@@ -43,7 +42,6 @@ class LogsDataTable extends BaseLogDataTable
                                 }
                             }
                         }
-
                     } else {
                         return $this->subjectView($data);
                     }

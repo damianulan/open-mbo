@@ -26,13 +26,13 @@ use Spatie\Activitylog\Models\Activity;
  * @property CarbonImmutable|null $deleted_at
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
- * @property-read Collection<int, Activity> $activities
- * @property-read int|null $activities_count
- * @property-read Company|null $company
- * @property-read TypeOfContract|null $contract
- * @property-read Department|null $department
+ * @property-read Collection<int, Activity> $activitiesAsSubject
+ * @property-read int|null $activities_as_subject_count
+ * @property-read \App\Models\Business\Company|null $company
+ * @property-read \App\Models\Business\TypeOfContract|null $contract
+ * @property-read \App\Models\Business\Department|null $department
  * @property-read bool $main
- * @property-read Position|null $position
+ * @property-read \App\Models\Business\Position|null $position
  * @property-read mixed $trans
  * @property-read User|null $user
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment active()

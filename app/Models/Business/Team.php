@@ -17,14 +17,15 @@ use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property int $id
+ * @property string $uuid
  * @property int|null $leader_id
  * @property string $name
  * @property mixed|null $description
  * @property CarbonImmutable|null $deleted_at
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
- * @property-read Collection<int, Activity> $activities
- * @property-read int|null $activities_count
+ * @property-read Collection<int, Activity> $activitiesAsSubject
+ * @property-read int|null $activities_as_subject_count
  * @property-read User|null $leader
  * @property-read Collection<int, User> $leaders
  * @property-read int|null $leaders_count
@@ -79,6 +80,7 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team whereLeaderId($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team whereName($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team whereUpdatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team whereUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Team withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Team withoutTrashed()

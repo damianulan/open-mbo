@@ -30,7 +30,6 @@ class ObjectiveDataTable extends DataTableService
     public function DataTable(QueryBuilder $query): DataTableBuilder
     {
         return (new DataTableBuilder($query))
-
             ->addColumn('action', fn ($data) => view('pages.mbo.objectives.action', [
                 'data' => $data,
             ]))

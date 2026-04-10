@@ -257,5 +257,4 @@ Route::middleware(['web', 'auth', 'maintenance', 'navigation'])->group(function 
     Route::prefix('ajax')->name('ajax.')->group(function (): void {
         Route::get('/get_model_instance', [AjaxController::class, 'getModelInstance'])->name('get_model_instance');
     });
-
 });

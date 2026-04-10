@@ -14,6 +14,7 @@ use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property int $id
+ * @property string $uuid
  * @property string $name
  * @property string|null $shortname
  * @property mixed|null $description
@@ -21,11 +22,11 @@ use Spatie\Activitylog\Models\Activity;
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
  * @property CarbonImmutable|null $deleted_at
- * @property-read Collection<int, Activity> $activities
- * @property-read int|null $activities_count
+ * @property-read Collection<int, Activity> $activitiesAsSubject
+ * @property-read int|null $activities_as_subject_count
  * @property-read Collection<int, User> $coordinators
  * @property-read int|null $coordinators_count
- * @property-read Collection<int, ObjectiveTemplate> $objective_templates
+ * @property-read Collection<int, \App\Models\Mbo\ObjectiveTemplate> $objective_templates
  * @property-read int|null $objective_templates_count
  * @property-read mixed $trans
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory active()
@@ -76,6 +77,7 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory whereName($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory whereShortname($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory whereUpdatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory whereUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory withoutTrashed()

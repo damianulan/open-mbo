@@ -6,7 +6,6 @@ use Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumAgeInDays;
 use Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumStorageInMegabytes;
 
 return [
-
     'backup' => [
         /*
          * The name of this application. You can use this name to monitor
@@ -343,5 +342,4 @@ return [
          */
         'retry_delay' => 0,
     ],
-
 ];

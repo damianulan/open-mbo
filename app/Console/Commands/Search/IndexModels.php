@@ -35,7 +35,6 @@ class IndexModels extends BaseCommand
                     $model->makeIndexes();
                     $this->line('Indexed ' . $model->id);
                 }
-
             }
 
             $this->log('completed', true);

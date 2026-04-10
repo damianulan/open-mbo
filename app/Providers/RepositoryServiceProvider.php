@@ -40,6 +40,5 @@ class RepositoryServiceProvider extends ServiceProvider
     private function registerFilterServices(): void
     {
         $this->app->bind(FilterCollection::class, FilterService::class);
-
     }
 }

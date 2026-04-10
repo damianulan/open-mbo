@@ -38,7 +38,6 @@ class FilterFormFactory extends Form
             case $filter instanceof FilterSearchType:
                 $component = FormComponent::text($filter->getKey(), $filter->getValue())->label($filter->getLabel())->col(4);
                 break;
-
             default:
                 throw new Exception('Invalid filter type');
                 break;

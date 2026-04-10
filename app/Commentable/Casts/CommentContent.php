@@ -11,7 +11,6 @@ class CommentContent implements CastsAttributes
     public static function commentQuotation(string $value): string
     {
         if (Str::contains($value, '<blockquote><em>--- @')) {
-
             $start = '<blockquote><em>--- @';
             $end = ' ---</blockquote>';
 

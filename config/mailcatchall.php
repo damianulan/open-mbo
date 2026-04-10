@@ -3,7 +3,6 @@
 use Illuminate\Mail\Events\MessageSending;
 
 return [
-
     /**
      * If we have the mail catchall enabled
      */

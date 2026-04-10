@@ -19,7 +19,6 @@ class NotificationsDataTable extends DataTableService
      */
     public function DataTable(QueryBuilder $query): DataTableBuilder
     {
-
         return (new DataTableBuilder($query))
             ->editColumn('system', fn ($data) => $data->system ? __('globals.yes') : __('globals.no'))
             ->editColumn('email', fn ($data) => $data->email ? __('globals.yes') : __('globals.no'))

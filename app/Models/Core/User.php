@@ -64,6 +64,7 @@ use Spatie\ModelStatus\Status;
 
 /**
  * @property int $id
+ * @property string $uuid
  * @property string $auth
  * @property string|null $email
  * @property string|null $email_hash
@@ -83,8 +84,8 @@ use Spatie\ModelStatus\Status;
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
  * @property CarbonImmutable|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Activity> $activities
- * @property-read int|null $activities_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Activity> $activitiesAsSubject
+ * @property-read int|null $activities_as_subject_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, ActivityModel> $activity
  * @property-read int|null $activity_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, UserPoints> $awards
@@ -103,12 +104,12 @@ use Spatie\ModelStatus\Status;
  * @property-read int|null $employments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, UserEmployment> $employments_active
  * @property-read int|null $employments_active_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Campaign> $favourite_campaigns
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Campaign> $favouriteCampaigns
  * @property-read int|null $favourite_campaigns_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $favouriteUsers
+ * @property-read int|null $favourite_users_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $favourite_to
  * @property-read int|null $favourite_to_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $favourite_users
- * @property-read int|null $favourite_users_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, IndexModel> $indexes
  * @property-read int|null $indexes_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Team> $leader_teams
@@ -118,13 +119,13 @@ use Spatie\ModelStatus\Status;
  * @property-read mixed $name
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Objective> $objectives
  * @property-read int|null $objectives_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, UserPasswordHistory> $password_history
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Core\UserPasswordHistory> $passwordHistory
  * @property-read int|null $password_history_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Permission> $permissions
  * @property-read int|null $permissions_count
  * @property-read mixed $points
- * @property-read UserPreference|null $preferences
- * @property-read UserProfile|null $profile
+ * @property-read \App\Models\Core\UserPreference|null $preferences
+ * @property-read \App\Models\Core\UserProfile|null $profile
  * @property-read Collection $sessions
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Status> $statuses
  * @property-read int|null $statuses_count
@@ -176,6 +177,7 @@ use Spatie\ModelStatus\Status;
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereUpdatedAt($value)
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereUsername($value)
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereUsernameHash($value)
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereUuid($value)
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User withPermission(...$slugs)
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User withRole(...$slugs)
  * @method static Builder<static>|User withTrashed(bool $withTrashed = true)
@@ -257,7 +259,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function validateNewPassword($newpassword): bool
     {
-        $passwords = $this->password_history->take(settings('users.password_not_repeat', 0));
+        $passwords = $this->passwordHistory->take(settings('users.password_not_repeat', 0));
 
         foreach ($passwords as $password) {
             if (Hash::check($newpassword, $password->password)) {
@@ -447,17 +449,17 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         return $this->morphMany(ActivityModel::class, 'causer');
     }
 
-    public function favourite_users()
+    public function favouriteUsers()
     {
         return $this->morphedByMany(User::class, 'subject', 'favourities');
     }
 
-    public function favourite_campaigns()
+    public function favouriteCampaigns()
     {
         return $this->morphedByMany(Campaign::class, 'subject', 'favourities');
     }
 
-    public function password_history(): HasMany
+    public function passwordHistory(): HasMany
     {
         return $this->hasMany(UserPasswordHistory::class)->orderByDesc('created_at');
     }

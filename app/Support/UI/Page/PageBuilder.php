@@ -44,9 +44,7 @@ class PageBuilder implements PageContract
             $contract = app(NavigationContract::class);
 
             return $contract;
-        } catch (Throwable $th) {
-
-        }
+        } catch (Throwable $th) {}
 
         return null;
     }
@@ -84,7 +82,6 @@ class PageBuilder implements PageContract
             if ($this->getNavigation()?->isSidebarCollapsed()) {
                 $classes[] = 'collapsed';
             }
-
         }
 
         return implode(' ', $classes);

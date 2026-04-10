@@ -11,6 +11,7 @@ use Spatie\Activitylog\Models\Activity;
 
 /**
  * @property int $id
+ * @property string $uuid
  * @property string $name
  * @property string|null $address_line_1
  * @property string|null $address_line_2
@@ -23,9 +24,9 @@ use Spatie\Activitylog\Models\Activity;
  * @property CarbonImmutable|null $deleted_at
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
- * @property-read Collection<int, Activity> $activities
- * @property-read int|null $activities_count
- * @property-read Collection<int, Company> $companies
+ * @property-read Collection<int, Activity> $activitiesAsSubject
+ * @property-read int|null $activities_as_subject_count
+ * @property-read Collection<int, \App\Models\Business\Company> $companies
  * @property-read int|null $companies_count
  * @property-read mixed $trans
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location active()
@@ -82,6 +83,7 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location whereName($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location wherePostalCode($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location whereUpdatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location whereUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location withoutTrashed()

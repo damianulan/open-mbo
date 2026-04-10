@@ -27,10 +27,10 @@ use YMigVal\LaravelModelCache\HasCachedQueries;
  * @property bool $private
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
- * @property-read Collection<int, Activity> $activities
- * @property-read int|null $activities_count
- * @property-read Model|Eloquent $author
- * @property-read Model|Eloquent $subject
+ * @property-read Collection<int, Activity> $activitiesAsSubject
+ * @property-read int|null $activities_as_subject_count
+ * @property-read Model|\Eloquent $author
+ * @property-read Model|\Eloquent $subject
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment authoredBy(\Illuminate\Database\Eloquent\Model $author)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Comment avg(string $column)

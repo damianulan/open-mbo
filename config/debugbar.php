@@ -3,7 +3,6 @@
 use Illuminate\Auth\Middleware\Authenticate;
 
 return [
-
     /*
      |--------------------------------------------------------------------------
      | Debugbar Settings

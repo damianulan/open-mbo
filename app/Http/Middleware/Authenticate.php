@@ -25,7 +25,7 @@ class Authenticate extends Middleware
                 'profile',
                 'preferences',
                 'roles',
-                'favourite_users',
+                'favouriteUsers',
                 'campaigns_ongoing.campaign',
             ]);
         }
@@ -35,7 +35,6 @@ class Authenticate extends Middleware
                 return redirect()->route('password.change.index');
             }
             if (! $this->ensureEmailIsVerified($request)) {
-
             }
         }
 

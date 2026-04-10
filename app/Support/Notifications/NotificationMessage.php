@@ -111,7 +111,6 @@ class NotificationMessage
                     throw $th;
                 }
                 $result = false;
-
             }
         }
 

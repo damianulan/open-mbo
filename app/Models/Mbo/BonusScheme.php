@@ -20,10 +20,10 @@ use Spatie\Activitylog\Models\Activity;
  * @property CarbonImmutable|null $deleted_at
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
- * @property-read Collection<int, Activity> $activities
- * @property-read int|null $activities_count
+ * @property-read Collection<int, Activity> $activitiesAsSubject
+ * @property-read int|null $activities_as_subject_count
  * @property-read mixed $trans
- * @property-read Collection<int, UserBonusScheme> $user_schemes
+ * @property-read Collection<int, \App\Models\Mbo\UserBonusScheme> $user_schemes
  * @property-read int|null $user_schemes_count
  * @property-read Collection<int, User> $users
  * @property-read int|null $users_count

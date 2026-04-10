@@ -31,7 +31,6 @@ class UserFactory extends Factory
             case 'f':
                 $gender = 'female';
                 break;
-
             default:
                 $gender = null;
                 break;

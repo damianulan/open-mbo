@@ -51,7 +51,6 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\Core\User\EmploymentDeleted' => [
             'App\Listeners\Business\UserEmploymentSaved',
         ],
-
     ];
 
     public function boot(): void

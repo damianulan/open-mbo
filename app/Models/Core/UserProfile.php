@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
  * @property CarbonImmutable|null $deleted_at
- * @property-read User|null $user
+ * @property-read \App\Models\Core\User|null $user
  * @method static \Database\Factories\Core\UserProfileFactory factory($count = null, $state = [])
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|UserProfile newModelQuery()
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|UserProfile newQuery()
