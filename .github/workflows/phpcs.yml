@@ -1,0 +1,29 @@
+name: PHPCS
+
+on:
+  pull_request:
+    branches:
+      - dev
+      - staging
+
+jobs:
+  phpcs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+
+      - name: Setup Composer
+        uses: ramsey/composer-install@v3
+        with:
+          composer-options: --no-interaction --no-progress --prefer-dist --no-scripts
+
+      - name: Run PHPCS
+        run: ./vendor/bin/phpcs

@@ -47,7 +47,7 @@
         }
     ],
     "require": {
-        "php": "^8.4.0",
+        "php": "^8.4",
         "akaunting/laravel-apexcharts": "^3.0",
         "barryvdh/laravel-snappy": "^1.0",
         "damianulan/laravel-feature-kit": "dev-main",
@@ -95,7 +95,7 @@
         "wikimedia/composer-merge-plugin": "^2.1"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.15",
+        "barryvdh/laravel-debugbar": "^3.15-dev",
         "barryvdh/laravel-ide-helper": "^3.1",
         "larastan/larastan": "^3.0",
         "laravel/boost": "^2.2",
@@ -107,7 +107,8 @@
         "pestphp/pest-plugin-type-coverage": "^3.6",
         "phpunit/phpunit": "^11.0",
         "spatie/boost-spatie-guidelines": "^1.1",
-        "spatie/laravel-ignition": "^2.0"
+        "spatie/laravel-ignition": "^2.0",
+        "squizlabs/php_codesniffer": "^3.7"
     },
     "autoload": {
         "psr-4": {
@@ -141,6 +142,12 @@
         "post-create-project-cmd": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "@php artisan key:generate --ansi"
+        ],
+        "test:lint": "pint --test",
+        "test:type-coverage": "pest --type-coverage --min=120",
+        "test": [
+            "@test:type-coverage",
+            "@test:lint"
         ]
     },
     "extra": {

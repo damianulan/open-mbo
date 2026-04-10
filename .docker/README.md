@@ -1,12 +1,13 @@
-# Docker environment (PHP 8.4 + MySQL + Redis + Nginx + Queue)
+# Docker environment (Ubuntu + PHP + MySQL + Redis + Nginx + Queue + Scheduler)
 
 This project includes a Docker Compose setup for running Open MBO with:
 
-- PHP-FPM `8.4` (application container)
+- Ubuntu-based PHP-FPM container (PHP version controlled by `PHP_VERSION`)
 - Nginx (serves HTTP)
 - MySQL (`mysql:8.4`)
 - Redis (`redis:latest`) for Laravel cache + queue
 - Queue worker container (`php artisan queue:work`)
+- Scheduler container (`php artisan schedule:work`)
 
 ## Prerequisites
 
@@ -22,16 +23,17 @@ docker compose up -d --build
 
 The app will be available at:
 
-- `http://localhost:8080`
+- `http://localhost:37000`
 
 ### Environment variables
 
 - The containers set sane defaults via `docker-compose.yml` (DB host, Redis, cache/queue drivers).
 - If you don't have an `.env`, the PHP container will create one from `.docker/php/.env.example` on first start.
+- Set `PHP_VERSION` before building if you want a different PHP release, for example `PHP_VERSION=8.3 docker compose up -d --build`.
 
 ## Services / Ports
 
-- Nginx: `localhost:8080`
+- Nginx: `localhost:37000` (container port `80`)
 - MySQL: `localhost:33006` (container port `3306`)
   - user: `laravel`
   - pass: `secret`
@@ -39,7 +41,7 @@ The app will be available at:
   - root pass: `root`
 - Redis: `localhost:6379`
 
-## Queue worker
+## Background workers
 
 The `queue` service runs:
 
@@ -47,7 +49,13 @@ The `queue` service runs:
 php artisan queue:work --sleep=3 --tries=3 --timeout=90
 ```
 
-By default this stack uses Redis queues (`QUEUE_CONNECTION=redis`).
+The `scheduler` service runs:
+
+```bash
+php artisan schedule:work
+```
+
+By default this stack uses Redis queues (`QUEUE_CONNECTION=redis`) and keeps the PHP-FPM app container focused on serving requests.
 
 ## Frontend assets
 
@@ -72,9 +80,9 @@ docker compose down -v
 
 ## Notes about "will this work?"
 
-This setup is internally consistent (containers, networking, env vars, queue worker, and Nginx ⇄ PHP-FPM wiring).
+This setup is internally consistent (containers, networking, env vars, queue worker, scheduler, and Nginx ⇄ PHP-FPM wiring).
 However, it depends on upstream images and package compatibility:
 
-- If `php:8.4-fpm` is not available on your machine/registry, the build will fail (pin to `8.3`).
+- The PHP image is built from Ubuntu and installs `php${PHP_VERSION}` packages from Ondrej's PPA, so the requested PHP version must exist there.
 - `mysql:latest` can introduce breaking changes across major releases; if you hit issues, pin a specific MySQL version.
   - This repo pins `mysql:8.4` because `mysql:latest` may jump major versions and fail to start against an existing data volume.
