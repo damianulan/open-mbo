@@ -248,7 +248,7 @@ return [
     | magic methods and properties.
     |
     */
-    'include_class_docblocks' => true,
+    'include_class_docblocks' => false,
 
     /*
     |--------------------------------------------------------------------------

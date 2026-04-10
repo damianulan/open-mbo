@@ -19,7 +19,7 @@ class MacroServiceProvider extends ServiceProvider
             $weight = 0;
             $this->each(function (Model $model) use (&$weight): void {
                 if ($model instanceof HasWeight) {
-                    $weight += $model->getWeightAttribute();
+                    $weight += $model->getWeightAttribute($weight);
                 }
             });
 
