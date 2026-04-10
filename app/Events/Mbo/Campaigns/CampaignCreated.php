@@ -12,10 +12,8 @@ class CampaignCreated implements ShouldDispatchAfterCommit
     use Dispatchable;
     use SerializesModels;
 
-    /**
-     * Create a new event instance.
-     */
     public function __construct(
-        public Campaign $campaign
-    ) {}
+        public Campaign $campaign,
+    ) {
+    }
 }

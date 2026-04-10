@@ -29,15 +29,12 @@ function sitename(): string
 }
 
 /**
- * Returns currently logged user instance or empty instance of User model.
- * Do not call in class constructors.
- *
- * @param  null|mixed  $user_id
+ * @param null|mixed $user_id
  */
 function user($user_id = null): ?User
 {
     $user = null;
-    if (is_null($user_id) || ( ! is_string($user_id) && ! is_int($user_id))) {
+    if (is_null($user_id) || (! is_string($user_id) && ! is_int($user_id))) {
         if (Auth::check()) {
             $user = Auth::user();
         }
@@ -48,9 +45,6 @@ function user($user_id = null): ?User
     return $user;
 }
 
-/**
- * Checks if currently logged user is a Root user
- */
 function isRoot(bool $strict = false): bool
 {
     return Auth::user()->isRoot($strict);
@@ -67,13 +61,13 @@ function current_theme(): string
     $user = Auth::user() ? Auth::user() : false;
     if ($user) {
         $userTheme = $user->preferences?->theme;
-        if ($userTheme && $userTheme !== $theme && 'auto' !== $userTheme) {
+        if ($userTheme && $userTheme !== $theme && $userTheme !== 'auto') {
             $theme = $userTheme;
         }
     }
     $available = Theme::getAvailable();
 
-    if (false === $available->contains($theme) || ! $theme) {
+    if ($available->contains($theme) === false || ! $theme) {
         $theme = $available->first();
     }
 
@@ -82,17 +76,14 @@ function current_theme(): string
 
 function development(): bool
 {
-    return 'development' === config('app.env');
+    return config('app.env') === 'development';
 }
 
 function production(): bool
 {
-    return 'production' === config('app.env');
+    return config('app.env') === 'production';
 }
 
-/**
- * Converts float values to their string representation based on current locale.
- */
 function float_view(?float $value, int $decimals = 2): string
 {
     $lang = app()->getLocale();
@@ -120,10 +111,7 @@ function unauthorized($message = '', $permission = null): void
 }
 
 /**
- * Returns settings value from Spatie Laravel Settings. Requires custom singletons in config service provider.
- *
- * @param  string  $key  - use as group.setting
- * @param  mixed  $default
+ * @param string $key - use as group.setting
  */
 function settings(string $key, $default = null)
 {
@@ -138,7 +126,7 @@ function settings(string $key, $default = null)
         $setting = $class ? $class->{$key} : null;
     }
 
-    if (null === $setting) {
+    if ($setting === null) {
         $setting = $default;
     }
 

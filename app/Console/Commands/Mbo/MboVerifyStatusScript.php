@@ -13,25 +13,19 @@ use Throwable;
 class MboVerifyStatusScript extends BaseCommand
 {
     /**
-     * The name and signature of the console command.
-     *
      * @var string
      */
     protected $signature = 'app:mbo:statuses';
 
     /**
-     * The console command description.
-     *
      * @var string
      */
     protected $description = 'User enrolled to Campaigns and Objectives status update';
 
-    /**
-     * Execute the console command.
-     */
     public function handle(): void
     {
         $this->logStart();
+
         try {
             $this->campaignsSetStatus();
             $this->log('completed', true);
@@ -79,6 +73,7 @@ class MboVerifyStatusScript extends BaseCommand
             DB::commit();
         } catch (Throwable $th) {
             DB::rollBack();
+
             throw $th;
         }
 

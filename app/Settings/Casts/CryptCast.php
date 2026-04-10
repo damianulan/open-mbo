@@ -7,18 +7,18 @@ use Spatie\LaravelSettings\SettingsCasts\SettingsCast;
 
 class CryptCast implements SettingsCast
 {
-    public function get($payload)
+    public function get($payload): mixed
     {
-        if ( ! empty($payload)) {
+        if (! empty($payload)) {
             return Crypt::decryptString($payload);
         }
 
         return $payload;
     }
 
-    public function set($payload)
+    public function set($payload): mixed
     {
-        if ( ! empty($payload) && 'PassProtection123@' !== $payload) {
+        if (! empty($payload) && $payload !== 'PassProtection123@') {
             return Crypt::encryptString($payload);
         }
 

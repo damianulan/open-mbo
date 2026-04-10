@@ -11,7 +11,6 @@ use FormForge\Components\Dictionary;
 use FormForge\FormBuilder;
 use Illuminate\Support\Carbon;
 
-// Ajax form
 class CampaignEditObjectiveForm extends Form
 {
     public function definition(FormBuilder $builder): FormBuilder
@@ -21,21 +20,23 @@ class CampaignEditObjectiveForm extends Form
         $campaign_id = $this->campaign_id;
         $selectedTemplate = null;
 
-        if ( ! is_null($this->model)) {
+        if (! is_null($this->model)) {
             $method = 'PUT';
             $title = 'Edytuj cel w ramach kampanii';
-            if ( ! $campaign_id) {
+            if (! $campaign_id) {
                 $campaign_id = $this->model->campaign_id;
             }
             if ($this->model->template_id) {
                 $selectedTemplate = $this->model->template_id ?? null;
             }
         }
-        $campaign = Campaign::findOrFail($campaign_id);
+        $campaign = Campaign::query()->findOrFail($campaign_id);
 
-        $template_ids = Objective::where('campaign_id', $campaign_id)->get()->pluck('template_id');
+        $template_ids = Objective::query()
+            ->where('campaign_id', $campaign_id)
+            ->pluck('template_id');
         $exclude = [];
-        if ( ! empty($template_ids)) {
+        if (! empty($template_ids)) {
             foreach ($template_ids as $tid) {
                 if ($tid !== $selectedTemplate) {
                     $exclude[] = ['id' => $tid];

@@ -16,7 +16,9 @@ class SearchIndexJob implements ShouldQueue
 
     public $tries = 3;
 
-    public function __construct(protected Model|Collection $input) {}
+    public function __construct(protected Model|Collection $input)
+    {
+    }
 
     public function handle(): void
     {
@@ -46,7 +48,7 @@ class SearchIndexJob implements ShouldQueue
     {
         $class = $model::class;
         if (class_uses_trait(Searchable::class, $class)) {
-            if (class_uses_trait(SoftDeletes::class, $class) && null !== $model->deleted_at) {
+            if (class_uses_trait(SoftDeletes::class, $class) && $model->deleted_at !== null) {
                 $model->purgeIndexes();
             } else {
                 $model->makeIndexes();

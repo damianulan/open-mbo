@@ -22,7 +22,7 @@ class SidebarNav implements NavbarContract
         $instance->sitename = $sitename;
         $instance->items = new Collection();
 
-        if ( ! empty($items)) {
+        if (! empty($items)) {
             foreach ($items as $item) {
                 if ($item instanceof MenuItem) {
                     if ($item->id && $item->isVisible()) {
@@ -38,7 +38,7 @@ class SidebarNav implements NavbarContract
 
     public function addClass(?string $class): self
     {
-        if ( ! empty($class)) {
+        if (! empty($class)) {
             $this->classes[] = $class;
         }
 
@@ -47,7 +47,7 @@ class SidebarNav implements NavbarContract
 
     public function isCollapsed(): bool
     {
-        return isset($_COOKIE['menu-collapsed']) && true === (bool) $_COOKIE['menu-collapsed'];
+        return isset($_COOKIE['menu-collapsed']) && (bool) $_COOKIE['menu-collapsed'] === true;
     }
 
     public function render(): string

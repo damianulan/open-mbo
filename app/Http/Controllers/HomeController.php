@@ -7,9 +7,6 @@ use Illuminate\Http\Request;
 
 class HomeController extends AppController
 {
-    /**
-     * Show the application dashboard.
-     */
     public function index(Request $request): View
     {
         return view('pages.dashboard', [

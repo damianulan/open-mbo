@@ -11,8 +11,6 @@ class BonusSchemeFactory extends Factory
     protected $model = BonusScheme::class;
 
     /**
-     * Define the model's default state.
-     *
      * @return array<string, mixed>
      */
     public function definition(): array

@@ -5,8 +5,9 @@ namespace App\Support\Filters\Contracts;
 use Countable;
 use FormForge\FormBuilder;
 use Illuminate\Contracts\Support\Renderable;
+use IteratorAggregate;
 
-interface FilterCollection extends Countable, \IteratorAggregate, \Traversable
+interface FilterCollection extends \Traversable, Countable, IteratorAggregate
 {
     public function __construct($items = []);
 

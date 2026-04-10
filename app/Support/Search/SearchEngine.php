@@ -8,7 +8,9 @@ use Illuminate\Support\Collection;
 
 class SearchEngine
 {
-    public function __construct(protected string $input) {}
+    public function __construct(protected string $input)
+    {
+    }
 
     public static function boot(string $input): self
     {

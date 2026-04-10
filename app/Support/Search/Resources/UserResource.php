@@ -20,13 +20,18 @@ class UserResource extends IndexResource
 
     public function attributes(): array
     {
+        $this->model->loadMissing([
+            'employment.position',
+            'employment.company',
+        ]);
+
         return [
             'firstname' => $this->model->firstname,
             'lastname' => $this->model->lastname,
             'email' => $this->model->email,
             'position' => $this->model->employment?->position->name,
             'company' => $this->model->employment?->company->name,
-            'gender' => 'm' === $this->model->gender ? 'Mężczyzna' : 'Kobieta',
+            'gender' => $this->model->gender === 'm' ? 'Mężczyzna' : 'Kobieta',
         ];
     }
 
@@ -35,7 +40,7 @@ class UserResource extends IndexResource
         return (new ResultItem([
             'title' => $this->model->name,
             'description' => null,
-            'link' => route('users.show', $this->model->id),
+            'link' => route('users.show', ['user' => $this->model->uuid]),
         ]))->setSearchedPhrase($phrase);
     }
 }

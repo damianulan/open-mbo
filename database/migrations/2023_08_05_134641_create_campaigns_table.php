@@ -5,15 +5,12 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class() extends Migration
-{
-    /**
-     * Run the migrations.
-     */
+return new class () extends Migration {
     public function up(): void
     {
         Schema::create('campaigns', function (Blueprint $table): void {
-            $table->uuid('id')->primary();
+            $table->id();
+            $table->uuid('uuid')->unique()->index();
             $table->string('name');
             $table->string('period');
             $table->longText('description')->nullable();
@@ -36,17 +33,13 @@ return new class() extends Migration
             $table->enum('stage', CampaignStage::hardValues())->default(CampaignStage::PENDING->value)->index()->comment('Campaign current status whether in progress, pending, completed, terminated or canceled');
 
             $table->boolean('draft')->default(1)->comment('Visible to admins only and is not automatically published.');
-            $table->boolean('manual')->default(0)->comment('Will not be automatically moved between stages.'); // if on - do not automatically end stage after date passes
-
+            $table->boolean('manual')->default(0)->comment('Will not be automatically moved between stages.');
             $table->timestamps();
             $table->softDeletes();
             $table->comment('MBO Campaigns with users and objectives assigned to it.');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('campaigns');

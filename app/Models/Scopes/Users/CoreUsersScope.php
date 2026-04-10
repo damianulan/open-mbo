@@ -9,9 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class CoreUsersScope implements Scope
 {
-    /**
-     * Apply the scope to a given Eloquent query builder.
-     */
     public function apply(Builder $builder, Model $model): void
     {
         if (Auth::check()) {

@@ -15,22 +15,15 @@ use Throwable;
 class SettingsMigrate extends BaseCommand
 {
     /**
-     * The name and signature of the console command.
-     *
      * @var string
      */
     protected $signature = 'settings:migrate {--class=}';
 
     /**
-     * The console command description.
-     *
      * @var string
      */
     protected $description = 'Migrate settings';
 
-    /**
-     * Execute the console command.
-     */
     public function handle(): void
     {
         $map = [
@@ -60,6 +53,7 @@ class SettingsMigrate extends BaseCommand
             DB::commit();
         } catch (Throwable $e) {
             DB::rollBack();
+
             throw $e;
         }
     }

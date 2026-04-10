@@ -7,14 +7,10 @@ use Illuminate\Support\ServiceProvider;
 
 class EnigmaServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     */
-    public function register(): void {}
+    public function register(): void
+    {
+    }
 
-    /**
-     * Bootstrap services.
-     */
     public function boot(): void
     {
         Blueprint::macro('encryptable', function (string $column, bool $index = false): void {

@@ -4,7 +4,6 @@ namespace App\Support\DataTables\Services;
 
 use App\Support\DataTables\SelectedColumns;
 use App\Support\Filters\Contracts\FilterCollection;
-use App\Support\Filters\Services\FilterService;
 use Exception;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -31,7 +30,7 @@ class DataTableService extends DataTable
         parent::__construct();
 
         $filters = $this->buildFilters();
-        $this->filterService = $filters ?? new FilterService();
+        $this->filterService = $filters ?? app()->make(FilterCollection::class);
     }
 
     public function getFilterService(): FilterCollection
@@ -56,9 +55,6 @@ class DataTableService extends DataTable
         return null;
     }
 
-    /**
-     * Get the dataTable columns definition.
-     */
     public function getColumns(): array
     {
         $columns = $this->selectedColumns();
@@ -106,9 +102,6 @@ class DataTableService extends DataTable
         return $view;
     }
 
-    /**
-     * Optional method if you want to use the html builder.
-     */
     public function html(): HtmlBuilder
     {
         $builder = $this->builder()
@@ -138,7 +131,7 @@ class DataTableService extends DataTable
             ->processing(true);
 
         $orderBy = $this->getOrderBy();
-        if ( ! is_null($orderBy)) {
+        if (! is_null($orderBy)) {
             $builder->orderBy($orderBy, $this->orderByDir);
         }
 
@@ -168,15 +161,12 @@ class DataTableService extends DataTable
             }
 
             return redirect()->back()->with('error', __('alerts.datatables.save_columns.error'));
-
         }
 
         return redirect()->back()->with('error', __('alerts.datatables.save_columns.error_data'));
     }
 
     /**
-     * Process dataTables needed render output.
-     *
      * @phpstan-param view-string|null $view
      */
     final public function render(?string $view = null, array $data = [], array $mergeData = []): mixed
@@ -187,7 +177,7 @@ class DataTableService extends DataTable
 
         /** @var string $action */
         $action = $this->request()->get('action');
-        $actionMethod = 'print' === $action ? 'printPreview' : $action;
+        $actionMethod = $action === 'print' ? 'printPreview' : $action;
 
         if (in_array($action, $this->actions) && method_exists($this, $actionMethod)) {
             /** @var callable $callback */
@@ -217,7 +207,7 @@ class DataTableService extends DataTable
         $filename = $this->getFilename() . '.json';
         $fullpath = 'docs' . DIRECTORY_SEPARATOR . $filename;
         $disk = Storage::disk('downloads');
-        if ( ! $disk) {
+        if (! $disk) {
             throw new Exception('Disk not found');
         }
         $disk->put($fullpath, json_encode($collection, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
@@ -261,7 +251,7 @@ class DataTableService extends DataTable
         $orderBy = null;
         if ($this->orderBy) {
             $columns = $this->getColumns();
-            if ( ! empty($columns)) {
+            if (! empty($columns)) {
                 foreach ($columns as $key => $column) {
                     if ($column->name === $this->orderBy) {
                         $orderBy = $key;
@@ -276,6 +266,6 @@ class DataTableService extends DataTable
 
     private function getAvailableColumns(): array
     {
-        return array_filter($this->availableColumns(), fn ($item) => false !== $item->visible && true === $item->viewable);
+        return array_filter($this->availableColumns(), fn ($item) => $item->visible !== false && $item->viewable === true);
     }
 }

@@ -51,7 +51,7 @@ class PositionControllerTest extends TestCase
             'name' => 'Developer',
         ]);
 
-        $response = $this->actingAs($user)->put(route('settings.organization.positions.update', $position->id), [
+        $response = $this->actingAs($user)->put(route('settings.organization.positions.update', $position), [
             'name' => 'Senior Developer',
             'description' => $position->description,
         ]);

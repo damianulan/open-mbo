@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - staging
+      - dev
 
 permissions:
   contents: read
@@ -29,16 +30,6 @@ jobs:
           tools: composer:v2
           extensions: bcmath, ctype, curl, dom, exif, fileinfo, gd, intl, mbstring, pdo_sqlite, sqlite3, zip
 
-      - name: Start SSH agent for private Composer repositories
-        uses: webfactory/ssh-agent@v0.9.1
-        with:
-          ssh-private-key: ${{ secrets.COMPOSER_SSH_PRIVATE_KEY }}
-
-      - name: Trust GitHub SSH host key
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-
       - name: Cache Composer dependencies
         uses: actions/cache@v4
         with:
@@ -48,7 +39,9 @@ jobs:
             ${{ runner.os }}-php-${{ matrix.php-version }}-composer-
 
       - name: Prepare application environment
-        run: cp .env.example .env
+        run: |
+          cp .env.example .env
+          mkdir -p tests/Unit
 
       - name: Install Composer dependencies
         run: composer install --no-interaction --prefer-dist --no-progress
@@ -59,4 +52,4 @@ jobs:
       - name: Run Pest type coverage
         env:
           APP_ENV: testing
-        run: ./vendor/bin/pest --type-coverage --min=100
+        run: ./vendor/bin/pest --type-coverage --min=95

@@ -12,12 +12,10 @@ class UserMentioned
     use Dispatchable;
     use SerializesModels;
 
-    /**
-     * Create a new event instance.
-     */
     public function __construct(
         public User $user,
         public Model $context,
-        public User $mentionedBy
-    ) {}
+        public User $mentionedBy,
+    ) {
+    }
 }

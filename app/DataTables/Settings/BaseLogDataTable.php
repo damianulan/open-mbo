@@ -19,7 +19,6 @@ class BaseLogDataTable extends DataTableService
                 ]);
             }
             report(new DataTablesException('Route not found: ' . $routeName));
-
         }
 
         return __('globals.not_applicable');

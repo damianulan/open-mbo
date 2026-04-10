@@ -297,8 +297,6 @@ class PositionFactory extends Factory
     }
 
     /**
-     * Define the model's default state.
-     *
      * @return array<string, mixed>
      */
     public function definition(): array
@@ -317,7 +315,7 @@ class PositionFactory extends Factory
     public function jobTitle(): string
     {
         $output = null;
-        if ('pl_PL' === config('app.faker_locale')) {
+        if (config('app.faker_locale') === 'pl_PL') {
             $dict = self::dict_pl();
             $output = $dict[fake()->numberBetween(0, count($dict) - 1)];
         }

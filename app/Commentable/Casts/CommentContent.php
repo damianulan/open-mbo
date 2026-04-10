@@ -11,7 +11,6 @@ class CommentContent implements CastsAttributes
     public static function commentQuotation(string $value): string
     {
         if (Str::contains($value, '<blockquote><em>--- @')) {
-
             $start = '<blockquote><em>--- @';
             $end = ' ---</blockquote>';
 
@@ -19,7 +18,7 @@ class CommentContent implements CastsAttributes
             $end_after = ' </blockquote></div>';
 
             $quote_inner = Str::between($value, $start, $end);
-            if ( ! empty($quote_inner)) {
+            if (! empty($quote_inner)) {
                 $quote_old = $start . $quote_inner . $end;
                 $quote = $start_after . $quote_inner . $end_after;
 
@@ -31,9 +30,7 @@ class CommentContent implements CastsAttributes
     }
 
     /**
-     * Cast the given value.
-     *
-     * @param  array<string, mixed>  $attributes
+     * @param array<string, mixed> $attributes
      */
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
@@ -43,9 +40,7 @@ class CommentContent implements CastsAttributes
     }
 
     /**
-     * Prepare the given value for storage.
-     *
-     * @param  array<string, mixed>  $attributes
+     * @param array<string, mixed> $attributes
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {

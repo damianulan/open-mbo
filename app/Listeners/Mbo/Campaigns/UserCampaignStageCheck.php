@@ -13,14 +13,10 @@ class UserCampaignStageCheck implements ShouldQueueAfterCommit
 
     public $timeout = 180;
 
-    /**
-     * Create the event listener.
-     */
-    public function __construct() {}
+    public function __construct()
+    {
+    }
 
-    /**
-     * Handle the event.
-     */
     public function handle(CampaignUpdated|CampaignViewed $event): void
     {
         $campaign = $event->campaign;

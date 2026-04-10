@@ -13,9 +13,9 @@ class CompanyEditForm extends Form
         $route = route('settings.organization.company.store');
         $method = 'POST';
 
-        if ( ! is_null($this->model)) {
+        if (! is_null($this->model)) {
             $method = 'PUT';
-            $route = route('settings.organization.company.update', $this->model->id);
+            $route = route('settings.organization.company.update', $this->model);
         }
 
         return $builder->setId(is_null($this->model) ? 'company_create' : 'company_edit')

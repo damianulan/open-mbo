@@ -12,7 +12,7 @@ class FilterFinderFactory
         if (is_string($filter) && class_exists($filter)) {
             $filter = app()->make($filter);
         }
-        if ( ! $filter instanceof FilterContract) {
+        if (! $filter instanceof FilterContract) {
             throw new Exception('Filter not found.');
         }
 

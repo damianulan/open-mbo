@@ -8,12 +8,12 @@
 
     if ($points->subject instanceof \App\Models\Mbo\UserObjective) {
         $subjectLabel = $points->subject->objective?->name ?? $subjectLabel;
-        $subjectUrl = route('objectives.assignment.show', $points->subject->id);
+        $subjectUrl = route('objectives.assignment.show', $points->subject);
     }
 
     if ($points->subject instanceof \App\Models\Mbo\UserCampaign) {
         $subjectLabel = $points->subject->campaign?->name ?? $subjectLabel;
-        $subjectUrl = route('campaigns.users.show', $points->subject->id);
+        $subjectUrl = route('campaigns.users.show', ['userCampaign' => $points->subject->uuid]);
     }
 @endphp
 

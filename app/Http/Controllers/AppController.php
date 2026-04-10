@@ -52,7 +52,7 @@ class AppController extends Controller
 
         if (is_null($defaultRedirect)) {
             $defaultRedirect = redirect()->back();
-            if ( ! is_null($errorMessage)) {
+            if (! is_null($errorMessage)) {
                 $defaultRedirect->with(MessageType::ERROR->value, $errorMessage);
             }
         }
@@ -63,7 +63,7 @@ class AppController extends Controller
     protected function catchResponseRedirect(
         Throwable $exception,
         ?string $message = null,
-        UrlGenerator|RedirectResponse|null $redirect = null
+        UrlGenerator|RedirectResponse|null $redirect = null,
     ): RedirectResponse|UrlGenerator {
         $message = $this->getExceptionMessage($exception, $message);
 
@@ -73,7 +73,7 @@ class AppController extends Controller
     protected function catchResponseJson(
         Throwable $exception,
         ?string $message = null,
-        array $datas = []
+        array $datas = [],
     ): JsonResponse {
         $message = $this->getExceptionMessage($exception, $message);
 
@@ -111,7 +111,7 @@ class AppController extends Controller
 
     private function getExceptionMessage(Throwable $exception, ?string $default = null): string
     {
-        if ( ! $exception instanceof AppException) {
+        if (! $exception instanceof AppException) {
             report($exception);
         }
 
@@ -139,7 +139,7 @@ class AppController extends Controller
                 'status' => $success ? 'ok' : 'error',
                 'message' => $message,
             ],
-            $datas
+            $datas,
         ));
     }
 }

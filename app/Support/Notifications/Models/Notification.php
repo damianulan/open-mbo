@@ -4,17 +4,16 @@ namespace App\Support\Notifications\Models;
 
 use App\Support\Notifications\Factories\ResourceFactory;
 use App\Support\Notifications\NotificationContents;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Lucent\Support\Traits\UUID;
 
 /**
- * @property string $id
+ * @property int $id
  * @property string $key
  * @property mixed|null $contents
  * @property bool $system
@@ -22,11 +21,10 @@ use Lucent\Support\Traits\UUID;
  * @property string|null $event
  * @property string|null $schedule
  * @property array<array-key, mixed>|null $conditions
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property Carbon|null $deleted_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
+ * @property CarbonImmutable|null $deleted_at
  * @property-read Collection $resources
- *
  * @method static Builder<static>|Notification events()
  * @method static Builder<static>|Notification newModelQuery()
  * @method static Builder<static>|Notification newQuery()
@@ -45,13 +43,11 @@ use Lucent\Support\Traits\UUID;
  * @method static Builder<static>|Notification whereUpdatedAt($value)
  * @method static Builder<static>|Notification withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|Notification withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Notification extends Model
 {
     use SoftDeletes;
-    use UUID;
 
     protected $table = 'notifications';
 
@@ -80,7 +76,7 @@ class Notification extends Model
     public static function createOrUpdate(string $key, array $attributes = []): self
     {
         $notification = self::byKey($key);
-        if ( ! $notification) {
+        if (! $notification) {
             $notification = new self();
             $attributes['key'] = $key;
         }

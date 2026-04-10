@@ -25,10 +25,9 @@ class NotificationServiceProvider extends ServiceProvider
             $namespace = 'App\\';
             $interface = NotifiableEvent::class;
 
-            $directory = app_path(); // You can narrow this down, e.g. app_path('Events')
-
+            $directory = app_path();
             $classes = collect(File::allFiles($directory))
-                ->filter(fn ($file) => 'php' === $file->getExtension())
+                ->filter(fn ($file) => $file->getExtension() === 'php')
                 ->map(function ($file) use ($namespace) {
                     $path = $file->getRealPath();
                     $relativePath = str_replace([app_path() . DIRECTORY_SEPARATOR, '.php'], '', $path);
@@ -37,7 +36,7 @@ class NotificationServiceProvider extends ServiceProvider
                     return $class;
                 })
                 ->filter(function ($class) use ($interface) {
-                    if ( ! class_exists($class)) {
+                    if (! class_exists($class)) {
                         return false;
                     }
 
@@ -55,14 +54,10 @@ class NotificationServiceProvider extends ServiceProvider
         return $classes;
     }
 
-    /**
-     * Register services.
-     */
-    public function register(): void {}
+    public function register(): void
+    {
+    }
 
-    /**
-     * Bootstrap services.
-     */
     public function boot(): void
     {
         try {

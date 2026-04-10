@@ -19,26 +19,12 @@ use Throwable;
 
 class ResetPasswordController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Password Reset Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller is responsible for handling password reset requests
-    | and uses a simple trait to include this behavior. You're free to
-    | explore this trait and override any methods you wish to tweak.
-    |
-    */
-
     use ResetsPasswords;
 
     protected const INVALID_OLD_PASSWORD = 'auth.invalid_old_password';
 
     protected const PASSWORD_REPEATED = 'auth.password_repeated';
 
-    /**
-     * Where to redirect users after resetting their password.
-     */
     protected string $redirectTo = RouteServiceProvider::HOME;
 
     public function showForceResetForm(): View
@@ -60,10 +46,10 @@ class ResetPasswordController extends Controller
                 }
 
                 return self::PASSWORD_REPEATED;
-            }
+            },
         );
 
-        return Password::PASSWORD_RESET === $response
+        return $response === Password::PASSWORD_RESET
                     ? $this->sendResetResponse($request, $response)
                     : $this->sendResetFailedResponse($request, $response);
     }
@@ -90,7 +76,7 @@ class ResetPasswordController extends Controller
             report($th);
         }
 
-        return Password::PASSWORD_RESET === $response
+        return $response === Password::PASSWORD_RESET
                     ? $this->sendResetResponse($request, $response)
                     : $this->sendForceResetFailedResponse($request, $response);
     }
@@ -139,6 +125,7 @@ class ResetPasswordController extends Controller
                     $errors['password'] = [trans($response)];
                     break;
             }
+
             throw ValidationException::withMessages($errors);
         }
 
@@ -155,9 +142,6 @@ class ResetPasswordController extends Controller
             ->withErrors($errors);
     }
 
-    /**
-     * Get the password reset validation rules.
-     */
     protected function forceRules(): array
     {
         return [

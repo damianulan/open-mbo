@@ -38,7 +38,7 @@ class ModelCharts extends ChartsLib
 
         $userObjectives = $model->user_objectives;
         $totalWeight = (float) $userObjectives->sum(
-            fn (UserObjective $userObjective): float => $userObjective->weight
+            fn (UserObjective $userObjective): float => $userObjective->weight,
         );
 
         $totalCompleted = (float) $userObjectives

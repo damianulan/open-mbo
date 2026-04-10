@@ -21,6 +21,8 @@ class UserObjectiveResource extends NotificationResource
 
     public function datas(): array
     {
+        $this->model->loadMissing('objective');
+
         return [
             'objective_name' => $this->model->objective->name,
         ];

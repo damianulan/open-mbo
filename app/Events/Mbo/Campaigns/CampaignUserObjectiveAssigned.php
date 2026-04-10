@@ -14,12 +14,10 @@ class CampaignUserObjectiveAssigned implements ShouldDispatchAfterCommit
     use Dispatchable;
     use SerializesModels;
 
-    /**
-     * Create a new event instance.
-     */
     public function __construct(
         public User $user,
         public Objective $objective,
-        public Campaign $campaign
-    ) {}
+        public Campaign $campaign,
+    ) {
+    }
 }

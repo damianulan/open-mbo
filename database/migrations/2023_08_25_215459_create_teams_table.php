@@ -4,17 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class() extends Migration
-{
-    /**
-     * Run the migrations.
-     */
+return new class () extends Migration {
     public function up(): void
     {
         Schema::create('teams', function (Blueprint $table): void {
-            $table->uuid('id')->primary();
-            $table->foreignUuid('leader_id')->nullable();
-            $table->foreign('leader_id')->references('id')->on('users')->nullOnDelete();
+            $table->id();
+            $table->uuid('uuid')->unique()->index();
+            $table->foreignId('leader_id')->nullable()->constrained('users')->nullOnDelete();
 
             $table->string('name');
             $table->longText('description')->nullable();
@@ -24,9 +20,6 @@ return new class() extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('teams');

@@ -34,7 +34,7 @@ class CampaignResource extends IndexResource
         return (new ResultItem([
             'title' => $this->model->name,
             'description' => $this->model->description,
-            'link' => route('campaigns.show', $this->model->id),
+            'link' => route('campaigns.show', ['campaign' => $this->model->uuid]),
         ]))->setSearchedPhrase($phrase);
     }
 }

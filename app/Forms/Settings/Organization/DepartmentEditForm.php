@@ -15,9 +15,9 @@ class DepartmentEditForm extends Form
         $route = route('settings.organization.departments.store');
         $method = 'POST';
 
-        if ( ! is_null($this->model)) {
+        if (! is_null($this->model)) {
             $method = 'PUT';
-            $route = route('settings.organization.departments.update', $this->model->id);
+            $route = route('settings.organization.departments.update', $this->model);
         }
 
         return $builder->setId(is_null($this->model) ? 'department_create' : 'department_edit')
@@ -34,7 +34,7 @@ class DepartmentEditForm extends Form
     public function validation(): array
     {
         return [
-            'company_id' => 'required|uuid|exists:companies,id',
+            'company_id' => 'required|integer|exists:companies,id',
             'name' => 'required|max:255',
             'description' => 'max:1000|nullable',
         ];

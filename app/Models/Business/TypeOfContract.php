@@ -3,24 +3,25 @@
 namespace App\Models\Business;
 
 use App\Models\BaseModel;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Carbon;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Spatie\Activitylog\Models\Activity;
 
 /**
- * @property string $id
+ * @property int $id
+ * @property string $uuid
  * @property string $name
  * @property string|null $description
- * @property Carbon|null $deleted_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property-read Collection<int, Activity> $activities
- * @property-read int|null $activities_count
- * @property-read Collection<int, UserEmployment> $employments
+ * @property CarbonImmutable|null $deleted_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
+ * @property-read Collection<int, Activity> $activitiesAsSubject
+ * @property-read int|null $activities_as_subject_count
+ * @property-read Collection<int, \App\Models\Business\UserEmployment> $employments
  * @property-read int|null $employments_count
  * @property-read mixed $trans
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|TypeOfContract active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|TypeOfContract average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|TypeOfContract avg(string $column)
@@ -67,15 +68,17 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|TypeOfContract whereId($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|TypeOfContract whereName($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|TypeOfContract whereUpdatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|TypeOfContract whereUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|TypeOfContract withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TypeOfContract withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class TypeOfContract extends BaseModel
 {
-    public static $contracts = [
+    use HasUniqueUuid;
+
+    public static array $contracts = [
         'uop',
         'uz',
         'b2b',

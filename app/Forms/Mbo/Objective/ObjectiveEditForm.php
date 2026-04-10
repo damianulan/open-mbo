@@ -9,15 +9,13 @@ use FormForge\Base\FormComponent;
 use FormForge\Components\Dictionary;
 use FormForge\FormBuilder;
 
-// Ajax form
 class ObjectiveEditForm extends Form
 {
-    // TODO - dodawanie użytkowników
     public function definition(FormBuilder $builder): FormBuilder
     {
         $method = 'POST';
         $title = 'Dodaj nowy cel';
-        if ( ! is_null($this->model)) {
+        if (! is_null($this->model)) {
             $method = 'PUT';
             $title = 'Edytuj cel';
         }

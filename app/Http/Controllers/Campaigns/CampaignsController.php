@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Campaigns;
 
+use App\Contracts\Repositories\CampaignRepositoryContract;
 use App\Filters\Collections\CampaignsListFilters;
 use App\Forms\Mbo\Campaign\CampaignEditForm;
 use App\Http\Controllers\AppController;
@@ -15,14 +16,14 @@ use Throwable;
 
 class CampaignsController extends AppController
 {
-    public function index(Request $request, CampaignsListFilters $filters): Renderable
+    public function index(Request $request, CampaignsListFilters $filters, CampaignRepositoryContract $campaignRepository): Renderable
     {
         if ($request->user()->cannot('viewAny', Campaign::class)) {
             unauthorized();
         }
         $this->logView('Wyświetlono listę kampanii pomiarowych');
 
-        $campaigns = Campaign::orderByStatus()->registerFilters($filters)->paginate(30);
+        $campaigns = $campaignRepository->paginateForIndex($filters);
 
         return view('pages.mbo.campaigns.index', [
             'campaigns' => $campaigns,
@@ -41,15 +42,13 @@ class CampaignsController extends AppController
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request, CampaignEditForm $form): RedirectResponse
     {
         $this->authorize('create', Campaign::class);
 
         $redirect = null;
         $service = null;
+
         try {
             $form->validate();
             $service = CreateOrUpdate::boot(request: $request)->execute();
@@ -57,7 +56,7 @@ class CampaignsController extends AppController
             if ($service->passed()) {
                 $campaign = $service->campaign;
 
-                $redirect = redirect()->route('campaigns.show', $campaign->id)->with('success', __('alerts.campaigns.success.create', ['name' => $campaign->name]));
+                $redirect = redirect()->route('campaigns.show', ['campaign' => $campaign->uuid])->with('success', __('alerts.campaigns.success.create', ['name' => $campaign->name]));
             }
         } catch (Throwable $e) {
             $this->e = $e;
@@ -68,12 +67,10 @@ class CampaignsController extends AppController
         return $this->returnResponseRedirect($redirect, $message ?? __('alerts.campaigns.error.create'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Campaign $campaign): Renderable
+    public function show(Campaign $campaign, CampaignRepositoryContract $campaignRepository): Renderable
     {
         $this->authorize('view', $campaign);
+        $campaign = $campaignRepository->loadForShow($campaign);
 
         $this->logShow($campaign);
         $this->setPagetitle("{$campaign->name} [{$campaign->period}]");
@@ -99,6 +96,7 @@ class CampaignsController extends AppController
 
         $redirect = null;
         $service = null;
+
         try {
             $form->validate();
 
@@ -107,7 +105,7 @@ class CampaignsController extends AppController
             if ($service->passed()) {
                 $campaign = $service->getResult();
 
-                $redirect = redirect()->route('campaigns.show', $campaign)->with('info_alert', __('alerts.campaigns.success.edit', ['name' => $campaign->name]));
+                $redirect = redirect()->route('campaigns.show', ['campaign' => $campaign->uuid])->with('info_alert', __('alerts.campaigns.success.edit', ['name' => $campaign->name]));
             }
         } catch (Throwable $e) {
             $this->e = $e;
@@ -118,10 +116,8 @@ class CampaignsController extends AppController
         return $this->returnResponseRedirect($redirect, $message ?? __('alerts.campaigns.error.edit', ['name' => $campaign->name]));
     }
 
-    public function terminate(int|string $id): JsonResponse
+    public function terminate(Campaign $campaign): JsonResponse
     {
-        $campaign = Campaign::findOrFail($id);
-
         if ($this->allows('terminate', $campaign)) {
             if ($campaign->terminate()) {
                 return ajax()->ok(__('alerts.campaigns.success.terminate'));
@@ -131,10 +127,8 @@ class CampaignsController extends AppController
         return ajax()->error(__('alerts.campaigns.error.terminate'));
     }
 
-    public function resume(int|string $id): JsonResponse
+    public function resume(Campaign $campaign): JsonResponse
     {
-        $campaign = Campaign::findOrFail($id);
-
         if ($campaign->resume()) {
             return ajax()->ok(__('alerts.campaigns.success.resume'));
         }
@@ -142,9 +136,9 @@ class CampaignsController extends AppController
         return ajax()->error(__('alerts.campaigns.error.resume'));
     }
 
-    public function cancel(int|string $id): JsonResponse
+    public function cancel(Campaign $campaign, CampaignRepositoryContract $campaignRepository): JsonResponse
     {
-        $campaign = Campaign::findOrFail($id);
+        $campaign = $campaignRepository->findOrFail($campaign->getKey(), ['user_campaigns']);
 
         if ($campaign->cancel()) {
             foreach ($campaign->user_campaigns as $uc) {

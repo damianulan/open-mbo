@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Traits\IsTranslated;
 use App\Traits\Vendors\ModelActivity;
-use Carbon\Carbon;
 use FormForge\Traits\RequestForms;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,7 +12,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Lucent\Support\Traits\Accessible;
 use Lucent\Support\Traits\CascadeDeletes;
 use Lucent\Support\Traits\SoftDeletesPrunable;
-use Lucent\Support\Traits\UUID;
 use Lucent\Support\Traits\VirginModel;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\LaravelPackageTools\Concerns\Package\HasTranslations;
@@ -22,7 +20,6 @@ use YMigVal\LaravelModelCache\HasCachedQueries;
 /**
  * @property-read Collection<int, Activity> $activities
  * @property-read int|null $activities_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel avg(string $column)
@@ -66,7 +63,6 @@ use YMigVal\LaravelModelCache\HasCachedQueries;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|BaseModel withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|BaseModel withoutTrashed()
- *
  * @mixin \Eloquent
  */
 abstract class BaseModel extends Model
@@ -81,17 +77,5 @@ abstract class BaseModel extends Model
     use RequestForms;
     use SoftDeletes;
     use SoftDeletesPrunable;
-    use UUID;
     use VirginModel;
-
-    public function carbonDate(string $prop, string $format = 'Y-m-d')
-    {
-        $date = $this->{$prop};
-        $date_carbon = null;
-        if ($date) {
-            $date_carbon = Carbon::parse($date)->format($format);
-        }
-
-        return $date_carbon;
-    }
 }

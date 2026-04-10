@@ -9,15 +9,13 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Core\User>
+ * @extends Factory<User>
  */
 class UserFactory extends Factory
 {
     protected $model = User::class;
 
     /**
-     * Define the model's default state.
-     *
      * @return array<string, mixed>
      */
     public function definition(): array
@@ -33,7 +31,6 @@ class UserFactory extends Factory
             case 'f':
                 $gender = 'female';
                 break;
-
             default:
                 $gender = null;
                 break;
@@ -45,6 +42,7 @@ class UserFactory extends Factory
         $email = $username . '@damianulan.me';
 
         return [
+            'uuid' => (string) Str::uuid(),
             'firstname' => $firstname,
             'lastname' => $lastname,
             'username' => $username,
@@ -56,9 +54,6 @@ class UserFactory extends Factory
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
     public function unverified(): static
     {
         return $this->state(fn (array $attributes) => [

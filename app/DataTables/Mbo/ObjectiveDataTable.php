@@ -2,6 +2,7 @@
 
 namespace App\DataTables\Mbo;
 
+use App\Contracts\Repositories\ObjectiveRepositoryContract;
 use App\Models\Mbo\Objective;
 use App\Support\DataTables\Column;
 use App\Support\DataTables\DataTableBuilder;
@@ -17,15 +18,18 @@ class ObjectiveDataTable extends DataTableService
 
     protected $orderByDir = 'desc';
 
+    public function __construct(
+        private readonly ObjectiveRepositoryContract $objectiveRepository,
+    ) {
+        parent::__construct();
+    }
+
     /**
-     * Build the DataTable class.
-     *
-     * @param  QueryBuilder  $query  Results from query() method.
+     * @param QueryBuilder $query Results from query() method.
      */
     public function DataTable(QueryBuilder $query): DataTableBuilder
     {
         return (new DataTableBuilder($query))
-
             ->addColumn('action', fn ($data) => view('pages.mbo.objectives.action', [
                 'data' => $data,
             ]))
@@ -46,12 +50,9 @@ class ObjectiveDataTable extends DataTableService
             });
     }
 
-    /**
-     * Get the query source of dataTable.
-     */
     public function query(Objective $model): QueryBuilder
     {
-        $query = $model->query();
+        $query = $this->objectiveRepository->queryForDataTable();
 
         return $query;
     }
@@ -101,9 +102,6 @@ class ObjectiveDataTable extends DataTableService
         ];
     }
 
-    /**
-     * Get the filename for export.
-     */
     protected function filename(): string
     {
         return 'Objectives_' . date('YmdHis');

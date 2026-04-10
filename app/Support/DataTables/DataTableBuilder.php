@@ -2,6 +2,7 @@
 
 namespace App\Support\DataTables;
 
+use App\Support\Filters\Contracts\FilterCollection;
 use App\Support\Filters\Contracts\FilterContract;
 use App\Support\Filters\Services\FilterService;
 use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
@@ -15,10 +16,10 @@ class DataTableBuilder extends EloquentDataTable
     public function __construct(Model|EloquentBuilder $model)
     {
         parent::__construct($model);
-        $this->filterService = new FilterService();
+        $this->filterService = app()->make(FilterCollection::class);
     }
 
-    public function registerFilters(FilterService $service): self
+    public function registerFilters(FilterCollection $service): self
     {
         $this->filterService = $service;
 
@@ -36,7 +37,6 @@ class DataTableBuilder extends EloquentDataTable
     {
         $this->applyFilters();
         parent::filterRecords();
-
     }
 
     protected function applyFilters(): void
@@ -46,6 +46,5 @@ class DataTableBuilder extends EloquentDataTable
                 $query->filter($filter);
             }
         });
-
     }
 }

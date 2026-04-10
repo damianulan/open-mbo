@@ -10,8 +10,8 @@ use Tests\Traits\HasUserCollection;
 
 class UsersControllerTest extends TestCase
 {
-    use RefreshDatabase;
     use HasUserCollection;
+    use RefreshDatabase;
 
     protected $seeder = TestDatabaseSeeder::class;
 
@@ -35,14 +35,14 @@ class UsersControllerTest extends TestCase
 
         $this->from('/users')
             ->actingAs($admin)
-            ->get(route('users.block', $targetUser))
+            ->get(route('users.block', ['user' => $targetUser->uuid]))
             ->assertRedirect('/users');
 
         $this->assertTrue($targetUser->fresh()->blocked());
 
         $this->from('/users')
             ->actingAs($admin)
-            ->get(route('users.block', $targetUser))
+            ->get(route('users.block', ['user' => $targetUser->uuid]))
             ->assertRedirect('/users');
 
         $this->assertFalse($targetUser->fresh()->blocked());
@@ -54,7 +54,7 @@ class UsersControllerTest extends TestCase
         $targetUser = $this->userFactory();
 
         $this->actingAs($adminHr)
-            ->get(route('users.block', $targetUser))
+            ->get(route('users.block', ['user' => $targetUser->uuid]))
             ->assertForbidden();
     }
 
@@ -65,7 +65,7 @@ class UsersControllerTest extends TestCase
 
         $this->from('/dashboard')
             ->actingAs($user->fresh())
-            ->get(route('users.favourite', $favouriteUser))
+            ->get(route('users.favourite', ['user' => $favouriteUser->uuid]))
             ->assertRedirect('/dashboard');
 
         $this->assertDatabaseHas('favourities', [
@@ -76,7 +76,7 @@ class UsersControllerTest extends TestCase
 
         $this->from('/dashboard')
             ->actingAs($user)
-            ->get(route('users.favourite', $favouriteUser))
+            ->get(route('users.favourite', ['user' => $favouriteUser->uuid]))
             ->assertRedirect('/dashboard');
 
         $this->assertDatabaseMissing('favourities', [
@@ -95,7 +95,7 @@ class UsersControllerTest extends TestCase
 
         $this->from('/users')
             ->actingAs($admin)
-            ->get(route('users.reset_password', $targetUser))
+            ->get(route('users.reset_password', ['user' => $targetUser->uuid]))
             ->assertRedirect('/users')
             ->assertSessionHas('success_alert');
 
@@ -108,7 +108,7 @@ class UsersControllerTest extends TestCase
         $targetUser = $this->userFactory();
 
         $this->actingAs($employee)
-            ->get(route('users.reset_password', $targetUser))
+            ->get(route('users.reset_password', ['user' => $targetUser->uuid]))
             ->assertForbidden();
     }
 }

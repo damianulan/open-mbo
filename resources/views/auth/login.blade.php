@@ -12,15 +12,7 @@
                 </div>
 
                 <div class="card-body pt-0">
-                    @if(config('app.env') !== 'production' && config('app.maintenance') === false)
-                        <div class="alert alert-primary mx-5 px-5 mb-4">
-                            <div class="text-center">{!! __('auth.login_info') !!}</div>
-                            <div class="text-center pt-3">
-                                <div><strong>{{ __('fields.login') }}:</strong> admin@damianulan.me</div>
-                                <div><strong>{{ __('fields.password') }}:</strong> 123456</div>
-                            </div>
-                        </div>
-                    @elseif(config('app.maintenance') === true)
+                    @if(config('app.maintenance') === true)
                         <div class="alert alert-danger mx-5 px-5 mb-4">
                             <div class="text-center">{!! __('auth.maintenance_info') !!}</div>
                         </div>
@@ -84,14 +76,23 @@
                         </div>
                     </form>
                     @if(config('app.env') !== 'production')
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <input type="hidden" name="email" value="admin@damianulan.me"/>
+                        <input type="hidden" name="password" value="123456"/>
+                       <div class="row mt-2">
+                            <div class="col-md-6 offset-md-3">
+                                <button type="submit" class="btn btn-primary w-100">
+                                    {{ __('menus.login_as_admin') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                     <div class="mx-5 mt-3">
                         <div class="row">
                             <div class="col-md-12 text-muted d-flex">
                                 <div class="login-version">
                                     Release: {{ config('app.release') }}
-                                </div>
-                                <div class="login-build ms-auto">
-                                    Build: {{ config('app.build') }}
                                 </div>
                             </div>
                         </div>

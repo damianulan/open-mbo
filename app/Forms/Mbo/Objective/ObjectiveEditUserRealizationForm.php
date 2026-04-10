@@ -2,23 +2,19 @@
 
 namespace App\Forms\Mbo\Objective;
 
-use App\Models\Mbo\UserObjective;
 use FormForge\Base\Form;
 use FormForge\Base\FormComponent;
 use FormForge\FormBuilder;
 use Illuminate\Support\Facades\Auth;
 
-// Ajax form
 class ObjectiveEditUserRealizationForm extends Form
 {
-    /**
-     * @param  UserObjective  $this->model
-     */
     public function definition(FormBuilder $builder): FormBuilder
     {
         $method = 'POST';
         $title = 'Modyfikacja realizacji celu';
         $prefix = '';
+        $this->model?->loadMissing('objective');
         if ($this->model && Auth::user()->id === $this->model->user_id) {
             $prefix = 'self_';
         }

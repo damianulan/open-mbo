@@ -9,13 +9,11 @@ use Symfony\Component\HttpFoundation\Response;
 class UserLocale
 {
     /**
-     * Handle an incoming request.
-     *
-     * @param  Closure(Request): (Response)  $next
+     * @param Closure(Request): (Response) $next
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ( ! $request->user()) {
+        if (! $request->user()) {
             return $next($request);
         }
 

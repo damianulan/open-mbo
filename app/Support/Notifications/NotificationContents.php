@@ -52,13 +52,13 @@ class NotificationContents implements CastsAttributes, Jsonable
 
     public function fill(array $placeholders): self
     {
-        if ( ! empty($this->system_contents)) {
+        if (! empty($this->system_contents)) {
             $this->system_contents = $this->replacePlaceholders($this->system_contents, $placeholders);
         }
-        if ( ! empty($this->email_contents)) {
+        if (! empty($this->email_contents)) {
             $this->email_contents = $this->replacePlaceholders($this->email_contents, $placeholders);
         }
-        if ( ! empty($this->subject)) {
+        if (! empty($this->subject)) {
             $this->subject = $this->replacePlaceholders($this->subject, $placeholders);
         }
 
@@ -66,9 +66,7 @@ class NotificationContents implements CastsAttributes, Jsonable
     }
 
     /**
-     * Cast the given value.
-     *
-     * @param  array<string, mixed>  $attributes
+     * @param array<string, mixed> $attributes
      */
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
@@ -87,7 +85,7 @@ class NotificationContents implements CastsAttributes, Jsonable
 
     public function toJson($options = 0)
     {
-        if ( ! $options) {
+        if (! $options) {
             $options = JSON_UNESCAPED_UNICODE;
         }
 
@@ -99,9 +97,7 @@ class NotificationContents implements CastsAttributes, Jsonable
     }
 
     /**
-     * Prepare the given value for storage.
-     *
-     * @param  array<string, mixed>  $attributes
+     * @param array<string, mixed> $attributes
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
@@ -120,11 +116,9 @@ class NotificationContents implements CastsAttributes, Jsonable
 
     private function replacePlaceholders(string $text, array $arr)
     {
-        // Use regex to find all occurrences of {% key %}
         return preg_replace_callback('/{%\s*(\w+)\s*%}/', function ($matches) use ($arr) {
             $key = $matches[1];
 
-            // Replace with corresponding value if it exists, otherwise leave unchanged
             return $arr[$key] ?? $matches[0];
         }, $text);
     }

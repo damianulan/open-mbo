@@ -8,15 +8,13 @@ use Exception;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Mbo\ObjectiveTemplate>
+ * @extends Factory<ObjectiveTemplate>
  */
 class ObjectiveTemplateFactory extends Factory
 {
     protected $model = ObjectiveTemplate::class;
 
     /**
-     * Define the model's default state.
-     *
      * @return array<string, mixed>
      */
     public function definition(): array
@@ -42,6 +40,7 @@ class ObjectiveTemplateFactory extends Factory
                 'award' => fake()->randomFloat(2, 1, 30),
             ];
         }
+
         throw new Exception('No category found');
     }
 

@@ -2,10 +2,8 @@
 
 namespace App\Models\Vendor;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Activitylog\Models\Activity;
 
@@ -15,23 +13,19 @@ use Spatie\Activitylog\Models\Activity;
  * @property string $description
  * @property string|null $subject_type
  * @property string|null $event
- * @property string|null $subject_id
+ * @property int|null $subject_id
  * @property string|null $causer_type
- * @property string|null $causer_id
- * @property Collection<array-key, mixed>|null $properties
+ * @property int|null $causer_id
+ * @property \Illuminate\Support\Collection<array-key, mixed>|null $properties
  * @property string|null $batch_uuid
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property-read Model|null $causer
- * @property-read Collection $changes
- * @property-read Model|null $subject
- *
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Model|null $causer
+ * @property-read \Illuminate\Database\Eloquent\Model|null $subject
  * @method static Builder<static>|ActivityModel causedBy(\Illuminate\Database\Eloquent\Model $causer)
- * @method static Builder<static>|ActivityModel forBatch(string $batchUuid)
- * @method static Builder<static>|ActivityModel forEvent(string $event)
+ * @method static Builder<static>|ActivityModel forEvent(\Spatie\Activitylog\Enums\ActivityEvent|string $event)
  * @method static Builder<static>|ActivityModel forSubject(\Illuminate\Database\Eloquent\Model $subject)
- * @method static Builder<static>|ActivityModel hasBatch()
- * @method static Builder<static>|ActivityModel inLog(...$logNames)
+ * @method static Builder<static>|ActivityModel inLog(array|string ...$logNames)
  * @method static Builder<static>|ActivityModel logger()
  * @method static Builder<static>|ActivityModel mine()
  * @method static Builder<static>|ActivityModel newModelQuery()
@@ -49,7 +43,6 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder<static>|ActivityModel whereSubjectId($value)
  * @method static Builder<static>|ActivityModel whereSubjectType($value)
  * @method static Builder<static>|ActivityModel whereUpdatedAt($value)
- *
  * @mixin \Eloquent
  */
 class ActivityModel extends Activity

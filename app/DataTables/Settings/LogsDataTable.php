@@ -16,13 +16,10 @@ class LogsDataTable extends BaseLogDataTable
     protected $orderBy = 'created_at';
 
     /**
-     * Build the DataTable class.
-     *
-     * @param  QueryBuilder  $query  Results from query() method.
+     * @param QueryBuilder $query Results from query() method.
      */
     public function DataTable(QueryBuilder $query): DataTableBuilder
     {
-
         return (new DataTableBuilder($query))
             ->addColumn('causer', fn ($data) => $this->userView($data, 'causer'))
             ->addColumn('event', fn ($data) => view('components.datatables.badge', [
@@ -45,7 +42,6 @@ class LogsDataTable extends BaseLogDataTable
                                 }
                             }
                         }
-
                     } else {
                         return $this->subjectView($data);
                     }
@@ -59,13 +55,13 @@ class LogsDataTable extends BaseLogDataTable
                     User::query()->select('firstname')
                         ->whereColumn('users.id', 'activity_log.causer_id')
                         ->limit(1),
-                    $order
+                    $order,
                 );
                 $query->orderBy(
                     User::query()->select('lastname')
                         ->whereColumn('users.id', 'activity_log.causer_id')
                         ->limit(1),
-                    $order
+                    $order,
                 );
             })
             ->filterColumn('causer', function ($query, $keyword): void {
@@ -80,9 +76,6 @@ class LogsDataTable extends BaseLogDataTable
             });
     }
 
-    /**
-     * Get the query source of dataTable.
-     */
     public function query(ActivityModel $model): QueryBuilder
     {
         return $model->newQuery()
@@ -122,9 +115,6 @@ class LogsDataTable extends BaseLogDataTable
         ];
     }
 
-    /**
-     * Get the filename for export.
-     */
     protected function filename(): string
     {
         return 'Logs_' . date('YmdHis');
@@ -134,7 +124,7 @@ class LogsDataTable extends BaseLogDataTable
     {
         $color = 'primary';
 
-        if ('auth_attempt_fail' === $event) {
+        if ($event === 'auth_attempt_fail') {
             $color = 'danger';
         }
 

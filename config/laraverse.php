@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Laraverse Configuration file v1.0
@@ -15,5 +14,4 @@ return [
         'catalog' => 'docs/catalog',
         // 'formforge' => 'vendor/damianulan/laravel-form-forge/docs',
     ],
-
 ];

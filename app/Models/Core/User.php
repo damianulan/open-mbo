@@ -31,6 +31,7 @@ use App\Traits\UserMBO;
 use App\Traits\Vendors\Impersonable;
 use App\Traits\Vendors\ModelActivity;
 use App\Warden\PermissionsLib;
+use Carbon\CarbonImmutable;
 use FormForge\Traits\RequestForms;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Builder;
@@ -40,7 +41,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -53,7 +53,7 @@ use Laravel\Sanctum\PersonalAccessToken;
 use Lucent\Contracts\Models\HasShowRoute;
 use Lucent\Support\Str\Alphabet;
 use Lucent\Support\Traits\CascadeDeletes;
-use Lucent\Support\Traits\UUID;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Lucent\Support\Traits\VirginModel;
 use SensitiveParameter;
 use Sentinel\Models\Permission;
@@ -63,7 +63,8 @@ use Spatie\ModelStatus\HasStatuses;
 use Spatie\ModelStatus\Status;
 
 /**
- * @property string $id
+ * @property int $id
+ * @property string $uuid
  * @property string $auth
  * @property string|null $email
  * @property string|null $email_hash
@@ -73,18 +74,18 @@ use Spatie\ModelStatus\Status;
  * @property string|null $lastname_hash
  * @property string|null $username
  * @property string|null $username_hash
- * @property Carbon|null $email_verified_at
+ * @property CarbonImmutable|null $email_verified_at
  * @property string $password
  * @property string|null $gender
  * @property int $core Core user - comes as default with the application - cannot be deleted
  * @property int $force_password_change Force user to change password after first login
  * @property string|null $remember_token
  * @property string|null $suspended_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Activity> $activities
- * @property-read int|null $activities_count
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
+ * @property CarbonImmutable|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Activity> $activitiesAsSubject
+ * @property-read int|null $activities_as_subject_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, ActivityModel> $activity
  * @property-read int|null $activity_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, UserPoints> $awards
@@ -103,12 +104,12 @@ use Spatie\ModelStatus\Status;
  * @property-read int|null $employments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, UserEmployment> $employments_active
  * @property-read int|null $employments_active_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Campaign> $favourite_campaigns
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Campaign> $favouriteCampaigns
  * @property-read int|null $favourite_campaigns_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $favouriteUsers
+ * @property-read int|null $favourite_users_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $favourite_to
  * @property-read int|null $favourite_to_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $favourite_users
- * @property-read int|null $favourite_users_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, IndexModel> $indexes
  * @property-read int|null $indexes_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Team> $leader_teams
@@ -118,13 +119,13 @@ use Spatie\ModelStatus\Status;
  * @property-read mixed $name
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Objective> $objectives
  * @property-read int|null $objectives_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, UserPasswordHistory> $password_history
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Core\UserPasswordHistory> $passwordHistory
  * @property-read int|null $password_history_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Permission> $permissions
  * @property-read int|null $permissions_count
  * @property-read mixed $points
- * @property-read UserPreference|null $preferences
- * @property-read UserProfile|null $profile
+ * @property-read \App\Models\Core\UserPreference|null $preferences
+ * @property-read \App\Models\Core\UserProfile|null $profile
  * @property-read Collection $sessions
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Status> $statuses
  * @property-read int|null $statuses_count
@@ -144,7 +145,6 @@ use Spatie\ModelStatus\Status;
  * @property-read int|null $user_objectives_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, UserObjective> $user_objectives_active
  * @property-read int|null $user_objectives_active_count
- *
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User active()
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User currentStatus(...$names)
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User drafted()
@@ -177,17 +177,17 @@ use Spatie\ModelStatus\Status;
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereUpdatedAt($value)
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereUsername($value)
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereUsernameHash($value)
+ * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User whereUuid($value)
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User withPermission(...$slugs)
  * @method static \App\Builders\Eloquent\EnigmaBuilder<static>|User withRole(...$slugs)
  * @method static Builder<static>|User withTrashed(bool $withTrashed = true)
  * @method static Builder<static>|User withoutTrashed()
- *
  * @mixin \Eloquent
  */
 #[ScopedBy(CoreUsersScope::class)]
 class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 {
-    use UUID;
+    use HasUniqueUuid;
     use CascadeDeletes;
     use Commentable;
     use Commentator;
@@ -196,6 +196,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     use HasEnigmaAttributes;
     use HasFactory;
     use HasRolesAndPermissions;
+    use HasStatuses;
     use Impersonable;
     use Impersonate;
     use IsTranslated;
@@ -208,7 +209,6 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     use UserHasPreferences;
     use UserMBO;
     use VirginModel;
-    use HasStatuses;
 
     protected $fillable = [
         'email',
@@ -259,7 +259,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function validateNewPassword($newpassword): bool
     {
-        $passwords = $this->password_history->take(settings('users.password_not_repeat', 0));
+        $passwords = $this->passwordHistory->take(settings('users.password_not_repeat', 0));
 
         foreach ($passwords as $password) {
             if (Hash::check($newpassword, $password->password)) {
@@ -272,7 +272,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function generatePassword($password = null)
     {
-        if ( ! $password) {
+        if (! $password) {
             $password = $this->getNewPassword();
         }
         $this->password = Hash::make($password);
@@ -284,7 +284,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     {
         $link = '<span>' . $this->name . '</span>';
         if (Auth::user()->can('view', $this)) {
-            $link = '<a href="' . route('users.show', $this->id) . '" class="text-primary">' . $this->name . '</a>';
+            $link = '<a href="' . route('users.show', ['user' => $this->uuid]) . '" class="text-primary">' . $this->name . '</a>';
         }
 
         return $link;
@@ -292,6 +292,11 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function nameDetails()
     {
+        $this->loadMissing([
+            'profile',
+            'roles',
+        ]);
+
         $view = view('components.datatables.username', ['data' => $this]);
         if (Auth::user()->can('preview', $this)) {
             $view = view('components.datatables.username_link', ['data' => $this]);
@@ -302,7 +307,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function toggleLock(): bool
     {
-        if (null === $this->suspended_at) {
+        if ($this->suspended_at === null) {
             $this->suspended_at = now();
         } else {
             $this->suspended_at = null;
@@ -318,16 +323,23 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function canBeDeleted(): bool
     {
-        return 0 === $this->core;
+        return ! $this->isCore();
     }
 
     public function canBeBlocked(): bool
     {
-        return 0 === $this->core;
+        return ! $this->isCore();
+    }
+
+    public function isCore(): bool
+    {
+        return $this->core === 1;
     }
 
     public function getAvatar(): ?string
     {
+        $this->loadMissing('profile');
+
         $avatar = $this->profile?->avatar;
         if ($avatar) {
             if (Str::startsWith($avatar, ['http://', 'https://'])) {
@@ -376,11 +388,16 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function getAvatarView($size = 'lg'): string
     {
+        $this->loadMissing([
+            'profile',
+            'roles',
+        ]);
+
         $initials = $this->getInitials();
         $letterNum = Alphabet::getAlphabetPosition($initials);
 
         $color = 'primary';
-        if ( ! $this->isAdmin()) {
+        if (! $this->isAdmin()) {
             if ($letterNum < 4) {
                 $color = 'orange';
             } elseif ($letterNum < 8) {
@@ -398,7 +415,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         }
 
         $indicator = '';
-        if ( ! $this->itsMe() && $this->isLoggedIn()) {
+        if (! $this->itsMe() && $this->isLoggedIn()) {
             $indicator = '<div class="profile-indicator"></div>';
         }
 
@@ -432,17 +449,17 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
         return $this->morphMany(ActivityModel::class, 'causer');
     }
 
-    public function favourite_users()
+    public function favouriteUsers()
     {
         return $this->morphedByMany(User::class, 'subject', 'favourities');
     }
 
-    public function favourite_campaigns()
+    public function favouriteCampaigns()
     {
         return $this->morphedByMany(Campaign::class, 'subject', 'favourities');
     }
 
-    public function password_history(): HasMany
+    public function passwordHistory(): HasMany
     {
         return $this->hasMany(UserPasswordHistory::class)->orderByDesc('created_at');
     }
@@ -450,7 +467,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     public function preferredLocale()
     {
         $locale = $this->preferences->lang ?? 'auto';
-        if ('auto' === $locale) {
+        if ($locale === 'auto') {
             $locale = app()->getLocale();
         }
 
@@ -473,7 +490,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
 
     public function routeShow(): string
     {
-        return route('users.show', $this->id);
+        return route('users.show', ['user' => $this->uuid]);
     }
 
     public function sendPasswordResetNotification(#[SensitiveParameter] $token): void
@@ -500,7 +517,7 @@ class User extends Authenticatable implements HasLocalePreference, HasShowRoute
     protected function sessions(): Attribute
     {
         return Attribute::make(
-            get: fn (): Collection => 'database' === config('session.driver') ? DB::table('sessions')->where('user_id', $this->id)->orderByDesc('last_activity')->get() : new Collection(),
+            get: fn (): Collection => config('session.driver') === 'database' ? DB::table('sessions')->where('user_id', $this->id)->orderByDesc('last_activity')->get() : new Collection(),
         );
     }
 }

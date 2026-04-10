@@ -17,7 +17,7 @@ class GeneralSettings extends BaseSettings
 
     public bool $debug = true;
 
-    public bool $debugbar = false;
+    public bool $debugbar = true;
 
     public bool $maintenance = false;
 

@@ -36,7 +36,7 @@ trait InteractsWithSystemNotifications
     {
         $notification = $this->notificationsQuery()->find($notificationId);
 
-        if ( ! $notification instanceof SystemNotification) {
+        if (! $notification instanceof SystemNotification) {
             return null;
         }
 

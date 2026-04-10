@@ -1,4 +1,7 @@
 <div class="content-card">
+    @php
+        $campaign = $objective->campaign;
+    @endphp
     <div class="content-card-top">
         <div class="content-card-header">
             <i class="bi-crosshair"></i>
@@ -10,8 +13,8 @@
             </div>
         @endif
         <div class="content-card-icons ms-auto">
-            @if($objective->campaign()->exists())
-                <a href={{ route('campaigns.show', $objective->campaign->id) }} data-tippy-content="{{ __('mbo.info.campaign_related', ['campaign' => $objective->campaign->name, 'period' => $objective->campaign->period]) }}">
+            @if($campaign)
+                <a href={{ route('campaigns.show', ['campaign' => $campaign->uuid]) }} data-tippy-content="{{ __('mbo.info.campaign_related', ['campaign' => $campaign->name, 'period' => $campaign->period]) }}">
                     <i class="bi-bullseye"></i>
                 </a>
             @endif
@@ -80,10 +83,10 @@
             </div>
             <div class="content-card-btns flex-wrap">
                 @if($userObjective->canBePassed())
-                    <a href="{{ route('objectives.assignment.pass', $userObjective->id) }}" class="btn btn-outline-success mt-3"><i class="bi-btn bi-check2-circle"></i>{{ __('mbo.objectives.pass') }}</a>
+                    <a href="{{ route('objectives.assignment.pass', $userObjective) }}" class="btn btn-outline-success mt-3"><i class="bi-btn bi-check2-circle"></i>{{ __('mbo.objectives.pass') }}</a>
                 @endif
                 @if($userObjective->canBeFailed())
-                    <a href="{{ route('objectives.assignment.fail', $userObjective->id) }}" class="btn btn-outline-danger mt-3"><i class="bi-btn bi-x-lg"></i>{{ __('mbo.objectives.fail') }}</a>
+                    <a href="{{ route('objectives.assignment.fail', $userObjective) }}" class="btn btn-outline-danger mt-3"><i class="bi-btn bi-x-lg"></i>{{ __('mbo.objectives.fail') }}</a>
                 @endif
             </div>
         @endif

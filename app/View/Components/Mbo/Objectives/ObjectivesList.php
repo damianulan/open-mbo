@@ -18,14 +18,12 @@ class ObjectivesList extends Component
 
     public Collection $objectives;
 
-    /**
-     * Create a new component instance.
-     */
     public function __construct(public Model $model, User $user = new User())
     {
-        if ( ! ($model instanceof HasObjectives) && ! isset(class_uses_recursive($model)[UserMBO::class])) {
+        if (! ($model instanceof HasObjectives) && ! isset(class_uses_recursive($model)[UserMBO::class])) {
             $e = new Exception('Model must implement HasObjectives interface or UserMBO trait.');
             report($e);
+
             throw $e;
         }
 
@@ -44,9 +42,6 @@ class ObjectivesList extends Component
         $this->objectives = $model->objectives;
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
     public function render(): View|Closure|string
     {
         return view('components.mbo.objectives.objectives-list');

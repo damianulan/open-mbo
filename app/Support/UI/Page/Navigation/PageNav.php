@@ -20,7 +20,7 @@ class PageNav implements NavbarContract
         $instance->id = $id;
         $instance->items = new Collection();
 
-        if ( ! empty($items)) {
+        if (! empty($items)) {
             foreach ($items as $item) {
                 if ($item instanceof MenuItem) {
                     if ($item->id && $item->isVisible()) {
@@ -37,7 +37,7 @@ class PageNav implements NavbarContract
 
     public function addClass(?string $class): self
     {
-        if ( ! empty($class)) {
+        if (! empty($class)) {
             $this->classes[] = $class;
         }
 

@@ -6,28 +6,29 @@ use App\Casts\FormattedText;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Models\Scopes\Mbo\ObjectiveTemplateCategoryScope;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Carbon;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Spatie\Activitylog\Models\Activity;
 
 /**
- * @property string $id
+ * @property int $id
+ * @property string $uuid
  * @property string $name
  * @property string|null $shortname
  * @property mixed|null $description
  * @property string|null $icon
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property Carbon|null $deleted_at
- * @property-read Collection<int, Activity> $activities
- * @property-read int|null $activities_count
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
+ * @property CarbonImmutable|null $deleted_at
+ * @property-read Collection<int, Activity> $activitiesAsSubject
+ * @property-read int|null $activities_as_subject_count
  * @property-read Collection<int, User> $coordinators
  * @property-read int|null $coordinators_count
- * @property-read Collection<int, ObjectiveTemplate> $objective_templates
+ * @property-read Collection<int, \App\Models\Mbo\ObjectiveTemplate> $objective_templates
  * @property-read int|null $objective_templates_count
  * @property-read mixed $trans
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory avg(string $column)
@@ -76,15 +77,17 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory whereName($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory whereShortname($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory whereUpdatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory whereUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|ObjectiveTemplateCategory withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ObjectiveTemplateCategory withoutTrashed()
- *
  * @mixin \Eloquent
  */
 #[ScopedBy(ObjectiveTemplateCategoryScope::class)]
 class ObjectiveTemplateCategory extends BaseModel
 {
+    use HasUniqueUuid;
+
     protected $table = 'objective_template_categories';
 
     protected $fillable = [
@@ -124,7 +127,7 @@ class ObjectiveTemplateCategory extends BaseModel
 
     public function refreshCoordinators(?array $user_ids): void
     {
-        if ( ! $user_ids) {
+        if (! $user_ids) {
             $user_ids = [];
         }
 

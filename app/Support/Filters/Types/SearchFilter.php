@@ -20,7 +20,7 @@ class SearchFilter extends BaseFilter implements FilterContract, FilterSearchTyp
 
     public function __construct(?string $key = null, string $label = '', ?callable $queryCallback = null, $value = null)
     {
-        if (null === $key) {
+        if ($key === null) {
             $this->setDefaultKey();
         }
 
@@ -41,7 +41,7 @@ class SearchFilter extends BaseFilter implements FilterContract, FilterSearchTyp
             $query = $callback($query);
         }
 
-        return null === $this->getValue() ? $query : $this->query($query);
+        return $this->getValue() === null ? $query : $this->query($query);
     }
 
     public function query(Builder $query): Builder
@@ -62,7 +62,7 @@ class SearchFilter extends BaseFilter implements FilterContract, FilterSearchTyp
     private function loadValue($value): void
     {
         $request = Request::has($this->key) ? Request::input($this->key, null) : Request::input('filters.' . $this->key, null);
-        $this->value = null === $value ? $request : $value;
+        $this->value = $value === null ? $request : $value;
     }
 
     private function loadLabel($label): void

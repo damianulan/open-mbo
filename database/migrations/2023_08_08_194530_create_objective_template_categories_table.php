@@ -4,15 +4,12 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class() extends Migration
-{
-    /**
-     * Run the migrations.
-     */
+return new class () extends Migration {
     public function up(): void
     {
         Schema::create('objective_template_categories', function (Blueprint $table): void {
-            $table->uuid('id')->primary();
+            $table->id();
+            $table->uuid('uuid')->unique()->index();
             $table->string('name', 255);
             $table->string('shortname', 64)->nullable();
             $table->longText('description')->nullable();
@@ -23,9 +20,6 @@ return new class() extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('objective_template_categories');

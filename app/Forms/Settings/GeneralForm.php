@@ -33,13 +33,13 @@ class GeneralForm extends Form
                     ->add(FormComponent::select('locale', $this->locale, Dictionary::fromUnassocArray(config('app.available_locales'), 'globals.langs'), app(GeneralSettings::class)->locale)
                         ->label(__('forms.settings.general.lang'))->noEmpty()->key(self::settingsKey('general.lang')))
                     ->add(FormComponent::select('target_release', $this->target_release, Dictionary::fromAssocArray(AppConfig::getReleasesOptions()), app(GeneralSettings::class)->target_release)
-                        ->label(__('forms.settings.general.release'))->key(self::settingsKey('general.release')))
+                        ->label(__('forms.settings.general.release'))->key(self::settingsKey('general.release'))),
             )
             ->addSection(
                 __('forms.settings.general.datas'),
                 fn (FormBuilder $builder) => $builder
                     ->add(FormComponent::multiselect('export_types', $this->export_types, Dictionary::fromAssocArray(ExportType::labels()))
-                        ->label(__('forms.settings.general.export_types'))->key(self::settingsKey('general.export_types')))
+                        ->label(__('forms.settings.general.export_types'))->key(self::settingsKey('general.export_types'))),
             )
             ->addSubmit();
     }

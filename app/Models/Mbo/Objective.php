@@ -12,41 +12,42 @@ use App\Events\Mbo\Objectives\ObjectiveUpdated;
 use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Models\Scopes\Mbo\ObjectiveScope;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Spatie\Activitylog\Models\Activity;
 
 /**
- * @property string $id
- * @property string|null $template_id
- * @property string|null $campaign_id
+ * @property int $id
+ * @property string $uuid
+ * @property int|null $template_id
+ * @property int|null $campaign_id
  * @property string $name
  * @property mixed|null $description
- * @property Carbon|null $deadline Deadline for objective completion, to which realization should be approved, otherwise it turns out red.
+ * @property CarbonImmutable|null $deadline Deadline for objective completion, to which realization should be approved, otherwise it turns out red.
  * @property float $weight Corresponds to the importance of the objective, the higher the weight, the more important it is.
  * @property numeric|null $award Max points to be awarded for objective completion
  * @property numeric|null $expected Expected numerical value of objective realization, that corresponds to 100% evaluation
  * @property bool $draft Is not visible to realization - only previewable to admins
- * @property Carbon|null $deleted_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property-read Collection<int, Activity> $activities
- * @property-read int|null $activities_count
- * @property-read Campaign|null $campaign
- * @property-read ObjectiveTemplateCategory|null $category
+ * @property CarbonImmutable|null $deleted_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
+ * @property-read Collection<int, Activity> $activitiesAsSubject
+ * @property-read int|null $activities_as_subject_count
+ * @property-read \App\Models\Mbo\Campaign|null $campaign
+ * @property-read \App\Models\Mbo\ObjectiveTemplateCategory|null $category
  * @property-read Collection<int, Comment> $comments
  * @property-read int|null $comments_count
- * @property-read ObjectiveTemplate|null $template
+ * @property-read \App\Models\Mbo\ObjectiveTemplate|null $template
  * @property-read mixed $trans
- * @property-read Collection<int, UserObjective> $user_objectives
+ * @property-read Collection<int, \App\Models\Mbo\UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective avg(string $column)
@@ -100,19 +101,21 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective whereName($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective whereTemplateId($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective whereUpdatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective whereUuid($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective whereWeight($value)
  * @method static Builder<static>|Objective withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Objective withoutCache()
  * @method static Builder<static>|Objective withoutTrashed()
- *
  * @mixin \Eloquent
  */
 #[ScopedBy(ObjectiveScope::class)]
 class Objective extends BaseModel implements HasDeadline, HasWeight
 {
     use Commentable;
+    use HasUniqueUuid;
 
     protected $fillable = [
+        'uuid',
         'template_id',
         'campaign_id',
         'name',
@@ -139,9 +142,14 @@ class Objective extends BaseModel implements HasDeadline, HasWeight
         'created' => ObjectiveCreated::class,
     ];
 
+    public function getRouteKeyName(): string
+    {
+        return 'uuid';
+    }
+
     public function getWeightAttribute($value): float
     {
-        if ( ! settings('mbo.objectives_weights')) {
+        if (! settings('mbo.objectives_weights')) {
             return 1;
         }
 
@@ -164,9 +172,6 @@ class Objective extends BaseModel implements HasDeadline, HasWeight
         return is_null($this->deadline) || ($this->deadline && $this->deadline->isPast());
     }
 
-    /**
-     * Is deadline is briefly upcoming.
-     */
     public function isDeadlineUpcoming(int $days = 3): bool
     {
         if ($this->deadline) {
@@ -215,7 +220,7 @@ class Objective extends BaseModel implements HasDeadline, HasWeight
 
     public function user_objective(?User $user = null): ?UserObjective
     {
-        if ( ! $user) {
+        if (! $user) {
             $user = Auth::user();
         }
 
@@ -229,7 +234,7 @@ class Objective extends BaseModel implements HasDeadline, HasWeight
 
     public function scopeWhereAssigned(Builder $query, ?User $user = null): void
     {
-        if ( ! $user) {
+        if (! $user) {
             $user = Auth::user();
         }
         $query->whereHas('user_objectives', function (Builder $q) use ($user): void {

@@ -20,12 +20,12 @@ class NotificationEditForm extends Form
         $route = route('settings.notifications.store');
         $method = 'POST';
 
-        if (null !== $this->model) {
+        if ($this->model !== null) {
             $method = 'PUT';
             $route = route('settings.notifications.update', $this->model->id);
         }
 
-        return $builder->setId(null === $this->model ? 'notification_create' : 'notification_edit')
+        return $builder->setId($this->model === null ? 'notification_create' : 'notification_edit')
             ->setMethod($method)
             ->setAction($route)
             ->class('notifications-edit-form')
@@ -87,7 +87,7 @@ class NotificationEditForm extends Form
                         return;
                     }
 
-                    if ( ! is_array($decoded)) {
+                    if (! is_array($decoded)) {
                         $fail('The conditions field must be a valid JSON object or array.');
                     }
                 },
@@ -118,7 +118,7 @@ class NotificationEditForm extends Form
 
     protected function conditionsValue(): ?string
     {
-        if ( ! ($this->model instanceof Notification) || empty($this->model->conditions)) {
+        if (! ($this->model instanceof Notification) || empty($this->model->conditions)) {
             return null;
         }
 

@@ -7,13 +7,12 @@ use Illuminate\Support\Carbon;
 
 class BaseCommand extends Command
 {
-    private $start = null;
+    private ?Carbon $start = null;
 
-    private $end = null;
+    private ?Carbon $end = null;
 
     protected function log($message, $success = true): void
     {
-
         $this->end = Carbon::now();
         $duration = null;
 
@@ -28,7 +27,7 @@ class BaseCommand extends Command
             $duration = "{$seconds}. {$milliseconds}";
         }
 
-        if ( ! empty($duration)) {
+        if (! empty($duration)) {
             $properties['duration'] = $duration;
         }
 

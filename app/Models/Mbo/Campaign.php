@@ -14,6 +14,7 @@ use App\Support\Search\IndexModel;
 use App\Support\Search\Traits\Searchable;
 use App\Warden\RolesLib;
 use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -23,47 +24,48 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Collection;
 use Lucent\Contracts\Models\HasShowRoute;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Translatable\HasTranslations;
 
 /**
- * @property string $id
+ * @property int $id
+ * @property string $uuid
  * @property array<array-key, mixed> $name
  * @property string $period
  * @property mixed|null $description
- * @property string|null $definition_from
- * @property string|null $definition_to
- * @property string|null $disposition_from
- * @property string|null $disposition_to
- * @property string|null $realization_from
- * @property string|null $realization_to
- * @property string|null $evaluation_from
- * @property string|null $evaluation_to
- * @property string|null $self_evaluation_from
- * @property string|null $self_evaluation_to
+ * @property CarbonImmutable|null $definition_from
+ * @property CarbonImmutable|null $definition_to
+ * @property CarbonImmutable|null $disposition_from
+ * @property CarbonImmutable|null $disposition_to
+ * @property CarbonImmutable|null $realization_from
+ * @property CarbonImmutable|null $realization_to
+ * @property CarbonImmutable|null $evaluation_from
+ * @property CarbonImmutable|null $evaluation_to
+ * @property CarbonImmutable|null $self_evaluation_from
+ * @property CarbonImmutable|null $self_evaluation_to
  * @property CampaignStage $stage Campaign current status whether in progress, pending, completed, terminated or canceled
  * @property bool $draft Visible to admins only and is not automatically published.
  * @property bool $manual Will not be automatically moved between stages.
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read EloquentCollection<int, Activity> $activities
- * @property-read int|null $activities_count
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
+ * @property CarbonImmutable|null $deleted_at
+ * @property-read EloquentCollection<int, Activity> $activitiesAsSubject
+ * @property-read int|null $activities_as_subject_count
  * @property-read EloquentCollection<int, User> $coordinators
  * @property-read int|null $coordinators_count
  * @property-read EloquentCollection<int, IndexModel> $indexes
  * @property-read int|null $indexes_count
- * @property-read EloquentCollection<int, Objective> $objectives
+ * @property-read EloquentCollection<int, \App\Models\Mbo\Objective> $objectives
  * @property-read int|null $objectives_count
  * @property-read mixed $timeend
  * @property-read mixed $timestart
  * @property-read mixed $trans
  * @property-read mixed $translations
- * @property-read EloquentCollection<int, UserCampaign> $user_campaigns
+ * @property-read EloquentCollection<int, \App\Models\Mbo\UserCampaign> $user_campaigns
  * @property-read int|null $user_campaigns_count
- * @property-read EloquentCollection<int, UserObjective> $user_objectives
+ * @property-read EloquentCollection<int, \App\Models\Mbo\UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign avg(string $column)
@@ -133,16 +135,17 @@ use Spatie\Translatable\HasTranslations;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereSelfEvaluationTo($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereStage($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereUpdatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign whereUuid($value)
  * @method static Builder<static>|Campaign withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Campaign withoutCache()
  * @method static Builder<static>|Campaign withoutTrashed()
- *
  * @mixin \Eloquent
  */
 #[ScopedBy(CampaignScope::class)]
 class Campaign extends BaseModel implements HasObjectives, HasShowRoute
 {
     use HasTranslations;
+    use HasUniqueUuid;
     use Searchable;
 
     public $stages;
@@ -154,6 +157,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
     protected $log_name = 'mbo';
 
     protected $fillable = [
+        'uuid',
         'name',
         'period',
         'description',
@@ -168,8 +172,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
         'evaluation_to',
         'self_evaluation_from',
         'self_evaluation_to',
-        'stage', // current overall CampaignStage
-
+        'stage',
         'draft',
         'manual',
     ];
@@ -179,6 +182,16 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
         'draft' => 'boolean',
         'manual' => 'boolean',
         'stage' => CampaignStage::class,
+        'definition_from' => 'date',
+        'definition_to' => 'date',
+        'disposition_from' => 'date',
+        'disposition_to' => 'date',
+        'realization_from' => 'date',
+        'realization_to' => 'date',
+        'evaluation_from' => 'date',
+        'evaluation_to' => 'date',
+        'self_evaluation_from' => 'date',
+        'self_evaluation_to' => 'date',
     ];
 
     protected $attributes = [
@@ -192,7 +205,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
 
     public function checkManual()
     {
-        if ( ! settings('mbo.campaigns_manual')) {
+        if (! settings('mbo.campaigns_manual')) {
             $this->manual = 0;
         }
 
@@ -221,7 +234,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
 
     public function refreshCoordinators(?array $user_ids)
     {
-        if ( ! $user_ids) {
+        if (! $user_ids) {
             $user_ids = [];
         }
 
@@ -276,12 +289,12 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
         $stage = CampaignStage::PENDING->value;
         $now = Carbon::now();
 
-        if ( ! in_array($this->stage, [CampaignStage::TERMINATED, CampaignStage::CANCELED], true)) {
+        if (! in_array($this->stage, [CampaignStage::TERMINATED, CampaignStage::CANCELED], true)) {
             foreach (CampaignStage::softValues() as $tmp) {
                 $prop_start = $tmp . '_from';
                 $prop_end = $tmp . '_to';
-                $start = Carbon::parse($this->{$prop_start});
-                $end = Carbon::parse($this->{$prop_end});
+                $start = $this->{$prop_start};
+                $end = $this->{$prop_end};
 
                 if ($now->between($start, $end)) {
                     $stage = CampaignStage::IN_PROGRESS->value;
@@ -307,7 +320,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
         $now = Carbon::now();
         $stage = $this->stage ?? CampaignStage::PENDING;
 
-        if (CampaignStage::IN_PROGRESS === $stage) {
+        if ($stage === CampaignStage::IN_PROGRESS) {
             $softStage = null;
             foreach (CampaignStage::softValues() as $tmp) {
                 $prop_start = $tmp . '_from';
@@ -348,7 +361,6 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
     public function finished(): bool
     {
         if ($this->manual) {
-            // TODO return true if all objectives are completed
             return false;
         }
 
@@ -374,14 +386,14 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
         return $progress;
     }
 
-    public function dateStart(): string
+    public function dateStart(): ?CarbonImmutable
     {
-        return $this->definition_from ?? '';
+        return $this->definition_from;
     }
 
-    public function dateEnd(): string
+    public function dateEnd(): ?CarbonImmutable
     {
-        return $this->self_evaluation_to ?? '';
+        return $this->self_evaluation_to;
     }
 
     public function inDates(): bool
@@ -391,10 +403,10 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
         $end = $this->dateEnd();
         $now = now();
         if ($start && $end) {
-            if ( ! $start instanceof Carbon) {
+            if (! $start instanceof Carbon) {
                 $start = Carbon::parse($start);
             }
-            if ( ! $end instanceof Carbon) {
+            if (! $end instanceof Carbon) {
                 $end = Carbon::parse($end);
             }
 
@@ -449,7 +461,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
 
     public function cancel(): bool
     {
-        if (CampaignStage::CANCELED !== $this->stage) {
+        if ($this->stage !== CampaignStage::CANCELED) {
             $this->stage = CampaignStage::CANCELED;
 
             foreach ($this->user_campaigns as $userCampaign) {
@@ -464,7 +476,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
 
     public function terminate(): bool
     {
-        if (CampaignStage::TERMINATED !== $this->stage) {
+        if ($this->stage !== CampaignStage::TERMINATED) {
             $this->stage = CampaignStage::TERMINATED;
 
             foreach ($this->user_campaigns as $userCampaign) {
@@ -479,7 +491,7 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
 
     public function resume(): bool
     {
-        if (CampaignStage::TERMINATED === $this->stage) {
+        if ($this->stage === CampaignStage::TERMINATED) {
             $this->stage = CampaignStage::IN_PROGRESS;
 
             foreach ($this->user_campaigns as $userCampaign) {
@@ -494,22 +506,22 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
 
     public function terminated(): bool
     {
-        return CampaignStage::TERMINATED === $this->stage;
+        return $this->stage === CampaignStage::TERMINATED;
     }
 
     public function canceled(): bool
     {
-        return CampaignStage::CANCELED === $this->stage;
+        return $this->stage === CampaignStage::CANCELED;
     }
 
     public function completed(): bool
     {
-        return CampaignStage::COMPLETED === $this->stage;
+        return $this->stage === CampaignStage::COMPLETED;
     }
 
     public function pending(): bool
     {
-        return CampaignStage::PENDING === $this->stage;
+        return $this->stage === CampaignStage::PENDING;
     }
 
     public function isActive(): bool
@@ -519,19 +531,19 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
 
     public function inProgress(): bool
     {
-        return CampaignStage::IN_PROGRESS === $this->stage;
+        return $this->stage === CampaignStage::IN_PROGRESS;
     }
 
     public function routeShow(): string
     {
-        return route('campaigns.show', $this->id);
+        return route('campaigns.show', ['campaign' => $this->uuid]);
     }
 
     public function assignUser($user_id): bool
     {
         $result = false;
         $exists = $this->user_campaigns()->where('user_id', $user_id)->exists();
-        if ( ! $exists) {
+        if (! $exists) {
             $user = User::find($user_id);
             if ($user) {
                 $result = $this->user_campaigns()->create([
@@ -541,7 +553,6 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
                     'active' => $this->draft ? 0 : 1,
                 ]);
             }
-
         }
 
         return $result ? true : false;
@@ -558,9 +569,6 @@ class Campaign extends BaseModel implements HasObjectives, HasShowRoute
         return $result ? true : false;
     }
 
-    /**
-     * LOCAL SCOPES
-     */
     public function scopeWhereManual(Builder $query, int $manual): void
     {
         $query->where('manual', $manual);

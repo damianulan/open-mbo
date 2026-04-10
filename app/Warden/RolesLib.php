@@ -18,7 +18,6 @@ final class RolesLib extends RoleWarden
 
     public const EMPLOYEE = 'employee';
 
-    // non-assignable - context-required
     public const OBJECTIVE_COORDINATOR = 'objective_coordinator';
 
     public const CAMPAIGN_COORDINATOR = 'campaign_coordinator';

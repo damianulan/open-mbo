@@ -39,7 +39,7 @@ class CommentComponent extends Component
 
         $user = Auth::user();
 
-        if ( ! $user) {
+        if (! $user) {
             return;
         }
 
@@ -57,7 +57,7 @@ class CommentComponent extends Component
     {
         $comment = Comment::mine()->find($id);
 
-        if ( ! $comment instanceof Comment) {
+        if (! $comment instanceof Comment) {
             return;
         }
 

@@ -54,7 +54,6 @@ use Yajra\DataTables\ExportServiceProvider;
 use Yajra\DataTables\HtmlServiceProvider;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -248,7 +247,6 @@ return [
     */
 
     'providers' => [
-
         /*
          * Laravel Framework Service Providers...
          */
@@ -337,5 +335,4 @@ return [
         'MessageType' => MessageType::class,
         'StorageHelper' => StorageHelper::class,
     ])->toArray(),
-
 ];

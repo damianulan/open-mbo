@@ -31,11 +31,11 @@ class ModelResourceFactory
             $resource = self::getResource($model);
         }
 
-        if ( ! $resource) {
+        if (! $resource) {
             throw new Exception("No resource found for model [{$class}]");
         }
 
-        if ( ! $model->exists) {
+        if (! $model->exists) {
             throw new Exception("Model [{$class}] does not exist as a database record");
         }
 
@@ -46,21 +46,21 @@ class ModelResourceFactory
     {
         $class = $model::class;
         $resource = self::getResource($model);
+
         try {
             DB::beginTransaction();
-            if ( ! $resource) {
+            if (! $resource) {
                 throw new Exception("No resource found for model [{$class}]");
             }
 
-            if ( ! $model->exists) {
+            if (! $model->exists) {
                 throw new Exception("Model [{$class}] does not exist as a database record");
             }
 
             self::purgeIndexes($model, $resource);
 
             foreach ($resource->attributes() as $attribute => $value) {
-
-                if ( ! empty($value)) {
+                if (! empty($value)) {
                     $trigrams = self::getTrigrams(self::normalizeValue($value));
 
                     foreach ($trigrams as $trigram) {
@@ -70,7 +70,7 @@ class ModelResourceFactory
                         $index->attribute = $attribute;
                         $index->trigram = $trigram;
                         if (self::validateIndex($index, $model)) {
-                            if ( ! $index->save()) {
+                            if (! $index->save()) {
                                 throw new Exception("Failed to save index for model [{$class}] [{$model->id}]");
                             }
                         }
@@ -80,6 +80,7 @@ class ModelResourceFactory
             DB::commit();
         } catch (Throwable $th) {
             DB::rollBack();
+
             throw $th;
         }
     }

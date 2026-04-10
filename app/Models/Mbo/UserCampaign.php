@@ -12,34 +12,35 @@ use App\Models\BaseModel;
 use App\Models\Core\User;
 use App\Traits\Guards\Mbo\CanUserCampaign;
 use App\Traits\HasCharts;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Illuminate\Support\Carbon;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Spatie\Activitylog\Models\Activity;
 
 /**
- * @property string $id
- * @property string $campaign_id
- * @property string $user_id
+ * @property int $id
+ * @property string $uuid
+ * @property int $campaign_id
+ * @property int $user_id
  * @property CampaignStage $stage User current campaign stage
  * @property bool $manual User will not be automatically moved between stages.
  * @property bool $active Is visible to users.
- * @property Carbon|null $deleted_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property-read Collection<int, Activity> $activities
- * @property-read int|null $activities_count
- * @property-read Campaign|null $campaign
- * @property-read Collection<int, Objective> $objectives
+ * @property CarbonImmutable|null $deleted_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
+ * @property-read Collection<int, Activity> $activitiesAsSubject
+ * @property-read int|null $activities_as_subject_count
+ * @property-read \App\Models\Mbo\Campaign|null $campaign
+ * @property-read Collection<int, \App\Models\Mbo\Objective> $objectives
  * @property-read int|null $objectives_count
  * @property-read Collection $points
  * @property-read mixed $trans
  * @property-read User|null $user
- * @property-read Collection<int, UserObjective> $user_objectives
+ * @property-read Collection<int, \App\Models\Mbo\UserObjective> $user_objectives
  * @property-read int|null $user_objectives_count
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign avg(string $column)
@@ -91,22 +92,24 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign whereStage($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign whereUpdatedAt($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign whereUserId($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign whereUuid($value)
  * @method static Builder<static>|UserCampaign withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserCampaign withoutCache()
  * @method static Builder<static>|UserCampaign withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
 {
     use CanUserCampaign;
     use HasCharts;
+    use HasUniqueUuid;
 
     public $logEntities = ['user_id' => User::class, 'campaign_id' => Campaign::class];
 
     public $timestamps = true;
 
     protected $fillable = [
+        'uuid',
         'campaign_id',
         'user_id',
         'stage',
@@ -188,7 +191,7 @@ class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
 
     public function terminate(): bool
     {
-        if (CampaignStage::TERMINATED !== $this->stage) {
+        if ($this->stage !== CampaignStage::TERMINATED) {
             $this->stage = CampaignStage::TERMINATED;
 
             return $this->update();
@@ -206,7 +209,7 @@ class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
 
     public function cancel(): bool
     {
-        if (CampaignStage::CANCELED !== $this->stage) {
+        if ($this->stage !== CampaignStage::CANCELED) {
             $this->stage = CampaignStage::CANCELED;
 
             return $this->update();
@@ -258,9 +261,6 @@ class UserCampaign extends BaseModel implements AssignsPoints, HasObjectives
         return $this->manual || $this->campaign?->manual;
     }
 
-    /**
-     * Sets users' objectives statuses based on campaign stage changes.
-     */
     public function mapObjectiveStatus(): void
     {
         $this->user_objectives()->chunk(config('app.chunk_default'), function (Collection $assignments): void {

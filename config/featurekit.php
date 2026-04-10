@@ -32,6 +32,5 @@ return [
     'features' => [
         // here declare feature namespaces you want to register
         // that may not be autoloaded.
-
     ],
 ];

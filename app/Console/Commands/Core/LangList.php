@@ -10,22 +10,15 @@ use Illuminate\Support\Facades\File;
 class LangList extends BaseCommand
 {
     /**
-     * The name and signature of the console command.
-     *
      * @var string
      */
     protected $signature = 'lang:list {--nofile} {--group=} {--lang=}';
 
     /**
-     * The console command description.
-     *
      * @var string
      */
     protected $description = 'List language values';
 
-    /**
-     * Execute the console command.
-     */
     public function handle(): void
     {
         $this->call('db:seed', ['--class' => 'LanguageSeeder']);
@@ -33,7 +26,7 @@ class LangList extends BaseCommand
         $group = $this->option('group') ?? null;
 
         $query = LanguageModel::orderBy('group')->orderBy('key');
-        if ( ! $this->option('nofile')) {
+        if (! $this->option('nofile')) {
             $this->toFile($query);
         }
         if ($group) {

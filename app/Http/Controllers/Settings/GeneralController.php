@@ -12,9 +12,6 @@ use Illuminate\View\View;
 
 class GeneralController extends SettingsController
 {
-    /**
-     * Show the application dashboard.
-     */
     public function index(): View
     {
         $model = app(GeneralSettings::class);

@@ -13,7 +13,8 @@ use Tests\Traits\HasUserCollection;
 
 class CampaignCreateTest extends TestCase
 {
-    use RefreshDatabase, HasUserCollection;
+    use HasUserCollection;
+    use RefreshDatabase;
 
     protected $seeder = TestDatabaseSeeder::class;
 
@@ -31,9 +32,6 @@ class CampaignCreateTest extends TestCase
         $this->fillUsers();
     }
 
-    /**
-     * A basic feature test example.
-     */
     public function test_admins_can_show_create_form(): void
     {
         $admin = $this->getAdmin();
@@ -70,7 +68,7 @@ class CampaignCreateTest extends TestCase
             ->first();
 
         $this->assertNotNull($campaign);
-        $response->assertRedirect(route('campaigns.show', $campaign));
+        $response->assertRedirect(route('campaigns.show', ['campaign' => $campaign->uuid]));
         $this->assertDatabaseHas('campaigns', [
             'id' => $campaign->id,
             'period' => $payload['period'],

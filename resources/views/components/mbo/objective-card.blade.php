@@ -1,5 +1,5 @@
 
-<a class="card card-url card-bg" href="{{ route('templates.edit', $objective->id) }}">
+<a class="card card-url card-bg" href="{{ route('templates.edit', $objective) }}">
     <div class="card-body">
         <div class="card-top">
             <div class="card-title" data-tippy-content="{{ $objective->name }}">

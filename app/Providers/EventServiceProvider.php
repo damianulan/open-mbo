@@ -9,8 +9,6 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 class EventServiceProvider extends ServiceProvider
 {
     /**
-     * The event to listener mappings for the application.
-     *
      * @var array<class-string, array<int, class-string>>
      */
     protected $listen = [
@@ -27,8 +25,6 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\Vendors\SettingsUpdated',
         ],
 
-        // MBO LISTENERS
-        // Campaigns
         'App\Events\Mbo\Campaigns\UserCampaignAssigned' => [
             'App\Listeners\Mbo\Campaigns\UserAssignObjectives',
         ],
@@ -39,7 +35,6 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\Mbo\Campaigns\UserCampaignStageCheck',
         ],
 
-        // Objectives
         'App\Events\Mbo\Objectives\ObjectiveUpdated' => [
             'App\Listeners\Mbo\Objectives\UserObjectiveStatusCheck',
         ],
@@ -47,7 +42,6 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\Mbo\Objectives\UserObjectiveStatusCheck',
         ],
 
-        // BUSINESS
         'App\Events\Core\User\EmploymentCreated' => [
             'App\Listeners\Business\UserEmploymentSaved',
         ],
@@ -57,20 +51,13 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\Core\User\EmploymentDeleted' => [
             'App\Listeners\Business\UserEmploymentSaved',
         ],
-
     ];
 
-    /**
-     * Register any events for your application.
-     */
     public function boot(): void
     {
         User::observe(UserObserver::class);
     }
 
-    /**
-     * Determine if events and listeners should be automatically discovered.
-     */
     public function shouldDiscoverEvents(): bool
     {
         return false;

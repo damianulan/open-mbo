@@ -13,7 +13,8 @@ use Tests\Traits\HasUserCollection;
 
 class CampaignViewTest extends TestCase
 {
-    use RefreshDatabase, HasUserCollection;
+    use HasUserCollection;
+    use RefreshDatabase;
 
     protected $seeder = TestDatabaseSeeder::class;
 
@@ -36,10 +37,11 @@ class CampaignViewTest extends TestCase
         $user = $this->getEmployee();
         $campaign = Campaign::factory()->create([
             'name' => 'TEST',
-        ])->assignUser($user->id);
-        $response = $this->actingAs($user)->get(route('campaigns.show', $campaign));
+        ]);
+        $campaign->assignUser($user->id);
+        $response = $this->actingAs($user)->get(route('campaigns.show', ['campaign' => $campaign->uuid]));
 
-        $response->assertStatus(404);
+        $response->assertForbidden();
     }
 
     public function test_user_not_enrolled_can_show_campaign(): void
@@ -48,9 +50,9 @@ class CampaignViewTest extends TestCase
             'name' => 'TEST',
         ]);
         $user = $this->getEmployee();
-        $response = $this->actingAs($user)->get(route('campaigns.show', $campaign));
+        $response = $this->actingAs($user)->get(route('campaigns.show', ['campaign' => $campaign->uuid]));
 
-        $response->assertStatus(404);
+        $response->assertForbidden();
     }
 
     public function test_coordinator_with_context_can_show_campaign(): void
@@ -59,7 +61,7 @@ class CampaignViewTest extends TestCase
             'name' => 'TEST',
         ]);
         $user = $this->userFactory()->assignRoleSlug(RolesLib::CAMPAIGN_COORDINATOR, $campaign);
-        $response = $this->actingAs($user)->get(route('campaigns.show', $campaign));
+        $response = $this->actingAs($user)->get(route('campaigns.show', ['campaign' => $campaign->uuid]));
 
         $response->assertStatus(200);
     }
@@ -70,7 +72,7 @@ class CampaignViewTest extends TestCase
             'name' => 'TEST',
         ]);
         $admin = $this->getAdminMbo();
-        $response = $this->actingAs($admin)->get(route('campaigns.show', $campaign));
+        $response = $this->actingAs($admin)->get(route('campaigns.show', ['campaign' => $campaign->uuid]));
 
         $response->assertStatus(200);
     }
@@ -81,6 +83,21 @@ class CampaignViewTest extends TestCase
         $response = $this->actingAs($admin)->get(route('campaigns.index'));
 
         $response->assertStatus(200);
+    }
+
+    public function test_campaign_card_without_user_campaign_uses_campaign_show_route(): void
+    {
+        $campaign = Campaign::factory()->make([
+            'name' => 'Campaign On Index',
+            'uuid' => 'campaign-card-test-uuid',
+        ]);
+
+        $view = $this->blade('<x-campaign-card :campaign="$campaign" />', [
+            'campaign' => $campaign,
+        ]);
+
+        $view->assertSee('Campaign On Index');
+        $view->assertSee(route('campaigns.show', ['campaign' => $campaign->uuid]), false);
     }
 
     public function test_employee_cannot_view_campaigns_index(): void

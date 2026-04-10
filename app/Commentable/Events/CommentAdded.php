@@ -12,10 +12,8 @@ class CommentAdded implements ShouldDispatchAfterCommit
     use Dispatchable;
     use SerializesModels;
 
-    /**
-     * Create a new event instance.
-     */
     public function __construct(
-        public Comment $comment
-    ) {}
+        public Comment $comment,
+    ) {
+    }
 }

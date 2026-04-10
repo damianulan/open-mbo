@@ -9,15 +9,15 @@ use JsonSerializable;
 
 class BonusSchemeOptions implements Arrayable, Countable, Jsonable, JsonSerializable
 {
-    public $reward_modifier;
+    public int $reward_modifier;
 
-    public $campaigns_bonus;
+    public float $campaigns_bonus;
 
-    public $rewards_min_evaluation;
+    public float $rewards_min_evaluation;
 
-    public $failed_rewards;
+    public bool $failed_rewards;
 
-    public $manipulate_rewards;
+    public bool $manipulate_rewards;
 
     public function __construct(array $attributes = [])
     {
@@ -59,24 +59,26 @@ class BonusSchemeOptions implements Arrayable, Countable, Jsonable, JsonSerializ
         return [];
     }
 
-    public function validator(): void {}
+    public function validator(): void
+    {
+    }
 
     public function count(): int
     {
         return count($this->toArray());
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         return get_object_vars($this);
     }
 
-    public function toJson($options = 0)
+    public function toJson($options = 0): string
     {
         return json_encode($this->toArray(), $options);
     }
 
-    public function jsonSerialize(): mixed
+    public function jsonSerialize(): string
     {
         return $this->toJson();
     }

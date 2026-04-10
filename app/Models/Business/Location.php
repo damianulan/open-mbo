@@ -3,13 +3,15 @@
 namespace App\Models\Business;
 
 use App\Models\BaseModel;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Support\Carbon;
+use Lucent\Support\Traits\HasUniqueUuid;
 use Spatie\Activitylog\Models\Activity;
 
 /**
- * @property string $id
+ * @property int $id
+ * @property string $uuid
  * @property string $name
  * @property string|null $address_line_1
  * @property string|null $address_line_2
@@ -19,15 +21,14 @@ use Spatie\Activitylog\Models\Activity;
  * @property string|null $description
  * @property bool $active
  * @property string|null $founded
- * @property Carbon|null $deleted_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property-read Collection<int, Activity> $activities
- * @property-read int|null $activities_count
- * @property-read Collection<int, Company> $companies
+ * @property CarbonImmutable|null $deleted_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
+ * @property-read Collection<int, Activity> $activitiesAsSubject
+ * @property-read int|null $activities_as_subject_count
+ * @property-read Collection<int, \App\Models\Business\Company> $companies
  * @property-read int|null $companies_count
  * @property-read mixed $trans
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location avg(string $column)
@@ -82,14 +83,16 @@ use Spatie\Activitylog\Models\Activity;
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location whereName($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location wherePostalCode($value)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location whereUpdatedAt($value)
+ * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location whereUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|Location withoutCache()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Location withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class Location extends BaseModel
 {
+    use HasUniqueUuid;
+
     protected $fillable = [
         'name',
         'address_line_1',

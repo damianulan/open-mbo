@@ -2,6 +2,7 @@
 
 namespace App\Forms\Users;
 
+use App\Contracts\Repositories\UserRepositoryContract;
 use App\Enums\Users\Gender;
 use App\Models\Core\User;
 use FormForge\Base\Form;
@@ -20,9 +21,10 @@ class UserEditForm extends Form
         $exclude = [];
         $selected = [];
         $profile = null;
-        if ( ! is_null($this->model)) {
+        if (! is_null($this->model)) {
             $method = 'PUT';
-            $route = route('users.update', $this->model->id);
+            $route = route('users.update', ['user' => $this->model->uuid]);
+            app(UserRepositoryContract::class)->loadForEdit($this->model);
             $profile = $this->model->profile;
 
             $selected = $this->model->supervisors->pluck('id')->toArray();
@@ -42,7 +44,7 @@ class UserEditForm extends Form
                 ->label(__('forms.users.roles')))
             ->add(FormComponent::multiselect('supervisors_ids', $selected, Dictionary::fromModel(User::class, 'name', 'allActive', $exclude))
                 ->label(__('forms.users.supervisors')))
-            ->when( ! is_null($this->model), function (FormBuilder $builder): void {
+            ->when(! is_null($this->model), function (FormBuilder $builder): void {
                 $builder->addButton(new Button(title: __('buttons.add_employment'), classes: 'btn-outline-primary add-employment'));
             })
             ->addSubmit();

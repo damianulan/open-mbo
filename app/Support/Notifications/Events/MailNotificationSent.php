@@ -13,5 +13,7 @@ class MailNotificationSent
     use InteractsWithSockets;
     use SerializesModels;
 
-    public function __construct(public MailNotification $notification) {}
+    public function __construct(public MailNotification $notification)
+    {
+    }
 }

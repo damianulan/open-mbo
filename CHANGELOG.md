@@ -1,0 +1,98 @@
+# Changelog
+
+## [0.0.3] - 2026-03-27
+
+### Changes
+
+- Pulling request workflows
+- Filtering datatables fix
+- feature(#9): Filtering architecture - text / select
+- User status overhaul
+- query builder remove
+- feature(#32): Upgrade to laravel 12
+- Apply automatic changes
+- Refactoring fixes
+- Debugbar fixed
+- Code refactoring
+- docs update
+- Controller refactor
+- ai implementation skillset
+- Notifications list, my objectives refactor, breadcrumbs fix
+- Filters form builder
+- Enumeration concern
+- Models helper
+- Profile menu
+- xdocker
+- dashboard fix
+- Docker update
+- Docker implementation fixes
+- fix issues
+- feature(#23): Companies management
+- Composer update
+- boost update
+- Datatables repository fix
+- fix(#17): Indexing job crashes at remigration
+- Theme mod choosing
+- Set pagetitle fix
+- cosmetic fux
+- feature(#9): Filtering architecture: init - search filter
+- Issues changelog fix
+- Datatable builder fix
+- Datatable builder
+- Automatic changelog
+- Teams functionality
+- manifest update
+- Navigation overhaul
+- Profile preferences form
+- Logs datatable fix
+- Env Manager
+- Migrations rework
+- Italian language support
+- #2 Theme modes refurb
+- #2 Theme modes refurb: Variable fixes
+- #2 Theme modes refurb: Styling nesting refactor
+- Check connection fix
+- Lint fix
+- Check connection
+- TEST-1
+- ui support files move
+- composer fix
+- Localization fixes + translations
+- en translations
+- docker init
+- ongoing campaign tests
+- Test case fix
+- Login page fix
+- typescript init
+- form fix
+- pint fix
+- Default settings
+- dd fix
+- Kernel fix
+- Page builder dev
+- health check
+- config fixes
+- config laraverse
+- Sail compose and unit fix
+- Mail notifications in progress
+- yml testing rm
+- yml versions update
+- Testing login view
+- Testing seeder & migrations update
+- Language model fix
+- LanguageModel
+- debugbar auth
+- lint
+- Dtos Factories command fizx
+- UserObserver
+- dto search fix
+- Searchable tasks fixes
+- Searchable tasks
+- Search index proprietary init
+- Form scripts update
+- helpers
+- User blocking fixes
+- user suspension
+- Password reset rules
+- upgrade fix
+

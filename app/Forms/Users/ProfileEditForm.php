@@ -2,7 +2,7 @@
 
 namespace App\Forms\Users;
 
-use App\Models\Core\User;
+use App\Contracts\Repositories\UserRepositoryContract;
 use Closure;
 use FormForge\Base\Form;
 use FormForge\Base\FormComponent;
@@ -13,6 +13,9 @@ class ProfileEditForm extends Form
 {
     public function definition(FormBuilder $builder): FormBuilder
     {
+        if ($this->model) {
+            app(UserRepositoryContract::class)->loadForBanner($this->model);
+        }
         $profile = $this->model?->profile;
 
         return $builder->setId('profile_edit')
@@ -45,10 +48,8 @@ class ProfileEditForm extends Form
                 'email',
                 'required',
                 function (string $attribute, mixed $value, Closure $fail) use ($userId): void {
-                    $emailExists = User::query()
-                        ->where('email', $value)
-                        ->where('id', '!=', $userId)
-                        ->exists();
+                    $emailExists = app(UserRepositoryContract::class)
+                        ->emailExistsForAnotherUser($value, $userId);
 
                     if ($emailExists) {
                         $fail(__('validation.unique', ['attribute' => $attribute]));

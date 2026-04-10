@@ -25,7 +25,7 @@ abstract class TestCase extends BaseTestCase
     public function setSetting(string $key, $value): void
     {
         $result = set_setting($key, $value);
-        if ( ! $result) {
+        if (! $result) {
             throw new Exception('Setting not set');
         }
     }
@@ -39,13 +39,13 @@ abstract class TestCase extends BaseTestCase
         $this->assertInstanceOf(
             get_class($expected),
             $user,
-            'The currently authenticated user is not who was expected'
+            'The currently authenticated user is not who was expected',
         );
 
         $this->assertEquals(
             $expected->getAuthIdentifier(),
             $user->getAuthIdentifier(),
-            'The currently authenticated user is not who was expected'
+            'The currently authenticated user is not who was expected',
         );
 
         return $this;

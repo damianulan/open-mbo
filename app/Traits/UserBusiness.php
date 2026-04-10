@@ -99,7 +99,7 @@ trait UserBusiness
 
     public function refreshSupervisors(?array $user_ids)
     {
-        if ( ! $user_ids) {
+        if (! $user_ids) {
             $user_ids = [];
         }
 

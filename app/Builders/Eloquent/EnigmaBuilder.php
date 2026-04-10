@@ -9,37 +9,29 @@ use Illuminate\Database\Eloquent\Builder;
 class EnigmaBuilder extends Builder
 {
     /**
-     * Override where() to redirect encrypted fields.
-     *
-     * @param  mixed  $column
-     * @param  null|mixed  $operator
-     * @param  null|mixed  $value
-     * @param  mixed  $boolean
+     * @param null|mixed $operator
+     * @param null|mixed $value
      */
-    public function where($column, $operator = null, $value = null, $boolean = 'and')
+    public function where($column, $operator = null, $value = null, $boolean = 'and'): Builder
     {
         if (config('app.enigma_models')) {
-
-            // Handle where('email', 'value')
-            if (2 === func_num_args()) {
+            if (func_num_args() === 2) {
                 $value = $operator;
                 $operator = '=';
             }
 
-            // Get encrypted fields from model
             $encrypted = $this->getModel()->getEncryptedAttributes() ?? [];
 
             if (in_array($column, $encrypted)) {
                 $column = $column . '_hash';
                 $value = Enigma::hashValue($value);
             }
-
         }
 
         return parent::where($column, $operator, $value, $boolean);
     }
 
-    public function whereIn($column, $values, $boolean = 'and', $not = false)
+    public function whereIn($column, $values, $boolean = 'and', $not = false): Builder
     {
         if (config('app.enigma_models')) {
             if ($values instanceof Arrayable) {

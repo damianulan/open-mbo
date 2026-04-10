@@ -19,9 +19,6 @@ class AppUpdateAdhoc implements ShouldBeUnique, ShouldQueue
 
     public $tries = 2;
 
-    /**
-     * Execute the job.
-     */
     public function handle(): void
     {
         Artisan::call('app:upgrade');

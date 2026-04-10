@@ -10,14 +10,10 @@ use Illuminate\View\Component;
 
 class CampaignCard extends Component
 {
-    /**
-     * Create a new component instance.
-     */
-    public function __construct(public Campaign $campaign, public UserCampaign $userCampaign = new UserCampaign()) {}
+    public function __construct(public Campaign $campaign, public ?UserCampaign $userCampaign = null)
+    {
+    }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
     public function render(): View|Closure|string
     {
         return view('components.mbo.campaign-card');

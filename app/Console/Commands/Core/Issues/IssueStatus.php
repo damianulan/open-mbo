@@ -12,28 +12,20 @@ class IssueStatus extends Command
     use StorageIssues;
 
     /**
-     * The name and signature of the console command.
-     *
      * @var string
      */
     protected $signature = 'issue:status';
 
     /**
-     * The console command description.
-     *
      * @var string
      */
     protected $description = 'Upgrading app with git repository';
 
-    /**
-     * Execute the console command.
-     */
     public function handle(): void
     {
         try {
             $issue = $this->getIssue();
-            if ( ! empty($issue)) {
-
+            if (! empty($issue)) {
                 $result = Process::run('git fetch --all');
                 $result = Process::run('git status');
                 $this->line($result->output());

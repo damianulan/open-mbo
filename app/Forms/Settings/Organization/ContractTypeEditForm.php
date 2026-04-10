@@ -13,9 +13,9 @@ class ContractTypeEditForm extends Form
         $route = route('settings.organization.contracts.store');
         $method = 'POST';
 
-        if ( ! is_null($this->model)) {
+        if (! is_null($this->model)) {
             $method = 'PUT';
-            $route = route('settings.organization.contracts.update', $this->model->id);
+            $route = route('settings.organization.contracts.update', $this->model);
         }
 
         return $builder->setId(is_null($this->model) ? 'contract_type_create' : 'contract_type_edit')

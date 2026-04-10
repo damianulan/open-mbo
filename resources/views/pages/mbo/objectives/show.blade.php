@@ -7,11 +7,14 @@
         <a class="icon-btn add-users" href="javascript:void(0);" data-modelid="{{ $objective->id }}" data-tippy-content="{{ __('buttons.add_users') }}"><i class="bi-person-fill-up"></i></a>
     </div>
 </div>
+@php
+    $coordinators = $objective->template?->category?->coordinators ?? collect();
+@endphp
 <div class="row">
-    <div class="@if($objective->coordinators())col-xl-8 col-lg-9 col-md-12 @else col-xl-12 col-lg-12 col-md-12 @endif pb-4">
+    <div class="@if($coordinators->isNotEmpty())col-xl-8 col-lg-9 col-md-12 @else col-xl-12 col-lg-12 col-md-12 @endif pb-4">
         <x-objective-summary :objective="$objective" />
     </div>
-    @if($objective->coordinators())
+    @if($coordinators->isNotEmpty())
         <div class="col-xl-4 col-lg-3 col-md-12 pb-4">
             <div class="content-card">
                 <div class="content-card-top">
@@ -22,9 +25,9 @@
                     </div>
                 </div>
                 <div class="content-card-body">
-                    @if($objective->coordinators()->count())
+                    @if($coordinators->isNotEmpty())
                         <ul class="ombo-list">
-                            @foreach ($objective->coordinators()->get() as $user)
+                            @foreach ($coordinators as $user)
                                 @if($user)
                                     <li>
                                         <div class="list-grid">

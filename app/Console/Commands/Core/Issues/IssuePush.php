@@ -13,22 +13,15 @@ class IssuePush extends Command
     use StorageIssues;
 
     /**
-     * The name and signature of the console command.
-     *
      * @var string
      */
     protected $signature = 'issue:push {message?}';
 
     /**
-     * The console command description.
-     *
      * @var string
      */
     protected $description = 'Upgrading app with git repository';
 
-    /**
-     * Execute the console command.
-     */
     public function handle(): void
     {
         $this->pushChanges();
@@ -39,13 +32,12 @@ class IssuePush extends Command
         try {
             $issue = $this->getIssue();
             $message = $this->argument('message');
-            if ( ! empty($issue)) {
-
+            if (! empty($issue)) {
                 $result = Process::run('git fetch --all');
                 $result = Process::run('git status');
                 $this->line($result->output());
                 $this->info("Opened issue detected: {$issue}");
-                if ( ! empty($message)) {
+                if (! empty($message)) {
                     $this->info("Commit message: {$message}");
                     $issue .= ': ' . $message;
                 } else {
@@ -53,19 +45,18 @@ class IssuePush extends Command
                 }
 
                 $answer = Str::lower($this->ask('Proceed? (y/n)', 'n'));
-                $proceed = 'y' === $answer;
+                $proceed = $answer === 'y';
                 if ($proceed) {
-                    if ( ! $this->validateCommitMessage($issue)) {
+                    if (! $this->validateCommitMessage($issue)) {
                         throw new Exception("Commit message was already been pushed: {$issue}");
                     }
                     $this->comment('Pushing issue ...');
                     $result = Process::run('git commit -m "' . $issue . '"');
-                    $result = Process::run('git push');
+                    $result = Process::run('git push --set-upstream origin ' . $this->getBranchName());
                     $this->line($result->output());
                 } else {
                     $this->info('Aborted.');
                 }
-
             } else {
                 $this->error('No issue registered.');
             }

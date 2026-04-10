@@ -17,9 +17,6 @@ class LoginTest extends TestCase
 
     protected $seed = true;
 
-    /**
-     * A basic feature test example.
-     */
     public function test_redirection_if_not_logged_in(): void
     {
         $response = $this->get(RouteServiceProvider::HOME);

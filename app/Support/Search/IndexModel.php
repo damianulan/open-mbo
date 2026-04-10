@@ -5,26 +5,24 @@ namespace App\Support\Search;
 use App\Support\Search\Dtos\ResultItem;
 use App\Support\Search\Factories\IndexResource;
 use App\Support\Search\Factories\ModelResourceFactory;
+use Carbon\CarbonImmutable;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Support\Carbon;
-use Lucent\Support\Traits\UUID;
 
 /**
- * @property string $id
+ * @property int $id
  * @property string $source_type
- * @property string $source_id
+ * @property int $source_id
  * @property string $attribute
  * @property string $trigram
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property-read IndexResource|null $resource
- * @property-read ResultItem|null $result_item
- * @property-read Model|Eloquent $source
- *
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
+ * @property-read \App\Support\Search\Factories\IndexResource|null $resource
+ * @property-read \App\Support\Search\Dtos\ResultItem|null $result_item
+ * @property-read Model|\Eloquent $source
  * @method static Builder<static>|IndexModel newModelQuery()
  * @method static Builder<static>|IndexModel newQuery()
  * @method static Builder<static>|IndexModel query()
@@ -37,13 +35,10 @@ use Lucent\Support\Traits\UUID;
  * @method static Builder<static>|IndexModel whereSourceType($value)
  * @method static Builder<static>|IndexModel whereTrigram($value)
  * @method static Builder<static>|IndexModel whereUpdatedAt($value)
- *
  * @mixin Eloquent
  */
 class IndexModel extends Model
 {
-    use UUID;
-
     protected $table = 'search_indexes';
 
     protected $fillable = [

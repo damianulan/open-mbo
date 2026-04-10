@@ -8,16 +8,10 @@ use Illuminate\View\Component;
 
 class CampaignUsersList extends Component
 {
-    /**
-     * Create a new component instance.
-     *
-     * @param  mixed  $userCampaigns
-     */
-    public function __construct(public $userCampaigns) {}
+    public function __construct(public $userCampaigns)
+    {
+    }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
     public function render(): View|Closure|string
     {
         return view('components.mbo.campaign.campaign-users-list');

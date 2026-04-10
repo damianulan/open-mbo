@@ -36,17 +36,6 @@ use Laraverse\Config\Laraverse;
 use Livewire\Livewire;
 use Spatie\Health\Http\Controllers\HealthCheckResultsController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::middleware('web')->group(function (): void {
     Auth::routes();
 });
@@ -63,9 +52,6 @@ Route::middleware(['web', 'auth', 'maintenance', 'navigation'])->group(function 
 
     Laraverse::routes();
 
-    /**
-     * Users START
-     */
     Route::prefix('users')->name('users.')->group(function (): void {
         Route::get('/', [UsersController::class, 'index'])->name('index');
         Route::post('/', [UsersController::class, 'store'])->name('store');
@@ -109,13 +95,6 @@ Route::middleware(['web', 'auth', 'maintenance', 'navigation'])->group(function 
         Route::get('/', [MyObjectivesController::class, 'index'])->name('index');
     });
 
-    /**
-     * Users END
-     */
-
-    /**
-     * Settings START
-     */
     Route::prefix('settings')->name('settings.')->group(function (): void {
         Route::prefix('general')->name('general.')->group(function (): void {
             Route::get('/', [GeneralController::class, 'index'])->name('index');
@@ -197,9 +176,6 @@ Route::middleware(['web', 'auth', 'maintenance', 'navigation'])->group(function 
         });
     });
 
-    /**
-     * Management START
-     */
     Route::prefix('mbo')->middleware('module:mbo')->group(function (): void {
         Route::prefix('templates')->name('templates.')->group(function (): void {
             Route::get('/', [ObjectiveTemplateController::class, 'index'])->name('index');
@@ -225,16 +201,16 @@ Route::middleware(['web', 'auth', 'maintenance', 'navigation'])->group(function 
             Route::post('/', [ObjectiveController::class, 'store'])->name('store');
             Route::get('create', [ObjectiveController::class, 'create'])->name('create');
             Route::get('edit/{objective}', [ObjectiveController::class, 'edit'])->name('edit');
-            Route::get('{user}', [ObjectiveController::class, 'show'])->name('show');
+            Route::get('{objective}', [ObjectiveController::class, 'show'])->name('show');
             Route::put('{objective}', [ObjectiveController::class, 'update'])->name('update');
             Route::get('/delete/{objective}', [ObjectiveController::class, 'delete'])->name('delete');
 
             Route::prefix('assignment')->name('assignment.')->group(function (): void {
-                Route::get('/{id}', [UserObjectiveController::class, 'show'])->name('show');
+                Route::get('/{userObjective}', [UserObjectiveController::class, 'show'])->name('show');
                 Route::post('{objective}', [UserObjectiveController::class, 'update'])->name('update');
-                Route::post('evaluation/{id}', [UserObjectiveController::class, 'updateEvaluation'])->name('update_evaluation');
-                Route::get('pass/{id}', [UserObjectiveController::class, 'pass'])->name('pass');
-                Route::get('fail/{id}', [UserObjectiveController::class, 'fail'])->name('fail');
+                Route::post('evaluation/{userObjective}', [UserObjectiveController::class, 'updateEvaluation'])->name('update_evaluation');
+                Route::get('pass/{userObjective}', [UserObjectiveController::class, 'pass'])->name('pass');
+                Route::get('fail/{userObjective}', [UserObjectiveController::class, 'fail'])->name('fail');
             });
         });
 
@@ -245,22 +221,22 @@ Route::middleware(['web', 'auth', 'maintenance', 'navigation'])->group(function 
             Route::get('edit/{campaign}', [CampaignsController::class, 'edit'])->name('edit');
             Route::get('{campaign}', [CampaignsController::class, 'show'])->name('show');
             Route::put('{campaign}', [CampaignsController::class, 'update'])->name('update');
-            Route::post('/terminate/{id}', [CampaignsController::class, 'terminate'])->name('terminate');
-            Route::post('/resume/{id}', [CampaignsController::class, 'resume'])->name('resume');
-            Route::post('/cancel/{id}', [CampaignsController::class, 'cancel'])->name('cancel');
+            Route::post('/terminate/{campaign}', [CampaignsController::class, 'terminate'])->name('terminate');
+            Route::post('/resume/{campaign}', [CampaignsController::class, 'resume'])->name('resume');
+            Route::post('/cancel/{campaign}', [CampaignsController::class, 'cancel'])->name('cancel');
 
             Route::prefix('objective')->name('objective.')->group(function (): void {
                 Route::post('/', [CampaignObjectiveController::class, 'store'])->name('store');
                 Route::put('/{objective}', [CampaignObjectiveController::class, 'update'])->name('update');
-                Route::delete('/delete/{id}', [CampaignObjectiveController::class, 'delete'])->name('delete');
+                Route::delete('/delete/{objective}', [CampaignObjectiveController::class, 'delete'])->name('delete');
             });
             Route::prefix('users')->name('users.')->group(function (): void {
                 Route::get('{userCampaign}', [CampaignUserController::class, 'show'])->name('show');
                 Route::post('/{campaign}', [CampaignUserController::class, 'update'])->name('update');
-                Route::get('/toggle-manual/{id}', [CampaignUserController::class, 'toggleManual'])->name('toggle_manual');
-                Route::get('/next-stage/{id}', [CampaignUserController::class, 'moveStageUp'])->name('next_stage');
-                Route::get('/prev-stage/{id}', [CampaignUserController::class, 'moveStageDown'])->name('prev_stage');
-                Route::delete('/delete/{id}', [CampaignUserController::class, 'delete'])->name('delete');
+                Route::get('/toggle-manual/{userCampaign}', [CampaignUserController::class, 'toggleManual'])->name('toggle_manual');
+                Route::get('/next-stage/{userCampaign}', [CampaignUserController::class, 'moveStageUp'])->name('next_stage');
+                Route::get('/prev-stage/{userCampaign}', [CampaignUserController::class, 'moveStageDown'])->name('prev_stage');
+                Route::delete('/delete/{userCampaign}', [CampaignUserController::class, 'delete'])->name('delete');
             });
         });
     });
@@ -281,8 +257,4 @@ Route::middleware(['web', 'auth', 'maintenance', 'navigation'])->group(function 
     Route::prefix('ajax')->name('ajax.')->group(function (): void {
         Route::get('/get_model_instance', [AjaxController::class, 'getModelInstance'])->name('get_model_instance');
     });
-
-    // Route::fallback(function () {
-    //     return redirect()->route('dashboard')->with('error', 'Nie znaleziono strony');
-    // })->name('fallback');
 });

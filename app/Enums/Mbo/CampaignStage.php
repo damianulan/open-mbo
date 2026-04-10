@@ -4,18 +4,10 @@ namespace App\Enums\Mbo;
 
 use App\Support\Concerns\EnumHasValues;
 
-/**
- * Campaign Stages can be assigned to campaigns and users in campaign.
- *
- * Campaigns while in progress can have multiple SOFT STAGES assigned.
- * User can only have one of any STAGES assigned at a time.
- */
 enum CampaignStage: string
 {
     use EnumHasValues;
 
-    // in progress/soft stages - campaign can have multiple of them assigned.
-    // if any assigned its generally an IN_PROGESS stage
     case DEFINITION = 'definition';
 
     case DISPOSITION = 'disposition';
@@ -26,20 +18,12 @@ enum CampaignStage: string
 
     case SELF_EVALUATION = 'self_evaluation';
 
-    // hard stages
-    case PENDING = 'pending'; // starting point stage
+    case PENDING = 'pending';
+    case IN_PROGRESS = 'in_progress';
+    case COMPLETED = 'completed';
+    case TERMINATED = 'terminated';
+    case CANCELED = 'canceled';
 
-    case IN_PROGRESS = 'in_progress'; // const when process is in progress
-
-    case COMPLETED = 'completed'; // const when process is finished in time
-
-    case TERMINATED = 'terminated'; // const when process has been terminated after it has started
-
-    case CANCELED = 'canceled'; // const when process has been canceled
-
-    /**
-     * Pending, In Progress, Completed, Terminated, Canceled
-     */
     public static function hardValues(): array
     {
         return [
@@ -51,9 +35,6 @@ enum CampaignStage: string
         ];
     }
 
-    /**
-     * Definition, Disposition, Realization, Evaluation, Self Evaluation
-     */
     public static function softValues(): array
     {
         return [
@@ -65,9 +46,6 @@ enum CampaignStage: string
         ];
     }
 
-    /**
-     * Pending, Definition, Disposition, Realization, Evaluation, Self Evaluation, Completed
-     */
     public static function sequences(): array
     {
         return [
@@ -81,9 +59,6 @@ enum CampaignStage: string
         ];
     }
 
-    /**
-     * In Progress, Pending, Completed, Terminated, Canceled
-     */
     public static function hardValuesOrder(): array
     {
         return [
@@ -135,10 +110,8 @@ enum CampaignStage: string
     }
 
     /**
-     * set user objective status based on current user campaign stage.
-     *
-     * @param  string  $stage  - UserCampaign stage
-     * @param  string|null  $status  - UserObjective status
+     * @param string $stage - UserCampaign stage
+     * @param string|null $status - UserObjective status
      * @return string $status
      */
     public static function mapObjectiveStatus(self|string $stage, ?string $status): ?string

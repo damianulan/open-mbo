@@ -13,29 +13,23 @@ class ObjectiveUsersList extends Component
 
     public $userAssignments;
 
-    /**
-     * Create a new component instance.
-     */
     public function __construct(public Objective $objective, public string $status = 'all')
     {
         $this->emptyInfo = __('mbo.info.no_users_added');
-        if ('all' === $status) {
-            $this->userAssignments = $objective->user_objectives()->get();
-        } elseif ('progress' === $status) {
-            $this->userAssignments = $objective->user_objectives()->whereNotEvaluated()->get();
+        if ($status === 'all') {
+            $this->userAssignments = $objective->user_objectives()->with(['user.profile', 'user.roles', 'campaign'])->get();
+        } elseif ($status === 'progress') {
+            $this->userAssignments = $objective->user_objectives()->whereNotEvaluated()->with(['user.profile', 'user.roles', 'campaign'])->get();
             $this->emptyInfo = __('mbo.info.objective_not_evaluated_no_users');
-        } elseif ('passed' === $status) {
-            $this->userAssignments = $objective->user_objectives()->wherePassed()->get();
+        } elseif ($status === 'passed') {
+            $this->userAssignments = $objective->user_objectives()->wherePassed()->with(['user.profile', 'user.roles', 'campaign'])->get();
             $this->emptyInfo = __('mbo.info.objective_passed_no_users');
-        } elseif ('failed' === $status) {
-            $this->userAssignments = $objective->user_objectives()->whereFailed()->get();
+        } elseif ($status === 'failed') {
+            $this->userAssignments = $objective->user_objectives()->whereFailed()->with(['user.profile', 'user.roles', 'campaign'])->get();
             $this->emptyInfo = __('mbo.info.objective_failed_no_users');
         }
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
     public function render(): View|Closure|string
     {
         return view('components.mbo.objectives.objective-users-list');

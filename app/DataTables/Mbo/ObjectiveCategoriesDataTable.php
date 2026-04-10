@@ -18,14 +18,11 @@ class ObjectiveCategoriesDataTable extends DataTableService
     protected $orderByDir = 'asc';
 
     /**
-     * Build the DataTable class.
-     *
-     * @param  QueryBuilder  $query  Results from query() method.
+     * @param QueryBuilder $query Results from query() method.
      */
     public function DataTable(QueryBuilder $query): DataTableBuilder
     {
         return (new DataTableBuilder($query))
-
             ->addColumn('action', fn ($data) => view('pages.mbo.categories.action', [
                 'data' => $data,
             ]))
@@ -42,9 +39,6 @@ class ObjectiveCategoriesDataTable extends DataTableService
             });
     }
 
-    /**
-     * Get the query source of dataTable.
-     */
     public function query(ObjectiveTemplateCategory $model): QueryBuilder
     {
         $query = $model->query();
@@ -89,9 +83,6 @@ class ObjectiveCategoriesDataTable extends DataTableService
         ];
     }
 
-    /**
-     * Get the filename for export.
-     */
     protected function filename(): string
     {
         return 'ObjectiveTemplateCategories_' . date('YmdHis');

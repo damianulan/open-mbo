@@ -7,14 +7,10 @@ use Illuminate\Auth\Events\Failed as AuthFailed;
 
 class LogAuthFailed
 {
-    /**
-     * Create the event listener.
-     */
-    public function __construct() {}
+    public function __construct()
+    {
+    }
 
-    /**
-     * Handle the event.
-     */
     public function handle(AuthFailed $event): void
     {
         if ($event->user) {

@@ -20,18 +20,18 @@ class Index extends Component
     {
         $notificationId = request()->query('notification');
 
-        if ( ! is_string($notificationId) || '' === $notificationId) {
+        if ($notificationId === null || $notificationId === '') {
             return;
         }
 
-        $this->showNotification($notificationId);
+        $this->showNotification((string) $notificationId);
     }
 
     public function showNotification(string $notificationId): void
     {
         $notification = $this->findNotification($notificationId);
 
-        if ( ! $notification instanceof SystemNotification) {
+        if (! $notification instanceof SystemNotification) {
             return;
         }
 
@@ -50,7 +50,7 @@ class Index extends Component
     #[Computed]
     public function selectedNotification(): ?SystemNotification
     {
-        if ( ! $this->selectedNotificationId) {
+        if (! $this->selectedNotificationId) {
             return null;
         }
 

@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Filename
@@ -45,7 +44,7 @@ return [
     |
     */
 
-    'include_fluent' => true,
+    'include_fluent' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -249,7 +248,7 @@ return [
     | magic methods and properties.
     |
     */
-    'include_class_docblocks' => true,
+    'include_class_docblocks' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -311,5 +310,4 @@ return [
     'post_migrate' => [
         'ide-helper:models --nowrite',
     ],
-
 ];

@@ -19,7 +19,6 @@ trait HasUserCollection
         $this->users->put('admin_mbo', $this->userFactory()->assignRoleSlug(RolesLib::ADMIN_MBO));
         $this->users->put('employee', $this->userFactory()->assignRoleSlug(RolesLib::EMPLOYEE));
         $this->users->put('supervisor', $this->userFactory()->assignRoleSlug(RolesLib::SUPERVISOR, $this->getEmployee()));
-
     }
 
     protected function userFactory($attributes = []): User

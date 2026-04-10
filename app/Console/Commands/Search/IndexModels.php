@@ -10,25 +10,19 @@ use Throwable;
 class IndexModels extends BaseCommand
 {
     /**
-     * The name and signature of the console command.
-     *
      * @var string
      */
     protected $signature = 'search:index';
 
     /**
-     * The console command description.
-     *
      * @var string
      */
     protected $description = 'Reindexes all indexable models';
 
-    /**
-     * Execute the console command.
-     */
     public function handle(): void
     {
         $this->logStart();
+
         try {
             IndexModel::truncate();
             $scope = new SearchModelScope();
@@ -41,7 +35,6 @@ class IndexModels extends BaseCommand
                     $model->makeIndexes();
                     $this->line('Indexed ' . $model->id);
                 }
-
             }
 
             $this->log('completed', true);

@@ -18,8 +18,8 @@ use Tests\Traits\HasUserCollection;
 
 class UserCampaignViewTest extends TestCase
 {
-    use RefreshDatabase;
     use HasUserCollection;
+    use RefreshDatabase;
 
     protected $seeder = TestDatabaseSeeder::class;
 

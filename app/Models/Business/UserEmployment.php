@@ -7,35 +7,34 @@ use App\Events\Core\User\EmploymentDeleted;
 use App\Events\Core\User\EmploymentUpdated;
 use App\Models\BaseModel;
 use App\Models\Core\User;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Activity;
 
 /**
- * @property string $id
- * @property string $user_id
- * @property string|null $company_id
- * @property string|null $contract_id
- * @property string|null $department_id
- * @property string|null $position_id
- * @property Carbon|null $employment Date of employment
- * @property Carbon|null $release Date of employee release (end of employment)
- * @property Carbon|null $deleted_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property-read Collection<int, Activity> $activities
- * @property-read int|null $activities_count
- * @property-read Company|null $company
- * @property-read TypeOfContract|null $contract
- * @property-read Department|null $department
+ * @property int $id
+ * @property int $user_id
+ * @property int|null $company_id
+ * @property int|null $contract_id
+ * @property int|null $department_id
+ * @property int|null $position_id
+ * @property CarbonImmutable|null $employment Date of employment
+ * @property CarbonImmutable|null $release Date of employee release (end of employment)
+ * @property CarbonImmutable|null $deleted_at
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
+ * @property-read Collection<int, Activity> $activitiesAsSubject
+ * @property-read int|null $activities_as_subject_count
+ * @property-read \App\Models\Business\Company|null $company
+ * @property-read \App\Models\Business\TypeOfContract|null $contract
+ * @property-read \App\Models\Business\Department|null $department
  * @property-read bool $main
- * @property-read Position|null $position
+ * @property-read \App\Models\Business\Position|null $position
  * @property-read mixed $trans
  * @property-read User|null $user
- *
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment active()
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment average(string $column)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment avg(string $column)
@@ -90,7 +89,6 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder<static>|UserEmployment withTrashed(bool $withTrashed = true)
  * @method static \YMigVal\LaravelModelCache\CacheableBuilder<static>|UserEmployment withoutCache()
  * @method static Builder<static>|UserEmployment withoutTrashed()
- *
  * @mixin \Eloquent
  */
 class UserEmployment extends BaseModel
@@ -103,7 +101,6 @@ class UserEmployment extends BaseModel
         'contract_id',
         'department_id',
         'position_id',
-
         'employment',
         'release',
     ];
@@ -146,11 +143,13 @@ class UserEmployment extends BaseModel
 
     public function scopeActive(Builder $query): void
     {
-        $query->where('user_employments.employment', '<', now())
-            ->where(function (Builder $q): void {
-                $q->whereNull('user_employments.release')
-                    ->orWhere('user_employments.release', '>', now());
-            });
+        $query->where(function (Builder $builder) {
+            $builder->whereDate('user_employments.employment', '<', now())
+                ->where(function (Builder $q): void {
+                    $q->whereNull('user_employments.release')
+                        ->orWhereDate('user_employments.release', '>', now());
+                });
+        });
     }
 
     protected static function booted(): void

@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 abstract class NotificationResource implements Jsonable
 {
-    public function __construct(protected Model $model) {}
+    public function __construct(protected Model $model)
+    {
+    }
 
     abstract public function datas(): array;
 

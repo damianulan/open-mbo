@@ -8,7 +8,6 @@ use App\Support\Filters\Services\FilterService;
 use Exception;
 use FormForge\Base\Form;
 use FormForge\Base\FormComponent;
-use FormForge\Components\Button;
 use FormForge\Components\ForgeComponent;
 use FormForge\FormBuilder;
 
@@ -30,8 +29,6 @@ class FilterFormFactory extends Form
             $builder->add($this->getComponent($item));
         }
 
-        // $builder->addButton(new Button(__('buttons.filter'), 'submit', null, 'btn-primary filter-btn'));
-
         return $builder;
     }
 
@@ -41,7 +38,6 @@ class FilterFormFactory extends Form
             case $filter instanceof FilterSearchType:
                 $component = FormComponent::text($filter->getKey(), $filter->getValue())->label($filter->getLabel())->col(4);
                 break;
-
             default:
                 throw new Exception('Invalid filter type');
                 break;

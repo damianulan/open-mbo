@@ -14,15 +14,14 @@ trait UserHasPreferences
 
     protected static function bootUserHasPreferences(): void
     {
-
         static::created(function ($user): void {
-            if (empty($user->preferences)) {
+            if (! $user->preferences()->exists()) {
                 $user->preferences()->create();
             }
         });
 
         static::deleting(function ($user): void {
-            $user->preferences->delete();
+            $user->preferences()->delete();
         });
     }
 }

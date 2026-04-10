@@ -21,6 +21,8 @@ class UserCampaignResource extends NotificationResource
 
     public function datas(): array
     {
+        $this->model->loadMissing('campaign');
+
         return [
             'campaign_name' => $this->model->campaign->name,
         ];

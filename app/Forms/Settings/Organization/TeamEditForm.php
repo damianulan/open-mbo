@@ -17,9 +17,10 @@ class TeamEditForm extends Form
         $selectedUsers = [];
         $selectedLeaders = [];
 
-        if ( ! is_null($this->model)) {
+        if (! is_null($this->model)) {
             $method = 'PUT';
-            $route = route('settings.organization.team.update', $this->model->id);
+            $route = route('settings.organization.team.update', $this->model);
+            $this->model->loadMissing(['users', 'leaders']);
             $selectedUsers = $this->model->users->pluck('id')->toArray();
             $selectedLeaders = $this->model->leaders->pluck('id')->toArray();
 
@@ -55,9 +56,9 @@ class TeamEditForm extends Form
         return [
             'name' => 'required|max:255|unique:teams,name,' . $teamId . ',id',
             'leaders_ids' => 'required|array|min:1',
-            'leaders_ids.*' => 'uuid|exists:users,id',
+            'leaders_ids.*' => 'integer|exists:users,id',
             'users_ids' => 'nullable|array',
-            'users_ids.*' => 'uuid|exists:users,id',
+            'users_ids.*' => 'integer|exists:users,id',
             'description' => 'max:1000|nullable',
         ];
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Objectives;
 
+use App\Contracts\Repositories\ObjectiveRepositoryContract;
 use App\DataTables\Mbo\ObjectiveDataTable;
 use App\Forms\Mbo\Objective\ObjectiveEditForm;
 use App\Models\Mbo\Objective;
@@ -12,9 +13,6 @@ use Illuminate\Http\Request;
 
 class ObjectiveController extends MBOController
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(ObjectiveDataTable $dataTable): Renderable|JsonResponse
     {
         $this->addPageNav();
@@ -24,19 +22,15 @@ class ObjectiveController extends MBOController
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create(): void {}
+    public function create(): void
+    {
+    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(ObjectiveEditForm $form): JsonResponse
     {
         $response = $form->validateJson();
 
-        if ('ok' === $response['status']) {
+        if ($response['status'] === 'ok') {
             $objective = Objective::fillFromRequest();
 
             if ($objective->save()) {
@@ -49,14 +43,9 @@ class ObjectiveController extends MBOController
         return response()->json($response);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  mixed  $id
-     */
-    public function show(int|string $id): View
+    public function show(Objective $objective, ObjectiveRepositoryContract $objectiveRepository): View
     {
-        $objective = Objective::findOrFail($id);
+        $objective = $objectiveRepository->findForShow($objective->getKey());
         $this->logShow($objective);
 
         $header = 'Podsumowanie Celu';
@@ -68,18 +57,15 @@ class ObjectiveController extends MBOController
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  mixed  $id
-     */
-    public function edit($id): void {}
+    public function edit($id): void
+    {
+    }
 
     public function update(Objective $objective, ObjectiveEditForm $form): JsonResponse
     {
         $response = $form->validateJson();
 
-        if ('ok' === $response['status']) {
+        if ($response['status'] === 'ok') {
             $objective = Objective::fillFromRequest($objective->getKey());
 
             if ($objective->update()) {
@@ -92,23 +78,23 @@ class ObjectiveController extends MBOController
         return response()->json($response);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  mixed  $id
-     */
-    public function destroy($id): void {}
+    public function destroy($id): void
+    {
+    }
 
-    public function addObjectives(Request $request, int|string|null $id): View
+    public function addObjectives(Request $request, int|string|null $id, ObjectiveRepositoryContract $objectiveRepository): View
     {
         $params = [];
 
         if ($id) {
-            $objective = Objective::find($id);
+            $objective = $objectiveRepository->find($id, [
+                'campaign',
+                'template',
+            ]);
 
             if ($objective) {
                 $params = [
-                    'id' => $id,
+                    'id' => $objective,
                     'form' => ObjectiveEditForm::bootWithModel($objective)->getDefinition(),
                 ];
             }

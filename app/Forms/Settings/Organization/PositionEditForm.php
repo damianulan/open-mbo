@@ -13,9 +13,9 @@ class PositionEditForm extends Form
         $route = route('settings.organization.positions.store');
         $method = 'POST';
 
-        if ( ! is_null($this->model)) {
+        if (! is_null($this->model)) {
             $method = 'PUT';
-            $route = route('settings.organization.positions.update', $this->model->id);
+            $route = route('settings.organization.positions.update', $this->model);
         }
 
         return $builder->setId(is_null($this->model) ? 'position_create' : 'position_edit')

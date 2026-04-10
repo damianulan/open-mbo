@@ -20,7 +20,7 @@ abstract class BaseSettings extends Settings
         $reflection = new ReflectionClass(static::class);
         $properties = $reflection->getProperties(ReflectionProperty::IS_PUBLIC);
 
-        if ( ! empty($properties)) {
+        if (! empty($properties)) {
             $migrator = app(SettingsMigrator::class);
 
             foreach ($properties as $property) {

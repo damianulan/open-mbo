@@ -9,25 +9,16 @@ use Illuminate\Auth\Access\Response;
 
 class UserObjectivePolicy
 {
-    /**
-     * Determine whether the user can view any models.
-     */
     public function viewAny(User $user): Response
     {
         return $user->can(PermissionsLib::MBO_OBJECTIVE_VIEW) ? Response::allow() : Response::deny();
     }
 
-    /**
-     * Determine whether the user can view the model.
-     */
     public function view(User $user, UserObjective $userObjective): Response
     {
         return $user->can(PermissionsLib::MBO_OBJECTIVE_VIEW) || $user->id === $userObjective->user_id ? Response::allow() : Response::deny();
     }
 
-    /**
-     * Determine whether the user can create models.
-     */
     public function create(User $user): Response
     {
         return $user->can(PermissionsLib::MBO_OBJECTIVE_CREATE) ? Response::allow() : Response::deny();
@@ -47,25 +38,16 @@ class UserObjectivePolicy
         return $userObjective->user_id === $user->id && $userObjective->isAfterDeadline() && $campaignCondition ? Response::allow() : Response::deny();
     }
 
-    /**
-     * Determine whether the user can update the model.
-     */
     public function update(User $user, UserObjective $userObjective): Response
     {
         return $user->can(PermissionsLib::MBO_OBJECTIVE_UPDATE) && $userObjective->user_id !== $user->id ? Response::allow() : Response::deny();
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     */
     public function delete(User $user, UserObjective $userObjective): Response
     {
         return $user->can(PermissionsLib::MBO_OBJECTIVE_DELETE) && $userObjective->user_id !== $user->id ? Response::allow() : Response::deny();
     }
 
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
     public function forceDelete(User $user, UserObjective $userObjective): Response
     {
         return $user->isAdmin() ? Response::allow() : Response::deny();

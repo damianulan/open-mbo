@@ -2,7 +2,7 @@
 
 namespace App\Support\Lang;
 
-use Illuminate\Support\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Str;
 use Spatie\TranslationLoader\LanguageLine;
 
@@ -12,9 +12,8 @@ use Spatie\TranslationLoader\LanguageLine;
  * @property string $key
  * @property array<array-key, mixed> $text
  * @property int $editable
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- *
+ * @property CarbonImmutable|null $created_at
+ * @property CarbonImmutable|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LanguageModel newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LanguageModel newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LanguageModel query()
@@ -25,7 +24,6 @@ use Spatie\TranslationLoader\LanguageLine;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LanguageModel whereKey($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LanguageModel whereText($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LanguageModel whereUpdatedAt($value)
- *
  * @mixin \Eloquent
  */
 class LanguageModel extends LanguageLine
@@ -33,8 +31,6 @@ class LanguageModel extends LanguageLine
     public $table = 'language_lines';
 
     /**
-     * Parts of lang locations is enough
-     *
      * @var array
      */
     protected $editables = [

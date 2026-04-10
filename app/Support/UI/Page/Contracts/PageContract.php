@@ -2,4 +2,6 @@
 
 namespace App\Support\UI\Page\Contracts;
 
-interface PageContract {}
+interface PageContract
+{
+}

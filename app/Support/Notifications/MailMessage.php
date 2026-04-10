@@ -14,9 +14,6 @@ class MailMessage extends Mailable
 
     protected $email_contents;
 
-    /**
-     * Create a new message instance.
-     */
     public function __construct(
         protected NotificationContents $contents,
     ) {
@@ -28,16 +25,13 @@ class MailMessage extends Mailable
         $this->email_contents = $contents->email_contents;
     }
 
-    /**
-     * Get the message content definition.
-     */
     public function content(): Content
     {
         return new Content(
             view: 'mail.template',
             with: [
                 'contents' => $this->email_contents,
-            ]
+            ],
         );
     }
 }

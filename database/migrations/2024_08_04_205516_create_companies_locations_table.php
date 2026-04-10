@@ -4,27 +4,17 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class() extends Migration
-{
-    /**
-     * Run the migrations.
-     */
+return new class () extends Migration {
     public function up(): void
     {
         Schema::create('companies_locations', function (Blueprint $table): void {
-            $table->foreignUuid('company_id');
-            $table->foreignUuid('location_id');
-
-            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
-            $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
+            $table->foreignId('company_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('location_id')->constrained('locations')->cascadeOnDelete();
 
             $table->primary(['company_id', 'location_id']);
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('companies_locations');

@@ -4,16 +4,12 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class() extends Migration
-{
-    /**
-     * Run the migrations.
-     */
+return new class () extends Migration {
     public function up(): void
     {
         Schema::create('search_indexes', function (Blueprint $table): void {
-            $table->uuid('id')->primary();
-            $table->uuidMorphs('source');
+            $table->id();
+            $table->morphs('source');
             $table->string('attribute');
             $table->string('trigram');
             $table->timestamps();
@@ -22,9 +18,6 @@ return new class() extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('search_indexes');

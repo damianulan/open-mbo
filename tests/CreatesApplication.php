@@ -7,13 +7,10 @@ use Illuminate\Foundation\Application;
 
 trait CreatesApplication
 {
-    /**
-     * Creates the application.
-     */
     public function createApplication(): Application
     {
         $compiledPath = dirname(__DIR__) . '/storage/framework/testing/views';
-        if ( ! is_dir($compiledPath)) {
+        if (! is_dir($compiledPath)) {
             mkdir($compiledPath, 0777, true);
         }
 
