@@ -33,7 +33,6 @@ class IssuePush extends Command
             $issue = $this->getIssue();
             $message = $this->argument('message');
             if (! empty($issue)) {
-
                 $result = Process::run('git fetch --all');
                 $result = Process::run('git status');
                 $this->line($result->output());
@@ -53,12 +52,13 @@ class IssuePush extends Command
                     }
                     $this->comment('Pushing issue ...');
                     $result = Process::run('git commit -m "' . $issue . '"');
-                    $result = Process::run('git push');
+                    $result = Process::run('git push --set-upstream origin ' . $this->getBranchName());
+                    $this->line($result->output());
+                    $result = Process::run('git checkout dev');
                     $this->line($result->output());
                 } else {
                     $this->info('Aborted.');
                 }
-
             } else {
                 $this->error('No issue registered.');
             }

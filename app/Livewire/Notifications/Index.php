@@ -20,11 +20,11 @@ class Index extends Component
     {
         $notificationId = request()->query('notification');
 
-        if (! is_string($notificationId) || $notificationId === '') {
+        if ($notificationId === null || $notificationId === '') {
             return;
         }
 
-        $this->showNotification($notificationId);
+        $this->showNotification((string) $notificationId);
     }
 
     public function showNotification(string $notificationId): void

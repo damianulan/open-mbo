@@ -2,7 +2,9 @@
 
 namespace App\Console\Commands\Core\Issues\Traits;
 
+use App\Console\Commands\Core\Issues\Enums\IssueType;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Str;
 
 trait StorageIssues
@@ -10,9 +12,9 @@ trait StorageIssues
     protected const PATH = 'issues/config.json';
 
     protected $typeMap = [
-        'feature' => 'feature',
+        'feature' => 'feat',
         'bug' => 'fix',
-        'refactor' => 'refactor',
+        'refactor' => 'ref',
     ];
 
     public function validateCommitMessage(string $message): bool
@@ -27,11 +29,11 @@ trait StorageIssues
         return true;
     }
 
-    public function putIssueConfig(int $id, string $issue, string $type): string
+    public function putIssueConfig(int $id, string $issue, IssueType $type): string
     {
-        $type = $this->typeMap[Str::lower($type)];
+        $typeStr = $type->toString();
         $id = Str::ltrim($id, '#');
-        $message = "{$type}(#{$id}): {$issue}";
+        $message = "{$typeStr}(#{$id}): {$issue}";
 
         $path = $this->getIssuePath();
         $config = $this->getConfigContents();
@@ -66,6 +68,13 @@ trait StorageIssues
     protected function getIssuePath(): string
     {
         return storage_path(self::PATH);
+    }
+
+    protected function getBranchName(): string
+    {
+        $result = Process::run('git rev-parse --abbrev-ref HEAD');
+
+        return mb_trim($result->output());
     }
 
     private function getConfigContents(): array

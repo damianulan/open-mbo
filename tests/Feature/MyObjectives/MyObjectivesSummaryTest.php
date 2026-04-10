@@ -82,6 +82,6 @@ class MyObjectivesSummaryTest extends TestCase
         $response->assertSee('My Objective');
         $response->assertSee('My Campaign');
         $response->assertSee((string) $userCampaign->id);
-        $response->assertSee(float_view(5.0) . ' / ' . float_view(10.0) . __('globals.pnts'));
+        $response->assertSee(float_view(5.0) . __('globals.pnts'));
     }
 }

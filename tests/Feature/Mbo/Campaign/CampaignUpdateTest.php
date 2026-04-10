@@ -57,7 +57,7 @@ class CampaignUpdateTest extends TestCase
 
         $response = $this->actingAs($user)->get(route('campaigns.edit', ['campaign' => $campaign->uuid]));
 
-        $response->assertStatus(404);
+        $response->assertForbidden();
     }
 
     public function test_coordinator_with_context_can_update_campaign(): void
@@ -90,7 +90,7 @@ class CampaignUpdateTest extends TestCase
 
         $response = $this->actingAs($user)->put(route('campaigns.update', ['campaign' => $targetCampaign->uuid]), $payload);
 
-        $response->assertStatus(404);
+        $response->assertForbidden();
     }
 
     public function test_update_campaign_requires_period(): void

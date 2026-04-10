@@ -11,19 +11,25 @@ class UserCampaignRepository implements UserCampaignRepositoryContract
 {
     public function getMyCampaignsForUser(User $user): Collection
     {
-        return $user->campaigns()
+        $userCampaigns = $user->campaigns()
+            ->without('campaign')
             ->orderForUser()
             ->with([
-                'campaign' => function ($query): void {
-                    $query->withoutGlobalScopes()->withCount([
-                        'user_campaigns',
-                        'objectives',
-                    ]);
-                },
                 'user_objectives.objective' => fn ($query) => $query->withoutGlobalScopes(),
                 'user_objectives.points',
             ])
             ->get();
+
+        $userCampaigns->load([
+            'campaign' => function ($query): void {
+                $query->withoutGlobalScopes()->withCount([
+                    'user_campaigns',
+                    'objectives',
+                ]);
+            },
+        ]);
+
+        return $userCampaigns;
     }
 
     public function find(int|string $id, array $relations = []): ?UserCampaign

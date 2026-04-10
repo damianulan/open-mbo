@@ -101,7 +101,6 @@ class UserEmployment extends BaseModel
         'contract_id',
         'department_id',
         'position_id',
-
         'employment',
         'release',
     ];
@@ -144,11 +143,13 @@ class UserEmployment extends BaseModel
 
     public function scopeActive(Builder $query): void
     {
-        $query->where('user_employments.employment', '<', now())
-            ->where(function (Builder $q): void {
-                $q->whereNull('user_employments.release')
-                    ->orWhere('user_employments.release', '>', now());
-            });
+        $query->where(function (Builder $builder) {
+            $builder->whereDate('user_employments.employment', '<', now())
+                ->where(function (Builder $q): void {
+                    $q->whereNull('user_employments.release')
+                        ->orWhereDate('user_employments.release', '>', now());
+                });
+        });
     }
 
     protected static function booted(): void

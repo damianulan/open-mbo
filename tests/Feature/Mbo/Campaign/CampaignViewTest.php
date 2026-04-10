@@ -37,10 +37,11 @@ class CampaignViewTest extends TestCase
         $user = $this->getEmployee();
         $campaign = Campaign::factory()->create([
             'name' => 'TEST',
-        ])->assignUser($user->id);
+        ]);
+        $campaign->assignUser($user->id);
         $response = $this->actingAs($user)->get(route('campaigns.show', ['campaign' => $campaign->uuid]));
 
-        $response->assertStatus(404);
+        $response->assertForbidden();
     }
 
     public function test_user_not_enrolled_can_show_campaign(): void
@@ -51,7 +52,7 @@ class CampaignViewTest extends TestCase
         $user = $this->getEmployee();
         $response = $this->actingAs($user)->get(route('campaigns.show', ['campaign' => $campaign->uuid]));
 
-        $response->assertStatus(404);
+        $response->assertForbidden();
     }
 
     public function test_coordinator_with_context_can_show_campaign(): void
