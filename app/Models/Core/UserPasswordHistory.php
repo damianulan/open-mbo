@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class UserPasswordHistory extends Model
 {
-    protected $table = 'user_passwordHistory';
+    protected $table = 'user_password_history';
 
     protected $hidden = [
         'password',
