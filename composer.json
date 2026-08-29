@@ -20,32 +20,6 @@
             "role": "Developer"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:damianulan/laravel-form-forge.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@github.com:damianulan/laravel-feature-kit.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@github.com:damianulan/php-dtos.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@github.com:damianulan/laravel-lucent.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@github.com:damianulan/laravel-sentinel.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@github.com:damianulan/laraverse.git"
-        }
-    ],
     "require": {
         "php": "^8.4",
         "akaunting/laravel-apexcharts": "^3.0",
@@ -85,7 +59,6 @@
         "spatie/laravel-settings": "^3.1",
         "spatie/laravel-tags": "^4.10",
         "spatie/laravel-translatable": "^6.11",
-        "spatie/laravel-translation-loader": "^2.8",
         "spatie/shiki-php": "^2.3",
         "tjvb/laravel-mail-catchall": "^4.4",
         "yajra/laravel-datatables": "*",
@@ -159,13 +132,6 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": {
-            "damianulan/laravel-form-forge": "source",
-            "damianulan/laravel-feature-kit": "source",
-            "damianulan/laravel-lucent": "source",
-            "damianulan/php-enumerable": "source",
-            "damianulan/php-dtos": "source",
-            "damianulan/laraverse": "source",
-            "damianulan/laravel-sentinel": "source",
             "*": "dist"
         },
         "sort-packages": true,

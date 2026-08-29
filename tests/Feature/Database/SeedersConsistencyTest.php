@@ -6,13 +6,10 @@ use App\Models\Business\Company;
 use App\Models\Business\Position;
 use App\Models\Business\TypeOfContract;
 use App\Models\Core\User;
-use App\Support\Lang\LanguageModel;
 use Database\Seeders\BusinessSeeder;
 use Database\Seeders\CreateAdminUserSeeder;
-use Database\Seeders\LanguageSeeder;
 use Database\Seeders\TestDatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Queue;
 use Tests\TestCase;
 
@@ -31,24 +28,6 @@ class SeedersConsistencyTest extends TestCase
         config(['cache.default' => 'array']);
         config(['model-cache.cache_store' => 'array']);
         Queue::fake();
-    }
-
-    public function test_language_seeder_is_idempotent(): void
-    {
-        $this->seed(LanguageSeeder::class);
-        $firstPassCount = LanguageModel::query()->count();
-
-        $this->seed(LanguageSeeder::class);
-        $secondPassCount = LanguageModel::query()->count();
-
-        $duplicates = DB::table('language_lines')
-            ->select('group', 'key', DB::raw('COUNT(*) as total'))
-            ->groupBy('group', 'key')
-            ->havingRaw('COUNT(*) > 1')
-            ->count();
-
-        $this->assertSame($firstPassCount, $secondPassCount);
-        $this->assertSame(0, $duplicates);
     }
 
     public function test_create_admin_user_seeder_is_idempotent(): void

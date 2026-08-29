@@ -10,10 +10,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         Artisan::call('settings:migrate', ['--no-interaction' => true]);
-        $this->call([
-            LanguageSeeder::class,
-            NotificationSeeder::class,
-        ]);
+        $this->call(NotificationSeeder::class);
         Artisan::call('sentinel:run', ['--no-interaction' => true]);
         $this->call([
             CreateAdminUserSeeder::class,

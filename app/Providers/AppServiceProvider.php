@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Console\Commands\Core\LangList;
 use App\Support\Storage\StorageManager;
 use App\Support\UI\Theme\Theme;
 use Barryvdh\Debugbar\Facades\Debugbar;
@@ -30,10 +29,6 @@ class AppServiceProvider extends ServiceProvider
         $loader->alias('Debugbar', Debugbar::class);
         $this->app->singleton(StorageManager::class);
 
-        $this->optimizes(
-            clear: LangList::class,
-            key: 'langs-cache',
-        );
     }
 
     public function boot(): void
