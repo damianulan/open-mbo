@@ -28,7 +28,6 @@ class AppServiceProvider extends ServiceProvider
         $loader = AliasLoader::getInstance();
         $loader->alias('Debugbar', Debugbar::class);
         $this->app->singleton(StorageManager::class);
-
     }
 
     public function boot(): void
