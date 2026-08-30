@@ -31,7 +31,7 @@ class CampaignResource extends IndexResource
 
     public function resultItem(string $phrase): ResultItem
     {
-        return (new ResultItem([
+        return (ResultItem::from([
             'title' => $this->model->name,
             'description' => $this->model->description,
             'link' => route('campaigns.show', ['campaign' => $this->model->uuid]),

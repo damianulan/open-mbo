@@ -37,7 +37,7 @@ class UserResource extends IndexResource
 
     public function resultItem(string $phrase): ResultItem
     {
-        return (new ResultItem([
+        return (ResultItem::from([
             'title' => $this->model->name,
             'description' => null,
             'link' => route('users.show', ['user' => $this->model->uuid]),

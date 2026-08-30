@@ -1,12 +1,11 @@
-# Docker environment (Ubuntu + PHP + MySQL + Redis + Nginx + Queue + Scheduler)
+# Docker environment (Ubuntu + PHP + MySQL + Redis + Nginx + Scheduler)
 
 This project includes a Docker Compose setup for running Open MBO with:
 
 - Ubuntu-based PHP-FPM container (PHP version controlled by `PHP_VERSION`)
 - Nginx (serves HTTP)
 - MySQL (`mysql:8.4`)
-- Redis (`redis:latest`) for Laravel cache + queue
-- Queue worker container (`php artisan queue:work`)
+- Redis (`redis:latest`) for Laravel cache and queue storage
 - Scheduler container (`php artisan schedule:work`)
 
 ## Prerequisites
@@ -43,10 +42,12 @@ The app will be available at:
 
 ## Background workers
 
-The `queue` service runs:
+Redis is the configured Laravel queue backend (`QUEUE_CONNECTION=redis`). It
+stores queued jobs, but it does not execute Laravel job handlers. Run a worker
+outside this Compose stack when queued jobs must be processed:
 
 ```bash
-php artisan queue:work --sleep=3 --tries=3 --timeout=90
+php artisan queue:work --sleep=3 --tries=3 --timeout=360
 ```
 
 The `scheduler` service runs:

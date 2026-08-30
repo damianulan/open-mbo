@@ -41,6 +41,7 @@ use Illuminate\Redis\RedisServiceProvider;
 use Illuminate\Session\SessionServiceProvider;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Facade;
+use Illuminate\Translation\TranslationServiceProvider;
 use Illuminate\Validation\ValidationServiceProvider;
 use Illuminate\View\ViewServiceProvider;
 use Lab404\Impersonate\ImpersonateServiceProvider;
@@ -269,7 +270,7 @@ return [
         RedisServiceProvider::class,
         PasswordResetServiceProvider::class,
         SessionServiceProvider::class,
-        // TranslationServiceProvider::class,
+        TranslationServiceProvider::class,
         ValidationServiceProvider::class,
         ViewServiceProvider::class,
 

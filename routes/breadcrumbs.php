@@ -15,7 +15,6 @@ $ignoredRoutePrefixes = [
     'sanctum.',
     'telescope',
     'boost.',
-    'laraverse.',
 ];
 
 $shouldRegisterBreadcrumb = static function (string $routeName) use ($ignoredRoutePrefixes): bool {

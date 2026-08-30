@@ -18,7 +18,6 @@ class BreadcrumbRegistrationTest extends TestCase
             'sanctum.',
             'telescope',
             'boost.',
-            'laraverse.',
         ];
 
         $namedRoutes = collect(Route::getRoutes()->getRoutesByName());
