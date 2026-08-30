@@ -1,0 +1,7 @@
+{
+    "name": "Enterprise",
+    "alias": "enterprise",
+    "description": "Enterprise module",
+    "type": "module",
+    "providers": ["Modules\\Enterprise\\EnterpriseServiceProvider"]
+}

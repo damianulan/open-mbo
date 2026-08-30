@@ -36,6 +36,7 @@ use Livewire\Livewire;
 use Spatie\Health\Http\Controllers\HealthCheckResultsController;
 
 Route::middleware('web')->group(function (): void {
+    Route::get('/debug', [HomeController::class, 'debug'])->name('debug');
     Auth::routes();
 });
 

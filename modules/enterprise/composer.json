@@ -1,0 +1,13 @@
+{
+    "name": "modules/enterprise",
+    "autoload": {
+        "psr-4": {
+            "Modules\\Enterprise\\": "src/",
+            "Modules\\Enterprise\\Database\\Factories\\": "database/factories/",
+            "Modules\\Enterprise\\Database\\Seeders\\": "database/seeders/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    }
+}

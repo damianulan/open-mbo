@@ -27,6 +27,7 @@
         "damianulan/laravel-feature-kit": "dev-main",
         "damianulan/laravel-form-forge": "dev-main",
         "damianulan/laravel-lucent": "dev-main",
+        "damianulan/laravel-modularis": "dev-main",
         "damianulan/laravel-sentinel": "dev-main",
         "diglactic/laravel-breadcrumbs": "^10.0",
         "doctrine/dbal": "^4.4",
@@ -115,7 +116,7 @@
             "@php artisan key:generate --ansi"
         ],
         "test:lint": "pint --test",
-        "test:type-coverage": "pest --type-coverage --min=120",
+        "test:type-coverage": "pest --type-coverage --min=100",
         "test": [
             "@test:type-coverage",
             "@test:lint"
@@ -126,6 +127,11 @@
             "dont-discover": [
                 "laravel/telescope"
             ]
+        },
+        "merge-plugin": {
+            "include": [
+                "modules/*/composer.json"
+            ]
         }
     },
     "config": {
@@ -133,13 +139,12 @@
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "wikimedia/composer-merge-plugin": true
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true,
     "require-dependencies": true,
     "require-dev-dependencies": true

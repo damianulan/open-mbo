@@ -1,0 +1,7 @@
+{
+    "name": "Skeleton",
+    "alias": "skeleton",
+    "description": "Skeleton module",
+    "type": "library",
+    "providers": ["Modules\\Skeleton\\SkeletonServiceProvider"]
+}
