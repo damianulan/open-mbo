@@ -2,22 +2,22 @@
 
 namespace App\Support\Search\Dtos;
 
-use DTOs\Dto;
-use DTOs\Workshop\PreventAccessingMissingAttributes;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Str;
+use Spatie\LaravelData\Data;
 
-class ResultItem extends Dto implements PreventAccessingMissingAttributes
+class ResultItem extends Data
 {
-    protected $fillable = [
-        'title',
-        'description',
-        'link',
-    ];
+    public function __construct(
+        public string $title,
+        public ?string $description,
+        public string $link,
+    ) {
+    }
 
     public function setSearchedPhrase(string $phrase): self
     {
-        foreach ($this->attributes as $key => $value) {
+        foreach ($this->all() as $key => $value) {
             $phraseFound = '<strong>' . Str::upper($phrase) . '</strong>';
             $this->{$key} = Str::replace($phrase, $phraseFound, $value, false);
         }

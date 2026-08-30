@@ -46,10 +46,6 @@ if [ "${RUN_OPTIMIZE:-0}" = "1" ] && [ "$role" = "app" ]; then
     php artisan optimize
 fi
 
-if [ "$role" = "queue" ]; then
-    exec php artisan queue:work --sleep=3 --tries=3 --timeout=360
-fi
-
 if [ "$role" = "scheduler" ]; then
     exec php artisan schedule:work
 fi

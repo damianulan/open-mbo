@@ -32,7 +32,6 @@ use App\Support\DataTables\Repositories\DataTableRepository;
 use App\Support\DataTables\Services\DataTableService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Laraverse\Config\Laraverse;
 use Livewire\Livewire;
 use Spatie\Health\Http\Controllers\HealthCheckResultsController;
 
@@ -49,8 +48,6 @@ Route::middleware(['web', 'auth', 'maintenance', 'navigation'])->group(function 
     Route::get(RouteServiceProvider::HOME, [HomeController::class, 'index'])->name('dashboard');
     Livewire::setUpdateRoute(fn ($handle) => Route::post('/livewire/update', $handle));
     Route::get('health', HealthCheckResultsController::class);
-
-    Laraverse::routes();
 
     Route::prefix('users')->name('users.')->group(function (): void {
         Route::get('/', [UsersController::class, 'index'])->name('index');

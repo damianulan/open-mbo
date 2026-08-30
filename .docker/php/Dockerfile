@@ -10,6 +10,7 @@ RUN apt-get update \
         ca-certificates \
         curl \
         git \
+        openssh-client \
         gnupg \
         lsb-release \
         nano \
