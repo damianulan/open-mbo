@@ -129,7 +129,7 @@
         }
     },
     "config": {
-        "optimize-autoloader": true,
+        "optimize-autoloader": false,
         "preferred-install": {
             "*": "dist"
         },
