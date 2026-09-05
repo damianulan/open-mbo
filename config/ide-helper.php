@@ -140,6 +140,7 @@ return [
 
     'model_locations' => [
         'app',
+        'vendor/damianulan/*/src/Models',
     ],
 
     /*
@@ -248,7 +249,7 @@ return [
     | magic methods and properties.
     |
     */
-    'include_class_docblocks' => false,
+    'include_class_docblocks' => true,
 
     /*
     |--------------------------------------------------------------------------
